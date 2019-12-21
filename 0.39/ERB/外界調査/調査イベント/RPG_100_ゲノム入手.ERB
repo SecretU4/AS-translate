@@ -1,28 +1,28 @@
-;-------------------------------------------------
-;�Q�m������
+﻿;-------------------------------------------------
+;ゲノム入手
 ;-------------------------------------------------
 @RPG_EVENT_100(ARG:0,ARG:1)
 #DIM L_INPUT
 #DIM L_I
 #DIM L_G
 L_G = RAND:20
-ARG = Flag:�����L����
-Flag:�����C�x���g������ = 1
-Flag:�����C�x���g�ԍ� = 100
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 100
 
 L_I = ARG
 CLEARLINE LINECOUNT
 DRAWLINE
 SETCOLOR 150,250,150
-PRINTFORML �y�����C�x���g:�Q�m������z
+PRINTFORML 【調査イベント:ゲノム入手】
 PRINTFORML 
-PRINTFORML %CALLNAME:L_I%�͋߂��̌������G�Ȃ��T���A����Ɠ�����H���ꂽ�������R������B
-PRINTFORML �����O�̌��J���Z�\�Ń��b�N���J����ƁA���ɂ͌���ł͋M�d�ȃQ�m�������߂��Ă����B
-PRINTFORML %CALLNAME:L_I%�͂��̍K�^�Ɋ�тA��悸�����Ǝ����A�邱�Ƃɂ����c
+PRINTFORML %CALLNAME:L_I%は近くの建物を隈なく探す、すると特殊加工された箱を偶然見つける。
+PRINTFORML 持ち前の鍵開け技能でロックを開けると、中には現代では貴重なゲノムが収められていた。
+PRINTFORML %CALLNAME:L_I%はこの幸運に喜びつつ、一先ず箱ごと持ち帰ることにした…
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 
-PRINTFORML %FlagNAME:(2500+L_G)%����肵��
+PRINTFORML %FlagNAME:(2500+L_G)%を入手した
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 

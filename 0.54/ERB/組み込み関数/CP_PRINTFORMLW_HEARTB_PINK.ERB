@@ -1,53 +1,53 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CP_PRINTFORMLW_HEARTB_PINK.ERB
-;	Facility	:����p�֐�
+;	Facility	:口上用関数
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2014/01/14		�l�g���X				�V�K�쐬
+;	001		2014/01/14		ネトリス				新規作成
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
-;�����̊֐���g�ݍ��킹�č��������p�̊֐�
-;�n�[�g�}�[�N(���h��s���N)������Ŏ�y�Ɏg����悤�ɍ쐬
+;既存の関数を組み合わせて作った口上用の関数
+;ハートマーク(黒塗りピンク)を口上で手軽に使えるように作成
 ;
 ;=================================================
 ;   sub CP_PRINTFORMLW_HEARTB_PINK
 ;=================================================
-;   �\��:����p�n�[�g�}�[�N(���h��s���N)�}��PRINTL(W)
+;   表示:口上用ハートマーク(黒塗りピンク)挿入PRINTL(W)
 ;-------------------------------------------------
-;   �uARGS:2�`�v�ɃZ�b�g�������͂��o�͂���
-;	���̍ہA"�n�[�g"��������"�́[��"�ƃZ�b�g����Ă����ꍇ�̓n�[�g�}�[�N(���h��s���N)���o�͂���
-;   �擪�����Ɩ��[�����́A""���Z�b�g����Ώȗ��\�i���̏ꍇ�͂��ꂼ��@"�u"�@"�v"�@�ɂȂ�j
+;   「ARGS:2～」にセットした文章を出力する
+;	その際、"ハート"もしくは"はーと"とセットされていた場合はハートマーク(黒塗りピンク)を出力する
+;   先頭文字と末端文字は、""をセットすれば省略可能（その場合はそれぞれ　"「"　"」"　になる）
 ;-------------------------------------------------
 ; Input:
-;  ARGS:0				�擪�����i�ȗ������"�u"�j
-;  ARGS:1				���[�����i�ȗ������"�v"�j
-;  ARGS:2				������WAIT�̗L���F"L""�k"�ƃZ�b�g�����ꍇ��PRINTL�A"W""�v"�ƃZ�b�g�����ꍇ��PRINTW�ɂȂ�i�ȗ������ꍇ��PRINTL�j
-;										�F����ȊO�̕����������Ă����ꍇ�͌x���Ǝ�ɂ��̕�����\������
-;  ARGS:3�`9			�o�͕��́F�Z�b�g���ꂽ���͂�\��
-;								�F"�n�[�g""�́[��"�Ɠ��͂��Ă����ꍇ�̓n�[�g�}�[�N(���h��s���N)��\��
+;  ARGS:0				先頭文字（省略すると"「"）
+;  ARGS:1				末端文字（省略すると"」"）
+;  ARGS:2				文末のWAITの有無："L""Ｌ"とセットした場合はPRINTL、"W""Ｗ"とセットした場合はPRINTWになる（省略した場合はPRINTL）
+;										：それ以外の文字が入っていた場合は警告と主にその文字を表示する
+;  ARGS:3～9			出力文章：セットされた文章を表示
+;								："ハート""はーと"と入力していた場合はハートマーク(黒塗りピンク)を表示
 ;-------------------------------------------------
 @CP_PRINTFORMLW_HEARTB_PINK(ARGS:0, ARGS:1, ARGS:2="", ARGS:3="", ARGS:4="", ARGS:5="", ARGS:6="", ARGS:7="", ARGS:8="", ARGS:9="")
 #DIM L_CNT
 
-;�������Z�b�g����Ă���΁A������o�͂���
+;文字がセットされていれば、それを出力する
 IF STRLENS(ARGS:0)
 	PRINTS ARGS:0
-;�Z�b�g����Ă��Ȃ��ꍇ�́u���o��
+;セットされていない場合は「を出力
 ELSE
-	PRINT �u
+	PRINT 「
 ENDIF
 
 l_CNT=3
 WHILE 1
 	SIF !STRLENS(ARGS:L_CNT)
 		BREAK
-	;"�n�[�g""�́[��"�̏ꍇ�̓n�[�g�}�[�N(���h��s���N)���o��
-	IF ARGS:L_CNT == "�n�[�g" || ARGS:L_CNT == "�́[��"
+	;"ハート""はーと"の場合はハートマーク(黒塗りピンク)を出力
+	IF ARGS:L_CNT == "ハート" || ARGS:L_CNT == "はーと"
 		CALL CP_HEARTB_PINK()
 	ELSE
 		PRINTS ARGS:L_CNT
@@ -56,33 +56,33 @@ WHILE 1
 WEND
 
 
-;�������Z�b�g����Ă���΁A������o�͂���
+;文字がセットされていれば、それを出力する
 IF STRLENS(ARGS:1)
 	PRINTS ARGS:1
 
-;�Z�b�g����Ă��Ȃ��ꍇ�́v���o��
+;セットされていない場合は」を出力
 ELSE
-	PRINT �v
+	PRINT 」
 ENDIF
 
 
-;������WAIT����
-;"W""�v"��PRINTW
-IF ARGS:2 == "W" || ARGS:2 == "�v"
+;文末のWAIT判別
+;"W""Ｗ"はPRINTW
+IF ARGS:2 == "W" || ARGS:2 == "Ｗ"
 	PRINTW
 
-;"L""�k"��PRINTL
-ELSEIF ARGS:2 == "L" || ARGS:2 == "�k"
+;"L""Ｌ"はPRINTL
+ELSEIF ARGS:2 == "L" || ARGS:2 == "Ｌ"
 	PRINTL
 
-;�Z�b�g����Ă��Ȃ��ꍇ��PRINTL
+;セットされていない場合はPRINTL
 ELSEIF ARGS:2 == ""
 	PRINTL
 
-;����ȊO�̕������Z�b�g����Ă����ꍇ�͌x�����ƂƂ��ɃZ�b�g���ꂽ������\��
+;それ以外の文字がセットされていた場合は警告文とともにセットされた文字を表示
 ELSE
 	PRINTL
-	PRINTL ARGS:2��"L""�k""W""�v"�ȊO�̕������Z�b�g����Ă��܂�
+	PRINTL ARGS:2に"L""Ｌ""W""Ｗ"以外の文字がセットされています
 	PRINTS ARGS:2
 	
 ENDIF

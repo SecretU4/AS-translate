@@ -1,42 +1,42 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SYSTEM_TRAIN.ERB
-;	Facility	:TRAINŠÖ˜Aˆ—B
+;	Facility	:TRAINé–¢é€£å‡¦ç†ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	E SYSTEM_TRAIN						SYSTEM:TRAIN
-;	E TRAIN_INIT						TR:‰Šú‰»
-;	E TRAIN_SEC_START					TR:‘Oˆ—
-;	E TRAIN_SEC_MAIN					TR:Žåˆ—
-;	E TRAIN_SEC_END					TR:Œãˆ—
-;	E TRAIN_SHOW_COM					TR:ƒRƒ}ƒ“ƒhƒŠƒXƒg•\Ž¦
+;	ãƒ» SYSTEM_TRAIN						SYSTEM:TRAIN
+;	ãƒ» TRAIN_INIT						TR:åˆæœŸåŒ–
+;	ãƒ» TRAIN_SEC_START					TR:å‰å‡¦ç†
+;	ãƒ» TRAIN_SEC_MAIN					TR:ä¸»å‡¦ç†
+;	ãƒ» TRAIN_SEC_END					TR:å¾Œå‡¦ç†
+;	ãƒ» TRAIN_SHOW_COM					TR:ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆè¡¨ç¤º
 ;
-; *- ˆ—Œn(Ú×)
+; *- å‡¦ç†ç³»(è©³ç´°)
 ;
-;	E TRAIN_COM_EXE					TR:ƒRƒ}ƒ“ƒhŽÀs
-;	E TR_CALC_MOOD						TR:ƒ€[ƒh
-;	E TR_LOST_VIRGIN					TR:‰‘ÌŒ±
-;	E TR_SAME_COMMAND					TR:“¯ˆêƒRƒ}ƒ“ƒh
-;	E TR_MSG_START						TR:ŠJŽnƒƒbƒZ[ƒW
-;	E TR_MSG_END						TR:I—¹ƒƒbƒZ[ƒW
-;	E TR_LOG							TR:—š—ð
-;	E TR_AUTO_COM						TR:Ž©“®ƒRƒ}ƒ“ƒh
-;	E TR_START_SET						TR:ŠJŽnó‘ÔƒZƒbƒg
+;	ãƒ» TRAIN_COM_EXE					TR:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
+;	ãƒ» TR_CALC_MOOD						TR:ãƒ ãƒ¼ãƒ‰
+;	ãƒ» TR_LOST_VIRGIN					TR:åˆä½“é¨“
+;	ãƒ» TR_SAME_COMMAND					TR:åŒä¸€ã‚³ãƒžãƒ³ãƒ‰
+;	ãƒ» TR_MSG_START						TR:é–‹å§‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+;	ãƒ» TR_MSG_END						TR:çµ‚äº†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+;	ãƒ» TR_LOG							TR:å±¥æ­´
+;	ãƒ» TR_AUTO_COM						TR:è‡ªå‹•ã‚³ãƒžãƒ³ãƒ‰
+;	ãƒ» TR_START_SET						TR:é–‹å§‹çŠ¶æ…‹ã‚»ãƒƒãƒˆ
 ;
 ;===============================================================================
 
@@ -54,55 +54,55 @@
 #DIM L_COM
 
 
-;- TR:‰Šú‰»
+;- TR:åˆæœŸåŒ–
 CALL TRAIN_INIT
 
-;- TR:ŠJŽnó‘ÔƒZƒbƒg
+;- TR:é–‹å§‹çŠ¶æ…‹ã‚»ãƒƒãƒˆ
 CALL TR_START_SET
 
-;- TR:ŠJŽnƒƒbƒZ[ƒW
+;- TR:é–‹å§‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 CALL TR_MSG_START
 
 ;-----------------------------
-;- ˆ—ŠJŽn
+;- å‡¦ç†é–‹å§‹
 ;-----------------------------
 
 WHILE 1
-	;- TR:‘Oˆ—
+	;- TR:å‰å‡¦ç†
 	CALL TRAIN_SEC_START
 
-	;- TR:Žåˆ—
+	;- TR:ä¸»å‡¦ç†
 	CALL TRAIN_SEC_MAIN
 
-	;- TR:Œãˆ—
+	;- TR:å¾Œå‡¦ç†
 	CALL TRAIN_SEC_END
 
-	SIF SELECTCOM == [[TRAIN:s“®I—¹]]
+	SIF SELECTCOM == [[TRAIN:è¡Œå‹•çµ‚äº†]]
 		BREAK
 WEND
 
 ;-----------------------------
-;- ˆ—I—¹
+;- å‡¦ç†çµ‚äº†
 ;-----------------------------
 
-;- TR:I—¹ƒƒbƒZ[ƒW
+;- TR:çµ‚äº†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 CALL TR_MSG_END
 
-;- TR:”½‰fˆ—
+;- TR:åæ˜ å‡¦ç†
 CALL TR_REFLECT_MAIN
 
 DRAWLINE
 
-;- ABLUP:Ž©“®(Žåˆ—)
+;- ABLUP:è‡ªå‹•(ä¸»å‡¦ç†)
 CALL ABLUP_AUTO_MAIN
 
-;- TR:MARKUP(ƒƒCƒ“)
+;- TR:MARKUP(ãƒ¡ã‚¤ãƒ³)
 CALL TR_MARKUP_MAIN
 
-;- TR:ƒpƒ‰ƒ[ƒ^•Ï“®(I—¹Žž)
+;- TR:ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰å‹•(çµ‚äº†æ™‚)
 CALL TR_PALAMCHG_AFTER
 
-;- TR:‰Šú‰»
+;- TR:åˆæœŸåŒ–
 CALL TRAIN_INIT
 
 
@@ -111,7 +111,7 @@ CALL TRAIN_INIT
 ;=================================================
 ;   sub TRAIN_INIT
 ;=================================================
-;   TR:‰Šú‰»
+;   TR:åˆæœŸåŒ–
 ;-------------------------------------------------
 @TRAIN_INIT
 
@@ -119,12 +119,12 @@ VARSET TFLAG
 VARSET TSTR
 VARSET PREVCOM
 
-FLAG:’²‹³ŠJŽnƒtƒ‰ƒO = 0
+FLAG:èª¿æ•™é–‹å§‹ãƒ•ãƒ©ã‚° = 0
 
-;- ‘SƒLƒƒƒ‰
+;- å…¨ã‚­ãƒ£ãƒ©
 REPEAT CHARANUM
 
-	;- ‘S—v‘f‚ð‰Šú‰»
+	;- å…¨è¦ç´ ã‚’åˆæœŸåŒ–
 	VARSET GOTJUEL:COUNT:0, 0
 	VARSET TEQUIP:COUNT:0, 0
 	VARSET EX:COUNT:0, 0
@@ -137,31 +137,31 @@ REPEAT CHARANUM
 
 	VARSET TCVAR:COUNT:0, 0
 
-	;- ‚»‚Ì‘¼
-	BASE:COUNT:â’¸ = 0
-	BASE:COUNT:ƒ€[ƒh = 0
-	CFLAG:COUNT:’²‹³”æ˜Jƒtƒ‰ƒO = 0
+	;- ãã®ä»–
+	BASE:COUNT:çµ¶é ‚ = 0
+	BASE:COUNT:ãƒ ãƒ¼ãƒ‰ = 0
+	CFLAG:COUNT:èª¿æ•™ç–²åŠ´ãƒ•ãƒ©ã‚° = 0
 REND
 
 
 ;=================================================
 ;   sub TRAIN_SEC_START
 ;=================================================
-;   TR:‘Oˆ—
+;   TR:å‰å‡¦ç†
 ;-------------------------------------------------
 @TRAIN_SEC_START
 
-;–ˆƒ^[ƒ“‰Šú‰»
-FLAG:’²‹³ƒRƒ}ƒ“ƒh”h¶ = 0
+;æ¯Žã‚¿ãƒ¼ãƒ³åˆæœŸåŒ–
+FLAG:èª¿æ•™ã‚³ãƒžãƒ³ãƒ‰æ´¾ç”Ÿ = 0
 
 
 ;=================================================
 ;   sub TRAIN_SEC_MAIN
 ;=================================================
-;   TR:Žåˆ—
+;   TR:ä¸»å‡¦ç†
 ;-------------------------------------------------
 ; Output:
-;  RETURN				ˆ—Œ‹‰Ê(0:‘±s 1:I—¹)
+;  RETURN				å‡¦ç†çµæžœ(0:ç¶šè¡Œ 1:çµ‚äº†)
 ;-------------------------------------------------
 @TRAIN_SEC_MAIN
 #DIM L_TMP
@@ -170,47 +170,47 @@ FLAG:’²‹³ƒRƒ}ƒ“ƒh”h¶ = 0
 #DIM L_C
 #DIM L_C2
 
-;- TR:ƒAƒVÝ’è
+;- TR:ã‚¢ã‚·è¨­å®š
 CALL TR_ASSI_SET
 
 ;-----------------------------
-;- •\Ž¦:ƒwƒbƒ_[•”
+;- è¡¨ç¤º:ãƒ˜ãƒƒãƒ€ãƒ¼éƒ¨
 ;-----------------------------
 
-;- •\Ž¦:ƒy[ƒWƒwƒbƒ_
+;- è¡¨ç¤º:ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
 CALL C_LINE
 
-;- •\Ž¦:“ú•t
+;- è¡¨ç¤º:æ—¥ä»˜
 CALL INFO_DATE
 
-PRINT @@
+PRINT ã€€ã€€
 ;-------------------------------------------------
-;PRINTFORM (Œo‰ßƒ^[ƒ“:{TFLAG:s“®Œo‰ßƒ^[ƒ“”}T/{FLAG:Å‘å”_s“®ŒÀŠEƒ^[ƒ“}T) 
+;PRINTFORM (çµŒéŽã‚¿ãƒ¼ãƒ³:{TFLAG:è¡Œå‹•çµŒéŽã‚¿ãƒ¼ãƒ³æ•°}T/{FLAG:æœ€å¤§æ•°_è¡Œå‹•é™ç•Œã‚¿ãƒ¼ãƒ³}T) 
 ;-------------------------------------------------
-PRINTFORM (Œo‰ßƒ^[ƒ“:
-;SETCOLOR COLOR("…F")
-PRINTFORM {TFLAG:s“®Œo‰ßƒ^[ƒ“”,2}T
+PRINTFORM (çµŒéŽã‚¿ãƒ¼ãƒ³:
+;SETCOLOR COLOR("æ°´è‰²")
+PRINTFORM {TFLAG:è¡Œå‹•çµŒéŽã‚¿ãƒ¼ãƒ³æ•°,2}T
 RESETCOLOR
-PRINTFORM /{FLAG:Å‘å”_s“®ŒÀŠEƒ^[ƒ“}T) 
+PRINTFORM /{FLAG:æœ€å¤§æ•°_è¡Œå‹•é™ç•Œã‚¿ãƒ¼ãƒ³}T) 
 ;-------------------------------------------------
 
 PRINTL
 
 ;-----------------------------
-;- •\Ž¦:ƒpƒ‰ƒ[ƒ^•”
+;- è¡¨ç¤º:ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿éƒ¨
 ;-----------------------------
 
-;- TRî•ñ:sŒ^PALAM(ƒƒCƒ“)
+;- TRæƒ…å ±:è¡Œåž‹PALAM(ãƒ¡ã‚¤ãƒ³)
 CALL TR_INFO_PALAM_LINE_MAIN
 
-;- TRî•ñ:PALAM(ƒƒCƒ“)
+;- TRæƒ…å ±:PALAM(ãƒ¡ã‚¤ãƒ³)
 CALL TR_INFO_PALAM_MAIN
 
 ;-----------------------------
-;- CHK:Ž©“®ƒRƒ}ƒ“ƒh
+;- CHK:è‡ªå‹•ã‚³ãƒžãƒ³ãƒ‰
 ;-----------------------------
 
-;- TR:Ž©“®ƒRƒ}ƒ“ƒh
+;- TR:è‡ªå‹•ã‚³ãƒžãƒ³ãƒ‰
 CALL TR_AUTO_COM
 SIF RESULT
 	GOTO COM_EXE
@@ -218,45 +218,45 @@ SIF RESULT
 DRAWLINE
 
 ;-----------------------------
-;- •\Ž¦:ƒIƒvƒVƒ‡ƒ“ƒpƒlƒ‹
+;- è¡¨ç¤º:ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ‘ãƒãƒ«
 ;-----------------------------
 
 IF 1
 ;	ALIGNMENT RIGHT
-	PRINT @@
+	PRINT ã€€ã€€
 	IF 0
-;		PRINT @@@@@@@@@
+;		PRINT ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
 	ELSE
 		PRINT [ 
-		PRINTBUTTON "ó‘Ô‰ðœ[960] ", 960
-		PRINT ]@
+		PRINTBUTTON "çŠ¶æ…‹è§£é™¤[960] ", 960
+		PRINT ]ã€€
 	ENDIF
 
 	IF 1
-		PRINT [ COM•\Ž¦: 
-		SIF FLAG:ƒtƒBƒ‹ƒ^ˆ¤•
-			SETCOLOR COLOR("•šŽš")
-		PRINTBUTTON "ˆ¤•Œn[950] ", 950
+		PRINT [ COMè¡¨ç¤º: 
+		SIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿æ„›æ’«
+			SETCOLOR COLOR("ä¼å­—")
+		PRINTBUTTON "æ„›æ’«ç³»[950] ", 950
 		RESETCOLOR
 
-		SIF FLAG:ƒtƒBƒ‹ƒ^•òŽd
-			SETCOLOR COLOR("•šŽš")
-		PRINTBUTTON "•òŽdŒn[951] ", 951
+		SIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿å¥‰ä»•
+			SETCOLOR COLOR("ä¼å­—")
+		PRINTBUTTON "å¥‰ä»•ç³»[951] ", 951
 		RESETCOLOR
 
-		SIF FLAG:ƒtƒBƒ‹ƒ^“¹‹ï
-			SETCOLOR COLOR("•šŽš")
-		PRINTBUTTON "“¹‹ïŒn[952] ", 952
+		SIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿é“å…·
+			SETCOLOR COLOR("ä¼å­—")
+		PRINTBUTTON "é“å…·ç³»[952] ", 952
 		RESETCOLOR
 
-		SIF FLAG:ƒtƒBƒ‹ƒ^‚u«Œð
-			SETCOLOR COLOR("•šŽš")
-		PRINTBUTTON "‚u«ŒðŒn[953] ", 953
+		SIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¶æ€§äº¤
+			SETCOLOR COLOR("ä¼å­—")
+		PRINTBUTTON "ï¼¶æ€§äº¤ç³»[953] ", 953
 		RESETCOLOR
 
-		SIF FLAG:ƒtƒBƒ‹ƒ^‚`«Œð
-			SETCOLOR COLOR("•šŽš")
-		PRINTBUTTON "‚`«ŒðŒn[954] ", 954
+		SIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¡æ€§äº¤
+			SETCOLOR COLOR("ä¼å­—")
+		PRINTBUTTON "ï¼¡æ€§äº¤ç³»[954] ", 954
 		RESETCOLOR
 
 		PRINT ] 
@@ -267,57 +267,57 @@ ENDIF
 PRINTL
 
 ;-----------------------------
-;- •\Ž¦:ƒRƒ}ƒ“ƒh•”
+;- è¡¨ç¤º:ã‚³ãƒžãƒ³ãƒ‰éƒ¨
 ;-----------------------------
 
-;- TR:ƒRƒ}ƒ“ƒhƒŠƒXƒg•\Ž¦
+;- TR:ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆè¡¨ç¤º
 CALL TRAIN_SHOW_COM
 
 IF PREVCOM
-	PRINTFORML ƒ‘O‰ñŽÀsƒRƒ}ƒ“ƒhF%TSTR:ŽÀsƒRƒ}ƒ“ƒh–¼%„
+	PRINTFORML ï¼œå‰å›žå®Ÿè¡Œã‚³ãƒžãƒ³ãƒ‰ï¼š%TSTR:å®Ÿè¡Œã‚³ãƒžãƒ³ãƒ‰å%ï¼ž
 ELSE
 	PRINTL 
 ENDIF
 
 ;-----------------------------
-;- ƒRƒ}ƒ“ƒhŽó•t
+;- ã‚³ãƒžãƒ³ãƒ‰å—ä»˜
 ;-----------------------------
 $INPUT_LOOP
 
 VARSET SELECTCOM
 
-SIF FLAG:ƒAƒjƒƒtƒŒ[ƒ€ŠÔŠu <= 0
-	FLAG:ƒAƒjƒƒtƒŒ[ƒ€ŠÔŠu = 50
+SIF FLAG:ã‚¢ãƒ‹ãƒ¡ãƒ•ãƒ¬ãƒ¼ãƒ é–“éš” <= 0
+	FLAG:ã‚¢ãƒ‹ãƒ¡ãƒ•ãƒ¬ãƒ¼ãƒ é–“éš” = 50
 ;INPUT
 L_C2 = 50
-FLAG:‰æ‘œ_’²‹³ƒAƒjƒS = 0
-FLAG:‰æ‘œ_’²‹³ƒAƒjƒF = 2
-FLAG:‰æ‘œ_’²‹³ƒAƒjƒ1 = 0
-FLAG:‰æ‘œ_’²‹³ƒAƒjƒ2 = 0
+FLAG:ç”»åƒ_èª¿æ•™ã‚¢ãƒ‹ãƒ¡S = 0
+FLAG:ç”»åƒ_èª¿æ•™ã‚¢ãƒ‹ãƒ¡F = 2
+FLAG:ç”»åƒ_èª¿æ•™ã‚¢ãƒ‹ãƒ¡1 = 0
+FLAG:ç”»åƒ_èª¿æ•™ã‚¢ãƒ‹ãƒ¡2 = 0
 $INPUT_LOOP2
-;ƒAƒjƒ
+;ã‚¢ãƒ‹ãƒ¡
 CALL H_ANIM_1
 SETCOLOR 0,0,0
 TINPUT L_C2, 1000, 1
 RESETCOLOR
 IF L_C == 1
-	L_C2 = FLAG:ƒAƒjƒƒtƒŒ[ƒ€ŠÔŠu
+	L_C2 = FLAG:ã‚¢ãƒ‹ãƒ¡ãƒ•ãƒ¬ãƒ¼ãƒ é–“éš”
 ELSE
-	L_C2 = FLAG:ƒAƒjƒƒtƒŒ[ƒ€ŠÔŠu
+	L_C2 = FLAG:ã‚¢ãƒ‹ãƒ¡ãƒ•ãƒ¬ãƒ¼ãƒ é–“éš”
 	L_C = 0
 ENDIF
 L_C += 1
 CLEARLINE 3
-;- ‘Þ”ð
+;- é€€é¿
 L_INPUT = RESULT
 
 SELECTCASE L_INPUT
-	;s“®I—¹
-	CASE [[TRAIN:s“®I—¹]]
+	;è¡Œå‹•çµ‚äº†
+	CASE [[TRAIN:è¡Œå‹•çµ‚äº†]]
 		SELECTCOM = L_INPUT
 		RETURN
 
-	;ƒLƒƒƒ‰•ÏX
+	;ã‚­ãƒ£ãƒ©å¤‰æ›´
 	CASE 0 TO 9
 		L_TMP = GTR_PL:L_INPUT
 
@@ -325,21 +325,21 @@ SELECTCASE L_INPUT
 		SIF L_TMP < 0
 			GOTO ERROR
 
-		;- TARGETƒ`ƒFƒ“ƒW
+		;- TARGETãƒã‚§ãƒ³ã‚¸
 		TARGET = L_TMP
 
-		IF TARGET == TFLAG:ƒƒCƒ“ƒ^[ƒQƒbƒg
+		IF TARGET == TFLAG:ãƒ¡ã‚¤ãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 			PREVCOM = L_PREVCOM
 		ELSEIF PREVCOM
 			L_PREVCOM = PREVCOM
 			PREVCOM = 0
 		ENDIF
 
-	;’²‹³ƒƒjƒ…[
+	;èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	CASE DEFTR_MACRO_1, DEFTR_MACRO_2
 
-		IF !BASE:TARGET:‘Ì—Í
-			CALL C_INPUT_ERROR(@"%CALLNAME%‚Ì‘Ì—Í‚ª0‚Ìˆ×A’²‹³o—ˆ‚Ü‚¹‚ñ")
+		IF !BASE:TARGET:ä½“åŠ›
+			CALL C_INPUT_ERROR(@"%CALLNAME%ã®ä½“åŠ›ãŒ0ã®ç‚ºã€èª¿æ•™å‡ºæ¥ã¾ã›ã‚“")
 			PRINTFORML
 			GOTO INPUT_LOOP
 		ENDIF
@@ -351,11 +351,11 @@ SELECTCASE L_INPUT
 				CALL COM_MACRO_EXE(1)
 		ENDSELECT
 
-	;ƒRƒ}ƒ“ƒhŽÀs
+	;ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 	CASE 10 TO (920 -1)
 
-		IF !BASE:TARGET:‘Ì—Í
-			CALL C_INPUT_ERROR(@"%CALLNAME%‚Ì‘Ì—Í‚ª0‚Ìˆ×A’²‹³o—ˆ‚Ü‚¹‚ñ")
+		IF !BASE:TARGET:ä½“åŠ›
+			CALL C_INPUT_ERROR(@"%CALLNAME%ã®ä½“åŠ›ãŒ0ã®ç‚ºã€èª¿æ•™å‡ºæ¥ã¾ã›ã‚“")
 			PRINTFORML
 			GOTO INPUT_LOOP
 		ENDIF
@@ -368,78 +368,78 @@ SELECTCASE L_INPUT
 
 		$COM_EXE
 
-		;- TR:ƒRƒ}ƒ“ƒhŽÀs
+		;- TR:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 		CALL TRAIN_COM_EXE
 
-		;- ŽÀsŒ‹‰Ê1ˆÈŠO‚Ìê‡‚ÍA‚»‚ÌƒRƒ}ƒ“ƒh‚ð’†Ž~‚Æ”»’f
+		;- å®Ÿè¡Œçµæžœ1ä»¥å¤–ã®å ´åˆã¯ã€ãã®ã‚³ãƒžãƒ³ãƒ‰ã‚’ä¸­æ­¢ã¨åˆ¤æ–­
 		SIF RESULT == 0
 			RESTART
 
 		RETURN
 
-	;”\—Í•\Ž¦
+	;èƒ½åŠ›è¡¨ç¤º
 	CASE 920
 		CALL INFO_STATUS_MAIN(MASTER)
-	;”\—Í•\Ž¦
+	;èƒ½åŠ›è¡¨ç¤º
 	CASE 921
 		CALL INFO_STATUS_MAIN(TARGET)
-	;”\—Í•\Ž¦(ˆê——)
+	;èƒ½åŠ›è¡¨ç¤º(ä¸€è¦§)
 	CASE 922
 		CALL INFO_STATUS_LIST
 
-	;ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^
+	;ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿
 	CASE 924
-		;- ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^‰æ–Ê:Žåˆ—
+		;- ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿ç”»é¢:ä¸»å‡¦ç†
 		CALL COMMAND_FILTER_MAIN
-	;ƒRƒ“ƒtƒBƒO
+	;ã‚³ãƒ³ãƒ•ã‚£ã‚°
 	CASE 925
-		;•\Ž¦:ƒRƒ“ƒtƒBƒO(LIST)
+		;è¡¨ç¤º:ã‚³ãƒ³ãƒ•ã‚£ã‚°(LIST)
 		CALL CONFIG_LIST
-	;—š—ð
+	;å±¥æ­´
 	CASE 926
 
 		DRAWLINE
-		PRINTFORML ƒ—š—ðF‘O‰ñ‚Ìƒpƒ‰ƒ[ƒ^•Ï“®„
+		PRINTFORML ï¼œå±¥æ­´ï¼šå‰å›žã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰å‹•ï¼ž
 
-		;- TR:—š—ð
+		;- TR:å±¥æ­´
 		CALL TR_LOG
 
-	;’²‹³ƒƒjƒ…[‚P
+	;èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼‘
 	CASE 927
-		;- ƒRƒ}ƒ“ƒhƒ}ƒNƒ:Ý’è
+		;- ã‚³ãƒžãƒ³ãƒ‰ãƒžã‚¯ãƒ­:è¨­å®š
 		CALL COM_MACRO_SET(0)
 
-	;’²‹³ƒƒjƒ…[‚Q
+	;èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼’
 	CASE 928
-		;- ƒRƒ}ƒ“ƒhƒ}ƒNƒ:Ý’è
+		;- ã‚³ãƒžãƒ³ãƒ‰ãƒžã‚¯ãƒ­:è¨­å®š
 		CALL COM_MACRO_SET(1)
 
-	;•\Ž¦Œnƒtƒ‰ƒO
+	;è¡¨ç¤ºç³»ãƒ•ãƒ©ã‚°
 	CASE 950 TO 954
 
 		SELECTCASE RESULT
 			CASE 950
-				FLAG:ƒtƒBƒ‹ƒ^ˆ¤• = !FLAG:ƒtƒBƒ‹ƒ^ˆ¤•
+				FLAG:ãƒ•ã‚£ãƒ«ã‚¿æ„›æ’« = !FLAG:ãƒ•ã‚£ãƒ«ã‚¿æ„›æ’«
 			CASE 951
-				FLAG:ƒtƒBƒ‹ƒ^•òŽd = !FLAG:ƒtƒBƒ‹ƒ^•òŽd
+				FLAG:ãƒ•ã‚£ãƒ«ã‚¿å¥‰ä»• = !FLAG:ãƒ•ã‚£ãƒ«ã‚¿å¥‰ä»•
 			CASE 952
-				FLAG:ƒtƒBƒ‹ƒ^“¹‹ï = !FLAG:ƒtƒBƒ‹ƒ^“¹‹ï
+				FLAG:ãƒ•ã‚£ãƒ«ã‚¿é“å…· = !FLAG:ãƒ•ã‚£ãƒ«ã‚¿é“å…·
 			CASE 953
-				FLAG:ƒtƒBƒ‹ƒ^‚u«Œð = !FLAG:ƒtƒBƒ‹ƒ^‚u«Œð
+				FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¶æ€§äº¤ = !FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¶æ€§äº¤
 			CASE 954
-				FLAG:ƒtƒBƒ‹ƒ^‚`«Œð = !FLAG:ƒtƒBƒ‹ƒ^‚`«Œð
+				FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¡æ€§äº¤ = !FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¡æ€§äº¤
 		ENDSELECT
 
-	;ó‘Ô‰ðœ
+	;çŠ¶æ…‹è§£é™¤
 	CASE 960
-		;- TR:•”ˆÊƒ|ƒCƒ“ƒgƒŠƒZƒbƒg
+		;- TR:éƒ¨ä½ãƒã‚¤ãƒ³ãƒˆãƒªã‚»ãƒƒãƒˆ
 		CALL TR_POINT_RESET(TARGET)
 
 	CASE 1000
 		CALL H_ANIM_1
 		CLEARLINE 1
 		GOTO INPUT_LOOP2
-	;ã‹LˆÈŠO
+	;ä¸Šè¨˜ä»¥å¤–
 	CASEELSE
 		$ERROR
 		CALL C_INPUT_ERROR
@@ -451,7 +451,7 @@ RESTART
 ;=================================================
 ;   sub TRAIN_SEC_END
 ;=================================================
-;   TRAIN:Œãˆ—
+;   TRAIN:å¾Œå‡¦ç†
 ;-------------------------------------------------
 @TRAIN_SEC_END
 #DIM L_I
@@ -459,57 +459,57 @@ RESTART
 #DIM L_HIT
 #DIM L_EXIT
 
-SIF SELECTCOM == [[TRAIN:s“®I—¹]]
+SIF SELECTCOM == [[TRAIN:è¡Œå‹•çµ‚äº†]]
 	RETURN
 
 ;-----------------------------
-;- ‘Þêƒ`ƒFƒbƒN
+;- é€€å ´ãƒã‚§ãƒƒã‚¯
 ;-----------------------------
 L_HIT=0
 L_EXIT=0
 
-;- ‹xŒeŽÒ”­¶
+;- ä¼‘æ†©è€…ç™ºç”Ÿ
 FOR L_I,0,DEFTR_PL_NUM
 	L_T = GTR_PL:L_I
 	SIF L_T < 0
 		BREAK
 
-	IF TCVAR:L_T:‹xŒeƒtƒ‰ƒO
+	IF TCVAR:L_T:ä¼‘æ†©ãƒ•ãƒ©ã‚°
 		CONTINUE
 	ENDIF
 
-	;‘Ì—Í0
-	IF !BASE:L_T:‘Ì—Í
+	;ä½“åŠ›0
+	IF !BASE:L_T:ä½“åŠ›
 
-		;- TR:•”ˆÊƒ|ƒCƒ“ƒgƒŠƒZƒbƒg
+		;- TR:éƒ¨ä½ãƒã‚¤ãƒ³ãƒˆãƒªã‚»ãƒƒãƒˆ
 		CALL TR_POINT_RESET(L_T)
 
 		L_HIT ++
-		TCVAR:L_T:‹xŒeƒtƒ‰ƒO=1
+		TCVAR:L_T:ä¼‘æ†©ãƒ•ãƒ©ã‚°=1
 		IF L_T == MASTER
 			L_EXIT=1
-			CALL CP_PRINTFORMW_COLORED("y‹xŒez", COLOR("…F"), @"%CALLNAME:L_T%‚ª”æ‚ê‚½‚½‚ßA’²‹³‚ðI‚¦‚éŽ–‚É‚µ‚½c")
+			CALL CP_PRINTFORMW_COLORED("ã€ä¼‘æ†©ã€‘", COLOR("æ°´è‰²"), @"%CALLNAME:L_T%ãŒç–²ã‚ŒãŸãŸã‚ã€èª¿æ•™ã‚’çµ‚ãˆã‚‹äº‹ã«ã—ãŸâ€¦")
 		ELSE
-			CALL CP_PRINTFORMW_COLORED("y‹xŒez", COLOR("…F"), @"%CALLNAME:L_T%‚ª”æ‚ê‚½‚½‚ßA‹xŒe‚³‚¹‚éŽ–‚É‚µ‚½c")
+			CALL CP_PRINTFORMW_COLORED("ã€ä¼‘æ†©ã€‘", COLOR("æ°´è‰²"), @"%CALLNAME:L_T%ãŒç–²ã‚ŒãŸãŸã‚ã€ä¼‘æ†©ã•ã›ã‚‹äº‹ã«ã—ãŸâ€¦")
 		ENDIF
 	ENDIF
 NEXT
 
-;- ŽžŠÔØ‚ê
-IF !L_HIT && (TFLAG:s“®Œo‰ßƒ^[ƒ“” >= FLAG:Å‘å”_s“®ŒÀŠEƒ^[ƒ“)
+;- æ™‚é–“åˆ‡ã‚Œ
+IF !L_HIT && (TFLAG:è¡Œå‹•çµŒéŽã‚¿ãƒ¼ãƒ³æ•° >= FLAG:æœ€å¤§æ•°_è¡Œå‹•é™ç•Œã‚¿ãƒ¼ãƒ³)
 	L_EXIT=1
-	CALL CP_PRINTFORMW_COLORED("yŽžŠÔz", COLOR("…F"), @"Žž‚ª—ˆ‚½‚½‚ßA¡‰ñ‚Ì’²‹³‚ðI‚¦‚éŽ–‚É‚µ‚½c")
+	CALL CP_PRINTFORMW_COLORED("ã€æ™‚é–“ã€‘", COLOR("æ°´è‰²"), @"æ™‚åˆ»ãŒæ¥ãŸãŸã‚ã€ä»Šå›žã®èª¿æ•™ã‚’çµ‚ãˆã‚‹äº‹ã«ã—ãŸâ€¦")
 ENDIF
 
 
 SIF L_EXIT
-	SELECTCOM = [[TRAIN:s“®I—¹]]
+	SELECTCOM = [[TRAIN:è¡Œå‹•çµ‚äº†]]
 
 
 ;=================================================
 ;   sub TRAIN_SHOW_COM
 ;=================================================
-;   TR:ƒRƒ}ƒ“ƒhƒŠƒXƒg•\Ž¦
+;   TR:ã‚³ãƒžãƒ³ãƒ‰ãƒªã‚¹ãƒˆè¡¨ç¤º
 ;-------------------------------------------------
 @TRAIN_SHOW_COM
 #DIM L_I
@@ -521,7 +521,7 @@ SIF L_EXIT
 #DIM L_MAX_PRINT
 
 ;-----------------------------
-;- ‰Šúˆ—
+;- åˆæœŸå‡¦ç†
 ;-----------------------------
 VARSET GTR_COMABLE, -1
 
@@ -531,29 +531,29 @@ L_CNT_PRINT	= 0
 L_MAX_PRINT	= PRINTCPERLINE()
 
 ;-----------------------------
-;- •\Ž¦ŠJŽn
+;- è¡¨ç¤ºé–‹å§‹
 ;-----------------------------
 
-;-- ŽÀs‰Â”\ƒRƒ}ƒ“ƒh‚ð‰æ–Ê•\Ž¦
+;-- å®Ÿè¡Œå¯èƒ½ã‚³ãƒžãƒ³ãƒ‰ã‚’ç”»é¢è¡¨ç¤º
 FOR L_I, 10, (1000 + 1)
-	;- ”h¶‚ÍœŠO(500`599)
+	;- æ´¾ç”Ÿã¯é™¤å¤–(500ï½ž599)
 	SIF (500 <= L_I) && (L_I < 600)
 		CONTINUE
 
-	;- ‰üsˆ—
+	;- æ”¹è¡Œå‡¦ç†
 	SELECTCASE L_I
-		;- •K{‚Å‰üs‚·‚é€–Ú
+		;- å¿…é ˆã§æ”¹è¡Œã™ã‚‹é …ç›®
 		CASE 900
 			L_HIT = 2
-		;- ‘Os‚Éo—Í—L‚è‚È‚ç‰üs‚·‚é€–Ú
+		;- å‰è¡Œã«å‡ºåŠ›æœ‰ã‚Šãªã‚‰æ”¹è¡Œã™ã‚‹é …ç›®
 		CASE 920, 800, 80, 300
 			SIF !LINEISEMPTY()
 				L_HIT = 1
 	ENDSELECT
 
-	;- ‰üs
+	;- æ”¹è¡Œ
 	IF L_HIT
-		;‹ós‚ð‹²‚Ý‚½‚¢ê‡
+		;ç©ºè¡Œã‚’æŒŸã¿ãŸã„å ´åˆ
 		SIF !LINEISEMPTY() && (L_HIT >= 2)
 			PRINTL
 		PRINTL
@@ -561,78 +561,78 @@ FOR L_I, 10, (1000 + 1)
 		L_CNT_PRINT=0
 	ENDIF
 
-	;- CHK:ŒÅ’è•\Ž¦
+	;- CHK:å›ºå®šè¡¨ç¤º
 	SELECTCASE L_I
-		;- ’²‹³ƒƒjƒ…[‚P
+		;- èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼‘
 		CASE DEFTR_MACRO_1
 			SIF TARGET == MASTER
 				CONTINUE
-			SIF !(FLAG:ƒ}ƒNƒ“o˜^”‚P && !FLAG:ƒ}ƒNƒŽg—pƒtƒ‰ƒO‚P)
+			SIF !(FLAG:ãƒžã‚¯ãƒ­ç™»éŒ²æ•°ï¼‘ && !FLAG:ãƒžã‚¯ãƒ­ä½¿ç”¨ãƒ•ãƒ©ã‚°ï¼‘)
 				CONTINUE
-			PRINTFORMC ’²‹³ƒƒjƒ…[‚P[{DEFTR_MACRO_1}]
-		;- ’²‹³ƒƒjƒ…[‚Q
+			PRINTFORMC èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼‘[{DEFTR_MACRO_1}]
+		;- èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼’
 		CASE DEFTR_MACRO_2
 			SIF TARGET == MASTER
 				CONTINUE
-			SIF !(FLAG:ƒ}ƒNƒ“o˜^”‚Q && !FLAG:ƒ}ƒNƒŽg—pƒtƒ‰ƒO‚Q)
+			SIF !(FLAG:ãƒžã‚¯ãƒ­ç™»éŒ²æ•°ï¼’ && !FLAG:ãƒžã‚¯ãƒ­ä½¿ç”¨ãƒ•ãƒ©ã‚°ï¼’)
 				CONTINUE
-			PRINTFORMC ’²‹³ƒƒjƒ…[‚Q[{DEFTR_MACRO_2}]
-		;- ƒIƒvƒVƒ‡ƒ“
+			PRINTFORMC èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼’[{DEFTR_MACRO_2}]
+		;- ã‚ªãƒ—ã‚·ãƒ§ãƒ³
 		CASE 920
-			PRINTC ”\—Í•\Ž¦(MASTER)[920]
+			PRINTC èƒ½åŠ›è¡¨ç¤º(MASTER)[920]
 		CASE 921
-			PRINTC ”\—Í•\Ž¦(TARGET)[921]
+			PRINTC èƒ½åŠ›è¡¨ç¤º(TARGET)[921]
 		CASE 922
-			PRINTC ”\—Í•\Ž¦(ˆê——)[922]
+			PRINTC èƒ½åŠ›è¡¨ç¤º(ä¸€è¦§)[922]
 		CASE 924
-			PRINTC ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^[924]
+			PRINTC ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿[924]
 		CASE 925
-			PRINTC ƒRƒ“ƒtƒBƒO[925]
+			PRINTC ã‚³ãƒ³ãƒ•ã‚£ã‚°[925]
 		CASE 926
-			PRINTC —š—ð[926]
+			PRINTC å±¥æ­´[926]
 		CASE 927
-			PRINTC ’²‹³ƒƒjƒ…[‚P[927]
+			PRINTC èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼‘[927]
 		CASE 928
-			PRINTC ’²‹³ƒƒjƒ…[‚Q[928]
-		;- ‚»‚Ì‘¼
+			PRINTC èª¿æ•™ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼’[928]
+		;- ãã®ä»–
 		CASEELSE
 			SIF TARGET == MASTER
 				CONTINUE
-			;- ”h¶‚É‚È‚é‚©ƒ`ƒFƒbƒN
+			;- æ´¾ç”Ÿã«ãªã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 			TRYCCALLFORM COM_FUNC_JUMP_X{L_I}
 				L_COM = ( (RESULT >= 0) ? RESULT # L_I )
 			CATCH
 				L_COM = L_I
 			ENDCATCH
 
-			;- ƒRƒ}ƒ“ƒh‚É•ÏX‚ª–³‚¢ê‡AðŒƒ`ƒFƒbƒN
+			;- ã‚³ãƒžãƒ³ãƒ‰ã«å¤‰æ›´ãŒç„¡ã„å ´åˆã€æ¡ä»¶ãƒã‚§ãƒƒã‚¯
 			IF L_COM == L_I
 				SELECTCOM=L_COM
 
-				;- TR:ƒRƒ}ƒ“ƒhŽÀsðŒƒ`ƒFƒbƒN
+				;- TR:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶ãƒã‚§ãƒƒã‚¯
 				CALL TR_COM_ABLE_MAIN
 				SIF !RESULT
 					CONTINUE
 			ENDIF
 
 
-			;- CHK:ƒtƒBƒ‹ƒ^
+			;- CHK:ãƒ•ã‚£ãƒ«ã‚¿
 			TRYCCALLFORM COM_FUNC_GET_TYPE_X{L_COM}
 				L_FILTER_VAL = RESULT
 
-				IF FLAG:ƒtƒBƒ‹ƒ^ˆ¤• && (L_FILTER_VAL == [[COMŽí•Ê:ˆ¤•Œn]])
+				IF FLAG:ãƒ•ã‚£ãƒ«ã‚¿æ„›æ’« && (L_FILTER_VAL == [[COMç¨®åˆ¥:æ„›æ’«ç³»]])
 					CONTINUE
-				ELSEIF FLAG:ƒtƒBƒ‹ƒ^•òŽd && (L_FILTER_VAL == [[COMŽí•Ê:•òŽdŒn]])
+				ELSEIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿å¥‰ä»• && (L_FILTER_VAL == [[COMç¨®åˆ¥:å¥‰ä»•ç³»]])
 					CONTINUE
-				ELSEIF FLAG:ƒtƒBƒ‹ƒ^“¹‹ï && (L_FILTER_VAL == [[COMŽí•Ê:“¹‹ïŒn]])
+				ELSEIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿é“å…· && (L_FILTER_VAL == [[COMç¨®åˆ¥:é“å…·ç³»]])
 					CONTINUE
-				ELSEIF FLAG:ƒtƒBƒ‹ƒ^‚u«Œð && (L_FILTER_VAL == [[COMŽí•Ê:‚u«ŒðŒn]])
+				ELSEIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¶æ€§äº¤ && (L_FILTER_VAL == [[COMç¨®åˆ¥:ï¼¶æ€§äº¤ç³»]])
 					CONTINUE
-				ELSEIF FLAG:ƒtƒBƒ‹ƒ^‚`«Œð && (L_FILTER_VAL == [[COMŽí•Ê:‚`«ŒðŒn]])
+				ELSEIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¡æ€§äº¤ && (L_FILTER_VAL == [[COMç¨®åˆ¥:ï¼¡æ€§äº¤ç³»]])
 					CONTINUE
-				ELSEIF FLAG:ƒtƒBƒ‹ƒ^‚u«Œð && (L_FILTER_VAL == [[COMŽí•Ê:‹t‚u«ŒðŒn]])
+				ELSEIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¶æ€§äº¤ && (L_FILTER_VAL == [[COMç¨®åˆ¥:é€†ï¼¶æ€§äº¤ç³»]])
 					CONTINUE
-				ELSEIF FLAG:ƒtƒBƒ‹ƒ^‚`«Œð && (L_FILTER_VAL == [[COMŽí•Ê:‹t‚`«ŒðŒn]])
+				ELSEIF FLAG:ãƒ•ã‚£ãƒ«ã‚¿ï¼¡æ€§äº¤ && (L_FILTER_VAL == [[COMç¨®åˆ¥:é€†ï¼¡æ€§äº¤ç³»]])
 					CONTINUE
 				ENDIF
 			CATCH
@@ -640,10 +640,10 @@ FOR L_I, 10, (1000 + 1)
 
 			L_TMP = L_I
 
-			;-- hitŽž
+			;-- hitæ™‚
 			GTR_COMABLE:L_TMP = L_COM
 
-			;- Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+			;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 			CALLFORM COM_FUNC_GET_NAME_X{L_COM}
 			PRINTFORMC %RESULTS%[{L_TMP,3}]
 			RESETCOLOR
@@ -657,21 +657,21 @@ NEXT
 SIF !LINEISEMPTY()
 	PRINTL
 ;PRINTL
-PRINTC s“®I—¹[990]
+PRINTC è¡Œå‹•çµ‚äº†[990]
 PRINTL
 
 
 ;-------------------------------------------------------------------------------
-;   ˆ—Œn(Ú×)
+;   å‡¦ç†ç³»(è©³ç´°)
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub TRAIN_COM_EXE
 ;=================================================
-;   TR:ƒRƒ}ƒ“ƒhŽÀs
+;   TR:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 ;-------------------------------------------------
 ; Output:
-;  RETURN				ˆ—Œ‹‰Ê(1:ƒRƒ}ƒ“ƒhŽÀs 0:ƒRƒ}ƒ“ƒh’†Ž~)
+;  RETURN				å‡¦ç†çµæžœ(1:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ 0:ã‚³ãƒžãƒ³ãƒ‰ä¸­æ­¢)
 ;-------------------------------------------------
 @TRAIN_COM_EXE
 #DIM L_TMP
@@ -680,12 +680,12 @@ PRINTL
 L_TMP=0
 
 ;-----------------------------
-;- ŽÀsŠm”F
+;- å®Ÿè¡Œç¢ºèª
 ;-----------------------------
 
-;- ƒRƒ}ƒ“ƒhŽÀsŠm”F
+;- ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œç¢ºèª
 TRYCCALLFORM COM_FUNC_INPUT_X{SELECTCOM}
-	;- CHK:ŽÀs’†Ž~‚©
+	;- CHK:å®Ÿè¡Œä¸­æ­¢ã‹
 	IF !RESULT
 		RETURN 0
 	ENDIF
@@ -693,29 +693,29 @@ CATCH
 ENDCATCH
 
 ;-------------------------------------------------
-;--- ŽÀs‚³‚ê‚éˆ×AŠeŽíŒã‘±ˆ—‚ðŽÀs
+;--- å®Ÿè¡Œã•ã‚Œã‚‹ç‚ºã€å„ç¨®å¾Œç¶šå‡¦ç†ã‚’å®Ÿè¡Œ
 ;-------------------------------------------------
 
 ;-----------------------------
-;- ‰Šú‰»ˆ—
+;- åˆæœŸåŒ–å‡¦ç†
 ;-----------------------------
 
-;- ‘SƒLƒƒƒ‰
+;- å…¨ã‚­ãƒ£ãƒ©
 REPEAT CHARANUM
-	;- ƒ|ƒCƒ“ƒgXV
-	TEQUIP:COUNT:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ = TEQUIP:COUNT:ƒ|ƒCƒ“ƒg«Œð
-	TEQUIP:COUNT:ƒ|ƒCƒ“ƒg•òŽd‘O‰ñ = TEQUIP:COUNT:ƒ|ƒCƒ“ƒg•òŽd
-	TEQUIP:COUNT:ƒ|ƒCƒ“ƒgˆ¤•‘O‰ñ = TEQUIP:COUNT:ƒ|ƒCƒ“ƒgˆ¤•
+	;- ãƒã‚¤ãƒ³ãƒˆæ›´æ–°
+	TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž = TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤
+	TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆå¥‰ä»•å‰å›ž = TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆå¥‰ä»•
+	TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆæ„›æ’«å‰å›ž = TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆæ„›æ’«
 
-	;- ƒ|ƒCƒ“ƒgƒNƒŠƒA
-;	TEQUIP:COUNT:ƒ|ƒCƒ“ƒg«Œð = 0
-	TEQUIP:COUNT:ƒ|ƒCƒ“ƒg•òŽd = 0
-	TEQUIP:COUNT:ƒ|ƒCƒ“ƒgˆ¤• = 0
+	;- ãƒã‚¤ãƒ³ãƒˆã‚¯ãƒªã‚¢
+;	TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = 0
+	TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆå¥‰ä»• = 0
+	TEQUIP:COUNT:ãƒã‚¤ãƒ³ãƒˆæ„›æ’« = 0
 
-	SIF !CFLAG:COUNT:’²‹³‘ÎÛƒtƒ‰ƒO && MASTER != COUNT
+	SIF !CFLAG:COUNT:èª¿æ•™å¯¾è±¡ãƒ•ãƒ©ã‚° && MASTER != COUNT
 		CONTINUE
 
-	;- ‰Šú‰»
+	;- åˆæœŸåŒ–
 	VARSET SOURCE:COUNT:0, 0
 	VARSET DOWNBASE:COUNT:0, 0
 	VARSET CUP:COUNT:0, 0
@@ -723,151 +723,151 @@ REPEAT CHARANUM
 
 REND
 
-;- ‚»‚Ì‘¼
+;- ãã®ä»–
 VARSET GTR_EXPUP:0:0
 
-TFLAG:ƒƒCƒ“ƒ^[ƒQƒbƒg = TARGET
+TFLAG:ãƒ¡ã‚¤ãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ = TARGET
 
-;PLAYER‚ÆTARGET‚ÍŽ©“®‚Ås“®Ï‚Ý
-TCVAR:PLAYER:s“®Ï‚Ýƒtƒ‰ƒO = 1
-TCVAR:TARGET:s“®Ï‚Ýƒtƒ‰ƒO = 1
+;PLAYERã¨TARGETã¯è‡ªå‹•ã§è¡Œå‹•æ¸ˆã¿
+TCVAR:PLAYER:è¡Œå‹•æ¸ˆã¿ãƒ•ãƒ©ã‚° = 1
+TCVAR:TARGET:è¡Œå‹•æ¸ˆã¿ãƒ•ãƒ©ã‚° = 1
 
 ;-----------------------------
-;- ƒRƒ}ƒ“ƒhî•ñŽæ“¾
+;- ã‚³ãƒžãƒ³ãƒ‰æƒ…å ±å–å¾—
 ;-----------------------------
 
-;- Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 CALLFORM COM_FUNC_GET_NAME_X{SELECTCOM}
-TSTR:ŽÀsƒRƒ}ƒ“ƒh–¼ = %RESULTS%
+TSTR:å®Ÿè¡Œã‚³ãƒžãƒ³ãƒ‰å = %RESULTS%
 
 ;-----------------------------
-;- ŽÀs
+;- å®Ÿè¡Œ
 ;-----------------------------
 
-;- ƒRƒ}ƒ“ƒhŽÀs
+;- ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 CALLFORM COM_FUNC_EXE_X{SELECTCOM}
 
 ;-------------------------------------------------
-;‘O‰ñ‚ÆƒRƒ}ƒ“ƒh‚ª“¯‚¶‚ÅAƒ^[ƒQƒbƒg‚à“¯‚¶
-SIF (PREVCOM == SELECTCOM) && (TARGET == TFLAG:ƒƒCƒ“ƒ^[ƒQƒbƒg)
-	TFLAG:“¯ˆêƒRƒ}ƒ“ƒhŽÀsƒtƒ‰ƒO = 1
+;å‰å›žã¨ã‚³ãƒžãƒ³ãƒ‰ãŒåŒã˜ã§ã€ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚‚åŒã˜
+SIF (PREVCOM == SELECTCOM) && (TARGET == TFLAG:ãƒ¡ã‚¤ãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ)
+	TFLAG:åŒä¸€ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œãƒ•ãƒ©ã‚° = 1
 ;-------------------------------------------------
 
 ;-----------------------------
-;- ƒJƒEƒ“ƒ^[
+;- ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
 ;-----------------------------
 
 
 ;-----------------------------
-;- ƒ\[ƒXŒvŽZ
+;- ã‚½ãƒ¼ã‚¹è¨ˆç®—
 ;-----------------------------
 
-;- ƒTƒuƒRƒ}ƒ“ƒh:ŽÀs(Žåˆ—)
+;- ã‚µãƒ–ã‚³ãƒžãƒ³ãƒ‰:å®Ÿè¡Œ(ä¸»å‡¦ç†)
 CALL SUB_COM_EXE_MAIN
 
-;- SOURCE”½‰f:Žåˆ—
+;- SOURCEåæ˜ :ä¸»å‡¦ç†
 CALL SOURCE_CHECK_MAIN
 
-;- TR:ƒ€[ƒh
+;- TR:ãƒ ãƒ¼ãƒ‰
 CALL TR_CALC_MOOD
 
 
 ;-------------------------------------------------
-;--- ƒ\[ƒXŒvŽZI—¹ŒãAŠeŒûãEîŒiEŒvŽZŒ‹‰Ê‚ð•\Ž¦
+;--- ã‚½ãƒ¼ã‚¹è¨ˆç®—çµ‚äº†å¾Œã€å„å£ä¸Šãƒ»æƒ…æ™¯ãƒ»è¨ˆç®—çµæžœã‚’è¡¨ç¤º
 ;-------------------------------------------------
 
 ;-----------------------------
-;- îŒi:ƒRƒ}ƒ“ƒh
+;- æƒ…æ™¯:ã‚³ãƒžãƒ³ãƒ‰
 ;-----------------------------
 
-;- •\Ž¦:ƒy[ƒWƒwƒbƒ_
+;- è¡¨ç¤º:ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
 CALL C_LINE
 ;PRINTL
 
-;- ƒTƒuƒRƒ}ƒ“ƒh:ƒƒbƒZ[ƒW(Žåˆ—)
+;- ã‚µãƒ–ã‚³ãƒžãƒ³ãƒ‰:ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸(ä¸»å‡¦ç†)
 CALL SUB_COM_MSG_MAIN
 
 SIF RESULT
 	PRINTL
 
 ;-----------------------------
-;- îŒi:I—¹ˆ—
+;- æƒ…æ™¯:çµ‚äº†å‡¦ç†
 ;-----------------------------
 
-;- LOGo—Í:â’¸(Žåˆ—)
+;- LOGå‡ºåŠ›:çµ¶é ‚(ä¸»å‡¦ç†)
 CALLFORM LOG_ORGASM_MAIN
 
-;- LOGo—Í:â’¸(îŒi - Žåˆ—)
+;- LOGå‡ºåŠ›:çµ¶é ‚(æƒ…æ™¯ - ä¸»å‡¦ç†)
 CALLFORM LOG_ORGASM_SIGHT_MAIN
 
-;- TR:ƒpƒ‰ƒ[ƒ^•Ï“®(ˆó)
+;- TR:ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å¤‰å‹•(åˆ»å°)
 CALLFORM TR_PALAMCHG_MARK_MAIN
 
-PRINTFORML c
-PRINTFORML cc
-PRINTFORML ccc
+PRINTFORML â€¦
+PRINTFORML â€¦â€¦
+PRINTFORML â€¦â€¦â€¦
 DRAWLINE
 WAIT
 
-;- TR:—š—ð
+;- TR:å±¥æ­´
 CALL TR_LOG
 
 
 ;-----------------------------
-;- ƒRƒ}ƒ“ƒhŽÀs•tˆ—
+;- ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œä»˜éšå‡¦ç†
 ;-----------------------------
 
-;- ‘SƒLƒƒƒ‰
+;- å…¨ã‚­ãƒ£ãƒ©
 REPEAT CHARANUM
 	IF COUNT == MASTER
-	ELSEIF !CFLAG:COUNT:’²‹³‘ÎÛƒtƒ‰ƒO
+	ELSEIF !CFLAG:COUNT:èª¿æ•™å¯¾è±¡ãƒ•ãƒ©ã‚°
 		CONTINUE
 	ENDIF
 
-	;ŽålˆÈŠO
+	;ä¸»äººä»¥å¤–
 	IF COUNT != MASTER
-		;s“®Ï‚Ý
-		IF TCVAR:COUNT:s“®Ï‚Ýƒtƒ‰ƒO
-			TCVAR:COUNT:’²‹³‰ñ” ++
-			EXP:COUNT:Žål’²‹³ŒoŒ± ++
-			IF TALENT:COUNT:ŒðÛ’† == 1 || TALENT:COUNT:Œ‹¥Ï‚Ý == 1 || TALENT:COUNT:•S‡Œ‹¥ == 1
-				EXP:COUNT:‚m‚s‚k’²‹³ŒoŒ± ++
+		;è¡Œå‹•æ¸ˆã¿
+		IF TCVAR:COUNT:è¡Œå‹•æ¸ˆã¿ãƒ•ãƒ©ã‚°
+			TCVAR:COUNT:èª¿æ•™å›žæ•° ++
+			EXP:COUNT:ä¸»äººèª¿æ•™çµŒé¨“ ++
+			IF TALENT:COUNT:äº¤éš›ä¸­ == 1 || TALENT:COUNT:çµå©šæ¸ˆã¿ == 1 || TALENT:COUNT:ç™¾åˆçµå©š == 1
+				EXP:COUNT:ï¼®ï¼´ï¼¬èª¿æ•™çµŒé¨“ ++
 				SIF RAND:100 > 50
-					EXP:COUNT:‚m‚s‚k’²‹³ŒoŒ± ++
+					EXP:COUNT:ï¼®ï¼´ï¼¬èª¿æ•™çµŒé¨“ ++
 			ENDIF
 		ENDIF
 	ENDIF
 
-	;‘Sˆõ
-	SIF TEQUIP:COUNT:‚uŠí‹ï
-		TEQUIP:COUNT:‚uŠí‹ïŒo‰ßƒ^[ƒ“ ++
-	SIF TEQUIP:COUNT:‚`Ší‹ï
-		TEQUIP:COUNT:‚`Ší‹ïŒo‰ßƒ^[ƒ“ ++
+	;å…¨å“¡
+	SIF TEQUIP:COUNT:ï¼¶å™¨å…·
+		TEQUIP:COUNT:ï¼¶å™¨å…·çµŒéŽã‚¿ãƒ¼ãƒ³ ++
+	SIF TEQUIP:COUNT:ï¼¡å™¨å…·
+		TEQUIP:COUNT:ï¼¡å™¨å…·çµŒéŽã‚¿ãƒ¼ãƒ³ ++
 
 REND
 
 
 ;-----------------------------
-;- ƒRƒ}ƒ“ƒhŽÀsI—¹Žž‰Šú‰»ˆ—
+;- ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œçµ‚äº†æ™‚åˆæœŸåŒ–å‡¦ç†
 ;-----------------------------
-;- ‘SƒLƒƒƒ‰
+;- å…¨ã‚­ãƒ£ãƒ©
 REPEAT CHARANUM
 	IF COUNT == MASTER
-	ELSEIF !CFLAG:COUNT:’²‹³‘ÎÛƒtƒ‰ƒO
+	ELSEIF !CFLAG:COUNT:èª¿æ•™å¯¾è±¡ãƒ•ãƒ©ã‚°
 		CONTINUE
 	ENDIF
 
-	;- POSE:‰Šú‰»
+	;- POSE:åˆæœŸåŒ–
 	CALL POSE_CLEAR(COUNT)
 
-	;- TCVAR‰Šú‰»
+	;- TCVARåˆæœŸåŒ–
 	FOR L_I, 0, 50
 		TCVAR:COUNT:L_I=0
 	NEXT
 
 REND
 
-;- TFLAG‰Šú‰»
+;- TFLAGåˆæœŸåŒ–
 REPEAT 50
 	TFLAG:COUNT=0
 REND
@@ -876,9 +876,9 @@ PREVCOM = SELECTCOM
 
 
 ;-----------------------------
-;- ƒRƒ}ƒ“ƒhŽÀsI—¹Žžˆ—
+;- ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œçµ‚äº†æ™‚å‡¦ç†
 ;-----------------------------
-TFLAG:s“®Œo‰ßƒ^[ƒ“” ++
+TFLAG:è¡Œå‹•çµŒéŽã‚¿ãƒ¼ãƒ³æ•° ++
 
 RETURN 1
 
@@ -886,7 +886,7 @@ RETURN 1
 ;=================================================
 ;   sub TR_CALC_MOOD
 ;=================================================
-;   TR:ƒ€[ƒh
+;   TR:ãƒ ãƒ¼ãƒ‰
 ;-------------------------------------------------
 @TR_CALC_MOOD
 #DIM L_I
@@ -898,7 +898,7 @@ L_I=0
 L_TMP=0
 
 ;-----------------------------
-;- ŒvŽZ:ƒ€[ƒh
+;- è¨ˆç®—:ãƒ ãƒ¼ãƒ‰
 ;-----------------------------
 
 ;- 
@@ -910,63 +910,63 @@ FOR L_I, 0, DEFTR_PL_NUM
 	SIF L_P == MASTER
 		CONTINUE
 
-	;-- ŒvŽZ
+	;-- è¨ˆç®—
 	LOCAL = 0
 
 	;-----------------------------
-	;--- ƒvƒ‰ƒX•â³
+	;--- ãƒ—ãƒ©ã‚¹è£œæ­£
 	;-----------------------------
 
-	;-- ŒÂlPALAM
+	;-- å€‹äººPALAM
 
-	;ŠeŽí‰õŠ´
-	LOCAL += TCVAR:L_P:â’¸‰ÁŽZ’l
-	;—~î
-	LOCAL += CUP:L_P:—~î
+	;å„ç¨®å¿«æ„Ÿ
+	LOCAL += TCVAR:L_P:çµ¶é ‚åŠ ç®—å€¤
+	;æ¬²æƒ…
+	LOCAL += CUP:L_P:æ¬²æƒ…
 
-	;-- ‘ÎlPALAM
-	LOCAL += CUP:L_P:DˆÓ
-	LOCAL += CUP:L_P:‹ü•ž
+	;-- å¯¾äººPALAM
+	LOCAL += CUP:L_P:å¥½æ„
+	LOCAL += CUP:L_P:å±ˆæœ
 
-	;- ŠeŽí”\—Í‚Å‘‰Á
+	;- å„ç¨®èƒ½åŠ›ã§å¢—åŠ 
 	L_TMP = 0
-	L_TMP += ABL:L_P:«“z—ê
-	L_TMP += ABL:L_P:e–§
-	L_TMP += ABL:L_P:]‡
-	L_TMP += ABL:L_P:•òŽd¸_
+	L_TMP += ABL:L_P:æ€§å¥´éš·
+	L_TMP += ABL:L_P:è¦ªå¯†
+	L_TMP += ABL:L_P:å¾“é †
+	L_TMP += ABL:L_P:å¥‰ä»•ç²¾ç¥ž
 	L_TMP = 100 + (10 * L_TMP)
 
 	LOCAL = LOCAL * L_TMP / 100
 
 	;-----------------------------
-	;--- ƒ}ƒCƒiƒX•â³
+	;--- ãƒžã‚¤ãƒŠã‚¹è£œæ­£
 	;-----------------------------
 
-	;-- ŒÂlPALAM
-	LOCAL -= CUP:L_P:‹ê’É
-	LOCAL -= CUP:L_P:—}ŸT
+	;-- å€‹äººPALAM
+	LOCAL -= CUP:L_P:è‹¦ç—›
+	LOCAL -= CUP:L_P:æŠ‘é¬±
 
-	;-- ‘ÎlPALAM
-	LOCAL -= CUP:L_P:‹°•|
-	LOCAL -= CUP:L_P:”½Š´
-	LOCAL -= CUP:L_P:•s‰õ
+	;-- å¯¾äººPALAM
+	LOCAL -= CUP:L_P:ææ€–
+	LOCAL -= CUP:L_P:åæ„Ÿ
+	LOCAL -= CUP:L_P:ä¸å¿«
 
 	;-----------------------------
-	;--- Œvã
+	;--- è¨ˆä¸Š
 	;-----------------------------
 
-	;0ˆÈ‰º‚Í‰ÁŽZ‚µ‚È‚¢
+	;0ä»¥ä¸‹ã¯åŠ ç®—ã—ãªã„
 	SIF LOCAL < 0
 		CONTINUE
 
-	DOWNBASE:L_P:ƒ€[ƒh = LOCAL
+	DOWNBASE:L_P:ãƒ ãƒ¼ãƒ‰ = LOCAL
 
-	;-- ŠÛ‚ß•â³(1/100)
-	DOWNBASE:L_P:ƒ€[ƒh /= 100
+	;-- ä¸¸ã‚è£œæ­£(1/100)
+	DOWNBASE:L_P:ãƒ ãƒ¼ãƒ‰ /= 100
 
-	BASE:L_P:ƒ€[ƒh += DOWNBASE:L_P:ƒ€[ƒh
-	BASE:L_P:ƒ€[ƒh = MAX(BASE:L_P:ƒ€[ƒh,0)
-	BASE:L_P:ƒ€[ƒh = MIN(BASE:L_P:ƒ€[ƒh,MAXBASE:L_P:ƒ€[ƒh)
+	BASE:L_P:ãƒ ãƒ¼ãƒ‰ += DOWNBASE:L_P:ãƒ ãƒ¼ãƒ‰
+	BASE:L_P:ãƒ ãƒ¼ãƒ‰ = MAX(BASE:L_P:ãƒ ãƒ¼ãƒ‰,0)
+	BASE:L_P:ãƒ ãƒ¼ãƒ‰ = MIN(BASE:L_P:ãƒ ãƒ¼ãƒ‰,MAXBASE:L_P:ãƒ ãƒ¼ãƒ‰)
 
 NEXT
 
@@ -974,12 +974,12 @@ NEXT
 ;=================================================
 ;   sub TR_LOST_VIRGIN
 ;=================================================
-;   TR:‰‘ÌŒ±
+;   TR:åˆä½“é¨“
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURN				Œ‹‰Ê
+;  RETURN				çµæžœ
 ;-------------------------------------------------
 @TR_LOST_VIRGIN(ARG)
 #DIM L_HIT
@@ -990,49 +990,49 @@ TARGET = ARG
 
 L_HIT=0
 
-IF TCVAR:ARG:—š—ð_EXP_ˆ—‘rŽ¸
+IF TCVAR:ARG:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤±
 	PRINTFORM %CALLNAME:ARG%
-	SETCOLOR COLOR("ƒsƒ“ƒN")
-	PRINTW ˆ—‘rŽ¸
+	SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	PRINTW å‡¦å¥³å–ªå¤±
 	RESETCOLOR
 	IF ARG != MASTER
-		;- Œûão—Í:ˆ—‘rŽ¸Žž
-		CALLFORM KOJO_LOST_VIRGIN([[Œûã:ˆ—‘rŽ¸]])
+		;- å£ä¸Šå‡ºåŠ›:å‡¦å¥³å–ªå¤±æ™‚
+		CALLFORM KOJO_LOST_VIRGIN([[å£ä¸Š:å‡¦å¥³å–ªå¤±]])
 	ENDIF
 	L_HIT=1
 ENDIF
 
-IF TCVAR:ARG:—š—ð_EXP_‚`ˆ—‘rŽ¸
+IF TCVAR:ARG:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤±
 	PRINTFORM %CALLNAME:ARG%
-	SETCOLOR COLOR("ƒsƒ“ƒN")
-	PRINTW ‚`ˆ—‘rŽ¸
+	SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	PRINTW ï¼¡å‡¦å¥³å–ªå¤±
 	RESETCOLOR
 	IF ARG != MASTER
-		;- Œûão—Í:ˆ—‘rŽ¸Žž
-		CALLFORM KOJO_LOST_VIRGIN([[Œûã:‚`ˆ—‘rŽ¸]])
+		;- å£ä¸Šå‡ºåŠ›:å‡¦å¥³å–ªå¤±æ™‚
+		CALLFORM KOJO_LOST_VIRGIN([[å£ä¸Š:ï¼¡å‡¦å¥³å–ªå¤±]])
 	ENDIF
 	L_HIT=1
 ENDIF
 
-IF TCVAR:ARG:—š—ð_EXP_“¶’å‘rŽ¸
+IF TCVAR:ARG:å±¥æ­´_EXP_ç«¥è²žå–ªå¤±
 	PRINTFORM %CALLNAME:ARG%
-	SETCOLOR COLOR("ŒQÂ")
-	PRINTW “¶’å‘rŽ¸
+	SETCOLOR COLOR("ç¾¤é’")
+	PRINTW ç«¥è²žå–ªå¤±
 	RESETCOLOR
 	IF ARG != MASTER
-		;- Œûão—Í:ˆ—‘rŽ¸Žž
-		CALLFORM KOJO_LOST_VIRGIN([[Œûã:“¶’å‘rŽ¸]])
+		;- å£ä¸Šå‡ºåŠ›:å‡¦å¥³å–ªå¤±æ™‚
+		CALLFORM KOJO_LOST_VIRGIN([[å£ä¸Š:ç«¥è²žå–ªå¤±]])
 	ENDIF
 	L_HIT=1
 ENDIF
 
-;- ‰‘ÌŒ±‹L˜^_TRAIN
-CALL ‰‘ÌŒ±‹L˜^_TRAIN(ARG)
+;- åˆä½“é¨“è¨˜éŒ²_TRAIN
+CALL åˆä½“é¨“è¨˜éŒ²_TRAIN(ARG)
 
-;‰Šú‰»
-TCVAR:ARG:—š—ð_EXP_ˆ—‘rŽ¸ = 0
-TCVAR:ARG:—š—ð_EXP_‚`ˆ—‘rŽ¸ = 0
-TCVAR:ARG:—š—ð_EXP_“¶’å‘rŽ¸ = 0
+;åˆæœŸåŒ–
+TCVAR:ARG:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 0
+TCVAR:ARG:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤± = 0
+TCVAR:ARG:å±¥æ­´_EXP_ç«¥è²žå–ªå¤± = 0
 
 TARGET = L_BAK
 
@@ -1041,16 +1041,16 @@ RETURNFORM L_HIT
 ;=================================================
 ;   sub TR_SAME_COMMAND 
 ;=================================================
-;   TR:“¯ˆêƒRƒ}ƒ“ƒh
+;   TR:åŒä¸€ã‚³ãƒžãƒ³ãƒ‰
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒ‚[ƒh(0:W 1:L)
+;  ARG:0				ãƒ¢ãƒ¼ãƒ‰(0:W 1:L)
 ;-------------------------------------------------
 @TR_SAME_COMMAND(ARG=1)
 
-IF TFLAG:“¯ˆêƒRƒ}ƒ“ƒhŽÀsƒtƒ‰ƒO
-	SETCOLOR COLOR("…F")
-	PRINTL ƒ“¯ˆêƒRƒ}ƒ“ƒhŽÀs„
+IF TFLAG:åŒä¸€ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œãƒ•ãƒ©ã‚°
+	SETCOLOR COLOR("æ°´è‰²")
+	PRINTL ï¼œåŒä¸€ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œï¼ž
 	RESETCOLOR
 	SIF !ARG
 		WAIT
@@ -1060,7 +1060,7 @@ ENDIF
 ;=================================================
 ;   sub TR_MSG_START
 ;=================================================
-;   TR:ŠJŽnƒƒbƒZ[ƒW
+;   TR:é–‹å§‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ;-------------------------------------------------
 @TR_MSG_START
 #DIM L_I
@@ -1070,17 +1070,17 @@ ENDIF
 L_PARTY = %TR_PARTY_NAME()%
 
 
-FLAG:”Ä—p•Ï” = 0
-FLAG:”Ä—p•Ï”2 = 0
-FLAG:”Ä—p•Ï”3 = 0
-FLAG:”Ä—p•Ï”4 = 0
-FLAG:”Ä—p•Ï”5 = 0
+FLAG:æ±Žç”¨å¤‰æ•° = 0
+FLAG:æ±Žç”¨å¤‰æ•°2 = 0
+FLAG:æ±Žç”¨å¤‰æ•°3 = 0
+FLAG:æ±Žç”¨å¤‰æ•°4 = 0
+FLAG:æ±Žç”¨å¤‰æ•°5 = 0
 
 DRAWLINE
-PRINTFORML %CALLNAME:MASTER%‚Í%L_PARTY%‚ðŒÄ‚Ñ‚Â‚¯AˆêŽž‚Ìˆ§£‚ðŽn‚ß‚½cc
+PRINTFORML %CALLNAME:MASTER%ã¯%L_PARTY%ã‚’å‘¼ã³ã¤ã‘ã€ä¸€æ™‚ã®é€¢ç€¬ã‚’å§‹ã‚ãŸâ€¦â€¦
 PRINTL 
 
-;- Œûã
+;- å£ä¸Š
 L_BAK_TGT = TARGET
 FOR L_I, 0, DEFTR_PL_NUM
 	L_T = GTR_PL:L_I
@@ -1090,32 +1090,32 @@ FOR L_I, 0, DEFTR_PL_NUM
 		CONTINUE
 	TARGET = L_T
 
-	;- TR:ƒAƒVÝ’è
+	;- TR:ã‚¢ã‚·è¨­å®š
 	CALL TR_ASSI_SET
 
-	;- Œûã:ƒGƒLƒXƒgƒ‰ƒ‚[ƒh
+	;- å£ä¸Š:ã‚¨ã‚­ã‚¹ãƒˆãƒ©ãƒ¢ãƒ¼ãƒ‰
 	CALL KOJO_EXTRA
 
 
-	;- Œûã:‘˜‹öŽž
+	;- å£ä¸Š:é­é‡æ™‚
 	CALL KOJO_ENCOUNTER("START")
 
-	CFLAG:Žål‰’²‹³ = 1
+	CFLAG:ä¸»äººåˆèª¿æ•™ = 1
 
 NEXT
 TARGET = L_BAK_TGT
 
-PRINTFORMW %CALLNAME:MASTER%‚Í%L_PARTY%‚ð‰Ÿ‚µ“|‚µA’²‹³‚ðŠJŽn‚µ‚½cc
-PRINTFORMW ccc
-PRINTFORMW cc
-PRINTFORMW c
+PRINTFORMW %CALLNAME:MASTER%ã¯%L_PARTY%ã‚’æŠ¼ã—å€’ã—ã€èª¿æ•™ã‚’é–‹å§‹ã—ãŸâ€¦â€¦
+PRINTFORMW â€¦â€¦â€¦
+PRINTFORMW â€¦â€¦
+PRINTFORMW â€¦
 
 
 
 ;=================================================
 ;   sub TR_MSG_END
 ;=================================================
-;   TR:I—¹ƒƒbƒZ[ƒW
+;   TR:çµ‚äº†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ;-------------------------------------------------
 @TR_MSG_END
 #DIM L_I
@@ -1124,13 +1124,13 @@ PRINTFORMW c
 #DIMS L_PARTY
 L_PARTY = %TR_PARTY_NAME()%
 
-;•\Ž¦:ƒy[ƒWƒwƒbƒ_
+;è¡¨ç¤º:ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
 CALL C_LINE
 
-PRINTFORMW %CALLNAME:MASTER%‚Í%L_PARTY%‚Ì’²‹³‚ðI‚¦‚½cc
+PRINTFORMW %CALLNAME:MASTER%ã¯%L_PARTY%ã®èª¿æ•™ã‚’çµ‚ãˆãŸâ€¦â€¦
 PRINTL
 
-;- Œûã
+;- å£ä¸Š
 L_BAK_TGT = TARGET
 FOR L_I, 0, DEFTR_PL_NUM
 	L_T = GTR_PL:L_I
@@ -1140,53 +1140,53 @@ FOR L_I, 0, DEFTR_PL_NUM
 		CONTINUE
 	TARGET = L_T
 
-	;- TR:ƒAƒVÝ’è
+	;- TR:ã‚¢ã‚·è¨­å®š
 	CALL TR_ASSI_SET
 
-	;- NTR:ŒvŽZ
+	;- NTR:è¨ˆç®—
 	CALL NTR_CALC(L_T, -50)
 
 	IF 1
-		;”½”­ˆóLV3
-		IF MARK:”½”­ˆó == 3
-			PRINTFORMW %CALLNAME%‚Í%CALLNAME:MASTER%‚É•s–ž‚ÌŽ‹ü‚ð‘—‚Á‚Ä‚¢‚éc
-		;«“z—êLV0
-		ELSEIF !ABL:«“z—ê
-			PRINTFORMW %CALLNAME%‚Í%CALLNAME:MASTER%‚ðŒ©‚Ä‚¢‚éc
+		;åç™ºåˆ»å°LV3
+		IF MARK:åç™ºåˆ»å° == 3
+			PRINTFORMW %CALLNAME%ã¯%CALLNAME:MASTER%ã«ä¸æº€ã®è¦–ç·šã‚’é€ã£ã¦ã„ã‚‹â€¦
+		;æ€§å¥´éš·LV0
+		ELSEIF !ABL:æ€§å¥´éš·
+			PRINTFORMW %CALLNAME%ã¯%CALLNAME:MASTER%ã‚’è¦‹ã¦ã„ã‚‹â€¦
 		ELSE
-			PRINTFORMW %CALLNAME%‚Í–j‚ðg’ª‚³‚¹‚Ä‚¢‚éc
+			PRINTFORMW %CALLNAME%ã¯é ¬ã‚’ç´…æ½®ã•ã›ã¦ã„ã‚‹â€¦
 		ENDIF
 	ENDIF
-	;- Œûã:‘˜‹öŽž
+	;- å£ä¸Š:é­é‡æ™‚
 	CALL KOJO_ENCOUNTER("END")
 NEXT
 TARGET = L_BAK_TGT
 
-PRINTFORMW %L_PARTY%‚Æ‰ï˜b‚ð‚µ‚È‚ª‚ç‹xŒe‚µ‚½cc
-PRINTFORML ccc
-PRINTFORML cc
-PRINTFORMW c
+PRINTFORMW %L_PARTY%ã¨ä¼šè©±ã‚’ã—ãªãŒã‚‰ä¼‘æ†©ã—ãŸâ€¦â€¦
+PRINTFORML â€¦â€¦â€¦
+PRINTFORML â€¦â€¦
+PRINTFORMW â€¦
 PRINTL
 
 ;=================================================
 ;   sub TR_LOG
 ;=================================================
-;   TR:—š—ð
+;   TR:å±¥æ­´
 ;-------------------------------------------------
 @TR_LOG
 
 PRINTL
 
-;- TR:“¯ˆêƒRƒ}ƒ“ƒh
+;- TR:åŒä¸€ã‚³ãƒžãƒ³ãƒ‰
 CALL TR_SAME_COMMAND
 
-;- SRC•\Ž¦:SOURCE(Žåˆ—)
+;- SRCè¡¨ç¤º:SOURCE(ä¸»å‡¦ç†)
 CALL SRC_SHOW_SRC_MAIN
 
-;- SRC•\Ž¦:BASE-EXP(Žåˆ—)
+;- SRCè¡¨ç¤º:BASE-EXP(ä¸»å‡¦ç†)
 CALL SRC_SHOW_BASE_EXP_MAIN
 
-;- SRC•\Ž¦:CUP(Žåˆ—)
+;- SRCè¡¨ç¤º:CUP(ä¸»å‡¦ç†)
 CALL SRC_SHOW_CUP_MAIN
 WAIT
 
@@ -1194,14 +1194,14 @@ WAIT
 ;=================================================
 ;   sub TR_AUTO_COM
 ;=================================================
-;   TR:Ž©“®ƒRƒ}ƒ“ƒh
+;   TR:è‡ªå‹•ã‚³ãƒžãƒ³ãƒ‰
 ;-------------------------------------------------
 ; Output:
-;  RESULT				^‹U’l
+;  RESULT				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_AUTO_COM
 
-SIF !BASE:TARGET:‘Ì—Í
+SIF !BASE:TARGET:ä½“åŠ›
 	VARSET NEXTCOM
 
 SIF !NEXTCOM:0
@@ -1215,7 +1215,7 @@ RETURN 1
 ;=================================================
 ;   sub TR_START_SET
 ;=================================================
-;   TR:ŠJŽnó‘ÔƒZƒbƒg
+;   TR:é–‹å§‹çŠ¶æ…‹ã‚»ãƒƒãƒˆ
 ;-------------------------------------------------
 @TR_START_SET
 #DIM L_I
@@ -1232,32 +1232,32 @@ FOR L_I, 0, DEFTR_PL_NUM
 		CONTINUE
 
 	L_MOOD = 0
-	IF TALENT:L_P:ãˆÊŠ×—Ž
+	IF TALENT:L_P:ä¸Šä½é™¥è½
 		L_MOOD = 5
-	ELSEIF MARK:L_P:Š×—Žˆó
+	ELSEIF MARK:L_P:é™¥è½åˆ»å°
 		L_MOOD = 4
-	ELSEIF MARK:L_P:—ê‘®ˆó
+	ELSEIF MARK:L_P:éš·å±žåˆ»å°
 		L_MOOD = 2
 	ENDIF
-	BASE:L_P:ƒ€[ƒh = (FLAG:Å‘å”_ƒ€[ƒh / FLAG:Å‘å”_ƒ€[ƒhŒ…”) * L_MOOD
+	BASE:L_P:ãƒ ãƒ¼ãƒ‰ = (FLAG:æœ€å¤§æ•°_ãƒ ãƒ¼ãƒ‰ / FLAG:æœ€å¤§æ•°_ãƒ ãƒ¼ãƒ‰æ¡æ•°) * L_MOOD
 
-;	IF MARK:L_P:Š×—Žˆó
+;	IF MARK:L_P:é™¥è½åˆ»å°
 ;		L_VAL = 10000
-;	ELSEIF MARK:L_P:—ê‘®ˆó
+;	ELSEIF MARK:L_P:éš·å±žåˆ»å°
 ;		L_VAL = 5000
 ;	ELSE
 ;		L_VAL = 0
 ;	ENDIF
-;	PALAM:L_P:ŠŠ = L_VAL
+;	PALAM:L_P:æ½¤æ»‘ = L_VAL
 
 NEXT
 
-;’²‹³‚ðŠJŽn‚µ‚½Žž‚Ì‘ÎÛƒLƒƒƒ‰‚ðˆê”Ô–Ú‚ÌƒLƒƒƒ‰‚ÉŒÅ’è‚·‚éi’Êí‚Í‘O‰ñ‘I‚ñ‚¾ƒLƒƒƒ‰j
-IF FLAG:’²‹³ŠJŽnŽž‚Ì‘ÎÛƒLƒƒƒ‰ŒÅ’è
+;èª¿æ•™ã‚’é–‹å§‹ã—ãŸæ™‚ã®å¯¾è±¡ã‚­ãƒ£ãƒ©ã‚’ä¸€ç•ªç›®ã®ã‚­ãƒ£ãƒ©ã«å›ºå®šã™ã‚‹ï¼ˆé€šå¸¸ã¯å‰å›žé¸ã‚“ã ã‚­ãƒ£ãƒ©ï¼‰
+IF FLAG:èª¿æ•™é–‹å§‹æ™‚ã®å¯¾è±¡ã‚­ãƒ£ãƒ©å›ºå®š
 	TARGET = GTR_PL:1
 ENDIF
 
-FLAG:’²‹³ŠJŽnƒtƒ‰ƒO = 1
+FLAG:èª¿æ•™é–‹å§‹ãƒ•ãƒ©ã‚° = 1
 
 
 

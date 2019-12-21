@@ -1,29 +1,29 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:MNG_ITEM.ERB
-;	Facility	:˜J–ðƒAƒCƒeƒ€B
+;	Facility	:åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- xxxx
 ;
-;	E MNG_ITEM_MAIN					Œo‰c:ƒAƒCƒeƒ€
-;	E MNG_ITEM_SELECT					Œo‰c:ƒAƒCƒeƒ€‘I‘ð
-;	E MNG_ITEM_NAME					Œo‰c:ƒAƒCƒeƒ€–¼
-;	E MNG_ITEM_CHK						Œo‰c:ƒAƒCƒeƒ€Šm”F
-;	E MNG_ITEM_RENEW					Œo‰c:ƒAƒCƒeƒ€XV
+;	ãƒ» MNG_ITEM_MAIN					çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ 
+;	ãƒ» MNG_ITEM_SELECT					çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ é¸æŠž
+;	ãƒ» MNG_ITEM_NAME					çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ å
+;	ãƒ» MNG_ITEM_CHK						çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ ç¢ºèª
+;	ãƒ» MNG_ITEM_RENEW					çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ æ›´æ–°
 ;
 ;===============================================================================
 
@@ -34,7 +34,7 @@
 ;=================================================
 ;   sub MNG_ITEM_MAIN
 ;=================================================
-;   Œo‰c:ƒAƒCƒeƒ€
+;   çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ 
 ;-------------------------------------------------
 @MNG_ITEM_MAIN
 #DIM L_CNT_DATA
@@ -52,36 +52,36 @@
 
 
 ;-----------------------------
-;- ‰Šúˆ—
+;- åˆæœŸå‡¦ç†
 ;-----------------------------
 
 L_PAGE=0
 
-; ƒf[ƒ^‘”
+; ãƒ‡ãƒ¼ã‚¿ç·æ•°
 L_CNT_DATA = GMNG_CL_NUM
 
-; ƒf[ƒ^•\Ž¦”/P
-L_CNT_PRINT = FLAG:’è”_ƒLƒƒƒ‰•\Ž¦”
+; ãƒ‡ãƒ¼ã‚¿è¡¨ç¤ºæ•°/P
+L_CNT_PRINT = FLAG:å®šæ•°_ã‚­ãƒ£ãƒ©è¡¨ç¤ºæ•°
 
 
 ;-----------------------------
-;- ˆ—ŠJŽn
+;- å‡¦ç†é–‹å§‹
 ;-----------------------------
 
 $PRINT_LIST
-;•\Ž¦:ƒy[ƒWƒwƒbƒ_
+;è¡¨ç¤º:ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
 CALL C_LINE
-PRINTFORML ]‹Æˆõ‚Ì˜J–ðƒAƒCƒeƒ€‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢B@ƒpage.{L_PAGE}„
-PRINTFORML Å‘å‚Å‚QŒÂ‚Ü‚ÅÝ’è‰Â”\‚Å‚·B
+PRINTFORML å¾“æ¥­å“¡ã®åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚ã€€ï¼œpage.{L_PAGE}ï¼ž
+PRINTFORML æœ€å¤§ã§ï¼’å€‹ã¾ã§è¨­å®šå¯èƒ½ã§ã™ã€‚
 DRAWLINE
 
 L_START	= L_CNT_PRINT * L_PAGE
 L_END	= L_CNT_PRINT * (L_PAGE + 1)
 
-;ƒwƒbƒ_
-PRINT @@@@@@@@@@@@@@@@@@@@@
-PRINT @@@ƒAƒCƒeƒ€‚P@@@ 
-PRINT @@@ƒAƒCƒeƒ€‚Q@@@ 
+;ãƒ˜ãƒƒãƒ€
+PRINT ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+PRINT ã€€ã€€ã€€ã‚¢ã‚¤ãƒ†ãƒ ï¼‘ã€€ã€€ã€€ 
+PRINT ã€€ã€€ã€€ã‚¢ã‚¤ãƒ†ãƒ ï¼’ã€€ã€€ã€€ 
 PRINTL
 
 L_CNT = 0
@@ -89,15 +89,15 @@ FOR L_I, L_START, L_END
 	L_T = GMNG_CL:L_I
 
 	IF L_T < 0
-		;‹ó
+		;ç©º
 	ELSE
 
-		;•\Ž¦
+		;è¡¨ç¤º
 		PRINTFORM [%TOSTR(L_T),3%] %CALLNAME:L_T, DEFVAR_LEN_CNAME, LEFT% 
-		PRINTFORM %DB_TALENT_NAME(L_T, "ƒIƒgƒR")% 
-		PRINTFORM y%INFO_WORK_NAME(L_T)%z 
+		PRINTFORM %DB_TALENT_NAME(L_T, "ã‚ªãƒˆã‚³")% 
+		PRINTFORM ã€%INFO_WORK_NAME(L_T)%ã€‘ 
 
-		;ƒAƒCƒeƒ€
+		;ã‚¢ã‚¤ãƒ†ãƒ 
 		PRINTFORM [{500+L_CNT}] %MNG_ITEM_NAME(L_T, 1)% 
 		PRINTFORM [{600+L_CNT}] %MNG_ITEM_NAME(L_T, 2)% 
 
@@ -114,9 +114,9 @@ PRINTL
 L_PREV = (L_PAGE <= 0) ? 0 # 1
 L_NEXT = (L_PAGE >= (L_CNT_DATA / L_CNT_PRINT) ) ? 0 # 1
 
-PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]‘O‚Ìƒy[ƒW\@
-PRINTLC [1000]–ß‚é
-PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]ŽŸ‚Ìƒy[ƒW\@
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]å‰ã®ãƒšãƒ¼ã‚¸\@
+PRINTLC [1000]æˆ»ã‚‹
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]æ¬¡ã®ãƒšãƒ¼ã‚¸\@
 PRINTL 
 PRINTL 
 
@@ -126,10 +126,10 @@ INPUT
 L_INPUT = RESULT
 
 SELECTCASE L_INPUT
-	;- I—¹
+	;- çµ‚äº†
 	CASE 1000
 		RETURN
-	;- ƒAƒCƒeƒ€‚P
+	;- ã‚¢ã‚¤ãƒ†ãƒ ï¼‘
 	CASE 500 TO 599
 
 		L_TMP = L_CNT_PRINT * L_PAGE
@@ -140,7 +140,7 @@ SELECTCASE L_INPUT
 
 		GOTO ITEM_SELECT
 
-	;- ƒAƒCƒeƒ€
+	;- ã‚¢ã‚¤ãƒ†ãƒ 
 	CASE 600 TO 699
 
 		L_TMP = L_CNT_PRINT * L_PAGE
@@ -151,26 +151,26 @@ SELECTCASE L_INPUT
 
 		GOTO ITEM_SELECT
 
-	;‘O‚Ìƒy[ƒW
+	;å‰ã®ãƒšãƒ¼ã‚¸
 	CASE 1007
 		SIF !L_PREV
 			GOTO ERROR
 		L_PAGE -= 1
 		GOTO PRINT_LIST
-	;ŽŸ‚Ìƒy[ƒW
+	;æ¬¡ã®ãƒšãƒ¼ã‚¸
 	CASE 1009
 		SIF !L_NEXT
 			GOTO ERROR
 		L_PAGE += 1
 		GOTO PRINT_LIST
-	;- ‚»‚Ì‘¼
+	;- ãã®ä»–
 	CASEELSE
 		$ERROR
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT
 
-;- ƒAƒCƒeƒ€‘I‘ð
+;- ã‚¢ã‚¤ãƒ†ãƒ é¸æŠž
 IF 0
 	$ITEM_SELECT
 	IF L_T < 0
@@ -178,12 +178,12 @@ IF 0
 		GOTO INPUT_LOOP_1
 ;-------------------------------------------------
 ;	ELSEIF L_T == MASTER
-;		CALL C_INPUT_ERROR("Žål‚É˜J–ðƒAƒCƒeƒ€‚ÍÝ’è‚Å‚«‚Ü‚¹‚ñ")
+;		CALL C_INPUT_ERROR("ä¸»äººã«åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ ã¯è¨­å®šã§ãã¾ã›ã‚“")
 ;		GOTO INPUT_LOOP_1
 ;-------------------------------------------------
 	ENDIF
 
-	;- Œo‰c:ƒAƒCƒeƒ€‘I‘ð
+	;- çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ é¸æŠž
 	CALL MNG_ITEM_SELECT(L_T, L_TMP)
 
 ENDIF
@@ -194,11 +194,11 @@ RESTART
 ;=================================================
 ;   sub MNG_ITEM_SELECT
 ;=================================================
-;   Œo‰c:ƒAƒCƒeƒ€‘I‘ð
+;   çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ é¸æŠž
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒLƒƒƒ‰
-;  ARG:1				ƒAƒCƒeƒ€ˆÊ’u
+;  ARG:0				ã‚­ãƒ£ãƒ©
+;  ARG:1				ã‚¢ã‚¤ãƒ†ãƒ ä½ç½®
 ;-------------------------------------------------
 @MNG_ITEM_SELECT(ARG:0, ARG:1)
 #DIM L_T
@@ -206,26 +206,26 @@ RESTART
 #DIM L_TNPUT
 
 L_T = ARG:0
-L_KEY = ˜J–ðƒAƒCƒeƒ€{ARG:1}
+L_KEY = åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ {ARG:1}
 
-;•\Ž¦:ƒy[ƒWƒwƒbƒ_
+;è¡¨ç¤º:ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
 CALL C_LINE
-PRINTFORML ƒZƒbƒg‚·‚é˜J–ðƒAƒCƒeƒ€‚ð‘I‚ñ‚Å‰º‚³‚¢B
+PRINTFORML ã‚»ãƒƒãƒˆã™ã‚‹åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ ã‚’é¸ã‚“ã§ä¸‹ã•ã„ã€‚
 PRINTFORML 
-PRINTFORML ‘ÎÛF%CALLNAME:L_T%
-PRINTFORML ˆÊ’uF%L_KEY%@c %MNG_ITEM_NAME(L_T, ARG:1)%
+PRINTFORML å¯¾è±¡ï¼š%CALLNAME:L_T%
+PRINTFORML ä½ç½®ï¼š%L_KEY%ã€€â€¦ %MNG_ITEM_NAME(L_T, ARG:1)%
 DRAWLINE
 PRINTL
 PRINTL
-PRINTFORML [0] –³‚µ@@@@@
-PRINTFORML [1] ”­MŠí@@@@c NTR‚É‚æ‚éŽ¸çH‚ð–hŽ~B
-PRINTFORML [2] “ÁW‹LŽ–@@@c ’–Ú‚ðW‚ß‚Ä˜J–ðŽû“ü‚ªã¸B‚½‚¾‚µNTR‚ª”­¶B
-PRINTFORML [3] Žñ—Ö@@@@@c Žål‚Ö‚Ì’‰½‚ðŽv‚¢‚¾‚µANTR‚ðŒ‚‘ÞB‚½‚¾‚µŽû“ü‚ª”¼Œ¸B
-PRINTFORML [4] ”ð”D–ò@@@@c ©ŠÙ‚âNTRA–é‰¾‚Å‚Ì”DP‚ð–h‚®B
+PRINTFORML [0] ç„¡ã—ã€€ã€€ã€€ã€€ã€€
+PRINTFORML [1] ç™ºä¿¡å™¨ã€€ã€€ã€€ã€€â€¦ NTRã«ã‚ˆã‚‹å¤±è¸ªã‚’é˜²æ­¢ã€‚
+PRINTFORML [2] ç‰¹é›†è¨˜äº‹ã€€ã€€ã€€â€¦ æ³¨ç›®ã‚’é›†ã‚ã¦åŠ´å½¹åŽå…¥ãŒä¸Šæ˜‡ã€‚ãŸã ã—NTRãŒç™ºç”Ÿã€‚
+PRINTFORML [3] é¦–è¼ªã€€ã€€ã€€ã€€ã€€â€¦ ä¸»äººã¸ã®å¿ èª ã‚’æ€ã„ã ã—ã€NTRã‚’æ’ƒé€€ã€‚ãŸã ã—åŽå…¥ãŒåŠæ¸›ã€‚
+PRINTFORML [4] é¿å¦Šè–¬ã€€ã€€ã€€ã€€â€¦ å¨¼é¤¨ã‚„NTRã€å¤œä¼½ã§ã®å¦Šå¨ ã‚’é˜²ãã€‚
 PRINTL
-PRINTFORML [-] ƒZƒNƒnƒ‰@@@c Žål‚ªƒZƒNƒnƒ‰‚ð‚µ‚És‚­BÅ‘å‚Tl‚Ü‚ÅBi’²®’†j
+PRINTFORML [-] ã‚»ã‚¯ãƒãƒ©ã€€ã€€ã€€â€¦ ä¸»äººãŒã‚»ã‚¯ãƒãƒ©ã‚’ã—ã«è¡Œãã€‚æœ€å¤§ï¼•äººã¾ã§ã€‚ï¼ˆèª¿æ•´ä¸­ï¼‰
 PRINTL
-PRINTFORML [9] –ß‚é
+PRINTFORML [9] æˆ»ã‚‹
 PRINTL
 CALL INPUT_INT(0,1,2,3,4,9)
 L_TNPUT = RESULT
@@ -234,10 +234,10 @@ SELECTCASE L_TNPUT
 	CASE 9
 		RETURN
 	CASEELSE
-		;XV
+		;æ›´æ–°
 		CFLAG:ARG:L_KEY = L_TNPUT
 
-		;- Œo‰c:ƒAƒCƒeƒ€XV
+		;- çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ æ›´æ–°
 		CALL MNG_ITEM_RENEW(ARG)
 
 		RETURN
@@ -247,40 +247,40 @@ ENDSELECT
 ;=================================================
 ;   sub MNG_ITEM_NAME
 ;=================================================
-;   Œo‰c:ƒAƒCƒeƒ€–¼
+;   çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ å
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒLƒƒƒ‰
-;  ARG:1				ƒAƒCƒeƒ€ˆÊ’u
+;  ARG:0				ã‚­ãƒ£ãƒ©
+;  ARG:1				ã‚¢ã‚¤ãƒ†ãƒ ä½ç½®
 ;-------------------------------------------------
 @MNG_ITEM_NAME(ARG:0, ARG:1)
 #FUNCTIONS
 #DIMS L_STR
 
-SELECTCASE CFLAG:ARG:@"˜J–ðƒAƒCƒeƒ€{ARG:1}"
+SELECTCASE CFLAG:ARG:@"åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ {ARG:1}"
 	;-----------------------------
 	;- NTR
 	;-----------------------------
-	CASE DEFMNG_ITEM_”­MŠí
-		L_STR = ”­MŠí
-	CASE DEFMNG_ITEM_“ÁW‹LŽ–
-		L_STR = “ÁW‹LŽ–
-	CASE DEFMNG_ITEM_Žñ—Ö
-		L_STR = Žñ—Ö
-	CASE DEFMNG_ITEM_”ð”D–ò
-		L_STR = ”ð”D–ò
+	CASE DEFMNG_ITEM_ç™ºä¿¡å™¨
+		L_STR = ç™ºä¿¡å™¨
+	CASE DEFMNG_ITEM_ç‰¹é›†è¨˜äº‹
+		L_STR = ç‰¹é›†è¨˜äº‹
+	CASE DEFMNG_ITEM_é¦–è¼ª
+		L_STR = é¦–è¼ª
+	CASE DEFMNG_ITEM_é¿å¦Šè–¬
+		L_STR = é¿å¦Šè–¬
 	;-----------------------------
-	;- ’Êí
+	;- é€šå¸¸
 	;-----------------------------
-	CASE DEFMNG_ITEM_ƒZƒNƒnƒ‰
-		L_STR = ƒZƒNƒnƒ‰
+	CASE DEFMNG_ITEM_ã‚»ã‚¯ãƒãƒ©
+		L_STR = ã‚»ã‚¯ãƒãƒ©
 	CASEELSE
-;		L_STR = @@@@@@
-		L_STR = \\\
-;		L_STR = @@@
+;		L_STR = ã€€ã€€ã€€ã€€ã€€ã€€
+		L_STR = â€•â€•â€•
+;		L_STR = ã€€ã€€ã€€
 ENDSELECT
 SIF STRLENS(L_STR)
-	L_STR = y%L_STR%z
+	L_STR = ã€%L_STR%ã€‘
 
 RETURNF @"%L_STR, 12+4, LEFT%"
 
@@ -288,13 +288,13 @@ RETURNF @"%L_STR, 12+4, LEFT%"
 ;=================================================
 ;   sub MNG_ITEM_CHK
 ;=================================================
-;   Œo‰c:ƒAƒCƒeƒ€Šm”F
+;   çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ ç¢ºèª
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒLƒƒƒ‰
-;  ARG:1				ƒAƒCƒeƒ€No
+;  ARG:0				ã‚­ãƒ£ãƒ©
+;  ARG:1				ã‚¢ã‚¤ãƒ†ãƒ No
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @MNG_ITEM_CHK(ARG:0, ARG:1)
 #FUNCTION
@@ -302,10 +302,10 @@ RETURNF @"%L_STR, 12+4, LEFT%"
 
 L_T = ARG:0
 
-SIF !GROUPMATCH(ARG:1, CFLAG:L_T:˜J–ðƒAƒCƒeƒ€1, CFLAG:L_T:˜J–ðƒAƒCƒeƒ€2)
+SIF !GROUPMATCH(ARG:1, CFLAG:L_T:åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ 1, CFLAG:L_T:åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ 2)
 	RETURNF 0
 
-;—L‚è
+;æœ‰ã‚Š
 RETURNF 1
 
 
@@ -313,14 +313,14 @@ RETURNF 1
 ;=================================================
 ;   sub MNG_ITEM_RENEW
 ;=================================================
-;   Œo‰c:ƒAƒCƒeƒ€XV
+;   çµŒå–¶:ã‚¢ã‚¤ãƒ†ãƒ æ›´æ–°
 ;-------------------------------------------------
 ; Input:
-;  ARG					ƒLƒƒƒ‰
+;  ARG					ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @MNG_ITEM_RENEW(ARG)
 
-;ƒAƒCƒeƒ€Ý’è
-CFLAG:ARG:”ð”D–ò = MNG_ITEM_CHK(ARG, DEFMNG_ITEM_”ð”D–ò)
+;ã‚¢ã‚¤ãƒ†ãƒ è¨­å®š
+CFLAG:ARG:é¿å¦Šè–¬ = MNG_ITEM_CHK(ARG, DEFMNG_ITEM_é¿å¦Šè–¬)
 
 

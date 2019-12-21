@@ -1,28 +1,28 @@
-;-------------------------------------------------
-;�J�W�m�C�x���g
+﻿;-------------------------------------------------
+;カジノイベント
 ;-------------------------------------------------
 @TURN_EVENT_F_53
 #DIM L_MONEY
 #DIM L_MONEY2
 
 DRAWLINE
-PRINTFORML �y�J�W�m�C�x���g(�{��):%CALLNAME%�z
-PRINTFORML %CALLNAME%�͎w�肳�ꂽ�o�j�[�R�X�`���[���ɐg���݁A�q���������Ă���B
-IF TALENT:���� || TALENT:����
-	PRINTFORML �������̃T�C�Y������Ȃ��悤�ŁA���ɂ�������L�������Ă��܂��������B
-ELSEIF TALENT:�n�� || TALENT:���
-	PRINTFORML ������%CALLNAME%�̃o�X�g�T�C�Y�ł͏��X����Ȃ��悤�ŁA�����ɂ���Ă͓��񂪌����Ă��܂��������B
+PRINTFORML 【カジノイベント(施設):%CALLNAME%】
+PRINTFORML %CALLNAME%は指定されたバニーコスチュームに身を包み、客引きをしている。
+IF TALENT:巨乳 || TALENT:爆乳
+	PRINTFORML だが胸のサイズが合わないようで、今にも服から豊乳が溢れてしまいそうだ。
+ELSEIF TALENT:貧乳 || TALENT:絶壁
+	PRINTFORML しかし%CALLNAME%のバストサイズでは少々足らないようで、見方によっては乳首が見えてしまいそうだ。
 ELSE
-	PRINTFORML ��������t�B�b�g�������̂��猩���郉�C���ɁA�����C�p����������������B
+	PRINTFORML しっかりフィットした肢体から見えるラインに、少し気恥ずかしさを感じる。
 ENDIF 
-PRINTFORML ����ł��C��������꒼���A%CALLNAME%�͎d���𑱂����c
+PRINTFORML それでも気合いを入れ直し、%CALLNAME%は仕事を続けた…
 PRINTFORML 
-	IF CFLAG:�t�F������ >= 15
-		PRINTFORML �����o�Ƀt�F�����������%CALLNAME%�́A����ɓ��Ă�ꂽ�j�����̎������C�ɂ��Ă���c
-	ELSEIF CFLAG:�t�F������ >= 7
-		PRINTFORML �M������J�W�m�̒��A%CALLNAME%�̎���ɂ͔ޏ��Ɍ����ꂽ�j���q�ŏW�܂��Ă����c
+	IF CFLAG:フェロモン >= 15
+		PRINTFORML 無自覚にフェロモンを放つ%CALLNAME%は、それに当てられた男たちの視線を気にしている…
+	ELSEIF CFLAG:フェロモン >= 7
+		PRINTFORML 熱狂するカジノの中、%CALLNAME%の周りには彼女に見惚れた男性客で集まっていた…
 	ELSE
-		PRINTFORML �^����ꂽ�C�����Ȃ��A�������J�W�m�̓M�����u���[�B�̈���J�œ��₩�Ȃ܂ܐ^�钆���߂��Ă����c
+		PRINTFORML 与えられた任をこなし、今日もカジノはギャンブラー達の一喜一憂で賑やかなまま真夜中を過ぎていく…
 	ENDIF
 PRINTFORMW 
 
@@ -32,32 +32,32 @@ L_MONEY = 500
 
 
 
-L_MONEY += ((CFLAG:�����o�Ȏ�)*20)+(RAND:((CFLAG:�����o�Ȏ�)+1*20))
-L_MONEY += ((CFLAG:�t�F������)*20)+(RAND:((CFLAG:�t�F������)+1*20))
-L_MONEY += ((CFLAG:���̖{�\)*20)+(RAND:((CFLAG:���̖{�\)+1)*20)
-L_MONEY += ((CFLAG:���ւ̋���)*20)+(RAND:((CFLAG:���ւ̋���)+1*20))
-L_MONEY += ((CFLAG:�Y�ւ̊֐S)*20)+(RAND:((CFLAG:�Y�ւ̊֐S)+1*20))
-L_MONEY += ((CFLAG:������])*20)+(RAND:((CFLAG:������])+1*20))
-L_MONEY += ((CFLAG:�D�P��])*20)+(RAND:((CFLAG:�D�P��])+1*20))
+L_MONEY += ((CFLAG:無自覚な雌)*20)+(RAND:((CFLAG:無自覚な雌)+1*20))
+L_MONEY += ((CFLAG:フェロモン)*20)+(RAND:((CFLAG:フェロモン)+1*20))
+L_MONEY += ((CFLAG:雌の本能)*20)+(RAND:((CFLAG:雌の本能)+1)*20)
+L_MONEY += ((CFLAG:性への興味)*20)+(RAND:((CFLAG:性への興味)+1*20))
+L_MONEY += ((CFLAG:雄への関心)*20)+(RAND:((CFLAG:雄への関心)+1*20))
+L_MONEY += ((CFLAG:性交願望)*20)+(RAND:((CFLAG:性交願望)+1*20))
+L_MONEY += ((CFLAG:妊娠願望)*20)+(RAND:((CFLAG:妊娠願望)+1*20))
 
-L_MONEY = L_MONEY*(1+(FLAG:�����J�W�m/5))+(CFlag:�Z�l_�l�C/10)
+L_MONEY = L_MONEY*(1+(FLAG:高級カジノ/5))+(CFlag:住人_人気/10)
 RESETCOLOR
 
-IF RAND:100 >= 60 && (CFLAG:�Z�l_������ < 0 || CFLAG:�Z�l_�J���} >= 40)
+IF RAND:100 >= 60 && (CFLAG:住人_モラル < 0 || CFLAG:住人_カルマ >= 40)
 	CALL TURN_EVENT_F_53_C
-;10&�̊m���Ńt�F�������������ꍇ����
-ELSEIF RAND:100 >= 90 && CFLAG:�t�F������ >= 15
+;10&の確率でフェロモンが高い場合発生
+ELSEIF RAND:100 >= 90 && CFLAG:フェロモン >= 15
 	CALL TURN_EVENT_F_53_B
 	L_MONEY += 500
 ENDIF
 
 
-SIF TALENT:���y���� == 1
+SIF TALENT:快楽中毒 == 1
 	L_MONEY = L_MONEY/9
 	
 CALL TURN_EVENT_NNK
 
-PRINTFORML �y�{���@%CALLNAME%�̔���:��{L_MONEY}�z
+PRINTFORML 【本日　%CALLNAME%の売上:￥{L_MONEY}】
 
 
 MONEY += L_MONEY
@@ -66,151 +66,151 @@ MONEY += L_MONEY
 
 
 ;-------------------------------------------------
-;�J�W�m�C�x���g�@�J���}
+;カジノイベント　カルマ
 ;-------------------------------------------------
 @TURN_EVENT_F_53_C
 
 
 DRAWLINE
 SETCOLOR 250,50,150
-PRINTFORML �y�����%CALLNAME%�̗l�q�����������c�z
+PRINTFORML 【何やら%CALLNAME%の様子がおかしい…】
 
 
-PRINTFORML �}�ɑ̂��M���Ȃ���%CALLNAME%�́A�t���t���Ƃ��������Ŏd����𗣂��B
-PRINTFORML �N�����Ȃ��q�ɂɓ�����悤�ɓ��荞�ނƁA���̂܂܎�サ���|�ꍞ�ށB
-PRINTFORML �o�j�[�X�[�c�����炵�鏊��I��ɂ���ƁA���t���g���g���ƈ��Ă����B
-PRINTFORML �c�ǂ���������񂾈����ɉ����܂܂�Ă����悤���B
+PRINTFORML 急に体が熱くなった%CALLNAME%は、フラフラとした足取りで仕事場を離れる。
+PRINTFORML 誰もいない倉庫に逃げるように入り込むと、そのまま弱弱しく倒れ込む。
+PRINTFORML バニースーツをずらし秘所を露わにすると、愛液がトロトロと溢れていた。
+PRINTFORML …どうやら先程飲んだ飲料に何か含まれていたようだ。
 PRINTFORMW 
-PRINTFORML �����m�M�����u�ԁA��납�牽�҂��ɉ����|�����B
-PRINTFORML �U��Ԃ���A�ӎ����N�O�Ƃ��Ă��邽�߂��A�̊i����j�ł��邱�Ƃ��炵�����ʂł��Ȃ��B
-PRINTFORML �������Ă���%CALLNAME%��m���Ă��m�炸���A�j�̓K�`�K�`�ɂȂ����y�j�X���S���֐N��������B
-PRINTFORML �ߖ������悤�ɂ������o���A�s�K�ɂ��ǂ������h�����H�Ȃ��߁A
-PRINTFORML �����%CALLNAME%�͒p�J���󂯓���邵���ł��Ȃ����c
+PRINTFORML そう確信した瞬間、後ろから何者かに押し倒される。
+PRINTFORML 振り返るも、意識が朦朧としているためか、体格から男であることぐらしか識別できない。
+PRINTFORML 混乱している%CALLNAME%を知ってか知らずが、男はガチガチになったペニスを膣内へ侵入させる。
+PRINTFORML 悲鳴をあげようにも声が出ず、不幸にも壁も扉も防音加工なため、
+PRINTFORML 弱った%CALLNAME%は恥辱を受け入れるしかできなった…
 PRINTFORMW 
 	IF !RAND:2 
-		PRINTFORML %CALLNAME%�����������邽�߂��A�j��%CALLNAME%�̗l�q�������̓�����ς��Ă����B
-		PRINTFORML �ア�����тɓ��������̂���ۑ傫�Ȑ��śg�����グ��%CALLNAME%������ƁA���̎��̓������x�[�X�Ƀs�X�g���𑬂߂��B
-		PRINTFORML ���_���������тɃJ�����q�_�Ɉ��������肻�ꂪ�����ƂȂ���%CALLNAME%���P���B
-		PRINTFORML %CALLNAME%�̈ӎv�Ƃ͗����ɁA�S���͒j�̃��m�ɍ����悤��忂����A
-		PRINTFORML ���g��Ƃ��y�j�X�����苭�������𓾂悤���S�ǂ��i�߂Ă������c
+		PRINTFORML %CALLNAME%を屈服させるためか、男は%CALLNAME%の様子を見つつ腰の動きを変えていく。
+		PRINTFORML 弱い性感帯に当たったのか一際大きな声で嬌声を上げる%CALLNAME%を見ると、その時の動きをベースにピストンを速めた。
+		PRINTFORML 肉棒を引くたびにカリがヒダに引っかかりそれが快感となって%CALLNAME%を襲う。
+		PRINTFORML %CALLNAME%の意思とは裏腹に、膣内は男のモノに合うように蠢かせ、
+		PRINTFORML 自身を犯すペニスからより強い快感を得ようと膣壁を絞めていった…
 	ELSE
-		PRINTFORML ��w�ʂ̑̐��Ńy�j�X���������ނƁA���x�������݂ɓ������̂������X�g���[�N�ō���ł����ݎn�߂�B
-		PRINTFORML �S�ǂ̐悩�牜�܂ŋT�����S�̂��C����A���̋���������y��%CALLNAME%�͔w�𔽂炵�Ěb�������グ���B
-		PRINTFORML ��̌��ʂ����X�ɋ��܂��Ă��邽�߂�%CALLNAME%�͈�C�̎��ɐ���ʂāA�Â�����R�炵�Ă���B
-		PRINTFORML ���̎p�ɒj�͈Â��΂݂𕂂��ׂA���Ɏ�t������ׂ��s�X�g���̓����𑬂߂Ă������c
+		PRINTFORML 後背位の体勢でペニスを差し込むと、何度か小刻みに動いたのち長いストロークで腰を打ち込み始める。
+		PRINTFORML 膣壁の先から奥まで亀頭が全体を擦りつけ、その強すぎる快楽に%CALLNAME%は背を反らして喘ぎ声を上げた。
+		PRINTFORML 薬の効果が徐々に強まっているためか%CALLNAME%は一匹の雌に成り果て、甘い声を漏らしている。
+		PRINTFORML その姿に男は暗い笑みを浮かべつつ、女に種付けするべくピストンの動きを速めていった…
 	ENDIF
 PRINTFORMW 
-PRINTFORML �ꎞ�Ԍ�A��~�̑S�Ă�f���o�����j�͂悤�₭�S������y�j�X�����������B
-PRINTFORML ����ƁA�鏊����͎�t�����ꂽ�؂ł��锒���t�����o���B
-PRINTFORML ����ɍ\�킸�j��%CALLNAME%�̌����Ƀy�j�X�����ƁA�t�F�����w������B
-PRINTFORML ��R�͂�������%CALLNAME%�́A���������̂܂܂�������Ɋ܂ނƂ������ƕ�d���Ă����B
-PRINTFORML �Ō�ɂ͋C�₵�Ă��܂��A�N�O�Ƃ��������ɋN�������̏o������%CALLNAME%�̋L���Ɏc��Ȃ����낤�c
+PRINTFORML 一時間後、情欲の全てを吐き出した男はようやく膣内からペニスを引き抜く。
+PRINTFORML すると、秘所からは種付けされた証である白濁液が溢れ出す。
+PRINTFORML それに構わず男は%CALLNAME%の口元にペニスをやると、フェラを指示する。
+PRINTFORML 抵抗力を失った%CALLNAME%は、濁った瞳のままそれを口に含むとゆっくりと奉仕していく。
+PRINTFORML 最後には気絶してしまい、朦朧としたうちに起きたこの出来事は%CALLNAME%の記憶に残らないだろう…
 PRINTFORMW 
 
 
 
 
-SIF CSTR:�����������薼 == ""
-	CSTR:�����������薼 = �J�W�m�q
-SIF CSTR:���L�X���薼 == "" 
-	CSTR:���L�X���薼 = �J�W�m�q
-SIF CSTR:���������薼 =="" 
-	CSTR:���������薼 = �J�W�m�q
-SIF CSTR:���t�F�����薼 ==""
-	CSTR:���t�F�����薼 = �J�W�m�q
-SIF CSTR:���`���������薼 ==""
-	CSTR:���`���������薼 = �J�W�m�q
-SIF CSTR:���Ⓒ���薼 ==""
-	CSTR:���Ⓒ���薼 = �J�W�m�q
-SIF CSTR:�����o�����薼 ==""
-	CSTR:�����o�����薼 = �J�W�m�q
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = カジノ客
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = カジノ客
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = カジノ客
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = カジノ客
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = カジノ客
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = カジノ客
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = カジノ客
 
 
 
-TALENT:�񏈏� = 1
-TALENT:�`�񏈏� = 1
-TCVAR:����_EXP_�����r�� = 1
-TCVAR:����_EXP_�`�����r�� = 1
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
 CALL JN_SEX_EXP
-EXP:�����o�� += (RAND:1+1)+1
-EXP:��ɉ��y�o�� += (RAND:2)
+EXP:強姦経験 += (RAND:1+1)+1
+EXP:苦痛快楽経験 += (RAND:2)
 
 
-IF TALENT:���y���� == 0 && RAND:100 > 40 && TALENT:��w == 0
+IF TALENT:快楽中毒 == 0 && RAND:100 > 40 && TALENT:情婦 == 0
 	SETCOLOR 150,50,250
-	PRINTFORML �y%CALLNAME%�̗l�q�����������c�A�C��Y���قǐ��s�ׂɛƂ��Ă��܂����悤���c�z
-	PRINTFORML �y%CALLNAME%�́u���y���Łv�ɂȂ����c�A�����l�����������܂��z
-	TALENT:���y���� = 1
+	PRINTFORML 【%CALLNAME%の様子がおかしい…、任を忘れるほど性行為に嵌ってしまったようだ…】
+	PRINTFORML 【%CALLNAME%は「快楽中毒」になった…、資金獲得が激減します】
+	TALENT:快楽中毒 = 1
 ENDIF
 
 
 
 ;-------------------------------------------------
-;�J�W�m�C�x���g�@�q�̃C�^�Y��
-;�t�F��������������Z�l���q�ɃC�^�Y�������B
-;���������ቺ�A�J���}�����A��������
+;カジノイベント　客のイタズラ
+;フェロモン強すぎる住人が客にイタズラされる。
+;◆モラル低下、カルマ増加、収入微増
 ;-------------------------------------------------
 @TURN_EVENT_F_53_B
 
 
 DRAWLINE
 SETCOLOR 250,50,150
-PRINTFORML �y%CALLNAME%�͐��q�ɗ��܂ꂽ�c�z
+PRINTFORML 【%CALLNAME%は酔客に絡まれた…】
 
 
-PRINTFORML �z�[���ŖZ���������Ă���%CALLNAME%�́A�������ڂ��������j���q�ɌĂю~�߂�ꂽ�B
-PRINTFORMW �����Ă���̂����܂�ւ�肽���Ȃ����͋C�����A���͂ɑ��̃X�^�b�t�����炸�A���Ԃ��ԑΉ����邱�Ƃɂ����c
+PRINTFORML ホールで忙しく働いていた%CALLNAME%は、怪しい目つきをした男性客に呼び止められた。
+PRINTFORMW 酔っているのかあまり関わりたくない雰囲気だが、周囲に他のスタッフも居らず、しぶしぶ対応することにした…
 
-PRINTFORML %CALLNAME%���j�ɋߕt���ƁA�j�͍��Ɏ���񂵂�%CALLNAME%������񂹂��B
-IF TALENT:���� || TALENT:����
-	PRINTFORML ��R���悤�Ƃ���%CALLNAME%���������A�����Ɋ��荞�񂾒j�̎肪�������炵�Ă��܂��A�L���ȓ��[���ۏo���ɂȂ��Ă��܂����B
-	PRINTFORML �p�x�I�ɑ��̋q����͌����Ȃ��̂��s�K���̍K�������A�吺���グ�ď��������߂�Ǝ������W�����Ă��܂������Ő����グ���Ȃ��B
-	PRINTFORML ���Ƃ����ւɍς܂��悤�Ƃ���%CALLNAME%�̑ԓx�𓯈ӂƊ��Ⴂ�����j�́A�܂��܂��s�����G�X�J���[�g�������B
-	PRINTFORML �L���̏_�炩�������\���Ȃ���A���L���������ɐ���������%CALLNAME%�̓��ւ���łȂ���B
-	PRINTFORML %CALLNAME%���~�߂�悤�����ōR�c�̐����グ��ƁA�j�͌y�����𗧂ĂȂ��������R���R���ƊÊ��݂����B
-	PRINTFORML �j�̈����Ńs���Ɩ��h���ɛ�����������ɋ����h��������A%CALLNAME%�͔��΍��ӂ��ƂȂ��ċq�ɂ��Ȑ��ꂩ����B
-	PRINTFORML �[���J�ԂɊ�𖄂߂�`�ɂȂ����j�͂܂��܂��@����ǂ����A%CALLNAME%�̔鏊�Ɏ��L�΂��Ď₵���ȃN���g���X��E�܂ށB
-	PRINTFORML �q���ɂȂ��Ă������ƃN���g���X�𓯎��ɐӂ߂���%CALLNAME%�͒B���Ă��܂������A�Ȃ�Ƃ��g�������͏グ���ɍς񂾁B
-	PRINTFORML �O�����ݒ��߂Ȃ��瑧�𐮂��Ă���%CALLNAME%�̉��p�ɖ��������j�́A�]�C�ɐZ��%CALLNAME%�ɑ����ĕ��𐮂����B
-	PRINTFORMW ����̓T�[�r�X���ƁA�j�͏����Ă��镪�̈ꕔ��%CALLNAME%�̊��ł����Ƃ�Ǝ������J�ԂɃ`�b�v�Ƃ��č������݉�������c
-ELSEIF TALENT:�n�� || TALENT:���
-	PRINTFORML �����񂹂�ꂽ%CALLNAME%�͋�����^�ォ��`�����܂��`�ƂȂ�A���Ԃ��珬���ȓˋN����������ƌ����Ă��܂����B
-	PRINTFORML �q�𑊎�ɗ��\�ȑΉ����o�����A%CALLNAME%�͂����ƒj��n�߂ē���悤�Ƃ����������Ă��邽�ߒʂ��Ȃ��B
-	PRINTFORML ����ǂ��납�������܂�Ȃ��̂��������ƂɁA���Ԃ������������ނ�%CALLNAME%�̓���̐�[���J���J���ƎC��n�߂�B
-	PRINTFORML �j�̓x���߂���s����%CALLNAME%�����������߂悤�Ǝ��͂Ɏ��������ƁA���������ڂŎ������Ă��������̋q�Ɩڂ������B
-	PRINTFORML �O�l���̒��œ������������Ă���󋵂Ɋ��^���Ԃɐ��߂�%CALLNAME%�́A㵒p�ɐk���Ȃ���j�̂Ȃ����܂܂ƂȂ����B
-	PRINTFORML %CALLNAME%�̒�R���~�ނƁA�j�͑�_�ɂ��o�j�[�X�[�c�𔼒E���ɂ����Ĕ����o���ƂȂ�������ւƂނ���Ԃ���B
-	PRINTFORML �j�̎��X�Ȏw�g���ŉՂߔ�����Ă�������͑��X�ɋ������A%CALLNAME%�͔w���|�Ȃ�ɔ��炵�ĐⒸ�����B
-	PRINTFORML ���ɕ��ꗎ����%CALLNAME%�ɒj�̓T�[�r�X���Ə̂��Ă����炩�̂��������点��ƁA�ĂїV�Y�ɖ߂����B
-	PRINTFORML �₪�Đ��C�����߂���%CALLNAME%�͋}���ňߕ��𐮂���ƁA���̏ꂩ�瑫���ɗ������낤�Ƃ����B
-	PRINTFORMW �����ꕔ�n�I�����Ă����q��%CALLNAME%�����X�ɌĂю~�߁A%CALLNAME%�͍T�����܂œ_�X�Ɛ��������邱�ƂƂȂ����c
+PRINTFORML %CALLNAME%が男に近付くと、男は腰に手を回して%CALLNAME%を抱き寄せた。
+IF TALENT:巨乳 || TALENT:爆乳
+	PRINTFORML 抵抗しようとした%CALLNAME%だったが、胸元に滑り込んだ男の手が服をずらしてしまい、豊かな乳房が丸出しになってしまった。
+	PRINTFORML 角度的に他の客からは見えないのが不幸中の幸いだが、大声を上げて助けを求めると視線が集中してしまいそうで声を上げられない。
+	PRINTFORML 何とか穏便に済ませようとする%CALLNAME%の態度を同意と勘違いした男は、ますます行動をエスカレートさせた。
+	PRINTFORML 豊乳の柔らかさを堪能しながら、酒臭い息を乳首に吹きかけつつ%CALLNAME%の乳輪を舌先でなぞる。
+	PRINTFORML %CALLNAME%が止めるよう小声で抗議の声を上げると、男は軽く歯を立てながら乳首をコリコリと甘噛みした。
+	PRINTFORML 男の愛撫でピンと無防備に屹立した乳首に強い刺激が走り、%CALLNAME%は半ば腰砕けとなって客にしな垂れかかる。
+	PRINTFORML 深い谷間に顔を埋める形になった男はますます機嫌を良くし、%CALLNAME%の秘所に手を伸ばして寂しげなクリトリスを摘まむ。
+	PRINTFORML 敏感になっている乳首とクリトリスを同時に責められて%CALLNAME%は達してしまったが、なんとか嬌声だけは上げずに済んだ。
+	PRINTFORML 唇をかみ締めながら息を整えている%CALLNAME%の艶姿に満足した男は、余韻に浸る%CALLNAME%に代わって服を整えた。
+	PRINTFORMW これはサービスだと、男は勝っている分の一部を%CALLNAME%の汗でしっとりと湿った谷間にチップとして差し込み解放した…
+ELSEIF TALENT:貧乳 || TALENT:絶壁
+	PRINTFORML 抱き寄せられた%CALLNAME%は胸元を真上から覗き込まれる形となり、隙間から小さな突起をしっかりと見られてしまった。
+	PRINTFORML 客を相手に乱暴な対応も出来ず、%CALLNAME%はやんわりと男を嗜めて逃れようとしたが酔っているため通じない。
+	PRINTFORML それどころか強く拒まれないのをいいことに、隙間から手を差し込むと%CALLNAME%の乳首の先端をカリカリと擦り始める。
+	PRINTFORML 男の度が過ぎる行動に%CALLNAME%が助けを求めようと周囲に視線をやると、血走った目で視姦していた多数の客と目が合う。
+	PRINTFORML 衆人環視の中で乳首を愛撫されている状況に顔を真っ赤に染めた%CALLNAME%は、羞恥に震えながら男のなすがままとなった。
+	PRINTFORML %CALLNAME%の抵抗が止むと、男は大胆にもバニースーツを半脱ぎにさせて剥き出しとなった乳首へとむしゃぶりつく。
+	PRINTFORML 男の執拗な指使いで苛め抜かれていた乳首は早々に屈服し、%CALLNAME%は背を弓なりに反らして絶頂した。
+	PRINTFORML 床に崩れ落ちた%CALLNAME%に男はサービス料と称していくらかのお金を握らせると、再び遊戯に戻った。
+	PRINTFORML やがて正気を取り戻した%CALLNAME%は急いで衣服を整えると、その場から足早に立ち去ろうとした。
+	PRINTFORMW だが一部始終を見ていた客は%CALLNAME%を次々に呼び止め、%CALLNAME%は控え室まで点々と水溜りを作ることとなった…
 ELSE
-	PRINTFORML ���̃J�W�m�ł͐��I�T�[�r�X���s���Ă��Ȃ���%CALLNAME%�͒j�ɐ����������A�[�������Ă��鑊��ɒʂ���͂����Ȃ������B
-	PRINTFORML �X�̋K�������ɒf�낤�Ƃ���%CALLNAME%��������悤�ƁA�j�͘e��������������Ō`�̂������𝆂ݎn�߂�B
-	PRINTFORML ����ŋ����x����悤�ɉ����睆�݁A�l�����w�ƒ��w�œ��������Ō݂��Ⴂ�ɓ����������������B
-	PRINTFORML ���߂͒�R���Ă���%CALLNAME%�̌�����b�������R��o���ƁA�܂��܂����Ȏ咣���n�߂����񂪏W���I�ɘM����B
-	PRINTFORML �₪�ċ���̌��t�����ɏo���Ȃ��Ȃ���%CALLNAME%���Ⓒ���}����ƒj�͌��炵���΂݂𕂂��ׂĎ�𗣂����B
-	PRINTFORMW �M���f�����J��Ԃ�%CALLNAME%�̋����Ƀ`�b�v���������񂾒j�́A���y�ɐk����K��@����%CALLNAME%���d���ɖ߂����c
+	PRINTFORML このカジノでは性的サービスを行っていないと%CALLNAME%は男に説明したが、深酔いしている相手に通じるはずもなかった。
+	PRINTFORML 店の規則を盾に断ろうとする%CALLNAME%を説得しようと、男は脇から手を差し込んで形のいい胸を揉み始める。
+	PRINTFORML 両手で胸を支えるように下から揉み、人差し指と中指で乳首を挟んで互い違いに動かし扱きあげた。
+	PRINTFORML 初めは抵抗していた%CALLNAME%の口から喘ぎ声が漏れ出すと、ますます自己主張を始めた乳首が集中的に弄られる。
+	PRINTFORML やがて拒絶の言葉を口に出来なくなった%CALLNAME%が絶頂を迎えると男は嫌らしい笑みを浮かべて手を離した。
+	PRINTFORMW 熱い吐息を繰り返す%CALLNAME%の胸元にチップを差し込んだ男は、快楽に震える尻を叩いて%CALLNAME%を仕事に戻した…
 ENDIF
 
 
-IF CFLAG:�Z�l_������ > 0
-	PRINTFORML %CALLNAME%�̃��������ቺ�����B
-	PRINTFORML �������@{CFLAG:�Z�l_������} �� {CFLAG:�Z�l_������-1}
+IF CFLAG:住人_モラル > 0
+	PRINTFORML %CALLNAME%のモラルが低下した。
+	PRINTFORML モラル　{CFLAG:住人_モラル} → {CFLAG:住人_モラル-1}
 ENDIF
-IF CFLAG:�Z�l_�J���} < 100
-	PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-	PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� {CFLAG:�Z�l_�J���}+1}
+IF CFLAG:住人_カルマ < 100
+	PRINTFORML %CALLNAME%のカルマが上昇した。
+	PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+1}
 ENDIF
 
-SIF CSTR:���Ⓒ���薼 ==""
-	CSTR:���Ⓒ���薼 = �J�W�m�q
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = カジノ客
 
-EXP:�a�o�� += (RAND:2)+1
-EXP:�Ⓒ�o�� += (RAND:3)+1
+EXP:Ｂ経験 += (RAND:2)+1
+EXP:絶頂経験 += (RAND:3)+1
 
-CFLAG:�Z�l_������ -= 1
-CFLAG:�Z�l_�J���} += 1
+CFLAG:住人_モラル -= 1
+CFLAG:住人_カルマ += 1
 
 
 

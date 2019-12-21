@@ -1,54 +1,54 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:COMFxxx.ERB
-;	Facility	:TRAINƒRƒ}ƒ“ƒh(50:Žèˆú)B
+;	Facility	:TRAINã‚³ãƒžãƒ³ãƒ‰(50:æ‰‹æ·«)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E COM_FUNC_JUMP_Xxxx				Žæ“¾:ƒWƒƒƒ“ƒvæ
-;	E COM_FUNC_GET_NAME_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
-;	E COM_FUNC_ABLE_Xxxx				CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
-;	E COM_FUNC_EXE_Xxxx				ƒRƒ}ƒ“ƒhŽÀs
-;	E COM_FUNC_SRC_Xxxx				ƒRƒ}ƒ“ƒhƒ\[ƒX
-;	E COM_FUNC_TRAIN_MSG_Xxxx			ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
-;	E COM_FUNC_GET_TYPE_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;	ãƒ» COM_FUNC_JUMP_Xxxx				å–å¾—:ã‚¸ãƒ£ãƒ³ãƒ—å…ˆ
+;	ãƒ» COM_FUNC_GET_NAME_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
+;	ãƒ» COM_FUNC_ABLE_Xxxx				CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
+;	ãƒ» COM_FUNC_EXE_Xxxx				ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
+;	ãƒ» COM_FUNC_SRC_Xxxx				ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
+;	ãƒ» COM_FUNC_TRAIN_MSG_Xxxx			ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+;	ãƒ» COM_FUNC_GET_TYPE_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub COM_FUNC_GET_NAME_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 ; Output:
-;  RESULTS				ƒRƒ}ƒ“ƒh–¼Ì
+;  RESULTS				ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 @COM_FUNC_GET_NAME_X50
-RESULTS = Žèˆú
+RESULTS = æ‰‹æ·«
 
 ;=================================================
 ;   sub COM_FUNC_ABLE_Xxxx
 ;=================================================
-;   CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
+;   CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
 ;-------------------------------------------------
 ; Output:
-;  RESULT				^‹U’l
+;  RESULT				çœŸå½å€¤
 ;-------------------------------------------------
 @COM_FUNC_ABLE_X50
 
-;- PLAYER‚ÉƒyƒjƒX‚ª–³‚¢‚Æ•s‰Â
+;- PLAYERã«ãƒšãƒ‹ã‚¹ãŒç„¡ã„ã¨ä¸å¯
 SIF !VAR_PENIS(PLAYER)
 	RETURN 0
 
-;- TR:•òŽd‰Â”\
-SIF !TR_CHK_•òŽd‰Â”\()
+;- TR:å¥‰ä»•å¯èƒ½
+SIF !TR_CHK_å¥‰ä»•å¯èƒ½()
 	RETURN 0
 
 RETURN 1
@@ -56,7 +56,7 @@ RETURN 1
 ;=================================================
 ;   sub COM_FUNC_EXE_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhŽÀs
+;   ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 ;-------------------------------------------------
 @COM_FUNC_EXE_X50
 #DIM L_P
@@ -66,27 +66,27 @@ L_P = PLAYER
 L_T = TARGET
 
 ;-----------------------------
-;COM•ÊFLAG‚ÌÝ’è
+;COMåˆ¥FLAGã®è¨­å®š
 ;-----------------------------
 
-TEQUIP:L_T:ƒ|ƒCƒ“ƒg•òŽd = [[TRAIN:Žèˆú]]
-;«ŒðŒn‚È‚ç«Œð‰ðœ
+TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆå¥‰ä»• = [[TRAIN:æ‰‹æ·«]]
+;æ€§äº¤ç³»ãªã‚‰æ€§äº¤è§£é™¤
 SIF TR_PREV_SEX_V() || TR_PREV_SEX_A()
-	TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð = [[TRAIN:–³‚µ]]
+	TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = [[TRAIN:ç„¡ã—]]
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 ;-----------------------------
-;‚»‚Ì‘¼‚Ìˆ—
+;ãã®ä»–ã®å‡¦ç†
 ;-----------------------------
 
 
 ;=================================================
 ;   sub COM_FUNC_SRC_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒ\[ƒX
+;   ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
 ;-------------------------------------------------
 @COM_FUNC_SRC_X50
 #DIM L_P
@@ -99,24 +99,24 @@ L_P = PLAYER
 L_T = TARGET
 
 ;-----------------------------
-;COM•ÊFLAG‚ÌÝ’è
+;COMåˆ¥FLAGã®è¨­å®š
 ;-----------------------------
 
 ;- POSE:SET
-CALL POSE_SET(L_T, [[è—L•”ˆÊ:Žw]])
+CALL POSE_SET(L_T, [[å æœ‰éƒ¨ä½:æŒ‡]])
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 LOCAL:0 = 100
 LOCAL:1 = 40
 LOCAL:2 = 120
 
-;-- •â³’Ç‰Á
+;-- è£œæ­£è¿½åŠ 
 
-;- ”ÍˆÍ:100%`200%
-LOCAL:10 = ABL:L_T:‹ZI
+;- ç¯„å›²:100%ï½ž200%
+LOCAL:10 = ABL:L_T:æŠ€å·§
 SELECTCASE LOCAL:10
 	CASE 0 to 8
 		L_TMP = 100 + (10 * LOCAL:10)
@@ -127,25 +127,25 @@ LOCAL:0 = LOCAL:0 * L_TMP / 100
 LOCAL:1 = LOCAL:1 * L_TMP / 100
 LOCAL:2 = LOCAL:2 * L_TMP / 100
 
-;- ƒ\[ƒX
-SOURCE:L_P:‰õ‚b += LOCAL:0
-SOURCE:L_T:«sˆ× += LOCAL:1
-SOURCE:L_T:«•òŽd += LOCAL:2
+;- ã‚½ãƒ¼ã‚¹
+SOURCE:L_P:å¿«ï¼£ += LOCAL:0
+SOURCE:L_T:æ€§è¡Œç‚º += LOCAL:1
+SOURCE:L_T:æ€§å¥‰ä»• += LOCAL:2
 
 
 ;-----------------------------
-;ŒoŒ±‚Ìˆ—
+;çµŒé¨“ã®å‡¦ç†
 ;-----------------------------
 
-;- TR:ˆÙ«ˆ¤ŒoŒ±
+;- TR:ç•°æ€§æ„›çµŒé¨“
 CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 
-;- ŠeŽíŒoŒ±
-GTR_EXPUP:L_T:DB_EXPUP_POS("ŽèˆúŒoŒ±") += 1
-GTR_EXPUP:L_T:DB_EXPUP_POS("—U˜fŒoŒ±") += 1
+;- å„ç¨®çµŒé¨“
+GTR_EXPUP:L_T:DB_EXPUP_POS("æ‰‹æ·«çµŒé¨“") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("èª˜æƒ‘çµŒé¨“") += 1
 
 ;-----------------------------
-;‚»‚Ì‘¼‚Ìˆ—
+;ãã®ä»–ã®å‡¦ç†
 ;-----------------------------
 
 
@@ -153,16 +153,16 @@ GTR_EXPUP:L_T:DB_EXPUP_POS("—U˜fŒoŒ±") += 1
 ;=================================================
 ;   sub COM_FUNC_TRAIN_MSG_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
+;   ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ;-------------------------------------------------
 @COM_FUNC_TRAIN_MSG_X50
 
-PRINTFORM %CALLNAME%‚Í
-SIF MARK:Š×—Žˆó
-	PRINT ˆ¤‚µ‚Þ‚æ‚¤‚È•\î‚ÅA
-SIF MARK:—ê‘®ˆó
-	PRINT Ž©•ª‚©‚ç
-PRINTFORML %CALLNAME:PLAYER%‚ÌƒyƒjƒX‚ÉŽw‚ð—‚ß‚ÄŽC‚è‚ ‚°‚Ä‚¢‚écc
+PRINTFORM %CALLNAME%ã¯
+SIF MARK:é™¥è½åˆ»å°
+	PRINT æ„›ã—ã‚€ã‚ˆã†ãªè¡¨æƒ…ã§ã€
+SIF MARK:éš·å±žåˆ»å°
+	PRINT è‡ªåˆ†ã‹ã‚‰
+PRINTFORML %CALLNAME:PLAYER%ã®ãƒšãƒ‹ã‚¹ã«æŒ‡ã‚’çµ¡ã‚ã¦æ“¦ã‚Šã‚ã’ã¦ã„ã‚‹â€¦â€¦
 
 WAIT
 
@@ -170,11 +170,11 @@ WAIT
 ;=================================================
 ;   sub COM_FUNC_GET_TYPE_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 ; Output:
-;  RESULT				ƒRƒ}ƒ“ƒhŽí•Ê
+;  RESULT				ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 @COM_FUNC_GET_TYPE_X50
-RETURN [[COMŽí•Ê:•òŽdŒn]]
+RETURN [[COMç¨®åˆ¥:å¥‰ä»•ç³»]]
 

@@ -1,10 +1,10 @@
-;-------------------------------------------------
-;ƒXƒJƒEƒgŽž‚Ìí“¬”\—Í
+ï»¿;-------------------------------------------------
+;ã‚¹ã‚«ã‚¦ãƒˆæ™‚ã®æˆ¦é—˜èƒ½åŠ›
 ;-------------------------------------------------
 ; Input:
-;  ARGS					‘ÎÛ’l
+;  ARGS					å¯¾è±¡å€¤
 ; Output:
-;  RETURNF				ˆÊ’u
+;  RETURNF				ä½ç½®
 ;-------------------------------------------------
 @CHARACTER_SCOUT_RPG(ARG:0)
 #DIM L_I
@@ -21,8 +21,8 @@
 L_I = ARG:0
 L_SBP = 0
 
-IF CFLAG:L_I:Zl_Ží‘° == 12
-;‹zŒŒ‹S
+IF CFLAG:L_I:ä½äºº_ç¨®æ— == 12
+;å¸è¡€é¬¼
 	L_HP = 60
 	L_SP = 60
 	L_ATK = 50
@@ -31,8 +31,8 @@ IF CFLAG:L_I:Zl_Ží‘° == 12
 	L_SPD = 50
 	L_LUK = 5
 	L_BRE = 100
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 11
-;¸—ì
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 11
+;ç²¾éœŠ
 	L_HP = 25
 	L_SP = 25
 	L_ATK = 10
@@ -41,8 +41,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 11
 	L_SPD = 60
 	L_LUK = 70
 	L_BRE = 0
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 10
-;‹S
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 10
+;é¬¼
 	L_HP = 60
 	L_SP = 60
 	L_ATK = 80
@@ -51,8 +51,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 10
 	L_SPD = 5
 	L_LUK = 5
 	L_BRE = 0
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 9
-;’¹l
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 9
+;é³¥äºº
 	L_HP = 15
 	L_SP = 50
 	L_ATK = 15
@@ -61,8 +61,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 9
 	L_SPD = 80
 	L_LUK = 10
 	L_BRE = 0
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 8
-;ŠCl
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 8
+;æµ·äºº
 	L_HP = 30
 	L_SP = 40
 	L_ATK = 25
@@ -71,8 +71,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 8
 	L_SPD = 50
 	L_LUK = 30
 	L_BRE = 50
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 7
-;ƒCƒX
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 7
+;ã‚¤ã‚¹
 	L_HP = 2
 	L_SP = 2
 	L_ATK = 80
@@ -81,8 +81,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 7
 	L_SPD = 60
 	L_LUK = 5
 	L_BRE = 200
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 6
-;—³l
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 6
+;ç«œäºº
 	L_HP = 80
 	L_SP = 80
 	L_ATK = 60
@@ -91,8 +91,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 6
 	L_SPD = 60
 	L_LUK = 20
 	L_BRE = 50
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 5
-;“VŽg
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 5
+;å¤©ä½¿
 	L_HP = 30
 	L_SP = 30
 	L_ATK = 20
@@ -101,8 +101,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 5
 	L_SPD = 25
 	L_LUK = 50
 	L_BRE = 0
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 4
-;ƒI[ƒgƒ}ƒ^
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 4
+;ã‚ªãƒ¼ãƒˆãƒžã‚¿
 	L_HP = 30
 	L_SP = 30
 	L_ATK = 30
@@ -111,8 +111,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 4
 	L_SPD = 30
 	L_LUK = 10
 	L_BRE = 0
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 3
-;ˆŸl
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 3
+;äºœäºº
 	L_HP = 50
 	L_SP = 50
 	L_ATK = 25
@@ -121,8 +121,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 3
 	L_SPD = 35
 	L_LUK = 5
 	L_BRE = 0
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 2
-;–é–‚
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 2
+;å¤œé­”
 	L_HP = 20
 	L_SP = 40
 	L_ATK = 25
@@ -131,8 +131,8 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 2
 	L_SPD = 30
 	L_LUK = 10
 	L_BRE = 30
-ELSEIF CFLAG:L_I:Zl_Ží‘° == 1
-;ƒGƒ‹ƒt
+ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ— == 1
+;ã‚¨ãƒ«ãƒ•
 	L_HP = 10
 	L_SP = 30
 	L_ATK = 5
@@ -142,7 +142,7 @@ ELSEIF CFLAG:L_I:Zl_Ží‘° == 1
 	L_LUK = 10
 	L_BRE = 60
 ELSE
-;lŠÔ
+;äººé–“
 	L_HP = 35
 	L_SP = 35
 	L_ATK = 20
@@ -157,62 +157,62 @@ ENDIF
 
 
 
-SIF TALENT:L_I:uƒVƒXƒ^[v== 1
+SIF TALENT:L_I:ã€Œã‚·ã‚¹ã‚¿ãƒ¼ã€== 1
 	L_SBP = 10+(RAND:10)
 
-IF RAND:100 >= 97 && FLAG:”Ä—p•Ï” == 52
-	TALENT:L_I:“Ë‘R•ÏˆÙ = 1
-	L_SBP = 10+(RAND:10)
-ENDIF
-
-IF RAND:100 >= 97 && FLAG:”Ä—p•Ï” == 52
-	TALENT:L_I:æ‘c•Ô‚è = 1
+IF RAND:100 >= 97 && FLAG:æ±Žç”¨å¤‰æ•° == 52
+	TALENT:L_I:çªç„¶å¤‰ç•° = 1
 	L_SBP = 10+(RAND:10)
 ENDIF
 
+IF RAND:100 >= 97 && FLAG:æ±Žç”¨å¤‰æ•° == 52
+	TALENT:L_I:å…ˆç¥–è¿”ã‚Š = 1
+	L_SBP = 10+(RAND:10)
+ENDIF
 
 
-CFlag:L_I:Zl_Å‘å‘Ì—Í = (RAND:20)+L_HP+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_Œ»Ý‘Ì—Í = CFlag:L_I:Zl_Å‘å‘Ì—Í
-CFlag:L_I:Zl_Å‘å‹C—Í = (RAND:20)+L_SP+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_Œ»Ý‹C—Í = CFlag:L_I:Zl_Å‘å‹C—Í
-CFlag:L_I:Zl_SAN      = (RAND:40)+40+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_GUTS     = (RAND:40)+40+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_BRAVE    = (RAND:40)+40+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
 
-CFlag:L_I:Zl_ATK      = (RAND:20)+L_ATK+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_DEF      = (RAND:20)+L_DEF+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_HIT      = (RAND:20)+L_HIT+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_SPD      = (RAND:20)+L_SPD+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_LUK      = (RAND:20)+L_LUK+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_Å‘åBRE  = L_BRE+(RAND:(Flag:ƒCƒxƒ“ƒgƒLƒƒƒ‰“Á•Ê•â³+1))+L_SBP
-CFlag:L_I:Zl_Œ»ÝBRE  = CFlag:L_I:Zl_Å‘åBRE
+CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ› = (RAND:20)+L_HP+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› = CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ›
+CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ› = (RAND:20)+L_SP+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ› = CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›
+CFlag:L_I:ä½äºº_SAN      = (RAND:40)+40+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_GUTS     = (RAND:40)+40+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_BRAVE    = (RAND:40)+40+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
 
-
-CFlag:L_I:Zl_‹Z”\ƒ|ƒCƒ“ƒg = 200
-
-CSTR:L_I:Zl_M•º‘•_–¼‘O = ƒƒCƒ“•º‘•
-CFlag:L_I:Zl_M•º‘•ƒ_ƒCƒX = 2
-CFlag:L_I:Zl_M•º‘•ƒ_ƒ[ƒW = 3
-CFlag:L_I:Zl_M•º‘•ƒ{[ƒiƒX = 2
-CFlag:L_I:Zl_M•º‘•—û“x = 1
-
-CSTR:L_I:Zl_S•º‘•_–¼‘O = ƒTƒu•º‘•
-CFlag:L_I:Zl_S•º‘•ƒ_ƒCƒX = 1
-CFlag:L_I:Zl_S•º‘•ƒ_ƒ[ƒW = 3
-CFlag:L_I:Zl_S•º‘•ƒ{[ƒiƒX = 1
-CFlag:L_I:Zl_S•º‘•—û“x = 1
+CFlag:L_I:ä½äºº_ATK      = (RAND:20)+L_ATK+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_DEF      = (RAND:20)+L_DEF+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_HIT      = (RAND:20)+L_HIT+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_SPD      = (RAND:20)+L_SPD+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_LUK      = (RAND:20)+L_LUK+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_æœ€å¤§BRE  = L_BRE+(RAND:(Flag:ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ£ãƒ©ç‰¹åˆ¥è£œæ­£+1))+L_SBP
+CFlag:L_I:ä½äºº_ç¾åœ¨BRE  = CFlag:L_I:ä½äºº_æœ€å¤§BRE
 
 
-;•K—v‚È‚çƒtƒ‰ƒO‚Å§Œä
-;IF FLAG:•º‘•ƒ‰ƒ“ƒ_ƒ€
-	CFlag:L_I:Zl_M•º‘• = RAND:5
-	CSTR:L_I:Zl_M•º‘•_–¼‘O = %ƒ‰ƒ“ƒ_ƒ€•º‘•–¼(CFlag:L_I:Zl_M•º‘•)%
-	CFlag:L_I:Zl_S•º‘• = RAND:5
-	CSTR:L_I:Zl_S•º‘•_–¼‘O = %ƒ‰ƒ“ƒ_ƒ€•º‘•–¼(CFlag:L_I:Zl_S•º‘•)%
+CFlag:L_I:ä½äºº_æŠ€èƒ½ãƒã‚¤ãƒ³ãƒˆ = 200
+
+CSTR:L_I:ä½äºº_Må…µè£…_åå‰ = ãƒ¡ã‚¤ãƒ³å…µè£…
+CFlag:L_I:ä½äºº_Må…µè£…ãƒ€ã‚¤ã‚¹ = 2
+CFlag:L_I:ä½äºº_Må…µè£…ãƒ€ãƒ¡ãƒ¼ã‚¸ = 3
+CFlag:L_I:ä½äºº_Må…µè£…ãƒœãƒ¼ãƒŠã‚¹ = 2
+CFlag:L_I:ä½äºº_Må…µè£…ç·´åº¦ = 1
+
+CSTR:L_I:ä½äºº_Så…µè£…_åå‰ = ã‚µãƒ–å…µè£…
+CFlag:L_I:ä½äºº_Så…µè£…ãƒ€ã‚¤ã‚¹ = 1
+CFlag:L_I:ä½äºº_Så…µè£…ãƒ€ãƒ¡ãƒ¼ã‚¸ = 3
+CFlag:L_I:ä½äºº_Så…µè£…ãƒœãƒ¼ãƒŠã‚¹ = 1
+CFlag:L_I:ä½äºº_Så…µè£…ç·´åº¦ = 1
+
+
+;å¿…è¦ãªã‚‰ãƒ•ãƒ©ã‚°ã§åˆ¶å¾¡
+;IF FLAG:å…µè£…ãƒ©ãƒ³ãƒ€ãƒ 
+	CFlag:L_I:ä½äºº_Må…µè£… = RAND:5
+	CSTR:L_I:ä½äºº_Må…µè£…_åå‰ = %ãƒ©ãƒ³ãƒ€ãƒ å…µè£…å(CFlag:L_I:ä½äºº_Må…µè£…)%
+	CFlag:L_I:ä½äºº_Så…µè£… = RAND:5
+	CSTR:L_I:ä½äºº_Så…µè£…_åå‰ = %ãƒ©ãƒ³ãƒ€ãƒ å…µè£…å(CFlag:L_I:ä½äºº_Så…µè£…)%
 ;ENDIF
 
-@ƒ‰ƒ“ƒ_ƒ€•º‘•–¼(ARG)
+@ãƒ©ãƒ³ãƒ€ãƒ å…µè£…å(ARG)
 #FUNCTIONS
 #DIM T_R
 
@@ -220,27 +220,27 @@ T_R = RESULT
 VARSET LOCALS
 SELECTCASE ARG
 	CASE 0
-		;Ši“¬
-		SPLIT "‹óŽè/_p/œ–@/Œìgp/‘Š–o/ƒ{ƒNƒVƒ“ƒO/ƒ€ƒGƒ^ƒC/ƒRƒ}ƒ“ƒhƒTƒ“ƒ{/ƒJƒ|ƒGƒ‰/ƒVƒXƒeƒ}", "/", LOCALS
+		;æ ¼é—˜
+		SPLIT "ç©ºæ‰‹/æŸ”è¡“/éª¨æ³•/è­·èº«è¡“/ç›¸æ’²/ãƒœã‚¯ã‚·ãƒ³ã‚°/ãƒ ã‚¨ã‚¿ã‚¤/ã‚³ãƒžãƒ³ãƒ‰ã‚µãƒ³ãƒœ/ã‚«ãƒã‚¨ãƒ©/ã‚·ã‚¹ãƒ†ãƒž", "/", LOCALS
 		LOCAL = RAND:RESULT
 	CASE 1
-		;“Œ•
-		SPLIT "ƒiƒCƒt/“ú–{“/ƒƒ“ƒOƒ\[ƒh/ƒT[ƒxƒ‹/ƒŒƒCƒsƒA/—¼ŽèŒ•/Žè•€/—¼Žè•€/ƒWƒƒƒxƒŠƒ“/ƒ‰ƒ“ƒX/ƒnƒ‹ƒo[ƒh/ŽÖ–µ/Â—´˜îŒŽ“/•û“V‰æŒ", "/", LOCALS
+		;åˆ€å‰£
+		SPLIT "ãƒŠã‚¤ãƒ•/æ—¥æœ¬åˆ€/ãƒ­ãƒ³ã‚°ã‚½ãƒ¼ãƒ‰/ã‚µãƒ¼ãƒ™ãƒ«/ãƒ¬ã‚¤ãƒ”ã‚¢/ä¸¡æ‰‹å‰£/æ‰‹æ–§/ä¸¡æ‰‹æ–§/ã‚¸ãƒ£ãƒ™ãƒªãƒ³/ãƒ©ãƒ³ã‚¹/ãƒãƒ«ãƒãƒ¼ãƒ‰/è›‡çŸ›/é’é¾åƒæœˆåˆ€/æ–¹å¤©ç”»æˆŸ", "/", LOCALS
 		LOCAL = RAND:RESULT
 	CASE 2
-		;“ÝŠí
-		SPLIT "žž–_/ƒƒCƒX/ŠÛ‘¾/ƒ‚[ƒjƒ“ƒOƒXƒ^[/•Ú/ƒnƒ“ƒ}[/ƒcƒ‹ƒnƒV/ñp/ƒgƒ“ƒtƒ@[", "/", LOCALS
+		;éˆå™¨
+		SPLIT "æ£æ£’/ãƒ¡ã‚¤ã‚¹/ä¸¸å¤ª/ãƒ¢ãƒ¼ãƒ‹ãƒ³ã‚°ã‚¹ã‚¿ãƒ¼/éž­/ãƒãƒ³ãƒžãƒ¼/ãƒ„ãƒ«ãƒã‚·/æ–è¡“/ãƒˆãƒ³ãƒ•ã‚¡ãƒ¼", "/", LOCALS
 		LOCAL = RAND:RESULT
 	CASE 3
-		;eŠí
-		SPLIT "ƒnƒ“ƒhƒKƒ“/ƒVƒ‡ƒbƒgƒKƒ“/ƒ}ƒVƒ“ƒKƒ“/ƒuƒ[ƒKƒ“/ƒ‰ƒCƒtƒ‹/ƒNƒƒXƒ{ƒE/˜a‹|/ƒA[ƒ`ƒFƒŠ[", "/", LOCALS
+		;éŠƒå™¨
+		SPLIT "ãƒãƒ³ãƒ‰ã‚¬ãƒ³/ã‚·ãƒ§ãƒƒãƒˆã‚¬ãƒ³/ãƒžã‚·ãƒ³ã‚¬ãƒ³/ãƒ–ãƒ­ãƒ¼ã‚¬ãƒ³/ãƒ©ã‚¤ãƒ•ãƒ«/ã‚¯ãƒ­ã‚¹ãƒœã‚¦/å’Œå¼“/ã‚¢ãƒ¼ãƒã‚§ãƒªãƒ¼", "/", LOCALS
 		LOCAL = RAND:RESULT
 	CASE 4
-		;–‚–@
-		SPLIT "‰Š–‚–@/•X–‚–@/•—–‚–@/—‹–‚–@/•–‚–@/”’–‚–@/ŒÃ‘ã–‚–@/””ép/¢Š«–‚–@", "/", LOCALS
+		;é­”æ³•
+		SPLIT "ç‚Žé­”æ³•/æ°·é­”æ³•/é¢¨é­”æ³•/é›·é­”æ³•/é»’é­”æ³•/ç™½é­”æ³•/å¤ä»£é­”æ³•/æ•°ç§˜è¡“/å¬å–šé­”æ³•", "/", LOCALS
 		LOCAL = RAND:RESULT
 	CASEELSE
-		LOCALS = •º‘•
+		LOCALS = å…µè£…
 		LOCAL = 0
 ENDSELECT
 

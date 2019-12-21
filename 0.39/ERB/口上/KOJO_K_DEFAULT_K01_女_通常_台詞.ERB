@@ -1,699 +1,699 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+Ôªø;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:KOJO_K_DEFAULT_K01_èó_í èÌ_ÉZÉäÉt.ERB
-;	Facility	:ÉLÉÉÉâÉNÉ^Å[å˚è„(No.0000:???)
+;	Module		:KOJO_K_DEFAULT_K01_Â•≥_ÈÄöÂ∏∏_„Çª„É™„Éï.ERB
+;	Facility	:„Ç≠„É£„É©„ÇØ„Çø„ÉºÂè£‰∏ä(No.0000:???)
 ;
-;	Licence		:ÉâÉCÉZÉìÉXè⁄ç◊ÇéQè∆ÅB
+;	Licence		:„É©„Ç§„Çª„É≥„ÇπË©≥Á¥∞„ÇíÂèÇÁÖß„ÄÇ
 ;
-;	å˚è„ÉeÉìÉvÉåÅ[Ég version :0.3
+;	Âè£‰∏ä„ÉÜ„É≥„Éó„É¨„Éº„Éà version :0.3
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2014/06/03		----					êVãKçÏê¨
+;	001		2014/06/03		----					Êñ∞Ë¶è‰ΩúÊàê
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 
 
 ;-------------------------------------------------
-;í≤ã≥äJénÅ@èâÇﬂÇƒ
+;Ë™øÊïôÈñãÂßã„ÄÄÂàù„ÇÅ„Å¶
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK1
-IF TALENT:çáà” == 1
-	IF TALENT:åãç•çœÇ› == 1 
-		PRINTFORML ÅuÅcÅcÇ‚Ç¡ÇœÇË%CSTR:àÍêlèÃ%ÅcÇ±Ç§Ç‰Ç§éñÇÕÅc%CSTR:ìÒêlèÃ%ÇÃéñÇÕó«Ç¢êlÇæÇ∆évÇ§ÇØÇ«ÅcÅv
-		PRINTFORML ÅuÇªÇÍÇ≈Ç‡%CSTR:àÍêlèÃ%Ç…ÇÕïvÇ™ÅcçüèàÇ‹Ç≈óàÇƒç°çXÇ±ÇÒÇ»éñÅc%CSTR:åÍîˆé”çﬂ%ÅcÇ¡Åc%CSTR:åÍîˆãëê‚%ÅHÅIÅv
+IF TALENT:ÂêàÊÑè == 1
+	IF TALENT:ÁµêÂ©öÊ∏à„Åø == 1 
+		PRINTFORML „Äå‚Ä¶‚Ä¶„ÇÑ„Å£„Å±„Çä%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶„Åì„ÅÜ„ÇÜ„ÅÜ‰∫ã„ÅØ‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ‰∫ã„ÅØËâØ„ÅÑ‰∫∫„Å†„Å®ÊÄù„ÅÜ„Åë„Å©‚Ä¶„Äç
+		PRINTFORML „Äå„Åù„Çå„Åß„ÇÇ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´„ÅØÂ§´„Åå‚Ä¶Ê≠§Âá¶„Åæ„ÅßÊù•„Å¶‰ªäÊõ¥„Åì„Çì„Å™‰∫ã‚Ä¶%CSTR:Ë™ûÂ∞æË¨ùÁΩ™%‚Ä¶„Å£‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%ÔºüÔºÅ„Äç
 	ELSE
-		PRINTFORML ÅuÇ¢Ç¢ïîâÆÅcÅcÇ†Ç∆ÇÕîCÇπÇÈÇ¬Ç‡ÇË%CSTR:åÍîˆãtê‡%ÅcóDÇµÇ≠ÇµÇƒ%CSTR:åÍîˆäÛñ]%ÅH%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÅÑ„ÅÑÈÉ®Â±ã‚Ä¶‚Ä¶„ÅÇ„Å®„ÅØ‰ªª„Åõ„Çã„Å§„ÇÇ„Çä%CSTR:Ë™ûÂ∞æÈÄÜË™¨%‚Ä¶ÂÑ™„Åó„Åè„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%Ôºü%UNICODE(0x2661)%„Äç
 	ENDIF
 ELSE
-	PRINTFORML ÅuÅcÅc%CSTR:åÍîˆâΩÅH%ÅHÅv
+	PRINTFORML „Äå‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æ‰ΩïÔºü%Ôºü„Äç
 ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
-;í≤ã≥äJénÅ@
+;Ë™øÊïôÈñãÂßã„ÄÄ
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK2
 
 
-IF TALENT:åãç•çœÇ› == 1 
-	IF   TALENT:ÇmÇsÇk == 1
-		IF TALENT:êSêå == 1
+IF TALENT:ÁµêÂ©öÊ∏à„Åø == 1 
+	IF   TALENT:ÔºÆÔº¥Ôº¨ == 1
+		IF TALENT:ÂøÉÈÖî == 1
 			IF !RAND:11
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%ÇÃà◊Ç»ÇÁÅAÇ«ÇÒÇ»Ç±Ç∆Ç≈Ç‡ÅcéqãüÇæÇ¡ÇƒéYÇﬂ%CSTR:åÍîˆÇ‹Ç∑%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÁÇ∫„Å™„Çâ„ÄÅ„Å©„Çì„Å™„Åì„Å®„Åß„ÇÇ‚Ä¶Â≠ê‰æõ„Å†„Å£„Å¶Áî£„ÇÅ%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:10
-				PRINTFORML ÅuïvÇÃÇ±Ç∆ÇÕç°Ç≈Ç‡à§ÇµÇƒÇ¢%CSTR:åÍîˆÇ‹Ç∑%ÅcÇ≈Ç‡%CSTR:ìÒêlèÃ%ÇÃï˚Ç™Ç‡Ç¡Ç∆çDÇ´Ç»ÇæÇØ%CSTR:åÍîˆñ‚Ç§3%%UNICODE(0x2661)%ÅHÅv
+				PRINTFORML „ÄåÂ§´„ÅÆ„Åì„Å®„ÅØ‰ªä„Åß„ÇÇÊÑõ„Åó„Å¶„ÅÑ%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶„Åß„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊñπ„Åå„ÇÇ„Å£„Å®Â•Ω„Åç„Å™„Å†„Åë%CSTR:Ë™ûÂ∞æÂïè„ÅÜ3%%UNICODE(0x2661)%Ôºü„Äç
 			ELSEIF !RAND:9
-				PRINTFORML ÅuÇ®îÊÇÍól%CSTR:åÍîˆÇ≈Ç∑%%CSTR:ìÒêlèÃ%ÅAç°ìxÇ‡%CSTR:àÍêlèÃ%Ç∆ëÔóëÉZÉbÉNÉXÇ™Ç®ñ]Ç›%CSTR:åÍîˆñ‚Ç§%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æ„Åß„Åô%%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ‰ªäÂ∫¶„ÇÇ%CSTR:‰∏Ä‰∫∫Áß∞%„Å®ÊâòÂçµ„Çª„ÉÉ„ÇØ„Çπ„Åå„ÅäÊúõ„Åø%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃólÇ»èóÇ≈ñûë´èoóàÇÈÇ»ÇÁÅAçDÇ´Ç»ÇÊÇ§Ç…çDÇ´Ç»ÇæÇØÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆÊßò„Å™Â•≥„ÅßÊ∫ÄË∂≥Âá∫Êù•„Çã„Å™„Çâ„ÄÅÂ•Ω„Åç„Å™„Çà„ÅÜ„Å´Â•Ω„Åç„Å™„Å†„Åë„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML ÅuÇ∑Ç±ÇµÇ‡ë“ÇƒÇ»Ç¢ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅHÅcÇ§Ç£Ç£Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åô„Åì„Åó„ÇÇÂæÖ„Å¶„Å™„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶„ÅÜ„ÅÖ„ÅÖ‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML Åu%CSTR:àÍêlèÃ%Ç≈èoóàÇÈïsíÂÇ»ÇÁâΩÇ≈Ç‡åæÇ¡Çƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅßÂá∫Êù•„Çã‰∏çË≤û„Å™„Çâ‰Ωï„Åß„ÇÇË®Ä„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML ÅuîºóßÇøÇ»ÇÃÇ…ïvÇÃÇÊÇËÇ‡Ç®Ç¡Ç´Ç°Åc%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%Çà‘ÇﬂÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÂçäÁ´ã„Å°„Å™„ÅÆ„Å´Â§´„ÅÆ„Çà„Çä„ÇÇ„Åä„Å£„Åç„ÅÉ‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÇíÊÖ∞„ÇÅ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML Åu%CSTR:åÍîˆé”çﬂ%ÅAïvÇ™ìdòbÇ≈ÇµÇ¬Ç±Ç≠ÇƒÅcÇ‡Ç§êÿ%CSTR:åÍîˆÇ‹ÇµÇΩ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:Ë™ûÂ∞æË¨ùÁΩ™%„ÄÅÂ§´„ÅåÈõªË©±„Åß„Åó„Å§„Åì„Åè„Å¶‚Ä¶„ÇÇ„ÅÜÂàá%CSTR:Ë™ûÂ∞æ„Åæ„Åó„Åü%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç…èóÇÃâxÇ—Çã≥Ç¶ÇÁÇÍÇƒÅc%CSTR:àÍêlèÃ%Ç∆Ç¡ÇƒÇ‡çKÇπ%CSTR:åÍîˆÇ≈Ç∑%ÅcÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å´Â•≥„ÅÆÊÇ¶„Å≥„ÇíÊïô„Åà„Çâ„Çå„Å¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å®„Å£„Å¶„ÇÇÂπ∏„Åõ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML Åuç°ìxÇÕ%CSTR:åÍîˆâΩÅH%ÅHÅcÅcç°ì˙ÇÕÅcÇ¢Ç¬Ç‡ÇÊÇËä√Ç¶ÇƒÇ‡Ç¢Ç¢ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅHÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰ªäÂ∫¶„ÅØ%CSTR:Ë™ûÂ∞æ‰ΩïÔºü%Ôºü‚Ä¶‚Ä¶‰ªäÊó•„ÅØ‚Ä¶„ÅÑ„Å§„ÇÇ„Çà„ÇäÁîò„Åà„Å¶„ÇÇ„ÅÑ„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML Åuïsóœ%CSTR:åÍîˆñ‚Ç§%ÅHÅA%CSTR:àÍêlèÃ%Ç…Ç∆Ç¡ÇƒíjÇÕ%CSTR:ìÒêlèÃ%à”äOÇ…óv%CSTR:åÍîˆï∑Ç≠%ÅHÅc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰∏çÂÄ´%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´„Å®„Å£„Å¶Áî∑„ÅØ%CSTR:‰∫å‰∫∫Áß∞%ÊÑèÂ§ñ„Å´Ë¶Å%CSTR:Ë™ûÂ∞æËÅû„Åè%Ôºü‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„Äç
 			ENDIF
-		ELSEIF TALENT:à§êl == 1
+		ELSEIF TALENT:ÊÑõ‰∫∫ == 1
 			IF !RAND:11
-				PRINTFORML ÅuëºÇÃíNÇÊÇËÅcïvÇÊÇËÇ‡%CSTR:ìÒêlèÃ%Çà§ÇµÇƒ%CSTR:åÍîˆà§%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰ªñ„ÅÆË™∞„Çà„Çä‚Ä¶Â§´„Çà„Çä„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„ÇíÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÊÑõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:10
-				PRINTFORML ÅuïvÇ…ÇÕè„éËÇ≠åÎñÇâªÇµÇƒÅcÇÒÇ¡%UNICODE(0x2661)%ÅcÅcÅc%CSTR:åÍîˆî˜èŒ%ÅAÇ‡Ç§ë“ÇøÇ´ÇÍÇ»Ç¢ÇÃ%CSTR:åÍîˆñ‚Ç§%%UNICODE(0x2661)%ÅHÅv
+				PRINTFORML „ÄåÂ§´„Å´„ÅØ‰∏äÊâã„ÅèË™§È≠îÂåñ„Åó„Å¶‚Ä¶„Çì„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%„ÄÅ„ÇÇ„ÅÜÂæÖ„Å°„Åç„Çå„Å™„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%%UNICODE(0x2661)%Ôºü„Äç
 			ELSEIF !RAND:9
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%ÅA%CSTR:àÍêlèÃ%Ç…ÇΩÇ≠Ç≥ÇÒéÌïtÇØÇµÇƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´„Åü„Åè„Åï„ÇìÁ®Æ‰ªò„Åë„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç™êQéÊÇ¡ÇΩéìÇ≈ãCéùÇøó«Ç≠%CSTR:åÍîˆìØà”ãÅÇﬁ2%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÅåÂØùÂèñ„Å£„ÅüÈõå„ÅßÊ∞óÊåÅ„Å°ËâØ„Åè%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML ÅuÇ®Ç†Ç∏ÇØÇ»ÇÒÇƒà”ínà´ÇµÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%ÅA%CSTR:ìÒêlèÃ%Ç™ó~ÇµÇ≠Ç¡Çƒâ‰ñùÇ≈Ç´Ç»Ç¢ÅcÇÒÇ¡Åc%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åä„ÅÇ„Åö„Åë„Å™„Çì„Å¶ÊÑèÂú∞ÊÇ™„Åó„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„ÄÅ%CSTR:‰∫å‰∫∫Áß∞%„ÅåÊ¨≤„Åó„Åè„Å£„Å¶ÊàëÊÖ¢„Åß„Åç„Å™„ÅÑ‚Ä¶„Çì„Å£‚Ä¶%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML ÅuîDêPÇµÇƒÇµÇ‹Ç¡ÇΩÇÃ%CSTR:åÍîˆãtê‡%ÅcÅA%CSTR:åÍîˆî˜èŒ%ÅcâR%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÂ¶äÂ®†„Åó„Å¶„Åó„Åæ„Å£„Åü„ÅÆ%CSTR:Ë™ûÂ∞æÈÄÜË™¨%‚Ä¶„ÄÅ%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶Âòò%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML ÅuÇ∆Ç¡ÇƒÇ‡éqã{Ç™îMÇ¢%CSTR:åÍîˆÇ≈Ç∑2%ÅcÅcÇ±ÇÃÇ‹Ç‹ÇµÇΩÇÁ%CSTR:ìÒêlèÃ%ÇÃéqÇõsÇÒÇ∂Ç·Ç§Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Å®„Å£„Å¶„ÇÇÂ≠êÂÆÆ„ÅåÁÜ±„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%‚Ä¶‚Ä¶„Åì„ÅÆ„Åæ„Åæ„Åó„Åü„Çâ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ≠ê„ÇíÂ≠ï„Çì„Åò„ÇÉ„ÅÜ‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML Åuéûä‘Ç‹Ç≈Åc%CSTR:àÍêlèÃ%Çâ¬à§Ç™Ç¡Çƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÊôÇÈñì„Åæ„Åß‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÇíÂèØÊÑõ„Åå„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML ÅuÇ∏Ç¡Ç∆%CSTR:ìÒêlèÃ%ÇÃâ∑Ç‡ÇËÇæÇØÇä¥Ç∂ÇΩÇ¢%CSTR:åÍîˆÇ≈Ç∑2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åö„Å£„Å®%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊ∏©„ÇÇ„Çä„Å†„Åë„ÇíÊÑü„Åò„Åü„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÕÇ‡Ç§%CSTR:ìÒêlèÃ%Ç»ÇµÇ≈ÇÕê∂Ç´ÇÁÇÍÇ»Ç¢ÅcÇªÇ§Ç‰Ç§èóÇ…Á^ÇØÇÁÇÍÇΩ%CSTR:åÍîˆÇÃÇ≈%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ„ÇÇ„ÅÜ%CSTR:‰∫å‰∫∫Áß∞%„Å™„Åó„Åß„ÅØÁîü„Åç„Çâ„Çå„Å™„ÅÑ‚Ä¶„Åù„ÅÜ„ÇÜ„ÅÜÂ•≥„Å´Ë∫æ„Åë„Çâ„Çå„Åü%CSTR:Ë™ûÂ∞æ„ÅÆ„Åß%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML Åuç°ì˙Ç‡ÇΩÇ≠Ç≥ÇÒÅcÉCÉPÉiÉCéñÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰ªäÊó•„ÇÇ„Åü„Åè„Åï„Çì‚Ä¶„Ç§„Ç±„Éä„Ç§‰∫ã„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ENDIF
-		ELSEIF TALENT:èÓïw == 1
+		ELSEIF TALENT:ÊÉÖÂ©¶ == 1
 			IF !RAND:11
-				PRINTFORML Åu%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅAç°ì˙Ç‡ãCéùÇøÇÊÇ≠ïsóœÅc%CSTR:åÍîˆçmíË%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„ÄÅ‰ªäÊó•„ÇÇÊ∞óÊåÅ„Å°„Çà„Åè‰∏çÂÄ´‚Ä¶%CSTR:Ë™ûÂ∞æËÇØÂÆö%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:10
-				PRINTFORML Åuågë—Ç™ñ¬Ç¡ÇƒÇÈÅcÅHÅc%CSTR:åÍîˆî˜èŒ%ëÂè‰ïv%CSTR:åÍîˆâûìö%ÅAç°ÇÕÅcÇΩÇ≠Ç≥ÇÒà§ÇµÇƒó~ÇµÇ¢%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆÇ≈Ç∑%Åv
+				PRINTFORML „ÄåÊê∫Â∏Ø„ÅåÈ≥¥„Å£„Å¶„Çã‚Ä¶Ôºü‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%Â§ß‰∏àÂ§´%CSTR:Ë™ûÂ∞æÂøúÁ≠î%„ÄÅ‰ªä„ÅØ‚Ä¶„Åü„Åè„Åï„ÇìÊÑõ„Åó„Å¶Ê¨≤„Åó„ÅÑ%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æ„Åß„Åô%„Äç
 			ELSEIF !RAND:9
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%ÅAÇ≤éwñº%CSTR:åÍîˆä¥é”%%UNICODE(0x2661)%ÅcÅcëºêlÇÃèóÇ≈Ç∑ÇÈÇÃÇ¡ÇƒÇ«Ç§%CSTR:åÍîˆñ‚Ç§%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ„ÅîÊåáÂêç%CSTR:Ë™ûÂ∞æÊÑüË¨ù%%UNICODE(0x2661)%‚Ä¶‚Ä¶‰ªñ‰∫∫„ÅÆÂ•≥„Åß„Åô„Çã„ÅÆ„Å£„Å¶„Å©„ÅÜ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML ÅuÇ‡Ç§èÄîıèoóàÇƒ%CSTR:åÍîˆÇ‹Ç∑%Åc%UNICODE(0x2661)%ÅAÇΩÇ≠Ç≥ÇÒéÌïtÇØÇµ%CSTR:åÍîˆñΩóﬂ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÇÇ„ÅÜÊ∫ñÂÇôÂá∫Êù•„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶%UNICODE(0x2661)%„ÄÅ„Åü„Åè„Åï„ÇìÁ®Æ‰ªò„Åë„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML ÅuÇ‡Ç§ïvÇÃÇ∂Ç·ñûë´Ç≈Ç´Ç»Ç¢êgëÃÇ…Ç≥ÇÍÇƒÅcÅcà´Ç¢ÉIÉ`ÉìÉ|Åc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÇÇ„ÅÜÂ§´„ÅÆ„Åò„ÇÉÊ∫ÄË∂≥„Åß„Åç„Å™„ÅÑË∫´‰Ωì„Å´„Åï„Çå„Å¶‚Ä¶‚Ä¶ÊÇ™„ÅÑ„Ç™„ÉÅ„É≥„Éù‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML ÅuëºêlÇÃèóÇâıäyí–ÇØÇ…ÇµÇƒêQéÊÇÈÇ»ÇÒÇƒÅcÅcÉCÉPÉiÉCêl%CSTR:åÍîˆçmíË2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰ªñ‰∫∫„ÅÆÂ•≥„ÇíÂø´Ê•ΩÊº¨„Åë„Å´„Åó„Å¶ÂØùÂèñ„Çã„Å™„Çì„Å¶‚Ä¶‚Ä¶„Ç§„Ç±„Éä„Ç§‰∫∫%CSTR:Ë™ûÂ∞æËÇØÂÆö2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML ÅuÇÒÇ¡%UNICODE(0x2661)%ÅcÅcéqã{Ç™ìMÇÍÇÈÇ≠ÇÁÇ¢ãCéùÇøÇÊÇ≠%CSTR:åÍîˆìØà”ãÅÇﬁ2%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Çì„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶Â≠êÂÆÆ„ÅåÊ∫∫„Çå„Çã„Åè„Çâ„ÅÑÊ∞óÊåÅ„Å°„Çà„Åè%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇÕÇüÇÕÇüÇ¡Åc%UNICODE(0x2661)%ÅcÅcÇÕÅAÇÕÇ‚Ç≠Ç¡ÅIÅc%CSTR:ìÒêlèÃ%ÇÃÇ≈ãCéùÇøÇÊÇ≠Çµ%CSTR:åÍîˆñΩóﬂã≠%Ç¡%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÅØ„ÅÅ„ÅØ„ÅÅ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶‚Ä¶„ÅØ„ÄÅ„ÅØ„ÇÑ„Åè„Å£ÔºÅ‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„ÅßÊ∞óÊåÅ„Å°„Çà„Åè„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%„Å£%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML ÅuÇ®îÊÇÍ%CSTR:åÍîˆñ‚Ç§%ÅHÅA%CSTR:àÍêlèÃ%Ç™É}ÉbÉTÅ[ÉWÇµÇƒÇ†Ç∞%CSTR:åÍîˆëóÇÈ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÅäÁñ≤„Çå%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„Åå„Éû„ÉÉ„Çµ„Éº„Ç∏„Åó„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÇ‡Ç§Ç±ÇÒÇ»Ç…ñcÇÁÇ‹ÇπÇƒÅc%UNICODE(0x2661)%Åc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅAç°ãCéùÇøÇÊÇ≠%CSTR:åÍîˆñ‚Ç§2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÇÇ„ÅÜ„Åì„Çì„Å™„Å´ËÜ®„Çâ„Åæ„Åõ„Å¶‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„ÄÅ‰ªäÊ∞óÊåÅ„Å°„Çà„Åè%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML Åu%CSTR:åÍîˆîΩâû%Åc%UNICODE(0x2661)%ÅAç°ì˙Ç‡ãCéùÇøÇÊÇ≠%CSTR:åÍîˆìØà”ãÅÇﬁ2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶%UNICODE(0x2661)%„ÄÅ‰ªäÊó•„ÇÇÊ∞óÊåÅ„Å°„Çà„Åè%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ENDIF
-		ELSEIF TALENT:çáà” == 1
+		ELSEIF TALENT:ÂêàÊÑè == 1
 			IF !RAND:12
-				PRINTFORML ÅuÅcÅcÇ¡Åc%UNICODE(0x2661)%ÅcÅcÇ∑ÇÈ%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆñ‚Ç§%ÅcÅcÅHÅv
+				PRINTFORML „Äå‚Ä¶‚Ä¶„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶‚Ä¶„Åô„Çã%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶‚Ä¶Ôºü„Äç
 			ELSEIF !RAND:11
-				PRINTFORML Åu%CSTR:åÍîˆî˜èŒ%ÅAç°ì˙Ç‡Åuécã∆ÅvÇ™í∑à¯Ç´ÇªÇ§%CSTR:åÍîˆçmíË%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%„ÄÅ‰ªäÊó•„ÇÇ„ÄåÊÆãÊ•≠„Äç„ÅåÈï∑Âºï„Åç„Åù„ÅÜ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:10
-				PRINTFORML Åu%CSTR:àÍêlèÃ%Ç™Ç±ÇÒÇ»Ç…Ç‡êgèüéËÇæÇ¡ÇΩÇ»ÇÒÇƒÅcÅcÇ≈Ç‡%CSTR:ìÒêlèÃ%Ç∆ÇÃä÷åWÇÕÇ‚ÇﬂÇÁÇÍÇªÇ§Ç…Ç»Ç¢%CSTR:åÍîˆÇ≈Ç∑2%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„Åå„Åì„Çì„Å™„Å´„ÇÇË∫´ÂãùÊâã„Å†„Å£„Åü„Å™„Çì„Å¶‚Ä¶‚Ä¶„Åß„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„Å®„ÅÆÈñ¢‰øÇ„ÅØ„ÇÑ„ÇÅ„Çâ„Çå„Åù„ÅÜ„Å´„Å™„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:9
-				PRINTFORML ÅuÇ‹ÇæïvÇ∆ìdòbíÜ%CSTR:åÍîˆãëî€%ÅIÅc%CSTR:åÍîˆãëê‚%%UNICODE(0x2661)%ÅcípÇ∏Ç©ÇµÅcÇ¡Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åæ„Å†Â§´„Å®ÈõªË©±‰∏≠%CSTR:Ë™ûÂ∞æÊãíÂê¶%ÔºÅ‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%%UNICODE(0x2661)%‚Ä¶ÊÅ•„Åö„Åã„Åó‚Ä¶„Å£‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç‡ï®çDÇ´%CSTR:åÍîˆçmíË%%UNICODE(0x2661)%ÅAÇªÇÒÇ»Ç…%CSTR:àÍêlèÃ%Ç›ÇΩÇ¢Ç»ëºêlÇÃèóÇ™ó«Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÇÇÁâ©Â•Ω„Åç%CSTR:Ë™ûÂ∞æËÇØÂÆö%%UNICODE(0x2661)%„ÄÅ„Åù„Çì„Å™„Å´%CSTR:‰∏Ä‰∫∫Áß∞%„Åø„Åü„ÅÑ„Å™‰ªñ‰∫∫„ÅÆÂ•≥„ÅåËâØ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 			ELSEIF !RAND:7
-				PRINTFORML Åu%CSTR:åÍîˆãëê‚%ÅcÇ®ï†Ç™Åc·uÇ¢ÇƒÇ•Åc%UNICODE(0x2661)%ÅcÅv
+				PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÊãíÁµ∂%‚Ä¶„ÅäËÖπ„Åå‚Ä¶Áñº„ÅÑ„Å¶„Åá‚Ä¶%UNICODE(0x2661)%‚Ä¶„Äç
 			ELSEIF !RAND:6
-				PRINTFORML ÅuÇÕÅAõsÇ‹ÇπÇÈÇ»ÇÒÇƒÇ•ÅcÇªÇÒÇ»ÇüÅcÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÅØ„ÄÅÂ≠ï„Åæ„Åõ„Çã„Å™„Çì„Å¶„Åá‚Ä¶„Åù„Çì„Å™„ÅÅ‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%ÅcîîDÇÕÇµÇ»Ç≠Çƒó«Ç¢Ç©ÇÁÅcïvÇ…ÇÕåæÇÕÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%‚Ä¶ÈÅøÂ¶ä„ÅØ„Åó„Å™„Åè„Å¶ËâØ„ÅÑ„Åã„Çâ‚Ä¶Â§´„Å´„ÅØË®Ä„ÅØ„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÅcÇ¡ÅcÅc%CSTR:åÍîˆé”çﬂ%Åc%CSTR:àÍêlèÃ%ÇÕç°Ç©ÇÁ%CSTR:ìÒêlèÃ%Ç…ï¯Ç©ÇÍÇ‹Ç∑ÅcÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‚Ä¶„Å£‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æË¨ùÁΩ™%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ‰ªä„Åã„Çâ%CSTR:‰∫å‰∫∫Áß∞%„Å´Êä±„Åã„Çå„Åæ„Åô‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML Åuç°ì˙Ç‡Ç∑ÇÈÇÃ%CSTR:åÍîˆñ‚Ç§%ÅHÅcÇ¢Ç∂ÇﬂÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰ªäÊó•„ÇÇ„Åô„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶„ÅÑ„Åò„ÇÅ„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÅcÅcïsíÂÇ…êSÇ‡êgëÃÇ‡èáâûÇµÇƒÇ®Ç©ÇµÇ≠Ç»ÇÈÇ£Åc%CSTR:åÍîˆãëê‚%Ç¡%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‚Ä¶‚Ä¶‰∏çË≤û„Å´ÂøÉ„ÇÇË∫´‰Ωì„ÇÇÈ†ÜÂøú„Åó„Å¶„Åä„Åã„Åó„Åè„Å™„Çã„ÅÖ‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML Åu%CSTR:àÍêlèÃ%Ç›ÇΩÇ¢Ç»ëºêlÇÃèóÅcÇªÇÒÇ»Ç…ñ£óÕìI%CSTR:åÍîˆñ‚Ç§%ÅHÅcÅc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„Åø„Åü„ÅÑ„Å™‰ªñ‰∫∫„ÅÆÂ•≥‚Ä¶„Åù„Çì„Å™„Å´È≠ÖÂäõÁöÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„Äç
 			ENDIF
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 400
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 400
 		IF !RAND:4
-			PRINTFORML ÅuÅc%CSTR:åÍîˆîΩâû%Åc%CSTR:åÍîˆYES%ÅcÇ∑ÇÈ%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅv
+			PRINTFORML „Äå‚Ä¶%CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶%CSTR:Ë™ûÂ∞æYES%‚Ä¶„Åô„Çã%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü„Äç
 		ELSEIF !RAND:3
-			PRINTFORML Åuñ{ìñÇÕïvà”äOÇ∆Ç∑ÇÈÇ»ÇÒÇƒÉ_ÉÅ%CSTR:åÍîˆñ‚Ç§3%ÅcÅHÅA%CSTR:ìÒêlèÃ%Åc%CSTR:ìÒêlèÃ%ÇæÇ©ÇÁ%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%Åv
+			PRINTFORML „ÄåÊú¨ÂΩì„ÅØÂ§´ÊÑèÂ§ñ„Å®„Åô„Çã„Å™„Çì„Å¶„ÉÄ„É°%CSTR:Ë™ûÂ∞æÂïè„ÅÜ3%‚Ä¶Ôºü„ÄÅ%CSTR:‰∫å‰∫∫Áß∞%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„Å†„Åã„Çâ%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuÇ¢ÇØÇ»Ç¢êlÅcÅc%CSTR:àÍêlèÃ%ÅcëºêlÇÃèó%CSTR:åÍîˆñ‚Ç§3%Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„ÅÑ„Åë„Å™„ÅÑ‰∫∫‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶‰ªñ‰∫∫„ÅÆÂ•≥%CSTR:Ë™ûÂ∞æÂïè„ÅÜ3%‚Ä¶%UNICODE(0x2661)%„Äç
 		ELSE
-			PRINTFORML ÅuÇ†ÇüÅcâΩÇæÇ©Ç¢ÇØÇ»Ç¢éñÇ∑ÇÈÇÃï»Ç…Ç»Ç¡ÇƒÇ´ÇƒÇÈãCÇ™%CSTR:åÍîˆñ‚Ç§2%Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„ÅÇ„ÅÅ‚Ä¶‰Ωï„Å†„Åã„ÅÑ„Åë„Å™„ÅÑ‰∫ã„Åô„Çã„ÅÆÁôñ„Å´„Å™„Å£„Å¶„Åç„Å¶„ÇãÊ∞ó„Åå%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%‚Ä¶%UNICODE(0x2661)%„Äç
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 300
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 300
 		IF !RAND:4
-			PRINTFORML Åu%CSTR:åÍîˆãëê‚%Åc%CSTR:àÍêlèÃ%Ç…ÇÕïvÇ™ãèÇÈÇÃÇ…Ç¡ÅIÅcÇ®ï†Ç™Åc·uÇ¢ÇƒÇ•Ç¡%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÊãíÁµ∂%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å´„ÅØÂ§´„ÅåÂ±Ö„Çã„ÅÆ„Å´„Å£ÔºÅ‚Ä¶„ÅäËÖπ„Åå‚Ä¶Áñº„ÅÑ„Å¶„Åá„Å£%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:3
-			PRINTFORML ÅuÇ‹ÇΩ%CSTR:åÍîˆñ‚Ç§%ÅcÅcÅc%CSTR:åÍîˆNo%Åc%UNICODE(0x2661)%ÇÒÇ£ÅcãëÇﬂÇÈÇÌÇØÇ»Ç¢%CSTR:åÍîˆãñâ¬%Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„Åæ„Åü%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æNo%‚Ä¶%UNICODE(0x2661)%„Çì„ÅÖ‚Ä¶Êãí„ÇÅ„Çã„Çè„Åë„Å™„ÅÑ%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:2
-			PRINTFORML Åuç≈ãﬂÇΩÇ‹Ç…ÅAïvÇÃéñÇëºêlÇÃólÇ…évÇ¶Çƒ%CSTR:åÍîˆÇ‹Ç∑%Åcïœ%CSTR:åÍîˆìØà”ãÅÇﬁ%ÅcÅcÅv
+			PRINTFORML „ÄåÊúÄËøë„Åü„Åæ„Å´„ÄÅÂ§´„ÅÆ‰∫ã„Çí‰ªñ‰∫∫„ÅÆÊßò„Å´ÊÄù„Åà„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶Â§â%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ%‚Ä¶‚Ä¶„Äç
 		ELSE
-			PRINTFORML ÅuÅcïvÇ…Ç‡Ç≥ÇÍÇΩÇ±Ç∆ñ≥Ç¢ólÇ»Ç±Ç∆ÇßÅcäµÇÍÇƒÇ´Çƒ%CSTR:åÍîˆëóÇÈ%Ç¡ÅcÇ®Ç©ÇµÇ≠Ç»ÇÈÇ¡ÅIÅv
+			PRINTFORML „Äå‚Ä¶Â§´„Å´„ÇÇ„Åï„Çå„Åü„Åì„Å®ÁÑ°„ÅÑÊßò„Å™„Åì„Å®„Åâ‚Ä¶ÊÖ£„Çå„Å¶„Åç„Å¶%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%„Å£‚Ä¶„Åä„Åã„Åó„Åè„Å™„Çã„Å£ÔºÅ„Äç
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 200
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 200
 		IF !RAND:4
-			PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç‡ï®çDÇ´%CSTR:åÍîˆçmíË%ÅAÇ«Ç§ÇµÇƒ%CSTR:àÍêlèÃ%Ç›ÇΩÇ¢Ç»ëºêlÇÃèóÇ™ó«Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+			PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÇÇÁâ©Â•Ω„Åç%CSTR:Ë™ûÂ∞æËÇØÂÆö%„ÄÅ„Å©„ÅÜ„Åó„Å¶%CSTR:‰∏Ä‰∫∫Áß∞%„Åø„Åü„ÅÑ„Å™‰ªñ‰∫∫„ÅÆÂ•≥„ÅåËâØ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 		ELSEIF !RAND:3
-			PRINTFORML Åu%CSTR:àÍêlèÃ%ÅcÇªÇÒÇ»Ç…ñ£óÕìI%CSTR:åÍîˆñ‚Ç§%ÅHÅc%CSTR:åÍîˆãëê‚%Ç¡ÅcÇ†Çü%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶„Åù„Çì„Å™„Å´È≠ÖÂäõÁöÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£‚Ä¶„ÅÇ„ÅÅ%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:2
-			PRINTFORML Åuç°ì˙Ç‡Ç∑ÇÈÇÃ%CSTR:åÍîˆñ‚Ç§%ÅHÅcåÉÇµÇ≠ÇµÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%ÅcÅv
+			PRINTFORML „Äå‰ªäÊó•„ÇÇ„Åô„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶ÊøÄ„Åó„Åè„Åó„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 		ELSE
-			PRINTFORML ÅuÅcÇ¡Åc%CSTR:åÍîˆé”çﬂ%Åc%CSTR:àÍêlèÃ%Åc%CSTR:ìÒêlèÃ%Ç…ï¯Ç©ÇÍÇ‹Ç∑Ç¡ÅcÅIÅcÅv
+			PRINTFORML „Äå‚Ä¶„Å£‚Ä¶%CSTR:Ë™ûÂ∞æË¨ùÁΩ™%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„Å´Êä±„Åã„Çå„Åæ„Åô„Å£‚Ä¶ÔºÅ‚Ä¶„Äç
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 100
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 100
 		IF !RAND:4
-			PRINTFORML ÅuÅc%CSTR:åÍîˆîΩâû%Åc%CSTR:åÍîˆYES%ÅcÇ∑ÇÈ%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅv
+			PRINTFORML „Äå‚Ä¶%CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶%CSTR:Ë™ûÂ∞æYES%‚Ä¶„Åô„Çã%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü„Äç
 		ELSEIF !RAND:3
-			PRINTFORML ÅuÇ≈Ç´ÇÈÇ»ÇÁîîDÇµÇƒ%CSTR:åÍîˆäÛñ]%ÅcÇŸÇÒÇ∆Ç§Ç…Ç®äËÇ¢%CSTR:åÍîˆÇ®äËÇ¢%Åv
+			PRINTFORML „Äå„Åß„Åç„Çã„Å™„ÇâÈÅøÂ¶ä„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Åª„Çì„Å®„ÅÜ„Å´„ÅäÈ°ò„ÅÑ%CSTR:Ë™ûÂ∞æ„ÅäÈ°ò„ÅÑ%„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuâΩåÃÇ©Åc%CSTR:ìÒêlèÃ%ÇãëÇﬂÇ»Ç¢%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆÇ≈Ç∑%ÅcÅcÅv
+			PRINTFORML „Äå‰ΩïÊïÖ„Åã‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÇíÊãí„ÇÅ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶„Äç
 		ELSE
-			PRINTFORML Åuïvà»äOÇÃêlÇ∆ÅcÅcÇ≈Ç‡ÅcÅv
+			PRINTFORML „ÄåÂ§´‰ª•Â§ñ„ÅÆ‰∫∫„Å®‚Ä¶‚Ä¶„Åß„ÇÇ‚Ä¶„Äç
 		ENDIF
 	ELSE
 		IF !RAND:4
-			PRINTFORML ÅuõsÇ‹ÇπÇÈÇ»ÇÒÇƒÅAÇªÇÒÇ»Ç¡ÅcÇªÇÒÇ»ÇüÅcÅcÅv
+			PRINTFORML „ÄåÂ≠ï„Åæ„Åõ„Çã„Å™„Çì„Å¶„ÄÅ„Åù„Çì„Å™„Å£‚Ä¶„Åù„Çì„Å™„ÅÅ‚Ä¶‚Ä¶„Äç
 		ELSEIF !RAND:3
-			PRINTFORML ÅuÅcÅc%CSTR:àÍêlèÃ%Ç…ÇÕïvÇ™ÅcÅcÇÒÇÒÇ¡ÅcÅv
+			PRINTFORML „Äå‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å´„ÅØÂ§´„Åå‚Ä¶‚Ä¶„Çì„Çì„Å£‚Ä¶„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuïvÇ∆ìdòbíÜÇæÇ©ÇÁÇ‡Ç§è≠Çµë“Ç¡Çƒ%CSTR:åÍîˆñΩóﬂã≠%Åc%CSTR:åÍîˆãëê‚%Ç¡ÅIÅv
+			PRINTFORML „ÄåÂ§´„Å®ÈõªË©±‰∏≠„Å†„Åã„Çâ„ÇÇ„ÅÜÂ∞ë„ÅóÂæÖ„Å£„Å¶%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£ÔºÅ„Äç
 		ELSE
-			PRINTFORML ÅuÅcåæÇ§éëäiÇÕÇ»Ç≠Ç∆Ç‡ÅAà§ÇµÇƒÇ¢ÇÈÇÃÇÕñ‹ò_ïv%CSTR:åÍîˆÇ≈Ç∑%Åv
+			PRINTFORML „Äå‚Ä¶Ë®Ä„ÅÜË≥áÊ†º„ÅØ„Å™„Åè„Å®„ÇÇ„ÄÅÊÑõ„Åó„Å¶„ÅÑ„Çã„ÅÆ„ÅØÂãøË´ñÂ§´%CSTR:Ë™ûÂ∞æ„Åß„Åô%„Äç
 		ENDIF
 	ENDIF
-ELSEIF TALENT:ìØê´à§ == 1 && TALENT:çáà” == 1 
-	IF   TALENT:êSêå == 1 || TALENT:à§êl == 1 || TALENT:èÓïw == 1
+ELSEIF TALENT:ÂêåÊÄßÊÑõ == 1 && TALENT:ÂêàÊÑè == 1 
+	IF   TALENT:ÂøÉÈÖî == 1 || TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÊÉÖÂ©¶ == 1
 			IF !RAND:5
-				PRINTFORML Åuñ{ìñÇÕíjÇ∆Ç∑ÇÈÇ»ÇÒÇƒåô%CSTR:åÍîˆñ‚Ç§3%ÅHÅA%CSTR:ìÒêlèÃ%ÇæÇ©ÇÁãñÇ∑ÇÒ%CSTR:åÍîˆÇ≈Ç∑%Åv
+				PRINTFORML „ÄåÊú¨ÂΩì„ÅØÁî∑„Å®„Åô„Çã„Å™„Çì„Å¶Â´å%CSTR:Ë™ûÂ∞æÂïè„ÅÜ3%Ôºü„ÄÅ%CSTR:‰∫å‰∫∫Áß∞%„Å†„Åã„ÇâË®±„Åô„Çì%CSTR:Ë™ûÂ∞æ„Åß„Åô%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇ®Ç©ÇµÇ¢ÅcÅcëäéËÇ™íjÇ»ÇÃÇ…ÅcîGÇÍÇƒÇÈÅcÅv
+				PRINTFORML „Äå„Åä„Åã„Åó„ÅÑ‚Ä¶‚Ä¶Áõ∏Êâã„ÅåÁî∑„Å™„ÅÆ„Å´‚Ä¶Êø°„Çå„Å¶„Çã‚Ä¶„Äç
 			ELSEIF !RAND:3
-				PRINTFORML ÅuÇ‹ÇΩ%CSTR:åÍîˆñ‚Ç§%ÅcÅcÅc%CSTR:åÍîˆNo%ÅcåôÇ∂Ç·Ç»Ç¢%CSTR:åÍîˆãñâ¬%ÅcÅv
+				PRINTFORML „Äå„Åæ„Åü%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æNo%‚Ä¶Â´å„Åò„ÇÉ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÇ§Ç£ÅcâΩÇæÇ©íÔçRä¥Ç™Ç»Ç≠Ç»Ç¡ÇƒÇ´ÇƒÇÈãCÇ™%CSTR:åÍîˆñ‚Ç§2%ÅcÅv
+				PRINTFORML „Äå„ÅÜ„ÅÖ‚Ä¶‰Ωï„Å†„ÅãÊäµÊäóÊÑü„Åå„Å™„Åè„Å™„Å£„Å¶„Åç„Å¶„ÇãÊ∞ó„Åå%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%‚Ä¶„Äç
 			ELSE
-				PRINTFORML Åuç≈ãﬂÇÕÅAíjê´Ç‡à´Ç≠Ç»Ç¢Ç∆évÇ¡Çƒ%CSTR:åÍîˆÇ‹Ç∑%ÅcÅcÅv
+				PRINTFORML „ÄåÊúÄËøë„ÅØ„ÄÅÁî∑ÊÄß„ÇÇÊÇ™„Åè„Å™„ÅÑ„Å®ÊÄù„Å£„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶‚Ä¶„Äç
 			ENDIF
 		ELSE
 			IF !RAND:5
-				PRINTFORML Åuçáà”Ç™Ç†ÇÈÇ∆ÇÕåæÇ¶ÅAíjÇ∆Ç»ÇÒÇƒÅcÅcÇÒÇ¡Åv
+				PRINTFORML „ÄåÂêàÊÑè„Åå„ÅÇ„Çã„Å®„ÅØË®Ä„Åà„ÄÅÁî∑„Å®„Å™„Çì„Å¶‚Ä¶‚Ä¶„Çì„Å£„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇ∑ÇÈÇÃÇ»ÇÁìØê´ÇÃï˚Ç™ó«Ç¢%CSTR:åÍîˆÇ≈Ç∑%ÅcÅv
+				PRINTFORML „Äå„Åô„Çã„ÅÆ„Å™„ÇâÂêåÊÄß„ÅÆÊñπ„ÅåËâØ„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶„Äç
 			ELSEIF !RAND:3
-				PRINTFORML ÅuèoóàÇÍÇŒíjÇ∆ÇÕÇµÇΩÇ≠Ç»Å\Å\ÅcÇÕÇüÅcÅv
+				PRINTFORML „ÄåÂá∫Êù•„Çå„Å∞Áî∑„Å®„ÅØ„Åó„Åü„Åè„Å™‚Äï‚Äï‚Ä¶„ÅØ„ÅÅ‚Ä¶„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÅcÅcåãã«ÅAêgëÃñ⁄ìñÇƒÇ»ÇÒ%CSTR:åÍîˆçmíË%ÅcÅv
+				PRINTFORML „Äå‚Ä¶‚Ä¶ÁµêÂ±Ä„ÄÅË∫´‰ΩìÁõÆÂΩì„Å¶„Å™„Çì%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶„Äç
 			ELSE
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÇ™ÅcíjÇ…âòÇ≥ÇÍÇÈÅcÅv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„Åå‚Ä¶Áî∑„Å´Ê±ö„Åï„Çå„Çã‚Ä¶„Äç
 			ENDIF
 	ENDIF
-ELSEIF TALENT:êSêå == 1
+ELSEIF TALENT:ÂøÉÈÖî == 1
 	IF !RAND:10
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%ÇÃà◊Ç»ÇÁÅAÇ«ÇÒÇ»Ç±Ç∆Ç‡ÇµÇƒÇ›Çπ%CSTR:åÍîˆÇ‹Ç∑%ÅcÅv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÁÇ∫„Å™„Çâ„ÄÅ„Å©„Çì„Å™„Åì„Å®„ÇÇ„Åó„Å¶„Åø„Åõ%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶„Äç
 	ELSEIF !RAND:9
-		PRINTFORML ÅuÇ®îÊÇÍól%CSTR:åÍîˆÇ≈Ç∑%%CSTR:ìÒêlèÃ%ÅA%CSTR:àÍêlèÃ%Ç≈ëßî≤Ç´Ç™óvñ]%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+		PRINTFORML „Äå„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æ„Åß„Åô%%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÅßÊÅØÊäú„Åç„ÅåË¶ÅÊúõ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 	ELSEIF !RAND:8
-		PRINTFORML Åu%CSTR:àÍêlèÃ%Ç≈ñûë´èoóàÇÈÇ»ÇÁÅAçDÇ´Ç»ÇÊÇ§Ç…ÇµÇƒ%CSTR:åÍîˆäÛñ]%ÅcÅv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅßÊ∫ÄË∂≥Âá∫Êù•„Çã„Å™„Çâ„ÄÅÂ•Ω„Åç„Å™„Çà„ÅÜ„Å´„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuÇ∑ÇÆÇ…Ç≈Ç‡ÇµÇΩÇ¢%CSTR:åÍîˆñ‚Ç§%ÅHÅcÅc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åô„Åê„Å´„Åß„ÇÇ„Åó„Åü„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:6
-		PRINTFORML Åu%CSTR:àÍêlèÃ%Ç…èoóàÇÈÇ±Ç∆Ç»ÇÁâΩÇ≈Ç‡åæÇ¡Çƒ%CSTR:åÍîˆäÛñ]%Åv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„Å´Âá∫Êù•„Çã„Åì„Å®„Å™„Çâ‰Ωï„Åß„ÇÇË®Ä„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Äç
 	ELSEIF !RAND:5
-		PRINTFORML ÅuÇ‡Ç§Ç±ÇÒÇ»Ç…å≈Ç≠Ç»Ç¡ÇƒÅcÅc%CSTR:àÍêlèÃ%Ç™à‘ÇﬂÇƒÇ†Ç∞%CSTR:åÍîˆëóÇÈ%ÅcÅv
+		PRINTFORML „Äå„ÇÇ„ÅÜ„Åì„Çì„Å™„Å´Âõ∫„Åè„Å™„Å£„Å¶‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅåÊÖ∞„ÇÅ„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML Åu%CSTR:åÍîˆé”çﬂ%ÅAèÄîıèIÇÌ%CSTR:åÍîˆÇ‹ÇµÇΩ%Åv
+		PRINTFORML „Äå%CSTR:Ë™ûÂ∞æË¨ùÁΩ™%„ÄÅÊ∫ñÂÇôÁµÇ„Çè%CSTR:Ë™ûÂ∞æ„Åæ„Åó„Åü%„Äç
 	ELSEIF !RAND:3
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç…êgëÃÇãÅÇﬂÇÁÇÍÇƒÅc%CSTR:àÍêlèÃ%ÇÕäÇµÇ¢%CSTR:åÍîˆÇ≈Ç∑%ÅcÅcÅv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å´Ë∫´‰Ωì„ÇíÊ±Ç„ÇÅ„Çâ„Çå„Å¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØÂ¨â„Åó„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇ≤ópåèÇÕ%CSTR:åÍîˆâΩÅH%ÅHÅcÅcÇ¢Ç¬Ç‡ÇÃÇ≈Ç¢Ç¢ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+		PRINTFORML „Äå„ÅîÁî®‰ª∂„ÅØ%CSTR:Ë™ûÂ∞æ‰ΩïÔºü%Ôºü‚Ä¶‚Ä¶„ÅÑ„Å§„ÇÇ„ÅÆ„Åß„ÅÑ„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 	ELSE
-		PRINTFORML ÅuñÈâæ%CSTR:åÍîˆñ‚Ç§%ÅHÅA%CSTR:àÍêlèÃ%Ç…îCÇπÇƒ%CSTR:åÍîˆäÛñ]%Åv
+		PRINTFORML „ÄåÂ§ú‰ºΩ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´‰ªª„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Äç
 	ENDIF
-ELSEIF TALENT:à§êl == 1
+ELSEIF TALENT:ÊÑõ‰∫∫ == 1
 	IF !RAND:10
-		PRINTFORML ÅuëºÇÃíNÇÊÇËÇ‡%CSTR:ìÒêlèÃ%Çà§ÇµÇƒ%CSTR:åÍîˆà§%ÅcÅcÅv
+		PRINTFORML „Äå‰ªñ„ÅÆË™∞„Çà„Çä„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„ÇíÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÊÑõ%‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:9
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%ÅA%CSTR:àÍêlèÃ%Ç™ëÚéRãCéùÇøÇÊÇ≠ÇµÇƒÇ†Ç∞%CSTR:åÍîˆÇ‹Ç∑%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÅåÊ≤¢Â±±Ê∞óÊåÅ„Å°„Çà„Åè„Åó„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æ„Åæ„Åô%„Äç
 	ELSEIF !RAND:8
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç…Á^ÇØÇÁÇÍÇΩÇ±ÇÃêgëÃÇ≈ãCéùÇøó«Ç≠Ç»Ç¡%CSTR:åÍîˆñΩóﬂ%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å´Ë∫æ„Åë„Çâ„Çå„Åü„Åì„ÅÆË∫´‰Ωì„ÅßÊ∞óÊåÅ„Å°ËâØ„Åè„Å™„Å£%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuÇ†Ç‹ÇËë“ÇΩÇπÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%ÅAêgëÃÇ™%CSTR:ìÒêlèÃ%Çó~ÇµÇ™Ç¡Çƒédï˚Ç»Ç¢ÇÒ%CSTR:åÍîˆÇ≈Ç∑%Åv
+		PRINTFORML „Äå„ÅÇ„Åæ„ÇäÂæÖ„Åü„Åõ„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„ÄÅË∫´‰Ωì„Åå%CSTR:‰∫å‰∫∫Áß∞%„ÇíÊ¨≤„Åó„Åå„Å£„Å¶‰ªïÊñπ„Å™„ÅÑ„Çì%CSTR:Ë™ûÂ∞æ„Åß„Åô%„Äç
 	ELSEIF !RAND:6
-		PRINTFORML ÅuÇ¢Ç¡ÇªéqçÏÇËÇ∆Ç©ÅcÅAèÁík%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÅÑ„Å£„ÅùÂ≠ê‰Ωú„Çä„Å®„Åã‚Ä¶„ÄÅÂÜóË´á%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:5
-		PRINTFORML ÅuâΩÇæÇ©éqã{Ç™îMÇ¢ÇÒ%CSTR:åÍîˆÇ≈Ç∑%ÅcÅcÇ±ÇÃÇ‹Ç‹ÇµÇΩÇÁîDêPÇ∑ÇÈÇ©Ç‡ÅcÅv
+		PRINTFORML „Äå‰Ωï„Å†„ÅãÂ≠êÂÆÆ„ÅåÁÜ±„ÅÑ„Çì%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶„Åì„ÅÆ„Åæ„Åæ„Åó„Åü„ÇâÂ¶äÂ®†„Åô„Çã„Åã„ÇÇ‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML Åuéûä‘Ç™Ç»Ç≠Ç»ÇÈÇ‹Ç≈Åcà§ÇµçáÇ¡ÇƒÇ¢%CSTR:åÍîˆìØà”ãÅÇﬁ2%ÅHÅv
+		PRINTFORML „ÄåÊôÇÈñì„Åå„Å™„Åè„Å™„Çã„Åæ„Åß‚Ä¶ÊÑõ„ÅóÂêà„Å£„Å¶„ÅÑ%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%Ôºü„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÇ∏Ç¡Ç∆%CSTR:ìÒêlèÃ%ÇÃâ∑Ç‡ÇËÇä¥Ç∂ÇΩÇ¢Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åö„Å£„Å®%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊ∏©„ÇÇ„Çä„ÇíÊÑü„Åò„Åü„ÅÑ‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÕ%CSTR:ìÒêlèÃ%Ç»ÇµÇ≈ÇÕê∂Ç´ÇÁÇÍÇ»Ç¢ÅcÅv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ%CSTR:‰∫å‰∫∫Áß∞%„Å™„Åó„Åß„ÅØÁîü„Åç„Çâ„Çå„Å™„ÅÑ‚Ä¶„Äç
 	ELSE
-		PRINTFORML Åuç°ì˙Ç‡ëÚéRà§ÇµÇƒ%CSTR:åÍîˆäÛñ]%ÅcÅv
+		PRINTFORML „Äå‰ªäÊó•„ÇÇÊ≤¢Â±±ÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 	ENDIF
-ELSEIF TALENT:èÓïw == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1
 	IF !RAND:10
-		PRINTFORML ÅuÇ”Ç”Ç¡ÅAç°ì˙Ç‡å≥ãC%CSTR:åÍîˆçmíË%%UNICODE(0x2661)%ÅcÅcî¸ñ°ÇµÇªÇ§Åv
+		PRINTFORML „Äå„Åµ„Åµ„Å£„ÄÅ‰ªäÊó•„ÇÇÂÖÉÊ∞ó%CSTR:Ë™ûÂ∞æËÇØÂÆö%%UNICODE(0x2661)%‚Ä¶‚Ä¶ÁæéÂë≥„Åó„Åù„ÅÜ„Äç
 	ELSEIF !RAND:9
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%ÅAÇ≤éwñº%CSTR:åÍîˆä¥é”%%UNICODE(0x2661)%ÅcÅcÇ”Ç”Ç¡%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ„ÅîÊåáÂêç%CSTR:Ë™ûÂ∞æÊÑüË¨ù%%UNICODE(0x2661)%‚Ä¶‚Ä¶„Åµ„Åµ„Å£%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:8
-		PRINTFORML ÅuÇ‡Ç§èÄîıèoóàÇƒ%CSTR:åÍîˆÇ‹Ç∑%Åc%UNICODE(0x2661)%ÅAÇÕÇ‚Ç≠àÍÇ¬Ç…%CSTR:åÍîˆìØà”ãÅÇﬁ2%ÅH%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÇÇ„ÅÜÊ∫ñÂÇôÂá∫Êù•„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶%UNICODE(0x2661)%„ÄÅ„ÅØ„ÇÑ„Åè‰∏Ä„Å§„Å´%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%Ôºü%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuÇ‡Ç§å„ñﬂÇËÇ≈Ç´Ç»Ç¢êgëÃÇ…í≤ã≥Ç≥ÇÍÇƒÅcÅcÇ≈Ç‡à´Ç≠Ç»Ç¢%CSTR:åÍîˆñJÇﬂÇÈ%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÇÇ„ÅÜÂæåÊàª„Çä„Åß„Åç„Å™„ÅÑË∫´‰Ωì„Å´Ë™øÊïô„Åï„Çå„Å¶‚Ä¶‚Ä¶„Åß„ÇÇÊÇ™„Åè„Å™„ÅÑ%CSTR:Ë™ûÂ∞æË§í„ÇÅ„Çã%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:6
-		PRINTFORML ÅuèóÇâıäyí–ÇØÇ…ÇµÇƒÅcÅcçﬂÇ»êl%CSTR:åÍîˆçmíË2%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „ÄåÂ•≥„ÇíÂø´Ê•ΩÊº¨„Åë„Å´„Åó„Å¶‚Ä¶‚Ä¶ÁΩ™„Å™‰∫∫%CSTR:Ë™ûÂ∞æËÇØÂÆö2%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:5
-		PRINTFORML ÅuÇÒÇ¡%UNICODE(0x2661)%ÅcÅcîÊÇÍÇÈÇ‹Ç≈ãCéùÇøÇÊÇ≠%CSTR:åÍîˆìØà”ãÅÇﬁ2%ÅH%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Çì„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶Áñ≤„Çå„Çã„Åæ„ÅßÊ∞óÊåÅ„Å°„Çà„Åè%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%Ôºü%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇÕÇüÇÕÇüÇ¡Åc%UNICODE(0x2661)%ÅcÅcÇÕÅAÇÕÇ‚Ç≠%CSTR:ìÒêlèÃ%ÇÃÇ≈ãCéùÇøÇÊÇ≠Çµ%CSTR:åÍîˆñΩóﬂã≠%Ç¡%UNICODE(0x2661)%ÅIÅv
+		PRINTFORML „Äå„ÅØ„ÅÅ„ÅØ„ÅÅ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶‚Ä¶„ÅØ„ÄÅ„ÅØ„ÇÑ„Åè%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„ÅßÊ∞óÊåÅ„Å°„Çà„Åè„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%„Å£%UNICODE(0x2661)%ÔºÅ„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÇ®îÊÇÍÇ›ÇΩÇ¢%CSTR:åÍîˆñ‚Ç§%%UNICODE(0x2661)%ÅA%CSTR:àÍêlèÃ%Ç™É}ÉbÉTÅ[ÉWÇµÇƒÇ†Ç∞%CSTR:åÍîˆëóÇÈ%%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÅäÁñ≤„Çå„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%%UNICODE(0x2661)%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„Åå„Éû„ÉÉ„Çµ„Éº„Ç∏„Åó„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇ‡Ç§Ç±ÇÒÇ»Ç…ñcÇÁÇ‹ÇπÇƒÅc%UNICODE(0x2661)%ÅcÉtÉtÉbÅAç°ãCéùÇøÇÊÇ≠%CSTR:åÍîˆñ‚Ç§2%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÇÇ„ÅÜ„Åì„Çì„Å™„Å´ËÜ®„Çâ„Åæ„Åõ„Å¶‚Ä¶%UNICODE(0x2661)%‚Ä¶„Éï„Éï„ÉÉ„ÄÅ‰ªäÊ∞óÊåÅ„Å°„Çà„Åè%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSE
-		PRINTFORML Åu%CSTR:åÍîˆîΩâû%Åc%UNICODE(0x2661)%ÅAç°ì˙Ç‡Ç∑ÇÈÇÒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶%UNICODE(0x2661)%„ÄÅ‰ªäÊó•„ÇÇ„Åô„Çã„Çì%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORML ÅuÅcÅcÇ¡ÅcÅcÅcÇ∑ÇÈ%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆñ‚Ç§%ÅcÅcÅHÅv
+		PRINTFORML „Äå‚Ä¶‚Ä¶„Å£‚Ä¶‚Ä¶‚Ä¶„Åô„Çã%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶‚Ä¶Ôºü„Äç
 	ELSEIF !RAND:9
-		PRINTFORML Åuã}Ç…ïûÇíEÇ™ÇªÇ§Ç∆ÇµÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%ÅIÅcÇ‹ÇæípÇ∏Ç©ÇµÅcÇ¡ÅcÅv
+		PRINTFORML „ÄåÊÄ•„Å´Êúç„ÇíËÑ±„Åå„Åù„ÅÜ„Å®„Åó„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%ÔºÅ‚Ä¶„Åæ„Å†ÊÅ•„Åö„Åã„Åó‚Ä¶„Å£‚Ä¶„Äç
 	ELSEIF !RAND:8
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç‡ï®çDÇ´%CSTR:åÍîˆçmíË%ÅAÇªÇÒÇ»Ç…%CSTR:àÍêlèÃ%Ç™ó«Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÇÇÁâ©Â•Ω„Åç%CSTR:Ë™ûÂ∞æËÇØÂÆö%„ÄÅ„Åù„Çì„Å™„Å´%CSTR:‰∏Ä‰∫∫Áß∞%„ÅåËâØ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuâΩÇæÇ©ÅcêgëÃÇ™ÅcîMÇ≠ÅcÅcÅv
+		PRINTFORML „Äå‰Ωï„Å†„Åã‚Ä¶Ë∫´‰Ωì„Åå‚Ä¶ÁÜ±„Åè‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:6
-		PRINTFORML ÅuÇÕÅAåÉÇµÇ¢ÇÃÇÕÅAÇ‹ÇæÅcÅcÅv
+		PRINTFORML „Äå„ÅØ„ÄÅÊøÄ„Åó„ÅÑ„ÅÆ„ÅØ„ÄÅ„Åæ„Å†‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:5
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Åcó]ÇËí…Ç¢ÇÃÇÕÇµÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%‚Ä¶‰Ωô„ÇäÁóõ„ÅÑ„ÅÆ„ÅØ„Åó„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÅcÇ¡ÅcÅc%CSTR:åÍîˆé”çﬂ%ÅcÇ‹ÇæäµÇÍÇƒÇ»Ç≠ÇƒÅcÅcÅv
+		PRINTFORML „Äå‚Ä¶„Å£‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æË¨ùÁΩ™%‚Ä¶„Åæ„Å†ÊÖ£„Çå„Å¶„Å™„Åè„Å¶‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:3
-		PRINTFORML Åuç°ì˙Ç‡Ç∑ÇÈÇÃ%CSTR:åÍîˆñ‚Ç§%ÅHÅcÇ®éËè_ÇÁÇ©Ç…Ç®äËÇ¢%CSTR:åÍîˆÇ®äËÇ¢%Åv
+		PRINTFORML „Äå‰ªäÊó•„ÇÇ„Åô„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶„ÅäÊâãÊüî„Çâ„Åã„Å´„ÅäÈ°ò„ÅÑ%CSTR:Ë™ûÂ∞æ„ÅäÈ°ò„ÅÑ%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÅcÅcì˙ÅXÇÃçsà◊Ç≈êgëÃÇ™èáâûÇµÇƒÇÈãCÇ™%CSTR:åÍîˆñ‚Ç§2%Åv
+		PRINTFORML „Äå‚Ä¶‚Ä¶Êó•„ÄÖ„ÅÆË°åÁÇ∫„ÅßË∫´‰Ωì„ÅåÈ†ÜÂøú„Åó„Å¶„ÇãÊ∞ó„Åå%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%„Äç
 	ELSE
-		PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÅcÇªÇÒÇ»Ç…ñ£óÕìI%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì‚Ä¶„Åù„Çì„Å™„Å´È≠ÖÂäõÁöÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü„Äç
 	ENDIF
-ELSEIF TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORML ÅuÇÕÇüÅcÇÕÇüÅcÅcêgëÃÇ™ÅcÅc·uÇ¢ÇƒÅcÅc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÅØ„ÅÅ‚Ä¶„ÅØ„ÅÅ‚Ä¶‚Ä¶Ë∫´‰Ωì„Åå‚Ä¶‚Ä¶Áñº„ÅÑ„Å¶‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇ±ÇÒÇ»êgëÃÇ…ÇµÇΩÇÃÇÕ%CSTR:ìÒêlèÃ%ÇÃÇπÇ¢Åcê”îCÇ∆Ç¡%CSTR:åÍîˆñΩóﬂ%ÅcÅc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åì„Çì„Å™Ë∫´‰Ωì„Å´„Åó„Åü„ÅÆ„ÅØ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åõ„ÅÑ‚Ä¶Ë≤¨‰ªª„Å®„Å£%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÇ‹ÇΩÅHÅcÅcÅcÅc%CSTR:åÍîˆYES%ÅcÇ¢Ç¢%CSTR:åÍîˆãñâ¬%ÅcÅc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åæ„ÅüÔºü‚Ä¶‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æYES%‚Ä¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇÒÇ¡ÅcÅcÇ‹ÇΩ%CSTR:àÍêlèÃ%ÇÃêgëÃÇòMÇ‘ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅH%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Çì„Å£‚Ä¶‚Ä¶„Åæ„Åü%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„ÇíÂºÑ„Å∂„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü%UNICODE(0x2661)%„Äç
 	ELSE
-		PRINTFORML ÅuÇ†Ç¡ÅcÅcç°ì˙ÇÕÇµÇƒÇ≠ÇÍÇÈÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅcÅcäÇµÇ¢%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÅÇ„Å£‚Ä¶‚Ä¶‰ªäÊó•„ÅØ„Åó„Å¶„Åè„Çå„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶‚Ä¶Â¨â„Åó„ÅÑ%UNICODE(0x2661)%„Äç
 	ENDIF
-ELSEIF TALENT:î∆Ç≥ÇÍ == 1
+ELSEIF TALENT:ÁäØ„Åï„Çå == 1
 	IF !RAND:5
-		PRINTFORML ÅuÅcçìÇ¢ÅcÇ±ÇÒÇ»ÇÃÅcÅcÅv
+		PRINTFORML „Äå‚Ä¶ÈÖ∑„ÅÑ‚Ä¶„Åì„Çì„Å™„ÅÆ‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÅcÅcÅcÇ¡Åv
+		PRINTFORML „Äå‚Ä¶‚Ä¶‚Ä¶„Å£„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÇ±ÇÍà»è„ÇÕé~Çﬂ%CSTR:åÍîˆñΩóﬂã≠%Ç¡Åv
+		PRINTFORML „Äå„Åì„Çå‰ª•‰∏ä„ÅØÊ≠¢„ÇÅ%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%„Å£„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇ§Ç£ÅcÅcÇ‡Ç§ÉCÉÑ%CSTR:åÍîˆãëî€%Åv
+		PRINTFORML „Äå„ÅÜ„ÅÖ‚Ä¶‚Ä¶„ÇÇ„ÅÜ„Ç§„É§%CSTR:Ë™ûÂ∞æÊãíÂê¶%„Äç
 	ELSE
-		PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÕÅcÅcÅv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ‚Ä¶‚Ä¶„Äç
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORML ÅuÅcÅcÇ†Ç‹ÇËÇ±Ç§Ç¢Ç§Ç±Ç∆ÇÕÉ_ÉÅ%CSTR:åÍîˆãëî€%ÅcÅv
+		PRINTFORML „Äå‚Ä¶‚Ä¶„ÅÇ„Åæ„Çä„Åì„ÅÜ„ÅÑ„ÅÜ„Åì„Å®„ÅØ„ÉÄ„É°%CSTR:Ë™ûÂ∞æÊãíÂê¶%‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÅcÅcÇπÇﬂÇƒÅcí…Ç¢ÇÃÇÕé~Çﬂ%CSTR:åÍîˆñΩóﬂ%ÅcÅv
+		PRINTFORML „Äå‚Ä¶‚Ä¶„Åõ„ÇÅ„Å¶‚Ä¶Áóõ„ÅÑ„ÅÆ„ÅØÊ≠¢„ÇÅ%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%‚Ä¶„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÅcÅcÅcÇ¢Ç¬Ç‹Ç≈Ç∑ÇÈ%CSTR:åÍîˆçsà◊%Åv
+		PRINTFORML „Äå‚Ä¶‚Ä¶‚Ä¶„ÅÑ„Å§„Åæ„Åß„Åô„Çã%CSTR:Ë™ûÂ∞æË°åÁÇ∫%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÅcÅcÅcÅv
+		PRINTFORML „Äå‚Ä¶‚Ä¶‚Ä¶„Äç
 	ELSE
-		PRINTFORML ÅuÅcñ≥óùñÓóùÇµÇΩÇÁì{%CSTR:åÍîˆëŒâû%Åv
+		PRINTFORML „Äå‚Ä¶ÁÑ°ÁêÜÁü¢ÁêÜ„Åó„Åü„ÇâÊÄí%CSTR:Ë™ûÂ∞æÂØæÂøú%„Äç
 	ENDIF
 ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
-;í≤ã≥èIóπÅ@
+;Ë™øÊïôÁµÇ‰∫Ü„ÄÄ
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK3
 
 
-IF TALENT:åãç•çœÇ› == 1 
-	IF   TALENT:ÇmÇsÇk == 1
-		IF TALENT:êSêå == 1
+IF TALENT:ÁµêÂ©öÊ∏à„Åø == 1 
+	IF   TALENT:ÔºÆÔº¥Ôº¨ == 1
+		IF TALENT:ÂøÉÈÖî == 1
 			IF !RAND:10
-				PRINTFORML ÅuÇÒÇÆÇ¡ÅcÇ∂Ç„ÇÈÇÈÇ¡%UNICODE(0x2661)%ÅcÅcÇÒÇÒÅcÇÕÇüÇ¡Åc%UNICODE(0x2661)%ÅcÇ±ÇÍÇ≈„YóÌÇ…Ç»%CSTR:åÍîˆÇ‹ÇµÇΩ%Åc%CSTR:åÍîˆîΩâû%ÅcÇ‡Ç§Ç±ÇÒÇ»Ç…Ç†Ç”ÇÍÇƒÇ•%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Çì„Åê„Å£‚Ä¶„Åò„ÇÖ„Çã„Çã„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶„Çì„Çì‚Ä¶„ÅØ„ÅÅ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶„Åì„Çå„ÅßÁ∂∫È∫ó„Å´„Å™%CSTR:Ë™ûÂ∞æ„Åæ„Åó„Åü%‚Ä¶%CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶„ÇÇ„ÅÜ„Åì„Çì„Å™„Å´„ÅÇ„Åµ„Çå„Å¶„Åá%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:9
-				PRINTFORML ÅuÅwíNÇÃÇ™àÍî‘î¸ñ°ÇµÇ¢ÅxÅcÅHÅcÅc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅcìñëR%CSTR:ìÒêlèÃ%ÇÃ%CSTR:åÍîˆçmíË2%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÄéË™∞„ÅÆ„Åå‰∏ÄÁï™ÁæéÂë≥„Åó„ÅÑ„Äè‚Ä¶Ôºü‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%‚Ä¶ÂΩìÁÑ∂%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ%CSTR:Ë™ûÂ∞æËÇØÂÆö2%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML Åuç°ì˙ÇÕÇ±ÇÍÇ≈èIÇÌÇËÇ›ÇΩÇ¢%CSTR:åÍîˆçmíË%ÅcÅc%CSTR:ìÒêlèÃ%Ç‡Ç®îÊÇÍól%CSTR:åÍîˆÇ≈Ç∑%Åcë“Ç¡Çƒ%CSTR:åÍîˆÇ‹Ç∑%ÅcÇ†ÇÒÇ‹ÇËë“ÇΩÇπÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰ªäÊó•„ÅØ„Åì„Çå„ÅßÁµÇ„Çè„Çä„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÇÇ„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶ÂæÖ„Å£„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶„ÅÇ„Çì„Åæ„ÇäÂæÖ„Åü„Åõ„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML Åuëßî≤Ç´Ç‡ëÂéñ%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%ÅcÇ‡ÇøÇÎÇÒÇ±Ç¡ÇøÇ‡Åcó≠Ç‹Ç¡ÇΩÇÁíºÇÆÇ…%CSTR:àÍêlèÃ%Ç…åæÇ¡Çƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÊÅØÊäú„Åç„ÇÇÂ§ß‰∫ã%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%‚Ä¶„ÇÇ„Å°„Çç„Çì„Åì„Å£„Å°„ÇÇ‚Ä¶Ê∫ú„Åæ„Å£„Åü„ÇâÁõ¥„Åê„Å´%CSTR:‰∏Ä‰∫∫Áß∞%„Å´Ë®Ä„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML ÅuÇ◊Ç¡Ç∆Ç◊Ç∆Çß%UNICODE(0x2661)%ÅcÇ∑Ç≤Ç≠ñûÇΩÇ≥ÇÍÇΩãCï™%CSTR:åÍîˆÇ≈Ç∑%ÅA%CSTR:àÍêlèÃ%%CSTR:åÍîˆä¥é”%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åπ„Å£„Å®„Åπ„Å®„Åâ%UNICODE(0x2661)%‚Ä¶„Åô„Åî„ÅèÊ∫Ä„Åü„Åï„Çå„ÅüÊ∞óÂàÜ%CSTR:Ë™ûÂ∞æ„Åß„Åô%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%%CSTR:Ë™ûÂ∞æÊÑüË¨ù%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML ÅuÇ±ÇÍÇ©ÇÁÇ‡ïvÇ∂Ç·Ç»Ç≠Çƒ%UNICODE(0x2661)%Åc%CSTR:ìÒêlèÃ%ÇÃèóÇ≈Ç†ÇËë±ÇØÇΩÇ¢%CSTR:åÍîˆÇ≈Ç∑2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åì„Çå„Åã„Çâ„ÇÇÂ§´„Åò„ÇÉ„Å™„Åè„Å¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ•≥„Åß„ÅÇ„ÇäÁ∂ö„Åë„Åü„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇ±Ç§Ç‚Ç¡Çƒ%CSTR:ìÒêlèÃ%ÇÃó~ñ]ÇéÛÇØé~ÇﬂÇÈÇÃÇ™Åc%CSTR:àÍêlèÃ%ÇÃàÍî‘ëÂéñÇ»édéñ%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åì„ÅÜ„ÇÑ„Å£„Å¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊ¨≤Êúõ„ÇíÂèó„ÅëÊ≠¢„ÇÅ„Çã„ÅÆ„Åå‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ‰∏ÄÁï™Â§ß‰∫ã„Å™‰ªï‰∫ã%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML Åuñûë´ÇµÇƒñ·Ç¶ÇΩÇÊÇ§%CSTR:åÍîˆçmíË%Åc%CSTR:åÍîˆî˜èŒ%ÅAéüÇ‡ä˙ë“ÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÊ∫ÄË∂≥„Åó„Å¶Ë≤∞„Åà„Åü„Çà„ÅÜ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%„ÄÅÊ¨°„ÇÇÊúüÂæÖ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇégÇ¢ÇΩÇ¢éûÇÕÅAÇ¢Ç¬Ç≈Ç‡åƒÇÒÇ≈%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„Çí‰Ωø„ÅÑ„Åü„ÅÑÊôÇ„ÅØ„ÄÅ„ÅÑ„Å§„Åß„ÇÇÂëº„Çì„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%ÇÃ%CSTR:åÍîˆíöîJ%ñÇ…óßÇƒÇƒÅcÅc%CSTR:àÍêlèÃ%çKÇπ%CSTR:åÍîˆÇ≈Ç∑2%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ%CSTR:Ë™ûÂ∞æ‰∏ÅÂØß%ÂΩπ„Å´Á´ã„Å¶„Å¶‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%Âπ∏„Åõ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%%UNICODE(0x2661)%„Äç
 			ENDIF
-		ELSEIF TALENT:à§êl == 1
+		ELSEIF TALENT:ÊÑõ‰∫∫ == 1
 			IF !RAND:10
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç∆Ç∏Ç¡Ç∆àÍèèÇ…ãèÇΩÇ¢Åc%UNICODE(0x2661)%ÅcÅc%CSTR:åÍîˆYES%ÅAÇªÇÃéûÇÕÇ‡Ç¡Ç∆åÉÇµÇ≠à§ÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å®„Åö„Å£„Å®‰∏ÄÁ∑í„Å´Â±Ö„Åü„ÅÑ‚Ä¶%UNICODE(0x2661)%‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æYES%„ÄÅ„Åù„ÅÆÊôÇ„ÅØ„ÇÇ„Å£„Å®ÊøÄ„Åó„ÅèÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:9
-				PRINTFORML ÅuÇ±ÇÍÇ©ÇÁÇ‡ëºÇÃíNÇ≈Ç‡Ç»Ç¢%CSTR:ìÒêlèÃ%ÇÃèóÇ≈Ç¢Ç≥ÇπÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åì„Çå„Åã„Çâ„ÇÇ‰ªñ„ÅÆË™∞„Åß„ÇÇ„Å™„ÅÑ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ•≥„Åß„ÅÑ„Åï„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç…Ç‡Ç¡Ç∆ãCéùÇøÇÊÇ≠Ç»Ç¡ÇƒÇ‡ÇÁÇ§à◊Ç…ÅA%CSTR:àÍêlèÃ%Ç‡Ç¡Ç∆ï◊ã≠ÇµÇƒ%CSTR:ìÒêlèÃ%çDÇ›Ç…Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å´„ÇÇ„Å£„Å®Ê∞óÊåÅ„Å°„Çà„Åè„Å™„Å£„Å¶„ÇÇ„Çâ„ÅÜÁÇ∫„Å´„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇ„Å£„Å®ÂãâÂº∑„Åó„Å¶%CSTR:‰∫å‰∫∫Áß∞%Â•Ω„Åø„Å´‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML ÅuêgëÃÇ∂Ç„Ç§%CSTR:ìÒêlèÃ%ÇÃÇ≈ÉhÉçÉhÉçÇ…Ç»Ç¡ÇƒÇ•%UNICODE(0x2661)%ÅcÇ±ÇÃìıÇ¢ïvÇ…ãCÇ√Ç©ÇÍÇΩÇÁÇüÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåË∫´‰Ωì„Åò„ÇÖ„ÅÜ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åß„Éâ„É≠„Éâ„É≠„Å´„Å™„Å£„Å¶„Åá%UNICODE(0x2661)%‚Ä¶„Åì„ÅÆÂåÇ„ÅÑÂ§´„Å´Ê∞ó„Å•„Åã„Çå„Åü„Çâ„ÅÅ‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML ÅuÉLÉXÅcÇµÇƒÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅcÅcÇÒÇ¡ÅcÇøÇ„Ç¡Åc%UNICODE(0x2661)%ÅcÅcÇÕÇüÅcÇÒÅcÇ‡Ç¡Ç∆ÇßÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Ç≠„Çπ‚Ä¶„Åó„Å¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶‚Ä¶„Çì„Å£‚Ä¶„Å°„ÇÖ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶‚Ä¶„ÅØ„ÅÅ‚Ä¶„Çì‚Ä¶„ÇÇ„Å£„Å®„Åâ‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML Åuñæì˙Ç‡Ç®édéñäÊí£Ç¡Çƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%ÅcÅcó≠Ç‹Ç¡ÇΩÇÁÇüÅc%CSTR:àÍêlèÃ%Ç™Ç¢Ç≠ÇÁÇ≈Ç‡ëäéËÇ%CSTR:åÍîˆñ‚Ç§2%%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÊòéÊó•„ÇÇ„Åä‰ªï‰∫ãÈ†ëÂºµ„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%‚Ä¶‚Ä¶Ê∫ú„Åæ„Å£„Åü„Çâ„ÅÅ‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Åå„ÅÑ„Åè„Çâ„Åß„ÇÇÁõ∏Êâã„Çí%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇ‹Çæéûä‘Ç™Ç†ÇÈÇ›ÇΩÇ¢%CSTR:åÍîˆâûìö%ÅcÅc%CSTR:ìÒêlèÃ%ÅAÇ«Ç§Ç∑ÇÈ%CSTR:åÍîˆçsà◊%ÅHÅcÅc%CSTR:åÍîˆî˜èŒ%Åcï∑Ç≠Ç‹Ç≈Ç‡Ç»Ç©Ç¡ÇΩ%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åæ„Å†ÊôÇÈñì„Åå„ÅÇ„Çã„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î%‚Ä¶‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ„Å©„ÅÜ„Åô„Çã%CSTR:Ë™ûÂ∞æË°åÁÇ∫%Ôºü‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶ËÅû„Åè„Åæ„Åß„ÇÇ„Å™„Åã„Å£„Åü%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÇ≈%CSTR:ìÒêlèÃ%Ç™ãCéùÇøÇÊÇ≠Ç»Ç¡ÇƒÇ≠ÇÍÇΩÇÃÇ»ÇÁäÇµÇ¢%CSTR:åÍîˆÇ≈Ç∑2%ÅcÇªÇÍÇ…%CSTR:àÍêlèÃ%Ç‡ãCéùÇøÇÊÇ©Ç¡ÇΩ%CSTR:åÍîˆñJÇﬂÇÈ%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„Åß%CSTR:‰∫å‰∫∫Áß∞%„ÅåÊ∞óÊåÅ„Å°„Çà„Åè„Å™„Å£„Å¶„Åè„Çå„Åü„ÅÆ„Å™„ÇâÂ¨â„Åó„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%‚Ä¶„Åù„Çå„Å´%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇÊ∞óÊåÅ„Å°„Çà„Åã„Å£„Åü%CSTR:Ë™ûÂ∞æË§í„ÇÅ„Çã%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuéüÇ‡ÅAëäéËÇÕ%CSTR:àÍêlèÃ%Ç…Ç≥ÇπÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÊ¨°„ÇÇ„ÄÅÁõ∏Êâã„ÅØ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´„Åï„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML ÅuÇ±ÇÒÇ»Ç…à§ÇµÇƒÇ‡ÇÁÇ¶ÇÈÇ»ÇÒÇƒÇ•Åc%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%ÅcÇ±ÇÒÇ»Ç…çKÇπÇ»ÇÃèâÇﬂÇƒ%CSTR:åÍîˆÇ≈Ç∑%ÅcÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åì„Çì„Å™„Å´ÊÑõ„Åó„Å¶„ÇÇ„Çâ„Åà„Çã„Å™„Çì„Å¶„Åá‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶„Åì„Çì„Å™„Å´Âπ∏„Åõ„Å™„ÅÆÂàù„ÇÅ„Å¶%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 			ENDIF
-		ELSEIF TALENT:èÓïw == 1
+		ELSEIF TALENT:ÊÉÖÂ©¶ == 1
 			IF !RAND:10
-				PRINTFORML ÅuÇÒÇÕÇüÇ¡ÅcÇ‡Ç¡Ç∆ÅcÇ‡Ç¡Ç∆ÇßÅcÅcñ≈íÉãÍíÉÇ…ÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%ÅcõsÇÒÇ∂Ç·Ç§Ç‹Ç≈éÌïtÇØÇµ%CSTR:åÍîˆñΩóﬂ%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Çì„ÅØ„ÅÅ„Å£‚Ä¶„ÇÇ„Å£„Å®‚Ä¶„ÇÇ„Å£„Å®„Åâ‚Ä¶‚Ä¶ÊªÖËå∂Ëã¶Ëå∂„Å´„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%‚Ä¶Â≠ï„Çì„Åò„ÇÉ„ÅÜ„Åæ„ÅßÁ®Æ‰ªò„Åë„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:9
-				PRINTFORML ÅuãCéùÇøÇ¢Ç¢ÅcÇ¡%UNICODE(0x2661)%ÅcÇæÇ¢Ç∑Ç´Ç°%UNICODE(0x2661)%ÅcÇøÇ„Ç¡ÅcÇÒÇ¡%CSTR:ìÒêlèÃ%%UNICODE(0x2661)%ÅcÅv
+				PRINTFORML „ÄåÊ∞óÊåÅ„Å°„ÅÑ„ÅÑ‚Ä¶„Å£%UNICODE(0x2661)%‚Ä¶„Å†„ÅÑ„Åô„Åç„ÅÉ%UNICODE(0x2661)%‚Ä¶„Å°„ÇÖ„Å£‚Ä¶„Çì„Å£%CSTR:‰∫å‰∫∫Áß∞%%UNICODE(0x2661)%‚Ä¶„Äç
 			ELSEIF !RAND:8
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç…åÉÇµÇ≠ãÅÇﬂÇÁÇÍÇÈìxÇ…ÅAéqã{Ç™·uÇ¢ÇƒõsÇ›ÇΩÇ≠Ç»ÇÈÇÒ%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å´ÊøÄ„Åó„ÅèÊ±Ç„ÇÅ„Çâ„Çå„ÇãÂ∫¶„Å´„ÄÅÂ≠êÂÆÆ„ÅåÁñº„ÅÑ„Å¶Â≠ï„Åø„Åü„Åè„Å™„Çã„Çì%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML ÅuÇ±ÇÒÇ»Ç…ê¶Ç¢âıäyÇ…êgëÃÇ™äµÇÍÇΩÇÁÇü%UNICODE(0x2661)%ÅcÅc%CSTR:ìÒêlèÃ%à»äOÇÃíjÇ∂Ç·çKÇπÇ…Ç»ÇÍÇ»Ç¢%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åì„Çì„Å™„Å´ÂáÑ„ÅÑÂø´Ê•Ω„Å´Ë∫´‰Ωì„ÅåÊÖ£„Çå„Åü„Çâ„ÅÅ%UNICODE(0x2661)%‚Ä¶‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%‰ª•Â§ñ„ÅÆÁî∑„Åò„ÇÉÂπ∏„Åõ„Å´„Å™„Çå„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML ÅuÇ”ÇüÇ¡%UNICODE(0x2661)%ÅcÅcÇÕÇüÇ†Ç¡Åc%UNICODE(0x2661)%ÅcÇÒÇ¡%UNICODE(0x2661)%ÅcÅcÅcãCéùÇøÇÊÇ∑Ç¨ÇƒÇ«Ç§Ç…Ç©Ç»ÇËÇªÇ§%CSTR:åÍîˆãëî€%Ç¡Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åµ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶„ÅØ„ÅÅ„ÅÇ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶„Çì„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åô„Åé„Å¶„Å©„ÅÜ„Å´„Åã„Å™„Çä„Åù„ÅÜ%CSTR:Ë™ûÂ∞æÊãíÂê¶%„Å£‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML ÅuéüÇÕÇ«ÇÒÇ»ÉvÉåÉCÇµÇƒ%CSTR:åÍîˆçsà◊2%ÅHÅA%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅcïvÇ…ñ£ÇπÇ¬ÇØÇƒ%CSTR:åÍîˆçsà◊2%%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÊ¨°„ÅØ„Å©„Çì„Å™„Éó„É¨„Ç§„Åó„Å¶%CSTR:Ë™ûÂ∞æË°åÁÇ∫2%Ôºü„ÄÅ%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%‚Ä¶Â§´„Å´È≠Ö„Åõ„Å§„Åë„Å¶%CSTR:Ë™ûÂ∞æË°åÁÇ∫2%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇ«Ç§%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc%CSTR:ìÒêlèÃ%ÇÃêQéÊÇ¡ÇΩèóÇÃñ°Åc%UNICODE(0x2661)%ÅcÇøÇ·ÇÒÇ∆î¸ñ°ÇµÇ≠Ç»Ç¡Çƒ%CSTR:åÍîˆñ‚Ç§6%ÅHÅcÇ†Ç†ÇüÇÒÇ¡%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Å©„ÅÜ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂØùÂèñ„Å£„ÅüÂ•≥„ÅÆÂë≥‚Ä¶%UNICODE(0x2661)%‚Ä¶„Å°„ÇÉ„Çì„Å®ÁæéÂë≥„Åó„Åè„Å™„Å£„Å¶%CSTR:Ë™ûÂ∞æÂïè„ÅÜ6%Ôºü‚Ä¶„ÅÇ„ÅÇ„ÅÅ„Çì„Å£%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêSÇ∆êgëÃÇüÅc%UNICODE(0x2661)%ÅcÇ«ÇÒÇ«ÇÒ%CSTR:ìÒêlèÃ%ÇÃÇΩÇﬂÇÃéìÇ…Ç»Ç¡ÇƒÇ¢Ç≠Ç£%UNICODE(0x2661)%ÅcÅcãtÇÁÇ¶Ç»Ç¢Ç°Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆÂøÉ„Å®Ë∫´‰Ωì„ÅÅ‚Ä¶%UNICODE(0x2661)%‚Ä¶„Å©„Çì„Å©„Çì%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åü„ÇÅ„ÅÆÈõå„Å´„Å™„Å£„Å¶„ÅÑ„Åè„ÅÖ%UNICODE(0x2661)%‚Ä¶‚Ä¶ÈÄÜ„Çâ„Åà„Å™„ÅÑ„ÅÉ‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÇ‡Ç§èIÇÌÇË%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅcÇ‡Ç¡Ç∆ÇΩÇ≠Ç≥ÇÒÅcî∆ÇµÇƒó~ÇµÇ¢ÇÃÇ…Ç°ÅcÅc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÇÇ„ÅÜÁµÇ„Çè„Çä%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶„ÇÇ„Å£„Å®„Åü„Åè„Åï„Çì‚Ä¶ÁäØ„Åó„Å¶Ê¨≤„Åó„ÅÑ„ÅÆ„Å´„ÅÉ‚Ä¶‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÇ≈ñûë´%CSTR:åÍîˆñ‚Ç§4%ÅHÅcÅcÅc%CSTR:åÍîˆëäí∆%%UNICODE(0x2661)%ÅA%CSTR:åÍîˆä¥é”%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„ÅßÊ∫ÄË∂≥%CSTR:Ë™ûÂ∞æÂïè„ÅÜ4%Ôºü‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÁõ∏Êßå%%UNICODE(0x2661)%„ÄÅ%CSTR:Ë™ûÂ∞æÊÑüË¨ù%%UNICODE(0x2661)%„Äç
 			ENDIF
-		ELSEIF TALENT:çáà” == 1
+		ELSEIF TALENT:ÂêàÊÑè == 1
 			IF !RAND:10
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç‡ãCéùÇøÇÊÇ©Ç¡ÇΩÇ›ÇΩÇ¢%CSTR:åÍîˆçmíË%ÅcÅcÇÊÇ©Ç¡ÇΩ%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÇÇÊ∞óÊåÅ„Å°„Çà„Åã„Å£„Åü„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶‚Ä¶„Çà„Åã„Å£„Åü%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:9
-				PRINTFORML Åuè„éiÇ∆ïÇãCÇµÇƒêQéÊÇÁÇÍÇøÇ·Ç¡ÇΩÉCÉPÉiÉCä÷åW%UNICODE(0x2661)%ÅcÅcÇ∆Ç¡ÇƒÇ‡îwìøìI%CSTR:åÍîˆçmíË%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‰∏äÂè∏„Å®ÊµÆÊ∞ó„Åó„Å¶ÂØùÂèñ„Çâ„Çå„Å°„ÇÉ„Å£„Åü„Ç§„Ç±„Éä„Ç§Èñ¢‰øÇ%UNICODE(0x2661)%‚Ä¶‚Ä¶„Å®„Å£„Å¶„ÇÇËÉåÂæ≥ÁöÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:8
-				PRINTFORML ÅuÇ¢ÇØÇ»Ç¢éñÇ»ÇÃÇÕÇÌÇ©Ç¡ÇƒÇÈ%UNICODE(0x2661)%ÅcÅcÇ≈Ç‡â‰ñùÇ∑ÇÈÇ»ÇÒÇƒñ≥óù%CSTR:åÍîˆãëî€%Ç¡%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÅÑ„Åë„Å™„ÅÑ‰∫ã„Å™„ÅÆ„ÅØ„Çè„Åã„Å£„Å¶„Çã%UNICODE(0x2661)%‚Ä¶‚Ä¶„Åß„ÇÇÊàëÊÖ¢„Åô„Çã„Å™„Çì„Å¶ÁÑ°ÁêÜ%CSTR:Ë™ûÂ∞æÊãíÂê¶%„Å£%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:7
-				PRINTFORML Åu%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅAç°ìxÇ∑ÇÈéûÇÕÇ‡Ç¡Ç∆ÇΩÇ≠Ç≥ÇÒãCéùÇøó«Ç≠Ç»%CSTR:åÍîˆë£êi%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„ÄÅ‰ªäÂ∫¶„Åô„ÇãÊôÇ„ÅØ„ÇÇ„Å£„Å®„Åü„Åè„Åï„ÇìÊ∞óÊåÅ„Å°ËâØ„Åè„Å™%CSTR:Ë™ûÂ∞æ‰øÉÈÄ≤%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:6
-				PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÇ≈ñûë´ÇµÇƒãCéùÇøÇÊÇ≠Ç»ÇÍÇΩ%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc%CSTR:åÍîˆYES%Ç¡%CSTR:åÍîˆä¥é”%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„ÅßÊ∫ÄË∂≥„Åó„Å¶Ê∞óÊåÅ„Å°„Çà„Åè„Å™„Çå„Åü%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶%CSTR:Ë™ûÂ∞æYES%„Å£%CSTR:Ë™ûÂ∞æÊÑüË¨ù%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:5
-				PRINTFORML Åuïvà»äOÇÃíjÇÃêlÇ∆Ç±ÇÒÇ»Ç”Ç§Ç…ó]âCÇ…êZÇÈÇ»ÇÒÇƒÅc%CSTR:àÍêlèÃ%Ç‡Ç§à¯Ç´ï‘ÇπÇ»Ç¢%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÂ§´‰ª•Â§ñ„ÅÆÁî∑„ÅÆ‰∫∫„Å®„Åì„Çì„Å™„Åµ„ÅÜ„Å´‰ΩôÈüª„Å´Êµ∏„Çã„Å™„Çì„Å¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇ„ÅÜÂºï„ÅçËøî„Åõ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML ÅuÇ†ÇÕÇüÇ¡Åc%UNICODE(0x2661)%Åcç°ì˙Ç‡Ç±ÇÒÇ»Ç…Ç°%UNICODE(0x2661)%ÅcÅv
+				PRINTFORML „Äå„ÅÇ„ÅØ„ÅÅ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶‰ªäÊó•„ÇÇ„Åì„Çì„Å™„Å´„ÅÉ%UNICODE(0x2661)%‚Ä¶„Äç
 			ELSEIF !RAND:3
-				PRINTFORML ÅuÇ®îÊÇÍól%CSTR:åÍîˆâûìö%%UNICODE(0x2661)%ÅcÅcñæì˙Ç‡êlç»ÇêQéÊÇ¡Çƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æÂøúÁ≠î%%UNICODE(0x2661)%‚Ä¶‚Ä¶ÊòéÊó•„ÇÇ‰∫∫Â¶ª„ÇíÂØùÂèñ„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÇ±ÇÒÇ«Ç¢Ç¡ÇœÇ¢‰Sì‡Ç…éÀê∏Ç≥ÇÍÇΩÇÁÇüÅc%UNICODE(0x2661)%ÅcïvÇ∂Ç·Ç»Ç≠Çƒ%CSTR:ìÒêlèÃ%ÇÃéqãüõsÇÒÇ∂Ç·Ç§Ç£Ç£Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå„Åì„Çì„Å©„ÅÑ„Å£„Å±„ÅÑËÜ£ÂÜÖ„Å´Â∞ÑÁ≤æ„Åï„Çå„Åü„Çâ„ÅÅ‚Ä¶%UNICODE(0x2661)%‚Ä¶Â§´„Åò„ÇÉ„Å™„Åè„Å¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ≠ê‰æõÂ≠ï„Çì„Åò„ÇÉ„ÅÜ„ÅÖ„ÅÖ‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSE
-				PRINTFORML ÅuéüÇÕïvÇ…ñ£ÇπÇ¬ÇØÇ»Ç™ÇÁÅcÅH%CSTR:åÍîˆãëê‚%ÅIÅcÇªÇÍÇæÇØÇÕãñÇµ%CSTR:åÍîˆñΩóﬂã≠%ÇŸÇ©ÇÃéñÇÕâΩÇ≈Ç‡%CSTR:åÍîˆÇ®äËÇ¢%ÅcÇæÇ©ÇÁÇ¡ÅIÅv
+				PRINTFORML „ÄåÊ¨°„ÅØÂ§´„Å´È≠Ö„Åõ„Å§„Åë„Å™„Åå„Çâ‚Ä¶Ôºü%CSTR:Ë™ûÂ∞æÊãíÁµ∂%ÔºÅ‚Ä¶„Åù„Çå„Å†„Åë„ÅØË®±„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%„Åª„Åã„ÅÆ‰∫ã„ÅØ‰Ωï„Åß„ÇÇ%CSTR:Ë™ûÂ∞æ„ÅäÈ°ò„ÅÑ%‚Ä¶„Å†„Åã„Çâ„Å£ÔºÅ„Äç
 			ENDIF
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 400
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 400
 		IF !RAND:4
-			PRINTFORML ÅuïvÇ…ÇÕîÈñßÇÃÉCÉPÉiÉCä÷åWÅc%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%ÅcÇ‡Ç§êQéÊÇÁÇÍÇƒÇÈÇÃ%CSTR:åÍîˆã^ñ‚%Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „ÄåÂ§´„Å´„ÅØÁßòÂØÜ„ÅÆ„Ç§„Ç±„Éä„Ç§Èñ¢‰øÇ‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶„ÇÇ„ÅÜÂØùÂèñ„Çâ„Çå„Å¶„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÁñëÂïè%‚Ä¶%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:3
-			PRINTFORML Åu%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅAç°ìxÇ∑ÇÈéûÇÕÇ‡Ç¡Ç∆ÇΩÇ≠Ç≥ÇÒãCéùÇøó«Ç≠Ç»%CSTR:åÍîˆë£êi%%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%„ÄÅ‰ªäÂ∫¶„Åô„ÇãÊôÇ„ÅØ„ÇÇ„Å£„Å®„Åü„Åè„Åï„ÇìÊ∞óÊåÅ„Å°ËâØ„Åè„Å™%CSTR:Ë™ûÂ∞æ‰øÉÈÄ≤%%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:2
-			PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÇ≈ñûë´ÇµÇƒãCéùÇøÇÊÇ≠Ç»ÇÍÇΩ%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc%CSTR:åÍîˆYES%Ç¡%CSTR:åÍîˆä¥é”%Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„ÅßÊ∫ÄË∂≥„Åó„Å¶Ê∞óÊåÅ„Å°„Çà„Åè„Å™„Çå„Åü%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶%CSTR:Ë™ûÂ∞æYES%„Å£%CSTR:Ë™ûÂ∞æÊÑüË¨ù%‚Ä¶%UNICODE(0x2661)%„Äç
 		ELSE
-			PRINTFORML ÅuÇ®îÊÇÍól%CSTR:åÍîˆâûìö%%UNICODE(0x2661)%ÅcÅcñæì˙Ç‡êlç»ÇêQéÊÇ¡Çƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æÂøúÁ≠î%%UNICODE(0x2661)%‚Ä¶‚Ä¶ÊòéÊó•„ÇÇ‰∫∫Â¶ª„ÇíÂØùÂèñ„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%„Äç
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 300
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 300
 		IF !RAND:4
-			PRINTFORML ÅuÇ¢ÇØÇ»Ç¢éñÇ»ÇÃÇÕÇÌÇ©Ç¡ÇƒÇÈ%UNICODE(0x2661)%ÅcÅcÇ≈Ç‡â‰ñùÇ∑ÇÈÇ»ÇÒÇƒñ≥óù%CSTR:åÍîˆãëî€%Ç¡%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„ÅÑ„Åë„Å™„ÅÑ‰∫ã„Å™„ÅÆ„ÅØ„Çè„Åã„Å£„Å¶„Çã%UNICODE(0x2661)%‚Ä¶‚Ä¶„Åß„ÇÇÊàëÊÖ¢„Åô„Çã„Å™„Çì„Å¶ÁÑ°ÁêÜ%CSTR:Ë™ûÂ∞æÊãíÂê¶%„Å£%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:3
-			PRINTFORML Åuïvà»äOÇÃíjÇÃêlÇ∆Ç±ÇÒÇ»Ç”Ç§Ç…ó]âCÇ…êZÇÈÇ»ÇÒÇƒÅc%CSTR:àÍêlèÃ%Ç‡Ç§à¯Ç´ï‘ÇπÇ»Ç¢%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „ÄåÂ§´‰ª•Â§ñ„ÅÆÁî∑„ÅÆ‰∫∫„Å®„Åì„Çì„Å™„Åµ„ÅÜ„Å´‰ΩôÈüª„Å´Êµ∏„Çã„Å™„Çì„Å¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇ„ÅÜÂºï„ÅçËøî„Åõ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuÇ®îÊÇÍól%CSTR:åÍîˆâûìö%ÅcÅcñæì˙Ç‡êlç»ÇêQéÊÇÈÇ¬Ç‡ÇË%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅv
+			PRINTFORML „Äå„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æÂøúÁ≠î%‚Ä¶‚Ä¶ÊòéÊó•„ÇÇ‰∫∫Â¶ª„ÇíÂØùÂèñ„Çã„Å§„ÇÇ„Çä%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü„Äç
 		ELSE
-			PRINTFORML ÅuãCéùÇøÇÊÇ©Ç¡ÇΩÇ›ÇΩÇ¢%CSTR:åÍîˆçmíË%ÅcÅcÇÊÇ©Ç¡ÇΩÅA%CSTR:àÍêlèÃ%ÅcÅHÅc%CSTR:åÍîˆãëê‚%ÅIÅcÇªÇÒÇ»Ç±Ç∆Ç¡ÅcÅIÅv
+			PRINTFORML „ÄåÊ∞óÊåÅ„Å°„Çà„Åã„Å£„Åü„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶‚Ä¶„Çà„Åã„Å£„Åü„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶Ôºü‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%ÔºÅ‚Ä¶„Åù„Çì„Å™„Åì„Å®„Å£‚Ä¶ÔºÅ„Äç
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 200
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 200
 		IF !RAND:4
-			PRINTFORML ÅuÇ†ÇüÇüÇ¡ÅcÅcç°ì˙Ç‡Ç±ÇÒÇ»Ç…Ç°Ç¡ÅcÅIÅv
+			PRINTFORML „Äå„ÅÇ„ÅÅ„ÅÅ„Å£‚Ä¶‚Ä¶‰ªäÊó•„ÇÇ„Åì„Çì„Å™„Å´„ÅÉ„Å£‚Ä¶ÔºÅ„Äç
 		ELSEIF !RAND:3
-			PRINTFORML Åuè„éiÇ∆ïÇãCÇµÇƒÇÈÇÃÇâBÇ∑Ç»ÇÒÇƒÅcïvÇÈxÇ∑Ç›ÇΩÇ¢%CSTR:åÍîˆâûìö%Åc%CSTR:åÍîˆYES%ÅcÉoÉâÇ≥Ç»Ç¢Ç≈%CSTR:åÍîˆâûìö%Ç¡ÅIÅv
+			PRINTFORML „Äå‰∏äÂè∏„Å®ÊµÆÊ∞ó„Åó„Å¶„Çã„ÅÆ„ÇíÈö†„Åô„Å™„Çì„Å¶‚Ä¶Â§´„ÇíÈ®ô„Åô„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î%‚Ä¶%CSTR:Ë™ûÂ∞æYES%‚Ä¶„Éê„É©„Åï„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂøúÁ≠î%„Å£ÔºÅ„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuèIÇÌÇ¡ÇΩÅcÅHÅcÉVÉÉÉèÅ[óÅÇ—%CSTR:åÍîˆëóÇÈ%ÅcÅcÇÕÇ‚Ç≠„YóÌÇ…ÇµÇ»Ç¢Ç∆Ç¡ÅcÅIÅv
+			PRINTFORML „ÄåÁµÇ„Çè„Å£„Åü‚Ä¶Ôºü‚Ä¶„Ç∑„É£„ÉØ„ÉºÊµ¥„Å≥%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%‚Ä¶‚Ä¶„ÅØ„ÇÑ„ÅèÁ∂∫È∫ó„Å´„Åó„Å™„ÅÑ„Å®„Å£‚Ä¶ÔºÅ„Äç
 		ELSE
-			PRINTFORML ÅuÇªÇÒÇ»Ç…Ç¡ÅcÇ®ï†ÇïèÇ≈Ç»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%Åcà·Ç¡ÅcïèÇ≈ÇÁÇÍÇÈÇ∆Ç¡ÅcïœÇ…Ç»Ç¡ÇƒÇ•Ç¡Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„Åù„Çì„Å™„Å´„Å£‚Ä¶„ÅäËÖπ„ÇíÊí´„Åß„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶ÈÅï„Å£‚Ä¶Êí´„Åß„Çâ„Çå„Çã„Å®„Å£‚Ä¶Â§â„Å´„Å™„Å£„Å¶„Åá„Å£‚Ä¶%UNICODE(0x2661)%„Äç
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 100
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 100
 		IF !RAND:4
-			PRINTFORML ÅuÇ±ÇÒÇ«Ç¢Ç¡ÇœÇ¢‰Sì‡Ç…éÀê∏Ç≥ÇÍÇΩÇÁÇüÅcÅcïvÇ∂Ç·Ç»Ç≠Çƒ%CSTR:ìÒêlèÃ%ÇÃéqãüÇ≈Ç´ÇøÇ·Ç§Ç£Ç£Åc%UNICODE(0x2661)%Åv
+			PRINTFORML „Äå„Åì„Çì„Å©„ÅÑ„Å£„Å±„ÅÑËÜ£ÂÜÖ„Å´Â∞ÑÁ≤æ„Åï„Çå„Åü„Çâ„ÅÅ‚Ä¶‚Ä¶Â§´„Åò„ÇÉ„Å™„Åè„Å¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ≠ê‰æõ„Åß„Åç„Å°„ÇÉ„ÅÜ„ÅÖ„ÅÖ‚Ä¶%UNICODE(0x2661)%„Äç
 		ELSEIF !RAND:3
-			PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÕïvÇÃÇ¡ÅcÅIÅc%CSTR:ìÒêlèÃ%ÇÃèóÇ…ÇÕÇ»Å\Å\ÇÒÇ¡ÅcÅIÅv
+			PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØÂ§´„ÅÆ„Å£‚Ä¶ÔºÅ‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ•≥„Å´„ÅØ„Å™‚Äï‚Äï„Çì„Å£‚Ä¶ÔºÅ„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuëÅÇ≠Åcê@Ç©Ç»Ç¢Ç∆ÅcÇ±ÇÒÇ»èLÇ¢Ç™êgëÃÇ…êıÇ›Ç¬Ç¢ÇΩÇÁÅcïvÇ…Ç¡ÅcÅIÅv
+			PRINTFORML „ÄåÊó©„Åè‚Ä¶Êã≠„Åã„Å™„ÅÑ„Å®‚Ä¶„Åì„Çì„Å™Ëá≠„ÅÑ„ÅåË∫´‰Ωì„Å´Êüì„Åø„Å§„ÅÑ„Åü„Çâ‚Ä¶Â§´„Å´„Å£‚Ä¶ÔºÅ„Äç
 		ELSE
-			PRINTFORML ÅuÅcÅcÇ‡Ç§é~ÇﬂÇƒ%CSTR:åÍîˆäÛñ]%ÅcÇ¢Ç¬ïvÇ…ÉoÉåÇÈÇ©Ç¡ÅcÇ‡Ç§%CSTR:åÍîˆãëê‚%Ç¡ÅIÅv
+			PRINTFORML „Äå‚Ä¶‚Ä¶„ÇÇ„ÅÜÊ≠¢„ÇÅ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„ÅÑ„Å§Â§´„Å´„Éê„É¨„Çã„Åã„Å£‚Ä¶„ÇÇ„ÅÜ%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£ÔºÅ„Äç
 		ENDIF
 	ELSE
 		IF !RAND:4
-			PRINTFORML ÅuéüÇÕïvÇ…ñ£ÇπÇ¬ÇØÇ»Ç™ÇÁÅcÅH%CSTR:åÍîˆãëê‚%ÅIÅcÇªÇÍÇæÇØÇÕãñÇµ%CSTR:åÍîˆñΩóﬂã≠%ÇŸÇ©ÇÃéñÇÕâΩÇ≈Ç‡%CSTR:åÍîˆÇ®äËÇ¢%ÅcÇæÇ©ÇÁÇ¡ÅIÅv
+			PRINTFORML „ÄåÊ¨°„ÅØÂ§´„Å´È≠Ö„Åõ„Å§„Åë„Å™„Åå„Çâ‚Ä¶Ôºü%CSTR:Ë™ûÂ∞æÊãíÁµ∂%ÔºÅ‚Ä¶„Åù„Çå„Å†„Åë„ÅØË®±„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%„Åª„Åã„ÅÆ‰∫ã„ÅØ‰Ωï„Åß„ÇÇ%CSTR:Ë™ûÂ∞æ„ÅäÈ°ò„ÅÑ%‚Ä¶„Å†„Åã„Çâ„Å£ÔºÅ„Äç
 		ELSEIF !RAND:3
-			PRINTFORML ÅuÅcÅcÅcêgëÃÇ™âòÇÍÇƒÇÈÅcâΩÇ‡ñ≥Ç©Ç¡ÇΩólÇ…Åcâ∆ÇèoÇΩéûÇ∆ìØÇ∂%CSTR:àÍêlèÃ%Ç≈ÅcãAÇÁÇ»Ç¢Ç∆ÅcÅv
+			PRINTFORML „Äå‚Ä¶‚Ä¶‚Ä¶Ë∫´‰Ωì„ÅåÊ±ö„Çå„Å¶„Çã‚Ä¶‰Ωï„ÇÇÁÑ°„Åã„Å£„ÅüÊßò„Å´‚Ä¶ÂÆ∂„ÇíÂá∫„ÅüÊôÇ„Å®Âêå„Åò%CSTR:‰∏Ä‰∫∫Áß∞%„Åß‚Ä¶Â∏∞„Çâ„Å™„ÅÑ„Å®‚Ä¶„Äç
 		ELSEIF !RAND:2
-			PRINTFORML ÅuÇÒÇ¡ÅcÅcÅcÇ‡Ç§èIÇÌÇËÇ»ÇÁíÖë÷Ç¶%CSTR:åÍîˆÇ‹Ç∑%ÅcÇ‹ÇΩêVÇµÇ¢åæÇ¢ñÛÅcçlÇ¶Ç»Ç¢Ç∆ÅcÅv
+			PRINTFORML „Äå„Çì„Å£‚Ä¶‚Ä¶‚Ä¶„ÇÇ„ÅÜÁµÇ„Çè„Çä„Å™„ÇâÁùÄÊõø„Åà%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶„Åæ„ÅüÊñ∞„Åó„ÅÑË®Ä„ÅÑË®≥‚Ä¶ËÄÉ„Åà„Å™„ÅÑ„Å®‚Ä¶„Äç
 		ELSE
-			PRINTFORML ÅuÅcÇ¢Ç¬Ç‹Ç≈Ç±ÇÒÇ»éñë±ÇØÇÈÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅc%CSTR:àÍêlèÃ%ÇÅcêQéÊÇÈÇ‹Ç≈ÅcÅHÅv
+			PRINTFORML „Äå‚Ä¶„ÅÑ„Å§„Åæ„Åß„Åì„Çì„Å™‰∫ãÁ∂ö„Åë„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Çí‚Ä¶ÂØùÂèñ„Çã„Åæ„Åß‚Ä¶Ôºü„Äç
 		ENDIF
 	ENDIF
-ELSEIF TALENT:ìØê´à§ == 1 && TALENT:çáà” == 1 
-	IF  TALENT:êSêå == 1 || TALENT:à§êl == 1 || TALENT:èÓïw == 1
+ELSEIF TALENT:ÂêåÊÄßÊÑõ == 1 && TALENT:ÂêàÊÑè == 1 
+	IF  TALENT:ÂøÉÈÖî == 1 || TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÊÉÖÂ©¶ == 1
 			IF !RAND:5
-				PRINTFORML ÅuÅcÅcÅcãCéùÇøÇÊÇ©Ç¡ÇΩ%CSTR:åÍîˆÇ≈Ç∑2%ÅAè≠Çµïsñ{à”%CSTR:åÍîˆãtê‡%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „Äå‚Ä¶‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åã„Å£„Åü%CSTR:Ë™ûÂ∞æ„Åß„Åô2%„ÄÅÂ∞ë„Åó‰∏çÊú¨ÊÑè%CSTR:Ë™ûÂ∞æÈÄÜË™¨%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:4
-				PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç∆Ç»ÇÁÅAç°å„Ç‡Ç±ÇÃêgëÃÇàœÇÀ%CSTR:åÍîˆÇ‹Ç∑%ÅcÅv
+				PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å®„Å™„Çâ„ÄÅ‰ªäÂæå„ÇÇ„Åì„ÅÆË∫´‰Ωì„ÇíÂßî„Å≠%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶„Äç
 			ELSEIF !RAND:3
-				PRINTFORML Åuåãã«íjÇ…é‰Ç©ÇÍÇÈÇÃÇÕÅAèóÇÃñ{î\Ç»ÇÃÇ©Ç‡ÇµÇÍÇ»Ç¢%CSTR:åÍîˆâûìö2%Åv
+				PRINTFORML „ÄåÁµêÂ±ÄÁî∑„Å´ÊÉπ„Åã„Çå„Çã„ÅÆ„ÅØ„ÄÅÂ•≥„ÅÆÊú¨ËÉΩ„Å™„ÅÆ„Åã„ÇÇ„Åó„Çå„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuäµÇÍÇΩÇ©ÇÁÇ¡ÇƒíjÇ»ÇÁíNÇ∆Ç≈Ç‡Ç∑ÇÈÇÌÇØÇ≈ÇÕÇ»Ç¢%CSTR:åÍîˆÇ≈Ç∑2%Åv
+				PRINTFORML „ÄåÊÖ£„Çå„Åü„Åã„Çâ„Å£„Å¶Áî∑„Å™„ÇâË™∞„Å®„Åß„ÇÇ„Åô„Çã„Çè„Åë„Åß„ÅØ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%„Äç
 			ELSE
-				PRINTFORML ÅuàŸê´Ç∆Ç∑ÇÈÇÃÇ‡à´Ç≠Ç»Ç¢%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åv
+				PRINTFORML „ÄåÁï∞ÊÄß„Å®„Åô„Çã„ÅÆ„ÇÇÊÇ™„Åè„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%„Äç
 			ENDIF
 		ELSE
 			IF !RAND:5
-				PRINTFORML ÅuäæÇ≈îGÇÍÇƒÇÈÇÃÇ≈ÉVÉÉÉèÅ[óÅÇ—%CSTR:åÍîˆÇ‹Ç∑%ÅcÅcÅcÇÕÇüÅcÅv
+				PRINTFORML „ÄåÊ±ó„ÅßÊø°„Çå„Å¶„Çã„ÅÆ„Åß„Ç∑„É£„ÉØ„ÉºÊµ¥„Å≥%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶‚Ä¶‚Ä¶„ÅØ„ÅÅ‚Ä¶„Äç
 			ELSEIF !RAND:4
-				PRINTFORML Åuçáà”ÇµÇƒÇÈÇ∆ÇÕÇ¢Ç¶ÅcíjÇ…ï¯Ç©ÇÍÇÈÇÃÇÕãÍéË%CSTR:åÍîˆÇ≈Ç∑%ÅcÅv
+				PRINTFORML „ÄåÂêàÊÑè„Åó„Å¶„Çã„Å®„ÅØ„ÅÑ„Åà‚Ä¶Áî∑„Å´Êä±„Åã„Çå„Çã„ÅÆ„ÅØËã¶Êâã%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶„Äç
 			ELSEIF !RAND:3
-				PRINTFORML ÅuÇ‚Ç¡ÇœÇËëäéËÇ∑ÇÈÇ»ÇÁìØê´Ç™Ç¢Ç¢%CSTR:åÍîˆâûìö2%Å[ÅcÅv
+				PRINTFORML „Äå„ÇÑ„Å£„Å±„ÇäÁõ∏Êâã„Åô„Çã„Å™„ÇâÂêåÊÄß„Åå„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%„Éº‚Ä¶„Äç
 			ELSEIF !RAND:2
-				PRINTFORML ÅuÇ±ÇÍÇ≈ñûë´%CSTR:åÍîˆñ‚Ç§4%ÅHÅcÅc%CSTR:àÍêlèÃ%ÇÕãA%CSTR:åÍîˆéÛÇØéÊÇÈ%ÅcÅv
+				PRINTFORML „Äå„Åì„Çå„ÅßÊ∫ÄË∂≥%CSTR:Ë™ûÂ∞æÂïè„ÅÜ4%Ôºü‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØÂ∏∞%CSTR:Ë™ûÂ∞æÂèó„ÅëÂèñ„Çã%‚Ä¶„Äç
 			ELSE
-				PRINTFORML ÅuÇ◊Ç∆Ç◊Ç∆ÇµÇƒÇÈÅcÅcãCéùÇøà´Ç¢ÅcÅv
+				PRINTFORML „Äå„Åπ„Å®„Åπ„Å®„Åó„Å¶„Çã‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°ÊÇ™„ÅÑ‚Ä¶„Äç
 			ENDIF
 	ENDIF
-ELSEIF TALENT:êSêå == 1
+ELSEIF TALENT:ÂøÉÈÖî == 1
 	IF !RAND:10
-		PRINTFORML ÅuÇÒÇÆÇ¡ÅcÇ∂Ç„ÇÈÇÈÇ¡ÅcÅcÇÒÇÒÅcÇÕÇ¡ÅcÅcÇ±ÇÍÇ≈„YóÌÇ…Ç»%CSTR:åÍîˆÇ‹ÇµÇΩ%Åv
+		PRINTFORML „Äå„Çì„Åê„Å£‚Ä¶„Åò„ÇÖ„Çã„Çã„Å£‚Ä¶‚Ä¶„Çì„Çì‚Ä¶„ÅØ„Å£‚Ä¶‚Ä¶„Åì„Çå„ÅßÁ∂∫È∫ó„Å´„Å™%CSTR:Ë™ûÂ∞æ„Åæ„Åó„Åü%„Äç
 	ELSEIF !RAND:9
-		PRINTFORML ÅuÅwè„éËÇ≠Ç»Ç¡ÇΩÅxÅcÅHÅcÅcÇ”Ç”Ç¡ÅAíNÇ©Ç≥ÇÒÇÃÇ®à¸%CSTR:åÍîˆçmíË2%ÅcÅÙÅv
+		PRINTFORML „Äå„Äé‰∏äÊâã„Åè„Å™„Å£„Åü„Äè‚Ä¶Ôºü‚Ä¶‚Ä¶„Åµ„Åµ„Å£„ÄÅË™∞„Åã„Åï„Çì„ÅÆ„ÅäËî≠%CSTR:Ë™ûÂ∞æËÇØÂÆö2%‚Ä¶‚ô™„Äç
 	ELSEIF !RAND:8
-		PRINTFORML Åuç°ì˙ÇÕÇ±Ç±Ç‹Ç≈Ç›ÇΩÇ¢%CSTR:åÍîˆçmíË%ÅcÅc%CSTR:ìÒêlèÃ%Ç‡Ç®îÊÇÍól%CSTR:åÍîˆÇ≈Ç∑%Åv
+		PRINTFORML „Äå‰ªäÊó•„ÅØ„Åì„Åì„Åæ„Åß„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÇÇ„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æ„Åß„Åô%„Äç
 	ELSEIF !RAND:7
-		PRINTFORML Åuëßî≤Ç´Ç‡ëÂéñ%CSTR:åÍîˆÇ≈Ç∑%ÅAó≠Ç‹Ç¡ÇΩÇÁ%CSTR:àÍêlèÃ%Ç…åæÇ¡Çƒ%CSTR:åÍîˆäÛñ]%Åv
+		PRINTFORML „ÄåÊÅØÊäú„Åç„ÇÇÂ§ß‰∫ã%CSTR:Ë™ûÂ∞æ„Åß„Åô%„ÄÅÊ∫ú„Åæ„Å£„Åü„Çâ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´Ë®Ä„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Äç
 	ELSEIF !RAND:6
-		PRINTFORML ÅuÇ∑Ç≤Ç≠ñûÇΩÇ≥ÇÍÇΩãCï™%CSTR:åÍîˆÇ≈Ç∑%ÅA%CSTR:àÍêlèÃ%%CSTR:åÍîˆä¥é”%Åv
+		PRINTFORML „Äå„Åô„Åî„ÅèÊ∫Ä„Åü„Åï„Çå„ÅüÊ∞óÂàÜ%CSTR:Ë™ûÂ∞æ„Åß„Åô%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%%CSTR:Ë™ûÂ∞æÊÑüË¨ù%„Äç
 	ELSEIF !RAND:5
-		PRINTFORML ÅuÇ±ÇÍÇ©ÇÁÇ‡%CSTR:ìÒêlèÃ%ÇÃà◊Ç…óLÇËë±ÇØÇΩÇ¢%CSTR:åÍîˆÇ≈Ç∑2%ÅcÅv
+		PRINTFORML „Äå„Åì„Çå„Åã„Çâ„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÁÇ∫„Å´Êúâ„ÇäÁ∂ö„Åë„Åü„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇ±Ç§ÇµÇƒ%CSTR:ìÒêlèÃ%ÇÃó~ñ]ÇéÛÇØé~ÇﬂÇÈÇÃÇ‹ÇΩÅAëÂéñÇ»%CSTR:àÍêlèÃ%ÇÃédéñ%CSTR:åÍîˆÇ≈Ç∑%Åv
+		PRINTFORML „Äå„Åì„ÅÜ„Åó„Å¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊ¨≤Êúõ„ÇíÂèó„ÅëÊ≠¢„ÇÅ„Çã„ÅÆ„Åæ„Åü„ÄÅÂ§ß‰∫ã„Å™%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ‰ªï‰∫ã%CSTR:Ë™ûÂ∞æ„Åß„Åô%„Äç
 	ELSEIF !RAND:3
-		PRINTFORML Åuñûë´ÇµÇƒñ·Ç¶ÇΩÇÊÇ§%CSTR:åÍîˆçmíË%ÅAéüÇ‡ä˙ë“ÇµÇƒ%CSTR:åÍîˆäÛñ]%Åv
+		PRINTFORML „ÄåÊ∫ÄË∂≥„Åó„Å¶Ë≤∞„Åà„Åü„Çà„ÅÜ%CSTR:Ë™ûÂ∞æËÇØÂÆö%„ÄÅÊ¨°„ÇÇÊúüÂæÖ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML Åu%CSTR:àÍêlèÃ%Ç™ïKóvÇ»éûÇÕÅAÇ¢Ç¬Ç≈Ç‡åƒÇÒÇ≈%CSTR:åÍîˆäÛñ]%ÅcÅv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅåÂøÖË¶Å„Å™ÊôÇ„ÅØ„ÄÅ„ÅÑ„Å§„Åß„ÇÇÂëº„Çì„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 	ELSE
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%ÇÃ%CSTR:åÍîˆíöîJ%ñÇ…óßÇƒÇƒÅcÅcäÇµÇ¢%CSTR:åÍîˆÇ≈Ç∑2%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ%CSTR:Ë™ûÂ∞æ‰∏ÅÂØß%ÂΩπ„Å´Á´ã„Å¶„Å¶‚Ä¶‚Ä¶Â¨â„Åó„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%„Äç
 	ENDIF
-ELSEIF TALENT:à§êl == 1
+ELSEIF TALENT:ÊÑõ‰∫∫ == 1
 	IF !RAND:10
-		PRINTFORML ÅuÇ‹ÇΩåƒÇÒÇ≈%CSTR:åÍîˆñ‚Ç§5%ÅHÅcÅc%CSTR:åÍîˆYES%ÅAÇªÇÃéûÇÕÇ‹ÇΩà§ÇµÇƒ%CSTR:åÍîˆäÛñ]%ÅcÅv
+		PRINTFORML „Äå„Åæ„ÅüÂëº„Çì„Åß%CSTR:Ë™ûÂ∞æÂïè„ÅÜ5%Ôºü‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æYES%„ÄÅ„Åù„ÅÆÊôÇ„ÅØ„Åæ„ÅüÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 	ELSEIF !RAND:9
-		PRINTFORML ÅuÇ±ÇÍÇ©ÇÁÇ‡%CSTR:ìÒêlèÃ%ÇÃ%CSTR:åÍîˆíöîJ%ñTÇ…Ç¢Ç≥ÇπÇƒ%CSTR:åÍîˆäÛñ]%ÅcÅv
+		PRINTFORML „Äå„Åì„Çå„Åã„Çâ„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ%CSTR:Ë™ûÂ∞æ‰∏ÅÂØß%ÂÇç„Å´„ÅÑ„Åï„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 	ELSEIF !RAND:8
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç…Ç‡Ç¡Ç∆ãCéùÇøÇÊÇ≠Ç»Ç¡ÇƒÇ‡ÇÁÇ§à◊Ç…ÅA%CSTR:àÍêlèÃ%Ç‡ï◊ã≠ÇµÇ»Ç¢Ç∆ÅcÅv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„Å´„ÇÇ„Å£„Å®Ê∞óÊåÅ„Å°„Çà„Åè„Å™„Å£„Å¶„ÇÇ„Çâ„ÅÜÁÇ∫„Å´„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇÂãâÂº∑„Åó„Å™„ÅÑ„Å®‚Ä¶„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuêgëÃíÜÇ™ÉhÉçÉhÉçÇ…Ç»Ç¡ÇƒÇ‡%CSTR:ìÒêlèÃ%ÇÃÇæÇ©ÇÁïsâıä¥Ç»Ç¢%CSTR:åÍîˆâûìö2%ÅcÅv
+		PRINTFORML „ÄåË∫´‰Ωì‰∏≠„Åå„Éâ„É≠„Éâ„É≠„Å´„Å™„Å£„Å¶„ÇÇ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Å†„Åã„Çâ‰∏çÂø´ÊÑü„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶„Äç
 	ELSEIF !RAND:6
-		PRINTFORML ÅuÉLÉXÅcÇµÇƒÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅcÅcÇÒÇ¡ÅcÇøÇ„Ç¡ÅcÅcÅv
+		PRINTFORML „Äå„Ç≠„Çπ‚Ä¶„Åó„Å¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶‚Ä¶„Çì„Å£‚Ä¶„Å°„ÇÖ„Å£‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:5
-		PRINTFORML Åuñæì˙Ç‡Ç®édéñäÊí£Ç¡Çƒ%CSTR:åÍîˆäÛñ]%ÅcÅcîÊÇÍÇ™ó≠Ç‹Ç¡ÇΩÇÁ%CSTR:àÍêlèÃ%Ç™ëäéËÇ%CSTR:åÍîˆñ‚Ç§2%Åv
+		PRINTFORML „ÄåÊòéÊó•„ÇÇ„Åä‰ªï‰∫ãÈ†ëÂºµ„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶‚Ä¶Áñ≤„Çå„ÅåÊ∫ú„Åæ„Å£„Åü„Çâ%CSTR:‰∏Ä‰∫∫Áß∞%„ÅåÁõ∏Êâã„Çí%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇ‹Çæéûä‘Ç™Ç†ÇÈÇ›ÇΩÇ¢%CSTR:åÍîˆâûìö%ÅcÅc%CSTR:ìÒêlèÃ%ÅAÇ«Ç§Ç∑ÇÈ%CSTR:åÍîˆçsà◊%ÅH%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åæ„Å†ÊôÇÈñì„Åå„ÅÇ„Çã„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î%‚Ä¶‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÄÅ„Å©„ÅÜ„Åô„Çã%CSTR:Ë™ûÂ∞æË°åÁÇ∫%Ôºü%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:3
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç™ãCéùÇøÇÊÇ≠Ç»ÇÍÇΩÇÃÇ»ÇÁÅA%CSTR:àÍêlèÃ%Ç‡äÇµÇ¢%CSTR:åÍîˆÇ≈Ç∑2%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÅåÊ∞óÊåÅ„Å°„Çà„Åè„Å™„Çå„Åü„ÅÆ„Å™„Çâ„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇÂ¨â„Åó„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuéüâÒÇ‡ÅAëäéËÇÕ%CSTR:àÍêlèÃ%Ç…îCÇπÇƒ%CSTR:åÍîˆäÛñ]%ÅcÅv
+		PRINTFORML „ÄåÊ¨°Âõû„ÇÇ„ÄÅÁõ∏Êâã„ÅØ%CSTR:‰∏Ä‰∫∫Áß∞%„Å´‰ªª„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Äç
 	ELSE
-		PRINTFORML ÅuÇ±ÇÒÇ»Ç…à§ÇµÇƒÇ‡ÇÁÇ¶ÇƒÅcÅc%CSTR:àÍêlèÃ%çKÇπ%CSTR:åÍîˆÇ≈Ç∑%ÅcÅcÅv
+		PRINTFORML „Äå„Åì„Çì„Å™„Å´ÊÑõ„Åó„Å¶„ÇÇ„Çâ„Åà„Å¶‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%Âπ∏„Åõ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶„Äç
 	ENDIF
-ELSEIF TALENT:èÓïw == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1
 	IF !RAND:10
-		PRINTFORML ÅuÇÕÇüÇ¡ÅcÇÒÇ¡ÅcÅcÇ‡Ç¡Ç∆ÇßÅcñ≈íÉãÍíÉÇ…ÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„ÅØ„ÅÅ„Å£‚Ä¶„Çì„Å£‚Ä¶‚Ä¶„ÇÇ„Å£„Å®„Åâ‚Ä¶ÊªÖËå∂Ëã¶Ëå∂„Å´„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:9
-		PRINTFORML Åuî∆Ç≥ÇÍÇÈÇÃÅAãCéùÇøÇ¢Ç¢ÅcÇ¡ÅcÇ≥Ç¢Ç±Ç§ÅcÅcÇÒÇ¡%UNICODE(0x2661)%ÅcÅcÅv
+		PRINTFORML „ÄåÁäØ„Åï„Çå„Çã„ÅÆ„ÄÅÊ∞óÊåÅ„Å°„ÅÑ„ÅÑ‚Ä¶„Å£‚Ä¶„Åï„ÅÑ„Åì„ÅÜ‚Ä¶‚Ä¶„Çì„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:8
-		PRINTFORML ÅuåÉÇµÇ≠ãÅÇﬂÇÁÇÍÇÈìxÇ…ÅAéqã{Ç™â∫ÇËÇƒÇ´ÇƒÇ≠ÇÈÇÒ%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „ÄåÊøÄ„Åó„ÅèÊ±Ç„ÇÅ„Çâ„Çå„ÇãÂ∫¶„Å´„ÄÅÂ≠êÂÆÆ„Åå‰∏ã„Çä„Å¶„Åç„Å¶„Åè„Çã„Çì%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuâıäyÇ…êgÇàœÇÀÇƒÇµÇ‹Ç¶ÇŒÅcÅcÇ±ÇÍíˆçKÇπÇ»Ç±Ç∆ÇÕÇ»Ç¢%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „ÄåÂø´Ê•Ω„Å´Ë∫´„ÇíÂßî„Å≠„Å¶„Åó„Åæ„Åà„Å∞‚Ä¶‚Ä¶„Åì„ÇåÁ®ãÂπ∏„Åõ„Å™„Åì„Å®„ÅØ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:6
-		PRINTFORML ÅuÇ”ÇüÅcÅcÇÕÇüÅcÅcÇÒÇ¡ÅcÅcÅcãCéùÇøÇÊÇ∑Ç¨ÇƒÇ«Ç§Ç…Ç©Ç»ÇËÇªÇ§%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åµ„ÅÅ‚Ä¶‚Ä¶„ÅØ„ÅÅ‚Ä¶‚Ä¶„Çì„Å£‚Ä¶‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åô„Åé„Å¶„Å©„ÅÜ„Å´„Åã„Å™„Çä„Åù„ÅÜ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:5
-		PRINTFORML ÅuéüÇÕÇ«ÇÒÇ»ÉvÉåÉCÇµÇƒ%CSTR:åÍîˆçsà◊2%ÅHÅAÇ”Ç”Ç¡Åcñ˘ÇµÇ›%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „ÄåÊ¨°„ÅØ„Å©„Çì„Å™„Éó„É¨„Ç§„Åó„Å¶%CSTR:Ë™ûÂ∞æË°åÁÇ∫2%Ôºü„ÄÅ„Åµ„Åµ„Å£‚Ä¶ÊÑâ„Åó„Åø%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇ«Ç§%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc%CSTR:ìÒêlèÃ%ÇÃéËÇ≈í≤ã≥Ç≥ÇÍÇΩèóÇÃñ°ÇÕÅcÅv
+		PRINTFORML „Äå„Å©„ÅÜ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊâã„ÅßË™øÊïô„Åï„Çå„ÅüÂ•≥„ÅÆÂë≥„ÅØ‚Ä¶„Äç
 	ELSEIF !RAND:3
-		PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêSÇ∆êgëÃÇ™Ç«ÇÒÇ«ÇÒà˙ÇÁÇ»éìÇ…Ç»Ç¡ÇƒÇ¢Ç≠ÅcÅcãtÇÁÇ¶Ç»Ç¢%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆÂøÉ„Å®Ë∫´‰Ωì„Åå„Å©„Çì„Å©„ÇìÊ∑´„Çâ„Å™Èõå„Å´„Å™„Å£„Å¶„ÅÑ„Åè‚Ä¶‚Ä¶ÈÄÜ„Çâ„Åà„Å™„ÅÑ%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇ‡Ç§èIÇÌÇË%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅcÇΩÇ≠Ç≥ÇÒÅcî∆ÇµÇƒó~ÇµÇ¢ÇÃÇ…ÅcÅcÅv
+		PRINTFORML „Äå„ÇÇ„ÅÜÁµÇ„Çè„Çä%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶„Åü„Åè„Åï„Çì‚Ä¶ÁäØ„Åó„Å¶Ê¨≤„Åó„ÅÑ„ÅÆ„Å´‚Ä¶‚Ä¶„Äç
 	ELSE
-		PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÃêgëÃÇ≈ñûë´%CSTR:åÍîˆñ‚Ç§4%ÅHÅcÅcÅc%CSTR:åÍîˆëäí∆%%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆË∫´‰Ωì„ÅßÊ∫ÄË∂≥%CSTR:Ë™ûÂ∞æÂïè„ÅÜ4%Ôºü‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÁõ∏Êßå%%UNICODE(0x2661)%„Äç
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%Ç‡ãCéùÇøÇÊÇ©Ç¡ÇΩÇ›ÇΩÇ¢%CSTR:åÍîˆçmíË%ÅcÅcÇÊÇ©Ç¡ÇΩÅv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%„ÇÇÊ∞óÊåÅ„Å°„Çà„Åã„Å£„Åü„Åø„Åü„ÅÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶‚Ä¶„Çà„Åã„Å£„Åü„Äç
 	ELSEIF !RAND:9
-		PRINTFORML Åuè„éiÇ∆ïîâ∫ÇÃì˜ëÃä÷åWÅcÅcÇ»ÇÒÇæÇ™îwìøìI%CSTR:åÍîˆçmíË%Åv
+		PRINTFORML „Äå‰∏äÂè∏„Å®ÈÉ®‰∏ã„ÅÆËÇâ‰ΩìÈñ¢‰øÇ‚Ä¶‚Ä¶„Å™„Çì„Å†„ÅåËÉåÂæ≥ÁöÑ%CSTR:Ë™ûÂ∞æËÇØÂÆö%„Äç
 	ELSEIF !RAND:8
-		PRINTFORML Åuñ{ìñÇÕÇ±ÇÒÇ»éñÇ¢ÇØÇ»Ç¢ÅcÅcÇ≈Ç‡é~ÇﬂÇÁÇÍÇ»Ç¢Åv
+		PRINTFORML „ÄåÊú¨ÂΩì„ÅØ„Åì„Çì„Å™‰∫ã„ÅÑ„Åë„Å™„ÅÑ‚Ä¶‚Ä¶„Åß„ÇÇÊ≠¢„ÇÅ„Çâ„Çå„Å™„ÅÑ„Äç
 	ELSEIF !RAND:7
-		PRINTFORML ÅuÇ≥ÇƒÇ∆ÅAñæì˙Ç‡ãŒñ±äÊí£%CSTR:åÍîˆë£êi%ÅA%CSTR:ìÒêlèÃ%ÅHÅv
+		PRINTFORML „Äå„Åï„Å¶„Å®„ÄÅÊòéÊó•„ÇÇÂã§ÂãôÈ†ëÂºµ%CSTR:Ë™ûÂ∞æ‰øÉÈÄ≤%„ÄÅ%CSTR:‰∫å‰∫∫Áß∞%Ôºü„Äç
 	ELSEIF !RAND:6
-		PRINTFORML Åuñûë´ÇµÇΩÇÊÇ§%CSTR:åÍîˆçmíË%ÅcÅc%CSTR:åÍîˆYES%ÅA%CSTR:àÍêlèÃ%Ç‡ãCéùÇøÇÊÇ©Ç¡ÇΩ%CSTR:åÍîˆãñâ¬%ÅcÅv
+		PRINTFORML „ÄåÊ∫ÄË∂≥„Åó„Åü„Çà„ÅÜ%CSTR:Ë™ûÂ∞æËÇØÂÆö%‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æYES%„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÇÇÊ∞óÊåÅ„Å°„Çà„Åã„Å£„Åü%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶„Äç
 	ELSEIF !RAND:5
-		PRINTFORML ÅuÇ±Ç§ÇµÇƒó]âCÇ…êZÇÈÇÃÇ‡à´Ç≠Ç»Ç¢%CSTR:åÍîˆâûìö2%ÅcÅv
+		PRINTFORML „Äå„Åì„ÅÜ„Åó„Å¶‰ΩôÈüª„Å´Êµ∏„Çã„ÅÆ„ÇÇÊÇ™„Åè„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇ†Ç¡ÅcÅcç°ì˙ÇÕÇ±Ç±Ç‹Ç≈%CSTR:åÍîˆñ‚Ç§%ÅHÅcÅcÅv
+		PRINTFORML „Äå„ÅÇ„Å£‚Ä¶‚Ä¶‰ªäÊó•„ÅØ„Åì„Åì„Åæ„Åß%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÇ®îÊÇÍól%CSTR:åÍîˆâûìö%ÅcÅcñæì˙Ç‡Ç∑ÇÈÇÒ%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+		PRINTFORML „Äå„ÅäÁñ≤„ÇåÊßò%CSTR:Ë™ûÂ∞æÂøúÁ≠î%‚Ä¶‚Ä¶ÊòéÊó•„ÇÇ„Åô„Çã„Çì%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuåÉÇµÇ≠Ç»Ç¢Ç»ÇÁÅcÅcéüÇ‡ëäéË%CSTR:åÍîˆñ‚Ç§2%ÅcÅv
+		PRINTFORML „ÄåÊøÄ„Åó„Åè„Å™„ÅÑ„Å™„Çâ‚Ä¶‚Ä¶Ê¨°„ÇÇÁõ∏Êâã%CSTR:Ë™ûÂ∞æÂïè„ÅÜ2%‚Ä¶„Äç
 	ELSE
-		PRINTFORML ÅuéüÇÕéÔå¸ïœÇ¶Çƒ%CSTR:åÍîˆçsà◊2%ÅHÅv
+		PRINTFORML „ÄåÊ¨°„ÅØË∂£ÂêëÂ§â„Åà„Å¶%CSTR:Ë™ûÂ∞æË°åÁÇ∫2%Ôºü„Äç
 	ENDIF
-ELSEIF TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORML ÅuÇÒÇ¡ÅcÇÕÇüÅcÅcãCéùÇøÇÊÇ©Ç¡ÇΩ%CSTR:åÍîˆñJÇﬂÇÈ%ÅcÅv
+		PRINTFORML „Äå„Çì„Å£‚Ä¶„ÅØ„ÅÅ‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åã„Å£„Åü%CSTR:Ë™ûÂ∞æË§í„ÇÅ„Çã%‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÇ‹Çæë´ÇËÇ»Ç¢ÅcÇ‡ÅAÇ‡Ç¡Ç∆ÅcÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå„Åæ„Å†Ë∂≥„Çä„Å™„ÅÑ‚Ä¶„ÇÇ„ÄÅ„ÇÇ„Å£„Å®‚Ä¶„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:3
-		PRINTFORML Åu%CSTR:ìÒêlèÃ%ÅcÅcéüÇ‡Ç‡Ç¡Ç∆Ç‡Ç¡Ç∆ãCéùÇøÇÊÇ≠ÇµÇƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+		PRINTFORML „Äå%CSTR:‰∫å‰∫∫Áß∞%‚Ä¶‚Ä¶Ê¨°„ÇÇ„ÇÇ„Å£„Å®„ÇÇ„Å£„Å®Ê∞óÊåÅ„Å°„Çà„Åè„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇ¡ÅcÇÕÇüÅcÅcÇÕÇüÇ¡ÅcÅcãCéùÇøÇ¢Ç¢ÅcÇ¡ÅcÅv
+		PRINTFORML „Äå„Å£‚Ä¶„ÅØ„ÅÅ‚Ä¶‚Ä¶„ÅØ„ÅÅ„Å£‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ‚Ä¶„Å£‚Ä¶„Äç
 	ELSE
-		PRINTFORML ÅuÇ®ë|èúÇµÇƒÇ†Ç∞%CSTR:åÍîˆëóÇÈ%ÅcÇÒÇ¡ÅcÅcÇ∂Ç„ÇÈÇ¡ÅcÅv
+		PRINTFORML „Äå„ÅäÊéÉÈô§„Åó„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%‚Ä¶„Çì„Å£‚Ä¶‚Ä¶„Åò„ÇÖ„Çã„Å£‚Ä¶„Äç
 	ENDIF
-ELSEIF TALENT:î∆Ç≥ÇÍ == 1
+ELSEIF TALENT:ÁäØ„Åï„Çå == 1
 	IF !RAND:5
-		PRINTFORML ÅuÇ±ÇÒÇ»ÇÃÅAçìÇ¢ÅcÅcÅv
+		PRINTFORML „Äå„Åì„Çì„Å™„ÅÆ„ÄÅÈÖ∑„ÅÑ‚Ä¶‚Ä¶„Äç
 	ELSEIF !RAND:4
-		PRINTFORML Åu%CSTR:àÍêlèÃ%ÇÕ%CSTR:ìÒêlèÃ%ÇÃäﬂãÔÇ∂Ç·Å\Å\ÇÒÇ¡ÅcÅIÅv
+		PRINTFORML „Äå%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÁé©ÂÖ∑„Åò„ÇÉ‚Äï‚Äï„Çì„Å£‚Ä¶ÔºÅ„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÅcÇ£ÅcÅcêgëÃÇ™ÅcèdÇ¢ÅcÅv
+		PRINTFORML „Äå‚Ä¶„ÅÖ‚Ä¶‚Ä¶Ë∫´‰Ωì„Åå‚Ä¶Èáç„ÅÑ‚Ä¶„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuëÅÇ≠ÅcâòÇÍÅAê@Ç©Ç»Ç¢ÅcÇ∆Åv
+		PRINTFORML „ÄåÊó©„Åè‚Ä¶Ê±ö„Çå„ÄÅÊã≠„Åã„Å™„ÅÑ‚Ä¶„Å®„Äç
 	ELSE
-		PRINTFORML ÅuÇÕÇüÅcÇÕÇüÅcÅcÅv
+		PRINTFORML „Äå„ÅØ„ÅÅ‚Ä¶„ÅØ„ÅÅ‚Ä¶‚Ä¶„Äç
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORML ÅuÅcèIÇÌÇË%CSTR:åÍîˆñ‚Ç§%ÅHÅv
+		PRINTFORML „Äå‚Ä¶ÁµÇ„Çè„Çä%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü„Äç
 	ELSEIF !RAND:4
-		PRINTFORML ÅuÅcÅcèoóàÇÈÇ»ÇÁÇ‡Ç§é~ÇﬂÇƒ%CSTR:åÍîˆäÛñ]%Åv
+		PRINTFORML „Äå‚Ä¶‚Ä¶Âá∫Êù•„Çã„Å™„Çâ„ÇÇ„ÅÜÊ≠¢„ÇÅ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Äç
 	ELSEIF !RAND:3
-		PRINTFORML ÅuÅcÅcÅcêgëÃÇ™âòÇÍÇƒÇÈÅcÅv
+		PRINTFORML „Äå‚Ä¶‚Ä¶‚Ä¶Ë∫´‰Ωì„ÅåÊ±ö„Çå„Å¶„Çã‚Ä¶„Äç
 	ELSEIF !RAND:2
-		PRINTFORML ÅuÇÒÅcÅcÅcÇ‡Ç§èIÇÌÇËÇ»ÇÁíÖë÷Ç¶%CSTR:åÍîˆÇ‹Ç∑%Åv
+		PRINTFORML „Äå„Çì‚Ä¶‚Ä¶‚Ä¶„ÇÇ„ÅÜÁµÇ„Çè„Çä„Å™„ÇâÁùÄÊõø„Åà%CSTR:Ë™ûÂ∞æ„Åæ„Åô%„Äç
 	ELSE
-		PRINTFORML ÅuÇÕÇüÅcÅcÇ¢Ç¬Ç‹Ç≈Ç∑ÇÈÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅv
+		PRINTFORML „Äå„ÅØ„ÅÅ‚Ä¶‚Ä¶„ÅÑ„Å§„Åæ„Åß„Åô„Çã„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶„Äç
 	ENDIF
 ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
-;öbÇ¨Å@à§ïè
+;Âñò„Åé„ÄÄÊÑõÊí´
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK10
 #DIM T_COUNT
 
 T_COUNT = RAND:3+2
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:5
-		PRINTFORM Ç¡ÇüÇ†Ç¡Åc
+		PRINTFORM „Å£„ÅÅ„ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ãCéùÇøÇ¢Ç¢Ç¡Åc
+		PRINTFORM Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM çDÇ´Ç¡Åc
+		PRINTFORM Â•Ω„Åç„Å£‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç¢Ç¡ÇœÇ¢êGÇ¡Çƒ%CSTR:åÍîˆäÛñ]%Ç¡
+		PRINTFORM „ÅÑ„Å£„Å±„ÅÑËß¶„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORM Ç‡Ç¡Ç∆Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „ÇÇ„Å£„Å®„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÉCÇ¡ÇøÇ·Ç¢ÇªÇ§%UNICODE(0x2661)%Åc
+		PRINTFORM „Ç§„Å£„Å°„ÇÉ„ÅÑ„Åù„ÅÜ%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ãCéùÇøÇÊÇ∑Ç¨Ç¡%UNICODE(0x2661)%
+		PRINTFORM Ê∞óÊåÅ„Å°„Çà„Åô„Åé„Å£%UNICODE(0x2661)%
 	ELSEIF !RAND:2
-		PRINTFORM Ç†Ç†ÇüÇ¡%UNICODE(0x2661)%
+		PRINTFORM „ÅÇ„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%
 	ELSE
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:5
-		PRINTFORM óDÇµÇ≠Åc
+		PRINTFORM ÂÑ™„Åó„Åè‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇªÇ±Ç¡Åc
+		PRINTFORM „Åù„Åì„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Ç¢Ç¢Ç¡
+		PRINTFORM „ÅÑ„ÅÑ„Å£
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM ãCéùÇøÇ¢Ç¢Ç¡Åc
+		PRINTFORM Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ„Å£‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORM åôÇ¡Åc
+		PRINTFORM Â´å„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM êGÇÁÇ»ÅcÇ¡Åc
+		PRINTFORM Ëß¶„Çâ„Å™‚Ä¶„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Ç≠Ç¡Åc
+		PRINTFORM „Åè„Å£‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç±ÇÒÇ»Åc
+		PRINTFORM „Åì„Çì„Å™‚Ä¶
 	ELSE
-		PRINTFORM Ç‚ÇﬂÇ¡Åc
+		PRINTFORM „ÇÑ„ÇÅ„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -701,93 +701,93 @@ ENDIF
 
 $INPUT_LOOP
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç†Ç¡Åc
+		PRINTFORM „ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”ÇüÇ¡Åc
+		PRINTFORM „Åµ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇüÇÒÇ¡Åc
+		PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¢Ç¡Åc
+		PRINTFORM „ÅÑ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç–Ç·Ç¡Åc
+		PRINTFORM „Å≤„ÇÉ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç¡ÇÕÅc
+		PRINTFORM „Å£„ÅØ‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇüÇ¡Åc
+		PRINTFORM „Çì„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç†Ç†ÇüÇüÇ¡Åc
+		PRINTFORM „ÅÇ„ÅÇ„ÅÅ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”Ç†ÇüÇ¡Åc
+		PRINTFORM „Åµ„ÅÇ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇüÇÒÇ¡Åc
+		PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¢Ç¡Åc
+		PRINTFORM „ÅÑ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç–Ç·ÇüÇ¡Åc
+		PRINTFORM „Å≤„ÇÉ„ÅÅ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç¡ÇÕÅc
+		PRINTFORM „Å£„ÅØ‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç†Ç¡Åc
+		PRINTFORM „ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”ÇüÇ¡Åc
+		PRINTFORM „Åµ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇüÇÒÇ¡Åc
+		PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¢Ç¡Åc
+		PRINTFORM „ÅÑ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç–Ç·Ç¡Åc
+		PRINTFORM „Å≤„ÇÉ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç¡ÇÕÅc
+		PRINTFORM „Å£„ÅØ‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç‚Ç¡Åc
+		PRINTFORM „ÇÑ„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç°ÇΩÇ¡Åc
+		PRINTFORM „ÅÉ„Åü„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM Ç£ÇüÅc
+		PRINTFORM „ÅÖ„ÅÅ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç–Ç·Ç¡Åc
+		PRINTFORM „Å≤„ÇÉ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç§ÇüÇ¡Åc
+		PRINTFORM „ÅÜ„ÅÅ„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -796,64 +796,64 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 ;-------------------------------------------------
 ;-------------------------------------------------
-;öbÇ¨Å@éËà˙
+;Âñò„Åé„ÄÄÊâãÊ∑´
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK11
 #DIM T_COUNT
 
 T_COUNT = RAND:2+2
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:5
-		PRINTFORM éËÇ≈ÅcÅHÅAÇÌÇ©%CSTR:åÍîˆÇ‹ÇµÇΩ%Åc
+		PRINTFORM Êâã„Åß‚Ä¶Ôºü„ÄÅ„Çè„Åã%CSTR:Ë™ûÂ∞æ„Åæ„Åó„Åü%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM %CSTR:àÍêlèÃ%ÇÃéËÅAãCéùÇøÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅc
+		PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆÊâã„ÄÅÊ∞óÊåÅ„Å°„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ê„Ç‡àÍèèÇ…ÅcÇÒÇ¡Åc
+		PRINTFORM Ëàå„ÇÇ‰∏ÄÁ∑í„Å´‚Ä¶„Çì„Å£‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç±ÇÒÇ»Ç…å≈Ç≠Ç»Ç¡ÇƒÅc%UNICODE(0x2661)%Åc
+		PRINTFORM „Åì„Çì„Å™„Å´Âõ∫„Åè„Å™„Å£„Å¶‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORM ëÚéRéCÇ¡ÇƒÇ†Ç∞%CSTR:åÍîˆÇ‹Ç∑%%UNICODE(0x2661)%Åc
+		PRINTFORM Ê≤¢Â±±Êì¶„Å£„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æ„Åæ„Åô%%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç”Ç”Ç¡ÅAÇ«Ç§%CSTR:åÍîˆñ‚Ç§%%UNICODE(0x2661)%Åc
+		PRINTFORM „Åµ„Åµ„Å£„ÄÅ„Å©„ÅÜ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Ç∆ÇƒÇ‡ãCéùÇøÇÊÇ≥ÇªÇ§%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%Åc
+		PRINTFORM „Å®„Å¶„ÇÇÊ∞óÊåÅ„Å°„Çà„Åï„Åù„ÅÜ%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç¢Ç¬Ç≈Ç‡ÉCÇ¡ÇƒÇ¢Ç¢%CSTR:åÍîˆãñâ¬%Åc
+		PRINTFORM „ÅÑ„Å§„Åß„ÇÇ„Ç§„Å£„Å¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:5
-		PRINTFORM ãCéùÇøÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅc
+		PRINTFORM Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç±Ç§ÇµÇƒÅcÇÒÇ¡Åc
+		PRINTFORM „Åì„ÅÜ„Åó„Å¶‚Ä¶„Çì„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Ç‡Ç¡Ç∆ÅHÅcÅc
+		PRINTFORM „ÇÇ„Å£„Å®Ôºü‚Ä¶‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç±ÇÍÇ≈ÅcÇ«Ç§%CSTR:åÍîˆñ‚Ç§%ÅHÅc
+		PRINTFORM „Åì„Çå„Åß‚Ä¶„Å©„ÅÜ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORM ÅcÅcâòÇ¢Åc
+		PRINTFORM ‚Ä¶‚Ä¶Ê±ö„ÅÑ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÅcîMÇ¢Åc
+		PRINTFORM ‚Ä¶ÁÜ±„ÅÑ‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ãCéùÇøÅcÇ¢Ç¢ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc
+		PRINTFORM Ê∞óÊåÅ„Å°‚Ä¶„ÅÑ„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç±ÇÒÇ»Ç±Ç∆ÅcÇ¡Åc
+		PRINTFORM „Åì„Çì„Å™„Åì„Å®‚Ä¶„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -861,93 +861,93 @@ ENDIF
 
 $INPUT_LOOP
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”Ç£Åc
+		PRINTFORM „Åµ„ÅÖ‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM Ç†Ç¬Åc
+		PRINTFORM „ÅÇ„Å§‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç·Åc
+		PRINTFORM „ÇÉ‚Ä¶
 	ELSE
-		PRINTFORM ÇµÇÂÇ¡Åc
+		PRINTFORM „Åó„Çá„Å£‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”Ç£Åc
+		PRINTFORM „Åµ„ÅÖ‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM Ç†Ç¬Åc
+		PRINTFORM „ÅÇ„Å§‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç·Åc
+		PRINTFORM „ÇÉ‚Ä¶
 	ELSE
-		PRINTFORM Ç”Ç”Ç¡Åc
+		PRINTFORM „Åµ„Åµ„Å£‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”Ç£Åc
+		PRINTFORM „Åµ„ÅÖ‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM Ç†Ç¬Åc
+		PRINTFORM „ÅÇ„Å§‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç·Åc
+		PRINTFORM „ÇÉ‚Ä¶
 	ELSE
-		PRINTFORM ÇµÇÂÇ¡Åc
+		PRINTFORM „Åó„Çá„Å£‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”Ç£Åc
+		PRINTFORM „Åµ„ÅÖ‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM Ç†Ç¬Åc
+		PRINTFORM „ÅÇ„Å§‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç·Åc
+		PRINTFORM „ÇÉ‚Ä¶
 	ELSE
-		PRINTFORM ÇµÇÂÇ¡Åc
+		PRINTFORM „Åó„Çá„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -956,64 +956,64 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 ;-------------------------------------------------
 ;-------------------------------------------------
-;öbÇ¨Å@ÉtÉFÉâÉ`ÉI
+;Âñò„Åé„ÄÄ„Éï„Çß„É©„ÉÅ„Ç™
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK12
 #DIM T_COUNT
 
 T_COUNT = RAND:2+2
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:5
-		PRINTFORM %CSTR:åÍîˆYES%ÅcÇøÇ„ÅcÇÒÇ¡Åc
+		PRINTFORM %CSTR:Ë™ûÂ∞æYES%‚Ä¶„Å°„ÇÖ‚Ä¶„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÁóÇµÇ¢%CSTR:åÍîˆâûìö2%ÅcÇ†ÇﬁÇ¡Åc
+		PRINTFORM ÈÄû„Åó„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶„ÅÇ„ÇÄ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM îMÇ≠Çƒå˚Ç™âŒèùÇµÇªÇ§%CSTR:åÍîˆÇ≈Ç∑%Åc
+		PRINTFORM ÁÜ±„Åè„Å¶Âè£„ÅåÁÅ´ÂÇ∑„Åó„Åù„ÅÜ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç¢Ç¬Ç≈Ç‡éÀê∏ÇµÇƒÇ¢Ç¢%CSTR:åÍîˆãñâ¬%Åc
+		PRINTFORM „ÅÑ„Å§„Åß„ÇÇÂ∞ÑÁ≤æ„Åó„Å¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORM å˚ÇÃíÜÇ…Ç¢Ç¡ÇœÇ¢éÀê∏ÇµÇƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%ÅHÅc
+		PRINTFORM Âè£„ÅÆ‰∏≠„Å´„ÅÑ„Å£„Å±„ÅÑÂ∞ÑÁ≤æ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%Ôºü‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç∑Ç≤Ç≠î¸ñ°ÇµÇªÇ§ÅcÇ†ÇﬁÇ¡Åc
+		PRINTFORM „Åô„Åî„ÅèÁæéÂë≥„Åó„Åù„ÅÜ‚Ä¶„ÅÇ„ÇÄ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ÇÒÇ¡ÅcÇ®Ç¢Ç–Ç¢Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „Çì„Å£‚Ä¶„Åä„ÅÑ„Å≤„ÅÑ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç‡Ç¡Ç∆Ç´Ç‡Ç–ÇÊÇ”Ç»Ç¡ÇƒÅc%UNICODE(0x2661)%ÅcÅc
+		PRINTFORM „ÇÇ„Å£„Å®„Åç„ÇÇ„Å≤„Çà„Åµ„Å™„Å£„Å¶‚Ä¶%UNICODE(0x2661)%‚Ä¶‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:5
-		PRINTFORM å˚Ç≈ÅcÅHÅcÅcÇ†ÇﬁÇ¡Åc
+		PRINTFORM Âè£„Åß‚Ä¶Ôºü‚Ä¶‚Ä¶„ÅÇ„ÇÄ„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç†Ç‹ÇËä˙ë“ÇµÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%ÅcÇÒÇÆÇ¡Åc
+		PRINTFORM „ÅÇ„Åæ„ÇäÊúüÂæÖ„Åó„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Çì„Åê„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ÇÒÇÆÅcÅcÇ«Ç§ÇÍÇ”Ç©ÅHÅc
+		PRINTFORM „Çì„Åê‚Ä¶‚Ä¶„Å©„ÅÜ„Çå„Åµ„ÅãÔºü‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÅcÇ´Ç‡Ç–Ç¢Ç¢ÅHÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶„Åç„ÇÇ„Å≤„ÅÑ„ÅÑÔºü‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORM å˚Ç≈Ç»ÇÒÇ¡ÅcÇÒÇÆÇ¡ÅIÅHÅc
+		PRINTFORM Âè£„Åß„Å™„Çì„Å£‚Ä¶„Çì„Åê„Å£ÔºÅÔºü‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç‚ÇﬂÇ¡ÅcÇ¡ÅcÇÆÇ§Ç¡Åc
+		PRINTFORM „ÇÑ„ÇÅ„Å£‚Ä¶„Å£‚Ä¶„Åê„ÅÜ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ãﬂÇ√ÇØÇ»Ç¢Ç≈%CSTR:åÍîˆäÛñ]%Ç¡ÅcÇÒÇÒÇ¡ÅIÅHÅc
+		PRINTFORM Ëøë„Å•„Åë„Å™„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£‚Ä¶„Çì„Çì„Å£ÔºÅÔºü‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç†ÇÆÇ¡ÅcÇÆÇ¡Åc
+		PRINTFORM „ÅÇ„Åê„Å£‚Ä¶„Åê„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1021,93 +1021,93 @@ ENDIF
 
 $INPUT_LOOP
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1116,65 +1116,65 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 ;-------------------------------------------------
 ;-------------------------------------------------
-;öbÇ¨Å@ÉpÉCÉYÉä
+;Âñò„Åé„ÄÄ„Éë„Ç§„Ç∫„É™
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK13
 
 #DIM T_COUNT
 
 T_COUNT = RAND:2+2
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:5
-		PRINTFORM %CSTR:àÍêlèÃ%ÇÃÇ®Ç¡ÇœÇ¢ÇÕ%CSTR:ìÒêlèÃ%ÇÃÉÇÉmÅc%UNICODE(0x2661)%Åc
+		PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ„Åä„Å£„Å±„ÅÑ„ÅØ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„É¢„Éé‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇªÇÒÇ»Ç…ãCéùÇøÇÊÇ≥ÇªÇ§Ç»äÁÇµÇƒÅc%CSTR:åÍîˆî˜èŒ%Åc
+		PRINTFORM „Åù„Çì„Å™„Å´Ê∞óÊåÅ„Å°„Çà„Åï„Åù„ÅÜ„Å™È°î„Åó„Å¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM â‰ñùÇµÇ»Ç≠ÇƒÇ¢Ç¢ÇÒ%CSTR:åÍîˆãñâ¬%Åc%UNICODE(0x2661)%ÅHÅc
+		PRINTFORM ÊàëÊÖ¢„Åó„Å™„Åè„Å¶„ÅÑ„ÅÑ„Çì%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶%UNICODE(0x2661)%Ôºü‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ¡ÅAÇ±ÇÒÇ»Ç…å≈Ç≠ÇµÇƒÅc
+		PRINTFORM „Çì„Å£„ÄÅ„Åì„Çì„Å™„Å´Âõ∫„Åè„Åó„Å¶‚Ä¶
 	ELSE
-		PRINTFORM %CSTR:åÍîˆî˜èŒ%Åc%CSTR:ìÒêlèÃ%ÇÃëÂçDÇ´Ç»Ç®Ç¡ÇœÇ¢Ç™Ç¢Ç¢ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc
+		PRINTFORM %CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ§ßÂ•Ω„Åç„Å™„Åä„Å£„Å±„ÅÑ„Åå„ÅÑ„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORM ì˚éÒÇ‡ãsÇﬂÇƒ%CSTR:åÍîˆäÛñ]%ÅcÇ¡Åc
+		PRINTFORM ‰π≥È¶ñ„ÇÇËôê„ÇÅ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM %CSTR:åÍîˆî˜èŒ%ÅcãCéùÇøÇÊÇ≥ÇªÇ§Ç…êkÇ¶Çƒ%CSTR:åÍîˆÇ‹Ç∑%Åc
+		PRINTFORM %CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åï„Åù„ÅÜ„Å´Èúá„Åà„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM %CSTR:ìÒêlèÃ%ÇÕñ{ìñÇ…Ç®Ç¡ÇœÇ¢çDÇ´%CSTR:åÍîˆìØà”ãÅÇﬁ%%UNICODE(0x2661)%Åc
+		PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅØÊú¨ÂΩì„Å´„Åä„Å£„Å±„ÅÑÂ•Ω„Åç%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ%%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç£ÇÒÅcçDÇ´Ç»ÇæÇØÇ®Ç¡ÇœÇ¢Ç…éÀê∏ÇµÇƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÖ„Çì‚Ä¶Â•Ω„Åç„Å™„Å†„Åë„Åä„Å£„Å±„ÅÑ„Å´Â∞ÑÁ≤æ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM ÇÕÇüÇ¡ÇÕÇ†Ç¡ÅA%CSTR:àÍêlèÃ%ÇÃÇ®Ç¡ÇœÇ¢ãCéùÇøÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%Ç¡ÅHÅc
+		PRINTFORM „ÅØ„ÅÅ„Å£„ÅØ„ÅÇ„Å£„ÄÅ%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ„Åä„Å£„Å±„ÅÑÊ∞óÊåÅ„Å°„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%„Å£Ôºü‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:5
-		PRINTFORM ãCéùÇøÅcÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc
+		PRINTFORM Ê∞óÊåÅ„Å°‚Ä¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ïÚédÅcÇµÇƒÇÈÇ›ÇΩÇ¢Ç≈ÅcïœÇ»ãCï™%CSTR:åÍîˆÇ≈Ç∑%Åc
+		PRINTFORM Â•â‰ªï‚Ä¶„Åó„Å¶„Çã„Åø„Åü„ÅÑ„Åß‚Ä¶Â§â„Å™Ê∞óÂàÜ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ÇÒÇ¡ÅAîMÇ¢Åc
+		PRINTFORM „Çì„Å£„ÄÅÁÜ±„ÅÑ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÉRÉåÅAêkÇ¶ÇƒÇÈÅcãCéùÇøÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅc
+		PRINTFORM „Ç≥„É¨„ÄÅÈúá„Åà„Å¶„Çã‚Ä¶Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶
 	ELSE
-		PRINTFORM %CSTR:àÍêlèÃ%Ç‹Ç≈ÅAãCéùÇøÇÊÇ≠Åc
+		PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„Åæ„Åß„ÄÅÊ∞óÊåÅ„Å°„Çà„Åè‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORM ÅcÇ±ÇÒÇ»Ç±Ç∆Ç‹Ç≈Åc
+		PRINTFORM ‚Ä¶„Åì„Çì„Å™„Åì„Å®„Åæ„Åß‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç±ÇÍÇ≈Ç¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅcÅHÅc
+		PRINTFORM „Åì„Çå„Åß„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ãπÇ≈ÅcÅHÅc%CSTR:ìÒêlèÃ%ÇÕïœë‘Ç»ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅcÅH
+		PRINTFORM ËÉ∏„Åß‚Ä¶Ôºü‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅØÂ§âÊÖã„Å™„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%‚Ä¶Ôºü
 	ELSEIF !RAND:2
-		PRINTFORM %CSTR:àÍêlèÃ%ÇÃãπÇÕäﬂãÔÇ∂Ç·ÅcÅcÇ¡ÅcÅcÅc
+		PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆËÉ∏„ÅØÁé©ÂÖ∑„Åò„ÇÉ‚Ä¶‚Ä¶„Å£‚Ä¶‚Ä¶‚Ä¶
 	ELSE
-		PRINTFORM ê´åÇ∑ÇÈÇÊÇËÇÕÉ}ÉV%CSTR:åÍîˆã^ñ‚%Åc
+		PRINTFORM ÊÄß‰∫§„Åô„Çã„Çà„Çä„ÅØ„Éû„Ç∑%CSTR:Ë™ûÂ∞æÁñëÂïè%‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1182,93 +1182,93 @@ ENDIF
 
 $INPUT_LOOP
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:10
-		PRINTFORM ÇÍÇÎÅc
+		PRINTFORM „Çå„Çç‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÇ¡Åc
+		PRINTFORM „ÅØ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç∂Ç„ÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇøÇ„Åc
+		PRINTFORM „Å°„ÇÖ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇÒÅc
+		PRINTFORM „Çì‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Åc
+		PRINTFORM „Çì„Åè‚Ä¶
 	ELSE
-		PRINTFORM Ç∂Ç„ÇÈÇÈÅc
+		PRINTFORM „Åò„ÇÖ„Çã„Çã‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1277,262 +1277,262 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 
 ;-------------------------------------------------
 ;-------------------------------------------------
-;öbÇ¨Å@ê´çsà◊
+;Âñò„Åé„ÄÄÊÄßË°åÁÇ∫
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK30
 #DIM T_COUNT
 T_COUNT = RAND:3+3
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
-IF TALENT:åãç•çœÇ› == 1 
-	IF   TALENT:ÇmÇsÇk == 1
-		IF TALENT:êSêå == 1
+IF TALENT:ÁµêÂ©öÊ∏à„Åø == 1 
+	IF   TALENT:ÔºÆÔº¥Ôº¨ == 1
+		IF TALENT:ÂøÉÈÖî == 1
 			IF !RAND:11
-				PRINTFORM %CSTR:ìÒêlèÃ%ÇÃéqãüÇ¡%UNICODE(0x2661)%ÅcéYÇ‹ÇπÇƒ%CSTR:åÍîˆäÛñ]%Ç¡Ç¡%UNICODE(0x2661)%%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ≠ê‰æõ„Å£%UNICODE(0x2661)%‚Ä¶Áî£„Åæ„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£„Å£%UNICODE(0x2661)%%UNICODE(0x2661)%
 			ELSEIF !RAND:10
-				PRINTFORM ÅcïvÅHÅc%CSTR:àÍêlèÃ%Ç™à§ÇµÇƒÇ¢ÇÈÇÃÇÕ%CSTR:ìÒêlèÃ%Ç≈Ç∑Ç¡%UNICODE(0x2661)%ÅcÇÒÇÕÇüÇ†Ç†Ç†Ç¡%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶Â§´Ôºü‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅåÊÑõ„Åó„Å¶„ÅÑ„Çã„ÅÆ„ÅØ%CSTR:‰∫å‰∫∫Áß∞%„Åß„Åô„Å£%UNICODE(0x2661)%‚Ä¶„Çì„ÅØ„ÅÅ„ÅÇ„ÅÇ„ÅÇ„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:9
-				PRINTFORM ïvÇÃëeÉ`ÉìÇ∂Ç·Ç»Ç≠ÇƒÇ•Åc%UNICODE(0x2661)%Åc%CSTR:ìÒêlèÃ%ÇÃÇ‘Ç¡Ç∆Ç≠ÇƒÁóÇµÇ¢ñ{ï®ÇÃÉIÉ`ÉìÉ|Ç≈%CSTR:àÍêlèÃ%Ç…ëÔóëÇµÇƒ%CSTR:åÍîˆäÛñ]%Ç¡%UNICODE(0x2661)%
+				PRINTFORM Â§´„ÅÆÁ≤ó„ÉÅ„É≥„Åò„ÇÉ„Å™„Åè„Å¶„Åá‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Å∂„Å£„Å®„Åè„Å¶ÈÄû„Åó„ÅÑÊú¨Áâ©„ÅÆ„Ç™„ÉÅ„É≥„Éù„Åß%CSTR:‰∏Ä‰∫∫Áß∞%„Å´ÊâòÂçµ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:8
-				PRINTFORM Åc%CSTR:àÍêlèÃ%ÇÕÇüÅcÇ‡Ç§%CSTR:ìÒêlèÃ%ÇÃèóÇ»ÇËÇ‹ÇµÇΩÇü%UNICODE(0x2661)%ÅcéqçÏÇËÇ°ÅcÇµÇøÇ·Ç¡ÇƒÇ‹Ç∑Ç£Ç£Ç¡%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ„ÅÅ‚Ä¶„ÇÇ„ÅÜ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ•≥„Å™„Çä„Åæ„Åó„Åü„ÅÅ%UNICODE(0x2661)%‚Ä¶Â≠ê‰Ωú„Çä„ÅÉ‚Ä¶„Åó„Å°„ÇÉ„Å£„Å¶„Åæ„Åô„ÅÖ„ÅÖ„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:7
-				PRINTFORM ÇßÅcïvÇÊÇËÇ‡óßîhÇ»Ç®ÇøÇÒÇøÇÒÇ∆Çß%UNICODE(0x2661)%ÅcÉZÉbÉNÉXÇµÇøÇ·Ç¡ÇƒÇ‹Ç∑Ç£Ç§Ç£Ç£Ç¡%UNICODE(0x2661)%
+				PRINTFORM „Åâ‚Ä¶Â§´„Çà„Çä„ÇÇÁ´ãÊ¥æ„Å™„Åä„Å°„Çì„Å°„Çì„Å®„Åâ%UNICODE(0x2661)%‚Ä¶„Çª„ÉÉ„ÇØ„Çπ„Åó„Å°„ÇÉ„Å£„Å¶„Åæ„Åô„ÅÖ„ÅÜ„ÅÖ„ÅÖ„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:6
-				PRINTFORM Ç†ÇÃêlÇ∆ëSëRà·Ç§Ç¡%UNICODE(0x2661)%ÅcÇ»ÇÒÇ≈Ç±ÇÒÇ»Ç…ê[Ç≠ãøÇ≠ÇÃÇßÇßÇ¡%UNICODE(0x2661)%
+				PRINTFORM „ÅÇ„ÅÆ‰∫∫„Å®ÂÖ®ÁÑ∂ÈÅï„ÅÜ„Å£%UNICODE(0x2661)%‚Ä¶„Å™„Çì„Åß„Åì„Çì„Å™„Å´Ê∑±„ÅèÈüø„Åè„ÅÆ„Åâ„Åâ„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:5
-				PRINTFORM ïvÇÃÇÊÇËÇ‡Ç®Ç¡Ç´Ç–Ç°Ç°Ç¡Åc%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%Ç¡Åc%CSTR:ìÒêlèÃ%ÇÃÇ®ÇøÇÒÇøÇÒÇ≈Ç¢Ç¡ÇøÇ·Ç§Ç£Ç£%UNICODE(0x2661)%
+				PRINTFORM Â§´„ÅÆ„Çà„Çä„ÇÇ„Åä„Å£„Åç„Å≤„ÅÉ„ÅÉ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å£‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åä„Å°„Çì„Å°„Çì„Åß„ÅÑ„Å£„Å°„ÇÉ„ÅÜ„ÅÖ„ÅÖ%UNICODE(0x2661)%
 			ELSEIF !RAND:4
-				PRINTFORM Ç®Ç‹ÇÒÇ±Çî∆ÇµÇƒÇ≠ÇÍÇƒÇ†ÇËÇ™Ç∆Ç§Ç≤Ç¥Ç¢Ç‹Ç∑Ç§Ç£Ç£%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%ÇÕ%CSTR:ìÒêlèÃ%ÇÃèóÇ≈Ç∑Ç£Ç§Ç§Ç¡%UNICODE(0x2661)%
+				PRINTFORM „Åä„Åæ„Çì„Åì„ÇíÁäØ„Åó„Å¶„Åè„Çå„Å¶„ÅÇ„Çä„Åå„Å®„ÅÜ„Åî„Åñ„ÅÑ„Åæ„Åô„ÅÜ„ÅÖ„ÅÖ%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅØ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ•≥„Åß„Åô„ÅÖ„ÅÜ„ÅÜ„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:3
-				PRINTFORM Åc%CSTR:ìÒêlèÃ%ÇÃÉIÉ`ÉìÉ|Ç…éìÇÃâxÇ—Çã≥Ç¶ÇÁÇÍÇƒÇ•%UNICODE(0x2661)%Åc%CSTR:ìÒêlèÃ%Ç∆ÉZÉbÉNÉXÇ∑ÇÈÇ±Ç∆ÇµÇ©çlÇ¶ÇÁÇÍÇ»Ç¢%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Ç™„ÉÅ„É≥„Éù„Å´Èõå„ÅÆÊÇ¶„Å≥„ÇíÊïô„Åà„Çâ„Çå„Å¶„Åá%UNICODE(0x2661)%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„Å®„Çª„ÉÉ„ÇØ„Çπ„Åô„Çã„Åì„Å®„Åó„ÅãËÄÉ„Åà„Çâ„Çå„Å™„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%
 			ELSEIF !RAND:2
-				PRINTFORM ÇªÇÒÇ»óßîhÇ»Ç®ÇøÇÒÇøÇÒÇ≈Ç¡Åcéqã{ÇÃÇ¢ÇËÇÆÇøÉYÉäÉYÉäÇ≥ÇÍÇΩÇÁÇü%UNICODE(0x2661)%ÅcÇ†Ç©ÇøÇ·ÇÒõsÇ›ÇΩÇ≠Ç»Ç¡ÇøÇ·Ç§Ç£Ç¡%UNICODE(0x2661)%
+				PRINTFORM „Åù„Çì„Å™Á´ãÊ¥æ„Å™„Åä„Å°„Çì„Å°„Çì„Åß„Å£‚Ä¶Â≠êÂÆÆ„ÅÆ„ÅÑ„Çä„Åê„Å°„Ç∫„É™„Ç∫„É™„Åï„Çå„Åü„Çâ„ÅÅ%UNICODE(0x2661)%‚Ä¶„ÅÇ„Åã„Å°„ÇÉ„ÇìÂ≠ï„Åø„Åü„Åè„Å™„Å£„Å°„ÇÉ„ÅÜ„ÅÖ„Å£%UNICODE(0x2661)%
 			ELSE
-				PRINTFORM ÅcïsóœÇ¡%UNICODE(0x2661)%ÅcÇ†ÇÃêlÇó†êÿÇ¡Çƒ%CSTR:ìÒêlèÃ%Ç∆ÇßÇ¡%UNICODE(0x2661)%ÅcÅc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶‰∏çÂÄ´„Å£%UNICODE(0x2661)%‚Ä¶„ÅÇ„ÅÆ‰∫∫„ÇíË£èÂàá„Å£„Å¶%CSTR:‰∫å‰∫∫Áß∞%„Å®„Åâ„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%
 			ENDIF
-		ELSEIF TALENT:à§êl == 1
+		ELSEIF TALENT:ÊÑõ‰∫∫ == 1
 			IF !RAND:11
-				PRINTFORM ÅcÇ∑Ç´Ç°Åcà§ÇµÇƒ%CSTR:åÍîˆà§%Åc%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%Ç∆Ç‡Ç¡Ç∆Ç∑Ç´Ç∑Ç´ÇµÇƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶„Åô„Åç„ÅÉ‚Ä¶ÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÊÑõ%‚Ä¶%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å®„ÇÇ„Å£„Å®„Åô„Åç„Åô„Åç„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%
 			ELSEIF !RAND:10
-				PRINTFORM ïvÇÃéñÇÕÇ¢Ç¢Ç©ÇÁÇüÅcÇÒÇÕÇüÇ¡%UNICODE(0x2661)%ÅcÅcêlç»Ç∆êQéÊÇËÇπÇ¡Ç≠Ç∑Ç£Ç¡%UNICODE(0x2661)%Åc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%
+				PRINTFORM Â§´„ÅÆ‰∫ã„ÅØ„ÅÑ„ÅÑ„Åã„Çâ„ÅÅ‚Ä¶„Çì„ÅØ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶‰∫∫Â¶ª„Å®ÂØùÂèñ„Çä„Åõ„Å£„Åè„Åô„ÅÖ„Å£%UNICODE(0x2661)%‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%
 			ELSEIF !RAND:9
-				PRINTFORM Ç‡Ç¡Ç∆Ç¢Ç¡ÇœÇ¢Ç°Ç¡%UNICODE(0x2661)%ÅcÇΩÇ≠Ç≥ÇÒéÌïtÇØÇµÇƒ%CSTR:åÍîˆäÛñ]%%UNICODE(0x2661)%
+				PRINTFORM „ÇÇ„Å£„Å®„ÅÑ„Å£„Å±„ÅÑ„ÅÉ„Å£%UNICODE(0x2661)%‚Ä¶„Åü„Åè„Åï„ÇìÁ®Æ‰ªò„Åë„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%%UNICODE(0x2661)%
 			ELSEIF !RAND:8
-				PRINTFORM ÅcÇ¢Ç¢Ç¡ÅcÇ®Ç‹ÇÒÇ±ÇßÇ¡%UNICODE(0x2661)%ÅcÇ‡Ç¡Ç∆Ç‡Ç¡Ç∆Ç®ÇøÇÒÇøÇÒÇ≈êQéÊÇ¡ÇƒÇ•Ç¡%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶„ÅÑ„ÅÑ„Å£‚Ä¶„Åä„Åæ„Çì„Åì„Åâ„Å£%UNICODE(0x2661)%‚Ä¶„ÇÇ„Å£„Å®„ÇÇ„Å£„Å®„Åä„Å°„Çì„Å°„Çì„ÅßÂØùÂèñ„Å£„Å¶„Åá„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:7
-				PRINTFORM à”ínà´ÇµÇ»Ç¢Ç≈Ç¡%UNICODE(0x2661)%ÅcÇ®ÇøÇÒÇøÇÒÇ¢ÇøÇŒÇÒâúÇ…Ç¡ÅcÉOÉäÉOÉäÇµÇƒÇ•Ç¡Ç¡%UNICODE(0x2661)%%UNICODE(0x2661)%
+				PRINTFORM ÊÑèÂú∞ÊÇ™„Åó„Å™„ÅÑ„Åß„Å£%UNICODE(0x2661)%‚Ä¶„Åä„Å°„Çì„Å°„Çì„ÅÑ„Å°„Å∞„ÇìÂ••„Å´„Å£‚Ä¶„Ç∞„É™„Ç∞„É™„Åó„Å¶„Åá„Å£„Å£%UNICODE(0x2661)%%UNICODE(0x2661)%
 			ELSEIF !RAND:6
-				PRINTFORM ïvÇ…âRÇ¬Ç¢ÇƒÇ•%UNICODE(0x2661)%Åc%CSTR:åÍîˆî˜èŒ%Åc%CSTR:àÍêlèÃ%Ç∆åîˆÇΩÇÃÇµÇÒÇ≈%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%
+				PRINTFORM Â§´„Å´Âòò„Å§„ÅÑ„Å¶„Åá%UNICODE(0x2661)%‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å®‰∫§Â∞æ„Åü„ÅÆ„Åó„Çì„Åß%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%
 			ELSEIF !RAND:5
-				PRINTFORM éqã{Ç…îMÇ¢ÇÃÇÕÇ¢Ç¡ÇƒÇ‹Ç∑Ç£Ç¡%UNICODE(0x2661)%Åc%CSTR:ìÒêlèÃ%ÇÃÇ†Ç©ÇøÇ·ÇÒõsÇÒÇ∂Ç·Ç¢%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%
+				PRINTFORM Â≠êÂÆÆ„Å´ÁÜ±„ÅÑ„ÅÆ„ÅØ„ÅÑ„Å£„Å¶„Åæ„Åô„ÅÖ„Å£%UNICODE(0x2661)%‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„ÅÇ„Åã„Å°„ÇÉ„ÇìÂ≠ï„Çì„Åò„ÇÉ„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%
 			ELSEIF !RAND:4
-				PRINTFORM ÅcÇ‡Ç¡Ç∆Çß%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%Çâ¬à§Ç™Ç¡Çƒ%CSTR:åÍîˆäÛñ]%Åc%UNICODE(0x2661)%Åv
+				PRINTFORM ‚Ä¶„ÇÇ„Å£„Å®„Åâ%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÇíÂèØÊÑõ„Åå„Å£„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶%UNICODE(0x2661)%„Äç
 			ELSEIF !RAND:3
-				PRINTFORM %CSTR:ìÒêlèÃ%ÇÃîMÇ¢ÇÃÇ¡Åc%UNICODE(0x2661)%ÅcÇµÇ´Ç„Ç§Ç…ÇŸÇµÇ¢%CSTR:åÍîˆÇ≈Ç∑2%%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆÁÜ±„ÅÑ„ÅÆ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶„Åó„Åç„ÇÖ„ÅÜ„Å´„Åª„Åó„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô2%%UNICODE(0x2661)%
 			ELSEIF !RAND:2
-				PRINTFORM Åc%CSTR:ìÒêlèÃ%ÇÃÇ®ÇøÇÒÇøÇÒÇ™Çü%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%ÇÃÇ”Ç©Ç¢Ç∆Ç±ÇÎÇßÅc%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åä„Å°„Çì„Å°„Çì„Åå„ÅÅ%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ„Åµ„Åã„ÅÑ„Å®„Åì„Çç„Åâ‚Ä¶%UNICODE(0x2661)%
 			ELSE
-				PRINTFORM %CSTR:àÍêlèÃ%ÇÃÇ®Ç‹ÇÒÇ±ÇßÇ¡Åc%UNICODE(0x2661)%Åcç°ì˙Ç‡êQéÊÇÁÇÍÇƒÇ•%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ„Åä„Åæ„Çì„Åì„Åâ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶‰ªäÊó•„ÇÇÂØùÂèñ„Çâ„Çå„Å¶„Åá%UNICODE(0x2661)%
 			ENDIF
-		ELSEIF TALENT:èÓïw == 1
+		ELSEIF TALENT:ÊÉÖÂ©¶ == 1
 			IF !RAND:11
-				PRINTFORM Ç‡Ç¡Ç∆ãCéùÇøÇÊÇ≠Ç£Ç¡%UNICODE(0x2661)%ÅcÇ¢ÇøÇŒÇÒâúÇ¡Åc%CSTR:åÍîˆçmíË%%UNICODE(0x2661)%
+				PRINTFORM „ÇÇ„Å£„Å®Ê∞óÊåÅ„Å°„Çà„Åè„ÅÖ„Å£%UNICODE(0x2661)%‚Ä¶„ÅÑ„Å°„Å∞„ÇìÂ••„Å£‚Ä¶%CSTR:Ë™ûÂ∞æËÇØÂÆö%%UNICODE(0x2661)%
 			ELSEIF !RAND:10
-				PRINTFORM Ç¢Ç¢%CSTR:åÍîˆâûìö%ÅA%CSTR:ìÒêlèÃ%ÇÃÇßÅcÇ†Ç©ÇøÇ·ÇÒÇŸÇµÇ°Ç¡%UNICODE(0x2661)%Åcó~ÇµÇ¢%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆÇ≈Ç∑%%UNICODE(0x2661)%
+				PRINTFORM „ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î%„ÄÅ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åâ‚Ä¶„ÅÇ„Åã„Å°„ÇÉ„Çì„Åª„Åó„ÅÉ„Å£%UNICODE(0x2661)%‚Ä¶Ê¨≤„Åó„ÅÑ%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æ„Åß„Åô%%UNICODE(0x2661)%
 			ELSEIF !RAND:9
-				PRINTFORM %CSTR:ìÒêlèÃ%%UNICODE(0x2661)%ÅcÇüÇÒÅc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%%UNICODE(0x2661)%‚Ä¶„ÅÅ„Çì‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%
 			ELSEIF !RAND:8
-				PRINTFORM ÅcéÌÇ¬ÇØÇ•Ç¡%UNICODE(0x2661)%ÅcéÌÇ¬ÇØåîˆÇ°%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶Á®Æ„Å§„Åë„Åá„Å£%UNICODE(0x2661)%‚Ä¶Á®Æ„Å§„Åë‰∫§Â∞æ„ÅÉ%UNICODE(0x2661)%
 			ELSEIF !RAND:7
-				PRINTFORM ïvÇÃÇ®ÇøÇÒÇøÇÒÇ∂Ç·É_ÉÅÇ•Ç¡%UNICODE(0x2661)%ÅcÅcÇ±ÇÃÉIÉ`ÉìÉ|ÇßÅc%UNICODE(0x2661)%
+				PRINTFORM Â§´„ÅÆ„Åä„Å°„Çì„Å°„Çì„Åò„ÇÉ„ÉÄ„É°„Åá„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶„Åì„ÅÆ„Ç™„ÉÅ„É≥„Éù„Åâ‚Ä¶%UNICODE(0x2661)%
 			ELSEIF !RAND:6
-				PRINTFORM êQéÊÇÈÇÃÇ¡ÅcÇ∑Ç´ÅcÅHÅcà´Ç¢êl%CSTR:åÍîˆçmíË2%%UNICODE(0x2661)%
+				PRINTFORM ÂØùÂèñ„Çã„ÅÆ„Å£‚Ä¶„Åô„Åç‚Ä¶Ôºü‚Ä¶ÊÇ™„ÅÑ‰∫∫%CSTR:Ë™ûÂ∞æËÇØÂÆö2%%UNICODE(0x2661)%
 			ELSEIF !RAND:5
-				PRINTFORM éqã{Ç¡%UNICODE(0x2661)%ÅcÇ®Ç¡ÅcìMÇÍÇÈÇ¡%UNICODE(0x2661)%
+				PRINTFORM Â≠êÂÆÆ„Å£%UNICODE(0x2661)%‚Ä¶„Åä„Å£‚Ä¶Ê∫∫„Çå„Çã„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:4
-				PRINTFORM ÇÕÇüÇÕÇüÇ¡Åc%UNICODE(0x2661)%ÅcãCéùÇøÇÊÇ≠Çµ%CSTR:åÍîˆñΩóﬂã≠%Ç¡%UNICODE(0x2661)%
+				PRINTFORM „ÅØ„ÅÅ„ÅØ„ÅÅ„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åè„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§Âº∑%„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:3
-				PRINTFORM Ç®Ç¡ÅcÇ®ÇøÇÒÇøÇÒãCéùÇøÇ¢Ç¢%CSTR:åÍîˆñ‚Ç§%ÅHÅcÇ§ÇÍÇµÇ¢Åc%CSTR:åÍîˆîΩâû%Ç¡%UNICODE(0x2661)%
+				PRINTFORM „Åä„Å£‚Ä¶„Åä„Å°„Çì„Å°„ÇìÊ∞óÊåÅ„Å°„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü‚Ä¶„ÅÜ„Çå„Åó„ÅÑ‚Ä¶%CSTR:Ë™ûÂ∞æÂèçÂøú%„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:2
-				PRINTFORM Ç±ÇÒÇ»Ç…Ç≥ÇπÇƒÇ•Åc%UNICODE(0x2661)%ÅcÇ‡Ç§%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%ÅcÇ¢Ç‚ÇüÇ†Ç†ÇüÇ¡%UNICODE(0x2661)%
+				PRINTFORM „Åì„Çì„Å™„Å´„Åï„Åõ„Å¶„Åá‚Ä¶%UNICODE(0x2661)%‚Ä¶„ÇÇ„ÅÜ%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%‚Ä¶„ÅÑ„ÇÑ„ÅÅ„ÅÇ„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%
 			ELSE
-				PRINTFORM %CSTR:åÍîˆîΩâû%ÅcÇ¡%UNICODE(0x2661)%ÅcÇ‡Ç¡Ç∆Ç‡Ç¡Ç∆ÇßÅcãCéùÇøÇÊÇ≠ÇµÇƒÇ•%UNICODE(0x2661)%
+				PRINTFORM %CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶„Å£%UNICODE(0x2661)%‚Ä¶„ÇÇ„Å£„Å®„ÇÇ„Å£„Å®„Åâ‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åè„Åó„Å¶„Åá%UNICODE(0x2661)%
 			ENDIF
-		ELSEIF TALENT:çáà” == 1
+		ELSEIF TALENT:ÂêàÊÑè == 1
 			IF !RAND:12
-				PRINTFORM ÇªÇÍçDÇ´Ç¡Åc ãCéùÇøÇ°ÅcÇ†ÇüÇÒÇ¡%UNICODE(0x2661)%ÅcÇ¢Ç°Ç¡ÅcÇ‡Ç¡Ç∆ÇßÇ¡ÅcÇµÇƒÇ•Ç¡Åc%UNICODE(0x2661)%Åc
+				PRINTFORM „Åù„ÇåÂ•Ω„Åç„Å£‚Ä¶ Ê∞óÊåÅ„Å°„ÅÉ‚Ä¶„ÅÇ„ÅÅ„Çì„Å£%UNICODE(0x2661)%‚Ä¶„ÅÑ„ÅÉ„Å£‚Ä¶„ÇÇ„Å£„Å®„Åâ„Å£‚Ä¶„Åó„Å¶„Åá„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶
 			ELSEIF !RAND:11
-				PRINTFORM Åc%CSTR:åÍîˆî˜èŒ%ÅcãCéùÇøÇ¢Ç°Åcç°ì˙Ç‡Ç¢Ç¡ÇœÇ¢Ç°%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶Ê∞óÊåÅ„Å°„ÅÑ„ÅÉ‚Ä¶‰ªäÊó•„ÇÇ„ÅÑ„Å£„Å±„ÅÑ„ÅÉ%UNICODE(0x2661)%
 			ELSEIF !RAND:10
-				PRINTFORM %CSTR:àÍêlèÃ%Ç¡Åc%CSTR:ìÒêlèÃ%Ç∆ÇÃÉZÉbÉNÉXÇæÇ¢Ç∑Ç´%CSTR:åÍîˆÇ≈Ç∑2%%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„Å£‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„Å®„ÅÆ„Çª„ÉÉ„ÇØ„Çπ„Å†„ÅÑ„Åô„Åç%CSTR:Ë™ûÂ∞æ„Åß„Åô2%%UNICODE(0x2661)%
 			ELSEIF !RAND:9
-				PRINTFORM %CSTR:åÍîˆãëê‚%%UNICODE(0x2661)%ÅcípÇ∏Ç©ÇµÇ¢Ç©ÇÁÇüÇ¡ÅcãCéùÇøÇÊÇ≠Ç»Ç¡ÇƒÇÈäÁÇ›Ç¬ÇﬂÇ»Ç¢Ç≈Ç•Ç¡%UNICODE(0x2661)%
+				PRINTFORM %CSTR:Ë™ûÂ∞æÊãíÁµ∂%%UNICODE(0x2661)%‚Ä¶ÊÅ•„Åö„Åã„Åó„ÅÑ„Åã„Çâ„ÅÅ„Å£‚Ä¶Ê∞óÊåÅ„Å°„Çà„Åè„Å™„Å£„Å¶„ÇãÈ°î„Åø„Å§„ÇÅ„Å™„ÅÑ„Åß„Åá„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:8
-				PRINTFORM %CSTR:ìÒêlèÃ%ÇÃÇ®Ç®Ç´Ç¢ÇÃÇß%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%ÇÃÇ»Ç©Ç…Ç≈ÇΩÇËÇÕÇ¢Ç¡ÇΩÇËÇ°%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åä„Åä„Åç„ÅÑ„ÅÆ„Åâ%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÅÆ„Å™„Åã„Å´„Åß„Åü„Çä„ÅØ„ÅÑ„Å£„Åü„Çä„ÅÉ%UNICODE(0x2661)%
 			ELSEIF !RAND:7
-				PRINTFORM Ç¢Ç¢Ç¡Ç‡Ç¡Ç∆ÇßÇ¡ÅcÇ®Ç»Ç©ÇµÇ—ÇÍÇƒÇ•Ç¡%UNICODE(0x2661)%
+				PRINTFORM „ÅÑ„ÅÑ„Å£„ÇÇ„Å£„Å®„Åâ„Å£‚Ä¶„Åä„Å™„Åã„Åó„Å≥„Çå„Å¶„Åá„Å£%UNICODE(0x2661)%
 			ELSEIF !RAND:6
-				PRINTFORM Ç±ÅcÇ±ÇÒÇ»Ç…Ç¢Ç¡ÇœÇ¢Ç°ÅcõsÇÒÇ∂Ç·Ç§Ç£Åc%UNICODE(0x2661)%
+				PRINTFORM „Åì‚Ä¶„Åì„Çì„Å™„Å´„ÅÑ„Å£„Å±„ÅÑ„ÅÉ‚Ä¶Â≠ï„Çì„Åò„ÇÉ„ÅÜ„ÅÖ‚Ä¶%UNICODE(0x2661)%
 			ELSEIF !RAND:5
-				PRINTFORM Ç¢ÇøÇŒÇÒâúÇ‹Ç≈Ç´ÇƒÇ•Ç¡Åc%UNICODE(0x2661)%ÅcÇ≈Ç´ÇøÇ·Ç¡ÇƒÇ‡Ç¢Ç¢Ç©ÇÁÇü%UNICODE(0x2661)%
+				PRINTFORM „ÅÑ„Å°„Å∞„ÇìÂ••„Åæ„Åß„Åç„Å¶„Åá„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶„Åß„Åç„Å°„ÇÉ„Å£„Å¶„ÇÇ„ÅÑ„ÅÑ„Åã„Çâ„ÅÅ%UNICODE(0x2661)%
 			ELSEIF !RAND:4
-				PRINTFORM Åc%CSTR:àÍêlèÃ%Çï¯Ç¢ÇƒÇ•Ç¡Åc%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„ÇíÊä±„ÅÑ„Å¶„Åá„Å£‚Ä¶%UNICODE(0x2661)%
 			ELSEIF !RAND:3
-				PRINTFORM %CSTR:åÍîˆîΩâû%ÅcÇ∂ÇÁÇ≥Ç»Ç¢Ç≈Ç•Åc%UNICODE(0x2661)%
+				PRINTFORM %CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶„Åò„Çâ„Åï„Å™„ÅÑ„Åß„Åá‚Ä¶%UNICODE(0x2661)%
 			ELSEIF !RAND:2
-				PRINTFORM %CSTR:ìÒêlèÃ%Ç…Ç∫ÇÒÇ‘Ç¡ÅcÇ®Ç©ÇµÇ≠Ç≥ÇÍÇƒÇÈÇ£Åc%UNICODE(0x2661)%
+				PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„Å´„Åú„Çì„Å∂„Å£‚Ä¶„Åä„Åã„Åó„Åè„Åï„Çå„Å¶„Çã„ÅÖ‚Ä¶%UNICODE(0x2661)%
 			ELSE
-				PRINTFORM Åc%CSTR:åÍîˆî˜èŒ%Åc%CSTR:àÍêlèÃ%Ç¡ÅcÇ‡Ç§âúÇ≥ÇÒé∏äi%UNICODE(0x2661)%
+				PRINTFORM ‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å£‚Ä¶„ÇÇ„ÅÜÂ••„Åï„ÇìÂ§±Ê†º%UNICODE(0x2661)%
 			ENDIF
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 400
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 400
 		IF !RAND:6
-			PRINTFORM ÅcÇ´Ç‡ÇøÅcÅcãCéùÇøÇ¢Ç°Ç¡ÅcÇ†ÇüÇ¡ÅcÇÒÇ†ÇüÇ¡%UNICODE(0x2661)%Åc
+			PRINTFORM ‚Ä¶„Åç„ÇÇ„Å°‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„ÅÑ„ÅÉ„Å£‚Ä¶„ÅÇ„ÅÅ„Å£‚Ä¶„Çì„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:5
-			PRINTFORM Ç‚ÇüÅcêGÇÁÇ»Ç¢Ç≈Åc%CSTR:åÍîˆãëê‚%Åc
+			PRINTFORM „ÇÑ„ÅÅ‚Ä¶Ëß¶„Çâ„Å™„ÅÑ„Åß‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM Åc%CSTR:åÍîˆîΩâû%Åc%CSTR:åÍîˆYES%ÅcÇ»Ç©Ç…Ç°Åc%UNICODE(0x2661)%
+			PRINTFORM ‚Ä¶%CSTR:Ë™ûÂ∞æÂèçÂøú%‚Ä¶%CSTR:Ë™ûÂ∞æYES%‚Ä¶„Å™„Åã„Å´„ÅÉ‚Ä¶%UNICODE(0x2661)%
 		ELSEIF !RAND:3
-			PRINTFORM ñ{ìñÇ…Ç°ÅcïvÇÃÇ∂Ç·Ç»Ç¢Ç†Ç©ÇøÇ·ÇÒÇ≈Ç´ÇøÇ·Ç§Ç¡%UNICODE(0x2661)%Åc
+			PRINTFORM Êú¨ÂΩì„Å´„ÅÉ‚Ä¶Â§´„ÅÆ„Åò„ÇÉ„Å™„ÅÑ„ÅÇ„Åã„Å°„ÇÉ„Çì„Åß„Åç„Å°„ÇÉ„ÅÜ„Å£%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:2
-			PRINTFORM Ç¢ÇØÇ»Ç¢ÇÃÇ¡ÅcÅc%CSTR:àÍêlèÃ%Åcåãç•ÇµÇƒÇ•Ç¡Åc%UNICODE(0x2661)%
+			PRINTFORM „ÅÑ„Åë„Å™„ÅÑ„ÅÆ„Å£‚Ä¶‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶ÁµêÂ©ö„Åó„Å¶„Åá„Å£‚Ä¶%UNICODE(0x2661)%
 		ELSE
-			PRINTFORM %CSTR:ìÒêlèÃ%ÇÃÇ®ÇÒÇ»Ç…Ç¡ÅcÇ»Ç¡ÇøÇ·Ç§Ç£Åc%UNICODE(0x2661)%
+			PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åä„Çì„Å™„Å´„Å£‚Ä¶„Å™„Å£„Å°„ÇÉ„ÅÜ„ÅÖ‚Ä¶%UNICODE(0x2661)%
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 300
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 300
 		IF !RAND:6
-			PRINTFORM ãCéùÇøÇ¢Ç°ÅcÅcÇüÅcÇÕÇüÇ¡%UNICODE(0x2661)%Åc
+			PRINTFORM Ê∞óÊåÅ„Å°„ÅÑ„ÅÉ‚Ä¶‚Ä¶„ÅÅ‚Ä¶„ÅØ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:5
-			PRINTFORM ÇªÅcÇªÇ±ÇßÅcïèÇ≈Ç¡Åc
+			PRINTFORM „Åù‚Ä¶„Åù„Åì„Åâ‚Ä¶Êí´„Åß„Å£‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM Åc%CSTR:àÍêlèÃ%Ç¡ÅcÅIÅcÇ®ï†Ç…Åcó~ÇµÇ≠Ç»Ç¡ÇƒÇ•Ç¡Åc%UNICODE(0x2661)%
+			PRINTFORM ‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å£‚Ä¶ÔºÅ‚Ä¶„ÅäËÖπ„Å´‚Ä¶Ê¨≤„Åó„Åè„Å™„Å£„Å¶„Åá„Å£‚Ä¶%UNICODE(0x2661)%
 		ELSEIF !RAND:3
-			PRINTFORM Ç‹ÇΩ%CSTR:àÍêlèÃ%ÅcÅc%CSTR:åÍîˆNo%ÅcïvÇó†êÿÇ¡ÇøÇ·Ç¡ÇƒÇÈÇ£Åc
+			PRINTFORM „Åæ„Åü%CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æNo%‚Ä¶Â§´„ÇíË£èÂàá„Å£„Å°„ÇÉ„Å£„Å¶„Çã„ÅÖ‚Ä¶
 		ELSEIF !RAND:2
-			PRINTFORM ÅcïvÇÃÇ∂Ç·ÅcÇ‡Ç§ãCéùÇøÇÊÇ≠Ç»ÇÍÇ»Ç¢%CSTR:åÍîˆÇ‹Ç∑%%UNICODE(0x2661)%Åc
+			PRINTFORM ‚Ä¶Â§´„ÅÆ„Åò„ÇÉ‚Ä¶„ÇÇ„ÅÜÊ∞óÊåÅ„Å°„Çà„Åè„Å™„Çå„Å™„ÅÑ%CSTR:Ë™ûÂ∞æ„Åæ„Åô%%UNICODE(0x2661)%‚Ä¶
 		ELSE
-			PRINTFORM Ç±ÇÒÇ»Ç…Ç®Ç≠Ç£ÅcÇ¡%UNICODE(0x2661)%Åc
+			PRINTFORM „Åì„Çì„Å™„Å´„Åä„Åè„ÅÖ‚Ä¶„Å£%UNICODE(0x2661)%‚Ä¶
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 200
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 200
 		IF !RAND:6
-			PRINTFORM ÅcÇ°ÅcÇ–Ç¢Ç°ÅcÇ°%UNICODE(0x2661)%Åc
+			PRINTFORM ‚Ä¶„ÅÉ‚Ä¶„Å≤„ÅÑ„ÅÉ‚Ä¶„ÅÉ%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:5
-			PRINTFORM ÇÒÅcÇ‚ÇüÅcÇ≠Ç∑ÇÆÇ¡ÇΩÇ¢Ç¡Åc
+			PRINTFORM „Çì‚Ä¶„ÇÑ„ÅÅ‚Ä¶„Åè„Åô„Åê„Å£„Åü„ÅÑ„Å£‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM ÅcÇ±ÇÒÇ»Ç±Ç∆ÇµÇøÇ·Ç¡Åc Ç¢ÇØÇ»Ç¢ÅcÇÃÇ…Ç°ÅcÇ¡Åc
+			PRINTFORM ‚Ä¶„Åì„Çì„Å™„Åì„Å®„Åó„Å°„ÇÉ„Å£‚Ä¶ „ÅÑ„Åë„Å™„ÅÑ‚Ä¶„ÅÆ„Å´„ÅÉ‚Ä¶„Å£‚Ä¶
 		ELSEIF !RAND:3
-			PRINTFORM %CSTR:àÍêlèÃ%ÅcâúÇ≥ÇÒé∏äiÇ¡ÅcÇ†Çü%CSTR:åÍîˆãëê‚%Ç¡Åc%UNICODE(0x2661)%
+			PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%‚Ä¶Â••„Åï„ÇìÂ§±Ê†º„Å£‚Ä¶„ÅÇ„ÅÅ%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£‚Ä¶%UNICODE(0x2661)%
 		ELSEIF !RAND:2
-			PRINTFORM ÅcåÉÇµÇ≠ÇµÇ»Ç¢Ç≈ÅcÇ©ÇΩÇøÇ¡ÅcÇ©ÇÌÇ¡ÇøÇ·Ç§Ç£Åc
+			PRINTFORM ‚Ä¶ÊøÄ„Åó„Åè„Åó„Å™„ÅÑ„Åß‚Ä¶„Åã„Åü„Å°„Å£‚Ä¶„Åã„Çè„Å£„Å°„ÇÉ„ÅÜ„ÅÖ‚Ä¶
 		ELSE
-			PRINTFORM ÅcÅcÇ†ÇÃêlÇÃÇÊÇËÇ‡Ç¡ÅcÅcãCéùÇøÇ¢Ç¢Ç≈Ç∑Ç¡%UNICODE(0x2661)%ÅcÅIÅc
+			PRINTFORM ‚Ä¶‚Ä¶„ÅÇ„ÅÆ‰∫∫„ÅÆ„Çà„Çä„ÇÇ„Å£‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ„Åß„Åô„Å£%UNICODE(0x2661)%‚Ä¶ÔºÅ‚Ä¶
 		ENDIF
-	ELSEIF  EXP:ÇmÇsÇkí≤ã≥åoå± >= 100
+	ELSEIF  EXP:ÔºÆÔº¥Ôº¨Ë™øÊïôÁµåÈ®ì >= 100
 		IF !RAND:6
-			PRINTFORM ÅcÇ¢ÅcÇ¢Ç°ÅcÅcÇÒÇüÅcÇ”ÇüÇüÅc%UNICODE(0x2661)%Åc
+			PRINTFORM ‚Ä¶„ÅÑ‚Ä¶„ÅÑ„ÅÉ‚Ä¶‚Ä¶„Çì„ÅÅ‚Ä¶„Åµ„ÅÅ„ÅÅ‚Ä¶%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:5
-			PRINTFORM Ç®ÅcÇ®ï†ÇüÅcïèÇ≈ÇøÇ·ÅcÇÒÇ¡Åc%UNICODE(0x2661)%Åc
+			PRINTFORM „Åä‚Ä¶„ÅäËÖπ„ÅÅ‚Ä¶Êí´„Åß„Å°„ÇÉ‚Ä¶„Çì„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM ÅcÇ–ÇÎÇ™Ç¡ÇøÇ·Ç¡Åc%CSTR:åÍîˆãëê‚%Ç¡ÅcÇ©Ç´Ç‹ÇÌÇ≥Ç»Ç¢Ç≈Ç•Ç¡Åc
+			PRINTFORM ‚Ä¶„Å≤„Çç„Åå„Å£„Å°„ÇÉ„Å£‚Ä¶%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£‚Ä¶„Åã„Åç„Åæ„Çè„Åï„Å™„ÅÑ„Åß„Åá„Å£‚Ä¶
 		ELSEIF !RAND:3
-			PRINTFORM îîDÅcÅcîîDÅcÇµÇƒ%CSTR:åÍîˆäÛñ]%ÅcÇ®äËÇ¢%CSTR:åÍîˆÇ®äËÇ¢%Ç¡Åc
+			PRINTFORM ÈÅøÂ¶ä‚Ä¶‚Ä¶ÈÅøÂ¶ä‚Ä¶„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%‚Ä¶„ÅäÈ°ò„ÅÑ%CSTR:Ë™ûÂ∞æ„ÅäÈ°ò„ÅÑ%„Å£‚Ä¶
 		ELSEIF !RAND:2
-			PRINTFORM Åc%CSTR:ìÒêlèÃ%ÇÃï˚Ç™ÅcÇ®Ç®Ç´Ç¢%CSTR:åÍîˆÇ≈Ç∑%ÅcÅc
+			PRINTFORM ‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆÊñπ„Åå‚Ä¶„Åä„Åä„Åç„ÅÑ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶‚Ä¶
 		ELSE
-			PRINTFORM ïvÇ∆Ç∑ÇÈÇÊÇËÇ¡ÅcÅcãCéùÇøÇ¢Ç¢Ç¡ÅcÅc
+			PRINTFORM Â§´„Å®„Åô„Çã„Çà„Çä„Å£‚Ä¶‚Ä¶Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ„Å£‚Ä¶‚Ä¶
 		ENDIF
 	ELSE
 		IF !RAND:6
-			PRINTFORM ÅcÇ°ÅcÅcÇüÅcÇü%UNICODE(0x2661)%Åc
+			PRINTFORM ‚Ä¶„ÅÉ‚Ä¶‚Ä¶„ÅÅ‚Ä¶„ÅÅ%UNICODE(0x2661)%‚Ä¶
 		ELSEIF !RAND:5
-			PRINTFORM Ç≥ÅcêGÇÁÇüÅcÇ¡Åc
+			PRINTFORM „Åï‚Ä¶Ëß¶„Çâ„ÅÅ‚Ä¶„Å£‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM %CSTR:åÍîˆãëê‚%Ç¡ÅcÅcÇ´ÇΩÇüÇ¡Åc
+			PRINTFORM %CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£‚Ä¶‚Ä¶„Åç„Åü„ÅÅ„Å£‚Ä¶
 		ELSEIF !RAND:3
-			PRINTFORM ïvÇ™ÅcÇ¢ÇÈÇÃÇ…ÅcÇ¡ÅcÇÒÇÒÇ¡Åc
+			PRINTFORM Â§´„Åå‚Ä¶„ÅÑ„Çã„ÅÆ„Å´‚Ä¶„Å£‚Ä¶„Çì„Çì„Å£‚Ä¶
 		ELSEIF !RAND:2
-			PRINTFORM Ç†ÇüÅcÇ‚ÇüÅcÅcÇ≤ÇﬂÅcÇ¡ÅcÇ»Ç≥Ç¡Åc
+			PRINTFORM „ÅÇ„ÅÅ‚Ä¶„ÇÑ„ÅÅ‚Ä¶‚Ä¶„Åî„ÇÅ‚Ä¶„Å£‚Ä¶„Å™„Åï„Å£‚Ä¶
 		ELSE
-			PRINTFORM ëæÇ¢ÇÃÇßÅcÅcÇ®Ç≠Ç¡ÅcÇ…Ç°ÅcÇ¡Åc
+			PRINTFORM Â§™„ÅÑ„ÅÆ„Åâ‚Ä¶‚Ä¶„Åä„Åè„Å£‚Ä¶„Å´„ÅÉ‚Ä¶„Å£‚Ä¶
 		ENDIF
 	ENDIF
-ELSEIF TALENT:ÉCÉåÉMÉÖÉâÅ[
-	IF TALENT:à§êl == 1 || TALENT:êSêå
+ELSEIF TALENT:„Ç§„É¨„ÇÆ„É•„É©„Éº
+	IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 		IF !RAND:5
-			PRINTFORM %CSTR:åÍîˆãëê‚%Ç¡ÅcÅcÇ±ÇÒÇ»ÇüÇ¡Åc
+			PRINTFORM %CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£‚Ä¶‚Ä¶„Åì„Çì„Å™„ÅÅ„Å£‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM Ç¢ÇØÇ»Ç¢ÅcÇÃÇ…ÅcÇ¡Åc
+			PRINTFORM „ÅÑ„Åë„Å™„ÅÑ‚Ä¶„ÅÆ„Å´‚Ä¶„Å£‚Ä¶
 		ELSEIF !RAND:3
-			PRINTFORM Ç›ÇÒÅcÇ»ÅcÅcÇ≤ÇﬂÅcÇ¡
+			PRINTFORM „Åø„Çì‚Ä¶„Å™‚Ä¶‚Ä¶„Åî„ÇÅ‚Ä¶„Å£
 		ELSEIF !RAND:2
-			PRINTFORM Åc
+			PRINTFORM ‚Ä¶
 		ELSE
-			PRINTFORM ëœÇ¶ÇÁÇÍÅcÇ»ÅcÇ¡Åc
+			PRINTFORM ËÄê„Åà„Çâ„Çå‚Ä¶„Å™‚Ä¶„Å£‚Ä¶
 		ENDIF
 	ELSE
 		IF !RAND:5
-			PRINTFORM %CSTR:åÍîˆãëê‚%Ç¡Åc
+			PRINTFORM %CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£‚Ä¶
 		ELSEIF !RAND:4
-			PRINTFORM Ç±ÇÃÅcíˆìxÅc
+			PRINTFORM „Åì„ÅÆ‚Ä¶Á®ãÂ∫¶‚Ä¶
 		ELSEIF !RAND:3
-			PRINTFORM âıäyÇ…ÅcÇ»ÇÒÅc
+			PRINTFORM Âø´Ê•Ω„Å´‚Ä¶„Å™„Çì‚Ä¶
 		ELSEIF !RAND:2
-			PRINTFORM Åc
+			PRINTFORM ‚Ä¶
 		ELSE
-			PRINTFORM Ç≠Ç¡ÅcÅc
+			PRINTFORM „Åè„Å£‚Ä¶‚Ä¶
 		ENDIF
 	ENDIF
-ELSEIF TALENT:à§êl == 1 || TALENT:êSêå
+ELSEIF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:5
-		PRINTFORM ÇüÇ¡Ç†ÇüÇ¡Ç†Ç¡Åc
+		PRINTFORM „ÅÅ„Å£„ÅÇ„ÅÅ„Å£„ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç‡Ç¡Ç∆Ç¡ÅcìÀÇ¢ÇƒÇ•Ç¡Åc
+		PRINTFORM „ÇÇ„Å£„Å®„Å£‚Ä¶Á™Å„ÅÑ„Å¶„Åá„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM çDÇ´Ç¡ÅcÇ∑Ç´Ç¡Åc
+		PRINTFORM Â•Ω„Åç„Å£‚Ä¶„Åô„Åç„Å£‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM Ç‡Ç¡Ç∆‰Sì‡Çî∆ÇµÇƒ%CSTR:åÍîˆäÛñ]%Ç¡Åc
+		PRINTFORM „ÇÇ„Å£„Å®ËÜ£ÂÜÖ„ÇíÁäØ„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:5
-		PRINTFORM ÇüÇ¡Ç†ÇüÇ¡Ç†Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÅ„Å£„ÅÇ„ÅÅ„Å£„ÅÇ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç†ÇÕÇ¡ÅcÇ‡Ç¡Ç∆Ç‡Ç¡Ç∆Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÇ„ÅØ„Å£‚Ä¶„ÇÇ„Å£„Å®„ÇÇ„Å£„Å®„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ãCéùÇøÅcÇ†ÇÒÇ¡ÅcÇÊÇ∑Ç¨Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM Ê∞óÊåÅ„Å°‚Ä¶„ÅÇ„Çì„Å£‚Ä¶„Çà„Åô„Åé„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç†Ç†ÇüÇ¡%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÇ„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:5
-		PRINTFORM óDÇµÇ≠Åc
+		PRINTFORM ÂÑ™„Åó„Åè‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇªÇ±Ç¡Åc
+		PRINTFORM „Åù„Åì„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Ç¢Ç¢Ç¡
+		PRINTFORM „ÅÑ„ÅÑ„Å£
 	ELSEIF !RAND:2
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSE
-		PRINTFORM ãCéùÇøÇ¢Ç¢Ç¡Åc
+		PRINTFORM Ê∞óÊåÅ„Å°„ÅÑ„ÅÑ„Å£‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORM åôÇ¡Åc
+		PRINTFORM Â´å„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM êGÇÁÇ»ÅcÇ¡Åc
+		PRINTFORM Ëß¶„Çâ„Å™‚Ä¶„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Ç≠Ç¡Åc
+		PRINTFORM „Åè„Å£‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç±ÇÒÇ»Åc
+		PRINTFORM „Åì„Çì„Å™‚Ä¶
 	ELSE
-		PRINTFORM Ç‚ÇﬂÇ¡Åc
+		PRINTFORM „ÇÑ„ÇÅ„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1540,93 +1540,93 @@ ENDIF
 
 $INPUT_LOOP
 
-IF TALENT:à§êl == 1 || TALENT:êSêå
+IF TALENT:ÊÑõ‰∫∫ == 1 || TALENT:ÂøÉÈÖî
 	IF !RAND:10
-		PRINTFORM Ç†Ç†Ç¡Åc
+		PRINTFORM „ÅÇ„ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ†Ç¡Åc
+		PRINTFORM „Çì„ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç†ÇÒÇ¡Åc
+		PRINTFORM „ÅÇ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”ÇüÇ¡Åc
+		PRINTFORM „Åµ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇüÇÒÇ¡Åc
+		PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÉCÉbÅc
+		PRINTFORM „Ç§„ÉÉ‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Ç¡Åc
+		PRINTFORM „Çì„Åè„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç¡ÇÕÇüÅc
+		PRINTFORM „Å£„ÅØ„ÅÅ‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1 || TALENT:í≤ã≥çœÇ› == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1 || TALENT:Ë™øÊïôÊ∏à„Åø == 1
 	IF !RAND:10
-		PRINTFORM Ç†Ç†Ç¡Åc
+		PRINTFORM „ÅÇ„ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ†Ç¡Åc
+		PRINTFORM „Çì„ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç†ÇÒÇ¡Åc
+		PRINTFORM „ÅÇ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”ÇüÇ¡Åc
+		PRINTFORM „Åµ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇüÇÒÇ¡Åc
+		PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÉCÉbÅc
+		PRINTFORM „Ç§„ÉÉ‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇÒÇ≠Ç¡Åc
+		PRINTFORM „Çì„Åè„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç¡ÇÕÇüÅc
+		PRINTFORM „Å£„ÅØ„ÅÅ‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç†Ç¡Åc
+		PRINTFORM „ÅÇ„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç”ÇüÇ¡Åc
+		PRINTFORM „Åµ„ÅÅ„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM ÇüÇÒÇ¡Åc
+		PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¢Ç¡Åc
+		PRINTFORM „ÅÑ„Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç–Ç·Ç¡Åc
+		PRINTFORM „Å≤„ÇÉ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç¡ÇÕÅc
+		PRINTFORM „Å£„ÅØ‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:10
-		PRINTFORM ÇüÅc
+		PRINTFORM „ÅÅ‚Ä¶
 	ELSEIF !RAND:9
-		PRINTFORM ÇÒÇ¡Åc
+		PRINTFORM „Çì„Å£‚Ä¶
 	ELSEIF !RAND:8
-		PRINTFORM Ç‚Ç¡Åc
+		PRINTFORM „ÇÑ„Å£‚Ä¶
 	ELSEIF !RAND:7
-		PRINTFORM ÇÕÇüÅc
+		PRINTFORM „ÅØ„ÅÅ‚Ä¶
 	ELSEIF !RAND:6
-		PRINTFORM Ç°ÇΩÇ¡Åc
+		PRINTFORM „ÅÉ„Åü„Å£‚Ä¶
 	ELSEIF !RAND:5
-		PRINTFORM Ç£ÇüÅc
+		PRINTFORM „ÅÖ„ÅÅ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¡Åc
+		PRINTFORM „Å£‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM Åc
+		PRINTFORM ‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç–Ç·Ç¡Åc
+		PRINTFORM „Å≤„ÇÉ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç§ÇüÇ¡Åc
+		PRINTFORM „ÅÜ„ÅÅ„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1635,91 +1635,91 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 	GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 
 
 ;-------------------------------------------------
 ;-------------------------------------------------
-;íÜèoÇµÅ@öbÇ¨
+;‰∏≠Âá∫„Åó„ÄÄÂñò„Åé
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
 #DIM T_COUNT
 T_COUNT = RAND:2+1
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
 
 
-IF TALENT:ÇmÇsÇk == 1 && TALENT:ëÔóë == 0
+IF TALENT:ÔºÆÔº¥Ôº¨ == 1 && TALENT:ÊâòÂçµ == 0
 	IF !RAND:5
-		PRINTFORM éYÇﬁÇ»ÇÁ%CSTR:ìÒêlèÃ%ÇÃê‘ÇøÇ·ÇÒÇ™Ç¢Ç¢%CSTR:åÍîˆñJÇﬂÇÈ%Ç¡%UNICODE(0x2661)%ÅcïvÇÃéqãüÇ»ÇÒÇƒéYÇ›ÇΩÇ≠%CSTR:åÍîˆñ≥%Ç¡ÅI%UNICODE(0x2661)%Åc
+		PRINTFORM Áî£„ÇÄ„Å™„Çâ%CSTR:‰∫å‰∫∫Áß∞%„ÅÆËµ§„Å°„ÇÉ„Çì„Åå„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æË§í„ÇÅ„Çã%„Å£%UNICODE(0x2661)%‚Ä¶Â§´„ÅÆÂ≠ê‰æõ„Å™„Çì„Å¶Áî£„Åø„Åü„Åè%CSTR:Ë™ûÂ∞æÁÑ°%„Å£ÔºÅ%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM éqã{ÇÃíÜÅc%CSTR:ìÒêlèÃ%ÇÃÇ≈àÍît%CSTR:åÍîˆÇ≈Ç∑%Åc%UNICODE(0x2661)%ÅcïvÇÃï™ÅcÅHÅcç≈èâÇ©ÇÁ%CSTR:åÍîˆñ≥%%UNICODE(0x2661)%Åc
+		PRINTFORM Â≠êÂÆÆ„ÅÆ‰∏≠‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Åß‰∏ÄÊùØ%CSTR:Ë™ûÂ∞æ„Åß„Åô%‚Ä¶%UNICODE(0x2661)%‚Ä¶Â§´„ÅÆÂàÜ‚Ä¶Ôºü‚Ä¶ÊúÄÂàù„Åã„Çâ%CSTR:Ë™ûÂ∞æÁÑ°%%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM É_ÉÅÇ»ïvÇÃï™Ç‹Ç≈Ç¡Åc%CSTR:ìÒêlèÃ%ÇÃÇ¢Ç¡ÇœÇ¢íçÇ¢Ç≈%CSTR:åÍîˆäÛñ]%Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „ÉÄ„É°„Å™Â§´„ÅÆÂàÜ„Åæ„Åß„Å£‚Ä¶%CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„ÅÑ„Å£„Å±„ÅÑÊ≥®„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM ÇüÇüÇ†ÇüÇ¡%UNICODE(0x2661)%ÅcÅcÅc%CSTR:åÍîˆî˜èŒ%ÅcÇ«Ç§%CSTR:åÍîˆíN%ÅHÅcêlç»Ç…éÌïtÇØÇµÇΩãCï™ÇÕ%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÅ„ÅÅ„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶„Å©„ÅÜ%CSTR:Ë™ûÂ∞æË™∞%Ôºü‚Ä¶‰∫∫Â¶ª„Å´Á®Æ‰ªò„Åë„Åó„ÅüÊ∞óÂàÜ„ÅØ%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM %CSTR:ìÒêlèÃ%ÇÃéqãüîDêPÇ≥Çπ%CSTR:åÍîˆäÛñ]2%Ç¡%UNICODE(0x2661)%ÅcÉfÇ´ÇÍÇŒïvÇ‡äÏÇ‘%CSTR:åÍîˆÇæÇÎÇ§%%UNICODE(0x2661)%Åc%CSTR:åÍîˆî˜èŒ%Åc
+		PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ≠ê‰æõÂ¶äÂ®†„Åï„Åõ%CSTR:Ë™ûÂ∞æÂ∏åÊúõ2%„Å£%UNICODE(0x2661)%‚Ä¶„Éá„Åç„Çå„Å∞Â§´„ÇÇÂñú„Å∂%CSTR:Ë™ûÂ∞æ„Å†„Çç„ÅÜ%%UNICODE(0x2661)%‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶
 	ENDIF
-ELSEIF TALENT:êSêå == 1
+ELSEIF TALENT:ÂøÉÈÖî == 1
 	IF !RAND:5
-		PRINTFORM %CSTR:ìÒêlèÃ%ÇÃÇ»ÇÁÅAÇ¢Ç≠ÇÁÇ≈Ç‡éÛÇØé~ÇﬂÇƒÇ†Ç∞%CSTR:åÍîˆëóÇÈ%Åc%UNICODE(0x2661)%Åc
+		PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆ„Å™„Çâ„ÄÅ„ÅÑ„Åè„Çâ„Åß„ÇÇÂèó„ÅëÊ≠¢„ÇÅ„Å¶„ÅÇ„Åí%CSTR:Ë™ûÂ∞æÈÄÅ„Çã%‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM éqçÏÇËÇ≈Ç‡Åc%UNICODE(0x2661)%ÅcÇ¡ÅcñΩóﬂÇ»ÇÁÅcédï˚Ç»Ç¢%CSTR:åÍîˆâûìö2%Åc%UNICODE(0x2661)%Åc
+		PRINTFORM Â≠ê‰Ωú„Çä„Åß„ÇÇ‚Ä¶%UNICODE(0x2661)%‚Ä¶„Å£‚Ä¶ÂëΩ‰ª§„Å™„Çâ‚Ä¶‰ªïÊñπ„Å™„ÅÑ%CSTR:Ë™ûÂ∞æÂøúÁ≠î2%‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ç~ÇÎÇ≥Ç∏éYÇ‹ÇπÇƒ%CSTR:åÍîˆäÛñ]%Ç¡%UNICODE(0x2661)%ÅcÇ¢Ç¢éqéYÇﬁÇ©ÇÁÇ¡%UNICODE(0x2661)%Åc
+		PRINTFORM Èôç„Çç„Åï„ÅöÁî£„Åæ„Åõ„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£%UNICODE(0x2661)%‚Ä¶„ÅÑ„ÅÑÂ≠êÁî£„ÇÄ„Åã„Çâ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM %CSTR:àÍêlèÃ%Ç…%CSTR:ìÒêlèÃ%ÇÃê‘ÇøÇ·ÇÒéYÇ‹ÇπÇƒÇ≠ÇÍÇÈ%CSTR:åÍîˆâûìö3%Åc%UNICODE(0x2661)%ÅcÇ†ÇüÇÒÇ¡Åc%UNICODE(0x2661)%Åc
+		PRINTFORM %CSTR:‰∏Ä‰∫∫Áß∞%„Å´%CSTR:‰∫å‰∫∫Áß∞%„ÅÆËµ§„Å°„ÇÉ„ÇìÁî£„Åæ„Åõ„Å¶„Åè„Çå„Çã%CSTR:Ë™ûÂ∞æÂøúÁ≠î3%‚Ä¶%UNICODE(0x2661)%‚Ä¶„ÅÇ„ÅÅ„Çì„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM Ç¢Ç¡ÇœÇ¢íçÇ¢Ç≈%CSTR:åÍîˆäÛñ]%Ç¡%UNICODE(0x2661)%Åcéqã{Ç™àÏÇÍÇÈÇ≠ÇÁÇ¢Ç…Ç¡Åc%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÑ„Å£„Å±„ÅÑÊ≥®„ÅÑ„Åß%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£%UNICODE(0x2661)%‚Ä¶Â≠êÂÆÆ„ÅåÊ∫¢„Çå„Çã„Åè„Çâ„ÅÑ„Å´„Å£‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ENDIF
-ELSEIF TALENT:à§êl == 1
+ELSEIF TALENT:ÊÑõ‰∫∫ == 1
 	IF !RAND:5
-		PRINTFORM ÇøÇ·ÇÒÇ∆éÌïtÇØÇµ%CSTR:åÍîˆñΩóﬂ%ÅcÅH%UNICODE(0x2661)%ÅcÇ†ÇÒÇ¡%UNICODE(0x2661)%ÅcÇ†ÇüÇ†Ç†Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „Å°„ÇÉ„Çì„Å®Á®Æ‰ªò„Åë„Åó%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%‚Ä¶Ôºü%UNICODE(0x2661)%‚Ä¶„ÅÇ„Çì„Å£%UNICODE(0x2661)%‚Ä¶„ÅÇ„ÅÅ„ÅÇ„ÅÇ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM Ç¡ÅcÇ†ÇüÇüÇ†Ç†Ç†ÇüÇ¡%UNICODE(0x2661)%ÅcÇ¡ÅcÅc%CSTR:åÍîˆî˜èŒ%Åcà§ÇµÇƒ%CSTR:åÍîˆà§%ÅcÅc%UNICODE(0x2661)%ÅcÇøÇ„Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „Å£‚Ä¶„ÅÇ„ÅÅ„ÅÅ„ÅÇ„ÅÇ„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶„Å£‚Ä¶‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%‚Ä¶ÊÑõ„Åó„Å¶%CSTR:Ë™ûÂ∞æÊÑõ%‚Ä¶‚Ä¶%UNICODE(0x2661)%‚Ä¶„Å°„ÇÖ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ç°ÇæÇØÇ¡Åcà§ÇµçáÇ§ïvïwÇ…%CSTR:åÍîˆìØà”ãÅÇﬁ2%Ç¡%UNICODE(0x2661)%Åcç»Ç…Ç¢Ç¡ÇœÇ¢éÌïtÇØÇµÇƒ%CSTR:åÍîˆäÛñ]%Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM ‰ªä„Å†„Åë„Å£‚Ä¶ÊÑõ„ÅóÂêà„ÅÜÂ§´Â©¶„Å´%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ2%„Å£%UNICODE(0x2661)%‚Ä¶Â¶ª„Å´„ÅÑ„Å£„Å±„ÅÑÁ®Æ‰ªò„Åë„Åó„Å¶%CSTR:Ë™ûÂ∞æÂ∏åÊúõ%„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç±ÇÃÇ‹Ç‹‰Sì‡Ç…Ç¡%UNICODE(0x2661)%ÅcÇ†Ç†Ç†Ç†Ç†ÇüÇ¡ÅI%UNICODE(0x2661)%Åc
+		PRINTFORM „Åì„ÅÆ„Åæ„ÅæËÜ£ÂÜÖ„Å´„Å£%UNICODE(0x2661)%‚Ä¶„ÅÇ„ÅÇ„ÅÇ„ÅÇ„ÅÇ„ÅÅ„Å£ÔºÅ%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM ç°Ç…Ç‡éÀê∏ÇªÇ§%CSTR:åÍîˆãtê‡%Ç¡%UNICODE(0x2661)%ÅcÇ‡ÇøÇÎÇÒ‰Sì‡%CSTR:åÍîˆìØà”ãÅÇﬁ%ÅcÇ¡%UNICODE(0x2661)%ÅHÅcÇÒÇüÇ†Ç†ÇüÇ¡ÅI%UNICODE(0x2661)%Åc
+		PRINTFORM ‰ªä„Å´„ÇÇÂ∞ÑÁ≤æ„Åù„ÅÜ%CSTR:Ë™ûÂ∞æÈÄÜË™¨%„Å£%UNICODE(0x2661)%‚Ä¶„ÇÇ„Å°„Çç„ÇìËÜ£ÂÜÖ%CSTR:Ë™ûÂ∞æÂêåÊÑèÊ±Ç„ÇÄ%‚Ä¶„Å£%UNICODE(0x2661)%Ôºü‚Ä¶„Çì„ÅÅ„ÅÇ„ÅÇ„ÅÅ„Å£ÔºÅ%UNICODE(0x2661)%‚Ä¶
 	ENDIF
-ELSEIF TALENT:èÓïw == 1
+ELSEIF TALENT:ÊÉÖÂ©¶ == 1
 	IF !RAND:5
-		PRINTFORM %CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%Åc%CSTR:àÍêlèÃ%Ç…õsÇÒÇ≈ó~ÇµÇ¢%CSTR:åÍîˆåqÇ¨%%CSTR:åÍîˆçmíË%%UNICODE(0x2661)%ÅcÅcÇ¡ÅcÇüÇ†Ç†Ç†Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM %CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%‚Ä¶%CSTR:‰∏Ä‰∫∫Áß∞%„Å´Â≠ï„Çì„ÅßÊ¨≤„Åó„ÅÑ%CSTR:Ë™ûÂ∞æÁπã„Åé%%CSTR:Ë™ûÂ∞æËÇØÂÆö%%UNICODE(0x2661)%‚Ä¶‚Ä¶„Å£‚Ä¶„ÅÅ„ÅÇ„ÅÇ„ÅÇ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM õsÇ‹ÇπÇΩÇ¢Ç¡ÇƒäÁÇµÇƒ%CSTR:åÍîˆÇ‹Ç∑%%UNICODE(0x2661)%Åc%CSTR:åÍîˆî˜èŒ%%UNICODE(0x2661)%Åcâìó∂Ç»ÇÒÇƒ%CSTR:åÍîˆâìó∂%%UNICODE(0x2661)%Åc
+		PRINTFORM Â≠ï„Åæ„Åõ„Åü„ÅÑ„Å£„Å¶È°î„Åó„Å¶%CSTR:Ë™ûÂ∞æ„Åæ„Åô%%UNICODE(0x2661)%‚Ä¶%CSTR:Ë™ûÂ∞æÂæÆÁ¨ë%%UNICODE(0x2661)%‚Ä¶ÈÅ†ÊÖÆ„Å™„Çì„Å¶%CSTR:Ë™ûÂ∞æÈÅ†ÊÖÆ%%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM ÇªÇÒÇ»Ç…çòêUÇ¡ÇƒÅc%UNICODE(0x2661)%ÅcéÌïtÇØÇµÇΩÇ¢ÇÃ%CSTR:åÍîˆñ‚Ç§%ÅH%UNICODE(0x2661)%ÅcÇ¢Ç¢%CSTR:åÍîˆãñâ¬%ÅcçDÇ´Ç»ÇæÇØÇ¡%UNICODE(0x2661)%Åc
+		PRINTFORM „Åù„Çì„Å™„Å´ËÖ∞ÊåØ„Å£„Å¶‚Ä¶%UNICODE(0x2661)%‚Ä¶Á®Æ‰ªò„Åë„Åó„Åü„ÅÑ„ÅÆ%CSTR:Ë™ûÂ∞æÂïè„ÅÜ%Ôºü%UNICODE(0x2661)%‚Ä¶„ÅÑ„ÅÑ%CSTR:Ë™ûÂ∞æË®±ÂèØ%‚Ä¶Â•Ω„Åç„Å™„Å†„Åë„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç±ÇÃÇ‹Ç‹ÇæÇ∆ÅA%CSTR:ìÒêlèÃ%Ç…éÌïtÇØÇ≥ÇÍ%CSTR:åÍîˆçsà◊3%Ç¡%UNICODE(0x2661)%ÅcÇ¡ÇÕÇüÇ†Ç¡%UNICODE(0x2661)%Åc
+		PRINTFORM „Åì„ÅÆ„Åæ„Åæ„Å†„Å®„ÄÅ%CSTR:‰∫å‰∫∫Áß∞%„Å´Á®Æ‰ªò„Åë„Åï„Çå%CSTR:Ë™ûÂ∞æË°åÁÇ∫3%„Å£%UNICODE(0x2661)%‚Ä¶„Å£„ÅØ„ÅÅ„ÅÇ„Å£%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM %CSTR:ìÒêlèÃ%ÇÃéqãüîDêPÇ≥Çπ%CSTR:åÍîˆäÛñ]2%Ç¡%UNICODE(0x2661)%ÅcÇ–Ç·ÇüÇÒÇ¡%UNICODE(0x2661)%Åc
+		PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆÂ≠ê‰æõÂ¶äÂ®†„Åï„Åõ%CSTR:Ë™ûÂ∞æÂ∏åÊúõ2%„Å£%UNICODE(0x2661)%‚Ä¶„Å≤„ÇÉ„ÅÅ„Çì„Å£%UNICODE(0x2661)%‚Ä¶
 	ENDIF
-ELSEIF TALENT:çáà” == 1
+ELSEIF TALENT:ÂêàÊÑè == 1
 	IF !RAND:5
-		PRINTFORM ÇπÇ¡Åcê”îCÇÕÅcÇ∆Ç¡%CSTR:åÍîˆñΩóﬂ%ÅcÅcÇüÇÒÇ¡Åc%UNICODE(0x2661)%
+		PRINTFORM „Åõ„Å£‚Ä¶Ë≤¨‰ªª„ÅØ‚Ä¶„Å®„Å£%CSTR:Ë™ûÂ∞æÂëΩ‰ª§%‚Ä¶‚Ä¶„ÅÅ„Çì„Å£‚Ä¶%UNICODE(0x2661)%
 	ELSEIF !RAND:4
-		PRINTFORM Ç®ï†Ç™ÅcÉ^ÉvÉ^ÉvÅc%UNICODE(0x2661)%
+		PRINTFORM „ÅäËÖπ„Åå‚Ä¶„Çø„Éó„Çø„Éó‚Ä¶%UNICODE(0x2661)%
 	ELSEIF !RAND:3
-		PRINTFORM Ç£ÅcäOÇ…ÅcÇÒÇ≠Ç¡%UNICODE(0x2661)%ÅcÇ£Ç£Ç¡ÅcÅc
+		PRINTFORM „ÅÖ‚Ä¶Â§ñ„Å´‚Ä¶„Çì„Åè„Å£%UNICODE(0x2661)%‚Ä¶„ÅÖ„ÅÖ„Å£‚Ä¶‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM Ç±ÇÒÇ»Ç…éÀê∏Ç≥ÇÍÇΩÇÁÅc%UNICODE(0x2661)%Åc
+		PRINTFORM „Åì„Çì„Å™„Å´Â∞ÑÁ≤æ„Åï„Çå„Åü„Çâ‚Ä¶%UNICODE(0x2661)%‚Ä¶
 	ELSE
-		PRINTFORM Ç†ÇÒÇ¡%UNICODE(0x2661)%ÅcÇ‚ÇüÇ¡%UNICODE(0x2661)%ÅIÅcÅc‰Sì‡ÇÕÇ¡%UNICODE(0x2661)%Åc
+		PRINTFORM „ÅÇ„Çì„Å£%UNICODE(0x2661)%‚Ä¶„ÇÑ„ÅÅ„Å£%UNICODE(0x2661)%ÔºÅ‚Ä¶‚Ä¶ËÜ£ÂÜÖ„ÅØ„Å£%UNICODE(0x2661)%‚Ä¶
 	ENDIF
 ELSE
 	IF !RAND:5
-		PRINTFORM Ç‚Ç¡Ç‚ÇﬂÇ¡ÅIÅHÅcíÜÇÕ%CSTR:åÍîˆãëê‚%Ç¡ÅIÅIÅc
+		PRINTFORM „ÇÑ„Å£„ÇÑ„ÇÅ„Å£ÔºÅÔºü‚Ä¶‰∏≠„ÅØ%CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£ÔºÅÔºÅ‚Ä¶
 	ELSEIF !RAND:4
-		PRINTFORM ÇüÅcÅcÇüÇüÇ†Ç†ÇüÅcÅcíÜÇ…Åc
+		PRINTFORM „ÅÅ‚Ä¶‚Ä¶„ÅÅ„ÅÅ„ÅÇ„ÅÇ„ÅÅ‚Ä¶‚Ä¶‰∏≠„Å´‚Ä¶
 	ELSEIF !RAND:3
-		PRINTFORM %CSTR:ìÒêlèÃ%ÇÃê‘ÇøÇ·ÇÒÇ»ÇÒÇƒÅcÅc
+		PRINTFORM %CSTR:‰∫å‰∫∫Áß∞%„ÅÆËµ§„Å°„ÇÉ„Çì„Å™„Çì„Å¶‚Ä¶‚Ä¶
 	ELSEIF !RAND:2
-		PRINTFORM %CSTR:åÍîˆãëê‚%Ç¡ÅIÅcîDêPÅcÇ¡ÅcÇ†ÇüÇ¡Åc
+		PRINTFORM %CSTR:Ë™ûÂ∞æÊãíÁµ∂%„Å£ÔºÅ‚Ä¶Â¶äÂ®†‚Ä¶„Å£‚Ä¶„ÅÇ„ÅÅ„Å£‚Ä¶
 	ELSE
-		PRINTFORM Ç±ÇÒÇ»Ç…Åcó¨ÇµçûÇ‹ÇÍÅcÇΩÇÁÇ¡Åc
+		PRINTFORM „Åì„Çì„Å™„Å´‚Ä¶ÊµÅ„ÅóËæº„Åæ„Çå‚Ä¶„Åü„Çâ„Å£‚Ä¶
 	ENDIF
 ENDIF
 
@@ -1727,25 +1727,25 @@ ENDIF
 $INPUT_LOOP
 
 IF !RAND:10
-	PRINTFORM Ç†Ç†ÇüÇ¡Åc
+	PRINTFORM „ÅÇ„ÅÇ„ÅÅ„Å£‚Ä¶
 ELSEIF !RAND:9
-	PRINTFORM Ç‚ÇüÇ†Ç¡Åc
+	PRINTFORM „ÇÑ„ÅÅ„ÅÇ„Å£‚Ä¶
 ELSEIF !RAND:8
-	PRINTFORM ÇÒÇÒÇüÇ¡Åc
+	PRINTFORM „Çì„Çì„ÅÅ„Å£‚Ä¶
 ELSEIF !RAND:7
-	PRINTFORM Ç”ÇüÇ†ÇüÇ¡Åc
+	PRINTFORM „Åµ„ÅÅ„ÅÇ„ÅÅ„Å£‚Ä¶
 ELSEIF !RAND:6
-	PRINTFORM Ç¡ÇüÇ†ÇüÇ¡Åc
+	PRINTFORM „Å£„ÅÅ„ÅÇ„ÅÅ„Å£‚Ä¶
 ELSEIF !RAND:5
-	PRINTFORM ÇüÇÒÇ¡Åc
+	PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 ELSEIF !RAND:4
-	PRINTFORM ÉbÅcÅIÅc
+	PRINTFORM „ÉÉ‚Ä¶ÔºÅ‚Ä¶
 ELSEIF !RAND:3
-	PRINTFORM Åc
+	PRINTFORM ‚Ä¶
 ELSEIF !RAND:2
-	PRINTFORM ÇÒÇ≠Ç¡ÅIÅc
+	PRINTFORM „Çì„Åè„Å£ÔºÅ‚Ä¶
 ELSE
-	PRINTFORM Ç¡ÇÕÇüÅc
+	PRINTFORM „Å£„ÅØ„ÅÅ‚Ä¶
 ENDIF
 	
 
@@ -1753,7 +1753,7 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 	GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 ;-------------------------------------------------
 ;-------------------------------------------------
 
@@ -1796,49 +1796,49 @@ PRINTFORML Åv
 
 ;-------------------------------------------------
 ;-------------------------------------------------
-;öbÇ¨Å@öbÇ¨
+;Âñò„Åé„ÄÄÂñò„Åé
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
 #DIM T_COUNT
 T_COUNT = RAND:3+3
 
-PRINTFORM Åu
+PRINTFORM „Äå
 
 
 IF !RAND:5
-	PRINTFORM ÇüÇ¡Ç†ÇüÇ¡Ç†Ç¡%UNICODE(0x2661)%Åc
+	PRINTFORM „ÅÅ„Å£„ÅÇ„ÅÅ„Å£„ÅÇ„Å£%UNICODE(0x2661)%‚Ä¶
 ELSEIF !RAND:4
-	PRINTFORM Ç†ÇÕÇ¡ÅcÇ‡Ç¡Ç∆Ç‡Ç¡Ç∆Ç¡%UNICODE(0x2661)%Åc
+	PRINTFORM „ÅÇ„ÅØ„Å£‚Ä¶„ÇÇ„Å£„Å®„ÇÇ„Å£„Å®„Å£%UNICODE(0x2661)%‚Ä¶
 ELSEIF !RAND:3
-	PRINTFORM ãCéùÇøÅcÇ†ÇÒÇ¡ÅcÇÊÇ∑Ç¨Ç¡%UNICODE(0x2661)%Åc
+	PRINTFORM Ê∞óÊåÅ„Å°‚Ä¶„ÅÇ„Çì„Å£‚Ä¶„Çà„Åô„Åé„Å£%UNICODE(0x2661)%‚Ä¶
 ELSEIF !RAND:2
-	PRINTFORM Ç†Ç†ÇüÇ¡%UNICODE(0x2661)%Åc
+	PRINTFORM „ÅÇ„ÅÇ„ÅÅ„Å£%UNICODE(0x2661)%‚Ä¶
 ELSE
-	PRINTFORM Åc
+	PRINTFORM ‚Ä¶
 ENDIF
 
 
 $INPUT_LOOP
 
 IF !RAND:10
-	PRINTFORM Ç†Ç†Ç¡Åc
+	PRINTFORM „ÅÇ„ÅÇ„Å£‚Ä¶
 ELSEIF !RAND:9
-	PRINTFORM ÇÒÇ†Ç¡Åc
+	PRINTFORM „Çì„ÅÇ„Å£‚Ä¶
 ELSEIF !RAND:8
-	PRINTFORM Ç†ÇÒÇ¡Åc
+	PRINTFORM „ÅÇ„Çì„Å£‚Ä¶
 ELSEIF !RAND:7
-	PRINTFORM ÇÒÇ¡Åc
+	PRINTFORM „Çì„Å£‚Ä¶
 ELSEIF !RAND:6
-	PRINTFORM Ç”ÇüÇ¡Åc
+	PRINTFORM „Åµ„ÅÅ„Å£‚Ä¶
 ELSEIF !RAND:5
-	PRINTFORM ÇüÇÒÇ¡Åc
+	PRINTFORM „ÅÅ„Çì„Å£‚Ä¶
 ELSEIF !RAND:4
-	PRINTFORM ÉCÉbÅc
+	PRINTFORM „Ç§„ÉÉ‚Ä¶
 ELSEIF !RAND:3
-	PRINTFORM Åc
+	PRINTFORM ‚Ä¶
 ELSEIF !RAND:2
-	PRINTFORM ÇÒÇ≠Ç¡Åc
+	PRINTFORM „Çì„Åè„Å£‚Ä¶
 ELSE
-	PRINTFORM Ç¡ÇÕÇüÅc
+	PRINTFORM „Å£„ÅØ„ÅÅ‚Ä¶
 ENDIF
 	
 
@@ -1846,7 +1846,7 @@ T_COUNT -= 1
 SIF T_COUNT >= 0
 	GOTO INPUT_LOOP
 
-PRINTFORML Åv
+PRINTFORML „Äç
 ;-------------------------------------------------
 ;-------------------------------------------------
 

@@ -1,6 +1,6 @@
-
+ï»¿
 ;-------------------------------------------------
-; ZlÝ’è
+; ä½äººè¨­å®š
 ;-------------------------------------------------
 @JN_CONFIG
 #DIM L_INPUT
@@ -9,20 +9,20 @@ $INPUT_LOOP2
 CLEARLINE LINECOUNT
 
 DRAWLINE
-PRINTFORML •ÏX‚µ‚½‚¢€–Ú‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
-PRINTFORML [1] - ƒŒƒMƒ…ƒ‰[Ý’è(ˆê•”ƒCƒxƒ“ƒg”­¶)
-PRINTFORML [2] - “Á•Ê•ÛŒìÝ’è(”íŠQ‚Ì•ÛŒì)
-PRINTFORML [3] - ŠeZlƒCƒxƒ“ƒgŒXŒü
-PRINTFORML [4] - Œð—¬‘ÎÛ
-PRINTFORML [5] - ˆß‘••ÏX
-PRINTFORML [6] - –ðE•ÏX
+PRINTFORML å¤‰æ›´ã—ãŸã„é …ç›®ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
+PRINTFORML [1] - ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼è¨­å®š(ä¸€éƒ¨ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿ)
+PRINTFORML [2] - ç‰¹åˆ¥ä¿è­·è¨­å®š(è¢«å®³ã®ä¿è­·)
+PRINTFORML [3] - å„ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘
+PRINTFORML [4] - äº¤æµå¯¾è±¡
+PRINTFORML [5] - è¡£è£…å¤‰æ›´
+PRINTFORML [6] - å½¹è·å¤‰æ›´
 PRINTFORML
-PRINTFORML [50] - –¼‘O•ÏX
+PRINTFORML [50] - åå‰å¤‰æ›´
 PRINTFORML
 PRINTFORML
-PRINTFORML [100] - Zl–•Á
+PRINTFORML [100] - ä½äººæŠ¹æ¶ˆ
 PRINTFORML 
-PRINTFORML [999] - –ß‚é
+PRINTFORML [999] - æˆ»ã‚‹
 
 $INPUT_LOOP
 INPUT
@@ -57,7 +57,7 @@ RESTART
 
 
 ;-------------------------------------------------
-; ƒŒƒMƒ…ƒ‰[Ý’è
+; ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼è¨­å®š
 ;-------------------------------------------------
 @JN_CONFIG_REGULAR(ARG:0,ARG:1,ARGS:0)
 #DIM L_INPUT
@@ -71,43 +71,43 @@ L_REGULAR = 0
 L_I = 0
 
 DRAWLINE
-PRINTFORML ƒŒƒMƒ…ƒ‰[Ý’è‚ð•ÏX‚µ‚½‚¢Zl‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢(ƒŒƒMƒ…ƒ‰[“ü‚è‚ÍÅ‘å20l‚Ü‚Å)
+PRINTFORML ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼è¨­å®šã‚’å¤‰æ›´ã—ãŸã„ä½äººã‚’é¸æŠžã—ã¦ä¸‹ã•ã„(ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼å…¥ã‚Šã¯æœ€å¤§20äººã¾ã§)
 DRAWLINE
 SETCOLOR 0,250,250
-PRINTFORM yƒŒƒMƒ…ƒ‰[:
+PRINTFORM ã€ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼:
 ARG:0 = 531
 ARG:1 = 1
 CALL MEMBER_LIST2(ARG:0,ARG:1)
-L_REGULAR = FLAG:”Ä—p•Ï”
-PRINTFORML z
+L_REGULAR = FLAG:æ±Žç”¨å¤‰æ•°
+PRINTFORML ã€‘
 RESETCOLOR
 
 
 FOR L_I,0,CHARANUM
-	CSTR:L_I:4999 '= \@(CFlag:L_I:ƒŒƒMƒ…ƒ‰[) ? o # x\@ + " "
+	CSTR:L_I:4999 '= \@(CFlag:L_I:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼) ? o # x\@ + " "
 NEXT
-ARGS:0 = ƒŒƒMƒ…ƒ‰[
+ARGS:0 = ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼
 CALL LIST_CHARA(ARGS:0,,,4999)
 
 L_INPUT = RESULT
 
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
-	ELSEIF L_REGULAR >= 20 && CFlag:L_INPUT:ƒŒƒMƒ…ƒ‰[ == 0
-		PRINTFORMW ƒŒƒMƒ…ƒ‰[‚Í20l‚Ü‚Å‚Å‚·
+	ELSEIF L_REGULAR >= 20 && CFlag:L_INPUT:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ == 0
+		PRINTFORMW ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ã¯20äººã¾ã§ã§ã™
 		GOTO DATA_LIST
-	ELSEIF CFlag:L_INPUT:ƒŒƒMƒ…ƒ‰[ == 0
-		CFlag:L_INPUT:ƒŒƒMƒ…ƒ‰[ = 1
-		PRINTFORMW %CALLNAME:L_INPUT%‚ðƒŒƒMƒ…ƒ‰[“ü‚è‚µ‚Ü‚µ‚½
+	ELSEIF CFlag:L_INPUT:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ == 0
+		CFlag:L_INPUT:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 1
+		PRINTFORMW %CALLNAME:L_INPUT%ã‚’ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼å…¥ã‚Šã—ã¾ã—ãŸ
 		GOTO DATA_LIST
-	ELSEIF CFlag:L_INPUT:ƒŒƒMƒ…ƒ‰[ == 1
-		CFlag:L_INPUT:ƒŒƒMƒ…ƒ‰[ = 0
-		PRINTFORMW %CALLNAME:L_INPUT%‚ðƒŒƒMƒ…ƒ‰[‚©‚çŠO‚µ‚Ü‚µ‚½
+	ELSEIF CFlag:L_INPUT:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ == 1
+		CFlag:L_INPUT:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 0
+		PRINTFORMW %CALLNAME:L_INPUT%ã‚’ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ã‹ã‚‰å¤–ã—ã¾ã—ãŸ
 		GOTO DATA_LIST
 	ENDIF
 ENDIF
@@ -117,7 +117,7 @@ ENDIF
 
 
 ;-------------------------------------------------
-; “Á•Ê•ÛŒìÝ’è
+; ç‰¹åˆ¥ä¿è­·è¨­å®š
 ;-------------------------------------------------
 @JN_CONFIG_T_BLOCK(ARG:0,ARG:1,ARGS:0)
 #DIM L_INPUT
@@ -131,16 +131,16 @@ L_REGULAR = 0
 L_I = 0
 
 DRAWLINE
-PRINTFORML “Á•Ê•ÛŒìÝ’è‚ð•ÏX‚µ‚½‚¢Zl‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢(“Á•Ê•ÛŒì“ü‚è‚ÍÅ‘å30l‚Ü‚Å)
-PRINTFORML “Á•Ê•ÛŒì‚³‚ê‚½Zl‚É‚Í•s—˜‰vE”íŠQ‚ª‹y‚ÔƒCƒxƒ“ƒg‚ª”­¶‚µ‚Ü‚¹‚ñB
+PRINTFORML ç‰¹åˆ¥ä¿è­·è¨­å®šã‚’å¤‰æ›´ã—ãŸã„ä½äººã‚’é¸æŠžã—ã¦ä¸‹ã•ã„(ç‰¹åˆ¥ä¿è­·å…¥ã‚Šã¯æœ€å¤§30äººã¾ã§)
+PRINTFORML ç‰¹åˆ¥ä¿è­·ã•ã‚ŒãŸä½äººã«ã¯ä¸åˆ©ç›Šãƒ»è¢«å®³ãŒåŠã¶ã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºç”Ÿã—ã¾ã›ã‚“ã€‚
 DRAWLINE
 SETCOLOR 0,250,250
-PRINTFORM y•ÛŒì“ü‚è:
+PRINTFORM ã€ä¿è­·å…¥ã‚Š:
 ARG:0 = 532
 ARG:1 = 1
 CALL MEMBER_LIST2(ARG:0,ARG:1)
-L_REGULAR = FLAG:”Ä—p•Ï”
-PRINTFORML z
+L_REGULAR = FLAG:æ±Žç”¨å¤‰æ•°
+PRINTFORML ã€‘
 RESETCOLOR
 DRAWLINE
 
@@ -148,30 +148,30 @@ DRAWLINE
 
 
 FOR L_I,0,CHARANUM
-	CSTR:L_I:4999 '= \@(CFlag:L_I:“Á•Ê•ÛŒì) ? o # x\@ + " "
+	CSTR:L_I:4999 '= \@(CFlag:L_I:ç‰¹åˆ¥ä¿è­·) ? o # x\@ + " "
 NEXT
-ARGS:0 = “Á•Ê•ÛŒì
+ARGS:0 = ç‰¹åˆ¥ä¿è­·
 CALL LIST_CHARA(ARGS:0,,,4999)
 
 L_INPUT = RESULT
 
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
-	ELSEIF L_REGULAR >= 30&& CFlag:L_INPUT:“Á•Ê•ÛŒì == 0
-		PRINTFORMW “Á•Ê•ÛŒì‚Í30l‚Ü‚Å‚Å‚·
+	ELSEIF L_REGULAR >= 30&& CFlag:L_INPUT:ç‰¹åˆ¥ä¿è­· == 0
+		PRINTFORMW ç‰¹åˆ¥ä¿è­·ã¯30äººã¾ã§ã§ã™
 		GOTO DATA_LIST
-	ELSEIF CFlag:L_INPUT:“Á•Ê•ÛŒì == 0
-		CFlag:L_INPUT:“Á•Ê•ÛŒì = 1
-		PRINTFORMW %CALLNAME:L_INPUT%‚ð“Á•Ê•ÛŒì“ü‚è‚µ‚Ü‚µ‚½
+	ELSEIF CFlag:L_INPUT:ç‰¹åˆ¥ä¿è­· == 0
+		CFlag:L_INPUT:ç‰¹åˆ¥ä¿è­· = 1
+		PRINTFORMW %CALLNAME:L_INPUT%ã‚’ç‰¹åˆ¥ä¿è­·å…¥ã‚Šã—ã¾ã—ãŸ
 		GOTO DATA_LIST
-	ELSEIF CFlag:L_INPUT:“Á•Ê•ÛŒì == 1
-		CFlag:L_INPUT:“Á•Ê•ÛŒì = 0
-		PRINTFORMW %CALLNAME:L_INPUT%‚ð“Á•Ê•ÛŒì‚©‚çŠO‚µ‚Ü‚µ‚½
+	ELSEIF CFlag:L_INPUT:ç‰¹åˆ¥ä¿è­· == 1
+		CFlag:L_INPUT:ç‰¹åˆ¥ä¿è­· = 0
+		PRINTFORMW %CALLNAME:L_INPUT%ã‚’ç‰¹åˆ¥ä¿è­·ã‹ã‚‰å¤–ã—ã¾ã—ãŸ
 		GOTO DATA_LIST
 	ENDIF
 ENDIF
@@ -182,7 +182,7 @@ ENDIF
 
 
 ;-------------------------------------------------
-; ŠeZlƒCƒxƒ“ƒgŒXŒü
+; å„ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘
 ;-------------------------------------------------
 @JN_CONFIG_EVENT
 #DIM L_I
@@ -192,7 +192,7 @@ $DATA_LIST
 L_I = 0
 
 DRAWLINE
-PRINTFORML •ÏX‚µ‚½‚¢ƒLƒƒƒ‰‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢
+PRINTFORML å¤‰æ›´ã—ãŸã„ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„
 DRAWLINE
 
 
@@ -203,80 +203,80 @@ CALL LIST_CHARA
 L_INPUT = RESULT
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ENDIF
 	L_I = L_INPUT
 	$INPUT_LOOP2
 	CLEARLINE LINECOUNT
 	DRAWLINE
-	PRINTFORML  {L_I} %CALLNAME:L_I% •ÏX‚µ‚½‚¢ƒCƒxƒ“ƒgŒXŒü‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+	PRINTFORML  {L_I} %CALLNAME:L_I% å¤‰æ›´ã—ãŸã„ã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 	DRAWLINE
-	PRINTFORM [0] Œð—¬ƒCƒxƒ“ƒg(
-	IF  CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_Œð—¬ == 90
-		PRINTFORM ‘½‚ß
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_Œð—¬ == 60
-		PRINTFORM •’Ê
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_Œð—¬ == 30
-		PRINTFORM ­‚È‚¢
+	PRINTFORM [0] äº¤æµã‚¤ãƒ™ãƒ³ãƒˆ(
+	IF  CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_äº¤æµ == 90
+		PRINTFORM å¤šã‚
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_äº¤æµ == 60
+		PRINTFORM æ™®é€š
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_äº¤æµ == 30
+		PRINTFORM å°‘ãªã„
 	ELSE
-		PRINTFORM ”­¶‚µ‚È‚¢
+		PRINTFORM ç™ºç”Ÿã—ãªã„
 	ENDIF
 	PRINTFORML )
-	PRINTFORM [1] —öˆ¤ƒCƒxƒ“ƒg(
-	IF  CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_—öˆ¤ == 90
-		PRINTFORM ‘½‚ß
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_—öˆ¤ == 60
-		PRINTFORM •’Ê
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_—öˆ¤ == 30
-		PRINTFORM ­‚È‚¢
+	PRINTFORM [1] æ‹æ„›ã‚¤ãƒ™ãƒ³ãƒˆ(
+	IF  CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ‹æ„› == 90
+		PRINTFORM å¤šã‚
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ‹æ„› == 60
+		PRINTFORM æ™®é€š
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ‹æ„› == 30
+		PRINTFORM å°‘ãªã„
 	ELSE
-		PRINTFORM ”­¶‚µ‚È‚¢
+		PRINTFORM ç™ºç”Ÿã—ãªã„
 	ENDIF
 	PRINTFORML )
-	PRINTFORM [2] ”ÆßƒCƒxƒ“ƒg(
-	IF  CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_”Æß == 90
-		PRINTFORM ‘½‚ß
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_”Æß == 60
-		PRINTFORM •’Ê
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_”Æß == 30
-		PRINTFORM ­‚È‚¢
+	PRINTFORM [2] çŠ¯ç½ªã‚¤ãƒ™ãƒ³ãƒˆ(
+	IF  CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_çŠ¯ç½ª == 90
+		PRINTFORM å¤šã‚
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_çŠ¯ç½ª == 60
+		PRINTFORM æ™®é€š
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_çŠ¯ç½ª == 30
+		PRINTFORM å°‘ãªã„
 	ELSE
-		PRINTFORM ”­¶‚µ‚È‚¢
+		PRINTFORM ç™ºç”Ÿã—ãªã„
 	ENDIF
 	PRINTFORML )
-	PRINTFORM [3] «“IƒCƒxƒ“ƒg(
-	IF  CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_« == 90
-		PRINTFORM ‘½‚ß
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_« == 60
-		PRINTFORM •’Ê
-	ELSEIF CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_« == 30
-		PRINTFORM ­‚È‚¢
+	PRINTFORM [3] æ€§çš„ã‚¤ãƒ™ãƒ³ãƒˆ(
+	IF  CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ€§ == 90
+		PRINTFORM å¤šã‚
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ€§ == 60
+		PRINTFORM æ™®é€š
+	ELSEIF CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ€§ == 30
+		PRINTFORM å°‘ãªã„
 	ELSE
-		PRINTFORM ”­¶‚µ‚È‚¢
+		PRINTFORM ç™ºç”Ÿã—ãªã„
 	ENDIF
 	PRINTFORML )
-	PRINTFORM [10] ZlŒð—¬ãŒÀ(
-	IF  CFlag:L_I:ZlŒð—¬Ý’è == 4
-		PRINTFORM ãŒÀ‚È‚µ
-	ELSEIF CFlag:L_I:ZlŒð—¬Ý’è == 3
-		PRINTFORM —öl
-	ELSEIF CFlag:L_I:ZlŒð—¬Ý’è == 2
-		PRINTFORM e—F
-	ELSEIF CFlag:L_I:ZlŒð—¬Ý’è == 1
-		PRINTFORM —Fl
+	PRINTFORM [10] ä½äººäº¤æµä¸Šé™(
+	IF  CFlag:L_I:ä½äººäº¤æµè¨­å®š == 4
+		PRINTFORM ä¸Šé™ãªã—
+	ELSEIF CFlag:L_I:ä½äººäº¤æµè¨­å®š == 3
+		PRINTFORM æ‹äºº
+	ELSEIF CFlag:L_I:ä½äººäº¤æµè¨­å®š == 2
+		PRINTFORM è¦ªå‹
+	ELSEIF CFlag:L_I:ä½äººäº¤æµè¨­å®š == 1
+		PRINTFORM å‹äºº
 	ELSE
-		PRINTFORM ”­¶‚µ‚È‚¢
+		PRINTFORM ç™ºç”Ÿã—ãªã„
 	ENDIF
 	PRINTFORML )
 	PRINTFORML 
-	PRINTFORML [999] –ß‚é
-	PRINTFORMLC \@(L_I > 1) ? [1001]‘O‚ÌƒLƒƒƒ‰ # %" " * 16%\@
+	PRINTFORML [999] æˆ»ã‚‹
+	PRINTFORMLC \@(L_I > 1) ? [1001]å‰ã®ã‚­ãƒ£ãƒ© # %" " * 16%\@
 	PRINTFORMLC   %" " * 18%
-	PRINTFORMLC \@(L_I < CHARANUM-1) ? [1003]ŽŸ‚ÌƒLƒƒƒ‰ # %" " * 16%\@
+	PRINTFORMLC \@(L_I < CHARANUM-1) ? [1003]æ¬¡ã®ã‚­ãƒ£ãƒ© # %" " * 16%\@
 	$INPUT_LOOP
 	INPUT
 	L_INPUT = RESULT
@@ -321,7 +321,7 @@ ENDIF
 
 
 ;-------------------------------------------------
-; ƒfƒŠ[ƒg
+; ãƒ‡ãƒªãƒ¼ãƒˆ
 ;-------------------------------------------------
 @JN_CONFIG_DELETE
 #DIM L_I
@@ -331,7 +331,7 @@ $DATA_LIST
 L_I = 0
 
 DRAWLINE
-PRINTFORML íœ‚µ‚½‚¢ƒLƒƒƒ‰‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢
+PRINTFORML å‰Šé™¤ã—ãŸã„ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„
 DRAWLINE
 
 
@@ -342,16 +342,16 @@ CALL LIST_CHARA
 L_INPUT = RESULT
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ENDIF
 	L_I = L_INPUT
-	PRINTFORML %CALLNAME:L_I%‚ðíœ‚µ‚Ü‚·A–{“–‚É‚æ‚ë‚µ‚¢‚Å‚·‚©H
-	PRINTFORML [0] ‚Í‚¢
-	PRINTFORML [999] –ß‚é
+	PRINTFORML %CALLNAME:L_I%ã‚’å‰Šé™¤ã—ã¾ã™ã€æœ¬å½“ã«ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+	PRINTFORML [0] ã¯ã„
+	PRINTFORML [999] æˆ»ã‚‹
 	$INPUT_LOOP
 	INPUT
 	L_INPUT = RESULT
@@ -359,7 +359,7 @@ IF L_INPUT != 1000
 	CASE 999
 	CASE 0
 	PRINTFORML 
-	PRINTFORMW %CALLNAME:L_I%‚ðíœ‚µ‚Ü‚µ‚½
+	PRINTFORMW %CALLNAME:L_I%ã‚’å‰Šé™¤ã—ã¾ã—ãŸ
 	DELCHARA  L_I
 	CASEELSE
 		GOTO INPUT_LOOP
@@ -377,7 +377,7 @@ ENDIF
 ; CALL JN_CONFIG
 
 ;-------------------------------------------------
-; ŠeŒð—¬Zl
+; å„äº¤æµä½äºº
 ;-------------------------------------------------
 @JN_CONFIG_COM
 #DIM L_NPC
@@ -389,7 +389,7 @@ L_T = TARGET
 $COM_LIST
 
 DRAWLINE
-PRINTFORML ŽQÆ‚µ‚½‚¢ƒLƒƒƒ‰‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢
+PRINTFORML å‚ç…§ã—ãŸã„ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„
 DRAWLINE
 CALL LIST_CHARA
 TARGET = RESULT
@@ -398,10 +398,10 @@ SIF RESULT == 1000
 	RETURN
 
 IF TALENT:RESULT:NPC == 999 
-	PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+	PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 	GOTO COM_LIST
 ELSEIF RESULT == 0
-	PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+	PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 	GOTO COM_LIST
 ENDIF
 
@@ -410,38 +410,38 @@ $INPUT_LOOP0
 CLEARLINE LINECOUNT
 DRAWLINE
 PRINTFORML  {TARGET} %CALLNAME:TARGET%
-PRINTFORML Œð—¬‘ÎÛ‚Ì‚¨‹C‚É“ü‚èA–¼‘O•ÏX‚ª‚Å‚«‚Ü‚·B
+PRINTFORML äº¤æµå¯¾è±¡ã®ãŠæ°—ã«å…¥ã‚Šã€åå‰å¤‰æ›´ãŒã§ãã¾ã™ã€‚
 DRAWLINE
 L_NPC = 0
-PRINTFORML [-1] ‚¨‹C‚É“ü‚è‰ðœ
+PRINTFORML [-1] ãŠæ°—ã«å…¥ã‚Šè§£é™¤
 $INPUT_LOOP
 IF CSTR:(3000+L_NPC) == ""
-	PRINTFORML y–¢“o˜^z
+	PRINTFORML ã€æœªç™»éŒ²ã€‘
 ELSE
 SIF CFLAG:3600 == L_NPC
 	SETCOLOR 50,250,250
 	PRINTFORM [{L_NPC}] %CSTR:(3000+L_NPC), 18 ,LEFT%
-	PRINTFORM y
+	PRINTFORM ã€
 	IF CFLAG:(3030+L_NPC) == 1
-		PRINTFORM ’j
+		PRINTFORM ç”·
 	ELSE
-		PRINTFORM —
+		PRINTFORM å¥³
 	ENDIF
-	PRINTFORM zyŠÖŒW:
+	PRINTFORM ã€‘ã€é–¢ä¿‚:
 	IF CFLAG:(3020+L_NPC) == 5
-		PRINTFORM •v•w
+		PRINTFORM å¤«å©¦
 	ELSEIF CFLAG:(3020+L_NPC) == 4
-		PRINTFORM —öl
+		PRINTFORM æ‹äºº
 	ELSEIF CFLAG:(3020+L_NPC) == 3
-		PRINTFORM e—F
+		PRINTFORM è¦ªå‹
 	ELSEIF CFLAG:(3020+L_NPC) == 2
-		PRINTFORM —Fl
+		PRINTFORM å‹äºº
 	ELSEIF CFLAG:(3020+L_NPC) == 1
-		PRINTFORM ’ml
+		PRINTFORM çŸ¥äºº
 	ELSEIF CFLAG:(3020+L_NPC) == -5
-		PRINTFORM ˆ¤l
+		PRINTFORM æ„›äºº
 	ENDIF
-	PRINTFORM zyDŠ´“x:{CFLAG:(3010+L_NPC), 3 ,LEFT}zy‘Š«:{CFLAG:(3050+L_NPC), 3 ,LEFT}zy«sˆ×‰ñ”:{CFLAG:(3060+L_NPC)}z
+	PRINTFORM ã€‘ã€å¥½æ„Ÿåº¦:{CFLAG:(3010+L_NPC), 3 ,LEFT}ã€‘ã€ç›¸æ€§:{CFLAG:(3050+L_NPC), 3 ,LEFT}ã€‘ã€æ€§è¡Œç‚ºå›žæ•°:{CFLAG:(3060+L_NPC)}ã€‘
 	PRINTFORML
 ENDIF
 RESETCOLOR
@@ -451,17 +451,17 @@ SIF L_NPC < 10
 DRAWLINE
 PRINTFORML
 PRINTFORML 
-PRINTFORML [999] –ß‚é
-PRINTFORMLC \@(TARGET > 1) ? [1001]‘O‚ÌƒLƒƒƒ‰ # %" " * 16%\@
+PRINTFORML [999] æˆ»ã‚‹
+PRINTFORMLC \@(TARGET > 1) ? [1001]å‰ã®ã‚­ãƒ£ãƒ© # %" " * 16%\@
 PRINTFORMLC   %" " * 18%
-PRINTFORMLC \@(TARGET < CHARANUM-1) ? [1003]ŽŸ‚ÌƒLƒƒƒ‰ # %" " * 16%\@
+PRINTFORMLC \@(TARGET < CHARANUM-1) ? [1003]æ¬¡ã®ã‚­ãƒ£ãƒ© # %" " * 16%\@
 $INPUT_LOOP2
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE -1
 	CFLAG:3600 = -1
-	PRINTFORMW y‚¨‹C‚É“ü‚è‚ð‰ðœ‚µ‚Ü‚µ‚½z
+	PRINTFORMW ã€ãŠæ°—ã«å…¥ã‚Šã‚’è§£é™¤ã—ã¾ã—ãŸã€‘
 	GOTO INPUT_LOOP0
 CASE 999
 	TARGET = L_T
@@ -481,21 +481,21 @@ CASE 1003
 	GOTO INPUT_LOOP2
 CASEELSE
 	CFLAG:3600 = RESULT
-	PRINTFORML y%CSTR:(3000+RESULT)%‚ð‚¨‹C‚É“ü‚è‚É‚µ‚Ü‚µ‚½z
-	PRINTFORMW ‚¨‹C‚É“ü‚è‚É‚µ‚½Zl‚Æ‚ÍŒð—¬”­¶‚ª‘½‚­‚È‚èADŠ´“xE‘Š«‘‰Á‚É•â³‚ª“ü‚è‚Ü‚·B
+	PRINTFORML ã€%CSTR:(3000+RESULT)%ã‚’ãŠæ°—ã«å…¥ã‚Šã«ã—ã¾ã—ãŸã€‘
+	PRINTFORMW ãŠæ°—ã«å…¥ã‚Šã«ã—ãŸä½äººã¨ã¯äº¤æµç™ºç”ŸãŒå¤šããªã‚Šã€å¥½æ„Ÿåº¦ãƒ»ç›¸æ€§å¢—åŠ ã«è£œæ­£ãŒå…¥ã‚Šã¾ã™ã€‚
 	DRAWLINE
-	PRINTFORML y‘±‚¯‚Ä–¼‘O‚ð•ÏX‚µ‚Ü‚·A–¢“ü—Í‚Å•ÏX‚µ‚Ü‚¹‚ñBz
+	PRINTFORML ã€ç¶šã‘ã¦åå‰ã‚’å¤‰æ›´ã—ã¾ã™ã€æœªå…¥åŠ›ã§å¤‰æ›´ã—ã¾ã›ã‚“ã€‚ã€‘
 	DRAWLINE
 	INPUTS
 	IF RESULTS == ""
-		;ƒXƒ‹[
+		;ã‚¹ãƒ«ãƒ¼
 	ELSE
 		SIF CFLAG:(3020+L_NPC) == 5
-		CSTR:”º—µ–¼‘O = %RESULTS%
+		CSTR:ä¼´ä¾¶åå‰ = %RESULTS%
 		CSTR:(3000+RESULT) = %RESULTS%
-		PRINTFORML y–¼‘O‚ð%CSTR:(3000+RESULT)%‚É•ÏX‚µ‚Ü‚µ‚½z
-		SIF TALENT:Žq‹Ÿ‚Á‚Û‚¢ || TALENT:‚¨‚µ‚á‚Ü
-			CSTR:ˆêlÌ = %CALLNAME:TARGET%
+		PRINTFORML ã€åå‰ã‚’%CSTR:(3000+RESULT)%ã«å¤‰æ›´ã—ã¾ã—ãŸã€‘
+		SIF TALENT:å­ä¾›ã£ã½ã„ || TALENT:ãŠã—ã‚ƒã¾
+			CSTR:ä¸€äººç§° = %CALLNAME:TARGET%
 	ENDIF
 	GOTO INPUT_LOOP0
 ENDSELECT
@@ -508,13 +508,13 @@ ENDSELECT
 
 
 
-IF TALENT:Œ‹¥Ï‚Ý == 1
-	PRINTFORML [200] •v‚Ì–¼‘O•ÏX
+IF TALENT:çµå©šæ¸ˆã¿ == 1
+	PRINTFORML [200] å¤«ã®åå‰å¤‰æ›´
 ENDIF 
 TARGET = L_T
 
 ;-------------------------------------------------
-;–ðE•ÏX
+;å½¹è·å¤‰æ›´
 ;-------------------------------------------------
 @POSITION_CHANGE
 #DIM L_INPUT
@@ -525,20 +525,20 @@ $INPUT_LOOP
 CLEARLINE LINECOUNT
 
 DRAWLINE
-PRINTFORML Ž‘‹à500000Á”ï‚µ‚ÄZl‚Ì–ðE‚ð•ÏX‚Å‚«‚Ü‚·B
-PRINTFORML ˆÈ‰º‚Ì–ðE‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B
+PRINTFORML è³‡é‡‘500000æ¶ˆè²»ã—ã¦ä½äººã®å½¹è·ã‚’å¤‰æ›´ã§ãã¾ã™ã€‚
+PRINTFORML ä»¥ä¸‹ã®å½¹è·ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚
 PRINTFORML 
-PRINTFORML [1]  - –ðE‚È‚µ
-PRINTFORML [93] - ¹EŽÒ
-PRINTFORML [94] - ƒƒCƒh
-PRINTFORML [95] - Šw¶
-PRINTFORML [96] - ƒAƒCƒhƒ‹
-PRINTFORML [97] - ŽÐ‰ïl
-PRINTFORML [98] - ©•w
-PRINTFORML [99] - Ž¡ˆÀˆÛŽ‹Çˆõ
+PRINTFORML [1]  - å½¹è·ãªã—
+PRINTFORML [93] - è–è·è€…
+PRINTFORML [94] - ãƒ¡ã‚¤ãƒ‰
+PRINTFORML [95] - å­¦ç”Ÿ
+PRINTFORML [96] - ã‚¢ã‚¤ãƒ‰ãƒ«
+PRINTFORML [97] - ç¤¾ä¼šäºº
+PRINTFORML [98] - å¨¼å©¦
+PRINTFORML [99] - æ²»å®‰ç¶­æŒå±€å“¡
 PRINTFORML
 PRINTFORML 
-PRINTFORML [999] - –ß‚é
+PRINTFORML [999] - æˆ»ã‚‹
 
 INPUT
 L_P = RESULT
@@ -549,12 +549,12 @@ SIF L_INPUT == 999
 	
 IF MONEY < 500000
 	PRINTFORML 
-	PRINTFORML Ž‘‹à‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+	PRINTFORML è³‡é‡‘ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 	PRINTFORMW 
 ENDIF
 
 PRINTFORML 
-PRINTFORML –ðE•ÏX‚µ‚½‚¢Zl‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+PRINTFORML å½¹è·å¤‰æ›´ã—ãŸã„ä½äººã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 PRINTFORML 
 
 
@@ -567,41 +567,41 @@ SIF L_INPUT == 1000
 	RETURN
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO INPUT_LOOP
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO INPUT_LOOP
 	ENDIF
 	
-	IF TALENT:L_INPUT:Šw¶ != 0 && L_P != 95
-		PRINTFORML Šw¶‚Ìg•ª‚ðŽc‚µ‚Ü‚·‚©H
+	IF TALENT:L_INPUT:å­¦ç”Ÿ != 0 && L_P != 95
+		PRINTFORML å­¦ç”Ÿã®èº«åˆ†ã‚’æ®‹ã—ã¾ã™ã‹ï¼Ÿ
 		PRINTFORML 
-		PRINTFORML [1] - ‚Í‚¢
-		PRINTFORML [2] - ‚¢‚¢‚¦
+		PRINTFORML [1] - ã¯ã„
+		PRINTFORML [2] - ã„ã„ãˆ
 		INPUT
 		L_INPUT2 = RESULT
 		SIF L_INPUT2 >= 2
-			TALENT:L_INPUT:Šw¶ = 0
+			TALENT:L_INPUT:å­¦ç”Ÿ = 0
 	ELSE
-		TALENT:L_INPUT:Šw¶ = 0
+		TALENT:L_INPUT:å­¦ç”Ÿ = 0
 	ENDIF
-	TALENT:L_INPUT:¹EŽÒ = 0
-	TALENT:L_INPUT:ƒƒCƒh = 0
-	TALENT:L_INPUT:ƒAƒCƒhƒ‹ = 0
-	TALENT:L_INPUT:ŽÐ‰ïl = 0
-	TALENT:L_INPUT:©•w = 0
-	TALENT:L_INPUT:Ž¡ˆÀˆÛŽ‹Çˆõ = 0
+	TALENT:L_INPUT:è–è·è€… = 0
+	TALENT:L_INPUT:ãƒ¡ã‚¤ãƒ‰ = 0
+	TALENT:L_INPUT:ã‚¢ã‚¤ãƒ‰ãƒ« = 0
+	TALENT:L_INPUT:ç¤¾ä¼šäºº = 0
+	TALENT:L_INPUT:å¨¼å©¦ = 0
+	TALENT:L_INPUT:æ²»å®‰ç¶­æŒå±€å“¡ = 0
 
 
 	IF L_P == 95
-		PRINTFORML Šw¶‚Ìg•ª‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢
+		PRINTFORML å­¦ç”Ÿã®èº«åˆ†ã‚’é¸æŠžã—ã¦ãã ã•ã„
 		PRINTFORML 
-		PRINTFORML [1] - •’Ê‚ÌŠw¶
-		PRINTFORML [2] - ‘åŠw¶
-		PRINTFORML [3] - ‚Z¶
-		PRINTFORML [4] - ’†Šw¶
-		PRINTFORML [5] - ¬Šw¶
+		PRINTFORML [1] - æ™®é€šã®å­¦ç”Ÿ
+		PRINTFORML [2] - å¤§å­¦ç”Ÿ
+		PRINTFORML [3] - é«˜æ ¡ç”Ÿ
+		PRINTFORML [4] - ä¸­å­¦ç”Ÿ
+		PRINTFORML [5] - å°å­¦ç”Ÿ
 		INPUT
 		L_INPUT2 = RESULT
 		TALENT:L_INPUT:L_P = L_INPUT2
@@ -610,7 +610,7 @@ IF L_INPUT != 1000
 	ENDIF
 	MONEY -= 500000
 	PRINTFORML 
-	PRINTFORML •ÏX‚µ‚Ü‚µ‚½B
+	PRINTFORML å¤‰æ›´ã—ã¾ã—ãŸã€‚
 	PRINTFORMW 
 ENDIF
 
@@ -623,7 +623,7 @@ ENDIF
 
 
 ;-------------------------------------------------
-;–¼‘O•ÏX
+;åå‰å¤‰æ›´
 ;-------------------------------------------------
 @JN_CONFIG_N_C
 #DIM L_INPUT
@@ -634,7 +634,7 @@ ENDIF
 $DATA_LIST
 
 DRAWLINE
-PRINTFORML –¼‘O•ÏX‚µ‚½‚¢Zl‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+PRINTFORML åå‰å¤‰æ›´ã—ãŸã„ä½äººã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 DRAWLINE
 
 CALL LIST_CHARA
@@ -646,24 +646,24 @@ SIF L_INPUT == 1000
 	; CALL JN_CONFIG
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+		PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 		GOTO DATA_LIST
 	ENDIF
 	DRAWLINE
-	PRINTL V‚µ‚¢CALLNAME‚ð‘I‚ñ‚Å‰º‚³‚¢B
-	PRINTL ‹ó“ü—Í‚ð‚·‚é‚ÆA‰½‚à‘I‘ð‚¹‚¸‚É–ß‚è‚Ü‚·B
+	PRINTL æ–°ã—ã„CALLNAMEã‚’é¸ã‚“ã§ä¸‹ã•ã„ã€‚
+	PRINTL ç©ºå…¥åŠ›ã‚’ã™ã‚‹ã¨ã€ä½•ã‚‚é¸æŠžã›ãšã«æˆ»ã‚Šã¾ã™ã€‚
 	DRAWLINE
 	PRINTL
 	INPUTS
 	IF RESULTS == ""
-		;ƒXƒ‹[
+		;ã‚¹ãƒ«ãƒ¼
 	ELSE
 		CALLNAME:L_NAME = %RESULTS%
-		SIF TALENT:L_NAME:Žq‹Ÿ‚Á‚Û‚¢ || TALENT:L_NAME:‚¨‚µ‚á‚Ü
-			CSTR:L_NAME:ˆêlÌ = %CALLNAME:L_NAME%
+		SIF TALENT:L_NAME:å­ä¾›ã£ã½ã„ || TALENT:L_NAME:ãŠã—ã‚ƒã¾
+			CSTR:L_NAME:ä¸€äººç§° = %CALLNAME:L_NAME%
 	ENDIF
 ENDIF
 

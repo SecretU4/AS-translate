@@ -1,14 +1,14 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:Random_Chara.ERB
-;	Facility	:ƒ‰ƒ“ƒ_ƒ€ƒLƒƒƒ‰Ý’è
+;	Facility	:ãƒ©ãƒ³ãƒ€ãƒ ã‚­ãƒ£ãƒ©è¨­å®š
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
@@ -47,54 +47,54 @@ ELSEIF RCS_RANDOM >= 6
 ELSE
 ENDIF
 	
-;g‘Ì‚ÌƒTƒCƒY‚ðŽw’è
+;èº«ä½“ã®ã‚µã‚¤ã‚ºã‚’æŒ‡å®š
 SELECTCASE  RAND:10 + RCS_body
 	CASE is <= -3
-		TALENT:L_I:¬•¿‘ÌŒ^ = 1
-		TALENT:L_I:¬l‘ÌŒ^ = 1
+		TALENT:L_I:å°æŸ„ä½“åž‹ = 1
+		TALENT:L_I:å°äººä½“åž‹ = 1
 	CASE is <= 0
-		TALENT:L_I:¬•¿‘ÌŒ^ = 1
+		TALENT:L_I:å°æŸ„ä½“åž‹ = 1
 	CASE is >= 10
-		SIF !TALENT:L_I:¬•¿‘ÌŒ^
-			TALENT:L_I:’·g = 1
+		SIF !TALENT:L_I:å°æŸ„ä½“åž‹
+			TALENT:L_I:é•·èº« = 1
 	CASEELSE
 ENDSELECT
 
-IF TALENT:L_I:ƒIƒgƒR == 0
-	;‹¹‚ÌƒTƒCƒY‚ðÝ’è
+IF TALENT:L_I:ã‚ªãƒˆã‚³ == 0
+	;èƒ¸ã®ã‚µã‚¤ã‚ºã‚’è¨­å®š
 	SELECTCASE  RAND:10 + RCS_bust
 		CASE is <=0
-			TALENT:L_I:â•Ç = 1
+			TALENT:L_I:çµ¶å£ = 1
 		CASE 1,2,3
-			TALENT:L_I:•n“û = 1
+			TALENT:L_I:è²§ä¹³ = 1
 		CASE 7,8,9
-			TALENT:L_I:‹“û = 1
+			TALENT:L_I:å·¨ä¹³ = 1
 		CASE is >=10
-			TALENT:L_I:”š“û = 1
+			TALENT:L_I:çˆ†ä¹³ = 1
 	ENDSELECT
-	;K‚ÌƒTƒCƒY‚ðÝ’è
+	;å°»ã®ã‚µã‚¤ã‚ºã‚’è¨­å®š
 	SELECTCASE  RAND:10 + RCS_hip
 		CASE 8,9
-			TALENT:L_I:‹K = 1
+			TALENT:L_I:å·¨å°» = 1
 		CASE 10
-			TALENT:L_I:”šK = 1
+			TALENT:L_I:çˆ†å°» = 1
 	ENDSELECT
 ENDIF
 
 ;----------------------------------------------------------
 ;----------------------------------------------------------
-;‘fŽ¿ŠÖ˜Ai‹æ‰æj
+;ç´ è³ªé–¢é€£ï¼ˆåŒºç”»ï¼‰
 ;----------------------------------------------------------
 ;----------------------------------------------------------
-SIF TALENT:L_I:‡ˆÓ == 0
-	TALENT:L_I:”ñ‡ˆÓ = 1
+SIF TALENT:L_I:åˆæ„ == 0
+	TALENT:L_I:éžåˆæ„ = 1
 
 CALL SET_RANDOM_TALENT_MENTAL(L_I)
 CALL SET_RANDOM_TALENT_SENCIBITY(L_I)
 
 ;----------------------------------------------------------
 ;----------------------------------------------------------
-;Ú×î•ñ
+;è©³ç´°æƒ…å ±
 ;----------------------------------------------------------
 ;----------------------------------------------------------
 CALL CHARACTER_SCOUT_PERSONAL(L_I)
@@ -104,12 +104,12 @@ RETURN 0
 
 ;----------------------------------------------------------
 ;----------------------------------------------------------
-;‘fŽ¿ŠÖ˜Ai«Šij
+;ç´ è³ªé–¢é€£ï¼ˆæ€§æ ¼ï¼‰
 ;----------------------------------------------------------
 ;----------------------------------------------------------
-;FUNC_FISHER_YATES_SHAFFLE‚É‚æ‚èƒ‰ƒ“ƒ_ƒ€”z—ñ‚ð¶¬‚·‚é‚±‚Æ‚Å’Š‘I‚Ìd•¡‚ð”rœ‚µ‚½
-;‚±‚ÌŽž“_‚Å‚Íƒ‰ƒ“ƒ_ƒ€ƒLƒƒƒ‰‚Íƒ^ƒŒƒ“ƒg‚ª‚Ü‚Á‚³‚ç‚Èó‘Ô‚È‚Í‚¸‚¾‚ª
-;”O‚Ì‚½‚ß‚É‘fŽ¿”»’è‚ð“ü‚ê‚Ä’e‚¢‚Ä‚¨‚­
+;FUNC_FISHER_YATES_SHAFFLEã«ã‚ˆã‚Šãƒ©ãƒ³ãƒ€ãƒ é…åˆ—ã‚’ç”Ÿæˆã™ã‚‹ã“ã¨ã§æŠ½é¸ã®é‡è¤‡ã‚’æŽ’é™¤ã—ãŸ
+;ã“ã®æ™‚ç‚¹ã§ã¯ãƒ©ãƒ³ãƒ€ãƒ ã‚­ãƒ£ãƒ©ã¯ã‚¿ãƒ¬ãƒ³ãƒˆãŒã¾ã£ã•ã‚‰ãªçŠ¶æ…‹ãªã¯ãšã ãŒ
+;å¿µã®ãŸã‚ã«ç´ è³ªåˆ¤å®šã‚’å…¥ã‚Œã¦å¼¾ã„ã¦ãŠã
 @SET_RANDOM_TALENT_MENTAL(L_I)
 #DIM L_I
 #DIM TAL_NUM
@@ -119,278 +119,278 @@ CALLF FUNC_FISHER_YATES_SHAFFLE(TAL_INDEX, 53)
 FOR LOCAL, 0, RAND(3, 13)
 	SELECTCASE TAL_INDEX:LOCAL
 	CASE 0
-		TALENT:L_I:Ž¡—Ã = 1
+		TALENT:L_I:æ²»ç™‚ = 1
 	CASE 1
-		SIF TALENT:L_I:–Ú—§‚¿‚½‚ª‚è || TALENT:L_I:‘ål‚µ‚¢
+		SIF TALENT:L_I:ç›®ç«‹ã¡ãŸãŒã‚Š || TALENT:L_I:å¤§äººã—ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:–Ú—§‚¿‚½‚ª‚è = 1
+			TALENT:L_I:ç›®ç«‹ã¡ãŸãŒã‚Š = 1
 		ELSE
-			TALENT:L_I:‘ål‚µ‚¢ = 1
+			TALENT:L_I:å¤§äººã—ã„ = 1
 		ENDIF
 	CASE 2
-		SIF TALENT:L_I:‹Cä || TALENT:L_I:‰°•a
+		SIF TALENT:L_I:æ°—ä¸ˆ || TALENT:L_I:è‡†ç—…
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‹Cä = 1
+			TALENT:L_I:æ°—ä¸ˆ = 1
 		ELSE
-			TALENT:L_I:‰°•a = 1
+			TALENT:L_I:è‡†ç—… = 1
 		ENDIF
 	CASE 3
-		SIF TALENT:L_I:¶ˆÓ‹C || TALENT:L_I:‘f’¼
+		SIF TALENT:L_I:ç”Ÿæ„æ°— || TALENT:L_I:ç´ ç›´
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:¶ˆÓ‹C = 1
+			TALENT:L_I:ç”Ÿæ„æ°— = 1
 		ELSE
-			TALENT:L_I:‘f’¼ = 1
+			TALENT:L_I:ç´ ç›´ = 1
 		ENDIF
 	CASE 4
-		TALENT:L_I:–£—Í = 1
+		TALENT:L_I:é­…åŠ› = 1
 	CASE 5
-		SIF TALENT:L_I:’jD‚« || TALENT:L_I:’jŒ™‚¢
+		SIF TALENT:L_I:ç”·å¥½ã || TALENT:L_I:ç”·å«Œã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:’jD‚« = 1
+			TALENT:L_I:ç”·å¥½ã = 1
 		ELSE
-			TALENT:L_I:’jŒ™‚¢ = 1
+			TALENT:L_I:ç”·å«Œã„ = 1
 		ENDIF
 	CASE 6
-		SIF TALENT:L_I:–³ŠÖS || TALENT:L_I:DŠïS
+		SIF TALENT:L_I:ç„¡é–¢å¿ƒ || TALENT:L_I:å¥½å¥‡å¿ƒ
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:–³ŠÖS = 1
+			TALENT:L_I:ç„¡é–¢å¿ƒ = 1
 		ELSE
-			TALENT:L_I:DŠïS = 1
+			TALENT:L_I:å¥½å¥‡å¿ƒ = 1
 		ENDIF
 	CASE 7
-		SIF TALENT:L_I:Š´î–L‚© || TALENT:L_I:Š´î–R‚µ‚¢
+		SIF TALENT:L_I:æ„Ÿæƒ…è±Šã‹ || TALENT:L_I:æ„Ÿæƒ…ä¹ã—ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:Š´î–L‚© = 1
+			TALENT:L_I:æ„Ÿæƒ…è±Šã‹ = 1
 		ELSE
-			TALENT:L_I:Š´î–R‚µ‚¢ = 1
+			TALENT:L_I:æ„Ÿæƒ…ä¹ã—ã„ = 1
 		ENDIF
 	CASE 8
-		TALENT:L_I:ƒcƒ“ƒfƒŒ = 1
+		TALENT:L_I:ãƒ„ãƒ³ãƒ‡ãƒ¬ = 1
 	CASE 9
-		SIF TALENT:L_I:—}ˆ³ || TALENT:L_I:‰ð•ú
+		SIF TALENT:L_I:æŠ‘åœ§ || TALENT:L_I:è§£æ”¾
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:—}ˆ³ = 1
+			TALENT:L_I:æŠ‘åœ§ = 1
 		ELSE
-			TALENT:L_I:‰ð•ú = 1
+			TALENT:L_I:è§£æ”¾ = 1
 		ENDIF
 	CASE 10
-		SIF TALENT:L_I:”G‚ê‚É‚­‚¢ || TALENT:L_I:”G‚ê‚â‚·‚¢
+		SIF TALENT:L_I:æ¿¡ã‚Œã«ãã„ || TALENT:L_I:æ¿¡ã‚Œã‚„ã™ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:”G‚ê‚É‚­‚¢ = 1
+			TALENT:L_I:æ¿¡ã‚Œã«ãã„ = 1
 		ELSE
-			TALENT:L_I:”G‚ê‚â‚·‚¢ = 1
+			TALENT:L_I:æ¿¡ã‚Œã‚„ã™ã„ = 1
 		ENDIF
 	CASE 11
-		SIF TALENT:L_I:ƒvƒ‰ƒCƒh‚‚¢ || TALENT:L_I:ƒvƒ‰ƒCƒh’á‚¢
+		SIF TALENT:L_I:ãƒ—ãƒ©ã‚¤ãƒ‰é«˜ã„ || TALENT:L_I:ãƒ—ãƒ©ã‚¤ãƒ‰ä½Žã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:ƒvƒ‰ƒCƒh‚‚¢ = 1
+			TALENT:L_I:ãƒ—ãƒ©ã‚¤ãƒ‰é«˜ã„ = 1
 		ELSE
-			TALENT:L_I:ƒvƒ‰ƒCƒh’á‚¢ = 1
+			TALENT:L_I:ãƒ—ãƒ©ã‚¤ãƒ‰ä½Žã„ = 1
 		ENDIF
 	CASE 12
-		SIF TALENT:L_I:ŠyŠÏ“I || TALENT:L_I:”ßŠÏ“I
+		SIF TALENT:L_I:æ¥½è¦³çš„ || TALENT:L_I:æ‚²è¦³çš„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:ŠyŠÏ“I = 1
+			TALENT:L_I:æ¥½è¦³çš„ = 1
 		ELSE
-			TALENT:L_I:”ßŠÏ“I = 1
+			TALENT:L_I:æ‚²è¦³çš„ = 1
 		ENDIF
 	CASE 13
-		SIF TALENT:L_I:’É‚Ý‚É‹­‚¢ || TALENT:L_I:’É‚Ý‚ÉŽã‚¢
+		SIF TALENT:L_I:ç—›ã¿ã«å¼·ã„ || TALENT:L_I:ç—›ã¿ã«å¼±ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:’É‚Ý‚É‹­‚¢ = 1
+			TALENT:L_I:ç—›ã¿ã«å¼·ã„ = 1
 		ELSE
-			TALENT:L_I:’É‚Ý‚ÉŽã‚¢ = 1
+			TALENT:L_I:ç—›ã¿ã«å¼±ã„ = 1
 		ENDIF
 	CASE 14
-		SIF TALENT:L_I:’p”–‚¢ || TALENT:L_I:’p‚¶‚ç‚¢
+		SIF TALENT:L_I:æ¥è–„ã„ || TALENT:L_I:æ¥ã˜ã‚‰ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:’p”–‚¢ = 1
+			TALENT:L_I:æ¥è–„ã„ = 1
 		ELSE
-			TALENT:L_I:’p‚¶‚ç‚¢ = 1
+			TALENT:L_I:æ¥ã˜ã‚‰ã„ = 1
 		ENDIF
 	CASE 15
-		SIF TALENT:L_I:‰õŠ´‚Ì”Û’è || TALENT:L_I:‰õŠ´‚É‘f’¼
+		SIF TALENT:L_I:å¿«æ„Ÿã®å¦å®š || TALENT:L_I:å¿«æ„Ÿã«ç´ ç›´
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‰õŠ´‚Ì”Û’è = 1
+			TALENT:L_I:å¿«æ„Ÿã®å¦å®š = 1
 		ELSE
-			TALENT:L_I:‰õŠ´‚É‘f’¼ = 1
+			TALENT:L_I:å¿«æ„Ÿã«ç´ ç›´ = 1
 		ENDIF
 	CASE 16
-		SIF TALENT:L_I:’å‘€ŠÏ”O || TALENT:L_I:’å‘€–³“Ú’…
+		SIF TALENT:L_I:è²žæ“è¦³å¿µ || TALENT:L_I:è²žæ“ç„¡é “ç€
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:’å‘€ŠÏ”O = 1
+			TALENT:L_I:è²žæ“è¦³å¿µ = 1
 		ELSE
-			TALENT:L_I:’å‘€–³“Ú’… = 1
+			TALENT:L_I:è²žæ“ç„¡é “ç€ = 1
 		ENDIF
 	CASE 17
-		SIF TALENT:L_I:K“¾‘‚¢ || TALENT:L_I:K“¾’x‚¢
+		SIF TALENT:L_I:ç¿’å¾—æ—©ã„ || TALENT:L_I:ç¿’å¾—é…ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:K“¾‘‚¢ = 1
+			TALENT:L_I:ç¿’å¾—æ—©ã„ = 1
 		ELSE
-			TALENT:L_I:K“¾’x‚¢ = 1
+			TALENT:L_I:ç¿’å¾—é…ã„ = 1
 		ENDIF
 	CASE 18
-		SIF TALENT:L_I:“|ö“I || TALENT:L_I:•ÛŽç“I
+		SIF TALENT:L_I:å€’éŒ¯çš„ || TALENT:L_I:ä¿å®ˆçš„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:“|ö“I = 1
+			TALENT:L_I:å€’éŒ¯çš„ = 1
 		ELSE
-			TALENT:L_I:•ÛŽç“I = 1
+			TALENT:L_I:ä¿å®ˆçš„ = 1
 		ENDIF
 	CASE 19
-		SIF TALENT:L_I:ƒTƒh || TALENT:L_I:ƒ}ƒ]
+		SIF TALENT:L_I:ã‚µãƒ‰ || TALENT:L_I:ãƒžã‚¾
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:ƒTƒh = 1
+			TALENT:L_I:ã‚µãƒ‰ = 1
 		ELSE
-			TALENT:L_I:ƒ}ƒ] = 1
+			TALENT:L_I:ãƒžã‚¾ = 1
 		ENDIF
 	CASE 20
-		SIF TALENT:L_I:‰ñ•œ’x‚¢ || TALENT:L_I:‰ñ•œ‘‚¢
+		SIF TALENT:L_I:å›žå¾©é…ã„ || TALENT:L_I:å›žå¾©æ—©ã„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‰ñ•œ’x‚¢ = 1
+			TALENT:L_I:å›žå¾©é…ã„ = 1
 		ELSE
-			TALENT:L_I:‰ñ•œ‘‚¢= 1
+			TALENT:L_I:å›žå¾©æ—©ã„= 1
 		ENDIF
 	CASE 21
-		;TALENT:L_I:‹¶‹C = 1
+		;TALENT:L_I:ç‹‚æ°— = 1
 	CASE 22
-		TALENT:L_I:ƒ„ƒ“ƒfƒŒ = 1
+		TALENT:L_I:ãƒ¤ãƒ³ãƒ‡ãƒ¬ = 1
 	CASE 23
-		TALENT:L_I:–£˜f = 1
+		TALENT:L_I:é­…æƒ‘ = 1
 	CASE 24
-		TALENT:L_I:ƒJƒŠƒXƒ} = 1
+		TALENT:L_I:ã‚«ãƒªã‚¹ãƒž = 1
 	CASE 25
-		TALENT:L_I:—c’t = 1
+		TALENT:L_I:å¹¼ç¨š = 1
 	CASE 26
-		SIF TALENT:L_I:”Lã || TALENT:L_I:ãŽg‚¢ 
+		SIF TALENT:L_I:çŒ«èˆŒ || TALENT:L_I:èˆŒä½¿ã„ 
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:”Lã = 1
+			TALENT:L_I:çŒ«èˆŒ = 1
 		ELSE
-			TALENT:L_I:ãŽg‚¢ = 1
+			TALENT:L_I:èˆŒä½¿ã„ = 1
 		ENDIF
 	CASE 27
-		TALENT:L_I:ˆêü‰z‚¦‚È‚¢ = 1
+		TALENT:L_I:ä¸€ç·šè¶Šãˆãªã„ = 1
 	CASE 28
-		TALENT:L_I:Ž©ˆÔ‚µ‚â‚·‚¢ = 1
+		TALENT:L_I:è‡ªæ…°ã—ã‚„ã™ã„ = 1
 	CASE 29
-		TALENT:L_I:’†“Å‚µ‚â‚·‚¢ = 1
+		TALENT:L_I:ä¸­æ¯’ã—ã‚„ã™ã„ = 1
 	CASE 30
-		TALENT:L_I:l‹C = 1
+		TALENT:L_I:äººæ°— = 1
 	CASE 31
-		SIF TALENT:L_I:Œ£g“I || TALENT:L_I:”½R“I
+		SIF TALENT:L_I:çŒ®èº«çš„ || TALENT:L_I:åæŠ—çš„
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:Œ£g“I = 1
+			TALENT:L_I:çŒ®èº«çš„ = 1
 		ELSE
-			TALENT:L_I:”½R“I = 1
+			TALENT:L_I:åæŠ—çš„ = 1
 		ENDIF
 	CASE 32
-		TALENT:L_I:¬ˆ«–‚ = 1
+		TALENT:L_I:å°æ‚ªé­” = 1
 	CASE 33
-		TALENT:L_I:ŒÛ•‘ = 1
+		TALENT:L_I:é¼“èˆž = 1
 	CASE 34
-		TALENT:L_I:˜Žg‚¢ = 1
+		TALENT:L_I:è…°ä½¿ã„ = 1
 	CASE 35
-		TALENT:L_I:Ž©§S = 1
+		TALENT:L_I:è‡ªåˆ¶å¿ƒ = 1
 	CASE 36
-		TALENT:L_I:T‚¦–Ú = 1
+		TALENT:L_I:æŽ§ãˆç›® = 1
 	CASE 37
-		SIF TALENT:L_I:ˆË‘¶ || TALENT:L_I:’ïR
+		SIF TALENT:L_I:ä¾å­˜ || TALENT:L_I:æŠµæŠ—
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:ˆË‘¶ = 1
+			TALENT:L_I:ä¾å­˜ = 1
 		ELSE
-			TALENT:L_I:’ïR = 1
+			TALENT:L_I:æŠµæŠ— = 1
 		ENDIF
 	CASE 38
 		IF !RAND:2 
-			TALENT:L_I:“¯«ˆ¤ = 1
+			TALENT:L_I:åŒæ€§æ„› = 1
 			SIF RAND:10 < 6
-				TALENT:L_I:”’•S‡•P = 1
+				TALENT:L_I:ç™½ç™¾åˆå§« = 1
 		ELSE
-			TALENT:L_I:—¼“= 1
+			TALENT:L_I:ä¸¡åˆ€= 1
 		ENDIF
 	CASE 39
-		TALENT:L_I:ŽwŽg‚¢= 1
+		TALENT:L_I:æŒ‡ä½¿ã„= 1
 	CASE 40
-		SIF TALENT:L_I:›‚ê‚Á‚Û‚¢ || TALENT:L_I:‘¦‘Â‚¿ || TALENT:L_I:Œx‰úS || TALENT:L_I:lŠÔ•sM 
+		SIF TALENT:L_I:æƒšã‚Œã£ã½ã„ || TALENT:L_I:å³å •ã¡ || TALENT:L_I:è­¦æˆ’å¿ƒ || TALENT:L_I:äººé–“ä¸ä¿¡ 
 			CONTINUE
 		IF !RAND:4 
-			TALENT:L_I:lŠÔ•sM = 1
+			TALENT:L_I:äººé–“ä¸ä¿¡ = 1
 		ELSEIF !RAND:3 
-			TALENT:L_I:Œx‰úS = 1
+			TALENT:L_I:è­¦æˆ’å¿ƒ = 1
 		ELSEIF !RAND:2 
-			TALENT:L_I:‘¦‘Â‚¿ = 1
+			TALENT:L_I:å³å •ã¡ = 1
 		ELSE
-			TALENT:L_I:›‚ê‚Á‚Û‚¢ = 1
+			TALENT:L_I:æƒšã‚Œã£ã½ã„ = 1
 		ENDIF
 	CASE 41
-		TALENT:L_I:”ü–e = 1
+		TALENT:L_I:ç¾Žè²Œ = 1
 	CASE 42
-		TALENT:L_I:ƒLƒX–‚ = 1
+		TALENT:L_I:ã‚­ã‚¹é­” = 1
 	CASE 43
-		TALENT:L_I:ƒZƒbƒNƒX‹¶ = 1
+		TALENT:L_I:ã‚»ãƒƒã‚¯ã‚¹ç‹‚ = 1
 	CASE 44
-		TALENT:L_I:KŒŠ‹¶‚¢ = 1
+		TALENT:L_I:å°»ç©´ç‹‚ã„ = 1
 	CASE 45
-		SIF TALENT:L_I:ƒAƒz‚Ì–º || TALENT:L_I:“VË
+		SIF TALENT:L_I:ã‚¢ãƒ›ã®å¨˜ || TALENT:L_I:å¤©æ‰
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:ƒAƒz‚Ì–º = 1
+			TALENT:L_I:ã‚¢ãƒ›ã®å¨˜ = 1
 		ELSE
-			TALENT:L_I:“VË = 1
+			TALENT:L_I:å¤©æ‰ = 1
 		ENDIF
 	CASE 46
-		TALENT:L_I:‚—ä‚Ì‰Ô = 1
+		TALENT:L_I:é«˜å¶ºã®èŠ± = 1
 	CASE 47
 		IF  RAND:100 <= 5
-			TALENT:L_I:uƒVƒXƒ^[v= 1
+			TALENT:L_I:ã€Œã‚·ã‚¹ã‚¿ãƒ¼ã€= 1
 		ENDIF
 	CASE 48
 		IF  RAND:100 <= 20
-		TALENT:L_I:‹L‰¯ˆ—Ï= 1
+		TALENT:L_I:è¨˜æ†¶å‡¦ç†æ¸ˆ= 1
 		ENDIF
 	CASE 49
-		SIF TALENT:L_I:”DP‚µ‚â‚·‚¢ || TALENT:L_I:”DP‚µ‚É‚­‚¢ || TALENT:L_I:¹—‚ÌŽq‹{
+		SIF TALENT:L_I:å¦Šå¨ ã—ã‚„ã™ã„ || TALENT:L_I:å¦Šå¨ ã—ã«ãã„ || TALENT:L_I:è–å¥³ã®å­å®®
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:”DP‚µ‚â‚·‚¢ = 1
+			TALENT:L_I:å¦Šå¨ ã—ã‚„ã™ã„ = 1
 		ELSE
-			TALENT:L_I:”DP‚µ‚É‚­‚¢ = 1
+			TALENT:L_I:å¦Šå¨ ã—ã«ãã„ = 1
 		ENDIF
 		IF  RAND:100 <= 5
-			TALENT:L_I:”DP‚µ‚â‚·‚¢ = 1
-			TALENT:L_I:”DP‚µ‚É‚­‚¢ = 0
-			TALENT:L_I:¹—‚ÌŽq‹{ = 1
+			TALENT:L_I:å¦Šå¨ ã—ã‚„ã™ã„ = 1
+			TALENT:L_I:å¦Šå¨ ã—ã«ãã„ = 0
+			TALENT:L_I:è–å¥³ã®å­å®® = 1
 		ENDIF
 	CASE 50
 		IF  RAND:100 <= 5
-			TALENT:L_I:‹Éã‚Ì–Ä = 1
+			TALENT:L_I:æ¥µä¸Šã®ç‰ = 1
 		ENDIF
 	CASE 51
 		IF  RAND:100 <= 20
-			TALENT:L_I:ƒ}ƒhƒ“ƒi = 1
+			TALENT:L_I:ãƒžãƒ‰ãƒ³ãƒŠ = 1
 		ENDIF
 	CASE 52
-		TALENT:L_I:ƒŒƒCƒvŠè–] = 1
+		TALENT:L_I:ãƒ¬ã‚¤ãƒ—é¡˜æœ› = 1
 	CASEELSE
 	ENDSELECT
 NEXT
@@ -400,7 +400,7 @@ NEXT
 
 ;----------------------------------------------------------
 ;----------------------------------------------------------
-;‘fŽ¿ŠÖ˜Aig‘Ìj
+;ç´ è³ªé–¢é€£ï¼ˆèº«ä½“ï¼‰
 ;----------------------------------------------------------
 ;----------------------------------------------------------
 @SET_RANDOM_TALENT_SENCIBITY(L_I)
@@ -411,36 +411,36 @@ CALLF FUNC_FISHER_YATES_SHAFFLE(TAL_INDEX, 4)
 FOR LOCAL, 0, RAND(1, 3)
 	SELECTCASE TAL_INDEX:LOCAL
 	CASE 0
-		SIF TALENT:L_I:‚u•qŠ´ || TALENT:L_I:‚u“ÝŠ´
+		SIF TALENT:L_I:ï¼¶æ•æ„Ÿ || TALENT:L_I:ï¼¶éˆæ„Ÿ
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‚u•qŠ´ = 1
+			TALENT:L_I:ï¼¶æ•æ„Ÿ = 1
 		ELSE
-			TALENT:L_I:‚u“ÝŠ´ = 1
+			TALENT:L_I:ï¼¶éˆæ„Ÿ = 1
 		ENDIF
 	CASE 1
-		SIF TALENT:L_I:‚a•qŠ´ || TALENT:L_I:‚a“ÝŠ´
+		SIF TALENT:L_I:ï¼¢æ•æ„Ÿ || TALENT:L_I:ï¼¢éˆæ„Ÿ
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‚a•qŠ´ = 1
+			TALENT:L_I:ï¼¢æ•æ„Ÿ = 1
 		ELSE
-			TALENT:L_I:‚a“ÝŠ´ = 1
+			TALENT:L_I:ï¼¢éˆæ„Ÿ = 1
 		ENDIF
 	CASE 2
-		SIF TALENT:L_I:‚b•qŠ´ || TALENT:L_I:‚b“ÝŠ´
+		SIF TALENT:L_I:ï¼£æ•æ„Ÿ || TALENT:L_I:ï¼£éˆæ„Ÿ
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‚b•qŠ´ = 1
+			TALENT:L_I:ï¼£æ•æ„Ÿ = 1
 		ELSE
-			TALENT:L_I:‚b“ÝŠ´ = 1
+			TALENT:L_I:ï¼£éˆæ„Ÿ = 1
 		ENDIF
 	CASE 3
-		SIF TALENT:L_I:‚`•qŠ´ || TALENT:L_I:‚`“ÝŠ´
+		SIF TALENT:L_I:ï¼¡æ•æ„Ÿ || TALENT:L_I:ï¼¡éˆæ„Ÿ
 			CONTINUE
 		IF !RAND:2
-			TALENT:L_I:‚`•qŠ´ = 1
+			TALENT:L_I:ï¼¡æ•æ„Ÿ = 1
 		ELSE
-			TALENT:L_I:‚`“ÝŠ´ = 1
+			TALENT:L_I:ï¼¡éˆæ„Ÿ = 1
 		ENDIF
 	CASEELSE
 	ENDSELECT

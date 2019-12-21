@@ -1,148 +1,148 @@
-;-------------------------------------------------
-;�ޓ��̑㏞�A�t�^�[
+﻿;-------------------------------------------------
+;窃盗の代償アフター
 ;-------------------------------------------------
 @TURN_EVENT_NSM_AF
 #DIM L_INPUT
 #DIM L_S
 
 
-IF CFLAG:�ޓ��̑㏞�A�t�^�[ == 1
+IF CFLAG:窃盗の代償アフター == 1
 	DRAWLINE
 	SETCOLOR 150,250,150
-	PRINTFORML �y�ޓ��̑㏞�A�t�^�[(�J���}):%CALLNAME%�z
+	PRINTFORML 【窃盗の代償アフター(カルマ):%CALLNAME%】
 	PRINTFORML 
-	PRINTFORML �A���%CALLNAME%�͗X�֎󂯂ɓ����Ă����������m�F���A�v�킸���g�����ɂԂ��܂��Ă��܂����B
-	PRINTFORML ��������o�Ă����͓̂X���ɔƂ���Ă���%CALLNAME%�̒s�Ԃ��ʂ����ʐ^�ŁA�������ꂽ���ɂ͏Z����������Ă����B
-	PRINTFORMW ���̏Z���ɗ��Ȃ������ꍇ�͎ʐ^���΂�T���Ƃ��������Ȃ̂��낤�B
-	PRINTFORMW �u�ł��A�ǂ����āc�c�H�v
-	PRINTFORML �X���ɂ������A����𕷂��ꂽ�L���͂��邪�A�Ō�܂Ō�������Ȃ������͂����B
-	PRINTFORML ���̎��̏���v���o�������ɁA�q�{�̂����肪�M���u�������B
-	PRINTFORML �s���Γ��R�A�g�̂����߂��邾�낤�B
-	PRINTFORML ��������x�̉߂����A�f�����悭�m��Ȃ��j�̈Ԃݎ҂Ƃ����ߎS�Ȍ�����l���ɂ����炷�ȂǒN���\�z�ł��邾�낤���B
-	PRINTFORML ��ꂻ���ɂȂ�܂�@���Ȃ���ߒQ�ɕ��Ă���%CALLNAME%�́A�ӂƃJ�t�F�ŏ����ɋ��񂾉\���v���o�����B
-	PRINTFORML ������������ނȂ�Ώ����Ă���邩������Ȃ����A�����Ȃ�Ƃ��ׂĂ��ڂ炩�ɘb���Ȃ���΂Ȃ�Ȃ��B
-	PRINTFORMW �X���̈Ԃݎ҂Ƃ��ė��p���ꑱ���邩�A�p��E��Ŕނɑ��k���邩�c
+	PRINTFORML 帰宅した%CALLNAME%は郵便受けに入っていた封筒を確認し、思わず中身を床にぶちまけてしまった。
+	PRINTFORML 封筒から出てきたのは店員に犯されている%CALLNAME%の痴態を写した写真で、同封された紙には住所が書かれていた。
+	PRINTFORMW この住所に来なかった場合は写真をばら撒くという脅しなのだろう。
+	PRINTFORMW 「でも、どうして……？」
+	PRINTFORML 店員にしつこく連絡先を聞かれた記憶はあるが、最後まで口を割らなかったはずだ。
+	PRINTFORML あの時の情事を思い出すうちに、子宮のあたりが熱く疼きだす。
+	PRINTFORML 行けば当然、身体を求められるだろう。
+	PRINTFORML たった一度の過ちが、素性をよく知らない男の慰み者という悲惨な結末を人生にもたらすなど誰が予想できるだろうか。
+	PRINTFORML 溢れそうになる涙を拭いながら悲嘆に暮れていた%CALLNAME%は、ふとカフェで小耳に挟んだ噂を思い出した。
+	PRINTFORML もしかしたら彼ならば助けてくれるかもしれないが、そうなるとすべてを詳らかに話さなければならない。
+	PRINTFORMW 店員の慰み者として利用され続けるか、恥を忍んで彼に相談するか…
 	
 	$INPUT_LOOP
 	PRINTFORML 
-	PRINTFORML [1] - ���k����
-	PRINTFORML [2] - ���k�����Z����K�˂�
+	PRINTFORML [1] - 相談する
+	PRINTFORML [2] - 相談せず住所を訪ねる
 	PRINTFORML 
 	
 	INPUT
 	L_INPUT = RESULT
 	
 	SELECTCASE L_INPUT
-	CASE 1	;���k����
-		PRINTFORMW �ʐ^�Ǝ��𕕓��ɉ�������%CALLNAME%�͋}���ōs�����̃J�t�F�ւƌ��������B
+	CASE 1	;相談する
+		PRINTFORMW 写真と紙を封筒に押し込んだ%CALLNAME%は急いで行きつけのカフェへと向かった。
 		PRINTFORML 
-		PRINTFORML �^�̂������ƂɁA�ނ͓X���̏�����l�ƃJ�E���^�[�z���ɒk�΂��Ă����B
-		PRINTFORML �v���؂���%CALLNAME%������������ƁA��قǍ���������Ă����̂�%CALLNAME%�̊������Ȃ�X���̓�l�̓M���b�Ƃ����l�q��������B
-		PRINTFORML �u�c�c���̕����ցv
-		PRINTFORML �X���̈�l���C�𗘂����ĉ��̌��ւƈē����Ă��ꂽ�̂ŁA%CALLNAME%��%CALLNAME:MASTER%�Ɠ�l����ƂȂ�B
-		PRINTFORMW ������n���ďڍׂ�b�������ɁA%CALLNAME%�͈ӎ����N�O�Ƃ��n�߂��c
+		PRINTFORML 運のいいことに、彼は店員の女性二人とカウンター越しに談笑していた。
+		PRINTFORML 思い切って%CALLNAME%が声をかけると、よほど酷い顔をしていたのか%CALLNAME%の顔を見るなり店員の二人はギョッとした様子を見せる。
+		PRINTFORML 「……奥の部屋へ」
+		PRINTFORML 店員の一人が気を利かせて奥の個室へと案内してくれたので、%CALLNAME%は%CALLNAME:MASTER%と二人きりとなる。
+		PRINTFORMW 封筒を渡して詳細を話すうちに、%CALLNAME%は意識が朦朧とし始めた…
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�͐V�����I�[�v�������l���X�Ŕ��������y����ł����B
-		PRINTFORML �����O�ɓX������ւ�����Ƃ������A�ȑO�̓X���ǂ�Ȃ��̂��������N���o���Ă��Ȃ��B
-		PRINTFORMW �����炭���N�ł��Ȃ��X�������̂��낤�Ɛl�X�͉\�������A���̉\����T�ԂƗ����Ȃ������ɐl�X�̋L����������Ă������c
+		PRINTFORML %CALLNAME%は新しくオープンした個人商店で買い物を楽しんでいた。
+		PRINTFORML 数日前に店が入れ替わったというが、以前の店がどんなものだったか誰も覚えていない。
+		PRINTFORMW おそらくロクでもない店だったのだろうと人々は噂したが、その噂も一週間と立たないうちに人々の記憶から消えていった…
 		
 		RESETCOLOR
-		;�t���O��܂�
-		CFLAG:�ޓ��̑㏞�A�t�^�[ = -1
+		;フラグを折る
+		CFLAG:窃盗の代償アフター = -1
 		
-	CASE 2	;���k�����Z����K�˂�
-		PRINTFORMW %CALLNAME%�͑��l�ɒm���邱�Ƃ������A�L�ڂ��ꂽ�Z���ւƌ��������c
+	CASE 2	;相談せず住所を訪ねる
+		PRINTFORMW %CALLNAME%は他人に知られることを嫌い、記載された住所へと向かった…
 		PRINTFORML 
-		PRINTFORML %CALLNAME%��҂��󂯂Ă����X���́w�Z�b�N�X���ɂ��ꖇ�̎ʐ^��j���x�w�Ⓒ�̂��тɒǉ��ňꖇ�̎ʐ^��j���x
-		PRINTFORML �w���ׂĂ̎ʐ^���j�����ꂽ��֌W���I����x�Ƃ���������ۂނ悤�ɔ������B
-		PRINTFORML ���͂⑼�Ɏ�i�͂Ȃ��Ǝv������ł���%CALLNAME%�͓X���̌��Ԃɏ��A���Ԍ���̓��̊֌W������ł��܂����B
-		PRINTFORMW ���������ʐ^�̔j�������悤�ƓX����%CALLNAME%��U���A���̂��߂Ɏ؂肽�Ƃ������������ւ�%CALLNAME%��A�ꍞ�񂾁c
+		PRINTFORML %CALLNAME%を待ち受けていた店員は『セックス一回につき一枚の写真を破棄』『絶頂のたびに追加で一枚の写真を破棄』
+		PRINTFORML 『すべての写真が破棄されたら関係を終える』という条件を呑むように迫った。
+		PRINTFORML もはや他に手段はないと思い込んでいる%CALLNAME%は店員の口車に乗り、期間限定の肉体関係を結んでしまった。
+		PRINTFORMW さっそく写真の破棄をしようと店員は%CALLNAME%を誘い、このために借りたというヤリ部屋へと%CALLNAME%を連れ込んだ…
 		PRINTFORML 
-		PRINTFORML �S�g���琸�L��Y�킹�Ȃ���A���%CALLNAME%�́A�����̒��ɓ������ʐ^�̖����𐔂���B
-		PRINTFORML ���Ɖ��x���̒j�ɕ�����邱�ƂɂȂ�̂��v�Z���邪�A����͈Ӗ��̂Ȃ��s�ׂł������B
-		PRINTFORMW �Ȃ��Ȃ獡��̒s�Ԃ��܂������ɎB�e����A�V���Ȏʐ^���ǉ������̂�����c
+		PRINTFORML 全身から精臭を漂わせながら帰宅した%CALLNAME%は、封筒の中に入った写真の枚数を数える。
+		PRINTFORML あと何度あの男に抱かれることになるのか計算するが、それは意味のない行為であった。
+		PRINTFORMW なぜなら今回の痴態もまた密かに撮影され、新たな写真が追加されるのだから…
 		
 		RESETCOLOR
-		CFLAG:�ޓ��̑㏞�A�t�^�[ += 1
+		CFLAG:窃盗の代償アフター += 1
 		
-		EXP:�L�X�o�� += (RAND:2)+1
-		EXP:�a�o�� += (RAND:2)+1
-		EXP:�b�o�� += (RAND:2)+1
-		EXP:�u�o�� += (RAND:3)+1
-		EXP:�t�F���o�� += (RAND:2)+1
-		EXP:�����o�� += (RAND:2)+1
-		EXP:�Ⓒ�o�� += (RAND:2)+1
-		EXP:���t�o�� += (RAND:2)+1
-		EXP:�S�ˌo�� += (RAND:2)+1
-		EXP:�����o�� += (RAND:3)+1
-		EXP:��ɉ��y�o�� += (RAND:2)+1
+		EXP:キス経験 += (RAND:2)+1
+		EXP:Ｂ経験 += (RAND:2)+1
+		EXP:Ｃ経験 += (RAND:2)+1
+		EXP:Ｖ経験 += (RAND:3)+1
+		EXP:フェラ経験 += (RAND:2)+1
+		EXP:性交経験 += (RAND:2)+1
+		EXP:絶頂経験 += (RAND:2)+1
+		EXP:精液経験 += (RAND:2)+1
+		EXP:膣射経験 += (RAND:2)+1
+		EXP:強姦経験 += (RAND:3)+1
+		EXP:苦痛快楽経験 += (RAND:2)+1
 		
 	CASEELSE
-		PRINTFORML %CALLNAME%�͍������Ă��ď�肭�l�����܂Ƃ܂�Ȃ��c
+		PRINTFORML %CALLNAME%は混乱していて上手く考えがまとまらない…
 		GOTO INPUT_LOOP
 	ENDSELECT
-;���k�����A���ڈȍ~
-ELSEIF CFLAG:�ޓ��̑㏞�A�t�^�[ > 1
+;相談せず、二回目以降
+ELSEIF CFLAG:窃盗の代償アフター > 1
 	DRAWLINE
 	SETCOLOR 150,250,150
-	PRINTFORML �y�ޓ��̑㏞�A�t�^�[(�J���}):%CALLNAME%�z
+	PRINTFORML 【窃盗の代償アフター(カルマ):%CALLNAME%】
 	PRINTFORML 
-	PRINTFORML %CALLNAME%�͓X���Ɏʐ^��j�����Ă��炤���ߓ��̂�����Ă���c
+	PRINTFORML %CALLNAME%は店員に写真を破棄してもらうため肉体を捧げている…
 	IF !RAND:5
-		PRINTFORML %CALLNAME%�͂��݂��̑̉t�ɂ���ĉ��ꂽ�X���̃y�j�X�����ł��ꂢ�ɑ|�����Ă����B
-		PRINTFORML ���x�ː����Ă�����Ɉނ���C�z�̂Ȃ��y�j�X��s�v�c�����Ɍ��߂Ă���ƁA�X���͎������ɗ��R��������B
-		PRINTFORML �H�����͑����̃T�v����ۂ�ł���̂ň�����Z�b�N�X���邱�Ƃ��\�Ȃ̂��������B
-		PRINTFORML �܂��T�v���̉e���Ő��q���������悭���x�ɂȂ��Ă��邩���D���Ȃ���΂ЂƂ��܂���Ȃ��B
-		PRINTFORMW �~�]�ɖ���������%CALLNAME%�̉����������߂Ȃ��炻�������˓X���ɁA%CALLNAME%�͔�D��̏�p��Y��ʂ悤�����̂������c
+		PRINTFORML %CALLNAME%はお互いの体液によって汚れた店員のペニスを口できれいに掃除していた。
+		PRINTFORML 何度射精しても一向に萎える気配のないペニスを不思議そうに見つめていると、店員は自慢げに理由を語った。
+		PRINTFORML 曰く精力増強のサプリを呑んでいるので一日中セックスすることも可能なのだそうだ。
+		PRINTFORML またサプリの影響で精子も活きがよく強靭になっているから避妊しなければひとたまりもない。
+		PRINTFORMW 欲望に満ちた瞳で%CALLNAME%の下腹部を見つめながらそう告げね店員に、%CALLNAME%は避妊薬の常用を忘れぬよう誓うのだった…
 	ELSEIF !RAND:4
-		PRINTFORML �X���ƑΖʍ��ʂŃf�B�[�v�L�X�����Ȃ���%CALLNAME%�͎���q�{�����T���ɎC����Ă����B
-		PRINTFORML �X���̌��t��F�߂�̂�ᛂ��������A�̂̑����������Ƃ����͎̂����������B
-		PRINTFORML ���傤�ǂ������ɓ�����X���̃y�j�X�ɉ��x���Ⓒ�ɒǂ�����A�z�������S�ǂ��X���̃y�j�X�����������ߕt���ː��𑣂��B
-		PRINTFORML ���̃T�C�N�����̂��d�˂�x�ɑ����Ȃ�A���܂Ŋ��������Ƃ̂Ȃ����y�̍��݂ւƓ�l�������グ�Ă����B
-		PRINTFORMW ���̂܂ܔ����o���Ȃ��Ȃ邩������Ȃ����|�ɐk���Ȃ�����A%CALLNAME%�͎ʐ^�̔j���Ƃ������R�����ɓX���ɛZ�ё������c
+		PRINTFORML 店員と対面座位でディープキスをしながら%CALLNAME%は自ら子宮口を亀頭に擦りつけていた。
+		PRINTFORML 店員の言葉を認めるのは癪だったが、体の相性がいいというのは事実だった。
+		PRINTFORML ちょうどいい所に当たる店員のペニスに何度も絶頂に追いやられ、痙攣する膣壁が店員のペニスを激しく締め付け射精を促す。
+		PRINTFORML そのサイクルが体を重ねる度に早くなり、今まで感じたことのない快楽の高みへと二人を押し上げていく。
+		PRINTFORMW このまま抜け出せなくなるかもしれない恐怖に震えながらも、%CALLNAME%は写真の破棄という理由を盾に店員に媚び続けた…
 	ELSEIF !RAND:3
-		PRINTFORML �q�{�����m�b�N���ꑱ����%CALLNAME%�̓��̂͊ח����O�������B
-		PRINTFORML �q�{���~��Ă��ėY�̐��t��~���A�s�݂������Ă���̂�%CALLNAME%�ɂ͂悭�킩�����B
-		PRINTFORML �Ƃ�����Ζ\�������˂Ȃ����B�{�\��K���ɗ����ŉ��������Ȃ���A%CALLNAME%�͓X���̐ӂߋ�ɑς���B
-		PRINTFORMW ���ׂĂ͎ʐ^�̔j���̂��߂Ɂc
+		PRINTFORML 子宮口をノックされ続けた%CALLNAME%の肉体は陥落寸前だった。
+		PRINTFORML 子宮が降りてきて雄の精液を欲し、孕みたがっているのが%CALLNAME%にはよくわかった。
+		PRINTFORML ともすれば暴走しかねない生殖本能を必死に理性で押さえつけながら、%CALLNAME%は店員の責め苦に耐える。
+		PRINTFORMW すべては写真の破棄のために…
 	ELSEIF !RAND:2
-		PRINTFORML ����Ȃ�ƓX���̃y�j�X���󂯓��ꂽ�S��%CALLNAME%�͏ł���o���Ă����B
-		PRINTFORML �ӎ��͓X���Ƃ̃Z�b�N�X���������Ă��邪�A���͓̂X���Ƃ̃Z�b�N�X��҂���тĔ鏊��G�炵�Ă���B
-		PRINTFORML ���̎����Ɍ��E���߂����Ƃ����A%CALLNAME%�͏����̒ǉ���\���o�邪�X���͋����Ȃ��B
-		PRINTFORMW ���̂�����̂��悩�A�ʐ^�����ׂĔj������̂��悩�A%CALLNAME%�ɂ͕��̈����q���ɂ����v���Ȃ��Ȃ��Ă����c
+		PRINTFORML すんなりと店員のペニスを受け入れた膣に%CALLNAME%は焦りを覚えていた。
+		PRINTFORML 意識は店員とのセックスを嫌がっているが、肉体は店員とのセックスを待ちわびて秘所を濡らしている。
+		PRINTFORML その事実に限界が近いことを悟り、%CALLNAME%は条件の追加を申し出るが店員は許さない。
+		PRINTFORMW 肉体が堕ちるのが先か、写真をすべて破棄するのが先か、%CALLNAME%には分の悪い賭けにしか思えなくなっていた…
 	ELSE
-		PRINTFORML �X������n���ꂽ��D����S�~���Ɏ̂Ă�%CALLNAME%�́A�����ōw��������D���ۂ�ł����B
-		PRINTFORML ���n���ꂽ�Ƃ��̓X���̖ڂ��A�~�]�ۏo���̃M�������ڂŐM�p�Ȃ�Ȃ������̂��B
-		PRINTFORML ���͍̂D���ɂ����Ă��q�{�܂ō����o���悤�Ȃ��Ƃ͂��Ȃ��B
-		PRINTFORMW %CALLNAME%�͉��߂Č��ӂ��ł߂�ƒj�̑҂����ւƌ��������c
+		PRINTFORML 店員から渡された避妊薬をゴミ箱に捨てた%CALLNAME%は、自腹で購入した避妊薬を呑んでいた。
+		PRINTFORML 薬を渡されたときの店員の目が、欲望丸出しのギラついた目で信用ならなかったのだ。
+		PRINTFORML 肉体は好きにさせても子宮まで差し出すようなことはしない。
+		PRINTFORMW %CALLNAME%は改めて決意を固めると男の待つ部屋へと向かった…
 	ENDIF
 	
 	RESETCOLOR
-	CFLAG:�ޓ��̑㏞�A�t�^�[ += 1
+	CFLAG:窃盗の代償アフター += 1
 	
-	;�񐔂��d�˂邲�Ƃɔ��o����\����5%���A�b�v
-	L_S = CFLAG:�ޓ��̑㏞�A�t�^�[ * 5
+	;回数を重ねるごとに発覚する可能性が5%ずつアップ
+	L_S = CFLAG:窃盗の代償アフター * 5
 
 	IF RAND:100 <= L_S
-		;���o�����ꍇ�A�t���O��܂�
-		PRINTFORML �x�d�Ȃ�X���Ƃ̓��̌��Ő��_�I�ɂ܂����Ă��܂���%CALLNAME%�́A���ɓ��퐶���ɂ��x����������悤�ɂȂ����B
-		PRINTFORML �����Ȃ��%CALLNAME:MASTER%���ٕς��@�m���A�X���͑��݂��Ə�������A%CALLNAME%�̋L�����K�؂ɏ������ꂽ�B
-		PRINTFORMW %CALLNAME%�͐V�����J�X�����X��O�ɂ��ĕs�ӂɟT���ȋC�����N���N����A�s�v�c�����Ɏ���X���Ă����c
-		CFLAG:�ޓ��̑㏞�A�t�^�[ = -1
+		;発覚した場合、フラグを折る
+		PRINTFORML 度重なる店員との肉体交渉で精神的にまいってしまった%CALLNAME%は、遂に日常生活にも支障をきたすようになった。
+		PRINTFORML そうなると%CALLNAME:MASTER%も異変を察知し、店員は存在ごと処理され、%CALLNAME%の記憶も適切に処理された。
+		PRINTFORMW %CALLNAME%は新しく開店した店を前にして不意に鬱屈な気分が湧き起こり、不思議そうに首を傾げていた…
+		CFLAG:窃盗の代償アフター = -1
 	ENDIF
 	
-	EXP:�L�X�o�� += (RAND:2)+1
-	EXP:�a�o�� += (RAND:2)+1
-	EXP:�b�o�� += (RAND:2)+1
-	EXP:�u�o�� += (RAND:4)+1
-	EXP:�t�F���o�� += (RAND:2)+1
-	EXP:�����o�� += (RAND:4)+1
-	EXP:�Ⓒ�o�� += (RAND:3)+1
-	EXP:���t�o�� += (RAND:2)+1
-	EXP:�����o�� += (RAND:2)+1
-	EXP:�S�ˌo�� += (RAND:4)+1
-	EXP:�����o�� += (RAND:4)+1
-	EXP:��ɉ��y�o�� += (RAND:3)+1
+	EXP:キス経験 += (RAND:2)+1
+	EXP:Ｂ経験 += (RAND:2)+1
+	EXP:Ｃ経験 += (RAND:2)+1
+	EXP:Ｖ経験 += (RAND:4)+1
+	EXP:フェラ経験 += (RAND:2)+1
+	EXP:性交経験 += (RAND:4)+1
+	EXP:絶頂経験 += (RAND:3)+1
+	EXP:精液経験 += (RAND:2)+1
+	EXP:精飲経験 += (RAND:2)+1
+	EXP:膣射経験 += (RAND:4)+1
+	EXP:強姦経験 += (RAND:4)+1
+	EXP:苦痛快楽経験 += (RAND:3)+1
 
 ENDIF
 

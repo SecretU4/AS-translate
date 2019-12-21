@@ -1,10 +1,10 @@
-@CHANGE_CHILD_BODY
-PRINTL !����! �����A���l�̌^�̉摜�����ւ��������s���܂�
-PRINTL �������͈�x�̎��s�̌�͕s�v�ł��B
+﻿@CHANGE_CHILD_BODY
+PRINTL !注意! 小柄、小人体型の画像差し替え処理を行います
+PRINTL 当処理は一度の実行の後は不要です。
 FOR LOCAL, 1, CHARANUM-1
-	IF TALENT:LOCAL:�����̌^==1  || TALENT:LOCAL:���l�̌^==1
+	IF TALENT:LOCAL:小柄体型==1  || TALENT:LOCAL:小人体型==1
 		PRINTFORML {LOCAL}
-		CFLAG:LOCAL:�Z�l_�̊i=1
+		CFLAG:LOCAL:住人_体格=1
 	ENDIF
 NEXT
 RETURN

@@ -1,310 +1,310 @@
-;-------------------------------------------------
-;����C�x���g
+﻿;-------------------------------------------------
+;日常イベント
 ;-------------------------------------------------
 @TURN_EVENT_NJ
 
 DRAWLINE
 
-IF TALENT:�w�� && RAND:10 > 5
-	PRINTFORML �y�w���C�x���g:%CALLNAME%�z
+IF TALENT:学生 && RAND:10 > 5
+	PRINTFORML 【学生イベント:%CALLNAME%】
 	DRAWLINE
 	IF !RAND:10
-		PRINTFORML %CALLNAME%�������Œ��̐H�����Ƃ��Ă���ƁA�߂��̐��k�������\�b�����Ă���B
-		PRINTFORML �u�\�\�\�ł��A�o���o���̎��̂��]�����Ă��񂾂��āv
-		PRINTFORML �u�����[�A���H�n�ɂ͋߂Â��Ȃ����������ȁc�������댯������c�v
-		PRINTFORML �ǂ����ŋߋN����������ɂ��Č�荇���Ă���悤���B
-		SIF CFlag:�Z�l_�Y�ݑΐl���� == 1
-			PRINTFORML �����čŋߐl�ڂ��C�ɂ���%CALLNAME%�ɂƂ��āA�]�薳���ł��Ȃ����e�ł���B
-		PRINTFORMW %CALLNAME%�������ڂɍ���ʂ悤�A�C��t���邱�Ƃɂ����c
+		PRINTFORML %CALLNAME%が教室で昼の食事をとっていると、近くの生徒が何やら噂話をしている。
+		PRINTFORML 「―――でさ、バラバラの死体が転がってたんだって」
+		PRINTFORML 「こえー、裏路地には近づかない方がいいな…あそこ危険すぎる…」
+		PRINTFORML どうやら最近起きた怪奇事件について語り合っているようだ。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML そして最近人目を気にする%CALLNAME%にとって、余り無視できない内容である。
+		PRINTFORMW %CALLNAME%も同じ目に合わぬよう、気を付けることにした…
 	ELSEIF !RAND:9
-		PRINTFORML ���ƒ��A���t�̘b�𕷂��Ȃ���m�[�g�Ɏ��������Ă���%CALLNAME%�͂ӂƋ߂��̐Ȃ̐��k�ɖڂ����B
+		PRINTFORML 授業中、教師の話を聞きながらノートに式を書いていた%CALLNAME%はふと近くの席の生徒に目をやる。
 		IF !RAND:3
-			PRINTFORML ����ƃm�[�g�����ɑ��ق����Ă������k����ɓ������A�o�������ς��Ǝv���̂����c�B
+			PRINTFORML するとノートを盾に早弁をしていた生徒が眼に入った、バレたら大変だと思うのだが…。
 		ELSEIF !RAND:2
-			PRINTFORML ����ƃm�[�g�̒[�ɗ����������Ă��鐶�k����ɓ���A�ӊO�Ə�肢�B
+			PRINTFORML するとノートの端に落書きをしている生徒が眼に入る、意外と上手い。
 		ELSE
-			PRINTFORML ����Ƌ����肵�Ă��鐶�k����ɓ������A��p�ɕ׋����Ă���|�[�Y�����Ă���B
+			PRINTFORML すると居眠りしている生徒が眼に入った、器用に勉強しているポーズをしている。
 		ENDIF
-		SIF CFlag:�Z�l_�Y�ݕ׊w���� == 1
-			PRINTFORML ���̐��k�͉��̎��ƒ��Ȃ̂ɕ׋����Ȃ��̂��A�r���^��Ɏv�����B
-		PRINTFORMW �c�������܂�Ȃ��悤%CALLNAME%�͌��Ă݂Ȃ��ӂ�����Ď��Ƃɖ߂����c
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML あの生徒は何故授業中なのに勉強しないのか、甚だ疑問に思った。
+		PRINTFORMW …巻き込まれないよう%CALLNAME%は見てみないふりをして授業に戻った…
 	ELSEIF !RAND:8
-		PRINTFORML %CALLNAME%�̑O�ŏ��q���k��l���y�������ɉ�b���Ă���B
-		SIF CFlag:�Z�l_�Y�ݗ������� == 1
-			PRINTFORML �ِ��̘b���������Ă���悤�ŁA�������X���Ă��܂����B
+		PRINTFORML %CALLNAME%の前で女子生徒二人が楽しそうに会話している。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 異性の話も混じっているようで、つい耳を傾けてしまった。
 		IF !RAND:3
-			PRINTFORML �u�����I������炢���̋i���ɍs���H�v
-			PRINTFORML �u����A���̐l����Ƃ����񂾂��ǂȁ[�v
+			PRINTFORML 「部活終わったらいつもの喫茶に行く？」
+			PRINTFORML 「うん、あの人いるといいんだけどなー」
 		ELSEIF !RAND:2
-			PRINTFORML �u���̋i���X�ɂ�������l���邶��Ȃ��H�A������y�����Ė����������v
-			PRINTFORML �u�������������H�b�ʔ����������l����ˁv
+			PRINTFORML 「あの喫茶店にいつもいる人いるじゃない？、昨日ご馳走して貰っちゃった」
+			PRINTFORML 「あっ私もあるよ？話面白いしいい人だよね」
 		ELSE
-			PRINTFORML �u�������O�Ńs���`�Ȃ񂾂�˂��A�܂����̐l�ɚ����Ă��炨�����Ȃ��v
-			PRINTFORML �u����܂肽����Ɩ��f�����A�Ȃ�ׂ��T���������ǂ���H�v
+			PRINTFORML 「給料日前でピンチなんだよねぇ、またあの人に奢ってもらおうかなぁ」
+			PRINTFORML 「あんまりたかると迷惑だし、なるべく控えた方が良いよ？」
 		ENDIF
-		PRINTFORMW �ǂ���玩�����s�����̋i���X�̘b�����Ă���悤���A�������]�T������΍s���Ă݂悤�c
+		PRINTFORMW どうやら自分も行きつけの喫茶店の話をしているようだ、自分も余裕があれば行ってみよう…
 	ELSEIF !RAND:7
-		PRINTFORML �C���������̂ŉ���ł������߂������Ƃ���Ă݂�ƁA���l���m�炵����l���[�����ł�������Ă����B
-		PRINTFORML �����͐l�ڂ����Ȃ��Ƃ͂����A�₽�甧�𖧒������Ċy�������ɉ�b���Ă���B
-		PRINTFORMW ���đ��X���l�̍��C�����������A���S�n�������Ȃ���%CALLNAME%�͂��������ƑގU�����B
+		PRINTFORML 気が向いたので屋上でお昼を過ごそうとやってみると、恋人同士らしい二人が端っこでいちゃついていた。
+		PRINTFORML ここは人目が少ないとはいえ、やたら肌を密着させて楽しそうに会話している。
+		PRINTFORMW 来て早々他人の惚気を見せつけられ、居心地が悪くなった%CALLNAME%はそそくさと退散した。
 	ELSEIF !RAND:6
-		PRINTFORML ���Ƃ��I���Z��܂ŏo�Ă݂�ƁA��l�̐��k���ǂɐg��a��������f���Ă����B
+		PRINTFORML 授業も終わり校門まで出てみると、一人の生徒が壁に身を預け溜息を吐いていた。
 		IF !RAND:3
-			PRINTFORML �u�͂��A�ƂɋA�肽���Ȃ��ȁc�A�܂��@�����񂾂낤���c�v
+			PRINTFORML 「はあ、家に帰りたくないな…、また叩かれるんだろうし…」
 		ELSEIF !RAND:2
-			PRINTFORML �u�Ƃ͍ň������A�������N���ɔ��߂Ă��炨�����ȁc�v
+			PRINTFORML 「家は最悪だし、今日も誰かに泊めてもらおうかな…」
 		ELSE
-			PRINTFORML �u�ߏ��̎G���Ȃ�Ƃ����Ă���Ȃ����Ȃ��A�ƂɋA�肭�Ȃ��Ȃ��c�v
+			PRINTFORML 「近所の雑音なんとかしてくれないかなぁ、家に帰りくなくなるよ…」
 		ENDIF
-		PRINTFORML ���k�͂ǂ����ƒ�Ɋւ���Y�݂�����Ă���悤���B
-		SIF CFlag:�Z�l_�Y�݉ƒ뗍�� == 1
-			PRINTFORML �ӂƎ����̉ƒ뎖���z�N�������A�������ܐU�蕥����ɕԂ�B
-		PRINTFORMW ���l�̉ƒ뎖��͂ǂ����悤���Ȃ��̂�%CALLNAME%�͎�����؂�A��l�X�ւƌ������Ă������c
+		PRINTFORML 生徒はどうやら家庭に関する悩みを抱いているようだ。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML ふと自分の家庭事情を想起したが、すぐさま振り払い我に返る。
+		PRINTFORMW 他人の家庭事情はどうしようもないので%CALLNAME%は視線を切り、一人街へと向かっていった…
 	ELSEIF !RAND:5
-		PRINTFORML ���ނ�߂��ɑq�ɂƉ������A�󂫕����Ɍ������Œ��߂��̋������琺�����������B
-		PRINTFORML ���̋������󂫕����̂͂������c�ƕs�v�c�Ɏv����%CALLNAME%�́A�߂Â��Ď����X���Ă݂�B
+		PRINTFORML 教材を戻しに倉庫と化した、空き部屋に向かう最中近くの教室から声が聞こえた。
+		PRINTFORML あの教室も空き部屋のはずだが…と不思議に思った%CALLNAME%は、近づいて耳を傾けてみる。
 		IF !RAND:3
-			PRINTFORML �u���ӂӁA������������������ˁA��������������v
-			PRINTFORML �u������ƍ��������邩�Ǝv�������c�v
+			PRINTFORML 「うふふ、今日も激しかったわね、私も満足したわ」
+			PRINTFORML 「ちょっと腰が抜けるかと思ったぞ…」
 		ELSEIF !RAND:2
-			PRINTFORML �u���񂾂��ł����̂��H�A�����Ƒ����Ă��c�v
-			PRINTFORML �u�����悱�ꂾ���Łc�c���̂����A�܂������Ăˁc�H�v
+			PRINTFORML 「こんだけでいいのか？、もっと多くても…」
+			PRINTFORML 「いいよこれだけで……そのかわり、また抱いてね…？」
 		ELSE
-			PRINTFORML �u�������C�����ǂ���������H�A���ł������Ă�邺�v
-			PRINTFORML �u���A����͂����̐����������c�v
+			PRINTFORML 「あいつより気持ち良かっただろ？、いつでも抱いてやるぜ」
+			PRINTFORML 「こ、これはただの性処理だし…」
 		ENDIF
-		PRINTFORML �c���͏I����Ă���悤�����A�ǂ����B��Ĉ������Ă����悤���B
-		SIF CFlag:�Z�l_�Y�ݐ��I���� == 1
-			PRINTFORML ����͕����Ă͂����Ȃ����e�̔��Ȃ̂ɁA�{�\�I�ɋ����������Ă��܂��B
-		SIF CFlag:�Z�l_�Y�ݗ������� == 1
-			PRINTFORML ���������֌W������ł����ŁA��l�̊֌W��m�肽���Ȃ��Ă��܂����B�B
-		PRINTFORMW �������������Ă���%CALLNAME%�́A������O�ɂ������ƑގU���邱�Ƃɂ����c
+		PRINTFORML …事は終わっているようだが、どうやら隠れて逢引していたようだ。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML それは聞いてはいけない内容の筈なのに、本能的に興味を向けてしまう。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML だが恋愛関係も絡んでそうで、二人の関係を知りたくなってしまった。。
+		PRINTFORMW ついつい聞き入っていた%CALLNAME%は、見つかる前にさっさと退散することにした…
 	ELSEIF !RAND:4
-		PRINTFORML ���Z�r���Œ��֏�߂��œ�l�̐��k���������l�q�Řb�����Ă���B
+		PRINTFORML 下校途中で駐輪場近くで二人の生徒が困った様子で話をしている。
 		IF !RAND:3
-			PRINTFORML �u���c�������x���A���g���������c�v
-			PRINTFORML �u�َq�p�����炢�Ȃ甃���Ă��񂱂Ƃ��Ȃ����c�v
+			PRINTFORML 「う…今月ヤベぇ、金使いすぎた…」
+			PRINTFORML 「菓子パンくらいなら買ってやらんこともないが…」
 		ELSEIF !RAND:2
-			PRINTFORML �u��y�`���������Ă����������v
-			PRINTFORML �u�c�n�R�Ȃ̂͒m���Ă邯�ǁA�{���ɑ��v�����O�c�v
+			PRINTFORML 「先輩～お金かしてくださぁい」
+			PRINTFORML 「…貧乏なのは知ってるけど、本当に大丈夫かお前…」
 		ELSE
-			PRINTFORML �u����Ȃɍ��z���߂āc�܂��������H�v
-			PRINTFORML �u����c�c�����Ȃ�����g�̂𔄂邵���c�v
-			PRINTFORML �u��߂Ƃ��A���Ȃ񂾂���g�̂͑厖�ɂ���v
-			PRINTFORML �u���Ⴀ�����Ă患�A�����̓z���g�Ƀs���`�Ȃ񂾂�����v
+			PRINTFORML 「そんなに財布見つめて…また金欠か？」
+			PRINTFORML 「うん……こうなったら身体を売るしか…」
+			PRINTFORML 「やめとけ、女なんだから身体は大事にしろ」
+			PRINTFORML 「じゃあ買ってよぅ、今月はホントにピンチなんだからっ」
 		ENDIF
-		PRINTFORML ���K��肾�낤���A�������茋�\�[�������ł������B
-		SIF CFlag:�Z�l_�Y�݋��K���� == 1
-			PRINTFORML ���g�����K�����ޔY�݂������Ă���̂ŏ��X�������o����B
-		PRINTFORMW �Ƃ����ꑼ�l�̖��́A%CALLNAME%�͎��˂����܂����̏����ɂ����c
+		PRINTFORML 金銭問題だろうか、見た限り結構深刻そうであった。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML 自身も金銭が絡む悩みを持っているので少々共感を覚える。
+		PRINTFORMW ともあれ他人の問題故、%CALLNAME%は首を突っ込まずその場を後にした…
 	ELSEIF !RAND:3
-		PRINTFORML ��ɂ͂ƐH���ɑ����^�ԂƁA���ς�炸�̐l������ŕӂ�͍��G���Ă���B
-		SIF CFlag:�Z�l_�Y�ݕa���� == 1
-			PRINTFORML �̒����C�ɂ��āA�o���邾���h�{�o�����X�̂悢���j���[��I������B
-		PRINTFORML �������ς܂������Ƌ󂢂Ă���Ȃɂ��Ƌ߂��̐Ȃŏ��q���k������珬�����X���Ă����B
+		PRINTFORML 偶にはと食堂に足を運ぶと、相変わらずの人だかりで辺りは混雑している。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 体調を気にして、出来るだけ栄養バランスのよいメニューを選択する。
+		PRINTFORML 注文を済ませたあと空いている席につくと近くの席で女子生徒が何やら小さく唸っていた。
 		IF !RAND:3
-			PRINTFORML �u���`�A�ŋߐH�ׂ�ʌ��炵�Ă邯�ǂ���ς肨���󂭂�[�v
-			PRINTFORML �u�_�C�G�b�g���H�A��肷���͕Ԃ��ċt���ʂ��Ǝv�����ǁc�v
+			PRINTFORML 「う～、最近食べる量減らしてるけどやっぱりお腹空くよー」
+			PRINTFORML 「ダイエット中？、やりすぎは返って逆効果だと思うけど…」
 		ELSEIF !RAND:2
-			PRINTFORML �u�����ƐH�ׂ����c�I�A�ŁA�ł������̃^�v�^�v�Ȃ�Ƃ����������c�v
-			PRINTFORML �u��؂Ƃ��ł����c��܂��邵���Ȃ��˂��c�v
+			PRINTFORML 「もっと食べたい…！、で、でもお腹のタプタプなんとかしたいし…」
+			PRINTFORML 「野菜とかでお腹膨らませるしかないねえ…」
 		ELSE
-			PRINTFORML �u��������I���H�A�S�R�H�ׂĖ����Ȃ��H�v
-			PRINTFORML �u���͂́c���_�C�G�b�g���Ȃ񂾁c�v
+			PRINTFORML 「あれもう終わり？、全然食べて無くない？」
+			PRINTFORML 「あはは…今ダイエット中なんだ…」
 		ENDIF
-			IF CFlag:�Z�l_�Y�ݐH������ == 1
-				PRINTFORMW ��������l���݂�����O��Ă���ʂȂ̂ŏ��������ɂ������B
+			IF CFlag:住人_悩み食生絡み == 1
+				PRINTFORMW こちらも人並みからやや外れている量なので少し耳が痛かった。
 			ELSE
-				PRINTFORMW �ǂ����_�C�G�b�g���̈אH�����T���Ă���悤���A%CSTR:��l��%���H�ׂ����ɂ͋C��t���悤�c
+				PRINTFORMW どうやらダイエット中の為食事を控えているようだ、%CSTR:一人称%も食べすぎには気を付けよう…
 			ENDIF
 	ELSEIF !RAND:2
-		PRINTFORML �o�Z����ƍZ��O�Ő������g�Ȃ���������I�ψ������k�B����������Ă����B
-		PRINTFORML %CALLNAME%�͏��X��F��I��ɂ��A���̐��k�B��������Ɩʓ|�����Ȋ�����ďa�X������󂯂Ă���B
-		SIF CFlag:�Z�l_�Y�ݔƍߗ��� == 1
-			PRINTFORML �Ƃ��ɖ��Ȃ��n�Y�Ȃ̂ɂ������������̂ɂ͉��̂��g�\���Ă��܂��c
-		PRINTFORMW �c�����󂯂Ȃ����Ƃɂ͓���Ȃ��̂ŁA���ǌ�����󂯂邱�ƂɂȂ����c
+		PRINTFORML 登校すると校門前で正しい身なりをした風紀委員が生徒達を検問をしていた。
+		PRINTFORML %CALLNAME%は少々難色を露わにし、他の生徒達もちょっと面倒そうな顔をして渋々検問を受けている。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML とくに問題ないハズなのにああいったものには何故か身構えてしまう…
+		PRINTFORMW …だが受けないことには入れないので、結局検問を受けることになった…
 	ELSE
-		PRINTFORML �ɂԂ��ɐ}�����ɗ���ƐÂ��ȋ�C��Y�킹�钆�A���k�B���فX�ƕ׊w�ɗ��ł����B
-		SIF CFlag:�Z�l_�Y�ݑΐl���� == 1
-			PRINTFORML �����Ă����͐l�ڂ����Ȃ��̂ŁA%CALLNAME%�ɂƂ��Ă͗���������ꏊ�ł�����B
-		PRINTFORML �������������m���Ȃ����{�I������݂Ԃ��ɒT���ƁA�C�ɂȂ������������̂Ŏ�Ɏ��B
-		PRINTFORML �p���p���Ɨ����ǂ݂������ƁA�ʔ������������̂ŐȂɂ��Ă�������ǂނ��Ƃɂ����B
-		SIF CFlag:�Z�l_�Y�ݕ׊w���� == 1
-			PRINTFORML �������A�׊w�̕��ɋC�������Ă��܂��̂��A�b������Ǝ����Ă����m�[�g���J���Ď��K���n�߂��B
-		PRINTFORMW �x�ݎ��Ԃ��I���܂ł̊ԁA%CALLNAME%�͐}�����Ŏ��Ԃ�ׂ����c
+		PRINTFORML 暇つぶしに図書室に来ると静かな空気を漂わせる中、生徒達が黙々と勉学に励んでいた。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML そしてここは人目が少ないので、%CALLNAME%にとっては落ち着ける場所でもある。
+		PRINTFORML 興味を引くモノがないか本棚をしらみつぶしに探すと、気になる一冊を見つけたので手に取る。
+		PRINTFORML パラパラと流し読みしたあと、面白そうだったので席についてしっかり読むことにした。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML しかし、勉学の方に気が向いてしまうのか、暫くすると持っていたノートを開いて自習を始めた。
+		PRINTFORMW 休み時間が終わるまでの間、%CALLNAME%は図書室で時間を潰した…
 	ENDIF
-ELSEIF TALENT:�Љ�l == 1 && RAND:10 > 5
-	PRINTFORML �y�Љ�l�C�x���g:%CALLNAME%�z
+ELSEIF TALENT:社会人 == 1 && RAND:10 > 5
+	PRINTFORML 【社会人イベント:%CALLNAME%】
 	DRAWLINE
 	IF !RAND:10
-		PRINTFORML �E�ƕ��l�O�ɏo�邱�Ƃ����Ȃ��Ȃ����߁A%CALLNAME%���t�@�b�V�����ɂ͋C���g���Ă���B
-		PRINTFORML �������h���̗ǂ����̂͑��l�𒣂�̂������A�o����o�J�ɏo���Ȃ��B
-		SIF CFlag:�Z�l_�Y�ݑΐl���� == 1
-			PRINTFORML �������l�O�ɏo��ȏ�A����ۂɂȂ�Ȃ����x�̑����͕K�v���낤�B
-		PRINTFORMW �C�ɓ��������̒l�D�����ė������k�炵���A�K�v�o��Ƃ��Ċ���؂邱�Ƃɂ����c
+		PRINTFORML 職業柄人前に出ることも少なくないため、%CALLNAME%もファッションには気を使っている。
+		PRINTFORML だが見栄えの良いものは大抵値を張るのが多く、出費もバカに出来ない。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML しかし人前に出る以上、悪印象にならない程度の装いは必要だろう。
+		PRINTFORMW 気に入った服の値札を見て溜息を洩らしつつも、必要経費として割り切ることにした…
 	ELSEIF !RAND:9
-		PRINTFORML ������x�͐�p�@�ނ̈����ɂ͊���Ȃ���΂ƁA�󂢂����Ԃŗ��K���n�߂�B
-		PRINTFORML ����ɍ��x�ȋ@�ނȂǂ͂�͂莑�i���K�v�Ȃ̂��낤���ƁA%CALLNAME%�͎v���Ȃ��玎���Ă����B
-		SIF CFlag:�Z�l_�Y�ݕ׊w���� == 1
-			PRINTFORML �ӋC���݂������A�������͎U�����Ă邩�A��Ƃ͂Ȃ��Ȃ��i�܂Ȃ��B
-		PRINTFORMW �c�c���������ɂȂ�߂��Ă��܂����̂��A���Ԃ͂����Ƃ����Ԃɉ߂��Ă������c
+		PRINTFORML ある程度は専用機材の扱いには慣れなければと、空いた時間で練習を始める。
+		PRINTFORML さらに高度な機材などはやはり資格が必要なのだろうかと、%CALLNAME%は思いながら試していく。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 意気込みすぎか、もしくは散漫してるか、作業はなかなか進まない。
+		PRINTFORMW ……だが夢中になり過ぎてしまったのか、時間はあっという間に過ぎていった…
 	ELSEIF !RAND:8
-		PRINTFORML �x�e���A�����̏����Ј��B���W�܂��ĉ�b�����Ă���B
+		PRINTFORML 休憩中、同僚の女性社員達が集まって会話をしている。
 		IF !RAND:3
-			PRINTFORML �u���̋i���X�A�����������������Ă����H�׉߂����Ⴄ�񂾂�ˁv
-			PRINTFORML �u�z���g�Ȃ�ŗ����X����Ȃ��ċi���X�Ȃ񂾂�v
+			PRINTFORML 「あの喫茶店、料理が美味しすぎてついつい食べ過ぎちゃうんだよね」
+			PRINTFORML 「ホントなんで料理店じゃなくて喫茶店なんだろ」
 		ELSEIF !RAND:2
-			PRINTFORML �u�d���I������炢���̋i���X�����H�v
-			PRINTFORML �u�����ˁA�����͉��H�ׂ悤������v
+			PRINTFORML 「仕事終わったらいつもの喫茶店いく？」
+			PRINTFORML 「そうね、今日は何食べようかしら」
 		ELSE
-			PRINTFORML �u�����ɂȂ����牽���H�ׂɍs���Ȃ��H�v
-			PRINTFORML �u���Ⴀ�\�̋i���X�͂ǂ����ȁA���������������炵����v
+			PRINTFORML 「お昼になったら何か食べに行かない？」
+			PRINTFORML 「じゃあ噂の喫茶店はどうかな、料理が美味しいらしいよ」
 		ENDIF
-		PRINTFORML �b�𕷂�����A�ǂ���炱���炪�m���Ă���i���X�̘b�̂悤���B
-		SIF CFlag:�Z�l_�Y�ݐH������ == 1
-			PRINTFORML �m���ɂ������̓X������闿���͐�i�ŁA�v���o���Ƃ��������傳���B
-		PRINTFORMW �c���܂��Ă���d������i�������玩�����s���Ă݂悤�c
+		PRINTFORML 話を聞く限り、どうやらこちらが知っている喫茶店の話のようだ。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML 確かにあそこの店員が作る料理は絶品で、思い出すとつい涎が分泌される。
+		PRINTFORMW …いましている仕事が一段落したら自分も行ってみよう…
 	ELSEIF !RAND:7
-		PRINTFORML ���܂ꂽ�p���ς܂�������֖߂낤�ƘL��������Ă���ƁA��l�̎Ј����[�������ɓd�b�����Ă���B
+		PRINTFORML 頼まれた用を済まし持ち場へ戻ろうと廊下を歩いていると、一人の社員が深刻そうに電話をしている。
 		IF !RAND:3
-			PRINTFORML �u�܂������A���Ă��ĂȂ��̂��c�c�킩�����A���������T���Ă݂��v
+			PRINTFORML 「まだあいつ帰ってきてないのか……わかった、こっちも探してみるよ」
 		ELSEIF !RAND:2
-			PRINTFORML �u����ς���f�s�ׂ��Ă�񂾂ȁA�{�i�I�ɋ����o���ׂ����ȁv
+			PRINTFORML 「やっぱり迷惑行為してるんだな、本格的に苦情を出すべきだな」
 		ELSE
-			PRINTFORML �u���͒m��Ȃ�����c�c���Ƃ͂�����������ɂ�������Ƃł���H�v
+			PRINTFORML 「私は知らないから……もとはそっちが勝手にやったことでしょ？」
 		ENDIF
-		PRINTFORML �z������ɉƒ��肾�낤���H�A����Ă���\��͖��邢���̂ł͂Ȃ������B
-		SIF CFlag:�Z�l_�Y�݉ƒ뗍�� == 1
-			PRINTFORML ����������l���ł͂Ȃ��̂ŁA�|�������z�N����ƗJ�T�ȋC���ɂȂ�B
-		PRINTFORMW �����|����ɂ͋C���������̂ŁA%CALLNAME%�͐Â��ɉ���ʂ�߂��Ă������c
+		PRINTFORML 想像するに家庭問題だろうか？、語っている表情は明るいものではなかった。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML こちらも他人事ではないので、掛かる問題を想起すると憂鬱な気分になる。
+		PRINTFORMW 声を掛けるには気が引けたので、%CALLNAME%は静かに横を通り過ぎていった…
 	ELSEIF !RAND:6
-		PRINTFORML �����̂悤�Ɏ�����ɂ��d�����n�߂悤�Ǝv�����̂����A�l������Ȃ��悤�ȋC������B
+		PRINTFORML いつものように持ち場につき仕事を始めようと思ったのだが、人が足らないような気がする。
 		IF !RAND:3
-			PRINTFORML �u���̂ŋx��ł�炵����A�厖�ɂ͂Ȃ�Ȃ�����������v���낤���ǁv
+			PRINTFORML 「事故で休んでるらしいよ、大事にはならなかったから大丈夫だろうけど」
 		ELSEIF !RAND:2
-			PRINTFORML �u�x�񂾓z�A���a�����������炵���c��������Ƃ����񂾂��c�v
+			PRINTFORML 「休んだ奴、持病が悪化したらしい…快復するといいんだが…」
 		ELSE
-			PRINTFORML �u���׈������z������݂������ȁA���������C��t���Ȃ��Ƃȁv
+			PRINTFORML 「風邪引いた奴がいるみたいだな、俺たちも気を付けないとな」
 		ENDIF
-		PRINTFORML �����Ƃ���d�a�ł͂Ȃ��悤�����A�x��ł���l������悤���B
-		SIF CFlag:�Z�l_�Y�ݕa���� == 1
-			PRINTFORML �������g�߂Ȑl�����a�ɉ点��ƁA������������ɒǂ��Ă�����o���o����B
-		PRINTFORMW �Ζ����̎��̂����肤��̂ŁA�C���������߂Ė��߂邱�Ƃɂ����c
+		PRINTFORML 聞くところ重病ではないようだが、休んでいる人がいるようだ。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML こうも身近な人物が病に臥せると、こちらも何かに追われている錯覚を覚える。
+		PRINTFORMW 勤務中の事故もありうるので、気を引き締めて務めることにした…
 	ELSEIF !RAND:5
-		PRINTFORML ����̋�C���Ⴄ�c�ǂ���炨���Ӑ�ƃg���u�����������悤���B
-		PRINTFORML �b�̓��e���炵�ĔƍߏL�����鎖�Ԃ������悤�ŁA�֌W�̂Ȃ��b�ł͂Ȃ��̂�%CALLNAME%�͎v�킸�g�k�������B
-		SIF CFlag:�Z�l_�Y�ݔƍߗ��� == 1
-			PRINTFORML �c��Ј��Ƃ��Ă̗��ꂾ�Ƃ����̂ɁA���̂���߂�ꂽ�C���ɂȂ�B
-		PRINTFORMW ���͂Ƃ�����A���ꂪ�厖�ɂȂ�Ȃ��悤�F��Ȃ��玝����Ɍ��������c
+		PRINTFORML 朝礼の空気が違う…どうやらお得意先とトラブルがあったようだ。
+		PRINTFORML 話の内容からして犯罪臭がする事態だったようで、関係のない話ではないので%CALLNAME%は思わず身震いした。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML …一社員としての立場だというのに、何故か咎められた気分になる。
+		PRINTFORMW 何はともあれ、これが大事にならないよう祈りながら持ち場に向かった…
 	ELSEIF !RAND:4
-		PRINTFORML �d�����I��葧�����Ɍy���H�����Ƃ���%CALLNAME%�͋A�H�ɂ��Ă����B
-		PRINTFORML �������H�n�t�߂Ɏ��������ƂӂƊo���̂���j�����������A%CALLNAME%�̓����Ə�i�̂悤���B
-		PRINTFORML �����Ă��̓�l�����u�z�e���ɓ����Ă����p���݂Ă��܂����c�c�����ǂ��̂͒m���Ă����������܂łƂ́B
-		SIF CFlag:�Z�l_�Y�ݐ��I���� == 1
-			PRINTFORML �c��͂�s�ׂ��������̂��낤���ƁA���ϑz���Ă��܂���%CALLNAME%�͊��Ԃ����߂�B
-		PRINTFORMW ���΂ɒ��܂Œǂ��Ȃ��̂ŁA�쎟�n�����͍T���悤�c
+		PRINTFORML 仕事も終わり息抜きに軽い食事をとった%CALLNAME%は帰路についていた。
+		PRINTFORML だが裏路地付近に視線をやるとふと覚えのある男女が見えた、%CALLNAME%の同僚と上司のようだ。
+		PRINTFORML そしてその二人がラブホテルに入っていく姿をみてしまった……仲が良いのは知っていたがここまでとは。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML …やはり行為も激しいのだろうかと、つい妄想してしまった%CALLNAME%は顔を赤く染める。
+		PRINTFORMW 流石に中まで追えないので、野次馬根性は控えよう…
 	ELSEIF !RAND:3
-		PRINTFORML �ŋߑ��̋ƊE�ŉ����������s���Ă���炵���A�����̎d����ɂ������ǂ�����Ă����B
-		PRINTFORML ��̎҂����ɘb�𕷂��Ȃ���A���{�̈׍��܂ł̎�����������Ă����B
-		SIF CFlag:�Z�l_�Y�ݔƍߗ��� == 1
-			PRINTFORML ���̎p������Ƃ��̎����ɂ͑S���֌W�Ȃ��Ƃ����̂ɁA�ǂ����Ă��g�����������Ă��܂��B
-		PRINTFORMW �c�����̈�Ј��Ƃ͂����������܂��\���͏\���ɂ��蓾��̂ŁA�Â��ɐ��ނ��Ƃɂ����c
+		PRINTFORML 最近他の業界で横流しが横行しているらしく、うちの仕事場にも調査班がやってきた。
+		PRINTFORML 上の者たちに話を聞きながら、検閲の為今までの資料を回収していく。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML その姿を見るとこの事件には全く関係ないというのに、どうしてか身を小さくしてしまう。
+		PRINTFORMW …ただの一社員とはいえ巻き込まれる可能性は十分にあり得るので、静かに潜むことにした…
 	ELSEIF !RAND:2
-		PRINTFORML �d�����I���Ȃ�A��l�̎Ј����}�����ł��̏����ɂ���c�������낤���B
+		PRINTFORML 仕事が終わるなり、一人の社員が急ぎ足でその場を後にする…何事だろうか。
 		IF !RAND:3
-			PRINTFORML �u�����o�C�g������Ă�񂾂�ȁA���ł��K�v�Ȃ񂩂ˁv
+			PRINTFORML 「あいつバイトもやってるんだよな、金でも必要なんかね」
 		ELSEIF !RAND:2
-			PRINTFORML �u���̐l�A�Ƃ̎؋��Ԃ����߂Ƀo�C�g������Ă�񂾂��āc��ς����c�v
+			PRINTFORML 「あの人、家の借金返すためにバイトもやってるんだって…大変そう…」
 		ELSE
-			PRINTFORML �u���ł�����������������Ƃ��Ȃ�Ƃ������Ă��ȁc���Ƃł����Ă�̂��v
+			PRINTFORML 「何でも買いたい物があるとかなんとか言ってたな…副業でもしてるのか」
 		ENDIF
-		PRINTFORML ���K�Ɋւ�����炵���A���Ƃ�����������Ă���̂��낤���B
-		SIF CFlag:�Z�l_�Y�݋��K���� == 1
-			PRINTFORML ��͂���K���͂���ɂł����邩�ƁA%CALLNAME%�͐[�����ߑ��������B
-		PRINTFORMW ���̎�̖��͈�������Ǝ�ɂ����Ȃ��c�C��t����Ƃ��悤�c
+		PRINTFORML 金銭に関する問題らしい、副業をする程困っているのだろうか。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML やはり金銭問題はだれにでもあるかと、%CALLNAME%は深いため息をついた。
+		PRINTFORMW この手の問題は悪化すると手におえない…気を付けるとしよう…
 	ELSE
-		PRINTFORML ���ǂ������Ȓj�����x�e���ŉ�b���Ă���A�m���t�������Ă���Ƃ����b���B
-		PRINTFORML ���萻�̂��ٓ�����������Ȃ���H�ׂĂ�����i�͉��Ƃ��Â����邢��C�ɖ����Ă����B
-		SIF CFlag:�Z�l_�Y�ݗ������� == 1
-			PRINTFORML �ŏ��͖������Ă������ŋߐF�������ɂ͉������邽�߁A�ǂ��ɂ��C�ɂȂ��Ă��܂��B
-		PRINTFORMW ��������������Ⴂ�Ȋ���������%CALLNAME%�́A���̏����ɂ����c
+		PRINTFORML 仲良さそうな男女が休憩所で会話している、確か付き合っているという話だ。
+		PRINTFORML お手製のお弁当をいちゃつきながら食べている光景は何とも甘ったるい空気に満ちていた。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 最初は無視していたが最近色恋沙汰には縁があるため、どうにも気になってしまう。
+		PRINTFORMW 何だか自分が場違いな感じがした%CALLNAME%は、その場を後にした…
 	ENDIF
 ELSE
-	PRINTFORML �y�x���C�x���g:%CALLNAME%�z
+	PRINTFORML 【休日イベント:%CALLNAME%】
 	IF !RAND:10
-		PRINTFORML �����ŋx��ł���Ɖ����O�����������A�C�ɂȂ���%CALLNAME%�͑�����l�q���f���B
-		PRINTFORML ����ƌx�@�����̎�ɂ��A�Ƃ��瓹�H�ֈ�l�̒j����������o����Ă���悤���A�����̎������낤���B
-		PRINTFORML �j�͎b���\��Ă������A���΂ɑ����̍S�����瓦��邱�Ƃ͏o�����A�Ō�͊ϔO�����悤�ɓ��s���Ă������B
-		SIF CFlag:�Z�l_�Y�ݔƍߗ��� == 1
-			PRINTFORML ���̌��i�����ڂŌ��Ă��邾�����Ƃ����̂ɂȂ����|���C�����ɂȂ��Ă��܂��A%CALLNAME%�͉��Ƃ��C�𒣂��ċC�������炵���B
-		PRINTFORMW �����ł͂�������������Ƃ͖����A�������I��������Ƃ�%CALLNAME%���Ăё̂��x�߂邱�Ƃɂ����c
+		PRINTFORML 自室で休んでいると何やら外が騒がしい、気になった%CALLNAME%は窓から様子を伺う。
+		PRINTFORML すると警察たちの手により、家から道路へ一人の男が引きずり出されているようだ、何かの事件だろうか。
+		PRINTFORML 男は暫く暴れていたが、流石に多勢の拘束から逃れることは出来ず、最後は観念したように同行していった。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML その光景を遠目で見ているだけだというのになぜか怖い気持ちになってしまう、%CALLNAME%は何とか気を張って気分をそらした。
+		PRINTFORMW 物騒ではあったがこちらとは無縁、騒ぎも終わったことで%CALLNAME%も再び体を休めることにした…
 	ELSEIF !RAND:9
-		PRINTFORML �A�蓹�A�����͒x���܂Ŏ��Ԃ�ׂ��Ă��܂�������%CALLNAME%�͋A�H��ς��ɉ؊X�̉���ʂ邱�Ƃɂ����B
-		PRINTFORML �l���݂͂��Ȃ茸����������ɉ������X�����X�ɂ���A���̋߂��ł͒j�����o��������s���������Ă���B
-		PRINTFORML ������ς���ƎႢ�j�����̂𐠂�񂹂Ȃ���z�e���̂悤�Ȍ����ɓ����Ă����c�c���u�z�e���̂悤���B
-		SIF CFlag:�Z�l_�Y�ݐ��I���� == 1
-			PRINTFORML ���𐟂܂��ƕ����̏����̚b��������������c�c�ƘA����������悤��%CALLNAME%�̐g�̂��u���n�߂�B
-		PRINTFORMW ���܂�Ɩʓ|�Ȃ��ƂɂȂ肩�˂Ȃ��̂ŁA%CALLNAME%�͒����t�߂�����Ȃ������ʂ�߂������Ƃɂ����c
+		PRINTFORML 帰り道、今日は遅くまで時間を潰してしまったため%CALLNAME%は帰路を変え繁華街の横を通ることにした。
+		PRINTFORML 人ごみはかなり減ったが代わりに怪しい店が所々にあり、その近くでは男女が出入り口を行き交いしている。
+		PRINTFORML 視線を変えると若い男女が体を摺り寄せながらホテルのような建物に入っていく……ラブホテルのようだ。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 耳を澄ますと複数の女性の喘ぐ声が聞こえる……と連鎖反応するように%CALLNAME%の身体も疼き始める。
+		PRINTFORMW 留まると面倒なことになりかねないので、%CALLNAME%は中央付近を歩きながら区画を通り過ごすことにした…
 	ELSEIF !RAND:8
-		PRINTFORML �ɉ؊X��ʂ��Ă���ƁA��ʂ肩�玀�p�ɂȂ�ꏊ�ɎႢ��������l�Ԃ��Ă����B
-		PRINTFORML �g�тŉ�����b���Ă���悤�����A�\��炷��Ɩ��邢�b�ł͂Ȃ��悤���B
-		PRINTFORML ���������΁u�Əo�����v�Ȃ�҂������ŋߑ������Ă���Ƃ̂��Ƃ����A�ޏ����������̂����̈�l�Ȃ̂��낤�B
-		SIF CFlag:�Z�l_�Y�݉ƒ뗍�� == 1
-			PRINTFORML �����đ��������Ă���Ƃ������Ƃ́A��͂�ǂ̉Ƃ����������Ƃ͂����Ȃ��悤���B
-		PRINTFORMW �������l�̉ƒ���ɉ������C�͂Ȃ��̂ŁA�ޏ��������王�����O������i�߂��c
+		PRINTFORML 繁華街を通っていると、大通りから死角になる場所に若い女性が二人屯っていた。
+		PRINTFORML 携帯で何やら会話しているようだが、表情からすると明るい話ではないようだ。
+		PRINTFORML そういえば「家出少女」なる者たちが最近増加しているとのことだが、彼女たちもそのうちの一人なのだろう。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML そして増え続けているということは、やはりどの家も順風満帆とはいかないようだ。
+		PRINTFORMW だが他人の家庭問題に介入する気はないので、彼女たちから視線を外し歩を進めた…
 	ELSEIF !RAND:7
-		PRINTFORML ������������Ă��܂����̂��A�y�����ׂ��Ђ��Ă��܂����B
-		PRINTFORML �~�}�����畗�ז�����o�����Ɋ܂ށA����ő����͑������邾�낤�B
-		PRINTFORML �x�b�h�ɐg��a����͈��Âɂ���A�{���Ȃ��ŗV�ׂ����d�����Ȃ��B
-		SIF CFlag:�Z�l_�Y�ݕa���� == 1
-			PRINTFORML ���ꂪ�����Őg�̂��󂷂킯�ɂ͂����Ȃ��A�Ƒ����������邱�Ƃ��F��B
-		PRINTFORMW �ȂǂƎv�l���Ă������A��������񂾂�Ɠ݂��Ȃ�%CALLNAME%�͐[������ւƗ����Ă������c
+		PRINTFORML 昨日無茶をしてしまったのか、軽い風邪をひいてしまった。
+		PRINTFORML 救急箱から風邪薬を取り出し口に含む、これで多少は早く治るだろう。
+		PRINTFORML ベッドに身を預け後は安静にする、本来なら趣味で遊べたが仕方がない。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML これが原因で身体を壊すわけにはいかない、と早く完治することを祈る。
+		PRINTFORMW などと思考していたが、それもだんだんと鈍くなり%CALLNAME%は深い眠りへと落ちていった…
 	ELSEIF !RAND:6
-		PRINTFORML �����͓��ɗp���Ȃ��̂Ŏ�̂��Ƃł����悤��%CALLNAME%�͈ӋC�g�X�ƍs�����J�n�����B
-		PRINTFORML �c�c
-		PRINTFORML �c�c�c�c
-		PRINTFORML �c�c�c�c�c�c
-		PRINTFORMW �c�I�A�����ɂȂ�߂��ė[���ɂȂ��Ă��܂����B
+		PRINTFORML 今日は特に用もないので趣味のことでもしようと%CALLNAME%は意気揚々と行動を開始した。
+		PRINTFORML ……
+		PRINTFORML …………
+		PRINTFORML ………………
+		PRINTFORMW …！、夢中になり過ぎて夕方になってしまった。
 	ELSEIF !RAND:5
-		PRINTFORML ���������ΐH�ނ����s�������Ă���̂��v���o���A�X�[�p�[�Ŕ������߂��邱�Ƃɂ����B
-		PRINTFORML ����������������ƂȂ�ƁA�����Z�[�����̂Ɏ肪�o�Ă��܂��]�v�Ȃ��̂������Ă����B
-		SIF CFlag:�Z�l_�Y�݋��K���� == 1
-			PRINTFORML �������܂�g��������ƌ�X�����̂��v���o���A�s�v�ȏ��i��I�ɖ߂��B
-		PRINTFORMW ����ȏ㑝���Ȃ��悤�ɋC������}���A�K�v�ȕ������Ăɓ�����%CALLNAME%�̓��W�ւƌ��������c
+		PRINTFORML そういえば食材が底を尽きかけているのを思い出し、スーパーで買いだめすることにした。
+		PRINTFORML いざ買い物をするとなると、ついついセールものに手が出てしまい余計なものが増えていく。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML だがあまり使いすぎると後々響くのを思い出し、不要な商品を棚に戻す。
+		PRINTFORMW これ以上増えないように気持ちを抑え、必要な分だけ籠に入れると%CALLNAME%はレジへと向かった…
 	ELSEIF !RAND:4
-		PRINTFORML ��������Ă���ƁA�ڂ̑O�ɉ����l�����肪�o���Ă���A�߂Â��Ĕ`�����ނƈꌬ�ƂŎ������N�����悤���B
-		PRINTFORML �ߏ��̏Z�������̉�b�ɕ����������ĂĂ݂�ƁA���K����݂ł̃g���u���������Ŏ��������������炵���B
-		PRINTFORML ��Q�҂͎���ł��Ȃ��悤�����A�E�l�������N�����قǌオ�Ȃ������̂��낤���B
-		SIF CFlag:�Z�l_�Y�݋��K���� == 1
-			PRINTFORML �����͂Ȃ肽���͂Ȃ��ƁA�g�߂Ɋ����鋰�|��%CALLNAME%�͔w�؂�k�킹��B
-		PRINTFORMW ���܂��ĂĂ�����ȏ�i�W�͂Ȃ������Ȃ̂ŁA%CALLNAME%�͐l�����肩�痣��邱�Ƃɂ����c
+		PRINTFORML 道を歩いていると、目の前に何やら人だかりが出来ている、近づいて覗き込むと一軒家で事件が起きたようだ。
+		PRINTFORML 近所の住民たちの会話に聞き耳をたててみると、金銭がらみでのトラブルが原因で事件が発生したらしい。
+		PRINTFORML 被害者は死んでいないようだが、殺人未遂を起こすほど後がなかったのだろうか。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML こうはなりたくはないと、身近に感じる恐怖に%CALLNAME%は背筋を震わせる。
+		PRINTFORMW 留まっててもこれ以上進展はなさそうなので、%CALLNAME%は人だかりから離れることにした…
 	ELSEIF !RAND:3
-		PRINTFORML �C���炵�Ɍ����ɗ��Ă݂�ƁA�F�x�e�ړI�ŗ��Ă���̂��l�������B
-		PRINTFORML �������̃x���`�ł̓J�b�v�����낤���A��l�̒j���̖r�܂����p��������B
-		PRINTFORML ��قǂ��炢������Ă��邪�A�f�[�g�Ƃ��Ȃ�Ǝ���̖ڂ��C�ɂȂ�Ȃ��Ȃ�̂��Ƒ�O�Ҏ��_�Œ��߂�B
-		SIF CFlag:�Z�l_�Y�ݗ������� == 1
-			PRINTFORML �����ĒN���ƕt�������Ƃ����Ȃ�̂��ƁA�z�����邾���ŋC�������V���Ă��܂��B
-		PRINTFORMW ����ȏ㌩�Ă���Ɨ��΂Ɍ��̒����Â����邭�Ȃ�̂ŁA�ꏊ��ς��邱�Ƃɂ����c
+		PRINTFORML 気晴らしに公園に来てみると、皆休憩目的で来ているのか人が多い。
+		PRINTFORML 向こうのベンチではカップルだろうか、二人の男女の睦まじい姿が見える。
+		PRINTFORML 先ほどからいちゃついているが、デートともなると周りの目が気にならなくなるのかと第三者視点で眺める。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML そして誰かと付き合うとああなるのかと、想像するだけで気持ちが昂ってしまう。
+		PRINTFORMW これ以上見ていると流石に口の中が甘ったるくなるので、場所を変えることにした…
 	ELSEIF !RAND:2
-		PRINTFORML �Z��n������Ă���ƁA���͂�G���ɋ߂����y���������Ă���Ƃ�������B
-		PRINTFORML �ߏ��ɂ͉��l���̉��l����������܂��Ĉ�˒[��c�����Ă����B
-		PRINTFORML ���΂ɂ���قǂ̉����o���Ă���ƂȂ�ƁA�߂��ɏZ�ސl�������炷��΂��܂������̂ł͂Ȃ����낤�B
-		SIF CFlag:�Z�l_�Y�݉ƒ뗍�� == 1
-			PRINTFORML ���������܂葼�l���ł͂Ȃ��̂ŁA�ޏ������̋C������������Ȃ����Ȃ��B
-		PRINTFORMW �����ɂ��Ȃ��Ă����̂ŁA%CALLNAME%�͂��̏ꂩ�痣��邱�Ƃɂ����c
+		PRINTFORML 住宅地を歩いていると、もはや雑音に近い音楽を響かせている家を見つける。
+		PRINTFORML 近所には何人かの奥様方が眉を潜ませて井戸端会議をしていた。
+		PRINTFORML 流石にこれほどの音を出しているとなると、近くに住む人たちからすればたまったものではないだろう。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML 自分もあまり他人事ではないので、彼女たちの気持ちも分からなくもない。
+		PRINTFORMW 耳が痛くなってきたので、%CALLNAME%はこの場から離れることにした…
 	ELSE
 		IF !RAND:3
-			PRINTFORML �u��������Ⴂ�܂��A�󂢂Ă�Ȃւ��ē��������܂��ˁv
+			PRINTFORML 「いらっしゃいませ、空いてる席へご案内いたしますね」
 		ELSEIF !RAND:2
-			PRINTFORML �u�������܂�܂����[�A���X���҂����������v
+			PRINTFORML 「かしこまりましたー、少々お待ちください」
 		ELSE
-			PRINTFORML �u���܂������܂����[�A���������ǂ�����v
+			PRINTFORML 「おまたせしましたー、ごゆっくりどうぞ♪」
 		ENDIF
-		PRINTFORML �����̋i���X�œK���ȃ��j���[�𗊂݁A�y����������������B
-		SIF CFlag:�Z�l_�Y�ݐH������ == 1
-			PRINTFORML �����ŋ߂̏o�����̂����ŁA�����j���[�̃J�����[���C�ɂ��Ă��܂��B
-		PRINTFORML �\������A�H��̃R�[�q�[�����݂Ȃ���u�ށv�����Ȃ������̐Ȃ����n�����A�ǂ���獡�͂��Ȃ��悤���B
-		PRINTFORMW �����x�e���ς񂾂̂�%CALLNAME%�͋i���X����ɂ����c
+		PRINTFORML いつもの喫茶店で適当なメニューを頼み、軽く小腹を解消する。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML だが最近の出来事のせいで、ついメニューのカロリーを気にしてしまう。
+		PRINTFORML 十数分後、食後のコーヒーを飲みながら「彼」がいないか他の席を見渡すが、どうやら今はいないようだ。
+		PRINTFORMW もう休憩も済んだので%CALLNAME%は喫茶店を後にした…
 	ENDIF
 ENDIF
 

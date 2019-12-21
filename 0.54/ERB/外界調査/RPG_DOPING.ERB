@@ -1,50 +1,50 @@
-;-------------------------------------------------
-;�A�C�e���g�p
+﻿;-------------------------------------------------
+;アイテム使用
 ;-------------------------------------------------
 @RPG_DOPING(C_ID, MODE_NOW)
 #DIM          C_ID
 #DIMS REF     MODE_NOW
-#DIMS DYNAMIC LOG_STR       ;�~�~���������܂����̃��O�\���p
-#DIM          DOPING_ID     ;0/1��"������", "���l��"�ɑΉ�
-#DIMS CONST   DOPING_NAME = "������", "���l��"
-#DIM          DOPING_FLAG_ID;�A�C�e�����̗p�ϐ���ID�͈͊J�n�l
-#DIM          DOPING_CNT_ID ;���݂̃h�[�s���O�񐔃t���O�̈ʒu
-#DIM          DOPING_LIMIT  ;���݂̃h�[�s���O���
-#DIM          CFLAG_STATUS  ;�X�e�[�^�X�p�ϐ���ID�͈͊J�n�l
-#DIM          DOPING_NUM    ;������s�����h�[�s���O�̉�
-#DIM          ITEM_ID       ;��܌n��FLAG�̎�ށA���LST_NAME�̂��ꂼ��"HP"�ȂǂɑΉ�
+#DIMS DYNAMIC LOG_STR       ;××を強化しましたのログ表示用
+#DIM          DOPING_ID     ;0/1で"強化剤", "超人薬"に対応
+#DIMS CONST   DOPING_NAME = "強化剤", "超人薬"
+#DIM          DOPING_FLAG_ID;アイテム個数の用変数のID範囲開始値
+#DIM          DOPING_CNT_ID ;現在のドーピング回数フラグの位置
+#DIM          DOPING_LIMIT  ;現在のドーピング上限
+#DIM          CFLAG_STATUS  ;ステータス用変数のID範囲開始値
+#DIM          DOPING_NUM    ;今回実行したドーピングの回数
+#DIM          ITEM_ID       ;薬剤系のFLAGの種類、下記ST_NAMEのそれぞれ"HP"などに対応
 #DIMS CONST   ST_NAME       = "HP", "SP", "ATK", "DEF", "HIT", "SPD"
-#DIM          CFLAG_ID      ;ITEM_ID����������CFLAG�̎�ށA���ۂɎg�����ɂ�CFLAG_STATUS�����܂��܂�
-                            ;CFLAG_LIST��ITEM_ID��CFLAG_ID�p�̕ϊ����X�g
+#DIM          CFLAG_ID      ;ITEM_IDが強化するCFLAGの種類、実際に使う時にはCFLAG_STATUSを噛ませます
+                            ;CFLAG_LISTはITEM_ID→CFLAG_ID用の変換リスト
 #DIM  CONST   CFLAG_LIST    = 0, 2, 11, 12, 13, 14
 #DIM          L_INPUT
 CLEARLINE LINECOUNT
 DRAWLINE
 CALL C_PICTURE_RD(C_ID)
 DRAWLINE
-;�X�e�[�^�X�p�ϐ���ID�͈͊J�n�l���擾
+;ステータス用変数のID範囲開始値を取得
 SIF !CFLAG_STATUS
-	CFLAG_STATUS = GETNUM(CFLAG, "�Z�l_�ő�̗�")
+	CFLAG_STATUS = GETNUM(CFLAG, "住人_最大体力")
 
-;���ꂼ��
-;�E�A�C�e���p�ϐ���ID�͈͊J�n�l
-;�E���ݎg�p���Ă���A�C�e���̃J�E���^�ϐ���ID
-;�E���ݎg�p���Ă���A�C�e���̋������
-;���擾���܂�
+;それぞれ
+;・アイテム用変数のID範囲開始値
+;・現在使用しているアイテムのカウンタ変数のID
+;・現在使用しているアイテムの強化上限
+;を取得します
 SELECTCASE MODE_NOW
-CASE "RPG_�����ܓ��^"
+CASE "RPG_強化剤投与"
 	DOPING_ID      = 0
-	DOPING_FLAG_ID = GETNUM(FLAG, "I������(HP)")
-	DOPING_CNT_ID  = GETNUM(CFLAG, "�Z�l_������")
+	DOPING_FLAG_ID = GETNUM(FLAG, "I強化剤(HP)")
+	DOPING_CNT_ID  = GETNUM(CFLAG, "住人_強化回数")
 	DOPING_LIMIT   = 100 - CFLAG:C_ID:DOPING_CNT_ID
-CASE "RPG_���l�򓊗^"
+CASE "RPG_超人薬投与"
 	DOPING_ID      = 1
-	DOPING_FLAG_ID = GETNUM(FLAG, "I���l��(HP)")
-	DOPING_CNT_ID  = GETNUM(CFLAG, "�Z�l_���l��")
+	DOPING_FLAG_ID = GETNUM(FLAG, "I超人薬(HP)")
+	DOPING_CNT_ID  = GETNUM(CFLAG, "住人_超人回数")
 	DOPING_LIMIT   = 100 - CFLAG:C_ID:DOPING_CNT_ID
 ENDSELECT
 IF DOPING_LIMIT <= 0
-	PRINTFORMW �����񐔂�����܂���
+	PRINTFORMW 強化回数が足りません
 	RETURN
 ENDIF
 IF STRLENSU(LOG_STR) > 0
@@ -53,41 +53,41 @@ IF STRLENSU(LOG_STR) > 0
 	RESETCOLOR
 ENDIF
 DRAWLINE
-PRINTFORML �g�p����%DOPING_NAME:DOPING_ID%��I�����ĉ������B
+PRINTFORML 使用する%DOPING_NAME:DOPING_ID%を選択して下さい。
 DRAWLINE
 FOR ITEM_ID, 0, 6
-	SIF !Flag:(DOPING_FLAG_ID + ITEM_ID) && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
+	SIF !Flag:(DOPING_FLAG_ID + ITEM_ID) && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM [{ITEM_ID, 3}] %DOPING_NAME:DOPING_ID%(%ST_NAME:ITEM_ID, 3%) 
-	PRINTFORM (������:{Flag:(DOPING_FLAG_ID + ITEM_ID), 4 ,RIGHT}) 
+	PRINTFORM (所持数:{Flag:(DOPING_FLAG_ID + ITEM_ID), 4 ,RIGHT}) 
 	RESETCOLOR
-	SIF Flag:(DOPING_FLAG_ID + ITEM_ID) < 5 && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
+	SIF Flag:(DOPING_FLAG_ID + ITEM_ID) < 5 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM [{100 + ITEM_ID, 3}]x5 
 	RESETCOLOR
-	SIF Flag:(DOPING_FLAG_ID + ITEM_ID) < 10 && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
+	SIF Flag:(DOPING_FLAG_ID + ITEM_ID) < 10 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM [{200 + ITEM_ID, 3}]x10
 	RESETCOLOR
 	PRINTFORML 
 NEXT
-PRINTFORML [900] �����ܓ��^�@[901] ���l�򓊗^
-PRINTFORML [999] ��߂�
+PRINTFORML [900] 強化剤投与　[901] 超人薬投与
+PRINTFORML [999] やめる
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 900
-	MODE_NOW '= "RPG_�����ܓ��^"
+	MODE_NOW '= "RPG_強化剤投与"
 CASE 901
-	MODE_NOW '= "RPG_���l�򓊗^"
+	MODE_NOW '= "RPG_超人薬投与"
 CASE 999
 	RETURN
 CASEELSE
-	;20170217�C��
-	;���e�̃o�O�̎�v���Ƃ��ċ����܂̔ԍ��̕���(Flag2800��)�ƃp�����[�^(6500��)���Y���Ă���̂��o�O�̌���
-	;���ނ̔ԍ����c�����ق��������̂�L_PNUM���p�����[�^�ԍ��p�ɍ쐬��(+6500) I_S�������ܗp�̔ԍ�(�����+2800)�Ƃ��ď��������Ă��炢�܂�
+	;20170217修正
+	;初稿のバグの主要因として強化剤の番号の並び(Flag2800台)とパラメータ(6500台)がズレているのがバグの原因
+	;二種類の番号を残したほうがいいのでL_PNUMをパラメータ番号用に作成し(+6500) I_Sを強化剤用の番号(分岐後+2800)として処理させてもらいます
 	;20181115
-	;CONST�̃��X�g�ł�������Q�Əo����悤�ɕύX
+	;CONSTのリストでさっくり参照出来るように変更
 	ITEM_ID  = L_INPUT % 100
 	SIF !INRANGE(ITEM_ID, 0, 5)
 		RESTART
@@ -103,17 +103,17 @@ CASEELSE
 		RESTART
 	ENDSELECT
 	IF FLAG:(DOPING_FLAG_ID + ITEM_ID) <= 0
-		PRINTFORMW �A�C�e�����s�����Ă��܂��B
+		PRINTFORMW アイテムが不足しています。
 		RETURN
 	ENDIF
-	;�����������邱�Ƃ�1�ł�����Ύ��s�ł���悤��
+	;制限をかけることで1個でもあれば実行できるように
 	DOPING_NUM = MIN(DOPING_NUM, DOPING_LIMIT, FLAG:(DOPING_FLAG_ID + ITEM_ID))
-	;����Ă�����A�C�e��������ăp�����[�^����
+	;足りていたらアイテムを消費してパラメータ増加
 	FLAG:(DOPING_FLAG_ID + ITEM_ID)      -= DOPING_NUM
 	CFLAG:C_ID:(CFLAG_STATUS + CFLAG_ID) += DOPING_NUM * (1 + DOPING_ID)
 	CFLAG:C_ID:DOPING_CNT_ID             += DOPING_NUM
-	LOG_STR '= REPLACE(CFLAGNAME:(CFLAG_STATUS + CFLAG_ID), "�Z�l_", "")
-	LOG_STR = %CALLNAME:C_ID%��%LOG_STR%��{DOPING_NUM * (1 + DOPING_ID) , 2 ,RIGHT}�������܂����B
+	LOG_STR '= REPLACE(CFLAGNAME:(CFLAG_STATUS + CFLAG_ID), "住人_", "")
+	LOG_STR = %CALLNAME:C_ID%の%LOG_STR%を{DOPING_NUM * (1 + DOPING_ID) , 2 ,RIGHT}強化しました。
 ENDSELECT
 RESTART
 

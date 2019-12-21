@@ -1,95 +1,95 @@
-;=================================================
+﻿;=================================================
 ;   sub COLOR
 ;=================================================
-;   ���F
+;   着色
 ;-------------------------------------------------
 ; Input:
-;  ARGS					�F
+;  ARGS					色
 ; Output:
-;  RETURNF				�F
+;  RETURNF				色
 ;-------------------------------------------------
 @COLOR(ARGS)
 #FUNCTION
 
 SELECTCASE ARGS
 	;-----------------------------
-	;- ����F
+	;- 特殊色
 	;-----------------------------
-	CASE "����"
+	CASE "伏字"
 		RETURNF 0x666666
-	CASE "����W��"
+	CASE "口上標準"
 ;		RETURNF 0xFFCCFF
 		RETURNF GETCOLOR()
 
 	;-----------------------------
-	;- �W���F
+	;- 標準色
 	;-----------------------------
-	CASE "�D�F", "gray"
+	CASE "灰色", "gray"
 		RETURNF 0x666666
-	CASE "��"
+	CASE "紫"
 		RETURNF 0xCC66CC
-	CASE "�s���N"
+	CASE "ピンク"
 		RETURNF 0xFF00FF
-	CASE "��"
+	CASE "赤"
 		RETURNF 0xFF9999
-	CASE "���F"
+	CASE "水色"
 		RETURNF 0x66FFFF
-	CASE "��"
+	CASE "緑"
 		RETURNF 0x00FF00
-	CASE "�Q��"
+	CASE "群青"
 		RETURNF 0x9999FF
-	CASE "���F"
+	CASE "黄色"
 		RETURNF 0xffff00
 	
 	;-----------------------------
-	;- �Y�݋�ʐF
+	;- 悩み区別色
 	;-----------------------------
-	CASE "�Y��_���K"
+	CASE "悩み_金銭"
 		RETURNF COLOR_FROMNAME("LemonChiffon")
 
-	CASE "�Y��_����"
+	CASE "悩み_恋愛"
 		RETURNF COLOR_FROMNAME("Salmon")
 	
-	CASE "�Y��_�ƒ�"
+	CASE "悩み_家庭"
 		RETURNF COLOR_FROMNAME("Lime")
 	
-	CASE "�Y��_����"
+	CASE "悩み_生活"
 		RETURNF COLOR_FROMNAME("Aqua")
 	
-	CASE "�Y��_�ƍ�"
+	CASE "悩み_犯罪"
 		RETURNF COLOR_FROMNAME("LightSteelBlue")
 	
-	CASE "�Y��_���I"
+	CASE "悩み_性的"
 		RETURNF COLOR_FROMNAME("Fuchsia")
 	
 	;-----------------------------
-	;- �X�e�[�^�X�\��
+	;- ステータス表示
 	;-----------------------------
-	CASE "�l�C_UPPER"
+	CASE "人気_UPPER"
 		RETURNF COLOR_FROMNAME("Yellow")
 	
-	CASE "������_UPPER"
+	CASE "モラル_UPPER"
 		RETURNF COLOR_FROMNAME("Aqua")
 	
-	CASE "������_LOWER"
+	CASE "モラル_LOWER"
 		RETURNF COLOR_FROMNAME("Tomato")
 	
-	CASE "�J���}_UPPER"
+	CASE "カルマ_UPPER"
 		RETURNF COLOR_FROMNAME("Pink")
 	
-	CASE "�J���}_LOWER"
+	CASE "カルマ_LOWER"
 		RETURNF COLOR_FROMNAME("Lime")
 	
-	CASE "�i��_UPPER"
+	CASE "品性_UPPER"
 		RETURNF COLOR_FROMNAME("Lime")
 	
-	CASE "�i��_LOWER"
+	CASE "品性_LOWER"
 		RETURNF COLOR_FROMNAME("Violet")
 	
-	CASE "����_UPPER"
+	CASE "収入_UPPER"
 		RETURNF COLOR_FROMNAME("Gold")
 
-	CASE "�o��_UPPER"
+	CASE "出費_UPPER"
 		RETURNF COLOR_FROMNAME("Gold")
 
 	;-----------------------------
@@ -104,52 +104,52 @@ SELECTCASE ARGS
 	CASE "HIGHLIGHT"
 		RETURNF COLOR_FROMNAME("lemonyellow")
 
-	CASE "�Y��_����2"
+	CASE "悩み_解決2"
 		RETURNF COLOR_FROMNAME("lightsalmon")
-	CASE "�Y��_����1"
+	CASE "悩み_解決1"
 		RETURNF COLOR_FROMNAME("lemonyellow")
-	CASE "�Y��_����0"
+	CASE "悩み_解決0"
 		RETURNF COLOR_FROMNAME("LimeGreen")
 
 	;-----------------------------
-	;- CITY MAP �F�ݒ�
+	;- CITY MAP 色設定
 	;-----------------------------
 
-	CASE "�s�s�h�q��"
+	CASE "都市防衛中"
 		RETURNF COLOR_FROMRGB(250, 50, 50)
-	CASE "�s�s�P��_��"
+	CASE "都市襲撃_近"
 		RETURNF COLOR_FROMRGB(250, 50, 50)
-	CASE "�s�s�P��_��"
+	CASE "都市襲撃_中"
 		RETURNF COLOR_FROMRGB(250, 50, 250)
-	CASE "�s�s�P��_��"
+	CASE "都市襲撃_遠"
 		RETURNF COLOR_FROMRGB(50, 250, 250)
 	
-	CASE "�s�s����_��"
+	CASE "都市損壊_大"
 		RETURNF COLOR_FROMRGB(250, 50, 50)
-	CASE "�s�s����_��"
+	CASE "都市損壊_中"
 		RETURNF COLOR_FROMRGB(250, 50, 250)
-	CASE "�s�s����_��"
+	CASE "都市損壊_小"
 		RETURNF COLOR_FROMRGB(50, 250, 250)
 	
-	CASE "�������ߐ؂�_10������"
+	CASE "今期締め切り_10日未満"
 		RETURNF COLOR_FROMRGB(250, 50, 50)
-	CASE "�������ߐ؂�_30������"
+	CASE "今期締め切り_30日未満"
 		RETURNF COLOR_FROMRGB(250, 50, 250)
-	CASE "�������ߐ؂�_30���ȏ�"
+	CASE "今期締め切り_30日以上"
 		RETURNF COLOR_FROMRGB(50, 250, 250)
 
 	;-----------------------------
-	;- RPG_BATTLE �G�F�ݒ�
+	;- RPG_BATTLE 敵色設定
 	;-----------------------------
-	CASE "�G_�m��"			; IS <= 10%
+	CASE "敵_瀕死"			; IS <= 10%
 		RETURNF 0xAA1100
-	CASE "�G_�d��"			; IS <= 40%
+	CASE "敵_重症"			; IS <= 40%
 		RETURNF 0xDD6600
-	CASE "�G_�d��"			; IS <= 60%
+	CASE "敵_重傷"			; IS <= 60%
 		RETURNF 0xEE9900
-	CASE "�G_�y��"			; IS <= 80%
+	CASE "敵_軽傷"			; IS <= 80%
 		RETURNF 0xFFFF00
-	CASE "�G_����"			; CASEELSE
+	CASE "敵_無傷"			; CASEELSE
 		RETURNF 0xA0FFA0
 	
 	CASE "RPG_MESSAGE_GOOD"
@@ -174,9 +174,9 @@ ENDSELECT
 RETURNF 0
 
 
-;PERCENT�l0�`100����F���w�肷��
-;96�`100���ƃf�t�H�F
-;���C�t�o�[�n�ł̎g�p��z��
+;PERCENT値0～100から色を指定する
+;96～100だとデフォ色
+;ライフバー系での使用を想定
 @PERC_TO_COLOR(PERCENT)
 #FUNCTION
 #DIM PERCENT
@@ -195,16 +195,16 @@ ENDSELECT
 RETURNF GETDEFCOLOR()
 
 
-;RANK�l1�`7����F���w�肷��
-;3101,�K��SevenR,;����K���A�u�v���C���[�v�Ɓu�V�e�B�v�ɔF�߂�ꂽ�҂̂ݎ�����B
-;3102,�K��SixO,;�@�K���̏㏸�Ƌ��ɍv���l���オ��
-;3103,�K��FiveY,;
-;3104,�K��FourG,;
-;3105,�K��ThreeB,;
-;3106,�K��ToI,;
-;3107,�K��OneV,;
+;RANK値1～7から色を指定する
+;3101,階級SevenR,;特殊階級、「プレイヤー」と「シティ」に認められた者のみ授かる。
+;3102,階級SixO,;　階級の上昇と共に貢献値も上がる
+;3103,階級FiveY,;
+;3104,階級FourG,;
+;3105,階級ThreeB,;
+;3106,階級ToI,;
+;3107,階級OneV,;
 ;
-;1�`7�̐��l�ɓ��Ă͂܂�Ȃ��ꍇ�͍��F��Ԃ�
+;1～7の数値に当てはまらない場合は黒色を返す
 @RANK_TO_COLOR(RANK)
 #FUNCTION
 #DIM RANK
@@ -228,13 +228,13 @@ RETURNF 0x000000
 
 
 ;===========================================================================================================================
-;RGB��Ԃɂ�����2�_ (REF_POINT0, REF_COLOR0) - (REF_POINT1, REF_COLOR1)�Ԃ̒��ԐF��Ԃ�
-; ���ԐF�̓_ TARGET_POINT �� REF_POINT0�`REF_POINT1�͈͓̔��ɂ���K�v�͂Ȃ�
-; �F�̒l���ȗ����邩���̒l�ɂ���ƌ��݂̃t�H�A�O���E���h�F�ɂȂ�
-; POINT0�̂ق�����w��Ȃ̂ɒ���
+;RGB空間における2点 (REF_POINT0, REF_COLOR0) - (REF_POINT1, REF_COLOR1)間の中間色を返す
+; 中間色の点 TARGET_POINT は REF_POINT0～REF_POINT1の範囲内にある必要はない
+; 色の値を省略するか負の値にすると現在のフォアグラウンド色になる
+; POINT0のほうが後指定なのに注意
 ; example:
-;	(0, forgraund�F) - (100, ��)�Ԃ� ���ԓ_ x --> Intermediate_Color( x, 100, COLOR("�ԐF"))
-;	(-100, �F) - (100, �ΐF)�Ԃ� ���ԓ_ x ----> Intermediate_Color( x, 100, COLOE("�ΐF"), -100, COLOR("�F"))
+;	(0, forgraund色) - (100, 赤)間で 中間点 x --> Intermediate_Color( x, 100, COLOR("赤色"))
+;	(-100, 青色) - (100, 緑色)間で 中間点 x ----> Intermediate_Color( x, 100, COLOE("緑色"), -100, COLOR("青色"))
 ;===========================================================================================================================
 @Intermediate_Color(TARGET_POINT, REF_POINT1, REF_COLOR1 = -1, REF_POINT0 = 0, REF_COLOR0 = -1 )
 #FUNCTION
@@ -249,7 +249,7 @@ RETURNF 0x000000
 #DIM CONST _RED___	= 0
 #DIM CONST _GREEN_	= 1
 #DIM CONST _BLUE__	= 2
-#DIM DYNAMIC _OFFSET_	; �v�Z���x����̂��߂̃Q�^
+#DIM DYNAMIC _OFFSET_	; 計算精度向上のためのゲタ
 #DIM DYNAMIC TP_RP0		; TARGET_POINT - REF_POINT0
 #DIM DYNAMIC RP1_RP0	; REF_POINT1 - REF_POINT0
 

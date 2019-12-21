@@ -1,12 +1,12 @@
-
+﻿
 ;-------------------------------------------------
-; �i���X
+; 喫茶店
 ;-------------------------------------------------
 @CITY_CAFE(OP)
-#DIMS OP       ;���s�I�v�V����
-#DIM NOW_GROUP ;REF�p
-SIF !FLAG:�萔_�J�t�F�\����
-	FLAG:�萔_�J�t�F�\���� = 10
+#DIMS OP       ;実行オプション
+#DIM NOW_GROUP ;REF用
+SIF !FLAG:定数_カフェ表示数
+	FLAG:定数_カフェ表示数 = 10
 NOW_GROUP = 1
 CALL CITY_CAFE_NPC_TALK("ENTER")
 CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP, "CAFE")
@@ -14,34 +14,34 @@ CALL CITY_CAFE_NPC_TALK("EXIT")
 
 
 ;-------------------------------------------------
-;�i���X���̃Z���t����֐�
+;喫茶店員のセリフ制御関数
 ;-------------------------------------------------
 @CITY_CAFE_NPC_TALK(EVENT)
 #DIMS EVENT
 SELECTCASE EVENT
 CASE "ENTER"
-;���X��
+;入店時
 	DRAWLINE
 	CALL C_PICTURE_NPC(100)
-	PRINTFORML �X������@�u����A��������Ⴂ�B�����̐Ȃł���������H�v
-	PRINTFORML �X�������u�ł́A���ē��v���܂��ˁI�v
+	PRINTFORML 店長さん　「あら、いらっしゃい。いつもの席でいいかしら？」
+	PRINTFORML 店員ちゃん「では、ご案内致しますね！」
 	DRAWLINE
 	WAIT
 CASE "EXIT"
-;�ޓX��
+;退店時
 	DRAWLINE
 	CALL C_PICTURE_NPC(100)
-	PRINTFORML �X�������u���A��ɂȂ��܁[���v
-	PRINTFORML �X������@�u�́[���A�܂����ĉ������ˁv
+	PRINTFORML 店員ちゃん「お帰りになられまーす」
+	PRINTFORML 店長さん　「はーい、また来て下さいね」
 	DRAWLINE
 	WAIT
 CASE "SCOUT"
-;���U�p
+;勧誘用
 	PRINTDATAL
-		DATAFORM �X������u�����ł��˂��A���̎q�Ȃ�Ăǂ��ł��傤�H�v
-		DATAFORM �X������u���������΁A����Ȑl�����܂�����H�v
-		DATAFORM �X������u�ς�����q���ŋߗ��Ă܂�����A�������c�v
-		DATAFORM �X������u���������A�����I�Ȑl�����炵�Ă܂����B�܂�����Ǝv���̂ł����v
-		DATAFORM �X������u�d���M�S�ł��ˁ�A�Ȃ炠�̐l�͂ǂ��ł��傤�v
+		DATAFORM 店長さん「そうですねえ、あの子なんてどうでしょう？」
+		DATAFORM 店長さん「そういえば、こんな人がいましたよ？」
+		DATAFORM 店長さん「変わった子が最近来てましたよ、たしか…」
+		DATAFORM 店長さん「そうそう、特徴的な人がいらしてました。まだいると思うのですが」
+		DATAFORM 店長さん「仕事熱心ですね♪、ならあの人はどうでしょう」
 	ENDDATA
 ENDSELECT

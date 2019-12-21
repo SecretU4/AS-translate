@@ -1,14 +1,14 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:_SYSTEM_MANAGEMENT.ERH
-;	Facility	:ƒwƒbƒ_ƒtƒ@ƒCƒ‹(Œo‰c)B
+;	Facility	:ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«(çµŒå–¶)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
@@ -16,21 +16,21 @@
 ;   MNG:
 ;-------------------------------------------------
 
-#DEFINE DEFMNG_CL_NUM	300				;ƒLƒƒƒ‰ƒŠƒXƒg‘”
+#DEFINE DEFMNG_CL_NUM	300				;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆç·æ•°
 
-#DIM GMNG_CL,			300				;”z—ñ:ƒLƒƒƒ‰ƒŠƒXƒg
-#DIM GMNG_CL_NUM,		1				;ƒLƒƒƒ‰”
+#DIM GMNG_CL,			300				;é…åˆ—:ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆ
+#DIM GMNG_CL_NUM,		1				;ã‚­ãƒ£ãƒ©æ•°
 
-;˜J–ðƒAƒCƒeƒ€
-#DEFINE DEFMNG_ITEM_”­MŠí		1		;˜J–ðƒAƒCƒeƒ€:”­MŠí
-#DEFINE DEFMNG_ITEM_“ÁW‹LŽ–	2		;˜J–ðƒAƒCƒeƒ€:“ÁW‹LŽ–
-#DEFINE DEFMNG_ITEM_Žñ—Ö		3		;˜J–ðƒAƒCƒeƒ€:Žñ—Ö
-#DEFINE DEFMNG_ITEM_”ð”D–ò		4		;˜J–ðƒAƒCƒeƒ€:”ð”D–ò
-#DEFINE DEFMNG_ITEM_ƒZƒNƒnƒ‰	7		;˜J–ðƒAƒCƒeƒ€:ƒZƒNƒnƒ‰
+;åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ 
+#DEFINE DEFMNG_ITEM_ç™ºä¿¡å™¨		1		;åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ :ç™ºä¿¡å™¨
+#DEFINE DEFMNG_ITEM_ç‰¹é›†è¨˜äº‹	2		;åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ :ç‰¹é›†è¨˜äº‹
+#DEFINE DEFMNG_ITEM_é¦–è¼ª		3		;åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ :é¦–è¼ª
+#DEFINE DEFMNG_ITEM_é¿å¦Šè–¬		4		;åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ :é¿å¦Šè–¬
+#DEFINE DEFMNG_ITEM_ã‚»ã‚¯ãƒãƒ©	7		;åŠ´å½¹ã‚¢ã‚¤ãƒ†ãƒ :ã‚»ã‚¯ãƒãƒ©
 
-;˜J–ðÝ”õ
-#DEFINE DEFMNG_FC_PRICE_LV1		300		;˜J–ðÝ”õ:ƒAƒbƒvƒOƒŒ[ƒh”ï—p(LV1)
-#DEFINE DEFMNG_FC_PRICE_LV2		500		;˜J–ðÝ”õ:ƒAƒbƒvƒOƒŒ[ƒh”ï—p(LV2)
-#DEFINE DEFMNG_FC_PRICE_LV3		700		;˜J–ðÝ”õ:ƒAƒbƒvƒOƒŒ[ƒh”ï—p(LV3)
+;åŠ´å½¹è¨­å‚™
+#DEFINE DEFMNG_FC_PRICE_LV1		300		;åŠ´å½¹è¨­å‚™:ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰è²»ç”¨(LV1)
+#DEFINE DEFMNG_FC_PRICE_LV2		500		;åŠ´å½¹è¨­å‚™:ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰è²»ç”¨(LV2)
+#DEFINE DEFMNG_FC_PRICE_LV3		700		;åŠ´å½¹è¨­å‚™:ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰è²»ç”¨(LV3)
 
 

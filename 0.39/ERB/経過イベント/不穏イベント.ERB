@@ -1,19 +1,19 @@
-;-------------------------------------------------
-;•s‰¸ƒCƒxƒ“ƒg
+ï»¿;-------------------------------------------------
+;ä¸ç©ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @TURN_EVENT_FON
 
-;•ÛŒì‚³‚ê‚Ä‚¢‚éZ–¯‚Í–ß‚·
-SIF CFLAG:“Á•Ê•ÛŒì != 0
+;ä¿è­·ã•ã‚Œã¦ã„ã‚‹ä½æ°‘ã¯æˆ»ã™
+SIF CFLAG:ç‰¹åˆ¥ä¿è­· != 0
 	RETURN
 
-;«ŠÖŒW
-IF CFlag:ZlƒCƒxƒ“ƒgŒXŒü_« > RAND:100 
-	IF !RAND:4 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ < 0
+;æ€§é–¢ä¿‚
+IF CFlag:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ€§ > RAND:100 
+	IF !RAND:4 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« < 0
 		CALL TURN_EVENT_FON_1
-	ELSEIF !RAND:3 && CFLAG:Zl_ƒJƒ‹ƒ} >= 20
+	ELSEIF !RAND:3 && CFLAG:ä½äºº_ã‚«ãƒ«ãƒž >= 20
 		CALL TURN_EVENT_I_R
-	ELSEIF !RAND:2 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ < 0
+	ELSEIF !RAND:2 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« < 0
 		CALL TURN_EVENT_HJ_S
 	ELSE 
 		CALL TURN_EVENT_SS

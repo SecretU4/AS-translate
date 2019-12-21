@@ -1,32 +1,32 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:VAR_NAYAMI.ERB
-;	Facility	:eraAS�p�Y�݊֘A����
+;	Facility	:eraAS用悩み関連処理
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2017/03/02		morph					�V�K�쐬
-;	002		2018/11/14		morph					�Y�ݏ�������֐�SEARCH_ALL_NAYAMI��ǉ�
+;	001		2017/03/02		morph					新規作成
+;	002		2018/11/14		morph					悩み所持判定関数SEARCH_ALL_NAYAMIを追加
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- xxxx
 ;
-;	�E VAR_NAYAMI_ASSIST_ABLE_LIST		VAR:�Y�݋��͐��۔���
-;	�E VAR_NAYAMI_ASSIST_ABLE			VAR:�ʔY�݉������۔���
-;	�E VAR_NAYAMI_EXIST					VAR:�Y�ݎ��̗L������
-;	�E VAR_NAYAMI_SET_ASSIST			VAR:�Y�݋��͕ϐ�����֐�
-;	�E SEARCH_ALL_NAYAMI				INFO_TARGET_DETAIL�p�ɍ쐬�A�������Ă���Y�݂�Ԃ�
-;	�E SEARCH_BIG_NAYAMI				
-;	�E SEARCH_SMALL_NAYAMI				
+;	・ VAR_NAYAMI_ASSIST_ABLE_LIST		VAR:悩み協力成否判定
+;	・ VAR_NAYAMI_ASSIST_ABLE			VAR:個別悩み解決成否判定
+;	・ VAR_NAYAMI_EXIST					VAR:悩み事の有無判定
+;	・ VAR_NAYAMI_SET_ASSIST			VAR:悩み協力変数制御関数
+;	・ SEARCH_ALL_NAYAMI				INFO_TARGET_DETAIL用に作成、所持している悩みを返す
+;	・ SEARCH_BIG_NAYAMI				
+;	・ SEARCH_SMALL_NAYAMI				
 ;;
 ;===============================================================================
 
@@ -35,24 +35,24 @@
 ;-------------------------------------------------------------------------------
 
 ;-------------------------------------------------
-;�Y�݋��͐��۔���
+;悩み協力成否判定
 ;-------------------------------------------------
-;�Y�ݎ��ɋ��͂ł��邩�ǂ����𔻒肷��
+;悩み事に協力できるかどうかを判定する
 @VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID)
 #FUNCTION
 #DIM C_ID
 #DIM NAYAMI_ID
-SIF FLAG:�s�s_����TP < 1 && FLAG:�s�s_����BP < 1
+SIF FLAG:都市_現在TP < 1 && FLAG:都市_現在BP < 1
 	RETURNF 0
-;���݉������̔Y�݂�����
-SIF CFLAG:C_ID:�Z�l_�Y�݉�����
+;現在解決中の悩みがある
+SIF CFLAG:C_ID:住人_悩み解決中
 	RETURNF 0
-;�傫�ȔY��
+;大きな悩み
 FOR NAYAMI_ID, 1, 9
 	SIF VAR_NAYAMI_ASSIST_ABLE(C_ID, NAYAMI_ID)
 		RETURNF 2
 NEXT
-;�����ȔY��
+;小さな悩み
 FOR NAYAMI_ID, 11, 19
 	SIF VAR_NAYAMI_ASSIST_ABLE(C_ID, NAYAMI_ID)
 		RETURNF 1
@@ -62,44 +62,44 @@ RETURNF 0
 
 
 ;-------------------------------------------------
-;�ʔY�݉������۔���
+;個別悩み解決成否判定
 ;-------------------------------------------------
-;�X�̔Y�݂̉����s��
+;個々の悩みの解決可不可
 @VAR_NAYAMI_ASSIST_ABLE(C_ID, NAYAMI_ID)
 #FUNCTION
 #DIM C_ID
 #DIM NAYAMI_ID
-;�Y�݂��Ȃ�
+;悩みがない
 SIF CFLAG:C_ID:(4000 + NAYAMI_ID) <= 0
 	RETURNF 0
-;�Y�݂��������ĂȂ�
+;悩みが判明してない
 SIF CFLAG:C_ID:(4100 + NAYAMI_ID) <  100
 	RETURNF 0
-;����Ȃɐe�����Ȃ�
-SIF NAYAMI_ID <= 10 && CFLAG:C_ID:�֌W�i�K == 0
+;そんなに親しくない
+SIF NAYAMI_ID <= 10 && CFLAG:C_ID:関係段階 == 0
 	RETURNF 0
 RETURNF 1
 
 
 
 ;-------------------------------------------------
-;�Y�ݎ��̗L������
+;悩み事の有無判定
 ;-------------------------------------------------
-;���̂܂܃t���O�Z�b�g�ɂ��g�������̂Ŗ߂�l�͂��ϑ��I��
+;このままフラグセットにも使いたいので戻り値はやや変則的に
 @VAR_NAYAMI_EXIST(C_ID)
 #FUNCTION
 #DIM C_ID
 #DIM NAYAMI_ID
-;���݉������̔Y�݂�����
-SIF CFLAG:C_ID:�Z�l_�Y�݉�����
+;現在解決中の悩みがある
+SIF CFLAG:C_ID:住人_悩み解決中
 	RETURNF 0
-;�傫�ȔY��
+;大きな悩み
 FOR NAYAMI_ID, 1, 9
 	SIF CFLAG:C_ID:(4000 + NAYAMI_ID) <= 0
 		CONTINUE
 	RETURNF 7
 NEXT
-;�����ȔY��
+;小さな悩み
 FOR NAYAMI_ID, 11, 19
 	SIF CFLAG:C_ID:(4000 + NAYAMI_ID) <= 0
 		CONTINUE
@@ -110,34 +110,34 @@ RETURNF 0
 
 
 ;-------------------------------------------------
-;�Y�݋��͕ϐ�����֐�
+;悩み協力変数制御関数
 ;-------------------------------------------------
-;�Y�ݎ����̓t���O�̃Z�b�g
-;����ł͊֌W�i�K��0~2���������Ă��ǂ��悤��
-;VAR_NAYAMI_EXIST�̖߂�l�̍ŏ��l��5�ɂ���
+;悩み事協力フラグのセット
+;現状では関係段階は0~2だが増えても良いように
+;VAR_NAYAMI_EXISTの戻り値の最小値を5にした
 @VAR_NAYAMI_SET_ASSIST(C_ID)
 #DIM C_ID
 IF !VAR_NAYAMI_EXIST(C_ID)
-	;���łɉ������Ă���֌W�i�K��
-	CFLAG:C_ID:�Z�l_�Y�݋��͏� = CFLAG:C_ID:�֌W�i�K
+	;すでに解決してたら関係段階順
+	CFLAG:C_ID:住人_悩み協力状況 = CFLAG:C_ID:関係段階
 ELSE
-	;�������ĂȂ����͊֌W�i�K������ĂȂ��l�D��
-	;�����̏��̎q�Ɛe�����Ȃ��悤��
-	CFLAG:C_ID:�Z�l_�Y�݋��͏� = VAR_NAYAMI_EXIST(C_ID) - CFLAG:C_ID:�֌W�i�K
+	;解決してない時は関係段階が育ってない人優先
+	;多くの女の子と親しくなれるように
+	CFLAG:C_ID:住人_悩み協力状況 = VAR_NAYAMI_EXIST(C_ID) - CFLAG:C_ID:関係段階
 ENDIF
-SIF CFLAG:C_ID:���M�����[
-	CFLAG:C_ID:�Z�l_�Y�݋��͏� ++
-SIF CFLAG:C_ID:���ʕی�
-	CFLAG:C_ID:�Z�l_�Y�݋��͏� ++
-SIF CFLAG:C_ID:�g�єԍ�����
-	CFLAG:C_ID:�Z�l_�Y�݋��͏� ++
+SIF CFLAG:C_ID:レギュラー
+	CFLAG:C_ID:住人_悩み協力状況 ++
+SIF CFLAG:C_ID:特別保護
+	CFLAG:C_ID:住人_悩み協力状況 ++
+SIF CFLAG:C_ID:携帯番号入手
+	CFLAG:C_ID:住人_悩み協力状況 ++
 
 
 
 ;-------------------------------------------------
-;�Y�݉����R�X�g�Z�o�֐�
+;悩み解決コスト算出関数
 ;-------------------------------------------------
-;�z����󂯎���Ċe�v�����̎��s�R�X�g���Z�o����
+;配列を受け取って各プランの実行コストを算出する
 @VAR_NAYAMI_PLAN_COST(C_ID, N_ID, COST_AP, COST_MONEY)
 #FUNCTION
 #DIM  C_ID
@@ -147,58 +147,58 @@ SIF CFLAG:C_ID:�g�єԍ�����
 #DIM  COST_CHARA
 #DIM  COST_NAYAMI
 
-COST_CHARA = CFLAG:C_ID:�Z�l_��x
+COST_CHARA = CFLAG:C_ID:住人_難度
 COST_NAYAMI = CFLAG:C_ID:(4300 + N_ID)
 
-;01:"������t�@"
+;01:"資金寄付　"
 COST_AP:1 = 0
 COST_MONEY:1 = (COST_NAYAMI * 1000) * COST_CHARA
 
-;02:"�@�̗́@�@"
+;02:"法の力　　"
 COST_AP:2 = (COST_NAYAMI * 3) * COST_CHARA / 2
 COST_MONEY:2 = 0
 
-;03:"���Á@�@�@"
+;03:"治療　　　"
 COST_AP:3 = (COST_NAYAMI * 3) * COST_CHARA / 2
 COST_MONEY:3 = (COST_NAYAMI * 500) * COST_CHARA
 
-;04:"�A�h�o�C�X"
+;04:"アドバイス"
 COST_AP:4 = (COST_NAYAMI * 1) * COST_CHARA / 2
 COST_MONEY:4 = 0
 
-;05:"�X�̏Љ�@"
+;05:"店の紹介　"
 COST_AP:5 = (COST_NAYAMI * 2) * COST_CHARA / 2
 COST_MONEY:5 = 0
 
-;06:"��܂��@�@"
+;06:"励ます　　"
 COST_AP:6 = (COST_NAYAMI * 2) * COST_CHARA / 2
 COST_MONEY:6 = 0
 
-;07:"�����@�@�@"
+;07:"教授　　　"
 COST_AP:7 = (COST_NAYAMI * 4) * COST_CHARA
 COST_MONEY:7 = 0
 
-;08:"�\�𗬂��@"
+;08:"噂を流す　"
 COST_AP:8 = (COST_NAYAMI * 5) * COST_CHARA / 2
 COST_MONEY:8 = 0
 
-;09:"��񑀍�@"
+;09:"情報操作　"
 COST_AP:9 = (COST_NAYAMI * 7) * COST_CHARA / 2
 COST_MONEY:9 = 0
 
-;10:"�͂�s����"
+;10:"力を尽くす"
 COST_AP:10 = (COST_NAYAMI * 10) * COST_CHARA / 2
 COST_MONEY:10 = (COST_NAYAMI * 5000) * COST_CHARA
 
 
 
-;�Y�ݏ�������
-;�������Ă���Y�݂̔Y�݃X���b�g��Ԃ�
-;����D�揇�͏ォ��
-;�E�����ς̑傫�ȔY�݂����鎞�A200�{�Y�݃X���b�g(1�`5)
-;�E�����ς̏����ȔY�݂����鎞�A200�{�Y�݃X���b�g(11�`15)
-;�E�������̑傫�ȔY�݂����鎞�A100�{�Y�݃X���b�g(1�`5)
-;�E�������̏����ȔY�݂����鎞�A100�{�Y�݃X���b�g(11�`15)
+;悩み所持判定
+;所持している悩みの悩みスロットを返す
+;判定優先順は上から
+;・判明済の大きな悩みがある時、200＋悩みスロット(1～5)
+;・判明済の小さな悩みがある時、200＋悩みスロット(11～15)
+;・未判明の大きな悩みがある時、100＋悩みスロット(1～5)
+;・未判明の小さな悩みがある時、100＋悩みスロット(11～15)
 @SEARCH_ALL_NAYAMI(L_I)
 #FUNCTION
 #DIM L_I
@@ -220,7 +220,7 @@ RETURNF
 #FUNCTION
 #DIM L_I
 #DIM NAYAMI_SLOT
-#DIM NAYAMI_EXIST  = 4000;CFLAG�̎Q�Ɨp�ł�����
+#DIM NAYAMI_EXIST  = 4000;CFLAGの参照用でござる
 #DIM NAYAMI_DETECT = 4100;
 #DIM NAYAMI_SOLVE  = 4200;
 FOR NAYAMI_SLOT, 1, 6
@@ -238,7 +238,7 @@ RETURNF
 #FUNCTION
 #DIM L_I
 #DIM NAYAMI_SLOT
-#DIM NAYAMI_EXIST  = 4000;CFLAG�̎Q�Ɨp�ł�����
+#DIM NAYAMI_EXIST  = 4000;CFLAGの参照用でござる
 #DIM NAYAMI_DETECT = 4100;
 #DIM NAYAMI_SOLVE  = 4200;
 FOR NAYAMI_SLOT, 11, 16

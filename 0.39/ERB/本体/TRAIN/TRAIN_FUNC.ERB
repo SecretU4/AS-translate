@@ -1,56 +1,56 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:LIB_COM.ERB
-;	Facility	:ŠÖ”’u‚«ê(TRAIN)Bæ“ª‚É"TR_"‚ð•t—^B
+;	Facility	:é–¢æ•°ç½®ãå ´(TRAIN)ã€‚å…ˆé ­ã«"TR_"ã‚’ä»˜ä¸Žã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	E TR_COM_ABLE_BASIC				TR:ƒRƒ}ƒ“ƒhŽÀsðŒƒ`ƒFƒbƒN
-;	E TR_DOWNBASE_ADD_DEFAULT			TR:Á”ïƒfƒtƒHƒ‹ƒg
-;	E TR_GETPALAMLV					TR:PALAMLV
-;	E TR_CALC_GOTJUEL					TR:Žæ“¾—\’èŽì
-;	E TR_PARTY_NAME					TR:ƒp[ƒeƒB[–¼
+;	ãƒ» TR_COM_ABLE_BASIC				TR:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶ãƒã‚§ãƒƒã‚¯
+;	ãƒ» TR_DOWNBASE_ADD_DEFAULT			TR:æ¶ˆè²»ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
+;	ãƒ» TR_GETPALAMLV					TR:PALAMLV
+;	ãƒ» TR_CALC_GOTJUEL					TR:å–å¾—äºˆå®šç 
+;	ãƒ» TR_PARTY_NAME					TR:ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼å
 ;
-; *- ƒRƒ}ƒ“ƒhŒø‰ÊŒn
+; *- ã‚³ãƒžãƒ³ãƒ‰åŠ¹æžœç³»
 ;
-;	E TR_EXP_ADD_HETEROSEX				TR:ˆÙ«ˆ¤ŒoŒ±
-;	E TR_SOURCE_ADD_•”ˆÊ‹ê’É			TR:ƒ\[ƒX’Ç‰Á(•”ˆÊ‹ê’É)
-;	E TR_COM_PALAMCHG_SEX_V			TR:PALAM•Ï“®(‚u«ŒðŽž)
-;	E TR_COM_PALAMCHG_SEX_A			TR:PALAM•Ï“®(‚`«ŒðŽž)
-;	E TR_COM_PALAMCHG_SEX_ADD			TR:PALAM•Ï“®(«ŒðŽžƒ\[ƒX’Ç‰Á)
-;	E TR_CHK_LOST_VIRGIN_V				TR:ˆ—‘rŽ¸(‚u)
-;	E TR_CHK_LOST_VIRGIN_A				TR:ˆ—‘rŽ¸(‚`)
-;	E TR_CHK_LOST_VIRGIN_P				TR:ˆ—‘rŽ¸(‚o)
+;	ãƒ» TR_EXP_ADD_HETEROSEX				TR:ç•°æ€§æ„›çµŒé¨“
+;	ãƒ» TR_SOURCE_ADD_éƒ¨ä½è‹¦ç—›			TR:ã‚½ãƒ¼ã‚¹è¿½åŠ (éƒ¨ä½è‹¦ç—›)
+;	ãƒ» TR_COM_PALAMCHG_SEX_V			TR:PALAMå¤‰å‹•(ï¼¶æ€§äº¤æ™‚)
+;	ãƒ» TR_COM_PALAMCHG_SEX_A			TR:PALAMå¤‰å‹•(ï¼¡æ€§äº¤æ™‚)
+;	ãƒ» TR_COM_PALAMCHG_SEX_ADD			TR:PALAMå¤‰å‹•(æ€§äº¤æ™‚ã‚½ãƒ¼ã‚¹è¿½åŠ )
+;	ãƒ» TR_CHK_LOST_VIRGIN_V				TR:å‡¦å¥³å–ªå¤±(ï¼¶)
+;	ãƒ» TR_CHK_LOST_VIRGIN_A				TR:å‡¦å¥³å–ªå¤±(ï¼¡)
+;	ãƒ» TR_CHK_LOST_VIRGIN_P				TR:å‡¦å¥³å–ªå¤±(ï¼°)
 ;
-; *- ‚»‚Ì‘¼
+; *- ãã®ä»–
 ;
-;	E TR_CHK_•òŽd‰Â”\					TR:•òŽd‰Â”\
-;	E TR_CHK_ABLE_SEX_V				TR:«Œð‰Â”\(‚u)
-;	E TR_CHK_ABLE_SEX_A				TR:«Œð‰Â”\(‚`)
-;	E TR_CHK_ABLE_SEX_POINT			TR:«Œð‰Â”\(ˆÊ’u•Ê)
-;	E TR_CHK_ABLE_REV_SEX_POINT		TR:«Œð‰Â”\(‹tˆÊ’u•Ê)
-;	E TR_POINT_RESET					TR:•”ˆÊƒ|ƒCƒ“ƒgƒŠƒZƒbƒg
-;	E TR_PREV_SEX_V					TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‚u)
-;	E TR_PREV_SEX_A					TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‚`)
-;	E TR_PREV_SEX_REV_V				TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‹t‚u)
-;	E TR_PREV_SEX_REV_A				TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‹t‚`)
-;	E TR_ASSI_SET						TR:ƒAƒVÝ’è
-;	E TR_ASSI_ABLE						TR:ƒAƒVŽÀsðŒ
-;	E TR_ASSI_SEXUAL_DESIRE			TR:ƒAƒV—~î
+;	ãƒ» TR_CHK_å¥‰ä»•å¯èƒ½					TR:å¥‰ä»•å¯èƒ½
+;	ãƒ» TR_CHK_ABLE_SEX_V				TR:æ€§äº¤å¯èƒ½(ï¼¶)
+;	ãƒ» TR_CHK_ABLE_SEX_A				TR:æ€§äº¤å¯èƒ½(ï¼¡)
+;	ãƒ» TR_CHK_ABLE_SEX_POINT			TR:æ€§äº¤å¯èƒ½(ä½ç½®åˆ¥)
+;	ãƒ» TR_CHK_ABLE_REV_SEX_POINT		TR:æ€§äº¤å¯èƒ½(é€†ä½ç½®åˆ¥)
+;	ãƒ» TR_POINT_RESET					TR:éƒ¨ä½ãƒã‚¤ãƒ³ãƒˆãƒªã‚»ãƒƒãƒˆ
+;	ãƒ» TR_PREV_SEX_V					TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(ï¼¶)
+;	ãƒ» TR_PREV_SEX_A					TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(ï¼¡)
+;	ãƒ» TR_PREV_SEX_REV_V				TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(é€†ï¼¶)
+;	ãƒ» TR_PREV_SEX_REV_A				TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(é€†ï¼¡)
+;	ãƒ» TR_ASSI_SET						TR:ã‚¢ã‚·è¨­å®š
+;	ãƒ» TR_ASSI_ABLE						TR:ã‚¢ã‚·å®Ÿè¡Œæ¡ä»¶
+;	ãƒ» TR_ASSI_SEXUAL_DESIRE			TR:ã‚¢ã‚·æ¬²æƒ…
 ;
 ;===============================================================================
 
@@ -61,20 +61,20 @@
 ;=================================================
 ;   sub TR_COM_ABLE_MAIN
 ;=================================================
-;   TR:ƒRƒ}ƒ“ƒhŽÀsðŒƒ`ƒFƒbƒN
+;   TR:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶ãƒã‚§ãƒƒã‚¯
 ;-------------------------------------------------
 ; Output:
-;  RETURN				^‹U’l
+;  RETURN				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_COM_ABLE_MAIN
 #DIM L_COM
 #DIMS L_FILTER
 L_COM = SELECTCOM
 
-;- Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
+;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
 L_FILTER = %COMMAND_FILTER_MEMORY_GET(0)%
 
-;- CHK:ƒtƒBƒ‹ƒ^
+;- CHK:ãƒ•ã‚£ãƒ«ã‚¿
 SIF COMMAND_FILTER_DATA_GET(L_COM, L_FILTER)
 	RETURN 0
 
@@ -90,16 +90,16 @@ RETURN 1
 ;=================================================
 ;   sub TR_DOWNBASE_ADD_DEFAULT
 ;=================================================
-;   TR:Á”ïƒfƒtƒHƒ‹ƒg
+;   TR:æ¶ˆè²»ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
 ;-------------------------------------------------
 ; Input:
-;  ARG					ƒLƒƒƒ‰
+;  ARG					ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @TR_DOWNBASE_ADD_DEFAULT(ARG=-1)
 SIF ARG==-1
 	ARG = TARGET
 
-DOWNBASE:ARG:‘Ì—Í += FLAG:’è”_‘Ì—ÍÁ”ï
+DOWNBASE:ARG:ä½“åŠ› += FLAG:å®šæ•°_ä½“åŠ›æ¶ˆè²»
 
 ;=================================================
 ;   sub TR_GETPALAMLV
@@ -107,8 +107,8 @@ DOWNBASE:ARG:‘Ì—Í += FLAG:’è”_‘Ì—ÍÁ”ï
 ;   TR:PALAMLV
 ;-------------------------------------------------
 ; Input:
-;  ARGS					‘ÎÛ•¶Žš—ñ
-;  ARG					ƒLƒƒƒ‰
+;  ARGS					å¯¾è±¡æ–‡å­—åˆ—
+;  ARG					ã‚­ãƒ£ãƒ©
 ; Output:
 ;  RETURNF				PALAMLV
 ;-------------------------------------------------
@@ -118,35 +118,35 @@ DOWNBASE:ARG:‘Ì—Í += FLAG:’è”_‘Ì—ÍÁ”ï
 SIF ARG==-1
 	ARG = TARGET
 
-RETURNF GETPALAMLV(PALAM:ARG:ARGS, FLAG:Å‘å”_PALAMLV)
+RETURNF GETPALAMLV(PALAM:ARG:ARGS, FLAG:æœ€å¤§æ•°_PALAMLV)
 
 ;=================================================
 ;   sub TR_GOTJUEL
 ;=================================================
-;   TR:Žæ“¾—\’èŽì
+;   TR:å–å¾—äºˆå®šç 
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛPALAM’l
+;  ARG:0				å¯¾è±¡PALAMå€¤
 ; Output:
-;  RETURNF				Žæ“¾—\’èŽì
+;  RETURNF				å–å¾—äºˆå®šç 
 ;-------------------------------------------------
 @TR_GOTJUEL(ARG)
 #FUNCTION
 #DIM L_MAX
 #DIM L_VAL
 
-;--’è”Ý’è
-;LOCAL:10 ;MAX:‘ÎÛPALAM LV
-L_MAX = FLAG:Å‘å”_PALAMLV
+;--å®šæ•°è¨­å®š
+;LOCAL:10 ;MAX:å¯¾è±¡PALAM LV
+L_MAX = FLAG:æœ€å¤§æ•°_PALAMLV
 
-;- ‘ÎÛPALAM‚ÌLV‚ðŽæ“¾
+;- å¯¾è±¡PALAMã®LVã‚’å–å¾—
 L_VAL = GETPALAMLV(ARG,L_MAX)
 
-;CHK:ãŒÀ
+;CHK:ä¸Šé™
 SIF L_VAL > L_MAX
 	L_VAL = L_MAX
 
-;- Ž®: 10 * 2^LV
+;- å¼: 10 * 2^LV
 ;LV    0/ 1/ 2/ 3/  4/  5/  6/  7/    8/   9/
 ;JUEL, 0/20/40/80/160/320/640/1280/2560/5120
 ;20
@@ -168,23 +168,23 @@ ENDIF
 ;=================================================
 ;   sub TR_PARTY_NAME
 ;=================================================
-;   TR:ƒp[ƒeƒB[–¼
+;   TR:ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¼å
 ;-------------------------------------------------
 ; Output:
-;  RETURNF				‘ÎÛƒLƒƒƒ‰–¼
+;  RETURNF				å¯¾è±¡ã‚­ãƒ£ãƒ©å
 ;-------------------------------------------------
 @TR_PARTY_NAME
 #FUNCTIONS
 #DIMS L_PARTY
 
-SELECTCASE FLAG:’²‹³‘ÎÛl”
-	;3lˆÈã
+SELECTCASE FLAG:èª¿æ•™å¯¾è±¡äººæ•°
+	;3äººä»¥ä¸Š
 	CASE IS >= 3
-		L_PARTY = %CALLNAME:(GTR_PL:1)%’B
-	;2l
+		L_PARTY = %CALLNAME:(GTR_PL:1)%é”
+	;2äºº
 	CASE 2
-		L_PARTY = %CALLNAME:(GTR_PL:1)%‚Æ%CALLNAME:(GTR_PL:2)%
-	;1l
+		L_PARTY = %CALLNAME:(GTR_PL:1)%ã¨%CALLNAME:(GTR_PL:2)%
+	;1äºº
 	CASEELSE
 		L_PARTY = %CALLNAME:(GTR_PL:1)%
 ENDSELECT
@@ -194,54 +194,54 @@ RETURNF L_PARTY
 
 
 ;-------------------------------------------------------------------------------
-;   ƒRƒ}ƒ“ƒhŒø‰ÊŒn
+;   ã‚³ãƒžãƒ³ãƒ‰åŠ¹æžœç³»
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub TR_EXP_ADD_HETEROSEX
 ;=================================================
-;   TR:ˆÙ«ˆ¤ŒoŒ±
+;   TR:ç•°æ€§æ„›çµŒé¨“
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
-;  ARG:1				ŽÀsŽÒ
-;  ARG:2				‰ÁŽZ’l
+;  ARG:0				å¯¾è±¡è€…
+;  ARG:1				å®Ÿè¡Œè€…
+;  ARG:2				åŠ ç®—å€¤
 ;-------------------------------------------------
 @TR_EXP_ADD_HETEROSEX(ARG, ARG:1, ARG:2=1)
 #DIM L_CHK
 #DIM L_POS
 
 L_CHK = VAR_HETEROSEX(ARG,ARG:1)
-L_POS = GETNUM(EXP, "ƒŒƒYŒoŒ±") + (L_CHK - 1)
+L_POS = GETNUM(EXP, "ãƒ¬ã‚ºçµŒé¨“") + (L_CHK - 1)
 
-;CHK:ˆÙ«ˆ¤
+;CHK:ç•°æ€§æ„›
 IF L_CHK
-	;ƒŒƒY or ‚a‚kŒoŒ±‚ð‰ÁŽZ
+	;ãƒ¬ã‚º or ï¼¢ï¼¬çµŒé¨“ã‚’åŠ ç®—
 	GTR_EXPUP:(ARG:0):(DB_EXPUP_POS(@"%EXPNAME:L_POS%")) += ARG:2
 	GTR_EXPUP:(ARG:1):(DB_EXPUP_POS(@"%EXPNAME:L_POS%")) += ARG:2
 ENDIF
 
 
 ;=================================================
-;   sub TR_SOURCE_ADD_•”ˆÊ‹ê’É
+;   sub TR_SOURCE_ADD_éƒ¨ä½è‹¦ç—›
 ;=================================================
-;   TR:ƒ\[ƒX’Ç‰Á(•”ˆÊ‹ê’É)
+;   TR:ã‚½ãƒ¼ã‚¹è¿½åŠ (éƒ¨ä½è‹¦ç—›)
 ;-------------------------------------------------
 ; Input:
-;  ARGS:0				‘ÎÛ•”ˆÊ
-;  ARG:0				‘ÎÛŽÒ
-;  ARG:1				’l
+;  ARGS:0				å¯¾è±¡éƒ¨ä½
+;  ARG:0				å¯¾è±¡è€…
+;  ARG:1				å€¤
 ;-------------------------------------------------
-@TR_SOURCE_ADD_•”ˆÊ‹ê’É(ARGS, ARG:0, ARG:1=100)
+@TR_SOURCE_ADD_éƒ¨ä½è‹¦ç—›(ARGS, ARG:0, ARG:1=100)
 #DIM L_T
 #DIM L_TMP
 #DIM L_VAL
 
 L_T = ARG
 
-;‹ê’É (ŠŠLv + ››Š´ŠoLv)
+;è‹¦ç—› (æ½¤æ»‘Lv + â—‹â—‹æ„Ÿè¦šLv)
 L_VAL = ARG:1
-L_TMP = TR_GETPALAMLV("ŠŠ", L_T) + ABL:L_T:ARGS
+L_TMP = TR_GETPALAMLV("æ½¤æ»‘", L_T) + ABL:L_T:ARGS
 SELECTCASE L_TMP
 	CASE 0 to 5
 		L_TMP = 100 - (15 * L_TMP)
@@ -249,22 +249,22 @@ SELECTCASE L_TMP
 		L_TMP = 0
 ENDSELECT
 L_VAL = L_VAL * L_TMP / 100
-SIF ARGS == "‚`Š´Šo"
+SIF ARGS == "ï¼¡æ„Ÿè¦š"
 	L_VAL = L_VAL * 2
-SOURCE:L_T:‹ê’É += L_VAL
+SOURCE:L_T:è‹¦ç—› += L_VAL
 
 
 ;=================================================
 ;   sub TR_COM_PALAMCHG_SEX_V
 ;=================================================
-;   TR:PALAM•Ï“®(‚u«ŒðŽž)
+;   TR:PALAMå¤‰å‹•(ï¼¶æ€§äº¤æ™‚)
 ;-------------------------------------------------
-;   ƒZƒbƒNƒXŒnƒRƒ}ƒ“ƒh‚Å‚Ì‹¤’ÊPALAM•Ï“®ˆ—‚ð“Z‚ß‚é
+;   ã‚»ãƒƒã‚¯ã‚¹ç³»ã‚³ãƒžãƒ³ãƒ‰ã§ã®å…±é€šPALAMå¤‰å‹•å‡¦ç†ã‚’çºã‚ã‚‹
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ŽÀsŽÒ
-;  ARG:1				‘ÎÛŽÒ
-;  ARG:2				‹t«Œðƒtƒ‰ƒO
+;  ARG:0				å®Ÿè¡Œè€…
+;  ARG:1				å¯¾è±¡è€…
+;  ARG:2				é€†æ€§äº¤ãƒ•ãƒ©ã‚°
 ;-------------------------------------------------
 @TR_COM_PALAMCHG_SEX_V(ARG:0=-1, ARG:1=-1, ARG:2=0)
 #DIM L_P
@@ -274,36 +274,36 @@ SOURCE:L_T:‹ê’É += L_VAL
 L_P = ((ARG:0 == -1) ? PLAYER # ARG:0)
 L_T = ((ARG:1 == -1) ? TARGET # ARG:1)
 
-;‚Ç‚¿‚ç‚©‚ªŽål‚È‚ç^
+;ã©ã¡ã‚‰ã‹ãŒä¸»äººãªã‚‰çœŸ
 IF (L_P == MASTER) || (L_T == MASTER)
 	SIF L_P == TARGET
-		TCVAR:Žål«Œðƒtƒ‰ƒO‚o = 1
+		TCVAR:ä¸»äººæ€§äº¤ãƒ•ãƒ©ã‚°ï¼° = 1
 	IF L_T == TARGET
-		TCVAR:Žål«Œðƒtƒ‰ƒO‚u = 1
-		CFLAG:Žål‰‚u«Œð = 1
+		TCVAR:ä¸»äººæ€§äº¤ãƒ•ãƒ©ã‚°ï¼¶ = 1
+		CFLAG:ä¸»äººåˆï¼¶æ€§äº¤ = 1
 	ENDIF
 ENDIF
 
-GTR_EXPUP:L_P:DB_EXPUP_POS("«ŒðŒoŒ±") += 1
-GTR_EXPUP:L_T:DB_EXPUP_POS("«ŒðŒoŒ±") += 1
+GTR_EXPUP:L_P:DB_EXPUP_POS("æ€§äº¤çµŒé¨“") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("æ€§äº¤çµŒé¨“") += 1
 
-;ˆ—ƒ`ƒFƒbƒN
+;å‡¦å¥³ãƒã‚§ãƒƒã‚¯
 CALL TR_CHK_LOST_VIRGIN_V(L_T)
 CALL TR_CHK_LOST_VIRGIN_P(L_P)
 
-;- TR:ˆÙ«ˆ¤ŒoŒ±
+;- TR:ç•°æ€§æ„›çµŒé¨“
 CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
-CALL TR_COM_PALAMCHG_SEX_ADD(L_P, L_T, "‚u", ARG:2)
+CALL TR_COM_PALAMCHG_SEX_ADD(L_P, L_T, "ï¼¶", ARG:2)
 
-;- ’Êí«ŒðŽž
+;- é€šå¸¸æ€§äº¤æ™‚
 IF !ARG:2
-	;- TR:ƒ\[ƒX’Ç‰Á(•”ˆÊ‹ê’É)
-	CALL TR_SOURCE_ADD_•”ˆÊ‹ê’É("‚uŠ´Šo", L_T)
+	;- TR:ã‚½ãƒ¼ã‚¹è¿½åŠ (éƒ¨ä½è‹¦ç—›)
+	CALL TR_SOURCE_ADD_éƒ¨ä½è‹¦ç—›("ï¼¶æ„Ÿè¦š", L_T)
 ELSE
 ENDIF
 
@@ -311,14 +311,14 @@ ENDIF
 ;=================================================
 ;   sub TR_COM_PALAMCHG_SEX_A
 ;=================================================
-;   TR:PALAM•Ï“®(‚`«ŒðŽž)
+;   TR:PALAMå¤‰å‹•(ï¼¡æ€§äº¤æ™‚)
 ;-------------------------------------------------
-;   ƒAƒiƒ‹ƒZƒbƒNƒXŒnƒRƒ}ƒ“ƒh‚Å‚Ì‹¤’ÊPALAM•Ï“®ˆ—‚ð“Z‚ß‚é
+;   ã‚¢ãƒŠãƒ«ã‚»ãƒƒã‚¯ã‚¹ç³»ã‚³ãƒžãƒ³ãƒ‰ã§ã®å…±é€šPALAMå¤‰å‹•å‡¦ç†ã‚’çºã‚ã‚‹
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ŽÀsŽÒ
-;  ARG:1				‘ÎÛŽÒ
-;  ARG:2				‹t«Œðƒtƒ‰ƒO
+;  ARG:0				å®Ÿè¡Œè€…
+;  ARG:1				å¯¾è±¡è€…
+;  ARG:2				é€†æ€§äº¤ãƒ•ãƒ©ã‚°
 ;-------------------------------------------------
 @TR_COM_PALAMCHG_SEX_A(ARG:0=-1, ARG:1=-1, ARG:2=0)
 #DIM L_P
@@ -328,36 +328,36 @@ ENDIF
 L_P = ((ARG:0 == -1) ? PLAYER # ARG:0)
 L_T = ((ARG:1 == -1) ? TARGET # ARG:1)
 
-;‚Ç‚¿‚ç‚©‚ªŽål‚È‚ç^
+;ã©ã¡ã‚‰ã‹ãŒä¸»äººãªã‚‰çœŸ
 IF (L_P == MASTER) || (L_T == MASTER)
 	SIF L_P == TARGET
-		TCVAR:Žål«Œðƒtƒ‰ƒO‚o = 1
+		TCVAR:ä¸»äººæ€§äº¤ãƒ•ãƒ©ã‚°ï¼° = 1
 	IF L_T == TARGET
-		TCVAR:Žål«Œðƒtƒ‰ƒO‚` = 1
-		CFLAG:Žål‰‚`«Œð = 1
+		TCVAR:ä¸»äººæ€§äº¤ãƒ•ãƒ©ã‚°ï¼¡ = 1
+		CFLAG:ä¸»äººåˆï¼¡æ€§äº¤ = 1
 	ENDIF
 ENDIF
 
-GTR_EXPUP:L_P:DB_EXPUP_POS("«ŒðŒoŒ±") += 1
-GTR_EXPUP:L_T:DB_EXPUP_POS("‚`«ŒðŒoŒ±") += 1
+GTR_EXPUP:L_P:DB_EXPUP_POS("æ€§äº¤çµŒé¨“") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("ï¼¡æ€§äº¤çµŒé¨“") += 1
 
-;ˆ—ƒ`ƒFƒbƒN
+;å‡¦å¥³ãƒã‚§ãƒƒã‚¯
 CALL TR_CHK_LOST_VIRGIN_A(L_T)
 ;CALL TR_CHK_LOST_VIRGIN_P(L_P)
 
-;- TR:ˆÙ«ˆ¤ŒoŒ±
+;- TR:ç•°æ€§æ„›çµŒé¨“
 CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
-CALL TR_COM_PALAMCHG_SEX_ADD(L_P, L_T, "‚`", ARG:2)
+CALL TR_COM_PALAMCHG_SEX_ADD(L_P, L_T, "ï¼¡", ARG:2)
 
-;- ’Êí«ŒðŽž
+;- é€šå¸¸æ€§äº¤æ™‚
 IF !ARG:2
-	;- TR:ƒ\[ƒX’Ç‰Á(•”ˆÊ‹ê’É)
-	CALL TR_SOURCE_ADD_•”ˆÊ‹ê’É("‚`Š´Šo", L_T)
+	;- TR:ã‚½ãƒ¼ã‚¹è¿½åŠ (éƒ¨ä½è‹¦ç—›)
+	CALL TR_SOURCE_ADD_éƒ¨ä½è‹¦ç—›("ï¼¡æ„Ÿè¦š", L_T)
 ELSE
 ENDIF
 
@@ -365,13 +365,13 @@ ENDIF
 ;=================================================
 ;   sub TR_COM_PALAMCHG_SEX_ADD
 ;=================================================
-;   TR:PALAM•Ï“®(«ŒðŽžƒ\[ƒX’Ç‰Á)
+;   TR:PALAMå¤‰å‹•(æ€§äº¤æ™‚ã‚½ãƒ¼ã‚¹è¿½åŠ )
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ŽÀsŽÒ
-;  ARG:1				‘ÎÛŽÒ
-;  ARGS					•”ˆÊ("‚u"A"‚`")
-;  ARG:2				‹t«Œðƒtƒ‰ƒO
+;  ARG:0				å®Ÿè¡Œè€…
+;  ARG:1				å¯¾è±¡è€…
+;  ARGS					éƒ¨ä½("ï¼¶"ã€"ï¼¡")
+;  ARG:2				é€†æ€§äº¤ãƒ•ãƒ©ã‚°
 ;-------------------------------------------------
 @TR_COM_PALAMCHG_SEX_ADD(ARG:0, ARG:1, ARGS, ARG:2)
 #DIM L_P
@@ -384,90 +384,90 @@ L_P = ARG:0
 L_T = ARG:1
 
 SELECTCASE ARGS
-	CASE "‚u"
-		L_KEY_P = ‰õ‚b
-		L_KEY_T = ‰õ‚u
-	CASE "‚`"
-		L_KEY_P = ‰õ‚b
-		L_KEY_T = ‰õ‚`
+	CASE "ï¼¶"
+		L_KEY_P = å¿«ï¼£
+		L_KEY_T = å¿«ï¼¶
+	CASE "ï¼¡"
+		L_KEY_P = å¿«ï¼£
+		L_KEY_T = å¿«ï¼¡
 	;ERROR
 	CASEELSE
 		RETURN
 ENDSELECT
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 SOURCE:L_P:L_KEY_P += 300
-;SIF MARK:L_T:—ê‘®ˆó
+;SIF MARK:L_T:éš·å±žåˆ»å°
 ;	SOURCE:L_T:L_KEY_T += 100
-;SIF MARK:L_T:Š×—Žˆó
+;SIF MARK:L_T:é™¥è½åˆ»å°
 ;	SOURCE:L_T:L_KEY_T += 200
 
-;- ’Êí«ŒðŽž
+;- é€šå¸¸æ€§äº¤æ™‚
 IF !ARG:2
 
-	IF TCVAR:L_T:ƒLƒƒƒ‰ŠŠ
-		;–³‚µ
-	ELSEIF TR_GETPALAMLV("ŠŠ", L_T) < 3
-		SOURCE:L_T:‹ê’É += 200
-	ELSEIF TR_GETPALAMLV("ŠŠ", L_T) < 1
-		SOURCE:L_T:‹ê’É += 400
+	IF TCVAR:L_T:ã‚­ãƒ£ãƒ©æ½¤æ»‘
+		;ç„¡ã—
+	ELSEIF TR_GETPALAMLV("æ½¤æ»‘", L_T) < 3
+		SOURCE:L_T:è‹¦ç—› += 200
+	ELSEIF TR_GETPALAMLV("æ½¤æ»‘", L_T) < 1
+		SOURCE:L_T:è‹¦ç—› += 400
 	ENDIF
 
-;- ‹t«ŒðŽž
+;- é€†æ€§äº¤æ™‚
 ELSE
 
-	TCVAR:L_T:@"ŒÅ’è‰ÁŽZ_%L_KEY_T%" += 1000
-	TCVAR:L_P:@"ŒÅ’è‰ÁŽZ_%L_KEY_P%" += 1000
+	TCVAR:L_T:@"å›ºå®šåŠ ç®—_%L_KEY_T%" += 1000
+	TCVAR:L_P:@"å›ºå®šåŠ ç®—_%L_KEY_P%" += 1000
 
-	;ŒvŽZ—p‚ÉUŽç‚ð–ß‚·
+	;è¨ˆç®—ç”¨ã«æ”»å®ˆã‚’æˆ»ã™
 	SWAP L_P, L_T
 
 ENDIF
 
-L_TMP = (10 * (ABL:L_T:˜U— + ABL:L_P:‹ZI))
-SOURCE:L_T:ª•ž += L_TMP
-SIF MARK:L_T:Š×—Žˆó
-	SOURCE:L_T:ƒˆ¤ += L_TMP
+L_TMP = (10 * (ABL:L_T:ç¯­çµ¡ + ABL:L_P:æŠ€å·§))
+SOURCE:L_T:å¾æœ += L_TMP
+SIF MARK:L_T:é™¥è½åˆ»å°
+	SOURCE:L_T:ç´”æ„› += L_TMP
 
 
 ;=================================================
 ;   sub TR_CHK_LOST_VIRGIN_V
 ;=================================================
-;   TR:ˆ—‘rŽ¸(‚u)
+;   TR:å‡¦å¥³å–ªå¤±(ï¼¶)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
-;  ARG:1				ƒ^ƒCƒv(0:«Œð 1:“¹‹ï)
+;  ARG:0				å¯¾è±¡è€…
+;  ARG:1				ã‚¿ã‚¤ãƒ—(0:æ€§äº¤ 1:é“å…·)
 ;-------------------------------------------------
 @TR_CHK_LOST_VIRGIN_V(ARG, ARG:1=0)
 
-;- CHK:ˆ—
-IF !TALENT:ARG:”ñˆ—
-	TALENT:ARG:”ñˆ— = 1
-	TCVAR:ARG:—š—ð_EXP_ˆ—‘rŽ¸ = 1
+;- CHK:å‡¦å¥³
+IF !TALENT:ARG:éžå‡¦å¥³
+	TALENT:ARG:éžå‡¦å¥³ = 1
+	TCVAR:ARG:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 1
 
-	IF TR_GETPALAMLV("ŠŠ", ARG) < 5
-		SOURCE:ARG:‹ê’É += 100
-	ELSEIF TR_GETPALAMLV("ŠŠ", ARG) < 3
-		SOURCE:ARG:‹ê’É += 400
-	ELSEIF TR_GETPALAMLV("ŠŠ", ARG) < 1
-		SOURCE:ARG:‹ê’É += 1000
+	IF TR_GETPALAMLV("æ½¤æ»‘", ARG) < 5
+		SOURCE:ARG:è‹¦ç—› += 100
+	ELSEIF TR_GETPALAMLV("æ½¤æ»‘", ARG) < 3
+		SOURCE:ARG:è‹¦ç—› += 400
+	ELSEIF TR_GETPALAMLV("æ½¤æ»‘", ARG) < 1
+		SOURCE:ARG:è‹¦ç—› += 1000
 	ENDIF
 
-	;ŽålˆÈŠO
+	;ä¸»äººä»¥å¤–
 	IF ARG != MASTER
-		;- Š×—Ž‚È‚çƒˆ¤’Ç‰Á
-		IF MARK:ARG:Š×—Žˆó
-			SOURCE:ARG:ƒˆ¤ += 500
+		;- é™¥è½ãªã‚‰ç´”æ„›è¿½åŠ 
+		IF MARK:ARG:é™¥è½åˆ»å°
+			SOURCE:ARG:ç´”æ„› += 500
 		ENDIF
 
 		IF ARG:1
-			SOURCE:ARG:ª•ž += 150
+			SOURCE:ARG:å¾æœ += 150
 		ELSE
-			SOURCE:ARG:ª•ž += 500
+			SOURCE:ARG:å¾æœ += 500
 		ENDIF
 	ENDIF
 ENDIF
@@ -476,37 +476,37 @@ ENDIF
 ;=================================================
 ;   sub TR_CHK_LOST_VIRGIN_A
 ;=================================================
-;   TR:ˆ—‘rŽ¸(‚`)
+;   TR:å‡¦å¥³å–ªå¤±(ï¼¡)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ;-------------------------------------------------
 @TR_CHK_LOST_VIRGIN_A(ARG)
 
-;- CHK:’j‚Åƒo[ƒWƒ“–³Œø
-IF !VAR_WOMAN(ARG) && !FLAG:ƒo[ƒWƒ“ƒ‚[ƒh
-	;ƒXƒ‹[
-;- CHK:ˆ—
-ELSEIF !TALENT:ARG:‚`”ñˆ—
-	TALENT:ARG:‚`”ñˆ— = 1
-	TCVAR:ARG:—š—ð_EXP_‚`ˆ—‘rŽ¸ = 1
+;- CHK:ç”·ã§ãƒãƒ¼ã‚¸ãƒ³ç„¡åŠ¹
+IF !VAR_WOMAN(ARG) && !FLAG:ãƒãƒ¼ã‚¸ãƒ³ãƒ¢ãƒ¼ãƒ‰
+	;ã‚¹ãƒ«ãƒ¼
+;- CHK:å‡¦å¥³
+ELSEIF !TALENT:ARG:ï¼¡éžå‡¦å¥³
+	TALENT:ARG:ï¼¡éžå‡¦å¥³ = 1
+	TCVAR:ARG:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤± = 1
 
-	IF TR_GETPALAMLV("ŠŠ", ARG) < 5
-		SOURCE:ARG:‹ê’É += 100
-	ELSEIF TR_GETPALAMLV("ŠŠ", ARG) < 3
-		SOURCE:ARG:‹ê’É += 400
-	ELSEIF TR_GETPALAMLV("ŠŠ", ARG) < 1
-		SOURCE:ARG:‹ê’É += 1000
+	IF TR_GETPALAMLV("æ½¤æ»‘", ARG) < 5
+		SOURCE:ARG:è‹¦ç—› += 100
+	ELSEIF TR_GETPALAMLV("æ½¤æ»‘", ARG) < 3
+		SOURCE:ARG:è‹¦ç—› += 400
+	ELSEIF TR_GETPALAMLV("æ½¤æ»‘", ARG) < 1
+		SOURCE:ARG:è‹¦ç—› += 1000
 	ENDIF
 
-	;ŽålˆÈŠO
+	;ä¸»äººä»¥å¤–
 	IF ARG != MASTER
-		;- Š×—Ž‚È‚çƒˆ¤’Ç‰Á
-		IF MARK:ARG:Š×—Žˆó
-			SOURCE:ARG:ƒˆ¤ += 500
+		;- é™¥è½ãªã‚‰ç´”æ„›è¿½åŠ 
+		IF MARK:ARG:é™¥è½åˆ»å°
+			SOURCE:ARG:ç´”æ„› += 500
 		ENDIF
 
-		SOURCE:ARG:ª•ž += 300
+		SOURCE:ARG:å¾æœ += 300
 	ENDIF
 ENDIF
 
@@ -514,63 +514,63 @@ ENDIF
 ;=================================================
 ;   sub TR_CHK_LOST_VIRGIN_P
 ;=================================================
-;   TR:ˆ—‘rŽ¸(‚o)
+;   TR:å‡¦å¥³å–ªå¤±(ï¼°)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
-;  ARG:1				ƒ^ƒCƒv(0:«Œð 1:“¹‹ï)
+;  ARG:0				å¯¾è±¡è€…
+;  ARG:1				ã‚¿ã‚¤ãƒ—(0:æ€§äº¤ 1:é“å…·)
 ;-------------------------------------------------
 @TR_CHK_LOST_VIRGIN_P(ARG, ARG:1=0)
 
-;- CHK:“¶’å
-IF !TALENT:ARG:”ñ“¶’å
-	TALENT:ARG:”ñ“¶’å = 1
-	TCVAR:ARG:—š—ð_EXP_“¶’å‘rŽ¸ = 1
+;- CHK:ç«¥è²ž
+IF !TALENT:ARG:éžç«¥è²ž
+	TALENT:ARG:éžç«¥è²ž = 1
+	TCVAR:ARG:å±¥æ­´_EXP_ç«¥è²žå–ªå¤± = 1
 
-	;ŽålˆÈŠO
+	;ä¸»äººä»¥å¤–
 	IF ARG != MASTER
-		;- Š×—Ž‚È‚çƒˆ¤’Ç‰Á
-		IF MARK:ARG:Š×—Žˆó
-			SOURCE:ARG:ƒˆ¤ += 500
+		;- é™¥è½ãªã‚‰ç´”æ„›è¿½åŠ 
+		IF MARK:ARG:é™¥è½åˆ»å°
+			SOURCE:ARG:ç´”æ„› += 500
 		ENDIF
 
 		IF ARG:1
-			SOURCE:ARG:ª•ž += 150
+			SOURCE:ARG:å¾æœ += 150
 		ELSE
-			SOURCE:ARG:ª•ž += 200
+			SOURCE:ARG:å¾æœ += 200
 		ENDIF
 	ENDIF
 ENDIF
 
 
 ;-------------------------------------------------------------------------------
-;   ‚»‚Ì‘¼
+;   ãã®ä»–
 ;-------------------------------------------------------------------------------
 
 ;=================================================
-;   sub TR_CHK_•òŽd‰Â”\
+;   sub TR_CHK_å¥‰ä»•å¯èƒ½
 ;=================================================
-;   TR:•òŽd‰Â”\
+;   TR:å¥‰ä»•å¯èƒ½
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
-@TR_CHK_•òŽd‰Â”\(ARG:0=-1)
+@TR_CHK_å¥‰ä»•å¯èƒ½(ARG:0=-1)
 #FUNCTION
 #DIM L_T
 
 L_T = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-;—~–]Lv3
-IF ABL:L_T:—~–] >= 3
+;æ¬²æœ›Lv3
+IF ABL:L_T:æ¬²æœ› >= 3
 	RETURNF 1
-;ƒ€[ƒhLv3
+;ãƒ ãƒ¼ãƒ‰Lv3
 ELSEIF VAR_MOOD_LV(L_T) >= 3
 	RETURNF 1
-;•òŽd¸_Lv2
-ELSEIF ABL:L_T:•òŽd¸_ >= 2
+;å¥‰ä»•ç²¾ç¥žLv2
+ELSEIF ABL:L_T:å¥‰ä»•ç²¾ç¥ž >= 2
 	RETURNF 1
 ENDIF
 
@@ -579,13 +579,13 @@ RETURNF 0
 ;=================================================
 ;   sub TR_CHK_ABLE_SEX_V
 ;=================================================
-;   TR:«Œð‰Â”\(‚u)
+;   TR:æ€§äº¤å¯èƒ½(ï¼¶)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
-;  ARG:1				ŽÀsŽÒ
+;  ARG:0				å¯¾è±¡è€…
+;  ARG:1				å®Ÿè¡Œè€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_CHK_ABLE_SEX_V(ARG:0=-1, ARG:1=-1)
 #FUNCTION
@@ -595,9 +595,9 @@ RETURNF 0
 L_T = ( (ARG:0 < 0) ? TARGET # ARG:0)
 L_P = ( (ARG:1 < 0) ? PLAYER # ARG:1)
 
-;- ’j«Ší—L‚è
+;- ç”·æ€§å™¨æœ‰ã‚Š
 IF VAR_PENIS(L_P)
-	;- —«Ší—L‚è
+	;- å¥³æ€§å™¨æœ‰ã‚Š
 	RETURNF VAR_SEX(L_T)
 ELSE
 	RETURNF 0
@@ -606,14 +606,14 @@ ENDIF
 ;=================================================
 ;   sub TR_CHK_ABLE_SEX_A
 ;=================================================
-;   TR:«Œð‰Â”\(‚`)
+;   TR:æ€§äº¤å¯èƒ½(ï¼¡)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
-;  ARG:1				ŽÀsŽÒ
+;  ARG:0				å¯¾è±¡è€…
+;  ARG:1				å®Ÿè¡Œè€…
 ; Output:
-;  RETURNF				^‹U’l
-;  RESULT				V
+;  RETURNF				çœŸå½å€¤
+;  RESULT				ã€ƒ
 ;-------------------------------------------------
 @TR_CHK_ABLE_SEX_A(ARG:0=-1, ARG:1=-1)
 #FUNCTION
@@ -623,7 +623,7 @@ ENDIF
 L_T = ( (ARG:0 < 0) ? TARGET # ARG:0)
 L_P = ( (ARG:1 < 0) ? PLAYER # ARG:1)
 
-;- ’j«Ší—L‚è
+;- ç”·æ€§å™¨æœ‰ã‚Š
 IF VAR_PENIS(L_P)
 	RETURNF 1
 ELSE
@@ -633,12 +633,12 @@ ENDIF
 ;=================================================
 ;   sub TR_CHK_ABLE_SEX_POINT
 ;=================================================
-;   TR:«Œð‰Â”\(ˆÊ’u•Ê)
+;   TR:æ€§äº¤å¯èƒ½(ä½ç½®åˆ¥)
 ;-------------------------------------------------
 ; Input:
-;  ARGS					ˆÊ’u
+;  ARGS					ä½ç½®
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_CHK_ABLE_SEX_POINT(ARGS)
 #FUNCTION
@@ -646,18 +646,18 @@ ENDIF
 #DIM L_P
 
 SELECTCASE ARGS
-	CASE "³íˆÊ"
-		;ƒXƒ‹[
-	CASE "‹RæˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "æ­£å¸¸ä½"
+		;ã‚¹ãƒ«ãƒ¼
+	CASE "é¨Žä¹—ä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
-	CASE "Œã”wˆÊ"
-		;ƒXƒ‹[
-	CASE "‘Î–ÊÀˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "å¾ŒèƒŒä½"
+		;ã‚¹ãƒ«ãƒ¼
+	CASE "å¯¾é¢åº§ä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
-	CASE "”w–ÊÀˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "èƒŒé¢åº§ä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
 	CASEELSE
 ENDSELECT
@@ -667,38 +667,38 @@ RETURNF 1
 ;=================================================
 ;   sub TR_CHK_ABLE_REV_SEX_POINT
 ;=================================================
-;   TR:«Œð‰Â”\(‹t«ŒðˆÊ’u•Ê)
+;   TR:æ€§äº¤å¯èƒ½(é€†æ€§äº¤ä½ç½®åˆ¥)
 ;-------------------------------------------------
 ; Input:
-;  ARGS					ˆÊ’u
+;  ARGS					ä½ç½®
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_CHK_ABLE_REV_SEX_POINT(ARGS)
 #FUNCTION
 #DIM L_T
 #DIM L_P
 
-;;- —~î‚ª•K—v
-;SIF PALAM:—~î < PALAMLV:3
+;;- æ¬²æƒ…ãŒå¿…è¦
+;SIF PALAM:æ¬²æƒ… < PALAMLV:3
 ;	RETURNF 0
 
 RETURNF 1
 
 SELECTCASE ARGS
-	CASE "³íˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "æ­£å¸¸ä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
-	CASE "‹RæˆÊ"
-		;ƒXƒ‹[
-	CASE "Œã”wˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "é¨Žä¹—ä½"
+		;ã‚¹ãƒ«ãƒ¼
+	CASE "å¾ŒèƒŒä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
-	CASE "‘Î–ÊÀˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "å¯¾é¢åº§ä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
-	CASE "”w–ÊÀˆÊ"
-		SIF ABL:«“z—ê < 1
+	CASE "èƒŒé¢åº§ä½"
+		SIF ABL:æ€§å¥´éš· < 1
 			RETURNF 0
 	CASEELSE
 ENDSELECT
@@ -708,45 +708,45 @@ RETURNF 1
 ;=================================================
 ;   sub TR_POINT_RESET
 ;=================================================
-;   TR:•”ˆÊƒ|ƒCƒ“ƒgƒŠƒZƒbƒg
+;   TR:éƒ¨ä½ãƒã‚¤ãƒ³ãƒˆãƒªã‚»ãƒƒãƒˆ
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ;-------------------------------------------------
 @TR_POINT_RESET(ARG=-1)
 
 ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-TEQUIP:ARG:ƒ|ƒCƒ“ƒg«Œð = [[TRAIN:–³‚µ]]
-TEQUIP:ARG:ƒ|ƒCƒ“ƒg•òŽd = [[TRAIN:–³‚µ]]
-TEQUIP:ARG:ƒ|ƒCƒ“ƒgˆ¤• = [[TRAIN:–³‚µ]]
-TCVAR:ARG:“o˜^ƒTƒuƒRƒ}ƒ“ƒh = [[TRAIN:–³‚µ]]
+TEQUIP:ARG:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = [[TRAIN:ç„¡ã—]]
+TEQUIP:ARG:ãƒã‚¤ãƒ³ãƒˆå¥‰ä»• = [[TRAIN:ç„¡ã—]]
+TEQUIP:ARG:ãƒã‚¤ãƒ³ãƒˆæ„›æ’« = [[TRAIN:ç„¡ã—]]
+TCVAR:ARG:ç™»éŒ²ã‚µãƒ–ã‚³ãƒžãƒ³ãƒ‰ = [[TRAIN:ç„¡ã—]]
 
-TEQUIP:ARG:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ = [[TRAIN:–³‚µ]]
-TEQUIP:ARG:ƒ|ƒCƒ“ƒg•òŽd‘O‰ñ = [[TRAIN:–³‚µ]]
-TEQUIP:ARG:ƒ|ƒCƒ“ƒgˆ¤•‘O‰ñ = [[TRAIN:–³‚µ]]
+TEQUIP:ARG:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž = [[TRAIN:ç„¡ã—]]
+TEQUIP:ARG:ãƒã‚¤ãƒ³ãƒˆå¥‰ä»•å‰å›ž = [[TRAIN:ç„¡ã—]]
+TEQUIP:ARG:ãƒã‚¤ãƒ³ãƒˆæ„›æ’«å‰å›ž = [[TRAIN:ç„¡ã—]]
 
-TEQUIP:ARG:‚uŠí‹ï = 0
-TEQUIP:ARG:‚`Ší‹ï = 0
-TEQUIP:ARG:‚uŠí‹ïŒo‰ßƒ^[ƒ“ = 0
-TEQUIP:ARG:‚`Ší‹ïŒo‰ßƒ^[ƒ“ = 0
+TEQUIP:ARG:ï¼¶å™¨å…· = 0
+TEQUIP:ARG:ï¼¡å™¨å…· = 0
+TEQUIP:ARG:ï¼¶å™¨å…·çµŒéŽã‚¿ãƒ¼ãƒ³ = 0
+TEQUIP:ARG:ï¼¡å™¨å…·çµŒéŽã‚¿ãƒ¼ãƒ³ = 0
 
 ;=================================================
 ;   sub TR_PREV_SEX_V
 ;=================================================
-;   TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‚u)
+;   TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(ï¼¶)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_PREV_SEX_V(ARG=-1)
 #FUNCTION
 
 ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-SIF GROUPMATCH(TEQUIP:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ, [[TRAIN:³íˆÊ]], [[TRAIN:‹RæˆÊ]], [[TRAIN:Œã”wˆÊ]], [[TRAIN:‘Î–ÊÀˆÊ]], [[TRAIN:”w–ÊÀˆÊ]])
+SIF GROUPMATCH(TEQUIP:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž, [[TRAIN:æ­£å¸¸ä½]], [[TRAIN:é¨Žä¹—ä½]], [[TRAIN:å¾ŒèƒŒä½]], [[TRAIN:å¯¾é¢åº§ä½]], [[TRAIN:èƒŒé¢åº§ä½]])
 	RETURNF 1
 RETURNF 0
 
@@ -754,19 +754,19 @@ RETURNF 0
 ;=================================================
 ;   sub TR_PREV_SEX_A
 ;=================================================
-;   TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‚`)
+;   TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(ï¼¡)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_PREV_SEX_A(ARG=-1)
 #FUNCTION
 
 ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-SIF GROUPMATCH(TEQUIP:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ, [[TRAIN:³íˆÊƒAƒiƒ‹]], [[TRAIN:‹RæˆÊƒAƒiƒ‹]], [[TRAIN:Œã”wˆÊƒAƒiƒ‹]], [[TRAIN:‘Î–ÊÀˆÊƒAƒiƒ‹]], [[TRAIN:”w–ÊÀˆÊƒAƒiƒ‹]])
+SIF GROUPMATCH(TEQUIP:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž, [[TRAIN:æ­£å¸¸ä½ã‚¢ãƒŠãƒ«]], [[TRAIN:é¨Žä¹—ä½ã‚¢ãƒŠãƒ«]], [[TRAIN:å¾ŒèƒŒä½ã‚¢ãƒŠãƒ«]], [[TRAIN:å¯¾é¢åº§ä½ã‚¢ãƒŠãƒ«]], [[TRAIN:èƒŒé¢åº§ä½ã‚¢ãƒŠãƒ«]])
 	RETURNF 1
 RETURNF 0
 
@@ -774,19 +774,19 @@ RETURNF 0
 ;=================================================
 ;   sub TR_PREV_SEX_REV_V
 ;=================================================
-;   TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‹t‚u)
+;   TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(é€†ï¼¶)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_PREV_SEX_REV_V(ARG=-1)
 #FUNCTION
 
 ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-SIF GROUPMATCH(TEQUIP:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ, [[TRAIN:‹RæˆÊ‚·‚é]], [[TRAIN:‘Î–ÊÀˆÊ‚·‚é]], [[TRAIN:³íˆÊ‚³‚¹‚é]], [[TRAIN:Œã”wˆÊ‚³‚¹‚é]], [[TRAIN:”w–ÊÀˆÊ‚³‚¹‚é]])
+SIF GROUPMATCH(TEQUIP:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž, [[TRAIN:é¨Žä¹—ä½ã™ã‚‹]], [[TRAIN:å¯¾é¢åº§ä½ã™ã‚‹]], [[TRAIN:æ­£å¸¸ä½ã•ã›ã‚‹]], [[TRAIN:å¾ŒèƒŒä½ã•ã›ã‚‹]], [[TRAIN:èƒŒé¢åº§ä½ã•ã›ã‚‹]])
 	RETURNF 1
 RETURNF 0
 
@@ -794,19 +794,19 @@ RETURNF 0
 ;=================================================
 ;   sub TR_PREV_SEX_REV_A
 ;=================================================
-;   TR:‘O‰ñ«Œð‘ÌˆÊƒ`ƒFƒbƒN(‹t‚`)
+;   TR:å‰å›žæ€§äº¤ä½“ä½ãƒã‚§ãƒƒã‚¯(é€†ï¼¡)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_PREV_SEX_REV_A(ARG=-1)
 #FUNCTION
 
 ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-SIF GROUPMATCH(TEQUIP:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ, [[TRAIN:‚`‹RæˆÊ‚·‚é]], [[TRAIN:‚`‘Î–ÊÀˆÊ‚·‚é]], [[TRAIN:‚`³íˆÊ‚³‚¹‚é]], [[TRAIN:‚`Œã”wˆÊ‚³‚¹‚é]], [[TRAIN:‚`”w–ÊÀˆÊ‚³‚¹‚é]])
+SIF GROUPMATCH(TEQUIP:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž, [[TRAIN:ï¼¡é¨Žä¹—ä½ã™ã‚‹]], [[TRAIN:ï¼¡å¯¾é¢åº§ä½ã™ã‚‹]], [[TRAIN:ï¼¡æ­£å¸¸ä½ã•ã›ã‚‹]], [[TRAIN:ï¼¡å¾ŒèƒŒä½ã•ã›ã‚‹]], [[TRAIN:ï¼¡èƒŒé¢åº§ä½ã•ã›ã‚‹]])
 	RETURNF 1
 RETURNF 0
 
@@ -814,7 +814,7 @@ RETURNF 0
 ;=================================================
 ;   sub TR_ASSI_SET
 ;=================================================
-;   TR:ƒAƒVÝ’è
+;   TR:ã‚¢ã‚·è¨­å®š
 ;-------------------------------------------------
 @TR_ASSI_SET
 #DIM L_I
@@ -836,7 +836,7 @@ FOR L_I, 0, DEFTR_PL_NUM
 	L_CNT ++
 NEXT
 
-;‚RlˆÈã‹‚éê‡‚ÍASSI–³‚µ
+;ï¼“äººä»¥ä¸Šå±…ã‚‹å ´åˆã¯ASSIç„¡ã—
 SIF L_CNT >= 3
 	VARSET ASSI
 
@@ -844,32 +844,32 @@ SIF L_CNT >= 3
 ;=================================================
 ;   sub TR_ASSI_ABLE
 ;=================================================
-;   TR:ƒAƒVŽÀsðŒ
+;   TR:ã‚¢ã‚·å®Ÿè¡Œæ¡ä»¶
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_ASSI_ABLE(ARG=-1)
 #FUNCTION
 
 ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 
-;ƒAƒV‚ª‘¶Ý
+;ã‚¢ã‚·ãŒå­˜åœ¨
 SIF ASSI < 0
 	RETURNF 0
 
-;—¼•û‘Ì—Í‚ ‚è
-SIF (!BASE:ARG:‘Ì—Í) || (!BASE:ASSI:‘Ì—Í)
+;ä¸¡æ–¹ä½“åŠ›ã‚ã‚Š
+SIF (!BASE:ARG:ä½“åŠ›) || (!BASE:ASSI:ä½“åŠ›)
 	RETURNF 0
 
-;—¼•û—ê‘®ˆÈã
-SIF (!MARK:ARG:—ê‘®ˆó) || (!MARK:ASSI:—ê‘®ˆó)
+;ä¸¡æ–¹éš·å±žä»¥ä¸Š
+SIF (!MARK:ARG:éš·å±žåˆ»å°) || (!MARK:ASSI:éš·å±žåˆ»å°)
 	RETURNF 0
 
-;‚m‚s‚qŽž‚Í–³‚µ
-SIF (TALENT:ARG:‚m‚s‚q“x) || (TALENT:ASSI:‚m‚s‚q“x)
+;ï¼®ï¼´ï¼²æ™‚ã¯ç„¡ã—
+SIF (TALENT:ARG:ï¼®ï¼´ï¼²åº¦) || (TALENT:ASSI:ï¼®ï¼´ï¼²åº¦)
 	RETURNF 0
 
 RETURNF 1
@@ -878,12 +878,12 @@ RETURNF 1
 ;=================================================
 ;   sub TR_ASSI_SEXUAL_DESIRE
 ;=================================================
-;   TR:ƒAƒV—~î
+;   TR:ã‚¢ã‚·æ¬²æƒ…
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURNF				^‹U’l
+;  RETURNF				çœŸå½å€¤
 ;-------------------------------------------------
 @TR_ASSI_SEXUAL_DESIRE(ARG=-1)
 #FUNCTION
@@ -897,30 +897,30 @@ ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
 L_TMP = 3
 
 SELECTCASE VAR_HETEROSEX(ARG, ASSI)
-	;ˆÙ«
+	;ç•°æ€§
 	CASE 0
 
-		;—~–]Lv6
-		SIF (ABL:ARG:—~–] < 6) && (ABL:ASSI:—~–] < 6)
+		;æ¬²æœ›Lv6
+		SIF (ABL:ARG:æ¬²æœ› < 6) && (ABL:ASSI:æ¬²æœ› < 6)
 			RETURNF 0
 
-	;—“¯Žm
+	;å¥³åŒå£«
 	CASE 1
 
-		;ƒŒƒY‚Á‹CLv3
-		SIF (ABL:ARG:ƒŒƒY‚Á‹C < L_TMP) && (ABL:ASSI:ƒŒƒY‚Á‹C < L_TMP)
+		;ãƒ¬ã‚ºã£æ°—Lv3
+		SIF (ABL:ARG:ãƒ¬ã‚ºã£æ°— < L_TMP) && (ABL:ASSI:ãƒ¬ã‚ºã£æ°— < L_TMP)
 			RETURNF 0
 
-	;’j“¯Žm
+	;ç”·åŒå£«
 	CASE 2
 
-		;‚a‚k‚Á‹CLv3
-		SIF (ABL:ARG:‚a‚k‚Á‹C < L_TMP) && (ABL:ASSI:‚a‚k‚Á‹C < L_TMP)
+		;ï¼¢ï¼¬ã£æ°—Lv3
+		SIF (ABL:ARG:ï¼¢ï¼¬ã£æ°— < L_TMP) && (ABL:ASSI:ï¼¢ï¼¬ã£æ°— < L_TMP)
 			RETURNF 0
 
 ENDSELECT
 
-;—~î
-FLAG:’²‹³ƒRƒ}ƒ“ƒh”h¶ = 1
+;æ¬²æƒ…
+FLAG:èª¿æ•™ã‚³ãƒžãƒ³ãƒ‰æ´¾ç”Ÿ = 1
 
 RETURNF 1

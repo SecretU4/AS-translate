@@ -1,16 +1,16 @@
-;=================================================
+ï»¿;=================================================
 ;   sub INPUT_YN
 ;=================================================
-;   “ü—Í’ñŽ¦:‚Q‘ð
+;   å…¥åŠ›æç¤º:ï¼’æŠž
 ;-------------------------------------------------
 ; Input:
-;  ARGS:0				•\Ž¦•¶Žš—ñ(0)
-;  ARGS:1				•\Ž¦•¶Žš—ñ(1)
-;  ARG					‰üs‹æ•ª(0:ˆê—ñ•\Ž¦ 1:‚Q—ñ•\Ž¦)
+;  ARGS:0				è¡¨ç¤ºæ–‡å­—åˆ—(0)
+;  ARGS:1				è¡¨ç¤ºæ–‡å­—åˆ—(1)
+;  ARG					æ”¹è¡ŒåŒºåˆ†(0:ä¸€åˆ—è¡¨ç¤º 1:ï¼’åˆ—è¡¨ç¤º)
 ; Output:
-;  RETURN				Œ‹‰Ê(0:‚Í‚¢ 1:‚¢‚¢‚¦)
+;  RETURN				çµæžœ(0:ã¯ã„ 1:ã„ã„ãˆ)
 ;-------------------------------------------------
-@INPUT_YN(ARGS:0 = "‚Í‚¢", ARGS:1 = "‚¢‚¢‚¦", ARG = 1)
+@INPUT_YN(ARGS:0 = "ã¯ã„", ARGS:1 = "ã„ã„ãˆ", ARG = 1)
 
 SELECTCASE ARG
 	CASE 1
@@ -37,7 +37,7 @@ SELECTCASE RESULTS
 		GOTO INPUT_LOOP
 	CASEELSE
 		CLEARLINE 1
-;		REUSELASTLINE i“ü—Í’l %RESULTS% ‚Í”ÍˆÍŠO‚Å‚·j
+;		REUSELASTLINE ï¼ˆå…¥åŠ›å€¤ %RESULTS% ã¯ç¯„å›²å¤–ã§ã™ï¼‰
 		GOTO INPUT_LOOP
 ENDSELECT
 

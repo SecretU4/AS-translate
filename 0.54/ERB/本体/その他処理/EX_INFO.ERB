@@ -1,12 +1,12 @@
-
+ï»¿
 ;=================================================
 ;   sub INFO_TARGET_DETAIL
 ;=================================================
-;   •\Ž¦:ƒ^[ƒQƒbƒg(Ú×)
+;   è¡¨ç¤º:ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ(è©³ç´°)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
-;  ARG:1				’Zkƒtƒ‰ƒO(0:ƒIƒt 1:ƒIƒ“)
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
+;  ARG:1				çŸ­ç¸®ãƒ•ãƒ©ã‚°(0:ã‚ªãƒ• 1:ã‚ªãƒ³)
 ;-------------------------------------------------
 @EX_INFO_TARGET_DETAIL(L_I, L_COLOR = 0, ARG:2 = 0, ARGS:0)
 #DIM L_I
@@ -22,15 +22,15 @@ CALL VAR_PRINT_LIST_NAME(L_I)
 CALL MNG_INFO_BASIC_DATA(L_I)
 
 SELECTCASE ARGS:0
-CASE "ŽŸ¢‘ã‘n‘¢"
+CASE "æ¬¡ä¸–ä»£å‰µé€ "
 	CALL INFO_TARGET_BREEDING(L_I)
-CASE "Ž{Ý”z‘®"
+CASE "æ–½è¨­é…å±ž"
 	CALL INFO_TARGET_SOCIALITY(L_I)
-CASE "ƒŒƒMƒ…ƒ‰["
+CASE "ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼"
 	CALL INFO_TARGET_BREEDING(L_I)
-CASE "“Á•Ê•ÛŒì"
+CASE "ç‰¹åˆ¥ä¿è­·"
 	CALL INFO_TARGET_SOCIALITY(L_I)
-CASE "ŠK‹‰•t—^"
-CASE "‹Æ–±"
+CASE "éšŽç´šä»˜ä¸Ž"
+CASE "æ¥­å‹™"
 ENDSELECT
 

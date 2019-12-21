@@ -1,18 +1,18 @@
-;-------------------------------------------------
-;���ʓ��͗p�֐��@@INPUT_MANY
-;ARG�ōŏ��l�AARG:1�ōő�l���w��
-;�d�앗�̃R���\�[�����琔�l����͂�����
+﻿;-------------------------------------------------
+;数量入力用関数　@INPUT_MANY
+;ARGで最小値、ARG:1で最大値を指定
+;電卓風のコンソールから数値を入力させる
 ;
-;ARG�EARG:1�@�Œ�l���邢�͍ő�l�@�����͋t�ł��悢
-;ARGS�@�I�v�V�����B�Ƃ肠�������܂̓��O���c���̂�
-;ARGS:1�@��O�̐��l�ݒ�B�͈͊O�ł��ʂ鐔�l��ݒ肷��
-;		 �L�q���@��0/20/30/-1�Ƃ������悤�ɁA�������"/"����؂蕶���Ƃ���
+;ARG・ARG:1　最低値あるいは最大値　順序は逆でもよい
+;ARGS　オプション。とりあえずいまはログを残すのみ
+;ARGS:1　例外の数値設定。範囲外でも通る数値を設定する
+;		 記述方法は0/20/30/-1といったように、文字列で"/"を区切り文字とする
 ;-------------------------------------------------
-@INPUT_MANY(ARG, ARG:1, ARGS = "���O���c��", ARGS:1)
+@INPUT_MANY(ARG, ARG:1, ARGS = "ログを残す", ARGS:1)
 #LOCALSIZE 3
 #LOCALSSIZE 20
 #DIM LINE, 1
-;�ŏ���0
+;最初は0
 LOCAL = 0
 LOCAL:1 = 1
 VARSET LOCALS
@@ -21,45 +21,45 @@ LINE = LINECOUNT
 $START
 REDRAW 0
 CLEARLINE LINECOUNT - LINE
-PRINTFORML �y{LOCAL}�z�@�s�y{ARG}�z - �y{ARG:1}�z�t
-PRINTBUTTON "[7]", "�V"
-PRINT �@
-PRINTBUTTON "[8]", "�W"
-PRINT �@
-PRINTBUTTON "[9]", "�X"
-PRINT �@
+PRINTFORML 【{LOCAL}】　《【{ARG}】 - 【{ARG:1}】》
+PRINTBUTTON "[7]", "７"
+PRINT 　
+PRINTBUTTON "[8]", "８"
+PRINT 　
+PRINTBUTTON "[9]", "９"
+PRINT 　
 PRINTBUTTON "[ AC]", "AC"
 PRINTL 
 
-PRINTBUTTON "[4]", "�S"
-PRINT �@
-PRINTBUTTON "[5]", "�T"
-PRINT �@
-PRINTBUTTON "[6]", "�U"
-PRINT �@
+PRINTBUTTON "[4]", "４"
+PRINT 　
+PRINTBUTTON "[5]", "５"
+PRINT 　
+PRINTBUTTON "[6]", "６"
+PRINT 　
 PRINTBUTTON "[Max]", "MAX"
 PRINTL 
 
-PRINTBUTTON "[1]", "�P"
-PRINT �@
-PRINTBUTTON "[2]", "�Q"
-PRINT �@
-PRINTBUTTON "[3]", "�R"
-PRINT �@
+PRINTBUTTON "[1]", "１"
+PRINT 　
+PRINTBUTTON "[2]", "２"
+PRINT 　
+PRINTBUTTON "[3]", "３"
+PRINT 　
 PRINTBUTTON "[Min]", "MIN"
 PRINTL 
 
-PRINTBUTTON "[0]", "�O"
-PRINT �@
+PRINTBUTTON "[0]", "０"
+PRINT 　
 IF LOCAL:1 == -1
 	PRINTBUTTON "[+]", "+"
 ELSE
 	PRINTBUTTON "[-]", "-"
 ENDIF
-PRINT �@
+PRINT 　
 PRINTBUTTON "[ENTER]", "ENTER"
 PRINTL 
-PRINTFORML ���L�[�{�[�h����A���ڐ��l����͂��邱�Ƃ��ł��܂�
+PRINTFORML ※キーボードから、直接数値を入力することもできます
 INPUTS
 SELECTCASE RESULTS
 	CASE "AC"
@@ -74,16 +74,16 @@ SELECTCASE RESULTS
 		LOCAL = ARG
 	CASE "MAX"
 		LOCAL = ARG:1
-	CASE "�O", "�P", "�Q", "�R", "�S", "�T", "�U", "�V", "�W", "�X"
+	CASE "０", "１", "２", "３", "４", "５", "６", "７", "８", "９"
 		IF LOCAL == 0
 			LOCAL = ABS(LOCAL) + TOINT(TOHALF(RESULTS)) * LOCAL:1
 		ELSE
-			;���������
+			;桁数を取る
 			LOCAL:2 = 1
 			WHILE LOCAL >= POWER(10, LOCAL:2)
 				LOCAL:2++
 				IF LOCAL:2 > 18
-					PRINTFORMW �������������܂��I
+					PRINTFORMW 桁数が多すぎます！
 					GOTO START
 				ENDIF
 			WEND
@@ -94,18 +94,18 @@ SELECTCASE RESULTS
 			FOR LOCAL:2, 0, STRLENS(RESULTS)
 				SIF GROUPMATCH(SUBSTRING(RESULTS, LOCAL:2, 1), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
 					CONTINUE
-				PRINTFORMW ���͂��ُ�ł��B���͂��Ȃ����Ă�������
+				PRINTFORMW 入力が異常です。入力しなおしてください
 				RESTART
 			NEXT
 			LOCAL = TOINT(RESULTS)
 		ENDIF
 		IF INRANGE(LOCAL, ARG, ARG:1) || MATCH(LOCALS, TOSTR(LOCAL))
-			SIF !STRCOUNT(ARGS, "���O���c��")
+			SIF !STRCOUNT(ARGS, "ログを残す")
 				CLEARLINE LINE - LINECOUNT
 			REDRAW 1
 			RETURNFORM LOCAL
 		ELSE
-			PRINTFORMW ���l���͈͊O�ł��B���͂��Ȃ����Ă�������
+			PRINTFORMW 数値が範囲外です。入力しなおしてください
 			RESTART
 		ENDIF
 ENDSELECT

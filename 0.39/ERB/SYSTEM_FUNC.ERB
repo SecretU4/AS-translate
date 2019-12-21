@@ -1,29 +1,29 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SYSTEM_FUNC.ERB
-;	Facility	:ƒVƒXƒeƒ€—pŠÖ”’u‚«êB
+;	Facility	:ã‚·ã‚¹ãƒ†ãƒ ç”¨é–¢æ•°ç½®ãå ´ã€‚
 ;
-;				 ®A‹LÚ‚·‚éŠÖ”‚Í‘S‚Äæ“ª‚É"C_"‚ð•t‚¯‚éB
-;				 (C=CommonA‹¤’Ê)
+;				 å°šã€è¨˜è¼‰ã™ã‚‹é–¢æ•°ã¯å…¨ã¦å…ˆé ­ã«"C_"ã‚’ä»˜ã‘ã‚‹ã€‚
+;				 (C=Commonã€å…±é€š)
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- xxxx
 ;
-;	E C_ADD_CHARA						‹¤’Ê:ƒLƒƒƒ‰’Ç‰Á
-;	E C_CUSTOM_CHARA					‹¤’Ê:ƒLƒƒƒ‰ƒJƒXƒ^ƒ€
+;	ãƒ» C_ADD_CHARA						å…±é€š:ã‚­ãƒ£ãƒ©è¿½åŠ 
+;	ãƒ» C_CUSTOM_CHARA					å…±é€š:ã‚­ãƒ£ãƒ©ã‚«ã‚¹ã‚¿ãƒ 
 ;
 ;===============================================================================
 
@@ -34,14 +34,14 @@
 ;=================================================
 ;   sub C_ADD_CHARA
 ;=================================================
-;   ‹¤’Ê:ƒLƒƒƒ‰’Ç‰Á
+;   å…±é€š:ã‚­ãƒ£ãƒ©è¿½åŠ 
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
-;  ARG:1				í“¬ƒŒƒxƒ‹
-;  ARG:2				d•¡‹–‰Â
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
+;  ARG:1				æˆ¦é—˜ãƒ¬ãƒ™ãƒ«
+;  ARG:2				é‡è¤‡è¨±å¯
 ; Output:
-;  RESULT				Œ‹‰Ê(0:“o˜^‚ðŽÀs 1:Šù‚É“o˜^Ï‚Ý 2:ƒf[ƒ^‚ª‘¶Ý‚µ‚È‚¢ 3:ƒLƒƒƒ‰”ãŒÀ)
+;  RESULT				çµæžœ(0:ç™»éŒ²ã‚’å®Ÿè¡Œ 1:æ—¢ã«ç™»éŒ²æ¸ˆã¿ 2:ãƒ‡ãƒ¼ã‚¿ãŒå­˜åœ¨ã—ãªã„ 3:ã‚­ãƒ£ãƒ©æ•°ä¸Šé™)
 ;-------------------------------------------------
 @C_ADD_CHARA(ARG, ARG:1 = 0, ARG:2 = 0)
 #DIM L_T
@@ -50,11 +50,11 @@
 #DIM L_TMP
 L_MAX = 300
 
-;d•¡‹–‰Â–³‚µ‚Ìê‡
+;é‡è¤‡è¨±å¯ç„¡ã—ã®å ´åˆ
 IF !ARG:2
-	;ƒLƒƒƒ‰No190`200‚Íd•¡‰Â”\
+	;ã‚­ãƒ£ãƒ©No190ï½ž200ã¯é‡è¤‡å¯èƒ½
 	IF GROUPMATCH(ARG, 190, 200) || GROUPMATCH(ARG, 167)  
-	;[“¯No‚Å‚Ì“o˜^ŽÒ‚ª‘¶Ý]
+	;[åŒNoã§ã®ç™»éŒ²è€…ãŒå­˜åœ¨]
 	ELSEIF CHARANUM && FINDCHARA(NO, ARG) > -1
 		RETURN 1
 	ENDIF
@@ -63,18 +63,18 @@ ENDIF
 L_NUM = CHARANUM
 L_TMP = L_MAX - 5
 IF L_NUM == L_TMP
-	PRINTFORML ¦ŠŽ‚µ‚Ä‚¢‚éƒLƒƒƒ‰‚ª{L_TMP}‘Ì‚É’B‚µ‚Ä‚¢‚Ü‚·
-	PRINTFORML @{L_MAX}‘Ì‚ð’´‚¦‚é‚ÆA‰Á“üˆ—‚ªƒLƒƒƒ“ƒZƒ‹‚³‚ê‚Ü‚·‚Ì‚Å’ˆÓ‚µ‚Ä‚­‚¾‚³‚¢
+	PRINTFORML â€»æ‰€æŒã—ã¦ã„ã‚‹ã‚­ãƒ£ãƒ©ãŒ{L_TMP}ä½“ã«é”ã—ã¦ã„ã¾ã™
+	PRINTFORML ã€€{L_MAX}ä½“ã‚’è¶…ãˆã‚‹ã¨ã€åŠ å…¥å‡¦ç†ãŒã‚­ãƒ£ãƒ³ã‚»ãƒ«ã•ã‚Œã¾ã™ã®ã§æ³¨æ„ã—ã¦ãã ã•ã„
 	WAIT
 ENDIF
 IF L_NUM == (L_MAX-1)
-	PRINTFORML ƒLƒƒƒ‰ƒNƒ^[”‚ªãŒÀ({L_MAX}‘Ì)‚É’B‚µ‚Ä‚¢‚Ü‚·
-	PRINTFORML ƒLƒƒƒ‰ƒNƒ^[‰Á“üˆ—‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚·
+	PRINTFORML ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼æ•°ãŒä¸Šé™({L_MAX}ä½“)ã«é”ã—ã¦ã„ã¾ã™
+	PRINTFORML ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼åŠ å…¥å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¾ã™
 	WAIT
 	RETURN 3
 ENDIF
 
-;--- ƒLƒƒƒ‰’Ç‰Á
+;--- ã‚­ãƒ£ãƒ©è¿½åŠ 
 IF EXISTCSV(ARG, 0)
 	ADDCHARA ARG
 		IF ARG == 167
@@ -87,22 +87,22 @@ ENDIF
 L_T = CHARANUM -1
 
 ;-----------------------------
-;- –{‘Ìƒ‚ƒWƒ…[ƒ‹
+;- æœ¬ä½“ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«
 ;-----------------------------
 
-;- ’Ç‰Á:ƒLƒƒƒ‰
+;- è¿½åŠ :ã‚­ãƒ£ãƒ©
 CALL VAR_ADD_CHARA(L_T)
 
 
 ;-----------------------------
-;- ‚»‚Ì‘¼
+;- ãã®ä»–
 ;-----------------------------
 
-;ƒfƒtƒHƒ‹ƒg‚Å‚Í1‚ðÝ’è‚µAŒÄ‚Ño‚µ‘¤‚Å’²®
-CFLAG:L_T:ƒCƒxƒ“ƒg‰Á“ü = 1
+;ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ã¯1ã‚’è¨­å®šã—ã€å‘¼ã³å‡ºã—å´ã§èª¿æ•´
+CFLAG:L_T:ã‚¤ãƒ™ãƒ³ãƒˆåŠ å…¥ = 1
 
-;ƒJƒXƒ^ƒ€‰Â”\ƒ`ƒFƒbƒN
-SIF CFLAG:L_T:ƒJƒXƒ^ƒ€ƒtƒ‰ƒO
+;ã‚«ã‚¹ã‚¿ãƒ å¯èƒ½ãƒã‚§ãƒƒã‚¯
+SIF CFLAG:L_T:ã‚«ã‚¹ã‚¿ãƒ ãƒ•ãƒ©ã‚°
 	CALL C_CUSTOM_CHARA(L_T)
 
 RETURN 0
@@ -111,42 +111,42 @@ RETURN 0
 ;=================================================
 ;   sub C_CUSTOM_CHARA
 ;=================================================
-;   ‹¤’Ê:ƒLƒƒƒ‰ƒJƒXƒ^ƒ€
+;   å…±é€š:ã‚­ãƒ£ãƒ©ã‚«ã‚¹ã‚¿ãƒ 
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @C_CUSTOM_CHARA(ARG)
 #DIM L_INPUT
 
 ;-----------------------------
-;- –¼‘O•ÏX
+;- åå‰å¤‰æ›´
 ;-----------------------------
 CUSTOMDRAWLINE =
-PRINTFORML yƒLƒƒƒ‰ƒJƒXƒ^ƒ€z
-PRINTFORML %CALLNAME:ARG%‚Íˆê•”ƒf[ƒ^‚ðƒJƒXƒ^ƒ}ƒCƒY‰Â”\‚Å‚·Bƒpƒ‰ƒ[ƒ^‚ð‘I‚ñ‚Å‰º‚³‚¢B
+PRINTFORML ã€ã‚­ãƒ£ãƒ©ã‚«ã‚¹ã‚¿ãƒ ã€‘
+PRINTFORML %CALLNAME:ARG%ã¯ä¸€éƒ¨ãƒ‡ãƒ¼ã‚¿ã‚’ã‚«ã‚¹ã‚¿ãƒžã‚¤ã‚ºå¯èƒ½ã§ã™ã€‚ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’é¸ã‚“ã§ä¸‹ã•ã„ã€‚
 PRINTL
-PRINTFORML [  0] –¼‘O(NAME)@@@F%NAME:ARG%
-PRINTFORML [  1] ŒÄ‚Ñ–¼(CALLNAME)F%CALLNAME:ARG%
+PRINTFORML [  0] åå‰(NAME)ã€€ã€€ã€€ï¼š%NAME:ARG%
+PRINTFORML [  1] å‘¼ã³å(CALLNAME)ï¼š%CALLNAME:ARG%
 PRINTL
 PRINTL
 PRINTL
-PRINTFORML [100] Š®—¹
+PRINTFORML [100] å®Œäº†
 
 $INPUT_LOOP
 INPUT
 L_INPUT = RESULT
 
 SELECTCASE L_INPUT
-	;Š®—¹
+	;å®Œäº†
 	CASE 100
 		RETURN
-	;–¼‘O•ÏX
+	;åå‰å¤‰æ›´
 	CASE 0
 		DRAWLINE
-		PRINTFORML y–¼‘O(NAME)•ÏXz
-		PRINTFORML Œ»Ý‚Ì–¼‘O‚Í"%NAME:ARG%"‚Å‚·BV‚µ‚¢–¼‘O‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
-		PRINTFORML “ü—Í‚ðƒLƒƒƒ“ƒZƒ‹‚·‚éê‡‚ÍA‹ó“ü—Í‚ð‚µ‚Ä‚­‚¾‚³‚¢B
+		PRINTFORML ã€åå‰(NAME)å¤‰æ›´ã€‘
+		PRINTFORML ç¾åœ¨ã®åå‰ã¯"%NAME:ARG%"ã§ã™ã€‚æ–°ã—ã„åå‰ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚
+		PRINTFORML å…¥åŠ›ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹å ´åˆã¯ã€ç©ºå…¥åŠ›ã‚’ã—ã¦ãã ã•ã„ã€‚
 		INPUTS
 		SELECTCASE RESULTS
 			CASE ""
@@ -154,12 +154,12 @@ SELECTCASE L_INPUT
 			CASEELSE
 				NAME:ARG = %RESULTS%
 		ENDSELECT
-	;ŒÄ‚Ñ–¼•ÏX
+	;å‘¼ã³åå¤‰æ›´
 	CASE 1
 		DRAWLINE
-		PRINTFORML yŒÄ‚Ñ–¼(CALLNAME)•ÏXz
-		PRINTFORML Œ»Ý‚ÌŒÄ‚Ñ–¼‚Í"%CALLNAME:ARG%"‚Å‚·BV‚µ‚¢ŒÄ‚Ñ–¼‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B
-		PRINTFORML “ü—Í‚ðƒLƒƒƒ“ƒZƒ‹‚·‚éê‡‚ÍA‹ó“ü—Í‚ð‚µ‚Ä‚­‚¾‚³‚¢B
+		PRINTFORML ã€å‘¼ã³å(CALLNAME)å¤‰æ›´ã€‘
+		PRINTFORML ç¾åœ¨ã®å‘¼ã³åã¯"%CALLNAME:ARG%"ã§ã™ã€‚æ–°ã—ã„å‘¼ã³åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚
+		PRINTFORML å…¥åŠ›ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹å ´åˆã¯ã€ç©ºå…¥åŠ›ã‚’ã—ã¦ãã ã•ã„ã€‚
 		INPUTS
 		SELECTCASE RESULTS
 			CASE ""

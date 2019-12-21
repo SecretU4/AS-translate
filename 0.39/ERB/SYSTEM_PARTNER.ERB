@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;ƒƒjƒ…[‚Éƒp[ƒgƒi[•\Ž¦
+ï»¿;-------------------------------------------------
+;ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«ãƒ‘ãƒ¼ãƒˆãƒŠãƒ¼è¡¨ç¤º
 ;-------------------------------------------------
 @SYSTEM_PARTNER
 #DIM L_I
@@ -7,82 +7,82 @@
 #DIMS LSTR
 
 CALL MEMBER_LIST2_1(1, 1 ,1)
-L_I = FLAG:”Ä—p•Ï”
-FLAG:”Ä—p•Ï”2 = FLAG:”Ä—p•Ï”
-FLAG:”Ä—p•Ï” = 100
-IF FLAG:“sŽs_ƒp[ƒgƒi[ƒZƒbƒNƒX == 0 && TALENT:L_I:”DP == 0 && TALENT:L_I:Žó¸ == 0 && TALENT:L_I:”ñˆ— && (TALENT:L_I:SŒ || TALENT:L_I:ˆ¤l || TALENT:L_I:î•w)
+L_I = FLAG:æ±Žç”¨å¤‰æ•°
+FLAG:æ±Žç”¨å¤‰æ•°2 = FLAG:æ±Žç”¨å¤‰æ•°
+FLAG:æ±Žç”¨å¤‰æ•° = 100
+IF FLAG:éƒ½å¸‚_ãƒ‘ãƒ¼ãƒˆãƒŠãƒ¼ã‚»ãƒƒã‚¯ã‚¹ == 0 && TALENT:L_I:å¦Šå¨  == 0 && TALENT:L_I:å—ç²¾ == 0 && TALENT:L_I:éžå‡¦å¥³ && (TALENT:L_I:å¿ƒé…” || TALENT:L_I:æ„›äºº || TALENT:L_I:æƒ…å©¦)
 P_S = RAND:5
 LSTR =  <nonbutton pos='0'><img src='P_SEX_{P_S}' height = '900'  ypos = '0'></nonbutton><nobr>
 HTML_PRINT LSTR
 
-ELSEIF TALENT:L_I:•sÝ == 0
+ELSEIF TALENT:L_I:ä¸åœ¨ == 0
 	CALL C_PICTURE(L_I, 0, -100)
 ENDIF
-FLAG:”Ä—p•Ï” = 0
-PRINTFORML @@ @@yHP@:{CFlag:L_I:Zl_Œ»Ý‘Ì—Í, 3 ,RIGHT}/{CFlag:L_I:Zl_Å‘å‘Ì—Í, 3 ,RIGHT}zySP@:{CFlag:L_I:Zl_Œ»Ý‹C—Í, 3 ,RIGHT}/{CFlag:L_I:Zl_Å‘å‹C—Í, 3 ,RIGHT}z
-PRINTFORML @@ @@yDŠ´“x:{CFlag:L_I:DŠ´“x, 6 ,RIGHT}zy’‰½’l:{CFLAG:L_I:’‰½’l, 4 ,RIGHT}zyˆ¤î’l:{CFLAG:L_I:ˆ¤î’l, 4 ,RIGHT}zyˆú—’l:{CFLAG:L_I:ˆú—’l, 4 ,RIGHT}z
-PRINTFORML @@ @@yl‹C@:{CFLAG:L_I:Zl_l‹C, 6 ,RIGHT}zyƒ‚ƒ‰ƒ‹:{CFLAG:L_I:Zl_ƒ‚ƒ‰ƒ‹, 4 ,RIGHT}zyƒJƒ‹ƒ}:{CFLAG:L_I:Zl_ƒJƒ‹ƒ}, 4 ,RIGHT}zy•i«@:{CFLAG:L_I:Zl_•i«, 4 ,RIGHT}z
-PRINTFORML @@ @@
+FLAG:æ±Žç”¨å¤‰æ•° = 0
+PRINTFORML ã€€ã€€ ã€€ã€€ã€HPã€€:{CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ›, 3 ,RIGHT}/{CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ›, 3 ,RIGHT}ã€‘ã€SPã€€:{CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ›, 3 ,RIGHT}/{CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›, 3 ,RIGHT}ã€‘
+PRINTFORML ã€€ã€€ ã€€ã€€ã€å¥½æ„Ÿåº¦:{CFlag:L_I:å¥½æ„Ÿåº¦, 6 ,RIGHT}ã€‘ã€å¿ èª å€¤:{CFLAG:L_I:å¿ èª å€¤, 4 ,RIGHT}ã€‘ã€æ„›æƒ…å€¤:{CFLAG:L_I:æ„›æƒ…å€¤, 4 ,RIGHT}ã€‘ã€æ·«ä¹±å€¤:{CFLAG:L_I:æ·«ä¹±å€¤, 4 ,RIGHT}ã€‘
+PRINTFORML ã€€ã€€ ã€€ã€€ã€äººæ°—ã€€:{CFLAG:L_I:ä½äºº_äººæ°—, 6 ,RIGHT}ã€‘ã€ãƒ¢ãƒ©ãƒ«:{CFLAG:L_I:ä½äºº_ãƒ¢ãƒ©ãƒ«, 4 ,RIGHT}ã€‘ã€ã‚«ãƒ«ãƒž:{CFLAG:L_I:ä½äºº_ã‚«ãƒ«ãƒž, 4 ,RIGHT}ã€‘ã€å“æ€§ã€€:{CFLAG:L_I:ä½äºº_å“æ€§, 4 ,RIGHT}ã€‘
+PRINTFORML ã€€ã€€ ã€€ã€€
 
 
-PRINTFORM @@@@@
-SIF TALENT:L_I:•sÝ == 0
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+SIF TALENT:L_I:ä¸åœ¨ == 0
 	PRINTFORM %CALLNAME:L_I%
-IF FLAG:“sŽs_ƒp[ƒgƒi[ƒZƒbƒNƒX == 0 && TALENT:L_I:”DP == 0 && TALENT:L_I:Žó¸ == 0 &&  TALENT:L_I:”ñˆ— && (TALENT:L_I:SŒ || TALENT:L_I:ˆ¤l || TALENT:L_I:î•w)
+IF FLAG:éƒ½å¸‚_ãƒ‘ãƒ¼ãƒˆãƒŠãƒ¼ã‚»ãƒƒã‚¯ã‚¹ == 0 && TALENT:L_I:å¦Šå¨  == 0 && TALENT:L_I:å—ç²¾ == 0 &&  TALENT:L_I:éžå‡¦å¥³ && (TALENT:L_I:å¿ƒé…” || TALENT:L_I:æ„›äºº || TALENT:L_I:æƒ…å©¦)
 	CALL PARTNER_SEX
-ELSEIF TALENT:L_I:‡ˆÓ != 1
+ELSEIF TALENT:L_I:åˆæ„ != 1
 	PRINTFORML 
-;‚±‚Á‚©‚ç‰º‚Í‘S‚Ä‡ˆÓ—L‚è
-ELSEIF FLAG:“sŽs_–h‰q != 0
+;ã“ã£ã‹ã‚‰ä¸‹ã¯å…¨ã¦åˆæ„æœ‰ã‚Š
+ELSEIF FLAG:éƒ½å¸‚_é˜²è¡› != 0
 	PRINTDATAL
-		DATAFORM u€”õ‚ªo—ˆ‚½‚ç‚·‚®‚És%CSTR:L_I:Œê”ös‚­%Iv
-		DATAFORM u“|‚¹‚È‚­‚Ä‚àƒ_ƒ[ƒW‚³‚¦’Ê‚ê‚ÎŒø‰Ê‚Í‚ %CSTR:L_I:Œê”ö‘Î‰ž%Iv
-		DATAFORM uƒ_ƒ[ƒW‚ð’~Ï‚³‚¹‚ê‚ÎA‚¢‚¸‚ê“G‚àˆø‚«‰º‚ª‚é‚ÆŽv‚¤%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‹tà%cv
-		;–³‘Ê‚ÉƒqƒƒCƒbƒN‚ÈƒZƒŠƒt‚ð’Ç‰Á‚µ‚Ä‚Ý‚é
-		DATAFORM u‚È‚ñ‚Æ‚©‚µ‚ÄH‚¢Ž~‚ß‚È‚¢‚Æ%CSTR:L_I:Œê”öm’è2%ccŠæ’£%CSTR:L_I:Œê”ö‘£i%v
-		DATAFORM u‚±‚Ì“sŽs‚ª%CSTR:L_I:ˆêlÌ%‚½‚¿‚ÉŽc‚³‚ê‚½ÅŒã‚Ì‹êŠ‚È%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‚Å‚·%Aâ‘Î‚ÉŒ‚‘Þ%CSTR:L_I:Œê”ö–â‚¤2%Iv
+		DATAFORM ã€Œæº–å‚™ãŒå‡ºæ¥ãŸã‚‰ã™ãã«è¡Œ%CSTR:L_I:èªžå°¾è¡Œã%ï¼ã€
+		DATAFORM ã€Œå€’ã›ãªãã¦ã‚‚ãƒ€ãƒ¡ãƒ¼ã‚¸ã•ãˆé€šã‚Œã°åŠ¹æžœã¯ã‚%CSTR:L_I:èªžå°¾å¯¾å¿œ%ï¼ã€
+		DATAFORM ã€Œãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’è“„ç©ã•ã›ã‚Œã°ã€ã„ãšã‚Œæ•µã‚‚å¼•ãä¸‹ãŒã‚‹ã¨æ€ã†%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾é€†èª¬%â€¦ã€
+		;ç„¡é§„ã«ãƒ’ãƒ­ã‚¤ãƒƒã‚¯ãªã‚»ãƒªãƒ•ã‚’è¿½åŠ ã—ã¦ã¿ã‚‹
+		DATAFORM ã€Œãªã‚“ã¨ã‹ã—ã¦é£Ÿã„æ­¢ã‚ãªã„ã¨%CSTR:L_I:èªžå°¾è‚¯å®š2%â€¦â€¦é ‘å¼µ%CSTR:L_I:èªžå°¾ä¿ƒé€²%ã€
+		DATAFORM ã€Œã“ã®éƒ½å¸‚ãŒ%CSTR:L_I:ä¸€äººç§°%ãŸã¡ã«æ®‹ã•ã‚ŒãŸæœ€å¾Œã®å±…å ´æ‰€ãª%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾ã§ã™%ã€çµ¶å¯¾ã«æ’ƒé€€%CSTR:L_I:èªžå°¾å•ã†2%ï¼ã€
 	ENDDATA
-ELSEIF FLAG:ƒ^[ƒ“’²¸Ï‚Ý != 0
+ELSEIF FLAG:ã‚¿ãƒ¼ãƒ³èª¿æŸ»æ¸ˆã¿ != 0
 	PRINTDATAL
-		DATAFORM uˆêæ‚¸’²¸I—¹%CSTR:L_I:Œê”ö“¯ˆÓ‹‚Þ%HA­‚µ‹xŒe%CSTR:L_I:Œê”ö‚¨Šè‚¢%v
-		DATAFORM u‹xŒe‚ð‹²‚ñ‚¾‚çŽŸ‚ÌoŒ‚‚Ì€”õ‚ð‚µ‚È‚¢‚Æ%CSTR:L_I:Œê”ö“¯ˆÓ‹‚Þ%Hv
-		DATAFORM uŠl“¾‚µ‚½Ž‘Þ‚ÍŠm”F%CSTR:L_I:Œê”ö–â‚¤4%HA—Ê‚ª‚ ‚ê‚ÎƒNƒ‰ƒtƒg‚µ‚Ä‚Ý‚Ä%CSTR:L_I:Œê”öŠó–]%v
-		DATAFORM uŠO“G‚ª—ˆ‚é‘OA¢ŠE‚Í‚Ç‚ñ‚È•—‚¾‚Á‚½%CSTR:L_I:Œê”ösˆ×%Hv
+		DATAFORM ã€Œä¸€å…ˆãšèª¿æŸ»çµ‚äº†%CSTR:L_I:èªžå°¾åŒæ„æ±‚ã‚€%ï¼Ÿã€å°‘ã—ä¼‘æ†©%CSTR:L_I:èªžå°¾ãŠé¡˜ã„%ã€
+		DATAFORM ã€Œä¼‘æ†©ã‚’æŒŸã‚“ã ã‚‰æ¬¡ã®å‡ºæ’ƒã®æº–å‚™ã‚’ã—ãªã„ã¨%CSTR:L_I:èªžå°¾åŒæ„æ±‚ã‚€%ï¼Ÿã€
+		DATAFORM ã€Œç²å¾—ã—ãŸè³‡æã¯ç¢ºèª%CSTR:L_I:èªžå°¾å•ã†4%ï¼Ÿã€é‡ãŒã‚ã‚Œã°ã‚¯ãƒ©ãƒ•ãƒˆã—ã¦ã¿ã¦%CSTR:L_I:èªžå°¾å¸Œæœ›%ã€
+		DATAFORM ã€Œå¤–æ•µãŒæ¥ã‚‹å‰ã€ä¸–ç•Œã¯ã©ã‚“ãªé¢¨ã ã£ãŸ%CSTR:L_I:èªžå°¾è¡Œç‚º%ï¼Ÿã€
 	ENDDATA
-ELSEIF TALENT:L_I:•sÝ == 0
-	IF TALENT:L_I:Ž¡ˆÀˆÛŽ‹Çˆõ && RAND:10 <= 1
+ELSEIF TALENT:L_I:ä¸åœ¨ == 0
+	IF TALENT:L_I:æ²»å®‰ç¶­æŒå±€å“¡ && RAND:10 <= 1
 		PRINTDATAL
-			DATAFORM u‚¤‚¿‚ÌŠÇ‹æ‚Í•½˜a‚»‚Ì‚à‚Ì%CSTR:L_I:Œê”ö‚Å‚·%v
-			DATAFORM u—×‚Ì’n‹æ‚ÉƒCƒŒƒMƒ…ƒ‰[‚ªo‚½‚ç‚µ‚¢%CSTR:L_I:Œê”ö‹–‰Â%v
-			DATAFORM u%CSTR:L_I:Œê”ö‰½H%Hcc‚ ‚ŸA‚±‚ê‚ÍÅ‹ßŒ»‚ê‚½¬Œ^‚ÌŠO“G‚ÌŽ‘—¿%CSTR:L_I:Œê”ö‰ž“š%v
+			DATAFORM ã€Œã†ã¡ã®ç®¡åŒºã¯å¹³å’Œãã®ã‚‚ã®%CSTR:L_I:èªžå°¾ã§ã™%ã€
+			DATAFORM ã€Œéš£ã®åœ°åŒºã«ã‚¤ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ãŒå‡ºãŸã‚‰ã—ã„%CSTR:L_I:èªžå°¾è¨±å¯%ã€
+			DATAFORM ã€Œ%CSTR:L_I:èªžå°¾ä½•ï¼Ÿ%ï¼Ÿâ€¦â€¦ã‚ãã€ã“ã‚Œã¯æœ€è¿‘ç¾ã‚ŒãŸå°åž‹ã®å¤–æ•µã®è³‡æ–™%CSTR:L_I:èªžå°¾å¿œç­”%ã€
 		ENDDATA
 	ELSE
 		PRINTDATAL
-			DATAFORM uŽŸ‚ÌPŒ‚‚Ü‚Å‚É€”õ‚µ‚Ä‚¨%CSTR:L_I:Œê”ös‚­%v
-			DATAFORM u¡“x‚Í%CSTR:L_I:ˆêlÌ%‚ª%CSTR:L_I:“ñlÌ%‚ðŽx‚¦%CSTR:L_I:Œê”ö‚Ü‚·%v
-			DATAFORM u­‚µ‚Í‹x‚ñ‚Å%CSTR:L_I:Œê”öŠó–]%A‚±‚ê‚Å‚àS”z‚µ‚Ä‚é%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‚Å‚·%v
-			DATAFORM uŽŸ‚ÌPŒ‚‚Ü‚Å‚É€”õ‚µ‚Ä‚¨%CSTR:L_I:Œê”ös‚­%v
-			DATAFORM u‰ð•ú‚³‚ê‚½Ž{Ý‚Í‰^—p‚µ‚Ä%CSTR:L_I:Œê”ö–â‚¤6%Hv
-			DATAFORM u‚Í‚ cƒCƒŒƒMƒ…ƒ‰[‘ÞŽ¡‚à‘å•Ï%CSTR:L_I:Œê”ö‰ž“š%cv
-			DATAFORM uŠOŠE‚¾‚Æ’¿‚µ‚¢Ží‘°‚É‰ï‚¦‚é‚©‚à‚µ‚ê‚È‚¢%CSTR:L_I:Œê”ö‹–‰Â%v
-			DATAFORM uŠOŠE‚ª‹C‚É‚È‚é%CSTR:L_I:Œê”ö‚Ì‚Å%’²¸‚És%CSTR:L_I:Œê”ös‚­%Hv
-			DATAFORM uc‚½‚Ü‚É‚Í%CSTR:L_I:ˆêlÌ%‚à\‚Á‚Ä—~‚µ‚¢%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‹tà%cv
-			DATAFORM uc‚·‚é‚È‚çˆêºŠ|‚¯%CSTR:L_I:Œê”ö–½—ß%c%UNICODE(0x2661)%v
-			DATAFORM u%CSTR:L_I:Œê”ö”÷Î%A¡“ú‚Í‰½‚ð‚·‚é%CSTR:L_I:Œê”ösˆ×%Hv
+			DATAFORM ã€Œæ¬¡ã®è¥²æ’ƒã¾ã§ã«æº–å‚™ã—ã¦ãŠ%CSTR:L_I:èªžå°¾è¡Œã%ã€
+			DATAFORM ã€Œä»Šåº¦ã¯%CSTR:L_I:ä¸€äººç§°%ãŒ%CSTR:L_I:äºŒäººç§°%ã‚’æ”¯ãˆ%CSTR:L_I:èªžå°¾ã¾ã™%ã€
+			DATAFORM ã€Œå°‘ã—ã¯ä¼‘ã‚“ã§%CSTR:L_I:èªžå°¾å¸Œæœ›%ã€ã“ã‚Œã§ã‚‚å¿ƒé…ã—ã¦ã‚‹%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾ã§ã™%ã€
+			DATAFORM ã€Œæ¬¡ã®è¥²æ’ƒã¾ã§ã«æº–å‚™ã—ã¦ãŠ%CSTR:L_I:èªžå°¾è¡Œã%ã€
+			DATAFORM ã€Œè§£æ”¾ã•ã‚ŒãŸæ–½è¨­ã¯é‹ç”¨ã—ã¦%CSTR:L_I:èªžå°¾å•ã†6%ï¼Ÿã€
+			DATAFORM ã€Œã¯ã‚â€¦ã‚¤ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼é€€æ²»ã‚‚å¤§å¤‰%CSTR:L_I:èªžå°¾å¿œç­”%â€¦ã€
+			DATAFORM ã€Œå¤–ç•Œã ã¨çã—ã„ç¨®æ—ã«ä¼šãˆã‚‹ã‹ã‚‚ã—ã‚Œãªã„%CSTR:L_I:èªžå°¾è¨±å¯%ã€
+			DATAFORM ã€Œå¤–ç•ŒãŒæ°—ã«ãªã‚‹%CSTR:L_I:èªžå°¾ã®ã§%èª¿æŸ»ã«è¡Œ%CSTR:L_I:èªžå°¾è¡Œã%ï¼Ÿã€
+			DATAFORM ã€Œâ€¦ãŸã¾ã«ã¯%CSTR:L_I:ä¸€äººç§°%ã‚‚æ§‹ã£ã¦æ¬²ã—ã„%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾é€†èª¬%â€¦ã€
+			DATAFORM ã€Œâ€¦ã™ã‚‹ãªã‚‰ä¸€å£°æŽ›ã‘%CSTR:L_I:èªžå°¾å‘½ä»¤%â€¦%UNICODE(0x2661)%ã€
+			DATAFORM ã€Œ%CSTR:L_I:èªžå°¾å¾®ç¬‘%ã€ä»Šæ—¥ã¯ä½•ã‚’ã™ã‚‹%CSTR:L_I:èªžå°¾è¡Œç‚º%ï¼Ÿã€
 		ENDDATA
 	ENDIF
 ENDIF
 
-IF TALENT:L_I:”DP != 0
-	SETCOLOR COLOR("ƒsƒ“ƒN")
-	PRINTFORM @@@@@@@@@y”DP:Œo‰ßT”{TALENT:L_I:”DP}z
-ELSEIF TALENT:L_I:Žó¸ != 0
-	SETCOLOR COLOR("ƒsƒ“ƒN")
-	PRINTFORM @@@@@@@@@yŽó¸:Œo‰ßT”{TALENT:L_I:”DP}z
+IF TALENT:L_I:å¦Šå¨  != 0
+	SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	PRINTFORM ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€å¦Šå¨ :çµŒéŽé€±æ•°{TALENT:L_I:å¦Šå¨ }ã€‘
+ELSEIF TALENT:L_I:å—ç²¾ != 0
+	SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	PRINTFORM ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€å—ç²¾:çµŒéŽé€±æ•°{TALENT:L_I:å¦Šå¨ }ã€‘
 ENDIF
-IF TALENT:L_I:‘ï—‘ != 0
-	SETCOLOR COLOR("Ž‡")
-	PRINTFORM (‘ï—‘%UNICODE(0x2661)%)
+IF TALENT:L_I:æ‰˜åµ != 0
+	SETCOLOR COLOR("ç´«")
+	PRINTFORM (æ‰˜åµ%UNICODE(0x2661)%)
 ENDIF
 PRINTFORML 
 RESETCOLOR
@@ -91,7 +91,7 @@ CALL CITY_NEWS
 
 
 
-FLAG:”Ä—p•Ï” = 0
+FLAG:æ±Žç”¨å¤‰æ•° = 0
 
 
 

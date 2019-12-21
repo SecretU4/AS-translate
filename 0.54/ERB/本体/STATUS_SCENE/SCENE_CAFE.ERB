@@ -1,24 +1,24 @@
-;=================================================
+ï»¿;=================================================
 ;   sub CAFE_INFO_TARGET_DETAIL
 ;=================================================
-;   •\Ž¦:ƒ^[ƒQƒbƒg(Ú×)
+;   è¡¨ç¤º:ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ(è©³ç´°)
 ;-------------------------------------------------
 @CAFE_INFO_TARGET_DETAIL(C_ID, SHORT = 0)
-#DIM C_ID   ;‘ÎÛƒLƒƒƒ‰
-#DIM SHORT  ;’Zkƒtƒ‰ƒO(0:ƒIƒt 1:ƒIƒ“)
+#DIM C_ID   ;å¯¾è±¡ã‚­ãƒ£ãƒ©
+#DIM SHORT  ;çŸ­ç¸®ãƒ•ãƒ©ã‚°(0:ã‚ªãƒ• 1:ã‚ªãƒ³)
 ;PRINTFORM \[No.%TOSTR(NO:L_I),3%\] 
 CALL VAR_PRINT_LIST_NAME(C_ID)
 
-;DŠ´“x•\Ž¦
-;s“à‚ÅÅ‰‚ÉƒJƒ‰[•ÏX‚ª‹N‚«‚é‚Æ”¼ŠpƒXƒy[ƒX‚ª“ü‚éŽd—lH‚ÅŒã‚ë‚ªƒYƒŒ‚È‚¢‚½‚ß‚ÌSETCOLOR
+;å¥½æ„Ÿåº¦è¡¨ç¤º
+;è¡Œå†…ã§æœ€åˆã«ã‚«ãƒ©ãƒ¼å¤‰æ›´ãŒèµ·ãã‚‹ã¨åŠè§’ã‚¹ãƒšãƒ¼ã‚¹ãŒå…¥ã‚‹ä»•æ§˜ï¼Ÿã§å¾Œã‚ãŒã‚ºãƒ¬ãªã„ãŸã‚ã®SETCOLOR
 SETCOLOR 0xc1c1c1
-PRINTFORM DŠ´“x:{CFlag:C_ID:DŠ´“x, 6 ,RIGHT} 
+PRINTFORM å¥½æ„Ÿåº¦:{CFlag:C_ID:å¥½æ„Ÿåº¦, 6 ,RIGHT} 
 RESETCOLOR
 CALL INFO_TARGET_MARK(C_ID)
 ;-----------------------------
-;-- ˜J–ðî•ñ
+;-- åŠ´å½¹æƒ…å ±
 ;-----------------------------
-;–¢ŽÀ‘•‚Ý‚½‚¢‚È‚Ì‚ÅˆêŽž“I‚ÉƒRƒƒ“ƒgƒAƒEƒg
+;æœªå®Ÿè£…ã¿ãŸã„ãªã®ã§ä¸€æ™‚çš„ã«ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
 ;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
 CALL INFO_TARGET_RELATION(C_ID)
 CALL INFO_TARGET_GENDER(C_ID)
@@ -29,79 +29,79 @@ CALL INFO_TARGET_PREGNANCY(C_ID, SHORT)
 
 
 @CAFE_LIST_CHARA_STATUS_HEADER(SCENE, LIST_NAME, CHARA_CNT, NOW_GROUP, LAST_GROUP)
-#DIMS SCENE      ;Œ»Ý‚Ìê–Ê
-#DIMS LIST_NAME  ;•\Ž¦€–Ú‚Ì•ª—ÞPACK_NAME
-#DIM  CHARA_CNT  ;ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ‚ÌƒLƒƒƒ‰”
-#DIM  NOW_GROUP  ;‰{——’†‚ÌƒLƒƒƒ‰ƒOƒ‹[ƒv
-#DIM  LAST_GROUP ;ƒLƒƒƒ‰ƒOƒ‹[ƒv‚ÌÅ‘å’l
-IF Flag:ŽžŠÔ‘Ñ == 0
-	PRINTFORM yŽžŠÔ‘Ñ:’‹(‘P‘®«Z–¯”­¶’†)z
+#DIMS SCENE      ;ç¾åœ¨ã®å ´é¢
+#DIMS LIST_NAME  ;è¡¨ç¤ºé …ç›®ã®åˆ†é¡žï¼PACK_NAME
+#DIM  CHARA_CNT  ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—ã®ã‚­ãƒ£ãƒ©æ•°
+#DIM  NOW_GROUP  ;é–²è¦§ä¸­ã®ã‚­ãƒ£ãƒ©ã‚°ãƒ«ãƒ¼ãƒ—
+#DIM  LAST_GROUP ;ã‚­ãƒ£ãƒ©ã‚°ãƒ«ãƒ¼ãƒ—ã®æœ€å¤§å€¤
+IF Flag:æ™‚é–“å¸¯ == 0
+	PRINTFORM ã€æ™‚é–“å¸¯:æ˜¼(å–„å±žæ€§ä½æ°‘ç™ºç”Ÿä¸­)ã€‘
 ELSE
-	PRINTFORM yŽžŠÔ‘Ñ:–é(ˆ«‘®«Z–¯”­¶’†)z
+	PRINTFORM ã€æ™‚é–“å¸¯:å¤œ(æ‚ªå±žæ€§ä½æ°‘ç™ºç”Ÿä¸­)ã€‘
 ENDIF
-CALL PRINT_RANGE_STATUS(-1, "TP", , , , "•šŽš")
-CALL PRINT_RANGE_STATUS(-1, "AP", , , , "•šŽš")
+CALL PRINT_RANGE_STATUS(-1, "TP", , , , "ä¼å­—")
+CALL PRINT_RANGE_STATUS(-1, "AP", , , , "ä¼å­—")
 PRINTL
 
 
 
 @CAFE_LIST_CHARA_INPUT(SCENE, OP, CHARA_LIST, CHARA_CNT, NOW_GROUP, LAST_GROUP, LIST_PACK, PACK_PAGE, PACK_SIZE, INPUT_MIN, INPUT_MAX, SORT_TYPE, GET_LIST)
-#DIMS     SCENE      ;Žg—pê–Ê
-#DIMS     OP         ;ƒIƒvƒVƒ‡ƒ“•¶Žš—ñ
-#DIM  REF CHARA_LIST ;ƒLƒƒƒ‰ƒŠƒXƒgˆê——”z—ñ
-#DIM      CHARA_CNT  ;ƒŠƒXƒg’†‚ÌƒLƒƒƒ‰”
-#DIM  REF NOW_GROUP  ;Œ»Ý•\Ž¦’†‚ÌƒLƒƒƒ‰ƒOƒ‹[ƒv
-#DIM      LAST_GROUP ;ƒLƒƒƒ‰ƒOƒ‹[ƒv‚ÌÅŒã”ö
-#DIMS REF LIST_PACK  ;ƒpƒbƒNƒŠƒXƒg”z—ñ
-#DIM  REF PACK_PAGE  ;•\Ž¦ƒf[ƒ^‚Ìƒy[ƒW”
-#DIM      PACK_SIZE  ;ƒpƒbƒNƒŠƒXƒg”z—ñ‚ÌƒTƒCƒY
-#DIM      INPUT_MIN  ;•\Ž¦’†ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID‚ÌÅ¬’l
-#DIM      INPUT_MAX  ;•\Ž¦’†ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID‚ÌÅ‘å’l
-#DIMS REF SORT_TYPE  ;Œ»Ý‚Ìƒ\[ƒg‡
-#DIM  REF GET_LIST   ;ƒLƒƒƒ‰ƒŠƒXƒgXVˆ——pƒtƒ‰ƒO
-#DIMS     INPUT_STR  ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
-#DIM      INPUT_INT  ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
-#DIM      L_INPUT    ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
+#DIMS     SCENE      ;ä½¿ç”¨å ´é¢
+#DIMS     OP         ;ã‚ªãƒ—ã‚·ãƒ§ãƒ³æ–‡å­—åˆ—
+#DIM  REF CHARA_LIST ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆä¸€è¦§é…åˆ—
+#DIM      CHARA_CNT  ;ãƒªã‚¹ãƒˆä¸­ã®ã‚­ãƒ£ãƒ©æ•°
+#DIM  REF NOW_GROUP  ;ç¾åœ¨è¡¨ç¤ºä¸­ã®ã‚­ãƒ£ãƒ©ã‚°ãƒ«ãƒ¼ãƒ—
+#DIM      LAST_GROUP ;ã‚­ãƒ£ãƒ©ã‚°ãƒ«ãƒ¼ãƒ—ã®æœ€å¾Œå°¾
+#DIMS REF LIST_PACK  ;ãƒ‘ãƒƒã‚¯ãƒªã‚¹ãƒˆé…åˆ—
+#DIM  REF PACK_PAGE  ;è¡¨ç¤ºãƒ‡ãƒ¼ã‚¿ã®ãƒšãƒ¼ã‚¸æ•°
+#DIM      PACK_SIZE  ;ãƒ‘ãƒƒã‚¯ãƒªã‚¹ãƒˆé…åˆ—ã®ã‚µã‚¤ã‚º
+#DIM      INPUT_MIN  ;è¡¨ç¤ºä¸­ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«IDã®æœ€å°å€¤
+#DIM      INPUT_MAX  ;è¡¨ç¤ºä¸­ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«IDã®æœ€å¤§å€¤
+#DIMS REF SORT_TYPE  ;ç¾åœ¨ã®ã‚½ãƒ¼ãƒˆé †
+#DIM  REF GET_LIST   ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆæ›´æ–°å‡¦ç†ç”¨ãƒ•ãƒ©ã‚°
+#DIMS     INPUT_STR  ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
+#DIM      INPUT_INT  ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
+#DIM      L_INPUT    ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
 
-#DIM DYNAMIC L_SUP_CNT, 4         ;Še•”‘à‚É”z‘®Ï‚Ý‚ÌƒLƒƒƒ‰”
+#DIM DYNAMIC L_SUP_CNT, 4         ;å„éƒ¨éšŠã«é…å±žæ¸ˆã¿ã®ã‚­ãƒ£ãƒ©æ•°
 
-;ƒ{ƒ^ƒ“’·‚³F
+;ãƒœã‚¿ãƒ³é•·ã•ï¼š
 ;[----] - 
 ;%LIST_PACK:((PACK_PAGE - 1 + 11) % 11), 20%
 ;
-;î•ñˆÚ“®‚Íƒ{ƒ^ƒ“•”9Aƒ‰ƒxƒ‹•”20‚Å29
-;ƒLƒƒƒ‰ˆÚ“®‚Íƒ{ƒ^ƒ“•”9Aƒ‰ƒxƒ‹•”14‚Å23
+;æƒ…å ±ç§»å‹•ã¯ãƒœã‚¿ãƒ³éƒ¨9ã€ãƒ©ãƒ™ãƒ«éƒ¨20ã§29
+;ã‚­ãƒ£ãƒ©ç§»å‹•ã¯ãƒœã‚¿ãƒ³éƒ¨9ã€ãƒ©ãƒ™ãƒ«éƒ¨14ã§23
 PRINTFORM %" " * 29%
-PRINTFORM @@
+PRINTFORM ã€€ã€€
 SIF CHARA_CNT > 0 && NOW_GROUP > 1
-	PRINTBUTTON "[8888] - @‘O‚ÌƒLƒƒƒ‰@", "8888"
+	PRINTBUTTON "[8888] - ã€€å‰ã®ã‚­ãƒ£ãƒ©ã€€", "8888"
 PRINTFORML 
-PRINTFORM @
+PRINTFORM ã€€
 PRINTBUTTON @"[4444] - %LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%", "4444"
-PRINTFORM @
+PRINTFORM ã€€
 PRINTFORM %" " * 23%
-PRINTFORM @
+PRINTFORM ã€€
 PRINTBUTTON @"[6666] - %LIST_PACK:((PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE), 20%", "6666"
 PRINTFORML 
 IF CHARANUM < 200
-	PRINTFORM @
-	PRINTBUTTON "[1111] - @@VZl‚ðŒ©’è‚ß‚é", "1111"
-	PRINTFORM @
+	PRINTFORM ã€€
+	PRINTBUTTON "[1111] - ã€€ã€€æ–°ä½äººã‚’è¦‹å®šã‚ã‚‹", "1111"
+	PRINTFORM ã€€
 ELSE
 	PRINTFORM %" " * 29%
-	PRINTFORM @@
+	PRINTFORM ã€€ã€€
 ENDIF
 IF CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP
-	PRINTBUTTON "[2222] - @ŽŸ‚ÌƒLƒƒƒ‰@", "2222"
+	PRINTBUTTON "[2222] - ã€€æ¬¡ã®ã‚­ãƒ£ãƒ©ã€€", "2222"
 ELSE
 	PRINTFORM %" " * 23%
 ENDIF
-PRINTFORM @
-PRINTBUTTON "[3333] - @@@@•\Ž¦l”•ÏX", "3333"
+PRINTFORM ã€€
+PRINTBUTTON "[3333] - ã€€ã€€ã€€ã€€è¡¨ç¤ºäººæ•°å¤‰æ›´", "3333"
 PRINTFORML 
 DRAWLINE
-PRINTFORM @
-PRINTBUTTON "[9999] - @@@@‚à‚Ç‚é@@@@", "9999"
+PRINTFORM ã€€
+PRINTBUTTON "[9999] - ã€€ã€€ã€€ã€€ã‚‚ã©ã‚‹ã€€ã€€ã€€ã€€", "9999"
 PRINTFORML 
 PRINTFORML 
 DO
@@ -112,7 +112,7 @@ DO
 	IF ISNUMERIC(INPUT_STR)
 		INPUT_INT = TOINT(INPUT_STR)
 		SELECTCASE INPUT_INT
-		;æ‚ÉƒVƒXƒeƒ€Œn‚ðˆ—AƒLƒƒƒ‰”‚ª‘½‚¢‚Ì‚Å4ƒPƒ^‚ÉŠg’£
+		;å…ˆã«ã‚·ã‚¹ãƒ†ãƒ ç³»ã‚’å‡¦ç†ã€ã‚­ãƒ£ãƒ©æ•°ãŒå¤šã„ã®ã§4ã‚±ã‚¿ã«æ‹¡å¼µ
 		CASE 8888
 			SIF !(CHARA_CNT > 0 && NOW_GROUP > 1)
 				GOTO CAFE_RETRY
@@ -131,17 +131,17 @@ DO
 				GET_LIST = 1
 			RETURN -1
 		CASE 3333
-			PRINTFORML ƒy[ƒWÅ‘å•\Ž¦l”‚ð‘I‘ð‚Ü‚½‚Í“ü—Í‚µ‚Ä‚­‚¾‚³‚¢i1`999lj
-			PRINTFORM [5] 5l 
-			PRINTFORM [10] 10l 
-			PRINTFORM [15] 15l 
-			PRINTFORML [20] 20l 
-			PRINTFORML [0] •ÏX‚µ‚È‚¢
+			PRINTFORML ãƒšãƒ¼ã‚¸æœ€å¤§è¡¨ç¤ºäººæ•°ã‚’é¸æŠžã¾ãŸã¯å…¥åŠ›ã—ã¦ãã ã•ã„ï¼ˆ1ï½ž999äººï¼‰
+			PRINTFORM [5] 5äºº 
+			PRINTFORM [10] 10äºº 
+			PRINTFORM [15] 15äºº 
+			PRINTFORML [20] 20äºº 
+			PRINTFORML [0] å¤‰æ›´ã—ãªã„
 			INPUT
 			L_INPUT = RESULT
 			IF INRANGE(L_INPUT, 1, 999)
-				FLAG:’è”_ƒJƒtƒF•\Ž¦” = L_INPUT
-				PRINTFORMW •\Ž¦l”‚ð{L_INPUT}l‚É•ÏX‚µ‚Ü‚µ‚½
+				FLAG:å®šæ•°_ã‚«ãƒ•ã‚§è¡¨ç¤ºæ•° = L_INPUT
+				PRINTFORMW è¡¨ç¤ºäººæ•°ã‚’{L_INPUT}äººã«å¤‰æ›´ã—ã¾ã—ãŸ
 				GET_LIST = 1
 				NOW_GROUP = 1
 			ENDIF
@@ -156,19 +156,19 @@ DO
 			NOW_GROUP = 1
 			RETURN
 		CASEELSE
-		;ƒLƒƒƒ‰‚ª‘I‘ð‚³‚ê‚½Žž
+		;ã‚­ãƒ£ãƒ©ãŒé¸æŠžã•ã‚ŒãŸæ™‚
 			SIF !INRANGE(INPUT_INT, INPUT_MIN, INPUT_MAX)
 				GOTO CAFE_RETRY
-			;‚±‚±‚¾‚¯DO-LOOP‚Ê‚¯‚Ü‚·
+			;ã“ã“ã ã‘DO-LOOPã¬ã‘ã¾ã™
 			BREAK
 			$CAFE_RETRY
-			CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+			CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 			CONTINUE
 		ENDSELECT
 	ELSE
-		;STR‚ÅŽó‚¯Žæ‚Á‚½ŽžASORTˆ—‚È‚Ì‚Åˆ—‚ª‰Â”\‚Èê‡‚Í‘S‚ÄRESTART
-		;–­‚È•¶Žš—ñ‚ðŽó‚¯Žæ‚Á‚½ê‡‚É‚ÍCONTINUE
-		;DO-LOOP‚ð’Eo‚Å‚«‚é‚Ì‚ÍINT‚©‚ÂAƒŠƒXƒgã‚ÌƒLƒƒƒ‰‚ð‘I‘ð‚µ‚½ê‡‚Ì‚Ý
+		;STRã§å—ã‘å–ã£ãŸæ™‚ã€SORTå‡¦ç†ãªã®ã§å‡¦ç†ãŒå¯èƒ½ãªå ´åˆã¯å…¨ã¦RESTART
+		;å¦™ãªæ–‡å­—åˆ—ã‚’å—ã‘å–ã£ãŸå ´åˆã«ã¯CONTINUE
+		;DO-LOOPã‚’è„±å‡ºã§ãã‚‹ã®ã¯INTã‹ã¤ã€ãƒªã‚¹ãƒˆä¸Šã®ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ãŸå ´åˆã®ã¿
 		CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
 		IF RESULT
 			RETURN -1

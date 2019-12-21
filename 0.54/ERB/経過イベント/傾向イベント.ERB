@@ -1,125 +1,125 @@
-;-------------------------------------------------
-;ŒXŒüƒCƒxƒ“ƒg
+ï»¿;-------------------------------------------------
+;å‚¾å‘ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @TURN_EVENT_TL
 #DIM L_KD
 
 L_KD = 0
 
-IF CFlag:’lŒXŒü == 3 && CFLAG:ˆú—’l < 999
-;ˆú—
+IF CFlag:å€¤å‚¾å‘ == 3 && CFLAG:æ·«ä¹±å€¤ < 999
+;æ·«ä¹±
 DRAWLINE
 	IF !RAND:5
-		PRINTFORML u‚ñ‚Ác‚¦‚ÁA‚Èc‰½‚Å‚à‚È‚¢%CSTR:Œê”ö‚Å‚·2%‚Áv
+		PRINTFORML ã€Œã‚“ã£â€¦ãˆã£ã€ãªâ€¦ä½•ã§ã‚‚ãªã„%CSTR:èªžå°¾ã§ã™2%ã£ã€
 	ELSEIF !RAND:4
-		PRINTFORML (Å‹ßc‰½ŒÌ‚©g‘Ì‚ª”M‚­c)
+		PRINTFORML (æœ€è¿‘â€¦ä½•æ•…ã‹èº«ä½“ãŒç†±ãâ€¦)
 	ELSEIF !RAND:3
-		PRINTFORML u‚Í‚Ÿc‚Í‚Ÿcc‹C•ª‚ª‚—g‚·‚écv
+		PRINTFORML ã€Œã¯ãâ€¦ã¯ãâ€¦â€¦æ°—åˆ†ãŒé«˜æšã™ã‚‹â€¦ã€
 	ELSEIF !RAND:2
-		PRINTFORML (g‘Ì‚ªáu‚­cc—}‚¦‚ªc‚Ác)
+		PRINTFORML (èº«ä½“ãŒç–¼ãâ€¦â€¦æŠ‘ãˆãŒâ€¦ã£â€¦)
 	ELSE
-		PRINTFORML uŠç‚ªÔ‚¢cHA‚»‚Ác‚»‚ñ‚È‚±‚Æ‚Í‚È‚¢%CSTR:Œê”ö‚Å‚·2%‚Áccc‚ñ‚Ácv
+		PRINTFORML ã€Œé¡”ãŒèµ¤ã„â€¦ï¼Ÿã€ãã£â€¦ãã‚“ãªã“ã¨ã¯ãªã„%CSTR:èªžå°¾ã§ã™2%ã£â€¦â€¦â€¦ã‚“ã£â€¦ã€
 	ENDIF
-	CFLAG:ˆú—’l += (RAND:3)+((CFLAG:DŠ´“x)/200)+1
-	PRINTFORML –§‚©‚É·‚ç‚ê‚½›Z–ò‚ÌŒø‰Ê‚É‚æ‚èA%CALLNAME%‚Í«—~‚ð‚‚ß‚Ä‚¢‚­c
-	IF ABL:«“z—ê < 9 && ((ABL:«“z—ê)*100) < CFLAG:ˆú—’l
+	CFLAG:æ·«ä¹±å€¤ += (RAND:3)+((CFLAG:å¥½æ„Ÿåº¦)/200)+1
+	PRINTFORML å¯†ã‹ã«ç››ã‚‰ã‚ŒãŸåªšè–¬ã®åŠ¹æžœã«ã‚ˆã‚Šã€%CALLNAME%ã¯æ€§æ¬²ã‚’é«˜ã‚ã¦ã„ãâ€¦
+	IF ABL:æ€§å¥´éš· < 9 && ((ABL:æ€§å¥´éš·)*100) < CFLAG:æ·«ä¹±å€¤
 		SETCOLOR 0,250,250
-		PRINTFORML «“z—ê‚ªã¸‚µ‚½
+		PRINTFORML æ€§å¥´éš·ãŒä¸Šæ˜‡ã—ãŸ
 		RESETCOLOR
-		ABL:«“z—ê += 1
+		ABL:æ€§å¥´éš· += 1
 	ENDIF
 	IF RAND:10 > 5
 		SETCOLOR 250,250,0
-		CFLAG:Zl_ƒ‚ƒ‰ƒ‹ -= 1
-		PRINTFORML ƒ‚ƒ‰ƒ‹‚ª’á‰º‚µ‚½
+		CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« -= 1
+		PRINTFORML ãƒ¢ãƒ©ãƒ«ãŒä½Žä¸‹ã—ãŸ
 		RESETCOLOR
 	ENDIF
-ELSEIF CFlag:’lŒXŒü == 2 && CFLAG:ˆ¤î’l < 999
-;ˆ¤î
+ELSEIF CFlag:å€¤å‚¾å‘ == 2 && CFLAG:æ„›æƒ…å€¤ < 999
+;æ„›æƒ…
 DRAWLINE
 	IF !RAND:5
-		PRINTFORML u\\%CSTR:Œê”ö”÷Î%A‚»‚ê‚Í–Ê”’‚¢%CSTR:Œê”ö‰ž“š2%v
+		PRINTFORML ã€Œâ€•â€•%CSTR:èªžå°¾å¾®ç¬‘%ã€ãã‚Œã¯é¢ç™½ã„%CSTR:èªžå°¾å¿œç­”2%ã€
 	ELSEIF !RAND:4
-		PRINTFORML u‚Ü‚¾ŽžŠÔ‚ %CSTR:Œê”ö•·‚­%ccHA‚È‚çŽŸs%CSTR:Œê”ös‚­%v
+		PRINTFORML ã€Œã¾ã æ™‚é–“ã‚%CSTR:èªžå°¾èžã%â€¦â€¦ï¼Ÿã€ãªã‚‰æ¬¡è¡Œ%CSTR:èªžå°¾è¡Œã%ã€
 	ELSEIF !RAND:3
-		PRINTFORML u‚±‚Á‚¿‚Í‚Ç‚¤%CSTR:Œê”ö‹^–â%HA‚Ù‚çA—Ç‚¢Š´‚¶%CSTR:Œê”ö‚Å‚·%v
+		PRINTFORML ã€Œã“ã£ã¡ã¯ã©ã†%CSTR:èªžå°¾ç–‘å•%ï¼Ÿã€ã»ã‚‰ã€è‰¯ã„æ„Ÿã˜%CSTR:èªžå°¾ã§ã™%ã€
 	ELSEIF !RAND:2
-		PRINTFORML uc‚ÜA‚Ü‚¾Šñ‚è‚½‚¢‚Æ‚±‚ë‚ %CSTR:Œê”ö•·‚­%HAccv
+		PRINTFORML ã€Œâ€¦ã¾ã€ã¾ã å¯„ã‚ŠãŸã„ã¨ã“ã‚ã‚%CSTR:èªžå°¾èžã%ï¼Ÿã€â€¦â€¦ã€
 	ELSE
-		PRINTFORML u%CSTR:Œê”ö”½‰ž%c‚ ‚ê–Ê”’‚»‚¤%CSTR:Œê”ö‚Å‚·%A‚â‚Á‚Ä%CSTR:Œê”ösˆ×2%Hv
+		PRINTFORML ã€Œ%CSTR:èªžå°¾åå¿œ%â€¦ã‚ã‚Œé¢ç™½ãã†%CSTR:èªžå°¾ã§ã™%ã€ã‚„ã£ã¦%CSTR:èªžå°¾è¡Œç‚º2%ï¼Ÿã€
 	ENDIF
-	CFLAG:ˆ¤î’l += (RAND:3)+((CFLAG:DŠ´“x)/200)+1
-	PRINTFORML “ñl‚¾‚¯‚Ì—LˆÓ‹`‚ÈŽžŠÔ‚É‚æ‚èA%CALLNAME%‚Í%CALLNAME:MASTER%‚Éˆ¤î‚ð­‚µ‚¸‚Â’~Ï‚µ‚Ä‚¢‚­c
-	IF ABL:˜U— < 9 && ((ABL:˜U—)*100) < CFLAG:ˆ¤î’l
+	CFLAG:æ„›æƒ…å€¤ += (RAND:3)+((CFLAG:å¥½æ„Ÿåº¦)/200)+1
+	PRINTFORML äºŒäººã ã‘ã®æœ‰æ„ç¾©ãªæ™‚é–“ã«ã‚ˆã‚Šã€%CALLNAME%ã¯%CALLNAME:MASTER%ã«æ„›æƒ…ã‚’å°‘ã—ãšã¤è“„ç©ã—ã¦ã„ãâ€¦
+	IF ABL:ç¯­çµ¡ < 9 && ((ABL:ç¯­çµ¡)*100) < CFLAG:æ„›æƒ…å€¤
 		SETCOLOR 0,250,250
-		PRINTFORML ˜U—‚ªã¸‚µ‚½
+		PRINTFORML ç¯­çµ¡ãŒä¸Šæ˜‡ã—ãŸ
 		RESETCOLOR
-		ABL:˜U— += 1
+		ABL:ç¯­çµ¡ += 1
 	ENDIF
-ELSEIF CFlag:’lŒXŒü == 1 && CFLAG:’‰½’l < 999
-;’‰½
+ELSEIF CFlag:å€¤å‚¾å‘ == 1 && CFLAG:å¿ èª å€¤ < 999
+;å¿ èª 
 DRAWLINE
 	IF !RAND:5
-		PRINTFORML u\\\‚È‚é‚Ù‚ÇAc–{“–‚É•¨’m‚è%CSTR:Œê”öm’è%v
+		PRINTFORML ã€Œâ€•â€•â€•ãªã‚‹ã»ã©ã€â€¦æœ¬å½“ã«ç‰©çŸ¥ã‚Š%CSTR:èªžå°¾è‚¯å®š%ã€
 	ELSEIF !RAND:4
-		PRINTFORML u\\‚·‚²‚¢%CSTR:Œê”öÌ‚¦‚é%A%CSTR:ˆêlÌ%‚à‚±‚ê‚­‚ç‚¢‚Å‚«‚½‚çcv
+		PRINTFORML ã€Œâ€•â€•ã™ã”ã„%CSTR:èªžå°¾ç§°ãˆã‚‹%ã€%CSTR:ä¸€äººç§°%ã‚‚ã“ã‚Œãã‚‰ã„ã§ããŸã‚‰â€¦ã€
 	ELSEIF !RAND:3
-		PRINTFORML uŽè“`‚Á‚Ä—~‚µ‚¢‚±‚Æ‚ª\\\‚¢‚Â‚à%CSTR:Œê”öŠ´ŽÓ%v
+		PRINTFORML ã€Œæ‰‹ä¼ã£ã¦æ¬²ã—ã„ã“ã¨ãŒâ€•â€•â€•ã„ã¤ã‚‚%CSTR:èªžå°¾æ„Ÿè¬%ã€
 	ELSEIF !RAND:2
-		PRINTFORML u‰½‚©¢‚Á‚Ä‚é‚±‚Æ‚ %CSTR:Œê”ö•·‚­%Hv
+		PRINTFORML ã€Œä½•ã‹å›°ã£ã¦ã‚‹ã“ã¨ã‚%CSTR:èªžå°¾èžã%ï¼Ÿã€
 	ELSE
-		PRINTFORML (cc‚¢‚Â‚àŒ©‚Ä‚é‚¯‚ÇAŽèÛ‚ª‚¢‚¢%CSTR:Œê”ö‰ž“š2%c)
+		PRINTFORML (â€¦â€¦ã„ã¤ã‚‚è¦‹ã¦ã‚‹ã‘ã©ã€æ‰‹éš›ãŒã„ã„%CSTR:èªžå°¾å¿œç­”2%â€¦)
 	ENDIF
-	CFLAG:’‰½’l += (RAND:3)+((CFLAG:DŠ´“x)/200)+1
-	PRINTFORML ‹¤“¯ì‹Æ‚Ì‰ß’ö‚Å%CALLNAME%‚Í%CALLNAME:MASTER%‚ÉŠÖS‚Æ‘¸Œh‚Ì”O‚ð•ø‚¢‚Ä‚¢‚éc
-	IF ABL:]‡ < 9 && ((ABL:]‡)*100) < CFLAG:’‰½’l
+	CFLAG:å¿ èª å€¤ += (RAND:3)+((CFLAG:å¥½æ„Ÿåº¦)/200)+1
+	PRINTFORML å…±åŒä½œæ¥­ã®éŽç¨‹ã§%CALLNAME%ã¯%CALLNAME:MASTER%ã«é–¢å¿ƒã¨å°Šæ•¬ã®å¿µã‚’æŠ±ã„ã¦ã„ã‚‹â€¦
+	IF ABL:å¾“é † < 9 && ((ABL:å¾“é †)*100) < CFLAG:å¿ èª å€¤
 		SETCOLOR 0,250,250
-		PRINTFORML ]‡‚ªã¸‚µ‚½
+		PRINTFORML å¾“é †ãŒä¸Šæ˜‡ã—ãŸ
 		RESETCOLOR
-		ABL:]‡ += 1
+		ABL:å¾“é † += 1
 	ENDIF
 	IF RAND:10 > 5
 		SETCOLOR 250,250,0
-		CFLAG:Zl_ƒ‚ƒ‰ƒ‹ += 1
-		PRINTFORML ƒ‚ƒ‰ƒ‹‚ªã¸‚µ‚½
+		CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« += 1
+		PRINTFORML ãƒ¢ãƒ©ãƒ«ãŒä¸Šæ˜‡ã—ãŸ
 		RESETCOLOR
 	ENDIF
 ELSE
-;‚È‚µ
+;ãªã—
 ENDIF
 
-IF ABL:e–§ < 9 && ((ABL:e–§)*500) < CFLAG:DŠ´“x
+IF ABL:è¦ªå¯† < 9 && ((ABL:è¦ªå¯†)*500) < CFLAG:å¥½æ„Ÿåº¦
 	SETCOLOR 0,250,250
-	PRINTFORML e–§‚ªã¸‚µ‚½
+	PRINTFORML è¦ªå¯†ãŒä¸Šæ˜‡ã—ãŸ
 	RESETCOLOR
-	ABL:e–§ += 1
+	ABL:è¦ªå¯† += 1
 ENDIF
 
-L_KD = CFLAG:DŠ´“x/10
+L_KD = CFLAG:å¥½æ„Ÿåº¦/10
 SIF L_KD > 100
 	L_KD = 100
 
-IF TALENT:‘¦‘Â‚¿ == 1
+IF TALENT:å³å •ã¡ == 1
 	L_KD = L_KD*5
-ELSEIF TALENT:›‚ê‚Á‚Û‚¢ == 1
+ELSEIF TALENT:æƒšã‚Œã£ã½ã„ == 1
 	L_KD = L_KD*2
 ENDIF
 
-CFLAG:DŠ´“x += L_KD
+CFLAG:å¥½æ„Ÿåº¦ += L_KD
 
-SIF CFLAG:DŠ´“x > 9999999
-	CFLAG:DŠ´“x = 9999999
+SIF CFLAG:å¥½æ„Ÿåº¦ > 9999999
+	CFLAG:å¥½æ„Ÿåº¦ = 9999999
 
-SIF CFLAG:ˆú—’l > 999
-	CFLAG:ˆú—’l = 999
-SIF CFLAG:ˆ¤î’l > 999
-	CFLAG:ˆ¤î’l = 999
-SIF CFLAG:’‰½’l > 999
-	CFLAG:’‰½’l = 999
-SIF CFLAG:Zl_ƒ‚ƒ‰ƒ‹ > 100
-	CFLAG:Zl_ƒ‚ƒ‰ƒ‹ = 100
-SIF CFLAG:Zl_ƒ‚ƒ‰ƒ‹ < -100
-	CFLAG:Zl_ƒ‚ƒ‰ƒ‹ = -100
+SIF CFLAG:æ·«ä¹±å€¤ > 999
+	CFLAG:æ·«ä¹±å€¤ = 999
+SIF CFLAG:æ„›æƒ…å€¤ > 999
+	CFLAG:æ„›æƒ…å€¤ = 999
+SIF CFLAG:å¿ èª å€¤ > 999
+	CFLAG:å¿ èª å€¤ = 999
+SIF CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« > 100
+	CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« = 100
+SIF CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« < -100
+	CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« = -100
 
 
 

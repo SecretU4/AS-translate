@@ -1,179 +1,179 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:‰‘ÌŒ±‹L˜^.ERB
-;	Facility	:‚»‚ê‚¼‚ê‚Ì‰‘ÌŒ±‘ŠŽè‚ð‹L˜^‚µ‚ÄAƒXƒe[ƒ^ƒX‚Å•\Ž¦‚Å‚«‚é‚æ‚¤‚É‚·‚é
+;	Module		:åˆä½“é¨“è¨˜éŒ².ERB
+;	Facility	:ãã‚Œãžã‚Œã®åˆä½“é¨“ç›¸æ‰‹ã‚’è¨˜éŒ²ã—ã¦ã€ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã§è¡¨ç¤ºã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2013/12/19		ƒlƒgƒŠƒX				V‹Kì¬
-;	002		20XX/XX/XX		----					’²®
+;	001		2013/12/19		ãƒãƒˆãƒªã‚¹				æ–°è¦ä½œæˆ
+;	002		20XX/XX/XX		----					èª¿æ•´
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;‚ ‚­‚Ü‚ÅŸŽè‚Éì‚Á‚½ŠO•”ƒpƒbƒ`‚È‚Ì‚ÅAŒø—¦‚ªˆ«‚­‚Ä‚àƒGƒ‰[–hŽ~‚Ì‚½‚ß‚É‘å•”•ª‚Ìˆ—‚Í‚±‚Ì’†‚Ås‚¤
-;–{‘Ì‚É‘‚«ž‚Þê‡‚ÍwTRYCALLx‚ðŽg‚Á‚ÄA‚±‚ÌERB‚ðŠO‚µ‚Ä‚àƒGƒ‰[‚ª‹N‚±‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+;ã‚ãã¾ã§å‹æ‰‹ã«ä½œã£ãŸå¤–éƒ¨ãƒ‘ãƒƒãƒãªã®ã§ã€åŠ¹çŽ‡ãŒæ‚ªãã¦ã‚‚ã‚¨ãƒ©ãƒ¼é˜²æ­¢ã®ãŸã‚ã«å¤§éƒ¨åˆ†ã®å‡¦ç†ã¯ã“ã®ä¸­ã§è¡Œã†
+;æœ¬ä½“ã«æ›¸ãè¾¼ã‚€å ´åˆã¯ã€ŽTRYCALLã€ã‚’ä½¿ã£ã¦ã€ã“ã®ERBã‚’å¤–ã—ã¦ã‚‚ã‚¨ãƒ©ãƒ¼ãŒèµ·ã“ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
 ;
 ;==========================================================
-;@‰‘ÌŒ±‹L˜^_’²‹³
-; ’²‹³Žž‚Ì‰‘ÌŒ±‹L˜^
+;@åˆä½“é¨“è¨˜éŒ²_èª¿æ•™
+; èª¿æ•™æ™‚ã®åˆä½“é¨“è¨˜éŒ²
 ;
-;<ˆø”>
-;ARG   = ‘ÎÛŽÒ
-;ARG:1 = ‰‘ÌŒ±‚Ì‹æ•Ê—pi1.‰‚¦‚Á‚¿@2.‰‚`‚¦‚Á‚¿@3.‰ƒLƒX@4.‰ƒtƒFƒ‰@5.‰’†o‚µ@6.‰â’¸@7.‰¸ˆù@8.‰oŽY
-;ARGS  = ‘ŠŽè–¼
-;<•Ï”>
+;<å¼•æ•°>
+;ARG   = å¯¾è±¡è€…
+;ARG:1 = åˆä½“é¨“ã®åŒºåˆ¥ç”¨ï¼ˆ1.åˆãˆã£ã¡ã€€2.åˆï¼¡ãˆã£ã¡ã€€3.åˆã‚­ã‚¹ã€€4.åˆãƒ•ã‚§ãƒ©ã€€5.åˆä¸­å‡ºã—ã€€6.åˆçµ¶é ‚ã€€7.åˆç²¾é£²ã€€8.åˆå‡ºç”£
+;ARGS  = ç›¸æ‰‹å
+;<å¤‰æ•°>
 ;
-;<–ß‚è’l>
+;<æˆ»ã‚Šå€¤>
 ;
 ;==========================================================
-@‰‘ÌŒ±‹L˜^_’²‹³, ARG, ARG:1, ARGS=""
+@åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, ARG:1, ARGS=""
 #LOCALSSIZE 1
 
 LOCALS=
-;‰‘ÌŒ±‚Ì‘ŠŽè–¼‚ð‹L˜^
+;åˆä½“é¨“ã®ç›¸æ‰‹åã‚’è¨˜éŒ²
 SELECTCASE ARG:1
-	;‰‚¦‚Á‚¿
+	;åˆãˆã£ã¡
 	CASE 1
-		LOCALS=‰‚¦‚Á‚¿‘ŠŽè–¼
-	;‰‚`‚¦‚Á‚¿
+		LOCALS=åˆãˆã£ã¡ç›¸æ‰‹å
+	;åˆï¼¡ãˆã£ã¡
 	CASE 2
-		LOCALS=‰‚`‚¦‚Á‚¿‘ŠŽè–¼
-	;‰ƒLƒX
+		LOCALS=åˆï¼¡ãˆã£ã¡ç›¸æ‰‹å
+	;åˆã‚­ã‚¹
 	CASE 3
-		LOCALS=‰ƒLƒX‘ŠŽè–¼
-	;‰ƒtƒFƒ‰
+		LOCALS=åˆã‚­ã‚¹ç›¸æ‰‹å
+	;åˆãƒ•ã‚§ãƒ©
 	CASE 4
-		LOCALS=‰ƒtƒFƒ‰‘ŠŽè–¼
-	;‰’†o‚µ
+		LOCALS=åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å
+	;åˆä¸­å‡ºã—
 	CASE 5
-		LOCALS=‰’†o‚µ‘ŠŽè–¼
-	;‰â’¸
+		LOCALS=åˆä¸­å‡ºã—ç›¸æ‰‹å
+	;åˆçµ¶é ‚
 	CASE 6
-		LOCALS=‰â’¸‘ŠŽè–¼
-	;‰¸ˆù
+		LOCALS=åˆçµ¶é ‚ç›¸æ‰‹å
+	;åˆç²¾é£²
 	CASE 7
-		LOCALS=‰¸ˆù‘ŠŽè–¼
-	;‰oŽY‘ŠŽè–¼
+		LOCALS=åˆç²¾é£²ç›¸æ‰‹å
+	;åˆå‡ºç”£ç›¸æ‰‹å
 	CASE 8
-		SIF CSTR:ARG:‰oŽY‘ŠŽè–¼ == ""
-			CSTR:ARG:‰oŽY‘ŠŽè–¼ = %CSTR:ARG:”DP‘ŠŽè–¼%
+		SIF CSTR:ARG:åˆå‡ºç”£ç›¸æ‰‹å == ""
+			CSTR:ARG:åˆå‡ºç”£ç›¸æ‰‹å = %CSTR:ARG:å¦Šå¨ ç›¸æ‰‹å%
 		RETURN
-	;‚»‚Ì‘¼
+	;ãã®ä»–
 	CASEELSE
 		RETURN
 ENDSELECT
 SIF CSTR:ARG:LOCALS != ""
 	RETURN
 
-;–¼‘O—L‚è‚Ìê‡‚Í‚»‚ê‚ðƒZƒbƒg
+;åå‰æœ‰ã‚Šã®å ´åˆã¯ãã‚Œã‚’ã‚»ãƒƒãƒˆ
 IF STRLENS(ARGS)
 	CSTR:ARG:LOCALS = %ARGS%
-;Žål
+;ä¸»äºº
 ELSEIF ARG == MASTER
-	;“z—ê‚ðƒZƒbƒg
-	CSTR:ARG:LOCALS = %NAME:(TFLAG:ƒƒCƒ“ƒ^[ƒQƒbƒg)%
-;‚»‚êˆÈŠO‚ÍPLAYER
+	;å¥´éš·ã‚’ã‚»ãƒƒãƒˆ
+	CSTR:ARG:LOCALS = %NAME:(TFLAG:ãƒ¡ã‚¤ãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ)%
+;ãã‚Œä»¥å¤–ã¯PLAYER
 ELSE
 	CSTR:ARG:LOCALS = %NAME:PLAYER%
 ENDIF
 
 
 ;;==========================================================
-;;@‰‘ÌŒ±‹L˜^_‚m‚s‚q
-;; ’²‹³Žž‚Ì‰‘ÌŒ±‹L˜^
+;;@åˆä½“é¨“è¨˜éŒ²_ï¼®ï¼´ï¼²
+;; èª¿æ•™æ™‚ã®åˆä½“é¨“è¨˜éŒ²
 ;;
-;;<ˆø”>
-;;ARG = ‘ÎÛŽÒ
+;;<å¼•æ•°>
+;;ARG = å¯¾è±¡è€…
 ;;ARG:1
-;;ARG:2 = ‰‘ÌŒ±‚Ì‹æ•Ê—pi1.‰‚¦‚Á‚¿@2.‰‚`‚¦‚Á‚¿@3.‰ƒLƒX@4.‰ƒtƒFƒ‰@5.‰’†o‚µ@6.‰â’¸@7.‰¸ˆù
-;;<•Ï”>
+;;ARG:2 = åˆä½“é¨“ã®åŒºåˆ¥ç”¨ï¼ˆ1.åˆãˆã£ã¡ã€€2.åˆï¼¡ãˆã£ã¡ã€€3.åˆã‚­ã‚¹ã€€4.åˆãƒ•ã‚§ãƒ©ã€€5.åˆä¸­å‡ºã—ã€€6.åˆçµ¶é ‚ã€€7.åˆç²¾é£²
+;;<å¤‰æ•°>
 ;;
-;;<–ß‚è’l>
+;;<æˆ»ã‚Šå€¤>
 ;;
 ;;==========================================================
-;@‰‘ÌŒ±‹L˜^_‚m‚s‚q, ARGS
+;@åˆä½“é¨“è¨˜éŒ²_ï¼®ï¼´ï¼², ARGS
 ;#LOCALSSIZE 1
 ;
-;LOCALS=‰‚¦‚Á‚¿‘ŠŽè–¼
-;SIF EXP:TARGET:‚uŒoŒ± && (CSTR:TARGET:LOCALS == "–¢ŒoŒ±" || CSTR:TARGET:LOCALS == "")
+;LOCALS=åˆãˆã£ã¡ç›¸æ‰‹å
+;SIF EXP:TARGET:ï¼¶çµŒé¨“ && (CSTR:TARGET:LOCALS == "æœªçµŒé¨“" || CSTR:TARGET:LOCALS == "")
 ;	CSTR:TARGET:LOCALS = %ARGS%
-;SIF EXP:TARGET:ƒLƒXŒoŒ± && (CSTR:TARGET:‰ƒLƒX‘ŠŽè–¼ == "–¢ŒoŒ±" || CSTR:TARGET:‰ƒLƒX‘ŠŽè–¼ == "")
-;	CSTR:TARGET:‰ƒLƒX‘ŠŽè–¼ = %ARGS%
-;SIF EXP:TARGET:ƒtƒFƒ‰ŒoŒ± && (CSTR:TARGET:‰ƒtƒFƒ‰‘ŠŽè–¼ == "–¢ŒoŒ±" || CSTR:TARGET:‰ƒtƒFƒ‰‘ŠŽè–¼ == "")
-;	CSTR:TARGET:‰ƒtƒFƒ‰‘ŠŽè–¼ = %ARGS%
-;SIF EXP:TARGET:äSŽËŒoŒ± && (CSTR:TARGET:‰’†o‚µ‘ŠŽè–¼ == "–¢ŒoŒ±" || CSTR:TARGET:‰’†o‚µ‘ŠŽè–¼ == "")
-;	CSTR:TARGET:‰’†o‚µ‘ŠŽè–¼ =%ARGS%
-;SIF EXP:TARGET:â’¸ŒoŒ± && (CSTR:TARGET:‰â’¸‘ŠŽè–¼ == "–¢ŒoŒ±" || CSTR:TARGET:‰â’¸‘ŠŽè–¼ == "")
-;	CSTR:TARGET:‰â’¸‘ŠŽè–¼ = %ARGS%
-;SIF EXP:TARGET:¸ˆùŒoŒ± && (CSTR:TARGET:‰¸ˆù‘ŠŽè–¼ == "–¢ŒoŒ±" || CSTR:TARGET:‰¸ˆù‘ŠŽè–¼ == "")
-;	CSTR:TARGET:‰¸ˆù‘ŠŽè–¼ = %ARGS%
+;SIF EXP:TARGET:ã‚­ã‚¹çµŒé¨“ && (CSTR:TARGET:åˆã‚­ã‚¹ç›¸æ‰‹å == "æœªçµŒé¨“" || CSTR:TARGET:åˆã‚­ã‚¹ç›¸æ‰‹å == "")
+;	CSTR:TARGET:åˆã‚­ã‚¹ç›¸æ‰‹å = %ARGS%
+;SIF EXP:TARGET:ãƒ•ã‚§ãƒ©çµŒé¨“ && (CSTR:TARGET:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å == "æœªçµŒé¨“" || CSTR:TARGET:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å == "")
+;	CSTR:TARGET:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å = %ARGS%
+;SIF EXP:TARGET:è†£å°„çµŒé¨“ && (CSTR:TARGET:åˆä¸­å‡ºã—ç›¸æ‰‹å == "æœªçµŒé¨“" || CSTR:TARGET:åˆä¸­å‡ºã—ç›¸æ‰‹å == "")
+;	CSTR:TARGET:åˆä¸­å‡ºã—ç›¸æ‰‹å =%ARGS%
+;SIF EXP:TARGET:çµ¶é ‚çµŒé¨“ && (CSTR:TARGET:åˆçµ¶é ‚ç›¸æ‰‹å == "æœªçµŒé¨“" || CSTR:TARGET:åˆçµ¶é ‚ç›¸æ‰‹å == "")
+;	CSTR:TARGET:åˆçµ¶é ‚ç›¸æ‰‹å = %ARGS%
+;SIF EXP:TARGET:ç²¾é£²çµŒé¨“ && (CSTR:TARGET:åˆç²¾é£²ç›¸æ‰‹å == "æœªçµŒé¨“" || CSTR:TARGET:åˆç²¾é£²ç›¸æ‰‹å == "")
+;	CSTR:TARGET:åˆç²¾é£²ç›¸æ‰‹å = %ARGS%
 
 
 ;==========================================================
-;@‰‘ÌŒ±‹L˜^
-; ’²‹³Žž‚Ì‰‘ÌŒ±‹L˜^
+;@åˆä½“é¨“è¨˜éŒ²
+; èª¿æ•™æ™‚ã®åˆä½“é¨“è¨˜éŒ²
 ;
-;<ˆø”>
-;ARG = ‘ÎÛŽÒ
-;<•Ï”>
+;<å¼•æ•°>
+;ARG = å¯¾è±¡è€…
+;<å¤‰æ•°>
 ;
-;<–ß‚è’l>
+;<æˆ»ã‚Šå€¤>
 ;
 ;==========================================================
-@‰‘ÌŒ±‹L˜^(ARG)
+@åˆä½“é¨“è¨˜éŒ²(ARG)
 #DIM L_LEN
 ;FOR COUNT, 60, 68
 ;	LOCALS = %CSTR:ARG:COUNT%
 ;	IF STRLENS(LOCALS) >= 1
 ;		CONTINUE
-;	CSTR:ARG:COUNT = –¢ŒoŒ±
+;	CSTR:ARG:COUNT = æœªçµŒé¨“
 ;NEXT
 
 L_LEN = 20
 
-CALL C_HEADLINE("‰‘ÌŒ±")
-PRINTFORM ‰ƒLƒX@@F%CSTR:ARG:‰ƒLƒX‘ŠŽè–¼, L_LEN, LEFT%
-PRINTFORM ‰ƒtƒFƒ‰@F%CSTR:ARG:‰ƒtƒFƒ‰‘ŠŽè–¼, L_LEN, LEFT%
-PRINTFORM ‰¸ˆù@@F%CSTR:ARG:‰¸ˆù‘ŠŽè–¼, L_LEN, LEFT%
+CALL C_HEADLINE("åˆä½“é¨“")
+PRINTFORM åˆã‚­ã‚¹ã€€ã€€ï¼š%CSTR:ARG:åˆã‚­ã‚¹ç›¸æ‰‹å, L_LEN, LEFT%
+PRINTFORM åˆãƒ•ã‚§ãƒ©ã€€ï¼š%CSTR:ARG:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å, L_LEN, LEFT%
+PRINTFORM åˆç²¾é£²ã€€ã€€ï¼š%CSTR:ARG:åˆç²¾é£²ç›¸æ‰‹å, L_LEN, LEFT%
 PRINTL
-PRINTFORM ‰ƒGƒbƒ`@F%CSTR:ARG:‰‚¦‚Á‚¿‘ŠŽè–¼, L_LEN, LEFT%
-PRINTFORM ‰‚`ƒGƒbƒ`F%CSTR:ARG:‰‚`‚¦‚Á‚¿‘ŠŽè–¼, L_LEN, LEFT%
-PRINTFORM ‰’†o‚µ@F%CSTR:ARG:‰’†o‚µ‘ŠŽè–¼, L_LEN, LEFT%
+PRINTFORM åˆã‚¨ãƒƒãƒã€€ï¼š%CSTR:ARG:åˆãˆã£ã¡ç›¸æ‰‹å, L_LEN, LEFT%
+PRINTFORM åˆï¼¡ã‚¨ãƒƒãƒï¼š%CSTR:ARG:åˆï¼¡ãˆã£ã¡ç›¸æ‰‹å, L_LEN, LEFT%
+PRINTFORM åˆä¸­å‡ºã—ã€€ï¼š%CSTR:ARG:åˆä¸­å‡ºã—ç›¸æ‰‹å, L_LEN, LEFT%
 PRINTL
-PRINTFORM ‰â’¸@@F%CSTR:ARG:‰â’¸‘ŠŽè–¼, L_LEN, LEFT%
-PRINTFORM ‰oŽY@@F%CSTR:ARG:‰oŽY‘ŠŽè–¼, L_LEN, LEFT%
+PRINTFORM åˆçµ¶é ‚ã€€ã€€ï¼š%CSTR:ARG:åˆçµ¶é ‚ç›¸æ‰‹å, L_LEN, LEFT%
+PRINTFORM åˆå‡ºç”£ã€€ã€€ï¼š%CSTR:ARG:åˆå‡ºç”£ç›¸æ‰‹å, L_LEN, LEFT%
 PRINTL
 PRINTL
-;SIF FLAG:ƒfƒoƒbƒOƒ‚[ƒh
-;	PRINTL [999] - ‰‘ÌŒ±‹L˜^ƒŠƒZƒbƒg|ƒfƒoƒbƒOƒ‚[ƒh‹@”\
-;PRINTL [0]‚à‚Ç‚é
+;SIF FLAG:ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰
+;	PRINTL [999] - åˆä½“é¨“è¨˜éŒ²ãƒªã‚»ãƒƒãƒˆï¼ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰æ©Ÿèƒ½
+;PRINTL [0]ã‚‚ã©ã‚‹
 ;
 ;INPUT
 ;SELECTCASE RESULT
 ;	CASE 999
-;		CALL ‰‘ÌŒ±‹L˜^ƒŠƒZƒbƒg
+;		CALL åˆä½“é¨“è¨˜éŒ²ãƒªã‚»ãƒƒãƒˆ
 ;	CASEELSE
 ;		
 ;ENDSELECT
 
 
 ;;==========================================================
-;;@‰‘ÌŒ±‹L˜^ƒŠƒZƒbƒg
-;;Vƒo[ƒWƒ‡ƒ“ˆÚsŽž‚É•s‹ï‡‚ð–h‚®ˆ×‚ÌƒŠƒZƒbƒgˆ—
+;;@åˆä½“é¨“è¨˜éŒ²ãƒªã‚»ãƒƒãƒˆ
+;;æ–°ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç§»è¡Œæ™‚ã«ä¸å…·åˆã‚’é˜²ãç‚ºã®ãƒªã‚»ãƒƒãƒˆå‡¦ç†
 ;;
-;;<ˆø”>
+;;<å¼•æ•°>
 ;;
-;;<•Ï”>
+;;<å¤‰æ•°>
 ;;
-;;<–ß‚è’l>
+;;<æˆ»ã‚Šå€¤>
 ;;
 ;;==========================================================
-;@‰‘ÌŒ±‹L˜^ƒŠƒZƒbƒg
-;PRINTFORML ŠO•”ƒpƒbƒ`w‰‘ÌŒ±‹L˜^.ERBx‚ÉŽg‚í‚ê‚Ä‚¢‚éwCSTRx‚Ì”’l‚ð‘Sˆõ•ªƒŠƒZƒbƒg‚µ‚Ü‚·B
-;PRINTFORMW ‚æ‚ë‚µ‚¢‚Å‚·‚©H
+;@åˆä½“é¨“è¨˜éŒ²ãƒªã‚»ãƒƒãƒˆ
+;PRINTFORML å¤–éƒ¨ãƒ‘ãƒƒãƒã€Žåˆä½“é¨“è¨˜éŒ².ERBã€ã«ä½¿ã‚ã‚Œã¦ã„ã‚‹ã€ŽCSTRã€ã®æ•°å€¤ã‚’å…¨å“¡åˆ†ãƒªã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
+;PRINTFORMW ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
 ;CALL INPUT_YN
 ;IF !RESULT
 ;	REPEAT CHARANUM
@@ -187,161 +187,161 @@ PRINTL
 ;		CVARSET CSTR, 67
 ;	REND
 ;	
-;	PRINTFORML ƒŠƒZƒbƒg‚µ‚Ü‚µ‚½B
-;	PRINTFORMW ‚±‚Ì‚Ü‚ÜƒZ[ƒu‚ðs‚¤Ž–‚Å’Êíó‘Ô‚Ìƒf[ƒ^‚É‚È‚è‚Ü‚·B
+;	PRINTFORML ãƒªã‚»ãƒƒãƒˆã—ã¾ã—ãŸã€‚
+;	PRINTFORMW ã“ã®ã¾ã¾ã‚»ãƒ¼ãƒ–ã‚’è¡Œã†äº‹ã§é€šå¸¸çŠ¶æ…‹ã®ãƒ‡ãƒ¼ã‚¿ã«ãªã‚Šã¾ã™ã€‚
 ;ELSE
-;	PRINTFORMW ˆ—‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚µ‚½B
+;	PRINTFORMW å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¾ã—ãŸã€‚
 ;ENDIF
 
 ;;==========================================================
-;;@‰‘ÌŒ±‹L˜^•\Ž¦
-;; ‚±‚ÌERB‚ðÁ‚µ‚½‚ç•\Ž¦‚³‚ê‚È‚¢‚æ‚¤‚É
-;; ‚©‚È‚èˆÓ–¡‚ª‚È‚¢‚¯‚ÇA‚È‚é‚×‚­–{‘Ì‚Éˆ—‚ðŽc‚³‚È‚¢‚æ‚¤‚É‚µ‚Ä‚Ý‚é
+;;@åˆä½“é¨“è¨˜éŒ²è¡¨ç¤º
+;; ã“ã®ERBã‚’æ¶ˆã—ãŸã‚‰è¡¨ç¤ºã•ã‚Œãªã„ã‚ˆã†ã«
+;; ã‹ãªã‚Šæ„å‘³ãŒãªã„ã‘ã©ã€ãªã‚‹ã¹ãæœ¬ä½“ã«å‡¦ç†ã‚’æ®‹ã•ãªã„ã‚ˆã†ã«ã—ã¦ã¿ã‚‹
 ;;
-;;<ˆø”>
+;;<å¼•æ•°>
 ;;
-;;<•Ï”>
+;;<å¤‰æ•°>
 ;;
-;;<–ß‚è’l>
+;;<æˆ»ã‚Šå€¤>
 ;;
 ;;==========================================================
-;@‰‘ÌŒ±‹L˜^•\Ž¦
-;PRINTBUTTON "‰‘ÌŒ±‹L˜^ +",200
+;@åˆä½“é¨“è¨˜éŒ²è¡¨ç¤º
+;PRINTBUTTON "åˆä½“é¨“è¨˜éŒ² +",200
 ;PRINTL 
 
 
 ;=================================================
-;   sub ‰‘ÌŒ±‹L˜^_TRAIN
+;   sub åˆä½“é¨“è¨˜éŒ²_TRAIN
 ;=================================================
-;   ‰‘ÌŒ±‹L˜^:’²‹³
+;   åˆä½“é¨“è¨˜éŒ²:èª¿æ•™
 ;-------------------------------------------------
 ; Input:
-;  ARG					‘ÎÛŽÒ
+;  ARG					å¯¾è±¡è€…
 ;-------------------------------------------------
-@‰‘ÌŒ±‹L˜^_TRAIN(ARG)
+@åˆä½“é¨“è¨˜éŒ²_TRAIN(ARG)
 
-;«ŒðŒn
+;æ€§äº¤ç³»
 ;-------------------------------------------------
-;SIF TCVAR:ARG:—š—ð_EXP_ˆ—‘rŽ¸
-;	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 1
-;SIF TCVAR:ARG:—š—ð_EXP_‚`ˆ—‘rŽ¸
-;	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 2
-;SIF TCVAR:ARG:—š—ð_EXP_“¶’å‘rŽ¸
-;	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 1
+;SIF TCVAR:ARG:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤±
+;	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 1
+;SIF TCVAR:ARG:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤±
+;	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 2
+;SIF TCVAR:ARG:å±¥æ­´_EXP_ç«¥è²žå–ªå¤±
+;	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 1
 ;-------------------------------------------------
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "«ŒðŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 1
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "‚`«ŒðŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 2
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "æ€§äº¤çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 1
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "ï¼¡æ€§äº¤çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 2
 ;-------------------------------------------------
 
-;‚»‚Ì‘¼
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "ƒLƒXŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 3
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "ƒtƒFƒ‰ŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 4
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "äSŽËŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 5
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "â’¸ŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 6
-SIF GTR_EXPUP:ARG:GETNUM(EXP, "¸ˆùŒoŒ±")
-	CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 7
+;ãã®ä»–
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "ã‚­ã‚¹çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 3
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "ãƒ•ã‚§ãƒ©çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 4
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "è†£å°„çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 5
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "çµ¶é ‚çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 6
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "ç²¾é£²çµŒé¨“")
+	CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 7
 
 
 
 ;=================================================
-;   sub ‰‘ÌŒ±‹L˜^_OTHER
+;   sub åˆä½“é¨“è¨˜éŒ²_OTHER
 ;=================================================
-;   ‰‘ÌŒ±‹L˜^:‚»‚Ì‘¼
+;   åˆä½“é¨“è¨˜éŒ²:ãã®ä»–
 ;-------------------------------------------------
 ; Input:
-;  ARG					‘ÎÛŽÒ
-;  ARG:1				‹æ•ª(1:•W€(‚u) 2:•W€(‚`) 3:•W€(‚o) 4:•W€(‚b) )
-;  ARGS					‘ÎÛŽÒ–¼
+;  ARG					å¯¾è±¡è€…
+;  ARG:1				åŒºåˆ†(1:æ¨™æº–(ï¼¶) 2:æ¨™æº–(ï¼¡) 3:æ¨™æº–(ï¼°) 4:æ¨™æº–(ï¼£) )
+;  ARGS					å¯¾è±¡è€…å
 ;-------------------------------------------------
-@‰‘ÌŒ±‹L˜^_OTHER(ARG, ARG:1=0, ARGS="")
+@åˆä½“é¨“è¨˜éŒ²_OTHER(ARG, ARG:1=0, ARGS="")
 
 SELECTCASE ARG:1
-	;•W€(‚u)
+	;æ¨™æº–(ï¼¶)
 	CASE 1
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 1, ARGS		;‰‚¦‚Á‚¿
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 3, ARGS		;‰ƒLƒXŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 4, ARGS		;‰ƒtƒFƒ‰ŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 5, ARGS		;‰äSŽËŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 6, ARGS		;‰â’¸ŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 7, ARGS		;‰¸ˆùŒoŒ±
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 1, ARGS		;åˆãˆã£ã¡
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 3, ARGS		;åˆã‚­ã‚¹çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 4, ARGS		;åˆãƒ•ã‚§ãƒ©çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 5, ARGS		;åˆè†£å°„çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 6, ARGS		;åˆçµ¶é ‚çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 7, ARGS		;åˆç²¾é£²çµŒé¨“
 
-	;•W€(‚`)
+	;æ¨™æº–(ï¼¡)
 	CASE 2
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 2, ARGS		;‰‚`‚¦‚Á‚¿
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 3, ARGS		;‰ƒLƒXŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 4, ARGS		;‰ƒtƒFƒ‰ŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 6, ARGS		;‰â’¸ŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 7, ARGS		;‰¸ˆùŒoŒ±
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 2, ARGS		;åˆï¼¡ãˆã£ã¡
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 3, ARGS		;åˆã‚­ã‚¹çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 4, ARGS		;åˆãƒ•ã‚§ãƒ©çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 6, ARGS		;åˆçµ¶é ‚çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 7, ARGS		;åˆç²¾é£²çµŒé¨“
 
-	;•W€(‚o)cƒIƒgƒR–ð‘¤
+	;æ¨™æº–(ï¼°)â€¦ã‚ªãƒˆã‚³å½¹å´
 	CASE 3
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 1, ARGS		;‰‚¦‚Á‚¿
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 3, ARGS		;‰ƒLƒXŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 6, ARGS		;‰â’¸ŒoŒ±
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 1, ARGS		;åˆãˆã£ã¡
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 3, ARGS		;åˆã‚­ã‚¹çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 6, ARGS		;åˆçµ¶é ‚çµŒé¨“
 
-	;•W€(‚b)c–{”Ô–³‚µ‚Ìˆ¤•
+	;æ¨™æº–(ï¼£)â€¦æœ¬ç•ªç„¡ã—ã®æ„›æ’«
 	CASE 4
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 3, ARGS		;‰ƒLƒXŒoŒ±
-		CALL ‰‘ÌŒ±‹L˜^_’²‹³, ARG, 6, ARGS		;‰â’¸ŒoŒ±
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 3, ARGS		;åˆã‚­ã‚¹çµŒé¨“
+		CALL åˆä½“é¨“è¨˜éŒ²_èª¿æ•™, ARG, 6, ARGS		;åˆçµ¶é ‚çµŒé¨“
 
-	;‚»‚Ì‘¼
+	;ãã®ä»–
 	CASEELSE
 		RETURN
 ENDSELECT
 
 
 ;;=================================================
-;;   sub ‰‘ÌŒ±‹L˜^_€–Ú
+;;   sub åˆä½“é¨“è¨˜éŒ²_é …ç›®
 ;;=================================================
-;;   ‰‘ÌŒ±‹L˜^:€–Ú
+;;   åˆä½“é¨“è¨˜éŒ²:é …ç›®
 ;;-------------------------------------------------
 ;; Input:
-;;  ARG					‘ÎÛŽÒ
-;;  ARGS:0				€–Ú–¼
-;;  ARGS:1				ƒL[
+;;  ARG					å¯¾è±¡è€…
+;;  ARGS:0				é …ç›®å
+;;  ARGS:1				ã‚­ãƒ¼
 ;;-------------------------------------------------
-;;  ƒƒ‚F
-;;  Žg—p•Û—¯BŽg‚¢•û‚Í‰º‹L
+;;  ãƒ¡ãƒ¢ï¼š
+;;  ä½¿ç”¨ä¿ç•™ã€‚ä½¿ã„æ–¹ã¯ä¸‹è¨˜
 ;;
-;;  CALL ‰‘ÌŒ±‹L˜^_ITEM(ARG, "‰ƒLƒX", "‰ƒLƒX‘ŠŽè–¼")
+;;  CALL åˆä½“é¨“è¨˜éŒ²_ITEM(ARG, "åˆã‚­ã‚¹", "åˆã‚­ã‚¹ç›¸æ‰‹å")
 ;;-------------------------------------------------
 ;
-;@‰‘ÌŒ±‹L˜^_ITEM(ARG, ARGS:0, ARGS:1)
+;@åˆä½“é¨“è¨˜éŒ²_ITEM(ARG, ARGS:0, ARGS:1)
 ;#DIM L_LEN
 ;#DIMS L_STR
 ;#DIM L_BAK
 ;L_BAK=GETCOLOR()
 ;L_LEN = 20
-;L_STR=%‰‘ÌŒ±‹L˜^_NAME(CSTR:ARG:(ARGS:1))%
+;L_STR=%åˆä½“é¨“è¨˜éŒ²_NAME(CSTR:ARG:(ARGS:1))%
 ;
 ;SIF L_STR == "----"
-;	SETCOLOR COLOR("•šŽš")
+;	SETCOLOR COLOR("ä¼å­—")
 ;
-;PRINTFORM %ARGS:0, 10, LEFT%F%L_STR, L_LEN, LEFT%
+;PRINTFORM %ARGS:0, 10, LEFT%ï¼š%L_STR, L_LEN, LEFT%
 ;
 ;SETCOLOR L_BAK
 
 ;=================================================
-;   sub ‰‘ÌŒ±‹L˜^_NAME
+;   sub åˆä½“é¨“è¨˜éŒ²_NAME
 ;=================================================
-;   ‰‘ÌŒ±‹L˜^:‘ŠŽè–¼
+;   åˆä½“é¨“è¨˜éŒ²:ç›¸æ‰‹å
 ;-------------------------------------------------
 ; Input:
-;  ARGS					–¼Ì
+;  ARGS					åç§°
 ; Output:
-;  RETURNF				‘ŠŽè–¼
+;  RETURNF				ç›¸æ‰‹å
 ;-------------------------------------------------
-@‰‘ÌŒ±‹L˜^_NAME(ARGS)
+@åˆä½“é¨“è¨˜éŒ²_NAME(ARGS)
 #FUNCTIONS
 
 ;SIF !STRLENS(ARGS)
-;	ARGS = –¢ŒoŒ±
+;	ARGS = æœªçµŒé¨“
 	ARGS = ----
 
 RETURNF ARGS
@@ -350,38 +350,38 @@ RETURNF ARGS
 
 
 ;==========================================================
-;@‰‘ÌŒ±‹L˜^_SAVESTRŠm”F
-; ARGS‚Ì•¶Žš—ñ‚ªSAVESTR‚É‚ ‚é‚©’²‚×‚é
-; ‚ ‚ê‚ÎSAVESTR‚Ì”Ô†‚ð•Ô‚·
-; ‚È‚¯‚ê‚Î‹ó‚¢‚Ä‚¢‚éSAVEDATA‚É‹L˜^A”Ô†‚ð•Ô‚·
-; ‹ó‚«‚ª‚È‚¯‚ê‚Î0‚ð•Ô‚·i0=–¼‚à’m‚ç‚Ê’jj
+;@åˆä½“é¨“è¨˜éŒ²_SAVESTRç¢ºèª
+; ARGSã®æ–‡å­—åˆ—ãŒSAVESTRã«ã‚ã‚‹ã‹èª¿ã¹ã‚‹
+; ã‚ã‚Œã°SAVESTRã®ç•ªå·ã‚’è¿”ã™
+; ãªã‘ã‚Œã°ç©ºã„ã¦ã„ã‚‹SAVEDATAã«è¨˜éŒ²ã€ç•ªå·ã‚’è¿”ã™
+; ç©ºããŒãªã‘ã‚Œã°0ã‚’è¿”ã™ï¼ˆ0=åã‚‚çŸ¥ã‚‰ã¬ç”·ï¼‰
 ;
-;<ˆø”>
-;ARGS  = ‘ŠŽè–¼
-;<•Ï”>
+;<å¼•æ•°>
+;ARGS  = ç›¸æ‰‹å
+;<å¤‰æ•°>
 ;
-;<–ß‚è’l>
-; ARGS‚Ì•¶Žš—ñ‚ª“o˜^‚³‚ê‚Ä‚¢‚éSAVESTR‚Ì”Ô†
-; “o˜^‚³‚ê‚Ä‚¢‚È‚­A“o˜^‚Å‚«‚é‹ó‚«‚ª‚È‚¯‚ê‚Î0
+;<æˆ»ã‚Šå€¤>
+; ARGSã®æ–‡å­—åˆ—ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚‹SAVESTRã®ç•ªå·
+; ç™»éŒ²ã•ã‚Œã¦ã„ãªãã€ç™»éŒ²ã§ãã‚‹ç©ºããŒãªã‘ã‚Œã°0
 ;==========================================================
-@‰‘ÌŒ±‹L˜^_SAVESTRŠm”F(ARGS)
+@åˆä½“é¨“è¨˜éŒ²_SAVESTRç¢ºèª(ARGS)
 #FUNCTION
 #LOCALSSIZE 2
-;ˆê‰ž”Ô†‚ª•s‘«‚µ‚½Žž—p‚Ì‚à‚Ì‚ðŽ–‘O‚É—pˆÓ
-SAVESTR:0 = –¼‚à’m‚ç‚Ê’j
+;ä¸€å¿œç•ªå·ãŒä¸è¶³ã—ãŸæ™‚ç”¨ã®ã‚‚ã®ã‚’äº‹å‰ã«ç”¨æ„
+SAVESTR:0 = åã‚‚çŸ¥ã‚‰ã¬ç”·
 FOR LOCAL, 0, VARSIZE("SAVESTR")
 	LOCAL:1 += 1 
-	;“¯‚¶•¨‚ª‚ ‚ê‚Î”Ô†‚ð•Ô‚·
+	;åŒã˜ç‰©ãŒã‚ã‚Œã°ç•ªå·ã‚’è¿”ã™
 	SIF SAVESTR:(LOCAL:1) == ARGS
 		RETURNF LOCAL:1
-	;‹ó‚Ìê‡‚ÍƒuƒŒƒCƒN
+	;ç©ºã®å ´åˆã¯ãƒ–ãƒ¬ã‚¤ã‚¯
 	SIF STRLENS(SAVESTR:(LOCAL:1)) == 0
 		BREAK
 NEXT
-;‹ó‚«‚ª‚È‚¯‚ê‚Î0‚ð•Ô‚·
+;ç©ºããŒãªã‘ã‚Œã°0ã‚’è¿”ã™
 SIF LOCAL:1 == VARSIZE("SAVESTR")
 	RETURNF 0
-;“¯‚¶•¨‚ª‚È‚­A”Ô†‚ª‚ ‚¢‚Ä‚¢‚ê‚ÎARGS‚ðSAVESTR:(LOCAL:1)‚É•Û‘¶‚µ‚½ã‚Å”Ô†‚ð•Ô‚·
+;åŒã˜ç‰©ãŒãªãã€ç•ªå·ãŒã‚ã„ã¦ã„ã‚Œã°ARGSã‚’SAVESTR:(LOCAL:1)ã«ä¿å­˜ã—ãŸä¸Šã§ç•ªå·ã‚’è¿”ã™
 SAVESTR:(LOCAL:1) = %ARGS%
 RETURNF LOCAL:1
 

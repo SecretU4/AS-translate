@@ -1,109 +1,109 @@
+ï»¿;-------------------------------------------------
+;ã‚­ãƒ£ãƒ©ç®¡ç†ç”¨ã‚­ãƒ£ãƒ©ã‚»ãƒ¬ã‚¯ãƒˆé–¢æ•°
 ;-------------------------------------------------
-;ƒLƒƒƒ‰ŠÇ——pƒLƒƒƒ‰ƒZƒŒƒNƒgŠÖ”
-;-------------------------------------------------
-@MANAGE_CHARA_SELECT(MODE_NOW = "MNG_ƒŒƒMƒ…ƒ‰[Žw’è")
+@MANAGE_CHARA_SELECT(MODE_NOW = "MNG_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼æŒ‡å®š")
 #DIMS         MODE_NOW
 #DIM          MODE_ID
 #DIM          L_INPUT
-#DIM          NOW_GROUP = 1 ;ƒy[ƒW‹L‰¯—p
+#DIM          NOW_GROUP = 1 ;ãƒšãƒ¼ã‚¸è¨˜æ†¶ç”¨
 #DIM  DYNAMIC ROOM_ID       ;
-#DIMS DYNAMIC OP_RELOAD     ;‰‰ñˆÈŠO‚Ìƒy[ƒWXV‚ÆƒŠƒXƒgXV‚ð—}§‚·‚é
+#DIMS DYNAMIC OP_RELOAD     ;åˆå›žä»¥å¤–ã®ãƒšãƒ¼ã‚¸æ›´æ–°ã¨ãƒªã‚¹ãƒˆæ›´æ–°ã‚’æŠ‘åˆ¶ã™ã‚‹
 {
-#DIMS CONST   MODE_NAME = "MNG_“o˜^_“o˜^–•Á", 
+#DIMS CONST   MODE_NAME = "MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ", 
 	
-	"MNG_“ü‹_ˆê†Žº", 
-	"MNG_“ü‹_“ñ†Žº", 
-	"MNG_“ü‹_ŽO†Žº", 
-	"MNG_“ü‹_Žl†Žº", 
-	"MNG_“ü‹_ŒÜ†Žº", 
-	"MNG_“ü‹_˜Z†Žº", 
-	"MNG_“ü‹_Žµ†Žº", 
-	"MNG_“ü‹_”ª†Žº", 
-	"MNG_“ü‹_‹ã†Žº", 
-	"MNG_“ü‹_\†Žº", 
+	"MNG_å…¥å±…_ä¸€å·å®¤", 
+	"MNG_å…¥å±…_äºŒå·å®¤", 
+	"MNG_å…¥å±…_ä¸‰å·å®¤", 
+	"MNG_å…¥å±…_å››å·å®¤", 
+	"MNG_å…¥å±…_äº”å·å®¤", 
+	"MNG_å…¥å±…_å…­å·å®¤", 
+	"MNG_å…¥å±…_ä¸ƒå·å®¤", 
+	"MNG_å…¥å±…_å…«å·å®¤", 
+	"MNG_å…¥å±…_ä¹å·å®¤", 
+	"MNG_å…¥å±…_åå·å®¤", 
 	
-	"MNG_“o˜^_ƒŒƒMƒ…ƒ‰[", 
-	"MNG_“o˜^_“Á•Ê•ÛŒì", 
-	"MNG_“o˜^_–¼‘O•ÏX", 
+	"MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼", 
+	"MNG_ç™»éŒ²_ç‰¹åˆ¥ä¿è­·", 
+	"MNG_ç™»éŒ²_åå‰å¤‰æ›´", 
 	
-	"MNG_“]E_¹EŽÒ", 
-	"MNG_“]E_ƒƒCƒh", 
-	"MNG_“]E_ƒAƒCƒhƒ‹", 
-	"MNG_“]E_ŽÐ‰ïl", 
-	"MNG_“]E_‹Çˆõ", 
-	"MNG_“]E_©•w", 
+	"MNG_è»¢è·_è–è·è€…", 
+	"MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰", 
+	"MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«", 
+	"MNG_è»¢è·_ç¤¾ä¼šäºº", 
+	"MNG_è»¢è·_å±€å“¡", 
+	"MNG_è»¢è·_å¨¼å©¦", 
 	
-	"MNG_”z‘®_Šw‰€¶“k", 
-	"MNG_”z‘®_Žx‰‡ƒ{ƒ‰", 
-	"MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ", 
-	"MNG_”z‘®_ƒJƒWƒm“Xˆõ", 
+	"MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’", 
+	"MNG_é…å±ž_æ”¯æ´ãƒœãƒ©", 
+	"MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡", 
+	"MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡", 
 	
-	"MNG_“ÁŽê_ŠOŒ©•ÏX", 
-	"MNG_“ÁŽê_Ž¡—ÃÝ”õ", 
-	"MNG_“ÁŽê_•iŽí‰ü—Ç", 
-	"MNG_“ÁŽê_g‘Ì‹­‰»", 
-	"MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢", 
+	"MNG_ç‰¹æ®Š_å¤–è¦‹å¤‰æ›´", 
+	"MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™", 
+	"MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯", 
+	"MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–", 
+	"MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ ", 
 	
-	"MNG_“o˜^_Œð—F§Œä", 
-	"MNG_“o˜^_ˆß‘••ÏX", 
-	"MNG_“o˜^_”ÍˆÍÁ‹Ž", 
-	"MNG_“o˜^_–•Á’†Ž~"
+	"MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡", 
+	"MNG_ç™»éŒ²_è¡£è£…å¤‰æ›´", 
+	"MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»", 
+	"MNG_ç™»éŒ²_æŠ¹æ¶ˆä¸­æ­¢"
 }
 
 {
-#DIMS CONST   MEMO_STR = "“o˜^–•Á‚ÌŒó•âŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
+#DIMS CONST   MEMO_STR = "ç™»éŒ²æŠ¹æ¶ˆã®å€™è£œè€…ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
 	
-	"ˆê†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"“ñ†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"ŽO†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"Žl†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"ŒÜ†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"˜Z†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"Žµ†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"”ª†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"‹ã†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"\†Žº‚É“ü‹‚³‚¹‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
+	"ä¸€å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"äºŒå·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"ä¸‰å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"å››å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"äº”å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"å…­å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"ä¸ƒå·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"å…«å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"ä¹å·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"åå·å®¤ã«å…¥å±…ã•ã›ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
 	
-	"ŠÏŽ@ó‹µ‚ðØ‚è‘Ö‚¦‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"•ÛŒìŽw’è‚ðØ‚è‘Ö‚¦‚él•¨‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
-	"–¼Ì•ÏX‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B", 
+	"è¦³å¯ŸçŠ¶æ³ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"ä¿è­·æŒ‡å®šã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
+	"åç§°å¤‰æ›´ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚", 
 	
-	"“]E‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"“]E‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"“]E‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"“]E‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"“]E‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"“]E‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
+	"è»¢è·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"è»¢è·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"è»¢è·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"è»¢è·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"è»¢è·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"è»¢è·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
 	
-	"Šw‰€‚Ö‚Ì“üŠw‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"Žx‰‡Z‘îƒ{ƒ‰ƒ“ƒeƒBƒA‚ÌŒó•âŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"ƒ‰ƒuƒzƒeƒ‹“Xˆõ‚ÌŒó•âŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"‚‹‰ƒJƒWƒm“Xˆõ‚ÌŒó•âŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
+	"å­¦åœ’ã¸ã®å…¥å­¦å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"æ”¯æ´ä½å®…ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ã®å€™è£œè€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"ãƒ©ãƒ–ãƒ›ãƒ†ãƒ«åº—å“¡ã®å€™è£œè€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"é«˜ç´šã‚«ã‚¸ãƒŽåº—å“¡ã®å€™è£œè€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
 	
-	"ŠOŒ©•ÏX‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"Ž¡—Ã‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"•iŽí‰ü—Ç‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"g‘Ì‹­‰»‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"ŽŸ¢‘ã‘n‘¢‚Ì•ê‘Ì‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
+	"å¤–è¦‹å¤‰æ›´ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"æ²»ç™‚ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"å“ç¨®æ”¹è‰¯ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"èº«ä½“å¼·åŒ–ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"æ¬¡ä¸–ä»£å‰µé€ ã®æ¯ä½“ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
 	
-	"ƒCƒxƒ“ƒgÝ’è‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
-	"ˆß‘••ÏX‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢", 
+	"ã‚¤ãƒ™ãƒ³ãƒˆè¨­å®šã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
+	"è¡£è£…å¤‰æ›´ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ãã ã•ã„", 
 	
-	"“o˜^–•Á”ÍˆÍ‚ÌŠJŽn’l‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢", 
+	"ç™»éŒ²æŠ¹æ¶ˆç¯„å›²ã®é–‹å§‹å€¤ã‚’æŒ‡å®šã—ã¦ãã ã•ã„", 
 	""
 }
-#DIM CONST INPUT_MODE_ŠOŒ©•ÏX   = 1024
-#DIM CONST INPUT_MODE_Ž¡—ÃÝ”õ   = 1025
-#DIM CONST INPUT_MODE_•iŽí‰ü—Ç   = 1026
-#DIM CONST INPUT_MODE_g‘Ì‹­‰»   = 1027
-#DIM CONST INPUT_MODE_ŽŸ¢‘ã‘n‘¢ = 1028
-#DIM CONST INPUT_MODE_–•Á’†Ž~   = 1032
+#DIM CONST INPUT_MODE_å¤–è¦‹å¤‰æ›´   = 1024
+#DIM CONST INPUT_MODE_æ²»ç™‚è¨­å‚™   = 1025
+#DIM CONST INPUT_MODE_å“ç¨®æ”¹è‰¯   = 1026
+#DIM CONST INPUT_MODE_èº«ä½“å¼·åŒ–   = 1027
+#DIM CONST INPUT_MODE_æ¬¡ä¸–ä»£å‰µé€  = 1028
+#DIM CONST INPUT_MODE_æŠ¹æ¶ˆä¸­æ­¢   = 1032
 
 
 MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
 SELECTCASE MODE_ID
 CASE -1
-	MODE_NOW '= "MNG_“o˜^_ƒŒƒMƒ…ƒ‰["
+	MODE_NOW '= "MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼"
 	MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
 ENDSELECT
 CLEARLINE LINECOUNT
@@ -112,7 +112,7 @@ CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP_RELOAD, MODE_NOW, MEMO_STR:MODE_ID)
 
 
 L_INPUT = RESULT
-OP_RELOAD '= "uƒy[ƒWXV–³‚µvuƒŠƒXƒgXV–³‚µv"
+OP_RELOAD '= "ã€Œãƒšãƒ¼ã‚¸æ›´æ–°ç„¡ã—ã€ã€Œãƒªã‚¹ãƒˆæ›´æ–°ç„¡ã—ã€"
 SELECTCASE L_INPUT
 CASE 0
 	NOW_GROUP = 1
@@ -120,72 +120,72 @@ CASE 0
 	RETURN
 CASE 1 TO CHARANUM - 1
 	SELECTCASE MODE_NOW
-	CASE "MNG_“o˜^_ƒŒƒMƒ…ƒ‰["
+	CASE "MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼"
 		CALL MNG_CHARA_REGULAR(L_INPUT)
-	CASE "MNG_“o˜^_“Á•Ê•ÛŒì"
+	CASE "MNG_ç™»éŒ²_ç‰¹åˆ¥ä¿è­·"
 		CALL MNG_CHARA_PROTECT(L_INPUT)
-	CASE "MNG_“o˜^_–¼‘O•ÏX"
+	CASE "MNG_ç™»éŒ²_åå‰å¤‰æ›´"
 		CALL MNG_RENAME(L_INPUT)
-	CASE "MNG_“o˜^_“o˜^–•Á"
+	CASE "MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ"
 		IF TALENT:L_INPUT:NPC
-			CFLAG:L_INPUT:“o˜^–•Á = 0
-		ELSEIF CFLAG:L_INPUT:ƒŒƒMƒ…ƒ‰[ || CFLAG:L_INPUT:“Á•Ê•ÛŒì || CFLAG:L_INPUT:ƒ}ƒ“ƒVƒ‡ƒ“ID
-			CFLAG:L_INPUT:“o˜^–•Á = 0
+			CFLAG:L_INPUT:ç™»éŒ²æŠ¹æ¶ˆ = 0
+		ELSEIF CFLAG:L_INPUT:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ || CFLAG:L_INPUT:ç‰¹åˆ¥ä¿è­· || CFLAG:L_INPUT:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID
+			CFLAG:L_INPUT:ç™»éŒ²æŠ¹æ¶ˆ = 0
 		ELSE
-			CFLAG:L_INPUT:“o˜^–•Á = !CFLAG:L_INPUT:“o˜^–•Á
+			CFLAG:L_INPUT:ç™»éŒ²æŠ¹æ¶ˆ = !CFLAG:L_INPUT:ç™»éŒ²æŠ¹æ¶ˆ
 		ENDIF
-	CASE "MNG_“o˜^_”ÍˆÍÁ‹Ž"
-	CASE "MNG_“o˜^_–•Á’†Ž~"
-	CASE "MNG_“o˜^_Œð—F§Œä"
+	CASE "MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»"
+	CASE "MNG_ç™»éŒ²_æŠ¹æ¶ˆä¸­æ­¢"
+	CASE "MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡"
 		CALL MNG_CONFIG_EVENT(L_INPUT)
-	CASE "MNG_“o˜^_ˆß‘••ÏX"
+	CASE "MNG_ç™»éŒ²_è¡£è£…å¤‰æ›´"
 		CALL MNG_CHANGE_CLOTHES(L_INPUT)
-	CASE "MNG_“ÁŽê_ŠOŒ©•ÏX"
+	CASE "MNG_ç‰¹æ®Š_å¤–è¦‹å¤‰æ›´"
 		CALL MNG_CUSTOM_LOOKS(L_INPUT)
-	CASE "MNG_“ÁŽê_Ž¡—ÃÝ”õ"
+	CASE "MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™"
 		CALL MNG_CURE_SICK(L_INPUT)
-	CASE "MNG_“ÁŽê_•iŽí‰ü—Ç"
+	CASE "MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯"
 		CALL CITY_F_54_GI2(L_INPUT)
-	CASE "MNG_“ÁŽê_g‘Ì‹­‰»"
+	CASE "MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–"
 		CALL LABORATORY_BOOST_ST(L_INPUT)
-	CASE "MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢"
-		IF CFLAG:L_INPUT:Zl_‰ñŽûÏ‚Ý”  <= CFLAG:L_INPUT:Zl_Œp³
-			PRINTFORMW ðŒ‚ð–ž‚½‚µ‚Ä‚¢‚Ü‚¹‚ñ
+	CASE "MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ "
+		IF CFLAG:L_INPUT:ä½äºº_å›žåŽæ¸ˆã¿æ•°  <= CFLAG:L_INPUT:ä½äºº_ç¶™æ‰¿
+			PRINTFORMW æ¡ä»¶ã‚’æº€ãŸã—ã¦ã„ã¾ã›ã‚“
 		ELSE
 			CALL LABORATORY_BREEDING_BABY_DESIGNING(L_INPUT)
-			OP_RELOAD '= "uƒy[ƒWXV–³‚µv"
+			OP_RELOAD '= "ã€Œãƒšãƒ¼ã‚¸æ›´æ–°ç„¡ã—ã€"
 		ENDIF
-	CASE "MNG_“]E_¹EŽÒ", "MNG_“]E_ƒƒCƒh", "MNG_“]E_ƒAƒCƒhƒ‹", "MNG_“]E_ŽÐ‰ïl", "MNG_“]E_‹Çˆõ", "MNG_“]E_©•w"
+	CASE "MNG_è»¢è·_è–è·è€…", "MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰", "MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«", "MNG_è»¢è·_ç¤¾ä¼šäºº", "MNG_è»¢è·_å±€å“¡", "MNG_è»¢è·_å¨¼å©¦"
 		CALL MNG_JOB(L_INPUT, MODE_NOW)
-	CASE "MNG_”z‘®_Šw‰€¶“k", "MNG_”z‘®_Žx‰‡ƒ{ƒ‰", "MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ", "MNG_”z‘®_ƒJƒWƒm“Xˆõ"
+	CASE "MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’", "MNG_é…å±ž_æ”¯æ´ãƒœãƒ©", "MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡", "MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡"
 		CALL MNG_FACILITY(L_INPUT, MODE_NOW)
 	CASEELSE
-		IF STRCOUNT(MODE_NOW, "MNG_“ü‹")
-			;ƒ}ƒ“ƒVƒ‡ƒ““ü‹ˆ—
+		IF STRCOUNT(MODE_NOW, "MNG_å…¥å±…")
+			;ãƒžãƒ³ã‚·ãƒ§ãƒ³å…¥å±…å‡¦ç†
 			ROOM_ID = MODE_ID
 			CALL MNG_MOVING_ROOM(L_INPUT, ROOM_ID)
 		ELSE
 
 		ENDIF
 	ENDSELECT
-CASE INPUT_MODE_ŠOŒ©•ÏX
-	IF FLAG:ƒGƒXƒe >= 1
+CASE INPUT_MODE_å¤–è¦‹å¤‰æ›´
+	IF FLAG:ã‚¨ã‚¹ãƒ† >= 1
 		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
 	ENDIF
-CASE INPUT_MODE_Ž¡—ÃÝ”õ
-	IF FLAG:•a‰@ >= 1
+CASE INPUT_MODE_æ²»ç™‚è¨­å‚™
+	IF FLAG:ç—…é™¢ >= 1
 		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
 	ENDIF
-CASE INPUT_MODE_•iŽí‰ü—Ç
-	IF FLAG:•iŽí‰ü—ÇŽ{Ý >= 1
+CASE INPUT_MODE_å“ç¨®æ”¹è‰¯
+	IF FLAG:å“ç¨®æ”¹è‰¯æ–½è¨­ >= 1
 		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
 	ENDIF
-CASE INPUT_MODE_g‘Ì‹­‰», INPUT_MODE_ŽŸ¢‘ã‘n‘¢
-	IF FLAG:Œ¤‹†Ž{Ý >= 1
+CASE INPUT_MODE_èº«ä½“å¼·åŒ–, INPUT_MODE_æ¬¡ä¸–ä»£å‰µé€ 
+	IF FLAG:ç ”ç©¶æ–½è¨­ >= 1
 		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
 	ENDIF
-CASE INPUT_MODE_–•Á’†Ž~
-	CVARSET CFLAG, GETNUM(CFLAG, "“o˜^–•Á"), 0
+CASE INPUT_MODE_æŠ¹æ¶ˆä¸­æ­¢
+	CVARSET CFLAG, GETNUM(CFLAG, "ç™»éŒ²æŠ¹æ¶ˆ"), 0
 	MODE_NOW '= MODE_NAME:0
 CASE 1000 TO 1031
 	MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
@@ -195,7 +195,7 @@ RESTART
 
 
 ;-------------------------------------------------
-;MNG—pCALLNAME•\Ž¦ŠÖ”
+;MNGç”¨CALLNAMEè¡¨ç¤ºé–¢æ•°
 ;-------------------------------------------------
 @MNG_LIST_NAME(C_ID)
 #DIM C_ID
@@ -203,63 +203,63 @@ SIF C_ID < 0
 	RETURN
 CALL INFO_TARGET_DELETE(C_ID)
 PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
-PRINT @
+PRINT ã€€
 CALL INFO_TARGET_FACILITY(C_ID, 1)
 CALL INFO_TARGET_RELATION(C_ID)
 
 
 
-@MNG_“ü‹_LIST_NAME(C_ID)
+@MNG_å…¥å±…_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
 CALL INFO_TARGET_DELETE(C_ID)
 PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
-PRINT @
+PRINT ã€€
 CALL INFO_TARGET_MARRIED(C_ID)
 CALL INFO_TARGET_ROOM_NUMBER(C_ID)
 CALL INFO_TARGET_JOB(C_ID, 1)
 
-@MNG_“ü‹_ˆê†Žº_LIST_NAME(C_ID)
+@MNG_å…¥å±…_ä¸€å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_“ñ†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_äºŒå·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_ŽO†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_ä¸‰å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_Žl†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_å››å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_ŒÜ†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_äº”å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_˜Z†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_å…­å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_Žµ†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_ä¸ƒå·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_”ª†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_å…«å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_‹ã†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_ä¹å·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
-@MNG_“ü‹_\†Žº_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
+@MNG_å…¥å±…_åå·å®¤_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“ü‹_LIST_NAME(C_ID)
+CALL MNG_å…¥å±…_LIST_NAME(C_ID)
 
 
 
-@MNG_“o˜^_ƒŒƒMƒ…ƒ‰[_LIST_NAME(C_ID)
+@MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
 CALL INFO_TARGET_DELETE(C_ID)
 PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
-PRINT @
+PRINT ã€€
 CALL INFO_TARGET_REGULAR(C_ID, 1)
 CALL INFO_TARGET_PROTECT(C_ID, 1)
 CALL INFO_TARGET_ROOM_NUMBER(C_ID)
@@ -267,13 +267,13 @@ CALL INFO_TARGET_RELATION(C_ID)
 
 
 
-@MNG_“o˜^_“Á•Ê•ÛŒì_LIST_NAME(C_ID)
+@MNG_ç™»éŒ²_ç‰¹åˆ¥ä¿è­·_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
 CALL INFO_TARGET_DELETE(C_ID)
 PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
-PRINT @
+PRINT ã€€
 CALL INFO_TARGET_REGULAR(C_ID, 1)
 CALL INFO_TARGET_PROTECT(C_ID, 1)
 CALL INFO_TARGET_ROOM_NUMBER(C_ID)
@@ -281,7 +281,7 @@ CALL INFO_TARGET_RELATION(C_ID)
 
 
 
-@MNG_“]E_LIST_NAME(C_ID)
+@MNG_è»¢è·_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
@@ -290,47 +290,47 @@ PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
 CALL INFO_TARGET_JOB(C_ID, 1)
 CALL INFO_TARGET_RELATION(C_ID)
 
-@MNG_“]E_¹EŽÒ_LIST_NAME(C_ID)
+@MNG_è»¢è·_è–è·è€…_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“]E_LIST_NAME(C_ID)
+CALL MNG_è»¢è·_LIST_NAME(C_ID)
 
-@MNG_“]E_ƒƒCƒh_LIST_NAME(C_ID)
+@MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“]E_LIST_NAME(C_ID)
+CALL MNG_è»¢è·_LIST_NAME(C_ID)
 
-@MNG_“]E_ƒAƒCƒhƒ‹_LIST_NAME(C_ID)
+@MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“]E_LIST_NAME(C_ID)
+CALL MNG_è»¢è·_LIST_NAME(C_ID)
 
-@MNG_“]E_ŽÐ‰ïl_LIST_NAME(C_ID)
+@MNG_è»¢è·_ç¤¾ä¼šäºº_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“]E_LIST_NAME(C_ID)
+CALL MNG_è»¢è·_LIST_NAME(C_ID)
 
-@MNG_“]E_‹Çˆõ_LIST_NAME(C_ID)
+@MNG_è»¢è·_å±€å“¡_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“]E_LIST_NAME(C_ID)
+CALL MNG_è»¢è·_LIST_NAME(C_ID)
 
-@MNG_“]E_©•w_LIST_NAME(C_ID)
+@MNG_è»¢è·_å¨¼å©¦_LIST_NAME(C_ID)
 #DIM C_ID
-CALL MNG_“]E_LIST_NAME(C_ID)
+CALL MNG_è»¢è·_LIST_NAME(C_ID)
 
 
 
-@MNG_“o˜^_–¼‘O•ÏX_LIST_NAME(C_ID)
+@MNG_ç™»éŒ²_åå‰å¤‰æ›´_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
 CALL INFO_TARGET_DELETE(C_ID)
 PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
-PRINT @
+PRINT ã€€
 CALL INFO_TARGET_REGULAR(C_ID, 1)
 CALL INFO_TARGET_PROTECT(C_ID, 1)
-PRINT @
+PRINT ã€€
 CALL INFO_TARGET_SAME_NAME(C_ID)
 
 
 
-@MNG_“ÁŽê_Ž¡—ÃÝ”õ_LIST_NAME(C_ID)
+@MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
@@ -343,64 +343,64 @@ CALL INFO_TARGET_RELATION(C_ID)
 
 
 [SKIPSTART]
-@MNG_“o˜^_“o˜^–•Á_LIST_NAME(C_ID)
+@MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ_LIST_NAME(C_ID)
 #DIM C_ID
 SIF C_ID < 0
 	RETURN
 
-MNG_“o˜^_“o˜^–•Á
+MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ
 
-MNG_“ÁŽê_Ž¡—ÃÝ”õ
-
-
+MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™
 
 
-MNG_”z‘®_Šw‰€¶“k
-MNG_”z‘®_Žx‰‡ƒ{ƒ‰
-MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ
-MNG_”z‘®_ƒJƒWƒm“Xˆõ
 
-MNG_“ÁŽê_ŠOŒ©•ÏX
 
-MNG_“ÁŽê_•iŽí‰ü—Ç
-MNG_“ÁŽê_g‘Ì‹­‰»
-MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢
+MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’
+MNG_é…å±ž_æ”¯æ´ãƒœãƒ©
+MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡
+MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡
 
-MNG_“o˜^_Œð—F§Œä
-MNG_“o˜^_ˆß‘••ÏX
-MNG_“o˜^_”ÍˆÍÁ‹Ž
-MNG_“o˜^_–•Á’†Ž~
+MNG_ç‰¹æ®Š_å¤–è¦‹å¤‰æ›´
+
+MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯
+MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–
+MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ 
+
+MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡
+MNG_ç™»éŒ²_è¡£è£…å¤‰æ›´
+MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»
+MNG_ç™»éŒ²_æŠ¹æ¶ˆä¸­æ­¢
 [SKIPEND]
 
 
 
 ;-------------------------------------------------
-;MNG—pƒLƒƒƒ‰ŠÇ——pŠî‘bî•ñŠÖ”
+;MNGç”¨ã‚­ãƒ£ãƒ©ç®¡ç†ç”¨åŸºç¤Žæƒ…å ±é–¢æ•°
 ;-------------------------------------------------
 @MNG_INFO_TARGET_DETAIL(L_I, L_CATE)
 #DIM        L_I
 #DIM        L_CATE
-#DIMS CONST OP_NAME = "NONE", "Ž{Ý”z‘®", "g‘ÌŽ¡—Ã", "•iŽí‰ü—Ç", "g‘Ì‹­‰»", "ŽŸ¢‘ã‘n‘¢", "“ü‹", "Œð—F§Œä"
+#DIMS CONST OP_NAME = "NONE", "æ–½è¨­é…å±ž", "èº«ä½“æ²»ç™‚", "å“ç¨®æ”¹è‰¯", "èº«ä½“å¼·åŒ–", "æ¬¡ä¸–ä»£å‰µé€ ", "å…¥å±…", "äº¤å‹åˆ¶å¾¡"
 CALL INFO_TARGET_RANK(L_I)
 CALL INFO_TARGET_SUPPORT(L_I)
-PRINTFORM @
+PRINTFORM ã€€
 CALL INFO_TARGET_GENDER(L_I)
 CALL INFO_TARGET_FALLEN(L_I)
-PRINTFORM @
+PRINTFORM ã€€
 
 SELECTCASE OP_NAME:L_CATE
-CASE "Ž{Ý”z‘®"
+CASE "æ–½è¨­é…å±ž"
 	CALL INFO_TARGET_SOCIALITY(L_I)
-CASE "g‘ÌŽ¡—Ã"
-	PRINTFORM @[”„t:{MIN(EXP:L_I:”„tŒoŒ±, 999), 3}]
-CASE "•iŽí‰ü—Ç"
+CASE "èº«ä½“æ²»ç™‚"
+	PRINTFORM ã€€[å£²æ˜¥:{MIN(EXP:L_I:å£²æ˜¥çµŒé¨“, 999), 3}]
+CASE "å“ç¨®æ”¹è‰¯"
 	CALL INFO_TARGET_GENOM(L_I)
-CASE "g‘Ì‹­‰»"
-CASE "ŽŸ¢‘ã‘n‘¢"
+CASE "èº«ä½“å¼·åŒ–"
+CASE "æ¬¡ä¸–ä»£å‰µé€ "
 	CALL INFO_TARGET_BREEDING(L_I)
-CASE "“ü‹"
+CASE "å…¥å±…"
 ;	CALL INFO_TARGET_MARRIED(L_I)
-CASE "Œð—F§Œä"
+CASE "äº¤å‹åˆ¶å¾¡"
 	CALL INFO_TARGET_PARTNER(L_I)
 
 CASEELSE
@@ -408,7 +408,7 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰ŠÇ——pŠî‘bî•ñŠÖ”
+;ã‚­ãƒ£ãƒ©ç®¡ç†ç”¨åŸºç¤Žæƒ…å ±é–¢æ•°
 ;-------------------------------------------------
 @MNG_INFO_BASIC_DATA(C_ID)
 #DIM C_ID
@@ -425,17 +425,17 @@ CALL INFO_TARGET_RELATION(C_ID)
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰ŠÇ——pƒ‰ƒxƒ‹Žg—pˆêsî•ñ•\Ž¦ŠÖ”
+;ã‚­ãƒ£ãƒ©ç®¡ç†ç”¨ãƒ©ãƒ™ãƒ«ä½¿ç”¨ä¸€è¡Œæƒ…å ±è¡¨ç¤ºé–¢æ•°
 ;-------------------------------------------------
 @MNG_INFO_CHARA_DETAIL_LABEL(C_LABEL, C_ID, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIM      C_LABEL    ;ƒ{ƒ^ƒ“‚Æ‚µ‚Ä•\Ž¦‚³‚¹‚é”’l
-#DIM      C_ID       ;ƒLƒƒƒ‰‚Ì“o˜^”Ô†
-#DIMS     SORT_TYPE  ;Œ»Ý‚Ìƒ\[ƒg‡
-#DIMS REF LABEL_LIST ;‚±‚Ìs‚ÅŽg—p‚·‚éƒ‰ƒxƒ‹ˆê——”z—ñ
-#DIM      LABEL_SIZE ;ƒ‰ƒxƒ‹ˆê——”z—ñ‚Ì—v‘f”
-;C_LABEL‚ª•‰”‚Í‚ ‚è‚¦‚È‚¢‚Ì‚Å•\Ž¦“à—e‚ÌƒAƒiƒEƒ“ƒX‚É—¬—p‚µ‚Ä‚Ü‚·
+#DIM      C_LABEL    ;ãƒœã‚¿ãƒ³ã¨ã—ã¦è¡¨ç¤ºã•ã›ã‚‹æ•°å€¤
+#DIM      C_ID       ;ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
+#DIMS     SORT_TYPE  ;ç¾åœ¨ã®ã‚½ãƒ¼ãƒˆé †
+#DIMS REF LABEL_LIST ;ã“ã®è¡Œã§ä½¿ç”¨ã™ã‚‹ãƒ©ãƒ™ãƒ«ä¸€è¦§é…åˆ—
+#DIM      LABEL_SIZE ;ãƒ©ãƒ™ãƒ«ä¸€è¦§é…åˆ—ã®è¦ç´ æ•°
+;C_LABELãŒè² æ•°ã¯ã‚ã‚Šãˆãªã„ã®ã§è¡¨ç¤ºå†…å®¹ã®ã‚¢ãƒŠã‚¦ãƒ³ã‚¹ã«æµç”¨ã—ã¦ã¾ã™
 IF C_LABEL < 0
 	PRINTFORM %" " * 31%
 	CALL INFO_LABEL_LIST(SORT_TYPE, LABEL_LIST, LABEL_SIZE)
@@ -448,22 +448,22 @@ ENDIF
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰ŠÇ——pî•ñƒy[ƒW’è‹`ŠÖ”
+;ã‚­ãƒ£ãƒ©ç®¡ç†ç”¨æƒ…å ±ãƒšãƒ¼ã‚¸å®šç¾©é–¢æ•°
 ;-------------------------------------------------
 @MNG_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
 #FUNCTION
 #DIMS SCENE
-#DIMS REF LIST_PACK ;–ß‚è’l—pAƒŠƒXƒg”z—ñ
+#DIMS REF LIST_PACK ;æˆ»ã‚Šå€¤ç”¨ã€ãƒªã‚¹ãƒˆé…åˆ—
 #DIM  REF PACK_SIZE ;
 {
-#DIMS CONST C_PACK = "Šî‘bî•ñ", 
-	"ŠÇ—î•ñ", 
-	"ŽÐ‰ïî•ñ", 
-	"g‘ÌST", 
-	"ƒtƒFƒƒ‚ƒ“ST", 
-	"’TõABL", 
-	"í“¬ST", 
-	"•‘•"
+#DIMS CONST C_PACK = "åŸºç¤Žæƒ…å ±", 
+	"ç®¡ç†æƒ…å ±", 
+	"ç¤¾ä¼šæƒ…å ±", 
+	"èº«ä½“ST", 
+	"ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³ST", 
+	"æŽ¢ç´¢ABL", 
+	"æˆ¦é—˜ST", 
+	"æ­¦è£…"
 }
 ARRAYCOPY "C_PACK", "LIST_PACK"
 PACK_SIZE = VARSIZE("C_PACK")
@@ -472,38 +472,38 @@ RETURNF
 
 
 @MNG_LIST_CHARA_STATUS_GROUP(SCENE, CHARA_LIST, SHOW_START, SHOW_END, INPUT_MIN, INPUT_MAX, SORT_TYPE, LIST_NAME)
-#DIMS     SCENE         ;Žg—p‚·‚éƒV[ƒ“
-#DIM  REF CHARA_LIST    ;ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ
-#DIM      SHOW_START    ;•\Ž¦ŠJŽn‚ÌƒLƒƒƒ‰ƒ‰ƒxƒ‹ID
-#DIM      SHOW_END      ;•\Ž¦I—¹‚ÌƒLƒƒƒ‰ƒ‰ƒxƒ‹ID
-#DIM      INPUT_MIN     ;•\Ž¦’†ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID‚ÌÅ¬’l
-#DIM      INPUT_MAX     ;•\Ž¦’†ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID‚ÌÅ‘å’l
-#DIMS     LABEL_LIST, 30;•\Ž¦“à—e‚ÌŽæ“¾—p
-#DIM      LABEL_SIZE    ;•\Ž¦“à—e‚Ì”
-#DIMS     SORT_TYPE     ;Œ»Ý‚Ìƒ\[ƒg‡
-#DIMS     LIST_NAME     ;Œ»Ý‚Ì•\Ž¦“à—e
-#DIMS     PREV_LIST     ;‘O‰ñ•\Ž¦‚µ‚½“à—e
-#DIM      C_LABEL       ;ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID
-#DIM      DETAIL_OP     ;Šî‘bî•ñ‚Ì•\Ž¦“à—e‚ÌØ‚è‘Ö‚¦—p
+#DIMS     SCENE         ;ä½¿ç”¨ã™ã‚‹ã‚·ãƒ¼ãƒ³
+#DIM  REF CHARA_LIST    ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—
+#DIM      SHOW_START    ;è¡¨ç¤ºé–‹å§‹ã®ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«ID
+#DIM      SHOW_END      ;è¡¨ç¤ºçµ‚äº†ã®ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«ID
+#DIM      INPUT_MIN     ;è¡¨ç¤ºä¸­ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«IDã®æœ€å°å€¤
+#DIM      INPUT_MAX     ;è¡¨ç¤ºä¸­ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«IDã®æœ€å¤§å€¤
+#DIMS     LABEL_LIST, 30;è¡¨ç¤ºå†…å®¹ã®å–å¾—ç”¨
+#DIM      LABEL_SIZE    ;è¡¨ç¤ºå†…å®¹ã®æ•°
+#DIMS     SORT_TYPE     ;ç¾åœ¨ã®ã‚½ãƒ¼ãƒˆé †
+#DIMS     LIST_NAME     ;ç¾åœ¨ã®è¡¨ç¤ºå†…å®¹
+#DIMS     PREV_LIST     ;å‰å›žè¡¨ç¤ºã—ãŸå†…å®¹
+#DIM      C_LABEL       ;ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«ID
+#DIM      DETAIL_OP     ;åŸºç¤Žæƒ…å ±ã®è¡¨ç¤ºå†…å®¹ã®åˆ‡ã‚Šæ›¿ãˆç”¨
 
-IF LIST_NAME == "Šî‘bî•ñ"
+IF LIST_NAME == "åŸºç¤Žæƒ…å ±"
 	SELECTCASE SCENE
-	CASE "MNG_”z‘®_Šw‰€¶“k", "MNG_”z‘®_Žx‰‡ƒ{ƒ‰", "MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ", "MNG_”z‘®_ƒJƒWƒm“Xˆõ"
+	CASE "MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’", "MNG_é…å±ž_æ”¯æ´ãƒœãƒ©", "MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡", "MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡"
 		DETAIL_OP = 1
-	CASE "MNG_“ÁŽê_Ž¡—ÃÝ”õ"
+	CASE "MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™"
 		DETAIL_OP = 2
-	CASE "MNG_“ÁŽê_•iŽí‰ü—Ç"
+	CASE "MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯"
 		DETAIL_OP = 3
-	CASE "MNG_“ÁŽê_g‘Ì‹­‰»"
+	CASE "MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–"
 		DETAIL_OP = 4
-	CASE "MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢"
+	CASE "MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ "
 		DETAIL_OP = 5
 	{
-	CASE "MNG_“ü‹_ˆê†Žº", "MNG_“ü‹_“ñ†Žº", "MNG_“ü‹_ŽO†Žº", "MNG_“ü‹_Žl†Žº", "MNG_“ü‹_ŒÜ†Žº", 
-		"MNG_“ü‹_˜Z†Žº", "MNG_“ü‹_Žµ†Žº", "MNG_“ü‹_”ª†Žº", "MNG_“ü‹_‹ã†Žº", "MNG_“ü‹_\†Žº", 
+	CASE "MNG_å…¥å±…_ä¸€å·å®¤", "MNG_å…¥å±…_äºŒå·å®¤", "MNG_å…¥å±…_ä¸‰å·å®¤", "MNG_å…¥å±…_å››å·å®¤", "MNG_å…¥å±…_äº”å·å®¤", 
+		"MNG_å…¥å±…_å…­å·å®¤", "MNG_å…¥å±…_ä¸ƒå·å®¤", "MNG_å…¥å±…_å…«å·å®¤", "MNG_å…¥å±…_ä¹å·å®¤", "MNG_å…¥å±…_åå·å®¤", 
 	}
 		DETAIL_OP = 6
-	CASE "MNG_“o˜^_Œð—F§Œä"
+	CASE "MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡"
 		DETAIL_OP = 7
 	CASEELSE
 		DETAIL_OP = 0
@@ -533,14 +533,14 @@ IF LIST_NAME == "Šî‘bî•ñ"
 	RETURN
 ENDIF
 
-;ƒ‰ƒxƒ‹ƒŠƒXƒgŽæ“¾
+;ãƒ©ãƒ™ãƒ«ãƒªã‚¹ãƒˆå–å¾—
 IF LIST_NAME == PREV_LIST
 ELSE
 	CALLF DIM_TABLE_LABEL_LIST(LIST_NAME, LABEL_LIST, LABEL_SIZE)
 	PREV_LIST '= LIST_NAME
 ENDIF
 
-;ƒfƒoƒbƒOŠm”F—p
+;ãƒ‡ãƒãƒƒã‚°ç¢ºèªç”¨
 ;CALL VAR_SHOW_STR_ARRAY(LABEL_LIST, LABEL_SIZE)
 
 CALL MNG_INFO_CHARA_DETAIL_LABEL(-1, 0, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
@@ -570,366 +570,366 @@ ENDCATCH
 
 
 @MNG_LIST_CHARA_INPUT(SCENE, OP, CHARA_LIST, CHARA_CNT, NOW_GROUP, LAST_GROUP, LIST_PACK, PACK_PAGE, PACK_SIZE, INPUT_MIN, INPUT_MAX, SORT_TYPE, GET_LIST)
-#DIMS     SCENE      ;Žg—pê–Ê
-#DIMS     OP         ;ƒIƒvƒVƒ‡ƒ“•¶Žš—ñ
-#DIM  REF CHARA_LIST ;ƒLƒƒƒ‰ƒŠƒXƒgˆê——”z—ñ
-#DIM      CHARA_CNT  ;ƒŠƒXƒg’†‚ÌƒLƒƒƒ‰”
-#DIM  REF NOW_GROUP  ;Œ»Ý•\Ž¦’†‚ÌƒLƒƒƒ‰ƒOƒ‹[ƒv
-#DIM      LAST_GROUP ;ƒLƒƒƒ‰ƒOƒ‹[ƒv‚ÌÅŒã”ö
-#DIMS REF LIST_PACK  ;ƒpƒbƒNƒŠƒXƒg”z—ñ
-#DIM  REF PACK_PAGE  ;•\Ž¦ƒf[ƒ^‚Ìƒy[ƒW”
-#DIM      PACK_SIZE  ;ƒpƒbƒNƒŠƒXƒg”z—ñ‚ÌƒTƒCƒY
-#DIM      INPUT_MIN  ;•\Ž¦’†ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID‚ÌÅ¬’l
-#DIM      INPUT_MAX  ;•\Ž¦’†ƒLƒƒƒ‰ƒ‰ƒxƒ‹ID‚ÌÅ‘å’l
-#DIMS REF SORT_TYPE  ;Œ»Ý‚Ìƒ\[ƒg‡
-#DIM  REF GET_LIST   ;ƒLƒƒƒ‰ƒŠƒXƒgXVˆ——pƒtƒ‰ƒO
-#DIMS     INPUT_STR  ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
-#DIM      INPUT_INT  ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
-#DIM      L_INPUT    ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
+#DIMS     SCENE      ;ä½¿ç”¨å ´é¢
+#DIMS     OP         ;ã‚ªãƒ—ã‚·ãƒ§ãƒ³æ–‡å­—åˆ—
+#DIM  REF CHARA_LIST ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆä¸€è¦§é…åˆ—
+#DIM      CHARA_CNT  ;ãƒªã‚¹ãƒˆä¸­ã®ã‚­ãƒ£ãƒ©æ•°
+#DIM  REF NOW_GROUP  ;ç¾åœ¨è¡¨ç¤ºä¸­ã®ã‚­ãƒ£ãƒ©ã‚°ãƒ«ãƒ¼ãƒ—
+#DIM      LAST_GROUP ;ã‚­ãƒ£ãƒ©ã‚°ãƒ«ãƒ¼ãƒ—ã®æœ€å¾Œå°¾
+#DIMS REF LIST_PACK  ;ãƒ‘ãƒƒã‚¯ãƒªã‚¹ãƒˆé…åˆ—
+#DIM  REF PACK_PAGE  ;è¡¨ç¤ºãƒ‡ãƒ¼ã‚¿ã®ãƒšãƒ¼ã‚¸æ•°
+#DIM      PACK_SIZE  ;ãƒ‘ãƒƒã‚¯ãƒªã‚¹ãƒˆé…åˆ—ã®ã‚µã‚¤ã‚º
+#DIM      INPUT_MIN  ;è¡¨ç¤ºä¸­ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«IDã®æœ€å°å€¤
+#DIM      INPUT_MAX  ;è¡¨ç¤ºä¸­ã‚­ãƒ£ãƒ©ãƒ©ãƒ™ãƒ«IDã®æœ€å¤§å€¤
+#DIMS REF SORT_TYPE  ;ç¾åœ¨ã®ã‚½ãƒ¼ãƒˆé †
+#DIM  REF GET_LIST   ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆæ›´æ–°å‡¦ç†ç”¨ãƒ•ãƒ©ã‚°
+#DIMS     INPUT_STR  ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
+#DIM      INPUT_INT  ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
+#DIM      L_INPUT    ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
 
-#DIM DYNAMIC L_SUP_CNT, 4         ;Še•”‘à‚É”z‘®Ï‚Ý‚ÌƒLƒƒƒ‰”
+#DIM DYNAMIC L_SUP_CNT, 4         ;å„éƒ¨éšŠã«é…å±žæ¸ˆã¿ã®ã‚­ãƒ£ãƒ©æ•°
 
-;ƒ{ƒ^ƒ“’·‚³F
+;ãƒœã‚¿ãƒ³é•·ã•ï¼š
 ;[----] - 
 ;%LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%
 ;
-;î•ñˆÚ“®‚Íƒ{ƒ^ƒ“•”9Aƒ‰ƒxƒ‹•”20‚Å29
-;ƒLƒƒƒ‰ˆÚ“®‚Íƒ{ƒ^ƒ“•”9Aƒ‰ƒxƒ‹•”14‚Å23
+;æƒ…å ±ç§»å‹•ã¯ãƒœã‚¿ãƒ³éƒ¨9ã€ãƒ©ãƒ™ãƒ«éƒ¨20ã§29
+;ã‚­ãƒ£ãƒ©ç§»å‹•ã¯ãƒœã‚¿ãƒ³éƒ¨9ã€ãƒ©ãƒ™ãƒ«éƒ¨14ã§23
 PRINTFORM %" " * 29%
-PRINTFORM @@
+PRINTFORM ã€€ã€€
 SIF CHARA_CNT > 0 && NOW_GROUP > 1
-	PRINTBUTTON "[8888] - @‘O‚ÌƒLƒƒƒ‰@", "8888"
+	PRINTBUTTON "[8888] - ã€€å‰ã®ã‚­ãƒ£ãƒ©ã€€", "8888"
 PRINTFORML 
-PRINTFORM @
+PRINTFORM ã€€
 PRINTBUTTON @"[4444] - %LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%", "4444"
-PRINTFORM @
+PRINTFORM ã€€
 PRINTFORM %" " * 23%
-PRINTFORM @
+PRINTFORM ã€€
 PRINTBUTTON @"[6666] - %LIST_PACK:((PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE), 20%", "6666"
 PRINTFORML 
-PRINTFORM @
+PRINTFORM ã€€
 
 PRINTFORM %" " * 29%
-PRINTFORM @
+PRINTFORM ã€€
 IF CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP
-	PRINTBUTTON "[2222] - @ŽŸ‚ÌƒLƒƒƒ‰@", "2222"
+	PRINTBUTTON "[2222] - ã€€æ¬¡ã®ã‚­ãƒ£ãƒ©ã€€", "2222"
 ELSE
 	PRINTFORM %" " * 23%
 ENDIF
-PRINTFORM @
-PRINTBUTTON "[3333] - @@@@•\Ž¦l”•ÏX", "3333"
+PRINTFORM ã€€
+PRINTBUTTON "[3333] - ã€€ã€€ã€€ã€€è¡¨ç¤ºäººæ•°å¤‰æ›´", "3333"
 PRINTFORML 
 {
 IF GROUPMATCH(SCENE, 
-	"MNG_“o˜^_“o˜^–•Á", 
-	"MNG_“ü‹_ˆê†Žº", "MNG_“ü‹_“ñ†Žº", "MNG_“ü‹_ŽO†Žº", "MNG_“ü‹_Žl†Žº", "MNG_“ü‹_ŒÜ†Žº", 
-	"MNG_“ü‹_˜Z†Žº", "MNG_“ü‹_Žµ†Žº", "MNG_“ü‹_”ª†Žº", "MNG_“ü‹_‹ã†Žº", "MNG_“ü‹_\†Žº", 
+	"MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ", 
+	"MNG_å…¥å±…_ä¸€å·å®¤", "MNG_å…¥å±…_äºŒå·å®¤", "MNG_å…¥å±…_ä¸‰å·å®¤", "MNG_å…¥å±…_å››å·å®¤", "MNG_å…¥å±…_äº”å·å®¤", 
+	"MNG_å…¥å±…_å…­å·å®¤", "MNG_å…¥å±…_ä¸ƒå·å®¤", "MNG_å…¥å±…_å…«å·å®¤", "MNG_å…¥å±…_ä¹å·å®¤", "MNG_å…¥å±…_åå·å®¤", 
 	
-	"MNG_“o˜^_ƒŒƒMƒ…ƒ‰[", "MNG_“o˜^_“Á•Ê•ÛŒì", "MNG_“o˜^_–¼‘O•ÏX", 
-	"MNG_“]E_¹EŽÒ", "MNG_“]E_ƒƒCƒh", "MNG_“]E_ƒAƒCƒhƒ‹", "MNG_“]E_ŽÐ‰ïl", "MNG_“]E_‹Çˆõ", "MNG_“]E_©•w", 
-	"MNG_”z‘®_Šw‰€¶“k", "MNG_”z‘®_Žx‰‡ƒ{ƒ‰", "MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ", "MNG_”z‘®_ƒJƒWƒm“Xˆõ", 
-	"MNG_“ÁŽê_ŠOŒ©•ÏX", "MNG_“ÁŽê_Ž¡—ÃÝ”õ", "MNG_“ÁŽê_•iŽí‰ü—Ç", "MNG_“ÁŽê_g‘Ì‹­‰»", "MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢", 
-	"MNG_“o˜^_Œð—F§Œä", "MNG_“o˜^_ˆß‘••ÏX", "MNG_“o˜^_”ÍˆÍÁ‹Ž", "MNG_“o˜^_–•Á’†Ž~"
+	"MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼", "MNG_ç™»éŒ²_ç‰¹åˆ¥ä¿è­·", "MNG_ç™»éŒ²_åå‰å¤‰æ›´", 
+	"MNG_è»¢è·_è–è·è€…", "MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰", "MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«", "MNG_è»¢è·_ç¤¾ä¼šäºº", "MNG_è»¢è·_å±€å“¡", "MNG_è»¢è·_å¨¼å©¦", 
+	"MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’", "MNG_é…å±ž_æ”¯æ´ãƒœãƒ©", "MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡", "MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡", 
+	"MNG_ç‰¹æ®Š_å¤–è¦‹å¤‰æ›´", "MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™", "MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯", "MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–", "MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ ", 
+	"MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡", "MNG_ç™»éŒ²_è¡£è£…å¤‰æ›´", "MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»", "MNG_ç™»éŒ²_æŠ¹æ¶ˆä¸­æ­¢"
 	)
 }
 
 	
 	DRAWLINE
-	PRINTFORM @“o˜^b
-	SIF SCENE == "MNG_“o˜^_ƒŒƒMƒ…ƒ‰["
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1011] - ƒŒƒMƒ…ƒ‰[", "1011"
-	PRINTFORM @
+	PRINTFORM ã€€ç™»éŒ²ï½œ
+	SIF SCENE == "MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1011] - ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼", "1011"
+	PRINTFORM ã€€
 	RESETCOLOR
-	SIF SCENE == "MNG_“o˜^_“Á•Ê•ÛŒì"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1012] - @“Á•Ê•ÛŒì", "1012"
-	PRINTFORM @
+	SIF SCENE == "MNG_ç™»éŒ²_ç‰¹åˆ¥ä¿è­·"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1012] - ã€€ç‰¹åˆ¥ä¿è­·", "1012"
+	PRINTFORM ã€€
 	RESETCOLOR
-	SIF SCENE == "MNG_“o˜^_–¼‘O•ÏX"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1013] - @–¼‘O•ÏX", "1013"
-	PRINTFORM @
+	SIF SCENE == "MNG_ç™»éŒ²_åå‰å¤‰æ›´"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1013] - ã€€åå‰å¤‰æ›´", "1013"
+	PRINTFORM ã€€
 	RESETCOLOR
-	SIF SCENE == "MNG_“o˜^_Œð—F§Œä"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1029] - @Œð—F§Œä", "1029"
-	PRINTFORM @
+	SIF SCENE == "MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1029] - ã€€äº¤å‹åˆ¶å¾¡", "1029"
+	PRINTFORM ã€€
 	RESETCOLOR
-	SIF SCENE == "MNG_“o˜^_ˆß‘••ÏX"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1030] - @ˆß‘••ÏX", "1030"
-	PRINTFORM @
-	RESETCOLOR
-	PRINTFORML
-	
-	
-	PRINTFORM @“]Eb
-	SIF SCENE == "MNG_“]E_¹EŽÒ"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1014] - @@¹EŽÒ", "1014"
-	PRINTFORM @
-	RESETCOLOR
-	SIF SCENE == "MNG_“]E_ƒƒCƒh"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1015] - @@ƒƒCƒh", "1015"
-	PRINTFORM @
-	RESETCOLOR
-	SIF SCENE == "MNG_“]E_ƒAƒCƒhƒ‹"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1016] - @ƒAƒCƒhƒ‹", "1016"
-	PRINTFORM @
-	RESETCOLOR
-	SIF SCENE == "MNG_“]E_ŽÐ‰ïl"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1017] - @@ŽÐ‰ïl", "1017"
-	PRINTFORM @
-	RESETCOLOR
-	SIF SCENE == "MNG_“]E_‹Çˆõ"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1018] - @@@‹Çˆõ", "1018"
-	PRINTFORML
-	RESETCOLOR
-	PRINTFORM @@@b
-	SIF SCENE == "MNG_“]E_©•w"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1019] - @@@©•w", "1019"
-	PRINTFORM @
+	SIF SCENE == "MNG_ç™»éŒ²_è¡£è£…å¤‰æ›´"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1030] - ã€€è¡£è£…å¤‰æ›´", "1030"
+	PRINTFORM ã€€
 	RESETCOLOR
 	PRINTFORML
 	
-	PRINTFORM @”z‘®b
-	IF FLAG:Šw‰€ <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - @HHHH
-	ELSE
-		SIF SCENE == "MNG_”z‘®_Šw‰€¶“k"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1020] - @Šw‰€¶“k", "1020"
-	ENDIF
-	PRINTFORM @
+	
+	PRINTFORM ã€€è»¢è·ï½œ
+	SIF SCENE == "MNG_è»¢è·_è–è·è€…"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1014] - ã€€ã€€è–è·è€…", "1014"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:Žx‰‡Z‘î <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - @HHHH
-	ELSE
-		SIF SCENE == "MNG_”z‘®_Žx‰‡ƒ{ƒ‰"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1021] - @Žx‰‡ƒ{ƒ‰", "1021"
-	ENDIF
-	PRINTFORM @
+	SIF SCENE == "MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1015] - ã€€ã€€ãƒ¡ã‚¤ãƒ‰", "1015"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:ƒ‰ƒuƒzƒeƒ‹ <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - HHHHH
-	ELSE
-		SIF SCENE == "MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1022] - ƒ‰ƒuƒz“Xˆõ", "1022"
-	ENDIF
-	PRINTFORM @
+	SIF SCENE == "MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1016] - ã€€ã‚¢ã‚¤ãƒ‰ãƒ«", "1016"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:‚‹‰ƒJƒWƒm <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - HHHHH
+	SIF SCENE == "MNG_è»¢è·_ç¤¾ä¼šäºº"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1017] - ã€€ã€€ç¤¾ä¼šäºº", "1017"
+	PRINTFORM ã€€
+	RESETCOLOR
+	SIF SCENE == "MNG_è»¢è·_å±€å“¡"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1018] - ã€€ã€€ã€€å±€å“¡", "1018"
+	PRINTFORML
+	RESETCOLOR
+	PRINTFORM ã€€ã€€ã€€ï½œ
+	SIF SCENE == "MNG_è»¢è·_å¨¼å©¦"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1019] - ã€€ã€€ã€€å¨¼å©¦", "1019"
+	PRINTFORM ã€€
+	RESETCOLOR
+	PRINTFORML
+	
+	PRINTFORM ã€€é…å±žï½œ
+	IF FLAG:å­¦åœ’ <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ã€€ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 	ELSE
-		SIF SCENE == "MNG_”z‘®_ƒJƒWƒm“Xˆõ"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1023] - ƒJƒWƒm“Xˆõ", "1023"
+		SIF SCENE == "MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1020] - ã€€å­¦åœ’ç”Ÿå¾’", "1020"
+	ENDIF
+	PRINTFORM ã€€
+	RESETCOLOR
+	IF FLAG:æ”¯æ´ä½å®… <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ã€€ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
+	ELSE
+		SIF SCENE == "MNG_é…å±ž_æ”¯æ´ãƒœãƒ©"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1021] - ã€€æ”¯æ´ãƒœãƒ©", "1021"
+	ENDIF
+	PRINTFORM ã€€
+	RESETCOLOR
+	IF FLAG:ãƒ©ãƒ–ãƒ›ãƒ†ãƒ« <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
+	ELSE
+		SIF SCENE == "MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1022] - ãƒ©ãƒ–ãƒ›åº—å“¡", "1022"
+	ENDIF
+	PRINTFORM ã€€
+	RESETCOLOR
+	IF FLAG:é«˜ç´šã‚«ã‚¸ãƒŽ <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
+	ELSE
+		SIF SCENE == "MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1023] - ã‚«ã‚¸ãƒŽåº—å“¡", "1023"
 	ENDIF
 	RESETCOLOR
 	PRINTFORML
 	
-	PRINTFORM @“ü‹b
-	IF FLAG:5031 && SCENE == "MNG_“ü‹_ˆê†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_ˆê†Žº"
-		SETCOLOR COLOR("‰©F")
+	PRINTFORM ã€€å…¥å±…ï½œ
+	IF FLAG:5031 && SCENE == "MNG_å…¥å±…_ä¸€å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_ä¸€å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5031
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1001] - @@ˆê†Žº", "1001"
-	PRINTFORM @
+	PRINTBUTTON "[1001] - ã€€ã€€ä¸€å·å®¤", "1001"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5032 && SCENE == "MNG_“ü‹_“ñ†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_“ñ†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5032 && SCENE == "MNG_å…¥å±…_äºŒå·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_äºŒå·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5032
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1002] - @@“ñ†Žº", "1002"
-	PRINTFORM @
+	PRINTBUTTON "[1002] - ã€€ã€€äºŒå·å®¤", "1002"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5033 && SCENE == "MNG_“ü‹_ŽO†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_ŽO†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5033 && SCENE == "MNG_å…¥å±…_ä¸‰å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_ä¸‰å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5033
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1003] - @@ŽO†Žº", "1003"
-	PRINTFORM @
+	PRINTBUTTON "[1003] - ã€€ã€€ä¸‰å·å®¤", "1003"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5034 && SCENE == "MNG_“ü‹_Žl†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_Žl†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5034 && SCENE == "MNG_å…¥å±…_å››å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_å››å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5034
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1004] - @@Žl†Žº", "1004"
-	PRINTFORM @
+	PRINTBUTTON "[1004] - ã€€ã€€å››å·å®¤", "1004"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5035 && SCENE == "MNG_“ü‹_ŒÜ†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_ŒÜ†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5035 && SCENE == "MNG_å…¥å±…_äº”å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_äº”å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5035
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1005] - @@ŒÜ†Žº", "1005"
-	PRINTFORM @
+	PRINTBUTTON "[1005] - ã€€ã€€äº”å·å®¤", "1005"
+	PRINTFORM ã€€
 	RESETCOLOR
 	PRINTFORML
 
-	PRINTFORM @@@b
-	IF FLAG:5036 && SCENE == "MNG_“ü‹_˜Z†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_˜Z†Žº"
-		SETCOLOR COLOR("‰©F")
+	PRINTFORM ã€€ã€€ã€€ï½œ
+	IF FLAG:5036 && SCENE == "MNG_å…¥å±…_å…­å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_å…­å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5036
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1006] - @@˜Z†Žº", "1006"
-	PRINTFORM @
+	PRINTBUTTON "[1006] - ã€€ã€€å…­å·å®¤", "1006"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5037 && SCENE == "MNG_“ü‹_Žµ†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_Žµ†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5037 && SCENE == "MNG_å…¥å±…_ä¸ƒå·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_ä¸ƒå·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5037
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1007] - @@Žµ†Žº", "1007"
-	PRINTFORM @
+	PRINTBUTTON "[1007] - ã€€ã€€ä¸ƒå·å®¤", "1007"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5038 && SCENE == "MNG_“ü‹_”ª†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_”ª†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5038 && SCENE == "MNG_å…¥å±…_å…«å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_å…«å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5038
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1008] - @@”ª†Žº", "1008"
-	PRINTFORM @
+	PRINTBUTTON "[1008] - ã€€ã€€å…«å·å®¤", "1008"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5039 && SCENE == "MNG_“ü‹_‹ã†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_‹ã†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5039 && SCENE == "MNG_å…¥å±…_ä¹å·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_ä¹å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5039
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	SIF SCENE == "MNG_“ü‹_‹ã†Žº"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1009] - @@‹ã†Žº", "1009"
-	PRINTFORM @
+	SIF SCENE == "MNG_å…¥å±…_ä¹å·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1009] - ã€€ã€€ä¹å·å®¤", "1009"
+	PRINTFORM ã€€
 	RESETCOLOR
-	IF FLAG:5040 && SCENE == "MNG_“ü‹_\†Žº"
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-	ELSEIF SCENE == "MNG_“ü‹_\†Žº"
-		SETCOLOR COLOR("‰©F")
+	IF FLAG:5040 && SCENE == "MNG_å…¥å±…_åå·å®¤"
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+	ELSEIF SCENE == "MNG_å…¥å±…_åå·å®¤"
+		SETCOLOR COLOR("é»„è‰²")
 	ELSEIF FLAG:5040
-		SETCOLOR COLOR("Ž‡")
+		SETCOLOR COLOR("ç´«")
 	ENDIF
-	PRINTBUTTON "[1010] - @@\†Žº", "1010"
-	PRINTFORM @
+	PRINTBUTTON "[1010] - ã€€ã€€åå·å®¤", "1010"
+	PRINTFORM ã€€
 	RESETCOLOR
 	PRINTFORML
 	
-	PRINTFORM @“ÁŽêb
-	IF FLAG:ƒGƒXƒe <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - @HHHH
+	PRINTFORM ã€€ç‰¹æ®Šï½œ
+	IF FLAG:ã‚¨ã‚¹ãƒ† <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ã€€ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 	ELSE
-		SIF SCENE == "MNG_“ÁŽê_ŠOŒ©•ÏX"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1024] - @ŠOŒ©•ÏX", "1024"
+		SIF SCENE == "MNG_ç‰¹æ®Š_å¤–è¦‹å¤‰æ›´"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1024] - ã€€å¤–è¦‹å¤‰æ›´", "1024"
 	ENDIF
-	PRINTFORM @
+	PRINTFORM ã€€
 	RESETCOLOR
 	
-	IF FLAG:•a‰@ <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - @HHHH
+	IF FLAG:ç—…é™¢ <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ã€€ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 	ELSE
-		SIF SCENE == "MNG_“ÁŽê_Ž¡—ÃÝ”õ"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1025] - @Ž¡—ÃÝ”õ", "1025"
+		SIF SCENE == "MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1025] - ã€€æ²»ç™‚è¨­å‚™", "1025"
 	ENDIF
-	PRINTFORM @
+	PRINTFORM ã€€
 	RESETCOLOR
 	
-	IF FLAG:•iŽí‰ü—ÇŽ{Ý <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - @HHHH
+	IF FLAG:å“ç¨®æ”¹è‰¯æ–½è¨­ <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ã€€ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 	ELSE
-		SIF SCENE == "MNG_“ÁŽê_•iŽí‰ü—Ç"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1026] - @•iŽí‰ü—Ç", "1026"
+		SIF SCENE == "MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1026] - ã€€å“ç¨®æ”¹è‰¯", "1026"
 	ENDIF
-	PRINTFORM @
+	PRINTFORM ã€€
 	RESETCOLOR
 	
-	IF FLAG:Œ¤‹†Ž{Ý <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - @HHHH
+	IF FLAG:ç ”ç©¶æ–½è¨­ <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ã€€ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 	ELSE
-		SIF SCENE == "MNG_“ÁŽê_g‘Ì‹­‰»"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1027] - @g‘Ì‹­‰»", "1027"
+		SIF SCENE == "MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–"
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1027] - ã€€èº«ä½“å¼·åŒ–", "1027"
 	ENDIF
-	PRINTFORM @
+	PRINTFORM ã€€
 	RESETCOLOR
 	
-	IF FLAG:Œ¤‹†Ž{Ý <= 0
-		SETCOLOR COLOR("ŠDF")
-		PRINTFORM [----] - HHHHH
+	IF FLAG:ç ”ç©¶æ–½è¨­ <= 0
+		SETCOLOR COLOR("ç°è‰²")
+		PRINTFORM [----] - ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 	ELSE
-		SIF SCENE == "MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢"
-			SETCOLOR COLOR("‰©F")
-		PRINTBUTTON "[1028] - ŽŸ¢‘ã‘n‘¢", "1028"
+		SIF SCENE == "MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ "
+			SETCOLOR COLOR("é»„è‰²")
+		PRINTBUTTON "[1028] - æ¬¡ä¸–ä»£å‰µé€ ", "1028"
 	ENDIF
-	PRINTFORM @
+	PRINTFORM ã€€
 	RESETCOLOR
 	PRINTFORML
 	
-	PRINTFORM @Á‹Žb
-	SIF SCENE == "MNG_“o˜^_“o˜^–•Á"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1000] - @“o˜^–•Á", "1000"
-	PRINTFORM @
+	PRINTFORM ã€€æ¶ˆåŽ»ï½œ
+	SIF SCENE == "MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1000] - ã€€ç™»éŒ²æŠ¹æ¶ˆ", "1000"
+	PRINTFORM ã€€
 	RESETCOLOR
 	
-	SIF SCENE == "MNG_“o˜^_”ÍˆÍÁ‹Ž"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1031] - @”ÍˆÍÁ‹Ž", "1031"
-	PRINTFORM @
+	SIF SCENE == "MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1031] - ã€€ç¯„å›²æ¶ˆåŽ»", "1031"
+	PRINTFORM ã€€
 	RESETCOLOR
 	
-	SIF SCENE == "MNG_“o˜^_–•Á’†Ž~"
-		SETCOLOR COLOR("‰©F")
-	PRINTBUTTON "[1032] - @–•Á’†Ž~", "1032"
-	PRINTFORM @
+	SIF SCENE == "MNG_ç™»éŒ²_æŠ¹æ¶ˆä¸­æ­¢"
+		SETCOLOR COLOR("é»„è‰²")
+	PRINTBUTTON "[1032] - ã€€æŠ¹æ¶ˆä¸­æ­¢", "1032"
+	PRINTFORM ã€€
 	RESETCOLOR
 	PRINTFORML
 ELSE
 ENDIF
 
 DRAWLINE
-PRINTFORM @
-PRINTBUTTON "[9999] - @@@@‚à‚Ç‚é@@@@", "9999"
+PRINTFORM ã€€
+PRINTBUTTON "[9999] - ã€€ã€€ã€€ã€€ã‚‚ã©ã‚‹ã€€ã€€ã€€ã€€", "9999"
 PRINTFORML 
 PRINTFORML 
 DO
@@ -940,53 +940,53 @@ DO
 	IF ISNUMERIC(INPUT_STR)
 		INPUT_INT = TOINT(INPUT_STR)
 		SELECTCASE INPUT_INT
-		;“o˜^–•Á/”ÍˆÍÁ‹Ž/–•Á’†Ž~
+		;ç™»éŒ²æŠ¹æ¶ˆ/ç¯„å›²æ¶ˆåŽ»/æŠ¹æ¶ˆä¸­æ­¢
 		CASE 1000, 1031, 1032
 			RETURN INPUT_INT
-		;ƒ}ƒ“ƒVƒ‡ƒ““ü‹
+		;ãƒžãƒ³ã‚·ãƒ§ãƒ³å…¥å±…
 		CASE 1001 TO 1010
 			RETURN INPUT_INT
 			
-		;ƒŒƒMƒ…ƒ‰[/“Á•Ê•ÛŒì/–¼‘O•ÏX/Œð—F§Œä/ˆß‘••ÏX
+		;ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼/ç‰¹åˆ¥ä¿è­·/åå‰å¤‰æ›´/äº¤å‹åˆ¶å¾¡/è¡£è£…å¤‰æ›´
 		CASE 1011, 1012, 1013, 1029, 1030
 			RETURN INPUT_INT
 		
-		;“]EŒn
+		;è»¢è·ç³»
 		CASE 1014 TO 1019
 			;SIF MONEY <= 500000
 			;	GOTO MNG_RETRY
 			RETURN INPUT_INT
-		;Ž{Ý—˜—pŒn
+		;æ–½è¨­åˆ©ç”¨ç³»
 		CASE 1020
-			SIF FLAG:Šw‰€ <= 0
+			SIF FLAG:å­¦åœ’ <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1021
-			SIF FLAG:Žx‰‡Z‘î <= 0
+			SIF FLAG:æ”¯æ´ä½å®… <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1022
-			SIF FLAG:ƒ‰ƒuƒzƒeƒ‹ <= 0
+			SIF FLAG:ãƒ©ãƒ–ãƒ›ãƒ†ãƒ« <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1023
-			SIF FLAG:‚‹‰ƒJƒWƒm <= 0
+			SIF FLAG:é«˜ç´šã‚«ã‚¸ãƒŽ <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1024
-			SIF FLAG:ƒGƒXƒe <= 0
+			SIF FLAG:ã‚¨ã‚¹ãƒ† <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1025
-			SIF FLAG:•a‰@ <= 0
+			SIF FLAG:ç—…é™¢ <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1026
-			SIF FLAG:•iŽí‰ü—ÇŽ{Ý <= 0
+			SIF FLAG:å“ç¨®æ”¹è‰¯æ–½è¨­ <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 1027, 1028
-			SIF FLAG:Œ¤‹†Ž{Ý <= 0
+			SIF FLAG:ç ”ç©¶æ–½è¨­ <= 0
 				GOTO MNG_RETRY
 			RETURN INPUT_INT
 		CASE 8888
@@ -1000,17 +1000,17 @@ DO
 			NOW_GROUP ++
 			RETURN -1
 		CASE 3333
-			PRINTFORML ƒy[ƒWÅ‘å•\Ž¦l”‚ð‘I‘ð‚Ü‚½‚Í“ü—Í‚µ‚Ä‚­‚¾‚³‚¢i1`999lj
-			PRINTFORM [5] 5l 
-			PRINTFORM [10] 10l 
-			PRINTFORM [15] 15l 
-			PRINTFORML [20] 20l 
-			PRINTFORML [0] •ÏX‚µ‚È‚¢
+			PRINTFORML ãƒšãƒ¼ã‚¸æœ€å¤§è¡¨ç¤ºäººæ•°ã‚’é¸æŠžã¾ãŸã¯å…¥åŠ›ã—ã¦ãã ã•ã„ï¼ˆ1ï½ž999äººï¼‰
+			PRINTFORM [5] 5äºº 
+			PRINTFORM [10] 10äºº 
+			PRINTFORM [15] 15äºº 
+			PRINTFORML [20] 20äºº 
+			PRINTFORML [0] å¤‰æ›´ã—ãªã„
 			INPUT
 			L_INPUT = RESULT
 			IF INRANGE(L_INPUT, 1, 999)
-				FLAG:’è”_ƒJƒtƒF•\Ž¦” = L_INPUT
-				PRINTFORMW •\Ž¦l”‚ð{L_INPUT}l‚É•ÏX‚µ‚Ü‚µ‚½
+				FLAG:å®šæ•°_ã‚«ãƒ•ã‚§è¡¨ç¤ºæ•° = L_INPUT
+				PRINTFORMW è¡¨ç¤ºäººæ•°ã‚’{L_INPUT}äººã«å¤‰æ›´ã—ã¾ã—ãŸ
 				GET_LIST = 1
 				NOW_GROUP = 1
 			ENDIF
@@ -1025,19 +1025,19 @@ DO
 			NOW_GROUP = 1
 			RETURN
 		CASEELSE
-		;ƒLƒƒƒ‰‚ª‘I‘ð‚³‚ê‚½Žž
+		;ã‚­ãƒ£ãƒ©ãŒé¸æŠžã•ã‚ŒãŸæ™‚
 			SIF !INRANGE(INPUT_INT, INPUT_MIN, INPUT_MAX)
 				GOTO MNG_RETRY
-			;‚±‚±‚¾‚¯DO-LOOP‚Ê‚¯‚Ü‚·
+			;ã“ã“ã ã‘DO-LOOPã¬ã‘ã¾ã™
 			BREAK
 			$MNG_RETRY
-			CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+			CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 			CONTINUE
 		ENDSELECT
 	ELSE
-		;STR‚ÅŽó‚¯Žæ‚Á‚½ŽžASORTˆ—‚È‚Ì‚Åˆ—‚ª‰Â”\‚Èê‡‚Í‘S‚ÄRESTART
-		;–­‚È•¶Žš—ñ‚ðŽó‚¯Žæ‚Á‚½ê‡‚É‚ÍCONTINUE
-		;DO-LOOP‚ð’Eo‚Å‚«‚é‚Ì‚ÍINT‚©‚ÂAƒŠƒXƒgã‚ÌƒLƒƒƒ‰‚ð‘I‘ð‚µ‚½ê‡‚Ì‚Ý
+		;STRã§å—ã‘å–ã£ãŸæ™‚ã€SORTå‡¦ç†ãªã®ã§å‡¦ç†ãŒå¯èƒ½ãªå ´åˆã¯å…¨ã¦RESTART
+		;å¦™ãªæ–‡å­—åˆ—ã‚’å—ã‘å–ã£ãŸå ´åˆã«ã¯CONTINUE
+		;DO-LOOPã‚’è„±å‡ºã§ãã‚‹ã®ã¯INTã‹ã¤ã€ãƒªã‚¹ãƒˆä¸Šã®ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ãŸå ´åˆã®ã¿
 		CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
 		IF RESULT
 			RETURN -1
@@ -1047,23 +1047,23 @@ DO
 	ENDIF
 LOOP 1
 
-IF STRCOUNT(OP, "uî•ñ•\Ž¦v")
+IF STRCOUNT(OP, "ã€Œæƒ…å ±è¡¨ç¤ºã€")
 	CALL INFO_STATUS_GROUP(CHARA_LIST, INPUT_INT, CHARA_CNT, OP)
 	SIF RESULT < 0
 		RETURN -1
-	SIF STRCOUNT(OP, "uÅIŠm”Fv")
+	SIF STRCOUNT(OP, "ã€Œæœ€çµ‚ç¢ºèªã€")
 		RETURN RESULT
-ELSEIF SCENE == "MNG_“o˜^_”ÍˆÍÁ‹Ž"
+ELSEIF SCENE == "MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»"
 	FOR LOCAL, INPUT_INT, CHARA_CNT
 		SIF TALENT:(CHARA_LIST:LOCAL):NPC
 			CONTINUE
-		SIF CFLAG:(CHARA_LIST:LOCAL):ƒŒƒMƒ…ƒ‰[
+		SIF CFLAG:(CHARA_LIST:LOCAL):ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼
 			CONTINUE
-		SIF CFLAG:(CHARA_LIST:LOCAL):“Á•Ê•ÛŒì
+		SIF CFLAG:(CHARA_LIST:LOCAL):ç‰¹åˆ¥ä¿è­·
 			CONTINUE
-		SIF CFLAG:(CHARA_LIST:LOCAL):ƒ}ƒ“ƒVƒ‡ƒ“ID
+		SIF CFLAG:(CHARA_LIST:LOCAL):ãƒžãƒ³ã‚·ãƒ§ãƒ³ID
 			CONTINUE
-		CFLAG:(CHARA_LIST:LOCAL):“o˜^–•Á = 1
+		CFLAG:(CHARA_LIST:LOCAL):ç™»éŒ²æŠ¹æ¶ˆ = 1
 	NEXT
 	RETURN CHARA_LIST:INPUT_INT
 ELSE
@@ -1074,17 +1074,17 @@ ENDIF
 
 
 ;-------------------------------------------------
-;ƒtƒ‰ƒO—˜—pˆêŠ‡ƒLƒƒƒ‰íœŠÖ”
+;ãƒ•ãƒ©ã‚°åˆ©ç”¨ä¸€æ‹¬ã‚­ãƒ£ãƒ©å‰Šé™¤é–¢æ•°
 ;-------------------------------------------------
 @MNG_DELETE_CHARA
-SIF FINDCHARA(CFLAG:“o˜^–•Á, 1) == -1
+SIF FINDCHARA(CFLAG:ç™»éŒ²æŠ¹æ¶ˆ, 1) == -1
 	RETURN
 
-PRINTFORMW Zl‚Ì“o˜^–•Áˆ—‚ðs‚¢‚Ü‚·
+PRINTFORMW ä½äººã®ç™»éŒ²æŠ¹æ¶ˆå‡¦ç†ã‚’è¡Œã„ã¾ã™
 FOR LOCAL, CHARANUM - 1, 0, -1
-	SIF !CFLAG:LOCAL:“o˜^–•Á
+	SIF !CFLAG:LOCAL:ç™»éŒ²æŠ¹æ¶ˆ
 		CONTINUE
-	PRINTFORML @[%CALLNAME:LOCAL%]‚Í‚ ‚È‚½‚ÌŠÇ—‰º‚ð—£‚ê‚Ü‚µ‚½
+	PRINTFORML ã€€[%CALLNAME:LOCAL%]ã¯ã‚ãªãŸã®ç®¡ç†ä¸‹ã‚’é›¢ã‚Œã¾ã—ãŸ
 	DELCHARA LOCAL
 NEXT
 WAIT
@@ -1092,88 +1092,88 @@ WAIT
 
 
 ;-------------------------------------------------
-;ƒŒƒMƒ…ƒ‰[Žw’èŠÇ—ŠÖ”
+;ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼æŒ‡å®šç®¡ç†é–¢æ•°
 ;-------------------------------------------------
 @MNG_CHARA_REGULAR(L_C_ID)
-#DIM         L_C_ID               ;‘ÎÛ“o˜^”Ô†
-#DIM DYNAMIC LIST_REGULAR, 300    ;ƒŒƒMƒ…ƒ‰[ƒŠƒXƒg
-#DIM DYNAMIC CNT_REGULAR          ;ƒŒƒMƒ…ƒ‰[ƒLƒƒƒ‰‚ÌƒJƒEƒ“ƒg
-#DIM         L_C_ID_REMOVE        ;‰ð”C‘ÎÛ“o˜^”Ô†
+#DIM         L_C_ID               ;å¯¾è±¡ç™»éŒ²ç•ªå·
+#DIM DYNAMIC LIST_REGULAR, 300    ;ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ãƒªã‚¹ãƒˆ
+#DIM DYNAMIC CNT_REGULAR          ;ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ã‚­ãƒ£ãƒ©ã®ã‚«ã‚¦ãƒ³ãƒˆ
+#DIM         L_C_ID_REMOVE        ;è§£ä»»å¯¾è±¡ç™»éŒ²ç•ªå·
 IF L_C_ID == MASTER
-	PRINTFORMW áuƒvƒŒƒCƒ„[vA‚ ‚È‚½‚Ìƒ‚ƒjƒ^ƒŠƒ“ƒO‚Í•K—v‚ ‚è‚Ü‚¹‚ñâ
+	PRINTFORMW â‰ªã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€ã€ã‚ãªãŸã®ãƒ¢ãƒ‹ã‚¿ãƒªãƒ³ã‚°ã¯å¿…è¦ã‚ã‚Šã¾ã›ã‚“â‰«
 	RETURN
-ELSEIF CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[
-	CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[ = 0
+ELSEIF CFLAG:L_C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼
+	CFLAG:L_C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 0
 	RETURN
 ENDIF
 CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(L_C_ID)
 CALL C_PICTURE_S(L_C_ID)
 DRAWLINE
-PRINTFORML @Œ»Ý‚Ìƒ‚ƒjƒ^ƒŠƒ“ƒO‘ÎÛ
+PRINTFORML ã€€ç¾åœ¨ã®ãƒ¢ãƒ‹ã‚¿ãƒªãƒ³ã‚°å¯¾è±¡
 DRAWLINE
-CALL SHOW_ALL_REGULAR(LIST_REGULAR, CNT_REGULAR, "uƒ{ƒ^ƒ“–³‚µv")
+CALL SHOW_ALL_REGULAR(LIST_REGULAR, CNT_REGULAR, "ã€Œãƒœã‚¿ãƒ³ç„¡ã—ã€")
 DRAWLINE
 
 IF CNT_REGULAR >= 20
-;ãŒÀ
-	PRINTFORML ŠÏŽ@‘ÎÛ‚Ìl”‚ª‘½‚·‚¬‚Ü‚·B
-	PRINTFORML ŠÏŽ@‚ð’†Ž~‚·‚éƒLƒƒƒ‰‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B
+;ä¸Šé™
+	PRINTFORML è¦³å¯Ÿå¯¾è±¡ã®äººæ•°ãŒå¤šã™ãŽã¾ã™ã€‚
+	PRINTFORML è¦³å¯Ÿã‚’ä¸­æ­¢ã™ã‚‹ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚
 	PRINTFORML
 	FOR LOCAL, 0, 20
-		IF TALENT:(LIST_REGULAR:LOCAL):•sÝ
-			SETCOLOR COLOR("ŠDF")
+		IF TALENT:(LIST_REGULAR:LOCAL):ä¸åœ¨
+			SETCOLOR COLOR("ç°è‰²")
 			PRINT ---
 			PRINTFORM [%CALLNAME:(LIST_REGULAR:LOCAL), 18%]
 		ELSE
 			PRINTBUTTON @"{LIST_REGULAR:LOCAL, 3}[%CALLNAME:(LIST_REGULAR:LOCAL), 18%]", LIST_REGULAR:LOCAL
 		ENDIF
 		RESETCOLOR
-		PRINTFORM @
+		PRINTFORM ã€€
 		SIF LOCAL % 5 == 4
 			PRINTFORML
 	NEXT
 	PRINTFORML
-	PRINTFORML [999] - ƒLƒƒƒ‰‘I‘ð‚É–ß‚é
+	PRINTFORML [999] - ã‚­ãƒ£ãƒ©é¸æŠžã«æˆ»ã‚‹
 	DO
 		INPUT
 		L_C_ID_REMOVE = RESULT
 		SIF L_C_ID_REMOVE == 999
 			RETURN
 		IF !INRANGE(L_C_ID_REMOVE, 1, CHARANUM - 1)
-		ELSEIF TALENT:L_C_ID_REMOVE:•sÝ
-		ELSEIF CFLAG:L_C_ID_REMOVE:ƒŒƒMƒ…ƒ‰[ != 1
+		ELSEIF TALENT:L_C_ID_REMOVE:ä¸åœ¨
+		ELSEIF CFLAG:L_C_ID_REMOVE:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ != 1
 		ELSE
 			BREAK
 		ENDIF
 	LOOP 1
 	CALL REGULAR_CHARA_REMOVE(L_C_ID_REMOVE)
 ENDIF
-CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[ = 1
+CFLAG:L_C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 1
 
 
 
 ;-------------------------------------------------
-;ƒŒƒMƒ…ƒ‰[Žw’è‰ðœŠÖ”
+;ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼æŒ‡å®šè§£é™¤é–¢æ•°
 ;-------------------------------------------------
 @REGULAR_CHARA_REMOVE(L_C_ID)
-#DIM         L_C_ID               ;ŠÏŽ@‘ÎÛƒLƒƒƒ‰‚Ì“o˜^”Ô†
-SIF TALENT:L_C_ID:•sÝ == 0
-	PRINTFORMW %CALLNAME:L_C_ID%‚ÌŠÏŽ@Žw’è‚ð‰ðœ‚µ‚Ü‚·B
-CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[ = 0
+#DIM         L_C_ID               ;è¦³å¯Ÿå¯¾è±¡ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
+SIF TALENT:L_C_ID:ä¸åœ¨ == 0
+	PRINTFORMW %CALLNAME:L_C_ID%ã®è¦³å¯ŸæŒ‡å®šã‚’è§£é™¤ã—ã¾ã™ã€‚
+CFLAG:L_C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 0
 
 
 
 ;-------------------------------------------------
-;ƒŒƒMƒ…ƒ‰[Žw’èŠÖ”
+;ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼æŒ‡å®šé–¢æ•°
 ;-------------------------------------------------
 @REGULAR_CHARA_SET(L_C_ID)
-#DIM         L_C_ID               ;ŠÏŽ@‘ÎÛƒLƒƒƒ‰‚Ì“o˜^”Ô†
-IF CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[
-	PRINTFORMW %CALLNAME:L_C_ID%‚ÍŠù‚ÉŠÏŽ@‘ÎÛ‚ÉŽw’è‚³‚ê‚Ä‚¢‚Ü‚·B
-	PRINTFORML ŠÏŽ@‚ð’†Ž~‚µ‚Ü‚·‚©H
-	PRINTFORML [1] - ’†Ž~‚·‚é
-	PRINTFORML [0] - ‘±s‚·‚é
+#DIM         L_C_ID               ;è¦³å¯Ÿå¯¾è±¡ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
+IF CFLAG:L_C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼
+	PRINTFORMW %CALLNAME:L_C_ID%ã¯æ—¢ã«è¦³å¯Ÿå¯¾è±¡ã«æŒ‡å®šã•ã‚Œã¦ã„ã¾ã™ã€‚
+	PRINTFORML è¦³å¯Ÿã‚’ä¸­æ­¢ã—ã¾ã™ã‹ï¼Ÿ
+	PRINTFORML [1] - ä¸­æ­¢ã™ã‚‹
+	PRINTFORML [0] - ç¶šè¡Œã™ã‚‹
 	DO
 		INPUT
 		SIF RESULT == 1
@@ -1184,8 +1184,8 @@ IF CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[
 	CALL REGULAR_CHARA_REMOVE(L_C_ID)
 	RETURN
 ENDIF
-PRINTFORMW %CALLNAME:L_C_ID%‚ðŠÏŽ@‘ÎÛ‚ÉŽw’è‚µ‚Ü‚µ‚½B
-CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[ = 1
+PRINTFORMW %CALLNAME:L_C_ID%ã‚’è¦³å¯Ÿå¯¾è±¡ã«æŒ‡å®šã—ã¾ã—ãŸã€‚
+CFLAG:L_C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 1
 
 
 
@@ -1196,12 +1196,12 @@ CFLAG:L_C_ID:ƒŒƒMƒ…ƒ‰[ = 1
 #DIMS     OP
 VARSET LIST_REGULAR
 VARSET CNT_REGULAR
-IF STRCOUNT(OP, "uƒ{ƒ^ƒ“–³‚µv")
+IF STRCOUNT(OP, "ã€Œãƒœã‚¿ãƒ³ç„¡ã—ã€")
 	FOR C_ID, 1, CHARANUM
-		SIF CFLAG:C_ID:ƒŒƒMƒ…ƒ‰[ != 1
+		SIF CFLAG:C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ != 1
 			CONTINUE
-		SIF TALENT:C_ID:•sÝ
-			SETCOLOR COLOR("ŠDF")
+		SIF TALENT:C_ID:ä¸åœ¨
+			SETCOLOR COLOR("ç°è‰²")
 		PRINTFORM [%CALLNAME:C_ID, 18%]
 		RESETCOLOR
 		SIF CNT_REGULAR % 5 == 4
@@ -1213,17 +1213,17 @@ IF STRCOUNT(OP, "uƒ{ƒ^ƒ“–³‚µv")
 		PRINTFORML
 ELSE
 	FOR C_ID, 1, CHARANUM
-		SIF CFLAG:C_ID:ƒŒƒMƒ…ƒ‰[ != 1
+		SIF CFLAG:C_ID:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ != 1
 			CONTINUE
-		IF TALENT:C_ID:•sÝ
-			SETCOLOR COLOR("ŠDF")
+		IF TALENT:C_ID:ä¸åœ¨
+			SETCOLOR COLOR("ç°è‰²")
 			PRINT ---
 			PRINTFORM [%CALLNAME:C_ID, 18%]
 		ELSE
 			PRINTBUTTON @"{C_ID, 3}[%CALLNAME:C_ID, 18%]", C_ID
 		ENDIF
 		RESETCOLOR
-		PRINTFORM @
+		PRINTFORM ã€€
 		SIF CNT_REGULAR % 5 == 4
 			PRINTFORML
 		LIST_REGULAR:CNT_REGULAR = C_ID
@@ -1238,60 +1238,60 @@ ENDIF
 
 
 ;-------------------------------------------------
-;“Á•Ê•ÛŒìŠÇ—ŠÖ”
+;ç‰¹åˆ¥ä¿è­·ç®¡ç†é–¢æ•°
 ;-------------------------------------------------
 @MNG_CHARA_PROTECT(L_C_ID)
-#DIM         L_C_ID               ;‘ÎÛ“o˜^”Ô†
-#DIM DYNAMIC LIST_PROTECT, 300    ;“Á•Ê•ÛŒìƒŠƒXƒg
-#DIM DYNAMIC CNT_PROTECT          ;“Á•Ê•ÛŒìƒLƒƒƒ‰‚ÌƒJƒEƒ“ƒg
-#DIM         L_C_ID_REMOVE        ;‰ð”C‘ÎÛ“o˜^”Ô†
+#DIM         L_C_ID               ;å¯¾è±¡ç™»éŒ²ç•ªå·
+#DIM DYNAMIC LIST_PROTECT, 300    ;ç‰¹åˆ¥ä¿è­·ãƒªã‚¹ãƒˆ
+#DIM DYNAMIC CNT_PROTECT          ;ç‰¹åˆ¥ä¿è­·ã‚­ãƒ£ãƒ©ã®ã‚«ã‚¦ãƒ³ãƒˆ
+#DIM         L_C_ID_REMOVE        ;è§£ä»»å¯¾è±¡ç™»éŒ²ç•ªå·
 IF L_C_ID == 0
-	PRINTFORMW áuƒvƒŒƒCƒ„[vA‚ ‚È‚½‚ÍŠù‚É•ÛŒì‚³‚ê‚Ä‚¢‚Ü‚·â
+	PRINTFORMW â‰ªã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€ã€ã‚ãªãŸã¯æ—¢ã«ä¿è­·ã•ã‚Œã¦ã„ã¾ã™â‰«
 	RETURN
-ELSEIF CFLAG:L_C_ID:“Á•Ê•ÛŒì
-	;‰ð”C
-	CFLAG:L_C_ID:“Á•Ê•ÛŒì = 0
+ELSEIF CFLAG:L_C_ID:ç‰¹åˆ¥ä¿è­·
+	;è§£ä»»
+	CFLAG:L_C_ID:ç‰¹åˆ¥ä¿è­· = 0
 	RETURN
 ENDIF
 CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(L_C_ID)
 CALL C_PICTURE_S(L_C_ID)
 DRAWLINE
-PRINTFORML @Œ»Ý‚Ì“Á•Ê•ÛŒì‘ÎÛ
+PRINTFORML ã€€ç¾åœ¨ã®ç‰¹åˆ¥ä¿è­·å¯¾è±¡
 DRAWLINE
-CALL SHOW_ALL_PROTECT(LIST_PROTECT, CNT_PROTECT, "uƒ{ƒ^ƒ“–³‚µv")
+CALL SHOW_ALL_PROTECT(LIST_PROTECT, CNT_PROTECT, "ã€Œãƒœã‚¿ãƒ³ç„¡ã—ã€")
 DRAWLINE
 
 IF CNT_PROTECT >= 30
-	;ãŒÀ
-	PRINTFORML •ÛŒì‘ÎÛ‚Ìl”‚ª‘½‚·‚¬‚Ü‚·B
-	PRINTFORML •ÛŒì‚ð’†Ž~‚·‚éƒLƒƒƒ‰‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B
+	;ä¸Šé™
+	PRINTFORML ä¿è­·å¯¾è±¡ã®äººæ•°ãŒå¤šã™ãŽã¾ã™ã€‚
+	PRINTFORML ä¿è­·ã‚’ä¸­æ­¢ã™ã‚‹ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚
 	PRINTFORML
 	FOR LOCAL, 0, CNT_PROTECT
-		IF TALENT:(LIST_PROTECT:LOCAL):•sÝ
-			SETCOLOR COLOR("ŠDF")
+		IF TALENT:(LIST_PROTECT:LOCAL):ä¸åœ¨
+			SETCOLOR COLOR("ç°è‰²")
 			PRINT ---
 			PRINTFORM [%CALLNAME:(LIST_PROTECT:LOCAL), 18%]
 		ELSE
 			PRINTBUTTON @"{LIST_PROTECT:LOCAL, 3}[%CALLNAME:(LIST_PROTECT:LOCAL), 18%]", LIST_PROTECT:LOCAL
 		ENDIF
 		RESETCOLOR
-		PRINTFORM @
+		PRINTFORM ã€€
 		SIF LOCAL % 5 == 4
 			PRINTFORML
 	NEXT
 	SIF (CNT_PROTECT - 1) % 5 != 4
 		PRINTFORML
 	PRINTFORML
-	PRINTFORML [999] - ƒLƒƒƒ‰‘I‘ð‚É–ß‚é
+	PRINTFORML [999] - ã‚­ãƒ£ãƒ©é¸æŠžã«æˆ»ã‚‹
 	DO
 		INPUT
 		L_C_ID_REMOVE = RESULT
 		SIF L_C_ID_REMOVE == 999
 			RETURN
 		IF !INRANGE(L_C_ID_REMOVE, 1, CHARANUM - 1)
-		ELSEIF TALENT:L_C_ID_REMOVE:•sÝ
-		ELSEIF CFLAG:L_C_ID_REMOVE:“Á•Ê•ÛŒì != 1
+		ELSEIF TALENT:L_C_ID_REMOVE:ä¸åœ¨
+		ELSEIF CFLAG:L_C_ID_REMOVE:ç‰¹åˆ¥ä¿è­· != 1
 		ELSE
 			BREAK
 		ENDIF
@@ -1299,30 +1299,30 @@ IF CNT_PROTECT >= 30
 	CALL PROTECT_CHARA_REMOVE(L_C_ID_REMOVE)
 
 ENDIF
-CFLAG:L_C_ID:“Á•Ê•ÛŒì = 1
+CFLAG:L_C_ID:ç‰¹åˆ¥ä¿è­· = 1
 
 
 
 ;-------------------------------------------------
-;“Á•Ê•ÛŒì‰ðœŠÖ”
+;ç‰¹åˆ¥ä¿è­·è§£é™¤é–¢æ•°
 ;-------------------------------------------------
 @PROTECT_CHARA_REMOVE(L_C_ID)
-#DIM         L_C_ID               ;•ÛŒì‘ÎÛƒLƒƒƒ‰‚Ì“o˜^”Ô†
-SIF TALENT:L_C_ID:•sÝ == 0
-	PRINTFORMW %CALLNAME:L_C_ID%‚ð•ÛŒì‘ÎÛ‚©‚çŠO‚µ‚Ü‚µ‚½B
-CFLAG:L_C_ID:“Á•Ê•ÛŒì = 0
+#DIM         L_C_ID               ;ä¿è­·å¯¾è±¡ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
+SIF TALENT:L_C_ID:ä¸åœ¨ == 0
+	PRINTFORMW %CALLNAME:L_C_ID%ã‚’ä¿è­·å¯¾è±¡ã‹ã‚‰å¤–ã—ã¾ã—ãŸã€‚
+CFLAG:L_C_ID:ç‰¹åˆ¥ä¿è­· = 0
 
 
 ;-------------------------------------------------
-;“Á•Ê•ÛŒìŽw’èŠÖ”
+;ç‰¹åˆ¥ä¿è­·æŒ‡å®šé–¢æ•°
 ;-------------------------------------------------
 @PROTECT_CHARA_SET(L_C_ID)
-#DIM         L_C_ID               ;•ÛŒì‘ÎÛƒLƒƒƒ‰‚Ì“o˜^”Ô†
-IF CFLAG:L_C_ID:“Á•Ê•ÛŒì
-	PRINTFORMW %CALLNAME:L_C_ID%‚ÍŠù‚É•ÛŒì‘ÎÛ‚ÉŽw’è‚³‚ê‚Ä‚¢‚Ü‚·B
-	PRINTFORML •ÛŒì‚ð’†Ž~‚µ‚Ü‚·‚©H
-	PRINTFORML [1] - ’†Ž~‚·‚é
-	PRINTFORML [0] - ‘±s‚·‚é
+#DIM         L_C_ID               ;ä¿è­·å¯¾è±¡ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
+IF CFLAG:L_C_ID:ç‰¹åˆ¥ä¿è­·
+	PRINTFORMW %CALLNAME:L_C_ID%ã¯æ—¢ã«ä¿è­·å¯¾è±¡ã«æŒ‡å®šã•ã‚Œã¦ã„ã¾ã™ã€‚
+	PRINTFORML ä¿è­·ã‚’ä¸­æ­¢ã—ã¾ã™ã‹ï¼Ÿ
+	PRINTFORML [1] - ä¸­æ­¢ã™ã‚‹
+	PRINTFORML [0] - ç¶šè¡Œã™ã‚‹
 	DO
 		INPUT
 		SIF RESULT == 1
@@ -1333,8 +1333,8 @@ IF CFLAG:L_C_ID:“Á•Ê•ÛŒì
 	CALL PROTECT_CHARA_REMOVE(L_C_ID)
 	RETURN
 ENDIF
-PRINTFORMW %CALLNAME:L_C_ID%‚ð•ÛŒì‘ÎÛ‚ÉŽw’è‚µ‚Ü‚µ‚½B
-CFLAG:L_C_ID:“Á•Ê•ÛŒì = 1
+PRINTFORMW %CALLNAME:L_C_ID%ã‚’ä¿è­·å¯¾è±¡ã«æŒ‡å®šã—ã¾ã—ãŸã€‚
+CFLAG:L_C_ID:ç‰¹åˆ¥ä¿è­· = 1
 
 
 
@@ -1345,12 +1345,12 @@ CFLAG:L_C_ID:“Á•Ê•ÛŒì = 1
 #DIMS     OP
 VARSET LIST_PROTECT
 VARSET CNT_PROTECT
-IF STRCOUNT(OP, "uƒ{ƒ^ƒ“–³‚µv")
+IF STRCOUNT(OP, "ã€Œãƒœã‚¿ãƒ³ç„¡ã—ã€")
 	FOR C_ID, 1, CHARANUM
-		SIF CFLAG:C_ID:“Á•Ê•ÛŒì != 1
+		SIF CFLAG:C_ID:ç‰¹åˆ¥ä¿è­· != 1
 			CONTINUE
-		SIF TALENT:C_ID:•sÝ
-			SETCOLOR COLOR("ŠDF")
+		SIF TALENT:C_ID:ä¸åœ¨
+			SETCOLOR COLOR("ç°è‰²")
 		PRINTFORM [%CALLNAME:C_ID, 18%]
 		RESETCOLOR
 		SIF CNT_PROTECT % 5 == 4
@@ -1362,17 +1362,17 @@ IF STRCOUNT(OP, "uƒ{ƒ^ƒ“–³‚µv")
 		PRINTFORML
 ELSE
 	FOR C_ID, 1, CHARANUM
-		SIF CFLAG:C_ID:“Á•Ê•ÛŒì != 1
+		SIF CFLAG:C_ID:ç‰¹åˆ¥ä¿è­· != 1
 			CONTINUE
-		IF TALENT:C_ID:•sÝ
-			SETCOLOR COLOR("ŠDF")
+		IF TALENT:C_ID:ä¸åœ¨
+			SETCOLOR COLOR("ç°è‰²")
 			PRINT ---
 			PRINTFORM [%CALLNAME:C_ID, 18%]
 		ELSE
 			PRINTBUTTON @"{C_ID, 3}[%CALLNAME:C_ID, 18%]", C_ID
 		ENDIF
 		RESETCOLOR
-		PRINTFORM @
+		PRINTFORM ã€€
 		SIF CNT_PROTECT % 5 == 4
 			PRINTFORML
 		LIST_PROTECT:CNT_PROTECT = C_ID
@@ -1387,16 +1387,16 @@ ENDIF
 
 
 @MNG_FACILITY(L_C_ID, MODE_NOW)
-#DIM          L_C_ID               ;‘ÎÛƒLƒƒƒ‰‚Ì“o˜^”Ô†
+#DIM          L_C_ID               ;å¯¾è±¡ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
 #DIMS         MODE_NOW
 #DIM  DYNAMIC TEMP_ID
 #DIM  DYNAMIC FACI_ID
 {
 #DIMS CONST   MODE_NAME     = 
-	"MNG_”z‘®_Šw‰€¶“k", 
-	"MNG_”z‘®_Žx‰‡ƒ{ƒ‰", 
-	"MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ", 
-	"MNG_”z‘®_ƒJƒWƒm“Xˆõ"
+	"MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’", 
+	"MNG_é…å±ž_æ”¯æ´ãƒœãƒ©", 
+	"MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡", 
+	"MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡"
 }
 {
 #DIM          L_FACI_LIST     = 
@@ -1405,10 +1405,10 @@ ENDIF
 	50,
 	53
 }
-#DIM  DYNAMIC L_CNT_WOKER, 4        ;ŠeŽ{Ý‚É”z‘®Ï‚Ý‚ÌƒLƒƒƒ‰”
-#DIM  CONST   L_CFLAG_START = 10000 ;Ž{Ý—pCFLAG‚ÌŠJŽn’l
-#DIM  CONST   L_CFLAG_END   = 10100 ;Ž{Ý—pCFLAG‚ÌI—¹’li‚±‚ÌIDŽ©‘Ì‚ÍŠÜ‚Ü‚ê‚È‚¢j
-#DIM L_CHARA_ORDER                  ;‘ÎÛƒLƒƒƒ‰‚ª‚·‚Å‚É”z‘®‚³‚ê‚Ä‚¢‚éŽ{Ý
+#DIM  DYNAMIC L_CNT_WOKER, 4        ;å„æ–½è¨­ã«é…å±žæ¸ˆã¿ã®ã‚­ãƒ£ãƒ©æ•°
+#DIM  CONST   L_CFLAG_START = 10000 ;æ–½è¨­ç”¨CFLAGã®é–‹å§‹å€¤
+#DIM  CONST   L_CFLAG_END   = 10100 ;æ–½è¨­ç”¨CFLAGã®çµ‚äº†å€¤ï¼ˆã“ã®IDè‡ªä½“ã¯å«ã¾ã‚Œãªã„ï¼‰
+#DIM L_CHARA_ORDER                  ;å¯¾è±¡ã‚­ãƒ£ãƒ©ãŒã™ã§ã«é…å±žã•ã‚Œã¦ã„ã‚‹æ–½è¨­
 
 TEMP_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
 SIF TEMP_ID == -1
@@ -1424,21 +1424,21 @@ CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(L_C_ID)
 CALL C_PICTURE_S(L_C_ID)
 DRAWLINE
-PRINTFORML @Œ»Ý‚Ì”z‘®ƒLƒƒƒ‰
+PRINTFORML ã€€ç¾åœ¨ã®é…å±žã‚­ãƒ£ãƒ©
 DRAWLINE
-CALL SHOW_ALL_WORKERS(L_FACI_LIST, L_CNT_WOKER, "uƒ{ƒ^ƒ“–³‚µv", L_C_ID)
+CALL SHOW_ALL_WORKERS(L_FACI_LIST, L_CNT_WOKER, "ã€Œãƒœã‚¿ãƒ³ç„¡ã—ã€", L_C_ID)
 DRAWLINE
 IF L_CNT_WOKER:TEMP_ID >= 5
-	PRINTFORML %CFLAGNAME:(L_CFLAG_START + FACI_ID)%‚Ìl”‚ª‘½‚·‚¬‚Ü‚·
-	PRINTFORML ‰ð”C‚·‚éƒLƒƒƒ‰‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B
+	PRINTFORML %CFLAGNAME:(L_CFLAG_START + FACI_ID)%ã®äººæ•°ãŒå¤šã™ãŽã¾ã™
+	PRINTFORML è§£ä»»ã™ã‚‹ã‚­ãƒ£ãƒ©ã‚’é¸æŠžã—ã¦ãã ã•ã„ã€‚
 	FOR LOCAL, 1, CHARANUM
-		SIF TALENT:LOCAL:•sÝ
+		SIF TALENT:LOCAL:ä¸åœ¨
 			CONTINUE
 		SIF CFLAG:LOCAL:(L_CFLAG_START + FACI_ID) == 0
 			CONTINUE
 		PRINTFORML [{LOCAL, 3}] - %CALLNAME:LOCAL%
 	NEXT
-	PRINTFORML [999] - ‚â‚ß‚é
+	PRINTFORML [999] - ã‚„ã‚ã‚‹
 	DO
 		INPUT
 		LOCAL = RESULT
@@ -1446,7 +1446,7 @@ IF L_CNT_WOKER:TEMP_ID >= 5
 		CASE 999
 			RETURN
 		CASE 1 TO CHARANUM -1
-			SIF TALENT:LOCAL:•sÝ
+			SIF TALENT:LOCAL:ä¸åœ¨
 				CONTINUE
 			SIF CFLAG:LOCAL:(L_CFLAG_START + FACI_ID) == 0
 				CONTINUE
@@ -1464,16 +1464,16 @@ CFLAG:L_C_ID:(L_CFLAG_START + FACI_ID) = 1
 
 
 @MNG_JOB(L_C_ID, MODE_NOW)
-#DIM          L_C_ID               ;‘ÎÛƒLƒƒƒ‰‚Ì“o˜^”Ô†
+#DIM          L_C_ID               ;å¯¾è±¡ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
 #DIMS         MODE_NOW
 {
 #DIMS CONST   MODE_NAME = 
-	"MNG_“]E_¹EŽÒ", 
-	"MNG_“]E_ƒƒCƒh", 
-	"MNG_“]E_ƒAƒCƒhƒ‹", 
-	"MNG_“]E_ŽÐ‰ïl", 
-	"MNG_“]E_‹Çˆõ", 
-	"MNG_“]E_©•w"
+	"MNG_è»¢è·_è–è·è€…", 
+	"MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰", 
+	"MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«", 
+	"MNG_è»¢è·_ç¤¾ä¼šäºº", 
+	"MNG_è»¢è·_å±€å“¡", 
+	"MNG_è»¢è·_å¨¼å©¦"
 }
 {
 #DIM  CONST   JOB_ID = 
@@ -1490,7 +1490,7 @@ SIF TEMP_ID < 0
 	RETURN
 TEMP_ID = JOB_ID:TEMP_ID
 IF MONEY < 500000
-	PRINTFORMW Ž‘‹à500000‚ª•K—v‚Å‚·
+	PRINTFORMW è³‡é‡‘500000ãŒå¿…è¦ã§ã™
 	RETURN
 ENDIF
 
@@ -1500,19 +1500,19 @@ DRAWLINE
 CALL C_PICTURE_S(L_C_ID)
 
 
-IF MODE_NOW == "MNG_“]E_©•w"
+IF MODE_NOW == "MNG_è»¢è·_å¨¼å©¦"
 	DRAWLINE
-	PRINTFORML Ž‘‹à500000‚ðÁ”ï‚µ‚Ä
-	IF TALENT:L_C_ID:©•w
-		PRINTFORML %CALLNAME:L_C_ID%‚Ì‹Æ–±“à—e‚ðŒ©’¼‚µ‚Ü‚·
-		PRINTFORML ‚æ‚ë‚µ‚¢‚Å‚·‚©H
-		PRINTFORML [1] - ”„t‚ð‚â‚ß‚³‚¹‚é
-		PRINTFORML [0] - ‚»‚Ì‚Ü‚Ü
+	PRINTFORML è³‡é‡‘500000ã‚’æ¶ˆè²»ã—ã¦
+	IF TALENT:L_C_ID:å¨¼å©¦
+		PRINTFORML %CALLNAME:L_C_ID%ã®æ¥­å‹™å†…å®¹ã‚’è¦‹ç›´ã—ã¾ã™
+		PRINTFORML ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+		PRINTFORML [1] - å£²æ˜¥ã‚’ã‚„ã‚ã•ã›ã‚‹
+		PRINTFORML [0] - ãã®ã¾ã¾
 	ELSE
-		PRINTFORML %CALLNAME:L_C_ID%‚É«ˆ—‚Ì‹Æ–±‚ð—^‚¦‚Ü‚·
-		PRINTFORML ‚æ‚ë‚µ‚¢‚Å‚·‚©H
-		PRINTFORML [1] - ”„t‚³‚¹‚é
-		PRINTFORML [0] - ‚»‚Ì‚Ü‚Ü
+		PRINTFORML %CALLNAME:L_C_ID%ã«æ€§å‡¦ç†ã®æ¥­å‹™ã‚’ä¸Žãˆã¾ã™
+		PRINTFORML ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+		PRINTFORML [1] - å£²æ˜¥ã•ã›ã‚‹
+		PRINTFORML [0] - ãã®ã¾ã¾
 	ENDIF
 	DO
 		INPUT
@@ -1521,22 +1521,22 @@ IF MODE_NOW == "MNG_“]E_©•w"
 		SIF RESULT == 1
 			BREAK
 	LOOP 1
-	IF TALENT:L_C_ID:©•w
-		PRINTFORMW %CALLNAME:L_C_ID%‚Í”„t‚©‚ç‘«‚ðô‚Á‚½
+	IF TALENT:L_C_ID:å¨¼å©¦
+		PRINTFORMW %CALLNAME:L_C_ID%ã¯å£²æ˜¥ã‹ã‚‰è¶³ã‚’æ´—ã£ãŸ
 	ELSE
-		PRINTFORMW %CALLNAME:L_C_ID%‚Ít‚ð‚Ð‚³‚¬‚Í‚¶‚ß‚½
+		PRINTFORMW %CALLNAME:L_C_ID%ã¯æ˜¥ã‚’ã²ã•ãŽã¯ã˜ã‚ãŸ
 	ENDIF
-	TALENT:L_C_ID:©•w = !TALENT:L_C_ID:©•w
+	TALENT:L_C_ID:å¨¼å©¦ = !TALENT:L_C_ID:å¨¼å©¦
 	MONEY -= 500000
 	RETURN
 ELSEIF TALENT:L_C_ID:TEMP_ID == 1
 	RETURN
 ENDIF
 DRAWLINE
-PRINTFORML Ž‘‹à500000‚ðÁ”ï‚µ‚Ä%CALLNAME:L_C_ID%‚É%TALENTNAME:TEMP_ID%‚Æ‚µ‚Ä‚Ì‹Æ–±‚ð—^‚¦‚Ü‚·
-PRINTFORML ‚æ‚ë‚µ‚¢‚Å‚·‚©H
-PRINTFORML [1] - “]EŽÀs
-PRINTFORML [0] - ‚â‚ß‚é
+PRINTFORML è³‡é‡‘500000ã‚’æ¶ˆè²»ã—ã¦%CALLNAME:L_C_ID%ã«%TALENTNAME:TEMP_ID%ã¨ã—ã¦ã®æ¥­å‹™ã‚’ä¸Žãˆã¾ã™
+PRINTFORML ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+PRINTFORML [1] - è»¢è·å®Ÿè¡Œ
+PRINTFORML [0] - ã‚„ã‚ã‚‹
 DO
 	INPUT
 	SIF RESULT == 0
@@ -1544,13 +1544,13 @@ DO
 	SIF RESULT == 1
 		BREAK
 LOOP 1
-TALENT:L_C_ID:¹EŽÒ = 0
-TALENT:L_C_ID:ƒƒCƒh = 0
-TALENT:L_C_ID:ƒAƒCƒhƒ‹ = 0
-TALENT:L_C_ID:ŽÐ‰ïl = 0
-TALENT:L_C_ID:Ž¡ˆÀˆÛŽ‹Çˆõ = 0
+TALENT:L_C_ID:è–è·è€… = 0
+TALENT:L_C_ID:ãƒ¡ã‚¤ãƒ‰ = 0
+TALENT:L_C_ID:ã‚¢ã‚¤ãƒ‰ãƒ« = 0
+TALENT:L_C_ID:ç¤¾ä¼šäºº = 0
+TALENT:L_C_ID:æ²»å®‰ç¶­æŒå±€å“¡ = 0
 TALENT:L_C_ID:TEMP_ID = 1
-PRINTFORMW %CALLNAME:L_C_ID%‚Í%TALENTNAME:TEMP_ID%‚É‚È‚Á‚½
+PRINTFORMW %CALLNAME:L_C_ID%ã¯%TALENTNAME:TEMP_ID%ã«ãªã£ãŸ
 MONEY -= 500000
 
 
@@ -1565,43 +1565,43 @@ ELSEIF C_ID == MASTER
 	RETURN
 ELSEIF TALENT:C_ID:NPC
 	RETURN
-ELSEIF CFLAG:C_ID:Zl_‘ÌŠi == 1
-	PRINTFORMW Žq‹Ÿ‚Í“ü‹‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB
+ELSEIF CFLAG:C_ID:ä½äºº_ä½“æ ¼ == 1
+	PRINTFORMW å­ä¾›ã¯å…¥å±…ã™ã‚‹ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚
 	RETURN
 ENDIF
 
-;“¯‚¶•”‰®”Ô†‚È‚çƒŠƒZƒbƒg
-IF FLAG:(5000 + ROOM_ID) == CFLAG:C_ID:ŒÂ•Ê”Ô†
+;åŒã˜éƒ¨å±‹ç•ªå·ãªã‚‰ãƒªã‚»ãƒƒãƒˆ
+IF FLAG:(5000 + ROOM_ID) == CFLAG:C_ID:å€‹åˆ¥ç•ªå·
 	FLAG:(5000 + ROOM_ID) = 0
-	CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = 0
+	CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = 0
 	RETURN
-ELSEIF CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID == ROOM_ID
-	FLAG:(5000 + CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID) = 0
-	CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = 0
+ELSEIF CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID == ROOM_ID
+	FLAG:(5000 + CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID) = 0
+	CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = 0
 	RETURN
 ENDIF
 
-;‘¼‚ÌƒLƒƒƒ‰‚ª“ü‹Ï‚Ý‚Ì‚Æ‚«
+;ä»–ã®ã‚­ãƒ£ãƒ©ãŒå…¥å±…æ¸ˆã¿ã®ã¨ã
 IF FLAG:(5000 + ROOM_ID)
-	;ŠY“–ƒLƒƒƒ‰‚ÌŒŸõ
-	SWAP_ID = FINDCHARA(CFLAG:ŒÂ•Ê”Ô†, FLAG:(5000 + ROOM_ID), 1, CHARANUM)
+	;è©²å½“ã‚­ãƒ£ãƒ©ã®æ¤œç´¢
+	SWAP_ID = FINDCHARA(CFLAG:å€‹åˆ¥ç•ªå·, FLAG:(5000 + ROOM_ID), 1, CHARANUM)
 	IF SWAP_ID >= 1
-		CFLAG:SWAP_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID
-		;“ü‹—\’èŽÒ‚ªŠù‚É•”‰®‚É“ü‚Á‚Ä‚¢‚é‚È‚ç“ü‚ê‘Ö‚¦ˆ—
-		IF CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID
-			FLAG:(5000 + CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID) = CFLAG:SWAP_ID:ŒÂ•Ê”Ô†
-			CFLAG:SWAP_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID
-		;‚»‚¤‚Å‚È‚¢‚È‚ç•”‰®‚©‚ço‚é‚¾‚¯
+		CFLAG:SWAP_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID
+		;å…¥å±…äºˆå®šè€…ãŒæ—¢ã«éƒ¨å±‹ã«å…¥ã£ã¦ã„ã‚‹ãªã‚‰å…¥ã‚Œæ›¿ãˆå‡¦ç†
+		IF CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID
+			FLAG:(5000 + CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID) = CFLAG:SWAP_ID:å€‹åˆ¥ç•ªå·
+			CFLAG:SWAP_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID
+		;ãã†ã§ãªã„ãªã‚‰éƒ¨å±‹ã‹ã‚‰å‡ºã‚‹ã ã‘
 		ELSE
-			CFLAG:SWAP_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = 0
+			CFLAG:SWAP_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = 0
 		ENDIF
 	ENDIF
-	FLAG:(5000 + ROOM_ID) = CFLAG:C_ID:ŒÂ•Ê”Ô†
-	CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = ROOM_ID
+	FLAG:(5000 + ROOM_ID) = CFLAG:C_ID:å€‹åˆ¥ç•ªå·
+	CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = ROOM_ID
 ELSE
-	FLAG:(5000 + CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID) = 0
-	FLAG:(5000 + ROOM_ID) = CFLAG:C_ID:ŒÂ•Ê”Ô†
-	CFLAG:C_ID:ƒ}ƒ“ƒVƒ‡ƒ“ID = ROOM_ID
+	FLAG:(5000 + CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID) = 0
+	FLAG:(5000 + ROOM_ID) = CFLAG:C_ID:å€‹åˆ¥ç•ªå·
+	CFLAG:C_ID:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID = ROOM_ID
 ENDIF
 
 
@@ -1609,11 +1609,11 @@ ENDIF
 @MNG_CUSTOM_LOOKS(L_I)
 #DIM         L_I
 #DIM DYNAMIC L_CHANGE_H_COLOR = -1 ;
-#DIM DYNAMIC L_CHANGE_H_STYLE = -1 ;‚¦‚Á‚¿‚·‚½‚¢‚é‚Å‚Í‚È‚­ƒwƒAƒXƒ^ƒCƒ‹‚¾
+#DIM DYNAMIC L_CHANGE_H_STYLE = -1 ;ãˆã£ã¡ã™ãŸã„ã‚‹ã§ã¯ãªããƒ˜ã‚¢ã‚¹ã‚¿ã‚¤ãƒ«ã 
 #DIM DYNAMIC L_CHANGE_UH_STYLE = -1 ;
 #DIM DYNAMIC L_CHANGE_E_COLOR = -1 ;
 #DIM DYNAMIC L_CHANGE_B_COLOR = -1 ;
-#DIM         L_NOW_H_COLOR         ;‰æ‘œ•\Ž¦—p‚ÉˆêŽž•ÏX‚·‚é
+#DIM         L_NOW_H_COLOR         ;ç”»åƒè¡¨ç¤ºç”¨ã«ä¸€æ™‚å¤‰æ›´ã™ã‚‹
 #DIM         L_NOW_H_STYLE         ;
 #DIM         L_NOW_UH_STYLE         ;
 #DIM         L_NOW_E_COLOR         ;
@@ -1626,93 +1626,93 @@ ELSEIF L_I == MASTER
 ELSEIF TALENT:L_I:NPC
 	RETURN
 ELSEIF MONEY < 10000
-	PRINTFORMW Ž‘‹à‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+	PRINTFORMW è³‡é‡‘ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 	RETURN
 ENDIF
-;•ÏX‘O‚Ìó‘Ô‚ð•Û‘¶
-L_NOW_H_COLOR = CFLAG:L_I:”¯F
-L_NOW_H_STYLE = CFLAG:L_I:”¯Œ^
-L_NOW_UH_STYLE = CFLAG:L_I:Œã”¯Œ^
-L_NOW_E_COLOR = CFLAG:L_I:“µF
-L_NOW_B_COLOR = CFLAG:L_I:”§F
+;å¤‰æ›´å‰ã®çŠ¶æ…‹ã‚’ä¿å­˜
+L_NOW_H_COLOR = CFLAG:L_I:é«ªè‰²
+L_NOW_H_STYLE = CFLAG:L_I:é«ªåž‹
+L_NOW_UH_STYLE = CFLAG:L_I:å¾Œé«ªåž‹
+L_NOW_E_COLOR = CFLAG:L_I:çž³è‰²
+L_NOW_B_COLOR = CFLAG:L_I:è‚Œè‰²
 
 DO
 	CLEARLINE LINECOUNT
 	DRAWLINE
-	PRINTFORML %CALLNAME:L_I%‚Ì—eŽp‚ð•ÏX‚µ‚Ü‚·
+	PRINTFORML %CALLNAME:L_I%ã®å®¹å§¿ã‚’å¤‰æ›´ã—ã¾ã™
 {
-	CALL PRINT_LABEL("”¯F",,,@"%INFO_STR_HAIRCOLOR(L_NOW_H_COLOR), 20%¨\@
-					L_CHANGE_H_COLOR == -1 ? •ÏX‚È‚µ # %INFO_STR_HAIRCOLOR(L_CHANGE_H_COLOR)%\@",,,,,,,, 1)
+	CALL PRINT_LABEL("é«ªè‰²",,,@"%INFO_STR_HAIRCOLOR(L_NOW_H_COLOR), 20%â†’\@
+					L_CHANGE_H_COLOR == -1 ? å¤‰æ›´ãªã— # %INFO_STR_HAIRCOLOR(L_CHANGE_H_COLOR)%\@",,,,,,,, 1)
 }
 {
-	CALL PRINT_LABEL("‘O”¯",,,@"%INFO_STR_HAIR(L_NOW_H_STYLE), 20%¨\@
-					L_CHANGE_H_STYLE == -1 ? •ÏX‚È‚µ # %INFO_STR_HAIR(L_CHANGE_H_STYLE)%\@",,,,,,,, 1)
+	CALL PRINT_LABEL("å‰é«ª",,,@"%INFO_STR_HAIR(L_NOW_H_STYLE), 20%â†’\@
+					L_CHANGE_H_STYLE == -1 ? å¤‰æ›´ãªã— # %INFO_STR_HAIR(L_CHANGE_H_STYLE)%\@",,,,,,,, 1)
 }
 {
-	CALL PRINT_LABEL("Œã”¯",,,@"%INFO_STR_U_HAIR(L_NOW_H_STYLE), 20%¨\@
-					L_CHANGE_H_STYLE == -1 ? •ÏX‚È‚µ # %INFO_STR_U_HAIR(L_CHANGE_UH_STYLE)%\@",,,,,,,, 1)
+	CALL PRINT_LABEL("å¾Œé«ª",,,@"%INFO_STR_U_HAIR(L_NOW_H_STYLE), 20%â†’\@
+					L_CHANGE_H_STYLE == -1 ? å¤‰æ›´ãªã— # %INFO_STR_U_HAIR(L_CHANGE_UH_STYLE)%\@",,,,,,,, 1)
 }
 {
-	CALL PRINT_LABEL("“µF",,,@"%INFO_STR_EYECOLOR(L_NOW_E_COLOR), 20%¨\@
-					L_CHANGE_E_COLOR == -1 ? •ÏX‚È‚µ # %INFO_STR_EYECOLOR(L_CHANGE_E_COLOR)%\@",,,,,,,, 1)
+	CALL PRINT_LABEL("çž³è‰²",,,@"%INFO_STR_EYECOLOR(L_NOW_E_COLOR), 20%â†’\@
+					L_CHANGE_E_COLOR == -1 ? å¤‰æ›´ãªã— # %INFO_STR_EYECOLOR(L_CHANGE_E_COLOR)%\@",,,,,,,, 1)
 }
 {
-	CALL PRINT_LABEL("”§F",,,@"%INFO_STR_SKINCOLOR(L_NOW_B_COLOR), 20%¨\@
-					L_CHANGE_B_COLOR == -1 ? •ÏX‚È‚µ # %INFO_STR_SKINCOLOR(L_CHANGE_B_COLOR)%\@",,,,,,,, 1)
+	CALL PRINT_LABEL("è‚Œè‰²",,,@"%INFO_STR_SKINCOLOR(L_NOW_B_COLOR), 20%â†’\@
+					L_CHANGE_B_COLOR == -1 ? å¤‰æ›´ãªã— # %INFO_STR_SKINCOLOR(L_CHANGE_B_COLOR)%\@",,,,,,,, 1)
 }
 	DRAWLINE
-	PRINTFORML @@@@@
-	PRINTFORML @@@@@
-	PRINTFORML @@@@@
-	PRINTFORML @@@@@@¨
-	PRINTFORML @@@@@
-	PRINTFORML @@@@@
-	PRINTFORML @@@@@
-	CFLAG:L_I:”¯F = L_NOW_H_COLOR
-	CFLAG:L_I:”¯Œ^ = L_NOW_H_STYLE
-	CFLAG:L_I:Œã”¯Œ^ = L_NOW_UH_STYLE
-	CFLAG:L_I:“µF = L_NOW_E_COLOR
-	CFLAG:L_I:”§F = L_NOW_B_COLOR
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€â†’
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€
+	CFLAG:L_I:é«ªè‰² = L_NOW_H_COLOR
+	CFLAG:L_I:é«ªåž‹ = L_NOW_H_STYLE
+	CFLAG:L_I:å¾Œé«ªåž‹ = L_NOW_UH_STYLE
+	CFLAG:L_I:çž³è‰² = L_NOW_E_COLOR
+	CFLAG:L_I:è‚Œè‰² = L_NOW_B_COLOR
 	
 	HTML_PRINT C_PICTURE_HTML(L_I, 0, -702, 0, 850)
 	SIF L_CHANGE_H_COLOR > -1
-		CFLAG:L_I:”¯F = L_CHANGE_H_COLOR
+		CFLAG:L_I:é«ªè‰² = L_CHANGE_H_COLOR
 	SIF L_CHANGE_H_STYLE > -1
-		CFLAG:L_I:”¯Œ^ = L_CHANGE_H_STYLE
+		CFLAG:L_I:é«ªåž‹ = L_CHANGE_H_STYLE
 	SIF L_CHANGE_UH_STYLE > -1
-		CFLAG:L_I:Œã”¯Œ^ = L_CHANGE_UH_STYLE
+		CFLAG:L_I:å¾Œé«ªåž‹ = L_CHANGE_UH_STYLE
 	SIF L_CHANGE_E_COLOR > -1
-		CFLAG:L_I:“µF = L_CHANGE_E_COLOR
+		CFLAG:L_I:çž³è‰² = L_CHANGE_E_COLOR
 	SIF L_CHANGE_B_COLOR > -1
-		CFLAG:L_I:”§F = L_CHANGE_B_COLOR
+		CFLAG:L_I:è‚Œè‰² = L_CHANGE_B_COLOR
 	HTML_PRINT C_PICTURE_HTML(L_I, 800, -800, 0, 850)
 	DRAWLINE
-	PRINTFORML [0] •ÏX‚ÌƒŠƒZƒbƒg
+	PRINTFORML [0] å¤‰æ›´ã®ãƒªã‚»ãƒƒãƒˆ
 	DRAWLINE
-	PRINTFORML [1] ”¯F‚Ì•ÏX
-	IF FLAG:ƒGƒXƒe >= 3
-		PRINTFORML [2] ‘O”¯‚Ì•ÏX
+	PRINTFORML [1] é«ªè‰²ã®å¤‰æ›´
+	IF FLAG:ã‚¨ã‚¹ãƒ† >= 3
+		PRINTFORML [2] å‰é«ªã®å¤‰æ›´
 	ELSE
-		PRINTFORML  ‘O”¯‚Ì•ÏX(ƒŒƒxƒ‹3ˆÈã•K—v)
+		PRINTFORML  å‰é«ªã®å¤‰æ›´(ãƒ¬ãƒ™ãƒ«3ä»¥ä¸Šå¿…è¦)
 	ENDIF
-	IF FLAG:ƒGƒXƒe >= 3
-		PRINTFORML [3] Œã”¯‚Ì•ÏX
+	IF FLAG:ã‚¨ã‚¹ãƒ† >= 3
+		PRINTFORML [3] å¾Œé«ªã®å¤‰æ›´
 	ELSE
-		PRINTFORML  Œã”¯‚Ì•ÏX(ƒŒƒxƒ‹3ˆÈã•K—v)
+		PRINTFORML  å¾Œé«ªã®å¤‰æ›´(ãƒ¬ãƒ™ãƒ«3ä»¥ä¸Šå¿…è¦)
 	ENDIF
-	IF FLAG:ƒGƒXƒe >= 6
-		PRINTFORML [4] “µF‚Ì•ÏX
+	IF FLAG:ã‚¨ã‚¹ãƒ† >= 6
+		PRINTFORML [4] çž³è‰²ã®å¤‰æ›´
 	ELSE
-		PRINTFORML  “µF‚Ì•ÏX(ƒŒƒxƒ‹6ˆÈã•K—v)
+		PRINTFORML  çž³è‰²ã®å¤‰æ›´(ãƒ¬ãƒ™ãƒ«6ä»¥ä¸Šå¿…è¦)
 	ENDIF
-	IF FLAG:ƒGƒXƒe >= 9
-		PRINTFORML [5] ”§F‚Ì•ÏX
+	IF FLAG:ã‚¨ã‚¹ãƒ† >= 9
+		PRINTFORML [5] è‚Œè‰²ã®å¤‰æ›´
 	ELSE
-		PRINTFORML  ”§F‚Ì•ÏX(ƒŒƒxƒ‹9ˆÈã•K—v)
+		PRINTFORML  è‚Œè‰²ã®å¤‰æ›´(ãƒ¬ãƒ™ãƒ«9ä»¥ä¸Šå¿…è¦)
 	ENDIF
 	PRINTFORML 
-	PRINTFORML [100] “K—p@(10000)
-	PRINTFORML [999] –ß‚é
+	PRINTFORML [100] é©ç”¨ã€€(ï¿¥10000)
+	PRINTFORML [999] æˆ»ã‚‹
 	INPUT
 	SELECTCASE RESULT
 	CASE 0
@@ -1726,7 +1726,7 @@ DO
 			PRINTFORML [{L_PARTS_TYPE, 2}] %INFO_STR_HAIRCOLOR(L_PARTS_TYPE)%
 		NEXT
 		PRINTFORML 
-		PRINTFORML [-1] •ÏX‚È‚µ
+		PRINTFORML [-1] å¤‰æ›´ãªã—
 		DO
 			INPUT
 			L_PARTS_TYPE = RESULT
@@ -1735,13 +1735,13 @@ DO
 		LOOP 1
 		L_CHANGE_H_COLOR = L_PARTS_TYPE
 	CASE 2
-		SIF FLAG:ƒGƒXƒe < 3
+		SIF FLAG:ã‚¨ã‚¹ãƒ† < 3
 			CONTINUE
 		FOR L_PARTS_TYPE, 29, -1, -1
 			PRINTFORML [{L_PARTS_TYPE, 2}] %INFO_STR_HAIR(L_PARTS_TYPE)%
 		NEXT
 		PRINTFORML 
-		PRINTFORML [-1] •ÏX‚È‚µ
+		PRINTFORML [-1] å¤‰æ›´ãªã—
 		DO
 			INPUT
 			L_PARTS_TYPE = RESULT
@@ -1750,13 +1750,13 @@ DO
 		LOOP 1
 		L_CHANGE_H_STYLE = L_PARTS_TYPE
 	CASE 3
-		SIF FLAG:ƒGƒXƒe < 3
+		SIF FLAG:ã‚¨ã‚¹ãƒ† < 3
 			CONTINUE
 		FOR L_PARTS_TYPE, 29, -1, -1
 			PRINTFORML [{L_PARTS_TYPE, 2}] %INFO_STR_U_HAIR(L_PARTS_TYPE)%
 		NEXT
 		PRINTFORML 
-		PRINTFORML [-1] •ÏX‚È‚µ
+		PRINTFORML [-1] å¤‰æ›´ãªã—
 		DO
 			INPUT
 			L_PARTS_TYPE = RESULT
@@ -1765,13 +1765,13 @@ DO
 		LOOP 1
 		L_CHANGE_UH_STYLE = L_PARTS_TYPE
 	CASE 4
-		SIF FLAG:ƒGƒXƒe < 6
+		SIF FLAG:ã‚¨ã‚¹ãƒ† < 6
 			CONTINUE
 		FOR L_PARTS_TYPE, 5, -1, -1
 			PRINTFORML [{L_PARTS_TYPE, 2}] %INFO_STR_EYECOLOR(L_PARTS_TYPE)%
 		NEXT
 		PRINTFORML 
-		PRINTFORML [-1] •ÏX‚È‚µ
+		PRINTFORML [-1] å¤‰æ›´ãªã—
 		DO
 			INPUT
 			L_PARTS_TYPE = RESULT
@@ -1780,13 +1780,13 @@ DO
 		LOOP 1
 		L_CHANGE_E_COLOR = L_PARTS_TYPE
 	CASE 5
-		SIF FLAG:ƒGƒXƒe < 9
+		SIF FLAG:ã‚¨ã‚¹ãƒ† < 9
 			CONTINUE
 		FOR L_PARTS_TYPE, 5, -1, -1
 			PRINTFORML [{L_PARTS_TYPE, 2}] %INFO_STR_SKINCOLOR(L_PARTS_TYPE)%
 		NEXT
 		PRINTFORML 
-		PRINTFORML [-1] •ÏX‚È‚µ
+		PRINTFORML [-1] å¤‰æ›´ãªã—
 		DO
 			INPUT
 			L_PARTS_TYPE = RESULT
@@ -1796,28 +1796,28 @@ DO
 		L_CHANGE_B_COLOR = L_PARTS_TYPE
 	CASE 100
 		IF ALLSAMES(-1, L_CHANGE_H_COLOR, L_CHANGE_H_STYLE, L_CHANGE_UH_STYLE, L_CHANGE_E_COLOR, L_CHANGE_B_COLOR)
-			PRINTFORMW •ÏX“à—e‚ªÝ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB
+			PRINTFORMW å¤‰æ›´å†…å®¹ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚
 			CONTINUE
-		;‰½‚ç‚©‚Ìˆ—‚ª“K—p‚³‚ê‚éê‡‚ÍŒÂ•Ê‚É”²‚¯‚é‚æ
+		;ä½•ã‚‰ã‹ã®å‡¦ç†ãŒé©ç”¨ã•ã‚Œã‚‹å ´åˆã¯å€‹åˆ¥ã«æŠœã‘ã‚‹ã‚ˆ
 		ELSEIF L_CHANGE_H_COLOR >= 0 && L_CHANGE_H_COLOR != L_NOW_H_COLOR
 		ELSEIF L_CHANGE_H_STYLE >= 0 && L_CHANGE_H_STYLE != L_NOW_H_STYLE
 		ELSEIF L_CHANGE_UH_STYLE >= 0 && L_CHANGE_UH_STYLE != L_NOW_UH_STYLE
 		ELSEIF L_CHANGE_E_COLOR >= 0 && L_CHANGE_E_COLOR != L_NOW_E_COLOR
 		ELSEIF L_CHANGE_B_COLOR >= 0 && L_CHANGE_B_COLOR != L_NOW_B_COLOR
 		ELSE
-			PRINTFORMW %CALLNAME:L_I%‚ÍŠù‚ÉŽw’è‚Ì—eŽp‚É‚È‚Á‚Ä‚¢‚Ü‚·B
+			PRINTFORMW %CALLNAME:L_I%ã¯æ—¢ã«æŒ‡å®šã®å®¹å§¿ã«ãªã£ã¦ã„ã¾ã™ã€‚
 			CONTINUE
 		ENDIF
 		
-		PRINTFORMW %CALLNAME:L_I%‚Ì—eŽp‚ð•ÏX‚µ‚Ü‚µ‚½B
+		PRINTFORMW %CALLNAME:L_I%ã®å®¹å§¿ã‚’å¤‰æ›´ã—ã¾ã—ãŸã€‚
 		MONEY -= 10000
 		RETURN
 	CASE 999
-		CFLAG:L_I:”¯F = L_NOW_H_COLOR
-		CFLAG:L_I:”¯Œ^ = L_NOW_H_STYLE
-		CFLAG:L_I:Œã”¯Œ^ = L_NOW_UH_STYLE
-		CFLAG:L_I:“µF = L_NOW_E_COLOR
-		CFLAG:L_I:”§F = L_NOW_B_COLOR
+		CFLAG:L_I:é«ªè‰² = L_NOW_H_COLOR
+		CFLAG:L_I:é«ªåž‹ = L_NOW_H_STYLE
+		CFLAG:L_I:å¾Œé«ªåž‹ = L_NOW_UH_STYLE
+		CFLAG:L_I:çž³è‰² = L_NOW_E_COLOR
+		CFLAG:L_I:è‚Œè‰² = L_NOW_B_COLOR
 		RETURN
 	ENDSELECT
 LOOP 1
@@ -1834,29 +1834,29 @@ ELSEIF L_I == MASTER
 	RETURN
 ELSEIF TALENT:L_I:NPC
 	RETURN
-ELSEIF TALENT:L_I:‰õŠy’†“Å <= 0
+ELSEIF TALENT:L_I:å¿«æ¥½ä¸­æ¯’ <= 0
 	RETURN
 ENDIF
-L_MONEY = MIN(100000, 2000 + (EXP:L_I:”„tŒoŒ± * 10))
+L_MONEY = MIN(100000, 2000 + (EXP:L_I:å£²æ˜¥çµŒé¨“ * 10))
 CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(L_I)
 DRAWLINE
 CALL C_PICTURE_S(L_I)
-PRINTFORML %CALLNAME:L_I%‚Ì‰õŠy’†“Å‚ÌŽ¡—Ã‚É‚Í{L_MONEY}‚ª•K—v‚Å‚·
-PRINTFORML Ž¡—Ã‚¢‚½‚µ‚Ü‚·‚©H
+PRINTFORML %CALLNAME:L_I%ã®å¿«æ¥½ä¸­æ¯’ã®æ²»ç™‚ã«ã¯ï¿¥{L_MONEY}ãŒå¿…è¦ã§ã™
+PRINTFORML æ²»ç™‚ã„ãŸã—ã¾ã™ã‹ï¼Ÿ
 PRINTFORML 
-PRINTFORML [0] ‚Í‚¢
-PRINTFORML [1] ‚¢‚¢‚¦
+PRINTFORML [0] ã¯ã„
+PRINTFORML [1] ã„ã„ãˆ
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 0
 	IF MONEY <= L_MONEY
-		PRINTFORML Ž¡—Ã”ï‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+		PRINTFORML æ²»ç™‚è²»ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 		RETURN
 	ENDIF
-	TALENT:L_I:‰õŠy’†“Å = 0
-	PRINTFORMW %CALLNAME:L_I%‚ðŽ¡—Ã‚µ‚Ü‚µ‚½B
+	TALENT:L_I:å¿«æ¥½ä¸­æ¯’ = 0
+	PRINTFORMW %CALLNAME:L_I%ã‚’æ²»ç™‚ã—ã¾ã—ãŸã€‚
 ENDSELECT
 
 
@@ -1864,8 +1864,8 @@ ENDSELECT
 @MNG_CONFIG_EVENT(L_I)
 #DIM        L_I
 #DIM        L_INPUT
-#DIMS CONST STR_EVE_RATE = "NG", "­", "•À", "‘½"
-#DIMS CONST STR_EVE_LIMIT = "NG", "—Fl", "e—F", "—öl", "–³§ŒÀ"
+#DIMS CONST STR_EVE_RATE = "NG", "å°‘", "ä¸¦", "å¤š"
+#DIMS CONST STR_EVE_LIMIT = "NG", "å‹äºº", "è¦ªå‹", "æ‹äºº", "ç„¡åˆ¶é™"
 IF !INRANGE(L_I, 0, CHARANUM - 1)
 	RETURN
 ELSEIF L_I == MASTER
@@ -1878,16 +1878,16 @@ CALL INFO_STATUS_HEADER(L_I)
 DRAWLINE
 CALL C_PICTURE_S(L_I)
 DRAWLINE
-PRINTFORML •ÏX‚µ‚½‚¢ƒCƒxƒ“ƒgŒXŒü‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+PRINTFORML å¤‰æ›´ã—ãŸã„ã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 DRAWLINE
-PRINTFORML  [0] Œð—¬ƒCƒxƒ“ƒg(•p“xF%STR_EVE_RATE:(LIMIT(CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_Œð—¬ / 30, 0, 3))%)
-PRINTFORML  [1] —öˆ¤ƒCƒxƒ“ƒg(•p“xF%STR_EVE_RATE:(LIMIT(CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_—öˆ¤ / 30, 0, 3))%)
-PRINTFORML  [2] ”ÆßƒCƒxƒ“ƒg(•p“xF%STR_EVE_RATE:(LIMIT(CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_”Æß / 30, 0, 3))%)
-PRINTFORML  [3] «“IƒCƒxƒ“ƒg(•p“xF%STR_EVE_RATE:(LIMIT(CFlag:L_I:ZlƒCƒxƒ“ƒgŒXŒü_« / 30, 0, 3))%)
-PRINTFORML [10] ZlŒð—¬ãŒÀ(ãŒÀF%STR_EVE_LIMIT:(LIMIT(CFlag:L_I:ZlŒð—¬Ý’è, 0, 4))%)
-PRINTFORML [20] Œð—¬‘ÎÛ‚Ì‚¨‹C‚É“ü‚èŽw’è
+PRINTFORML  [0] äº¤æµã‚¤ãƒ™ãƒ³ãƒˆ(é »åº¦ï¼š%STR_EVE_RATE:(LIMIT(CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_äº¤æµ / 30, 0, 3))%)
+PRINTFORML  [1] æ‹æ„›ã‚¤ãƒ™ãƒ³ãƒˆ(é »åº¦ï¼š%STR_EVE_RATE:(LIMIT(CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ‹æ„› / 30, 0, 3))%)
+PRINTFORML  [2] çŠ¯ç½ªã‚¤ãƒ™ãƒ³ãƒˆ(é »åº¦ï¼š%STR_EVE_RATE:(LIMIT(CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_çŠ¯ç½ª / 30, 0, 3))%)
+PRINTFORML  [3] æ€§çš„ã‚¤ãƒ™ãƒ³ãƒˆ(é »åº¦ï¼š%STR_EVE_RATE:(LIMIT(CFlag:L_I:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ€§ / 30, 0, 3))%)
+PRINTFORML [10] ä½äººäº¤æµä¸Šé™(ä¸Šé™ï¼š%STR_EVE_LIMIT:(LIMIT(CFlag:L_I:ä½äººäº¤æµè¨­å®š, 0, 4))%)
+PRINTFORML [20] äº¤æµå¯¾è±¡ã®ãŠæ°—ã«å…¥ã‚ŠæŒ‡å®š
 PRINTFORML 
-PRINTFORML [999] –ß‚é
+PRINTFORML [999] æˆ»ã‚‹
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
@@ -1910,84 +1910,84 @@ RESTART
 
 
 ;-------------------------------------------------
-; ŠeŒð—¬Zl
+; å„äº¤æµä½äºº
 ;-------------------------------------------------
 @MNG_CONFIG_PARTNER(L_I)
 #DIM L_NPC
 #DIM L_INPUT
 #DIM L_I
-#DIMS CONST NPC_LV = "ˆ¤l", "’ml", "—Fl", "e—F", "—öl", "•v•w"
+#DIMS CONST NPC_LV = "æ„›äºº", "çŸ¥äºº", "å‹äºº", "è¦ªå‹", "æ‹äºº", "å¤«å©¦"
 CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(L_I)
 DRAWLINE
 CALL C_PICTURE_S(L_I)
 DRAWLINE
-PRINTFORML Œð—¬‘ÎÛ‚Ì‚¨‹C‚É“ü‚èA–¼‘O•ÏX‚ª‚Å‚«‚Ü‚·B
+PRINTFORML äº¤æµå¯¾è±¡ã®ãŠæ°—ã«å…¥ã‚Šã€åå‰å¤‰æ›´ãŒã§ãã¾ã™ã€‚
 DRAWLINE
-PRINTFORML [-1] ‚¨‹C‚É“ü‚è‰ðœ
+PRINTFORML [-1] ãŠæ°—ã«å…¥ã‚Šè§£é™¤
 FOR L_NPC, 0, 10
 	IF CSTR:L_I:(3000+L_NPC) == ""
-		CALL PRINT_LABEL("–¢“o˜^")
+		CALL PRINT_LABEL("æœªç™»éŒ²")
 		PRINTL
 	ELSE
 		SIF CFLAG:L_I:3600 == L_NPC
 			SETCOLOR 50,250,250
-		PRINTBUTTON @"[{10 + L_NPC}] –¼Ì•ÏX", 10 + L_NPC
-		PRINTFORM @
+		PRINTBUTTON @"[{10 + L_NPC}] åç§°å¤‰æ›´", 10 + L_NPC
+		PRINTFORM ã€€
 		PRINTBUTTON @"[{L_NPC}] %CSTR:L_I:(3000+L_NPC), 18 ,LEFT%", L_NPC
 		IF CFLAG:L_I:(3030+L_NPC) == 1
-			CALL PRINT_LABEL("’j")
+			CALL PRINT_LABEL("ç”·")
 		ELSE
-			CALL PRINT_LABEL("—")
+			CALL PRINT_LABEL("å¥³")
 		ENDIF
 		SELECTCASE CFLAG:L_I:(3020+L_NPC)
 		CASE 1 TO 5, -5
-			CALL PRINT_LABEL("ŠÖŒW",,,NPC_LV:(MAX(0, CFLAG:L_I:(3020+L_NPC))))
+			CALL PRINT_LABEL("é–¢ä¿‚",,,NPC_LV:(MAX(0, CFLAG:L_I:(3020+L_NPC))))
 		ENDSELECT
-		CALL PRINT_LABEL("DŠ´“x",,,TOSTR(CFLAG:L_I:(3010+L_NPC)), -3)
-		CALL PRINT_LABEL("‘Š«",,,TOSTR(CFLAG:L_I:(3050+L_NPC)), -3)
-		CALL PRINT_LABEL("«sˆ×‰ñ”",,,TOSTR(CFLAG:L_I:(3060+L_NPC)))
+		CALL PRINT_LABEL("å¥½æ„Ÿåº¦",,,TOSTR(CFLAG:L_I:(3010+L_NPC)), -3)
+		CALL PRINT_LABEL("ç›¸æ€§",,,TOSTR(CFLAG:L_I:(3050+L_NPC)), -3)
+		CALL PRINT_LABEL("æ€§è¡Œç‚ºå›žæ•°",,,TOSTR(CFLAG:L_I:(3060+L_NPC)))
 		PRINTFORML
 	ENDIF
 	RESETCOLOR
 NEXT
 DRAWLINE
-PRINTFORML [999] –ß‚é
+PRINTFORML [999] æˆ»ã‚‹
 DO
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE -1
 		CFLAG:L_I:3600 = -1
-		CALL PRINT_LABEL("‚¨‹C‚É“ü‚è‚ð‰ðœ‚µ‚Ü‚µ‚½")
+		CALL PRINT_LABEL("ãŠæ°—ã«å…¥ã‚Šã‚’è§£é™¤ã—ã¾ã—ãŸ")
 		PRINTW
 	CASE 999
 		; CALL JN_CONFIG
 		RETURN
 	CASE 10 TO 19
-		CALL PRINT_LABEL("Œð—¬‘ÎÛ‚Ì–¼‘O‚ð•ÏX‚µ‚Ü‚·A–¢“ü—Í‚Å•ÏX‚µ‚Ü‚¹‚ñB")
+		CALL PRINT_LABEL("äº¤æµå¯¾è±¡ã®åå‰ã‚’å¤‰æ›´ã—ã¾ã™ã€æœªå…¥åŠ›ã§å¤‰æ›´ã—ã¾ã›ã‚“ã€‚")
 		PRINTL
 		DRAWLINE
 		INPUTS
 		IF RESULTS == ""
-			;ƒXƒ‹[
+			;ã‚¹ãƒ«ãƒ¼
 		ELSE
 			L_NPC = L_INPUT % 10
 			SIF CFLAG:L_I:(3020 + L_NPC) == 5
-				CSTR:L_I:”º—µ–¼‘O = %RESULTS%
+				CSTR:L_I:ä¼´ä¾¶åå‰ = %RESULTS%
 			CSTR:L_I:(3000 + L_NPC) = %RESULTS%
-			CALL PRINT_LABEL(@"–¼‘O‚ð%CSTR:L_I:(3000 + L_NPC)%‚É•ÏX‚µ‚Ü‚µ‚½")
+			CALL PRINT_LABEL(@"åå‰ã‚’%CSTR:L_I:(3000 + L_NPC)%ã«å¤‰æ›´ã—ã¾ã—ãŸ")
 			PRINTL
-			SIF TALENT:L_I:Žq‹Ÿ‚Á‚Û‚¢ || TALENT:L_I:‚¨‚µ‚á‚Ü
-				CSTR:L_I:ˆêlÌ = %CALLNAME:L_I%
+			SIF TALENT:L_I:å­ä¾›ã£ã½ã„ || TALENT:L_I:ãŠã—ã‚ƒã¾
+				CSTR:L_I:ä¸€äººç§° = %CALLNAME:L_I%
 		ENDIF
 	CASE 0 TO 9
 		SIF CSTR:L_I:(3000 + L_INPUT) == ""
 			RESTART
 		CFLAG:L_I:3600 = L_INPUT
-		CALL PRINT_LABEL(@"%CSTR:L_I:(3000 + L_INPUT)%‚ð‚¨‹C‚É“ü‚è‚É‚µ‚Ü‚µ‚½")
+		CALL PRINT_LABEL(@"%CSTR:L_I:(3000 + L_INPUT)%ã‚’ãŠæ°—ã«å…¥ã‚Šã«ã—ã¾ã—ãŸ")
 		PRINTL
-		PRINTFORMW ‚¨‹C‚É“ü‚è‚É‚µ‚½Zl‚Æ‚ÍŒð—¬”­¶‚ª‘½‚­‚È‚èADŠ´“xE‘Š«‘‰Á‚É•â³‚ª“ü‚è‚Ü‚·B
+		PRINTFORMW ãŠæ°—ã«å…¥ã‚Šã«ã—ãŸä½äººã¨ã¯äº¤æµç™ºç”ŸãŒå¤šããªã‚Šã€å¥½æ„Ÿåº¦ãƒ»ç›¸æ€§å¢—åŠ ã«è£œæ­£ãŒå…¥ã‚Šã¾ã™ã€‚
 	CASEELSE
 		CONTINUE
 	ENDSELECT
@@ -2016,19 +2016,19 @@ CALL INFO_STATUS_HEADER(C_ID)
 DRAWLINE
 CALL C_PICTURE_S(C_ID)
 DRAWLINE
-PRINTFORML V‚µ‚¢–¼‘O‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢i‚æ‚Ý‚ª‚È‚Í‹L˜^‚³‚ê‚Ü‚¹‚ñj
+PRINTFORML æ–°ã—ã„åå‰ã‚’é¸æŠžã—ã¦ãã ã•ã„ï¼ˆã‚ˆã¿ãŒãªã¯è¨˜éŒ²ã•ã‚Œã¾ã›ã‚“ï¼‰
 DRAWLINE
 CALL MAKE_NAMELIST(NAME_LIST, HURIGANA_LIST)
 FOR NAME_ID, 0, 30
-	PRINTBUTTON @"[{NAME_ID, 2}] %NAME_LIST:NAME_ID, 8% %HURIGANA_LIST:NAME_ID, 10% “¯–¼{CNT_SAME_NAME(C_ID, NAME_LIST:NAME_ID), 3}", NAME_ID
-	PRINTFORM @
+	PRINTBUTTON @"[{NAME_ID, 2}] %NAME_LIST:NAME_ID, 8% %HURIGANA_LIST:NAME_ID, 10% åŒå{CNT_SAME_NAME(C_ID, NAME_LIST:NAME_ID), 3}", NAME_ID
+	PRINTFORM ã€€
 	SIF NAME_ID % 3 == 2
 		PRINTFORML 
 NEXT
 PRINTFORML 
-PRINTFORML [100] Ž©•ª‚Å“ü—Í‚·‚é
-PRINTFORML [900] –¼‘OŒó•âÄ¶¬
-PRINTFORML [999] ƒLƒƒƒ“ƒZƒ‹
+PRINTFORML [100] è‡ªåˆ†ã§å…¥åŠ›ã™ã‚‹
+PRINTFORML [900] åå‰å€™è£œå†ç”Ÿæˆ
+PRINTFORML [999] ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 DO
 	INPUT
 	SELECTCASE RESULT
@@ -2037,35 +2037,35 @@ DO
 	CASE 900
 		RESTART
 	CASE 100
-		PRINTFORML V‚µ‚¢–¼‘O‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
+		PRINTFORML æ–°ã—ã„åå‰ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„
 		INPUTS
 		IF RESULTS == ""
-			;ƒXƒ‹[
+			;ã‚¹ãƒ«ãƒ¼
 			RESTART
 		ELSE
-			PRINTFORMW –¼‘O‚Ì•ÏX‚ªŠ®—¹‚µ‚Ü‚µ‚½
+			PRINTFORMW åå‰ã®å¤‰æ›´ãŒå®Œäº†ã—ã¾ã—ãŸ
 			CALLNAME:C_ID '= RESULTS
-			SIF TALENT:C_ID:Žq‹Ÿ‚Á‚Û‚¢ || TALENT:C_ID:‚¨‚µ‚á‚Ü
-				CSTR:C_ID:ˆêlÌ '= CALLNAME:C_ID
+			SIF TALENT:C_ID:å­ä¾›ã£ã½ã„ || TALENT:C_ID:ãŠã—ã‚ƒã¾
+				CSTR:C_ID:ä¸€äººç§° '= CALLNAME:C_ID
 			RETURN
 		ENDIF
 	CASE 0 TO 29
 		NAME_ID  = RESULT
 		NAME_CNT = CNT_SAME_NAME(C_ID, NAME_LIST:NAME_ID)
-		PRINTFORML %CALLNAME:C_ID%‚ÌV‚µ‚¢–¼‘O‚Í%NAME_LIST:NAME_ID%i%HURIGANA_LIST:NAME_ID%j‚Æ‚È‚è‚Ü‚·
+		PRINTFORML %CALLNAME:C_ID%ã®æ–°ã—ã„åå‰ã¯%NAME_LIST:NAME_ID%ï¼ˆ%HURIGANA_LIST:NAME_ID%ï¼‰ã¨ãªã‚Šã¾ã™
 		SIF NAME_CNT
-			PRINTFORML “¯–¼‚ÌƒLƒƒƒ‰‚Í{NAME_CNT}l‘¶Ý‚µ‚Ü‚·
-		PRINTFORML ‚±‚Ì–¼‘O‚Å‚æ‚ë‚µ‚¢‚Å‚·‚©H
-		PRINTFORML [1] - %NAME_LIST:NAME_ID%‚ÅŒˆ’è‚·‚é
-		PRINTFORML [0] - l‚¦’¼‚·
+			PRINTFORML åŒåã®ã‚­ãƒ£ãƒ©ã¯{NAME_CNT}äººå­˜åœ¨ã—ã¾ã™
+		PRINTFORML ã“ã®åå‰ã§ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+		PRINTFORML [1] - %NAME_LIST:NAME_ID%ã§æ±ºå®šã™ã‚‹
+		PRINTFORML [0] - è€ƒãˆç›´ã™
 		DO
 			INPUT
 			SELECTCASE RESULT
 			CASE 1
-				PRINTFORMW –¼‘O‚Ì•ÏX‚ªŠ®—¹‚µ‚Ü‚µ‚½
+				PRINTFORMW åå‰ã®å¤‰æ›´ãŒå®Œäº†ã—ã¾ã—ãŸ
 				CALLNAME:C_ID '= NAME_LIST:NAME_ID
-				SIF TALENT:C_ID:Žq‹Ÿ‚Á‚Û‚¢ || TALENT:C_ID:‚¨‚µ‚á‚Ü
-					CSTR:C_ID:ˆêlÌ '= CALLNAME:C_ID
+				SIF TALENT:C_ID:å­ä¾›ã£ã½ã„ || TALENT:C_ID:ãŠã—ã‚ƒã¾
+					CSTR:C_ID:ä¸€äººç§° '= CALLNAME:C_ID
 				RETURN
 			CASE 0
 				RESTART
@@ -2099,7 +2099,7 @@ RETURNF SUM_PRICE
 
 @MNG_CHANGE_CLOTHES(C_ID)
 #DIM          C_ID
-#DIMS CONST   COS_TYPE_ALL  = "•ž", "‰º’…ƒgƒbƒvƒX", "‰º’…ƒ{ƒgƒ€ƒX", "ŒC‰º", "ŒC", "–XŽq•ƒAƒNƒZ", "ˆú–ä"
+#DIMS CONST   COS_TYPE_ALL  = "æœ", "ä¸‹ç€ãƒˆãƒƒãƒ—ã‚¹", "ä¸‹ç€ãƒœãƒˆãƒ ã‚¹", "é´ä¸‹", "é´", "å¸½å­ï¼†ã‚¢ã‚¯ã‚»", "æ·«ç´‹"
 #DIM  CONST   COS_CFLAG_ID  = 420, 423, 424, 421, 422, 419, 418
 #DIMS CONST   STR_BODY_SIZE   = "NORMAL", "MINI"
 #DIM  DYNAMIC LOAD_CHECK = 1
@@ -2116,31 +2116,31 @@ ENDIF
 CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(C_ID)
 CALL C_PICTURE_FITTING(C_ID, MEMO_COS, NEW_COS)
-PRINTFORML ’…‘Ö‚¦‚³‚¹‚éˆß‘•‚ÌŽí—Þ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢(ŠŽ‹à:{MONEY})
+PRINTFORML ç€æ›¿ãˆã•ã›ã‚‹è¡£è£…ã®ç¨®é¡žã‚’é¸æŠžã—ã¦ãã ã•ã„(æ‰€æŒé‡‘:{MONEY})
 DRAWLINE
 FOR LOCAL, 0, VARSIZE("COS_TYPE_ALL")
 	PRINTBUTTON @"[{LOCAL}] %COS_TYPE_ALL:LOCAL, 14%", LOCAL
-	PRINT @@b
+	PRINT ã€€ã€€ï½œ
 	IF MEMO_COS:LOCAL < 0
-		PRINTFORM %"||", 24, LEFT%@¨
+		PRINTFORM %"ï¼ï¼", 24, LEFT%ã€€â†’
 	ELSE
-		PRINTFORM %COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE_ALL:LOCAL, MEMO_COS:LOCAL, "NAME"), 24, LEFT%@¨
+		PRINTFORM %COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE_ALL:LOCAL, MEMO_COS:LOCAL, "NAME"), 24, LEFT%ã€€â†’
 	ENDIF
 	IF NEW_COS:LOCAL < 0
-		PRINTFORM ||
+		PRINTFORM ï¼ï¼
 	ELSEIF NEW_COS:LOCAL == MEMO_COS:LOCAL
-		PRINTFORM ‚»‚Ì‚Ü‚Ü
+		PRINTFORM ãã®ã¾ã¾
 	ELSE
-		PRINTFORM %COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE_ALL:LOCAL, NEW_COS:LOCAL, "NAME"), 24, LEFT%
+		PRINTFORM %COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE_ALL:LOCAL, NEW_COS:LOCAL, "NAME"), 24, LEFT%
 	ENDIF
 	PRINTL
 NEXT
 SIF !LINEISEMPTY()
 	PRINTL
 PRINTFORML
-PRINTFORML [100] - ˆß‘•‚Ìw“ü (”ï—p{CULC_COST_COS_CHANGE(MEMO_COS, NEW_COS, COS_PRICE)})
-PRINTFORML [200] - ƒŠƒZƒbƒg
-PRINTFORML [999] - ƒLƒƒƒ“ƒZƒ‹
+PRINTFORML [100] - è¡£è£…ã®è³¼å…¥ (è²»ç”¨{CULC_COST_COS_CHANGE(MEMO_COS, NEW_COS, COS_PRICE)})
+PRINTFORML [200] - ãƒªã‚»ãƒƒãƒˆ
+PRINTFORML [999] - ã‚­ãƒ£ãƒ³ã‚»ãƒ«
 DO
 	INPUT
 	SELECTCASE RESULT
@@ -2151,7 +2151,7 @@ DO
 		RETURN
 	CASE 100
 		IF MONEY < CULC_COST_COS_CHANGE(MEMO_COS, NEW_COS, COS_PRICE)
-			PRINTFORMW ŠŽ‹à‚ª‘«‚è‚Ü‚¹‚ñ
+			PRINTFORMW æ‰€æŒé‡‘ãŒè¶³ã‚Šã¾ã›ã‚“
 		ELSE
 			MONEY -= CULC_COST_COS_CHANGE(MEMO_COS, NEW_COS, COS_PRICE)
 			FOR LOCAL, 0, 7
@@ -2181,9 +2181,9 @@ RESTART
 #DIM  REF     MEMO_COS
 #DIM  REF     NEW_COS
 #DIM  REF     COS_PRICE
-#DIMS CONST   COS_TYPE_ALL  = "•ž", "‰º’…ƒgƒbƒvƒX", "‰º’…ƒ{ƒgƒ€ƒX", "ŒC‰º", "ŒC", "–XŽq•ƒAƒNƒZ", "ˆú–ä"
+#DIMS CONST   COS_TYPE_ALL  = "æœ", "ä¸‹ç€ãƒˆãƒƒãƒ—ã‚¹", "ä¸‹ç€ãƒœãƒˆãƒ ã‚¹", "é´ä¸‹", "é´", "å¸½å­ï¼†ã‚¢ã‚¯ã‚»", "æ·«ç´‹"
 #DIM  CONST   COS_CFLAG_ID  = 420, 423, 424, 421, 422, 419, 418
-#DIM  CONST   •ž_NORMAL_INDEX = 0, 1, 2, 3, 4, -1, 5, 6, 7, 8, 17, 18, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, -1, 25, 26, 27
+#DIM  CONST   æœ_NORMAL_INDEX = 0, 1, 2, 3, 4, -1, 5, 6, 7, 8, 17, 18, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, -1, 25, 26, 27
 #DIMS CONST   STR_BODY_SIZE   = "NORMAL", "MINI"
 #DIMS         TEMP_LABEL
 #DIM  DYNAMIC PRICE_LIST, 40
@@ -2194,33 +2194,33 @@ SIF NOW_TYPE < 0
 	RETURN
 
 PRINTFORML
-;æ‚É—áŠOˆ—
-IF CFLAG:C_ID:Zl_‘ÌŠi == 0 && COS_TYPE == "•ž"
-	FOR LOCAL, 0, VARSIZE("•ž_NORMAL_INDEX")
-		IF •ž_NORMAL_INDEX:LOCAL < 0
+;å…ˆã«ä¾‹å¤–å‡¦ç†
+IF CFLAG:C_ID:ä½äºº_ä½“æ ¼ == 0 && COS_TYPE == "æœ"
+	FOR LOCAL, 0, VARSIZE("æœ_NORMAL_INDEX")
+		IF æœ_NORMAL_INDEX:LOCAL < 0
 			PRINTFORM %" " * 39%
 		ELSE
-			PRICE_LIST:(•ž_NORMAL_INDEX:LOCAL) = TOINT(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, •ž_NORMAL_INDEX:LOCAL, "PRICE"))
-			TEMP_LABEL '= @"[{•ž_NORMAL_INDEX:LOCAL, 2}] "
-			TEMP_LABEL += @"%COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, •ž_NORMAL_INDEX:LOCAL, "NAME"), 24, LEFT%"
-			TEMP_LABEL += "@\\" + @"{PRICE_LIST:(•ž_NORMAL_INDEX:LOCAL), 7, RIGHT}"
-			PRINTBUTTON TEMP_LABEL, •ž_NORMAL_INDEX:LOCAL
+			PRICE_LIST:(æœ_NORMAL_INDEX:LOCAL) = TOINT(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, æœ_NORMAL_INDEX:LOCAL, "PRICE"))
+			TEMP_LABEL '= @"[{æœ_NORMAL_INDEX:LOCAL, 2}] "
+			TEMP_LABEL += @"%COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, æœ_NORMAL_INDEX:LOCAL, "NAME"), 24, LEFT%"
+			TEMP_LABEL += "ã€€\\" + @"{PRICE_LIST:(æœ_NORMAL_INDEX:LOCAL), 7, RIGHT}"
+			PRINTBUTTON TEMP_LABEL, æœ_NORMAL_INDEX:LOCAL
 		ENDIF
-		PRINT @
+		PRINT ã€€
 		SIF LOCAL % 3 == 2
 			PRINTL 
 	NEXT
-ELSEIF GROUPMATCH(COS_TYPE, "–XŽq•ƒAƒNƒZ", "ˆú–ä")
+ELSEIF GROUPMATCH(COS_TYPE, "å¸½å­ï¼†ã‚¢ã‚¯ã‚»", "æ·«ç´‹")
 	LOCAL = 1
 	DO
-		TEMP_LABEL '= @"%COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, LOCAL, "NAME"), 24, LEFT%"
+		TEMP_LABEL '= @"%COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, LOCAL, "NAME"), 24, LEFT%"
 		SIF TEMP_LABEL == " " * 24
 			BREAK
-		PRICE_LIST:LOCAL = TOINT(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, LOCAL, "PRICE"))
-		TEMP_LABEL '= TEMP_LABEL + "@\\" + @"{PRICE_LIST:LOCAL, 7, RIGHT}"
+		PRICE_LIST:LOCAL = TOINT(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, LOCAL, "PRICE"))
+		TEMP_LABEL '= TEMP_LABEL + "ã€€\\" + @"{PRICE_LIST:LOCAL, 7, RIGHT}"
 		TEMP_LABEL '= @"[{LOCAL, 2}] " + TEMP_LABEL
 		PRINTBUTTON TEMP_LABEL, LOCAL
-		PRINT @
+		PRINT ã€€
 		SIF LOCAL % 4 == 3
 			PRINTL 
 		LOCAL ++
@@ -2228,14 +2228,14 @@ ELSEIF GROUPMATCH(COS_TYPE, "–XŽq•ƒAƒNƒZ", "ˆú–ä")
 ELSE
 	LOCAL = 0
 	DO
-		TEMP_LABEL '= @"%COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, LOCAL, "NAME"), 24, LEFT%"
+		TEMP_LABEL '= @"%COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, LOCAL, "NAME"), 24, LEFT%"
 		SIF TEMP_LABEL == " " * 24
 			BREAK
-		PRICE_LIST:LOCAL = TOINT(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, LOCAL, "PRICE"))
-		TEMP_LABEL '= TEMP_LABEL + "@\\" + @"{PRICE_LIST:LOCAL, 7, RIGHT}"
+		PRICE_LIST:LOCAL = TOINT(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, LOCAL, "PRICE"))
+		TEMP_LABEL '= TEMP_LABEL + "ã€€\\" + @"{PRICE_LIST:LOCAL, 7, RIGHT}"
 		TEMP_LABEL '= @"[{LOCAL, 2}] " + TEMP_LABEL
 		PRINTBUTTON TEMP_LABEL, LOCAL
-		PRINT @
+		PRINT ã€€
 		SIF LOCAL % 3 == 2
 			PRINTL 
 		LOCAL ++
@@ -2244,12 +2244,12 @@ ENDIF
 PRINTFORML
 SIF !LINEISEMPTY()
 	PRINTL
-IF COS_TYPE == "ˆú–ä"
-	PRINTFORML [-1] ‰ðœ
+IF COS_TYPE == "æ·«ç´‹"
+	PRINTFORML [-1] è§£é™¤
 ELSE
-	PRINTFORML [-1] ’E‚ª‚·
+	PRINTFORML [-1] è„±ãŒã™
 ENDIF
-PRINTFORML [100] ‚à‚Ç‚é
+PRINTFORML [100] ã‚‚ã©ã‚‹
 DO
 	INPUT
 	SELECTCASE RESULT
@@ -2261,14 +2261,14 @@ DO
 		COS_PRICE:NOW_TYPE = 0
 		RETURN
 		[SKIPSTART]
-		IF COS_TYPE == "ˆú–ä"
-			PRINTFORML ˆú–ä‚ð‰ðœ‚µ‚Ü‚·
+		IF COS_TYPE == "æ·«ç´‹"
+			PRINTFORML æ·«ç´‹ã‚’è§£é™¤ã—ã¾ã™
 		ELSE
-			PRINTFORML ˆß‘•‚ð’E‚ª‚¹‚Ü‚·
+			PRINTFORML è¡£è£…ã‚’è„±ãŒã›ã¾ã™
 		ENDIF
-		PRINTFORML ‚æ‚ë‚µ‚¢‚Å‚·‚©H
-		PRINTFORML [1] ‚Í‚¢
-		PRINTFORML [0] ‚¢‚¢‚¦
+		PRINTFORML ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+		PRINTFORML [1] ã¯ã„
+		PRINTFORML [0] ã„ã„ãˆ
 		INPUT
 		IF RESULT == 1
 			CFLAG:C_ID:(COS_CFLAG_ID:NOW_TYPE) = -1
@@ -2279,7 +2279,7 @@ DO
 		[SKIPEND]
 	CASE 0 TO 99
 		LOCAL = RESULT
-		SIF !STRLENS(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:Zl_‘ÌŠi), COS_TYPE, LOCAL, "NAME"))
+		SIF !STRLENS(COSTUME_DATA(STR_BODY_SIZE:(CFLAG:C_ID:ä½äºº_ä½“æ ¼), COS_TYPE, LOCAL, "NAME"))
 			CONTINUE
 		
 		CFLAG:C_ID:(COS_CFLAG_ID:NOW_TYPE) = LOCAL

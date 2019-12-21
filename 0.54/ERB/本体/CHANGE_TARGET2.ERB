@@ -1,15 +1,15 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+﻿;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;
 @CHANGE_TARGET_MAIN2
-#DIM L_i = 0       ;����
+#DIM L_i = 0       ;入力
 #DIM L_n;
-#DIM L_page = 0    ;�y�[�W�ԍ�
-#DIM L_size = 15   ;�y�[�W�T�C�Y
+#DIM L_page = 0    ;ページ番号
+#DIM L_size = 15   ;ページサイズ
 
 L_page = 0
 
-;�����\�Ώ۔z��𐶐��B
+;調教可能対象配列を生成。
 L_n = CHANGE_TARGET_ARRAY()
 
 REDRAW 0
@@ -17,45 +17,45 @@ REDRAW 0
 WHILE 1
 
 	CALL C_LINE
-	PRINTFORML �����ΏۂɑI���������L������I��ł��������@��page.{L_page}��
-	PRINTFORML �I�𒆂̒����Ώۂ�TARGET�}�[�J�[���\������Ă��܂��B
-	PRINTFORML �I���ł���̂́y���Ӂz�y��݁z�y�����ς݁z�����L�����݂̂ł��B
+	PRINTFORML 逢引対象に選択したいキャラを選んでください　＜page.{L_page}＞
+	PRINTFORML 選択中の調教対象はTARGETマーカーが表示されています。
+	PRINTFORML 選択できるのは【合意】【弱み】【調教済み】を持つキャラのみです。
 	DRAWLINE
 
-	;�y�[�W�\���B
+	;ページ表示。
 	CALL CHANGE_TARGET_LIST(L_page * L_size, L_size)
 	PRINTL
-	PRINTFORMLC \@(!CHANGE_TARGET_IS_PREV(L_page,L_size)) ? %" " * 16% # [1007]�O�̃y�[�W\@
-	PRINTLC [1000]�߂�
-	PRINTFORMLC \@(!CHANGE_TARGET_IS_NEXT(L_page,L_size)) ? %" " * 16% # [1009]���̃y�[�W\@
+	PRINTFORMLC \@(!CHANGE_TARGET_IS_PREV(L_page,L_size)) ? %" " * 16% # [1007]前のページ\@
+	PRINTLC [1000]戻る
+	PRINTFORMLC \@(!CHANGE_TARGET_IS_NEXT(L_page,L_size)) ? %" " * 16% # [1009]次のページ\@
 	PRINTL
 	PRINTL
 
-    ;���̓R�}���h�����B
+    ;入力コマンド処理。
 	WHILE 1
 		INPUT
 		L_i = RESULT
 		SELECTCASE L_i
 
 		CASE 1 TO CHARANUM
-			IF CFLAG:L_i:�����Ώۃt���O 
+			IF CFLAG:L_i:調教対象フラグ 
 				CALL CHANGE_TARGET_CLEAR
 			ELSEIF CHANGE_TARGET_IS(L_i)
 				CALL CHANGE_TARGET_SET(L_i)
 			ENDIF
 			BREAK
 
-		;�߂�
+		;戻る
 		CASE 1000
 			REDRAW 1
 			RETURN 0
-		;�O�̃y�[�W
+		;前のページ
 		CASE 1007
 			IF CHANGE_TARGET_IS_PREV(L_page,L_size)
 				L_page -= 1
 				BREAK
 			ENDIF
-		;���̃y�[�W
+		;次のページ
 		CASE 1009
 			IF CHANGE_TARGET_IS_NEXT(L_page,L_size)
 				L_page += 1
@@ -69,16 +69,16 @@ WEND
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; TARGET �Ɏw�肳��Ă���L�����̔ԍ���Ԃ��܂��B
+;; TARGET に指定されているキャラの番号を返します。
 ;;
-;; �ߒl
-;;   TARGET �Ɏw�肳��Ă���L�����̔ԍ���\�������B
+;; 戻値
+;;   TARGET に指定されているキャラの番号を表す整数。
 ;;
 @CHANGE_TARGET_GET()
 #FUNCTION
 #DIM L_i
 FOR L_i, 1, CHARANUM
-	SIF CFLAG:L_i:�����Ώۃt���O != 0 
+	SIF CFLAG:L_i:調教対象フラグ != 0 
 		RETURNF L_i
 NEXT
 RETURNF -1
@@ -86,15 +86,15 @@ RETURNF -1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; �w�肳�ꂽ�L������ TARGET �ɐݒ肵�܂��B
+;; 指定されたキャラを TARGET に設定します。
 ;;
-;; ����
-;;   ARG     �L�����ԍ���\�������B
+;; 引数
+;;   ARG     キャラ番号を表す整数。
 ;;
 @CHANGE_TARGET_SET(ARG)
 CALL CHANGE_TARGET_CLEAR
-CFLAG:ARG:�����Ώۃt���O = 1
-FLAG:�����Ώېl�� = 1
+CFLAG:ARG:調教対象フラグ = 1
+FLAG:調教対象人数 = 1
 VARSET GTR_PL, -1
 GTR_PL:0 = 0
 GTR_PL:1 = ARG
@@ -102,7 +102,7 @@ GTR_PL:1 = ARG
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; TARGET ��O�̒����\�L�����֕ύX���܂��B
+;; TARGET を前の調教可能キャラへ変更します。
 ;;
 @CHANGE_TARGET_PREV()
 CALL CHANGE_TARGET_SET_RELATIVE(-1)
@@ -110,7 +110,7 @@ CALL CHANGE_TARGET_SET_RELATIVE(-1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; TARGET �����̒����\�L�����֕ύX���܂��B
+;; TARGET を次の調教可能キャラへ変更します。
 ;;
 @CHANGE_TARGET_NEXT()
 CALL CHANGE_TARGET_SET_RELATIVE(+1)
@@ -118,12 +118,12 @@ CALL CHANGE_TARGET_SET_RELATIVE(+1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; TARGET �����̒����\�L�����֕ύX���܂��B
+;; TARGET を次の調教可能キャラへ変更します。
 ;;
 @CHANGE_TARGET_SET_RELATIVE(ARG:0)
 #DIM L_i
-#DIM L_n    ; �����\�L�����̑����B
-#DIM L_c    ; �� TARGET �L�����̔ԍ��B
+#DIM L_n    ; 調教可能キャラの総数。
+#DIM L_c    ; 現 TARGET キャラの番号。
 
 L_n = CHANGE_TARGET_ARRAY()
 SIF L_n == 0
@@ -141,37 +141,37 @@ CALL CHANGE_TARGET_SET(GTR_CL:((L_i - 1 + ARG:0 + L_n) % L_n))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; �S�ẴL������ TARGET ����O���܂��B
+;; 全てのキャラを TARGET から外します。
 ;;
 @CHANGE_TARGET_CLEAR
 #DIM L_i
 FOR L_i,1,CHARANUM
-	CFLAG:L_i:�����Ώۃt���O = 0
+	CFLAG:L_i:調教対象フラグ = 0
 NEXT
-FLAG:�����Ώېl�� = 0
+FLAG:調教対象人数 = 0
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; �w�肳�ꂽ�L������ TARGET �ݒ�\���ۂ���Ԃ��܂��B
+;; 指定されたキャラが TARGET 設定可能か否かを返します。
 ;;
-;; ����
-;;   ARG     �L�����ԍ���\�������B
-;; �ߒl
-;;   TARGET �ݒ�\���ۂ��̐^�U�l�B
+;; 引数
+;;   ARG     キャラ番号を表す整数。
+;; 戻値
+;;   TARGET 設定可能か否かの真偽値。
 ;;
 @CHANGE_TARGET_IS(ARG)
 #FUNCTION
-RETURNF (Talent:ARG:���� != 0 || Talent:ARG:��� != 0 || Talent:ARG:�����ς� != 0) && TALENT:ARG:�s�� == 0 &&  TALENT:ARG:�{�����e�B�A <= 0
+RETURNF (Talent:ARG:合意 != 0 || Talent:ARG:弱み != 0 || Talent:ARG:調教済み != 0) && TALENT:ARG:不在 == 0 &&  TALENT:ARG:ボランティア <= 0
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; �O�y�[�W�����邩�ۂ���Ԃ��܂��B
+;; 前ページがあるか否かを返します。
 ;;
-;; ����
-;;   ARG:0   �y�[�W�ԍ���\�������B
-;;   ARG:1   �y�[�W�T�C�Y��\�������B
+;; 引数
+;;   ARG:0   ページ番号を表す整数。
+;;   ARG:1   ページサイズを表す整数。
 ;;
 @CHANGE_TARGET_IS_PREV(ARG:0, ARG:1)
 #FUNCTION
@@ -180,11 +180,11 @@ RETURNF ARG:0 > 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; ���y�[�W�����邩�ۂ���Ԃ��܂��B
+;; 次ページがあるか否かを返します。
 ;;
-;; ����
-;;   ARG:0   �y�[�W�ԍ���\�������B
-;;   ARG:1   �y�[�W�T�C�Y��\�������B
+;; 引数
+;;   ARG:0   ページ番号を表す整数。
+;;   ARG:1   ページサイズを表す整数。
 ;;
 @CHANGE_TARGET_IS_NEXT(ARG:0, ARG:1)
 #FUNCTION
@@ -193,8 +193,8 @@ RETURNF GTR_CL:((ARG:0 + 1) * ARG:1) > 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; TARGET �ݒ�\�ȃL�����ԍ��̔z����쐬���܂��B
-;; �z��͍L��z��ϐ� GTR_CL �Ɋi�[����܂��B
+;; TARGET 設定可能なキャラ番号の配列を作成します。
+;; 配列は広域配列変数 GTR_CL に格納されます。
 ;;
 @CHANGE_TARGET_ARRAY()
 #FUNCTION
@@ -213,21 +213,21 @@ RETURNF L_c
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; �����\�ȃL�����̃��X�g��\�����܂��B
+;; 調教可能なキャラのリストを表示します。
 ;;
-;; ����
-;;   ARG:0   �\���J�n�ʒu��\�������B
-;;   ARG:1   �\������\�������B
+;; 引数
+;;   ARG:0   表示開始位置を表す整数。
+;;   ARG:1   表示数を表す整数。
 ;;
 @CHANGE_TARGET_LIST(ARG:0, ARG:1)
 #DIM L_i
 FOR L_i, ARG:0, ARG:0 + ARG:1
 	IF GTR_CL:L_i > 0
 		PRINTFORM [%TOSTR(GTR_CL:L_i),3%]
-		IF CFLAG:(GTR_CL:L_i):�����Ώۃt���O 
-			CALL PRINT_LABEL("TARGET",,COLOR("�s���N"))
+		IF CFLAG:(GTR_CL:L_i):調教対象フラグ 
+			CALL PRINT_LABEL("TARGET",,COLOR("ピンク"))
 		ELSE
-			PRINTFORM �@      �@
+			PRINTFORM 　      　
 		ENDIF
 		CALL INFO_TARGET_DETAIL(GTR_CL:L_i, 1)
 	ENDIF

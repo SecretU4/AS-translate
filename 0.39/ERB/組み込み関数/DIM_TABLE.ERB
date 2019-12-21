@@ -1,61 +1,61 @@
+ï»¿;-------------------------------------------------
+;ã‚½ãƒ¼ãƒˆç”¨ãƒ©ãƒ™ãƒ«å®šç¾©é–¢æ•°
 ;-------------------------------------------------
-;ƒ\[ƒg—pƒ‰ƒxƒ‹’è‹`ŠÖ”
-;-------------------------------------------------
-;INTŒ^‚ÌƒLƒƒƒ‰ƒNƒ^•Ï”‚ð‹æ•Ê‚È‚µ‚Éˆµ‚¤‚½‚ß‚Ìƒe[ƒuƒ‹‚ð’è‹`‚·‚é
-;”ŽšŒˆ‚ß‘Å‚¿‚ÅconstŽg‚¢‚Ü‚­‚é‚Ì‚Á‚Ä‚Ì‚à³’¼–J‚ß‚ç‚ê‚½‚à‚ñ‚¶‚á‚È‚¢‚ª
-;ABL‚âCFLAG‚ð‹æ•Ê‚¹‚¸‚ÉLABEL_NAME‚¾‚¯‚ÅƒTƒNƒb‚ÆŽQÆ‚Å‚«‚é‚Ì‚Í‚©‚È‚èŠÈ—ª‰»o—ˆ‚Ä•Ö—˜
+;INTåž‹ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿å¤‰æ•°ã‚’åŒºåˆ¥ãªã—ã«æ‰±ã†ãŸã‚ã®ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’å®šç¾©ã™ã‚‹
+;æ•°å­—æ±ºã‚æ‰“ã¡ã§constä½¿ã„ã¾ãã‚‹ã®ã£ã¦ã®ã‚‚æ­£ç›´è¤’ã‚ã‚‰ã‚ŒãŸã‚‚ã‚“ã˜ã‚ƒãªã„ãŒ
+;ABLã‚„CFLAGã‚’åŒºåˆ¥ã›ãšã«LABEL_NAMEã ã‘ã§ã‚µã‚¯ãƒƒã¨å‚ç…§ã§ãã‚‹ã®ã¯ã‹ãªã‚Šç°¡ç•¥åŒ–å‡ºæ¥ã¦ä¾¿åˆ©
 ;
-;FŠÖ”‚Å‚àŽg‚¦‚é‚æ‚¤‚É‚±‚ÌŠÖ”Ž©‘Ì‚ðFŠÖ”‰»‚µ‚ÄCALLF‚ÅŽg—p‚·‚é‚æ‚¤‚É‚·‚é
-;’ˆÓj
-;ECONST”z—ñ‚Í—v‘f0‚ð‹ó‚¯‚Ä‚¨‚­‚±‚Æ
-;E@C_GET_CVAR_VALUE‚É‹LÚ‚ª‚È‚¢LABEL_VAR_NAME‚ÍŽg—po—ˆ‚È‚¢
-;EƒLƒƒƒ‰•Ï”CSV‚ðƒCƒW‚Á‚½‚çŒ©’¼‚µ‚ª•K—v
-;Eu’Pˆê‚ÌCVAR‚É‘®‚³‚È‚¢ƒXƒe[ƒ^ƒXv‚ÌŽQÆ—p‚É"EXTRA"‚ð‘Ý
-;@ŽÀÛ‚ÌŽZo‚Í@C_GET_CVAR_VALUE“à•”‚Ås‚Á‚Ä‚¢‚é
-;@‚±‚ÌŠÖ”“à‚Å‚ÌEXTRA:X‚ÆEXTRAŽQÆ—pCONST‚ðˆê’v‚³‚¹‚Ä‚¨‚­‚±‚Æ
+;Fé–¢æ•°ã§ã‚‚ä½¿ãˆã‚‹ã‚ˆã†ã«ã“ã®é–¢æ•°è‡ªä½“ã‚’Fé–¢æ•°åŒ–ã—ã¦CALLFã§ä½¿ç”¨ã™ã‚‹ã‚ˆã†ã«ã™ã‚‹
+;æ³¨æ„ï¼‰
+;ãƒ»CONSTé…åˆ—ã¯è¦ç´ 0ã‚’ç©ºã‘ã¦ãŠãã“ã¨
+;ãƒ»@C_GET_CVAR_VALUEã«è¨˜è¼‰ãŒãªã„LABEL_VAR_NAMEã¯ä½¿ç”¨å‡ºæ¥ãªã„
+;ãƒ»ã‚­ãƒ£ãƒ©å¤‰æ•°CSVã‚’ã‚¤ã‚¸ã£ãŸã‚‰è¦‹ç›´ã—ãŒå¿…è¦
+;ãƒ»ã€Œå˜ä¸€ã®CVARã«å±žã•ãªã„ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã€ã®å‚ç…§ç”¨ã«"EXTRA"ã‚’å¢—è¨­
+;ã€€å®Ÿéš›ã®ç®—å‡ºã¯@C_GET_CVAR_VALUEå†…éƒ¨ã§è¡Œã£ã¦ã„ã‚‹
+;ã€€ã“ã®é–¢æ•°å†…ã§ã®EXTRA:Xã¨EXTRAå‚ç…§ç”¨CONSTã‚’ä¸€è‡´ã•ã›ã¦ãŠãã“ã¨
 @DIM_TABLE_CVAR(LABEL_NAME, LABEL_VAR_NAME, LABEL_VAR_ID, LABEL_MAX)
 #FUNCTION
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIMS REF LABEL_NAME     ;–ß‚è’l—pA”z—ñ‚ð’¼Ú‘‚«Š·‚¦‚é
-#DIMS REF LABEL_VAR_NAME ;Šeƒ‰ƒxƒ‹•¶Žš—ñ
-#DIM  REF LABEL_VAR_ID   ;Šeƒ‰ƒxƒ‹•¶Žš—ñ‚ª‘Î‰ž‚·‚éƒLƒƒƒ‰•Ï”‚Ì–¼‘OAABL‚âMARK
-#DIM  REF LABEL_MAX      ;Šeƒ‰ƒxƒ‹•¶Žš—ñ‚ª‘Î‰ž‚·‚éƒLƒƒƒ‰•Ï”‚Ì—v‘f
-;STRŒn‚Í¶‘µ‚¦‚ÅINT‚Í‰E‘µ‚¦‚É‚È‚Á‚Ä‚é‚ª‹C‚É‚·‚é‚È
+#DIMS REF LABEL_NAME     ;æˆ»ã‚Šå€¤ç”¨ã€é…åˆ—ã‚’ç›´æŽ¥æ›¸ãæ›ãˆã‚‹
+#DIMS REF LABEL_VAR_NAME ;å„ãƒ©ãƒ™ãƒ«æ–‡å­—åˆ—
+#DIM  REF LABEL_VAR_ID   ;å„ãƒ©ãƒ™ãƒ«æ–‡å­—åˆ—ãŒå¯¾å¿œã™ã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®åå‰ã€ABLã‚„MARK
+#DIM  REF LABEL_MAX      ;å„ãƒ©ãƒ™ãƒ«æ–‡å­—åˆ—ãŒå¯¾å¿œã™ã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®è¦ç´ 
+;STRç³»ã¯å·¦æƒãˆã§INTã¯å³æƒãˆã«ãªã£ã¦ã‚‹ãŒæ°—ã«ã™ã‚‹ãª
 {
 #DIMS CONST C_LABEL_NAME, 158 = "none",
-	"ID",             "‹¦—Íó‹µ",       "ŠÖŒW’iŠK",     "Œûà‚«’l",       "DŠ´“x@@@", 
-	"’‰½’l",         "—ê‘®ˆó",       "ˆ¤î’l",       "Š×—Žˆó",       "ˆú—’l", 
-	"ˆú—ˆó",       "”½”­ˆó",       "“ï“x",         "l‹C",           "ƒ‚ƒ‰ƒ‹", 
-	"ƒJƒ‹ƒ}",         "•i«",           "“÷‘Ìƒ_ƒ",     "¸_ƒ_ƒ",       "’nˆÊ", 
-	"‘Pˆ«",           "vŒ£",           "ŠŽ‹à@",     "Žû“ü@@",       "o”ï@@", 
-	"‰‡Œð”",         "Ží‘°",           "g’·",         "‘Ìd",           "BUST", 
-	"CUP",            "WAIST",          "HIP",          "”¯F",           "”¯Œ^", 
-	"Šá",             "ŠáF",           "‘ÌŒ^",         "¶B•]‰¿",       "—‘ŽqLV", 
-	"•ê‘ÌLV",         "@Ž“",           "ƒtƒFƒƒ‚ƒ“",   "–{”\",           "‹»–¡",
-	"ŠÖS",           "«ŒðŠè–]",       "”DPŠè–]",     "‚bŠ´Šo",         "‚uŠ´Šo", 
-	"‚`Š´Šo",         "‚aŠ´Šo",         "‹ZI",         "–£—¹",           "—~–]", 
-	"˜Io•È",         "ƒTƒh‚Á‹C",       "ƒ}ƒ]‚Á‹C",     "ƒŒƒY‚Á‹C",       "‚a‚k‚Á‹C", 
-	"«Œð’†“Å",       "Ž©ˆÔ’†“Å",       "¸‰t’†“Å",     "ƒLƒX’†“Å",       "e–§", 
-	"]‡",           "•òŽd¸_",       "«“z—ê",       "˜U—",           "â’¸ŒoŒ±", 
-	"‚bŒoŒ±",         "‚uŒoŒ±",         "‚aŒoŒ±",       "‚`ŒoŒ±",         "ƒLƒXŒoŒ±", 
-	"ŽèˆúŒoŒ±",       "ƒtƒFƒ‰ŒoŒ±",     "Ž©ˆÔŒoŒ±",     "ƒpƒCƒYƒŠŒoŒ±",   "‚u«ŒðŒoŒ±", 
-	"‚`«ŒðŒoŒ±",     "¸‰tŒoŒ±",       "¸ˆùŒoŒ±",     "äSŽËŒoŒ±",       "Žål’²‹³ŒoŒ±", 
-	"‚m‚s‚q’²‹³ŒoŒ±", "•òŽd‰õŠyŒoŒ±",   "—U˜fŒoŒ±",     "‚m‚s‚k’²‹³ŒoŒ±", "ƒŒƒYŒoŒ±", 
-	"‚a‚kŒoŒ±",       "‹ê’É‰õŠyŒoŒ±",   "”í‹s‰õŠyŒoŒ±", "šn‹s‰õŠyŒoŒ±",   "‹Ù”›ŒoŒ±", 
-	"GŽèŒoŒ±",       "bŠ­ŒoŒ±",       "‹­Š­ŒoŒ±",     "‰ÆŽ–ŒoŒ±",       "ŽB‰eŒoŒ±", 
-	"”íŽÊŒoŒ±",       "‰Ì¥ŒoŒ±",       "í“¬ŒoŒ±",     "”„tŒoŒ±",       "oŽYŒoŒ±", 
-	"Ÿ—˜‰ñ”",       "ŒoŒ±’l",         "Œ»HP",         "–žHP",           "Œ»SP", 
-	"–žSP",           "Œ»BRE",          "–žBRE",        "SAN",            "GUTS", 
+	"ID",             "å”åŠ›çŠ¶æ³",       "é–¢ä¿‚æ®µéšŽ",     "å£èª¬ãå€¤",       "å¥½æ„Ÿåº¦ã€€ã€€ã€€", 
+	"å¿ èª å€¤",         "éš·å±žåˆ»å°",       "æ„›æƒ…å€¤",       "é™¥è½åˆ»å°",       "æ·«ä¹±å€¤", 
+	"æ·«ä¹±åˆ»å°",       "åç™ºåˆ»å°",       "é›£åº¦",         "äººæ°—",           "ãƒ¢ãƒ©ãƒ«", 
+	"ã‚«ãƒ«ãƒž",         "å“æ€§",           "è‚‰ä½“ãƒ€ãƒ¡",     "ç²¾ç¥žãƒ€ãƒ¡",       "åœ°ä½", 
+	"å–„æ‚ª",           "è²¢çŒ®",           "æ‰€æŒé‡‘ã€€",     "åŽå…¥ã€€ã€€",       "å‡ºè²»ã€€ã€€", 
+	"æ´äº¤æ•°",         "ç¨®æ—",           "èº«é•·",         "ä½“é‡",           "BUST", 
+	"CUP",            "WAIST",          "HIP",          "é«ªè‰²",           "é«ªåž‹", 
+	"çœ¼",             "çœ¼è‰²",           "ä½“åž‹",         "ç”Ÿæ®–è©•ä¾¡",       "åµå­LV", 
+	"æ¯ä½“LV",         "ã€€é›Œ",           "ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³",   "æœ¬èƒ½",           "èˆˆå‘³",
+	"é–¢å¿ƒ",           "æ€§äº¤é¡˜æœ›",       "å¦Šå¨ é¡˜æœ›",     "ï¼£æ„Ÿè¦š",         "ï¼¶æ„Ÿè¦š", 
+	"ï¼¡æ„Ÿè¦š",         "ï¼¢æ„Ÿè¦š",         "æŠ€å·§",         "é­…äº†",           "æ¬²æœ›", 
+	"éœ²å‡ºç™–",         "ã‚µãƒ‰ã£æ°—",       "ãƒžã‚¾ã£æ°—",     "ãƒ¬ã‚ºã£æ°—",       "ï¼¢ï¼¬ã£æ°—", 
+	"æ€§äº¤ä¸­æ¯’",       "è‡ªæ…°ä¸­æ¯’",       "ç²¾æ¶²ä¸­æ¯’",     "ã‚­ã‚¹ä¸­æ¯’",       "è¦ªå¯†", 
+	"å¾“é †",           "å¥‰ä»•ç²¾ç¥ž",       "æ€§å¥´éš·",       "ç¯­çµ¡",           "çµ¶é ‚çµŒé¨“", 
+	"ï¼£çµŒé¨“",         "ï¼¶çµŒé¨“",         "ï¼¢çµŒé¨“",       "ï¼¡çµŒé¨“",         "ã‚­ã‚¹çµŒé¨“", 
+	"æ‰‹æ·«çµŒé¨“",       "ãƒ•ã‚§ãƒ©çµŒé¨“",     "è‡ªæ…°çµŒé¨“",     "ãƒ‘ã‚¤ã‚ºãƒªçµŒé¨“",   "ï¼¶æ€§äº¤çµŒé¨“", 
+	"ï¼¡æ€§äº¤çµŒé¨“",     "ç²¾æ¶²çµŒé¨“",       "ç²¾é£²çµŒé¨“",     "è†£å°„çµŒé¨“",       "ä¸»äººèª¿æ•™çµŒé¨“", 
+	"ï¼®ï¼´ï¼²èª¿æ•™çµŒé¨“", "å¥‰ä»•å¿«æ¥½çµŒé¨“",   "èª˜æƒ‘çµŒé¨“",     "ï¼®ï¼´ï¼¬èª¿æ•™çµŒé¨“", "ãƒ¬ã‚ºçµŒé¨“", 
+	"ï¼¢ï¼¬çµŒé¨“",       "è‹¦ç—›å¿«æ¥½çµŒé¨“",   "è¢«è™å¿«æ¥½çµŒé¨“", "å—œè™å¿«æ¥½çµŒé¨“",   "ç·Šç¸›çµŒé¨“", 
+	"è§¦æ‰‹çµŒé¨“",       "ç£å§¦çµŒé¨“",       "å¼·å§¦çµŒé¨“",     "å®¶äº‹çµŒé¨“",       "æ’®å½±çµŒé¨“", 
+	"è¢«å†™çµŒé¨“",       "æ­Œå”±çµŒé¨“",       "æˆ¦é—˜çµŒé¨“",     "å£²æ˜¥çµŒé¨“",       "å‡ºç”£çµŒé¨“", 
+	"å‹åˆ©å›žæ•°",       "çµŒé¨“å€¤",         "ç¾HP",         "æº€HP",           "ç¾SP", 
+	"æº€SP",           "ç¾BRE",          "æº€BRE",        "SAN",            "GUTS", 
 	"BRAVE",          "ATK",            "DEF",          "HIT",            "SPD", 
-	"LUK",            "‹Z”\“_",         "–Ú¯",         "ƒAƒCƒfƒA",       "•·‚«Ž¨", 
-	"ˆã—Ã",           "‹@ŠBC—",       "ƒRƒ“ƒsƒ…[ƒ^", "Œ®ŠJ‚¯",         "‰B‚ê‚é", 
-	"‰ð‘Ì",           "‰ð“Ç",           "ŽåŽí•Ê",       "Žå—û“x",         "ŽåDICE”", 
-	"ŽåDICE–Ê",       "ŽåBONUS",        "•›Ží•Ê",       "•›—û“x",         "•›DICE”", 
-	"•›DICE–Ê",       "•›BONUS",        "”º",         "Œã•û",           "‰ñŽû", 
-	"•”‘à",           "Ž{Ý",           "eŒð",         "’Tõ",           "oŽ©", 
-	"E‹Æ",           "ŠÇ—",           "‹@–§",         "‡ˆÓ",           "DLV", 
-	"U—ª",           "ƒtƒ@ƒ“",         
+	"LUK",            "æŠ€èƒ½ç‚¹",         "ç›®æ˜Ÿ",         "ã‚¢ã‚¤ãƒ‡ã‚¢",       "èžãè€³", 
+	"åŒ»ç™‚",           "æ©Ÿæ¢°ä¿®ç†",       "ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿", "éµé–‹ã‘",         "éš ã‚Œã‚‹", 
+	"è§£ä½“",           "è§£èª­",           "ä¸»ç¨®åˆ¥",       "ä¸»ç·´åº¦",         "ä¸»DICEæ•°", 
+	"ä¸»DICEé¢",       "ä¸»BONUS",        "å‰¯ç¨®åˆ¥",       "å‰¯ç·´åº¦",         "å‰¯DICEæ•°", 
+	"å‰¯DICEé¢",       "å‰¯BONUS",        "éšä¼´",         "å¾Œæ–¹",           "å›žåŽ", 
+	"éƒ¨éšŠ",           "æ–½è¨­",           "è¦ªäº¤",         "æŽ¢ç´¢",           "å‡ºè‡ª", 
+	"è·æ¥­",           "ç®¡ç†",           "æ©Ÿå¯†",         "åˆæ„",           "å¥½LV", 
+	"æ”»ç•¥",           "ãƒ•ã‚¡ãƒ³",         
 }
 
 
@@ -145,144 +145,144 @@ ARRAYCOPY "C_LABEL_VAR_ID"  , "LABEL_VAR_ID"
 LABEL_MAX = C_LABEL_MAX
 
 [SKIPSTART]
-ƒ‰ƒxƒ‹ˆê——
+ãƒ©ãƒ™ãƒ«ä¸€è¦§
 000:[none,         none,  none]
 
-001:[Ž¯•ÊID,       CFLAG, 530]
-002:[‹¦—Íó‹µ,     CFLAG, 5016]
-003:[ŠÖŒW’iŠK,     CFLAG, 551]
-004:[Œûà‚«’l,     CFLAG, 510]
-005:[DŠ´“x@@@, CFLAG, 550]
+001:[è­˜åˆ¥ID,       CFLAG, 530]
+002:[å”åŠ›çŠ¶æ³,     CFLAG, 5016]
+003:[é–¢ä¿‚æ®µéšŽ,     CFLAG, 551]
+004:[å£èª¬ãå€¤,     CFLAG, 510]
+005:[å¥½æ„Ÿåº¦ã€€ã€€ã€€, CFLAG, 550]
 
-006:[’‰½’l,       CFLAG, 500]
-007:[—ê‘®ˆó,     MARK,  0]
-008:[ˆ¤î’l,       CFLAG, 501]
-009:[Š×—Žˆó,     MARK,  1]
-010:[ˆú—’l,       CFLAG, 502]
+006:[å¿ èª å€¤,       CFLAG, 500]
+007:[éš·å±žåˆ»å°,     MARK,  0]
+008:[æ„›æƒ…å€¤,       CFLAG, 501]
+009:[é™¥è½åˆ»å°,     MARK,  1]
+010:[æ·«ä¹±å€¤,       CFLAG, 502]
 
-011:[ˆú—ˆó,     MARK,  2]
-012:[”½”­ˆó,     MARK,  9]
-013:[l•¨“ï“x,     CFLAG, 5000]
-014:[l‹C,     CFLAG, 6005]
-015:[ƒ‚ƒ‰ƒ‹,   CFLAG, 6006]
+011:[æ·«ä¹±åˆ»å°,     MARK,  2]
+012:[åç™ºåˆ»å°,     MARK,  9]
+013:[äººç‰©é›£åº¦,     CFLAG, 5000]
+014:[äººæ°—,     CFLAG, 6005]
+015:[ãƒ¢ãƒ©ãƒ«,   CFLAG, 6006]
 
-016:[ƒJƒ‹ƒ},   CFLAG, 6007]
-017:[•i«,     CFLAG, 6008]
-018:[“÷‘Ìƒ_ƒ, CFLAG, 6040]
-019:[¸_ƒ_ƒ, CFLAG, 6041]
-020:[’nˆÊ,     CFLAG, 6002]
+016:[ã‚«ãƒ«ãƒž,   CFLAG, 6007]
+017:[å“æ€§,     CFLAG, 6008]
+018:[è‚‰ä½“ãƒ€ãƒ¡, CFLAG, 6040]
+019:[ç²¾ç¥žãƒ€ãƒ¡, CFLAG, 6041]
+020:[åœ°ä½,     CFLAG, 6002]
 
-021:[‘Pˆ«,     CFLAG, 6009]
-022:[vŒ£’l,   CFLAG, 6003]
-023:[ŠŽ‹à@, CFLAG, 6001]
-024:[Žû“ü@@, CFLAG, 6011]
-025:[o”ï@@, CFLAG, 6004]
+021:[å–„æ‚ª,     CFLAG, 6009]
+022:[è²¢çŒ®å€¤,   CFLAG, 6003]
+023:[æ‰€æŒé‡‘ã€€, CFLAG, 6001]
+024:[åŽå…¥ã€€ã€€, CFLAG, 6011]
+025:[å‡ºè²»ã€€ã€€, CFLAG, 6004]
 
-026:[‰‡Œð”,   CFLAG, 6080]
-027:[Ží‘°,           CFLAG, 6010]
-028:[g’·,           CFLAG, 300]
-029:[‘Ìd,           CFLAG, 301]
+026:[æ´äº¤æ•°,   CFLAG, 6080]
+027:[ç¨®æ—,           CFLAG, 6010]
+028:[èº«é•·,           CFLAG, 300]
+029:[ä½“é‡,           CFLAG, 301]
 030:[BUST,     CFLAG, 302]
 
 031:[CUP,   CFLAG, 303]
 032:[WAIST, CFLAG, 304]
 033:[HIP,   CFLAG, 305]
-034:[”¯F,           CFLAG, 400]
-035:[”¯Œ^,           CFLAG, 401]
+034:[é«ªè‰²,           CFLAG, 400]
+035:[é«ªåž‹,           CFLAG, 401]
 
-036:[Šá,             CFLAG, 403]
-037:[ŠáF,           CFLAG, 404]
-038:[‘ÌŒ^,         CFLAG, 406]
-039:[¶B•]‰¿,   CFLAG, 1500]
-040:[—‘ŽqLV,     CFLAG, 1200]
+036:[çœ¼,             CFLAG, 403]
+037:[çœ¼è‰²,           CFLAG, 404]
+038:[ä½“åž‹,         CFLAG, 406]
+039:[ç”Ÿæ®–è©•ä¾¡,   CFLAG, 1500]
+040:[åµå­LV,     CFLAG, 1200]
 
-041:[•ê‘ÌLV,     CFLAG, 1201]
-042:[Ž“,         CFLAG, 1001]
-043:[ƒtƒFƒƒ‚ƒ“, CFLAG, 1002]
-044:[–{”\,       CFLAG, 1010]
-045:[‹»–¡,       CFLAG, 1011]
+041:[æ¯ä½“LV,     CFLAG, 1201]
+042:[é›Œ,         CFLAG, 1001]
+043:[ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³, CFLAG, 1002]
+044:[æœ¬èƒ½,       CFLAG, 1010]
+045:[èˆˆå‘³,       CFLAG, 1011]
 
-046:[ŠÖS,       CFLAG, 1012]
-047:[«ŒðŠè–],   CFLAG, 1020]
-048:[”DPŠè–],   CFLAG, 1021]
-049:[‚bŠ´Šo,   ABL, 0]
-050:[‚uŠ´Šo,   ABL, 1]
+046:[é–¢å¿ƒ,       CFLAG, 1012]
+047:[æ€§äº¤é¡˜æœ›,   CFLAG, 1020]
+048:[å¦Šå¨ é¡˜æœ›,   CFLAG, 1021]
+049:[ï¼£æ„Ÿè¦š,   ABL, 0]
+050:[ï¼¶æ„Ÿè¦š,   ABL, 1]
 
-051:[‚`Š´Šo,   ABL, 2]
-052:[‚aŠ´Šo,   ABL, 3]
-053:[‹ZI,     ABL, 10]
-054:[–£—¹,     ABL, 16]
-055:[—~–],     ABL, 17]
+051:[ï¼¡æ„Ÿè¦š,   ABL, 2]
+052:[ï¼¢æ„Ÿè¦š,   ABL, 3]
+053:[æŠ€å·§,     ABL, 10]
+054:[é­…äº†,     ABL, 16]
+055:[æ¬²æœ›,     ABL, 17]
 
-056:[˜Io•È,   ABL, 18]
-057:[ƒTƒh‚Á‹C, ABL, 20]
-058:[ƒ}ƒ]‚Á‹C, ABL, 21]
-059:[ƒŒƒY‚Á‹C, ABL, 22]
-060:[‚a‚k‚Á‹C, ABL, 23]
+056:[éœ²å‡ºç™–,   ABL, 18]
+057:[ã‚µãƒ‰ã£æ°—, ABL, 20]
+058:[ãƒžã‚¾ã£æ°—, ABL, 21]
+059:[ãƒ¬ã‚ºã£æ°—, ABL, 22]
+060:[ï¼¢ï¼¬ã£æ°—, ABL, 23]
 
-061:[«Œð’†“Å, ABL, 30]
-062:[Ž©ˆÔ’†“Å, ABL, 31]
-063:[¸‰t’†“Å, ABL, 32]
-064:[ƒLƒX’†“Å, ABL, 33]
-065:[e–§,     ABL, 50]
+061:[æ€§äº¤ä¸­æ¯’, ABL, 30]
+062:[è‡ªæ…°ä¸­æ¯’, ABL, 31]
+063:[ç²¾æ¶²ä¸­æ¯’, ABL, 32]
+064:[ã‚­ã‚¹ä¸­æ¯’, ABL, 33]
+065:[è¦ªå¯†,     ABL, 50]
 
-066:[]‡,     ABL, 51]
-067:[•òŽd¸_, ABL, 52]
-068:[«“z—ê,   ABL, 53]
-069:[˜U—,     ABL, 59]
-070:[â’¸ŒoŒ±,     EXP, 10]
+066:[å¾“é †,     ABL, 51]
+067:[å¥‰ä»•ç²¾ç¥ž, ABL, 52]
+068:[æ€§å¥´éš·,   ABL, 53]
+069:[ç¯­çµ¡,     ABL, 59]
+070:[çµ¶é ‚çµŒé¨“,     EXP, 10]
 
-071:[‚bŒoŒ±,       EXP, 1]
-072:[‚uŒoŒ±,       EXP, 2]
-073:[‚aŒoŒ±,       EXP, 4]
-074:[‚`ŒoŒ±,       EXP, 50]
-075:[ƒLƒXŒoŒ±,     EXP, 35]
+071:[ï¼£çµŒé¨“,       EXP, 1]
+072:[ï¼¶çµŒé¨“,       EXP, 2]
+073:[ï¼¢çµŒé¨“,       EXP, 4]
+074:[ï¼¡çµŒé¨“,       EXP, 50]
+075:[ã‚­ã‚¹çµŒé¨“,     EXP, 35]
 
-076:[ŽèˆúŒoŒ±,     EXP, 36]
-077:[ƒtƒFƒ‰ŒoŒ±,   EXP, 37]
-078:[Ž©ˆÔŒoŒ±,     EXP, 38]
-079:[ƒpƒCƒYƒŠŒoŒ±, EXP, 39]
-080:[‚u«ŒðŒoŒ±,   EXP, 30]
+076:[æ‰‹æ·«çµŒé¨“,     EXP, 36]
+077:[ãƒ•ã‚§ãƒ©çµŒé¨“,   EXP, 37]
+078:[è‡ªæ…°çµŒé¨“,     EXP, 38]
+079:[ãƒ‘ã‚¤ã‚ºãƒªçµŒé¨“, EXP, 39]
+080:[ï¼¶æ€§äº¤çµŒé¨“,   EXP, 30]
 
-081:[‚`«ŒðŒoŒ±,   EXP, 51]
-082:[¸‰tŒoŒ±,     EXP, 20]
-083:[¸ˆùŒoŒ±,     EXP, 21]
-084:[äSŽËŒoŒ±,     EXP, 22]
-085:[Žål’²‹³ŒoŒ±,   EXP, 80]
+081:[ï¼¡æ€§äº¤çµŒé¨“,   EXP, 51]
+082:[ç²¾æ¶²çµŒé¨“,     EXP, 20]
+083:[ç²¾é£²çµŒé¨“,     EXP, 21]
+084:[è†£å°„çµŒé¨“,     EXP, 22]
+085:[ä¸»äººèª¿æ•™çµŒé¨“,   EXP, 80]
 
-086:[‚m‚s‚q’²‹³ŒoŒ±, EXP, 81]
-087:[•òŽd‰õŠyŒoŒ±,   EXP, 82]
-088:[—U˜fŒoŒ±,       EXP, 83]
-089:[‚m‚s‚k’²‹³ŒoŒ±, EXP, 85]
-090:[ƒŒƒYŒoŒ±,       EXP, 55]
+086:[ï¼®ï¼´ï¼²èª¿æ•™çµŒé¨“, EXP, 81]
+087:[å¥‰ä»•å¿«æ¥½çµŒé¨“,   EXP, 82]
+088:[èª˜æƒ‘çµŒé¨“,       EXP, 83]
+089:[ï¼®ï¼´ï¼¬èª¿æ•™çµŒé¨“, EXP, 85]
+090:[ãƒ¬ã‚ºçµŒé¨“,       EXP, 55]
 
-091:[‚a‚kŒoŒ±,       EXP, 56]
-092:[‹ê’É‰õŠyŒoŒ±,   EXP, 57]
-093:[”í‹s‰õŠyŒoŒ±,   EXP, 60]
-094:[šn‹s‰õŠyŒoŒ±,   EXP, 61]
-095:[‹Ù”›ŒoŒ±,       EXP, 62]
+091:[ï¼¢ï¼¬çµŒé¨“,       EXP, 56]
+092:[è‹¦ç—›å¿«æ¥½çµŒé¨“,   EXP, 57]
+093:[è¢«è™å¿«æ¥½çµŒé¨“,   EXP, 60]
+094:[å—œè™å¿«æ¥½çµŒé¨“,   EXP, 61]
+095:[ç·Šç¸›çµŒé¨“,       EXP, 62]
 
-096:[GŽèŒoŒ±,       EXP, 63]
-097:[bŠ­ŒoŒ±,       EXP, 64]
-098:[‹­Š­ŒoŒ±,       EXP, 65]
-099:[‰ÆŽ–ŒoŒ±, EXP, 90]
-100:[ŽB‰eŒoŒ±, EXP, 91]
+096:[è§¦æ‰‹çµŒé¨“,       EXP, 63]
+097:[ç£å§¦çµŒé¨“,       EXP, 64]
+098:[å¼·å§¦çµŒé¨“,       EXP, 65]
+099:[å®¶äº‹çµŒé¨“, EXP, 90]
+100:[æ’®å½±çµŒé¨“, EXP, 91]
 
-101:[”íŽÊŒoŒ±, EXP, 92]
-102:[‰Ì¥ŒoŒ±, EXP, 93]
-103:[í“¬ŒoŒ±, EXP, 94]
-104:[”„tŒoŒ±, EXP, 95]
-105:[oŽYŒoŒ±, EXP, 99]
+101:[è¢«å†™çµŒé¨“, EXP, 92]
+102:[æ­Œå”±çµŒé¨“, EXP, 93]
+103:[æˆ¦é—˜çµŒé¨“, EXP, 94]
+104:[å£²æ˜¥çµŒé¨“, EXP, 95]
+105:[å‡ºç”£çµŒé¨“, EXP, 99]
 
-106:[Ÿ—˜‰ñ”, CFLAG, 6901]
-107:[ŒoŒ±’l,   CFLAG, 6900]
-108:[Œ»HP,     CFLAG, 6501]
-109:[–žHP,     CFLAG, 6500]
-110:[Œ»SP,     CFLAG, 6503]
+106:[å‹åˆ©å›žæ•°, CFLAG, 6901]
+107:[çµŒé¨“å€¤,   CFLAG, 6900]
+108:[ç¾HP,     CFLAG, 6501]
+109:[æº€HP,     CFLAG, 6500]
+110:[ç¾SP,     CFLAG, 6503]
 
-111:[–žSP,     CFLAG, 6502]
-112:[Œ»BRE,    CFLAG, 6517]
-113:[–žBRE,    CFLAG, 6516]
+111:[æº€SP,     CFLAG, 6502]
+112:[ç¾BRE,    CFLAG, 6517]
+113:[æº€BRE,    CFLAG, 6516]
 114:[SAN,      CFLAG, 6505]
 115:[GUTS,     CFLAG, 6507]
 
@@ -293,240 +293,240 @@ LABEL_MAX = C_LABEL_MAX
 120:[SPD,      CFLAG, 6514]
 
 121:[LUK,      CFLAG, 6515]
-122:[‹Z”\“_,       CFLAG, 6902]
-123:[–Ú¯,         CFLAG, 6600]
-124:[ƒAƒCƒfƒA,     CFLAG, 6601]
-125:[•·‚«Ž¨,       CFLAG, 6602]
+122:[æŠ€èƒ½ç‚¹,       CFLAG, 6902]
+123:[ç›®æ˜Ÿ,         CFLAG, 6600]
+124:[ã‚¢ã‚¤ãƒ‡ã‚¢,     CFLAG, 6601]
+125:[èžãè€³,       CFLAG, 6602]
 
-126:[ˆã—Ã,         CFLAG, 6603]
-127:[‹@ŠBC—,     CFLAG, 6604]
-128:[ƒRƒ“ƒsƒ…[ƒ^, CFLAG, 6605]
-129:[Œ®ŠJ‚¯,       CFLAG, 6606]
-130:[‰B‚ê‚é,       CFLAG, 6607]
+126:[åŒ»ç™‚,         CFLAG, 6603]
+127:[æ©Ÿæ¢°ä¿®ç†,     CFLAG, 6604]
+128:[ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿, CFLAG, 6605]
+129:[éµé–‹ã‘,       CFLAG, 6606]
+130:[éš ã‚Œã‚‹,       CFLAG, 6607]
 
-131:[‰ð‘Ì,         CFLAG, 6608]
-132:[‰ð“Ç,         CFLAG, 6609]
-133:[ŽåŽí•Ê,   CFLAG, 6550]
-134:[Žå—û“x,   CFLAG, 6558]
-135:[ŽåDICE”, CFLAG, 6551]
+131:[è§£ä½“,         CFLAG, 6608]
+132:[è§£èª­,         CFLAG, 6609]
+133:[ä¸»ç¨®åˆ¥,   CFLAG, 6550]
+134:[ä¸»ç·´åº¦,   CFLAG, 6558]
+135:[ä¸»DICEæ•°, CFLAG, 6551]
 
-136:[ŽåDICE–Ê, CFLAG, 6552]
-137:[ŽåBONUS,  CFLAG, 6553]
-138:[•›Ží•Ê,     CFLAG, 6560]
-139:[•›—û“x,     CFLAG, 6568]
-140:[•›DICE”,   CFLAG, 6561]
+136:[ä¸»DICEé¢, CFLAG, 6552]
+137:[ä¸»BONUS,  CFLAG, 6553]
+138:[å‰¯ç¨®åˆ¥,     CFLAG, 6560]
+139:[å‰¯ç·´åº¦,     CFLAG, 6568]
+140:[å‰¯DICEæ•°,   CFLAG, 6561]
 
-141:[•›DICE–Ê,   CFLAG, 6562]
-142:[•›BONUS,    CFLAG, 6563]
-143:[”º, EXTRA, 0]
-144:[Œã•û, EXTRA, 1]
-145:[‰ñŽû, EXTRA, 2]
+141:[å‰¯DICEé¢,   CFLAG, 6562]
+142:[å‰¯BONUS,    CFLAG, 6563]
+143:[éšä¼´, EXTRA, 0]
+144:[å¾Œæ–¹, EXTRA, 1]
+145:[å›žåŽ, EXTRA, 2]
 
-146:[Š‘®•”‘à, EXTRA, 3]
-147:[”z‘®Ž{Ý, EXTRA, 4]
-148:[eŒð,     EXTRA, 5]
-149:[’Tõ,     EXTRA, 6]
-150:[oŽ©,     EXTRA, 7]
+146:[æ‰€å±žéƒ¨éšŠ, EXTRA, 3]
+147:[é…å±žæ–½è¨­, EXTRA, 4]
+148:[è¦ªäº¤,     EXTRA, 5]
+149:[æŽ¢ç´¢,     EXTRA, 6]
+150:[å‡ºè‡ª,     EXTRA, 7]
 
-151:[E‹Æ,     EXTRA, 8]
-152:[ŠÇ—Žw”, EXTRA, 9]
-153:[‹@–§,     EXTRA, 10]
-154:[‡ˆÓ,     EXTRA, 11]
-155:[DŠ´“xLV, EXTRA, 12]
+151:[è·æ¥­,     EXTRA, 8]
+152:[ç®¡ç†æŒ‡æ•°, EXTRA, 9]
+153:[æ©Ÿå¯†,     EXTRA, 10]
+154:[åˆæ„,     EXTRA, 11]
+155:[å¥½æ„Ÿåº¦LV, EXTRA, 12]
 
-156:[U—ª,     EXTRA, 13]
-157:[ƒtƒ@ƒ“,   CFLAG, 555]
+156:[æ”»ç•¥,     EXTRA, 13]
+157:[ãƒ•ã‚¡ãƒ³,   CFLAG, 555]
 
 [SKIPEND]
 
 
 
 ;-------------------------------------------------
-;ƒ‰ƒxƒ‹ƒŠƒXƒg’è‹`ŠÖ”
+;ãƒ©ãƒ™ãƒ«ãƒªã‚¹ãƒˆå®šç¾©é–¢æ•°
 ;-------------------------------------------------
-;ˆê˜A‚Ìƒ‰ƒxƒ‹iƒLƒƒƒ‰•Ï”j‚ð‚Ð‚Æ‚Ü‚Æ‚ß‚É‚µ‚Äˆµ‚¤‚½‚ß‚Éì¬
-;’ˆÓŽ–€
-;ELABEL_LIST‚Ì–¼‘O‚É‚Í2ƒPƒ^‚Ì”Ô†‚ð‚Ó‚é‚±‚ÆàŒ»ó‚Å‚Í99Ží—Þ‚Ü‚Å
-;ELABEL_LIST‚ð’Ç‰Á‚µ‚½‚çC_LIST_NAME‚É–¼‘O‚ð’Ç‰Á‚Ì‚±‚Æi,‚É‚æ‚éƒGƒ‰[‚É’ˆÓj
-;ELIST_NAME/LABEL_NAME‚Æ‚à‚ÉŒÄ‚Ño‚µ‘¤‚ÆDIM‘¤‚Å·ˆÙ‚ªo‚È‚¢‚æ‚¤‚É‚·‚é‚±‚Æ
-;@‚±‚ê‚ªŒÄ‚Ño‚µKEY‚É‚È‚é‚Ì‚ÅŒëŽš‚Á‚Ä‚½‚è•\‹L‚ä‚ê‚ª‚ ‚é‚Æ‚¤‚Ü‚­‚¢‚©‚È‚¢
+;ä¸€é€£ã®ãƒ©ãƒ™ãƒ«ï¼ˆã‚­ãƒ£ãƒ©å¤‰æ•°ï¼‰ã‚’ã²ã¨ã¾ã¨ã‚ã«ã—ã¦æ‰±ã†ãŸã‚ã«ä½œæˆ
+;æ³¨æ„äº‹é …
+;ãƒ»LABEL_LISTã®åå‰ã«ã¯2ã‚±ã‚¿ã®ç•ªå·ã‚’ãµã‚‹ã“ã¨â‰’ç¾çŠ¶ã§ã¯99ç¨®é¡žã¾ã§
+;ãƒ»LABEL_LISTã‚’è¿½åŠ ã—ãŸã‚‰C_LIST_NAMEã«åå‰ã‚’è¿½åŠ ã®ã“ã¨ï¼ˆ,ã«ã‚ˆã‚‹ã‚¨ãƒ©ãƒ¼ã«æ³¨æ„ï¼‰
+;ãƒ»LIST_NAME/LABEL_NAMEã¨ã‚‚ã«å‘¼ã³å‡ºã—å´ã¨DIMå´ã§å·®ç•°ãŒå‡ºãªã„ã‚ˆã†ã«ã™ã‚‹ã“ã¨
+;ã€€ã“ã‚ŒãŒå‘¼ã³å‡ºã—KEYã«ãªã‚‹ã®ã§èª¤å­—ã£ã¦ãŸã‚Šè¡¨è¨˜ã‚†ã‚ŒãŒã‚ã‚‹ã¨ã†ã¾ãã„ã‹ãªã„
 @DIM_TABLE_LABEL_LIST(LIST_NAME, LABEL_LIST, LABEL_SIZE)
 #FUNCTION
 #DIMS LIST_NAME
-#DIMS REF LABEL_LIST ;–ß‚è’l—pAƒ‰ƒxƒ‹”z—ñ
+#DIMS REF LABEL_LIST ;æˆ»ã‚Šå€¤ç”¨ã€ãƒ©ãƒ™ãƒ«é…åˆ—
 #DIM  REF LABEL_SIZE ;
-#DIM      TEMP_ID    ;LISTNAME”»•ÊID
-#DIMS     TEMP_LIST  ;LISTNAME‚ÌˆêŽŸŽæ“¾—p
+#DIM      TEMP_ID    ;LISTNAMEåˆ¤åˆ¥ID
+#DIMS     TEMP_LIST  ;LISTNAMEã®ä¸€æ¬¡å–å¾—ç”¨
 {
 #DIMS CONST C_LIST_NAME, 21 = "none", 
-	"Œð—¬ST", 
-	"Š×—ŽST", 
-	"«ŠiST", 
-	"ŒoÏST", 
-	"g‘ÌST", 
-	"ƒtƒFƒƒ‚ƒ“ST", 
-	"«Š´ŠoST", 
-	"«‹Z”\ABL", 
-	"«•ÈABL", 
-	"«s“®ŒoŒ±", 
-	"«ŒðŒoŒ±", 
-	"’²‹³ŒoŒ±", 
-	"“ÁŽê‰õŠyŒoŒ±", 
-	"“úíŒoŒ±", 
-	"í“¬BASE", 
-	"í“¬ST", 
-	"’TõABL", 
-	"•‘•", 
-	"ŠÇ—î•ñ", 
-	"ŽÐ‰ïî•ñ", 
+	"äº¤æµST", 
+	"é™¥è½ST", 
+	"æ€§æ ¼ST", 
+	"çµŒæ¸ˆST", 
+	"èº«ä½“ST", 
+	"ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³ST", 
+	"æ€§æ„Ÿè¦šST", 
+	"æ€§æŠ€èƒ½ABL", 
+	"æ€§ç™–ABL", 
+	"æ€§è¡Œå‹•çµŒé¨“", 
+	"æ€§äº¤çµŒé¨“", 
+	"èª¿æ•™çµŒé¨“", 
+	"ç‰¹æ®Šå¿«æ¥½çµŒé¨“", 
+	"æ—¥å¸¸çµŒé¨“", 
+	"æˆ¦é—˜BASE", 
+	"æˆ¦é—˜ST", 
+	"æŽ¢ç´¢ABL", 
+	"æ­¦è£…", 
+	"ç®¡ç†æƒ…å ±", 
+	"ç¤¾ä¼šæƒ…å ±", 
 }
 
 
 
-;î•ñ 01.Œð—¬ST
+;æƒ…å ± 01.äº¤æµST
 {
 #DIMS CONST LABEL_LIST01, 6 = 
-	"ID",   "‹¦—Íó‹µ", "ŠÖŒW’iŠK", "Œûà‚«’l",  "DŠ´“x@@@", 
-	"“ï“x"
+	"ID",   "å”åŠ›çŠ¶æ³", "é–¢ä¿‚æ®µéšŽ", "å£èª¬ãå€¤",  "å¥½æ„Ÿåº¦ã€€ã€€ã€€", 
+	"é›£åº¦"
 }
-;î•ñ 02.Š×—ŽST
+;æƒ…å ± 02.é™¥è½ST
 {
 #DIMS CONST LABEL_LIST02, 8 = 
-	"eŒð", "’‰½’l", "—ê‘®ˆó", "ˆ¤î’l", "Š×—Žˆó", 
-	"ˆú—’l", "ˆú—ˆó", "”½”­ˆó"
+	"è¦ªäº¤", "å¿ èª å€¤", "éš·å±žåˆ»å°", "æ„›æƒ…å€¤", "é™¥è½åˆ»å°", 
+	"æ·«ä¹±å€¤", "æ·«ä¹±åˆ»å°", "åç™ºåˆ»å°"
 }
-;î•ñ 03.«ŠiST
+;æƒ…å ± 03.æ€§æ ¼ST
 {
 #DIMS CONST LABEL_LIST03, 7 = 
-	"‘Pˆ«", "l‹C", "ƒ‚ƒ‰ƒ‹", "ƒJƒ‹ƒ}", "•i«", 
-	"“÷‘Ìƒ_ƒ", "¸_ƒ_ƒ"
+	"å–„æ‚ª", "äººæ°—", "ãƒ¢ãƒ©ãƒ«", "ã‚«ãƒ«ãƒž", "å“æ€§", 
+	"è‚‰ä½“ãƒ€ãƒ¡", "ç²¾ç¥žãƒ€ãƒ¡"
 }
 
-;î•ñ 04.ŒoÏST
+;æƒ…å ± 04.çµŒæ¸ˆST
 {
 #DIMS CONST LABEL_LIST04, 6 = 
-	"’nˆÊ", "vŒ£", "ŠŽ‹à@", "Žû“ü@@", "o”ï@@", 
-	"‰‡Œð”"
+	"åœ°ä½", "è²¢çŒ®", "æ‰€æŒé‡‘ã€€", "åŽå…¥ã€€ã€€", "å‡ºè²»ã€€ã€€", 
+	"æ´äº¤æ•°"
 }
 
-;î•ñ 05.g‘ÌST
+;æƒ…å ± 05.èº«ä½“ST
 {
 #DIMS CONST LABEL_LIST05, 12 = 
-	"Ží‘°", "g’·", "‘Ìd", "BUST", "CUP", 
-	"WAIST", "HIP", "”¯F", "”¯Œ^", "Šá", 
-	"ŠáF", "‘ÌŒ^"
+	"ç¨®æ—", "èº«é•·", "ä½“é‡", "BUST", "CUP", 
+	"WAIST", "HIP", "é«ªè‰²", "é«ªåž‹", "çœ¼", 
+	"çœ¼è‰²", "ä½“åž‹"
 }
 
-;î•ñ 06.ƒtƒFƒƒ‚ƒ“ST
+;æƒ…å ± 06.ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³ST
 {
 #DIMS CONST LABEL_LIST06, 10 = 
-	"¶B•]‰¿", "—‘ŽqLV", "•ê‘ÌLV", "@Ž“",     "ƒtƒFƒƒ‚ƒ“", 
-	"–{”\",     "‹»–¡",   "ŠÖS",   "«ŒðŠè–]", "”DPŠè–]"
+	"ç”Ÿæ®–è©•ä¾¡", "åµå­LV", "æ¯ä½“LV", "ã€€é›Œ",     "ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³", 
+	"æœ¬èƒ½",     "èˆˆå‘³",   "é–¢å¿ƒ",   "æ€§äº¤é¡˜æœ›", "å¦Šå¨ é¡˜æœ›"
 }
 
-;î•ñ 07.«Š´ŠoABL
+;æƒ…å ± 07.æ€§æ„Ÿè¦šABL
 {
 #DIMS CONST LABEL_LIST07, 9 = 
-	"â’¸ŒoŒ±", "‚bŠ´Šo", "‚bŒoŒ±", "‚uŠ´Šo", "‚uŒoŒ±", 
-	"‚`Š´Šo",   "‚`ŒoŒ±", "‚aŠ´Šo", "‚aŒoŒ±"
+	"çµ¶é ‚çµŒé¨“", "ï¼£æ„Ÿè¦š", "ï¼£çµŒé¨“", "ï¼¶æ„Ÿè¦š", "ï¼¶çµŒé¨“", 
+	"ï¼¡æ„Ÿè¦š",   "ï¼¡çµŒé¨“", "ï¼¢æ„Ÿè¦š", "ï¼¢çµŒé¨“"
 }
 
-;î•ñ 08.«‹Z”\ABL
+;æƒ…å ± 08.æ€§æŠ€èƒ½ABL
 {
 #DIMS CONST LABEL_LIST08, 8 = 
-	"‹ZI", "–£—¹", "—~–]", "e–§", "]‡", 
-	"•òŽd¸_", "«“z—ê", "˜U—"
+	"æŠ€å·§", "é­…äº†", "æ¬²æœ›", "è¦ªå¯†", "å¾“é †", 
+	"å¥‰ä»•ç²¾ç¥ž", "æ€§å¥´éš·", "ç¯­çµ¡"
 }
 
-;î•ñ 09.«•ÈABL
+;æƒ…å ± 09.æ€§ç™–ABL
 {
 #DIMS CONST LABEL_LIST09, 9 = 
-	"˜Io•È", "ƒTƒh‚Á‹C", "ƒ}ƒ]‚Á‹C", "ƒŒƒY‚Á‹C", "‚a‚k‚Á‹C", 
-	"«Œð’†“Å", "Ž©ˆÔ’†“Å", "¸‰t’†“Å", "ƒLƒX’†“Å"
+	"éœ²å‡ºç™–", "ã‚µãƒ‰ã£æ°—", "ãƒžã‚¾ã£æ°—", "ãƒ¬ã‚ºã£æ°—", "ï¼¢ï¼¬ã£æ°—", 
+	"æ€§äº¤ä¸­æ¯’", "è‡ªæ…°ä¸­æ¯’", "ç²¾æ¶²ä¸­æ¯’", "ã‚­ã‚¹ä¸­æ¯’"
 }
 
-;î•ñ 10.«s“®ŒoŒ±
+;æƒ…å ± 10.æ€§è¡Œå‹•çµŒé¨“
 {
 #DIMS CONST LABEL_LIST10, 5 = 
-	"ƒLƒXŒoŒ±", "ŽèˆúŒoŒ±", "ƒtƒFƒ‰ŒoŒ±", "Ž©ˆÔŒoŒ±", "ƒpƒCƒYƒŠŒoŒ±"
+	"ã‚­ã‚¹çµŒé¨“", "æ‰‹æ·«çµŒé¨“", "ãƒ•ã‚§ãƒ©çµŒé¨“", "è‡ªæ…°çµŒé¨“", "ãƒ‘ã‚¤ã‚ºãƒªçµŒé¨“"
 }
 
-;î•ñ 11.«ŒðŒoŒ±
+;æƒ…å ± 11.æ€§äº¤çµŒé¨“
 {
 #DIMS CONST LABEL_LIST11, 6 = 
-	"Žål’²‹³ŒoŒ±", "‚u«ŒðŒoŒ±", "‚`«ŒðŒoŒ±", "¸‰tŒoŒ±", "¸ˆùŒoŒ±", 
-	"äSŽËŒoŒ±"
+	"ä¸»äººèª¿æ•™çµŒé¨“", "ï¼¶æ€§äº¤çµŒé¨“", "ï¼¡æ€§äº¤çµŒé¨“", "ç²¾æ¶²çµŒé¨“", "ç²¾é£²çµŒé¨“", 
+	"è†£å°„çµŒé¨“"
 }
 
-;î•ñ 12.’²‹³ŒoŒ±
+;æƒ…å ± 12.èª¿æ•™çµŒé¨“
 {
 #DIMS CONST LABEL_LIST12, 6 = 
-	"—U˜fŒoŒ±", "•òŽd‰õŠyŒoŒ±", "ƒŒƒYŒoŒ±", "‚a‚kŒoŒ±", "‚m‚s‚q’²‹³ŒoŒ±", 
-	"‚m‚s‚k’²‹³ŒoŒ±"
+	"èª˜æƒ‘çµŒé¨“", "å¥‰ä»•å¿«æ¥½çµŒé¨“", "ãƒ¬ã‚ºçµŒé¨“", "ï¼¢ï¼¬çµŒé¨“", "ï¼®ï¼´ï¼²èª¿æ•™çµŒé¨“", 
+	"ï¼®ï¼´ï¼¬èª¿æ•™çµŒé¨“"
 }
 
-;î•ñ 13.“ÁŽê‰õŠyŒoŒ±
+;æƒ…å ± 13.ç‰¹æ®Šå¿«æ¥½çµŒé¨“
 {
 #DIMS CONST LABEL_LIST13, 7 = 
-	"‹ê’É‰õŠyŒoŒ±", "”í‹s‰õŠyŒoŒ±", "šn‹s‰õŠyŒoŒ±", "‹Ù”›ŒoŒ±", "GŽèŒoŒ±", 
-	"bŠ­ŒoŒ±", "‹­Š­ŒoŒ±"
+	"è‹¦ç—›å¿«æ¥½çµŒé¨“", "è¢«è™å¿«æ¥½çµŒé¨“", "å—œè™å¿«æ¥½çµŒé¨“", "ç·Šç¸›çµŒé¨“", "è§¦æ‰‹çµŒé¨“", 
+	"ç£å§¦çµŒé¨“", "å¼·å§¦çµŒé¨“"
 }
 
-;î•ñ 14.“úíŒoŒ±
+;æƒ…å ± 14.æ—¥å¸¸çµŒé¨“
 {
 #DIMS CONST LABEL_LIST14, 7 = 
-	"‰ÆŽ–ŒoŒ±", "ŽB‰eŒoŒ±", "”íŽÊŒoŒ±", "‰Ì¥ŒoŒ±", "í“¬ŒoŒ±", 
-	"”„tŒoŒ±", "oŽYŒoŒ±"
+	"å®¶äº‹çµŒé¨“", "æ’®å½±çµŒé¨“", "è¢«å†™çµŒé¨“", "æ­Œå”±çµŒé¨“", "æˆ¦é—˜çµŒé¨“", 
+	"å£²æ˜¥çµŒé¨“", "å‡ºç”£çµŒé¨“"
 }
 
-;î•ñ 15.í“¬BASE
+;æƒ…å ± 15.æˆ¦é—˜BASE
 {
 #DIMS CONST LABEL_LIST15, 8 = 
-	"Ÿ—˜‰ñ”", "ŒoŒ±’l", "Œ»HP", "–žHP", "Œ»SP", 
-	"–žSP", "Œ»BRE", "–žBRE"
+	"å‹åˆ©å›žæ•°", "çµŒé¨“å€¤", "ç¾HP", "æº€HP", "ç¾SP", 
+	"æº€SP", "ç¾BRE", "æº€BRE"
 }
 
-;î•ñ 16.í“¬ST
+;æƒ…å ± 16.æˆ¦é—˜ST
 {
 #DIMS CONST LABEL_LIST16, 13 = 
 	"SAN", "GUTS", "BRAVE", "ATK",  "DEF", 
-	"HIT", "SPD",  "LUK",   "•”‘à", "”º", 
-	"Œã•û" , "‰ñŽû", "’Tõ"
+	"HIT", "SPD",  "LUK",   "éƒ¨éšŠ", "éšä¼´", 
+	"å¾Œæ–¹" , "å›žåŽ", "æŽ¢ç´¢"
 }
 
-;î•ñ 17.’TõABL
+;æƒ…å ± 17.æŽ¢ç´¢ABL
 {
 #DIMS CONST LABEL_LIST17, 11 = 
-	"‹Z”\“_", "–Ú¯", "ƒAƒCƒfƒA", "•·‚«Ž¨", "ˆã—Ã", 
-	"‹@ŠBC—", "ƒRƒ“ƒsƒ…[ƒ^", "Œ®ŠJ‚¯", "‰B‚ê‚é", "‰ð‘Ì", 
-	"‰ð“Ç"
+	"æŠ€èƒ½ç‚¹", "ç›®æ˜Ÿ", "ã‚¢ã‚¤ãƒ‡ã‚¢", "èžãè€³", "åŒ»ç™‚", 
+	"æ©Ÿæ¢°ä¿®ç†", "ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿", "éµé–‹ã‘", "éš ã‚Œã‚‹", "è§£ä½“", 
+	"è§£èª­"
 }
 
-;î•ñ 18.ƒƒCƒ“•‘•
+;æƒ…å ± 18.ãƒ¡ã‚¤ãƒ³æ­¦è£…
 {
 #DIMS CONST LABEL_LIST18, 10 = 
-	"ŽåŽí•Ê", "Žå—û“x", "ŽåDICE”", "ŽåDICE–Ê", "ŽåBONUS", 
-	"•›Ží•Ê", "•›—û“x", "•›DICE”", "•›DICE–Ê", "•›BONUS"
+	"ä¸»ç¨®åˆ¥", "ä¸»ç·´åº¦", "ä¸»DICEæ•°", "ä¸»DICEé¢", "ä¸»BONUS", 
+	"å‰¯ç¨®åˆ¥", "å‰¯ç·´åº¦", "å‰¯DICEæ•°", "å‰¯DICEé¢", "å‰¯BONUS"
 }
-;î•ñ 19.ŠÇ—î•ñ
+;æƒ…å ± 19.ç®¡ç†æƒ…å ±
 {
 #DIMS CONST LABEL_LIST19, 14 = 
-	"ID",   "‹@–§",   "ŠÇ—",   "eŒð", "U—ª",
-	"DLV", "•”‘à",   "Ž{Ý",   "“ï“x", "vŒ£", 
-	"l‹C", "ƒ‚ƒ‰ƒ‹", "ƒJƒ‹ƒ}", "•i«"
+	"ID",   "æ©Ÿå¯†",   "ç®¡ç†",   "è¦ªäº¤", "æ”»ç•¥",
+	"å¥½LV", "éƒ¨éšŠ",   "æ–½è¨­",   "é›£åº¦", "è²¢çŒ®", 
+	"äººæ°—", "ãƒ¢ãƒ©ãƒ«", "ã‚«ãƒ«ãƒž", "å“æ€§"
 }
 
-;î•ñ 20.ŽÐ‰ïî•ñ
+;æƒ…å ± 20.ç¤¾ä¼šæƒ…å ±
 {
 #DIMS CONST LABEL_LIST20, 9 = 
-	"ID",     "‹@–§",     "oŽ©",     "’nˆÊ",    "E‹Æ", 
-	"ƒtƒ@ƒ“", "ŠŽ‹à@", "Žû“ü@@", "o”ï@@"
+	"ID",     "æ©Ÿå¯†",     "å‡ºè‡ª",     "åœ°ä½",    "è·æ¥­", 
+	"ãƒ•ã‚¡ãƒ³", "æ‰€æŒé‡‘ã€€", "åŽå…¥ã€€ã€€", "å‡ºè²»ã€€ã€€"
 }
 
 
 TEMP_ID = FINDELEMENT(C_LIST_NAME, LIST_NAME, , , 1)
 SIF TEMP_ID <= 0
-	THROW •s³‚ÈLIST_NAME %LIST_NAME%
+	THROW ä¸æ­£ãªLIST_NAME %LIST_NAME%
 
 VARSET LABEL_LIST
 TEMP_LIST '= @"LABEL_LIST%TOSTR(TEMP_ID, "D2")%"
@@ -536,75 +536,75 @@ LABEL_SIZE = VARSIZE(TEMP_LIST)
 
 
 ;-------------------------------------------------
-;ƒŠƒXƒgƒpƒbƒN’è‹`ŠÖ”
+;ãƒªã‚¹ãƒˆãƒ‘ãƒƒã‚¯å®šç¾©é–¢æ•°
 ;-------------------------------------------------
-;ˆê˜A‚ÌƒŠƒXƒg‚ð‚Ð‚Æ‚Ü‚Æ‚ß‚É‚µ‚Äˆµ‚¤‚½‚ß‚Éì¬
-;’ˆÓŽ–€
-;ESCENEŽg—p‚·‚éê–Ê‚²‚Æ‚É•\Ž¦€–Ú‚ðØ‚è‘Ö‚¦‚é‚±‚Æ‚ð‘z’è‚·‚é
-;E“–ŠÖ”‚ÌLABEL_TYPE‚Í@DIM_TABLE_LABEL_LIST‘¤‚ÌC_LIST_NAME‚Æ‘Î‰ž‚·‚é
-;@‚µ‚©‚µAC_LIST_NAME‚Í0‚ðnone‚Æ‚·‚é‚Ì‚É‘Î‚µ‚Ä
-;@LABEL_TYPE‚Í0‚àŽg—p‚µ‚Ä‚¢‚Ä‚»‚Ì‚Ü‚ÜƒRƒsƒy‚Å‚ÍŽg‚¦‚È‚¢
-;@i“–ŠÖ”‚Å‚Íƒy[ƒWzŠÂˆ—‚Ì“s‡AC_LIST_NAME‘¤‚Í•Ï”–¼Žæ“¾ˆ—‚Ì“s‡j
-;EŠî–{“I‚É‚ÍLABEL_LIST‚Ì“à—e‚É€‹’‚µ‚Ä‚¢‚é‚ª
-;@"Šî‘bî•ñ"‚¾‚¯‚Í—áŠOA‚±‚Ì•\Ž¦€–Ú‚ÍLIST_CHARA_STATUS_GROUP‚ÅŒÂ•Ê‚Éˆ—‚µ‚Ä‚¢‚é
+;ä¸€é€£ã®ãƒªã‚¹ãƒˆã‚’ã²ã¨ã¾ã¨ã‚ã«ã—ã¦æ‰±ã†ãŸã‚ã«ä½œæˆ
+;æ³¨æ„äº‹é …
+;ãƒ»SCENEï¼ä½¿ç”¨ã™ã‚‹å ´é¢ã”ã¨ã«è¡¨ç¤ºé …ç›®ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã“ã¨ã‚’æƒ³å®šã™ã‚‹
+;ãƒ»å½“é–¢æ•°ã®LABEL_TYPEã¯@DIM_TABLE_LABEL_LISTå´ã®C_LIST_NAMEã¨å¯¾å¿œã™ã‚‹
+;ã€€ã—ã‹ã—ã€C_LIST_NAMEã¯0ã‚’noneã¨ã™ã‚‹ã®ã«å¯¾ã—ã¦
+;ã€€LABEL_TYPEã¯0ã‚‚ä½¿ç”¨ã—ã¦ã„ã¦ãã®ã¾ã¾ã‚³ãƒ”ãƒšã§ã¯ä½¿ãˆãªã„
+;ã€€ï¼ˆå½“é–¢æ•°ã§ã¯ãƒšãƒ¼ã‚¸å¾ªç’°å‡¦ç†ã®éƒ½åˆã€C_LIST_NAMEå´ã¯å¤‰æ•°åå–å¾—å‡¦ç†ã®éƒ½åˆï¼‰
+;ãƒ»åŸºæœ¬çš„ã«ã¯LABEL_LISTã®å†…å®¹ã«æº–æ‹ ã—ã¦ã„ã‚‹ãŒ
+;ã€€"åŸºç¤Žæƒ…å ±"ã ã‘ã¯ä¾‹å¤–ã€ã“ã®è¡¨ç¤ºé …ç›®ã¯LIST_CHARA_STATUS_GROUPã§å€‹åˆ¥ã«å‡¦ç†ã—ã¦ã„ã‚‹
 @DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
 #FUNCTION
 #DIMS SCENE
-#DIMS REF LIST_PACK ;–ß‚è’l—pAƒŠƒXƒg”z—ñ
+#DIMS REF LIST_PACK ;æˆ»ã‚Šå€¤ç”¨ã€ãƒªã‚¹ãƒˆé…åˆ—
 #DIM  REF PACK_SIZE ;
-#DIMS     TEMP_PACK ;LISTNAME‚ÌˆêŽŸŽæ“¾—p
+#DIMS     TEMP_PACK ;LISTNAMEã®ä¸€æ¬¡å–å¾—ç”¨
 {
 #DIMS CONST C_PACK_ALL, 19 = 
-	"Šî‘bî•ñ", 
-	"Œð—¬ST", 
-	"Š×—ŽST", 
-	"«ŠiST", 
-	"ŒoÏST", 
-	"g‘ÌST", 
-	"ƒtƒFƒƒ‚ƒ“ST", 
-	"«Š´ŠoST", 
-	"«‹Z”\ABL", 
-	"«•ÈABL", 
-	"«s“®ŒoŒ±", 
-	"«ŒðŒoŒ±", 
-	"’²‹³ŒoŒ±", 
-	"“ÁŽê‰õŠyŒoŒ±", 
-	"“úíŒoŒ±", 
-	"í“¬BASE", 
-	"í“¬ST", 
-	"’TõABL", 
-	"•‘•", 
+	"åŸºç¤Žæƒ…å ±", 
+	"äº¤æµST", 
+	"é™¥è½ST", 
+	"æ€§æ ¼ST", 
+	"çµŒæ¸ˆST", 
+	"èº«ä½“ST", 
+	"ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³ST", 
+	"æ€§æ„Ÿè¦šST", 
+	"æ€§æŠ€èƒ½ABL", 
+	"æ€§ç™–ABL", 
+	"æ€§è¡Œå‹•çµŒé¨“", 
+	"æ€§äº¤çµŒé¨“", 
+	"èª¿æ•™çµŒé¨“", 
+	"ç‰¹æ®Šå¿«æ¥½çµŒé¨“", 
+	"æ—¥å¸¸çµŒé¨“", 
+	"æˆ¦é—˜BASE", 
+	"æˆ¦é—˜ST", 
+	"æŽ¢ç´¢ABL", 
+	"æ­¦è£…", 
 }
 {
 #DIMS CONST C_PACK_DEFAULT, 17 = 
-	"Šî‘bî•ñ", 
-	"ŠÇ—î•ñ", 
-	"ŽÐ‰ïî•ñ", 
-	"g‘ÌST", 
-	"ƒtƒFƒƒ‚ƒ“ST", 
-	"«Š´ŠoST", 
-	"«‹Z”\ABL", 
-	"«•ÈABL", 
-	"«s“®ŒoŒ±", 
-	"«ŒðŒoŒ±", 
-	"’²‹³ŒoŒ±", 
-	"“ÁŽê‰õŠyŒoŒ±", 
-	"“úíŒoŒ±", 
-	"í“¬BASE", 
-	"í“¬ST", 
-	"’TõABL", 
-	"•‘•", 
+	"åŸºç¤Žæƒ…å ±", 
+	"ç®¡ç†æƒ…å ±", 
+	"ç¤¾ä¼šæƒ…å ±", 
+	"èº«ä½“ST", 
+	"ãƒ•ã‚§ãƒ­ãƒ¢ãƒ³ST", 
+	"æ€§æ„Ÿè¦šST", 
+	"æ€§æŠ€èƒ½ABL", 
+	"æ€§ç™–ABL", 
+	"æ€§è¡Œå‹•çµŒé¨“", 
+	"æ€§äº¤çµŒé¨“", 
+	"èª¿æ•™çµŒé¨“", 
+	"ç‰¹æ®Šå¿«æ¥½çµŒé¨“", 
+	"æ—¥å¸¸çµŒé¨“", 
+	"æˆ¦é—˜BASE", 
+	"æˆ¦é—˜ST", 
+	"æŽ¢ç´¢ABL", 
+	"æ­¦è£…", 
 }
 
 {
 #DIMS CONST C_PACK_RPG, 7 = 
-	"Šî‘bî•ñ", 
-	"ŠÇ—î•ñ", 
-	"g‘ÌST", 
-	"’TõABL", 
-	"•‘•", 
-	"í“¬BASE", 
-	"í“¬ST"
+	"åŸºç¤Žæƒ…å ±", 
+	"ç®¡ç†æƒ…å ±", 
+	"èº«ä½“ST", 
+	"æŽ¢ç´¢ABL", 
+	"æ­¦è£…", 
+	"æˆ¦é—˜BASE", 
+	"æˆ¦é—˜ST"
 }
 
 
@@ -617,14 +617,14 @@ CASE "CAFE", "DEFAULT"
 	TEMP_PACK '= "C_PACK_DEFAULT"
 {
 CASE "EXPLORER", "RPG", 
-	"RPG_•Ší‹­‰»", 
-	"RPG_‹Z”\¬’·", 
-	"RPG_‹­‰»Ü“Š—^", 
-	"RPG_’´l–ò“Š—^", 
-	"RPG_”º”z’u", 
-	"RPG_Œã•û”z’u", 
-	"RPG_‰ñŽû”z’u", 
-	"RPG_’Tõ”z’u"
+	"RPG_æ­¦å™¨å¼·åŒ–", 
+	"RPG_æŠ€èƒ½æˆé•·", 
+	"RPG_å¼·åŒ–å‰¤æŠ•ä¸Ž", 
+	"RPG_è¶…äººè–¬æŠ•ä¸Ž", 
+	"RPG_éšä¼´é…ç½®", 
+	"RPG_å¾Œæ–¹é…ç½®", 
+	"RPG_å›žåŽé…ç½®", 
+	"RPG_æŽ¢ç´¢é…ç½®"
 }
 	TEMP_PACK '= "C_PACK_RPG"
 CASEELSE
@@ -636,24 +636,24 @@ PACK_SIZE = VARSIZE(TEMP_PACK)
 
 
 ;-------------------------------------------------
-;”Y‚Ýƒvƒ‰ƒ“’è‹`ŠÖ”
+;æ‚©ã¿ãƒ—ãƒ©ãƒ³å®šç¾©é–¢æ•°
 ;-------------------------------------------------
 @DIM_TABLE_NAYAMI_PLAN(PLAN_NAME, SUC_PLUS)
 #FUNCTION
-#DIMS REF PLAN_NAME ;–ß‚è’l—pAƒvƒ‰ƒ“–¼
-#DIM  REF SUC_PLUS  ;Šeƒvƒ‰ƒ“‚Ì¬Œ÷•â³’l
+#DIMS REF PLAN_NAME ;æˆ»ã‚Šå€¤ç”¨ã€ãƒ—ãƒ©ãƒ³å
+#DIM  REF SUC_PLUS  ;å„ãƒ—ãƒ©ãƒ³ã®æˆåŠŸè£œæ­£å€¤
 {
 #DIMS CONST C_PLAN_NAME, 11 = "none", 
-	"Ž‘‹àŠñ•t@", 
-	"–@‚Ì—Í@@", 
-	"Ž¡—Ã@@@", 
-	"ƒAƒhƒoƒCƒX", 
-	"“X‚ÌÐ‰î@", 
-	"—ã‚Ü‚·@@", 
-	"‹³Žö@@@", 
-	"‰\‚ð—¬‚·@", 
-	"î•ñ‘€ì@", 
-	"—Í‚ðs‚­‚·"
+	"è³‡é‡‘å¯„ä»˜ã€€", 
+	"æ³•ã®åŠ›ã€€ã€€", 
+	"æ²»ç™‚ã€€ã€€ã€€", 
+	"ã‚¢ãƒ‰ãƒã‚¤ã‚¹", 
+	"åº—ã®ç´¹ä»‹ã€€", 
+	"åŠ±ã¾ã™ã€€ã€€", 
+	"æ•™æŽˆã€€ã€€ã€€", 
+	"å™‚ã‚’æµã™ã€€", 
+	"æƒ…å ±æ“ä½œã€€", 
+	"åŠ›ã‚’å°½ãã™"
 }
 {
 #DIM  CONST C_SUC_PLUS, 11 = 0, 

@@ -1,83 +1,83 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+п»ї;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CHARACTER_SCOUT.ERB
-;	Facility	:ѓfЃ[ѓ^ѓxЃ[ѓX(EXPUP)ЃB
+;	Facility	:гѓ‡гѓјг‚їгѓ™гѓјг‚№(EXPUP)гЂ‚
 ;
-;	Licence		:ѓ‰ѓCѓZѓ“ѓXѓtѓЉЃ[ЃB
+;	Licence		:гѓ©г‚¤г‚»гѓіг‚№гѓ•гѓЄгѓјгЂ‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					ђV‹KЌмђ¬
+;	001		20XX/XX/XX		----					ж–°и¦ЏдЅњж€ђ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  Ѓћ‹LЌЪЉЦђ”€к——(‹LЌЪЏ‡)
+;  в—‡иЁиј‰й–ўж•°дёЂи¦§(иЁиј‰й †)
 ;
 ;		Module Name						Explanation
 ;
-;	ЃE CHARACTER_SCOUT_POS						DB:EXPUP€К’u
+;	гѓ» CHARACTER_SCOUT_POS						DB:EXPUPдЅЌзЅ®
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub CHARACTER_SCOUT_POS
 ;=================================================
-;   DB:EXPUP€К’u
+;   DB:EXPUPдЅЌзЅ®
 ;-------------------------------------------------
 ; Input:
-;  ARGS					‘ОЏЫ’l
+;  ARGS					еЇѕи±ЎеЂ¤
 ; Output:
-;  RETURNF				€К’u
+;  RETURNF				дЅЌзЅ®
 ;-------------------------------------------------
 @CHARACTER_SCOUT_MIND(L_C_ID)
-#DIM L_C_ID                  ;‘ОЏЫѓLѓѓѓ‰“o^”ФЌ†
-#DIM S_MIND                  ;ђ«ЉiID
-#DIM CONST L_TAL_START = 1400;Њы’І‘fЋїЉJЋn’l
+#DIM L_C_ID                  ;еЇѕи±Ўг‚­гѓЈгѓ©з™»йЊІз•ЄеЏ·
+#DIM S_MIND                  ;жЂ§ж јID
+#DIM CONST L_TAL_START = 1400;еЏЈиЄїзґ иіЄй–‹е§‹еЂ¤
 S_MIND = RAND:14
-;ЌЕЏ‰‚Йђ«Љi‚р‘I‚С‚Ь‚·
+;жњЂе€ќгЃ«жЂ§ж јг‚’йЃёгЃігЃѕгЃ™
 IF TALENT:L_C_ID:NPC == 0
-	IF TALENT:L_C_ID:ѓIѓgѓR == 0
-		;—c‚ўЊы’І‚Н‘I‚О‚к‚Й‚­‚ўЃi3/4‚ЕЌД’Љ‘IЃj
+	IF TALENT:L_C_ID:г‚Єгѓ€г‚і == 0
+		;е№јгЃ„еЏЈиЄїгЃЇйЃёгЃ°г‚ЊгЃ«гЃЏгЃ„пј€3/4гЃ§е†ЌжЉЅйЃёпј‰
 		SIF RAND:4
 			S_MIND = RAND:12
-	;€И‰єЃA’jђ«—pЊы’І‚МѓRѓ“ѓoЃ[ѓgЏ€—ќ
+	;д»Ґдё‹гЂЃз”·жЂ§з”ЁеЏЈиЄїгЃ®г‚ігѓігѓђгѓјгѓ€е‡¦зђ†
 	ELSEIF S_MIND >= 8
-	;’j‹C
+	;з”·ж°—
 		S_MIND = 8
 	ELSEIF S_MIND >= 6
-	;‰°•a
+	;и‡†з—…
 		S_MIND = 6
 	ELSEIF S_MIND >= 5
-	;ЌrЃX‚µ‚ў
+	;иЌ’гЂ…гЃ—гЃ„
 		S_MIND = 5
 	ELSEIF S_MIND >= 3
-	;ѓ}ѓCѓyЃ[ѓX
+	;гѓћг‚¤гѓљгѓјг‚№
 		S_MIND = 3
 	ELSEIF S_MIND >= 1
-	;ѓNЃ[ѓ‹
+	;г‚Їгѓјгѓ«
 		S_MIND = 1
 	ELSE
-	;—з‹Vђі‚µ‚ў
+	;з¤је„Ђж­ЈгЃ—гЃ„
 		S_MIND = 0
 	ENDIF
-	;‚±‚±‚Е‘fЋїѓIѓ“
+	;гЃ“гЃ“гЃ§зґ иіЄг‚Єгѓі
 	TALENT:L_C_ID:(L_TAL_START + S_MIND) = 1
 ENDIF
 CALL CHARACTER_SCOUT_MIND_C(L_C_ID, S_MIND)
 
 ;=============================
 ;=============================
-;ђ«Љi•К‚МЊы’ІђЭ’и
+;жЂ§ж је€ҐгЃ®еЏЈиЄїиЁ­е®љ
 ;=============================
 ;=============================
 @CHARACTER_SCOUT_MIND_C(L_C_ID, S_MIND)
-#DIM L_C_ID       ;‘ОЏЫѓLѓѓѓ‰“o^”ФЌ†
-#DIM S_MIND       ;ђ«ЉiID
-#DIM L_STR_START  ;STR‚М”Н€НЉJЋn’l
-#DIM L_CSTR_START ;CSTR‚М”Н€НЉJЋn’l
-#DIM L_RANGE      ;‘ОЏЫ”Н€НЃAЋАЌЫ‚Й‚Н0Ѓ`51‚Ь‚ЕЃieraAS0.3Њ»ЌЭЃj
+#DIM L_C_ID       ;еЇѕи±Ўг‚­гѓЈгѓ©з™»йЊІз•ЄеЏ·
+#DIM S_MIND       ;жЂ§ж јID
+#DIM L_STR_START  ;STRгЃ®зЇ„е›Ій–‹е§‹еЂ¤
+#DIM L_CSTR_START ;CSTRгЃ®зЇ„е›Ій–‹е§‹еЂ¤
+#DIM L_RANGE      ;еЇѕи±ЎзЇ„е›ІгЂЃе®џйљ›гЃ«гЃЇ0пЅћ51гЃѕгЃ§пј€eraAS0.3зЏѕењЁпј‰
 L_STR_START  = (S_MIND * 100) + 5000
 L_CSTR_START = 100
 FOR L_RANGE, 0, 95
@@ -87,78 +87,78 @@ CALL CHARACTER_SCOUT_MIND_PRONOUN(L_C_ID, S_MIND)
 
 
 ;=============================
-;€кђlЏМЃA“сђlЏМ‚МђЭ’и
+;дёЂдєєз§°гЂЃдєЊдєєз§°гЃ®иЁ­е®љ
 ;=============================
 @CHARACTER_SCOUT_MIND_PRONOUN(L_C_ID, S_MIND)
-#DIM L_C_ID                  ;‘ОЏЫѓLѓѓѓ‰“o^”ФЌ†
-#DIM S_MIND                  ;ђ«ЉiID
-#DIM CONST L_TAL_START = 1400;Њы’І‘fЋїЉJЋn’l
+#DIM L_C_ID                  ;еЇѕи±Ўг‚­гѓЈгѓ©з™»йЊІз•ЄеЏ·
+#DIM S_MIND                  ;жЂ§ж јID
+#DIM CONST L_TAL_START = 1400;еЏЈиЄїзґ иіЄй–‹е§‹еЂ¤
 SELECTCASE TALENTNAME:(L_TAL_START + S_MIND)
-CASE "—з‹Vђі‚µ‚ў"
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ‹M•ы
-CASE "ѓNЃ[ѓ‹"
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ѓLѓ~
-CASE "ѓcѓ“ѓcѓ“"
-	CSTR:L_C_ID:€кђlЏМ = ѓAѓ^ѓV
-	CSTR:L_C_ID:“сђlЏМ = ѓAѓ“ѓ^
-CASE "ѓ}ѓCѓyЃ[ѓX"
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ЊN
-CASE "Ќ‚€і“I"
-	CSTR:L_C_ID:€кђlЏМ = ѓAѓ^ѓV
-	CSTR:L_C_ID:“сђlЏМ = ‹M•ы
-CASE "ЌrЃX‚µ‚ў"
-	CSTR:L_C_ID:€кђlЏМ = ‰ґ
-	CSTR:L_C_ID:“сђlЏМ = ‚Ё‘O
-CASE "Ћг‹C"
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ‹M•ы
-CASE "‹C•iЌ‚‚ў"
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ‹M•ы
-CASE "’j‹C"
-	CSTR:L_C_ID:€кђlЏМ = ‰ґ
-	CSTR:L_C_ID:“сђlЏМ = ‚Ё‘O
-CASE "ђF‚Б‚Ы‚ў"
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ‹M•ы
-CASE "ѓtѓЊѓ“ѓhѓЉЃ["
-	CSTR:L_C_ID:€кђlЏМ = Ћ„
-	CSTR:L_C_ID:“сђlЏМ = ѓAѓ“ѓ^
-CASE "Ћq‹џ‚Б‚Ы‚ў"
-	CSTR:L_C_ID:€кђlЏМ = %CALLNAME:L_C_ID%
-	CSTR:L_C_ID:“сђlЏМ = ‚Ё‚ЙЃ[‚і‚с
-CASE "‚Ё‚µ‚б‚Ь"
-	CSTR:L_C_ID:€кђlЏМ = %CALLNAME:L_C_ID%
-	CSTR:L_C_ID:“сђlЏМ = ‚ЁЊZ‚і‚с
-CASE "ЊГ•—"
-	CSTR:L_C_ID:€кђlЏМ = ЏЁ
-	CSTR:L_C_ID:“сђlЏМ = ‚ЁЋе
+CASE "з¤је„Ђж­ЈгЃ—гЃ„"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = иІґж–№
+CASE "г‚Їгѓјгѓ«"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = г‚­гѓџ
+CASE "гѓ„гѓігѓ„гѓі"
+	CSTR:L_C_ID:дёЂдєєз§° = г‚ўг‚їг‚·
+	CSTR:L_C_ID:дєЊдєєз§° = г‚ўгѓіг‚ї
+CASE "гѓћг‚¤гѓљгѓјг‚№"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = еђ›
+CASE "й«ењ§зљ„"
+	CSTR:L_C_ID:дёЂдєєз§° = г‚ўг‚їг‚·
+	CSTR:L_C_ID:дєЊдєєз§° = иІґж–№
+CASE "иЌ’гЂ…гЃ—гЃ„"
+	CSTR:L_C_ID:дёЂдєєз§° = дїє
+	CSTR:L_C_ID:дєЊдєєз§° = гЃЉе‰Ќ
+CASE "еј±ж°—"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = иІґж–№
+CASE "ж°—е“Ѓй«гЃ„"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = иІґж–№
+CASE "з”·ж°—"
+	CSTR:L_C_ID:дёЂдєєз§° = дїє
+	CSTR:L_C_ID:дєЊдєєз§° = гЃЉе‰Ќ
+CASE "и‰ІгЃЈгЃЅгЃ„"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = иІґж–№
+CASE "гѓ•гѓ¬гѓігѓ‰гѓЄгѓј"
+	CSTR:L_C_ID:дёЂдєєз§° = з§Ѓ
+	CSTR:L_C_ID:дєЊдєєз§° = г‚ўгѓіг‚ї
+CASE "е­ђдѕ›гЃЈгЃЅгЃ„"
+	CSTR:L_C_ID:дёЂдєєз§° = %CALLNAME:L_C_ID%
+	CSTR:L_C_ID:дєЊдєєз§° = гЃЉгЃ«гѓјгЃ•г‚“
+CASE "гЃЉгЃ—г‚ѓгЃѕ"
+	CSTR:L_C_ID:дёЂдєєз§° = %CALLNAME:L_C_ID%
+	CSTR:L_C_ID:дєЊдєєз§° = гЃЉе…„гЃ•г‚“
+CASE "еЏ¤йўЁ"
+	CSTR:L_C_ID:дёЂдєєз§° = е¦ѕ
+	CSTR:L_C_ID:дєЊдєєз§° = гЃЉдё»
 ENDSELECT
 
 
 ;=============================
-;•t—^‚і‚к‚ЅTALENT‚©‚зђ«ЉiID‚рЋж“ѕ
-;‚Ѕ‚ѕ‚µЃA
-;ЃENPC‚М”ФЌ†‚р“n‚і‚к‚й‚±‚Ж‚Н‘z’и‚µ‚Д‚И‚ў
-;ЃEѓoѓO‚Б‚Д‘fЋї‚Є2‚В‚В‚ў‚Д‚й‚ж‚¤‚И‚М‚Н‘z’и‚µ‚Д‚И‚ў
-;ЃEђ«Љi‘fЋї‚Є‚В‚ў‚Д‚И‚ўѓLѓѓѓ‰‚р“n‚·‚Ж-1‚Є•Ф‚й
+;д»дёЋгЃ•г‚ЊгЃџTALENTгЃ‹г‚‰жЂ§ж јIDг‚’еЏ–еѕ—
+;гЃџгЃ гЃ—гЂЃ
+;гѓ»NPCгЃ®з•ЄеЏ·г‚’жёЎгЃ•г‚Њг‚‹гЃ“гЃЁгЃЇжѓіе®љгЃ—гЃ¦гЃЄгЃ„
+;гѓ»гѓђг‚°гЃЈгЃ¦зґ иіЄгЃЊ2гЃ¤гЃ¤гЃ„гЃ¦г‚‹г‚€гЃ†гЃЄгЃ®гЃЇжѓіе®љгЃ—гЃ¦гЃЄгЃ„
+;гѓ»жЂ§ж јзґ иіЄгЃЊгЃ¤гЃ„гЃ¦гЃЄгЃ„г‚­гѓЈгѓ©г‚’жёЎгЃ™гЃЁ-1гЃЊиї”г‚‹
 ;=============================
 @CHARACTER_SCOUT_TALENT_TO_MIND(L_C_ID)
 #FUNCTION
-#DIM L_C_ID       ;‘ОЏЫѓLѓѓѓ‰“o^”ФЌ†
-#DIM CONST L_TAL_START = 1400;Њы’І‘fЋїЉJЋn’l
-#DIM CONST L_TAL_END   = 1500;Њы’І‘fЋїЏI’lЃi‚±‚Мђ”Ћљ‚НЉЬ‚Ь‚к‚И‚ўЃj
+#DIM L_C_ID       ;еЇѕи±Ўг‚­гѓЈгѓ©з™»йЊІз•ЄеЏ·
+#DIM CONST L_TAL_START = 1400;еЏЈиЄїзґ иіЄй–‹е§‹еЂ¤
+#DIM CONST L_TAL_END   = 1500;еЏЈиЄїзґ иіЄзµ‚еЂ¤пј€гЃ“гЃ®ж•°е­—гЃЇеђ«гЃѕг‚ЊгЃЄгЃ„пј‰
 RETURNF MAX(FINDELEMENT(TALENT:L_C_ID:0, 1, L_TAL_START, L_TAL_END) - L_TAL_START, -1)
 
 
 ;-------------------------------------------------
-;Њк”цЊы’ІЌДђЭ’иЃ@ЏCђі—p
+;иЄће°ѕеЏЈиЄїе†ЌиЁ­е®љгЂЂдї®ж­Јз”Ё
 ;-------------------------------------------------
 @CHARACTER_SCOUT_MIND_REPEAT0
-#DIM L_C_ID       ;‘ОЏЫѓLѓѓѓ‰“o^”ФЌ†
+#DIM L_C_ID       ;еЇѕи±Ўг‚­гѓЈгѓ©з™»йЊІз•ЄеЏ·
 SIF CHARANUM == 1
 	RETURN
 	
@@ -168,17 +168,17 @@ FOR L_C_ID, 0, CHARANUM
 	CALL CHARACTER_SCOUT_MIND_REPEAT(L_C_ID)
 NEXT
 
-PRINTFORMW ЏCђіЉ®—№‚µ‚Ь‚µ‚ЅЃB
+PRINTFORMW дї®ж­Је®Њдє†гЃ—гЃѕгЃ—гЃџгЂ‚
 
 
 
 ;-------------------------------------------------
-;Њк”цЊы’ІЌДђЭ’и
+;иЄће°ѕеЏЈиЄїе†ЌиЁ­е®љ
 ;-------------------------------------------------
 @CHARACTER_SCOUT_MIND_REPEAT(L_C_ID, S_MIND = -1)
-#DIM L_C_ID       ;‘ОЏЫѓLѓѓѓ‰“o^”ФЌ†
-#DIM S_MIND       ;ђ«ЉiID
-;ђ«ЉiID‚Є“n‚і‚к‚Д‚ў‚И‚ўЏкЌ‡ЃA‘fЋї‚©‚з‚МЋж“ѕ‚рЋЋ‚Э‚й‚Є‚»‚к‚ађЭ’и‚і‚к‚Д‚ў‚И‚ў‚И‚з‚ОЌДђЭ’и‚·‚й
+#DIM L_C_ID       ;еЇѕи±Ўг‚­гѓЈгѓ©з™»йЊІз•ЄеЏ·
+#DIM S_MIND       ;жЂ§ж јID
+;жЂ§ж јIDгЃЊжёЎгЃ•г‚ЊгЃ¦гЃ„гЃЄгЃ„е ґеђ€гЂЃзґ иіЄгЃ‹г‚‰гЃ®еЏ–еѕ—г‚’и©¦гЃїг‚‹гЃЊгЃќг‚Њг‚‚иЁ­е®љгЃ•г‚ЊгЃ¦гЃ„гЃЄгЃ„гЃЄг‚‰гЃ°е†ЌиЁ­е®љгЃ™г‚‹
 SIF S_MIND < 0
 	S_MIND = CHARACTER_SCOUT_TALENT_TO_MIND(L_C_ID)
 IF S_MIND < 0
@@ -190,20 +190,20 @@ ENDIF
 
 
 ;-------------------------------------------------
-;ђg‘М“Б’ҐЊn‚МѓtѓЊЃ[ѓoЃ[ѓfЃ[ѓ^ђЭ’и
+;иє«дЅ“з‰№еѕґзі»гЃ®гѓ•гѓ¬гѓјгѓђгѓјгѓ‡гѓјг‚їиЁ­е®љ
 ;-------------------------------------------------
 @CHARACTER_SCOUT_PERSONAL(L_C_ID)
 #DIM L_C_ID
 IF TALENT:L_C_ID:NPC == 0
 	IF TALENT:L_C_ID:EPC == 0
-		CFLAG:L_C_ID:”§ђF = RAND:6
-		CFLAG:L_C_ID:”ЇђF = RAND:11
-		CFLAG:L_C_ID:”ЇЊ^ = RAND:25
-		CFLAG:L_C_ID:–Ъ = RAND:8
-		CFLAG:L_C_ID:“µђF = RAND:6
-		CFLAG:L_C_ID:‘МЊ^ = RAND:3
-		IF TALENT:L_C_ID:ѓIѓgѓR == 1 || TALENT:L_C_ID:‚У‚Ѕ‚И‚и
-			CFLAG:L_C_ID:ѓyѓjѓXѓTѓCѓY = RAND:4
+		CFLAG:L_C_ID:и‚Њи‰І = RAND:6
+		CFLAG:L_C_ID:й«Єи‰І = RAND:11
+		CFLAG:L_C_ID:й«Єећ‹ = RAND:25
+		CFLAG:L_C_ID:з›® = RAND:8
+		CFLAG:L_C_ID:зћіи‰І = RAND:6
+		CFLAG:L_C_ID:дЅ“ећ‹ = RAND:3
+		IF TALENT:L_C_ID:г‚Єгѓ€г‚і == 1 || TALENT:L_C_ID:гЃµгЃџгЃЄг‚Љ
+			CFLAG:L_C_ID:гѓљгѓ‹г‚№г‚µг‚¤г‚є = RAND:4
 		ENDIF
 	ENDIF
 ENDIF
@@ -213,151 +213,151 @@ CALL CHARACTER_SCOUT_BODYSIZE(L_C_ID)
 
 
 ;-------------------------------------------------
-;ѓ`ѓѓЃ[ѓЂѓ|ѓCѓ“ѓgЊ€’и
+;гѓЃгѓЈгѓјгѓ гѓќг‚¤гѓігѓ€ж±єе®љ
 ;-------------------------------------------------
 @CHARACTER_SCOUT_CHARM_POINT(L_C_ID)
 #DIM L_C_ID
-STRDATA CSTR:L_C_ID:ѓ`ѓѓЃ[ѓЂѓ|ѓCѓ“ѓg
-	DATA ”§
-	DATA –ЪЊі
-	DATA •@‹Ш
-	DATA ЊыЊі
-	DATA ‹ѓ‚«Ќ•Ћq
-	DATA ЌЅЌњ
-	DATA “с‚Мr
-	DATA ЋиЋс
-	DATA Ћи
-	DATA Ћw
-	DATA д`
-	DATA ”ь“ы
-	DATA ‚­‚С‚к
-	DATA ѓqѓbѓvѓ‰ѓCѓ“
-	DATA ‹rђь”ь
-	DATA •G
-	DATA ‘«Ћс
-	DATA ‚©‚©‚Ж
-	DATA ”w’†
-	DATA ЋЁ
-	DATA ђ«Љн
-	DATA ”Ї‚МЊх‘т
-	DATA ‚ЁђK
-	DATA ’·‚ў‚Ь‚В‚°
-	DATA ”ЄЏdЋ•
-	DATA ”ы–С
-	DATA ’Ь
-	DATA ђQ•И
-	DATA ”ЇЋї
+STRDATA CSTR:L_C_ID:гѓЃгѓЈгѓјгѓ гѓќг‚¤гѓігѓ€
+	DATA и‚Њ
+	DATA з›®е…ѓ
+	DATA йј»з­‹
+	DATA еЏЈе…ѓ
+	DATA жіЈгЃЌй»’е­ђ
+	DATA йЋ–йЄЁ
+	DATA дєЊгЃ®и…•
+	DATA ж‰‹й¦–
+	DATA ж‰‹
+	DATA жЊ‡
+	DATA и‡Ќ
+	DATA зѕЋд№і
+	DATA гЃЏгЃіг‚Њ
+	DATA гѓ’гѓѓгѓ—гѓ©г‚¤гѓі
+	DATA и„љз·љзѕЋ
+	DATA и†ќ
+	DATA и¶ій¦–
+	DATA гЃ‹гЃ‹гЃЁ
+	DATA иѓЊдё­
+	DATA иЂі
+	DATA жЂ§е™Ё
+	DATA й«ЄгЃ®е…‰жІў
+	DATA гЃЉе°»
+	DATA й•·гЃ„гЃѕгЃ¤гЃ’
+	DATA е…«й‡Ќж­Ї
+	DATA зњ‰жЇ›
+	DATA з€Є
+	DATA еЇќз™–
+	DATA й«ЄиіЄ
 ENDDATA
-SIF CSTR:L_C_ID:ѓ`ѓѓЃ[ѓЂѓ|ѓCѓ“ѓg == "‚ЁђK" && (TALENT:L_C_ID:‹ђђK  || TALENT:L_C_ID:”љђK)
-	CSTR:L_C_ID:ѓ`ѓѓЃ[ѓЂѓ|ѓCѓ“ѓg = ‘е‚«‚ИђK
+SIF CSTR:L_C_ID:гѓЃгѓЈгѓјгѓ гѓќг‚¤гѓігѓ€ == "гЃЉе°»" && (TALENT:L_C_ID:е·Ёе°»  || TALENT:L_C_ID:з€†е°»)
+	CSTR:L_C_ID:гѓЃгѓЈгѓјгѓ гѓќг‚¤гѓігѓ€ = е¤§гЃЌгЃЄе°»
 
 
 ;-------------------------------------------------
-;‚­‚№Њ€’и
+;гЃЏгЃ›ж±єе®љ
 ;-------------------------------------------------
 @CHARACTER_SCOUT_KUSE(L_C_ID)
 #DIM L_C_ID
-STRDATA CSTR:L_C_ID:•И
-	DATA ђO‚рдr‚Я‚й
-	DATA ‚ ‚і‚Б‚Д‚рЊ©‚й
-	DATA ”Ї‚рђG‚й
-	DATA ‘Ъ‚ЙЋи‚р‹І‚Ю
-	DATA r‚р‘g‚Ю
-	DATA Ћw‚р—Ќ‚Я‚й
-	DATA •n–R‚д‚·‚и
-	DATA ѓЉѓYѓЂ‚рЋж‚й
-	DATA Џг–ЪЊ­‚ў
-	DATA Ћс‚рЊX‚°‚й
-	DATA —­‘§
-	DATA ѓIЃ[ѓoЃ[ѓAѓNѓVѓ‡ѓ“
-	DATA Џu‚«‘Ѕ‚ў
-	DATA ‚У‚­‚к‚й
-	DATA Ћ•‚рђH‚ў‚µ‚О‚й
-	DATA Њы‚р‰B‚·
-	DATA ЋЁ‚рђG‚й
-	DATA ‚ѕ‚з‚Ї‚й
-	DATA ђг‘Е‚ї‚·‚й
-	DATA ’Ь‚рЉљ‚Ю
-	DATA •@‚р‚©‚­
-	DATA Љz‚р‰џ‚¦‚й
-	DATA Њќ‚р€¬‚й
-	DATA ЋwЌ·‚·
-	DATA Њ€‚Я‘дЋЊ‚Є‚ ‚й
-	DATA Ќ‚р”P‚й
-	DATA •Р–Ъ‚р•В‚¶‚й
-	DATA –Ъ‚рЌЧ‚Я‚й
-	DATA Њы‚рc‚Я‚й
-	DATA љX‚й
-	DATA ‹ч‚ЙЌs‚«‚Ѕ‚Є‚й
-	DATA ’·‚і‚р‘Є‚й
-	DATA b‚·Ћћ‚М‹——Ј‚Є‹Я‚ў
-	DATA Ћи‚МЌb‚рдr‚Я‚й
-	DATA ѓ|Ѓ[ѓY‚р‚Ж‚й
-	DATA ‹№‚рЉс‚№‚й
+STRDATA CSTR:L_C_ID:з™–
+	DATA е”‡г‚’и€ђг‚Ѓг‚‹
+	DATA гЃ‚гЃ•гЃЈгЃ¦г‚’и¦‹г‚‹
+	DATA й«Єг‚’и§¦г‚‹
+	DATA и…їгЃ«ж‰‹г‚’жЊџг‚Ђ
+	DATA и…•г‚’зµ„г‚Ђ
+	DATA жЊ‡г‚’зµЎг‚Ѓг‚‹
+	DATA иІ§д№Џг‚†гЃ™г‚Љ
+	DATA гѓЄг‚єгѓ г‚’еЏ–г‚‹
+	DATA дёЉз›®йЃЈгЃ„
+	DATA й¦–г‚’е‚ѕгЃ’г‚‹
+	DATA жєњжЃЇ
+	DATA г‚Єгѓјгѓђгѓјг‚ўг‚Їг‚·гѓ§гѓі
+	DATA зћ¬гЃЌе¤љгЃ„
+	DATA гЃµгЃЏг‚Њг‚‹
+	DATA ж­Їг‚’йЈџгЃ„гЃ—гЃ°г‚‹
+	DATA еЏЈг‚’йљ гЃ™
+	DATA иЂіг‚’и§¦г‚‹
+	DATA гЃ г‚‰гЃ‘г‚‹
+	DATA и€Њж‰“гЃЎгЃ™г‚‹
+	DATA з€Єг‚’е™›г‚Ђ
+	DATA йј»г‚’гЃ‹гЃЏ
+	DATA йЎЌг‚’жЉјгЃ€г‚‹
+	DATA ж‹іг‚’жЏЎг‚‹
+	DATA жЊ‡е·®гЃ™
+	DATA ж±єг‚ЃеЏ°и©ћгЃЊгЃ‚г‚‹
+	DATA и…°г‚’жЌ»г‚‹
+	DATA з‰‡з›®г‚’й–‰гЃг‚‹
+	DATA з›®г‚’зґ°г‚Ѓг‚‹
+	DATA еЏЈг‚’ж­Єг‚Ѓг‚‹
+	DATA е”ёг‚‹
+	DATA йљ…гЃ«иЎЊгЃЌгЃџгЃЊг‚‹
+	DATA й•·гЃ•г‚’жё¬г‚‹
+	DATA и©±гЃ™ж™‚гЃ®и·ќй›ўгЃЊиї‘гЃ„
+	DATA ж‰‹гЃ®з”Іг‚’и€ђг‚Ѓг‚‹
+	DATA гѓќгѓјг‚єг‚’гЃЁг‚‹
+	DATA иѓёг‚’еЇ„гЃ›г‚‹
 ENDDATA
-SIF CSTR:L_C_ID:•И == "‹№‚рЉс‚№‚й" && TALENT:L_C_ID:ѓIѓgѓR
-	CSTR:L_C_ID:•И = ѓ|Ѓ[ѓY‚р‚Ж‚й
+SIF CSTR:L_C_ID:з™– == "иѓёг‚’еЇ„гЃ›г‚‹" && TALENT:L_C_ID:г‚Єгѓ€г‚і
+	CSTR:L_C_ID:з™– = гѓќгѓјг‚єг‚’гЃЁг‚‹
 
 
 ;-------------------------------------------------
-;ѓ{ѓfѓBѓTѓCѓYЊ€’и
-;Џ¬•ї‘МЊ^‚И‚З‚рЋg—p‚·‚йЏкЌ‡‚НЋ–‘O‚Й•t—^‚µ‚Д‚Ё‚­‚±‚Ж
+;гѓњгѓ‡г‚Јг‚µг‚¤г‚єж±єе®љ
+;е°Џжџ„дЅ“ећ‹гЃЄгЃ©г‚’дЅїз”ЁгЃ™г‚‹е ґеђ€гЃЇдє‹е‰ЌгЃ«д»дёЋгЃ—гЃ¦гЃЉгЃЏгЃ“гЃЁ
 ;-------------------------------------------------
 @CHARACTER_SCOUT_BODYSIZE(L_C_ID)
 #DIM L_C_ID
 #DIM L_HOSEI_WAIST
-;ђg’·
-IF TALENT:L_C_ID:ѓIѓgѓR == 1
-	IF TALENT:L_C_ID:‹ђ‹л == 1
-		CFLAG:L_C_ID:ђg’· = 220 + RAND:30
-	ELSEIF TALENT:L_C_ID:‘е•ї == 1
-		CFLAG:L_C_ID:ђg’· = 190 + RAND:30
-	ELSEIF TALENT:L_C_ID:’·ђg == 1
-		CFLAG:L_C_ID:ђg’· = 175 + RAND:20
-	ELSEIF TALENT:L_C_ID:Џ¬ђl‘МЊ^ == 1
-		CFLAG:L_C_ID:ђg’· = 100 - RAND:5
-	ELSEIF TALENT:L_C_ID:Џ¬•ї‘МЊ^ == 1
-		CFLAG:L_C_ID:ђg’· = 130 - RAND:5
+;иє«й•·
+IF TALENT:L_C_ID:г‚Єгѓ€г‚і == 1
+	IF TALENT:L_C_ID:е·ЁиєЇ == 1
+		CFLAG:L_C_ID:иє«й•· = 220 + RAND:30
+	ELSEIF TALENT:L_C_ID:е¤§жџ„ == 1
+		CFLAG:L_C_ID:иє«й•· = 190 + RAND:30
+	ELSEIF TALENT:L_C_ID:й•·иє« == 1
+		CFLAG:L_C_ID:иє«й•· = 175 + RAND:20
+	ELSEIF TALENT:L_C_ID:е°ЏдєєдЅ“ећ‹ == 1
+		CFLAG:L_C_ID:иє«й•· = 100 - RAND:5
+	ELSEIF TALENT:L_C_ID:е°Џжџ„дЅ“ећ‹ == 1
+		CFLAG:L_C_ID:иє«й•· = 130 - RAND:5
 	ELSE
-		CFLAG:L_C_ID:ђg’· = 165 + RAND:7
+		CFLAG:L_C_ID:иє«й•· = 165 + RAND:7
 	ENDIF
 ELSE
-	IF TALENT:L_C_ID:‹ђ‹л == 1
-		CFLAG:L_C_ID:ђg’· = 180 + RAND:9
-	ELSEIF TALENT:L_C_ID:‘е•ї == 1
-		CFLAG:L_C_ID:ђg’· = 170 + RAND:9
-	ELSEIF TALENT:L_C_ID:’·ђg == 1
-		CFLAG:L_C_ID:ђg’· = 160 + RAND:9
-	ELSEIF TALENT:L_C_ID:Џ¬ђl‘МЊ^ == 1
-		CFLAG:L_C_ID:ђg’· = 130 - RAND:30
-	ELSEIF TALENT:L_C_ID:Џ¬•ї‘МЊ^ == 1
-		CFLAG:L_C_ID:ђg’· = 145 - RAND:20
+	IF TALENT:L_C_ID:е·ЁиєЇ == 1
+		CFLAG:L_C_ID:иє«й•· = 180 + RAND:9
+	ELSEIF TALENT:L_C_ID:е¤§жџ„ == 1
+		CFLAG:L_C_ID:иє«й•· = 170 + RAND:9
+	ELSEIF TALENT:L_C_ID:й•·иє« == 1
+		CFLAG:L_C_ID:иє«й•· = 160 + RAND:9
+	ELSEIF TALENT:L_C_ID:е°ЏдєєдЅ“ећ‹ == 1
+		CFLAG:L_C_ID:иє«й•· = 130 - RAND:30
+	ELSEIF TALENT:L_C_ID:е°Џжџ„дЅ“ећ‹ == 1
+		CFLAG:L_C_ID:иє«й•· = 145 - RAND:20
 	ELSE
-		CFLAG:L_C_ID:ђg’· = 145 + RAND:15
+		CFLAG:L_C_ID:иє«й•· = 145 + RAND:15
 	ENDIF
 ENDIF
 
-;‘МЏd
-IF CFLAG:L_C_ID:ђg’· > 120
-	CFLAG:L_C_ID:‘МЏd = ((CFLAG:L_C_ID:ђg’· - 100) * 9) / 10 + RAND:10
+;дЅ“й‡Ќ
+IF CFLAG:L_C_ID:иє«й•· > 120
+	CFLAG:L_C_ID:дЅ“й‡Ќ = ((CFLAG:L_C_ID:иє«й•· - 100) * 9) / 10 + RAND:10
 ELSE
-	CFLAG:L_C_ID:‘МЏd = ((CFLAG:L_C_ID:ђg’· - 48) * 3) / 10 + RAND:5
+	CFLAG:L_C_ID:дЅ“й‡Ќ = ((CFLAG:L_C_ID:иє«й•· - 48) * 3) / 10 + RAND:5
 ENDIF
 
-;ѓEѓGѓXѓgѓTѓCѓY
-;•вђі’l
-L_HOSEI_WAIST = RAND:100 + CFLAG:L_C_ID:‘МЊ^ * 100
-CFLAG:L_C_ID:ѓEѓGѓXѓgѓTѓCѓY = (CFLAG:L_C_ID:ђg’· * 320) + (RAND:500 * 2 + RAND:500 * 2)
-CFLAG:L_C_ID:ѓEѓGѓXѓgѓTѓCѓY = CFLAG:L_C_ID:ѓEѓGѓXѓgѓTѓCѓY * (L_HOSEI_WAIST + 1000) / 1000000
-SIF CFLAG:L_C_ID:ђg’· < 130
-	CFLAG:L_C_ID:ѓEѓGѓXѓgѓTѓCѓY += (130 - CFLAG:L_C_ID:ђg’· + RAND:10 + RAND:(TALENT:L_C_ID:Џ¬ђl‘МЊ^ + 1)) / 5
+;г‚¦г‚Ёг‚№гѓ€г‚µг‚¤г‚є
+;иЈњж­ЈеЂ¤
+L_HOSEI_WAIST = RAND:100 + CFLAG:L_C_ID:дЅ“ећ‹ * 100
+CFLAG:L_C_ID:г‚¦г‚Ёг‚№гѓ€г‚µг‚¤г‚є = (CFLAG:L_C_ID:иє«й•· * 320) + (RAND:500 * 2 + RAND:500 * 2)
+CFLAG:L_C_ID:г‚¦г‚Ёг‚№гѓ€г‚µг‚¤г‚є = CFLAG:L_C_ID:г‚¦г‚Ёг‚№гѓ€г‚µг‚¤г‚є * (L_HOSEI_WAIST + 1000) / 1000000
+SIF CFLAG:L_C_ID:иє«й•· < 130
+	CFLAG:L_C_ID:г‚¦г‚Ёг‚№гѓ€г‚µг‚¤г‚є += (130 - CFLAG:L_C_ID:иє«й•· + RAND:10 + RAND:(TALENT:L_C_ID:е°ЏдєєдЅ“ећ‹ + 1)) / 5
 
-CFLAG:L_C_ID:ѓoѓXѓgѓTѓCѓY = CHARACTER_BUST_RETURN(L_C_ID)
-CFLAG:L_C_ID:ѓqѓbѓvѓTѓCѓY = CHARACTER_HIP_RETURN(L_C_ID)
+CFLAG:L_C_ID:гѓђг‚№гѓ€г‚µг‚¤г‚є = CHARACTER_BUST_RETURN(L_C_ID)
+CFLAG:L_C_ID:гѓ’гѓѓгѓ—г‚µг‚¤г‚є = CHARACTER_HIP_RETURN(L_C_ID)
 
 
 ;-------------------------------------------------
-;ѓoѓXѓg‰‰ЋZ
+;гѓђг‚№гѓ€жј”з®—
 ;-------------------------------------------------
 @CHARACTER_BUST_RETURN(ARG:0)
 #FUNCTION
@@ -366,71 +366,71 @@ CFLAG:L_C_ID:ѓqѓbѓvѓTѓCѓY = CHARACTER_HIP_RETURN(L_C_ID)
 #DIM L_HS
 
 L_I = ARG
-L_BH = CFLAG:L_I:ђg’·*520/1000
+L_BH = CFLAG:L_I:иє«й•·*520/1000
 
-IF TALENT:L_I:ѓIѓgѓR == 1
-	IF TALENT:L_I:‹ђ‹л == 1
+IF TALENT:L_I:г‚Єгѓ€г‚і == 1
+	IF TALENT:L_I:е·ЁиєЇ == 1
 		L_BH+= RAND:10
-	ELSEIF TALENT:L_I:‘е•ї == 1
+	ELSEIF TALENT:L_I:е¤§жџ„ == 1
 		L_BH+= RAND:5
-	ELSEIF TALENT:L_I:’·ђg == 1
+	ELSEIF TALENT:L_I:й•·иє« == 1
 		L_BH+= RAND:3
-	ELSEIF TALENT:L_I:Џ¬ђl‘МЊ^ == 1
+	ELSEIF TALENT:L_I:е°ЏдєєдЅ“ећ‹ == 1
 		L_BH-= RAND:5
-	ELSEIF TALENT:L_I:Џ¬•ї‘МЊ^ == 1
+	ELSEIF TALENT:L_I:е°Џжџ„дЅ“ећ‹ == 1
 		L_BH-= RAND:3
 	ELSE
 		L_BH+= RAND:5
 	ENDIF
 ELSE
-	;•вђі
-	L_BH += (CFLAG:L_I:‘МЊ^*100 + RAND:100) / 10
-	L_HS += (CFLAG:L_I:‘МЊ^*100 + RAND:100) / 50
+	;иЈњж­Ј
+	L_BH += (CFLAG:L_I:дЅ“ећ‹*100 + RAND:100) / 10
+	L_HS += (CFLAG:L_I:дЅ“ећ‹*100 + RAND:100) / 50
 
-	IF TALENT:L_I:‹ђ‹л == 1
+	IF TALENT:L_I:е·ЁиєЇ == 1
 		L_BH += 15+RAND:10
-	ELSEIF TALENT:L_I:‘е•ї == 1
+	ELSEIF TALENT:L_I:е¤§жџ„ == 1
 		L_BH += 10+RAND:10
-	ELSEIF TALENT:L_I:’·ђg == 1
+	ELSEIF TALENT:L_I:й•·иє« == 1
 		L_BH += 5+RAND:10
-	ELSEIF TALENT:L_I:Џ¬ђl‘МЊ^ == 1
+	ELSEIF TALENT:L_I:е°ЏдєєдЅ“ећ‹ == 1
 		L_BH -= 10+RAND:10
-	ELSEIF TALENT:L_I:Џ¬•ї‘МЊ^ == 1
+	ELSEIF TALENT:L_I:е°Џжџ„дЅ“ећ‹ == 1
 		L_BH -= 5+RAND:10
 	ENDIF
 
 	
-	;ѓJѓbѓvѓTѓCѓY‚НѓoѓXѓg-ѓAѓ“ѓ_Ѓ[ѓoѓXѓg‚ЄAA‚Е7.5cm€ИЏг10.0cm–ў–ћ
-	;€ИЌ~+2.5cm–€‚ЙѓTѓCѓYѓAѓbѓv‚µЃAAA–ў–ћ‚Е‘Є’и•s”\(=0)
-	L_HS = (CFLAG:L_I:ѓEѓGѓXѓgѓTѓCѓY+CFLAG:L_I:ђg’·/20)*10
-	SIF TALENT:L_I:Џ¬ђl‘МЊ^
+	;г‚«гѓѓгѓ—г‚µг‚¤г‚єгЃЇгѓђг‚№гѓ€-г‚ўгѓігѓЂгѓјгѓђг‚№гѓ€гЃЊAAгЃ§7.5cmд»ҐдёЉ10.0cmжњЄжєЂ
+	;д»Ґй™Ќ+2.5cmжЇЋгЃ«г‚µг‚¤г‚єг‚ўгѓѓгѓ—гЃ—гЂЃAAжњЄжєЂгЃ§жё¬е®љдёЌиѓЅ(=0)
+	L_HS = (CFLAG:L_I:г‚¦г‚Ёг‚№гѓ€г‚µг‚¤г‚є+CFLAG:L_I:иє«й•·/20)*10
+	SIF TALENT:L_I:е°ЏдєєдЅ“ећ‹
 		L_HS -= 10+RAND:10
-	IF TALENT:L_I:‹ђ“ы == 1
-		;EѓJѓbѓvЃ`FѓJѓbѓv‚Ь‚Е
+	IF TALENT:L_I:е·Ёд№і == 1
+		;Eг‚«гѓѓгѓ—пЅћFг‚«гѓѓгѓ—гЃѕгЃ§
 		L_BH = L_HS+200
-	ELSEIF TALENT:L_I:”љ“ы == 1
-		;GѓJѓbѓvЃ`
+	ELSEIF TALENT:L_I:з€†д№і == 1
+		;Gг‚«гѓѓгѓ—пЅћ
 		L_BH = MAX(L_BH, L_HS+250)
-	ELSEIF TALENT:L_I:ђв•З
-		;‘Є’и•s”\Ѓ`AAѓJѓbѓv‚Ь‚Е
+	ELSEIF TALENT:L_I:зµ¶еЈЃ
+		;жё¬е®љдёЌиѓЅпЅћAAг‚«гѓѓгѓ—гЃѕгЃ§
 		L_BH = L_HS
 		L_BH += RAND:51
-	ELSEIF TALENT:L_I:•n“ы
-		;AѓJѓbѓvЃ`BѓJѓbѓv‚Ь‚Е
+	ELSEIF TALENT:L_I:иІ§д№і
+		;Aг‚«гѓѓгѓ—пЅћBг‚«гѓѓгѓ—гЃѕгЃ§
 		L_BH = L_HS+100
 	ELSE
-		;CѓJѓbѓvЃ`DѓJѓbѓv‚Ь‚Е
+		;Cг‚«гѓѓгѓ—пЅћDг‚«гѓѓгѓ—гЃѕгЃ§
 		L_BH = L_HS+150
 	ENDIF
 	L_BH += RAND:50
-	CFLAG:L_I:ѓJѓbѓvѓTѓCѓY = MAX(0, (L_BH-L_HS-50)/25)
-	CFLAG:L_I:‘МЏd += RAND:(CFLAG:L_I:ѓJѓbѓvѓTѓCѓY + 1) / 10
+	CFLAG:L_I:г‚«гѓѓгѓ—г‚µг‚¤г‚є = MAX(0, (L_BH-L_HS-50)/25)
+	CFLAG:L_I:дЅ“й‡Ќ += RAND:(CFLAG:L_I:г‚«гѓѓгѓ—г‚µг‚¤г‚є + 1) / 10
 ENDIF
 RETURNF L_BH/10
 
 
 ;-------------------------------------------------
-;ѓqѓbѓv‰‰ЋZ
+;гѓ’гѓѓгѓ—жј”з®—
 ;-------------------------------------------------
 @CHARACTER_HIP_RETURN(ARG:0)
 #FUNCTION
@@ -439,26 +439,26 @@ RETURNF L_BH/10
 #DIM L_HS
 
 L_I = ARG
-;•вђі
-L_HS = CFLAG:L_I:‘МЊ^*100 - RAND:50
-L_BH = (CFLAG:L_I:ђg’·*(48+RAND:4)+RAND:100) * (L_HS+1000) / 10000
+;иЈњж­Ј
+L_HS = CFLAG:L_I:дЅ“ећ‹*100 - RAND:50
+L_BH = (CFLAG:L_I:иє«й•·*(48+RAND:4)+RAND:100) * (L_HS+1000) / 10000
 
-IF TALENT:L_I:”љђK
-	L_BH = MAX(CFLAG:L_I:ђg’·*59/10, L_BH)
-	L_BH += CFLAG:L_I:‘МЊ^*RAND:15
-ELSEIF TALENT:L_I:‹ђђK
-	L_BH = MAX(CFLAG:L_I:ђg’·*56/10, L_BH)
-	L_BH = MIN(CFLAG:L_I:ђg’·*59/10 - 1, L_BH)
+IF TALENT:L_I:з€†е°»
+	L_BH = MAX(CFLAG:L_I:иє«й•·*59/10, L_BH)
+	L_BH += CFLAG:L_I:дЅ“ећ‹*RAND:15
+ELSEIF TALENT:L_I:е·Ёе°»
+	L_BH = MAX(CFLAG:L_I:иє«й•·*56/10, L_BH)
+	L_BH = MIN(CFLAG:L_I:иє«й•·*59/10 - 1, L_BH)
 ELSE
-	L_BH = MIN(CFLAG:L_I:ђg’·*56/10 - 1, L_BH)
-	L_BH = MAX(CFLAG:L_I:ђg’·*48/10, L_BH)
+	L_BH = MIN(CFLAG:L_I:иє«й•·*56/10 - 1, L_BH)
+	L_BH = MAX(CFLAG:L_I:иє«й•·*48/10, L_BH)
 ENDIF
 
 RETURNF L_BH/10
 
 
 ;-------------------------------------------------
-;ЏZђlЏо•с
+;дЅЏдєєжѓ…е ±
 ;-------------------------------------------------
 @CHARACTER_SCOUT_PERSONAL2(ARG:0)
 #DIM L_I
@@ -467,13 +467,13 @@ RETURNF L_BH/10
 P_1 = 0
 L_I= ARG:0
 
-IF TALENT:L_I:ђВ‚«ЊЊ‘° == 1
+IF TALENT:L_I:йќ’гЃЌиЎЂж—Џ == 1
 	P_1 = 3
-ELSEIF     FLAG:“sЋs_Lv >= 30 &&  FLAG:Ќ‚‹‰ѓJѓWѓm >= 15 && FLAG:ѓGѓXѓe >= 15 && FLAG:Љw‰Ђ >= 15 && FLAG:ѓ‰ѓuѓzѓeѓ‹ >= 15
+ELSEIF     FLAG:йѓЅеё‚_Lv >= 30 &&  FLAG:й«зґљг‚«г‚ёгѓЋ >= 15 && FLAG:г‚Ёг‚№гѓ† >= 15 && FLAG:е­¦ењ’ >= 15 && FLAG:гѓ©гѓ–гѓ›гѓ†гѓ« >= 15
 	P_1 = RAND:4
-ELSEIF FLAG:“sЋs_Lv >= 20 &&  FLAG:Ќ‚‹‰ѓJѓWѓm >= 10 && FLAG:ѓGѓXѓe >= 10 && FLAG:Љw‰Ђ >= 10 && FLAG:ѓ‰ѓuѓzѓeѓ‹ >= 10
+ELSEIF FLAG:йѓЅеё‚_Lv >= 20 &&  FLAG:й«зґљг‚«г‚ёгѓЋ >= 10 && FLAG:г‚Ёг‚№гѓ† >= 10 && FLAG:е­¦ењ’ >= 10 && FLAG:гѓ©гѓ–гѓ›гѓ†гѓ« >= 10
 	P_1 = RAND:3
-ELSEIF FLAG:“sЋs_Lv >= 10 &&  FLAG:Ќ‚‹‰ѓJѓWѓm >=  5 && FLAG:ѓGѓXѓe >=  5 && FLAG:Љw‰Ђ >=  5 && FLAG:ѓ‰ѓuѓzѓeѓ‹ >=  5
+ELSEIF FLAG:йѓЅеё‚_Lv >= 10 &&  FLAG:й«зґљг‚«г‚ёгѓЋ >=  5 && FLAG:г‚Ёг‚№гѓ† >=  5 && FLAG:е­¦ењ’ >=  5 && FLAG:гѓ©гѓ–гѓ›гѓ†гѓ« >=  5
 	P_1 = RAND:2
 ELSE
 	P_1 = 0
@@ -481,72 +481,72 @@ ENDIF
 
 
 
-IF Flag:Њ@‚иЏo‚µ‚а‚М•iЋї > 0
-	TALENT:L_I:ђlЊ ‘№‰у = 1
-	TALENT:L_I:€Л‘¶ = 1
-	TALENT:L_I:”сЌ‡€У = 0
-	TALENT:L_I:Ќ‡€У = 1
+IF Flag:жЋг‚Ље‡єгЃ—г‚‚гЃ®е“ЃиіЄ > 0
+	TALENT:L_I:дєєжЁ©жђЌеЈЉ = 1
+	TALENT:L_I:дѕќе­ = 1
+	TALENT:L_I:йќћеђ€ж„Џ = 0
+	TALENT:L_I:еђ€ж„Џ = 1
 ENDIF
 
-IF Flag:Њ@‚иЏo‚µ‚а‚М•iЋї == 3
-	CFLAG:L_I:ЏZђl_’n€К = 3
-	TALENT:L_I:ђВ‚«ЊЊ‘° = 1
+IF Flag:жЋг‚Ље‡єгЃ—г‚‚гЃ®е“ЃиіЄ == 3
+	CFLAG:L_I:дЅЏдєє_ењ°дЅЌ = 3
+	TALENT:L_I:йќ’гЃЌиЎЂж—Џ = 1
 	P_1 = 3
-ELSEIF Flag:Њ@‚иЏo‚µ‚а‚М•iЋї == 2
-	CFLAG:L_I:ЏZђl_’n€К = 2
+ELSEIF Flag:жЋг‚Ље‡єгЃ—г‚‚гЃ®е“ЃиіЄ == 2
+	CFLAG:L_I:дЅЏдєє_ењ°дЅЌ = 2
 	P_1 = 2
 ELSE
-	CFLAG:L_I:ЏZђl_’n€К = P_1
+	CFLAG:L_I:дЅЏдєє_ењ°дЅЌ = P_1
 ENDIF
 
-SIF CFLAG:L_I:ЏZђl_’n€К >= 3 && RAND:100 <= 5
-	TALENT:L_I:ђВ‚«ЊЊ‘° = 1
+SIF CFLAG:L_I:дЅЏдєє_ењ°дЅЌ >= 3 && RAND:100 <= 5
+	TALENT:L_I:йќ’гЃЌиЎЂж—Џ = 1
 
 
 P_1 += 1
 
-CFlag:L_I:ЏZђl_ЏЉЋќ‹а = ((1000 * (RAND:10 + 1)) + (100 * (RAND:10 + 1)) + (10 * (RAND:10 + 1))) * (CFlag:L_I:ЏZђl_’n€К + 1 * 10)
-CFlag:L_I:ЏZђl_ЌvЊЈ’l = (RAND:3 + 1) * P_1
-CFlag:L_I:ЏZђl_Џo”п = (CFlag:L_I:ЏZђl_ЏЉЋќ‹а) / (RAND:4 + 4)
-CFlag:L_I:ЏZђl_Ћы“ь = ((CFlag:L_I:ЏZђl_ЏЉЋќ‹а) / 5) * 2
-CFlag:L_I:ЏZђl_ђl‹C = (RAND:50 + 1) * (CFlag:L_I:ЏZђl_’n€К + 1)
-CFlag:L_I:ЏZђl_•iђ« = (RAND:50 + 1) * (CFlag:L_I:ЏZђl_’n€К + 1)
-IF Flag:ЋћЉФ‘С == 0
+CFlag:L_I:дЅЏдєє_ж‰ЂжЊЃй‡‘ = ((1000 * (RAND:10 + 1)) + (100 * (RAND:10 + 1)) + (10 * (RAND:10 + 1))) * (CFlag:L_I:дЅЏдєє_ењ°дЅЌ + 1 * 10)
+CFlag:L_I:дЅЏдєє_иІўзЊ®еЂ¤ = (RAND:3 + 1) * P_1
+CFlag:L_I:дЅЏдєє_е‡єиІ» = (CFlag:L_I:дЅЏдєє_ж‰ЂжЊЃй‡‘) / (RAND:4 + 4)
+CFlag:L_I:дЅЏдєє_еЏЋе…Ґ = ((CFlag:L_I:дЅЏдєє_ж‰ЂжЊЃй‡‘) / 5) * 2
+CFlag:L_I:дЅЏдєє_дєєж°— = (RAND:50 + 1) * (CFlag:L_I:дЅЏдєє_ењ°дЅЌ + 1)
+CFlag:L_I:дЅЏдєє_е“ЃжЂ§ = (RAND:50 + 1) * (CFlag:L_I:дЅЏдєє_ењ°дЅЌ + 1)
+IF Flag:ж™‚й–“еёЇ == 0
 	IF !RAND:2
-		CFlag:L_I:ЏZђl_‘®ђ« = 1
+		CFlag:L_I:дЅЏдєє_е±ћжЂ§ = 1
 	ELSE
-		CFlag:L_I:ЏZђl_‘®ђ« = 0
+		CFlag:L_I:дЅЏдєє_е±ћжЂ§ = 0
 	ENDIF
 ELSE
 	IF !RAND:2
-		CFlag:L_I:ЏZђl_‘®ђ« = 2
+		CFlag:L_I:дЅЏдєє_е±ћжЂ§ = 2
 	ELSE
-		CFlag:L_I:ЏZђl_‘®ђ« = 0
+		CFlag:L_I:дЅЏдєє_е±ћжЂ§ = 0
 	ENDIF
 ENDIF
 
-SIF TALENT:L_I:ђl‹C == 1
-	CFlag:L_I:ЏZђl_ђl‹C += RAND:100+50
-SIF TALENT:L_I:–Јf == 1
-	CFlag:L_I:ЏZђl_ђl‹C += RAND:70+50
-SIF TALENT:L_I:–Ј—Н == 1
-	CFlag:L_I:ЏZђl_ђl‹C += RAND:70+50
-SIF TALENT:L_I:”ь–e == 1
-	CFlag:L_I:ЏZђl_ђl‹C += RAND:100+100
-SIF TALENT:L_I:ѓJѓЉѓXѓ} == 1
-	CFlag:L_I:ЏZђl_ђl‹C += RAND:200+100
+SIF TALENT:L_I:дєєж°— == 1
+	CFlag:L_I:дЅЏдєє_дєєж°— += RAND:100+50
+SIF TALENT:L_I:й­…жѓ‘ == 1
+	CFlag:L_I:дЅЏдєє_дєєж°— += RAND:70+50
+SIF TALENT:L_I:й­…еЉ› == 1
+	CFlag:L_I:дЅЏдєє_дєєж°— += RAND:70+50
+SIF TALENT:L_I:зѕЋиІЊ == 1
+	CFlag:L_I:дЅЏдєє_дєєж°— += RAND:100+100
+SIF TALENT:L_I:г‚«гѓЄг‚№гѓћ == 1
+	CFlag:L_I:дЅЏдєє_дєєж°— += RAND:200+100
 
 
 
-IF CFlag:L_I:ЏZђl_‘®ђ« == 1
-	CFlag:L_I:ЏZђl_ѓ‚ѓ‰ѓ‹ = (RAND:20)+(RAND:40)+40
-	CFlag:L_I:ЏZђl_ѓJѓ‹ѓ} = (RAND:5)
-ELSEIF CFlag:L_I:ЏZђl_‘®ђ« == 2
-	CFlag:L_I:ЏZђl_ѓ‚ѓ‰ѓ‹ = (RAND:20)-(RAND:40)-20
-	CFlag:L_I:ЏZђl_ѓJѓ‹ѓ} = (RAND:40)+20
+IF CFlag:L_I:дЅЏдєє_е±ћжЂ§ == 1
+	CFlag:L_I:дЅЏдєє_гѓўгѓ©гѓ« = (RAND:20)+(RAND:40)+40
+	CFlag:L_I:дЅЏдєє_г‚«гѓ«гѓћ = (RAND:5)
+ELSEIF CFlag:L_I:дЅЏдєє_е±ћжЂ§ == 2
+	CFlag:L_I:дЅЏдєє_гѓўгѓ©гѓ« = (RAND:20)-(RAND:40)-20
+	CFlag:L_I:дЅЏдєє_г‚«гѓ«гѓћ = (RAND:40)+20
 ELSE
-	CFlag:L_I:ЏZђl_ѓ‚ѓ‰ѓ‹ = (RAND:10)+(RAND:10)+30
-	CFlag:L_I:ЏZђl_ѓJѓ‹ѓ} = (RAND:20)
+	CFlag:L_I:дЅЏдєє_гѓўгѓ©гѓ« = (RAND:10)+(RAND:10)+30
+	CFlag:L_I:дЅЏдєє_г‚«гѓ«гѓћ = (RAND:20)
 ENDIF
 
 CALL CHARACTER_SCOUT_PERSONAL3(ARG:0)
@@ -554,69 +554,69 @@ CALL CHARACTER_SCOUT_PERSONAL3(ARG:0)
 
 
 ;-------------------------------------------------
-;“ч‘МЏо•с
+;и‚‰дЅ“жѓ…е ±
 ;-------------------------------------------------
 @CHARACTER_SCOUT_PERSONAL3(L_C_ID)
 #DIM L_C_ID
 #DIM L_OVUM_DEFFENSE
 
 L_OVUM_DEFFENSE = 0
-SELECTCASE INFO_STR_SYUZOKU(CFLAG:L_C_ID:ЏZђl_Ћн‘°)
-CASE "ѓGѓ‹ѓt"
+SELECTCASE INFO_STR_SYUZOKU(CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џ)
+CASE "г‚Ёгѓ«гѓ•"
 	L_OVUM_DEFFENSE = 500
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 5
-CASE "–й–‚"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 5
+CASE "е¤њй­”"
 	L_OVUM_DEFFENSE = 100
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 15
-CASE "€џђl"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 15
+CASE "дєњдєє"
 	L_OVUM_DEFFENSE = 50
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 30
-CASE "ѓIЃ[ѓgѓ}ѓ^"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 30
+CASE "г‚Єгѓјгѓ€гѓћг‚ї"
 	L_OVUM_DEFFENSE = 500
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 5
-CASE "“VЋg"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 5
+CASE "е¤©дЅї"
 	L_OVUM_DEFFENSE = 200
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 10
-CASE "ЉCђl"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 10
+CASE "жµ·дєє"
 	L_OVUM_DEFFENSE = 600
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 5
-CASE "’№ђl"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 5
+CASE "йіҐдєє"
 	L_OVUM_DEFFENSE = 50
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 30
-CASE "‹S"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 30
+CASE "й¬ј"
 	L_OVUM_DEFFENSE = 500
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 20
-CASE "‹zЊЊ‹S"
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 20
+CASE "еђёиЎЂй¬ј"
 	L_OVUM_DEFFENSE = 500
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 5
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 5
 CASEELSE
-;CASE "ђlЉФ", "—іђl", "ѓCѓX", "ђё—м" ѓfѓX
+;CASE "дєєй–“", "з«њдєє", "г‚¤г‚№", "зІѕйњЉ" гѓ‡г‚№
 	L_OVUM_DEFFENSE = 0
-	CFLAG:L_C_ID:ЋуђёЉm—¦ = 20
+	CFLAG:L_C_ID:еЏ—зІѕзўєзЋ‡ = 20
 ENDSELECT
 
-CFLAG:L_C_ID:ЋуђёЌЕ‘е‘П‹v’l = 100 + L_OVUM_DEFFENSE
-CFLAG:L_C_ID:ЋуђёЊ»ЌЭ‘П‹v’l = CFLAG:L_C_ID:ЋуђёЌЕ‘е‘П‹v’l
+CFLAG:L_C_ID:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤ = 100 + L_OVUM_DEFFENSE
+CFLAG:L_C_ID:еЏ—зІѕзЏѕењЁиЂђд№…еЂ¤ = CFLAG:L_C_ID:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤
 
 CALL CHARACTER_SECRET(L_C_ID)
 
 
 ;-------------------------------------------------
-;‚»‚М‘јЃ@Џо•с
+;гЃќгЃ®д»–гЂЂжѓ…е ±
 ;-------------------------------------------------
 @CHARACTER_SCOUT_EXTRA(L_C_ID)
 #DIM L_C_ID
 #DIM L_NAYAMI_SLOT
 
-;–{ђl‚М“п“x‚МђЭ’и
-CFLAG:L_C_ID:ЏZђl_“п“x = RAND(1, 4)
-;‘е‚«‚И”Y‚Э
-;1Ѓ`2‰сЌмђ¬
+;жњ¬дєєгЃ®й›Јеє¦гЃ®иЁ­е®љ
+CFLAG:L_C_ID:дЅЏдєє_й›Јеє¦ = RAND(1, 4)
+;е¤§гЃЌгЃЄж‚©гЃї
+;1пЅћ2е›ћдЅњж€ђ
 FOR L_NAYAMI_SLOT, 1, RAND(2, 4)
 	CALL MAKE_BIG_NAYAMI(L_C_ID, L_NAYAMI_SLOT)
 NEXT
-;Џ¬‚і‚И”Y‚Э
-;2Ѓ`3‰сЌмђ¬
+;е°ЏгЃ•гЃЄж‚©гЃї
+;2пЅћ3е›ћдЅњж€ђ
 FOR L_NAYAMI_SLOT, 1, RAND(3, 5)
 	CALL MAKE_SMALL_NAYAMI(L_C_ID, L_NAYAMI_SLOT)
 NEXT
@@ -624,100 +624,100 @@ NEXT
 
 
 ;-------------------------------------------------
-;Џ‰Љъ•ћ‘•&Ћн‘°“Б’Ґ
+;е€ќжњџжњЌиЈ…&зЁ®ж—Џз‰№еѕґ
 ;-------------------------------------------------
 @CHARACTER_SCOUT_COSTUME(L_C_ID)
 #DIM L_C_ID
 #DIM L_RANDOM
-SELECTCASE INFO_STR_SYUZOKU(CFLAG:L_C_ID:ЏZђl_Ћн‘°)
-CASE "ђlЉФ"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 0
-CASE "ѓGѓ‹ѓt"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = CFLAG:L_C_ID:”§ђF
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 0
-CASE "–й–‚"
+SELECTCASE INFO_STR_SYUZOKU(CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џ)
+CASE "дєєй–“"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 0
+CASE "г‚Ёгѓ«гѓ•"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = CFLAG:L_C_ID:и‚Њи‰І
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 0
+CASE "е¤њй­”"
 	IF RAND:999 < 950
-		CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 0
+		CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 0
 	ELSE
-		CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 1
+		CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 1
 	ENDIF
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ3 = 0
-CASE "€џђl"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ3 = 0
+CASE "дєњдєє"
 	IF RAND:999 < 950
-		CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = RAND:4
-		CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1
+		CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = RAND:4
+		CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1
 	ELSE
-		CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 2
-		CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 4
+		CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 2
+		CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 4
 	ENDIF
-CASE "ѓIЃ[ѓgѓ}ѓ^"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ3 = 0
-CASE "“VЋg"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = RAND:2
-CASE "—іђl"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = RAND:8
-CASE "ѓCѓX"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = RAND:4
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 0
-CASE "ЉCђl"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 0
-CASE "’№ђl"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = RAND:5
-CASE "‹S"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = RAND:4
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = 0
+CASE "г‚Єгѓјгѓ€гѓћг‚ї"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ3 = 0
+CASE "е¤©дЅї"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = RAND:2
+CASE "з«њдєє"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = RAND:8
+CASE "г‚¤г‚№"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = RAND:4
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 0
+CASE "жµ·дєє"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 0
+CASE "йіҐдєє"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = RAND:5
+CASE "й¬ј"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = RAND:4
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = 0
 	SIF RAND:10 > 6
-		CFLAG:L_C_ID:”§ђF = 4
-CASE "ђё—м"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = RAND:6
-CASE "‹zЊЊ‹S"
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ1 = 0
-	CFLAG:L_C_ID:ЏZђl_Ћн‘°“Б’Ґ2 = RAND:4
+		CFLAG:L_C_ID:и‚Њи‰І = 4
+CASE "зІѕйњЉ"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = RAND:6
+CASE "еђёиЎЂй¬ј"
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ1 = 0
+	CFLAG:L_C_ID:дЅЏдєє_зЁ®ж—Џз‰№еѕґ2 = RAND:4
 CASEELSE
 ENDSELECT
 
-IF TALENT:L_C_ID:ѓIѓgѓR == 0
-	IF TALENT:L_C_ID:Љwђ¶
-		CFLAG:L_C_ID:•ћ‘• = RAND:3
-		CFLAG:L_C_ID:ЊC = (RAND:3)+2
-	ELSEIF TALENT:L_C_ID:ѓAѓCѓhѓ‹ == 1
-		CFLAG:L_C_ID:•ћ‘• = (RAND:4)+5
-		CFLAG:L_C_ID:ЊC = RAND:5
-	ELSEIF TALENT:L_C_ID:ЋР‰пђl == 1
-		CFLAG:L_C_ID:•ћ‘• = (RAND:6)+3
-		CFLAG:L_C_ID:ЊC = RAND:2
-	ELSEIF TALENT:L_C_ID:Џ©•w == 1
-		CFLAG:L_C_ID:•ћ‘• = (RAND:2)+9
-		CFLAG:L_C_ID:ЊC = RAND:2
-	ELSEIF TALENT:L_C_ID:ЋЎ€А€ЫЋќ‹З€х 
-		CFLAG:L_C_ID:•ћ‘• = (RAND:3)+20
-		CFLAG:L_C_ID:ЊC = RAND:2
-		SIF CFLAG:L_C_ID:•ћ‘• == 22
-			CFLAG:L_C_ID:–XЋq = 2
+IF TALENT:L_C_ID:г‚Єгѓ€г‚і == 0
+	IF TALENT:L_C_ID:е­¦з”џ
+		CFLAG:L_C_ID:жњЌиЈ… = RAND:3
+		CFLAG:L_C_ID:йќґ = (RAND:3)+2
+	ELSEIF TALENT:L_C_ID:г‚ўг‚¤гѓ‰гѓ« == 1
+		CFLAG:L_C_ID:жњЌиЈ… = (RAND:4)+5
+		CFLAG:L_C_ID:йќґ = RAND:5
+	ELSEIF TALENT:L_C_ID:з¤ѕдјљдєє == 1
+		CFLAG:L_C_ID:жњЌиЈ… = (RAND:6)+3
+		CFLAG:L_C_ID:йќґ = RAND:2
+	ELSEIF TALENT:L_C_ID:еЁје©¦ == 1
+		CFLAG:L_C_ID:жњЌиЈ… = (RAND:2)+9
+		CFLAG:L_C_ID:йќґ = RAND:2
+	ELSEIF TALENT:L_C_ID:жІ»е®‰з¶­жЊЃе±Ђе“Ў 
+		CFLAG:L_C_ID:жњЌиЈ… = (RAND:3)+20
+		CFLAG:L_C_ID:йќґ = RAND:2
+		SIF CFLAG:L_C_ID:жњЌиЈ… == 22
+			CFLAG:L_C_ID:еёЅе­ђ = 2
 	ELSE
-		CFLAG:L_C_ID:•ћ‘• = RAND:12
-		CFLAG:L_C_ID:ЊC = RAND:5
+		CFLAG:L_C_ID:жњЌиЈ… = RAND:12
+		CFLAG:L_C_ID:йќґ = RAND:5
 	ENDIF
 ENDIF
 
 L_RANDOM = RAND:2
-CFLAG:L_C_ID:‰є’…Џг = L_RANDOM
-CFLAG:L_C_ID:‰є’…‰є = (RAND:3)+L_RANDOM 
-CFLAG:L_C_ID:ЊC‰є = RAND:4
+CFLAG:L_C_ID:дё‹зќЂдёЉ = L_RANDOM
+CFLAG:L_C_ID:дё‹зќЂдё‹ = (RAND:3)+L_RANDOM 
+CFLAG:L_C_ID:йќґдё‹ = RAND:4
 
 
 
 
-IF CFlag:L_C_ID:ЏZђl_‘МЉi == 1
-	CFlag:L_C_ID:•ћ‘• = (RAND:5)
-	CFlag:L_C_ID:ЊC = RAND:3
+IF CFlag:L_C_ID:дЅЏдєє_дЅ“ж ј == 1
+	CFlag:L_C_ID:жњЌиЈ… = (RAND:5)
+	CFlag:L_C_ID:йќґ = RAND:3
 ENDIF
 
 
@@ -731,181 +731,181 @@ ENDIF
 
 
 ;-------------------------------------------------
-;‰B‚µѓXѓeЃ[ѓ^ѓX
+;йљ гЃ—г‚№гѓ†гѓјг‚їг‚№
 ;-------------------------------------------------
 @CHARACTER_SECRET(L_I)
 #DIM  L_I
 #DIM  L_DICE
 #DIMS L_RACE
 
-L_RACE = INFO_STR_SYUZOKU(CFLAG:L_I:ЏZђl_Ћн‘°)
+L_RACE = INFO_STR_SYUZOKU(CFLAG:L_I:дЅЏдєє_зЁ®ж—Џ)
 {
 	L_DICE = 10
-	 + TALENT:L_I:–Јf * 2
-	 + TALENT:L_I:ђl‹C
-	 + TALENT:L_I:ѓJѓЉѓXѓ}
-	 + TALENT:L_I:ѓZѓbѓNѓX‹¶ * 3
-	 + TALENT:L_I:Џ¬€«–‚ * 2
-	 + TALENT:L_I:’е‘Ђ–і“Ъ’…
-	 + TALENT:L_I:‰хЉґ‚Й‘f’ј
-	 + TALENT:L_I:‰р•ъ
-	 + TALENT:L_I:’jЌD‚«
-	 + TALENT:L_I:Ќ›‚к‚Б‚Ы‚ў * 2
-	 + TALENT:L_I:‘¦‘В‚ї * 3
-	 + TALENT:L_I:€Л‘¶
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
+	 + TALENT:L_I:й­…жѓ‘ * 2
+	 + TALENT:L_I:дєєж°—
+	 + TALENT:L_I:г‚«гѓЄг‚№гѓћ
+	 + TALENT:L_I:г‚»гѓѓг‚Їг‚№з‹‚ * 3
+	 + TALENT:L_I:е°Џж‚Єй­” * 2
+	 + TALENT:L_I:иІћж“Ќз„Ўй “зќЂ
+	 + TALENT:L_I:еї«ж„џгЃ«зґ з›ґ
+	 + TALENT:L_I:и§Јж”ѕ
+	 + TALENT:L_I:з”·еҐЅгЃЌ
+	 + TALENT:L_I:жѓљг‚ЊгЃЈгЃЅгЃ„ * 2
+	 + TALENT:L_I:еЌіе •гЃЎ * 3
+	 + TALENT:L_I:дѕќе­
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
 }
-CFlag:L_I:–іЋ©Љo‚ИЋ“ = RAND:(L_DICE) + RAND:(L_DICE)
+CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ = RAND:(L_DICE) + RAND:(L_DICE)
 {
-	L_DICE = 7 + CFlag:L_I:–іЋ©Љo‚ИЋ“ / 3
-	 + TALENT:L_I:–Јf
-	 + TALENT:L_I:–Ј—Н
-	 + TALENT:L_I:”ь–e * 2
-	 + TALENT:L_I:ђl‹C * 2
-	 + TALENT:L_I:Џ¬€«–‚ * 2
-	 + TALENT:L_I:ѓJѓЉѓXѓ} * 3
-	 + TALENT:L_I:ѓAѓCѓhѓ‹ * 3
-	 + TALENT:L_I:Џ©•w * 2
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
+	L_DICE = 7 + CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ / 3
+	 + TALENT:L_I:й­…жѓ‘
+	 + TALENT:L_I:й­…еЉ›
+	 + TALENT:L_I:зѕЋиІЊ * 2
+	 + TALENT:L_I:дєєж°— * 2
+	 + TALENT:L_I:е°Џж‚Єй­” * 2
+	 + TALENT:L_I:г‚«гѓЄг‚№гѓћ * 3
+	 + TALENT:L_I:г‚ўг‚¤гѓ‰гѓ« * 3
+	 + TALENT:L_I:еЁје©¦ * 2
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
 }
-CFlag:L_I:ѓtѓFѓЌѓ‚ѓ“ = RAND:(L_DICE) + RAND:(L_DICE)
+CFlag:L_I:гѓ•г‚§гѓ­гѓўгѓі = RAND:(L_DICE) + RAND:(L_DICE)
 
 {
-	L_DICE = 7 + CFlag:L_I:–іЋ©Љo‚ИЋ“ / 3
-	 + TALENT:L_I:ѓZѓbѓNѓX‹¶ * 3
-	 + TALENT:L_I:’†“Е‚µ‚в‚·‚ў * 2
-	 + TALENT:L_I:’е‘Ђ–і“Ъ’… * 2
-	 + TALENT:L_I:‰хЉґ‚Й‘f’ј * 2
-	 + TALENT:L_I:‰р•ъ * 2
-	 + TALENT:L_I:€Л‘¶
-	 + TALENT:L_I:Џ©•w * 3
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
-	 + TALENT:L_I:ѓ}ѓhѓ“ѓi * 10
+	L_DICE = 7 + CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ / 3
+	 + TALENT:L_I:г‚»гѓѓг‚Їг‚№з‹‚ * 3
+	 + TALENT:L_I:дё­жЇ’гЃ—г‚„гЃ™гЃ„ * 2
+	 + TALENT:L_I:иІћж“Ќз„Ўй “зќЂ * 2
+	 + TALENT:L_I:еї«ж„џгЃ«зґ з›ґ * 2
+	 + TALENT:L_I:и§Јж”ѕ * 2
+	 + TALENT:L_I:дѕќе­
+	 + TALENT:L_I:еЁје©¦ * 3
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
+	 + TALENT:L_I:гѓћгѓ‰гѓігѓЉ * 10
 }
-CFlag:L_I:Ћ“‚М–{”\ = RAND:(L_DICE) + RAND:(L_DICE)
-SIF GROUPMATCH(L_RACE, "€џђl", "‹S", "’№ђl", "–й–‚")
-	CFlag:L_I:Ћ“‚М–{”\ +=  RAND:(L_DICE)
+CFlag:L_I:й›ЊгЃ®жњ¬иѓЅ = RAND:(L_DICE) + RAND:(L_DICE)
+SIF GROUPMATCH(L_RACE, "дєњдєє", "й¬ј", "йіҐдєє", "е¤њй­”")
+	CFlag:L_I:й›ЊгЃ®жњ¬иѓЅ +=  RAND:(L_DICE)
 {
-	L_DICE = 7 + CFlag:L_I:–іЋ©Љo‚ИЋ“ / 3
-	 + TALENT:L_I:’†“Е‚µ‚в‚·‚ў
-	 + TALENT:L_I:ЌDЉпђS * 3
-	 + TALENT:L_I:’е‘Ђ–і“Ъ’…
-	 + TALENT:L_I:Ћ©€Ф‚µ‚в‚·‚ў * 3
-	 + TALENT:L_I:ЊрЌЫ’† 
-	 + TALENT:L_I:ѓZѓtѓЊЋќ‚ї * 3
-	 + TALENT:L_I:Њ‹ЌҐЌП‚Э * 2
-	 + (1 - !(TALENT:L_I:Љwђ¶)) * 2
-	 + TALENT:L_I:Џ©•w * 2
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
+	L_DICE = 7 + CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ / 3
+	 + TALENT:L_I:дё­жЇ’гЃ—г‚„гЃ™гЃ„
+	 + TALENT:L_I:еҐЅеҐ‡еїѓ * 3
+	 + TALENT:L_I:иІћж“Ќз„Ўй “зќЂ
+	 + TALENT:L_I:и‡Єж…°гЃ—г‚„гЃ™гЃ„ * 3
+	 + TALENT:L_I:дє¤йљ›дё­ 
+	 + TALENT:L_I:г‚»гѓ•гѓ¬жЊЃгЃЎ * 3
+	 + TALENT:L_I:зµђе©љжё€гЃї * 2
+	 + (1 - !(TALENT:L_I:е­¦з”џ)) * 2
+	 + TALENT:L_I:еЁје©¦ * 2
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
 }
-CFlag:L_I:ђ«‚Ц‚М‹»–Ў = RAND:(L_DICE) + RAND:(L_DICE)
-
-{
-	L_DICE = 7 + CFlag:L_I:–іЋ©Љo‚ИЋ“ / 3
-	 + TALENT:L_I:–Јf
-	 + TALENT:L_I:’†“Е‚µ‚в‚·‚ў
-	 + TALENT:L_I:’е‘Ђ–і“Ъ’…
-	 + TALENT:L_I:‰хЉґ‚Й‘f’ј
-	 + TALENT:L_I:‰р•ъ
-	 + TALENT:L_I:’jЌD‚«
-	 + TALENT:L_I:Ќ›‚к‚Б‚Ы‚ў * 2
-	 + TALENT:L_I:‘¦‘В‚ї * 3
-	 + TALENT:L_I:Љwђ¶
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
-}
-CFlag:L_I:—Y‚Ц‚МЉЦђS = RAND:(L_DICE) + RAND:(L_DICE)
+CFlag:L_I:жЂ§гЃёгЃ®и€€е‘і = RAND:(L_DICE) + RAND:(L_DICE)
 
 {
-	L_DICE = 7 + CFlag:L_I:–іЋ©Љo‚ИЋ“ / 3
-	 + TALENT:L_I:ѓZѓbѓNѓX‹¶ * 5
-	 + TALENT:L_I:’†“Е‚µ‚в‚·‚ў * 2
-	 + TALENT:L_I:’е‘Ђ–і“Ъ’…
-	 + TALENT:L_I:‰хЉґ‚Й‘f’ј
-	 + TALENT:L_I:‰р•ъ * 2
-	 + TALENT:L_I:Њ‹ЌҐЌП‚Э * 3
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
+	L_DICE = 7 + CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ / 3
+	 + TALENT:L_I:й­…жѓ‘
+	 + TALENT:L_I:дё­жЇ’гЃ—г‚„гЃ™гЃ„
+	 + TALENT:L_I:иІћж“Ќз„Ўй “зќЂ
+	 + TALENT:L_I:еї«ж„џгЃ«зґ з›ґ
+	 + TALENT:L_I:и§Јж”ѕ
+	 + TALENT:L_I:з”·еҐЅгЃЌ
+	 + TALENT:L_I:жѓљг‚ЊгЃЈгЃЅгЃ„ * 2
+	 + TALENT:L_I:еЌіе •гЃЎ * 3
+	 + TALENT:L_I:е­¦з”џ
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
 }
-CFlag:L_I:ђ«ЊрЉи–] = RAND:(L_DICE) + RAND:(L_DICE)
+CFlag:L_I:й›„гЃёгЃ®й–ўеїѓ = RAND:(L_DICE) + RAND:(L_DICE)
 
 {
-	L_DICE = 7 + CFlag:L_I:–іЋ©Љo‚ИЋ“ / 3
-	 + TALENT:L_I:ѓZѓbѓNѓX‹¶ * 2
-	 + TALENT:L_I:’†“Е‚µ‚в‚·‚ў
-	 + TALENT:L_I:’е‘Ђ–і“Ъ’…
-	 + TALENT:L_I:ѓ„ѓ“ѓfѓЊ * 5
-	 + TALENT:L_I:‰р•ъ
-	 + TALENT:L_I:Њ‹ЌҐЌП‚Э * 5
-	 + TALENT:L_I:‹ЙЏг‚М–Д * 25
+	L_DICE = 7 + CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ / 3
+	 + TALENT:L_I:г‚»гѓѓг‚Їг‚№з‹‚ * 5
+	 + TALENT:L_I:дё­жЇ’гЃ—г‚„гЃ™гЃ„ * 2
+	 + TALENT:L_I:иІћж“Ќз„Ўй “зќЂ
+	 + TALENT:L_I:еї«ж„џгЃ«зґ з›ґ
+	 + TALENT:L_I:и§Јж”ѕ * 2
+	 + TALENT:L_I:зµђе©љжё€гЃї * 3
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
 }
-CFlag:L_I:”DђPЉи–] = RAND:(L_DICE) + RAND:(L_DICE)
-;”ЙђB—НЋг‚ўA’†‚НђШЋА
-SIF GROUPMATCH(L_RACE, "“VЋg", "ѓGѓ‹ѓt", "ђё—м", "ѓIЃ[ѓgѓ}ѓ^", "ЉCђl")
-	CFlag:L_I:”DђPЉи–] +=  RAND:(L_DICE)
+CFlag:L_I:жЂ§дє¤йЎжњ› = RAND:(L_DICE) + RAND:(L_DICE)
 
-CFlag:L_I:–іЋ©Љo‚ИЋ“ = LIMIT(CFlag:L_I:–іЋ©Љo‚ИЋ“, 0, 35)
-CFlag:L_I:ѓtѓFѓЌѓ‚ѓ“ = LIMIT(CFlag:L_I:ѓtѓFѓЌѓ‚ѓ“, 0, 35)
-CFlag:L_I:Ћ“‚М–{”\   = LIMIT(CFlag:L_I:Ћ“‚М–{”\,   0, 35)
-CFlag:L_I:ђ«‚Ц‚М‹»–Ў = LIMIT(CFlag:L_I:ђ«‚Ц‚М‹»–Ў, 0, 35)
-CFlag:L_I:—Y‚Ц‚МЉЦђS = LIMIT(CFlag:L_I:—Y‚Ц‚МЉЦђS, 0, 35)
-CFlag:L_I:ђ«ЊрЉи–]   = LIMIT(CFlag:L_I:ђ«ЊрЉи–],   0, 35)
-CFlag:L_I:”DђPЉи–]   = LIMIT(CFlag:L_I:”DђPЉи–],   0, 35)
+{
+	L_DICE = 7 + CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ / 3
+	 + TALENT:L_I:г‚»гѓѓг‚Їг‚№з‹‚ * 2
+	 + TALENT:L_I:дё­жЇ’гЃ—г‚„гЃ™гЃ„
+	 + TALENT:L_I:иІћж“Ќз„Ўй “зќЂ
+	 + TALENT:L_I:гѓ¤гѓігѓ‡гѓ¬ * 5
+	 + TALENT:L_I:и§Јж”ѕ
+	 + TALENT:L_I:зµђе©љжё€гЃї * 5
+	 + TALENT:L_I:жҐµдёЉгЃ®з‰ќ * 25
+}
+CFlag:L_I:е¦ЉеЁ йЎжњ› = RAND:(L_DICE) + RAND:(L_DICE)
+;з№Ѓж®–еЉ›еј±гЃ„йЂЈдё­гЃЇе€‡е®џ
+SIF GROUPMATCH(L_RACE, "е¤©дЅї", "г‚Ёгѓ«гѓ•", "зІѕйњЉ", "г‚Єгѓјгѓ€гѓћг‚ї", "жµ·дєє")
+	CFlag:L_I:е¦ЉеЁ йЎжњ› +=  RAND:(L_DICE)
 
-SELECTCASE CFLAG:L_I:ЋуђёЉm—¦
+CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ = LIMIT(CFlag:L_I:з„Ўи‡Єи¦љгЃЄй›Њ, 0, 35)
+CFlag:L_I:гѓ•г‚§гѓ­гѓўгѓі = LIMIT(CFlag:L_I:гѓ•г‚§гѓ­гѓўгѓі, 0, 35)
+CFlag:L_I:й›ЊгЃ®жњ¬иѓЅ   = LIMIT(CFlag:L_I:й›ЊгЃ®жњ¬иѓЅ,   0, 35)
+CFlag:L_I:жЂ§гЃёгЃ®и€€е‘і = LIMIT(CFlag:L_I:жЂ§гЃёгЃ®и€€е‘і, 0, 35)
+CFlag:L_I:й›„гЃёгЃ®й–ўеїѓ = LIMIT(CFlag:L_I:й›„гЃёгЃ®й–ўеїѓ, 0, 35)
+CFlag:L_I:жЂ§дє¤йЎжњ›   = LIMIT(CFlag:L_I:жЂ§дє¤йЎжњ›,   0, 35)
+CFlag:L_I:е¦ЉеЁ йЎжњ›   = LIMIT(CFlag:L_I:е¦ЉеЁ йЎжњ›,   0, 35)
+
+SELECTCASE CFLAG:L_I:еЏ—зІѕзўєзЋ‡
 CASE 30
-;"€џђl", "’№ђl"
-;‚±‚ў‚В‚з•к‘М‚Ж‚µ‚Д‚а—DЏG‚Е‚ ‚й
-;Љъ‘Т’l4.0Ѓ~2ЃЃ8ЃA0Ѓ`16
-	CFlag:L_I:—‘ЋqѓЊѓxѓ‹ = RAND:9 + RAND:9
+;"дєњдєє", "йіҐдєє"
+;гЃ“гЃ„гЃ¤г‚‰жЇЌдЅ“гЃЁгЃ—гЃ¦г‚‚е„Єз§ЂгЃ§гЃ‚г‚‹
+;жњџеѕ…еЂ¤4.0Г—2пјќ8гЂЃ0пЅћ16
+	CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ« = RAND:9 + RAND:9
 CASE 20
-;"ђlЉФ", "—іђl", "ѓCѓX", "ђё—м",  "‹S"
-;Љъ‘Т’l3.5Ѓ~2ЃЃ7ЃA0Ѓ`14
-	CFlag:L_I:—‘ЋqѓЊѓxѓ‹ = RAND:8 + RAND:8
+;"дєєй–“", "з«њдєє", "г‚¤г‚№", "зІѕйњЉ",  "й¬ј"
+;жњџеѕ…еЂ¤3.5Г—2пјќ7гЂЃ0пЅћ14
+	CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ« = RAND:8 + RAND:8
 CASE 15, 10
-;"–й–‚", "“VЋg"
-;Љъ‘Т’l3.0Ѓ~2ЃЃ6ЃA0Ѓ`12
-	CFlag:L_I:—‘ЋqѓЊѓxѓ‹ = RAND:7 + RAND:7
+;"е¤њй­”", "е¤©дЅї"
+;жњџеѕ…еЂ¤3.0Г—2пјќ6гЂЃ0пЅћ12
+	CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ« = RAND:7 + RAND:7
 CASE 5
-;"ѓGѓ‹ѓt", "ѓIЃ[ѓgѓ}ѓ^", "ЉCђl", "‹zЊЊ‹S"
-;Љъ‘Т’l2.5Ѓ~2ЃЃ5ЃA0Ѓ`10
-	CFlag:L_I:—‘ЋqѓЊѓxѓ‹ = RAND:6 + RAND:6
+;"г‚Ёгѓ«гѓ•", "г‚Єгѓјгѓ€гѓћг‚ї", "жµ·дєє", "еђёиЎЂй¬ј"
+;жњџеѕ…еЂ¤2.5Г—2пјќ5гЂЃ0пЅћ10
+	CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ« = RAND:6 + RAND:6
 ENDSELECT
-CFlag:L_I:—‘ЋqѓЊѓxѓ‹ = LIMIT(CFlag:L_I:—‘ЋqѓЊѓxѓ‹, 1, 20)
+CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ« = LIMIT(CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ«, 1, 20)
 
-;–П‘zЃF“ч‘М‚Ж”ЙђBЌs€Ч‚Ж‚Мђeaђ«‚Ж‰рЋЯ
+;е¦„жѓіпјљи‚‰дЅ“гЃЁз№Ѓж®–иЎЊз‚єгЃЁгЃ®и¦Єе’ЊжЂ§гЃЁи§Јй‡€
 SELECTCASE L_RACE
-CASE "€џђl", "‹S", "’№ђl", "—іђl"
-;Љъ‘Т’l4.0Ѓ~2ЃЃ8ЃA0Ѓ`16
-;ђё‹­‚И“ч‘М‚рЋќ‚ВA’†
-	CFlag:L_I:•к‘МѓЊѓxѓ‹ = RAND:9 + RAND:9
-CASE "ЉCђl", "ѓGѓ‹ѓt"
-;Љъ‘Т’l3.0Ѓ~2ЃЃ6ЃA0Ѓ`12
-;ђЭ’и“I‚Й”ЙђB—Н‚ЄЋг‚ў
-	CFlag:L_I:•к‘МѓЊѓxѓ‹ = RAND:7 + RAND:7
-CASE "ѓIЃ[ѓgѓ}ѓ^", "“VЋg", "‹zЊЊ‹S", "ђё—м"
-;‚»‚а‚»‚а”ЙђBЌs€Ч‚в‚Б‚Д‚с‚М‚©‹^–в‚ИA’†
-;Љъ‘Т’l2.5Ѓ~2ЃЃ5ЃA0Ѓ`10
-	CFlag:L_I:•к‘МѓЊѓxѓ‹ = RAND:6 + RAND:6
+CASE "дєњдєє", "й¬ј", "йіҐдєє", "з«њдєє"
+;жњџеѕ…еЂ¤4.0Г—2пјќ8гЂЃ0пЅћ16
+;зІѕеј·гЃЄи‚‰дЅ“г‚’жЊЃгЃ¤йЂЈдё­
+	CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ« = RAND:9 + RAND:9
+CASE "жµ·дєє", "г‚Ёгѓ«гѓ•"
+;жњџеѕ…еЂ¤3.0Г—2пјќ6гЂЃ0пЅћ12
+;иЁ­е®љзљ„гЃ«з№Ѓж®–еЉ›гЃЊеј±гЃ„
+	CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ« = RAND:7 + RAND:7
+CASE "г‚Єгѓјгѓ€гѓћг‚ї", "е¤©дЅї", "еђёиЎЂй¬ј", "зІѕйњЉ"
+;гЃќг‚‚гЃќг‚‚з№Ѓж®–иЎЊз‚єг‚„гЃЈгЃ¦г‚“гЃ®гЃ‹з–‘е•ЏгЃЄйЂЈдё­
+;жњџеѕ…еЂ¤2.5Г—2пјќ5гЂЃ0пЅћ10
+	CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ« = RAND:6 + RAND:6
 CASEELSE
-;"ђlЉФ"‚Ж"–й–‚"
-;Ћн‘°‚М•WЏЂ
-;Љъ‘Т’l3.5Ѓ~2ЃЃ7ЃA0Ѓ`14
-	CFlag:L_I:•к‘МѓЊѓxѓ‹ = RAND:8 + RAND:8
+;"дєєй–“"гЃЁ"е¤њй­”"
+;зЁ®ж—ЏгЃ®жЁ™жє–
+;жњџеѕ…еЂ¤3.5Г—2пјќ7гЂЃ0пЅћ14
+	CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ« = RAND:8 + RAND:8
 ENDSELECT
-CFlag:L_I:•к‘МѓЊѓxѓ‹ = LIMIT(CFlag:L_I:•к‘МѓЊѓxѓ‹, 1, 20)
+CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ« = LIMIT(CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ«, 1, 20)
 
 
 
 
-CFLAG:L_I:ЋуђёЌЕ‘е‘П‹v’l += ((CFLAG:L_I:ЋуђёЌЕ‘е‘П‹v’l)*(CFlag:L_I:•к‘МѓЊѓxѓ‹+CFlag:L_I:—‘ЋqѓЊѓxѓ‹))/50
-CFLAG:L_I:ЋуђёЊ»ЌЭ‘П‹v’l = CFLAG:L_I:ЋуђёЌЕ‘е‘П‹v’l
+CFLAG:L_I:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤ += ((CFLAG:L_I:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤)*(CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ«+CFlag:L_I:еЌµе­ђгѓ¬гѓ™гѓ«))/50
+CFLAG:L_I:еЏ—зІѕзЏѕењЁиЂђд№…еЂ¤ = CFLAG:L_I:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤
 
 
 
-IF TALENT:L_I:ђ№Џ—‚МЋq‹{ == 1
-	CFLAG:L_I:ЋуђёЌЕ‘е‘П‹v’l = CFLAG:L_I:ЋуђёЌЕ‘е‘П‹v’l/8
-	CFLAG:L_I:ЋуђёЊ»ЌЭ‘П‹v’l = CFLAG:L_I:ЋуђёЌЕ‘е‘П‹v’l
-	CFLAG:L_I:ЋуђёЉm—¦ = 100
-	CFlag:L_I:•к‘МѓЊѓxѓ‹ += 2
+IF TALENT:L_I:иЃ–еҐігЃ®е­ђе®® == 1
+	CFLAG:L_I:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤ = CFLAG:L_I:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤/8
+	CFLAG:L_I:еЏ—зІѕзЏѕењЁиЂђд№…еЂ¤ = CFLAG:L_I:еЏ—зІѕжњЂе¤§иЂђд№…еЂ¤
+	CFLAG:L_I:еЏ—зІѕзўєзЋ‡ = 100
+	CFlag:L_I:жЇЌдЅ“гѓ¬гѓ™гѓ« += 2
 ENDIF
 
 

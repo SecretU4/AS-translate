@@ -1,32 +1,32 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SYSTEM_DATA_FUNC.ERB
-;	Facility	:�V�X�e���f�[�^�Ǘ� - �֐��u����B
+;	Facility	:システムデータ管理 - 関数置き場。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
+;	001		20XX/XX/XX		----					新規作成
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;-------------------------------------------------
-; �����F
-;   ���ɂȂ�
+; メモ：
+;   特になし
 ;-------------------------------------------------
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- xxxx
 ;
-;	�E TITLE_SAVEGAME_FUNC				SYSTEM:�Z�[�u�����֐�
-;	�E _MAKE_SAVEDATA					�쐬:�Z�[�u�f�[�^
-;	�E TITLE_LOADGAME_FUNC				SYSTEM:���[�h�����֐�
+;	・ TITLE_SAVEGAME_FUNC				SYSTEM:セーブ処理関数
+;	・ _MAKE_SAVEDATA					作成:セーブデータ
+;	・ TITLE_LOADGAME_FUNC				SYSTEM:ロード処理関数
 ;
 ;===============================================================================
 
@@ -37,7 +37,7 @@
 ;=================================================
 ;   sub TITLE_SAVEGAME_FUNC
 ;=================================================
-;   SYSTEM:�Z�[�u�����֐�
+;   SYSTEM:セーブ処理関数
 ;-------------------------------------------------
 @TITLE_SAVEGAME_FUNC
 #DIM L_I
@@ -46,19 +46,19 @@
 #DIM L_IDX
 #DIMS LSTR
 
-LSTR = �@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<img src='Logo_0' height = '2500' ypos = '200'>
+LSTR = 　　　　　　　　　　　　　　　　　　　<img src='Logo_0' height = '2500' ypos = '200'>
 HTML_PRINT LSTR
 L_MIN = 0
 SAVENOS L_MAX
 
-;���C���\��:�V�y�[�W
+;ライン表示:新ページ
 CALL C_LINE
 
-PRINTL �y�Z�[�u��ʁz
-PRINTL �Z�[�u����ʒu��I��ŉ������B
+PRINTL 【セーブ画面】
+PRINTL セーブする位置を選んで下さい。
 PRINTL 
 
-;- �\��:�Z�[�u�f�[�^
+;- 表示:セーブデータ
 FOR L_I, L_MIN, L_MAX
 	CHKDATA L_I
 	IF !RESULT
@@ -68,24 +68,24 @@ FOR L_I, L_MIN, L_MAX
 	ENDIF
 NEXT
 PRINTL
-PRINTFORMLC [1001] �߂�
+PRINTFORMLC [1001] 戻る
 
 $INPUT_LOOP
 INPUT
 
 SELECTCASE RESULT
-	;- �߂�
+	;- 戻る
 	CASE 1001
 		RETURN
 
-	;- �͈͓�
+	;- 範囲内
 	CASE L_MIN TO (L_MAX - 1)
-		;- �㑱�����֑J��
+		;- 後続処理へ遷移
 
-	;- �͈͊O
+	;- 範囲外
 	CASEELSE
 		CLEARLINE 1
-		REUSELASTLINE �����Ȓl�ł�
+		REUSELASTLINE 無効な値です
 		GOTO INPUT_LOOP
 ENDSELECT
 
@@ -93,43 +93,43 @@ L_IDX = RESULT
 
 CHKDATA L_IDX
 IF !RESULT
-	PRINTL ���Ƀf�[�^�����݂��Ă��܂��B�㏑�����܂����H
-	;- ���͒�:�Q��
+	PRINTL 既にデータが存在しています。上書きしますか？
+	;- 入力提示:２托
 	CALL INPUT_YN
 	SIF RESULT == 1
 		RESTART
 ENDIF
 
-;- SYSTEM:�Z�[�u���s
+;- SYSTEM:セーブ実行
 CALL SYS_SAVE_EXE(L_IDX)
 
 ;=================================================
 ;   sub _MAKE_SAVEDATA
 ;=================================================
-;   �쐬:�Z�[�u�f�[�^
+;   作成:セーブデータ
 ;-------------------------------------------------
 @_MAKE_SAVEDATA
 #DIMS L_WORK
 
-;- PUTFORM��"SAVEDATA_TEXT"�ɕ�������Z�b�g
+;- PUTFORMで"SAVEDATA_TEXT"に文字列をセット
 
-PUTFORM {DAY,3}���� 
+PUTFORM {DAY,3}日目 
 PUTFORM (%INFO_TIME()%) 
 
-PUTFORM ��l:%CALLNAME:MASTER, 20, LEFT% 
+PUTFORM 主人:%CALLNAME:MASTER, 20, LEFT% 
 SIF GETNUM(BASE, "LV") != -1
 	PUTFORM LV:{BASE:MASTER:LV, 2} 
 
 L_WORK = {GAMEBASE_VERSION/1000,1}.{GAMEBASE_VERSION % 1000, 3}
 L_WORK = %REPLACE(L_WORK, " ", "0")%
-SIF FLAG:����v���C��
-	L_WORK += @" ��{1+FLAG:����v���C��,2}�T��"
+SIF FLAG:周回プレイ数
+	L_WORK += @" ☆{1+FLAG:周回プレイ数,2}週目"
 PUTFORM Ver%L_WORK% 
 
 
 
 ;-----------------------------
-;- �Z�[�u�f�[�^�T�C�Y�팸����
+;- セーブデータサイズ削減処理
 ;-----------------------------
 
 VARSET A
@@ -164,11 +164,11 @@ REPEAT CHARANUM
 REND
 
 ;-----------------------------
-;- �s�����ȊO�̏ꍇ�́A���L��������
-;  (���s�����ɃZ�[�u�o���邩�ǂ����͌�����)
+;- 行動中以外の場合は、下記も初期化
+;  (※行動中にセーブ出来るかどうかは検討中)
 ;-----------------------------
 
-;- ��荇�������s�B�s�����ɃZ�[�u�\�ɂ���ꍇ�́A���L��IF�Ő���
+;- 取り合えず実行。行動中にセーブ可能にする場合は、下記はIFで制御
 REPEAT CHARANUM
 	VARSET GOTJUEL:COUNT:0
 	VARSET EX:COUNT:0
@@ -180,7 +180,7 @@ REND
 ;=================================================
 ;   sub TITLE_LOADGAME_FUNC
 ;=================================================
-;   SYSTEM:���[�h�����֐�
+;   SYSTEM:ロード処理関数
 ;-------------------------------------------------
 @TITLE_LOADGAME_FUNC
 #DIM L_I
@@ -189,17 +189,17 @@ REND
 #DIM L_IDX
 #DIMS LSTR
 
-LSTR = �@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@�@<img src='Logo_0' height = '2500' ypos = '200'>
+LSTR = 　　　　　　　　　　　　　　　　　　　<img src='Logo_0' height = '2500' ypos = '200'>
 HTML_PRINT LSTR
 L_MIN = 0
 SAVENOS L_MAX
-;���C���\��:�V�y�[�W
+;ライン表示:新ページ
 CALL C_LINE
-PRINTL �y���[�h��ʁz
-PRINTL ���[�h����f�[�^��I��ŉ������B
+PRINTL 【ロード画面】
+PRINTL ロードするデータを選んで下さい。
 PRINTL 
 
-;- �\��:�Z�[�u�f�[�^
+;- 表示:セーブデータ
 FOR L_I, L_MIN, L_MAX
 	CHKDATA L_I
 	IF !RESULT
@@ -230,28 +230,28 @@ IF 1
 ENDIF
 
 PRINTL
-PRINTFORMLC [1001] �߂�
+PRINTFORMLC [1001] 戻る
 
 $INPUT_LOOP
 INPUT
 
 SELECTCASE RESULT
-	;- �߂�
+	;- 戻る
 	CASE 1001
 		RETURN
 
-	;- �I�[�g�Z�[�u
+	;- オートセーブ
 	CASE 98, 99
-		;- �㑱�����֑J��
+		;- 後続処理へ遷移
 
-	;- �͈͓�
+	;- 範囲内
 	CASE L_MIN TO (L_MAX - 1)
-		;- �㑱�����֑J��
+		;- 後続処理へ遷移
 
-	;- �͈͊O
+	;- 範囲外
 	CASEELSE
 		CLEARLINE 1
-		REUSELASTLINE �����Ȓl�ł�
+		REUSELASTLINE 無効な値です
 		GOTO INPUT_LOOP
 ENDSELECT
 
@@ -260,10 +260,10 @@ L_IDX = RESULT
 CHKDATA L_IDX
 IF RESULT
 	CLEARLINE 1
-	REUSELASTLINE �����Ȓl�ł�
+	REUSELASTLINE 無効な値です
 	GOTO INPUT_LOOP
 ENDIF
 
-;- ���[�h(���s��A@EVENTLOAD�֑J��)
+;- ロード(実行後、@EVENTLOADへ遷移)
 LOADDATA L_IDX
 

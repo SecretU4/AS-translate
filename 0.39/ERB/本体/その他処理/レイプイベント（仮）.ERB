@@ -1,84 +1,84 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;	Module		:ƒŒƒCƒvƒCƒxƒ“ƒgi‰¼j.ERB
-;	Facility	:˜J–ð‚ÉŽ¡ˆÀ‚Ì—v‘f’Ç‰Á‚ÆƒŒƒCƒvƒCƒxƒ“ƒgi‰¼j
+;	Module		:ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆï¼ˆä»®ï¼‰.ERB
+;	Facility	:åŠ´å½¹ã«æ²»å®‰ã®è¦ç´ è¿½åŠ ã¨ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆï¼ˆä»®ï¼‰
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		2013/12/02		ƒlƒgƒŠƒX				V‹Kì¬
-;	002		2013/12/15		----					’²®
-;	003		2013/12/30		ƒlƒgƒŠƒX				ƒŒƒCƒv‚Å‚Ì‰‘ÌŒ±‚ª‹L˜^‚³‚ê‚é‚æ‚¤‚É
-;	004		2013/12/31		----					’²®
+;	001		2013/12/02		ãƒãƒˆãƒªã‚¹				æ–°è¦ä½œæˆ
+;	002		2013/12/15		----					èª¿æ•´
+;	003		2013/12/30		ãƒãƒˆãƒªã‚¹				ãƒ¬ã‚¤ãƒ—ã§ã®åˆä½“é¨“ãŒè¨˜éŒ²ã•ã‚Œã‚‹ã‚ˆã†ã«
+;	004		2013/12/31		----					èª¿æ•´
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
-;‚ ‚­‚Ü‚ÅŸŽè‚Éì‚Á‚½ŠO•”ƒpƒbƒ`‚È‚Ì‚ÅA‘å•”•ª‚Ìˆ—‚Í‚±‚Ì’†‚Ås‚¤
-;–{‘Ì‚É‘‚«ž‚Þê‡‚ÍwTRYCALLx‚ðŽg‚Á‚ÄA‚±‚ÌERB‚ðŠO‚µ‚Ä‚àƒGƒ‰[‚ª‹N‚±‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+;ã‚ãã¾ã§å‹æ‰‹ã«ä½œã£ãŸå¤–éƒ¨ãƒ‘ãƒƒãƒãªã®ã§ã€å¤§éƒ¨åˆ†ã®å‡¦ç†ã¯ã“ã®ä¸­ã§è¡Œã†
+;æœ¬ä½“ã«æ›¸ãè¾¼ã‚€å ´åˆã¯ã€ŽTRYCALLã€ã‚’ä½¿ã£ã¦ã€ã“ã®ERBã‚’å¤–ã—ã¦ã‚‚ã‚¨ãƒ©ãƒ¼ãŒèµ·ã“ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
 ;
 ;==========================================================
-;@Ž¡ˆÀ•\Ž¦
-; Ž¡ˆÀ‚Ì•\Ž¦ˆ—
+;@æ²»å®‰è¡¨ç¤º
+; æ²»å®‰ã®è¡¨ç¤ºå‡¦ç†
 ;
-;<ˆø”>
+;<å¼•æ•°>
 ;
-;<•Ï”>
+;<å¤‰æ•°>
 ;
-;<–ß‚è’l>
+;<æˆ»ã‚Šå€¤>
 ;
 ;==========================================================
-@Ž¡ˆÀ•\Ž¦
+@æ²»å®‰è¡¨ç¤º
 
-;- EVE:ƒŒƒCƒv(‰‰ñ’²®)
+;- EVE:ãƒ¬ã‚¤ãƒ—(åˆå›žèª¿æ•´)
 CALL EVENT_RAPE_INIT
 
-SELECTCASE FLAG:˜J–ðŽ¡ˆÀ
+SELECTCASE FLAG:åŠ´å½¹æ²»å®‰
 	CASE IS >= 91 
-;		SETCOLOR COLOR("…F")
-		PRINTFORML Ž¡ˆÀF
+;		SETCOLOR COLOR("æ°´è‰²")
+		PRINTFORML æ²»å®‰ï¼šâ—Ž
 	CASE IS >= 71
-		PRINTFORML Ž¡ˆÀF›
+		PRINTFORML æ²»å®‰ï¼šâ—‹
 	CASE IS >= 51
-;		SETCOLOR COLOR("‰©F")
-		PRINTFORML Ž¡ˆÀF¢
+;		SETCOLOR COLOR("é»„è‰²")
+		PRINTFORML æ²»å®‰ï¼šâ–³
 	CASEELSE
-		SETCOLOR COLOR("Ô")
-		PRINTFORML Ž¡ˆÀF~
+		SETCOLOR COLOR("èµ¤")
+		PRINTFORML æ²»å®‰ï¼šÃ—
 ENDSELECT
 RESETCOLOR
 
 
 
 ;==========================================================
-;@ƒŒƒCƒvƒCƒxƒ“ƒg
-; ƒŒƒCƒvƒCƒxƒ“ƒgˆ—
+;@ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
+; ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
 ;
-;<ˆø”>
+;<å¼•æ•°>
 ;
-;<•Ï”>
+;<å¤‰æ•°>
 ;
-;<–ß‚è’l>
+;<æˆ»ã‚Šå€¤>
 ;
 ;==========================================================
-@ƒŒƒCƒvƒCƒxƒ“ƒg
+@ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
 #DIM L_I
 #DIM L_TGT_BAK
 #DIM L_RAPE_CHK, DEFTR_CL_NUM
 #DIM L_NUM
 
-;- EVE:ƒŒƒCƒv(‰‰ñ’²®)
+;- EVE:ãƒ¬ã‚¤ãƒ—(åˆå›žèª¿æ•´)
 CALL EVENT_RAPE_INIT
 
-;ƒRƒ“ƒtƒBƒO
-SIF !FLAG:ƒŒƒCƒvƒCƒxƒ“ƒg‹@”\
+;ã‚³ãƒ³ãƒ•ã‚£ã‚°
+SIF !FLAG:ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆæ©Ÿèƒ½
 	RETURN
 
-;FLAG:˜J–ðŽ¡ˆÀ‚ª51ˆÈã‚Ìê‡‚ÍI—¹
-SIF FLAG:˜J–ðŽ¡ˆÀ > 50
+;FLAG:åŠ´å½¹æ²»å®‰ãŒ51ä»¥ä¸Šã®å ´åˆã¯çµ‚äº†
+SIF FLAG:åŠ´å½¹æ²»å®‰ > 50
 	RETURN
-;TARGET‚ð•ÛŠÇ‚·‚é
+;TARGETã‚’ä¿ç®¡ã™ã‚‹
 L_TGT_BAK = TARGET
 
 
@@ -89,27 +89,27 @@ FOR L_I, 0, CHARANUM
 
 	TARGET=L_I
 
-	;ƒLƒƒƒ‰Ž¸çHŽž‚ÌƒGƒ‰[–hŽ~
+	;ã‚­ãƒ£ãƒ©å¤±è¸ªæ™‚ã®ã‚¨ãƒ©ãƒ¼é˜²æ­¢
 	SIF L_NUM > CHARANUM && L_I == CHARANUM
 		BREAK
 
-	;’j‚Í’e‚­
+	;ç”·ã¯å¼¾ã
 	SIF !VAR_SEX()
 		CONTINUE
 
-	;- –ðE–³‚µ
-	SIF !CFLAG:˜J–ð–ðEƒ^ƒCƒv
+	;- å½¹è·ç„¡ã—
+	SIF !CFLAG:åŠ´å½¹å½¹è·ã‚¿ã‚¤ãƒ—
 		CONTINUE
 
 	L_RAPE_CHK:LOCAL = TARGET
 	LOCAL++
 NEXT
 
-;Œó•â‚ª–³‚¢ê‡‚Í–ß‚é
+;å€™è£œãŒç„¡ã„å ´åˆã¯æˆ»ã‚‹
 SIF L_RAPE_CHK == 0
 	RETURN
 
-;‹]µŽÒ‚Ì”Ô†‚ðTARGET‚É“ü‚ê‚é
+;çŠ ç‰²è€…ã®ç•ªå·ã‚’TARGETã«å…¥ã‚Œã‚‹
 TARGET = L_RAPE_CHK:(RAND:LOCAL)
 CALL RAPE_MNG
 
@@ -119,7 +119,7 @@ CALL RAPE_MNG
 
 
 
-;TARGET‚ðŒ³‚É–ß‚·
+;TARGETã‚’å…ƒã«æˆ»ã™
 TARGET = L_TGT_BAK
 
 
@@ -127,22 +127,22 @@ TARGET = L_TGT_BAK
 
 ;==========================================================
 ;@RAPE_MNG
-; ƒŒƒCƒv¬”Û”»’è‚ÆŒ‹‰Ê
+; ãƒ¬ã‚¤ãƒ—æˆå¦åˆ¤å®šã¨çµæžœ
 ;
-;<ˆø”>
+;<å¼•æ•°>
 ;
-;<•Ï”>
+;<å¤‰æ•°>
 ;
-;<–ß‚è’l>
+;<æˆ»ã‚Šå€¤>
 ;
 ;==========================================================
 @RAPE_MNG
 #DIM L_I
 #DIM L_TMP
 #DIMS L_NAME
-L_NAME = %CALLNAME%‚ðƒŒƒCƒv‚µ‚½’j
-;FLAG:˜J–ðŽ¡ˆÀ‚É‚æ‚Á‚ÄŠm—¦‚ð•Ï‚¦‚é
-SELECTCASE FLAG:˜J–ðŽ¡ˆÀ
+L_NAME = %CALLNAME%ã‚’ãƒ¬ã‚¤ãƒ—ã—ãŸç”·
+;FLAG:åŠ´å½¹æ²»å®‰ã«ã‚ˆã£ã¦ç¢ºçŽ‡ã‚’å¤‰ãˆã‚‹
+SELECTCASE FLAG:åŠ´å½¹æ²»å®‰
 	CASE IS >= 41
 		L_I = 5
 	CASE IS >= 31
@@ -155,112 +155,112 @@ SELECTCASE FLAG:˜J–ðŽ¡ˆÀ
 		L_I = 50
 ENDSELECT
 DRAWLINE
-PRINTFORMW %CALLNAME%‚ª‹qŽº‚Ì®”õ‚ð‚µ‚Ä‚¢‚é‚ÆAŽüˆÍ‚©‚çŽ‹ü‚ðŠ´‚¶‚éc
+PRINTFORMW %CALLNAME%ãŒå®¢å®¤ã®æ•´å‚™ã‚’ã—ã¦ã„ã‚‹ã¨ã€å‘¨å›²ã‹ã‚‰è¦–ç·šã‚’æ„Ÿã˜ã‚‹â€¦
 PRINTFORML 
-PRINTFORML E
-PRINTFORML EE
-PRINTFORML EEE
+PRINTFORML ãƒ»
+PRINTFORML ãƒ»ãƒ»
+PRINTFORML ãƒ»ãƒ»ãƒ»
 PRINTFORML 
-;ƒŒƒCƒv‚³‚ê‚é
+;ãƒ¬ã‚¤ãƒ—ã•ã‚Œã‚‹
 IF RAND:100 < L_I
-	;Ž¡ˆÀ‚ª’á‚­‚È‚Á‚Ä‚µ‚Ü‚Á‚½Žž‚Ì‘Îô—p
-	;FLAG:˜J–ð•—Í‚ªFLAG:˜J–ðl‹C‚æ‚è“ñ”{ˆÈã‘å‚«‚¢ê‡‚ÍŠmŽÀ‚É‰ñ”ð
-	SIF FLAG:˜J–ð•—Í > FLAG:˜J–ðl‹C*2
-		GOTO ƒŒƒCƒv‰ñ”ð
-	;ƒŒƒCƒvƒLƒƒƒ‰
-	CSTR:ƒŒƒCƒvƒLƒƒƒ‰–¼ = h”‘‹q
+	;æ²»å®‰ãŒä½Žããªã£ã¦ã—ã¾ã£ãŸæ™‚ã®å¯¾ç­–ç”¨
+	;FLAG:åŠ´å½¹æ­¦åŠ›ãŒFLAG:åŠ´å½¹äººæ°—ã‚ˆã‚ŠäºŒå€ä»¥ä¸Šå¤§ãã„å ´åˆã¯ç¢ºå®Ÿã«å›žé¿
+	SIF FLAG:åŠ´å½¹æ­¦åŠ› > FLAG:åŠ´å½¹äººæ°—*2
+		GOTO ãƒ¬ã‚¤ãƒ—å›žé¿
+	;ãƒ¬ã‚¤ãƒ—ã‚­ãƒ£ãƒ©
+	CSTR:ãƒ¬ã‚¤ãƒ—ã‚­ãƒ£ãƒ©å = å®¿æ³Šå®¢
 
-	PRINTFORMW %CALLNAME%‚Í‚¢‚«‚È‚è%CSTR:ƒŒƒCƒvƒLƒƒƒ‰–¼%‚É‰Ÿ‚µ“|‚³‚ê‚½I
+	PRINTFORMW %CALLNAME%ã¯ã„ããªã‚Š%CSTR:ãƒ¬ã‚¤ãƒ—ã‚­ãƒ£ãƒ©å%ã«æŠ¼ã—å€’ã•ã‚ŒãŸï¼
 
 	;-----------------------------
-	;- Œûã
+	;- å£ä¸Š
 	;-----------------------------
 
-	;- Œûã:ƒŒƒCƒvƒCƒxƒ“ƒg
-	FLAG:ƒŒƒCƒvŒ‹‰Êƒ^ƒCƒv = [[ƒŒƒCƒvŒ‹‰Ê:‹qŽº‹­Š­]]
+	;- å£ä¸Š:ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
+	FLAG:ãƒ¬ã‚¤ãƒ—çµæžœã‚¿ã‚¤ãƒ— = [[ãƒ¬ã‚¤ãƒ—çµæžœ:å®¢å®¤å¼·å§¦]]
 	CALL KOJO_RAPE
 
-	L_TMP = 2 + (ABL:«“z—ê / 2)
+	L_TMP = 2 + (ABL:æ€§å¥´éš· / 2)
 
-	IF !TALENT:”ñˆ—
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-		PRINTL ˆ—‘rŽ¸
+	IF !TALENT:éžå‡¦å¥³
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+		PRINTL å‡¦å¥³å–ªå¤±
 		RESETCOLOR
-		TALENT:”ñˆ— = 1
-		TCVAR:—š—ð_EXP_ˆ—‘rŽ¸ = 1
+		TALENT:éžå‡¦å¥³ = 1
+		TCVAR:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 1
 	ENDIF
 
 	;- EXP
-	CALL MNG_LOG_ADD("EXP", "ƒLƒXŒoŒ±",		(1+L_TMP))
-	CALL MNG_LOG_ADD("EXP", "ƒtƒFƒ‰ŒoŒ±",	(2+L_TMP/2))
-	CALL MNG_LOG_ADD("EXP", "‚uŒoŒ±",		(2+L_TMP))
-	CALL MNG_LOG_ADD("EXP", "«ŒðŒoŒ±",		(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "ã‚­ã‚¹çµŒé¨“",		(1+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "ãƒ•ã‚§ãƒ©çµŒé¨“",	(2+L_TMP/2))
+	CALL MNG_LOG_ADD("EXP", "ï¼¶çµŒé¨“",		(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "æ€§äº¤çµŒé¨“",		(2+L_TMP))
 
-	CALL MNG_LOG_ADD("EXP", "â’¸ŒoŒ±",	(2+L_TMP))
-	CALL MNG_LOG_ADD("EXP", "¸ˆùŒoŒ±",	(2+L_TMP/2))
-	CALL MNG_LOG_ADD("EXP", "¸‰tŒoŒ±",	(2+L_TMP))
-	CALL MNG_LOG_ADD("EXP", "äSŽËŒoŒ±",	(2+L_TMP))
-	;‹­Š­ŒoŒ±‚ðÔ‚­•\Ž¦‚µ‚Ä‚Ý‚é
+	CALL MNG_LOG_ADD("EXP", "çµ¶é ‚çµŒé¨“",	(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "ç²¾é£²çµŒé¨“",	(2+L_TMP/2))
+	CALL MNG_LOG_ADD("EXP", "ç²¾æ¶²çµŒé¨“",	(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "è†£å°„çµŒé¨“",	(2+L_TMP))
+	;å¼·å§¦çµŒé¨“ã‚’èµ¤ãè¡¨ç¤ºã—ã¦ã¿ã‚‹
 	SETCOLOR 0x990000
-	CALL MNG_LOG_ADD("EXP", "‹­Š­ŒoŒ±",	(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "å¼·å§¦çµŒé¨“",	(2+L_TMP))
 	RESETCOLOR
 	PRINTL
 
-	;- ”DP:‰Â”\ƒ`ƒFƒbƒN
+	;- å¦Šå¨ :å¯èƒ½ãƒã‚§ãƒƒã‚¯
 	IF NINSIN_ABLE(TARGET)
-		;- ”DP:ƒ`ƒFƒbƒN
+		;- å¦Šå¨ :ãƒã‚§ãƒƒã‚¯
 		CALL NINSIN_CHK(TARGET, -2, 4, L_NAME)
 	ENDIF
 
-	;- ‰‘ÌŒ±‹L˜^:‚»‚Ì‘¼
-	TRYCALL ‰‘ÌŒ±‹L˜^_OTHER(TARGET, 1, L_NAME)
+	;- åˆä½“é¨“è¨˜éŒ²:ãã®ä»–
+	TRYCALL åˆä½“é¨“è¨˜éŒ²_OTHER(TARGET, 1, L_NAME)
 
-	;- Œûã:ƒŒƒCƒvƒCƒxƒ“ƒg
-	FLAG:ƒŒƒCƒvŒ‹‰Êƒ^ƒCƒv = [[ƒŒƒCƒvŒ‹‰Ê:‹qŽºŽ–Œã]]
+	;- å£ä¸Š:ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
+	FLAG:ãƒ¬ã‚¤ãƒ—çµæžœã‚¿ã‚¤ãƒ— = [[ãƒ¬ã‚¤ãƒ—çµæžœ:å®¢å®¤äº‹å¾Œ]]
 	CALL KOJO_RAPE
 
-	;ƒŒƒCƒv”­¶‚ÅŽ¡ˆÀ‚ª5‰º‚ª‚é
-	;w‚ ‚Ìƒzƒeƒ‹‚ÌƒIƒ“ƒiA–³—‚â‚èƒ„ƒb‚¿‚á‚Á‚½ƒ[Ixwƒ}ƒWIƒIƒŒ‚àƒ„ƒ‹‚í[x‚Ý‚½‚¢‚ÈŠ´‚¶‚Å
-	FLAG:˜J–ðŽ¡ˆÀ -= 5
+	;ãƒ¬ã‚¤ãƒ—ç™ºç”Ÿã§æ²»å®‰ãŒ5ä¸‹ãŒã‚‹
+	;ã€Žã‚ã®ãƒ›ãƒ†ãƒ«ã®ã‚ªãƒ³ãƒŠã€ç„¡ç†ã‚„ã‚Šãƒ¤ãƒƒã¡ã‚ƒã£ãŸã‚¼ï¼ã€ã€Žãƒžã‚¸ï¼ã‚ªãƒ¬ã‚‚ãƒ¤ãƒ«ã‚ãƒ¼ã€ã¿ãŸã„ãªæ„Ÿã˜ã§
+	FLAG:åŠ´å½¹æ²»å®‰ -= 5
 
-;–¢‹
+;æœªé‚
 ELSE
-	$ƒŒƒCƒv‰ñ”ð
-	PRINTFORMW ‹C‚Ì‚¹‚¢‚¾‚Á‚½‚æ‚¤‚¾
+	$ãƒ¬ã‚¤ãƒ—å›žé¿
+	PRINTFORMW æ°—ã®ã›ã„ã ã£ãŸã‚ˆã†ã 
 
-	;- Œûã:ƒŒƒCƒvƒCƒxƒ“ƒg
-	FLAG:ƒŒƒCƒvŒ‹‰Êƒ^ƒCƒv = [[ƒŒƒCƒvŒ‹‰Ê:‰ñ”ð]]
+	;- å£ä¸Š:ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
+	FLAG:ãƒ¬ã‚¤ãƒ—çµæžœã‚¿ã‚¤ãƒ— = [[ãƒ¬ã‚¤ãƒ—çµæžœ:å›žé¿]]
 	CALL KOJO_RAPE
 ENDIF
 PRINTL
 
-TCVAR:—š—ð_EXP_ˆ—‘rŽ¸ = 0
+TCVAR:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 0
 
 ;=================================================
 ;   sub KOJO_RAPE
 ;=================================================
-;   Œûã:ƒŒƒCƒvƒCƒxƒ“ƒg
+;   å£ä¸Š:ãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @KOJO_RAPE
-TRYCCALLFORM KOJO_RAPE_K{CFLAG:Žg—pŒûã}
-;Œûã‚ª–³‚¢ê‡‚Í’n‚Ì•ª‚ª•\Ž¦‚³‚ê‚é
+TRYCCALLFORM KOJO_RAPE_K{CFLAG:ä½¿ç”¨å£ä¸Š}
+;å£ä¸ŠãŒç„¡ã„å ´åˆã¯åœ°ã®åˆ†ãŒè¡¨ç¤ºã•ã‚Œã‚‹
 CATCH
-	SELECTCASE FLAG:ƒŒƒCƒvŒ‹‰Êƒ^ƒCƒv
-		CASE [[ƒŒƒCƒvŒ‹‰Ê:‰ñ”ð]]
+	SELECTCASE FLAG:ãƒ¬ã‚¤ãƒ—çµæžœã‚¿ã‚¤ãƒ—
+		CASE [[ãƒ¬ã‚¤ãƒ—çµæžœ:å›žé¿]]
 
-		CASE [[ƒŒƒCƒvŒ‹‰Ê:‹qŽº‹­Š­]]
+		CASE [[ãƒ¬ã‚¤ãƒ—çµæžœ:å®¢å®¤å¼·å§¦]]
 
-		CASE [[ƒŒƒCƒvŒ‹‰Ê:‹qŽºŽ–Œã]]
+		CASE [[ãƒ¬ã‚¤ãƒ—çµæžœ:å®¢å®¤äº‹å¾Œ]]
 			SELECTCASE RAND:3
 				CASE 0
-					PRINTFORMW %CALLNAME%‚É—òî‚ð‚Ô‚¿‚Ü‚¯‚½’j‚ÍA–ž‘«‚°‚É‚»‚Ìê‚ð—§‚¿‹Ž‚Á‚½
-					PRINTFORMW Žc‚³‚ê‚½%CALLNAME%‚ÍæøçW‚³‚ê‚½ŠiD‚Ì‚Ü‚ÜA•úS‚µ‚Ä‚¢‚éc
+					PRINTFORMW %CALLNAME%ã«åŠ£æƒ…ã‚’ã¶ã¡ã¾ã‘ãŸç”·ã¯ã€æº€è¶³ã’ã«ãã®å ´ã‚’ç«‹ã¡åŽ»ã£ãŸ
+					PRINTFORMW æ®‹ã•ã‚ŒãŸ%CALLNAME%ã¯è¹‚èº™ã•ã‚ŒãŸæ ¼å¥½ã®ã¾ã¾ã€æ”¾å¿ƒã—ã¦ã„ã‚‹â€¦
 				CASE 1
-					PRINTFORMW %CALLNAME%‚É—òî‚ð‚Ô‚¿‚Ü‚¯‚½’j‚ÍA–ž‘«‚°‚É‚»‚Ìê‚ð—§‚¿‹Ž‚Á‚½
-					PRINTFORMW Žc‚³‚ê‚½%CALLNAME%‚Í‰½‚©‚ð™ê‚«‚È‚ª‚çA•KŽ€‚É’‚ª‚ê‚½¸‰t‚ð‘~‚«o‚»‚¤‚Æ‚µ‚Ä‚¢‚éc
+					PRINTFORMW %CALLNAME%ã«åŠ£æƒ…ã‚’ã¶ã¡ã¾ã‘ãŸç”·ã¯ã€æº€è¶³ã’ã«ãã®å ´ã‚’ç«‹ã¡åŽ»ã£ãŸ
+					PRINTFORMW æ®‹ã•ã‚ŒãŸ%CALLNAME%ã¯ä½•ã‹ã‚’å‘ŸããªãŒã‚‰ã€å¿…æ­»ã«æ³¨ãŒã‚ŒãŸç²¾æ¶²ã‚’æŽ»ãå‡ºãã†ã¨ã—ã¦ã„ã‚‹â€¦
 				CASEELSE
-					PRINTFORMW —ËJ‚ªI‚í‚èAˆêlŽc‚³‚ê‚½%CALLNAME%‚Í—Í‚È‚­—§‚¿ã‚ª‚é‚ÆA
-					PRINTFORMW ‚Ó‚ç‚Ó‚ç‚ÆƒVƒƒƒ[Žº‚Ö‚ÆŒü‚©‚Á‚Ä‚¢‚Á‚½c
+					PRINTFORMW é™µè¾±ãŒçµ‚ã‚ã‚Šã€ä¸€äººæ®‹ã•ã‚ŒãŸ%CALLNAME%ã¯åŠ›ãªãç«‹ã¡ä¸ŠãŒã‚‹ã¨ã€
+					PRINTFORMW ãµã‚‰ãµã‚‰ã¨ã‚·ãƒ£ãƒ¯ãƒ¼å®¤ã¸ã¨å‘ã‹ã£ã¦ã„ã£ãŸâ€¦
 			ENDSELECT
 		CASEELSE
 	ENDSELECT
@@ -270,37 +270,37 @@ PRINTL
 
 
 ;;==========================================================
-;;@˜J–ðŽ¡ˆÀƒŠƒZƒbƒg
-;;Vƒo[ƒWƒ‡ƒ“ˆÚsŽž‚É•s‹ï‡‚ð–h‚®ˆ×‚ÌwFLAG:˜J–ðŽ¡ˆÀxƒŠƒZƒbƒgˆ—
+;;@åŠ´å½¹æ²»å®‰ãƒªã‚»ãƒƒãƒˆ
+;;æ–°ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç§»è¡Œæ™‚ã«ä¸å…·åˆã‚’é˜²ãç‚ºã®ã€ŽFLAG:åŠ´å½¹æ²»å®‰ã€ãƒªã‚»ãƒƒãƒˆå‡¦ç†
 ;;
-;;<ˆø”>
+;;<å¼•æ•°>
 ;;
-;;<•Ï”>
+;;<å¤‰æ•°>
 ;;
-;;<–ß‚è’l>
+;;<æˆ»ã‚Šå€¤>
 ;;
 ;;==========================================================
-;@˜J–ðŽ¡ˆÀƒŠƒZƒbƒg
-;PRINTFORML ŠO•”ƒpƒbƒ`wƒŒƒCƒvƒCƒxƒ“ƒgi‰¼j.ERBx‚ÉŽg‚í‚ê‚Ä‚¢‚éwFLAG:˜J–ðŽ¡ˆÀx‚Ì”’l‚ðƒŠƒZƒbƒg‚µ‚Ü‚·B
-;PRINTFORMW ‚æ‚ë‚µ‚¢‚Å‚·‚©H
+;@åŠ´å½¹æ²»å®‰ãƒªã‚»ãƒƒãƒˆ
+;PRINTFORML å¤–éƒ¨ãƒ‘ãƒƒãƒã€Žãƒ¬ã‚¤ãƒ—ã‚¤ãƒ™ãƒ³ãƒˆï¼ˆä»®ï¼‰.ERBã€ã«ä½¿ã‚ã‚Œã¦ã„ã‚‹ã€ŽFLAG:åŠ´å½¹æ²»å®‰ã€ã®æ•°å€¤ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
+;PRINTFORMW ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
 ;CALL INPUT_YN
 ;IF !RESULT
-;	FLAG:˜J–ðŽ¡ˆÀ = 1
-;	PRINTFORML wFLAG:˜J–ðŽ¡ˆÀx‚ðƒŠƒZƒbƒg‚µ‚Ü‚µ‚½B
-;	PRINTFORMW ‚±‚Ì‚Ü‚ÜƒZ[ƒu‚ðs‚¤Ž–‚Åƒtƒ‰ƒOŽg—pó‘Ô‚ª’Êíó‘Ô‚Ìƒf[ƒ^‚É‚È‚è‚Ü‚·B
+;	FLAG:åŠ´å½¹æ²»å®‰ = 1
+;	PRINTFORML ã€ŽFLAG:åŠ´å½¹æ²»å®‰ã€ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã—ãŸã€‚
+;	PRINTFORMW ã“ã®ã¾ã¾ã‚»ãƒ¼ãƒ–ã‚’è¡Œã†äº‹ã§ãƒ•ãƒ©ã‚°ä½¿ç”¨çŠ¶æ…‹ãŒé€šå¸¸çŠ¶æ…‹ã®ãƒ‡ãƒ¼ã‚¿ã«ãªã‚Šã¾ã™ã€‚
 ;ELSE
-;	PRINTFORMW ˆ—‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚µ‚½B
+;	PRINTFORMW å‡¦ç†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¾ã—ãŸã€‚
 ;ENDIF
 ;
 ;
 ;
-;;ˆÈ‰º‚Ì“ñ‚Â‚ÍŠiƒLƒƒƒ‰‚ÌŒûã‚ÉƒRƒsƒy‚µ‚ÄŽg‚Á‚Ä‚­‚¾‚³‚¢
-;;ƒŒƒCƒvŒãŒûã‚Í—LŒø‚É‚È‚Á‚Ä‚¢‚é‚Æ’n‚Ì•¶‚ªo‚È‚­‚È‚é‚Ì‚ÅA‘‚«ž‚ñ‚Å‚¢‚È‚¢ê‡‚Íw;x‚Å–³Œø‰»‚µ‚Ä‚­‚¾‚³‚¢
+;;ä»¥ä¸‹ã®äºŒã¤ã¯æ ¼ã‚­ãƒ£ãƒ©ã®å£ä¸Šã«ã‚³ãƒ”ãƒšã—ã¦ä½¿ã£ã¦ãã ã•ã„
+;;ãƒ¬ã‚¤ãƒ—å¾Œå£ä¸Šã¯æœ‰åŠ¹ã«ãªã£ã¦ã„ã‚‹ã¨åœ°ã®æ–‡ãŒå‡ºãªããªã‚‹ã®ã§ã€æ›¸ãè¾¼ã‚“ã§ã„ãªã„å ´åˆã¯ã€Ž;ã€ã§ç„¡åŠ¹åŒ–ã—ã¦ãã ã•ã„
 ;
-;;ƒŒƒCƒvŒûã
+;;ãƒ¬ã‚¤ãƒ—å£ä¸Š
 ;;@KOJO_RAPE_K000
 ;
-;;ƒŒƒCƒvŒãŒûã
+;;ãƒ¬ã‚¤ãƒ—å¾Œå£ä¸Š
 ;;@KOJO_RAPE_AFTER_K000
 
 
@@ -308,29 +308,29 @@ PRINTL
 ;=================================================
 ;   sub EVENT_RAPE_INIT
 ;=================================================
-;   EVE:ƒŒƒCƒv(‰‰ñ’²®)
+;   EVE:ãƒ¬ã‚¤ãƒ—(åˆå›žèª¿æ•´)
 ;-------------------------------------------------
 @EVENT_RAPE_INIT
 
-;‰‰ñ‚Í100Ý’è
-SIF FLAG:˜J–ðŽ¡ˆÀ == 0
-	FLAG:˜J–ðŽ¡ˆÀ = 100
+;åˆå›žã¯100è¨­å®š
+SIF FLAG:åŠ´å½¹æ²»å®‰ == 0
+	FLAG:åŠ´å½¹æ²»å®‰ = 100
 
 
 ;=================================================
-;   sub EVENT_RAPE_Ž¡ˆÀˆ—
+;   sub EVENT_RAPE_æ²»å®‰å‡¦ç†
 ;=================================================
-;   EVE:ƒŒƒCƒv(Ž¡ˆÀˆ—)
+;   EVE:ãƒ¬ã‚¤ãƒ—(æ²»å®‰å‡¦ç†)
 ;-------------------------------------------------
-@EVENT_RAPE_Ž¡ˆÀˆ—
-;•—Í‚ªl‹C‚Ì75%–¢–ž‚Å‰º‚ª‚é
-IF FLAG:˜J–ðl‹C*75/100 > FLAG:˜J–ð•—Í
-	FLAG:˜J–ðŽ¡ˆÀ -= 3+RAND:3
+@EVENT_RAPE_æ²»å®‰å‡¦ç†
+;æ­¦åŠ›ãŒäººæ°—ã®75%æœªæº€ã§ä¸‹ãŒã‚‹
+IF FLAG:åŠ´å½¹äººæ°—*75/100 > FLAG:åŠ´å½¹æ­¦åŠ›
+	FLAG:åŠ´å½¹æ²»å®‰ -= 3+RAND:3
 ELSE
-	FLAG:˜J–ðŽ¡ˆÀ += 3+RAND:3
+	FLAG:åŠ´å½¹æ²»å®‰ += 3+RAND:3
 ENDIF
-;101ˆÈã1–¢–ž‚É‚È‚ç‚È‚¢‚æ‚¤‚É
-FLAG:˜J–ðŽ¡ˆÀ = LIMIT(FLAG:˜J–ðŽ¡ˆÀ, 1, 100)
+;101ä»¥ä¸Š1æœªæº€ã«ãªã‚‰ãªã„ã‚ˆã†ã«
+FLAG:åŠ´å½¹æ²»å®‰ = LIMIT(FLAG:åŠ´å½¹æ²»å®‰, 1, 100)
 
 
 

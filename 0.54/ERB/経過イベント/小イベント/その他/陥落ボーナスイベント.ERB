@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�ח��{�[�i�X�C�x���g
+﻿;-------------------------------------------------
+;陥落ボーナスイベント
 ;
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS
@@ -8,589 +8,589 @@
 
 
 DRAWLINE
-IF TALENT:���l
+IF TALENT:愛人
 	SETCOLOR 250,50,150
-	PRINTFORML �y�ח��{�[�i�X�C�x���g�F�ؐC�̓T(���l)�z
+	PRINTFORML 【陥落ボーナスイベント：華燭の典(愛人)】
 	RESETCOLOR
-	PRINTFORML %CALLNAME%���ח�������%CALLNAME:MASTER%�͓��ʂȈߑ���p�ӂ����B
-	IF (TALENT:�m�s�k || TALENT:�S���E��)
-		;�ח��Ώۂɔ���������ꍇ
+	PRINTFORML %CALLNAME%を陥落させた%CALLNAME:MASTER%は特別な衣装を用意した。
+	IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+		;陥落対象に伴侶がいる場合
 		PRINTFORML 
-		PRINTFORML �����������Ȃ���%CALLNAME:MASTER%�ɐS�D���Ă��܂���%CALLNAME%�́A���̙���ے����邩�̂悤�Ȏ����̃E�G�f�B���O�h���X��
-		PRINTFORML �g����ŃJ�t�F�̉��̕����ւƌ��ꂽ�B
-		PRINTFORML ����ɑ����̊֌W�҂��W�߂čs���������Ƃ̌������Ƃ͈قȂ�A��l����ŗ���l�����Ȃ��B
-		PRINTFORML �������A�ؐC�̓T�ɗՂ�%CALLNAME%�̋��̍���͓���������A�C�p������������%CALLNAME:MASTER%�̊�𒼎��ł��Ȃ��ł����B
-		PRINTFORMW �����%CALLNAME%������񂹂�%CALLNAME%�́A�ؐC�̓T���J�n�����c
+		PRINTFORML 伴侶を持ちながら%CALLNAME:MASTER%に心奪われてしまった%CALLNAME%は、その咎を象徴するかのような漆黒のウエディングドレスに
+		PRINTFORML 身を包んでカフェの奥の部屋へと現れた。
+		PRINTFORML 式場に多数の関係者を集めて行った伴侶との結婚式とは異なり、二人きりで立会人もいない。
+		PRINTFORML しかし、華燭の典に臨む%CALLNAME%の胸の高鳴りは当時を上回り、気恥ずかしさから%CALLNAME:MASTER%の顔を直視できないでいた。
+		PRINTFORMW そんな%CALLNAME%を抱き寄せた%CALLNAME%は、華燭の典を開始した…
 		PRINTFORML 
-		PRINTFORML �낫������%CALLNAME%����������グ�Č��t�������킷�ƁA%CALLNAME:MASTER%�͐�𗍂܂����t�𗬂�����ł����B
-		PRINTFORML �����̂��̂ł͂Ȃ����t�����X�Ƃ��ĚT����%CALLNAME%�́A�F���Ȏ��ł����ɂ������̂悤�ɂ����Ƃ�Ƃ����\��Ś�������B
-		PRINTFORML �₪�Č��t�����I���鍠�ɂ͂�������Əo���オ���Ă��܂���%CALLNAME%�͕��ꗎ����悤��%CALLNAME:MASTER%�̑O���삢���B
-		PRINTFORML �u�����A���̓��A���̎����A%CALLNAME%��%CALLNAME:MASTER%�ɐ^�̈�������邱�Ƃ𐾂��܂�%UNICODE(0x2661)%�v
-		PRINTFORML ���͂�%CALLNAME:MASTER%����̈������߂čs�����邱�ƂɈ�Ђ̋^��������Ȃ��Ȃ��Ă���%CALLNAME%�́A���Ĉ��𐾂��������͂���
-		PRINTFORMW �����𗠐؂�A%CALLNAME:MASTER%�̑��̍b�Ɍ��t���𗎂Ƃ��Ĕw���̐��������񂾁c
+		PRINTFORML 俯きがちな%CALLNAME%の頤を持ち上げて口付けを交わすと、%CALLNAME:MASTER%は舌を絡ませ唾液を流し込んでいく。
+		PRINTFORML 伴侶のものではない唾液を嬉々として啜った%CALLNAME%は、芳醇な酒でも口にしたかのようにうっとりとした表情で嚥下する。
+		PRINTFORML やがて口付けを終える頃にはすっかりと出来上がってしまった%CALLNAME%は崩れ落ちるように%CALLNAME:MASTER%の前に跪いた。
+		PRINTFORML 「今日、この日、この時より、%CALLNAME%は%CALLNAME:MASTER%に真の愛を捧げることを誓います%UNICODE(0x2661)%」
+		PRINTFORML もはや%CALLNAME:MASTER%からの愛を求めて行動することに一片の疑問も抱かなくなっていた%CALLNAME%は、かつて愛を誓い合ったはずの
+		PRINTFORMW 伴侶を裏切り、%CALLNAME:MASTER%の足の甲に口付けを落として背徳の誓いを結んだ…
 		PRINTFORML 
 	ELSE
-		;�ח��Ώۂɔ��������Ȃ��ꍇ
+		;陥落対象に伴侶がいない場合
 		PRINTFORML 
-		PRINTFORML �����̃E�G�f�B���O�h���X�ɐg����œo�ꂵ��%CALLNAME%�͖j�����������A���񂾓���%CALLNAME:MASTER%�����߂Ă���B
-		PRINTFORMW �J�t�F�̉��̕����œ�l����B����l�����Ȃ��ؐC�̓T�͂��߂₩�ɍs���悤�Ƃ��Ă����c
+		PRINTFORML 純白のウエディングドレスに身を包んで登場した%CALLNAME%は頬を高潮させ、潤んだ瞳で%CALLNAME:MASTER%を見つめている。
+		PRINTFORMW カフェの奥の部屋で二人きり。立会人もいない華燭の典はしめやかに行われようとしていた…
 		PRINTFORML 
-		PRINTFORML �����񂹂�%CALLNAME:MASTER%�Ɉ����񂹂���܂܁A%CALLNAME%�͂��̘r�̒��ɔ[�܂�ƌ��t�������킷�B
-		PRINTFORML %CALLNAME%�͍������܂ꂽ%CALLNAME:MASTER%�̐�����������ɏo�}���A�������܂ꂽ���t���S�O���Ȃ��������Ă����B
-		PRINTFORML �Â��f����낵�Ȃ�����t�����I����%CALLNAME%�́A�������Ƃ��̏�ɂ��Ⴊ�ݍ��񂾁B
-		PRINTFORML �u�����A���̓��A���̎����A%CALLNAME%��%CALLNAME:MASTER%���I�������邱�Ƃ𐾂��܂�%UNICODE(0x2661)%�v
-		PRINTFORMW �����g��ŋF��悤�ɓ��𐂂ꂽ%CALLNAME%��%CALLNAME:MASTER%�̑��̍b�ɐ����̌��t���𗎂Ƃ����c
+		PRINTFORML 抱き寄せた%CALLNAME:MASTER%に引き寄せられるまま、%CALLNAME%はその腕の中に納まると口付けを交わす。
+		PRINTFORML %CALLNAME%は差し込まれた%CALLNAME:MASTER%の舌を嬉しそうに出迎え、流し込まれた唾液を躊躇いなく嚥下していく。
+		PRINTFORML 甘い吐息を零しながら口付けを終えた%CALLNAME%は、ゆっくりとその場にしゃがみ込んだ。
+		PRINTFORML 「今日、この日、この時より、%CALLNAME%は%CALLNAME:MASTER%を終世愛することを誓います%UNICODE(0x2661)%」
+		PRINTFORMW 両手を組んで祈るように頭を垂れた%CALLNAME%は%CALLNAME:MASTER%の足の甲に誓いの口付けを落とした…
 		PRINTFORML 
 	ENDIF
-ELSEIF TALENT:�S��
+ELSEIF TALENT:心酔
 	SETCOLOR 250,50,150
-	PRINTFORML �y�ח��{�[�i�X�C�x���g�F�ؐC�̓T(�S��)�z
+	PRINTFORML 【陥落ボーナスイベント：華燭の典(心酔)】
 	RESETCOLOR
-	PRINTFORML %CALLNAME%���ח�������%CALLNAME:MASTER%�͓��ʂȈߑ���p�ӂ����B
-	IF (TALENT:�m�s�k || TALENT:�S���E��)
-		;�ח��Ώۂɔ���������ꍇ
+	PRINTFORML %CALLNAME%を陥落させた%CALLNAME:MASTER%は特別な衣装を用意した。
+	IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+		;陥落対象に伴侶がいる場合
 		PRINTFORML 
-		PRINTFORML ���������Ȃ���V���Ȏ�ɐS�D���Ă��܂���%CALLNAME%�́A���̙���ے����邩�̂悤�Ȏ����̃E�G�f�B���O�h���X�ɐg����œo�ꂵ���B
-		PRINTFORML �h���X�͋����Ɣw�����傫���J����A�X�J�[�g�̃X���b�g���[���Z�N�V�[�ȃf�U�C���̂��ߔ��̘I�o�������B
-		PRINTFORML �����҂Ȃ�ΐT�݂������A�����ȊO�̐l���ɑ΂��Ă݂���ɂ��̔����N�����Ƃ͔�����ׂ��Ȃ̂��낤���A%CALLNAME:MASTER%�̂��肢�Ȃ̂��B
-		PRINTFORMW �w�����ɋ������点��%CALLNAME%��%CALLNAME:MASTER%�̐��ʂɗ����A�J�t�F�̉��̕����œ�l����A����l�����Ȃ��ؐC�̓T���n�܂����c
+		PRINTFORML 伴侶がいながら新たな主に心奪われてしまった%CALLNAME%は、その咎を象徴するかのような漆黒のウエディングドレスに身を包んで登場した。
+		PRINTFORML ドレスは胸元と背中が大きく開かれ、スカートのスリットが深いセクシーなデザインのため肌の露出が多い。
+		PRINTFORML 既婚者ならば慎みを持ち、伴侶以外の人物に対してみだりにその肌を晒すことは避けるべきなのだろうが、%CALLNAME:MASTER%のお願いなのだ。
+		PRINTFORMW 背徳感に胸を高鳴らせた%CALLNAME%が%CALLNAME:MASTER%の正面に立ち、カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まった…
 		PRINTFORML 
-		PRINTFORML %CALLNAME%��%CALLNAME:MASTER%�̌��Â��ɐϋɓI�ɉ����A�������܂ꂽ��𒚏d�ɏo�}�����B
-		PRINTFORML �����ɂ��������Ƃ̂Ȃ��Z���ȃf�B�[�v�L�X��%CALLNAME:MASTER%�̂��ዾ�ɓK�����炵���A���J���Ƃ��đ��t���������܂�Ă���B
-		PRINTFORML ��������X�Ƃ��Ĉ��ݍ���%CALLNAME%�͒����̏؂��������߁A���̏���삭�Ɠ��_�����o�����B
-		SIF TALENT:�m�s�k
-			PRINTFORML �v�̑e�`���Ƃ͈Ⴄ�A�l�Ȃ��_���ɂ��鋥���ň��炵�����_�ɂ����ƌ��Â������Ă���%CALLNAME%�̓t�F���`�I���J�n����B
-		SIF TALENT:�S���E��
-			PRINTFORML ���͗Y�Ɏx�z����邽�߂̑��݂ł��邱�Ƃ��v���o�����Ă��ꂽ�����ň��炵�����_�����ə����A%CALLNAME%�̓t�F���`�I���J�n����B
-		PRINTFORML �V���̂��߂ɖu�����邾�����Ƃ����̂ɁA���M�S�ɕ�d�����Ă��܂���%CALLNAME%��%CALLNAME:MASTER%�������܂ł��Ǝ~�߂��B
-		PRINTFORML ��̖��߂ŖړI���v���o����%CALLNAME%���t�F���`�I�𒆒f���Đ��ʂɊ��������ƁA���̖j�ɍd���Ȃ������_���҂���Ɖ������Ă�ꂽ�B
-		PRINTFORML �u%CALLNAME%�̐g���S���A���ׂĐ^�̎�ł���%CALLNAME:MASTER%�l�ɕ����܂��B������͎��R�ɂ��g�����������v
-		SIF TALENT:�m�s�k
-			PRINTFORML ������苭���A��藊��ɂȂ�Y�����߂�͎̂��R�̐ۗ��ł���A�����̌�����q�ׂ邱�ƂɂȂ���S�O�����Ȃ������B
-		SIF TALENT:�S���E��
-			PRINTFORML �����m�ł͐��_�I�ɂ����̓I�ɂ�����Ȃ������𖄂߂Ă����Y�ւ̕��]�𐾂����ƂɁA�Ȃ���S�O�����Ȃ��B
-		PRINTFORML %CALLNAME:MASTER%��%CALLNAME%�̍��E�̖j�ɎO�x���_���������ĂĂ���T���̐�[�ɔw���̐����̌��Â���������B
-		PRINTFORMW �l�Ȃ������ł͂Ȃ��V���Ȏ�𓾂��u�Ԃł������c
+		PRINTFORML %CALLNAME%は%CALLNAME:MASTER%の口づけに積極的に応じ、差し込まれた舌を丁重に出迎えた。
+		PRINTFORML 伴侶にもしたことのない濃厚なディープキスは%CALLNAME:MASTER%のお眼鏡に適ったらしく、ご褒美として唾液が流し込まれてくる。
+		PRINTFORML それを嬉々として飲み込んだ%CALLNAME%は忠誠の証を示すため、その場に跪くと肉棒を取り出した。
+		SIF TALENT:ＮＴＬ
+			PRINTFORML 夫の粗チンとは違う、人妻をダメにする凶悪で愛らしい肉棒にそっと口づけをしてから%CALLNAME%はフェラチオを開始する。
+		SIF TALENT:百合摘み
+			PRINTFORML 雌は雄に支配されるための存在であることを思い出させてくれた凶悪で愛らしい肉棒を口に咥え、%CALLNAME%はフェラチオを開始する。
+		PRINTFORML 儀式のために勃たせるだけだというのに、つい熱心に奉仕をしてしまった%CALLNAME%を%CALLNAME:MASTER%がそこまでだと止めた。
+		PRINTFORML 主の命令で目的を思い出した%CALLNAME%がフェラチオを中断して正面に顔を向けると、その頬に硬くなった肉棒がぴたりと押し当てられた。
+		PRINTFORML 「%CALLNAME%の身も心も、すべて真の主である%CALLNAME:MASTER%様に捧げます。これよりは自由にお使いください」
+		SIF TALENT:ＮＴＬ
+			PRINTFORML 雌がより強き、より頼りになる雄を求めるのは自然の摂理であり、誓いの口上を述べることになんの躊躇いもなかった。
+		SIF TALENT:百合摘み
+			PRINTFORML 雌同士では精神的にも肉体的にも足りない部分を埋めてくれる雄への服従を誓うことに、なんの躊躇いもない。
+		PRINTFORML %CALLNAME:MASTER%は%CALLNAME%の左右の頬に三度肉棒を押し当ててから亀頭の先端に背徳の誓いの口づけをさせる。
+		PRINTFORMW 人妻が伴侶ではない新たな主を得た瞬間であった…
 		PRINTFORML 
 	ELSE
-		;�ח��Ώۂɔ��������Ȃ��ꍇ
+		;陥落対象に伴侶がいない場合
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�̒��鏃���̃E�G�f�B���O�h���X�͋����Ɣw�����傫���J����A�X�J�[�g�̃X���b�g���[���Z�N�V�[�ȃf�U�C���ł������B
-		PRINTFORML �����p�炤���ƂȂ����p���Č��ꂽ%CALLNAME%�̒����S�ɖ�������%CALLNAME:MASTER%�́A%CALLNAME%������񂹂�B
-		PRINTFORMW �J�t�F�̉��̕����œ�l����A����l�����Ȃ��ؐC�̓T�����߂₩�ɍs���悤�Ƃ��Ă����c
+		PRINTFORML %CALLNAME%の着る純白のウエディングドレスは胸元と背中が大きく開かれ、スカートのスリットが深いセクシーなデザインであった。
+		PRINTFORML それを恥らうことなく着用して現れた%CALLNAME%の忠誠心に満足した%CALLNAME:MASTER%は、%CALLNAME%を抱き寄せる。
+		PRINTFORMW カフェの奥の部屋で二人きり、立会人もいない華燭の典がしめやかに行われようとしていた…
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�͌��t�������킷�ƁA%CALLNAME:MASTER%�̐O������悤�ɐ����������Ő㓯�m�𗍂݂�����B
-		PRINTFORML �ϋɓI�ɕ�d���悤�Ƃ���%CALLNAME%�����A����̖ړI�͐���d���󂯂邱�Ƃł͂Ȃ��B
-		PRINTFORML %CALLNAME%�̐K��@���ĖړI���v���o������%CALLNAME:MASTER%�́A���̏���삩����Ɠ��_�����o�����B
-		PRINTFORML �܂��u�N���Ă��Ȃ����_��%CALLNAME%�Ƀt�F���`�I�����ċN������ƁA���̖j�ɂ҂���Ɠ��Ă�B
-		PRINTFORML �u%CALLNAME%�̐g���S���A���ׂ�%CALLNAME:MASTER%�l�̂��̂ł��B������͎��R�ɂ��g�����������v
-		PRINTFORMW %CALLNAME%��������q�ׂ�ƁA%CALLNAME:MASTER%�͍��E�̖j�ɎO�x���_���������ĂĂ���T���̐�[�ɐ����̌��t�����������c
+		PRINTFORML %CALLNAME%は口付けを交わすと、%CALLNAME:MASTER%の唇を割るように舌を差し込んで舌同士を絡みつかせる。
+		PRINTFORML 積極的に奉仕しようとする%CALLNAME%だが、今回の目的は性奉仕を受けることではない。
+		PRINTFORML %CALLNAME%の尻を叩いて目的を思い出させた%CALLNAME:MASTER%は、その場に跪かせると肉棒を取り出した。
+		PRINTFORML まだ勃起していない肉棒を%CALLNAME%にフェラチオさせて起たせると、その頬にぴたりと当てる。
+		PRINTFORML 「%CALLNAME%の身も心も、すべて%CALLNAME:MASTER%様のものです。これよりは自由にお使いください」
+		PRINTFORMW %CALLNAME%が口上を述べると、%CALLNAME:MASTER%は左右の頬に三度肉棒を押し当ててから亀頭の先端に誓いの口付けをさせた…
 		PRINTFORML 
 	ENDIF
-ELSEIF TALENT:��w
+ELSEIF TALENT:情婦
 	SETCOLOR 250,50,150
-	PRINTFORML �y�ח��{�[�i�X�C�x���g�F�ؐC�̓T(��w)�z
+	PRINTFORML 【陥落ボーナスイベント：華燭の典(情婦)】
 	RESETCOLOR
-	PRINTFORML %CALLNAME%���ח�������%CALLNAME:MASTER%�͓��ʂȈߑ���p�ӂ����B
-	IF (TALENT:�m�s�k || TALENT:�S���E��)
-		;�ח��Ώۂɔ���������ꍇ
+	PRINTFORML %CALLNAME%を陥落させた%CALLNAME:MASTER%は特別な衣装を用意した。
+	IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+		;陥落対象に伴侶がいる場合
 		PRINTFORML 
-		PRINTFORML %CALLNAME:MASTER%�̗^������y�ɋt�炦�Ȃ��Ȃ���%CALLNAME%�́A�����ւ̋`�����Ă��Y��Ď����̃I�[�v���u���ƃI�[�v���s�o�b�N��
-		PRINTFORML �K�[�^�[�x���g�Ƃ������r�ȉ����p�ŃJ�t�F�̉��ɂ��镔���ւƂ���Ă����B
-		PRINTFORML %CALLNAME%���������тɃ��[�X�̃`���[�J�[�Ǝ�����q�������h��A�`�����`�����Ƌ�������t�ł�B
-		PRINTFORML ���̉��F�𕷂��Ȃ���A%CALLNAME%�͎��g�������ł͂Ȃ��ʂ̗Y�ɂ���Ċ��S�Ɏx�z���ꂽ���Ƃ��Ċm�F�������Ƃ��Ă����B
-		PRINTFORML ���͂┺���̂��ƂȂǓ��ɖ���%CALLNAME%��%CALLNAME:MASTER%�͖T��ɕ����񂹂�B
-		PRINTFORMW %CALLNAME%�̔������m��ʊԂɁA�J�t�F�̉��̕����œ�l����A����l�����Ȃ��ؐC�̓T���n�܂낤�Ƃ��Ă����c
+		PRINTFORML %CALLNAME:MASTER%の与える快楽に逆らえなくなった%CALLNAME%は、伴侶への義理立ても忘れて漆黒のオープンブラとオープンＴバックに
+		PRINTFORML ガーターベルトという淫靡な下着姿でカフェの奥にある部屋へとやってきた。
+		PRINTFORML %CALLNAME%が歩くたびにレースのチョーカーと手錠を繋ぐ鎖が揺れ、チャリチャリと金属音を奏でる。
+		PRINTFORML その音色を聞きながら、%CALLNAME%は自身が伴侶ではない別の雄によって完全に支配されたことを再確認し恍惚としていた。
+		PRINTFORML もはや伴侶のことなど頭に無い%CALLNAME%を%CALLNAME:MASTER%は傍らに抱き寄せる。
+		PRINTFORMW %CALLNAME%の伴侶が知らぬ間に、カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まろうとしていた…
 		PRINTFORML 
-		PRINTFORML %CALLNAME:MASTER%�̑O���삢��%CALLNAME%�͓��_�����o���ăt�F���`�I���J�n����ƁA�����̂��ߎ��g�̔鏊���w�Ŏh�����n�߂�B
-		PRINTFORML �����ł͂Ȃ�%CALLNAME:MASTER%�ɂ���ĊJ�����ꂽ�����т�I�m�Ɏh������΁A�S�͂Ƃ�Ƃ�ƈ��t�����ڂ��n�߂�B
-		PRINTFORML ���I�h���ɂ��[���������A�O���ς�����ƌ����J�����̂��m�F�ł������ɂ́A%CALLNAME:MASTER%�̓��_���������Ă����B
-		PRINTFORML �������I���ė����オ����%CALLNAME%��%CALLNAME:MASTER%�ɕ��������ƁA�����J���߂��ē��_��҂��ł���Ă����S�������̐�[�ւƉ����t����B
-		PRINTFORML �T���Ɉ������ꂽ�S�����ʂ����Ɖ��𗧂āA�����ӂ������ȉ����������g����o���Ă��邪�}���͂��Ȃ��B
-		PRINTFORML �}�����Ă��܂��Ă͋V���͎��s�Ƃ݂Ȃ����̂ŁA%CALLNAME%�͕K���ɉ䖝���ċT�����S�̌��Â������ōς܂���B
-		PRINTFORML �u���������%CALLNAME:MASTER%�l��p�̐��~�����p���؂ł��B���ꂩ��͂��ł�%CALLNAME%�ɐ��~���������\���t�����������ˁv
-		PRINTFORMW �������Ĕw���̐������q�ׂ�%CALLNAME%�͖{�\�ɋt����ċT�����S�̌��Â����I����ƁA���̏�ɓy��������%CALLNAME:MASTER%�̑��̍b�ւƌ��Â��������c
+		PRINTFORML %CALLNAME:MASTER%の前で跪いた%CALLNAME%は肉棒を取り出してフェラチオを開始すると、準備のため自身の秘所も指で刺激し始める。
+		PRINTFORML 伴侶ではなく%CALLNAME:MASTER%によって開発された性感帯を的確に刺激すれば、膣はとろとろと愛液をこぼし始める。
+		PRINTFORML 性的刺激により充血した小陰唇がぱっくりと口を開けたのが確認できた頃には、%CALLNAME:MASTER%の肉棒も屹立していた。
+		PRINTFORML 準備を終えて立ち上がった%CALLNAME%が%CALLNAME:MASTER%に抱き着くと、口を開け閉めして肉棒を待ち焦がれている膣口をその先端へと押し付ける。
+		PRINTFORML 亀頭に圧迫された粘膜がぬちゃりと音を立て、腰が砕けそうな快感が下半身から登ってくるが挿入はしない。
+		PRINTFORML 挿入してしまっては儀式は失敗とみなされるので、%CALLNAME%は必死に我慢して亀頭と膣の口づけだけで済ませる。
+		PRINTFORML 「今日からは%CALLNAME:MASTER%様専用の性欲処理用雌豚です。これからはいつでも%CALLNAME%に性欲処理をお申し付けくださいね」
+		PRINTFORMW そうして背徳の誓いを述べた%CALLNAME%は本能に逆らって亀頭と膣の口づけを終えると、その場に土下座して%CALLNAME:MASTER%の足の甲へと口づけをした…
 		PRINTFORML 
 	ELSE
-		;�ח��Ώۂɔ��������Ȃ��ꍇ
+		;陥落対象に伴侶がいない場合
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�͏����̃I�[�v���u���ƃI�[�v���s�o�b�N�ɃK�[�^�[�x���g�Ƃ������r�ȉ����p�œo�ꂵ���B
-		PRINTFORML �܂����[�X�̃`���[�J�[����͋�F�̍����L�сA�r���Ŏ}�����ꂵ�����͂��ꂼ�ꗼ���̃��[�X�̎���ƌq�����Ă���B
-		PRINTFORML ���͂�%CALLNAME:MASTER%�ɑ΂��ĉB�����͉̂������%CALLNAME%�͎��Ƃ��Ă̖{���𔘂��o���A�����̍��������������Ɩق���
-		PRINTFORML ������x�z���Ă���Y�̖T��ɐg���񂹂��B
-		PRINTFORMW �J�t�F�̉��̕����œ�l����A����l�����Ȃ��ؐC�̓T���n�܂����c
+		PRINTFORML %CALLNAME%は純白のオープンブラとオープンＴバックにガーターベルトという淫靡な下着姿で登場した。
+		PRINTFORML またレースのチョーカーからは銀色の鎖が伸び、途中で枝分かれした鎖はそれぞれ両手首のレースの手錠と繋がっている。
+		PRINTFORML もはや%CALLNAME:MASTER%に対して隠すものは何一つ無い%CALLNAME%は雌としての本性を曝け出し、胸元の鎖を強く引かれると黙って
+		PRINTFORML 自らを支配している雄の傍らに身を寄せた。
+		PRINTFORMW カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まった…
 		PRINTFORML 
-		PRINTFORML %CALLNAME:MASTER%�̑O�ɂ��Ⴊ�ݍ���%CALLNAME%�͎��ԃt�F���`�I���s���V���̏������n�߂�B
-		PRINTFORML %CALLNAME:MASTER%�ɂ���Ďd���܂ꂽ�e�N�j�b�N�ɁA�J�����ꂽ�����тɂ���ď����͂������Ȃ��قǂ����ɏI������B
-		PRINTFORML ���Ȑ��ꂩ����悤��%CALLNAME:MASTER%�ɕ���������%CALLNAME%�́A�u�N�������_���S�ւƗU�����Ĉ������B
-		PRINTFORML ���i�̌���Ȃ�΂��̂܂ܑ}�����Ă��܂��̂����A�����͐����̋V���̂��߂ɋT�����S�̌��Â������ōς܂��K�v���������B
-		PRINTFORML %CALLNAME:MASTER%�̎�ɂ���Ĉ����Ȏ��ւƕϖe������ꂽ%CALLNAME%�ɂƂ��Ă͕s���̎c��s�ׂł��邪�A�V���Ȃ̂�����d�����Ȃ��B
-		PRINTFORML �ʂ���ʂ���Ƃ킴�Ƃ炵�����𗧂ĂȂ���T�����S�̌��Â��������Ղ�Ɩ������%CALLNAME%�́A%CALLNAME:MASTER%�̎����Ś����B
-		PRINTFORML �u���������%CALLNAME:MASTER%�l�̃��m�ł��B���ꂩ��͂��ł�%CALLNAME%�Ő��~�������Ă��������ˁv
-		PRINTFORMW �������q�ׂĂ����Ƒ̂𗣂���%CALLNAME%�́A���̏�ɓy��������%CALLNAME:MASTER%�̑��̍b�ւƌ��Â��������c
+		PRINTFORML %CALLNAME:MASTER%の前にしゃがみ込んだ%CALLNAME%は自慰フェラチオを行い儀式の準備を始める。
+		PRINTFORML %CALLNAME:MASTER%によって仕込まれたテクニックに、開発された性感帯によって準備はあっけないほどすぐに終わった。
+		PRINTFORML しな垂れかかるように%CALLNAME:MASTER%に抱き着いた%CALLNAME%は、勃起した肉棒を膣へと誘導して宛がう。
+		PRINTFORML 普段の交尾ならばこのまま挿入してしまうのだが、今日は誓いの儀式のために亀頭と膣の口づけだけで済ます必要があった。
+		PRINTFORML %CALLNAME:MASTER%の手によって淫乱な雌へと変貌させられた%CALLNAME%にとっては不満の残る行為であるが、儀式なのだから仕方がない。
+		PRINTFORML ぬちゃぬちゃとわざとらしく音を立てながら亀頭と膣の口づけをたっぷりと味わった%CALLNAME%は、%CALLNAME:MASTER%の耳元で囁く。
+		PRINTFORML 「今日からは%CALLNAME:MASTER%様のモノです。これからはいつでも%CALLNAME%で性欲処理してくださいね」
+		PRINTFORMW 誓いを述べてそっと体を離した%CALLNAME%は、その場に土下座して%CALLNAME:MASTER%の足の甲へと口づけをした…
 		PRINTFORML 
 	ENDIF
 ENDIF
 
 
-SIF TALENT:���l
-	PRINTFORML �V�����I����%CALLNAME%�͈���ɖ������ڂ�%CALLNAME:MASTER%�����߂Ă���B
-SIF TALENT:�S��
-	PRINTFORML �V�����I����%CALLNAME%��%CALLNAME:MASTER%����̖��߂�Â��ɑ҂��Ă���B
-SIF TALENT:��w
-	PRINTFORML �V�����I����%CALLNAME%�͌�������悤�Ɏ��Ԃ��n�߂�%CALLNAME:MASTER%��U���Ă���B
+SIF TALENT:愛人
+	PRINTFORML 儀式を終えた%CALLNAME%は愛情に満ちた目で%CALLNAME:MASTER%を見つめている。
+SIF TALENT:心酔
+	PRINTFORML 儀式を終えた%CALLNAME%は%CALLNAME:MASTER%からの命令を静かに待っている。
+SIF TALENT:情婦
+	PRINTFORML 儀式を終えた%CALLNAME%は見せつけるように自慰を始めて%CALLNAME:MASTER%を誘っている。
 
-PRINTFORML ����͌���Ώ���Ƃ������ƂɂȂ邪�c
+PRINTFORML 今回は言わば初夜ということになるが…
 PRINTFORML 
 SETCOLOR 250,50,50
-PRINTFORML �i�ח��{�[�i�X�I�@�ؐC�̓T�̃{�[�i�X�͂P�L�����ɂ��P�x�����ł��j
+PRINTFORML （陥落ボーナス！　華燭の典のボーナスは１キャラにつき１度だけです）
 RESETCOLOR
 
 $INPUT_LOOP
 PRINTFORML 
-PRINTFORM %CALLNAME%�̏�ԁF
-IF TALENT:��
-	PRINTFORML �󐸍ς�
-ELSEIF TALENT:�D�P
-	PRINTFORML �D�P��
+PRINTFORM %CALLNAME%の状態：
+IF TALENT:受精
+	PRINTFORML 受精済み
+ELSEIF TALENT:妊娠
+	PRINTFORML 妊娠中
 ELSE
-	PRINTFORML ��فi��t���\�j
+	PRINTFORML 空胎（種付け可能）
 ENDIF
-PRINTFORM �u���x�F
-IF TALENT:�u�q��
-	PRINTFORM �q��
-ELSEIF TALENT:�u�݊�
-	PRINTFORM �݊�
+PRINTFORM Ｖ感度：
+IF TALENT:Ｖ敏感
+	PRINTFORM 敏感
+ELSEIF TALENT:Ｖ鈍感
+	PRINTFORM 鈍感
 ELSE
-	PRINTFORM ����
-ENDIF
-
-PRINTFORM �@�^�@�`���x�F
-IF TALENT:�`�q��
-	PRINTFORM �q��
-ELSEIF TALENT:�`�݊�
-	PRINTFORM �݊�
-ELSE
-	PRINTFORM ����
+	PRINTFORM 普通
 ENDIF
 
-PRINTFORM �@�^�@�a���x�F
-IF TALENT:�a�q��
-	PRINTFORM �q��
-ELSEIF TALENT:�a�݊�
-	PRINTFORM �݊�
+PRINTFORM 　／　Ａ感度：
+IF TALENT:Ａ敏感
+	PRINTFORM 敏感
+ELSEIF TALENT:Ａ鈍感
+	PRINTFORM 鈍感
 ELSE
-	PRINTFORM ����
+	PRINTFORM 普通
 ENDIF
 
-PRINTFORM �@�^�@�b���x�F
-IF TALENT:�b�q��
-	PRINTFORML �q��
-ELSEIF TALENT:�b�݊�
-	PRINTFORML �݊�
+PRINTFORM 　／　Ｂ感度：
+IF TALENT:Ｂ敏感
+	PRINTFORM 敏感
+ELSEIF TALENT:Ｂ鈍感
+	PRINTFORM 鈍感
 ELSE
-	PRINTFORML ����
+	PRINTFORM 普通
+ENDIF
+
+PRINTFORM 　／　Ｃ感度：
+IF TALENT:Ｃ敏感
+	PRINTFORML 敏感
+ELSEIF TALENT:Ｃ鈍感
+	PRINTFORML 鈍感
+ELSE
+	PRINTFORML 普通
 ENDIF
 PRINTFORML 
-PRINTFORML [1] - �y��t������z(�K���󐸂��o���l���l�����܂�)
-PRINTFORML [2] - �y�����o�̑f�������z(�����_���łP�����������܂�)
-PRINTFORML [3] - �y���̋����z(RPG�X�e�[�^�X����̓I�ɋ������܂�)
-PRINTFORML [4] - �y���_�����z(RPG�X�e�[�^�X�𐸐_�I�ɋ������܂�)
-PRINTFORM [10] - �y�u���x���グ��z�@
-PRINTFORM [11] - �y�`���x���グ��z�@
-PRINTFORM [12] - �y�a���x���グ��z�@
-PRINTFORML [13] - �y�b���x���グ��z
-PRINTFORML [999] - �y�������Ȃ��z(�{�[�i�X�l���̌���������B���_�Ȃ�)
+PRINTFORML [1] - 【種付けする】(必ず受精し経験値を獲得します)
+PRINTFORML [2] - 【無自覚の素質強化】(ランダムで１つだけ強化します)
+PRINTFORML [3] - 【肉体強化】(RPGステータスを肉体的に強化します)
+PRINTFORML [4] - 【精神強化】(RPGステータスを精神的に強化します)
+PRINTFORM [10] - 【Ｖ感度を上げる】　
+PRINTFORM [11] - 【Ａ感度を上げる】　
+PRINTFORM [12] - 【Ｂ感度を上げる】　
+PRINTFORML [13] - 【Ｃ感度を上げる】
+PRINTFORML [999] - 【何もしない】(ボーナス獲得の権利を放棄。利点なし)
 PRINTFORML 
 
 INPUT
 L_INPUT = RESULT
 
 SELECTCASE L_INPUT
-CASE 1	;��t������
-	IF (TALENT:�� || TALENT:�D�P)
-		PRINTFORMW ��c�c�������܂����c�u�v���C���[�v��c�c���c���Ȃ��́c�S�Ɂc���ځc �Ăт����Ă��܂��c��
-		PRINTFORMW ��c���̏����́c���łɁc�D�P���ł��c�c���́c�����Ɂc��t������̂ł��c�c��
+CASE 1	;種付けする
+	IF (TALENT:受精 || TALENT:妊娠)
+		PRINTFORMW ≪……きこえますか…「プレイヤー」よ……今…あなたの…心に…直接… 呼びかけています…≫
+		PRINTFORMW ≪…その女性は…すでに…妊娠中です……他の…女性に…種付けするのです……≫
 		GOTO INPUT_LOOP
 	ELSE
 		CALL TURN_EVENT_FALL_BONUS_SEX
 	ENDIF
-CASE 2	;�����o�̑f������
+CASE 2	;無自覚の素質強化
 	CALL TURN_EVENT_FALL_BONUS_TAL
-CASE 3	;���̋���
+CASE 3	;肉体強化
 	CALL TURN_EVENT_FALL_BONUS_POW
-CASE 4	;���_����
+CASE 4	;精神強化
 	CALL TURN_EVENT_FALL_BONUS_MIN
-CASE 10	;�u���x������
-	IF TALENT:�u�q��
-		PRINTFORMW ���ł�%CALLNAME%�̂u���x�͕q���ł���ȏ�͏オ�肻���ɂȂ��B
+CASE 10	;Ｖ感度を強化
+	IF TALENT:Ｖ敏感
+		PRINTFORMW すでに%CALLNAME%のＶ感度は敏感でこれ以上は上がりそうにない。
 		GOTO INPUT_LOOP
 	ELSE
 		CALL TURN_EVENT_FALL_BONUS_EROV
 	ENDIF
-CASE 11	;�`���x������
-	IF TALENT:�`�q��
-		PRINTFORMW ���ł�%CALLNAME%�̂`���x�͕q���ł���ȏ�͏オ�肻���ɂȂ��B
+CASE 11	;Ａ感度を強化
+	IF TALENT:Ａ敏感
+		PRINTFORMW すでに%CALLNAME%のＡ感度は敏感でこれ以上は上がりそうにない。
 		GOTO INPUT_LOOP
 	ELSE
 		CALL TURN_EVENT_FALL_BONUS_EROA
 	ENDIF
-CASE 12	;�a���x������
-	IF TALENT:�a�q��
-		PRINTFORMW ���ł�%CALLNAME%�̂a���x�͕q���ł���ȏ�͏オ�肻���ɂȂ��B
+CASE 12	;Ｂ感度を強化
+	IF TALENT:Ｂ敏感
+		PRINTFORMW すでに%CALLNAME%のＢ感度は敏感でこれ以上は上がりそうにない。
 		GOTO INPUT_LOOP
 	ELSE
 		CALL TURN_EVENT_FALL_BONUS_EROB
 	ENDIF
-CASE 13	;�b���x������
-	IF TALENT:�b�q��
-		PRINTFORMW ���ł�%CALLNAME%�̂b���x�͕q���ł���ȏ�͏オ�肻���ɂȂ��B
+CASE 13	;Ｃ感度を強化
+	IF TALENT:Ｃ敏感
+		PRINTFORMW すでに%CALLNAME%のＣ感度は敏感でこれ以上は上がりそうにない。
 		GOTO INPUT_LOOP
 	ELSE
 		CALL TURN_EVENT_FALL_BONUS_EROC
 	ENDIF
-CASE 999	;�������Ȃ�
-	PRINTFORML �c
-	PRINTFORML �c�c
-	PRINTFORML �����͂����x���B
-	PRINTFORMW %CALLNAME:MASTER%��%CALLNAME%�𕁒i���ɒ��ւ��Ȃ�������ƉƂ̖T�܂ő����Ă�����c
-	;�P�����̃C�x���g�Ȃ̂Ŏ���ȍ~�͔������Ȃ��t���OON
-	CFLAG:�ؐC�̓T = 1
+CASE 999	;何もしない
+	PRINTFORML …
+	PRINTFORML ……
+	PRINTFORML 今日はもう遅い。
+	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%を普段着に着替えなおさせると家の傍まで送ってやった…
+	;１回限りのイベントなので次回以降は発生しないフラグON
+	CFLAG:華燭の典 = 1
 	RETURN
 CASEELSE
 	GOTO INPUT_LOOP
 ENDSELECT
 
-;�P�����̃C�x���g�Ȃ̂Ŏ���ȍ~�͔������Ȃ��t���OON
-CFLAG:�ؐC�̓T = 1
+;１回限りのイベントなので次回以降は発生しないフラグON
+CFLAG:華燭の典 = 1
 
 
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@��t������
-;�K���󐸂��o���l���l�����܂�
+;陥落ボーナス　種付けする
+;必ず受精し経験値を獲得します
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_SEX
 
 
-PRINTFORML ��t�����s�����Ƃɂ���%CALLNAME:MASTER%��%CALLNAME%�ɔr���U���܂����܂���ƁA���g�����͑����܂𕞗p�����B
-PRINTFORML �c
-PRINTFORML �c�c
+PRINTFORML 種付けを行うことにした%CALLNAME:MASTER%は%CALLNAME%に排卵誘発剤を飲ませると、自身も精力増強剤を服用した。
+PRINTFORML …
+PRINTFORML ……
 PRINTFORML 
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
 PRINTFORML 
-;�Ώۂ������̏ꍇ
-IF !TALENT:�񏈏�
-	IF TALENT:���l
-		PRINTFORML �w���������o�ď���ɏ���������Ďq��s�ށx
-		PRINTFORML ����͌�������͂����V�������A���Ė��������i�������̂��̂ƂȂ��Ă��邱�Ƃ�%CALLNAME%�͋������点�Ă����B
-		IF (TALENT:�m�s�k || TALENT:�S���E��)
-			PRINTFORML ���������肪�U��̈��𐾂킳�ꂽ�����ł͂Ȃ��A�^�̔Ԃł���%CALLNAME:MASTER%�ɏ����������̂�����Ȃ�����ł���B
+;対象が処女の場合
+IF !TALENT:非処女
+	IF TALENT:愛人
+		PRINTFORML 『結婚式を経て初夜に処女を捧げて子を孕む』
+		PRINTFORML 今回は結婚式を模した儀式だが、かつて夢見た光景が現実のものとなっていることに%CALLNAME%は胸を高鳴らせていた。
+		IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+			PRINTFORML しかも相手が偽りの愛を誓わされた伴侶ではなく、真の番である%CALLNAME:MASTER%に処女を捧げるのだからなおさらである。
 		ELSE
-			PRINTFORML ����������͍ň���%CALLNAME:MASTER%�ł���A���͂₱��ȏ�̍K���͂Ȃ����낤�B
+			PRINTFORML しかも相手は最愛の%CALLNAME:MASTER%であり、もはやこれ以上の幸せはないだろう。
 		ENDIF
-		PRINTFORMW �D�����x�b�h�ւƓ����ꂽ%CALLNAME%��%CALLNAME:MASTER%�̎�����x�����̐g�Ɏ󂯓���A��������Ǝq�ǂ����h�����c
-	ELSEIF TALENT:�S��
-		PRINTFORML ���܂ň�x���g���邱�Ƃ̂Ȃ����������S���g���Ƃ������ƂŁA%CALLNAME%�͂��ĂȂ��قǂɋْ����Ă����B
-		PRINTFORML %CALLNAME:MASTER%�ɋC�ɓ����Ă��炦�邾�낤���H
-		PRINTFORML ���܂����߂��ʂ����邾�낤���H
-		PRINTFORML �s���Q����%CALLNAME%�̐S�����@����%CALLNAME:MASTER%�͕��i�����D��������������ƁA�ْ����ق����悤�Ɍy���X�L���V�b�v����J�n�����B
-		PRINTFORMW ������x�������Ă��܂��Ύ��O��%CALLNAME:MASTER%�Ɏd���܂�Ă������Ƃ�����A%CALLNAME%�͂�������Ɩ��߂��ʂ����Ď󐸂����c
-	ELSEIF TALENT:��w
-		PRINTFORML ���悢��ڑO�ɔ�����%CALLNAME:MASTER%�Ƃ̏������%CALLNAME%�̓��̂͊��҂ɑł��k���Ă����B
-		PRINTFORML ����܂ň�x���g���邱�Ƃ̂Ȃ������S�A�������瓾������y�͂����قǂ̂��̂ł��낤���B
-		PRINTFORML ���x��������j���ė~�����Ɗ肢�o�Ă����̂ɁA%CALLNAME:MASTER%�͂���炵���΂݂𕂂��ׂ�΂���Ŏ�荇���Ă���Ȃ������B
-		PRINTFORML ��������������܂ŁB
-		PRINTFORML %CALLNAME:MASTER%�̔M�����_�Ǝq���ٓ��Ɏ󂯓��ꂽ%CALLNAME%�́A���̐��̂��̂Ƃ͎v���Ȃ������ƍK�����ɕ�܂ꂽ�B
-		PRINTFORMW ���̉x�т�m����%CALLNAME%�̗͑͂̑�������%CALLNAME:MASTER%�Ƃ̎�t������ɗ�ݎ󐸂��܂����c
+		PRINTFORMW 優しくベッドへと導かれた%CALLNAME%は%CALLNAME:MASTER%の種を何度もその身に受け入れ、しっかりと子どもを宿した…
+	ELSEIF TALENT:心酔
+		PRINTFORML 今まで一度も使われることのなかった処女膣を使うということで、%CALLNAME%はかつてないほどに緊張していた。
+		PRINTFORML %CALLNAME:MASTER%に気に入ってもらえるだろうか？
+		PRINTFORML うまく務めを果たせるだろうか？
+		PRINTFORML 不安渦巻く%CALLNAME%の心中を察した%CALLNAME:MASTER%は普段よりも優しく声をかけると、緊張をほぐすように軽いスキンシップから開始した。
+		PRINTFORMW だが一度交合してしまえば事前に%CALLNAME:MASTER%に仕込まれていたこともあり、%CALLNAME%はしっかりと務めを果たして受精した…
+	ELSEIF TALENT:情婦
+		PRINTFORML いよいよ目前に迫った%CALLNAME:MASTER%との初交尾に%CALLNAME%の肉体は期待に打ち震えていた。
+		PRINTFORML 今夜まで一度も使われることのなかった膣、そこから得られる快楽はいかほどのものであろうか。
+		PRINTFORML 何度も処女を破って欲しいと願い出ていたのに、%CALLNAME:MASTER%はいやらしい笑みを浮かべるばかりで取り合ってくれなかった。
+		PRINTFORML だがそれも今日まで。
+		PRINTFORML %CALLNAME:MASTER%の熱い肉棒と子種を胎内に受け入れた%CALLNAME%は、この世のものとは思えない快感と幸福感に包まれた。
+		PRINTFORMW 性の悦びを知った%CALLNAME%は体力の続く限り%CALLNAME:MASTER%との種付け交尾に励み受精しました…
 	ENDIF
 
-	TALENT:�񏈏� = 1
-	TCVAR:����_EXP_�����r�� = 1
+	TALENT:非処女 = 1
+	TCVAR:履歴_EXP_処女喪失 = 1
 
-	SIF CSTR:�����������薼 == ""
-		CSTR:�����������薼 = %CALLNAME:MASTER%
-	SIF CSTR:���L�X���薼 == "" 
-		CSTR:���L�X���薼 = %CALLNAME:MASTER%
-	SIF CSTR:���t�F�����薼 ==""
-		CSTR:���t�F�����薼 = %CALLNAME:MASTER%
-	SIF CSTR:���Ⓒ���薼 ==""
-		CSTR:���Ⓒ���薼 = %CALLNAME:MASTER%
-	SIF CSTR:�����o�����薼 ==""
-		CSTR:�����o�����薼 = %CALLNAME:MASTER%
-;�Ώۂ��񏈏��̏ꍇ
+	SIF CSTR:初えっち相手名 == ""
+		CSTR:初えっち相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初キス相手名 == "" 
+		CSTR:初キス相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初フェラ相手名 ==""
+		CSTR:初フェラ相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初絶頂相手名 ==""
+		CSTR:初絶頂相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初中出し相手名 ==""
+		CSTR:初中出し相手名 = %CALLNAME:MASTER%
+;対象が非処女の場合
 ELSE
-	IF TALENT:���l
+	IF TALENT:愛人
 		IF !RAND:3
-			PRINTFORMW ������%CALLNAME:MASTER%�̎q���~�����Ƃ���%CALLNAME%�̊肢�����q�Ɨ��q�ɒʂ����̂��A%CALLNAME%�͎󐸂��܂����c
+			PRINTFORMW 愛する%CALLNAME:MASTER%の子が欲しいという%CALLNAME%の願いが精子と卵子に通じたのか、%CALLNAME%は受精しました…
 		ELSEIF !RAND:2
-			PRINTFORMW %CALLNAME:MASTER%�̈��𓾂邽�ߎ�t���Z�b�N�X�ɗՂ�%CALLNAME%�͖����Ɏ󐸂��܂����c
+			PRINTFORMW %CALLNAME:MASTER%の愛を得るため種付けセックスに臨んだ%CALLNAME%は無事に受精しました…
 		ELSE
-			PRINTFORMW %CALLNAME%�̓s���[�g�[�N���ɓˑR����ȍK�����Ɍ������A���g���󐸂������Ƃ�{�\�I�Ɍ�����c
+			PRINTFORMW %CALLNAME%はピロートーク中に突然強烈な幸福感に見舞われ、自身が受精したことを本能的に悟った…
 		ENDIF
-	ELSEIF TALENT:�S��
+	ELSEIF TALENT:心酔
 		IF !RAND:3
-			PRINTFORMW %CALLNAME:MASTER%����q��s�ނ悤�ɖ�����ꂽ%CALLNAME%����t������ɗ�񂾌��ʁA%CALLNAME%�͎󐸂��܂����c
+			PRINTFORMW %CALLNAME:MASTER%から子を孕むように命じられた%CALLNAME%が種付け交尾に励んだ結果、%CALLNAME%は受精しました…
 		ELSEIF !RAND:2
-			PRINTFORMW %CALLNAME%�����g�̗��q�ɑ΂���%CALLNAME:MASTER%�̐��q�ɕ�����悤�����O�������������A%CALLNAME%�͖����Ɏ󐸂��܂����c
+			PRINTFORMW %CALLNAME%が自身の卵子に対して%CALLNAME:MASTER%の精子に負けるよう強く念じたおかげか、%CALLNAME%は無事に受精しました…
 		ELSE
-			PRINTFORMW %CALLNAME:MASTER%�̐��t��ٓ��ɒ������߂邽�߂ɐ�p�̒呀�т܂ŗp�ӂ��Ă���%CALLNAME%�̓w�͂�����A%CALLNAME%�͎󐸂��܂����c
+			PRINTFORMW %CALLNAME:MASTER%の精液を胎内に長く留めるために専用の貞操帯まで用意していた%CALLNAME%の努力が実り、%CALLNAME%は受精しました…
 		ENDIF
-	ELSEIF TALENT:��w
+	ELSEIF TALENT:情婦
 		IF !RAND:3
-			PRINTFORMW %CALLNAME:MASTER%�Ƃ̎�t������̉����Ƀn�}���Ĕ����o���Ȃ��Ȃ���%CALLNAME%�͓��R�̂悤�Ɏ󐸂��܂����c
+			PRINTFORMW %CALLNAME:MASTER%との種付け交尾の快感にハマって抜け出せなくなった%CALLNAME%は当然のように受精しました…
 		ELSEIF !RAND:2
-			PRINTFORMW ���y�����߂邠�܂蓖���̖ړI��Y��đS�g���t�܂݂�ɂȂ���%CALLNAME%�����A�����Ɏ󐸂��܂����c
+			PRINTFORMW 快楽を求めるあまり当初の目的を忘れて全身精液まみれになった%CALLNAME%だが、無事に受精しました…
 		ELSE
-			PRINTFORMW ���o��%CALLNAME:MASTER%�̐��t�𖳈ӎ��̂������S���֎w�ŉ����߂��Ă���%CALLNAME%�̐��B�{�\���������A%CALLNAME%�͎󐸂��܂����c
+			PRINTFORMW 溢れ出た%CALLNAME:MASTER%の精液を無意識のうちに膣内へ指で押し戻していた%CALLNAME%の生殖本能が勝利し、%CALLNAME%は受精しました…
 		ENDIF
 	ENDIF
 ENDIF
 
-CFLAG:�󐸌��ݑϋv�l = 0
-TALENT:�� += 1
-SIF TALENT:���ے� == 1 || TALENT:�����ς� == 1�@|| TALENT:�S������ == 1�@
-	TALENT:� = 1
-CFLAG:�D�P�t���O = 1
+CFLAG:受精現在耐久値 = 0
+TALENT:受精 += 1
+SIF TALENT:交際中 == 1 || TALENT:結婚済み == 1　|| TALENT:百合結婚 == 1　
+	TALENT:托卵 = 1
+CFLAG:妊娠フラグ = 1
 
-;�j�̌o���l�͔D�P2�񕪁A���q�o���l���S���ː�20�񕪂����Z
-;�]��̌o���l�͎����z����0�Ƀ��Z�b�g
-CFLAG:MASTER:�j�̌o���l += 2
-IF CFLAG:MASTER:�j�̌o���l >= CFlag:MASTER:�j�̃��x��*2
-	CFLAG:MASTER:�j�̌o���l = 0
-	CFlag:MASTER:�j�̃��x�� += 1
+;男体経験値は妊娠2回分、精子経験値は膣内射精20回分を加算
+;余剰の経験値は持ち越さず0にリセット
+CFLAG:MASTER:男体経験値 += 2
+IF CFLAG:MASTER:男体経験値 >= CFlag:MASTER:男体レベル*2
+	CFLAG:MASTER:男体経験値 = 0
+	CFlag:MASTER:男体レベル += 1
 ENDIF
-CFLAG:MASTER:���q�o���l += 20
-IF CFLAG:MASTER:���q�o���l >= ((CFlag:MASTER:���q���x��)*5)+CFlag:MASTER:���q���x��
-	CFLAG:MASTER:���q�o���l = 0
-	CFlag:MASTER:���q���x�� += 1
+CFLAG:MASTER:精子経験値 += 20
+IF CFLAG:MASTER:精子経験値 >= ((CFlag:MASTER:精子レベル)*5)+CFlag:MASTER:精子レベル
+	CFLAG:MASTER:精子経験値 = 0
+	CFlag:MASTER:精子レベル += 1
 ENDIF
 CALL JN_SEX_EXP
 
 
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@�u���x���グ��
-;V���x���グ�܂�
+;陥落ボーナス　Ｖ感度を上げる
+;V感度を上げます
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_EROV
 
-PRINTFORML �c
-PRINTFORML �c�c
-IF TALENT:�u�݊�
-	PRINTFORML �ȑO����%CALLNAME%�̃��@�M�i���h���ɑ΂��Ĕ������݂����Ƃ�%CALLNAME:MASTER%�͕s���Ɏv���Ă����B
-	PRINTFORML ������@�ɐ����т̊J�����s���A�l���݂Ɋ�����悤�ɂ��Ă��݂��Ɋy���߂�悤�ɂ������B
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｖ鈍感
+	PRINTFORML 以前から%CALLNAME%のヴァギナが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
 ELSE
-	PRINTFORML %CALLNAME%�̃��@�M�i�͎h���ɑ΂��Đl���݂Ɋ�����悤�����A�����Ɗ����ė����p�����Ă݂����B
+	PRINTFORML %CALLNAME%のヴァギナは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
 ENDIF
-PRINTFORMW �����v��������%CALLNAME:MASTER%�͊e��ӂߋ��p�ӂ���%CALLNAME%���x�b�h�ɉ����|�����c
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
 PRINTFORML 
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
 PRINTFORML 
-;�u�݊��̏ꍇ�͂u�݊����폜
-IF TALENT:�u�݊�
-	TALENT:�u�݊� = 0
-	PRINTFORMW %CALLNAME:MASTER%�͎����O�̃e�N�j�b�N��%CALLNAME%�̃��@�M�i���C�W���ʂ��A�l���݂Ɋ�����܂ŊJ�������B
-;�����łȂ��ꍇ�͂u�q����ǉ�
+;Ｖ鈍感の場合はＶ鈍感を削除
+IF TALENT:Ｖ鈍感
+	TALENT:Ｖ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のヴァギナをイジメぬき、人並みに感じるまで開発した。
+;そうでない場合はＶ敏感を追加
 ELSE
-	TALENT:�u�q�� = 1
-	PRINTFORMW %CALLNAME:MASTER%�̎��X�Ȑӂ߂ɋ�����%CALLNAME%�̃��@�M�i�͂ƂĂ��q���ɂȂ�A���ׂȎh���ɂ������������قǂɊJ�����ꂽ�B
+	TALENT:Ｖ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のヴァギナはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
 ENDIF
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@�`���x���グ��
-;A���x���グ�܂�
+;陥落ボーナス　Ａ感度を上げる
+;A感度を上げます
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_EROA
 
-PRINTFORML �c
-PRINTFORML �c�c
-IF TALENT:�`�݊�
-	PRINTFORML �ȑO����%CALLNAME%�̃A�i�����h���ɑ΂��Ĕ������݂����Ƃ�%CALLNAME:MASTER%�͕s���Ɏv���Ă����B
-	PRINTFORML ������@�ɐ����т̊J�����s���A�l���݂Ɋ�����悤�ɂ��Ă��݂��Ɋy���߂�悤�ɂ������B
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ａ鈍感
+	PRINTFORML 以前から%CALLNAME%のアナルが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
 ELSE
-	PRINTFORML %CALLNAME%�̃A�i���͎h���ɑ΂��Đl���݂Ɋ�����悤�����A�����Ɗ����ė����p�����Ă݂����B
+	PRINTFORML %CALLNAME%のアナルは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
 ENDIF
-PRINTFORMW �����v��������%CALLNAME:MASTER%�͊e��ӂߋ��p�ӂ���%CALLNAME%���x�b�h�ɉ����|�����c
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
 PRINTFORML 
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
 PRINTFORML 
-;�`�݊��̏ꍇ�͂`�݊����폜
-IF TALENT:�`�݊�
-	TALENT:�`�݊� = 0
-	PRINTFORMW %CALLNAME:MASTER%�͎����O�̃e�N�j�b�N��%CALLNAME%�̃A�i�������񂵁A�l���݂Ɋ�����܂ŊJ�������B
-;�����łȂ��ꍇ�͂`�q����ǉ�
+;Ａ鈍感の場合はＡ鈍感を削除
+IF TALENT:Ａ鈍感
+	TALENT:Ａ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のアナルを穿り回し、人並みに感じるまで開発した。
+;そうでない場合はＡ敏感を追加
 ELSE
-	TALENT:�`�q�� = 1
-	PRINTFORMW %CALLNAME:MASTER%�̎��X�Ȑӂ߂ɋ�����%CALLNAME%�̃A�i���͂ƂĂ��q���ɂȂ�A���ׂȎh���ɂ������������قǂɊJ�����ꂽ�B
+	TALENT:Ａ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のアナルはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
 ENDIF
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@�a���x���グ��
-;B���x���グ�܂�
+;陥落ボーナス　Ｂ感度を上げる
+;B感度を上げます
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_EROB
 
-PRINTFORML �c
-PRINTFORML �c�c
-IF TALENT:�a�݊�
-	PRINTFORML �ȑO����%CALLNAME%�̃o�X�g���h���ɑ΂��Ĕ������݂����Ƃ�%CALLNAME:MASTER%�͕s���Ɏv���Ă����B
-	PRINTFORML ������@�ɐ����т̊J�����s���A�l���݂Ɋ�����悤�ɂ��Ă��݂��Ɋy���߂�悤�ɂ������B
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｂ鈍感
+	PRINTFORML 以前から%CALLNAME%のバストが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
 ELSE
-	PRINTFORML %CALLNAME%�̃o�X�g�͎h���ɑ΂��Đl���݂Ɋ�����悤�����A�����Ɗ����ė����p�����Ă݂����B
+	PRINTFORML %CALLNAME%のバストは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
 ENDIF
-PRINTFORMW �����v��������%CALLNAME:MASTER%�͊e��ӂߋ��p�ӂ���%CALLNAME%���x�b�h�ɉ����|�����c
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
 PRINTFORML 
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
 PRINTFORML 
-;�a�݊��̏ꍇ�͂a�݊����폜
-IF TALENT:�a�݊�
-	TALENT:�a�݊� = 0
-	PRINTFORMW %CALLNAME:MASTER%�͎����O�̃e�N�j�b�N��%CALLNAME%�̃o�X�g��s�ˌJ��񂵁A�l���݂Ɋ�����܂ŊJ�������B
-;�����łȂ��ꍇ�͂a�q����ǉ�
+;Ｂ鈍感の場合はＢ鈍感を削除
+IF TALENT:Ｂ鈍感
+	TALENT:Ｂ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のバストを捏ね繰り回し、人並みに感じるまで開発した。
+;そうでない場合はＢ敏感を追加
 ELSE
-	TALENT:�a�q�� = 1
-	PRINTFORMW %CALLNAME:MASTER%�̎��X�Ȑӂ߂ɋ�����%CALLNAME%�̃o�X�g�͂ƂĂ��q���ɂȂ�A���ׂȎh���ɂ������������قǂɊJ�����ꂽ�B
+	TALENT:Ｂ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のバストはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
 ENDIF
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@�b���x���グ��
-;C���x���グ�܂�
+;陥落ボーナス　Ｃ感度を上げる
+;C感度を上げます
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_EROC
 
-PRINTFORML �c
-PRINTFORML �c�c
-IF TALENT:�b�݊�
-	PRINTFORML �ȑO����%CALLNAME%�̃N���g���X���h���ɑ΂��Ĕ������݂����Ƃ�%CALLNAME:MASTER%�͕s���Ɏv���Ă����B
-	PRINTFORML ������@�ɐ����т̊J�����s���A�l���݂Ɋ�����悤�ɂ��Ă��݂��Ɋy���߂�悤�ɂ������B
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｃ鈍感
+	PRINTFORML 以前から%CALLNAME%のクリトリスが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
 ELSE
-	PRINTFORML %CALLNAME%�̃N���g���X�͎h���ɑ΂��Đl���݂Ɋ�����悤�����A�����Ɗ����ė����p�����Ă݂����B
+	PRINTFORML %CALLNAME%のクリトリスは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
 ENDIF
-PRINTFORMW �����v��������%CALLNAME:MASTER%�͊e��ӂߋ��p�ӂ���%CALLNAME%���x�b�h�ɉ����|�����c
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
 PRINTFORML 
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
 PRINTFORML 
-;�b�݊��̏ꍇ�͂b�݊����폜
-IF TALENT:�b�݊�
-	TALENT:�b�݊� = 0
-	PRINTFORMW %CALLNAME:MASTER%�͎����O�̃e�N�j�b�N��%CALLNAME%�̃N���g���X��j�葱���A�l���݂Ɋ�����܂ŊJ�������B
-;�����łȂ��ꍇ�͂b�q����ǉ�
+;Ｃ鈍感の場合はＣ鈍感を削除
+IF TALENT:Ｃ鈍感
+	TALENT:Ｃ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のクリトリスを嬲り続け、人並みに感じるまで開発した。
+;そうでない場合はＣ敏感を追加
 ELSE
-	TALENT:�b�q�� = 1
-	PRINTFORMW %CALLNAME:MASTER%�̎��X�Ȑӂ߂ɋ�����%CALLNAME%�̃N���g���X�͂ƂĂ��q���ɂȂ�A���ׂȎh���ɂ������������قǂɊJ�����ꂽ�B
+	TALENT:Ｃ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のクリトリスはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
 ENDIF
 
 
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@�����o�̑f������
-;�����o�̑f���������_���łP�����������܂�
-;�w�����o�Ȏ��x�Ɋւ��Ă�20��؂�A�X�e��ʂŃn�[�g�������̂��ߏ��O���Ă���܂�
+;陥落ボーナス　無自覚の素質強化
+;無自覚の素質をランダムで１つだけ強化します
+;『無自覚な雌』に関しては20区切り、ステ画面でハート個数無しのため除外してあります
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_TAL
 
 
-PRINTFORML ���ʂȊ֌W�ɂȂ����̂�����}���K�v�͂Ȃ��B
-PRINTFORML %CALLNAME:MASTER%��%CALLNAME%�ɂ��������Ē��ւ�������ƁA����̖T�܂ő��邱�Ƃɂ����B
+PRINTFORML 特別な関係になったのだから急ぐ必要はない。
+PRINTFORML %CALLNAME:MASTER%は%CALLNAME%にそう囁いて着替えさせると、自宅の傍まで送ることにした。
 PRINTFORML 
-IF !RAND:6	;�t�F����������
-	PRINTFORML ��ؐC�̓T���o��%CALLNAME:MASTER%�Ƃ̊֌W���[�܂������ƂŁA%CALLNAME%�̃t�F����������������܂�����
-	;90�ȏ�̏ꍇ�͏����99�Ȃ̂�99��
-	IF CFLAG:�t�F������ >= 90
-		PRINTFORML �y�t�F�������F%UNICODE(0x2661)%�~10(MAX)�z
-		PRINTFORMW ���͂�%CALLNAME:MASTER%�̕ی삪�Ȃ���΂܂Ƃ��ɐ����ł��Ȃ��ق�%CALLNAME%�̃t�F�������͍��܂��Ă��܂��B
+IF !RAND:6	;フェロモン強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%のフェロモンが強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:フェロモン >= 90
+		PRINTFORML 【フェロモン：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW もはや%CALLNAME:MASTER%の保護がなければまともに生活できないほど%CALLNAME%のフェロモンは高まっています。
 		
-		CFLAG:�t�F������ = 99
-	;����ȊO��+10(�n�[�g�P�i�K)��������
+		CFLAG:フェロモン = 99
+	;それ以外は+10(ハート１段階)増加する
 	ELSE
-		PRINTFORML �y�t�F�������@{CFLAG:�t�F������} �� {CFLAG:�t�F������+10}�z
-		PRINTFORMW %CALLNAME%�̑S�g�����苭���t�F�����������ݏo�Ă��܂��B
+		PRINTFORML 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン+10}】
+		PRINTFORMW %CALLNAME%の全身からより強くフェロモンが滲み出ています。
 		
-		CFLAG:�t�F������ += 10
+		CFLAG:フェロモン += 10
 	ENDIF
-ELSEIF !RAND:5	;���̖{�\����
-	PRINTFORML ��ؐC�̓T���o��%CALLNAME:MASTER%�Ƃ̊֌W���[�܂������ƂŁA%CALLNAME%�̎��̖{�\����������܂�����
-	;90�ȏ�̏ꍇ�͏����99�Ȃ̂�99��
-	IF CFLAG:���̖{�\ >= 90
-		PRINTFORML �y���̖{�\�F%UNICODE(0x2661)%�~10(MAX)�z
-		PRINTFORMW %CALLNAME%�͏�ɔD�P���Ă��Ȃ��Ə�s����ɂȂ���ُ̈�Ȑ��B�{�\�ł��B
+ELSEIF !RAND:5	;雌の本能強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の雌の本能が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雌の本能 >= 90
+		PRINTFORML 【雌の本能：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は常に妊娠していないと情緒不安定になる程の異常な生殖本能です。
 		
-		CFLAG:���̖{�\ = 99
-	;����ȊO��+10(�n�[�g�P�i�K)��������
+		CFLAG:雌の本能 = 99
+	;それ以外は+10(ハート１段階)増加する
 	ELSE
-		PRINTFORML �y���̖{�\�@{CFLAG:���̖{�\} �� {CFLAG:���̖{�\+10}�z
-		PRINTFORMW %CALLNAME%�͂�苭���q�𐬂������Ǝv���n�߂Ă��܂��B
+		PRINTFORML 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能+10}】
+		PRINTFORMW %CALLNAME%はより強く子を成したいと思い始めています。
 		
-		CFLAG:���̖{�\ += 10
+		CFLAG:雌の本能 += 10
 	ENDIF
-ELSEIF !RAND:4	;���ւ̋�������
-	PRINTFORML ��ؐC�̓T���o��%CALLNAME:MASTER%�Ƃ̊֌W���[�܂������ƂŁA%CALLNAME%�̐��ւ̋�������������܂�����
-	;90�ȏ�̏ꍇ�͏����99�Ȃ̂�99��
-	IF CFLAG:���ւ̋��� >= 90
-		PRINTFORML �y���ւ̋����F%UNICODE(0x2661)%�~10(MAX)�z
-		PRINTFORMW %CALLNAME%�͐��ɑ΂��ĖO���Ȃ��T���S������Ă���悤�ł��B
+ELSEIF !RAND:4	;性への興味強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の性への興味が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性への興味 >= 90
+		PRINTFORML 【性への興味：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は性に対して飽くなき探求心を抱いているようです。
 		
-		CFLAG:���ւ̋��� = 99
-	;����ȊO��+10(�n�[�g�P�i�K)��������
+		CFLAG:性への興味 = 99
+	;それ以外は+10(ハート１段階)増加する
 	ELSE
-		PRINTFORML �y���ւ̋����@{CFLAG:���ւ̋���} �� {CFLAG:���ւ̋���+10}�z
-		PRINTFORMW %CALLNAME%�͂�苭�����ւ̋����������n�߂Ă��܂��B
+		PRINTFORML 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味+10}】
+		PRINTFORMW %CALLNAME%はより強く性への興味を持ち始めています。
 		
-		CFLAG:���ւ̋��� += 10
+		CFLAG:性への興味 += 10
 	ENDIF
-ELSEIF !RAND:3	;�Y�ւ̊֐S����
-	PRINTFORML ��ؐC�̓T���o��%CALLNAME:MASTER%�Ƃ̊֌W���[�܂������ƂŁA%CALLNAME%�̗Y�ւ̊֐S����������܂�����
-	;90�ȏ�̏ꍇ�͏����99�Ȃ̂�99��
-	IF CFLAG:�Y�ւ̊֐S >= 90
-		PRINTFORML �y�Y�ւ̊֐S�F%UNICODE(0x2661)%�~10(MAX)�z
-		PRINTFORMW %CALLNAME%�͗Y�ɑ΂��Ăǂ̂悤�ɃA�s�[������΂������������ɏ��m���Ă���悤�ł��B
+ELSEIF !RAND:3	;雄への関心強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の雄への関心が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雄への関心 >= 90
+		PRINTFORML 【雄への関心：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は雄に対してどのようにアピールすればいいかを完璧に承知しているようです。
 		
-		CFLAG:�Y�ւ̊֐S = 99
-	;����ȊO��+10(�n�[�g�P�i�K)��������
+		CFLAG:雄への関心 = 99
+	;それ以外は+10(ハート１段階)増加する
 	ELSE
-		PRINTFORML �y�Y�ւ̊֐S�@{CFLAG:�Y�ւ̊֐S} �� {CFLAG:�Y�ւ̊֐S+10}�z
-		PRINTFORMW %CALLNAME%�͂�苭���Y�ւ̊֐S�������n�߂Ă��܂��B
+		PRINTFORML 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心+10}】
+		PRINTFORMW %CALLNAME%はより強く雄への関心を持ち始めています。
 		
-		CFLAG:�Y�ւ̊֐S += 10
+		CFLAG:雄への関心 += 10
 	ENDIF
-ELSEIF !RAND:2	;������]����
-	PRINTFORML ��ؐC�̓T���o��%CALLNAME:MASTER%�Ƃ̊֌W���[�܂������ƂŁA%CALLNAME%�̐�����]����������܂�����
-	;90�ȏ�̏ꍇ�͏����99�Ȃ̂�99��
-	IF CFLAG:������] >= 90
-		PRINTFORML �y������]�F%UNICODE(0x2661)%�~10(MAX)�z
-		PRINTFORMW ���͂�%CALLNAME%�̓Z�b�N�X���łƌ������قǂɐ��s�ׂɐϋɓI�ł��B
+ELSEIF !RAND:2	;性交願望強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の性交願望が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性交願望 >= 90
+		PRINTFORML 【性交願望：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW もはや%CALLNAME%はセックス中毒と見紛うほどに性行為に積極的です。
 		
-		CFLAG:������] = 99
-	;����ȊO��+10(�n�[�g�P�i�K)��������
+		CFLAG:性交願望 = 99
+	;それ以外は+10(ハート１段階)増加する
 	ELSE
-		PRINTFORML �y������]�@{CFLAG:������]} �� {CFLAG:������]+10}�z
-		PRINTFORMW %CALLNAME%�͂�苭�����s�ׂ��s�������Ǝv���n�߂Ă��܂��B
+		PRINTFORML 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望+10}】
+		PRINTFORMW %CALLNAME%はより強く性行為を行いたいと思い始めています。
 		
-		CFLAG:������] += 10
+		CFLAG:性交願望 += 10
 	ENDIF
-ELSE			;�D�P��]����
-	PRINTFORML ��ؐC�̓T���o��%CALLNAME:MASTER%�Ƃ̊֌W���[�܂������ƂŁA%CALLNAME%�̔D�P��]����������܂�����
-	;90�ȏ�̏ꍇ�͏����99�Ȃ̂�99��
-	IF CFLAG:�D�P��] >= 90
-		PRINTFORML �y�D�P��]�F%UNICODE(0x2661)%�~10(MAX)�z
-		PRINTFORMW %CALLNAME%�͏�Ɏq�{��Y�ɗ��p����Ă������ƍl����قǂɔD�P��]�������悤�ł��B
+ELSE			;妊娠願望強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の妊娠願望が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:妊娠願望 >= 90
+		PRINTFORML 【妊娠願望：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は常に子宮を雄に利用されていたいと考えるほどに妊娠願望が強いようです。
 		
-		CFLAG:�D�P��] = 99
-	;����ȊO��+10(�n�[�g�P�i�K)��������
+		CFLAG:妊娠願望 = 99
+	;それ以外は+10(ハート１段階)増加する
 	ELSE
-		PRINTFORML �y�D�P��]�@{CFLAG:�D�P��]} �� {CFLAG:�D�P��]+10}�z
-		PRINTFORMW %CALLNAME%�͂�苭���D�P�������Ǝv���n�߂Ă��܂��B
+		PRINTFORML 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+10}】
+		PRINTFORMW %CALLNAME%はより強く妊娠したいと思い始めています。
 		
-		CFLAG:�D�P��] += 10
+		CFLAG:妊娠願望 += 10
 	ENDIF
 ENDIF
 
 
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@���̋���
-;�퓬�ŕK�v�Ƃ����e��X�e�[�^�X�𑝉����܂�
+;陥落ボーナス　肉体強化
+;戦闘で必要とされる各種ステータスを増加します
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_POW
 #DIM L_HP
@@ -605,29 +605,29 @@ L_DEF = (RAND:3)+2
 L_SPD = (RAND:3)+2
 
 
-PRINTFORML %CALLNAME%�ɂ͒T����퓬�ł̊���Ɋ��҂��Ă���B
-PRINTFORML %CALLNAME:MASTER%��%CALLNAME%�ɂ��������Ē��ւ�������ƁA����̖T�܂ő��邱�Ƃɂ����B
+PRINTFORML %CALLNAME%には探索や戦闘での活躍に期待している。
+PRINTFORML %CALLNAME:MASTER%は%CALLNAME%にそう囁いて着替えさせると、自宅の傍まで送ることにした。
 PRINTFORML 
-PRINTFORMW %CALLNAME%��%CALLNAME:MASTER%�̊��҂ɉ�����ׂ����E�܂œ��̂�b�����c
+PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の期待に応えるべく限界まで肉体を鍛えた…
 PRINTFORML 
-PRINTFORML HP�@{CFLAG:�Z�l_�ő�̗�}�@���@{CFLAG:�Z�l_�ő�̗�+L_HP}
-PRINTFORML ATK�@{CFLAG:�Z�l_ATK}�@���@{CFLAG:�Z�l_ATK+L_ATK}
-PRINTFORML DEF�@{CFLAG:�Z�l_DEF}�@���@{CFLAG:�Z�l_DEF+L_DEF}
-PRINTFORML SPD�@{CFLAG:�Z�l_SPD}�@���@{CFLAG:�Z�l_SPD+L_SPD}
+PRINTFORML HP　{CFLAG:住人_最大体力}　→　{CFLAG:住人_最大体力+L_HP}
+PRINTFORML ATK　{CFLAG:住人_ATK}　→　{CFLAG:住人_ATK+L_ATK}
+PRINTFORML DEF　{CFLAG:住人_DEF}　→　{CFLAG:住人_DEF+L_DEF}
+PRINTFORML SPD　{CFLAG:住人_SPD}　→　{CFLAG:住人_SPD+L_SPD}
 PRINTFORMW 
 
 
-CFLAG:�Z�l_�ő�̗� += L_HP
-CFLAG:�Z�l_���ݑ̗� += L_HP
-CFLAG:�Z�l_ATK      += L_ATK
-CFLAG:�Z�l_DEF      += L_DEF
-CFLAG:�Z�l_SPD      += L_SPD
+CFLAG:住人_最大体力 += L_HP
+CFLAG:住人_現在体力 += L_HP
+CFLAG:住人_ATK      += L_ATK
+CFLAG:住人_DEF      += L_DEF
+CFLAG:住人_SPD      += L_SPD
 
 
 
 ;-------------------------------------------------
-;�ח��{�[�i�X�@���_����
-;�퓬�ŕK�v�Ƃ����e��X�e�[�^�X�𑝉����܂�
+;陥落ボーナス　精神強化
+;戦闘で必要とされる各種ステータスを増加します
 ;-------------------------------------------------
 @TURN_EVENT_FALL_BONUS_MIN
 #DIM L_SP
@@ -642,23 +642,23 @@ L_BRAVE = (RAND:2)+1
 L_GUTS  = (RAND:2)+1
 
 
-PRINTFORML %CALLNAME%�ɂ͒T����퓬�ł̊���Ɋ��҂��Ă���B
-PRINTFORML %CALLNAME:MASTER%��%CALLNAME%�ɂ��������Ē��ւ�������ƁA����̖T�܂ő��邱�Ƃɂ����B
+PRINTFORML %CALLNAME%には探索や戦闘での活躍に期待している。
+PRINTFORML %CALLNAME:MASTER%は%CALLNAME%にそう囁いて着替えさせると、自宅の傍まで送ることにした。
 PRINTFORML 
-PRINTFORMW %CALLNAME%��%CALLNAME:MASTER%�̊��҂ɉ�����ׂ����E�܂Ő��_�b�B���s�����c
+PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の期待に応えるべく限界まで精神鍛錬を行った…
 PRINTFORML 
-PRINTFORML SP�@{CFLAG:�Z�l_�ő�C��}�@���@{CFLAG:�Z�l_�ő�C��+L_SP}
-PRINTFORML HIT�@{CFLAG:�Z�l_HIT}�@���@{CFLAG:�Z�l_HIT+L_HIT}
-PRINTFORML BRAVE�@{CFLAG:�Z�l_BRAVE}�@���@{CFLAG:�Z�l_BRAVE+L_BRAVE}
-PRINTFORML GUTS�@{CFLAG:�Z�l_GUTS}�@���@{CFLAG:�Z�l_GUTS+L_GUTS}
+PRINTFORML SP　{CFLAG:住人_最大気力}　→　{CFLAG:住人_最大気力+L_SP}
+PRINTFORML HIT　{CFLAG:住人_HIT}　→　{CFLAG:住人_HIT+L_HIT}
+PRINTFORML BRAVE　{CFLAG:住人_BRAVE}　→　{CFLAG:住人_BRAVE+L_BRAVE}
+PRINTFORML GUTS　{CFLAG:住人_GUTS}　→　{CFLAG:住人_GUTS+L_GUTS}
 PRINTFORMW 
 
 
-CFLAG:�Z�l_�ő�C�� += L_SP
-CFLAG:�Z�l_���݋C�� += L_SP
-CFLAG:�Z�l_HIT      += L_HIT
-CFLAG:�Z�l_BRAVE    += L_BRAVE
-CFLAG:�Z�l_GUTS     += L_GUTS
+CFLAG:住人_最大気力 += L_SP
+CFLAG:住人_現在気力 += L_SP
+CFLAG:住人_HIT      += L_HIT
+CFLAG:住人_BRAVE    += L_BRAVE
+CFLAG:住人_GUTS     += L_GUTS
 
 
 

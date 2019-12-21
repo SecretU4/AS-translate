@@ -1,6 +1,6 @@
-
+﻿
 ;-------------------------------------------------
-;�Z�l�Ɩ��@�Ɩ��@���
+;住人業務　業務　一般
 ;-------------------------------------------------
 @WORK_T_Ip(ARG:0,ARG:1,ARGS:0)
 #DIM L_INPUT
@@ -20,210 +20,210 @@ PRINTFORML
 PRINTFORML
 PRINTFORML
 PRINTFORML
-PRINTFORM �@�@�@�@�@
+PRINTFORM 　　　　　
 		IF !RAND:3
-			PRINTFORML �u%CSTR:���YES%�A���邾������Ă�%CSTR:����܂�%�v
+			PRINTFORML 「%CSTR:語尾YES%、やれるだけやってみ%CSTR:語尾ます%」
 		ELSEIF !RAND:2
-			PRINTFORML �u�c�c��肭�ł����݂���%CSTR:����m��2%�v
+			PRINTFORML 「……上手くできたみたい%CSTR:語尾肯定2%」
 		ELSE
-			PRINTFORML �u�܂��H�v������݂���%CSTR:����m��2%�v
+			PRINTFORML 「まだ工夫がいるみたい%CSTR:語尾肯定2%」
 		ENDIF
 PRINTFORML 
-PRINTFORM �@�@�@�@�@
-PRINTFORML %CALLNAME%��%CALLNAME:MASTER%�ɑ��i����A�d���ɗ�񂾁c
+PRINTFORM 　　　　　
+PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に促進され、仕事に励んだ…
 PRINTFORML 
 
-IF (Talent:�񏈏� == 1 && Talent:���� == 1) && (Talent:�S�� == 1 || Talent:���l == 1 || Talent:��w == 1) && RAND:10 >= 5
+IF (Talent:非処女 == 1 && Talent:合意 == 1) && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1) && RAND:10 >= 5
 SETCOLOR 250,50,200
 DRAWLINE
 	IF !RAND:6
-		PRINTFORML �d���̊撣���%CALLNAME:MASTER%�ɔF�߂�ꂽ%CALLNAME%��%CALLNAME:MASTER%�̎���ւƏ��҂��ꂽ�B
-		PRINTFORML ������%CALLNAME%��҂��󂯂Ă����͕̂����̃��C�h�������B
-		PRINTFORML ���C�h�͕x�T�w�ł͂��ƃ��W���[�ȐE�Ƃł��邪�A���ʂ̐������c�ޕ��ɂ͂܂��ړ_���Ȃ��E�Ƃ��B
-		PRINTFORML ���l�ɘ������Ƃ����o�������|�I�ɕs�����Ă���%CALLNAME%�́A���q�̑Ή��ɏo�Ă������C�h�ɑ΂��Ă����s���ۏo���̋��k������̔����ł���B
-		PRINTFORML �y�ɂ���悤%CALLNAME:MASTER%�ɏ�������邪�A%CALLNAME:MASTER%�̏Љ��ޏ������͒N�����L���ȉƂ̏o�ł����������������Ȃ��B
-		PRINTFORML �m���ɏ���⌾�t�����A�g�����Ȃ݂ɑ΂���ׂ����C�z��Ȃǂ�%CALLNAME%�Ǝ��Ă������Ȃ��قǗD��ŋC�i�Ɉ��Ă���B
-		PRINTFORML ����Ȕޏ����������C�h�Ƃ��Ďg���Ă���%CALLNAME:MASTER%�̐�����%CALLNAME%�͉��߂Ď�������̂Ɠ����ɁA����Ȕޏ�������͂ɒu���Ă����Ȃ���
-		PRINTFORML �������܂�%CALLNAME:MASTER%�ɑI�΂ꂽ���Ƃ��s�v�c�łȂ�Ȃ������B
-		PRINTFORML �ۂ��[���Ƃ��Ă���%CALLNAME%��u������ɂ���%CALLNAME:MASTER%�̓��C�h�B�ɕ�������������悤�����ĉ����点���B
-		PRINTFORML �悤�₭��l����ɂȂ�ْ��̉�����%CALLNAME%�������̏����ɂ��ďڂ����q�˂�ƁA%CALLNAME:MASTER%�͖��������ɏ΂݂𕂂��ׂ��B
+		PRINTFORML 仕事の頑張りを%CALLNAME:MASTER%に認められた%CALLNAME%は%CALLNAME:MASTER%の自宅へと招待された。
+		PRINTFORML そこで%CALLNAME%を待ち受けていたのは複数のメイドだった。
+		PRINTFORML メイドは富裕層ではわりとメジャーな職業であるが、普通の生活を営む分にはまず接点がない職業だ。
+		PRINTFORML 他人に傅かれるという経験が圧倒的に不足している%CALLNAME%は、来客の対応に出てきたメイドに対しても小市民丸出しの恐縮しきりの反応である。
+		PRINTFORML 楽にするよう%CALLNAME:MASTER%に助言されるが、%CALLNAME:MASTER%の紹介する彼女たちは誰もが有名な家の出でただただ驚くしかない。
+		PRINTFORML 確かに所作や言葉遣い、身だしなみに対する細かい気配りなどは%CALLNAME%と似ても似つかないほど優雅で気品に溢れている。
+		PRINTFORML そんな彼女たちをメイドとして使っている%CALLNAME:MASTER%の凄さを%CALLNAME%は改めて実感するのと同時に、そんな彼女らを周囲に置いておきながら
+		PRINTFORML 自分もまた%CALLNAME:MASTER%に選ばれたことが不思議でならなかった。
+		PRINTFORML ぽけーっとしている%CALLNAME%を置き去りにして%CALLNAME:MASTER%はメイド達に部屋を準備するよう命じて下がらせた。
+		PRINTFORML ようやく二人きりになり緊張の解けた%CALLNAME%が部屋の準備について詳しく尋ねると、%CALLNAME:MASTER%は愉快そうに笑みを浮かべた。
 		PRINTFORML 
 		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
 		PRINTFORML 
-		PRINTFORML ���ʂȂ��J����ʎ��ɗp�ӂ����ƗU��ꂽ%CALLNAME%��҂��󂯂Ă����̂́A���C�h�B�ɂ�鈤���ł������B
-		PRINTFORML �A���}�I�C���𗘗p�����}�b�T�[�W�̂悤�Ȉ�����%CALLNAME%�̔鏊���Ƃ�Ƃ�ɗn�����ē�����c�͏I�n�u�����ςȂ��B
-		PRINTFORML �����ɓ�������Ō��̒[���矵�𐂂炵�Ȃ���b���l�́A��قǂ܂Ń��C�h�B�ɋ��k���Ă����l���Ɠ���l���Ƃ͎v���Ȃ��قǂł���B
-		PRINTFORML �D�����q�{�̕ӂ�������̏ォ�牟��������ꂽ�Ƃ���ŁA�}�����ꂽ�f�B���h�̐�[���q�{����˂��グ��B
-		PRINTFORML ��������Ȃ������q�{���̓f�B���h�̍U���ɔۉ��Ȃ��N����A�d�������q�{���͒i�X�ƌ��炵�������J���Ă����B
-		PRINTFORML �d�グ�Ƃ΂���Ɉ�i�Ƌ����������܂ꂽ�f�B���h���ח������q�{�����ς�����ƊJ������ƁA���C�h�B�͂��������ƃx�b�h���痣���
-		PRINTFORML %CALLNAME%�̏�������������l�q���������Ă���%CALLNAME:MASTER%�̔w��ɍT�����B
-		PRINTFORML �q�{���ӂ߂Œf���I�ȐⒸ�ɉ����グ��ꂽ%CALLNAME%�͖����ɉ����̔��������Ă���̂��A�r�N�r�N�Ƒ̂��z�������ăx�b�h�ɉ�������Ă���B
-		PRINTFORML %CALLNAME:MASTER%�̓K�`�K�`�ɖu�N�������_���_�炩���C�L�����ꂽ%CALLNAME%���S�ɑ}������ƁA���i�Ƃ̈Ⴂ���悭�������B
-		PRINTFORML ���͂�Y�ɑ΂��Ē�R�̈ӎv�͔��o���Ȃ��A�����󂯓���邱�Ƃ����ł��Ȃ����y���������̌��B
-		PRINTFORML ���S�ɏo���オ���Ă���M���_�炩���S�ǂ̊��G�𑶕��ɖ�����%CALLNAME:MASTER%�͓��_���q�{���܂œ˂����ꂽ�B
-		PRINTFORML ���C�h�B�ɂ�芮�S�J�����ꂽ�q�{���ɗ���𖧒������ː�����ƁA�ː��������t�͈�H�c�炸�q�{���ւƈ��ݍ��܂��B
-		PRINTFORML ���_�����������A�w����S�������J���Ă�����m�F����%CALLNAME:MASTER%�́A�q�{���ւ̎ː��ŋC�₵��%CALLNAME%�̂�����D�������ł��B
-		PRINTFORML �^����ꂽ�����ɔ����������̂��z������ƁA�q�{���͎��k���Đ��t����ꗎ���ɂ�����Ԃւƕω������B
-		PRINTFORML ���M�ȉƌn�ɓ`���[���p�̈��%CALLNAME%�ɑ̌�������%CALLNAME:MASTER%�́A���҂ɖ������፷���������郁�C�h�B���Ăъ񂹂��c
+		PRINTFORML 特別なご褒美を別室に用意したと誘われた%CALLNAME%を待ち受けていたのは、メイド達による愛撫であった。
+		PRINTFORML アロマオイルを利用したマッサージのような愛撫は%CALLNAME%の秘所をとろとろに溶かして乳首や秘芯は終始勃ちっぱなし。
+		PRINTFORML 快感に蕩けた顔で口の端から涎を垂らしながら喘ぐ様は、先ほどまでメイド達に恐縮していた人物と同一人物とは思えないほどである。
+		PRINTFORML 優しく子宮の辺りをお腹の上から押さえつけられたところで、挿入されたディルドの先端が子宮口を突き上げる。
+		PRINTFORML 逃げ場をなくした子宮口はディルドの攻撃に否応なく晒され、硬かった子宮口は段々と嫌らしく口を開けていく。
+		PRINTFORML 仕上げとばかりに一段と強く差し込まれたディルドが陥落した子宮口をぱっくりと開かせると、メイド達はしずしずとベッドから離れて
+		PRINTFORML %CALLNAME%の準備が整えられる様子を視姦していた%CALLNAME:MASTER%の背後に控えた。
+		PRINTFORML 子宮口責めで断続的な絶頂に押し上げられた%CALLNAME%は未だに快感の尾が引いているのか、ビクビクと体を痙攣させてベッドに横たわっている。
+		PRINTFORML %CALLNAME:MASTER%はガチガチに勃起した肉棒を柔らかくイキ解された%CALLNAME%の膣に挿入すると、普段との違いがよく解った。
+		PRINTFORML もはや雄に対して抵抗の意思は微塵もなく、ただ受け入れることしかできない快楽堕ちした雌の穴。
+		PRINTFORML 完全に出来上がっている熱く柔らかな膣壁の感触を存分に愉しんだ%CALLNAME:MASTER%は肉棒を子宮口まで突き入れた。
+		PRINTFORML メイド達により完全開放された子宮口に鈴口を密着させ射精すると、射精した精液は一滴残らず子宮内へと飲み込まれる。
+		PRINTFORML 肉棒を引き抜き、指先で膣を押し開いてそれを確認した%CALLNAME:MASTER%は、子宮内への射精で気絶した%CALLNAME%のお腹を優しく撫でた。
+		PRINTFORML 与えられた快感に反応した肉体が痙攣すると、子宮口は収縮して精液が零れ落ちにくい状態へと変化した。
+		PRINTFORML 高貴な家系に伝わる房中術の一つを%CALLNAME%に体験させた%CALLNAME:MASTER%は、期待に満ちた眼差しを向けるメイド達を呼び寄せた…
 	ELSEIF !RAND:5
-		PRINTFORML �}�ȏo��d�Ȃ���K�I�ɗ]�T�̂Ȃ��Ȃ���%CALLNAME%�͉��������邱�Ƃɂ����B
-		PRINTFORML ���u�z�e���̖T�ŋq����낤�Ƃ���%CALLNAME%���������A���R�ʂ肩������%CALLNAME:MASTER%�Ɍ���߂�ꂽ�B
-		PRINTFORML �����b���Ă������K�v�Ȃ̂��Ƒ��k����%CALLNAME%�ɁA%CALLNAME:MASTER%�͂�������̂����Ɏx�����邱�Ƃ�񑩂����B
+		PRINTFORML 急な出費が重なり金銭的に余裕のなくなった%CALLNAME%は援交をすることにした。
+		PRINTFORML ラブホテルの傍で客を取ろうとした%CALLNAME%だったが、偶然通りかかった%CALLNAME:MASTER%に見咎められた。
+		PRINTFORML 事情を話してお金が必要なのだと相談する%CALLNAME%に、%CALLNAME:MASTER%はある条件のかわりに支援することを約束した。
 		PRINTFORML 
-		IF TALENT:�m�s�k
-			PRINTFORML �u���ꂩ��%CSTR:��l��%�͈��𐾂����v�ł͂Ȃ��A�s������̒j�Ɛ��n����������Ďq�{�𖾂��n��%CSTR:����܂�%�v
-			PRINTFORML �r�f�I�J�����̑O�ł����錾����%CALLNAME%��������鑊��͍s������̒j�Ȃǂł͂Ȃ�%CALLNAME:MASTER%�ł���B
-			PRINTFORML �����ݒ��͂�������̒j�ɂ��Ă����������E�P�������ƌ�����΁A%CALLNAME%�͏]�������Ȃ��B
-			PRINTFORML %CALLNAME:MASTER%���x���̑���ɏo���������Ƃ����͎̂��吻��`�u�ւ̏o���������B
-			PRINTFORML ���݂��̊�Ƀ��U�C�N�������邽�ߐg�o������S�z�̓[���ȏ�ɁA�f����%CALLNAME:MASTER%���Ǘ�����̂ŗ��o�̋�����Ȃ��B
-			PRINTFORML ��ɑO���Ƃ��ĕK�v�ȕ��̋��z��n����A����z�ɉ����Ēǉ��̕�V���x������Ƃ�����Ă�%CALLNAME%�͏�����B
-			PRINTFORML �������Ƃƌ����Ε��i�ʂ��%CALLNAME:MASTER%�ƌ��������ނ����ł���B
-			PRINTFORML �������̃p�^�[�����B�e���I���鍠�ɂ�%CALLNAME%�̎q�{��%CALLNAME:MASTER%�̐��t�ň�t�ɂȂ��Ă����B
-			PRINTFORML �v�̎q��s�ޑO��%CALLNAME:MASTER%�̐��q�ŔD�P�ł����炢���̂ɂƁA%CALLNAME%�͂����𕏂ŎC��Ȃ���󐸂���悤�F�����B
+		IF TALENT:ＮＴＬ
+			PRINTFORML 「これから%CSTR:一人称%は愛を誓った夫ではなく、行きずりの男と生ハメ交尾をして子宮を明け渡し%CSTR:語尾ます%」
+			PRINTFORML ビデオカメラの前でそう宣言した%CALLNAME%が抱かれる相手は行きずりの男などではなく%CALLNAME:MASTER%である。
+			PRINTFORML だが設定上はいきずりの男にしておいた方がウケがいいと言われれば、%CALLNAME%は従うしかない。
+			PRINTFORML %CALLNAME:MASTER%が支援の代わりに出した条件というのは自主製作ＡＶへの出演だった。
+			PRINTFORML お互いの顔にモザイクをかけるため身バレする心配はゼロな上に、映像は%CALLNAME:MASTER%が管理するので流出の恐れもない。
+			PRINTFORML 先に前金として必要な分の金額を渡され、売上額に応じて追加の報酬が支払われるという提案に%CALLNAME%は乗った。
+			PRINTFORML ヤルことと言えば普段通りに%CALLNAME:MASTER%と交尾を愉しむだけである。
+			PRINTFORML いくつかのパターンを撮影し終える頃には%CALLNAME%の子宮は%CALLNAME:MASTER%の精液で一杯になっていた。
+			PRINTFORML 夫の子を孕む前に%CALLNAME:MASTER%の精子で妊娠できたらいいのにと、%CALLNAME%はお腹を撫で擦りながら受精するよう祈った。
 			PRINTFORML 
-			PRINTFORML ����������ꂽ�`�u�͂��Ȃ�̔���s���������A%CALLNAME%�ɒǉ��̕�V���x����ꂽ�B
-			PRINTFORML ����Ɠ����ɍw���҂̒��ɕv�����邱�Ƃ�m�炳�ꂽ%CALLNAME%�͏����������\��������͂������A���������ɏ΂������グ���B
-			PRINTFORML �u�����̍Ȃ��m�炸�m�炸�̂����ɕʂ̗Y�ɒD���ěs�܂���Ă�����Č����̂Ɂc�c�{���ɏ�Ȃ��l�v
+			PRINTFORML 後日発売されたＡＶはかなりの売れ行きを見せ、%CALLNAME%に追加の報酬が支払われた。
+			PRINTFORML それと同時に購入者の中に夫がいることを知らされた%CALLNAME%は少し驚いた表情を見せはしたが、愉快そうに笑い声を上げた。
+			PRINTFORML 「自分の妻が知らず知らずのうちに別の雄に奪われて孕まされているって言うのに……本当に情けない人」
 		ELSE
-			PRINTFORML %CALLNAME:MASTER%���x���̑���ɏo���������Ƃ����͎̂��吻��`�u�ւ̏o���������B
-			PRINTFORML ���݂��̊�Ƀ��U�C�N�������邽�ߐg�o������S�z�̓[���ȏ�ɁA�f����%CALLNAME:MASTER%���Ǘ�����̂ŗ��o�̋�����Ȃ��B
-			PRINTFORML ��ɑO���Ƃ��ĕK�v�ȕ��̋��z��n����A����z�ɉ����Ēǉ��̕�V���x������Ƃ�����Ă�%CALLNAME%�͏�����B
-			PRINTFORML �������Ƃƌ����Ε��i�ʂ��%CALLNAME:MASTER%�ƌ��������ނ����ł���B
-			PRINTFORML �������̃p�^�[����p�ӂ��ĎB�e���I�����%CALLNAME%�͑O���̕��̂�����%CALLNAME:MASTER%����󂯎�����B
-			PRINTFORML �A��x�x��i�߂Ă���%CALLNAME%��%CALLNAME:MASTER%������������ꏏ�ɉ߂����Ȃ����ƗU��ꂽ�B
-			PRINTFORML �J�������C�ɂȂ��Ă��܂�������オ��Ȃ�����%CALLNAME%�͓�Ԏ��ŃI�[�P�[�����B
+			PRINTFORML %CALLNAME:MASTER%が支援の代わりに出した条件というのは自主製作ＡＶへの出演だった。
+			PRINTFORML お互いの顔にモザイクをかけるため身バレする心配はゼロな上に、映像は%CALLNAME:MASTER%が管理するので流出の恐れもない。
+			PRINTFORML 先に前金として必要な分の金額を渡され、売上額に応じて追加の報酬が支払われるという提案に%CALLNAME%は乗った。
+			PRINTFORML ヤルことと言えば普段通りに%CALLNAME:MASTER%と交尾を愉しむだけである。
+			PRINTFORML いくつかのパターンを用意して撮影を終えると%CALLNAME%は前金の分のお金を%CALLNAME:MASTER%から受け取った。
+			PRINTFORML 帰り支度を進めていた%CALLNAME%は%CALLNAME:MASTER%からもう少し一緒に過ごさないかと誘われた。
+			PRINTFORML カメラが気になっていまいち盛り上がらなかった%CALLNAME%は二つ返事でオーケーした。
 			PRINTFORML 
 			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
 			PRINTFORML 
-			PRINTFORML �B�e�𔲂��ɂ����{�C�̃Z�b�N�X��%CALLNAME%�͑傢�ɖ����񂾂��A�����̕Ћ��ɒu���ꂽ�J�����͐Â��ɋ쓮���𗧂ĂĂ����B
+			PRINTFORML 撮影を抜きにした本気のセックスを%CALLNAME%は大いに愉しんだが、部屋の片隅に置かれたカメラは静かに駆動音を立てていた。
 			PRINTFORML 
-			PRINTFORML ����������ꂽ�`�u�͂��̍Ō�ɍs��ꂽ�Z�b�N�X��ҏW�������̂��������ꂽ�B
-			PRINTFORML �u�f�l���̖{�C����v�Ƒ肵�����̂`�u�̓Z�[���X�����L���O�ď�ʂɑ؍݂��郍���O�Z���[��i�ƂȂ�A%CALLNAME%�ɂ�
-			PRINTFORML ���z�̒ǉ��̕�V���x����ꂽ�B
-			PRINTFORML �x����ꂽ��V�̑����ɐ��Y�Ƃ������Ȃ��Ȃ�%CALLNAME%�͓]�E�Ɏv����y�����c
+			PRINTFORML 後日発売されたＡＶはこの最後に行われたセックスを編集したものが発売された。
+			PRINTFORML 「素人娘の本気交尾」と題したこのＡＶはセールスランキングて上位に滞在するロングセラー作品となり、%CALLNAME%には
+			PRINTFORML 多額の追加の報酬が支払われた。
+			PRINTFORML 支払われた報酬の多さに性産業も悪くないなと%CALLNAME%は転職に思いを馳せた…
 		ENDIF
 	ELSEIF !RAND:4
-		PRINTFORML �s�ӂɃT�C�������苿���A�g�����ʂ��������n��Z���Ɍ������֔���悤�w��������B
-		PRINTFORML ���̒n��Łu�O�G�v�̋쏜���n�܂�̂��Ɨ��������Z���͎�߂Ȏ{�݂�V�F���^�[�ɔ��Ă����B
-		PRINTFORML %CALLNAME%���߂��̌����֓����������Ƃ������A�s�^�Ȃ��Ƃɋ󂩂�~���Ă����u�O�G�v���i�H���ǂ��ł��܂����B
-		PRINTFORML �Q�ĂĔ��]���悤�Ƃ���%CALLNAME%�Ɍ����āu�O�G�v�͍E���炯�����܂������ѐ��𔭂��Ȃ���G���L�΂��B
-		PRINTFORML �l���𗍂߂Ƃ��Ă��܂���%CALLNAME%�͕K���ɓ����悤�Ƃ��������A�u�O�G�v���O�͂ɐl�̗͂��G���͂����Ȃ��B
+		PRINTFORML 不意にサイレンが鳴り響き、拡声器を通した声が地域住民に建物内へ避難するよう指示をする。
+		PRINTFORML この地区で「外敵」の駆除が始まるのだと理解した住民は手近な施設やシェルターに避難していく。
+		PRINTFORML %CALLNAME%も近くの建物へ逃げ込もうとしたが、不運なことに空から降ってきた「外敵」が進路を塞いでしまった。
+		PRINTFORML 慌てて反転しようとした%CALLNAME%に向けて「外敵」は孔からけたたましい叫び声を発しながら触手を伸ばす。
+		PRINTFORML 四肢を絡めとられてしまった%CALLNAME%は必死に逃げようともがくが、「外敵」の膂力に人の力が敵うはずもない。
 		IF !RAND:3
-			PRINTFORML ���̂܂܁u�O�G�v�Ɉ����񂹂�ꂽ%CALLNAME%�͋��ѐ��𔭂�������E�ւƉ����g���������܂ꂽ�B
-			PRINTFORML ���ɋz�����悤�ɂ��čE��������Ɨ��r�̍S���������ꂽ���߁A%CALLNAME%�͎��R�ɂȂ������r���g����
-			PRINTFORML �Ȃ�Ƃ��E����̒E�o���v�낤�Ƃ��邪�r�N�Ƃ����Ȃ��B
-			PRINTFORML �����Ȃ������g�ɖ����̐G�肪���݂����܂������o�ɑς��Ȃ���E�o����߂Ȃ�%CALLNAME%���������A���悤�Ƃ��闼�r��
-			PRINTFORML �����ē���悤�ȓ����ɋC�Â��đS�g���ْ��������B
-			PRINTFORML �܂����Ǝv�������̏u�ԁA�S���ɋ���ȐG�肪��������%CALLNAME%�̎q�{���𐨂��悭�˂��グ��B
-			PRINTFORML �l�ł͂܂��s�\�ȏՌ��Ɓu�O�G�v�ɔƂ��ꂽ�Ƃ���������%CALLNAME%�͓f�b�����Ԃ��܂����B
-			PRINTFORML ���̓I�ɂ����_�I�ɂ������Ռ����󂯂�%CALLNAME%�̖{�\�͎��Ȗh�q�̂��߂Ɉӎ���������B
-			PRINTFORML ���̌�삯���������ێ��ǈ��ɂ����%CALLNAME%�͋~�o���ꂽ���A�ߕ���n������I�o���������g����͎q�{�ɓ��肫��Ȃ������u�O�G�v��
-			PRINTFORML ���t����̂悤�ɗ��ꗎ���Ă����c
+			PRINTFORML そのまま「外敵」に引き寄せられた%CALLNAME%は叫び声を発し続ける孔へと下半身を差し込まれた。
+			PRINTFORML 腰に吸いつくようにして孔が閉じられると両腕の拘束が解かれたため、%CALLNAME%は自由になった両腕を使って
+			PRINTFORML なんとか孔からの脱出を計ろうとするがビクともしない。
+			PRINTFORML 見えない下半身に無数の触手が絡みつく悍ましい感覚に耐えながら脱出を諦めない%CALLNAME%だったが、閉じようとする両脚を
+			PRINTFORML 割って入るような動きに気づいて全身を緊張させた。
+			PRINTFORML まさかと思った次の瞬間、膣内に巨大な触手が押し入り%CALLNAME%の子宮口を勢いよく突き上げる。
+			PRINTFORML 人ではまず不可能な衝撃と「外敵」に犯されたという事実に%CALLNAME%は吐瀉物をぶちまけた。
+			PRINTFORML 肉体的にも精神的にも強い衝撃を受けた%CALLNAME%の本能は自己防衛のために意識を手放す。
+			PRINTFORML その後駆けつけた治安維持局員によって%CALLNAME%は救出されたが、衣服を溶かされ露出した下半身からは子宮に入りきらなかった「外敵」の
+			PRINTFORML 精液が滝のように流れ落ちていた…
 		ELSEIF !RAND:2
-			PRINTFORML �󒆂Ɏ����グ��ꂽ%CALLNAME%�ɖ����̐G�肪�E�����A�S�t�Ńk���k���Ƃ���G�肪�ߕ��̓����𔇂��������Ĉ������J�n����B
-			PRINTFORML ����Ɠ����Ɂu�O�G�v�����[�ɓ��̂悤�ȋ��̂𖄂ߍ��񂾐G�肪��{�L�тĂ���Ƃ������%CALLNAME%�̎q�{�����邠������ώ@���n�߂��B
-			PRINTFORML �ɐB�Ɏg�p�����̂��r�����Ă��邩�ǂ������m�F�����u�O�G�v�͎q�{���ɗ��q���m�F�ł��Ȃ���������%CALLNAME%��ł��̂Ă��B
-			PRINTFORML ��������Ƃ͎v���Ă��Ȃ�����%CALLNAME%�͒ɂޑ̂���������Ȃ��畨�A�ɉB���̂Ɠ����ɏ����̎����ێ��ǈ����삯�����B
-			PRINTFORML �Ԃ̈������Ƃɔޏ���%CALLNAME%��������Ď肷���ƂȂ����u�O�G�v�ɕߑ�����A�����Ƃ����Ԃɋ󒆂֎����グ���Ă��܂��B
-			PRINTFORML �������^�����ޏ��̗��ǂɂ͔r�o���ꂽ�΂���̐V�N�ȗ��q���Y���Ă����B
-			PRINTFORML ����𓵂Ŏ@�m�����u�O�G�v�͐G��Ƃ͈قȂ鐶�B���V���ɐ��₷�Ɩ\��鎡���ێ��ǈ��̌ҊԂɓ˂��h�����B
-			PRINTFORML �傫���̂������点���ޏ��͂��͂�u�O�G�v�̓��I�i�z�Ɖ����A�h���Ԃ��邤���Ɉӎ��������Ă�������Ƃ��Ă����B
-			PRINTFORML �₪�Ĕޏ��̌ҊԂ����ʂ̔S�t����ꗎ����Ɛ��B��͈���������A��t�����I�������͒n�ʂւƑł��̂Ă�ꂽ�B
-			PRINTFORML ���A�Ők���Ȃ��炻�̗l�q�����߂Ă���%CALLNAME%�́u�O�G�v����������������������Ƃ��ł��Ȃ������B
-			PRINTFORML ���̌�A�u�O�G�v�̋쏜���I���������ێ��ǈ��ɂ����%CALLNAME%�Ǝ�t�����ꂽ�����͕ی삳�ꂽ�c
+			PRINTFORML 空中に持ち上げられた%CALLNAME%に無数の触手が殺到し、粘液でヌメヌメとする触手が衣服の内側を這いずり回って愛撫を開始する。
+			PRINTFORML それと同時に「外敵」から先端に瞳のような球体を埋め込んだ触手が一本伸びてくるとしきりに%CALLNAME%の子宮があるあたりを観察し始めた。
+			PRINTFORML 繁殖に使用する母体が排卵しているかどうかを確認した「外敵」は子宮内に卵子を確認できなかったため%CALLNAME%を打ち捨てた。
+			PRINTFORML 解放されるとは思っていなかった%CALLNAME%は痛む体を引きずりながら物陰に隠れるのと同時に女性の治安維持局員が駆けつけた。
+			PRINTFORML 間の悪いことに彼女は%CALLNAME%を解放して手すきとなった「外敵」に捕捉され、あっという間に空中へ持ち上げられてしまう。
+			PRINTFORML しかも運悪く彼女の卵管には排出されたばかりの新鮮な卵子が漂っていた。
+			PRINTFORML それを瞳で察知した「外敵」は触手とは異なる生殖器を新たに生やすと暴れる治安維持局員の股間に突き刺した。
+			PRINTFORML 大きく体を仰け反らせた彼女はもはや「外敵」の肉オナホと化し、揺さぶられるうちに意識を失ってぐったりとしていた。
+			PRINTFORML やがて彼女の股間から大量の粘液が零れ落ちると生殖器は引き抜かれ、種付けを終えた雌は地面へと打ち捨てられた。
+			PRINTFORML 物陰で震えながらその様子を見つめていた%CALLNAME%は「外敵」が立ち去った後も動くことができなかった。
+			PRINTFORML その後、「外敵」の駆除を終えた治安維持局員によって%CALLNAME%と種付けされた女性は保護された…
 		ELSE
-			PRINTFORML ���Ƃ����₷���u�O�G�v�̖ڑO�܂ň����񂹂�ꂽ%CALLNAME%���������A�������y�􉹂ƂƂ��Ɂu�O�G�v�̑̂�����Ђ�̉t��
-			PRINTFORML ��юU�������Ǝv���ƐG��̍S�����ɂ񂾁B
-			PRINTFORML ���̌��ɒE�o����%CALLNAME%�����A�ɉB���ƊԈꔯ�̃^�C�~���O�ŋ삯�t���������ێ��ǈ��ɂ���āu�O�G�v����������c��
-			PRINTFORML �����������Ă����B
-			PRINTFORML �₪�ē����Ȃ��Ȃ����u�O�G�v�̎��S����������Ɗm�F���������ێ��ǈ��́u�O�G�v�̎��[���������B
-			PRINTFORML �܂�%CALLNAME%�ɔO�̂��ߌ��f���󂯂�悤�A�h�o�C�X���Ď����ێ��ǂň�U�ی삵���B
+			PRINTFORML いともたやすく「外敵」の目前まで引き寄せられた%CALLNAME%だったが、激しい炸裂音とともに「外敵」の体から肉片や体液が
+			PRINTFORML 飛び散ったかと思うと触手の拘束が緩んだ。
+			PRINTFORML その隙に脱出した%CALLNAME%が物陰に隠れると間一髪のタイミングで駆け付けた治安維持局員によって「外敵」が見るも無残に
+			PRINTFORML 命を刈り取られていく。
+			PRINTFORML やがて動かなくなった「外敵」の死亡をしっかりと確認した治安維持局員は「外敵」の死骸を回収する。
+			PRINTFORML また%CALLNAME%に念のため検診を受けるようアドバイスして治安維持局で一旦保護した。
 		ENDIF
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�͎��Â��󂯂����߂��݂̂��������ŎC��Ȃ��玡���ێ��ǂ���ɂ����B
-		PRINTFORML �u�O�G�v�Ƃ̐퓬�Ɋ������܂�č��|���Ă����Ƃ����ی삳�ꂽ�Ɛ������󂯂�%CALLNAME%���������A���������ł������߂ɑO��̋L����
-		PRINTFORML �B���Ńn�b�L���Ǝv���o�����Ƃ��ł��Ȃ��B
-		PRINTFORML �u�O�G�v�ɏP��ꂽ�L����Y�p����%CALLNAME%�͓���ւƖ߂��Ă������c
+		PRINTFORML %CALLNAME%は治療を受けたこめかみのあたりを手で擦りながら治安維持局を後にした。
+		PRINTFORML 「外敵」との戦闘に巻き込まれて昏倒していたところを保護されたと説明を受けた%CALLNAME%だったが、頭を強く打ったために前後の記憶が
+		PRINTFORML 曖昧でハッキリと思い出すことができない。
+		PRINTFORML 「外敵」に襲われた記憶を忘却した%CALLNAME%は日常へと戻っていった…
 	ELSEIF !RAND:3
-		PRINTFORML �ŋ߂ɂȂ��Ă悤�₭�l�C���o�n�߂��A�C�h�����f�r���[���ォ�牞�����Ă���%CALLNAME%�͓X���̂l�u�Ɍ������Ă����B
-		PRINTFORML �ȑO�͐V��̒I�̋��ɂЂ�����ƕ���ł����A�C�h�����A����X���ő傫���L����ł���ăO�b�Y�̔̔��܂ōs����l�C�Ԃ�ł���B
-		PRINTFORML �ꗬ�̃A�C�h���Ƃ��Ĉ����Ă���p�����S�[�����߂Ă���ƁA���X����%CALLNAME:MASTER%����l�̏�����A��ďo�Ă����B
-		PRINTFORML �����͖X�q�ɃT���O���X�A�}�X�N�Ƃ����x�^�ȕϑ������Ă��邽�ߐ��̂��C�ɂȂ邪�A%CALLNAME:MASTER%�𖳎�����킯�ɂ͂����Ȃ��B
-		PRINTFORML %CALLNAME%�����������Ĉ��A�������%CALLNAME:MASTER%�͏Ί�ň��A��Ԃ��Ȃ���w��̒I�̑��݂ɋC�t�����悤�������B
-		PRINTFORML �t�@���Ȃ̂��Ɩ₤%CALLNAME:MASTER%�Ɂu�f�r���[����̃t�@���ł��v�Ƌ��𒣂���%CALLNAME%���������%CALLNAME:MASTER%��
-		PRINTFORML �w��̏����ɐU��Ԃ��Đ����������B
-		PRINTFORML �܂����Ɩڂ���������%CALLNAME%�ɃT���O���X�ƃ}�X�N���O���������́A�C�p�����������Ȋ�œ��������Ă�����q�ׂ��B
-		PRINTFORML ������J�t�F�ɍs���Ƃ��낾��%CALLNAME:MASTER%�ɗU��ꂽ%CALLNAME%�͐�D�̋@��𓦂��܂��Ƃ������邱�Ƃɂ����B
+		PRINTFORML 最近になってようやく人気が出始めたアイドルをデビュー直後から応援していた%CALLNAME%は店頭のＭＶに見入っていた。
+		PRINTFORML 以前は新作の棚の隅にひっそりと並んでいたアイドルが、今や店頭で大きく広告を打たれてグッズの販売まで行われる人気ぶりである。
+		PRINTFORML 一流のアイドルとして扱われている姿を感慨深く眺めていると、お店から%CALLNAME:MASTER%が一人の女性を連れて出てきた。
+		PRINTFORML 女性は帽子にサングラス、マスクというベタな変装をしているため正体が気になるが、%CALLNAME:MASTER%を無視するわけにはいかない。
+		PRINTFORML %CALLNAME%が声をかけて挨拶をすると%CALLNAME:MASTER%は笑顔で挨拶を返しながら背後の棚の存在に気付いたようだった。
+		PRINTFORML ファンなのかと問う%CALLNAME:MASTER%に「デビューからのファンです」と胸を張って%CALLNAME%が答えると%CALLNAME:MASTER%は
+		PRINTFORML 背後の女性に振り返って声をかけた。
+		PRINTFORML まさかと目を見張った%CALLNAME%にサングラスとマスクを外した女性は、気恥ずかしそうな顔で頭を下げてお礼を述べた。
+		PRINTFORML 今からカフェに行くところだと%CALLNAME:MASTER%に誘われた%CALLNAME%は絶好の機会を逃すまいとお供することにした。
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�̓J�t�F�̉��ւƑ����ʘH�̐�ɕ��������邱�Ƃ��A�����ĉ������Ă����A�C�h����%CALLNAME:MASTER%�ɕ�����Ă������Ƃ�
-		PRINTFORML ���̎����߂Ēm�����B
-		PRINTFORML %CALLNAME:MASTER%�Ɍׂ荘��U��l�͐l�X�𖣗�����A�C�h���̂��̂ł͂Ȃ��A�Y�ɋ����������̂���ł���B
-		PRINTFORML ���c�ƂƂ������t��%CALLNAME%�̔]���ɕ����񂾂��A�ޏ��̊������Ɩ����������������\��炻���ł͂Ȃ����Ƃ����ĂƂꂽ�B
-		PRINTFORML �܂�͖{�C�̌���ł���B
-		PRINTFORML �S�������Ȃ��܂܎n�܂��������%CALLNAME:MASTER%���S���ː��ɂ���ďI�����}���A��R�Ƃ��̗l�q�𗧂����܂ܒ��߂Ă���%CALLNAME%��
-		PRINTFORML �ޏ��Ɏ���������܂܃x�b�h�ւƈē������%CALLNAME:MASTER%�ɕ����񂹂�ꂽ�B
-		PRINTFORML �u���̂��Ɖ������Ă����Ǝo���̃R�ɂ́A���ʂɂ������Ƃ��Ă�����%UNICODE(0x2661)%�v
-		PRINTFORML ����������%CALLNAME%�̐g�̂��������͂��߂��ޏ��̎���͓����Ƃ������Ƃ������Ă��r�X�����͂Ȃ��A�����镔������T��ŒT�蓖�ĂȂ���
-		PRINTFORML �ɋ}�����Ďh�����Ă���B
-		PRINTFORML ����̃A�C�h���Ɉ������Ă��炤�Ƃ����\�z���ɂ��Ȃ������W�J�ɍ������Ă���%CALLNAME%���������A%CALLNAME:MASTER%�̓��_���S���ɑ}�������
-		PRINTFORML ���܂��Δޏ����l�Ɏq������߂č���U���C�̎��ɐ��艺���邵���Ȃ������B
-		PRINTFORML �������%CALLNAME:MASTER%�̐��t��ٓ��ɒ����ꂽ��l�͍Ō�ɂ��|���v�t�F���Ŗ����܂��Ă��ꂽ���_��|�����J��B
-		PRINTFORML �l�񔇂��ɂȂ���%CALLNAME:MASTER%�̌ҊԂɊ���񂹂��l�̌ҊԂ���͑�ʂ̐��t������ꗎ���Ă����c
+		PRINTFORML %CALLNAME%はカフェの奥へと続く通路の先に部屋があることを、そして応援していたアイドルが%CALLNAME:MASTER%に抱かれていたことを
+		PRINTFORML この時初めて知った。
+		PRINTFORML %CALLNAME:MASTER%に跨り腰を振る様は人々を魅了するアイドルのものではなく、雄に屈服した雌のそれである。
+		PRINTFORML 枕営業という言葉が%CALLNAME%の脳裏に浮かんだが、彼女の嬉しさと愉しさが同居した表情からそうではないことが見てとれた。
+		PRINTFORML つまりは本気の交尾である。
+		PRINTFORML ゴムをつけないまま始まった交尾は%CALLNAME:MASTER%の膣内射精によって終わりを迎え、呆然とその様子を立ったまま眺めていた%CALLNAME%は
+		PRINTFORML 彼女に手を引かれるままベッドへと案内されて%CALLNAME:MASTER%に抱き寄せられた。
+		PRINTFORML 「私のこと応援してくれる竿姉妹のコには、特別にいいことしてあげる%UNICODE(0x2661)%」
+		PRINTFORML そう言って%CALLNAME%の身体を愛撫しはじめた彼女の手つきは同性ということもあってか荒々しさはなく、感じる部分を手探りで探り当てながら
+		PRINTFORML 緩急をつけて刺激してくる。
+		PRINTFORML 憧れのアイドルに愛撫してもらうという予想だにしなかった展開に混乱していた%CALLNAME%だったが、%CALLNAME:MASTER%の肉棒が膣内に挿入されて
+		PRINTFORML しまえば彼女同様に子種を求めて腰を振る一匹の雌に成り下がるしかなかった。
+		PRINTFORML 代わる代わる%CALLNAME:MASTER%の精液を胎内に注がれた二人は最後にお掃除Ｗフェラで愉しませてくれた肉棒を掃除し労る。
+		PRINTFORML 四つん這いになって%CALLNAME:MASTER%の股間に顔を寄せる二人の股間からは大量の精液が溢れ零れ落ちていた…
 		PRINTFORML 
-		PRINTFORML �J�t�F����ɂ���%CALLNAME%�̎茳�ɂ͔ޏ��̃T�C���F���������Ă����B
-		PRINTFORML �܂����A�C�h���ƃJ�t�F�ŋ��R�o����ăT�C����Ⴆ��Ƃ̓��b�L�[��������%CALLNAME%�͖j���ɂ܂���B
-		PRINTFORML ��������̏o��������������Y��Ă��܂���%CALLNAME%���������A�ٓ��ɂ�%CALLNAME:MASTER%�̐��t����������ƒ~�����Ă����c
+		PRINTFORML カフェを後にした%CALLNAME%の手元には彼女のサイン色紙が握られていた。
+		PRINTFORML まさかアイドルとカフェで偶然出会ってサインを貰えるとはラッキーだったと%CALLNAME%は頬を緩ませる。
+		PRINTFORML 今日一日の出来事をすっかり忘れてしまった%CALLNAME%だったが、胎内には%CALLNAME:MASTER%の精液がしっかりと蓄えられていた…
 	ELSEIF !RAND:2
-		PRINTFORML %CALLNAME%�͂Ƃ��镨�̃C�x���g�̃A���o�C�g�X�^�b�t�Ƃ��ē����Ă����B
-		PRINTFORML �^�c��%CALLNAME:MASTER%���g����Ă��邱�Ƃ���̗p���ꂽ%CALLNAME%�͕��̂̔̔����ɔz�������͂����������A�����ɂȂ���
-		PRINTFORML ���f�����̏������x�񂾂��߂ɋ}篔w�i�D�̎��Ă���%CALLNAME%������𖱂߂邱�ƂƂȂ����B
+		PRINTFORML %CALLNAME%はとある物販イベントのアルバイトスタッフとして働いていた。
+		PRINTFORML 運営に%CALLNAME:MASTER%が携わっていることから採用された%CALLNAME%は物販の販売員に配属されるはずだったが、当日になって
+		PRINTFORML モデル役の女性が休んだために急遽背格好の似ている%CALLNAME%が代役を務めることとなった。
 		PRINTFORML 
-		PRINTFORML �u���݂܂��[��A������Ɏ����������[���v
-		PRINTFORML �u���͂������ɁA�|�[�Y���L���Ȃ��炨�肢���܁[���v
-		PRINTFORML �B�e�p�̃J�����𖳐��Ɍ�����ꂽ%CALLNAME%�͒j���ɑ�l�C�L�����N�^�[�̃R�X�v���ߑ��𒅂����Ă����B
-		PRINTFORML �t���t���̉��炵���ߑ���n���ꂽ%CALLNAME%�̊��z�́u�����ߑ��Ń��b�L�[�v�Ƃ������̂����������Ă����Ɍ�������B
-		PRINTFORML �����≺���g�Ƃ���������ǂ������͐݌v�̒i�K�ŕz�n�����Ȃ�����Ă����炵���A�����ł��g�̂𓮂����Ɖ������`���`���ƌ����B�ꂷ��B
-		IF TALENT:���� || TALENT:����
-			PRINTFORML �������s�^�Ȃ��ƂɁA�w�i�D�����Ă���Ƃ͂������̑傫�������̓��f�����̏����Ǝ��Ă��Ȃ������炵���������Ƃɂ��������������B
-			PRINTFORML ��ђ��˂悤���̂Ȃ狹���|��������̂͂܂��ԈႢ�Ȃ����낤�B
-		ELSEIF TALENT:�n�� || TALENT:���
-			PRINTFORML �������s�^�Ȃ��ƂɁA�w�i�D�����Ă���Ƃ͂������̑傫�������̓��f�����̏����Ǝ��Ă��Ȃ������炵���������Ƃɂ����X�J�X�J�������B
-			PRINTFORML ���R������̂ňߑ����Y��������S�z�����͖������A���f����Ƒ傫���J��������������񂪌����Ă��܂���������Ȃ��B
+		PRINTFORML 「すみませーん、こちらに視線くださーい」
+		PRINTFORML 「次はこっちに、ポーズをキメながらお願いしまーす」
+		PRINTFORML 撮影用のカメラを無数に向けられた%CALLNAME%は男性に大人気キャラクターのコスプレ衣装を着せられていた。
+		PRINTFORML フリフリの可愛らしい衣装を渡された%CALLNAME%の感想は「可愛い衣装でラッキー」というものだったが着てすぐに後悔した。
+		PRINTFORML 胸元や下半身といったきわどい部分は設計の段階で布地が少なくされていたらしく、少しでも身体を動かすと下着がチラチラと見え隠れする。
+		IF TALENT:巨乳 || TALENT:爆乳
+			PRINTFORML しかも不運なことに、背格好が似ているとはいえ胸の大きさだけはモデル役の女性と似ていなかったらしく胸元がとにかく窮屈だった。
+			PRINTFORML 飛び跳ねようものなら胸がポロリするのはまず間違いないだろう。
+		ELSEIF TALENT:貧乳 || TALENT:絶壁
+			PRINTFORML しかも不運なことに、背格好が似ているとはいえ胸の大きさだけはモデル役の女性と似ていなかったらしく胸元がとにかくスカスカだった。
+			PRINTFORML 肩紐があるので衣装がズリ落ちる心配だけは無いが、油断すると大きく開いた袖口から乳首が見えてしまうかもしれない。
 		ENDIF
-		PRINTFORML �傫�������Ƃ��͓��ɐT�d�ɂȂ�Ȃ���΂Ȃ�Ȃ���%CALLNAME%�͐S�ɐ������B
-		PRINTFORML �������ă��f���Ƃ��ĎB�e�ɗՂ�%CALLNAME%�͍��̂Ƃ��뎖�̂����͔������Ă��邱�ƂɈ��g���Ă����B
-		PRINTFORML �������C�ɂ��邠�܂�~�j�X�J�[�g����͉������قڊی����ɂȂ��Ă���̂��C�t�����ɁA%CALLNAME%�͎��X�ƃ|�[�Y������Ă����B
-		PRINTFORML ���܂�̐l�C�Ԃ��s�R�Ɏv�����̔����̈�l���B�e����`�����񂾂��ƂŎ��Ԃ����o���A�B�e��͂��̏�Œ��~�ƂȂ����B
-		PRINTFORML %CALLNAME%�̕����ɂ�蔄��グ���\�z��啝�ɒ��������߂ɕ�V�͏�悹����邱�ƂɂȂ������A���%CALLNAME:MASTER%�ɌĂяo���ꂽ
-		PRINTFORML %CALLNAME%�͑��̒j�ɉ������N���������łȂ��ʐ^�܂ŎB��ꂽ�Ƃ������R����݂�����ƍċ���Ƃ��������^���{����邱�ƂɂȂ����c
+		PRINTFORML 大きく動くときは特に慎重にならなければならないと%CALLNAME%は心に誓った。
+		PRINTFORML そうしてモデルとして撮影に臨んだ%CALLNAME%は今のところ事故だけは避けられていることに安堵していた。
+		PRINTFORML 胸元を気にするあまりミニスカートからは下着がほぼ丸見えになっているのも気付かずに、%CALLNAME%は次々とポーズを取っていく。
+		PRINTFORML あまりの人気ぶりを不審に思った販売員の一人が撮影会場を覗き込んだことで事態が発覚し、撮影会はその場で中止となった。
+		PRINTFORML %CALLNAME%の奮闘により売り上げが予想を大幅に超えたために報酬は上乗せされることになったが、後日%CALLNAME:MASTER%に呼び出された
+		PRINTFORML %CALLNAME%は他の男に下着を晒しただけでなく写真まで撮られたという理由からみっちりと再教育という名の躾を施されることになった…
 	ELSE
-		PRINTFORML %CALLNAME%�̓J�b�v����Ώۂɂ�����̗Տ������A���o�C�g�ɎQ�����邽��%CALLNAME:MASTER%�Ɖ���K��Ă��Ă��B
-		PRINTFORML �Տ��������s����͐V�J�����ꂽ�Z��ŁA�����̂��̂������ʂ͋������r�o����₷���̓��Ɏc��ɂ����Ȃ��Ă���炵���B
-		PRINTFORML ��茒�N�I�țZ��ƂȂ��Ă��܂��Ƃ����S���҂̐�����%CALLNAME%�͌ӎU�L�����Ȋ������B
-		PRINTFORML �u���N�I�țZ����āc�c�v
-		PRINTFORML ����󂯎����%CALLNAME%��%CALLNAME:MASTER%�͓���O�̃f�[�^���L�^���Ă��犄�蓖�Ă�ꂽ�����ւƈē����ꂽ�B
-		PRINTFORML �����̓z�e���̈ꎺ�̂悤�ɐ������x�b�h�T�C�h�ɂ͂����J�Ɋe���l�̊ߋ���D��܂ŗp�ӂ���Ă���B
-		PRINTFORML �u���ꂶ�Ⴀ�c�c�n�߂�����H�v
-		PRINTFORML ���������V���Ă���Ă���Ƌt�ɂ��ɂ�����������%CALLNAME%���������A�d���ł���ȏ�̓��������Ȃ��B
-		PRINTFORML �Z��𕞗p���Ă���b���҂ƁA���ʂ��o�Ă����̂��S�g���ΏƂ����悤�ɔM���Ȃ�B
-		PRINTFORML �܂��G����Ă����Ȃ��̂��u�������������g��%CALLNAME%�͊��҂���������%CALLNAME:MASTER%�֌������B
-		PRINTFORML %CALLNAME:MASTER%�����łɖu�N���ėՐ��ԂɂȂ��Ă���A��l�͂ǂ��炩��Ƃ��Ȃ����t�������킷�ƌ�����J�n����B
+		PRINTFORML %CALLNAME%はカップルを対象にした薬の臨床試験アルバイトに参加するため%CALLNAME:MASTER%と会場を訪れていてた。
+		PRINTFORML 臨床試験を行う薬は新開発された媚薬で、既存のものよりも効果は強いが排出されやすく体内に残りにくくなっているらしい。
+		PRINTFORML より健康的な媚薬となっていますという担当者の説明に%CALLNAME%は胡散臭そうな顔をする。
+		PRINTFORML 「健康的な媚薬って……」
+		PRINTFORML 薬を受け取った%CALLNAME%と%CALLNAME:MASTER%は投薬前のデータを記録してから割り当てられた部屋へと案内された。
+		PRINTFORML 部屋はホテルの一室のように整えられベッドサイドにはご丁寧に各種大人の玩具や避妊具まで用意されている。
+		PRINTFORML 「それじゃあ……始めよっか？」
+		PRINTFORML こうもお膳立てされていると逆にやりにくさを感じる%CALLNAME%だったが、仕事である以上はヤルしかない。
+		PRINTFORML 媚薬を服用してから暫く待つと、効果が出てきたのか全身が火照ったように熱くなる。
+		PRINTFORML まだ触れられてもいないのに疼きだした下半身に%CALLNAME%は期待した視線を%CALLNAME:MASTER%へ向けた。
+		PRINTFORML %CALLNAME:MASTER%もすでに勃起して臨戦状態になっており、二人はどちらからともなく口付けを交わすと交尾を開始する。
 		PRINTFORML 
-		PRINTFORML ���_�����Ɍ����Ă��܂��΁A�Z��͎��s�삾�����B
-		PRINTFORML �u�܂��ցc�c�������%UNICODE(0x2661)%�@��ӂ��A�ق߂ցc�c��炟%UNICODE(0x2661)%�@���J���J���J���J���J���J���I�I�I�v
-		PRINTFORML %CALLNAME%�̐��~�𖳎�����%CALLNAME:MASTER%���S���ː����s���ƁA%CALLNAME%�͋������悤�ɋ��ѐ����グ���B
-		PRINTFORML ��������̂͂��ŁA�̓�����r�o����₷���Ƃ������ʂɂ��%CALLNAME:MASTER%�̐��t�ɗn�����񂾛Z�򐬕����S��q�{��
-		PRINTFORML �����S���ɒ��ڌ������܂��̂ł���B
-		PRINTFORML %CALLNAME:MASTER%�����t�⎩�g�̎ː��������t�����_�ɐG��邱�ƂśZ�򐬕���ێ悵�Ă��܂��A���݂��̐g�̂�Z�򐬕����z����
-		PRINTFORML �Ƃ����������ȏ󋵂ւƊׂ��Ă��܂��Ă����B
-		PRINTFORML ��������Ȃ��Ȃ��o�Ă��Ȃ������҂�����s�v�c�Ɏv�����S���҂������ŏ󋵂̊m�F������܂œ��~�̘A���͑������A�����͒��~�B
-		PRINTFORML �{���̗p�r�Ƃ͈قȂ錋�ʂƂȂ������N�I�țZ��͂�������ƂȂ�A�J�������~���ꂽ�B
+		PRINTFORML 結論から先に言ってしまえば、媚薬は失敗作だった。
+		PRINTFORML 「まっへ……もうやめ%UNICODE(0x2661)%　んふっ、ほめへ……やらぁ%UNICODE(0x2661)%　あ゛あ゛あ゛あ゛あ゛あ゛っ！！！」
+		PRINTFORML %CALLNAME%の制止を無視して%CALLNAME:MASTER%が膣内射精を行うと、%CALLNAME%は狂ったように叫び声を上げた。
+		PRINTFORML それもそのはずで、体内から排出されやすいという効果により%CALLNAME:MASTER%の精液に溶け込んだ媚薬成分が膣や子宮の
+		PRINTFORML 内部粘膜に直接撃ち込まれるのである。
+		PRINTFORML %CALLNAME:MASTER%も愛液や自身の射精した精液が肉棒に触れることで媚薬成分を摂取してしまい、お互いの身体を媚薬成分が循環する
+		PRINTFORML というおかしな状況へと陥ってしまっていた。
+		PRINTFORML 部屋からなかなか出てこない治験者たちを不思議に思った担当者が内線で状況の確認をするまで肉欲の連鎖は続けられ、試験は中止。
+		PRINTFORML 本来の用途とは異なる結果となった健康的な媚薬はお蔵入りとなり、開発も中止された。
 		PRINTFORML 
-		PRINTFORML ����A���t��Z��ɕς���Ƃ����j�������̐V��̖򂪓��������Ђ��甭������邱�ƂƂȂ����B
-		PRINTFORML �Տ������̎Q���҂ɂ͕�V�Ƌ��ɂ��l�тƂ��Ă��̖򂪑���ꂽ���A%CALLNAME%�͂��̂��ׂĂ�%CALLNAME:MASTER%�ɏ���n�����B
-		PRINTFORML ���ł͕K�v�Ȃ�����ƌ��������҂ɖ������\���%CALLNAME:MASTER%�𓐂݌���%CALLNAME%�ɁA%CALLNAME:MASTER%�͖ڂ̑O�Ŗ��
-		PRINTFORML ���p����ƃx�b�h�ւƘA�ꍞ�񂾁B
-		PRINTFORML �ȗ��A%CALLNAME%�̃|�[�`�̒��ɂ͂��̖򂪏������邱�ƂƂȂ����c
+		PRINTFORML 後日、精液を媚薬に変えるという男性向けの新種の薬が同じ製薬会社から発売されることとなった。
+		PRINTFORML 臨床試験の参加者には報酬と共にお詫びとしてこの薬が送られたが、%CALLNAME%はそのすべてを%CALLNAME:MASTER%に譲り渡した。
+		PRINTFORML 口では必要ないからと言いつつも期待に満ちた表情で%CALLNAME:MASTER%を盗み見る%CALLNAME%に、%CALLNAME:MASTER%は目の前で薬を
+		PRINTFORML 服用するとベッドへと連れ込んだ。
+		PRINTFORML 以来、%CALLNAME%のポーチの中にはこの薬が常備されることとなった…
 	ENDIF
 DRAWLINE
 
@@ -240,16 +240,16 @@ PRINTFORMW
 
 
 
-EXP:�Ɩ��o�� += 1
-PRINTFORML �y�Ɩ��o���@�@:{EXP:�Ɩ��o��-1, 5 ,LEFT}��{EXP:�Ɩ��o��, 5 ,RIGHT}�z
+EXP:業務経験 += 1
+PRINTFORML 【業務経験　　:{EXP:業務経験-1, 5 ,LEFT}→{EXP:業務経験, 5 ,RIGHT}】
 DRAWLINE
-IF Flag:�s�s_���ъl���@�� != 0
-	CFLAG:�Z�l_�Ɩ��|�C���g += 5
-	L_K = (((EXP:�Ɩ��o��/100)+1)*1000)+(EXP:�Ɩ��o��*3)
-	Flag:�s�s_���� += L_K
-	Flag:�s�s_���ъl���@�� = 0
-	PRINTFORML �X��%CALLNAME%�̊��􂪁u�V�e�B�v�ɔF�߂��A��ʂ̌��т��l�������I
-	PRINTFORML �y���с@�@:{Flag:�s�s_���� - L_K, 10 ,LEFT}��{Flag:�s�s_����, 10 ,RIGHT}�z
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 5
+	L_K = (((EXP:業務経験/100)+1)*1000)+(EXP:業務経験*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 更に%CALLNAME%の活躍が「シティ」に認められ、大量の功績を獲得した！
+	PRINTFORML 【功績　　:{Flag:都市_功績 - L_K, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
 	DRAWLINE
 ENDIF
 PRINTFORMW 

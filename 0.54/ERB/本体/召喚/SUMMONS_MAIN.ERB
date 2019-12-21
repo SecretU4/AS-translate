@@ -1,34 +1,34 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SUMMONS_MAIN.ERB
-;	Facility	:¢Š«‰æ–ÊB
+;	Facility	:å¬å–šç”»é¢ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
-;	002		2014/03/10		‚È‚é‚Í‚â				«•ÊƒtƒBƒ‹ƒ^‚Æogì•i•Ê•\Ž¦‚ð’Ç‰Á
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
+;	002		2014/03/10		ãªã‚‹ã¯ã‚„				æ€§åˆ¥ãƒ•ã‚£ãƒ«ã‚¿ã¨å‡ºèº«ä½œå“åˆ¥è¡¨ç¤ºã‚’è¿½åŠ 
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E SYSTEM_SUMMONS_MAIN				SYSTEM:¢Š«‰æ–Ê
-;	E SUMMONS_DATA_MAIN				¢Š«:î•ñ(ƒƒCƒ“)
-;	E SUMMONS_DATA_BASIC				¢Š«:î•ñ(Šî–{)
-;	E SUMMONS_EXE						¢Š«:ŽÀs
+;	ãƒ» SYSTEM_SUMMONS_MAIN				SYSTEM:å¬å–šç”»é¢
+;	ãƒ» SUMMONS_DATA_MAIN				å¬å–š:æƒ…å ±(ãƒ¡ã‚¤ãƒ³)
+;	ãƒ» SUMMONS_DATA_BASIC				å¬å–š:æƒ…å ±(åŸºæœ¬)
+;	ãƒ» SUMMONS_EXE						å¬å–š:å®Ÿè¡Œ
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub SYSTEM_SUMMONS_MAIN
 ;=================================================
-;   SYSTEM:¢Š«‰æ–Ê
+;   SYSTEM:å¬å–šç”»é¢
 ;-------------------------------------------------
 @SYSTEM_SUMMONS_MAIN
 #DIM L_INPUT
@@ -55,32 +55,32 @@
 #DIMS L_PART, 2
 
 ;-----------------------------
-;- ‰Šúˆ—
+;- åˆæœŸå‡¦ç†
 ;-----------------------------
 L_PAGE=0
 L_MODE=0
 
-;- SMN:‰Šú‰»
+;- SMN:åˆæœŸåŒ–
 CALL SMN_INIT
 GSMN_RACE_NO = 50
 GSMN_ORIGIN_NO = -1
 
-; ƒLƒƒƒ‰•\Ž¦”/P
-L_CNT_PRINT_DATA = FLAG:’è”_ƒLƒƒƒ‰•\Ž¦” * 2
+; ã‚­ãƒ£ãƒ©è¡¨ç¤ºæ•°/P
+L_CNT_PRINT_DATA = FLAG:å®šæ•°_ã‚­ãƒ£ãƒ©è¡¨ç¤ºæ•° * 2
 
 ;-----------------------------
-;- ‘Oˆ—
+;- å‰å‡¦ç†
 ;-----------------------------
 $MAKE_LIST
 
-;ì•i§Œä‚Å•\Ž¦•ªŠò
+;ä½œå“åˆ¶å¾¡ã§è¡¨ç¤ºåˆ†å²
 IF !GSMN_CTL_MODE
 	L_TMP = GSMN_RACE_NO
 ELSE
 	L_TMP = 50
 ENDIF
 
-;- SMN:ƒŠƒXƒg”ÍˆÍ
+;- SMN:ãƒªã‚¹ãƒˆç¯„å›²
 CALL SMN_LIST_RANGE(L_TMP)
 
 L_START	= GSMN_LIST_START
@@ -89,23 +89,23 @@ L_END	= GSMN_LIST_END
 L_RANGE = L_END - L_START
 
 ;-----------------------------
-;- ƒŠƒXƒgì¬
+;- ãƒªã‚¹ãƒˆä½œæˆ
 ;-----------------------------
 
-;- ‰‰ñ‚Éogì•iƒŠƒXƒg‚Ì€”õ
+;- åˆå›žã«å‡ºèº«ä½œå“ãƒªã‚¹ãƒˆã®æº–å‚™
 IF !GSMN_ORIGIN_INITED
 	L_ORIGIN_CNT = 0
 
 	FOR L_I, L_START, L_END
 
-		;- ƒLƒƒƒ‰ƒtƒ@ƒCƒ‹:‘¶Ýƒ`ƒFƒbƒN
+		;- ã‚­ãƒ£ãƒ©ãƒ•ã‚¡ã‚¤ãƒ«:å­˜åœ¨ãƒã‚§ãƒƒã‚¯
 		SIF !EXISTCSV(L_I, 0)
 			CONTINUE
 
-		IF STRLENS(CSVCSTR(L_I, GETNUM(CSTR, "ogì•i")))
-			IF FINDELEMENT(L_ORIGIN, CSVCSTR(L_I, GETNUM(CSTR, "ogì•i"))) == -1
-				L_ORIGIN:L_ORIGIN_CNT = %CSVCSTR(L_I, GETNUM(CSTR, "ogì•i"))%
-				GSMN_ORIGIN_KANA:L_ORIGIN_CNT = %CSVCSTR(L_I, GETNUM(CSTR, "ogƒJƒi"))%_{L_ORIGIN_CNT}
+		IF STRLENS(CSVCSTR(L_I, GETNUM(CSTR, "å‡ºèº«ä½œå“")))
+			IF FINDELEMENT(L_ORIGIN, CSVCSTR(L_I, GETNUM(CSTR, "å‡ºèº«ä½œå“"))) == -1
+				L_ORIGIN:L_ORIGIN_CNT = %CSVCSTR(L_I, GETNUM(CSTR, "å‡ºèº«ä½œå“"))%
+				GSMN_ORIGIN_KANA:L_ORIGIN_CNT = %CSVCSTR(L_I, GETNUM(CSTR, "å‡ºèº«ã‚«ãƒŠ"))%_{L_ORIGIN_CNT}
 				L_ORIGIN_CNT ++
 			ENDIF
 		ENDIF
@@ -118,7 +118,7 @@ IF !GSMN_ORIGIN_INITED
 		GSMN_ORIGIN_KANA:L_I = %L_PART:0%
 		GSMN_ORIGIN:L_I = %L_ORIGIN:TOINT(L_PART:1)%
 	NEXT
-	GSMN_ORIGIN:L_ORIGIN_CNT = ‚»‚Ì‘¼
+	GSMN_ORIGIN:L_ORIGIN_CNT = ãã®ä»–
 	GSMN_ORIGIN_NUM = L_ORIGIN_CNT + 1
 	GSMN_ORIGIN_INITED = 1
 ENDIF
@@ -128,35 +128,35 @@ L_CNT=0
 
 FOR L_I, L_START, L_END
 
-	;- ƒLƒƒƒ‰ƒtƒ@ƒCƒ‹:‘¶Ýƒ`ƒFƒbƒN
+	;- ã‚­ãƒ£ãƒ©ãƒ•ã‚¡ã‚¤ãƒ«:å­˜åœ¨ãƒã‚§ãƒƒã‚¯
 	SIF !EXISTCSV(L_I, 0)
 		CONTINUE
 
-	;ˆ«–‚ƒtƒHƒ‹ƒ_‚ÍœŠO
+	;æ‚ªé­”ãƒ•ã‚©ãƒ«ãƒ€ã¯é™¤å¤–
 	IF INRANGE(L_I, 2001,4098)
-		;‚½‚¾‚µ‚±‚ê‚ç‚ÍœŠO‚µ‚È‚¢
-		SIF !GROUPMATCH(L_I, [[ƒLƒƒƒ‰:ƒAƒ}ƒeƒ‰ƒX]], [[ƒLƒƒƒ‰:ƒ‚[EƒVƒ‡ƒ{[]], [[ƒLƒƒƒ‰:ƒxƒ‹ƒ[ƒuƒu]], [[ƒLƒƒƒ‰:ƒ†ƒLƒWƒ‡ƒƒE]], [[ƒLƒƒƒ‰:ƒAƒŠƒX]])
+		;ãŸã ã—ã“ã‚Œã‚‰ã¯é™¤å¤–ã—ãªã„
+		SIF !GROUPMATCH(L_I, [[ã‚­ãƒ£ãƒ©:ã‚¢ãƒžãƒ†ãƒ©ã‚¹]], [[ã‚­ãƒ£ãƒ©:ãƒ¢ãƒ¼ãƒ»ã‚·ãƒ§ãƒœãƒ¼]], [[ã‚­ãƒ£ãƒ©:ãƒ™ãƒ«ã‚¼ãƒ–ãƒ–]], [[ã‚­ãƒ£ãƒ©:ãƒ¦ã‚­ã‚¸ãƒ§ãƒ­ã‚¦]], [[ã‚­ãƒ£ãƒ©:ã‚¢ãƒªã‚¹]])
 			CONTINUE
 	ENDIF
 
-	;ì•i§Œä‚Å•\Ž¦•ªŠò
+	;ä½œå“åˆ¶å¾¡ã§è¡¨ç¤ºåˆ†å²
 	IF !GSMN_CTL_MODE
 
 	ELSE
-		;ogì•i‚É‚æ‚éƒtƒBƒ‹ƒ^
-		;-1‚Í‘S‚Ä‚ÌƒLƒƒƒ‰‚ð’Ê‚·
+		;å‡ºèº«ä½œå“ã«ã‚ˆã‚‹ãƒ•ã‚£ãƒ«ã‚¿
+		;-1ã¯å…¨ã¦ã®ã‚­ãƒ£ãƒ©ã‚’é€šã™
 		IF GSMN_ORIGIN_NO == -1
-		;ì•i‚ÌÅŒã”ö‚Íw‚»‚Ì‘¼x
+		;ä½œå“ã®æœ€å¾Œå°¾ã¯ã€Žãã®ä»–ã€
 		ELSEIF GSMN_ORIGIN_NO == GSMN_ORIGIN_NUM - 1
-			SIF STRLENS(CSVCSTR(L_I, GETNUM(CSTR, "ogì•i")))
+			SIF STRLENS(CSVCSTR(L_I, GETNUM(CSTR, "å‡ºèº«ä½œå“")))
 				CONTINUE
 		ELSE
-			SIF CSVCSTR(L_I, GETNUM(CSTR, "ogì•i")) != GSMN_ORIGIN:GSMN_ORIGIN_NO
+			SIF CSVCSTR(L_I, GETNUM(CSTR, "å‡ºèº«ä½œå“")) != GSMN_ORIGIN:GSMN_ORIGIN_NO
 				CONTINUE
 		ENDIF
 
-		;«•Ê‚É‚æ‚éƒtƒBƒ‹ƒ^
-		SIF L_SEX == 2 - CSVTALENT(L_I, GETNUM(TALENT, "ƒIƒgƒR"))
+		;æ€§åˆ¥ã«ã‚ˆã‚‹ãƒ•ã‚£ãƒ«ã‚¿
+		SIF L_SEX == 2 - CSVTALENT(L_I, GETNUM(TALENT, "ã‚ªãƒˆã‚³"))
 			CONTINUE
 	ENDIF
 
@@ -168,18 +168,18 @@ NEXT
 L_PAGE_MAX = (L_CNT-1) / L_CNT_PRINT_DATA
 
 ;-----------------------------
-;- ˆ—ŠJŽn
+;- å‡¦ç†é–‹å§‹
 ;-----------------------------
 
 $PRINT_LIST
 
-;ƒ‰ƒCƒ“•\Ž¦:Vƒy[ƒW
+;ãƒ©ã‚¤ãƒ³è¡¨ç¤º:æ–°ãƒšãƒ¼ã‚¸
 CALL C_LINE
-PRINTFORML y“z—êw“üz
-PRINTFORML V‚½‚È“z—ê‚ðw“ü‚µ‚Ü‚·Bw“ü‚É‚ÍŽ‘‹à‚ð100Á”ï‚µ‚Ü‚·B
-;PRINTFORML w“ü‚µ‚½‚¢ƒLƒƒƒ‰‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢BŒûã‚ª‘¶Ý‚·‚éƒLƒƒƒ‰ƒNƒ^[‚ÍA–¼‘O‚ªƒsƒ“ƒN‚Å•\Ž¦‚³‚ê‚Ü‚·B
-PRINTFORML w“ü‚µ‚½‚¢ƒLƒƒƒ‰‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢B
-PRINTFORML iŒ»Ý‚Ì“z—êl”F{CHARANUM-1}l^Ž‘‹àF{MONEY}jƒpage.{L_PAGE}/{L_PAGE_MAX}„ (Œv{L_CNT}l)
+PRINTFORML ã€å¥´éš·è³¼å…¥ã€‘
+PRINTFORML æ–°ãŸãªå¥´éš·ã‚’è³¼å…¥ã—ã¾ã™ã€‚è³¼å…¥ã«ã¯è³‡é‡‘ã‚’100æ¶ˆè²»ã—ã¾ã™ã€‚
+;PRINTFORML è³¼å…¥ã—ãŸã„ã‚­ãƒ£ãƒ©ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚å£ä¸ŠãŒå­˜åœ¨ã™ã‚‹ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¯ã€åå‰ãŒãƒ”ãƒ³ã‚¯ã§è¡¨ç¤ºã•ã‚Œã¾ã™ã€‚
+PRINTFORML è³¼å…¥ã—ãŸã„ã‚­ãƒ£ãƒ©ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚
+PRINTFORML ï¼ˆç¾åœ¨ã®å¥´éš·äººæ•°ï¼š{CHARANUM-1}äººï¼è³‡é‡‘ï¼š{MONEY}ï¼‰ï¼œpage.{L_PAGE}/{L_PAGE_MAX}ï¼ž (è¨ˆ{L_CNT}äºº)
 DRAWLINE
 
 
@@ -189,49 +189,49 @@ L_HIT_CNT = 0
 L_HIT = 0
 FOR L_I, 0 + (L_PAGE * L_CNT_PRINT_DATA), L_RANGE
 
-	;- ‘¶Ýƒ`ƒFƒbƒN
+	;- å­˜åœ¨ãƒã‚§ãƒƒã‚¯
 	SIF GSMN_LIST:L_I < 0
 		CONTINUE
 
 	;-----------------------------
-	;- ƒLƒƒƒ‰ƒNƒ^[•\Ž¦
+	;- ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼è¡¨ç¤º
 	;-----------------------------
 	L_HIT_CNT ++
 
-	;- ŽŸƒy[ƒW‚ðì¬‚·‚é•K—v‚ª‚ ‚é‚©
+	;- æ¬¡ãƒšãƒ¼ã‚¸ã‚’ä½œæˆã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã‹
 	IF L_HIT_CNT > (L_CNT_PRINT_DATA)
-		;ŽŸƒy[ƒW—L‚è‚Ìê‡A“–ƒy[ƒW‚Ío—ÍŠ®—¹‚Ìˆ×I—¹
+		;æ¬¡ãƒšãƒ¼ã‚¸æœ‰ã‚Šã®å ´åˆã€å½“ãƒšãƒ¼ã‚¸ã¯å‡ºåŠ›å®Œäº†ã®ç‚ºçµ‚äº†
 		L_NEXT = 1
 		BREAK
 	ENDIF
 
 	L_T = GSMN_LIST:L_I
 
-	;•\Ž¦
+	;è¡¨ç¤º
 	PRINTFORM [%TOSTR(L_T),4%] 
-;------------------------------------------------- Žb’è‚ÅƒIƒ~ƒbƒg
+;------------------------------------------------- æš«å®šã§ã‚ªãƒŸãƒƒãƒˆ
 ;	TRYCCALLFORM KOJO_EXIST_K{L_T}
-;		SETCOLOR COLOR("ƒsƒ“ƒN")
+;		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
 ;	CATCH
 ;	ENDCATCH
 ;-------------------------------------------------
 	PRINTFORM %CSVNAME(L_T,0), 24, LEFT% 
 	RESETCOLOR
-	PRINTFORM %DB_TALENT_NAME(L_T, "ƒIƒgƒR", 1)% 
+	PRINTFORM %DB_TALENT_NAME(L_T, "ã‚ªãƒˆã‚³", 1)% 
 
 	IF GSMN_VIEW_MODE
 		PRINT [
-		SIF !CSVABL(L_T, GETNUM(ABL, "‰Ì¥‹Z”\"))
-			SETCOLOR COLOR("•šŽš")
-		PRINT ‰Ì
+		SIF !CSVABL(L_T, GETNUM(ABL, "æ­Œå”±æŠ€èƒ½"))
+			SETCOLOR COLOR("ä¼å­—")
+		PRINT æ­Œ
 		RESETCOLOR
-		SIF !CSVABL(L_T, GETNUM(ABL, "í“¬‹Z”\"))
-			SETCOLOR COLOR("•šŽš")
-		PRINT í
+		SIF !CSVABL(L_T, GETNUM(ABL, "æˆ¦é—˜æŠ€èƒ½"))
+			SETCOLOR COLOR("ä¼å­—")
+		PRINT æˆ¦
 		RESETCOLOR
-;		SIF !CSVABL(L_T, GETNUM(ABL, "Hì‹Z”\"))
-;			SETCOLOR COLOR("•šŽš")
-;		PRINT H
+;		SIF !CSVABL(L_T, GETNUM(ABL, "å·¥ä½œæŠ€èƒ½"))
+;			SETCOLOR COLOR("ä¼å­—")
+;		PRINT å·¥
 		RESETCOLOR
 		PRINT ] 
 	ENDIF
@@ -239,34 +239,34 @@ FOR L_I, 0 + (L_PAGE * L_CNT_PRINT_DATA), L_RANGE
 
 	L_STR=
 	IF L_T == MASTER
-		SETCOLOR COLOR("…F")
+		SETCOLOR COLOR("æ°´è‰²")
 		L_STR = MASTER
-	; Šù‚ÉŠ—LÏ
+	; æ—¢ã«æ‰€æœ‰æ¸ˆ
 	ELSEIF GETCHARA(L_T, 0) > -1
-		SETCOLOR COLOR("ƒsƒ“ƒN")
-		L_STR = Š—LÏ
-		;ÝŒÉ
+		SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+		L_STR = æ‰€æœ‰æ¸ˆ
+		;åœ¨åº«
 		SIF !GSMN_STOCK:L_T
 			GSMN_STOCK:L_T =1
-	;’†ŒÃ”Ì”„FŽ¸çHŒã5“úŒo‰ß‚·‚é‚Æ’†ŒÃ•i‚Æ‚µ‚Ä•À‚Ô
+	;ä¸­å¤è²©å£²ï¼šå¤±è¸ªå¾Œ5æ—¥çµŒéŽã™ã‚‹ã¨ä¸­å¤å“ã¨ã—ã¦ä¸¦ã¶
 	ELSEIF GSMN_STOCK:L_T > 1 && GSMN_STOCK:L_T < DAY
-		SETCOLOR COLOR("‰©F")
-		L_STR = ’†ŒÃ•i
-	; ÝŒÉ–³‚µ
+		SETCOLOR COLOR("é»„è‰²")
+		L_STR = ä¸­å¤å“
+	; åœ¨åº«ç„¡ã—
 	ELSEIF GSMN_STOCK:L_T
-		SETCOLOR COLOR("ŒQÂ")
-		L_STR = ÝŒÉ–³
+		SETCOLOR COLOR("ç¾¤é’")
+		L_STR = åœ¨åº«ç„¡
 	ELSE
 	ENDIF
 	SIF STRLENS(L_STR)
-		L_STR = y%L_STR%z
+		L_STR = ã€%L_STR%ã€‘
 	PRINTFORM %L_STR, 10, LEFT%
 	PRINT  
 	RESETCOLOR
 
 	L_HIT ++
 
-	;‰üs
+	;æ”¹è¡Œ
 	SIF (L_HIT % 2) == 0
 		PRINTL
 
@@ -274,53 +274,53 @@ NEXT
 
 L_PREV = (L_PAGE <= 0) ? 0 # 1
 
-;- ‹ós
+;- ç©ºè¡Œ
 FOR L_I, 0, (L_CNT_PRINT_DATA / 2) - (L_HIT / 2)
 	PRINTL
 NEXT
 
 PRINTL
 
-;ì•i§Œä‚Å•\Ž¦•ªŠò
+;ä½œå“åˆ¶å¾¡ã§è¡¨ç¤ºåˆ†å²
 IF !GSMN_CTL_MODE
-	;- SMN:ƒ†ƒjƒbƒgƒ^ƒCƒvƒŠƒXƒg
+	;- SMN:ãƒ¦ãƒ‹ãƒƒãƒˆã‚¿ã‚¤ãƒ—ãƒªã‚¹ãƒˆ
 	CALL SMN_PRINT_UNIT_TYPE_LIST(GSMN_RACE_NO)
 ELSE
 	DRAWLINE
-	PRINTFORMLC [5012]«•ÊF\@(L_SEX == 2) ? %"  "% # Š\@\@(L_SEX == 1) ? %"  "% # ‰\@
+	PRINTFORMLC [5012]æ€§åˆ¥ï¼š\@(L_SEX == 2) ? %"  "% # â™€\@\@(L_SEX == 1) ? %"  "% # â™‚\@
 	IF GSMN_ORIGIN_NO == -1
-		PRINTFORMLC [5013]ogF‘S‚Ä
+		PRINTFORMLC [5013]å‡ºèº«ï¼šå…¨ã¦
 	ELSE
-		PRINTFORMLC [5013]ogF%GSMN_ORIGIN:GSMN_ORIGIN_NO%
+		PRINTFORMLC [5013]å‡ºèº«ï¼š%GSMN_ORIGIN:GSMN_ORIGIN_NO%
 	ENDIF
-	PRINTFORMLC [5014]‘Sì•i
+	PRINTFORMLC [5014]å…¨ä½œå“
 	PRINTL
 	DRAWLINE
 ENDIF
 
 
-PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [5007]‘O‚Ìƒy[ƒW\@
-PRINTLC [5000]–ß‚é
-PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [5009]ŽŸ‚Ìƒy[ƒW\@
-PRINTFORMLC [5010]ì•i§ŒäF\@(!GSMN_CTL_MODE) ? ’Êí # ì•i•Ê \@
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [5007]å‰ã®ãƒšãƒ¼ã‚¸\@
+PRINTLC [5000]æˆ»ã‚‹
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [5009]æ¬¡ã®ãƒšãƒ¼ã‚¸\@
+PRINTFORMLC [5010]ä½œå“åˆ¶å¾¡ï¼š\@(!GSMN_CTL_MODE) ? é€šå¸¸ # ä½œå“åˆ¥ \@
 PRINTL
-PRINTFORMLC @
-PRINTFORMLC @
-PRINTFORMLC @
-PRINTFORMLC [5011]•\Ž¦ƒ‚[ƒhF\@(!GSMN_VIEW_MODE) ? ’Êí # Ú× \@
+PRINTFORMLC ã€€
+PRINTFORMLC ã€€
+PRINTFORMLC ã€€
+PRINTFORMLC [5011]è¡¨ç¤ºãƒ¢ãƒ¼ãƒ‰ï¼š\@(!GSMN_VIEW_MODE) ? é€šå¸¸ # è©³ç´° \@
 PRINTL
 
 $INPUT_LOOP_1
 INPUT
 L_INPUT = RESULT
 
-;- •\Ž¦:ƒy[ƒW•Ê
+;- è¡¨ç¤º:ãƒšãƒ¼ã‚¸åˆ¥
 SELECTCASE L_INPUT
-	;- I—¹
+	;- çµ‚äº†
 	CASE 5000
 		RETURN 0
 
-	;- ˆÊ’u•ÏX
+	;- ä½ç½®å¤‰æ›´
 	CASE 4000 TO 4050
 		SIF GSMN_CTL_MODE
 			GOTO ERROR
@@ -341,7 +341,7 @@ SELECTCASE L_INPUT
 		GSMN_RACE_NO = L_TMP
 		GOTO MAKE_LIST
 
-	;- ƒLƒƒƒ‰
+	;- ã‚­ãƒ£ãƒ©
 	CASE L_START TO L_END -1
 
 		;- CHK:ABLE
@@ -349,37 +349,37 @@ SELECTCASE L_INPUT
 			GOTO ERROR
 		ENDIF
 
-		;- ¢Š«:î•ñ(ƒƒCƒ“)
+		;- å¬å–š:æƒ…å ±(ãƒ¡ã‚¤ãƒ³)
 		CALL SUMMONS_DATA_MAIN(L_INPUT)
 		FINDELEMENT GSMN_LIST, RESULT
 		L_PAGE = RESULT / L_CNT_PRINT_DATA
 		GOTO PRINT_LIST
 
-	;‘O‚Ìƒy[ƒW
+	;å‰ã®ãƒšãƒ¼ã‚¸
 	CASE 5007
 		SIF !L_PREV
 			GOTO ERROR
 		L_PAGE -= 1
 		GOTO PRINT_LIST
-	;ŽŸ‚Ìƒy[ƒW
+	;æ¬¡ã®ãƒšãƒ¼ã‚¸
 	CASE 5009
 		SIF !L_NEXT
 			GOTO ERROR
 		L_PAGE += 1
 		GOTO PRINT_LIST
 
-	;- ì•i§Œä
+	;- ä½œå“åˆ¶å¾¡
 	CASE 5010
 		GSMN_CTL_MODE = !GSMN_CTL_MODE
 		L_PAGE = 0
 		GOTO MAKE_LIST
 
-	;- •\Ž¦ƒ‚[ƒh
+	;- è¡¨ç¤ºãƒ¢ãƒ¼ãƒ‰
 	CASE 5011
 		GSMN_VIEW_MODE = !GSMN_VIEW_MODE
 		GOTO PRINT_LIST
 
-	;- «•Ê§Œä
+	;- æ€§åˆ¥åˆ¶å¾¡
 	CASE 5012
 		SIF !GSMN_CTL_MODE
 			GOTO ERROR
@@ -387,7 +387,7 @@ SELECTCASE L_INPUT
 		L_PAGE = 0
 		GOTO MAKE_LIST
 
-	;- ogì•i§Œä
+	;- å‡ºèº«ä½œå“åˆ¶å¾¡
 	CASE 5013
 		SIF !GSMN_CTL_MODE
 			GOTO ERROR
@@ -395,7 +395,7 @@ SELECTCASE L_INPUT
 		L_PAGE = 0
 		GOTO MAKE_LIST
 
-	;- ‘Sì•i
+	;- å…¨ä½œå“
 	CASE 5014
 		SIF !GSMN_CTL_MODE
 			GOTO ERROR
@@ -403,10 +403,10 @@ SELECTCASE L_INPUT
 		L_PAGE = 0
 		GOTO MAKE_LIST
 
-	;- ‚»‚Ì‘¼
+	;- ãã®ä»–
 	CASEELSE
 		$ERROR
-		;INPUTƒGƒ‰[‘Î‰ž
+		;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT
@@ -416,12 +416,12 @@ GOTO PRINT_LIST
 ;=================================================
 ;   sub SUMMONS_DATA_MAIN
 ;=================================================
-;   ¢Š«:î•ñ(ƒƒCƒ“)
+;   å¬å–š:æƒ…å ±(ãƒ¡ã‚¤ãƒ³)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
 ; Output:
-;  RETURN				‘ÎÛƒLƒƒƒ‰
+;  RETURN				å¯¾è±¡ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @SUMMONS_DATA_MAIN(ARG)
 #DIM L_T
@@ -436,7 +436,7 @@ REDRAW 0
 
 L_T = ARG
 
-;ƒ‰ƒCƒ“•\Ž¦:Vƒy[ƒW
+;ãƒ©ã‚¤ãƒ³è¡¨ç¤º:æ–°ãƒšãƒ¼ã‚¸
 CALL C_LINE
 FINDELEMENT GSMN_LIST, L_T
 IF RESULT > 0
@@ -450,104 +450,104 @@ L_NEXT = (L_TMP < 0) ? -1 # L_TMP
 
 SELECTCASE L_PAGE
 	CASE 0
-		;- ¢Š«î•ñ:Šî–{
+		;- å¬å–šæƒ…å ±:åŸºæœ¬
 		CALL SUMMONS_DATA_BASIC(L_T)
 ENDSELECT
 DRAWLINE
 
-PRINTFORML ‚±‚ÌƒLƒƒƒ‰‚ðw“ü‚µ‚Ü‚·‚©H
+PRINTFORML ã“ã®ã‚­ãƒ£ãƒ©ã‚’è³¼å…¥ã—ã¾ã™ã‹ï¼Ÿ
 
 PRINTL
 L_CHK=0
 IF L_T == MASTER
 	L_CHK = 0
-	PRINTFORML i¦‚±‚ÌƒLƒƒƒ‰ƒNƒ^[‚ÍƒvƒŒƒCƒ„[ƒLƒƒƒ‰(MASTER)‚Ìˆ×Aw“üo—ˆ‚Ü‚¹‚ñj
+	PRINTFORML ï¼ˆâ€»ã“ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¯ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©(MASTER)ã®ç‚ºã€è³¼å…¥å‡ºæ¥ã¾ã›ã‚“ï¼‰
 ELSEIF L_T == 167
 	L_CHK = 1
-	PRINTFORMLC [1] w“ü‚·‚é
+	PRINTFORMLC [1] è³¼å…¥ã™ã‚‹
 	PRINTL
-ELSEIF GROUPMATCH(L_T, [[ƒLƒƒƒ‰:‚ ‚È‚½‚Ì–º]], [[ƒLƒƒƒ‰:“z—ê‚Ì–º]])
+ELSEIF GROUPMATCH(L_T, [[ã‚­ãƒ£ãƒ©:ã‚ãªãŸã®å¨˜]], [[ã‚­ãƒ£ãƒ©:å¥´éš·ã®å¨˜]])
 	L_CHK = 0
-	PRINTFORML i¦‚±‚ÌƒLƒƒƒ‰ƒNƒ^[‚Íw“üo—ˆ‚Ü‚¹‚ñj
+	PRINTFORML ï¼ˆâ€»ã“ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¯è³¼å…¥å‡ºæ¥ã¾ã›ã‚“ï¼‰
 ELSEIF FINDCHARA(NO, L_T, 0) > -1 
 	L_CHK = 0
-	PRINTFORML i¦‚±‚ÌƒLƒƒƒ‰ƒNƒ^[‚ÍŠ—LÏ‚Ý‚Ìˆ×AV‚½‚Éw“ü‚Ío—ˆ‚Ü‚¹‚ñj
+	PRINTFORML ï¼ˆâ€»ã“ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¯æ‰€æœ‰æ¸ˆã¿ã®ç‚ºã€æ–°ãŸã«è³¼å…¥ã¯å‡ºæ¥ã¾ã›ã‚“ï¼‰
 ELSEIF GSMN_STOCK:L_T > 1 && GSMN_STOCK:L_T < DAY
 	L_CHK = 1
-	SETCOLOR COLOR("ŒQÂ")
-	PRINTFORML i¦‚±‚ÌƒLƒƒƒ‰ƒNƒ^[‚Í’†ŒÃ•i‚Ìˆ×A•\Ž¦‚³‚ê‚Ä‚¢‚éî•ñ‚Æˆá‚¤ê‡‚ª‚ ‚è‚Ü‚·j
+	SETCOLOR COLOR("ç¾¤é’")
+	PRINTFORML ï¼ˆâ€»ã“ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¯ä¸­å¤å“ã®ç‚ºã€è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹æƒ…å ±ã¨é•ã†å ´åˆãŒã‚ã‚Šã¾ã™ï¼‰
 	RESETCOLOR
-	PRINTFORMLC [1] w“ü‚·‚é
+	PRINTFORMLC [1] è³¼å…¥ã™ã‚‹
 	PRINTL
 ELSEIF GSMN_STOCK:L_T
-	SIF FLAG:ƒfƒoƒbƒOƒ‚[ƒh
+	SIF FLAG:ãƒ‡ãƒãƒƒã‚°ãƒ¢ãƒ¼ãƒ‰
 		GOTO DATA_OK
 	L_CHK = 0
-	PRINTFORML i¦‚±‚ÌƒLƒƒƒ‰ƒNƒ^[‚ÍÝŒÉ–³‚µ‚Ìˆ×AV‚½‚Éw“ü‚Ío—ˆ‚Ü‚¹‚ñj
+	PRINTFORML ï¼ˆâ€»ã“ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¯åœ¨åº«ç„¡ã—ã®ç‚ºã€æ–°ãŸã«è³¼å…¥ã¯å‡ºæ¥ã¾ã›ã‚“ï¼‰
 ELSE
 	$DATA_OK
 	L_CHK = 1
-	PRINTFORMLC [1] w“ü‚·‚é
+	PRINTFORMLC [1] è³¼å…¥ã™ã‚‹
 	PRINTL
 ENDIF
 PRINTL
-PRINTFORMLC \@(L_PREV < 0) ? %" " * 16% # [1007]‘O‚ÌƒLƒƒƒ‰\@
-PRINTFORMLC [0]–ß‚é
-PRINTFORMLC \@(L_NEXT < 0) ? %" " * 16% # [1009]ŽŸ‚ÌƒLƒƒƒ‰\@
+PRINTFORMLC \@(L_PREV < 0) ? %" " * 16% # [1007]å‰ã®ã‚­ãƒ£ãƒ©\@
+PRINTFORMLC [0]æˆ»ã‚‹
+PRINTFORMLC \@(L_NEXT < 0) ? %" " * 16% # [1009]æ¬¡ã®ã‚­ãƒ£ãƒ©\@
 PRINTL
 
 ;-----------------------------
-;- ƒRƒ}ƒ“ƒhŽó•t
+;- ã‚³ãƒžãƒ³ãƒ‰å—ä»˜
 ;-----------------------------
 
 $INPUT_LOOP
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
-	;–ß‚é
+	;æˆ»ã‚‹
 	CASE 0
 		REDRAW 1
 		RETURNFORM ARG
 
-	;Ý’è
+	;è¨­å®š
 	CASE 1
 		SIF !L_CHK
 			GOTO ERROR
 
 		IF MONEY < 100
-			;INPUTƒGƒ‰[‘Î‰ž
-			CALL C_INPUT_ERROR("w“ü‚É•K—v‚ÈŽ‘‹à‚ª‘«‚è‚Ü‚¹‚ñ")
+			;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
+			CALL C_INPUT_ERROR("è³¼å…¥ã«å¿…è¦ãªè³‡é‡‘ãŒè¶³ã‚Šã¾ã›ã‚“")
 			GOTO INPUT_LOOP
 		ENDIF
 		MONEY -= 100
 
-		;- ¢Š«:ŽÀs
+		;- å¬å–š:å®Ÿè¡Œ
 		CALL SUMMONS_EXE(L_T)
 
-		PRINTFORMW %CSVNAME(L_T, 0)%‚ðw“ü‚µ‚Ü‚µ‚½B
+		PRINTFORMW %CSVNAME(L_T, 0)%ã‚’è³¼å…¥ã—ã¾ã—ãŸã€‚
 
 		SIF GSMN_STOCK:L_T > 1 && GSMN_STOCK:L_T < DAY
-			CALL ’†ŒÃw“üˆ—, CHARANUM-1
+			CALL ä¸­å¤è³¼å…¥å‡¦ç†, CHARANUM-1
 
 		REDRAW 1
 		RETURN
-	;‘O
+	;å‰
 	CASE 1007
 		SIF L_PREV < 0
 			GOTO ERROR
 		ARG = L_PREV
 
-	;ŽŸ
+	;æ¬¡
 	CASE 1009
 		SIF L_NEXT < 0
 			GOTO ERROR
 		ARG = L_NEXT
 
-	;- ‚»‚Ì‘¼
+	;- ãã®ä»–
 	CASEELSE
 		$ERROR
 		RESULT = L_INPUT
-		;INPUTƒGƒ‰[‘Î‰ž
+		;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP
 ENDSELECT
@@ -558,31 +558,31 @@ RESTART
 ;=================================================
 ;   sub SUMMONS_DATA_BASIC
 ;=================================================
-;   ¢Š«:î•ñ(Šî–{)
+;   å¬å–š:æƒ…å ±(åŸºæœ¬)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @SUMMONS_DATA_BASIC(ARG)
 #DIM L_T
 L_T = ARG
 
-;-- Ð‰î
-PRINTFORML ƒLƒƒƒ‰ƒNƒ^[No.{L_T,3,LEFT}
-PRINTFORM ƒLƒƒƒ‰ƒNƒ^[–¼:%CSVNAME(L_T, 0), 40, LEFT%
-PRINTFORML ogì•i:%CSVCSTR(L_T, GETNUM(CSTR, "ogì•i"))%
+;-- ç´¹ä»‹
+PRINTFORML ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼No.{L_T,3,LEFT}
+PRINTFORM ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼å:%CSVNAME(L_T, 0), 40, LEFT%
+PRINTFORML å‡ºèº«ä½œå“:%CSVCSTR(L_T, GETNUM(CSTR, "å‡ºèº«ä½œå“"))%
 PRINTFORML
 
-;- •\Ž¦:STATUS(‘fŽ¿)
-PRINTFORML ¡ TALENT(‘fŽ¿) ¡
+;- è¡¨ç¤º:STATUS(ç´ è³ª)
+PRINTFORML â–  TALENT(ç´ è³ª) â– 
 CALL INFO_STATUS_TALENT(L_T, 1)
 PRINTL
-;- ˆß‘•:î•ñ
+;- è¡£è£…:æƒ…å ±
 CALL CLOTHES_INFO(L_T, 1)
 PRINTL
 
-;- •\Ž¦:STATUS(Ð‰î)
-PRINTFORML ¡ l•¨Ð‰î ¡
+;- è¡¨ç¤º:STATUS(ç´¹ä»‹)
+PRINTFORML â–  äººç‰©ç´¹ä»‹ â– 
 CALL INFO_STATUS_INTRODUCTION(L_T, 1)
 PRINTL
 
@@ -591,37 +591,37 @@ PRINTL
 ;=================================================
 ;   sub SUMMONS_EXE
 ;=================================================
-;   ¢Š«:ŽÀs
+;   å¬å–š:å®Ÿè¡Œ
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @SUMMONS_EXE(ARG)
 #DIM L_TGT_BAK
 
 L_TGT_BAK = TARGET
 
-;- ‹¤’Ê:ƒLƒƒƒ‰’Ç‰Á
+;- å…±é€š:ã‚­ãƒ£ãƒ©è¿½åŠ 
 CALL C_ADD_CHARA(ARG, 5)
-;“o˜^Ž¸”sŽž
+;ç™»éŒ²å¤±æ•—æ™‚
 SIF RESULT
 	RETURN
 
 TARGET = CHARANUM-1
 
-;- VAR:ƒ^[ƒQƒbƒgÝ’è
+;- VAR:ã‚¿ãƒ¼ã‚²ãƒƒãƒˆè¨­å®š
 CALLF VAR_SET_TARGET(TARGET)
 
-CFLAG:ƒCƒxƒ“ƒg‰Á“ü = 0
+CFLAG:ã‚¤ãƒ™ãƒ³ãƒˆåŠ å…¥ = 0
 
-;ÝŒÉ
+;åœ¨åº«
 SIF !GSMN_STOCK:(NO:TARGET)
 	GSMN_STOCK:(NO:TARGET) =1
 
 SIF L_TGT_BAK > -1
 	TARGET = L_TGT_BAK
 
-;- VAR:ƒŠƒXƒgXV
+;- VAR:ãƒªã‚¹ãƒˆæ›´æ–°
 CALL VAR_MAKE_LIST
 
 

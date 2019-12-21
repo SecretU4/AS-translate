@@ -1,35 +1,35 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CHARACTER_SCOUT.ERB
-;	Facility	:ƒf[ƒ^ƒx[ƒX(EXPUP)B
+;	Facility	:ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹(EXPUP)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E CHARACTER_SCOUT_POS						DB:EXPUPˆÊ’u
+;	ãƒ» CHARACTER_SCOUT_POS						DB:EXPUPä½ç½®
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub CHARACTER_SCOUT_POS
 ;=================================================
-;   DB:EXPUPˆÊ’u
+;   DB:EXPUPä½ç½®
 ;-------------------------------------------------
 ; Input:
-;  ARGS					‘ÎÛ’l
+;  ARGS					å¯¾è±¡å€¤
 ; Output:
-;  RETURNF				ˆÊ’u
+;  RETURNF				ä½ç½®
 ;-------------------------------------------------
 @CHARACTER_SCOUT1(ARG:0)
 #DIM S_LOOP
@@ -46,8 +46,8 @@ CALL CHARACTER_SCOUT2
 
 
 ;-------------------------------------------------
-; –¼‘O@«Ši@‘fŽ¿@ŒoŒ±@Ý’è
-;ƒ‰ƒ“ƒ_ƒ€ƒLƒƒƒ‰‚È‚ç‚Î’Ç‰Á‚µ‚½‚ ‚Æ•K‚¸Žg‚¤‚±‚Æ
+; åå‰ã€€æ€§æ ¼ã€€ç´ è³ªã€€çµŒé¨“ã€€è¨­å®š
+;ãƒ©ãƒ³ãƒ€ãƒ ã‚­ãƒ£ãƒ©ãªã‚‰ã°è¿½åŠ ã—ãŸã‚ã¨å¿…ãšä½¿ã†ã“ã¨
 ;-------------------------------------------------
 @CHARACTER_SCOUT2(ARG:0)
 #DIM L_I
@@ -56,15 +56,15 @@ CALL CHARACTER_SCOUT2
 L_I = CHARANUM -1
 
 ;IF RAND:10 <= 7
-;«•Ê‚ð‘I‚Ñ‚Ü‚·
+;æ€§åˆ¥ã‚’é¸ã³ã¾ã™
 ;ELSE
-;		TALENT:L_I:ƒIƒgƒR = 1
+;		TALENT:L_I:ã‚ªãƒˆã‚³ = 1
 ;ENDIF
 
 ARG:0 = L_I
 
-IF TALENT:L_I:ƒIƒgƒR == 0
-;–¼‘O‚ðÝ’è‚µ‚Ü‚·
+IF TALENT:L_I:ã‚ªãƒˆã‚³ == 0
+;åå‰ã‚’è¨­å®šã—ã¾ã™
 	IF RAND:100 > 80
 		CALL RANDOM_N_LADY(ARG:0)
 	ELSE
@@ -75,15 +75,15 @@ CALL RANDOM_N_MAN(ARG:0)
 ENDIF
 
 
-IF Flag:ˆË—Š_ˆË—ŠŠJŽn == 1
-	S_RACE = RAND:((Flag:ˆË—Š_ˆË—ŠLv/5)+1)
+IF Flag:ä¾é ¼_ä¾é ¼é–‹å§‹ == 1
+	S_RACE = RAND:((Flag:ä¾é ¼_ä¾é ¼Lv/5)+1)
 	SIF S_RACE >= 10
 		S_RACE = 10
-ELSEIF Flag:EP¬”Û == 1
-	S_RACE = RAND:((Flag:EP“Gí—Í/30)+1)
+ELSEIF Flag:EPæˆå¦ == 1
+	S_RACE = RAND:((Flag:EPæ•µæˆ¦åŠ›/30)+1)
 	SIF S_RACE >= 10
 		S_RACE = 10
-ELSEIF Flag:’²¸ƒCƒxƒ“ƒg”Ô† > 0
+ELSEIF Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· > 0
 	S_RACE = RAND:11
 	SIF S_RACE >= 10
 		S_RACE = 10
@@ -92,17 +92,17 @@ ELSE
 		S_RACE = 11
 	ELSEIF RAND:100  >= 95
 		S_RACE = 8
-	ELSEIF !RAND:6 && FLAG:“sŽs_Lv >= 50
+	ELSEIF !RAND:6 && FLAG:éƒ½å¸‚_Lv >= 50
 		S_RACE = 6
-	ELSEIF !RAND:6 && FLAG:•a‰@ >= 20
+	ELSEIF !RAND:6 && FLAG:ç—…é™¢ >= 20
 		S_RACE = 5
-	ELSEIF !RAND:5 && FLAG:Œ¤‹†Ž{Ý >= 20
+	ELSEIF !RAND:5 && FLAG:ç ”ç©¶æ–½è¨­ >= 20
 		S_RACE = 4
-	ELSEIF !RAND:4 && FLAG:•iŽí‰ü—ÇŽ{Ý >= 5 && FLAG:Žx‰‡Z‘î >= 5
+	ELSEIF !RAND:4 && FLAG:å“ç¨®æ”¹è‰¯æ–½è¨­ >= 5 && FLAG:æ”¯æ´ä½å®… >= 5
 		S_RACE = 3
-	ELSEIF !RAND:3 && FLAG:ƒ‰ƒuƒzƒeƒ‹ >= 5 && FLAG:‚‹‰ƒJƒWƒm >= 5 && FLAG:ƒQ[ƒ€ƒZƒ“ƒ^[ >= 5
+	ELSEIF !RAND:3 && FLAG:ãƒ©ãƒ–ãƒ›ãƒ†ãƒ« >= 5 && FLAG:é«˜ç´šã‚«ã‚¸ãƒŽ >= 5 && FLAG:ã‚²ãƒ¼ãƒ ã‚»ãƒ³ã‚¿ãƒ¼ >= 5
 		S_RACE = 2
-	ELSEIF !RAND:2 && FLAG:Šó­Ží•ÛŒìŽ{Ý >= 5 && FLAG:Šw‰€ >= 5
+	ELSEIF !RAND:2 && FLAG:å¸Œå°‘ç¨®ä¿è­·æ–½è¨­ >= 5 && FLAG:å­¦åœ’ >= 5
 		S_RACE = 1
 	ELSE
 		S_RACE = 0
@@ -112,57 +112,57 @@ ENDIF
 
 
 
-IF Flag:ˆË—Š_ƒXƒpƒCƒeƒ‹ìœ == 1
-	TALENT:L_I:ƒCƒŒƒMƒ…ƒ‰[ = 1
-	TALENT:L_I:Žã‚Ý = 1
-ELSEIF Flag:EP¬”Û == 1
-	TALENT:L_I:ŽålŽ‚¿ = 1
-	TALENT:L_I:Žã‚Ý = 1
-	Talent:L_I:”ñˆ— = 1
-	TCVAR:L_I:—š—ð_EXP_ˆ—‘rŽ¸ = 1
-	Talent:L_I:‚`”ñˆ— = 1
-	TCVAR:L_I:—š—ð_EXP_‚`ˆ—‘rŽ¸ = 1
-	EXP:L_I:‚uŒoŒ± = (RAND:200)+100
-	EXP:L_I:‚`ŒoŒ± = (RAND:200)+100
-	EXP:L_I:«ŒðŒoŒ± = (RAND:300)+150
-	EXP:L_I:‹­Š­ŒoŒ± = (RAND:300)+150
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± = (RAND:100)+50
-	EXP:L_I:ƒpƒCƒYƒŠŒoŒ± = (RAND:100)+50
-	CSTR:L_I:‰‚¦‚Á‚¿‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰ƒLƒX‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰¸ˆù‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰ƒtƒFƒ‰‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰‚`‚¦‚Á‚¿‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰â’¸‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰’†o‚µ‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
-	CSTR:L_I:‰oŽY‘ŠŽè–¼ = ‘¼uƒvƒŒƒCƒ„[v
+IF Flag:ä¾é ¼_ã‚¹ãƒ‘ã‚¤ãƒ†ãƒ­é§†é™¤ == 1
+	TALENT:L_I:ã‚¤ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ = 1
+	TALENT:L_I:å¼±ã¿ = 1
+ELSEIF Flag:EPæˆå¦ == 1
+	TALENT:L_I:ä¸»äººæŒã¡ = 1
+	TALENT:L_I:å¼±ã¿ = 1
+	Talent:L_I:éžå‡¦å¥³ = 1
+	TCVAR:L_I:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 1
+	Talent:L_I:ï¼¡éžå‡¦å¥³ = 1
+	TCVAR:L_I:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤± = 1
+	EXP:L_I:ï¼¶çµŒé¨“ = (RAND:200)+100
+	EXP:L_I:ï¼¡çµŒé¨“ = (RAND:200)+100
+	EXP:L_I:æ€§äº¤çµŒé¨“ = (RAND:300)+150
+	EXP:L_I:å¼·å§¦çµŒé¨“ = (RAND:300)+150
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ = (RAND:100)+50
+	EXP:L_I:ãƒ‘ã‚¤ã‚ºãƒªçµŒé¨“ = (RAND:100)+50
+	CSTR:L_I:åˆãˆã£ã¡ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆã‚­ã‚¹ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆç²¾é£²ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆï¼¡ãˆã£ã¡ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆçµ¶é ‚ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆä¸­å‡ºã—ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+	CSTR:L_I:åˆå‡ºç”£ç›¸æ‰‹å = ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
 ENDIF
 
 
 
 
-IF Flag:’²¸ƒCƒxƒ“ƒg”Ô† == 401
-	TALENT:L_I:Œ³«“z—ê = 1
-	Talent:L_I:”ñˆ— = 1
-	TCVAR:L_I:—š—ð_EXP_ˆ—‘rŽ¸ = 1
-	Talent:L_I:‚`”ñˆ— = 1
-	TCVAR:L_I:—š—ð_EXP_‚`ˆ—‘rŽ¸ = 1
-	EXP:L_I:‚uŒoŒ± = (RAND:200)+100
-	EXP:L_I:‚`ŒoŒ± = (RAND:200)+100
-	EXP:L_I:«ŒðŒoŒ± = (RAND:300)+150
-	EXP:L_I:‹­Š­ŒoŒ± = (RAND:300)+150
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± = (RAND:100)+50
-	EXP:L_I:ƒpƒCƒYƒŠŒoŒ± = (RAND:100)+50
-	CSTR:L_I:‰‚¦‚Á‚¿‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰ƒLƒX‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰¸ˆù‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰ƒtƒFƒ‰‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰‚`‚¦‚Á‚¿‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰â’¸‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰’†o‚µ‘ŠŽè–¼ = •s–¾
-	CSTR:L_I:‰oŽY‘ŠŽè–¼ = •s–¾
-ELSEIF Flag:’²¸ƒCƒxƒ“ƒg”Ô† == 400
-	TALENT:L_I:‹Œ¢‘ãl = 1
+IF Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· == 401
+	TALENT:L_I:å…ƒæ€§å¥´éš· = 1
+	Talent:L_I:éžå‡¦å¥³ = 1
+	TCVAR:L_I:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 1
+	Talent:L_I:ï¼¡éžå‡¦å¥³ = 1
+	TCVAR:L_I:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤± = 1
+	EXP:L_I:ï¼¶çµŒé¨“ = (RAND:200)+100
+	EXP:L_I:ï¼¡çµŒé¨“ = (RAND:200)+100
+	EXP:L_I:æ€§äº¤çµŒé¨“ = (RAND:300)+150
+	EXP:L_I:å¼·å§¦çµŒé¨“ = (RAND:300)+150
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ = (RAND:100)+50
+	EXP:L_I:ãƒ‘ã‚¤ã‚ºãƒªçµŒé¨“ = (RAND:100)+50
+	CSTR:L_I:åˆãˆã£ã¡ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆã‚­ã‚¹ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆç²¾é£²ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆï¼¡ãˆã£ã¡ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆçµ¶é ‚ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆä¸­å‡ºã—ç›¸æ‰‹å = ä¸æ˜Ž
+	CSTR:L_I:åˆå‡ºç”£ç›¸æ‰‹å = ä¸æ˜Ž
+ELSEIF Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· == 400
+	TALENT:L_I:æ—§ä¸–ä»£äºº = 1
 ENDIF
 
 
@@ -172,72 +172,72 @@ ENDIF
 ;S_RACE = 12
 
 
-CFLAG:L_I:Zl_Ží‘° = S_RACE
-;Ží‘°‚ÌÝ’è
+CFLAG:L_I:ä½äºº_ç¨®æ— = S_RACE
+;ç¨®æ—ã®è¨­å®š
 
 
 
-SIF Flag:’²¸ƒCƒxƒ“ƒg”Ô† == 500
-	CFLAG:L_I:Zl_Ží‘° = 9
-SIF Flag:’²¸ƒCƒxƒ“ƒg”Ô† == 501
-	CFLAG:L_I:Zl_Ží‘° = 10
+SIF Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· == 500
+	CFLAG:L_I:ä½äºº_ç¨®æ— = 9
+SIF Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· == 501
+	CFLAG:L_I:ä½äºº_ç¨®æ— = 10
 
-SIF Flag:ˆË—Š_ƒCƒX‚©‚ç‚Ì‹ìœˆË—Š == 1
-	CFLAG:L_I:Zl_Ží‘° = 7
+SIF Flag:ä¾é ¼_ã‚¤ã‚¹ã‹ã‚‰ã®é§†é™¤ä¾é ¼ == 1
+	CFLAG:L_I:ä½äºº_ç¨®æ— = 7
 
 
-IF FLAG:Œp³Ží‘° != 0
-	CFLAG:L_I:Zl_Ží‘° = (FLAG:Œp³Ží‘°)-1
+IF FLAG:ç¶™æ‰¿ç¨®æ— != 0
+	CFLAG:L_I:ä½äºº_ç¨®æ— = (FLAG:ç¶™æ‰¿ç¨®æ—)-1
 ENDIF
 
 S_MIND = RAND:10
-;«Ši‚ÌÝ’è4
+;æ€§æ ¼ã®è¨­å®š4
 
 CALL CHARACTER_SCOUT_MIND(ARG:0)
-;«Ši‚ÆŒû’²‚ÌÝ’è
+;æ€§æ ¼ã¨å£èª¿ã®è¨­å®š
 
 CALL Random_Chara_Set(ARG:0)
-;‘fŽ¿‚ÌÝ’è
+;ç´ è³ªã®è¨­å®š
 
 
 CALL CHARACTER_SCOUT_PERSONAL2(ARG:0)
-;Zlî•ñ‚ÌÝ’è
+;ä½äººæƒ…å ±ã®è¨­å®š
 
 CALL CHARACTER_SCOUT_EXTRA(ARG:0)
-;”Y‚Ý‚ÌÝ’è
+;æ‚©ã¿ã®è¨­å®š
 SIF CALLNAME:L_I == ""
 	CALLNAME:L_I = %NAME:L_I%
 
-MAXBASE:L_I:‘Ì—Í = 200
-BASE:L_I:‘Ì—Í = MAXBASE:L_I:‘Ì—Í
-MAXBASE:L_I:â’¸ = FLAG:Å‘å’l_â’¸
-MAXBASE:L_I:ƒ€[ƒh = FLAG:Å‘å”_ƒ€[ƒh
+MAXBASE:L_I:ä½“åŠ› = 200
+BASE:L_I:ä½“åŠ› = MAXBASE:L_I:ä½“åŠ›
+MAXBASE:L_I:çµ¶é ‚ = FLAG:æœ€å¤§å€¤_çµ¶é ‚
+MAXBASE:L_I:ãƒ ãƒ¼ãƒ‰ = FLAG:æœ€å¤§æ•°_ãƒ ãƒ¼ãƒ‰
 
-CFLAG:L_I:Žg—pŒûã = NO:L_I
-CFLAG:L_I:ŠëŒ¯“ú = RAND:6
+CFLAG:L_I:ä½¿ç”¨å£ä¸Š = NO:L_I
+CFLAG:L_I:å±é™ºæ—¥ = RAND:6
 
-FLAG:ŒÂ•Ê”Ô†ƒJƒEƒ“ƒg += 1
-CFLAG:L_I:ŒÂ•Ê”Ô† = FLAG:ŒÂ•Ê”Ô†ƒJƒEƒ“ƒg
+FLAG:å€‹åˆ¥ç•ªå·ã‚«ã‚¦ãƒ³ãƒˆ += 1
+CFLAG:L_I:å€‹åˆ¥ç•ªå· = FLAG:å€‹åˆ¥ç•ªå·ã‚«ã‚¦ãƒ³ãƒˆ
 
 CALL CHARACTER_SCOUT_PROFILE(ARG:0)
-;‰ŠúƒvƒƒtƒB[ƒ‹
+;åˆæœŸãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«
 
 CALL CHARACTER_SCOUT_RPG(ARG:0)
 ;RPG
 
 
 CALL CHARACTER_SCOUT_COSTUME(ARG:0)
-;Ží‘°“Á’¥
+;ç¨®æ—ç‰¹å¾´
 
 
 
 
 
-;ƒLƒƒƒ‰•¨F’†‚ÉƒLƒƒƒ“ƒZƒ‹‚µ‚Ä‚à”Ô†‚ªi‚Þ‚Ì‚ª‹C‚É‚È‚é‚Ì‚Å
-;ƒLƒƒƒ“ƒZƒ‹—p‚ÌŠÖ”
+;ã‚­ãƒ£ãƒ©ç‰©è‰²ä¸­ã«ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã—ã¦ã‚‚ç•ªå·ãŒé€²ã‚€ã®ãŒæ°—ã«ãªã‚‹ã®ã§
+;ã‚­ãƒ£ãƒ³ã‚»ãƒ«ç”¨ã®é–¢æ•°
 @CANCEL_SCOUT(L_C_ID)
 #DIM L_C_ID
-FLAG:ŒÂ•Ê”Ô†ƒJƒEƒ“ƒg --
+FLAG:å€‹åˆ¥ç•ªå·ã‚«ã‚¦ãƒ³ãƒˆ --
 DELCHARA L_C_ID
 
 

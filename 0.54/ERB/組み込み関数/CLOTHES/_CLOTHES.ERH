@@ -1,36 +1,36 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:_CLOTHES.ERH
-;	Facility	:ƒwƒbƒ_ƒtƒ@ƒCƒ‹(ˆß‘•)B
+;	Facility	:ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«(è¡£è£…)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;-----------------------------
-;   ˆß‘•Fƒtƒ‰ƒO—Þ
+;   è¡£è£…ï¼šãƒ•ãƒ©ã‚°é¡ž
 ;-----------------------------
 
-#DEFINE DEFCLOTHE_TYPE_NUM		12 			;ƒ^ƒCƒv”
-#DIMS GCLOTHE_TYPE_NAME,		12			;ƒ^ƒCƒv–¼
+#DEFINE DEFCLOTHE_TYPE_NUM		12 			;ã‚¿ã‚¤ãƒ—æ•°
+#DIMS GCLOTHE_TYPE_NAME,		12			;ã‚¿ã‚¤ãƒ—å
 
 
 ;-----------------------------
-;   ˆß‘•Fƒf[ƒ^
+;   è¡£è£…ï¼šãƒ‡ãƒ¼ã‚¿
 ;-----------------------------
-;—v‘f”‚ð‘S‚Ä“¯‚¶‚É
+;è¦ç´ æ•°ã‚’å…¨ã¦åŒã˜ã«
 
-#DEFINE DEFCLOTHE_NUM			1200		;‘”
+#DEFINE DEFCLOTHE_NUM			1200		;ç·æ•°
 
-;ƒe[ƒuƒ‹
-#DIM  GCLOTHE_ID,				1200		;ƒAƒCƒeƒ€ID
-#DIM  GCLOTHE_PRICE,			1200		;ƒAƒCƒeƒ€‰¿Ši
-#DIMS GCLOTHE_NAME,				1200		;ƒAƒCƒeƒ€–¼(‘SŠp‚XŽšˆÈ“à)
-#DIMS GCLOTHE_EXPLAIN,			1200		;ƒAƒCƒeƒ€à–¾i‘SŠp‚Q‚TŽšˆÈ“àj
-#DIM GCLOTHE_NONSALE,			1200		;ƒAƒCƒeƒ€”ñ”„•iƒtƒ‰ƒO
+;ãƒ†ãƒ¼ãƒ–ãƒ«
+#DIM  GCLOTHE_ID,				1200		;ã‚¢ã‚¤ãƒ†ãƒ ID
+#DIM  GCLOTHE_PRICE,			1200		;ã‚¢ã‚¤ãƒ†ãƒ ä¾¡æ ¼
+#DIMS GCLOTHE_NAME,				1200		;ã‚¢ã‚¤ãƒ†ãƒ å(å…¨è§’ï¼™å­—ä»¥å†…)
+#DIMS GCLOTHE_EXPLAIN,			1200		;ã‚¢ã‚¤ãƒ†ãƒ èª¬æ˜Žï¼ˆå…¨è§’ï¼’ï¼•å­—ä»¥å†…ï¼‰
+#DIM GCLOTHE_NONSALE,			1200		;ã‚¢ã‚¤ãƒ†ãƒ éžå£²å“ãƒ•ãƒ©ã‚°
 

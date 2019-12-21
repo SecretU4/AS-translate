@@ -1,32 +1,32 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SYSTEM.ERB
-;	Facility	:ƒCƒxƒ“ƒgŠÖ”‚ð“Z‚ß‚éB
+;	Facility	:ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°ã‚’çºã‚ã‚‹ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-; *- ƒCƒxƒ“ƒgŠÖ”
+; *- ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°
 ;
-;	E EVENTFIRST						EVENTFIRST
-;	E EVENTLOAD						EVENTLOAD
+;	ãƒ» EVENTFIRST						EVENTFIRST
+;	ãƒ» EVENTLOAD						EVENTLOAD
 ;
 ;===============================================================================
 
 
 ;-------------------------------------------------------------------------------
-;   ƒCƒxƒ“ƒgŠÖ”
+;   ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°
 ;-------------------------------------------------------------------------------
 
 ;=================================================
@@ -34,37 +34,37 @@
 ;=================================================
 ;   EVENTFIRST
 ;-------------------------------------------------
-;  u‚Í‚¶‚ß‚©‚çv‘I‘ðŽž‚Ìˆ—
+;  ã€Œã¯ã˜ã‚ã‹ã‚‰ã€é¸æŠžæ™‚ã®å‡¦ç†
 ;-------------------------------------------------
 @EVENTFIRST
 
-;- SYSTEM:ŠJŽnˆ—(ƒfƒtƒHƒ‹ƒg)
+;- SYSTEM:é–‹å§‹å‡¦ç†(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ)
 CALL SYSTEM_DEFAULT
 
-;- SYSTEM:ŠJŽnˆ—(INI)
+;- SYSTEM:é–‹å§‹å‡¦ç†(INI)
 CALL SYSTEM_INIT
 
 
-;‚ ‚È‚½“o˜^
+;ã‚ãªãŸç™»éŒ²
 DELCHARA 0
 CALL C_ADD_CHARA(0)
 CALL EVENTFIRST2
-Flag:“sŽs_Lv = 1
-Flag:“sŽs_Å‘åSP = 20
-Flag:“sŽs_Å‘åAP = 50
-Flag:“sŽs_Œ»ÝSP = 20
-Flag:“sŽs_Œ»ÝAP = 50
-Flag:“sŽs_Å‘åTP = 10
-Flag:“sŽs_Œ»ÝTP = 10
-Flag:“sŽs_Å‘åKP = 20
-Flag:“sŽs_Œ»ÝKP = 0
-Flag:ƒJƒtƒF_ƒ^[ƒQƒbƒg = -1
+Flag:éƒ½å¸‚_Lv = 1
+Flag:éƒ½å¸‚_æœ€å¤§SP = 20
+Flag:éƒ½å¸‚_æœ€å¤§AP = 50
+Flag:éƒ½å¸‚_ç¾åœ¨SP = 20
+Flag:éƒ½å¸‚_ç¾åœ¨AP = 50
+Flag:éƒ½å¸‚_æœ€å¤§TP = 10
+Flag:éƒ½å¸‚_ç¾åœ¨TP = 10
+Flag:éƒ½å¸‚_æœ€å¤§KP = 20
+Flag:éƒ½å¸‚_ç¾åœ¨KP = 0
+Flag:ã‚«ãƒ•ã‚§_ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ = -1
 
 
 
-PRINTL == •K—vƒf[ƒ^“Ç‚Ýž‚ÝŠ®—¹ ==
+PRINTL == å¿…è¦ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿å®Œäº† ==
 
-;-  EVE:ƒQ[ƒ€ŠJŽn
+;-  EVE:ã‚²ãƒ¼ãƒ é–‹å§‹
 CALL EVENT_GAMESTART
 
 ;=================================================
@@ -80,18 +80,18 @@ CALL EVENT_GAMESTART
 ;=================================================
 ;   EVENTLOAD
 ;-------------------------------------------------
-;  uƒ[ƒhv‘I‘ðŽž‚Ìˆ—
-;  (@TITLE_LOADGAME‚Ì"LOADDATA"–½—ßŽÀs’¼Œã‚É”ò‚ñ‚Å‚­‚é)
+;  ã€Œãƒ­ãƒ¼ãƒ‰ã€é¸æŠžæ™‚ã®å‡¦ç†
+;  (@TITLE_LOADGAMEã®"LOADDATA"å‘½ä»¤å®Ÿè¡Œç›´å¾Œã«é£›ã‚“ã§ãã‚‹)
 ;-------------------------------------------------
 @EVENTLOAD
 
-;- SYSTEM:ŠJŽnˆ—(INI)
+;- SYSTEM:é–‹å§‹å‡¦ç†(INI)
 CALL SYSTEM_INIT
 
-;–`“ª
-PRINTW ƒf[ƒ^‚ðƒ[ƒh‚µ‚Ü‚µ‚½B
+;å†’é ­
+PRINTW ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¾ã—ãŸã€‚
 
-;- VAR:ƒŠƒXƒgXV
+;- VAR:ãƒªã‚¹ãƒˆæ›´æ–°
 CALL VAR_MAKE_LIST
 
 

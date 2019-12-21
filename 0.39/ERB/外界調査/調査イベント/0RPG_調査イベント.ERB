@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;’²¸ƒCƒxƒ“ƒg
+ï»¿;-------------------------------------------------
+;èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @RPG_EVENT_MAIN(ARG)
 #DIM L_INPUT
@@ -7,40 +7,40 @@
 #DIM L_I2
 
 L_I2 = TARGET
-ARG = Flag:’²¸ƒLƒƒƒ‰
+ARG = Flag:èª¿æŸ»ã‚­ãƒ£ãƒ©
 TARGET = ARG
 L_I = ARG
 
 IF RAND:100 > 97
-	IF !RAND:5 && Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ >= 1 && Flag:’²¸[“x >= 30 
-		;‚Â‚¢‚½’¹l
+	IF !RAND:5 && Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ >= 1 && Flag:èª¿æŸ»æ·±åº¦ >= 30 
+		;å‚·ã¤ã„ãŸé³¥äºº
 		CALL RPG_EVENT_500
-	ELSEIF !RAND:4 && Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ >= 3 && Flag:’²¸[“x >= 50 
-		;‹S‚Æ‚Ìo‰ï‚¢
+	ELSEIF !RAND:4 && Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ >= 3 && Flag:èª¿æŸ»æ·±åº¦ >= 50 
+		;é¬¼ã¨ã®å‡ºä¼šã„
 		CALL RPG_EVENT_501
-	ELSEIF !RAND:3 && Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ >= 2 && Flag:’²¸[“x >= 70 
-		;—â“€ƒJƒvƒZƒ‹
+	ELSEIF !RAND:3 && Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ >= 2 && Flag:èª¿æŸ»æ·±åº¦ >= 70 
+		;å†·å‡ã‚«ãƒ—ã‚»ãƒ«
 		CALL RPG_EVENT_400
-	ELSEIF !RAND:2 && Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && CFLAG:L_I:“Á•Ê•ÛŒì == 0 && Flag:ƒCƒxƒ“ƒg—U‰û’† == 0 && CFlag:L_I:Zl_ƒJƒ‹ƒ} >= 40 
-		;f’v
+	ELSEIF !RAND:2 && Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && CFLAG:L_I:ç‰¹åˆ¥ä¿è­· == 0 && Flag:ã‚¤ãƒ™ãƒ³ãƒˆèª˜æ‹ä¸­ == 0 && CFlag:L_I:ä½äºº_ã‚«ãƒ«ãƒž >= 40 
+		;æ‹‰è‡´
 		CALL RPG_EVENT_800
 	ELSE
 	ENDIF
 ENDIF
 
-;ƒAƒCƒeƒ€“üŽèƒCƒxƒ“ƒg
-IF RAND:100 > (95-((FLAG:Žx‰‡_Œã•û‡ŒvHIT+FLAG:Žx‰‡_Œã•û‡ŒvSPD)/8))
-	IF !RAND:3 && Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ >= 1 && Flag:’²¸[“x >= 20 
-		;ŒÃ‘ãˆâ•¨”­Œ©
+;ã‚¢ã‚¤ãƒ†ãƒ å…¥æ‰‹ã‚¤ãƒ™ãƒ³ãƒˆ
+IF RAND:100 > (95-((FLAG:æ”¯æ´_å¾Œæ–¹åˆè¨ˆHIT+FLAG:æ”¯æ´_å¾Œæ–¹åˆè¨ˆSPD)/8))
+	IF !RAND:3 && Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ >= 1 && Flag:èª¿æŸ»æ·±åº¦ >= 20 
+		;å¤ä»£éºç‰©ç™ºè¦‹
 		CALL RPG_EVENT_102
-	ELSEIF !RAND:2 && Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ >= 1 && Flag:’²¸[“x >= 20 && CFLAG:L_I:Zl_‹Z”\_‰ð“Ç > RAND:100
-		;‘•¨‰{——
+	ELSEIF !RAND:2 && Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ >= 1 && Flag:èª¿æŸ»æ·±åº¦ >= 20 && CFLAG:L_I:ä½äºº_æŠ€èƒ½_è§£èª­ > RAND:100
+		;æ›¸ç‰©é–²è¦§
 		CALL RPG_EVENT_101
-	ELSEIF  Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ == 5 && Flag:’²¸[“x >= 20 && RAND:100 > 20
-		;’wå‚Ì‘ƒ’²¸
+	ELSEIF  Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ == 5 && Flag:èª¿æŸ»æ·±åº¦ >= 20 && RAND:100 > 20
+		;èœ˜è››ã®å·£èª¿æŸ»
 		CALL RPG_EVENT_150
-	ELSEIF  Flag:’²¸ƒCƒxƒ“ƒg”­¶’† == 0 && Flag:’²¸‹æˆæ >= 1 && Flag:’²¸[“x >= 50 && CFLAG:L_I:Zl_‹Z”\_Œ®ŠJ‚¯ > RAND:100
-		;ƒQƒmƒ€“üŽè
+	ELSEIF  Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ == 0 && Flag:èª¿æŸ»åŒºåŸŸ >= 1 && Flag:èª¿æŸ»æ·±åº¦ >= 50 && CFLAG:L_I:ä½äºº_æŠ€èƒ½_éµé–‹ã‘ > RAND:100
+		;ã‚²ãƒŽãƒ å…¥æ‰‹
 		CALL RPG_EVENT_100
 	ENDIF
 ENDIF
@@ -54,7 +54,7 @@ TARGET = L_I2
 
 
 ;-------------------------------------------------
-;’²¸ƒCƒxƒ“ƒg I‚í‚èˆ—
+;èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆ çµ‚ã‚ã‚Šå‡¦ç†
 ;-------------------------------------------------
 @RPG_EVENT_MAIN_END(ARG)
 #DIM L_INPUT
@@ -64,8 +64,8 @@ TARGET = L_I2
 
 
 
-Flag:’²¸ƒCƒxƒ“ƒg”­¶’† = 0
-Flag:’²¸ƒCƒxƒ“ƒg”Ô† = 0
+Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ = 0
+Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· = 0
 
 
 

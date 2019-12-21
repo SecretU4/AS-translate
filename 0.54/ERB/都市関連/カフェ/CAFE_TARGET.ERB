@@ -1,6 +1,6 @@
-
+﻿
 ;-------------------------------------------------
-; �i���X�^�[�Q�b�g
+; 喫茶店ターゲット
 ;-------------------------------------------------
 
 @CAFE_TARGET(ARG, ARG:1=0)
@@ -15,13 +15,13 @@ L_INPUT = RESULT
 
 IF L_INPUT != 1000
 	IF TALENT:L_INPUT:NPC == 999 
-		PRINTFORMW NPC�͑I���ł��܂���
+		PRINTFORMW NPCは選択できません
 		GOTO DATA_LIST
 	ELSEIF L_INPUT == 0
-		PRINTFORMW ���Ȃ��͑I���ł��܂���
+		PRINTFORMW あなたは選択できません
 		GOTO DATA_LIST
 	ELSE
-	Flag:�J�t�F_�^�[�Q�b�g = CFlag:L_INPUT:�ʔԍ�
+	Flag:カフェ_ターゲット = CFlag:L_INPUT:個別番号
 	ENDIF
 ENDIF
 

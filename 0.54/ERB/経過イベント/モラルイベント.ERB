@@ -1,22 +1,22 @@
-;-------------------------------------------------
-;�������C�x���g
+﻿;-------------------------------------------------
+;モラルイベント
 ;-------------------------------------------------
 @TURN_EVENT_MORAL
 
 
-;�ی삳��Ă���Z���͖߂�
-SIF CFLAG:���ʕی� != 0
+;保護されている住民は戻す
+SIF CFLAG:特別保護 != 0
 	RETURN
 
 
-IF CFlag:�Z�l�C�x���g�X��_�� > RAND:100
-	IF RAND:100 >= 90 && CFLAG:�Z�l_������ < 0 
+IF CFlag:住人イベント傾向_性 > RAND:100
+	IF RAND:100 >= 90 && CFLAG:住人_モラル < 0 
 		CALL TURN_EVENT_MORAL_BS
-	ELSEIF RAND:100 >= 95 && CFLAG:�Z�l_������ < 0 && TALENT:�w�� && TALENT:�j���� == 0
-		;�����ÁX�Ȃ��N��
+	ELSEIF RAND:100 >= 95 && CFLAG:住人_モラル < 0 && TALENT:学生 && TALENT:男嫌い == 0
+		;興味津々なお年頃
 		CALL TURN_EVENT_MORAL_OTSGR
-	ELSEIF CFLAG:�Z�l_������ < 0 && TALENT:���S�l && CFlag:�Ⴂ�Y�Ɩ��S�l >= 0
-		;�Ⴂ�Y�ɂ͂܂関�S�l
+	ELSEIF CFLAG:住人_モラル < 0 && TALENT:未亡人 && CFlag:若い雄と未亡人 >= 0
+		;若い雄にはまる未亡人
 		CALL TURN_EVENT_MORAL_MBUJN
 	ENDIF
 ENDIF

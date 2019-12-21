@@ -1,26 +1,26 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:RPG_INFO_TARGET_DETAIL.ERB
-;	Facility	:���\���B
+;	Facility	:情報表示。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001	2017/02/17		�u�v					�{�̑�INFO.ERB���璲���p�[�g��p�ɕ���
-;	002	2018/11/14		morph					�{�̑�INFO.ERB�Ƃ̋��ʏ������֐���
+;	001	2017/02/17		「」					本体側INFO.ERBから調査パート専用に分離
+;	002	2018/11/14		morph					本体側INFO.ERBとの共通処理を関数化
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	�E RPG_INFO_TARGET_DETAIL					�O�E�����p���:�^�[�Q�b�g(�ڍ�)
+;	・ RPG_INFO_TARGET_DETAIL					外界調査用情報:ターゲット(詳細)
 ;
 ;===============================================================================
 
@@ -31,11 +31,11 @@
 ;=================================================
 ;   sub RPG_INFO_TARGET_DETAIL
 ;=================================================
-;   �O�E�����p���:�^�[�Q�b�g(�ڍ�)
+;   外界調査用情報:ターゲット(詳細)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
-;  ARG:1				�\���J�e�S���[���敪�t���O(0:�f�t�H���gRPG�\�� 1:�����f�ޗp)
+;  ARG:0				対象キャラ
+;  ARG:1				表示カテゴリー小区分フラグ(0:デフォルトRPG表示 1:強化素材用)
 ;-------------------------------------------------
 @RPG_INFO_TARGET_DETAIL(ARG:0, L_CATE)
 #DIM L_I
@@ -43,7 +43,7 @@
 #DIM L_SEX
 #DIM L_CATE
 #DIMS L_STR
-#DIMS CONST OP_NAME = "NONE", "������", "���l��", "�Z�\"
+#DIMS CONST OP_NAME = "NONE", "強化剤", "超人薬", "技能"
 
 L_I=ARG
 L_SEX = VAR_SEX(L_I)
@@ -51,74 +51,74 @@ L_SEX = VAR_SEX(L_I)
 
 ;PRINTFORM \[No.%TOSTR(NO:L_I),3%\] 
 IF CFlag:(ARG:0):(6800) == 1
-	PRINT �� 
+	PRINT 随 
 ELSEIF CFlag:(ARG:0):(6801) == 1
-	PRINT �� 
+	PRINT 後 
 ELSEIF CFlag:(ARG:0):(6802) == 1
-	PRINT �� 
+	PRINT 回 
 ELSEIF CFlag:(ARG:0):(6803) == 1
-	PRINT �T 
+	PRINT 探 
 ELSE
-	PRINT �@ 
+	PRINT 　 
 ENDIF
 CALL VAR_PRINT_LIST_NAME(L_I)
 
-;VAR:�o�[�o��(��b)
+;VAR:バー出力(基礎)
 ;CALL VAR_BAR_BASE(L_I, 0, 2)
 
-;�����ܗp�t���O�����鎞�c�苭���񐔂�\��
+;強化剤用フラグがある時残り強化回数を表示
 SELECTCASE OP_NAME:L_CATE
-CASE "������"
-	PRINTFORM [�c{LIMIT(100-CFLAG:L_I:�Z�l_������, 0, 999), 3 ,RIGHT}]
-CASE "���l��"
-	PRINTFORM [�c{LIMIT(100-CFLAG:L_I:�Z�l_���l��, 0, 999), 3 ,RIGHT}]
-CASE "�Z�\"
-	PRINTFORM [�c{LIMIT(CFLAG:L_I:�Z�l_�Z�\�|�C���g, 0, 999), 3 ,RIGHT}]
+CASE "強化剤"
+	PRINTFORM [残{LIMIT(100-CFLAG:L_I:住人_強化回数, 0, 999), 3 ,RIGHT}]
+CASE "超人薬"
+	PRINTFORM [残{LIMIT(100-CFLAG:L_I:住人_超人回数, 0, 999), 3 ,RIGHT}]
+CASE "技能"
+	PRINTFORM [残{LIMIT(CFLAG:L_I:住人_技能ポイント, 0, 999), 3 ,RIGHT}]
 CASEELSE
-	PRINTFORM [��{LIMIT(CFLAG:L_I:�Z�l_������, 0, 999), 3 ,RIGHT}]
+	PRINTFORM [勝{LIMIT(CFLAG:L_I:住人_勝利回数, 0, 999), 3 ,RIGHT}]
 ENDSELECT
 
 
-;��b�\�͏o��
-;�̗�
+;基礎能力出力
+;体力
 SETCOLOR 0xbbbbbb
 PRINTFORM [
 RESETCOLOR
 PRINT HP:
-IF (CFlag:L_I:�Z�l_���ݑ̗� <= 0) && (L_I != MASTER)
+IF (CFlag:L_I:住人_現在体力 <= 0) && (L_I != MASTER)
 	SETCOLOR 0xAA0000
-ELSEIF (CFlag:L_I:�Z�l_���ݑ̗�)*4 < CFlag:L_I:�Z�l_�ő�̗�
+ELSEIF (CFlag:L_I:住人_現在体力)*4 < CFlag:L_I:住人_最大体力
 	SETCOLOR 0xFF6600
-ELSEIF (CFlag:L_I:�Z�l_���ݑ̗�)*2 < CFlag:L_I:�Z�l_�ő�̗�
+ELSEIF (CFlag:L_I:住人_現在体力)*2 < CFlag:L_I:住人_最大体力
 	SETCOLOR 0xFFFF00
-ELSEIF	CFlag:L_I:�Z�l_���ݑ̗� != CFlag:L_I:�Z�l_�ő�̗�
+ELSEIF	CFlag:L_I:住人_現在体力 != CFlag:L_I:住人_最大体力
 	SETCOLOR 0x808080
 ENDIF
-PRINTFORM {CFlag:L_I:�Z�l_���ݑ̗�, 3 ,RIGHT}
+PRINTFORM {CFlag:L_I:住人_現在体力, 3 ,RIGHT}
 RESETCOLOR
-PRINTFORM /{CFlag:L_I:�Z�l_�ő�̗�, 3 ,RIGHT}
+PRINTFORM /{CFlag:L_I:住人_最大体力, 3 ,RIGHT}
 SETCOLOR 0xbbbbbb
 PRINTFORM ][
 RESETCOLOR
 
 PRINT SP:
-IF (CFlag:L_I:�Z�l_���݋C�� <= 0) && (L_I != MASTER)
+IF (CFlag:L_I:住人_現在気力 <= 0) && (L_I != MASTER)
 	SETCOLOR 0xAA0000
-ELSEIF (CFlag:L_I:�Z�l_���݋C��)*4 < CFlag:L_I:�Z�l_�ő�C��
+ELSEIF (CFlag:L_I:住人_現在気力)*4 < CFlag:L_I:住人_最大気力
 	SETCOLOR 0xFF6600
-ELSEIF (CFlag:L_I:�Z�l_���݋C��)*2 < CFlag:L_I:�Z�l_�ő�C��
+ELSEIF (CFlag:L_I:住人_現在気力)*2 < CFlag:L_I:住人_最大気力
 	SETCOLOR 0xFFFF00
-ELSEIF	CFlag:L_I:�Z�l_���݋C�� != CFlag:L_I:�Z�l_�ő�C��
+ELSEIF	CFlag:L_I:住人_現在気力 != CFlag:L_I:住人_最大気力
 	SETCOLOR 0x808080
 ENDIF
-PRINTFORM {CFlag:L_I:�Z�l_���݋C��, 3 ,RIGHT}
+PRINTFORM {CFlag:L_I:住人_現在気力, 3 ,RIGHT}
 RESETCOLOR
-PRINTFORM /{CFlag:L_I:�Z�l_�ő�C��, 3 ,RIGHT}
+PRINTFORM /{CFlag:L_I:住人_最大気力, 3 ,RIGHT}
 SETCOLOR 0xbbbbbb
 PRINTFORM ][
 RESETCOLOR
 
-PRINTFORM BRE:{CFlag:L_I:�Z�l_����BRE, 3 ,RIGHT}/{CFlag:L_I:�Z�l_�ő�BRE, 3 ,RIGHT}
+PRINTFORM BRE:{CFlag:L_I:住人_現在BRE, 3 ,RIGHT}/{CFlag:L_I:住人_最大BRE, 3 ,RIGHT}
 SETCOLOR 0xbbbbbb
 PRINTFORM ]
 RESETCOLOR
@@ -127,14 +127,14 @@ CALL INFO_TARGET_WEAPON(L_I, "MAIN")
 CALL INFO_TARGET_WEAPON(L_I, "SUB")
 
 ;-----------------------------
-;-- ������
+;-- 刻印情報
 ;-----------------------------
-;����͒����p�[�g�ɉe�����������Œ����̂ŃR�����g�A�E�g
+;現状は調査パートに影響無さそうで長いのでコメントアウト
 
 ;-----------------------------
-;-- �J�����
+;-- 労役情報
 ;-----------------------------
-;�������݂����Ȃ̂ňꎞ�I�ɃR�����g�A�E�g
+;未実装みたいなので一時的にコメントアウト
 ;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
 
 CALL INFO_TARGET_RELATION(L_I)

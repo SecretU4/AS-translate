@@ -1,49 +1,49 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:COMFxxx.ERB
-;	Facility	:TRAINƒRƒ}ƒ“ƒh(70:ƒ[ƒ^[)B
+;	Facility	:TRAINã‚³ãƒžãƒ³ãƒ‰(70:ãƒ­ãƒ¼ã‚¿ãƒ¼)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E COM_FUNC_GET_NAME_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
-;	E COM_FUNC_ABLE_Xxxx				CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
-;	E COM_FUNC_EXE_Xxxx				ƒRƒ}ƒ“ƒhŽÀs
-;	E COM_FUNC_SRC_Xxxx				ƒRƒ}ƒ“ƒhƒ\[ƒX
-;	E COM_FUNC_TRAIN_MSG_Xxxx			ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
-;	E COM_FUNC_GET_TYPE_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;	ãƒ» COM_FUNC_GET_NAME_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
+;	ãƒ» COM_FUNC_ABLE_Xxxx				CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
+;	ãƒ» COM_FUNC_EXE_Xxxx				ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
+;	ãƒ» COM_FUNC_SRC_Xxxx				ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
+;	ãƒ» COM_FUNC_TRAIN_MSG_Xxxx			ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+;	ãƒ» COM_FUNC_GET_TYPE_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub COM_FUNC_GET_NAME_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 ; Output:
-;  RESULTS				ƒRƒ}ƒ“ƒh–¼Ì
+;  RESULTS				ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 @COM_FUNC_GET_NAME_X70
-RESULTS = ƒ[ƒ^[
+RESULTS = ãƒ­ãƒ¼ã‚¿ãƒ¼
 
 ;=================================================
 ;   sub COM_FUNC_ABLE_Xxxx
 ;=================================================
-;   CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
+;   CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
 ;-------------------------------------------------
 ; Output:
-;  RESULT				^‹U’l
+;  RESULT				çœŸå½å€¤
 ;-------------------------------------------------
 @COM_FUNC_ABLE_X70
 
-;“Á’èƒAƒCƒeƒ€‚ðŠ—L
-SIF !ITEM:ƒ[ƒ^[
+;ç‰¹å®šã‚¢ã‚¤ãƒ†ãƒ ã‚’æ‰€æœ‰
+SIF !ITEM:ãƒ­ãƒ¼ã‚¿ãƒ¼
 	RETURN 0
 
 RETURN 1
@@ -51,7 +51,7 @@ RETURN 1
 ;=================================================
 ;   sub COM_FUNC_EXE_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhŽÀs
+;   ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 ;-------------------------------------------------
 @COM_FUNC_EXE_X70
 #DIM L_P
@@ -64,24 +64,24 @@ L_P = PLAYER
 L_T = TARGET
 
 ;-----------------------------
-;COM•ÊFLAG‚ÌÝ’è
+;COMåˆ¥FLAGã®è¨­å®š
 ;-----------------------------
 
-TEQUIP:L_T:ƒ|ƒCƒ“ƒgˆ¤• = [[TRAIN:ƒ[ƒ^[]]
+TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ„›æ’« = [[TRAIN:ãƒ­ãƒ¼ã‚¿ãƒ¼]]
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 ;-----------------------------
-;‚»‚Ì‘¼‚Ìˆ—
+;ãã®ä»–ã®å‡¦ç†
 ;-----------------------------
 
 
 ;=================================================
 ;   sub COM_FUNC_SRC_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒ\[ƒX
+;   ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
 ;-------------------------------------------------
 @COM_FUNC_SRC_X70
 #DIM L_P
@@ -94,11 +94,11 @@ L_P = PLAYER
 L_T = TARGET
 
 ;-----------------------------
-;COM•ÊFLAG‚ÌÝ’è
+;COMåˆ¥FLAGã®è¨­å®š
 ;-----------------------------
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 LOCAL:0 = 120
@@ -109,21 +109,21 @@ LOCAL:0 = LOCAL:0 * L_TMP / 100
 LOCAL:1 = LOCAL:1 * L_TMP / 100
 
 
-;- ƒ\[ƒX
-SOURCE:L_T:‰õ‚b += LOCAL:0
-SOURCE:L_T:«sˆ× += LOCAL:1
+;- ã‚½ãƒ¼ã‚¹
+SOURCE:L_T:å¿«ï¼£ += LOCAL:0
+SOURCE:L_T:æ€§è¡Œç‚º += LOCAL:1
 
 
 ;-----------------------------
-;ŒoŒ±‚Ìˆ—
+;çµŒé¨“ã®å‡¦ç†
 ;-----------------------------
 
-;- TR:ˆÙ«ˆ¤ŒoŒ±
+;- TR:ç•°æ€§æ„›çµŒé¨“
 CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 
 
 ;-----------------------------
-;‚»‚Ì‘¼‚Ìˆ—
+;ãã®ä»–ã®å‡¦ç†
 ;-----------------------------
 
 
@@ -131,32 +131,32 @@ CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 ;=================================================
 ;   sub COM_FUNC_TRAIN_MSG_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
+;   ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ;-------------------------------------------------
 @COM_FUNC_TRAIN_MSG_X70
 
-PRINTFORM %CALLNAME%‚Ì
-;ƒIƒgƒR
+PRINTFORM %CALLNAME%ã®
+;ã‚ªãƒˆã‚³
 IF !VAR_SEX()
-	;—~î‚ÌPALAMLV3ˆÈã
-	IF (PALAM:—~î >= PALAMLV:3)
-		PRINTL d‚­‚»‚»‚è–u‚Á‚½ƒyƒjƒX‚Ék‚¦‚éƒ[ƒ^[‚ð‰Ÿ‚µ“–‚Ä‚½c
-	;‚»‚êˆÈŠO
+	;æ¬²æƒ…ã®PALAMLV3ä»¥ä¸Š
+	IF (PALAM:æ¬²æƒ… >= PALAMLV:3)
+		PRINTL ç¡¬ãããã‚Šå‹ƒã£ãŸãƒšãƒ‹ã‚¹ã«éœ‡ãˆã‚‹ãƒ­ãƒ¼ã‚¿ãƒ¼ã‚’æŠ¼ã—å½“ã¦ãŸâ€¦
+	;ãã‚Œä»¥å¤–
 	ELSE
-		PRINTL ƒyƒjƒX‚Ék‚¦‚éƒ[ƒ^[‚ð‰Ÿ‚µ“–‚Ä‚½c
+		PRINTL ãƒšãƒ‹ã‚¹ã«éœ‡ãˆã‚‹ãƒ­ãƒ¼ã‚¿ãƒ¼ã‚’æŠ¼ã—å½“ã¦ãŸâ€¦
 	ENDIF
 ELSE
-	;‚Ó‚½‚È‚è{—~î‚ÌPALAMLV3ˆÈã
-	IF TALENT:‚Ó‚½‚È‚è && PALAM:—~î >= PALAMLV:3
-		PRINTL ‚Ê‚©‚é‚ñ‚¾”éO‚Ék‚¦‚éƒ[ƒ^[‚ð‰Ÿ‚µ“–‚Ä‚½c
-	;‚Ó‚½‚È‚è
-	ELSEIF TALENT:‚Ó‚½‚È‚è
-		PRINTL ”éO‚Ék‚¦‚éƒ[ƒ^[‚ð‰Ÿ‚µ“–‚Ä‚½c
-	;—~î‚ÌPALAMLV3ˆÈã
-	ELSEIF PALAM:—~î >= PALAMLV:3
-		PRINTL d‚­ë‚Á‚½ƒNƒŠƒgƒŠƒX‚Ék‚¦‚éƒ[ƒ^[‚ð‰Ÿ‚µ“–‚Ä‚½c
+	;ãµãŸãªã‚Šï¼‹æ¬²æƒ…ã®PALAMLV3ä»¥ä¸Š
+	IF TALENT:ãµãŸãªã‚Š && PALAM:æ¬²æƒ… >= PALAMLV:3
+		PRINTL ã¬ã‹ã‚‹ã‚“ã ç§˜å”‡ã«éœ‡ãˆã‚‹ãƒ­ãƒ¼ã‚¿ãƒ¼ã‚’æŠ¼ã—å½“ã¦ãŸâ€¦
+	;ãµãŸãªã‚Š
+	ELSEIF TALENT:ãµãŸãªã‚Š
+		PRINTL ç§˜å”‡ã«éœ‡ãˆã‚‹ãƒ­ãƒ¼ã‚¿ãƒ¼ã‚’æŠ¼ã—å½“ã¦ãŸâ€¦
+	;æ¬²æƒ…ã®PALAMLV3ä»¥ä¸Š
+	ELSEIF PALAM:æ¬²æƒ… >= PALAMLV:3
+		PRINTL ç¡¬ãå°–ã£ãŸã‚¯ãƒªãƒˆãƒªã‚¹ã«éœ‡ãˆã‚‹ãƒ­ãƒ¼ã‚¿ãƒ¼ã‚’æŠ¼ã—å½“ã¦ãŸâ€¦
 	ELSE
-		PRINTL ƒNƒŠƒgƒŠƒX‚Ék‚¦‚éƒ[ƒ^[‚ð‰Ÿ‚µ“–‚Ä‚½c
+		PRINTL ã‚¯ãƒªãƒˆãƒªã‚¹ã«éœ‡ãˆã‚‹ãƒ­ãƒ¼ã‚¿ãƒ¼ã‚’æŠ¼ã—å½“ã¦ãŸâ€¦
 	ENDIF
 ENDIF
 WAIT
@@ -165,11 +165,11 @@ WAIT
 ;=================================================
 ;   sub COM_FUNC_GET_TYPE_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 ; Output:
-;  RESULT				ƒRƒ}ƒ“ƒhŽí•Ê
+;  RESULT				ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 @COM_FUNC_GET_TYPE_X70
-RETURN [[COMŽí•Ê:“¹‹ïŒn]]
+RETURN [[COMç¨®åˆ¥:é“å…·ç³»]]
 

@@ -1,26 +1,26 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CAFE_LIST_CHARA.ERB
-;	Facility	:‹i’ƒ“X—pƒŠƒXƒgiƒLƒƒƒ‰jB
+;	Facility	:å–«èŒ¶åº—ç”¨ãƒªã‚¹ãƒˆï¼ˆã‚­ãƒ£ãƒ©ï¼‰ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	002		2017/02/17		----					LIST_CHARA.ERB‚©‚çƒJƒtƒF—p‚É•\Ž¦•”•ª‚Ì‚Ý•ª—£
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	002		2017/02/17		----					LIST_CHARA.ERBã‹ã‚‰ã‚«ãƒ•ã‚§ç”¨ã«è¡¨ç¤ºéƒ¨åˆ†ã®ã¿åˆ†é›¢
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	E LIST_CHARA						LIST:ƒLƒƒƒ‰ƒŠƒXƒg
+;	ãƒ» LIST_CHARA						LIST:ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆ
 ;
 ;===============================================================================
 
@@ -31,15 +31,15 @@
 ;=================================================
 ;   sub CAFE_LIST_CHARA
 ;=================================================
-;   LIST:ƒLƒƒƒ‰ƒŠƒXƒg
+;   LIST:ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆ
 ;-------------------------------------------------
 ; Input:
-;  ARGS:0				à–¾•¶
-;  ARG:0				ƒy[ƒWˆÊ’u
-;  ARGS:1				Ä‹A‚µ‚½Û‚ÌƒGƒ‰[ƒƒbƒZ[ƒW
+;  ARGS:0				èª¬æ˜Žæ–‡
+;  ARG:0				ãƒšãƒ¼ã‚¸ä½ç½®
+;  ARGS:1				å†å¸°ã—ãŸéš›ã®ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ; Output:
-;  RESULT:0				ƒLƒƒƒ‰(1000‚Ìê‡‚Í"–ß‚é")
-;  RESULT:1				ƒy[ƒWˆÊ’u
+;  RESULT:0				ã‚­ãƒ£ãƒ©(1000ã®å ´åˆã¯"æˆ»ã‚‹")
+;  RESULT:1				ãƒšãƒ¼ã‚¸ä½ç½®
 ;-------------------------------------------------
 @CAFE_LIST_CHARA(ARGS:0, ARG:0, ARGS:1)
 #DIM L_INPUT
@@ -53,7 +53,7 @@
 #DIMS L_CMSG
 
 ;-----------------------------
-;- ‰Šúˆ—
+;- åˆæœŸå‡¦ç†
 ;-----------------------------
 
 L_INPUT=0
@@ -63,86 +63,86 @@ L_CNT_DATA=0
 L_CNT_PRINT=0
 L_CMSG = %ARGS:0%
 
-; ƒLƒƒƒ‰‘”
+; ã‚­ãƒ£ãƒ©ç·æ•°
 L_CNT_DATA = CHARANUM
 
-; ƒLƒƒƒ‰•\Ž¦”/P
-L_CNT_PRINT = FLAG:’è”_ƒJƒtƒF•\Ž¦”
+; ã‚­ãƒ£ãƒ©è¡¨ç¤ºæ•°/P
+L_CNT_PRINT = FLAG:å®šæ•°_ã‚«ãƒ•ã‚§è¡¨ç¤ºæ•°
 
 
 L_ERR_MSG = %ARGS:1%
 
-IF Flag:’è”_ƒJƒtƒF•\Ž¦” != 1000
+IF Flag:å®šæ•°_ã‚«ãƒ•ã‚§è¡¨ç¤ºæ•° != 1000
 	SIF !INRANGE(L_PAGE, 0, L_CNT_DATA / L_CNT_PRINT)
 		L_PAGE = 0
 ENDIF
 
 ;-----------------------------
-;- ˆ—ŠJŽn
+;- å‡¦ç†é–‹å§‹
 ;-----------------------------
 
 $PRINT_LIST
 	
 
-	;;ƒ‰ƒCƒ“•\Ž¦:Vƒy[ƒW
+	;;ãƒ©ã‚¤ãƒ³è¡¨ç¤º:æ–°ãƒšãƒ¼ã‚¸
 	;CALL C_LINE
-	;PRINTFORML ƒJƒtƒF—pƒLƒƒƒ‰ƒŠƒXƒgo—Í
-	PRINTFORM %ARGS:0%ƒpage.{L_PAGE}„ 
-	PRINTFORML (Œv{L_CNT_DATA-1}l)
+	;PRINTFORML ã‚«ãƒ•ã‚§ç”¨ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆå‡ºåŠ›
+	PRINTFORM %ARGS:0%ï¼œpage.{L_PAGE}ï¼ž 
+	PRINTFORML (è¨ˆ{L_CNT_DATA-1}äºº)
 
 	L_I = 0
 	WHILE 1
 
-		;SET:ŠJŽn’l
+		;SET:é–‹å§‹å€¤
 		SIF L_I < (L_PAGE * L_CNT_PRINT) + 1
 			L_I = (L_PAGE * L_CNT_PRINT) + 1
 
-		IF Flag:’è”_ƒJƒtƒF•\Ž¦” != 1000
-		;ƒy[ƒW”ÍˆÍŠO
+		IF Flag:å®šæ•°_ã‚«ãƒ•ã‚§è¡¨ç¤ºæ•° != 1000
+		;ãƒšãƒ¼ã‚¸ç¯„å›²å¤–
 		SIF L_I - 1 >= ( (L_PAGE + 1) * L_CNT_PRINT)
 			BREAK
 		ENDIF
 
 
-		;- Å‘åƒLƒƒƒ‰”’´‰ß
+		;- æœ€å¤§ã‚­ãƒ£ãƒ©æ•°è¶…éŽ
 		IF L_I >= L_CNT_DATA
 			BREAK
 		ELSE
-			;‚ ‚È‚½‚Í”ñ•\Ž¦
+			;ã‚ãªãŸã¯éžè¡¨ç¤º
 			IF L_I == 0 && L_PAGE == 0
 			ELSE
-			;ƒ}ƒ“ƒVƒ‡ƒ“Žž‚Ìà–¾•¶‚©‚ðŠm”F‚µA“K‡‚©‚Â•”‰®‚ðŽ‚ÂƒLƒƒƒ‰‚Í”Ô†‚ð•t‚¯ƒOƒŒ[‚É
-			IF L_CMSG == "Z‚ÞŽs–¯‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢" && CFLAG:L_I:ƒ}ƒ“ƒVƒ‡ƒ“ID != 0
-				;Z‚ñ‚Å‚¢‚é•”‰®”Ô†‚²‚Æ‚ÉŠÛ•¶Žš‚ðŠ„‚è“–‚Ä(‘SŠp1•¶Žš‚É‘µ‚¦‚½‚¢)
-				SELECTCASE CFLAG:L_I:ƒ}ƒ“ƒVƒ‡ƒ“ID
+			;ãƒžãƒ³ã‚·ãƒ§ãƒ³æ™‚ã®èª¬æ˜Žæ–‡ã‹ã‚’ç¢ºèªã—ã€é©åˆã‹ã¤éƒ¨å±‹ã‚’æŒã¤ã‚­ãƒ£ãƒ©ã¯ç•ªå·ã‚’ä»˜ã‘ã‚°ãƒ¬ãƒ¼ã«
+			IF L_CMSG == "ä½ã‚€å¸‚æ°‘ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„" && CFLAG:L_I:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID != 0
+				;ä½ã‚“ã§ã„ã‚‹éƒ¨å±‹ç•ªå·ã”ã¨ã«ä¸¸æ–‡å­—ã‚’å‰²ã‚Šå½“ã¦(å…¨è§’1æ–‡å­—ã«æƒãˆãŸã„)
+				SELECTCASE CFLAG:L_I:ãƒžãƒ³ã‚·ãƒ§ãƒ³ID
 					CASE 1
-					PRINTFORM ‡@
+					PRINTFORM â‘ 
 					CASE 2
-					PRINTFORM ‡A
+					PRINTFORM â‘¡
 					CASE 3
-					PRINTFORM ‡B
+					PRINTFORM â‘¢
 					CASE 4
-					PRINTFORM ‡C
+					PRINTFORM â‘£
 					CASE 5
-					PRINTFORM ‡D
+					PRINTFORM â‘¤
 					CASE 6
-					PRINTFORM ‡E
+					PRINTFORM â‘¥
 					CASE 7
-					PRINTFORM ‡F
+					PRINTFORM â‘¦
 					CASE 8
-					PRINTFORM ‡G
+					PRINTFORM â‘§
 					CASE 9
-					PRINTFORM ‡H
+					PRINTFORM â‘¨
 					CASE 10
-					PRINTFORM ‡I
+					PRINTFORM â‘©
 				ENDSELECT
-				SETCOLOR COLOR("•šŽš")
+				SETCOLOR COLOR("ä¼å­—")
 			ELSE
-			PRINTFORM @
+			PRINTFORM ã€€
 			ENDIF
 			PRINTFORM [%TOSTR(L_I),3%] 
 
-			;- •\Ž¦:ƒ^[ƒQƒbƒg(Ú×)
+			;- è¡¨ç¤º:ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ(è©³ç´°)
 			CALL CAFE_INFO_TARGET_DETAIL(L_I)
 			PRINTL
 			ENDIF
@@ -151,16 +151,16 @@ $PRINT_LIST
 		L_I += 1
 
 	WEND
-	;‹ós
-	IF Flag:’è”_ƒJƒtƒF•\Ž¦” != 1000
+	;ç©ºè¡Œ
+	IF Flag:å®šæ•°_ã‚«ãƒ•ã‚§è¡¨ç¤ºæ•° != 1000
 	L_PREV = (L_PAGE <= 0) ? 0 # 1
 	L_NEXT = ( L_PAGE >= (L_CNT_DATA / L_CNT_PRINT) ) ? 0 # 1
 
-	PRINTFORM \@(!L_PREV) ? %" " * 16% # [1007]‘O‚Ìƒy[ƒW\@ 
-	;PRINTFORMLC [1000]–ß‚é
-	PRINTFORML \@(!L_NEXT) ? %" " * 16% # [1009]ŽŸ‚Ìƒy[ƒW\@
+	PRINTFORM \@(!L_PREV) ? %" " * 16% # [1007]å‰ã®ãƒšãƒ¼ã‚¸\@ 
+	;PRINTFORMLC [1000]æˆ»ã‚‹
+	PRINTFORML \@(!L_NEXT) ? %" " * 16% # [1009]æ¬¡ã®ãƒšãƒ¼ã‚¸\@
 	SIF STRLENS(L_ERR_MSG)
-		REUSELASTLINE i%L_ERR_MSG%j
+		REUSELASTLINE ï¼ˆ%L_ERR_MSG%ï¼‰
 	ELSE
 	PRINTL
 	ENDIF

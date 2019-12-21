@@ -1,42 +1,42 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:COMMAND_FILTER.ERB
-;	Facility	:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^‰æ–ÊB
+;	Facility	:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿ç”»é¢ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-; *- •\Ž¦Œn
+; *- è¡¨ç¤ºç³»
 ;
-;	E COMMAND_FILTER_MAIN				ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^‰æ–Ê:Žåˆ—
+;	ãƒ» COMMAND_FILTER_MAIN				ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿ç”»é¢:ä¸»å‡¦ç†
 ;
-;	# ŒÂ•Êˆ—
-;	E COMMAND_FILTER_DATA_GET			Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(DATA)
-;	E COMMAND_FILTER_DATA_INVERT		”½“]:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(DATA)
-;	E COMMAND_FILTER_MEMORY_GET		Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
-;	E COMMAND_FILTER_MEMORY_SET		Ý’è:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
+;	# å€‹åˆ¥å‡¦ç†
+;	ãƒ» COMMAND_FILTER_DATA_GET			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(DATA)
+;	ãƒ» COMMAND_FILTER_DATA_INVERT		åè»¢:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(DATA)
+;	ãƒ» COMMAND_FILTER_MEMORY_GET		å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
+;	ãƒ» COMMAND_FILTER_MEMORY_SET		è¨­å®š:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
 ;
 ;===============================================================================
 
 ;-------------------------------------------------------------------------------
-;   •\Ž¦Œn
+;   è¡¨ç¤ºç³»
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub COMMAND_FILTER_MAIN
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^‰æ–Ê:Žåˆ—
+;   ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿ç”»é¢:ä¸»å‡¦ç†
 ;-------------------------------------------------
 @COMMAND_FILTER_MAIN
 #DIM DYNAMIC L_HIT ,1000
@@ -55,54 +55,54 @@
 #DIMS L_STR
 
 ;-----------------------------
-;- ‰Šúˆ—
+;- åˆæœŸå‡¦ç†
 ;-----------------------------
 
-;--‰Šú‰»
+;--åˆæœŸåŒ–
 L_PAGE=0
 L_MODE=0
 L_FILTER=
 
-;•\Ž¦ƒAƒCƒeƒ€”/P
+;è¡¨ç¤ºã‚¢ã‚¤ãƒ†ãƒ æ•°/P
 L_MAX = 60
 
-;- ƒRƒ}ƒ“ƒhÅ‘å”
+;- ã‚³ãƒžãƒ³ãƒ‰æœ€å¤§æ•°
 L_COM_MAX = 900
 
-;- ŽÀsƒ‚[ƒh
+;- å®Ÿè¡Œãƒ¢ãƒ¼ãƒ‰
 L_MODE = 0
 
-;- Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
+;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
 L_FILTER = %COMMAND_FILTER_MEMORY_GET(L_MODE)%
 
 ;-----------------------------
-;- ƒŠƒXƒgì¬
+;- ãƒªã‚¹ãƒˆä½œæˆ
 ;-----------------------------
 VARSET L_LIST
 VARSET L_HIT
 L_CNT=0
 FOR L_I, 0, L_COM_MAX
-	;- Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+	;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 	TRYCCALLFORM COM_FUNC_GET_NAME_X{L_I}
 		L_LIST:L_CNT = L_I
 		L_CNT ++
 		L_HIT:L_I = 1
 	CATCH
-		;- –³‚µ‚Ìê‡‚ÍŽŸ‚Ö
+		;- ç„¡ã—ã®å ´åˆã¯æ¬¡ã¸
 		CONTINUE
 	ENDCATCH
 NEXT
 
 ;-----------------------------
-;- •\Ž¦ŠJŽn
+;- è¡¨ç¤ºé–‹å§‹
 ;-----------------------------
 $PRINT_LIST
 L_INPUT=0
 
-;•\Ž¦:ƒy[ƒWƒwƒbƒ_
+;è¡¨ç¤º:ãƒšãƒ¼ã‚¸ãƒ˜ãƒƒãƒ€
 CALL C_LINE
-PRINTFORML ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^‚ðÝ’è‚µ‚Ü‚·B
-PRINTFORML ƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚µ‚½‚¢ƒRƒ}ƒ“ƒh‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢Bi‘SƒLƒƒƒ‰‹¤’Êj
+PRINTFORML ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿ã‚’è¨­å®šã—ã¾ã™ã€‚
+PRINTFORML ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã—ãŸã„ã‚³ãƒžãƒ³ãƒ‰ã‚’é¸ã‚“ã§ãã ã•ã„ã€‚ï¼ˆå…¨ã‚­ãƒ£ãƒ©å…±é€šï¼‰
 PRINTL
 
 L_CNT=0
@@ -114,25 +114,25 @@ FOR L_I, L_MIN, L_COM_MAX
 		BREAK
 
 	SELECTCASE L_CNT
-		;- Å‘å”‰z‚¦
+		;- æœ€å¤§æ•°è¶Šãˆ
 		CASE IS >= L_MAX
-			;- ŽŸ‚Ìƒy[ƒW—L‚è
+			;- æ¬¡ã®ãƒšãƒ¼ã‚¸æœ‰ã‚Š
 			L_NEXT = 1
 			BREAK
-		;- ”ÍˆÍ“à
+		;- ç¯„å›²å†…
 		CASEELSE
-			;- Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+			;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 			CALLFORM COM_FUNC_GET_NAME_X{L_COM}
 			L_STR = %RESULTS%
 
-			;- Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(DATA)
+			;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(DATA)
 			SIF COMMAND_FILTER_DATA_GET(L_COM,L_FILTER)
-				SETCOLOR COLOR("•šŽš")
+				SETCOLOR COLOR("ä¼å­—")
 			PRINTFORMC %L_STR%[{L_COM,3}]
 			RESETCOLOR
 	ENDSELECT
 
-	;- Œvã
+	;- è¨ˆä¸Š
 	L_CNT ++ 
 
 	SIF (L_CNT % PRINTCPERLINE() ) == 0
@@ -142,9 +142,9 @@ SIF !LINEISEMPTY()
 	PRINTL
 PRINTL
 
-PRINTFORMLC \@(L_PAGE <= 0) ? %" " * 16% # [1007]‘O‚Ìƒy[ƒW\@
-PRINTLC [1000]–ß‚é
-PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]ŽŸ‚Ìƒy[ƒW\@
+PRINTFORMLC \@(L_PAGE <= 0) ? %" " * 16% # [1007]å‰ã®ãƒšãƒ¼ã‚¸\@
+PRINTLC [1000]æˆ»ã‚‹
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]æ¬¡ã®ãƒšãƒ¼ã‚¸\@
 PRINTL 
 PRINTL 
 
@@ -156,17 +156,17 @@ SELECTCASE L_INPUT
 	CASE 1000
 		RETURN 0
 	CASE 0 TO L_COM_MAX - 1
-		;- CHK:ƒqƒbƒg
+		;- CHK:ãƒ’ãƒƒãƒˆ
 		IF !L_HIT:L_INPUT
-			;INPUTƒGƒ‰[‘Î‰ž
+			;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
 			CALL C_INPUT_ERROR
 			GOTO INPUT_LOOP_1
 		ENDIF
 
-		;- ”½“]:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(DATA)
+		;- åè»¢:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(DATA)
 		L_FILTER = %COMMAND_FILTER_DATA_INVERT(L_INPUT,L_FILTER)%
 
-		;- Ý’è:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
+		;- è¨­å®š:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
 		CALLF COMMAND_FILTER_MEMORY_SET(L_MODE,TARGET,L_FILTER)
 
 		GOTO PRINT_LIST
@@ -187,7 +187,7 @@ SELECTCASE L_INPUT
 			GOTO INPUT_LOOP_1
 		ENDIF
 	CASEELSE
-		;INPUTƒGƒ‰[‘Î‰ž
+		;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT
@@ -195,19 +195,19 @@ ENDSELECT
 RESTART
 
 ;-------------------------------------------------------------------------------
-;   ŒÂ•Êˆ—
+;   å€‹åˆ¥å‡¦ç†
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub COMMAND_FILTER_DATA_GET
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(DATA)
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(DATA)
 ;-------------------------------------------------
 ; Input:
-;  ARG					‘ÎÛƒRƒ}ƒ“ƒhNo
-;  ARGS					ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^
+;  ARG					å¯¾è±¡ã‚³ãƒžãƒ³ãƒ‰No
+;  ARGS					ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿
 ; Output:
-;  RETURNF				ƒtƒBƒ‹ƒ^^‹U’l(0:OFF 1:ON)
+;  RETURNF				ãƒ•ã‚£ãƒ«ã‚¿çœŸå½å€¤(0:OFF 1:ON)
 ;-------------------------------------------------
 @COMMAND_FILTER_DATA_GET(ARG=-1,ARGS="")
 #FUNCTION
@@ -221,29 +221,29 @@ ENDIF
 ;=================================================
 ;   sub COMMAND_FILTER_DATA_INVERT
 ;=================================================
-;   ”½“]:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(DATA)
+;   åè»¢:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(DATA)
 ;-------------------------------------------------
 ; Input:
-;  ARG					‘ÎÛƒRƒ}ƒ“ƒhNo
-;  ARGS					ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^
+;  ARG					å¯¾è±¡ã‚³ãƒžãƒ³ãƒ‰No
+;  ARGS					ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿
 ; Output:
-;  RETURNF				ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^
+;  RETURNF				ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿
 ;-------------------------------------------------
 @COMMAND_FILTER_DATA_INVERT(ARG=-1,ARGS="")
 #FUNCTIONS
 
 ;-----------------------------
-;-- ’uŠ·‚µ‚ÄŒ³ƒf[ƒ^‚ðÁ‹ŽA‚Ü‚½‚Í’Ç‰Á‚·‚é
+;-- ç½®æ›ã—ã¦å…ƒãƒ‡ãƒ¼ã‚¿ã‚’æ¶ˆåŽ»ã€ã¾ãŸã¯è¿½åŠ ã™ã‚‹
 ;-----------------------------
 
 LOCALS = /{ARG}/
 IF STRCOUNT(ARGS,LOCALS)
-	;- Á‹Ž
+	;- æ¶ˆåŽ»
 	ARGS = %REPLACE(ARGS, LOCALS, "/")%
 ELSE
 	SIF !STRLENS(ARGS)
 		ARGS = /
-	;- ’Ç‰Á
+	;- è¿½åŠ 
 	ARGS += TOSTR(ARG) + "/"
 ENDIF
 RETURNF ARGS
@@ -251,13 +251,13 @@ RETURNF ARGS
 ;=================================================
 ;   sub COMMAND_FILTER_MEMORY_GET
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒtƒBƒ‹ƒ^(0:‹¤’Ê 1:ƒLƒƒƒ‰•Ê)
-;  ARG:5				‘ÎÛƒLƒƒƒ‰
+;  ARG:0				å¯¾è±¡ãƒ•ã‚£ãƒ«ã‚¿(0:å…±é€š 1:ã‚­ãƒ£ãƒ©åˆ¥)
+;  ARG:5				å¯¾è±¡ã‚­ãƒ£ãƒ©
 ; Output:
-;  RETURNF				ƒtƒBƒ‹ƒ^•¶Žš—ñ
+;  RETURNF				ãƒ•ã‚£ãƒ«ã‚¿æ–‡å­—åˆ—
 ;-------------------------------------------------
 @COMMAND_FILTER_MEMORY_GET(ARG:0=0, ARG:5=-1)
 #FUNCTIONS
@@ -268,11 +268,11 @@ SIF ARG:5 < 0
 ;- CHK
 SELECTCASE ARG:0
 ;-------------------------------------------------
-;	;- 1:ƒLƒƒƒ‰•Ê
+;	;- 1:ã‚­ãƒ£ãƒ©åˆ¥
 ;	CASE 1
-;		RETURNF CSTR:(ARG:5):ƒLƒƒƒ‰•ÊƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^
+;		RETURNF CSTR:(ARG:5):ã‚­ãƒ£ãƒ©åˆ¥ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿
 ;-------------------------------------------------
-	;- ‚»‚Ì‘¼
+	;- ãã®ä»–
 	CASEELSE
 		RETURNF GVAR_COM_FILTER
 ENDSELECT
@@ -281,12 +281,12 @@ ENDSELECT
 ;=================================================
 ;   sub COMMAND_FILTER_MEMORY_SET
 ;=================================================
-;   Ý’è:ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^(‹L‰¯—Ìˆæ)
+;   è¨­å®š:ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿(è¨˜æ†¶é ˜åŸŸ)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒtƒBƒ‹ƒ^(0:‹¤’Ê 1:ƒLƒƒƒ‰•Ê)
-;  ARG:5				‘ÎÛƒLƒƒƒ‰
-;  ARGS					ƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^
+;  ARG:0				å¯¾è±¡ãƒ•ã‚£ãƒ«ã‚¿(0:å…±é€š 1:ã‚­ãƒ£ãƒ©åˆ¥)
+;  ARG:5				å¯¾è±¡ã‚­ãƒ£ãƒ©
+;  ARGS					ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿
 ;-------------------------------------------------
 @COMMAND_FILTER_MEMORY_SET(ARG:0=0, ARG:5=-1,ARGS="")
 #FUNCTION
@@ -297,11 +297,11 @@ SIF ARG:5 < 0
 ;- CHK
 SELECTCASE ARG:0
 ;-------------------------------------------------
-;	;- 1:ƒLƒƒƒ‰•Ê
+;	;- 1:ã‚­ãƒ£ãƒ©åˆ¥
 ;	CASE 1
-;		CSTR:(ARG:5):ƒLƒƒƒ‰•ÊƒRƒ}ƒ“ƒhƒtƒBƒ‹ƒ^ = %ARGS%
+;		CSTR:(ARG:5):ã‚­ãƒ£ãƒ©åˆ¥ã‚³ãƒžãƒ³ãƒ‰ãƒ•ã‚£ãƒ«ã‚¿ = %ARGS%
 ;-------------------------------------------------
-	;- ‚»‚Ì‘¼
+	;- ãã®ä»–
 	CASEELSE
 		GVAR_COM_FILTER = %ARGS%
 ENDSELECT

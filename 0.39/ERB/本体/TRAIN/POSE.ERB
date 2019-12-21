@@ -1,64 +1,64 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:POSE.ERB
-;	Facility	:POSEŠÖ˜Aˆ—B
-;				 Žp¨§ŒäŠÖ˜A‚Ìˆ—‚ð“Z‚ß‚éB
+;	Facility	:POSEé–¢é€£å‡¦ç†ã€‚
+;				 å§¿å‹¢åˆ¶å¾¡é–¢é€£ã®å‡¦ç†ã‚’çºã‚ã‚‹ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-; *- POSEŠÖ˜A
+; *- POSEé–¢é€£
 ;
-;	E POSE_CLEAR						POSE:‰Šú‰»
-;	E POSE_SET							POSE:Ý’è
-;	E POSE_RESET						POSE:ƒŠƒZƒbƒg
+;	ãƒ» POSE_CLEAR						POSE:åˆæœŸåŒ–
+;	ãƒ» POSE_SET							POSE:è¨­å®š
+;	ãƒ» POSE_RESET						POSE:ãƒªã‚»ãƒƒãƒˆ
 ;
 ;===============================================================================
 
 ;-------------------------------------------------------------------------------
-;   POSEŠÖ˜A
+;   POSEé–¢é€£
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub POSE_CLEAR
 ;=================================================
-;   POSE:‰Šú‰»
+;   POSE:åˆæœŸåŒ–
 ;-------------------------------------------------
 ; Input:
-;  ARG					‘ÎÛƒLƒƒƒ‰
+;  ARG					å¯¾è±¡ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @POSE_CLEAR(ARG)
 #DIM L_P
 
 L_P = ARG
 
-TEQUIP:L_P:ƒyƒjƒXè—LŽÒ‚P	= [[ƒyƒjƒXè—LŽÒ:–³‚µ]]
-TEQUIP:L_P:ƒyƒjƒXè—LŽÒ‚Q	= [[ƒyƒjƒXè—LŽÒ:–³‚µ]]
-TEQUIP:L_P:ƒyƒjƒXè—L•”ˆÊ‚P	= [[è—L•”ˆÊ:–³‚µ]]
-TEQUIP:L_P:ƒyƒjƒXè—L•”ˆÊ‚Q	= [[è—L•”ˆÊ:–³‚µ]]
+TEQUIP:L_P:ãƒšãƒ‹ã‚¹å æœ‰è€…ï¼‘	= [[ãƒšãƒ‹ã‚¹å æœ‰è€…:ç„¡ã—]]
+TEQUIP:L_P:ãƒšãƒ‹ã‚¹å æœ‰è€…ï¼’	= [[ãƒšãƒ‹ã‚¹å æœ‰è€…:ç„¡ã—]]
+TEQUIP:L_P:ãƒšãƒ‹ã‚¹å æœ‰éƒ¨ä½ï¼‘	= [[å æœ‰éƒ¨ä½:ç„¡ã—]]
+TEQUIP:L_P:ãƒšãƒ‹ã‚¹å æœ‰éƒ¨ä½ï¼’	= [[å æœ‰éƒ¨ä½:ç„¡ã—]]
 
 
 ;=================================================
 ;   sub POSE_SET
 ;=================================================
-;   POSE:Ý’è
+;   POSE:è¨­å®š
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛƒLƒƒƒ‰
-;  ARG:1				è—L•”ˆÊ
-;  ARG:2				è—L˜A”Ô
-;  ARG:3				ŽÀsƒLƒƒƒ‰
+;  ARG:0				å¯¾è±¡ã‚­ãƒ£ãƒ©
+;  ARG:1				å æœ‰éƒ¨ä½
+;  ARG:2				å æœ‰é€£ç•ª
+;  ARG:3				å®Ÿè¡Œã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @POSE_SET(ARG:0, ARG:1, ARG:2=1, ARG:3=-1)
 #DIM L_P
@@ -68,49 +68,49 @@ TEQUIP:L_P:ƒyƒjƒXè—L•”ˆÊ‚Q	= [[è—L•”ˆÊ:–³‚µ]]
 L_P = (ARG:3 == -1) ? PLAYER # ARG:3
 L_T = ARG:0
 IF ARG:2 == 1
-	L_KEY = ‚P
+	L_KEY = ï¼‘
 ELSE
-	L_KEY = ‚Q
+	L_KEY = ï¼’
 ENDIF
 
 ;- SET
-TEQUIP:L_P:@"ƒyƒjƒXè—LŽÒ%L_KEY%"		= L_T
-TEQUIP:L_P:@"ƒyƒjƒXè—L•”ˆÊ%L_KEY%"		= ARG:1
+TEQUIP:L_P:@"ãƒšãƒ‹ã‚¹å æœ‰è€…%L_KEY%"		= L_T
+TEQUIP:L_P:@"ãƒšãƒ‹ã‚¹å æœ‰éƒ¨ä½%L_KEY%"		= ARG:1
 
 
 ;=================================================
 ;   sub POSE_RESET
 ;=================================================
-;   POSE:ƒŠƒZƒbƒg
+;   POSE:ãƒªã‚»ãƒƒãƒˆ
 ;-------------------------------------------------
 ; Input:
-;  ARGS					ƒ‚[ƒh("‚u", "‚`", "‚o")
+;  ARGS					ãƒ¢ãƒ¼ãƒ‰("ï¼¶", "ï¼¡", "ï¼°")
 ;-------------------------------------------------
 @POSE_RESET(ARGS)
 #DIM L_I
 #DIM L_T
 
-;- ‘S‘Ì’²®
+;- å…¨ä½“èª¿æ•´
 FOR L_I, 0, DEFTR_PL_NUM
 	L_T = GTR_PL:L_I
 	SIF L_T < 0
 		BREAK
 
 	SELECTCASE ARGS
-		CASE "‚u"
-			;- «Œð’†‚ÌƒLƒƒƒ‰‚ÍƒŠƒZƒbƒg
-			TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð = [[TRAIN:–³‚µ]]
-			SIF (TFLAG:ƒƒCƒ“ƒ^[ƒQƒbƒg == L_T)
-				TEQUIP:L_T:‚uŠí‹ï = 0
-		CASE "‚`"
-			;- «Œð’†‚ÌƒLƒƒƒ‰‚ÍƒŠƒZƒbƒg
-			TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð = [[TRAIN:–³‚µ]]
-			SIF (TFLAG:ƒƒCƒ“ƒ^[ƒQƒbƒg == L_T)
-				TEQUIP:L_T:‚`Ší‹ï = 0
-		CASE "‚o"
-			;- «Œð’†‚ÌƒLƒƒƒ‰‚ÍƒŠƒZƒbƒg
-			TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð = [[TRAIN:–³‚µ]]
-		;ã‹LˆÈŠO
+		CASE "ï¼¶"
+			;- æ€§äº¤ä¸­ã®ã‚­ãƒ£ãƒ©ã¯ãƒªã‚»ãƒƒãƒˆ
+			TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = [[TRAIN:ç„¡ã—]]
+			SIF (TFLAG:ãƒ¡ã‚¤ãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ == L_T)
+				TEQUIP:L_T:ï¼¶å™¨å…· = 0
+		CASE "ï¼¡"
+			;- æ€§äº¤ä¸­ã®ã‚­ãƒ£ãƒ©ã¯ãƒªã‚»ãƒƒãƒˆ
+			TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = [[TRAIN:ç„¡ã—]]
+			SIF (TFLAG:ãƒ¡ã‚¤ãƒ³ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ == L_T)
+				TEQUIP:L_T:ï¼¡å™¨å…· = 0
+		CASE "ï¼°"
+			;- æ€§äº¤ä¸­ã®ã‚­ãƒ£ãƒ©ã¯ãƒªã‚»ãƒƒãƒˆ
+			TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = [[TRAIN:ç„¡ã—]]
+		;ä¸Šè¨˜ä»¥å¤–
 		CASEELSE
 			BREAK
 	ENDSELECT

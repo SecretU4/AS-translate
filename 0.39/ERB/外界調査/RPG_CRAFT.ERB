@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;ƒNƒ‰ƒtƒg
+ï»¿;-------------------------------------------------
+;ã‚¯ãƒ©ãƒ•ãƒˆ
 ;-------------------------------------------------
 @RPG_CRAFT
 #DIM L_INPUT
@@ -14,13 +14,13 @@ I_S = 0
 
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML ƒNƒ‰ƒtƒg“à—e‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+PRINTFORML ã‚¯ãƒ©ãƒ•ãƒˆå†…å®¹ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 DRAWLINE
-PRINTFORML [0] ‹­‰»Ü¶¬
-PRINTFORML [1] ’´l–ò¶¬
+PRINTFORML [0] å¼·åŒ–å‰¤ç”Ÿæˆ
+PRINTFORML [1] è¶…äººè–¬ç”Ÿæˆ
 PRINTFORML 
 PRINTFORML 
-PRINTFORML [999] ‚â‚ß‚é
+PRINTFORML [999] ã‚„ã‚ã‚‹
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
@@ -28,52 +28,52 @@ CASE 0
 	$INPUT_LOOP2
 	CLEARLINE LINECOUNT
 	DRAWLINE
-	PRINTFORML ¶¬‚·‚é‹­‰»Ü‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+	PRINTFORML ç”Ÿæˆã™ã‚‹å¼·åŒ–å‰¤ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 	DRAWLINE
-	;5ŒÂ 10ŒÂ ‘S‘fÞ“Š“ü‚Ì‘I‘ðŽˆ‚ð’Ç‰Á
-	PRINTFORM [0] ‹­‰»Ü(HP) (ŠŽ”:{Flag:(2800) , 3 , RIGHT})@(—ì–Ø~5Á”ï)(ŠŽ”:{Flag:(2100) , 3 , RIGHT}) 
+	;5å€‹ 10å€‹ å…¨ç´ ææŠ•å…¥ã®é¸æŠžè‚¢ã‚’è¿½åŠ 
+	PRINTFORM [0] å¼·åŒ–å‰¤(HP) (æ‰€æŒæ•°:{Flag:(2800) , 3 , RIGHT})ã€€(éœŠæœ¨Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2100) , 3 , RIGHT}) 
 	PRINTFORM [10] x5 
 	PRINTFORML [20] x10
-	PRINTFORM [1] ‹­‰»Ü(SP) (ŠŽ”:{Flag:(2801) , 3 , RIGHT})@(—ìÎ~5Á”ï)(ŠŽ”:{Flag:(2101) , 3 , RIGHT}) 
+	PRINTFORM [1] å¼·åŒ–å‰¤(SP) (æ‰€æŒæ•°:{Flag:(2801) , 3 , RIGHT})ã€€(éœŠçŸ³Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2101) , 3 , RIGHT}) 
 	PRINTFORM [11] x5 
 	PRINTFORML [21] x10
-	PRINTFORM [2] ‹­‰»Ü(ATK)(ŠŽ”:{Flag:(2802) , 3 , RIGHT})@(—ì…~5Á”ï)(ŠŽ”:{Flag:(2102) , 3 , RIGHT}) 
+	PRINTFORM [2] å¼·åŒ–å‰¤(ATK)(æ‰€æŒæ•°:{Flag:(2802) , 3 , RIGHT})ã€€(éœŠæ°´Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2102) , 3 , RIGHT}) 
 	PRINTFORM [12] x5 
 	PRINTFORML [22] x10
-	PRINTFORM [3] ‹­‰»Ü(DEF)(ŠŽ”:{Flag:(2803) , 3 , RIGHT})@(‹@ŠB~5Á”ï)(ŠŽ”:{Flag:(2103) , 3 , RIGHT}) 
+	PRINTFORM [3] å¼·åŒ–å‰¤(DEF)(æ‰€æŒæ•°:{Flag:(2803) , 3 , RIGHT})ã€€(æ©Ÿæ¢°Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2103) , 3 , RIGHT}) 
 	PRINTFORM [13] x5 
 	PRINTFORML [23] x10
-	PRINTFORM [4] ‹­‰»Ü(HIT)(ŠŽ”:{Flag:(2804) , 3 , RIGHT})@(ŒŒ‰t~5Á”ï)(ŠŽ”:{Flag:(2104) , 3 , RIGHT}) 
+	PRINTFORM [4] å¼·åŒ–å‰¤(HIT)(æ‰€æŒæ•°:{Flag:(2804) , 3 , RIGHT})ã€€(è¡€æ¶²Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2104) , 3 , RIGHT}) 
 	PRINTFORM [14] x5 
 	PRINTFORML [24] x10
-	PRINTFORM [5] ‹­‰»Ü(SPD)(ŠŽ”:{Flag:(2805) , 3 , RIGHT})@(S‘Ÿ~5Á”ï)(ŠŽ”:{Flag:(2105) , 3 , RIGHT}) 
+	PRINTFORM [5] å¼·åŒ–å‰¤(SPD)(æ‰€æŒæ•°:{Flag:(2805) , 3 , RIGHT})ã€€(å¿ƒè‡“Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2105) , 3 , RIGHT}) 
 	PRINTFORM [15] x5 
 	PRINTFORML [25] x10
-	PRINTFORML [100] ‘S‘fÞŽg—p
+	PRINTFORML [100] å…¨ç´ æä½¿ç”¨
 	PRINTFORML 
-	PRINTFORML [999] ‚â‚ß‚é
+	PRINTFORML [999] ã‚„ã‚ã‚‹
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 999
 		GOTO INPUT_LOOP
 	CASE 100
-		PRINTFORML ŠŽ‚µ‚Ä‚¢‚é‘S‚Ä‚Ì‘fÞ‚©‚çì‚ê‚é‚¾‚¯‚Ì‹­‰»Ü‚ð¶¬‚µ‚Ü‚·
-		PRINTFORML ‚æ‚ë‚µ‚¢‚Å‚·‚©H
-		PRINTFORML [0] ‚Í‚¢
-		PRINTFORML [1] ‚¢‚¢‚¦
+		PRINTFORML æ‰€æŒã—ã¦ã„ã‚‹å…¨ã¦ã®ç´ æã‹ã‚‰ä½œã‚Œã‚‹ã ã‘ã®å¼·åŒ–å‰¤ã‚’ç”Ÿæˆã—ã¾ã™
+		PRINTFORML ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+		PRINTFORML [0] ã¯ã„
+		PRINTFORML [1] ã„ã„ãˆ
 		INPUT
 		L_INPUT = RESULT
 			SELECTCASE L_INPUT
 			CASE 0
-			;ƒ‹[ƒv—p‰Šú‰»ˆ—
+			;ãƒ«ãƒ¼ãƒ—ç”¨åˆæœŸåŒ–å‡¦ç†
 				L_CL = 0
-				;Œ³‘fÞ‚ÌŒÂ”‚ð5‚ÅŠ„‚Á‚½®”•ª‹­‰»Ü‚ð“üŽè‚µA‘fÞ‚ðÁ”ï
+				;å…ƒç´ æã®å€‹æ•°ã‚’5ã§å‰²ã£ãŸæ•´æ•°åˆ†å¼·åŒ–å‰¤ã‚’å…¥æ‰‹ã—ã€ç´ æã‚’æ¶ˆè²»
 				REPEAT 6
 					L_CV = Flag:(2100+L_CL) / 5
 					Flag:(2800+L_CL) += L_CV
 					Flag:(2100+L_CL) -= 5 * L_CV
-					PRINTFORML %FLAGNAME:(2100+L_CL)%‚ð{5 * L_CV , 3 , RIGHT}ŒÂÁ”ï‚µ‚Ä %FLAGNAME:(2800+L_CL)%‚ð{L_CV , 3 , RIGHT}ŒÂ¶¬‚µ‚Ü‚µ‚½B
+					PRINTFORML %FLAGNAME:(2100+L_CL)%ã‚’{5 * L_CV , 3 , RIGHT}å€‹æ¶ˆè²»ã—ã¦ %FLAGNAME:(2800+L_CL)%ã‚’{L_CV , 3 , RIGHT}å€‹ç”Ÿæˆã—ã¾ã—ãŸã€‚
 					L_CL += 1
 				REND
 				PRINTW
@@ -82,93 +82,93 @@ CASE 0
 				GOTO INPUT_LOOP2
 			ENDSELECT
 	CASEELSE
-		;ì¬ŒÂ”ƒ`ƒFƒbƒN
+		;ä½œæˆå€‹æ•°ãƒã‚§ãƒƒã‚¯
 		IF L_INPUT >= 20 && L_INPUT < 26
-			;10ŒÂ¶¬—pˆ—
+			;10å€‹ç”Ÿæˆç”¨å‡¦ç†
 			IF Flag:(2080+L_INPUT) >= 50
 				Flag:(2080+L_INPUT) -= 50
 				Flag:(2780+L_INPUT) += 10
-				PRINTFORMW %FlagNAME:(2780+L_INPUT)%‚ð10ŒÂ¶¬‚µ‚Ü‚µ‚½B
+				PRINTFORMW %FlagNAME:(2780+L_INPUT)%ã‚’10å€‹ç”Ÿæˆã—ã¾ã—ãŸã€‚
 				GOTO INPUT_LOOP2
 			ELSE 
-				PRINTFORMW ‘fÞ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ç´ æãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 			ENDIF
 		ELSEIF L_INPUT >= 10 && L_INPUT < 16
-			;5ŒÂ¶¬—pˆ—
+			;5å€‹ç”Ÿæˆç”¨å‡¦ç†
 			IF Flag:(2090+L_INPUT) >= 25
 				Flag:(2090+L_INPUT) -= 25
 				Flag:(2790+L_INPUT) += 5
-				PRINTFORMW %FlagNAME:(2790+L_INPUT)%‚ð5ŒÂ¶¬‚µ‚Ü‚µ‚½B
+				PRINTFORMW %FlagNAME:(2790+L_INPUT)%ã‚’5å€‹ç”Ÿæˆã—ã¾ã—ãŸã€‚
 				GOTO INPUT_LOOP2
 			ELSE 
-				PRINTFORMW ‘fÞ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ç´ æãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 			ENDIF
 		ELSEIF L_INPUT >= 0 && L_INPUT < 6
-			;1ŒÂ¶¬—pˆ—
+			;1å€‹ç”Ÿæˆç”¨å‡¦ç†
 			IF Flag:(2100+L_INPUT) >= 5
 				Flag:(2100+L_INPUT) -= 5
 				Flag:(2800+L_INPUT) += 1
-				PRINTFORMW %FlagNAME:(2800+L_INPUT)%‚ð¶¬‚µ‚Ü‚µ‚½B
+				PRINTFORMW %FlagNAME:(2800+L_INPUT)%ã‚’ç”Ÿæˆã—ã¾ã—ãŸã€‚
 				GOTO INPUT_LOOP2
 			ELSE 
-				PRINTFORMW ‘fÞ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ç´ æãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 			ENDIF
 		ELSE
 		GOTO INPUT_LOOP2
 		ENDIF
 	ENDSELECT
-	;ƒ‹[ƒvŠK‘w‚ðˆê‚ÂŽè‘O‚É‚µ‚Ü‚µ‚½
+	;ãƒ«ãƒ¼ãƒ—éšŽå±¤ã‚’ä¸€ã¤æ‰‹å‰ã«ã—ã¾ã—ãŸ
 	GOTO INPUT_LOOP2
 CASE 1
 	$INPUT_LOOP3
 	CLEARLINE LINECOUNT
 	DRAWLINE
-	PRINTFORML ¶¬‚·‚é’´l–ò‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+	PRINTFORML ç”Ÿæˆã™ã‚‹è¶…äººè–¬ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 	DRAWLINE
-	;5ŒÂ 10ŒÂ ‘S‘fÞ“Š“ü‚Ì‘I‘ðŽˆ‚ð’Ç‰Á
-	PRINTFORM [0] ’´l–ò(HP) (ŠŽ”:{Flag:(2810) , 3 , RIGHT})@(_–Ø~5Á”ï)(ŠŽ”:{Flag:(2110) , 3 , RIGHT}) 
+	;5å€‹ 10å€‹ å…¨ç´ ææŠ•å…¥ã®é¸æŠžè‚¢ã‚’è¿½åŠ 
+	PRINTFORM [0] è¶…äººè–¬(HP) (æ‰€æŒæ•°:{Flag:(2810) , 3 , RIGHT})ã€€(ç¥žæœ¨Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2110) , 3 , RIGHT}) 
 	PRINTFORM [10] x5 
 	PRINTFORML [20] x10
-	PRINTFORM [1] ’´l–ò(SP) (ŠŽ”:{Flag:(2811) , 3 , RIGHT})@(–‚Î~5Á”ï)(ŠŽ”:{Flag:(2111) , 3 , RIGHT}) 
+	PRINTFORM [1] è¶…äººè–¬(SP) (æ‰€æŒæ•°:{Flag:(2811) , 3 , RIGHT})ã€€(é­”çŸ³Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2111) , 3 , RIGHT}) 
 	PRINTFORM [11] x5 
 	PRINTFORML [21] x10
-	PRINTFORM [2] ’´l–ò(ATK)(ŠŽ”:{Flag:(2812) , 3 , RIGHT})@(¹…~5Á”ï)(ŠŽ”:{Flag:(2112) , 3 , RIGHT}) 
+	PRINTFORM [2] è¶…äººè–¬(ATK)(æ‰€æŒæ•°:{Flag:(2812) , 3 , RIGHT})ã€€(è–æ°´Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2112) , 3 , RIGHT}) 
 	PRINTFORM [12] x5 
 	PRINTFORML [22] x10
-	PRINTFORM [3] ’´l–ò(DEF)(ŠŽ”:{Flag:(2813) , 3 , RIGHT})@(•ó‹ï~5Á”ï)(ŠŽ”:{Flag:(2113) , 3 , RIGHT}) 
+	PRINTFORM [3] è¶…äººè–¬(DEF)(æ‰€æŒæ•°:{Flag:(2813) , 3 , RIGHT})ã€€(å®å…·Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2113) , 3 , RIGHT}) 
 	PRINTFORM [13] x5 
 	PRINTFORML [23] x10
-	PRINTFORM [4] ’´l–ò(HIT)(ŠŽ”:{Flag:(2814) , 3 , RIGHT})@(‹Ÿ•¨~5Á”ï)(ŠŽ”:{Flag:(2114) , 3 , RIGHT}) 
+	PRINTFORM [4] è¶…äººè–¬(HIT)(æ‰€æŒæ•°:{Flag:(2814) , 3 , RIGHT})ã€€(ä¾›ç‰©Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2114) , 3 , RIGHT}) 
 	PRINTFORM [14] x5 
 	PRINTFORML [24] x10
-	PRINTFORM [5] ’´l–ò(SPD)(ŠŽ”:{Flag:(2815) , 3 , RIGHT})@(°é®~5Á”ï)(ŠŽ”:{Flag:(2115) , 3 , RIGHT}) 
+	PRINTFORM [5] è¶…äººè–¬(SPD)(æ‰€æŒæ•°:{Flag:(2815) , 3 , RIGHT})ã€€(é­‚é­„Ã—5æ¶ˆè²»)(æ‰€æŒæ•°:{Flag:(2115) , 3 , RIGHT}) 
 	PRINTFORM [15] x5 
 	PRINTFORML [25] x10
-	PRINTFORML [100] ‘S‘fÞŽg—p
+	PRINTFORML [100] å…¨ç´ æä½¿ç”¨
 	PRINTFORML 
-	PRINTFORML [999] ‚â‚ß‚é
+	PRINTFORML [999] ã‚„ã‚ã‚‹
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 999
 		GOTO INPUT_LOOP
 	CASE 100
-		PRINTFORML ŠŽ‚µ‚Ä‚¢‚é‘S‚Ä‚Ì‘fÞ‚©‚çì‚ê‚é‚¾‚¯‚Ì’´l–ò‚ð¶¬‚µ‚Ü‚·
-		PRINTFORML ‚æ‚ë‚µ‚¢‚Å‚·‚©H
-		PRINTFORML [0] ‚Í‚¢
-		PRINTFORML [1] ‚¢‚¢‚¦
+		PRINTFORML æ‰€æŒã—ã¦ã„ã‚‹å…¨ã¦ã®ç´ æã‹ã‚‰ä½œã‚Œã‚‹ã ã‘ã®è¶…äººè–¬ã‚’ç”Ÿæˆã—ã¾ã™
+		PRINTFORML ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ
+		PRINTFORML [0] ã¯ã„
+		PRINTFORML [1] ã„ã„ãˆ
 		INPUT
 		L_INPUT = RESULT
 			SELECTCASE L_INPUT
 			CASE 0
-			;ƒ‹[ƒv—p‰Šú‰»ˆ—
+			;ãƒ«ãƒ¼ãƒ—ç”¨åˆæœŸåŒ–å‡¦ç†
 				L_CL = 0
-				;Œ³‘fÞ‚ÌŒÂ”‚ð5‚ÅŠ„‚Á‚½®”•ª’´l–ò‚ð“üŽè‚µA‘fÞ‚ðÁ”ï
+				;å…ƒç´ æã®å€‹æ•°ã‚’5ã§å‰²ã£ãŸæ•´æ•°åˆ†è¶…äººè–¬ã‚’å…¥æ‰‹ã—ã€ç´ æã‚’æ¶ˆè²»
 				REPEAT 6
 					L_CV = Flag:(2110+L_CL) / 5
 					Flag:(2810+L_CL) += L_CV
 					Flag:(2110+L_CL) -= 5 * L_CV
-					PRINTFORML %FLAGNAME:(2110+L_CL)%‚ð{5 * L_CV , 3 , RIGHT}ŒÂÁ”ï‚µ‚Ä %FLAGNAME:(2810+L_CL)%‚ð{L_CV , 3 , RIGHT}ŒÂ¶¬‚µ‚Ü‚µ‚½B
+					PRINTFORML %FLAGNAME:(2110+L_CL)%ã‚’{5 * L_CV , 3 , RIGHT}å€‹æ¶ˆè²»ã—ã¦ %FLAGNAME:(2810+L_CL)%ã‚’{L_CV , 3 , RIGHT}å€‹ç”Ÿæˆã—ã¾ã—ãŸã€‚
 					L_CL += 1
 				REND
 				PRINTW
@@ -177,42 +177,42 @@ CASE 1
 				GOTO INPUT_LOOP3
 			ENDSELECT
 	CASEELSE
-		;ì¬ŒÂ”ƒ`ƒFƒbƒN
+		;ä½œæˆå€‹æ•°ãƒã‚§ãƒƒã‚¯
 		IF L_INPUT >= 20 && L_INPUT < 26
-			;10ŒÂ¶¬—pˆ—
+			;10å€‹ç”Ÿæˆç”¨å‡¦ç†
 			IF Flag:(2090+L_INPUT) >= 50
 				Flag:(2090+L_INPUT) -= 50
 				Flag:(2790+L_INPUT) += 10
-				PRINTFORMW %FlagNAME:(2790+L_INPUT)%‚ð10ŒÂ¶¬‚µ‚Ü‚µ‚½B
+				PRINTFORMW %FlagNAME:(2790+L_INPUT)%ã‚’10å€‹ç”Ÿæˆã—ã¾ã—ãŸã€‚
 				GOTO INPUT_LOOP3
 			ELSE 
-				PRINTFORMW ‘fÞ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ç´ æãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 			ENDIF
 		ELSEIF L_INPUT >= 10 && L_INPUT < 16
-			;5ŒÂ¶¬—pˆ—
+			;5å€‹ç”Ÿæˆç”¨å‡¦ç†
 			IF Flag:(2100+L_INPUT) >= 25
 				Flag:(2100+L_INPUT) -= 25
 				Flag:(2800+L_INPUT) += 5
-				PRINTFORMW %FlagNAME:(2800+L_INPUT)%‚ð5ŒÂ¶¬‚µ‚Ü‚µ‚½B
+				PRINTFORMW %FlagNAME:(2800+L_INPUT)%ã‚’5å€‹ç”Ÿæˆã—ã¾ã—ãŸã€‚
 				GOTO INPUT_LOOP3
 			ELSE 
-				PRINTFORMW ‘fÞ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ç´ æãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 			ENDIF
 		ELSEIF L_INPUT >= 0 && L_INPUT < 6
-			;1ŒÂ¶¬—pˆ—
+			;1å€‹ç”Ÿæˆç”¨å‡¦ç†
 			IF Flag:(2110+L_INPUT) >= 5
 				Flag:(2110+L_INPUT) -= 5
 				Flag:(2810+L_INPUT) += 1
-				PRINTFORMW %FlagNAME:(2810+L_INPUT)%‚ð¶¬‚µ‚Ü‚µ‚½B
+				PRINTFORMW %FlagNAME:(2810+L_INPUT)%ã‚’ç”Ÿæˆã—ã¾ã—ãŸã€‚
 				GOTO INPUT_LOOP3
 			ELSE 
-				PRINTFORMW ‘fÞ‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ç´ æãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 			ENDIF
 		ELSE
 		GOTO INPUT_LOOP3
 		ENDIF
 	ENDSELECT
-	;ƒ‹[ƒvŠK‘w‚ðˆê‚ÂŽè‘O‚É‚µ‚Ü‚µ‚½
+	;ãƒ«ãƒ¼ãƒ—éšŽå±¤ã‚’ä¸€ã¤æ‰‹å‰ã«ã—ã¾ã—ãŸ
 	GOTO INPUT_LOOP3
 CASE 999
 	JUMP RPG_MAIN

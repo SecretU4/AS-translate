@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�f�v�ċփC�x���g
+﻿;-------------------------------------------------
+;拉致監禁イベント
 ;-------------------------------------------------
 @TURN_EVENT_RPG_RK
 #DIM L_MONEY
@@ -7,168 +7,168 @@
 
 DRAWLINE
 SETCOLOR 250,50,200
-PRINTFORML �y�f�v�ċփC�x���g:%CALLNAME%�z
+PRINTFORML 【拉致監禁イベント:%CALLNAME%】
 
-PRINTFORML %CALLNAME%�͗͂���߂鑕����g�ɒ������A�Ђ�����j�ɔƂ���Ă���B
+PRINTFORML %CALLNAME%は力を弱める装飾を身に着けられ、ひたすら男に犯されている。
 PRINTFORML 
 
-IF CFlag:�f�v�ċ� >= 30
-	PRINTFORML �y%CALLNAME%�̏��:�����ς݁z
-;�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ėp�䎌�J�n�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+IF CFlag:拉致監禁 >= 30
+	PRINTFORML 【%CALLNAME%の状態:調教済み】
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
 		IF !RAND:10
-		PRINTFORML �u�S�����c�c��������c%UNICODE(0x2661)%�c�c�������c�������������͂����%UNICODE(0x2661)%�v
+		PRINTFORML 「膣内っ……こすれっ…%UNICODE(0x2661)%……あぁっ…あっあっあっはぁんっ%UNICODE(0x2661)%」
 		ELSEIF !RAND:9
-		PRINTFORML �u�c���c������c%UNICODE(0x2661)%�c�c�Y���Y���c�c�˂���c���c�c%UNICODE(0x2661)%�v
+		PRINTFORML 「…後ろ…からっ…%UNICODE(0x2661)%……ズンズン……突かれ…っ……%UNICODE(0x2661)%」
 		ELSEIF !RAND:8
-		PRINTFORML �u���͂�%UNICODE(0x2661)%�c�c�͂��c����c�c�������c%UNICODE(0x2661)%�v
+		PRINTFORML 「あはっ%UNICODE(0x2661)%……はっ…んっ……くあっ…%UNICODE(0x2661)%」
 		ELSEIF !RAND:7
-		PRINTFORML �u����c�����c�c���c�ӂ����c�c�c%UNICODE(0x2661)%�v
+		PRINTFORML 「んっ…あっ……っ…ふぁっ………%UNICODE(0x2661)%」
 		ELSEIF !RAND:6
-		PRINTFORML �u�������������������c�c�񂟂����I�c%UNICODE(0x2661)%�v
+		PRINTFORML 「ぁっあっぁっああっ……んぁあっ！…%UNICODE(0x2661)%」
 		ELSEIF !RAND:5
-		PRINTFORML �u�c�������c�����c�S���Łc�R�c�����c�Ă��c�c%UNICODE(0x2661)%�v
+		PRINTFORML 「…ぅあっ…ぁっ…膣内で…コツンっ…てっ……%UNICODE(0x2661)%」
 		ELSEIF !RAND:4
-		PRINTFORML �u�������c�āc��%UNICODE(0x2661)%�c���������I�c������c�͂��������I%UNICODE(0x2661)%�v
+		PRINTFORML 「当たっ…て…っ%UNICODE(0x2661)%…ああぁっ！…あんっ…はぁあぁっ！%UNICODE(0x2661)%」
 		ELSEIF !RAND:3
-		PRINTFORML �u�񂟂����c�c�͂��c�c���c�����c�ς��c�c�o���c���͂�������c��v
+		PRINTFORML 「んぁあっ……はっ……ぃ…いっ…ぱい……出し…っはぁぁんっ…♪」
 		ELSEIF !RAND:2
-		PRINTFORML �u�ӂ����I�c�c����c��������c�c���c���͂�%UNICODE(0x2661)%�v
+		PRINTFORML 「ふぁっ！……んっ…んっあっ……ぁ…あはっ%UNICODE(0x2661)%」
 		ELSE
-		PRINTFORML �u�c�b�C�����c�c�����c�悷�c���c%UNICODE(0x2661)%�c�c�C��������c�ЂႠ������%UNICODE(0x2661)%�v
+		PRINTFORML 「…ッ気持ち……ぁっ…よす…ぎ…%UNICODE(0x2661)%……イっちゃっ…ひゃあぁあっ%UNICODE(0x2661)%」
 		ENDIF
-;�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ėp�䎌�I���\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
 	IF RAND:8 == 0
-		PRINTFORML �������I���A��������j�ɐg���S�������Ă��܂���%CALLNAME%�́A�j�̏�ň���ɚb���ł���B
-		PRINTFORMW ���g�̏�Śb�������p�ɒj�͖������Ȃ���A��t�����s���ׂ����𓮂����n�߂��c
+		PRINTFORML 調教も終わり、すっかり男に身も心も許してしまった%CALLNAME%は、男の上で淫らに喘いでいる。
+		PRINTFORMW 自身の上で喘ぎ舞う姿に男は満足しながら、種付けを行うべく腰を動かし始めた…
 	ELSEIF RAND:7 == 0
-		PRINTFORML �q�{��@���x�ɒ��Ń^�v���Ɨh��鐸�t�������Ȃ���A%CALLNAME%�͂���Ȃ��t�������߂č���U�蓮�����B
-		PRINTFORML �����x���S���̃q�_�ŃJ������U�ߑ����A�Ăт��݂��Ⓒ�֎���B
-		PRINTFORMW ���x�̎�t���ł��ɖ��^���ɂȂ����q�{���A%CALLNAME%�͍K�������ɂ����̏ォ�畏�ł��c
+		PRINTFORML 子宮を叩く度に中でタプンと揺れる精液を感じながら、%CALLNAME%はさらなる種付けを求めて腰を振り動かす。
+		PRINTFORML 動く度に膣内のヒダでカリ首を攻め続け、再びお互い絶頂へ至る。
+		PRINTFORMW 今度の種付けでついに満タンになった子宮を、%CALLNAME%は幸せそうにお腹の上から撫でた…
 	ELSEIF RAND:6 == 0
-		PRINTFORML �x�b�h�̏�Ŏl�񔇂��ɂȂ���%CALLNAME%���A�j�͍���͂�ŗ~�]�̂܂ܔƂ�������B
-		PRINTFORML �₪�đO�̂߂�ɕ��ꗎ����%CALLNAME%�ɕ������Ԃ���A�̂����������Ď�t�������B
-		PRINTFORMW �Ⓒ�ɐk�����l���������A���΂炭����Ɠ�l�̕�������͍Ăњb�������R�ꕷ�����Ă����c
+		PRINTFORML ベッドの上で四つん這いになった%CALLNAME%を、男は腰を掴んで欲望のまま犯し続ける。
+		PRINTFORML やがて前のめりに崩れ落ちた%CALLNAME%に覆いかぶさり、体を押さえつけて種付けした。
+		PRINTFORMW 絶頂に震える二人だったが、しばらくすると二人の部屋からは再び喘ぎ声が漏れ聞こえてきた…
 	ELSEIF RAND:5 == 0
-		PRINTFORML %CALLNAME%���ǂɎ��t���ė����o�b�N�̑̐������A�j����납�炻�̓��ق�Ƃ��B
-		PRINTFORML �x�b�h�ł���̂Ƃ͈Ⴄ�������y���݂Ȃ���A%CALLNAME%�͐K��˂��o���Ă��˂��肵���B
-		PRINTFORMW �j�͂���ɉ�����ׂɃs�X�g���̃e���|���グ�Ă����A�����Ŏq�{���������J�����ڎː������c
+		PRINTFORML %CALLNAME%が壁に手を付いて立ちバックの体勢を取り、男が後ろからその肉壷を犯す。
+		PRINTFORML ベッドでするのとは違う興奮を楽しみながら、%CALLNAME%は尻を突き出しておねだりした。
+		PRINTFORMW 男はそれに応える為にピストンのテンポを上げていき、剛直で子宮口をこじ開け直接射精した…
 	ELSEIF RAND:4 == 0
-		PRINTFORML ��l�����ɐⒸ�ɒB���A��t�������������j�̓Y�����ƃy�j�X�������������B
-		PRINTFORML �]�C�ɐZ��Ȃ�����ނ��n�߂Ă����y�j�X��j����Ɗ��ꂽ�����Ő��t�ƈ��t���r�ߎ��B
-		PRINTFORML ����ŏI���ɂ�����肾�����j�����A���̕�d�Ԃ�ɋ������čĂуy�j�X���d���������B
-		PRINTFORMW �u�N������_�����������Ɍ���%CALLNAME%�́A�鏊��M��Ȃ�����҂̊፷���Œj�������c
+		PRINTFORML 二人同時に絶頂に達し、種付けを完了した男はズルリとペニスを引き抜いた。
+		PRINTFORML 余韻に浸りながらも萎え始めていたペニスを頬張ると慣れた動きで精液と愛液を舐め取る。
+		PRINTFORML これで終わりにするつもりだった男だが、その奉仕ぶりに興奮して再びペニスを硬くさせた。
+		PRINTFORMW 勃起する肉棒を嬉しそうに見た%CALLNAME%は、秘所を弄りながら期待の眼差しで男を見た…
 	ELSEIF RAND:3 == 0
-		PRINTFORML �������������ȉ���炵�Ȃ���A��l�͂���ꎺ�Ŏq��肵�Ă����B
-		PRINTFORML ��t����������悤�ɋr�𗍂܂��āA���������悤�ɐg�̂�ł��t�������B
-		PRINTFORMW ���N���������M�тȂ���A�j��%CALLNAME%�̍ŉ��ɔ����t���Ԃ��܂����c
+		PRINTFORML 結合部から淫らな音を鳴らしながら、二人はある一室で子作りしていた。
+		PRINTFORML 種付けを強請るように脚を絡ませて、愛し合うように身体を打ち付けあう。
+		PRINTFORMW 隆起する乳頭を弄びながら、男は%CALLNAME%の最奥に白濁液をぶちまけた…
 	ELSEIF RAND:2 == 0
-		PRINTFORML �y�j�X��ł��t����j�̓����ɍ��킹�č������˂点�A%CALLNAME%�͑���̎ː��𑣂��B
-		PRINTFORMW %CALLNAME%�̐g���S�����ߏグ����Ɏ��g�̎q��s�܂���ׂ��A�j�͑�ʂ̈�`�q��%CALLNAME%�̒��ɍ��ݍ��񂾁c
+		PRINTFORML ペニスを打ち付ける男の動きに合わせて腰をくねらせ、%CALLNAME%は相手の射精を促す。
+		PRINTFORMW %CALLNAME%の身も心も染め上げた上に自身の子を孕ませるべく、男は大量の遺伝子を%CALLNAME%の中に刻み込んだ…
 	ELSEIF RAND:1 == 0
-		PRINTFORML �����̏b�̂悤�Ȍ������s�ׂł͂Ȃ��A�������ƁA�]�T�̂��铮���Œj�Ƃ܂��키�B
-		PRINTFORMW �k�΂��Ȃ����ɒ^�邻�̌���������́A���܂ł����t�����Ă����c
+		PRINTFORML いつもの獣のような激しい行為ではなく、ゆったりと、余裕のある動きで男とまぐわう。
+		PRINTFORMW 談笑しながら情事に耽るその結合部からは、いつまでも精液が溢れていた…
 	ELSE
-		IF TALENT:����  || TALENT:����
-			PRINTFORML ���炩����t�����I�����j�̂ǂ�ǂ�̃y�j�X�����΂񂾓��[�ŋ��ݍ��ށB
-			PRINTFORML ���[�V������h�肽�������o�u�ŁA�L���ȋ������E�ɂ��ˉ񂵂Ȃ���y�j�X�������Ă���B
-			PRINTFORML ���܂�̉����ɂ��łɎː����n�߂Ă���y�j�X���A�܂��ނ��Ȃ��Ɗm�M���Ă���%CALLNAME%�͗e�͂Ȃ������������B
-			PRINTFORMW �����Ƃ͋t�̗���ɂȂ��ėI�X�ƃy�j�X���������A���̓����͒j�Ɏd���܂ꂽ�����ł����Ȃ������c
+		IF TALENT:巨乳  || TALENT:爆乳
+			PRINTFORML あらかた種付けを終えた男のどろどろのペニスを汗ばんだ乳房で挟み込む。
+			PRINTFORML ローションを塗りたくった双丘で、豊満な胸を左右にこね回しながらペニスを扱いている。
+			PRINTFORML あまりの快感にすでに射精を始めているペニスを、まだ萎えないと確信している%CALLNAME%は容赦なく扱き続けた。
+			PRINTFORMW いつもとは逆の立場になって悠々とペニスを扱くが、その動きは男に仕込まれた動きでしかなかった…
 		ELSE
-			PRINTFORML ���炩����t�����I�����j�̂ǂ�ǂ�̃y�j�X��%CALLNAME%�͌��ɖj����A�����悭��𓮂������B
-			PRINTFORML �A���Ɏc�鐸�t���z�������A����Ƃɗ��ߌ��g�I�ɓ���������B
-			PRINTFORML ��ڌ����Ńt�F������������%CALLNAME%�ɒj�͋������āA�Ăуy�j�X���ł�������B
-			PRINTFORMW %CALLNAME%�͊��������ɓ��_������𗣂��ƁA��t���ɂ���Đ��t������鏊�ɓ��_����������Ă������c
+			PRINTFORML あらかた種付けを終えた男のどろどろのペニスを%CALLNAME%は口に頬張り、勢いよく首を動かした。
+			PRINTFORML 尿道に残る精液を吸いあげつつ、舌を竿に絡め献身的に動き続ける。
+			PRINTFORML 上目遣いでフェラをし続ける%CALLNAME%に男は興奮して、再びペニスを固くさせる。
+			PRINTFORMW %CALLNAME%は嬉しそうに肉棒から口を離すと、種付けによって精液が溢れる秘所に肉棒を咥えさせていった…
 		ENDIF
 	ENDIF
-ELSEIF CFlag:�f�v�ċ� >= 15
-	PRINTFORML �y%CALLNAME%�̏��:�����z
-;�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ėp�䎌�J�n�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+ELSEIF CFlag:拉致監禁 >= 15
+	PRINTFORML 【%CALLNAME%の状態:屈服】
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
 		IF !RAND:5
-		PRINTFORML �u�c���c�����c�����c�����c�c�͂����I�v
+		PRINTFORML 「…ぅ…ぁっ…あっ…あっ……はぁっ！」
 		ELSEIF !RAND:4
-		PRINTFORML �u�������c�āc���c���������I�c������c�͂��������I�v
+		PRINTFORML 「当たっ…て…っ…ああぁっ！…あんっ…はぁあぁっ！」
 		ELSEIF !RAND:3
-		PRINTFORML �u���͂��c�c�ӂ����c�c���͂�����c�v
+		PRINTFORML 「あはっ……ふあっ……っはぁんっ…」
 		ELSEIF !RAND:2
-		PRINTFORML �u�c�c�Ђ���c��������c�c�͂��v
+		PRINTFORML 「……ひゃっ…んっあっ……はっ」
 		ELSE
-		PRINTFORML �u�c���c�c���c���c�c�������v
+		PRINTFORML 「…っ……あ…っ……くぁっ」
 		ENDIF
-;�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ėp�䎌�I���\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
 	IF RAND:4 == 0
-		PRINTFORML �����̈ꎺ�ŏ����j�ɔƂ����`�Ō������g�̂������킹�Ă���B
-		PRINTFORMW ��납����_��˂�������A����ł���R����%CALLNAME%���������A�鏊����͉x�т̏؋��ł��鈤�t���ς��ς��Ɨ��Ă����c
+		PRINTFORML いつもの一室で女が男に犯される形で激しく身体を交合わせている。
+		PRINTFORMW 後ろから肉棒を突き入れられ、それでも抵抗する%CALLNAME%だったが、秘所からは悦びの証拠である愛液がぱたぱたと零れていた…
 	ELSEIF RAND:3 == 0
-		PRINTFORML ������F�߂���%CALLNAME%�����Ĕ����΂����j�́A�y�j�X�����������ƌ����ɃY�C�b�Ɠ˂�����B
-		PRINTFORMW �@����%CALLNAME%�͂��Ԃ��Ԑ��t�ƈ��t�ŉ��ꂫ�������_��j����A��ƐO���g���đ|�����n�߂��c
+		PRINTFORML 快感を認めつつある%CALLNAME%を見て薄く笑った男は、ペニスを引き抜くと口元にズイッと突きつける。
+		PRINTFORMW 察した%CALLNAME%はしぶしぶ精液と愛液で汚れきった肉棒を頬張り、舌と唇を使って掃除を始めた…
 	ELSEIF RAND:2 == 0
-		PRINTFORMW ������I������l�͗���邱�ƂȂ��A%CALLNAME%�͖������C�Ȓj�̃y�j�X���p�C�Y���ƃt�F���ŕ�d�����B
-		IF TALENT:����  || TALENT:����
-			PRINTFORMW �܂����ڂɂ�����Ȃ��L���ȋ��������̕��ɂ���ׂ��A�j�͐��t�Ńv���v���Ɣ��΂ɗh�����[�Ƀ}�[�L���O���Ă����c
+		PRINTFORMW 交尾を終えた二人は離れることなく、%CALLNAME%は未だ元気な男のペニスをパイズリとフェラで奉仕した。
+		IF TALENT:巨乳  || TALENT:爆乳
+			PRINTFORMW まずお目にかかれない豊満な胸を自分の物にするべく、男は精液でプルプルと卑猥に揺れる乳房にマーキングしていく…
 		ELSE
-			PRINTFORMW ����ɂ��肮��ƎC����Ȃ���A�j�͓f���o�����t��%CALLNAME%�̋����}�[�L���O���Ă����c
+			PRINTFORMW 乳首にぐりぐりと擦りつけながら、男は吐き出す精液で%CALLNAME%の胸をマーキングしていく…
 		ENDIF
 	ELSE
-		PRINTFORML �q�{�ɐ��x�ڂ̎�t�����I���Ă��j�̓y�j�X�𔲂����ɂ��̂܂܍���U�葱����B
-		PRINTFORMW �ł��t����x�ɁA����������͓��肫��Ȃ����t�����łĂ����c
+		PRINTFORML 子宮に数度目の種付けを終えても男はペニスを抜かずにそのまま腰を振り続ける。
+		PRINTFORMW 打ち付ける度に、結合部からは入りきらない精液が溢れでてきた…
 	ENDIF
 ELSE
-	PRINTFORML �y%CALLNAME%�̏��:��R�z
+	PRINTFORML 【%CALLNAME%の状態:抵抗】
 	IF RAND:2 == 0
-		PRINTFORML �x�d�Ȃ��t���ɐS�������A��Ɍ��𖳂�����%CALLNAME%��j�͍\�킸�Ƃ��Î󂯂�B
-		PRINTFORMW �j�͓��_���S����P��x�ɏ������b���p������݂Ȃ���A�Ⓒ�ɒB�����y�j�X�ōĂюq�{�Ɏ�t���������c
+		PRINTFORML 度重なる種付けに心が屈し、眼に光を無くした%CALLNAME%を男は構わず犯しづ受ける。
+		PRINTFORMW 男は肉棒で膣内を抉る度に小さく喘ぐ姿を愉しみながら、絶頂に達したペニスで再び子宮に種付けをした…
 	ELSEIF RAND:2 == 0
-		PRINTFORML �x�b�h�ł������܂��Ă���%CALLNAME%��j���͂Â��ŉ����|�����B
-		PRINTFORML ��サ����������%CALLNAME%��]���ɁA���������炵�ğ�����_���˂����񂾁B
-		PRINTFORML �������悤�ɂ������x�b�h�ɉ����t�����Ă��邽�ߏ�肭�������A�Ђ����疨���Ƃ����B
-		PRINTFORML �S���S���ƃy�j�X�̃J���񂪃q�_�ɓ�����A�����ɂ���čR���͂����܂��Ă����B
-		PRINTFORML �j�͏㔼�g����%CALLNAME%�̏�ɓ|�ꂱ�ނƁA�������U�肽���鍘�̃s�b�`�𑁂����Ă������B
-		PRINTFORMW %CALLNAME%�͗]�͂�U��i���Ė\�ꂽ���A��R�󂵂��j�̐��t�𒍂����܂�Ă��܂����c
+		PRINTFORML ベッドでうずくまっている%CALLNAME%を男が力づくで押し倒しす。
+		PRINTFORML 弱弱しく反応する%CALLNAME%を余所に、下着をずらして滾る肉棒をねじ込んだ。
+		PRINTFORML 反撃しようにも肩をベッドに押し付けられているため上手く動けず、ひたすら蜜壺を犯される。
+		PRINTFORML ゴリゴリとペニスのカリ首がヒダに当たり、快感によって抗う力も薄まっていく。
+		PRINTFORML 男は上半身ごと%CALLNAME%の上に倒れこむと、激しく振りたくる腰のピッチを早くしていった。
+		PRINTFORMW %CALLNAME%は余力を振り絞って暴れたが、抵抗空しく男の精液を注ぎ込まれてしまった…
 	ELSE
-		PRINTFORML %CALLNAME%�͒j�Ƀx�b�h�֖���������|����A����ʂ��S����Ƃ��ꂽ�B
-		PRINTFORML ���𗼘r�ŉ����������Ă���̂ōR�����Ƃ��o�����A�M�����_�Ō��������ق����W�����B
-		PRINTFORML ���C�v����Ă��Ă��{�\�I�ɍ~��Ă����q�{�ɁA�s�X�g������y�j�X�̋T�����R�c�R�c�Ɠ�����B
-		PRINTFORML ���������̖��A�ŊJ���������Ȃ����ɁA�D�P�\��̂Ȃ��q�{�֒j�������߂Ɏ�t������B
-		PRINTFORMW ��R���~�݁A���S��ԂɂȂ��Ă��܂���%CALLNAME%�ɒj�͍X�Ȃ鐫�s�ׂ𑱂��Ă������c
+		PRINTFORML %CALLNAME%は男にベッドへ無理矢理押し倒され、正常位で膣内を犯された。
+		PRINTFORML 手首を両腕で押さえつけられているので抗うことも出来ず、熱い肉棒で激しく肉壷を蹂躙される。
+		PRINTFORML レイプされていても本能的に降りてきた子宮に、ピストンするペニスの亀頭がコツコツと当たる。
+		PRINTFORML 長い性交の末、打開策も見つからない内に、妊娠予約のない子宮へ男が無慈悲に種付けする。
+		PRINTFORMW 抵抗も止み、放心状態になってしまった%CALLNAME%に男は更なる性行為を続けていった…
 	ENDIF
 ENDIF
 
 
 
-SIF CSTR:�����������薼 == ""
-	CSTR:�����������薼 = �C���M�����[
-SIF CSTR:���L�X���薼 == "" 
-	CSTR:���L�X���薼 = �C���M�����[
-SIF CSTR:���������薼 =="" 
-	CSTR:���������薼 = �C���M�����[
-SIF CSTR:���t�F�����薼 ==""
-	CSTR:���t�F�����薼 = �C���M�����[
-SIF CSTR:���`���������薼 ==""
-	CSTR:���`���������薼 = �C���M�����[
-SIF CSTR:���Ⓒ���薼 ==""
-	CSTR:���Ⓒ���薼 = �C���M�����[
-SIF CSTR:�����o�����薼 ==""
-	CSTR:�����o�����薼 = �C���M�����[
-TALENT:�񏈏� = 1
-TALENT:�`�񏈏� = 1
-TCVAR:����_EXP_�����r�� = 1
-TCVAR:����_EXP_�`�����r�� = 1
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = イレギュラー
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = イレギュラー
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = イレギュラー
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = イレギュラー
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = イレギュラー
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = イレギュラー
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = イレギュラー
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
 
 CALL JN_SEX_EXP
 
-SIF CFlag:�f�v�ċ� >= 30
-	EXP:�m�s�q�����o�� += (RAND:3+1)+1
-SIF CFlag:�f�v�ċ� <= 30
-	EXP:�����o�� += 1
-EXP:��d���y�o�� += (RAND:2)+1
-EXP:��ɉ��y�o�� += (RAND:2)
-CFlag:�f�v�ċ� += 1
-IF CFlag:�f�v�ċ� >= 30
-	TALENT:�m�s�q�x = 1
-	TALENT:�����ς� = 1
-	MARK:�������� = 3
+SIF CFlag:拉致監禁 >= 30
+	EXP:ＮＴＲ調教経験 += (RAND:3+1)+1
+SIF CFlag:拉致監禁 <= 30
+	EXP:強姦経験 += 1
+EXP:奉仕快楽経験 += (RAND:2)+1
+EXP:苦痛快楽経験 += (RAND:2)
+CFlag:拉致監禁 += 1
+IF CFlag:拉致監禁 >= 30
+	TALENT:ＮＴＲ度 = 1
+	TALENT:調教済み = 1
+	MARK:淫乱刻印 = 3
 ENDIF
-Flag:�C�x���g�U���� = 1
+Flag:イベント誘拐中 = 1
 RESETCOLOR
 
 

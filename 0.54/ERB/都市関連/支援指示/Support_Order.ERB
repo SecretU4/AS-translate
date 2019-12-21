@@ -1,6 +1,6 @@
-
+﻿
 ;-------------------------------------------------
-; �x���w��
+; 支援指示
 ;-------------------------------------------------
 @Support_Order(ARG:0,ARG:2)
 #DIM L_INPUT
@@ -10,38 +10,38 @@ CLEARLINE LINECOUNT
 DRAWLINE
 ARG:2 = 101
 CALL C_PICTURE_NPC(ARG:2)
-PRINTFORML ���肿���u�ււ��A���Ăтł����{�X�I�v
-PRINTFORML ��y�����u���ł��\���t���ĉ������ː�y�v
+PRINTFORML 助手ちゃん「へへっ、お呼びですかボス！」
+PRINTFORML 後輩ちゃん「何でも申し付けて下さいね先輩」
 DRAWLINE
 PRINTFORML 
-PRINTFORM [1]   - �y�Y�݉����T�|�[�g:
-IF FLAG:�x��_�Y�݉����T�|�[�g == 1
-	PRINTFORML ���z(����SP4)
+PRINTFORM [1]   - 【悩み解決サポート:
+IF FLAG:支援_悩み解決サポート == 1
+	PRINTFORML ○】(消費SP4)
 ELSE
-	PRINTFORML �~�z(����SP4)
+	PRINTFORML ×】(消費SP4)
 ENDIF
-PRINTFORM [2]   - �y�̗͉񕜃T�|�[�g:
-IF FLAG:�x��_�̗͉񕜃T�|�[�g == 1
-	PRINTFORML ���z(����SP7)
+PRINTFORM [2]   - 【体力回復サポート:
+IF FLAG:支援_体力回復サポート == 1
+	PRINTFORML ○】(消費SP7)
 ELSE
-	PRINTFORML �~�z(����SP7)
+	PRINTFORML ×】(消費SP7)
 ENDIF
-PRINTFORM [3]   - �y�����r����T�|�[�g:
-IF FLAG:�x��_�����r����T�|�[�g == 1
-	PRINTFORML ���z(����SP1)
+PRINTFORM [3]   - 【自動排卵薬サポート:
+IF FLAG:支援_自動排卵薬サポート == 1
+	PRINTFORML ○】(消費SP1)
 ELSE
-	PRINTFORML �~�z(����SP1)
+	PRINTFORML ×】(消費SP1)
 ENDIF
 PRINTFORML 
-PRINTFORML [999] - �A��
+PRINTFORML [999] - 帰る
 $INPUT_LOOP
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 1
-	PRINTFORML �Y�݉����̐�������Ɂ{�␳�������ŗ^����B
-	PRINTFORML ��l���ʂŏ�����A�s�������ꍇ�͕s���ƂȂ�܂��B
-	PRINTFORML ONOFF�����߂ĉ������B
+	PRINTFORML 悩み解決の成功判定に＋補正を自動で与える。
+	PRINTFORML 一人ずつ個別で消費される、不足した場合は不発となります。
+	PRINTFORML ONOFFを決めて下さい。
 	PRINTFORML [1] ON
 	PRINTFORML [2] OFF
 	$INPUT_LOOP3
@@ -49,16 +49,16 @@ CASE 1
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 1
-		FLAG:�x��_�Y�݉����T�|�[�g = 1
+		FLAG:支援_悩み解決サポート = 1
 	CASE 2
-		FLAG:�x��_�Y�݉����T�|�[�g = 0
+		FLAG:支援_悩み解決サポート = 0
 	CASEELSE
 		GOTO INPUT_LOOP3
 	ENDSELECT
 	GOTO INPUT_LOOP2
 CASE 2
-	PRINTFORML AP�񕜎��Ɂ{�␳�������ŗ^����B
-	PRINTFORML �s�������ꍇ�͕s���ƂȂ�܂��B
+	PRINTFORML AP回復時に＋補正を自動で与える。
+	PRINTFORML 不足した場合は不発となります。
 	PRINTFORML 
 	PRINTFORML [1] ON
 	PRINTFORML [2] OFF
@@ -67,16 +67,16 @@ CASE 2
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 1
-		FLAG:�x��_�̗͉񕜃T�|�[�g = 1
+		FLAG:支援_体力回復サポート = 1
 	CASE 2
-		FLAG:�x��_�̗͉񕜃T�|�[�g = 0
+		FLAG:支援_体力回復サポート = 0
 	CASEELSE
 		GOTO INPUT_LOOP4
 	ENDSELECT
 	GOTO INPUT_LOOP2
 CASE 3
-	PRINTFORML �������ɑ���Ɏ����Ŕr����𓊗^���܂��B
-	PRINTFORML ���̏ꍇ�r���򕪂̎������K�v�ł��B
+	PRINTFORML 逢引時に相手に自動で排卵薬を投与します。
+	PRINTFORML その場合排卵薬分の資金が必要です。
 	PRINTFORML 
 	PRINTFORML [1] ON
 	PRINTFORML [2] OFF
@@ -85,9 +85,9 @@ CASE 3
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 1
-		FLAG:�x��_�����r����T�|�[�g = 1
+		FLAG:支援_自動排卵薬サポート = 1
 	CASE 2
-		FLAG:�x��_�����r����T�|�[�g = 0
+		FLAG:支援_自動排卵薬サポート = 0
 	CASEELSE
 		GOTO INPUT_LOOP5
 	ENDSELECT
@@ -95,8 +95,8 @@ CASE 3
 CASE 4
 CASE 5
 CASE 999
-PRINTFORML ���肿���u���[�������₷���[���I�v
-PRINTFORMW ��y�����u���ɏo������A���J���������ˁc%UNICODE(0x2661)%�v
+PRINTFORML 助手ちゃん「りょーかいしやすたーっ！」
+PRINTFORMW 後輩ちゃん「上手に出来たら、ご褒美下さいね…%UNICODE(0x2661)%」
 	RETURN
 CASEELSE
 	GOTO INPUT_LOOP2

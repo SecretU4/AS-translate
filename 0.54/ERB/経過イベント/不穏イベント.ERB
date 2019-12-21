@@ -1,27 +1,27 @@
-;-------------------------------------------------
-;•s‰¸ƒCƒxƒ“ƒg
+ï»¿;-------------------------------------------------
+;ä¸ç©ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @TURN_EVENT_FON
 
-;•ÛŒì‚³‚ê‚Ä‚¢‚éZ–¯‚Í–ß‚·
-SIF CFLAG:“Á•Ê•ÛŒì != 0
+;ä¿è­·ã•ã‚Œã¦ã„ã‚‹ä½æ°‘ã¯æˆ»ã™
+SIF CFLAG:ç‰¹åˆ¥ä¿è­· != 0
 	RETURN
 
-;«ŠÖŒW
-IF CFlag:ZlƒCƒxƒ“ƒgŒXŒü_« > RAND:100 
-	IF !RAND:8 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ < 0
+;æ€§é–¢ä¿‚
+IF CFlag:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_æ€§ > RAND:100 
+	IF !RAND:8 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« < 0
 		CALL TURN_EVENT_FON_1
-	ELSEIF !RAND:7 && CFLAG:Zl_ƒJƒ‹ƒ} >= 20
+	ELSEIF !RAND:7 && CFLAG:ä½äºº_ã‚«ãƒ«ãƒž >= 20
 		CALL TURN_EVENT_I_R
-	ELSEIF !RAND:6 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ < 0
+	ELSEIF !RAND:6 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« < 0
 		CALL TURN_EVENT_HJ_S
-	ELSEIF !RAND:5 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ <= 0 && CFLAG:Þ“‚Ì‘ãžƒAƒtƒ^[ >= 1
+	ELSEIF !RAND:5 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« <= 0 && CFLAG:çªƒç›—ã®ä»£å„Ÿã‚¢ãƒ•ã‚¿ãƒ¼ >= 1
 		CALL TURN_EVENT_NSM_AF
-	ELSEIF !RAND:4 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ <= 0 && CFLAG:Þ“‚Ì‘ãžƒAƒtƒ^[ == 0
+	ELSEIF !RAND:4 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« <= 0 && CFLAG:çªƒç›—ã®ä»£å„Ÿã‚¢ãƒ•ã‚¿ãƒ¼ == 0
 		CALL TURN_EVENT_NSM
-	ELSEIF !RAND:3 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ <= 0 && CFLAG:Zl_ƒJƒ‹ƒ} >= 40 && TALENT:Ž¡ˆÀˆÛŽ‹Çˆõ == 1 && CFLAG:ˆ«“¿Ž¡ˆÀˆÛŽ‹Çˆõ >= 0
+	ELSEIF !RAND:3 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« <= 0 && CFLAG:ä½äºº_ã‚«ãƒ«ãƒž >= 40 && TALENT:æ²»å®‰ç¶­æŒå±€å“¡ == 1 && CFLAG:æ‚ªå¾³æ²»å®‰ç¶­æŒå±€å“¡ >= 0
 		CALL TURN_EVENT_AKTKC
-	ELSEIF !RAND:2 && CFLAG:Zl_ƒ‚ƒ‰ƒ‹ <= 20 && CFLAG:Zl_ƒJƒ‹ƒ} >= 20
+	ELSEIF !RAND:2 && CFLAG:ä½äºº_ãƒ¢ãƒ©ãƒ« <= 20 && CFLAG:ä½äºº_ã‚«ãƒ«ãƒž >= 20
 		CALL TURN_EVENT_FON_MWK
 	ELSE
 		CALL TURN_EVENT_SS

@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�x���Z��C�x���g
+﻿;-------------------------------------------------
+;支援住宅イベント
 ;-------------------------------------------------
 @TURN_EVENT_F_7
 #DIM L_K
@@ -10,277 +10,277 @@ L_K = (RAND:3)+1
 
 DRAWLINE
 SETCOLOR 150,150,250
-PRINTFORML �y�{�����e�B�A�C�x���g(�{��):%CALLNAME%�z
-IF TALENT:���E��
+PRINTFORML 【ボランティアイベント(施設):%CALLNAME%】
+IF TALENT:聖職者
 	IF	!RAND:3
-		PRINTFORML %CALLNAME%�͑��̐��E�҂�M�k�����Ƌ��ɐ����o�����s���Ă���B
+		PRINTFORML %CALLNAME%は他の聖職者や信徒たちと共に炊き出しを行っている。
 	ELSEIF !RAND:2
-		PRINTFORML %CALLNAME%�͕���ōw�������i���x���Z��ŕ�炷�l�X�ɔz�z���Ă���B
+		PRINTFORML %CALLNAME%は募金で購入した品を支援住宅で暮らす人々に配布している。
 	ELSE
-		PRINTFORML %CALLNAME%�͈�×p�̋@�ނň�҂ɂ�����Ȃ��l�X�̑̒����`�F�b�N���Ă���B
+		PRINTFORML %CALLNAME%は医療用の機材で医者にかかれない人々の体調をチェックしている。
 	ENDIF
-	PRINTFORML �{�����󂯂�l�X���犴�ӂ̌��t���󂯁A%CALLNAME%�̐S������₩�ɂȂ��Ă������c
-ELSEIF TALENT:�����ێ��ǈ�
+	PRINTFORML 施しを受ける人々から感謝の言葉を受け、%CALLNAME%の心も晴れやかになっていった…
+ELSEIF TALENT:治安維持局員
 	IF	!RAND:3
-		PRINTFORML %CALLNAME%�̓{�����e�B�A�Ŏx���Z��̂�������x紂��A�h�Ƃɖڂ����点�Ă���B
+		PRINTFORML %CALLNAME%はボランティアで支援住宅のある区画を警邏し、防犯に目を光らせている。
 	ELSEIF !RAND:2
-		PRINTFORML %CALLNAME%�͎x�������̔z�����󂯂�l�X�ɍ������N���Ȃ��悤�ɐ����O�ꂵ�Ă���B
+		PRINTFORML %CALLNAME%は支援物資の配給を受ける人々に混乱が起きないように整列を徹底している。
 	ELSE
-		PRINTFORML %CALLNAME%�͌Â��Ȃ��������̏C�U��S�~�E�����s���n��̔��ψێ��ɗ��ł���B
+		PRINTFORML %CALLNAME%は古くなった建物の修繕やゴミ拾いを行い地域の美観維持に励んでいる。
 	ENDIF
-	PRINTFORML �͂��Ȏ��ԂȂ�����������ǂ��Ȃ������Ƃ�l�X�Ɋ��ӂ���A%CALLNAME%�̐S������₩�ɂȂ��Ă������c
+	PRINTFORML 僅かな時間ながらも治安が良くなったことを人々に感謝され、%CALLNAME%の心も晴れやかになっていった…
 ELSE
-	PRINTFORML %CALLNAME%�͑��̃����o�[�Ƌ��Ƀ{�����e�B�A�ɎQ�����Ă���B
-	PRINTFORML �x�����󂯂�l�X�Ɋ��ӂ���A%CALLNAME%�̐S������₩�ɂȂ��Ă������c
+	PRINTFORML %CALLNAME%は他のメンバーと共にボランティアに参加している。
+	PRINTFORML 支援を受ける人々に感謝され、%CALLNAME%の心も晴れやかになっていった…
 ENDIF
 PRINTFORML  
 RESETCOLOR
-SIF RAND:100 >= 20 && CFLAG:�Z�l_������ <= 30 && CFLAG:���ʕی� == 0
+SIF RAND:100 >= 20 && CFLAG:住人_モラル <= 30 && CFLAG:特別保護 == 0
 	CALL TURN_EVENT_F_7_1
 
 CALL TURN_EVENT_NNK
-IF CFLAG:�Z�l_�J���} > 2
-	PRINTFORML %CALLNAME%�̃J���}�����������B
-	PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� {CFLAG:�Z�l_�J���}-L_K}
+IF CFLAG:住人_カルマ > 2
+	PRINTFORML %CALLNAME%のカルマが減少した。
+	PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ-L_K}
 ENDIF 
 
-CFLAG:�Z�l_�J���} -= L_K
+CFLAG:住人_カルマ -= L_K
 
 
 
 ;-------------------------------------------------
-;�x���Z��C�x���g����
+;支援住宅イベント密会
 ;-------------------------------------------------
 @TURN_EVENT_F_7_1
 
 
-;�a���n�m�s�q(�ǂ��炩�Ƃ����ƕ��C)�A�Ƃ�������Ȃ��l�͂��̓s�s�ł͎x���󂯂ꂻ���ɂȂ�
+;和姦系ＮＴＲ(どちらかというと浮気)、というか危ない人はこの都市では支援受けれそうにない
 DRAWLINE
 SETCOLOR 250,150,50
-PRINTFORML �y�x���Z��:�Ƃ���Z��z
-IF CFLAG:�x��_����_�i�W >= 40 && CFLAG:�x��_����_���s�� >= 10 && TALENT:�m�s�q�x == 0
-	PRINTFORML �ŋ߁A�u�v���C���[�v�����ނ̖T�ɂ��邱�Ƃ̕��������Ȃ����B
-	PRINTFORML �l�Ƃ��Ă��̐l�̂��Ƃ������ɂȂ����킯�ł�����Ă���Ƃ��ł͂Ȃ��A
-	PRINTFORML �������Ƃ��Ă̎������ނ����߂Ă���c
+PRINTFORML 【支援住宅:とある住宅】
+IF CFLAG:支援_密会_進展 >= 40 && CFLAG:支援_密会_性行為 >= 10 && TALENT:ＮＴＲ度 == 0
+	PRINTFORML 最近、「プレイヤー」よりも彼の傍にいることの方が多くなった。
+	PRINTFORML 人としてあの人のことを嫌いになったわけでも劣っているとかではない、
+	PRINTFORML ただ女としての自分が彼を求めている…
 	PRINTFORML 
-	PRINTFORML �ގ��g�͌Ȃ̐g�����킩������ŁA�w��Ԗڂł��\��Ȃ��x�ƌ����B
-	PRINTFORML ����ł��ǂ��j�ł��낤��簐i����p�ɁA���ɂ�����͌�����Ă��܂��Ă����B
+	PRINTFORML 彼自身は己の身分をわかった上で、『二番目でも構わない』と言う。
+	PRINTFORML それでも良い男であろうと邁進する姿に、既にこちらは見惚れてしまっていた。
 	PRINTFORML 
-	PRINTFORML �ɂ�����΍����������d�ˍ��킹�邾�낤�c�B
-	PRINTFORML �ŋ߂͔�D�����Ȃ��Ȃ�ꍇ�ɂ���Ă͔D�P�̉\��������B
-	PRINTFORML �����A�ނ̎q�ł���΁c�c
+	PRINTFORML 暇があれば今日も肌を重ね合わせるだろう…。
+	PRINTFORML 最近は避妊もしなくなり場合によっては妊娠の可能性がある。
+	PRINTFORML だが、彼の子であれば……
 	PRINTFORML 
-	PRINTFORML �c�c�Y��ł��������ƐS����v���Ă���
+	PRINTFORML ……産んであげたいと心から思っている
 	PRINTFORML 
-	PRINTFORML �y%CALLNAME%�͐Q���ꂽ�c�z
+	PRINTFORML 【%CALLNAME%は寝取られた…】
 	PRINTFORML 
-	TALENT:�m�s�q�x = 1
-	CSTR:�m�s�q�L������ = �x���Z��̐N
-ELSEIF CFLAG:�x��_����_�i�W == 30
-	PRINTFORML ���ʂƂ��Ďd���͑听���ɏI���A%CALLNAME%�́u���J���v�������邱�ƂɁB
-	PRINTFORML %CALLNAME%�̓V�����[�𗁂тȂ��炱�ꂩ�炷�邱�Ƃɂ��čl����B
-	PRINTFORML �u�v���C���[�v�̕��ł���͂��̂��̐g���A�����l�̒j�ɗa����B
-	PRINTFORML �ꉞ�C�̃M���M���͈͓̔��ł��邽�߈ᔽ�ł͂Ȃ����A�铽���ׂ��s�ׂƂȂ邾�낤�B
-	PRINTFORML �������̔w������%CALLNAME%��R���オ�点�A�w�؂��]�N�]�N���Ă����̂�����������c
+	TALENT:ＮＴＲ度 = 1
+	CSTR:ＮＴＲキャラ名 = 支援住宅の青年
+ELSEIF CFLAG:支援_密会_進展 == 30
+	PRINTFORML 結果として仕事は大成功に終わり、%CALLNAME%は「ご褒美」をあげることに。
+	PRINTFORML %CALLNAME%はシャワーを浴びながらこれからすることについて考える。
+	PRINTFORML 「プレイヤー」の物であるはずのこの身を、自ら一人の男に預ける。
+	PRINTFORML 一応任のギリギリの範囲内であるため違反ではないが、秘匿すべき行為となるだろう。
+	PRINTFORML だがその背徳感が%CALLNAME%を燃え上がらせ、背筋がゾクゾクしていくのを感じ取った…
 	PRINTFORML 
-	PRINTFORML �΂���N�͐Q���ɑ҂�����A�x�b�h�ɍ������܂����܂����Ɛk���Ă���B
-	PRINTFORML �u�����N����̂��v�����\�z�����Ă���̂��Y�{���z���Ƀy�j�X���M���M���ɖu�N���Ă����B
+	PRINTFORML 対する青年は寝室に待たされ、ベッドに腰かけまだかまだかと震えている。
+	PRINTFORML 「何が起きるのか」もう予想がついているのかズボン越しにペニスがギンギンに勃起していた。
 	PRINTFORML 
-	PRINTFORML �����Ċ���������ƃV�����[�𗁂тĂ���%CALLNAME%���^�I���ꖇ�Ŕނ̑O�Ɏp���������B
-	PRINTFORML �ނׂ̗ɍ���Ƃ������Ɣނ̐g�̂𕏂łȂ��������|�����Ă����A��l�̓x�b�h�֓|�ꂱ�ށB
-	PRINTFORML %CALLNAME%�̓Y�{������y�j�X�����o���Ƃ���͂Ȃ��Ȃ��̈ꕨ�ŁA���������������Ɍ��Ȃ����Ȃ߂��������B
-	PRINTFORML �����̂��܂蓮���Ȃ��ł���ނ������낵�Ȃ��玩��̔鏊�ɔނ̋T�����������āA�����Â��̐���ւƏ��҂��Ă����B
-	PRINTFORML ���{�܂ŐH�����ލ��ɂ͎q�{���܂ŔƂ���A����̐}����������Ă��܂��B
+	PRINTFORML そして幾分かするとシャワーを浴びてきた%CALLNAME%がタオル一枚で彼の前に姿を現した。
+	PRINTFORML 彼の隣に座るとゆっくりと彼の身体を撫でながらもたれ掛かっていき、二人はベッドへ倒れこむ。
+	PRINTFORML %CALLNAME%はズボンからペニスを取り出すとそれはなかなかの一物で、それを美味しそうに見ながら舌なめずりをする。
+	PRINTFORML 興奮のあまり動けないでいる彼を見下ろしながら自らの秘所に彼の亀頭を押し当て、少しづつ女の聖域へと招待していく。
+	PRINTFORML 根本まで食い込む頃には子宮口まで犯され、交尾の図式が成されてしまう。
 	PRINTFORML 
-	PRINTFORML ���@�I�ł��邪�w���I�ł�����𗬂ɓ�l�����������̂��z������Ȃ��A
-	PRINTFORML ���߂Ă̐����͖�ʂ��s��ꂽ�c
+	PRINTFORML 合法的であるが背徳的でもある交流に二人が酔いしれるのも想像難しくなく、
+	PRINTFORML 初めての性交渉は夜通し行われた…
 	PRINTFORML 
-	PRINTFORML �y��l�̊֌W�����̂ɂ܂ŋy�񂾁c�z
+	PRINTFORML 【二人の関係が肉体にまで及んだ…】
 	PRINTFORML 
-	SIF CSTR:�����������薼 == ""
-		CSTR:�����������薼 = �x���Z��̐N
-	SIF CSTR:���L�X���薼 == "" 
-		CSTR:���L�X���薼 = �x���Z��̐N
-	SIF CSTR:���������薼 =="" 
-		CSTR:���������薼 = �x���Z��̐N
-	SIF CSTR:���t�F�����薼 ==""
-		CSTR:���t�F�����薼 = �x���Z��̐N
-	SIF CSTR:���`���������薼 ==""
-		CSTR:���`���������薼 = �x���Z��̐N
-	SIF CSTR:���Ⓒ���薼 ==""
-		CSTR:���Ⓒ���薼 = �x���Z��̐N
-	SIF CSTR:�����o�����薼 ==""
-		CSTR:�����o�����薼 = �x���Z��̐N
+	SIF CSTR:初えっち相手名 == ""
+		CSTR:初えっち相手名 = 支援住宅の青年
+	SIF CSTR:初キス相手名 == "" 
+		CSTR:初キス相手名 = 支援住宅の青年
+	SIF CSTR:初精飲相手名 =="" 
+		CSTR:初精飲相手名 = 支援住宅の青年
+	SIF CSTR:初フェラ相手名 ==""
+		CSTR:初フェラ相手名 = 支援住宅の青年
+	SIF CSTR:初Ａえっち相手名 ==""
+		CSTR:初Ａえっち相手名 = 支援住宅の青年
+	SIF CSTR:初絶頂相手名 ==""
+		CSTR:初絶頂相手名 = 支援住宅の青年
+	SIF CSTR:初中出し相手名 ==""
+		CSTR:初中出し相手名 = 支援住宅の青年
 	
-	TALENT:�񏈏� = 1
-	TCVAR:����_EXP_�����r�� = 1
-	EXP:�u�o�� += (RAND:5+1)+1
-	EXP:�����o�� += (RAND:5+1)+1
-	EXP:�S�ˌo�� += (RAND:2+1)+1
-	EXP:��d���y�o�� += (RAND:3+1)+1
-ELSEIF CFLAG:�x��_����_�i�W == 20
-	PRINTFORML ���ƈ���Ƃ����֌W�ɂȂ������A���̃L�X�ȍ~���̓I��V�͂��Ă��Ȃ��B
-	PRINTFORML ������Ȃ̂��ނ��B��ăI�i�j�[���Ă���A���_�ϑz�Ώۂ�%CSTR:��l��%���낤�B
-	PRINTFORML ������������X���Ƃ͎v�����A�J�낻������������߂Ă��邱�Ƃɂ�����҂�D�z�����������B
-	PRINTFORML �c��������������΁c�c�����v�����Ƃ������Ȃ�A�����č������̋@��K�ꂽ�B
+	TALENT:非処女 = 1
+	TCVAR:履歴_EXP_処女喪失 = 1
+	EXP:Ｖ経験 += (RAND:5+1)+1
+	EXP:性交経験 += (RAND:5+1)+1
+	EXP:膣射経験 += (RAND:2+1)+1
+	EXP:奉仕快楽経験 += (RAND:3+1)+1
+ELSEIF CFLAG:支援_密会_進展 == 20
+	PRINTFORML あと一歩という関係になったが、あのキス以降肉体的交遊はしていない。
+	PRINTFORML だからなのか彼が隠れてオナニーしている、無論妄想対象は%CSTR:一人称%だろう。
+	PRINTFORML しかしそれを醜いとは思えず、寧ろそれ程自分を求めていることにちょっぴり優越感があった。
+	PRINTFORML …きっかけがあれば……そう思うことが多くなり、そして今日その機会が訪れた。
 	PRINTFORML 
-	PRINTFORML ��������ނ͑傫�Ȏd����C�����炵��
+	PRINTFORML 今日から彼は大きな仕事を任されるらしい
 	PRINTFORMW 
-	PRINTFORML �d���̏��������Ă���ނ̔w��ɋߊ��A�����Ƃ�����|����B
+	PRINTFORML 仕事の準備をしている彼の背後に近寄り、そっともたれ掛かる。
 	PRINTFORML 
-	PRINTFORML �����ނ𑼏���%CALLNAME%�͌���������ɋ߂Â����������B
-	PRINTFORML �u���x�̂��d�������ł�����c�c�u���J���v������%UNICODE(0x2661)%�v
-	PRINTFORML �����Ȃ�̗����̒�R�A������肭�����Ȃ������炱�̔C���痣���B
-	PRINTFORML �c�����A�������������̂Ȃ�c�c
+	PRINTFORML 驚く彼を他所に%CALLNAME%は口先を耳元に近づきこう囁く。
+	PRINTFORML 「今度のお仕事成功できたら……「ご褒美」あげる%UNICODE(0x2661)%」
+	PRINTFORML 自分なりの理性の抵抗、もし上手くいかなかったらこの任から離れる。
+	PRINTFORML …だが、もし成功したのなら……
 	PRINTFORML 
-	PRINTFORML �y��l�̊֌W�������[�܂����悤���c�z
+	PRINTFORML 【二人の関係が少し深まったようだ…】
 	PRINTFORML 
-ELSEIF CFLAG:�x��_����_�i�W == 15
-	PRINTFORML �c�c��͂莩���͔ނɏ��Ƃ��Č����Ă���c
-	PRINTFORML �����̌𗬂ł�����m�M����%CALLNAME%�̓N�X���Ɣ��΂ށB
-	PRINTFORML �Ђ��ނ��Ȏp�����x�����Ă���%CALLNAME%�Ƃ��Ă͂��̍D�ӂ��S�n�ǂ������̂��B
-	PRINTFORML �����������̒Ⴂ�����Ƃ��ẮA���I�Ȃ��̂��낤�Ƌ��߂���Ɖ����Ă��܂��X���ɂ���B
-	PRINTFORML �����u�v���C���[�v�̂��߂ɂ�����߂�ׂ����c�c���₷����X���������B
+ELSEIF CFLAG:支援_密会_進展 == 15
+	PRINTFORML ……やはり自分は彼に女として見られている…
+	PRINTFORML 毎日の交流でこれを確信した%CALLNAME%はクスリと微笑む。
+	PRINTFORML ひたむきな姿を何度も見ている%CALLNAME%としてはその好意が心地良かったのだ。
+	PRINTFORML 元来モラルの低い自分としては、性的なものだろうと求められると応じてしまう傾向にある。
+	PRINTFORML だが「プレイヤー」のためにもうやめるべきか……反問する日々が続いた。
 	PRINTFORMW 
-	PRINTFORML �Y�ݑ����Ă���������A�Ƃ���j���Ŏ������ނ��ƂɂȂ����̂����A���ꂪ������ɐ����Ă��܂����B
-	PRINTFORML �����Č݂��ɔM�ɕ������ꂽ�悤�ɋ������k�߁A�����ƌ��Â������킷�B
-	PRINTFORML �n�b�ƂȂ��ċ����𗣂����A�����ɖ��ӎ��ɔނ����߂Ă��邱�Ƃ����o���Ă��܂��B
-	PRINTFORML �ނ̕��͖{�C�������悤�Łw�D���ł��x�ƃX�g���[�g�ɍ�������Ă��܂����B
-	PRINTFORML %CSTR:��l��%�͂��ɐS��������Ă��܂��A�v�킸�Ԗʂ��������B
-	PRINTFORML �c���������Ȃ���������Ȃ��c
+	PRINTFORML 悩み続けていたある日、とある祝いで酒を飲むことになったのだが、これがいい具合に酔ってしまった。
+	PRINTFORML そして互いに熱に浮かされたように距離を縮め、そっと口づけを交わす。
+	PRINTFORML ハッとなって距離を離すが、同時に無意識に彼を求めていることを自覚してしまう。
+	PRINTFORML 彼の方は本気だったようで『好きです』とストレートに告白されてしまった。
+	PRINTFORML %CSTR:一人称%はついに心動かされてしまい、思わず赤面して頷く。
+	PRINTFORML …もうもたないかもしれない…
 	PRINTFORML 
-	PRINTFORML �y��l�̊֌W�������[�܂����悤���c�z
+	PRINTFORML 【二人の関係が少し深まったようだ…】
 	PRINTFORML 
-	EXP:�L�X�o�� += 1
-ELSEIF CFLAG:�x��_����_�i�W == 10
-	PRINTFORML �ŋߐN����M��������������c�B
-	PRINTFORML ����������%CALLNAME%�͔ނɎ����𑗂�ƁA�N�̓o�c���������Ɋ����炷�B
-	PRINTFORML �c�c���������Ȃ��Ă��D�ӂ�������Ă���̂��낤�A�ܘ_�ِ����̗ނŁB
+	EXP:キス経験 += 1
+ELSEIF CFLAG:支援_密会_進展 == 10
+	PRINTFORML 最近青年から熱い視線を感じる…。
+	PRINTFORML そう感じる%CALLNAME%は彼に視線を送ると、青年はバツが悪そうに顔を逸らす。
+	PRINTFORML ……もしかしなくても好意を持たれているのだろう、勿論異性愛の類で。
 	PRINTFORML 
-	PRINTFORML �{���Ȃ狗����u���ׂ��Ȃ̂��낤���A���̂����̋C�ɂȂ�Ȃ��B
-	PRINTFORML �]����%CALLNAME:MASTER%�̎p����������A���̐����̐S�n�悳�͍R����B
-	PRINTFORML �����ꐶ�����ɓw�͂���ނ̎p�����Ă���Ǝx���Ă��������Ǝv���Ă��܂��̂��B
-	PRINTFORML ���̔C���~�߂邩�ۂ��c�c���߂Ɍ��߂�����������������Ȃ�
+	PRINTFORML 本来なら距離を置くべきなのだろうが、何故かその気になれない。
+	PRINTFORML 脳裏に%CALLNAME:MASTER%の姿がちらつくも、今の生活の心地よさは抗い難い。
+	PRINTFORML 何より一生懸命に努力する彼の姿を見ていると支えてあげたいと思ってしまうのだ。
+	PRINTFORML この任を止めるか否か……早めに決めた方がいいかもしれない
 	PRINTFORML 
-	PRINTFORML �y��l�̊֌W�������[�܂����悤���c�z
+	PRINTFORML 【二人の関係が少し深まったようだ…】
 	PRINTFORML 
-ELSEIF CFLAG:�x��_����_�i�W == 5
-	PRINTFORML �N��%CALLNAME%�̌𗬂�����n�߂����c�B
-	PRINTFORML %CALLNAME%�̌��g�������ĐN�̊�ɂ��Ί炪�����邱�Ƃ������Ȃ����B
-	PRINTFORML �ŋ߂ł͎d���ɂ��A���悤�ɂȂ�A�ނ̐l���ɂ������������n�߂��悤���B
-	PRINTFORML �w����������%CALLNAME%����̂������x�ƏƂ�L�����Ɋ��ӂ̌��t��%CALLNAME%�ɑ���B
-	PRINTFORML %CALLNAME%��%CALLNAME%�ōb�オ�������Ƃ܂񂴂�ł��Ȃ������ɔ��΂񂾁c
+ELSEIF CFLAG:支援_密会_進展 == 5
+	PRINTFORML 青年と%CALLNAME%の交流も慣れ始めた頃…。
+	PRINTFORML %CALLNAME%の献身もあって青年の顔にも笑顔が見せることも多くなった。
+	PRINTFORML 最近では仕事にも就くようになり、彼の人生にも光明が見え始めたようだ。
+	PRINTFORML 『それもこれも%CALLNAME%さんのおかげ』と照れ臭そうに感謝の言葉を%CALLNAME%に送る。
+	PRINTFORML %CALLNAME%も%CALLNAME%で甲斐があったとまんざらでもなさそうに微笑んだ…
 	PRINTFORML 
-	PRINTFORML �y��l�̊֌W�������[�܂����悤���c�z
+	PRINTFORML 【二人の関係が少し深まったようだ…】
 	PRINTFORML 
-ELSEIF CFLAG:�x��_����_�i�W == 0
-	PRINTFORML %CALLNAME%���C�����ꂽ�Z��֕����ƁA��l�̐N���ޏ������������ꂽ�B
-	PRINTFORML ��ʂ舥�A���ς܂��Ă���ނ��ώ@����A�ꌩ�D���C�Ȉ�ۂ��󂯂邪�A�\��͂ǂ������ς������B�ꂵ�Ă���B
-	PRINTFORML �Â����R�𕷂����Ƃ���A��������̑����ŉƑ��ƉƂ��������炵���B
-	PRINTFORML �������ޔނ�%CALLNAME%�͂���ƂȂ���܂��A�����Ďx���̏ڍׂ�`����Ƃɓ���B
+ELSEIF CFLAG:支援_密会_進展 == 0
+	PRINTFORML %CALLNAME%が任命された住宅へ赴くと、一人の青年が彼女を向かい入れた。
+	PRINTFORML 一通り挨拶を済ましてから彼を観察する、一見優し気な印象を受けるが、表情はどこか諦観が見え隠れしている。
+	PRINTFORML 暗い理由を聞いたところ、何かしらの騒動で家族と家を失ったらしい。
+	PRINTFORML 落ち込む彼を%CALLNAME%はそれとなく励まし、続いて支援の詳細を伝え作業に入る。
 	PRINTFORML 
-	PRINTFORML �y��������%CALLNAME%�̐V�����Ɩ����n�܂����c�z
+	PRINTFORML 【今日から%CALLNAME%の新しい業務が始まった…】
 	PRINTFORML 
 ELSE
-	PRINTFORML %CALLNAME%�͐N�̐����x�������A�ނƒk�΂��Ă���c
+	PRINTFORML %CALLNAME%は青年の生活支援をしつつ、彼と談笑している…
 ENDIF 
 
-SIF RAND:100 >= 20 && CFLAG:�x��_����_�i�W >= 40
+SIF RAND:100 >= 20 && CFLAG:支援_密会_進展 >= 40
 	CALL TURN_EVENT_F_7_2
 RESETCOLOR
 
-CFLAG:�x��_����_�i�W += 1
+CFLAG:支援_密会_進展 += 1
 
 
 ;-------------------------------------------------
-;�x���Z��C�x���g����
+;支援住宅イベント密会
 ;-------------------------------------------------
 @TURN_EVENT_F_7_2
 #DIM L_TMP
 #DIM L_VAL
 
 
-L_TMP = CFLAG:�댯��
+L_TMP = CFLAG:危険日
 L_VAL = (DAY % 7)
 
-;�R���Ɉ��댯��
+;３日に一回危険日
 L_TMP /= 2
 L_VAL /= 2
 
 
 DRAWLINE
-;�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ėp�䎌�J�n�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
 		IF !RAND:10
-		PRINTFORML �u�S�����c�c��������c%UNICODE(0x2661)%�c�c�������c�������������͂����%UNICODE(0x2661)%�v
+		PRINTFORML 「膣内っ……こすれっ…%UNICODE(0x2661)%……あぁっ…あっあっあっはぁんっ%UNICODE(0x2661)%」
 		ELSEIF !RAND:9
-		PRINTFORML �u�c���c������c%UNICODE(0x2661)%�c�c�Y���Y���c�c�˂���c���c�c%UNICODE(0x2661)%�v
+		PRINTFORML 「…後ろ…からっ…%UNICODE(0x2661)%……ズンズン……突かれ…っ……%UNICODE(0x2661)%」
 		ELSEIF !RAND:8
-		PRINTFORML �u���͂�%UNICODE(0x2661)%�c�c�͂��c����c�c�������c%UNICODE(0x2661)%�v
+		PRINTFORML 「あはっ%UNICODE(0x2661)%……はっ…んっ……くあっ…%UNICODE(0x2661)%」
 		ELSEIF !RAND:7
-		PRINTFORML �u����c�����c�c���c�ӂ����c�c�c%UNICODE(0x2661)%�v
+		PRINTFORML 「んっ…あっ……っ…ふぁっ………%UNICODE(0x2661)%」
 		ELSEIF !RAND:6
-		PRINTFORML �u�������������������c�c�񂟂����I�c%UNICODE(0x2661)%�v
+		PRINTFORML 「ぁっあっぁっああっ……んぁあっ！…%UNICODE(0x2661)%」
 		ELSEIF !RAND:5
-		PRINTFORML �u�c�������c�����c�S���Łc�R�c�����c�Ă��c�c%UNICODE(0x2661)%�v
+		PRINTFORML 「…ぅあっ…ぁっ…膣内で…コツンっ…てっ……%UNICODE(0x2661)%」
 		ELSEIF !RAND:4
-		PRINTFORML �u�������c�āc��%UNICODE(0x2661)%�c���������I�c������c�͂��������I%UNICODE(0x2661)%�v
+		PRINTFORML 「当たっ…て…っ%UNICODE(0x2661)%…ああぁっ！…あんっ…はぁあぁっ！%UNICODE(0x2661)%」
 		ELSEIF !RAND:3
-		PRINTFORML �u�񂟂����c�c�͂��c�c���c�����c�ς��c�c�o���c���͂�������c��v
+		PRINTFORML 「んぁあっ……はっ……ぃ…いっ…ぱい……出し…っはぁぁんっ…♪」
 		ELSEIF !RAND:2
-		PRINTFORML �u�ӂ����I�c�c����c��������c�c���c���͂�%UNICODE(0x2661)%�v
+		PRINTFORML 「ふぁっ！……んっ…んっあっ……ぁ…あはっ%UNICODE(0x2661)%」
 		ELSE
-		PRINTFORML �u�c�b�C�����c�c�����c�悷�c���c%UNICODE(0x2661)%�c�c�C��������c�ЂႠ������%UNICODE(0x2661)%�v
+		PRINTFORML 「…ッ気持ち……ぁっ…よす…ぎ…%UNICODE(0x2661)%……イっちゃっ…ひゃあぁあっ%UNICODE(0x2661)%」
 		ENDIF
-;�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�ėp�䎌�I���\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	IF RAND:7 == 0 && TALENT:�m�s�q�x == 1
-		PRINTFORML �ނ��d���֘A�ŗ�������ł���̂��܂����߂ɁA���ʂɔr���܂�����ŃZ�b�N�X�ɋy�ԁB
-		PRINTFORML �����x�΂��郂�m�����邱�ƁA���̎��]��ł��鏗�����邱�ƁA�����������Ś�����A�ނ͎���ɓ��������������Ă����B
-		PRINTFORML �����Đ���������f�B�[�v�L�X�����킵�A�Ίۂɗ��߂�ꂽ�s�܂��`���q�{�ւƂ���ł����ƒ������񂾁B
-		PRINTFORML �������Ȃ��悤��%CALLNAME%�͔ނ̍��ɑ��𗍂܂��A���t�𒚔J�ɑقւƈ��ݍ���ł����B
-		PRINTFORMW �{�C�̌���͒��ɂȂ��Ă������A����܂œ�l�����̕����ɛg�����~�ނ��Ƃ͂Ȃ����c
-	ELSEIF RAND:6 == 0 && TALENT:�m�s�q�x == 1
-		PRINTFORML �����S���ŃZ�b�N�X�����Ă������A�������s�ׂɂ͑ς��؂�Ȃ��悤�Œm�ꂸ�r���r���ɔj��Ă��܂��B
-		PRINTFORML ��l�͂���ɋC�Â�������𑱂��A���̂܂ܒ��o�������Ƃ���ň�a���ɋC�Â��B
-		PRINTFORML ���������Ă݂�Ɠ��_���Z���Ȑ��t�𐂂炵�Ȃ���p�������A����͌����Ɏ�t�����������Ă����B
-		PRINTFORMW �ӂ�ނ�G�߂A�u�������邩�炽�܂ɂ��悤�v�ƒ����S���͈Ȍ���g���邱�ƂƂȂ����c
-	ELSEIF RAND:5 == 0 && TALENT:�m�s�q�x == 1
-		PRINTFORML �C����ς��悤�Ɠ�l�Ń��u�z�e���ɗ����̂͂������̂́A������Ă������S�����g���؂��Ă��܂����B
-		PRINTFORML ����ł����~�����߂���Ȃ��ނ����āA%CALLNAME%�͓��ʂɐ��Z�b�N�X�������邱�ƂɁB
-		PRINTFORML �v�������Ȃ��W�J�ɐ��~�𔚔��������ނ�%CALLNAME%�ɕ������Ԃ���ƁA������ĊJ�����B
-		PRINTFORMW �q�{���q��Ŗ��ߐs�������͎̂��Ԃ̖��ł������c
-	ELSEIF RAND:4 == 0 && TALENT:�m�s�q�x == 1
-		PRINTFORML �����͔ނ��撣�������J���Ƃ��ăS���Ȃ��Z�b�N�X�����Ă���B
-		PRINTFORML �����S����Ƃ���c�����Ďq�{�Ɏ���̈�`�q�����ݍ��߂�ƁA�ނ͋�����߂��ʂ悤�ɍ��𓮂���������B
-		PRINTFORML �����ĔM�����t���q�{���ŉ����������ƁA��t���̉����ɂԂ�Ԃ�Ɛk����ނ������ƕ��i�����B
-		PRINTFORMW ���Ƃ��Ă��̗Y�����}����悤�ɁA�ق𔒂����߂Ă������c
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+	IF RAND:7 == 0 && TALENT:ＮＴＲ度 == 1
+		PRINTFORML 彼が仕事関連で落ち込んでいるのを励ますために、特別に排卵剤を飲んでセックスに及ぶ。
+		PRINTFORML 女を悦ばせるモノがあること、その種を望んでいる女がいること、それらを耳元で囁かれ、彼は次第に動きを激しくしていく。
+		PRINTFORML そして舌も交えたディープキスを交わしつつ、睾丸に溜められた孕ませ汁を子宮へとこれでもかと注ぎ込んだ。
+		PRINTFORML 逃がさないように%CALLNAME%は彼の腰に足を絡ませ、精液を丁寧に胎へと飲み込んでいく。
+		PRINTFORMW 本気の交尾は朝になっても続き、それまで二人だけの部屋に嬌声が止むことはなった…
+	ELSEIF RAND:6 == 0 && TALENT:ＮＴＲ度 == 1
+		PRINTFORML 超薄ゴムでセックスをしていたが、激しい行為には耐え切れないようで知れずビリビリに破れてしまう。
+		PRINTFORML 二人はそれに気づかず交尾を続け、そのまま中出ししたところで違和感に気づく。
+		PRINTFORML 引き抜いてみると肉棒が濃厚な精液を垂らしながら姿を現し、それは見事に種付けが完了していた。
+		PRINTFORMW 謝る彼を宥めつつ、「興奮するからたまにしよう」と超薄ゴムは以後も使われることとなった…
+	ELSEIF RAND:5 == 0 && TALENT:ＮＴＲ度 == 1
+		PRINTFORML 気分を変えようと二人でラブホテルに来たのはいいものの、常備してあったゴムを使い切ってしまった。
+		PRINTFORML それでも性欲を治めきれない彼を見て、%CALLNAME%は特別に生セックスを許可することに。
+		PRINTFORML 思いがけない展開に性欲を爆発させた彼は%CALLNAME%に覆いかぶさると、交尾を再開した。
+		PRINTFORMW 子宮が子種で埋め尽くされるのは時間の問題であった…
+	ELSEIF RAND:4 == 0 && TALENT:ＮＴＲ度 == 1
+		PRINTFORML 今日は彼が頑張ったご褒美としてゴムなしセックスをしている。
+		PRINTFORML 生の膣内を犯せる…そして子宮に自らの遺伝子を刻み込めると、彼は興奮冷めやらぬように腰を動かし続ける。
+		PRINTFORML そして熱い精液が子宮内で解き放たれると、種付けの快感にぶるぶると震える彼をそっと抱擁した。
+		PRINTFORMW 雌としてこの雄を歓迎するように、胎を白く染めていった…
 	ELSEIF RAND:3 == 0
-		PRINTFORML ������%CALLNAME%���ނɌׂ�`�ō�������ɐU���Ă���B
-		PRINTFORML �����b������Ă��邨�Ԃ����A�p�`���p�`���Ƌ��������𗧂Ă���s�X�g����ł�������B
-		PRINTFORMW �Ȃ�Ƃ��ς��悤�Ƃ��Ă���p�Ƀ]�N�]�N���Ȃ���ނ�Ƃ��Ă������c
+		PRINTFORML 珍しく%CALLNAME%が彼に跨る形で腰を淫らに振っている。
+		PRINTFORML 日頃喘がされているお返しか、パチュパチュと強い水音を立てる程ピストンを打ち続ける。
+		PRINTFORMW なんとか耐えようとしている姿にゾクゾクじながら彼を犯していった…
 	ELSEIF RAND:2 == 0
-		PRINTFORML %CALLNAME%�͌�w�ʂ̑̐��œ��_�ŗe�͂Ȃ��Ƃ����B
-		SIF TALENT:����  || TALENT:����
-			PRINTFORML �ł��t����x�Ɍ����ȑo�����Ԃ��Ɨh��A���΂Ɍ`��ς��Ă����B
-		PRINTFORML �N�������₷���̐��ׂ̈��A������蓮�����������M��ł���B
-		PRINTFORMW ���߂��Ă��邱�Ƃɍ��g���A%CALLNAME%�͂���ɛg�����グ�������c
+		PRINTFORML %CALLNAME%は後背位の体勢で肉棒で容赦なく犯される。
+		SIF TALENT:巨乳  || TALENT:爆乳
+			PRINTFORML 打ち付ける度に見事な双乳がぶるんと揺れ、卑猥に形を変えていく。
+		PRINTFORML 青年が動きやすい体勢の為か、いつもより動きが激しく熱烈である。
+		PRINTFORMW 求められていることに高揚しつつ、%CALLNAME%はさらに嬌声を上げ続けた…
 	ELSE
-		PRINTFORML �N�ɐg��a���A�ނ̌����ȃs�X�g����%CALLNAME%�͗���Ȃ���b���B
-		PRINTFORML ������̐����т�T��悤�ɓ�������ς��A�q�{�S�̂�O����ɔƂ��Ă����B
-		PRINTFORMW �V�N�ȉ�����%CALLNAME%�͐Ⓒ�����x���J��Ԃ����c
+		PRINTFORML 青年に身を預け、彼の懸命なピストンで%CALLNAME%は乱れながら喘ぐ。
+		PRINTFORML こちらの性感帯を探るように動き方を変え、子宮全体を念入りに犯していく。
+		PRINTFORMW 新鮮な快感に%CALLNAME%は絶頂を何度も繰り返した…
 	ENDIF
 
 
 
-;�D�P
-IF L_TMP == L_VAL && RAND:10 >= 3 && FLAG:�D�P�@�\ == 1 && TALENT:�m�s�q�x == 1 && TALENT:�� == 0 && TALENT:�D�P == 0
-	TALENT:�� += 1
-	CFLAG:�D�P�t���O = 70
-	SIF Talent:�S�� == 1 || Talent:���l == 1 || Talent:��w == 1
-		TALENT:�� = 1
+;妊娠
+IF L_TMP == L_VAL && RAND:10 >= 3 && FLAG:妊娠機能 == 1 && TALENT:ＮＴＲ度 == 1 && TALENT:受精 == 0 && TALENT:妊娠 == 0
+	TALENT:受精 += 1
+	CFLAG:妊娠フラグ = 70
+	SIF Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1
+		TALENT:被托卵 = 1
 	PRINTFORML
 	PRINTFORML
 	PRINTFORML
-	PRINTFORML �y�N�̎q���󐸂��܂����c�z
+	PRINTFORML 【青年の子を受精しました…】
 	PRINTFORML
 	PRINTFORML
 	PRINTFORMW
@@ -297,6 +297,6 @@ ENDIF
 
 
 
-CFLAG:�x��_����_���s�� += 1
+CFLAG:支援_密会_性行為 += 1
 CALL JN_SEX_EXP
 

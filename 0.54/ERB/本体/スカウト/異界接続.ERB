@@ -1,17 +1,17 @@
+﻿;===============================================================================
 ;===============================================================================
-;===============================================================================
-;�يE�ڑ�
+;異界接続
 ;===============================================================================
 ;===============================================================================
 ;=================================================
 ;   sub CHARACTER_SCOUT_POS
 ;=================================================
-;   DB:EXPUP�ʒu
+;   DB:EXPUP位置
 ;-------------------------------------------------
 ; Input:
-;  ARGS					�Ώےl
+;  ARGS					対象値
 ; Output:
-;  RETURNF				�ʒu
+;  RETURNF				位置
 ;-------------------------------------------------
 @WORLD_CONNECT(ARG:0)
 #DIM L_INPUT
@@ -24,14 +24,14 @@ $INPUT_LOOP
 L_NM = 0
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML ��R�[�h���g�p���يE�l�̏��𒊏o���A�V���ɏZ���𐶐����܂���
-PRINTFORML �Ꮲ���ɂ������ēs�sLv�Ǝ������K�v�ł��̂Œ��ӂ��ĉ�������
+PRINTFORML ≪コードを使用し異界人の情報を抽出し、新たに住民を生成します≫
+PRINTFORML ≪召喚にあたって都市Lvと資金が必要ですので注意して下さい≫
 DRAWLINE
-PRINTFORML ���ŗL�L�����̔ԍ�����͂��ĉ�����(��@�N���[�t�B������1100)
-PRINTFORML �@��������L�����̃X�y�b�N�������قǗv�������s�sLv�E�����������Ȃ�܂��B
-PRINTFORML �y���ӁI�z���݂��Ȃ��ԍ�����͂���ƃG���[�ɂȂ�܂��B
+PRINTFORML ※固有キャラの番号を入力して下さい(例　クローフィ召喚→1100)
+PRINTFORML 　召喚するキャラのスペックが高いほど要求される都市Lv・資金が高くなります。
+PRINTFORML 【注意！】存在しない番号を入力するとエラーになります。
 PRINTFORML 
-PRINTFORML [999] �߂�
+PRINTFORML [999] 戻る
 PRINTFORML 
 CALL CHANGE_CHILD_BODY
 INPUT
@@ -47,13 +47,13 @@ CASE 1
 	GOTO INPUT_LOOP
 CASEELSE
 	IF !EXISTCSV(L_M)
-		PRINTFORMW ��c�c�c�cerror code:404 world not found��
-		PRINTFORML �ᕽ�s���E���C�u�����ɊY������A�h���X���o�^����Ă��܂����
-		PRINTFORMW �Ꮲ���v���g�R���𒆒f���܂���
+		PRINTFORMW ≪…………error code:404 world not found≫
+		PRINTFORML ≪平行世界ライブラリに該当するアドレスが登録されていません≫
+		PRINTFORMW ≪召喚プロトコルを中断します≫
 		GOTO INPUT_LOOP
 	ELSEIF FINDCHARA(NO:0, L_M) > 0
-		PRINTFORML ��u�v���C���[�v�A�Ώی̂͊��ɐ����ς݂ł���
-		PRINTFORMW �Ꮲ���v���g�R���𒆒f���܂���
+		PRINTFORML ≪「プレイヤー」、対象個体は既に生成済みです≫
+		PRINTFORMW ≪召喚プロトコルを中断します≫
 		GOTO INPUT_LOOP
 	ENDIF
 	CALL CHARACTER_NPC_SCOUT1(ARG:0)

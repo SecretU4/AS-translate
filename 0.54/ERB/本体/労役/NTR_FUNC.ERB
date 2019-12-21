@@ -1,27 +1,27 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:NTR_FUNC.ERB
-;	Facility	:‚m‚s‚qŠÖ”’u‚«êB
+;	Facility	:ï¼®ï¼´ï¼²é–¢æ•°ç½®ãå ´ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- xxxx
 ;
-;	E NTR_CALC							NTR:ŒvŽZ
-;	E NTR_LV							NTR:LV
-;	E NTR_SET_‚m‚s‚q“x					NTR:ƒZƒbƒg(‚m‚s‚q“x)
+;	ãƒ» NTR_CALC							NTR:è¨ˆç®—
+;	ãƒ» NTR_LV							NTR:LV
+;	ãƒ» NTR_SET_ï¼®ï¼´ï¼²åº¦					NTR:ã‚»ãƒƒãƒˆ(ï¼®ï¼´ï¼²åº¦)
 ;
 ;===============================================================================
 
@@ -32,11 +32,11 @@
 ;=================================================
 ;   sub NTR_CALC
 ;=================================================
-;   NTR:ŒvŽZ
+;   NTR:è¨ˆç®—
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒLƒƒƒ‰
-;  ARG:1				‰ÁŽZ’l
+;  ARG:0				ã‚­ãƒ£ãƒ©
+;  ARG:1				åŠ ç®—å€¤
 ;-------------------------------------------------
 @NTR_CALC(ARG:0, ARG:1)
 #DIM L_T
@@ -45,7 +45,7 @@
 L_T = ARG:0
 L_TMP = ARG:1
 
-LOCALS = ‚m‚s‚qDŠ´“x
+LOCALS = ï¼®ï¼´ï¼²å¥½æ„Ÿåº¦
 SIF CFLAG:L_T:LOCALS
 	CFLAG:L_T:LOCALS = MAX(0, CFLAG:L_T:LOCALS + L_TMP)
 
@@ -57,7 +57,7 @@ SIF CFLAG:L_T:LOCALS
 ;   NTR:LV
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒLƒƒƒ‰
+;  ARG:0				ã‚­ãƒ£ãƒ©
 ;-------------------------------------------------
 @NTR_LV(ARG:0)
 #FUNCTION
@@ -67,20 +67,20 @@ SIF CFLAG:L_T:LOCALS
 L_T = ARG:0
 
 L_LV = 0
-SELECTCASE CFLAG:L_T:‚m‚s‚qDŠ´“x
-	;‰ï˜b
+SELECTCASE CFLAG:L_T:ï¼®ï¼´ï¼²å¥½æ„Ÿåº¦
+	;ä¼šè©±
 	CASE IS < 100
 		L_LV = 0
-	;‹qŽº
+	;å®¢å®¤
 	CASE IS < 300
 		L_LV = 1
-	;—ê‘®
+	;éš·å±ž
 	CASE IS < 600
 		L_LV = 2
-	;Š×—Ž
+	;é™¥è½
 	CASE IS < 1000
 		L_LV = 3
-	;Ž¸çH
+	;å¤±è¸ª
 	CASEELSE
 		L_LV = -1
 ENDSELECT
@@ -89,33 +89,33 @@ RETURNF L_LV
 
 
 ;=================================================
-;   sub NTR_SET_‚m‚s‚q“x
+;   sub NTR_SET_ï¼®ï¼´ï¼²åº¦
 ;=================================================
-;   NTR:ƒZƒbƒg(‚m‚s‚q“x)
+;   NTR:ã‚»ãƒƒãƒˆ(ï¼®ï¼´ï¼²åº¦)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ƒLƒƒƒ‰
-;  ARG:1				ƒŒƒxƒ‹
+;  ARG:0				ã‚­ãƒ£ãƒ©
+;  ARG:1				ãƒ¬ãƒ™ãƒ«
 ;-------------------------------------------------
-@NTR_SET_‚m‚s‚q“x(ARG:0, ARG:1)
+@NTR_SET_ï¼®ï¼´ï¼²åº¦(ARG:0, ARG:1)
 #DIM L_T
 
 L_T = ARG:0
 
 SELECTCASE ARG:1
-	;‰ï˜b
+	;ä¼šè©±
 	CASE 0
 
-	;‹qŽº
+	;å®¢å®¤
 	CASE 1
 
-	;—ê‘®
+	;éš·å±ž
 	CASE 2
 
-	;Š×—Ž
+	;é™¥è½
 	CASE 3
-		SIF TALENT:L_T:‚m‚s‚q“x < 1
-			TALENT:L_T:‚m‚s‚q“x = 1
-	;Ž¸çH
+		SIF TALENT:L_T:ï¼®ï¼´ï¼²åº¦ < 1
+			TALENT:L_T:ï¼®ï¼´ï¼²åº¦ = 1
+	;å¤±è¸ª
 	CASEELSE
 ENDSELECT

@@ -1,32 +1,32 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SOURCE_CALC_ORGASM.ERB
-;	Facility	:SOURCE�֘A����(�Ⓒ�v�Z)�B
+;	Facility	:SOURCE関連処理(絶頂計算)。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
+;	001		20XX/XX/XX		----					新規作成
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	�E SRC_CALC_ORGASM_MAIN				SRC�v�Z:�Ⓒ(�又��)
-;	�E SRC_CALC_ORGASM_ADD				SRC�v�Z:�Ⓒ(�p�����[�^���Z)
-;	�E SRC_CALC_EJCT_POINT				SRC�v�Z:�ː��|�C���g
-;	�E LOG_ORGASM_MAIN					LOG�o��:�Ⓒ(�又��)
-;	�E LOG_ORGASM_SIGHT_MAIN			LOG�o��:�Ⓒ(��i - �又��)
-;	�E LOG_ORGASM_SIGHT_SLAVE_MAIN		LOG�o��:�Ⓒ(�z���i-�又��)
-;	�E LOG_ORGASM_SIGHT_MASTER_MAIN		LOG�o��:�Ⓒ(��l��i-�又��)
-;	�E LOG_ORGASM_SIGHT_MASTER_DETAIL	LOG�o��:�Ⓒ(��l��i-�ڍ�)
+;	・ SRC_CALC_ORGASM_MAIN				SRC計算:絶頂(主処理)
+;	・ SRC_CALC_ORGASM_ADD				SRC計算:絶頂(パラメータ加算)
+;	・ SRC_CALC_EJCT_POINT				SRC計算:射精ポイント
+;	・ LOG_ORGASM_MAIN					LOG出力:絶頂(主処理)
+;	・ LOG_ORGASM_SIGHT_MAIN			LOG出力:絶頂(情景 - 主処理)
+;	・ LOG_ORGASM_SIGHT_SLAVE_MAIN		LOG出力:絶頂(奴隷情景-主処理)
+;	・ LOG_ORGASM_SIGHT_MASTER_MAIN		LOG出力:絶頂(主人情景-主処理)
+;	・ LOG_ORGASM_SIGHT_MASTER_DETAIL	LOG出力:絶頂(主人情景-詳細)
 ;
 ;===============================================================================
 
@@ -37,7 +37,7 @@
 ;=================================================
 ;   sub SRC_CALC_ORGASM_MAIN
 ;=================================================
-;   SRC�v�Z:�Ⓒ(�又��)
+;   SRC計算:絶頂(主処理)
 ;-------------------------------------------------
 @SRC_CALC_ORGASM_MAIN
 #DIM L_I
@@ -45,7 +45,7 @@
 #DIM L_TMP
 #DIM L_MODE
 
-;�Ⓒ���[�h����(0:�C�L�����Ő��� 1:����) ���b��Ŗ����Œ���
+;絶頂モード制御(0:イキそうで制御 1:無し) ※暫定で無しで調整
 L_MODE = 1
 
 FOR L_I, 0, DEFTR_PL_NUM
@@ -55,48 +55,48 @@ FOR L_I, 0, DEFTR_PL_NUM
 	SIF L_T < 0
 		BREAK
 
-	L_TMP = TCVAR:L_T:�Ⓒ���Z�l
+	L_TMP = TCVAR:L_T:絶頂加算値
 
 	IF L_MODE
-		TCVAR:L_T:�C������ = 1
+		TCVAR:L_T:イきそう = 1
 	ENDIF
 
 	IF L_TMP
-		;- ���Z
-		BASE:L_T:�Ⓒ += L_TMP
+		;- 加算
+		BASE:L_T:絶頂 += L_TMP
 
 		;- CHK:MAX
-		IF BASE:L_T:�Ⓒ >= MAXBASE:L_T:�Ⓒ
-			;- ���ɃC�������ȏꍇ
-			IF TCVAR:L_T:�C������ > 0
+		IF BASE:L_T:絶頂 >= MAXBASE:L_T:絶頂
+			;- 既にイきそうな場合
+			IF TCVAR:L_T:イきそう > 0
 				;-----------------------------
-				;-- �Ⓒ
+				;-- 絶頂
 				;-----------------------------
-				TCVAR:L_T:�C������ = 0
+				TCVAR:L_T:イきそう = 0
 
-				;- SRC�v�Z:�Ⓒ(�p�����[�^���Z)
+				;- SRC計算:絶頂(パラメータ加算)
 				CALL SRC_CALC_ORGASM_ADD(L_T)
 
-				BASE:L_T:�Ⓒ %= MAXBASE:L_T:�Ⓒ
+				BASE:L_T:絶頂 %= MAXBASE:L_T:絶頂
 
 			ELSE
-				;- 1�^�[���p��
-				TCVAR:L_T:�C������ = 1
+				;- 1ターン継続
+				TCVAR:L_T:イきそう = 1
 			ENDIF
 		ENDIF
-	;�Ⓒ���Z����
+	;絶頂加算無し
 	ELSE
-		SIF TCVAR:L_T:�C������
-			TCVAR:L_T:�C������ --
+		SIF TCVAR:L_T:イきそう
+			TCVAR:L_T:イきそう --
 
-		;- �C�������Ŗ����ꍇ
-		IF !TCVAR:L_T:�C������
-			BASE:L_T:�Ⓒ = MIN(BASE:L_T:�Ⓒ, MAXBASE:L_T:�Ⓒ - 1)
+		;- イきそうで無い場合
+		IF !TCVAR:L_T:イきそう
+			BASE:L_T:絶頂 = MIN(BASE:L_T:絶頂, MAXBASE:L_T:絶頂 - 1)
 		ENDIF
 	ENDIF
 
 	IF L_MODE
-		TCVAR:L_T:�C������ = 0
+		TCVAR:L_T:イきそう = 0
 	ENDIF
 
 NEXT
@@ -104,10 +104,10 @@ NEXT
 ;=================================================
 ;   sub SRC_CALC_ORGASM_ADD
 ;=================================================
-;   SRC�v�Z:�Ⓒ(�p�����[�^���Z)
+;   SRC計算:絶頂(パラメータ加算)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
+;  ARG:0				対象者
 ;-------------------------------------------------
 @SRC_CALC_ORGASM_ADD(ARG:0)
 #DIM L_I
@@ -119,127 +119,127 @@ NEXT
 
 L_T = ARG:0
 
-L_TMP = BASE:L_T:�Ⓒ
+L_TMP = BASE:L_T:絶頂
 
-;- �v�Z:�Ⓒ���x
+;- 計算:絶頂強度
 SELECTCASE L_TMP
-	;2.5�{�ȏ�
-	CASE IS >= (FLAG:�ő�l_�Ⓒ * 250 / 100)
+	;2.5倍以上
+	CASE IS >= (FLAG:最大値_絶頂 * 250 / 100)
 		L_LV = 3
-	;1.5�{�ȏ�
-	CASE IS >= (FLAG:�ő�l_�Ⓒ * 150 / 100)
+	;1.5倍以上
+	CASE IS >= (FLAG:最大値_絶頂 * 150 / 100)
 		L_LV = 2
 	CASEELSE
 		L_LV = 1
 ENDSELECT
 
-TCVAR:L_T:�Ⓒ���x = L_LV
+TCVAR:L_T:絶頂強度 = L_LV
 
 ;-----------------------------
-;-- �e��\�[�X���Z
+;-- 各種ソース加算
 ;-----------------------------
 
-;- �Ⓒ
-;SOURCE:L_T:�Ⓒ = (L_LV * 500)
-SOURCE:L_T:�Ⓒ = 400 + (L_LV * 100)
+;- 絶頂
+;SOURCE:L_T:絶頂 = (L_LV * 500)
+SOURCE:L_T:絶頂 = 400 + (L_LV * 100)
 
-;�y�j�X�L��
+;ペニス有り
 IF VAR_PENIS(L_T)
 ;	L_VAL=(L_LV * 300)
 	L_VAL= 200 + (L_LV * 100)
 
-	L_TMP = TEQUIP:L_T:�y�j�X��L�҂P
-	IF !GROUPMATCH(L_TMP, [[�y�j�X��L��:����]], L_T)
-		SOURCE:L_TMP:���t += L_VAL
-		;- SRC�v�Z:�ː��|�C���g
-		CALL SRC_CALC_EJCT_POINT(L_TMP, TEQUIP:L_T:�y�j�X��L���ʂP, L_LV)
+	L_TMP = TEQUIP:L_T:ペニス占有者１
+	IF !GROUPMATCH(L_TMP, [[ペニス占有者:無し]], L_T)
+		SOURCE:L_TMP:精液 += L_VAL
+		;- SRC計算:射精ポイント
+		CALL SRC_CALC_EJCT_POINT(L_TMP, TEQUIP:L_T:ペニス占有部位１, L_LV)
 	ENDIF
 
-	L_TMP = TEQUIP:L_T:�y�j�X��L�҂Q
-	IF !GROUPMATCH(L_TMP, [[�y�j�X��L��:����]], L_T)
-		SOURCE:L_TMP:���t += L_VAL
-		;- SRC�v�Z:�ː��|�C���g
-		CALL SRC_CALC_EJCT_POINT(L_TMP, TEQUIP:L_T:�y�j�X��L���ʂQ, L_LV)
+	L_TMP = TEQUIP:L_T:ペニス占有者２
+	IF !GROUPMATCH(L_TMP, [[ペニス占有者:無し]], L_T)
+		SOURCE:L_TMP:精液 += L_VAL
+		;- SRC計算:射精ポイント
+		CALL SRC_CALC_EJCT_POINT(L_TMP, TEQUIP:L_T:ペニス占有部位２, L_LV)
 	ENDIF
 
-	;�u�ː���
-	IF TEQUIP:L_T:�y�j�X��L���ʂP == [[��L����:�u]]
-		L_TMP = TEQUIP:L_T:�y�j�X��L�҂P
-		CFLAG:MASTER:���q�o���l += 1
-		IF CFLAG:MASTER:���q�o���l >= ((CFlag:MASTER:���q���x��)*5)+CFlag:MASTER:���q���x��
-			CFLAG:MASTER:���q�o���l = 0
-			CFlag:MASTER:���q���x�� += 1
+	;Ｖ射精時
+	IF TEQUIP:L_T:ペニス占有部位１ == [[占有部位:Ｖ]]
+		L_TMP = TEQUIP:L_T:ペニス占有者１
+		CFLAG:MASTER:精子経験値 += 1
+		IF CFLAG:MASTER:精子経験値 >= ((CFlag:MASTER:精子レベル)*5)+CFlag:MASTER:精子レベル
+			CFLAG:MASTER:精子経験値 = 0
+			CFlag:MASTER:精子レベル += 1
 		ENDIF
-		;�D�P����
+		;妊娠処理
 		;CALL NINSIN_CHK(L_TMP, L_T, L_LV)
 	ENDIF
 
 ENDIF
 
 ;-----------------------------
-;- �Ⓒ�^�C�v����
+;- 絶頂タイプ判定
 ;-----------------------------
 L_VAL=1000
 IF 0
-;�y�j�X�L��
+;ペニス有り
 ELSEIF VAR_PENIS(L_T)
-	TCVAR:L_T:�Ⓒ�^�C�v = [[����:�o�ː�]]
-;;�u�Ƃ`�������B��
-;ELSEIF (CUP:L_T:���u >= L_VAL) && (CUP:L_T:���` >= L_VAL)
-;	TCVAR:L_T:�Ⓒ�^�C�v = [[����:�u�`�Ⓒ]]
-;�u���B��
-ELSEIF (CUP:L_T:���u >= L_VAL)
-	TCVAR:L_T:�Ⓒ�^�C�v = [[����:�u�Ⓒ]]
-;�`���B��
-ELSEIF (CUP:L_T:���` >= L_VAL)
-	TCVAR:L_T:�Ⓒ�^�C�v = [[����:�`�Ⓒ]]
-;�b���B��
-ELSEIF (CUP:L_T:���b >= L_VAL)
-	TCVAR:L_T:�Ⓒ�^�C�v = [[����:�b�Ⓒ]]
-;�a���B��
-ELSEIF (CUP:L_T:���a >= L_VAL)
-	TCVAR:L_T:�Ⓒ�^�C�v = [[����:�a�Ⓒ]]
-;�����@
+	TCVAR:L_T:絶頂タイプ = [[口上:Ｐ射精]]
+;;ＶとＡが両方達成
+;ELSEIF (CUP:L_T:快Ｖ >= L_VAL) && (CUP:L_T:快Ａ >= L_VAL)
+;	TCVAR:L_T:絶頂タイプ = [[口上:ＶＡ絶頂]]
+;Ｖが達成
+ELSEIF (CUP:L_T:快Ｖ >= L_VAL)
+	TCVAR:L_T:絶頂タイプ = [[口上:Ｖ絶頂]]
+;Ａが達成
+ELSEIF (CUP:L_T:快Ａ >= L_VAL)
+	TCVAR:L_T:絶頂タイプ = [[口上:Ａ絶頂]]
+;Ｃが達成
+ELSEIF (CUP:L_T:快Ｃ >= L_VAL)
+	TCVAR:L_T:絶頂タイプ = [[口上:Ｃ絶頂]]
+;Ｂが達成
+ELSEIF (CUP:L_T:快Ｂ >= L_VAL)
+	TCVAR:L_T:絶頂タイプ = [[口上:Ｂ絶頂]]
+;消去法
 ELSE
 	IF 0
-;	;�u�Ƃ`�ɒl�L��
-;	ELSEIF (CUP:L_T:���u) && (CUP:L_T:���`)
-;		TCVAR:L_T:�Ⓒ�^�C�v = [[����:�u�`�Ⓒ]]
-	;�u�ɒl�L��
-	ELSEIF (CUP:L_T:���u)
-		TCVAR:L_T:�Ⓒ�^�C�v = [[����:�u�Ⓒ]]
-	;�`�ɒl�L��
-	ELSEIF (CUP:L_T:���`)
-		TCVAR:L_T:�Ⓒ�^�C�v = [[����:�`�Ⓒ]]
-	;�a�ɒl�L��
-	ELSEIF (CUP:L_T:���a)
-		TCVAR:L_T:�Ⓒ�^�C�v = [[����:�a�Ⓒ]]
-	;����ȊO
+;	;ＶとＡに値有り
+;	ELSEIF (CUP:L_T:快Ｖ) && (CUP:L_T:快Ａ)
+;		TCVAR:L_T:絶頂タイプ = [[口上:ＶＡ絶頂]]
+	;Ｖに値有り
+	ELSEIF (CUP:L_T:快Ｖ)
+		TCVAR:L_T:絶頂タイプ = [[口上:Ｖ絶頂]]
+	;Ａに値有り
+	ELSEIF (CUP:L_T:快Ａ)
+		TCVAR:L_T:絶頂タイプ = [[口上:Ａ絶頂]]
+	;Ｂに値有り
+	ELSEIF (CUP:L_T:快Ｂ)
+		TCVAR:L_T:絶頂タイプ = [[口上:Ｂ絶頂]]
+	;それ以外
 	ELSE
-		TCVAR:L_T:�Ⓒ�^�C�v = [[����:�b�Ⓒ]]
+		TCVAR:L_T:絶頂タイプ = [[口上:Ｃ絶頂]]
 	ENDIF
 ENDIF
 
 ;;- DOWNBASE
-;DOWNBASE:L_T:�̗� -= 10
+;DOWNBASE:L_T:体力 -= 10
 
-;- PLAYER�ɏK��
-SOURCE:PLAYER:�K�� += (L_LV * 100)
+;- PLAYERに習得
+SOURCE:PLAYER:習得 += (L_LV * 100)
 
-;- EXP�֘A
-GTR_EXPUP:L_T:DB_EXPUP_POS("�Ⓒ�o��") += L_LV
+;- EXP関連
+GTR_EXPUP:L_T:DB_EXPUP_POS("絶頂経験") += L_LV
 
-TCVAR:L_T:�Ⓒ�� += L_LV
+TCVAR:L_T:絶頂回数 += L_LV
 
 ;=================================================
 ;   sub SRC_CALC_EJCT_POINT
 ;=================================================
-;   SRC�v�Z:�ː��|�C���g
+;   SRC計算:射精ポイント
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
-;  ARG:1				�y�j�X��L����
-;  ARG:2				�Ⓒ���x
+;  ARG:0				対象者
+;  ARG:1				ペニス占有部位
+;  ARG:2				絶頂強度
 ;-------------------------------------------------
 @SRC_CALC_EJCT_POINT(ARG:0, ARG:1, ARG:2)
 #DIM L_T
@@ -248,56 +248,56 @@ TCVAR:L_T:�Ⓒ�� += L_LV
 
 L_T = ARG:0
 L_TYPE = ARG:1
-L_RES = [[��L����:����]]
+L_RES = [[占有部位:無し]]
 
-;- CHK:��L����
+;- CHK:占有部位
 SELECTCASE L_TYPE
-	;�S���֎ː�
-	CASE [[��L����:�u]]
-		L_RES = [[����:��l�u�ː�]]
-		GTR_EXPUP:L_T:DB_EXPUP_POS("�S�ˌo��") += ARG:2
-		TCVAR:L_T:�q�{�ː��� += ARG:2
+	;膣奥へ射精
+	CASE [[占有部位:Ｖ]]
+		L_RES = [[口上:主人Ｖ射精]]
+		GTR_EXPUP:L_T:DB_EXPUP_POS("膣射経験") += ARG:2
+		TCVAR:L_T:子宮射精回数 += ARG:2
 
-	;�A�i���֎ː�
-	CASE [[��L����:�`]]
-		L_RES = [[����:��l�`�ː�]]
-	;���֎ː�
-	CASE [[��L����:��]], [[��L����:�U�X]], [[��L����:�o�U�X]]
-		L_RES = [[����:��l���ː�]]
-		GTR_EXPUP:L_T:DB_EXPUP_POS("�����o��") += ARG:2
+	;アナルへ射精
+	CASE [[占有部位:Ａ]]
+		L_RES = [[口上:主人Ａ射精]]
+	;口へ射精
+	CASE [[占有部位:口]], [[占有部位:６９]], [[占有部位:Ｐ６９]]
+		L_RES = [[口上:主人口射精]]
+		GTR_EXPUP:L_T:DB_EXPUP_POS("精飲経験") += ARG:2
 
-	;���֎ː�
-	CASE [[��L����:�a]]
-		L_RES = [[����:��l���ː�]]
-	;��֎ː�
-	CASE [[��L����:�w]]
-		L_RES = [[����:��l��ː�]]
+	;胸へ射精
+	CASE [[占有部位:Ｂ]]
+		L_RES = [[口上:主人胸射精]]
+	;手へ射精
+	CASE [[占有部位:指]]
+		L_RES = [[口上:主人手射精]]
 
 	;-----------------------------
-	;- �ȉ��͊g���n
+	;- 以下は拡張系
 	;-----------------------------
-	;���֎ː�
-	CASE [[��L����:�b]]
-		L_RES = [[����:��l���ː�]]
-	;���֎ː�
-	CASE [[��L����:��]]
-		L_RES = [[����:��l���ː�]]
+	;秘裂へ射精
+	CASE [[占有部位:Ｃ]]
+		L_RES = [[口上:主人秘裂射精]]
+	;足へ射精
+	CASE [[占有部位:足]]
+		L_RES = [[口上:主人足射精]]
 	;-----------------------------
-	;- �ȉ��͋t�����n
+	;- 以下は逆性交系
 	;-----------------------------
 	CASEELSE
-		;����
+		;無し
 ENDSELECT
 
-TCVAR:L_T:��ː�����=L_RES
+TCVAR:L_T:被射精部位=L_RES
 
-GTR_EXPUP:L_T:DB_EXPUP_POS("���t�o��") += ARG:2
+GTR_EXPUP:L_T:DB_EXPUP_POS("精液経験") += ARG:2
 
 
 ;=================================================
 ;   sub LOG_ORGASM_MAIN
 ;=================================================
-;   LOG�o��:�Ⓒ(�又��)
+;   LOG出力:絶頂(主処理)
 ;-------------------------------------------------
 @LOG_ORGASM_MAIN
 #DIM L_I
@@ -314,29 +314,29 @@ FOR L_I, 0, DEFTR_PL_NUM
 		BREAK
 
 	;-----------------------------
-	;- LOG�o��
+	;- LOG出力
 	;-----------------------------
-	IF TCVAR:L_T:�Ⓒ���x
+	IF TCVAR:L_T:絶頂強度
 		PRINTFORM %CALLNAME:L_T%
 
-		SETCOLOR COLOR("�s���N")
+		SETCOLOR COLOR("ピンク")
 		IF VAR_PENIS(L_T)
-			SELECTCASE TCVAR:L_T:�Ⓒ���x
+			SELECTCASE TCVAR:L_T:絶頂強度
 				CASE IS >= 3
-					PRINTFORM ����ʎː�
+					PRINTFORM 超大量射精
 				CASE 2
-					PRINTFORM ��ʎː�
+					PRINTFORM 大量射精
 				CASEELSE
-					PRINTFORM �ː�
+					PRINTFORM 射精
 			ENDSELECT
 		ELSE
-			SELECTCASE TCVAR:L_T:�Ⓒ���x
+			SELECTCASE TCVAR:L_T:絶頂強度
 				CASE IS >= 3
-					PRINTFORM �����Ⓒ
+					PRINTFORM 超強絶頂
 				CASE 2
-					PRINTFORM ���Ⓒ
+					PRINTFORM 強絶頂
 				CASEELSE
-					PRINTFORM �Ⓒ
+					PRINTFORM 絶頂
 			ENDSELECT
 		ENDIF
 		RESETCOLOR
@@ -355,27 +355,27 @@ ENDIF
 ;=================================================
 ;   sub LOG_ORGASM_SIGHT_MAIN
 ;=================================================
-;   LOG�o��:�Ⓒ(��i - �又��)
+;   LOG出力:絶頂(情景 - 主処理)
 ;-------------------------------------------------
-;   MASTER�����C��TARGET���T�uTARGET�̏���
-;   ��i���o��
+;   MASTER→メインTARGET→サブTARGETの順で
+;   情景を出力
 ;-------------------------------------------------
 @LOG_ORGASM_SIGHT_MAIN
 #DIM L_I
 #DIM L_T
 #DIM L_TGT_BAK
 
-;- �y�j�X�L��Ȃ��l��p��i
+;- ペニス有りなら主人専用情景
 IF VAR_PENIS(PLAYER)
-	;- LOG�o��:�Ⓒ(��l��i-�又��)
+	;- LOG出力:絶頂(主人情景-主処理)
 	CALL LOG_ORGASM_SIGHT_MASTER_MAIN
 ELSE
-	;- LOG�o��:�Ⓒ(�z���i-�又��)
+	;- LOG出力:絶頂(奴隷情景-主処理)
 	CALL LOG_ORGASM_SIGHT_SLAVE_MAIN(PLAYER)
 ENDIF
 
 
-;- LOG�o��:�Ⓒ(�z���i-�又��)
+;- LOG出力:絶頂(奴隷情景-主処理)
 CALL LOG_ORGASM_SIGHT_SLAVE_MAIN(TARGET)
 
 L_TGT_BAK = TARGET
@@ -386,12 +386,12 @@ FOR L_I, 0, DEFTR_PL_NUM
 	;CHK
 	SIF L_T < 0
 		BREAK
-	SIF TCVAR:L_T:���O�o��_�Ⓒ
+	SIF TCVAR:L_T:ログ出力_絶頂
 		CONTINUE
 
 	TARGET = L_T
 
-	;- LOG�o��:�Ⓒ(�z���i-�又��)
+	;- LOG出力:絶頂(奴隷情景-主処理)
 	CALL LOG_ORGASM_SIGHT_SLAVE_MAIN(TARGET)
 
 NEXT
@@ -401,49 +401,49 @@ TARGET = L_TGT_BAK
 ;=================================================
 ;   sub LOG_ORGASM_SIGHT_SLAVE_MAIN
 ;=================================================
-;   LOG�o��:�Ⓒ(�z���i-�又��)
+;   LOG出力:絶頂(奴隷情景-主処理)
 ;-------------------------------------------------
 ; Input:
-;  ARG					�ΏۃL����
+;  ARG					対象キャラ
 ;-------------------------------------------------
 @LOG_ORGASM_SIGHT_SLAVE_MAIN(ARG)
 #DIM L_T
 
 L_T = ARG
 
-;- ���O�o�͍ς�
-SIF TCVAR:L_T:���O�o��_�Ⓒ
+;- ログ出力済み
+SIF TCVAR:L_T:ログ出力_絶頂
 	RETURN
 
 ;- CHK
-SIF !TCVAR:L_T:�Ⓒ���x
+SIF !TCVAR:L_T:絶頂強度
 	RETURN
 
-TCVAR:L_T:���O�o��_�Ⓒ	= 1
+TCVAR:L_T:ログ出力_絶頂	= 1
 
 
-PRINTFORM %CALLNAME:L_T%��
+PRINTFORM %CALLNAME:L_T%は
 IF VAR_PENIS(L_T)
-	PRINT �y�j�X���琸�t�𕬂��o��
+	PRINT ペニスから精液を噴き出し
 ELSE
-	PRINT �A�O���瓧���Ȓ��𕬂��o��
+	PRINT 陰唇から透明な潮を噴き出し
 ENDIF
-PRINTL �Ȃ���A�S�g��k�킹�ĐⒸ�ɒB�����c�c
+PRINTL ながら、全身を震わせて絶頂に達した……
 
 PRINTFORM %CALLNAME:L_T%
-IF TCVAR:L_T:�Ⓒ���x >= 2
+IF TCVAR:L_T:絶頂強度 >= 2
 	IF VAR_PENIS(L_T)
-		PRINTL �͎ː��̉��y�ɍr���������Ȃ���A�Ⓒ�̗]�C�ɂЂ����Ă���c�c
+		PRINTL は射精の快楽に荒い息をつきながら、絶頂の余韻にひたっている……
 	ELSE
-		PRINTL �͒f���I�ɐⒸ���J��Ԃ��Ȃ���A�Ⓒ�̗]�C�ɂЂ����Ă���c�c
+		PRINTL は断続的に絶頂を繰り返しながら、絶頂の余韻にひたっている……
 	ENDIF
 ELSE
-	PRINTL �͍r���������Ȃ���Ⓒ�̗]�C�ɂЂ����Ă���c�c
+	PRINTL は荒い息をつきながら絶頂の余韻にひたっている……
 ENDIF
 
 WAIT
 
-;- ����:�Ⓒ������
+;- 口上:絶頂した時
 CALL KOJO_ORGASM
 PRINTL
 
@@ -451,76 +451,76 @@ PRINTL
 ;=================================================
 ;   sub LOG_ORGASM_SIGHT_MASTER_MAIN
 ;=================================================
-;   LOG�o��:�Ⓒ(��l��i-�又��)
+;   LOG出力:絶頂(主人情景-主処理)
 ;-------------------------------------------------
 @LOG_ORGASM_SIGHT_MASTER_MAIN
-#DIM ���ʂP
-#DIM ���ʂQ
+#DIM 部位１
+#DIM 部位２
 #DIM L_TMP
 
-;- ���O�o�͍ς�
-SIF TCVAR:PLAYER:���O�o��_�Ⓒ
+;- ログ出力済み
+SIF TCVAR:PLAYER:ログ出力_絶頂
 	RETURN
 
 ;- CHK
-SIF !TCVAR:PLAYER:�Ⓒ���x
+SIF !TCVAR:PLAYER:絶頂強度
 	RETURN
 
-TCVAR:PLAYER:���O�o��_�Ⓒ	= 1
+TCVAR:PLAYER:ログ出力_絶頂	= 1
 
 
 VARSET LOCALS
 VARSET LOCAL
 
-���ʂP = TEQUIP:PLAYER:�y�j�X��L���ʂP
-���ʂQ = TEQUIP:PLAYER:�y�j�X��L���ʂQ
+部位１ = TEQUIP:PLAYER:ペニス占有部位１
+部位２ = TEQUIP:PLAYER:ペニス占有部位２
 
 
 IF 0
 
 ;-----------------------------
-;- �_�u���n
+;- ダブル系
 ;-----------------------------
-ELSEIF (���ʂP == [[��L����:�u]]) && (���ʂQ == [[��L����:�u]])
-	LOCALS = ���ݑ}��
-ELSEIF (���ʂP == [[��L����:��]]) && (���ʂQ == [[��L����:��]])
-	LOCALS = �_�u���t�F��
-ELSEIF (���ʂP == [[��L����:�a]]) && (���ʂQ == [[��L����:�a]])
-	LOCALS = �_�u���p�C�Y��
-ELSEIF (���ʂP == [[��L����:�w]]) && (���ʂQ == [[��L����:�w]])
-	LOCALS = �_�u����R�L
-ELSEIF (���ʂP == [[��L����:��]]) && (���ʂQ == [[��L����:��]])
-	LOCALS = �_�u�����R�L
+ELSEIF (部位１ == [[占有部位:Ｖ]]) && (部位２ == [[占有部位:Ｖ]])
+	LOCALS = 交互挿入
+ELSEIF (部位１ == [[占有部位:口]]) && (部位２ == [[占有部位:口]])
+	LOCALS = ダブルフェラ
+ELSEIF (部位１ == [[占有部位:Ｂ]]) && (部位２ == [[占有部位:Ｂ]])
+	LOCALS = ダブルパイズリ
+ELSEIF (部位１ == [[占有部位:指]]) && (部位２ == [[占有部位:指]])
+	LOCALS = ダブル手コキ
+ELSEIF (部位１ == [[占有部位:足]]) && (部位２ == [[占有部位:足]])
+	LOCALS = ダブル足コキ
 
 ;-----------------------------
-;- �V���O���n
+;- シングル系
 ;-----------------------------
-ELSEIF (���ʂP == [[��L����:�o�U�X]])
-	LOCALS = �o�V�b�N�X�i�C��
-ELSEIF (���ʂP == [[��L����:�U�X]])
-	LOCALS = �V�b�N�X�i�C��
-ELSEIF (���ʂP == [[��L����:�u]])
-	LOCALS = �u����
-ELSEIF (���ʂP == [[��L����:�`]])
-	LOCALS = �`����
-ELSEIF (���ʂP == [[��L����:��]])
-	LOCALS = �t�F���`�I
-ELSEIF (���ʂP == [[��L����:�b]])
-	LOCALS = �f��
-ELSEIF (���ʂP == [[��L����:�a]])
-	LOCALS = �p�C�Y��
-ELSEIF (���ʂP == [[��L����:��]])
-	LOCALS = ���R�L
-ELSEIF (���ʂP == [[��L����:�w]])
-	LOCALS = ��R�L
+ELSEIF (部位１ == [[占有部位:Ｐ６９]])
+	LOCALS = Ｐシックスナイン
+ELSEIF (部位１ == [[占有部位:６９]])
+	LOCALS = シックスナイン
+ELSEIF (部位１ == [[占有部位:Ｖ]])
+	LOCALS = Ｖ性交
+ELSEIF (部位１ == [[占有部位:Ａ]])
+	LOCALS = Ａ性交
+ELSEIF (部位１ == [[占有部位:口]])
+	LOCALS = フェラチオ
+ELSEIF (部位１ == [[占有部位:Ｃ]])
+	LOCALS = 素股
+ELSEIF (部位１ == [[占有部位:Ｂ]])
+	LOCALS = パイズリ
+ELSEIF (部位１ == [[占有部位:足]])
+	LOCALS = 足コキ
+ELSEIF (部位１ == [[占有部位:指]])
+	LOCALS = 手コキ
 ELSE
 	RETURN
 ENDIF
 
-;- LOG�o��:�Ⓒ(��l��i-�ڍ�)
+;- LOG出力:絶頂(主人情景-詳細)
 CALL LOG_ORGASM_SIGHT_MASTER_DETAIL(LOCALS)
 
-;- ����o��:�Ⓒ��������
+;- 口上出力:絶頂させた時
 CALL KOJO_ORGASM_M
 PRINTL
 
@@ -528,134 +528,134 @@ PRINTL
 ;=================================================
 ;   sub LOG_ORGASM_SIGHT_MASTER_DETAIL
 ;=================================================
-;   LOG�o��:�Ⓒ(��l��i-�ڍ�)
+;   LOG出力:絶頂(主人情景-詳細)
 ;-------------------------------------------------
 ; Input:
-;  ARGS					�Ώە�����
+;  ARGS					対象文字列
 ;-------------------------------------------------
 @LOG_ORGASM_SIGHT_MASTER_DETAIL(ARGS,ARG,ARG:2)
-#DIM ��ʎː�
-#DIM �ΏۂP
-#DIM �ΏۂQ
-��ʎː� = TCVAR:PLAYER:�Ⓒ���x >= 2
-IF TEQUIP:PLAYER:�y�j�X��L�҂Q == TARGET
-	�ΏۂP = TEQUIP:PLAYER:�y�j�X��L�҂Q
-	�ΏۂQ = TEQUIP:PLAYER:�y�j�X��L�҂P
+#DIM 大量射精
+#DIM 対象１
+#DIM 対象２
+大量射精 = TCVAR:PLAYER:絶頂強度 >= 2
+IF TEQUIP:PLAYER:ペニス占有者２ == TARGET
+	対象１ = TEQUIP:PLAYER:ペニス占有者２
+	対象２ = TEQUIP:PLAYER:ペニス占有者１
 ELSE
-	�ΏۂP = TEQUIP:PLAYER:�y�j�X��L�҂P
-	�ΏۂQ = TEQUIP:PLAYER:�y�j�X��L�҂Q
+	対象１ = TEQUIP:PLAYER:ペニス占有者１
+	対象２ = TEQUIP:PLAYER:ペニス占有者２
 ENDIF
 SELECTCASE ARGS
-	CASE "���ݑ}��"
-		PRINTFORML %CALLNAME:PLAYER%��%CALLNAME:�ΏۂQ%���S���ɐ��t����ƈ�U�y�j�X�𔲂��Ă���
-		PRINTFORML �ː����~�܂�Ȃ�������%CALLNAME:�ΏۂP%�ɑ}�����A�Ō�̈�H�܂Œ������񂾁c
-	CASE "�_�u���t�F��"
-		IF ��ʎː�
-			PRINTFORML ��ʂ̐��t��%CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̊璆�ɍ~�蒍�����c
+	CASE "交互挿入"
+		PRINTFORML %CALLNAME:PLAYER%は%CALLNAME:対象２%の膣内に精液を放つと一旦ペニスを抜いてから
+		PRINTFORML 射精が止まらないうちに%CALLNAME:対象１%に挿入し、最後の一滴まで注ぎ込んだ…
+	CASE "ダブルフェラ"
+		IF 大量射精
+			PRINTFORML 大量の精液が%CALLNAME:対象１%と%CALLNAME:対象２%の顔中に降り注いだ…
 		ELSE
-			PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�͐��t�����Ŏ󂯎~�߂Ă���c
+			PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%は精液を口で受け止めている…
 		ENDIF
-		PRINTFORML ���̌�A%CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�͎c�������t���z�����Ȃ���A�y�j�X�̉�����Y����r�߂Ƃ��Ă������c
-		PRINTFORML ��l�͂��ꂾ���ł͑���Ȃ����̂悤�Ɍ݂��̌��ɗ��܂������t���r�߂����Ă���c
-	CASE "�_�u���p�C�Y��"
-		IF ��ʎː� && RAND:3
-			PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̋������A���̖тɎ���܂ł𐸉t���������ߏグ���c
-			PRINTFORML ���̌�A%CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�͎c�������t���z�����Ȃ���A�y�j�X�̉�����Y����r�߂Ƃ��Ă������c
-			PRINTFORML ��l�͂��ꂾ���ł͑���Ȃ����̂悤�Ɍ݂��̌��ɗ��܂������t���r�߂����Ă���c
+		PRINTFORML その後、%CALLNAME:対象１%と%CALLNAME:対象２%は残った精液を吸い取りながら、ペニスの汚れを綺麗に舐めとっていった…
+		PRINTFORML 二人はそれだけでは足りないかのように互いの口に溜まった精液を舐めあっている…
+	CASE "ダブルパイズリ"
+		IF 大量射精 && RAND:3
+			PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%の胸から顔、髪の毛に至るまでを精液が白く染め上げた…
+			PRINTFORML その後、%CALLNAME:対象１%と%CALLNAME:対象２%は残った精液を吸い取りながら、ペニスの汚れを綺麗に舐めとっていった…
+			PRINTFORML 二人はそれだけでは足りないかのように互いの口に溜まった精液を舐めあっている…
 		ELSE
-			IF VAR_�o�X�g�T�C�Y(�ΏۂP) > 0 && VAR_�o�X�g�T�C�Y(�ΏۂQ) > 0
-				PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̋��̒J�Ԃɐ��t�����܂��Ă���c
-			ELSEIF VAR_�o�X�g�T�C�Y(�ΏۂP) > 0 && VAR_�o�X�g�T�C�Y(�ΏۂQ) <= 0
-				PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̋��������ɂ܂Ő��t����юU�����c
-				PRINTFORML %CALLNAME:�ΏۂP%�̋��̒J�Ԃɂ͐��t�����܂��Ă���c
+			IF VAR_バストサイズ(対象１) > 0 && VAR_バストサイズ(対象２) > 0
+				PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%の胸の谷間に精液が溜まっている…
+			ELSEIF VAR_バストサイズ(対象１) > 0 && VAR_バストサイズ(対象２) <= 0
+				PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%の胸元から顔にまで精液が飛び散った…
+				PRINTFORML %CALLNAME:対象１%の胸の谷間には精液が溜まっている…
 			ELSE
-				PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̋��������ɂ܂Ő��t����юU�����c
+				PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%の胸元から顔にまで精液が飛び散った…
 			ENDIF
 		ENDIF
-	CASE "�_�u����R�L"
-		IF ��ʎː�
-			PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̊�Ǝ肪��ʂ̐��t�ɂ܂݂�Ă������c
+	CASE "ダブル手コキ"
+		IF 大量射精
+			PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%の顔と手が大量の精液にまみれていった…
 		ELSE
-			PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�ɐ��t���~�肩�����Ă������c
+			PRINTFORML %CALLNAME:対象１%と%CALLNAME:対象２%に精液が降りかかっていった…
 		ENDIF
-	CASE "�_�u�����R�L"
-		IF TALENT:�ΏۂP:�T�h
-			PRINTFORM %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%�̗��₩�Ȏ������󂯂Ȃ���A����
+	CASE "ダブル足コキ"
+		IF TALENT:対象１:サド
+			PRINTFORM %CALLNAME:対象１%と%CALLNAME:対象２%の冷ややかな視線を受けながら、その
 		ELSE
-			PRINTFORM %CALLNAME:�ΏۂP%��%CALLNAME:�ΏۂQ%��
+			PRINTFORM %CALLNAME:対象１%と%CALLNAME:対象２%の
 		ENDIF
-		PRINTFORML ����\@ ��ʎː� ? ��ʂ� # �M�� \@���t��������c
-		IF ��ʎː�
+		PRINTFORML 足に\@ 大量射精 ? 大量の # 熱い \@精液を放った…
+		IF 大量射精
 		ELSE
 		ENDIF
-	CASE "�U�X�p�C�Y��"
-		PRINTFORML %CALLNAME:PLAYER%��%CALLNAME:�ΏۂP%�̔鏊�ɐ���͂킹�Ȃ���%CALLNAME:�ΏۂP%�̌����Ŏː������c
-		PRINTFORML %CALLNAME:�ΏۂP%�͉����g�ւ̎h���ɂт��т��Ɣ������Ȃ��畬���オ�鐸�t���������Ă���c
-	CASE "�V�b�N�X�i�C��"
-		PRINTFORML %CALLNAME:PLAYER%��%CALLNAME:�ΏۂP%�̔鏊�ɐ���͂킹�Ȃ���%CALLNAME:�ΏۂP%�̌����Ŏː������c
-		PRINTFORML %CALLNAME:�ΏۂP%�͉����g�ւ̎h���ɂт��т��Ɣ������Ȃ��畬���オ�鐸�t���������Ă���c
-	CASE "�o�V�b�N�X�i�C��"
-		IF TCVAR:�ΏۂP:�ː�
-			PRINTFORML %CALLNAME:�ΏۂP%��%CALLNAME:PLAYER%�͓����Ɍ݂��̌����֎ː������c
-			PRINTFORML ��l�݂͌��̃y�j�X�������܂ř������y���m���߂������c
+	CASE "６９パイズリ"
+		PRINTFORML %CALLNAME:PLAYER%は%CALLNAME:対象１%の秘所に舌をはわせながら%CALLNAME:対象１%の口内で射精した…
+		PRINTFORML %CALLNAME:対象１%は下半身への刺激にびくびくと反応しながら噴き上がる精液をすすっている…
+	CASE "シックスナイン"
+		PRINTFORML %CALLNAME:PLAYER%は%CALLNAME:対象１%の秘所に舌をはわせながら%CALLNAME:対象１%の口内で射精した…
+		PRINTFORML %CALLNAME:対象１%は下半身への刺激にびくびくと反応しながら噴き上がる精液をすすっている…
+	CASE "Ｐシックスナイン"
+		IF TCVAR:対象１:射精
+			PRINTFORML %CALLNAME:対象１%と%CALLNAME:PLAYER%は同時に互いの口内へ射精した…
+			PRINTFORML 二人は互いのペニスを根元まで咥え快楽を確かめあった…
 		ELSE
-			PRINTFORM %CALLNAME:PLAYER%��%CALLNAME:�ΏۂP%�̒j���������Ԃ�Ȃ���
-			PRINTFORML %CALLNAME:�ΏۂP%�̌����Ŏː������c
-			PRINTFORML %CALLNAME:�ΏۂP%�͉����g�ւ̎h���ɂт��т��Ɣ������Ȃ��畬���オ�鐸�t���������Ă���c
+			PRINTFORM %CALLNAME:PLAYER%は%CALLNAME:対象１%の男性器をしゃぶりながら
+			PRINTFORML %CALLNAME:対象１%の口内で射精した…
+			PRINTFORML %CALLNAME:対象１%は下半身への刺激にびくびくと反応しながら噴き上がる精液をすすっている…
 		ENDIF
-	CASE "�u����"
+	CASE "Ｖ性交"
 
-		PRINTFORM %CALLNAME:PLAYER%��%CALLNAME:�ΏۂP%���S���Ƀy�j�X���Œ肵�A
-		IF ��ʎː�
-			PRINTFORML �q�{���ɂ����Ղ�Ɛ��t�𒍂����񂾁c
+		PRINTFORM %CALLNAME:PLAYER%は%CALLNAME:対象１%の膣奥にペニスを固定し、
+		IF 大量射精
+			PRINTFORML 子宮内にたっぷりと精液を注ぎ込んだ…
 		ELSE
-			PRINTFORML �q�{���ɐ��t�𒍂����񂾁c
+			PRINTFORML 子宮内に精液を注ぎ込んだ…
 		ENDIF
-		SIF MARK:�ΏۂP:�ח�����
-			PRINTFORML %CALLNAME:�ΏۂP%�͏]���Ɏq�{������Ă���c
-			ARG = �ΏۂP
+		SIF MARK:対象１:陥落刻印
+			PRINTFORML %CALLNAME:対象１%は従順に子宮を捧げている…
+			ARG = 対象１
 			ARG:1 = PLAYER
 			CALL NAKATDASI_MAIN(ARG,ARG:1)
-	CASE "�`����"
-		PRINTFORML %CALLNAME:PLAYER%��%CALLNAME:�ΏۂP%�̒����Ɏː������c
-		PRINTFORML ���t�ň��Ă��钰���ׂ͍����k���A�y�j�X���������߂��Ă���c
-	CASE "�t�F���`�I"
-		PRINTFORML %CALLNAME:PLAYER%��%CALLNAME:�ΏۂP%�̌����Ɏː������c
-		IF EXP:�ΏۂP:�����o�� == 0
-			PRINTFORML %CALLNAME:�ΏۂP%�͂т����肵�ăy�j�X������𗣂��Ă��܂���
-			PRINTFORML ��𐸉t�ŉ����Ȃ��珉�߂Ă̖��ɏ����˘f���Ă���悤���c
-			PRINTFORML %CALLNAME:�ΏۂP%�͏��߂Ă̐������o�������c
-		ELSEIF EXP:�ΏۂP:�����o�� < EXPLV:3
-			PRINTFORML %CALLNAME:�ΏۂP%�͐��t�������Ɏ󂯎~�߂��%CALLNAME:PLAYER%�̖��߂𕷂��Ĉ��ݍ��񂾁c
-			PRINTFORML �܂����t�̖��Ɋ���Ȃ��悤���c
+	CASE "Ａ性交"
+		PRINTFORML %CALLNAME:PLAYER%は%CALLNAME:対象１%の腸内に射精した…
+		PRINTFORML 精液で溢れている腸内は細かく震え、ペニスをきつく締めつけている…
+	CASE "フェラチオ"
+		PRINTFORML %CALLNAME:PLAYER%は%CALLNAME:対象１%の口内に射精した…
+		IF EXP:対象１:精飲経験 == 0
+			PRINTFORML %CALLNAME:対象１%はびっくりしてペニスから口を離してしまった
+			PRINTFORML 顔を精液で汚しながら初めての味に少し戸惑っているようだ…
+			PRINTFORML %CALLNAME:対象１%は初めての精飲を経験した…
+		ELSEIF EXP:対象１:精飲経験 < EXPLV:3
+			PRINTFORML %CALLNAME:対象１%は精液を口内に受け止めると%CALLNAME:PLAYER%の命令を聞いて飲み込んだ…
+			PRINTFORML まだ精液の味に慣れないようだ…
 		ELSE
-			IF ��ʎː�
-				PRINTFORML %CALLNAME:�ΏۂP%�͋T����������܂܌����ɕ�������ʂ̐��t�����ݍ���ł������c
+			IF 大量射精
+				PRINTFORML %CALLNAME:対象１%は亀頭を咥えたまま口内に放たれる大量の精液を飲み込んでいった…
 			ELSE
-				PRINTFORML %CALLNAME:�ΏۂP%�͐O�ŋT�����������Ă��ׂĂ̐��t�������Ɏ󂯎~�߂Ă���
-				PRINTFORML �T����������܂܌����̐��t���A��炵�Ĉ��ݍ��񂾁c
+				PRINTFORML %CALLNAME:対象１%は唇で亀頭をしごいてすべての精液を口内に受け止めてから
+				PRINTFORML 亀頭を咥えたまま口内の精液を喉を鳴らして飲み込んだ…
 			ENDIF
-			PRINTFORML %CALLNAME:�ΏۂP%�͌����ŋT��������Ԃ�Ȃ���A����Ȃ�ː��𑣂��Ă���c
+			PRINTFORML %CALLNAME:対象１%は口内で亀頭をしゃぶりながら、さらなる射精を促している…
 		ENDIF
-	CASE "�f��"
-		PRINTFORML %CALLNAME:PLAYER%�͖�����������̊ԂŎː������c
-	CASE "�p�C�Y��"
-		PRINTFORML %CALLNAME:�ΏۂP%�̋��ɋ��܂����y�j�X�̐�[���琸�t�������オ�����c
-		PRINTFORML %CALLNAME:�ΏۂP%�͋��Ɗ�Ő��t���󂯎~�߂Ȃ���A���t���r�ߎ����������\��������Ă���c
-	CASE "���R�L"
-		IF TALENT:�ΏۂP:�T�h
-			PRINTFORM %CALLNAME:�ΏۂP%�̗��₩�Ȏ������󂯂Ȃ���A����
+	CASE "素股"
+		PRINTFORML %CALLNAME:PLAYER%は密着した性器の間で射精した…
+	CASE "パイズリ"
+		PRINTFORML %CALLNAME:対象１%の胸に挟ませたペニスの先端から精液が噴き上がった…
+		PRINTFORML %CALLNAME:対象１%は胸と顔で精液を受け止めながら、精液を舐め取り屈服した表情を見せている…
+	CASE "足コキ"
+		IF TALENT:対象１:サド
+			PRINTFORM %CALLNAME:対象１%の冷ややかな視線を受けながら、その
 		ELSE
-			PRINTFORM %CALLNAME:�ΏۂP%��
+			PRINTFORM %CALLNAME:対象１%の
 		ENDIF
-		PRINTFORML ����\@ ��ʎː� ? ��ʂ� # �M�� \@���t��������c
-	CASE "��R�L"
-		IF ABL:�ΏۂP:���t���� > 2 && ABL:�ΏۂP:���z�� > 2
-			PRINTFORML %CALLNAME:�ΏۂP%�͜����̕\��Ő��˂��o���Ȃ���%CALLNAME:PLAYER%�̐��t�𗁂тĂ���c
-		ELSEIF ��ʎː�
-			PRINTFORML %CALLNAME:�ΏۂP%�̊�Ǝ肪��ʂ̐��t�ɂ܂݂�Ă������c
+		PRINTFORML 足に\@ 大量射精 ? 大量の # 熱い \@精液を放った…
+	CASE "手コキ"
+		IF ABL:対象１:精液中毒 > 2 && ABL:対象１:性奴隷 > 2
+			PRINTFORML %CALLNAME:対象１%は恍惚の表情で舌を突き出しながら%CALLNAME:PLAYER%の精液を浴びている…
+		ELSEIF 大量射精
+			PRINTFORML %CALLNAME:対象１%の顔と手が大量の精液にまみれていった…
 		ELSE
-			PRINTFORML %CALLNAME:�ΏۂP%�ɐ��t���~�肩�����Ă������c
+			PRINTFORML %CALLNAME:対象１%に精液が降りかかっていった…
 		ENDIF
 ENDSELECT
 

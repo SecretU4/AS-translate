@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�A�C�e���m�F
+﻿;-------------------------------------------------
+;アイテム確認
 ;-------------------------------------------------
 @RPG_ITEM
 #DIM L_INPUT
@@ -12,17 +12,17 @@ CLEARLINE LINECOUNT
 DRAWLINE
 REPEAT 900
 	IF L_LOOP == 0
-		PRINTFORML �y�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�f�@�ށ\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�z
+		PRINTFORML 【――――――――――――――――――素　材――――――――――――――――――】
 		L_LOOP2  = 0
 	ENDIF
 	IF L_LOOP == 400
 		PRINTFORML
-		PRINTFORML �y�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\��`�q�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�z
+		PRINTFORML 【――――――――――――――――――遺伝子――――――――――――――――――】
 		L_LOOP2  = 0
 	ENDIF
 	IF L_LOOP == 700
 		PRINTFORML
-		PRINTFORML �y�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�����܁\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�z
+		PRINTFORML 【――――――――――――――――――強化剤――――――――――――――――――】
 		L_LOOP2  = 0
 	ENDIF
 	IF FlagNAME:(2100+L_LOOP) != ""
@@ -30,7 +30,7 @@ REPEAT 900
 			PRINTFORML
 			L_LOOP2  =0
 		ENDIF
-		PRINTFORM �y%FlagNAME:(2100+L_LOOP), 8 ,LEFT%:{Flag:(2100+L_LOOP), 3 ,RIGHT}�z
+		PRINTFORM 【%FlagNAME:(2100+L_LOOP), 8 ,LEFT%:{Flag:(2100+L_LOOP), 3 ,RIGHT}】
 	ENDIF
 	L_LOOP2 += 1
 	L_LOOP += 1
@@ -38,7 +38,7 @@ REND
 PRINTFORML
 DRAWLINE
 PRINTFORML 
-PRINTFORML [999] �߂�
+PRINTFORML [999] 戻る
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT

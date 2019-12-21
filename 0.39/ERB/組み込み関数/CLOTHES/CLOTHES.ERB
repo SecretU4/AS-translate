@@ -1,29 +1,29 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+Ôªø;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CLOTHES.ERB
-;	Facility	:àﬂëïÉVÉXÉeÉÄÅB
+;	Facility	:Ë°£Ë£Ö„Ç∑„Çπ„ÉÜ„É†„ÄÇ
 ;
-;	Licence		:ÉâÉCÉZÉìÉXÉtÉäÅ[ÅB
+;	Licence		:„É©„Ç§„Çª„É≥„Çπ„Éï„É™„Éº„ÄÇ
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					êVãKçÏê¨
+;	001		20XX/XX/XX		----					Êñ∞Ë¶è‰ΩúÊàê
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ÅûãLç⁄ä÷êîàÍóó(ãLç⁄èá)
+;  ‚óáË®òËºâÈñ¢Êï∞‰∏ÄË¶ß(Ë®òËºâÈ†Ü)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXX
 ;
-;	ÅE INFO_STATUS_CLOTHES				ï\é¶:STATUS(àﬂëï)
-;	ÅE CLOTHES_SET_CUSTOM				àﬂëï:ÉZÉbÉg(ÉJÉXÉ^ÉÄàﬂëï)
-;	ÅE CLOTHES_CLEAR					àﬂëï:ÉNÉäÉA
-;	ÅE CLOTHES_CHG_MAIN					àﬂëï:ïœçXâÊñ 
-;	ÅE CLOTHES_INFO						àﬂëï:èÓïÒ
+;	„Éª INFO_STATUS_CLOTHES				Ë°®Á§∫:STATUS(Ë°£Ë£Ö)
+;	„Éª CLOTHES_SET_CUSTOM				Ë°£Ë£Ö:„Çª„ÉÉ„Éà(„Ç´„Çπ„Çø„É†Ë°£Ë£Ö)
+;	„Éª CLOTHES_CLEAR					Ë°£Ë£Ö:„ÇØ„É™„Ç¢
+;	„Éª CLOTHES_CHG_MAIN					Ë°£Ë£Ö:Â§âÊõ¥ÁîªÈù¢
+;	„Éª CLOTHES_INFO						Ë°£Ë£Ö:ÊÉÖÂ†±
 ;
 ;===============================================================================
 
@@ -34,10 +34,10 @@
 ;=================================================
 ;   sub INFO_STATUS_CLOTHES
 ;=================================================
-;   ï\é¶:STATUS(àﬂëï)
+;   Ë°®Á§∫:STATUS(Ë°£Ë£Ö)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ëŒè€ÉLÉÉÉâ
+;  ARG:0				ÂØæË±°„Ç≠„É£„É©
 ;-------------------------------------------------
 @INFO_STATUS_CLOTHES(ARG)
 #DIM L_CNT
@@ -46,7 +46,7 @@
 #DIMS L_KEY
 #DIMS L_STR
 
-L_POS = GETNUM(CSTR, "àﬂëïñº_ñXéq")
+L_POS = GETNUM(CSTR, "Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê")
 L_LEN = 7
 
 L_CNT=0
@@ -58,7 +58,7 @@ REPEAT DEFCLOTHE_TYPE_NUM
 
 	L_KEY = %CSTRNAME:(L_POS+COUNT)%
 	L_KEY = %SUBSTRING(L_KEY, L_LEN)%
-	PRINTFORM %L_KEY, 12, LEFT%ÅF%L_STR%
+	PRINTFORM %L_KEY, 12, LEFT%Ôºö%L_STR%
 	PRINTL
 	L_CNT ++
 
@@ -74,42 +74,42 @@ PRINTL
 ;=================================================
 ;   sub CLOTHES_SET_CUSTOM
 ;=================================================
-;   àﬂëï:ÉZÉbÉg(ÉJÉXÉ^ÉÄàﬂëï)
+;   Ë°£Ë£Ö:„Çª„ÉÉ„Éà(„Ç´„Çπ„Çø„É†Ë°£Ë£Ö)
 ;-------------------------------------------------
 ; Input:
-;  ARG					ÉLÉÉÉâ
-;  ARG:1				àﬂëïÉ^ÉCÉv("ÉfÉtÉHÉãÉg", "ÉÅÉCÉhïû")
+;  ARG					„Ç≠„É£„É©
+;  ARG:1				Ë°£Ë£Ö„Çø„Ç§„Éó("„Éá„Éï„Ç©„É´„Éà", "„É°„Ç§„ÉâÊúç")
 ;-------------------------------------------------
 @CLOTHES_SET_CUSTOM(ARG, ARGS)
 #DIM L_POS
 #DIM L_TMP
 
-L_POS = GETNUM(CSTR, "àﬂëïñº_ñXéq")
+L_POS = GETNUM(CSTR, "Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê")
 
 SELECTCASE ARGS
-	CASE "ÉfÉtÉHÉãÉg"
+	CASE "„Éá„Éï„Ç©„É´„Éà"
 		CALL CLOTHES_CLEAR(ARG)
 		REPEAT DEFCLOTHE_TYPE_NUM
 			L_TMP = L_POS + COUNT
 			CSTR:ARG:L_TMP = %CSVCSTR(NO:ARG, L_TMP, 0)%
 		REND
-	CASE "ÉrÉbÉ`ÉMÉÉÉã"
+	CASE "„Éì„ÉÉ„ÉÅ„ÇÆ„É£„É´"
 		CALL CLOTHES_CLEAR(ARG)
-		CSTR:ARG:àﬂëïñº_è„íÖÉgÉbÉvÉX = ÉVÉáÅ[ÉgÉLÉÉÉ~É\Å[Éã
-		CSTR:ARG:àﬂëïñº_è„íÖÉ{ÉgÉÄÉX = É}ÉCÉNÉçÉ~ÉjÉXÉJÅ[Ég
-		CSTR:ARG:àﬂëïñº_â∫íÖÉgÉbÉvÉX = 
-		CSTR:ARG:àﬂëïñº_â∫íÖÉ{ÉgÉÄÉX = 
-		CSTR:ARG:àﬂëïñº_åCâ∫ = ÉjÅ[É\ÉbÉNÉX
-		CSTR:ARG:àﬂëïñº_åC = É~ÉÖÅ[Éã
-	CASE "ÉÅÉCÉhïû"
+		CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏äÁùÄ„Éà„ÉÉ„Éó„Çπ = „Ç∑„Éß„Éº„Éà„Ç≠„É£„Éü„ÇΩ„Éº„É´
+		CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏äÁùÄ„Éú„Éà„É†„Çπ = „Éû„Ç§„ÇØ„É≠„Éü„Éã„Çπ„Ç´„Éº„Éà
+		CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏ãÁùÄ„Éà„ÉÉ„Éó„Çπ = 
+		CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏ãÁùÄ„Éú„Éà„É†„Çπ = 
+		CSTR:ARG:Ë°£Ë£ÖÂêç_Èù¥‰∏ã = „Éã„Éº„ÇΩ„ÉÉ„ÇØ„Çπ
+		CSTR:ARG:Ë°£Ë£ÖÂêç_Èù¥ = „Éü„É•„Éº„É´
+	CASE "„É°„Ç§„ÉâÊúç"
 		CALL CLOTHES_CLEAR(ARG)
-		CSTR:ARG:àﬂëïñº_ñXéq			= ÉzÉèÉCÉgÉuÉäÉÄ
-		CSTR:ARG:àﬂëïñº_ëSêgïû			= ÉÅÉCÉhïû(É~Éj)
-		CSTR:ARG:àﬂëïñº_â∫íÖÉgÉbÉvÉX	= ÉuÉâÉWÉÉÅ[
-		CSTR:ARG:àﬂëïñº_â∫íÖÉ{ÉgÉÄÉX	= ÉpÉìÉeÉB
-		CSTR:ARG:àﬂëïñº_åCâ∫			= ÉKÅ[É^Å[ÉXÉgÉbÉLÉìÉO
-		CSTR:ARG:àﬂëïñº_åC				= ÉÅÉCÉhÉuÅ[Éc
-	CASE "ÉMÉÉÉãàﬂëï"
+		CSTR:ARG:Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê			= „Éõ„ÉØ„Ç§„Éà„Éñ„É™„É†
+		CSTR:ARG:Ë°£Ë£ÖÂêç_ÂÖ®Ë∫´Êúç			= „É°„Ç§„ÉâÊúç(„Éü„Éã)
+		CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏ãÁùÄ„Éà„ÉÉ„Éó„Çπ	= „Éñ„É©„Ç∏„É£„Éº
+		CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏ãÁùÄ„Éú„Éà„É†„Çπ	= „Éë„É≥„ÉÜ„Ç£
+		CSTR:ARG:Ë°£Ë£ÖÂêç_Èù¥‰∏ã			= „Ç¨„Éº„Çø„Éº„Çπ„Éà„ÉÉ„Ç≠„É≥„Ç∞
+		CSTR:ARG:Ë°£Ë£ÖÂêç_Èù¥				= „É°„Ç§„Éâ„Éñ„Éº„ÉÑ
+	CASE "„ÇÆ„É£„É´Ë°£Ë£Ö"
 		
 	CASEELSE
 ENDSELECT
@@ -118,34 +118,34 @@ ENDSELECT
 ;=================================================
 ;   sub CLOTHES_CLEAR
 ;=================================================
-;   àﬂëï:ÉNÉäÉA
+;   Ë°£Ë£Ö:„ÇØ„É™„Ç¢
 ;-------------------------------------------------
 ; Input:
-;  ARG					ÉLÉÉÉâ
+;  ARG					„Ç≠„É£„É©
 ;-------------------------------------------------
 @CLOTHES_CLEAR(ARG)
 
-CSTR:ARG:àﬂëïñº_ñXéq			= 
-CSTR:ARG:àﬂëïñº_è„íÖÉgÉbÉvÉX	= 
-CSTR:ARG:àﬂëïñº_è„íÖÉ{ÉgÉÄÉX	= 
-CSTR:ARG:àﬂëïñº_ëSêgïû			= 
-CSTR:ARG:àﬂëïñº_éËë‹			= 
-CSTR:ARG:àﬂëïñº_â∫íÖÉgÉbÉvÉX	= 
-CSTR:ARG:àﬂëïñº_â∫íÖÉ{ÉgÉÄÉX	= 
-CSTR:ARG:àﬂëïñº_ëSêgâ∫íÖ		= 
-CSTR:ARG:àﬂëïñº_åCâ∫			= 
-CSTR:ARG:àﬂëïñº_åC				= 
-CSTR:ARG:àﬂëïñº_äOìÖ			= 
-CSTR:ARG:àﬂëïñº_ÉAÉNÉZÉTÉäÅ[	= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê			= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏äÁùÄ„Éà„ÉÉ„Éó„Çπ	= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏äÁùÄ„Éú„Éà„É†„Çπ	= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_ÂÖ®Ë∫´Êúç			= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_ÊâãË¢ã			= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏ãÁùÄ„Éà„ÉÉ„Éó„Çπ	= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_‰∏ãÁùÄ„Éú„Éà„É†„Çπ	= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_ÂÖ®Ë∫´‰∏ãÁùÄ		= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_Èù¥‰∏ã			= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_Èù¥				= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_Â§ñÂ•ó			= 
+CSTR:ARG:Ë°£Ë£ÖÂêç_„Ç¢„ÇØ„Çª„Çµ„É™„Éº	= 
 
 
 ;=================================================
 ;   sub CLOTHES_CHG_MAIN
 ;=================================================
-;   àﬂëï:ïœçXâÊñ 
+;   Ë°£Ë£Ö:Â§âÊõ¥ÁîªÈù¢
 ;-------------------------------------------------
 ; Input:
-;  ARG					ÉLÉÉÉâ
+;  ARG					„Ç≠„É£„É©
 ;-------------------------------------------------
 @CLOTHES_CHG_MAIN(ARG)
 #DIM L_CNT
@@ -158,11 +158,11 @@ CSTR:ARG:àﬂëïñº_ÉAÉNÉZÉTÉäÅ[	=
 #DIMS L_LIST, 100
 #DIM L_TMP
 
-L_POS = GETNUM(CSTR, "àﬂëïñº_ñXéq")
+L_POS = GETNUM(CSTR, "Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê")
 L_LEN = 7
 
 CUSTOMDRAWLINE =
-PRINTL ïœçXÇ∑ÇÈàﬂëïÇÃå¬èäÇëIÇÒÇ≈Ç≠ÇæÇ≥Ç¢
+PRINTL Â§âÊõ¥„Åô„ÇãË°£Ë£Ö„ÅÆÂÄãÊâÄ„ÇíÈÅ∏„Çì„Åß„Åè„Å†„Åï„ÅÑ
 DRAWLINE
 REPEAT DEFCLOTHE_TYPE_NUM
 
@@ -170,17 +170,17 @@ REPEAT DEFCLOTHE_TYPE_NUM
 
 	L_KEY = %CSTRNAME:(L_POS+COUNT)%
 	L_KEY = %SUBSTRING(L_KEY, L_LEN)%
-	PRINTFORM [{COUNT,2}] %L_KEY, 12, LEFT%ÅF%L_STR%
+	PRINTFORM [{COUNT,2}] %L_KEY, 12, LEFT%Ôºö%L_STR%
 	PRINTL
 
 REND
 PRINTL
-PRINTLC [100] ñﬂÇÈ
-PRINTLC [20] ÉfÉtÉHÉãÉg
-PRINTLC [21] ÉÅÉCÉhïû
-;NTRä◊óéà»è„
+PRINTLC [100] Êàª„Çã
+PRINTLC [20] „Éá„Éï„Ç©„É´„Éà
+PRINTLC [21] „É°„Ç§„ÉâÊúç
+;NTRÈô•ËêΩ‰ª•‰∏ä
 IF NTR_LV(ARG) >= 3
-	PRINTLC [22] ÉrÉbÉ`ÉMÉÉÉã
+	PRINTLC [22] „Éì„ÉÉ„ÉÅ„ÇÆ„É£„É´
 ENDIF
 PRINTL
 
@@ -188,21 +188,21 @@ $INPUT_LOOP_1
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
-	;ñﬂÇÈ
+	;Êàª„Çã
 	CASE 100
 		RETURN
 	CASE 0 TO (DEFCLOTHE_TYPE_NUM - 1)
 
 		DRAWLINE
-		PRINTL ïœçXÇ∑ÇÈàﬂëïÇëIÇÒÇ≈Ç≠ÇæÇ≥Ç¢
+		PRINTL Â§âÊõ¥„Åô„ÇãË°£Ë£Ö„ÇíÈÅ∏„Çì„Åß„Åè„Å†„Åï„ÅÑ
 		DRAWLINE
 		VARSET L_LIST
 		L_CNT = 0
 		REPEAT 100
 
 			IF !COUNT
-				L_STR = %CSVCSTR(NO:ARG, GETNUM(CSTR, "àﬂëïñº_ñXéq")+L_INPUT, 0)%
-				;ë∂ç›Ç∑ÇÈèÍçáÇÕèúäO
+				L_STR = %CSVCSTR(NO:ARG, GETNUM(CSTR, "Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê")+L_INPUT, 0)%
+				;Â≠òÂú®„Åô„ÇãÂ†¥Âêà„ÅØÈô§Â§ñ
 				SIF FINDELEMENT(GCLOTHE_NAME, L_STR) != -1
 					L_STR = 
 			ELSE
@@ -222,17 +222,17 @@ SELECTCASE L_INPUT
 		SIF !LINEISEMPTY()
 			PRINTL
 		PRINTL
-		PRINTL [100] âèú
-		PRINTL [200] ñﬂÇÈ
+		PRINTL [100] Ëß£Èô§
+		PRINTL [200] Êàª„Çã
 
 		$INPUT_LOOP_2
 		INPUT
 		L_TMP = RESULT
 		SELECTCASE L_TMP
-			;âèú
+			;Ëß£Èô§
 			CASE 100
 				CSTR:ARG:(L_POS+L_INPUT) = 
-			;ñﬂÇÈ
+			;Êàª„Çã
 			CASE 200
 				RESTART
 			CASE 0 TO 99
@@ -241,24 +241,24 @@ SELECTCASE L_INPUT
 				CSTR:ARG:(L_POS+L_INPUT) = %L_LIST:L_TMP%
 			CASEELSE
 				$ERROR_2
-				;INPUTÉGÉâÅ[ëŒâû
+				;INPUT„Ç®„É©„ÉºÂØæÂøú
 				CALL C_INPUT_ERROR
 				GOTO INPUT_LOOP_2
 		ENDSELECT
-	;ÉfÉtÉHÉãÉg
+	;„Éá„Éï„Ç©„É´„Éà
 	CASE 20
-		CALL CLOTHES_SET_CUSTOM(ARG, "ÉfÉtÉHÉãÉg")
+		CALL CLOTHES_SET_CUSTOM(ARG, "„Éá„Éï„Ç©„É´„Éà")
 
-	;ÉÅÉCÉhïû
+	;„É°„Ç§„ÉâÊúç
 	CASE 21
-		CALL CLOTHES_SET_CUSTOM(ARG, "ÉÅÉCÉhïû")
+		CALL CLOTHES_SET_CUSTOM(ARG, "„É°„Ç§„ÉâÊúç")
 
-	;ÉrÉbÉ`ÉMÉÉÉã
+	;„Éì„ÉÉ„ÉÅ„ÇÆ„É£„É´
 	CASE 22,(NTR_LV(ARG) >= 3)
-		CALL CLOTHES_SET_CUSTOM(ARG, "ÉrÉbÉ`ÉMÉÉÉã")
+		CALL CLOTHES_SET_CUSTOM(ARG, "„Éì„ÉÉ„ÉÅ„ÇÆ„É£„É´")
 
 	CASEELSE
-		;INPUTÉGÉâÅ[ëŒâû
+		;INPUT„Ç®„É©„ÉºÂØæÂøú
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT
@@ -268,11 +268,11 @@ RESTART
 ;=================================================
 ;   sub CLOTHES_INFO
 ;=================================================
-;   àﬂëï:èÓïÒ
+;   Ë°£Ë£Ö:ÊÉÖÂ†±
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				ÉLÉÉÉâ
-;  ARG:1				CSVóDêÊÉtÉâÉO
+;  ARG:0				„Ç≠„É£„É©
+;  ARG:1				CSVÂÑ™ÂÖà„Éï„É©„Ç∞
 ;-------------------------------------------------
 @CLOTHES_INFO(ARG, ARG:1=0)
 #DIM L_POS
@@ -280,10 +280,10 @@ RESTART
 #DIM L_W
 #DIMS L_STR
 
-L_POS = GETNUM(CSTR, "àﬂëïñº_ñXéq")
+L_POS = GETNUM(CSTR, "Ë°£Ë£ÖÂêç_Â∏ΩÂ≠ê")
 L_W = 75
 
-PRINTFORM %"ÅyàﬂëïÅz", 12, LEFT%ÅF
+PRINTFORM %"„ÄêË°£Ë£Ö„Äë", 12, LEFT%Ôºö
 L_LEN=0
 REPEAT DEFCLOTHE_TYPE_NUM
 
@@ -298,11 +298,11 @@ REPEAT DEFCLOTHE_TYPE_NUM
 	IF L_LEN > L_W
 		L_LEN = 0
 		PRINTL
-		PRINTFORM %"", 12, LEFT%Å@
+		PRINTFORM %"", 12, LEFT%„ÄÄ
 	ENDIF
 
 ;	SIF GROUPMATCH(COUNT, 5, 6, 7)
-;		SETCOLOR COLOR("ÉsÉìÉN")
+;		SETCOLOR COLOR("„Éî„É≥„ÇØ")
 	PRINTFORM [%L_STR%]
 ;	RESETCOLOR
 REND

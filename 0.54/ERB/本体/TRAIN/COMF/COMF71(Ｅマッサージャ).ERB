@@ -1,49 +1,49 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:COMFxxx.ERB
-;	Facility	:TRAINƒRƒ}ƒ“ƒh(71:‚dƒ}ƒbƒT[ƒWƒƒ)B
+;	Facility	:TRAINã‚³ãƒžãƒ³ãƒ‰(71:ï¼¥ãƒžãƒƒã‚µãƒ¼ã‚¸ãƒ£)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E COM_FUNC_GET_NAME_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
-;	E COM_FUNC_ABLE_Xxxx				CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
-;	E COM_FUNC_EXE_Xxxx				ƒRƒ}ƒ“ƒhŽÀs
-;	E COM_FUNC_SRC_Xxxx				ƒRƒ}ƒ“ƒhƒ\[ƒX
-;	E COM_FUNC_TRAIN_MSG_Xxxx			ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
-;	E COM_FUNC_GET_TYPE_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;	ãƒ» COM_FUNC_GET_NAME_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
+;	ãƒ» COM_FUNC_ABLE_Xxxx				CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
+;	ãƒ» COM_FUNC_EXE_Xxxx				ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
+;	ãƒ» COM_FUNC_SRC_Xxxx				ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
+;	ãƒ» COM_FUNC_TRAIN_MSG_Xxxx			ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+;	ãƒ» COM_FUNC_GET_TYPE_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub COM_FUNC_GET_NAME_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 ; Output:
-;  RESULTS				ƒRƒ}ƒ“ƒh–¼Ì
+;  RESULTS				ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 @COM_FUNC_GET_NAME_X71
-RESULTS = ‚dƒ}ƒbƒT[ƒWƒƒ
+RESULTS = ï¼¥ãƒžãƒƒã‚µãƒ¼ã‚¸ãƒ£
 
 ;=================================================
 ;   sub COM_FUNC_ABLE_Xxxx
 ;=================================================
-;   CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
+;   CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
 ;-------------------------------------------------
 ; Output:
-;  RESULT				^‹U’l
+;  RESULT				çœŸå½å€¤
 ;-------------------------------------------------
 @COM_FUNC_ABLE_X71
 
-;“Á’èƒAƒCƒeƒ€‚ðŠ—L
-SIF !ITEM:‚dƒ}ƒbƒT[ƒWƒƒ
+;ç‰¹å®šã‚¢ã‚¤ãƒ†ãƒ ã‚’æ‰€æœ‰
+SIF !ITEM:ï¼¥ãƒžãƒƒã‚µãƒ¼ã‚¸ãƒ£
 	RETURN 0
 
 RETURN 1
@@ -51,7 +51,7 @@ RETURN 1
 ;=================================================
 ;   sub COM_FUNC_EXE_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhŽÀs
+;   ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 ;-------------------------------------------------
 @COM_FUNC_EXE_X71
 #DIM L_P
@@ -64,24 +64,24 @@ L_P = PLAYER
 L_T = TARGET
 
 ;-----------------------------
-;COM•ÊFLAG‚ÌÝ’è
+;COMåˆ¥FLAGã®è¨­å®š
 ;-----------------------------
 
-TEQUIP:L_T:ƒ|ƒCƒ“ƒgˆ¤• = [[TRAIN:‚dƒ}ƒbƒT[ƒWƒƒ]]
+TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ„›æ’« = [[TRAIN:ï¼¥ãƒžãƒƒã‚µãƒ¼ã‚¸ãƒ£]]
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 ;-----------------------------
-;‚»‚Ì‘¼‚Ìˆ—
+;ãã®ä»–ã®å‡¦ç†
 ;-----------------------------
 
 
 ;=================================================
 ;   sub COM_FUNC_SRC_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒ\[ƒX
+;   ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
 ;-------------------------------------------------
 @COM_FUNC_SRC_X71
 #DIM L_P
@@ -94,11 +94,11 @@ L_P = PLAYER
 L_T = TARGET
 
 ;-----------------------------
-;COM•ÊFLAG‚ÌÝ’è
+;COMåˆ¥FLAGã®è¨­å®š
 ;-----------------------------
 
 ;-----------------------------
-;ƒ\[ƒX’Ç‰Áˆ—
+;ã‚½ãƒ¼ã‚¹è¿½åŠ å‡¦ç†
 ;-----------------------------
 
 LOCAL:0 = 120
@@ -109,21 +109,21 @@ LOCAL:0 = LOCAL:0 * L_TMP / 100
 LOCAL:1 = LOCAL:1 * L_TMP / 100
 
 
-;- ƒ\[ƒX
-SOURCE:L_T:‰õ‚b += LOCAL:0
-SOURCE:L_T:«sˆ× += LOCAL:1
+;- ã‚½ãƒ¼ã‚¹
+SOURCE:L_T:å¿«ï¼£ += LOCAL:0
+SOURCE:L_T:æ€§è¡Œç‚º += LOCAL:1
 
 
 ;-----------------------------
-;ŒoŒ±‚Ìˆ—
+;çµŒé¨“ã®å‡¦ç†
 ;-----------------------------
 
-;- TR:ˆÙ«ˆ¤ŒoŒ±
+;- TR:ç•°æ€§æ„›çµŒé¨“
 CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 
 
 ;-----------------------------
-;‚»‚Ì‘¼‚Ìˆ—
+;ãã®ä»–ã®å‡¦ç†
 ;-----------------------------
 
 
@@ -131,49 +131,49 @@ CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 ;=================================================
 ;   sub COM_FUNC_TRAIN_MSG_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
+;   ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ;-------------------------------------------------
 @COM_FUNC_TRAIN_MSG_X71
 
-PRINTFORML %CALLNAME%‚Ì”éŠ‚ÉU“®‚µ‚Ä‚¢‚é“d‹C‚ ‚ñ‚Ü‚ð‰Ÿ‚µ‚Â‚¯‚½
-PRINTFORM %CALLNAME%‚Í
-;‚bŠ´ŠoLV3–¢–ž{—~î‚ÌPALAMLV3–¢–ž
-IF ABL:‚bŠ´Šo < 3 && PALAM:—~î < PALAMLV:3
-	PRINT ‚Æ‚Ä‚à‚­‚·‚®‚Á‚½‚ª‚Á‚Ä‚¢‚é‚æ‚¤
-;‚bŠ´ŠoLV3–¢–ž{—~î‚ÌPALAMLV3ˆÈã
-ELSEIF ABL:‚bŠ´Šo < 3 && PALAM:—~î >= PALAMLV:3
-	PRINT Ac‰½‚àŒ¾‚¦‚È‚­‚È‚Á‚Ä‚¢‚é‚æ‚¤
-;Š×—Žˆó{‚bŠ´ŠoLV4ˆÈã{—~î‚ÌPALAMLV3–¢–ž
-ELSEIF MARK:Š×—Žˆó && ABL:‚bŠ´Šo >= 4 && PALAM:—~î < PALAMLV:3
-	PRINT ‘Ò‚¿‚í‚Ñ‚½‚æ‚¤‚É‘«‚ðŠJ‚«AŽó‚¯“ü‚ê‚Ä‚¢‚é‚æ‚¤
-;Š×—Žˆó{‚bŠ´ŠoLV4ˆÈã{—~î‚ÌPALAMLV3ˆÈã{—~î‚ÌPALAMLV5–¢–ž
-ELSEIF MARK:Š×—Žˆó && ABL:‚bŠ´Šo >= 4 && PALAM:—~î >= PALAMLV:3 && PALAM:—~î < PALAMLV:5
-	PRINTFORM ‰õŠy‚ÉŸµ‚ð‚½‚ç‚µ‚È‚ª‚çA‰½“x‚à%CALLNAME:PLAYER%‚Ì–¼‚ðŒÄ‚ñ
-;Š×—Žˆó{‚bŠ´ŠoLV4ˆÈã{—~î‚ÌPALAMLV5ˆÈã
-ELSEIF MARK:Š×—Žˆó && ABL:‚bŠ´Šo >= 4 && PALAM:—~î >= PALAMLV:5
-	PRINTFORM %CALLNAME:PLAYER%‚ð‘~‚«•ø‚«‚È‚ª‚çâ’¸‚Ìœ’›Š´‚ÉZ‚Á‚Ä‚¢‚é‚æ‚¤
-;‚bŠ´ŠoLV3ˆÈã{—~î‚ÌPALAMLV3–¢–ž
-ELSEIF ABL:‚bŠ´Šo >= 3 && PALAM:—~î < PALAMLV:3
-	PRINT ‹­‚¢‰õŠ´‚ÉŠç‚ðÔ‚ç‚ß‚Ä‚¢‚é‚æ‚¤
-;‚bŠ´ŠoLV3ˆÈã{—~î‚ÌPALAMLV3ˆÈã{—~î‚ÌPALAMLV5–¢–ž
-ELSEIF ABL:‚bŠ´Šo >= 3 && PALAM:—~î >= PALAMLV:3 && PALAM:—~î < PALAMLV:5
-	PRINT ›‚¯‚½–Ú‚Å‰õŠy‚ðæÃ‚Á‚Ä‚¢‚é‚æ‚¤
-;‚bŠ´ŠoLV3ˆÈã{—~î‚ÌPALAMLV5ˆÈã
-ELSEIF ABL:‚bŠ´Šo >= 3 && PALAM:—~î >= PALAMLV:5
-	PRINT ¡‚É‚àâ’¸‚É’B‚µ‚Ä‚µ‚Ü‚¢‚»‚¤‚È—lŽq
+PRINTFORML %CALLNAME%ã®ç§˜æ‰€ã«æŒ¯å‹•ã—ã¦ã„ã‚‹é›»æ°—ã‚ã‚“ã¾ã‚’æŠ¼ã—ã¤ã‘ãŸ
+PRINTFORM %CALLNAME%ã¯
+;ï¼£æ„Ÿè¦šLV3æœªæº€ï¼‹æ¬²æƒ…ã®PALAMLV3æœªæº€
+IF ABL:ï¼£æ„Ÿè¦š < 3 && PALAM:æ¬²æƒ… < PALAMLV:3
+	PRINT ã¨ã¦ã‚‚ãã™ãã£ãŸãŒã£ã¦ã„ã‚‹ã‚ˆã†
+;ï¼£æ„Ÿè¦šLV3æœªæº€ï¼‹æ¬²æƒ…ã®PALAMLV3ä»¥ä¸Š
+ELSEIF ABL:ï¼£æ„Ÿè¦š < 3 && PALAM:æ¬²æƒ… >= PALAMLV:3
+	PRINT ã€â€¦ä½•ã‚‚è¨€ãˆãªããªã£ã¦ã„ã‚‹ã‚ˆã†
+;é™¥è½åˆ»å°ï¼‹ï¼£æ„Ÿè¦šLV4ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV3æœªæº€
+ELSEIF MARK:é™¥è½åˆ»å° && ABL:ï¼£æ„Ÿè¦š >= 4 && PALAM:æ¬²æƒ… < PALAMLV:3
+	PRINT å¾…ã¡ã‚ã³ãŸã‚ˆã†ã«è¶³ã‚’é–‹ãã€å—ã‘å…¥ã‚Œã¦ã„ã‚‹ã‚ˆã†
+;é™¥è½åˆ»å°ï¼‹ï¼£æ„Ÿè¦šLV4ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV3ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV5æœªæº€
+ELSEIF MARK:é™¥è½åˆ»å° && ABL:ï¼£æ„Ÿè¦š >= 4 && PALAM:æ¬²æƒ… >= PALAMLV:3 && PALAM:æ¬²æƒ… < PALAMLV:5
+	PRINTFORM å¿«æ¥½ã«æ¶Žã‚’ãŸã‚‰ã—ãªãŒã‚‰ã€ä½•åº¦ã‚‚%CALLNAME:PLAYER%ã®åã‚’å‘¼ã‚“
+;é™¥è½åˆ»å°ï¼‹ï¼£æ„Ÿè¦šLV4ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV5ä»¥ä¸Š
+ELSEIF MARK:é™¥è½åˆ»å° && ABL:ï¼£æ„Ÿè¦š >= 4 && PALAM:æ¬²æƒ… >= PALAMLV:5
+	PRINTFORM %CALLNAME:PLAYER%ã‚’æŽ»ãæŠ±ããªãŒã‚‰çµ¶é ‚ã®ææƒšæ„Ÿã«æµ¸ã£ã¦ã„ã‚‹ã‚ˆã†
+;ï¼£æ„Ÿè¦šLV3ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV3æœªæº€
+ELSEIF ABL:ï¼£æ„Ÿè¦š >= 3 && PALAM:æ¬²æƒ… < PALAMLV:3
+	PRINT å¼·ã„å¿«æ„Ÿã«é¡”ã‚’èµ¤ã‚‰ã‚ã¦ã„ã‚‹ã‚ˆã†
+;ï¼£æ„Ÿè¦šLV3ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV3ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV5æœªæº€
+ELSEIF ABL:ï¼£æ„Ÿè¦š >= 3 && PALAM:æ¬²æƒ… >= PALAMLV:3 && PALAM:æ¬²æƒ… < PALAMLV:5
+	PRINT æƒšã‘ãŸç›®ã§å¿«æ¥½ã‚’è²ªã£ã¦ã„ã‚‹ã‚ˆã†
+;ï¼£æ„Ÿè¦šLV3ä»¥ä¸Šï¼‹æ¬²æƒ…ã®PALAMLV5ä»¥ä¸Š
+ELSEIF ABL:ï¼£æ„Ÿè¦š >= 3 && PALAM:æ¬²æƒ… >= PALAMLV:5
+	PRINT ä»Šã«ã‚‚çµ¶é ‚ã«é”ã—ã¦ã—ã¾ã„ãã†ãªæ§˜å­
 ENDIF
-PRINTL ‚¾c
+PRINTL ã â€¦
 WAIT
 
 
 ;=================================================
 ;   sub COM_FUNC_GET_TYPE_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 ; Output:
-;  RESULT				ƒRƒ}ƒ“ƒhŽí•Ê
+;  RESULT				ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 @COM_FUNC_GET_TYPE_X71
-RETURN [[COMŽí•Ê:“¹‹ïŒn]]
+RETURN [[COMç¨®åˆ¥:é“å…·ç³»]]
 

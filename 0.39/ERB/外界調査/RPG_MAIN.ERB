@@ -1,55 +1,55 @@
-;-------------------------------------------------
-;ŠOŠE’²¸
+ï»¿;-------------------------------------------------
+;å¤–ç•Œèª¿æŸ»
 ;-------------------------------------------------
 @RPG_MAIN
 #DIM L_INPUT
-#DIMS DYNAMIC OP_RELOAD     ;‰‰ñˆÈŠO‚Ìƒy[ƒWXV‚ÆƒŠƒXƒgXV‚ð—}§‚·‚é
-Flag:ƒ^[ƒ“is[“x = 0
-Flag:ƒ^[ƒ“í“¬‰ñ” = 0
-FLAG:ƒ^[ƒ“ŒoŒ±’l = 0
-Flag:’²¸ƒCƒxƒ“ƒg”Ô† = 0
+#DIMS DYNAMIC OP_RELOAD     ;åˆå›žä»¥å¤–ã®ãƒšãƒ¼ã‚¸æ›´æ–°ã¨ãƒªã‚¹ãƒˆæ›´æ–°ã‚’æŠ‘åˆ¶ã™ã‚‹
+Flag:ã‚¿ãƒ¼ãƒ³é€²è¡Œæ·±åº¦ = 0
+Flag:ã‚¿ãƒ¼ãƒ³æˆ¦é—˜å›žæ•° = 0
+FLAG:ã‚¿ãƒ¼ãƒ³çµŒé¨“å€¤ = 0
+Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· = 0
 
 $INPUT_LOOP
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORM y’²¸æ:
-IF Flag:’²¸‹æˆæ == 90
-	PRINTFORM Lv{Flag:“ú‘Ö‚í‚è‹æ‰æ“ïˆÕ“x}:‚ ‚é‹æ‰æz(Å[•”:{Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE})
-ELSEIF Flag:’²¸‹æˆæ == 50
-	PRINTFORM LvXX:»o‚Ì“sz
-ELSEIF Flag:’²¸‹æˆæ == 5
-	PRINTFORM Lv5:Š®‘SNH‹æˆæ[Œ»‘ã–À‹{]z
-ELSEIF Flag:’²¸‹æˆæ == 4
-	PRINTFORM Lv4:‹¶‹C‚Ì”p“sz
-ELSEIF Flag:’²¸‹æˆæ == 3
-	PRINTFORM Lv3:ŠëŒ¯‹æˆæz
-ELSEIF Flag:’²¸‹æˆæ == 2
-	PRINTFORM Lv2:‘Â‚¿‚½“sŽsz
-ELSEIF Flag:’²¸‹æˆæ == 1
-	PRINTFORM Lv1:–³–@‹æˆæz
+PRINTFORM ã€èª¿æŸ»å…ˆ:
+IF Flag:èª¿æŸ»åŒºåŸŸ == 90
+	PRINTFORM Lv{Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»é›£æ˜“åº¦}:ã‚ã‚‹åŒºç”»ã€‘(æœ€æ·±éƒ¨:{Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ})
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 50
+	PRINTFORM LvXX:ç ‚å¡µã®éƒ½ã€‘
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 5
+	PRINTFORM Lv5:å®Œå…¨ä¾µé£ŸåŒºåŸŸ[ç¾ä»£è¿·å®®]ã€‘
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 4
+	PRINTFORM Lv4:ç‹‚æ°—ã®å»ƒéƒ½ã€‘
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 3
+	PRINTFORM Lv3:å±é™ºåŒºåŸŸã€‘
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 2
+	PRINTFORM Lv2:å •ã¡ãŸéƒ½å¸‚ã€‘
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 1
+	PRINTFORM Lv1:ç„¡æ³•åŒºåŸŸã€‘
 ELSE
-	PRINTFORM Lv0:“sŽs‹«ŠEüz
+	PRINTFORM Lv0:éƒ½å¸‚å¢ƒç•Œç·šã€‘
 ENDIF
-PRINTFORML (Œ»Ý[“x:{Flag:’²¸[“x})
+PRINTFORML (ç¾åœ¨æ·±åº¦:{Flag:èª¿æŸ»æ·±åº¦})
 DRAWLINE
-IF Flag:ƒ^[ƒ“’²¸Ï‚Ý == 1
-	PRINTFORML ‚±‚Ìƒ^[ƒ“‚Í’²¸Ï‚Ý‚Å‚· 
-ELSEIF  Flag:“sŽs_–h‰q != 0
-	PRINTFORML –h‰qíŽž‚Í’²¸o—ˆ‚Ü‚¹‚ñ
+IF Flag:ã‚¿ãƒ¼ãƒ³èª¿æŸ»æ¸ˆã¿ == 1
+	PRINTFORML ã“ã®ã‚¿ãƒ¼ãƒ³ã¯èª¿æŸ»æ¸ˆã¿ã§ã™ 
+ELSEIF  Flag:éƒ½å¸‚_é˜²è¡› != 0
+	PRINTFORML é˜²è¡›æˆ¦æ™‚ã¯èª¿æŸ»å‡ºæ¥ã¾ã›ã‚“
 ELSE
-	PRINTFORML [0] ’²¸ŠJŽn
+	PRINTFORML [0] èª¿æŸ»é–‹å§‹
 ENDIF
-PRINTFORML [1] ’²¸‹æˆæ‘I‘ð
+PRINTFORML [1] èª¿æŸ»åŒºåŸŸé¸æŠž
 PRINTFORML 
-PRINTFORML [5] •”‘à”z’u
-PRINTFORM [2] •‘•‰ü—Ç@@
-PRINTFORM [10] ƒA[ƒeƒBƒtƒ@ƒNƒg@@
-PRINTFORML [20] ƒNƒ‰ƒtƒg
-PRINTFORM [3] ‹Z”\‹­‰»@@
-PRINTFORML [21] ƒAƒCƒeƒ€Žg—p
-PRINTFORML [4] ƒAƒCƒeƒ€Šm”F
+PRINTFORML [5] éƒ¨éšŠé…ç½®
+PRINTFORM [2] æ­¦è£…æ”¹è‰¯ã€€ã€€
+PRINTFORM [10] ã‚¢ãƒ¼ãƒ†ã‚£ãƒ•ã‚¡ã‚¯ãƒˆã€€ã€€
+PRINTFORML [20] ã‚¯ãƒ©ãƒ•ãƒˆ
+PRINTFORM [3] æŠ€èƒ½å¼·åŒ–ã€€ã€€
+PRINTFORML [21] ã‚¢ã‚¤ãƒ†ãƒ ä½¿ç”¨
+PRINTFORML [4] ã‚¢ã‚¤ãƒ†ãƒ ç¢ºèª
 PRINTFORML 
-PRINTFORML [999] ‚â‚ß‚é
+PRINTFORML [999] ã‚„ã‚ã‚‹
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
@@ -58,19 +58,19 @@ CASE 0
 CASE 1
 	CALL RPG_STAGESELECT
 CASE 2
-	CALL RPG_CHARA_SELECT("RPG_•Ší‹­‰»")
+	CALL RPG_CHARA_SELECT("RPG_æ­¦å™¨å¼·åŒ–")
 CASE 3
-	CALL RPG_CHARA_SELECT("RPG_‹Z”\¬’·")
+	CALL RPG_CHARA_SELECT("RPG_æŠ€èƒ½æˆé•·")
 CASE 4
 	CALL RPG_ITEM
 CASE 5
-	CALL RPG_CHARA_SELECT("RPG_”º”z’u")
+	CALL RPG_CHARA_SELECT("RPG_éšä¼´é…ç½®")
 CASE 10
 	CALL RPG_ARTIFACT
 CASE 20
 	CALL RPG_CRAFT
 CASE 21
-	CALL RPG_CHARA_SELECT("RPG_‹­‰»Ü“Š—^")
+	CALL RPG_CHARA_SELECT("RPG_å¼·åŒ–å‰¤æŠ•ä¸Ž")
 CASE 999
 	CALL SYSTEM_MENU
 CASEELSE
@@ -81,32 +81,32 @@ GOTO INPUT_LOOP
 
 
 
-@RPG_CHARA_SELECT(MODE_NOW = "RPG_•Ší‹­‰»")
+@RPG_CHARA_SELECT(MODE_NOW = "RPG_æ­¦å™¨å¼·åŒ–")
 #DIMS         MODE_NOW
 #DIM          MODE_ID
 #DIM          L_INPUT
-#DIMS DYNAMIC OP_RELOAD     ;‰‰ñˆÈŠO‚Ìƒy[ƒWXV‚ÆƒŠƒXƒgXV‚ð—}§‚·‚é
+#DIMS DYNAMIC OP_RELOAD     ;åˆå›žä»¥å¤–ã®ãƒšãƒ¼ã‚¸æ›´æ–°ã¨ãƒªã‚¹ãƒˆæ›´æ–°ã‚’æŠ‘åˆ¶ã™ã‚‹
 {
 #DIMS CONST   MODE_NAME = 
-	"RPG_•Ší‹­‰»", 
-	"RPG_‹Z”\¬’·", 
-	"RPG_‹­‰»Ü“Š—^", 
-	"RPG_’´l–ò“Š—^", 
-	"RPG_”º”z’u", 
-	"RPG_Œã•û”z’u", 
-	"RPG_‰ñŽû”z’u", 
-	"RPG_’Tõ”z’u"
+	"RPG_æ­¦å™¨å¼·åŒ–", 
+	"RPG_æŠ€èƒ½æˆé•·", 
+	"RPG_å¼·åŒ–å‰¤æŠ•ä¸Ž", 
+	"RPG_è¶…äººè–¬æŠ•ä¸Ž", 
+	"RPG_éšä¼´é…ç½®", 
+	"RPG_å¾Œæ–¹é…ç½®", 
+	"RPG_å›žåŽé…ç½®", 
+	"RPG_æŽ¢ç´¢é…ç½®"
 }
 {
 #DIMS CONST   MEMO_STR = 
-	"•Ší‹­‰»‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"‹Z”\¬’·‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"‹­‰»Ü“Š—^‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"’´l–ò“Š—^‚Ì‘ÎÛŽÒ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"”º•”‘à‚É”z’u‚·‚él•¨‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"Œã•û•”‘à‚É”z’u‚·‚él•¨‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"‰ñŽû•”‘à‚É”z’u‚·‚él•¨‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B", 
-	"’Tõ•”‘à‚É”z’u‚·‚él•¨‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B"
+	"æ­¦å™¨å¼·åŒ–ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"æŠ€èƒ½æˆé•·ã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"å¼·åŒ–å‰¤æŠ•ä¸Žã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"è¶…äººè–¬æŠ•ä¸Žã®å¯¾è±¡è€…ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"éšä¼´éƒ¨éšŠã«é…ç½®ã™ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"å¾Œæ–¹éƒ¨éšŠã«é…ç½®ã™ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"å›žåŽéƒ¨éšŠã«é…ç½®ã™ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚", 
+	"æŽ¢ç´¢éƒ¨éšŠã«é…ç½®ã™ã‚‹äººç‰©ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚"
 }
 
 
@@ -114,25 +114,25 @@ GOTO INPUT_LOOP
 MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
 SELECTCASE MODE_ID
 CASE -1
-	MODE_NOW '= "RPG_•Ší‹­‰»"
+	MODE_NOW '= "RPG_æ­¦å™¨å¼·åŒ–"
 	RESTART
 ENDSELECT
 CLEARLINE LINECOUNT
 CALL LIST_CHARA_STATUS_MAIN(0, OP_RELOAD, MODE_NOW, MEMO_STR:MODE_ID)
 L_INPUT = RESULT
-OP_RELOAD '= "uƒy[ƒWXV–³‚µvuƒŠƒXƒgXV–³‚µv"
+OP_RELOAD '= "ã€Œãƒšãƒ¼ã‚¸æ›´æ–°ç„¡ã—ã€ã€Œãƒªã‚¹ãƒˆæ›´æ–°ç„¡ã—ã€"
 SELECTCASE L_INPUT
 CASE 0
 	RETURN
 CASE 1 TO CHARANUM - 1
 	SELECTCASE MODE_NOW
-	CASE "RPG_•Ší‹­‰»"
+	CASE "RPG_æ­¦å™¨å¼·åŒ–"
 		CALL RPG_WEAPON_MENU(L_INPUT)
-	CASE "RPG_‹Z”\¬’·"
+	CASE "RPG_æŠ€èƒ½æˆé•·"
 		CALL RPG_SKILLSET(L_INPUT)
-	CASE "RPG_‹­‰»Ü“Š—^", "RPG_’´l–ò“Š—^"
+	CASE "RPG_å¼·åŒ–å‰¤æŠ•ä¸Ž", "RPG_è¶…äººè–¬æŠ•ä¸Ž"
 		CALL RPG_DOPING(L_INPUT, MODE_NOW)
-	CASE "RPG_”º”z’u", "RPG_Œã•û”z’u", "RPG_‰ñŽû”z’u", "RPG_’Tõ”z’u"
+	CASE "RPG_éšä¼´é…ç½®", "RPG_å¾Œæ–¹é…ç½®", "RPG_å›žåŽé…ç½®", "RPG_æŽ¢ç´¢é…ç½®"
 		CALL RPG_SUPPORT_MENU(L_INPUT, MODE_NOW)
 	ENDSELECT
 CASE 1000 TO 1007

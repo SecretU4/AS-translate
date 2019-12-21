@@ -1,59 +1,59 @@
-;-------------------------------------------------
-;�S�Ƃ̏o�
+﻿;-------------------------------------------------
+;鬼との出会い
 ;-------------------------------------------------
 @RPG_EVENT_501(ARG:0,ARG:1)
 #DIM L_INPUT
 #DIM L_I
 #DIM EVE_RAND
-#DIM ID_�S
-#DIM ID_�T����
+#DIM ID_鬼
+#DIM ID_探索者
 
-ARG = Flag:�����L����
-Flag:�����C�x���g������ = 1
-Flag:�����C�x���g�ԍ� = 501
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 501
 
 L_I = ARG
 
 CLEARLINE LINECOUNT
 DRAWLINE
 SETCOLOR 150,250,150
-PRINTFORML �y�����C�x���g:�S�Ƃ̏o��z
+PRINTFORML 【調査イベント:鬼との出会い】
 PRINTFORML 
 
-PRINTFORML �}�ɖڂ̑O�̌��������ӂ���%CALLNAME:L_I%�������Ĕ�ш����ƁA�����Ⴎ����ɂȂ����u�O�G�v���������ł����B
-PRINTFORML �������ƍ��f���Ă���Ƒ傫���J����������A���X�����ꂽ��l�̋S�����ꂽ�B
-PRINTFORML ��ɓG�ӂ͂Ȃ����Ƃ�`����ƁA�S�͋����������Ƃ��Ӎ߂��Ă����B
-PRINTFORML �b�ɂ��΁u�O�G�v�Ɛ킢�����Ă�����W�����炩�Ȃ藣��Ă��Ă��܂����悤���A����΂͂���Ȃ̂��낤�B
-PRINTFORML �S���g�͂��̂܂ܓ����𑱂���悤�����A�g�̂�������蒷���͎����Ȃ���������Ȃ��c
+PRINTFORML 急に目の前の建物が粉砕され%CALLNAME:L_I%が驚いて飛び引くと、ぐちゃぐちゃになった「外敵」が吹き飛んできた。
+PRINTFORML 何事かと困惑していると大きく開いた穴から、少々薄汚れた一人の鬼が現れた。
+PRINTFORML 先に敵意はないことを伝えると、鬼は驚かせたことを謝罪してきた。
+PRINTFORML 話によれば「外敵」と戦い続けていたら集落からかなり離れてきてしまったようだ、言わばはぐれなのだろう。
+PRINTFORML 鬼自身はこのまま討伐を続けるようだが、身体を見る限り長くは持たないかもしれない…
 PRINTFORML 
-PRINTFORML [0] ���������@�@(�Z���o�^���܂�)
-PRINTFORML [1] ���̂܂܌�����(�Z���o�^�͂��܂���)
+PRINTFORML [0] 引き入れる　　(住民登録します)
+PRINTFORML [1] そのまま見送る(住民登録はしません)
 PRINTFORML 
 $INPUT_LOOP
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 0
-	PRINTFORML %CALLNAME:L_I%�͓s�s�̎���`���A�u���������ꏏ�Ɛ��Ȃ����v�ƗU���Ă݂�B
-	PRINTFORML �����ԎR�̉��n�Ő������Ă������߂��A�S�͓s�s�̓��e�𕷂��Ċ֐S�������U���ɂ̂��Ă����B
-	PRINTFORML �^�p����ł͐S���������ɂȂ��Ă���邾�낤�c
+	PRINTFORML %CALLNAME:L_I%は都市の事を伝えつつ、「自分たち一緒と戦わないか」と誘ってみる。
+	PRINTFORML 長い間山の奥地で生活していたためか、鬼は都市の内容を聞いて関心を示し誘いにのってきた。
+	PRINTFORML 運用次第では心強い味方になってくれるだろう…
 	PRINTFORML 
 	PRINTFORMW 
 	CALL CHARACTER_SCOUT1
 	RESETCOLOR
-	ID_�S = CHARANUM - 1
-	ID_�T���� = Flag:�����L����
+	ID_鬼 = CHARANUM - 1
+	ID_探索者 = Flag:調査キャラ
 	EVE_RAND = RAND(1, 5)
 	
 	{
 	CALL RPG_PAIR_TALK(
-		ID_�S,     "�y�O�E�̋S�F" + @"%CALLNAME:ID_�S,     20, LEFT%" + "�z", @"RPG_EVENT_501_{EVE_RAND}_ONI", 
-		ID_�T����, "�y�T���ҁ@�F" + @"%CALLNAME:ID_�T����, 20, LEFT%" + "�z", @"RPG_EVENT_501_{EVE_RAND}_EXPLORER"
+		ID_鬼,     "【外界の鬼：" + @"%CALLNAME:ID_鬼,     20, LEFT%" + "】", @"RPG_EVENT_501_{EVE_RAND}_ONI", 
+		ID_探索者, "【探索者　：" + @"%CALLNAME:ID_探索者, 20, LEFT%" + "】", @"RPG_EVENT_501_{EVE_RAND}_EXPLORER"
 		)
 	}
 CASE 1
-	PRINTFORML ���΂ɂ��̂܂܌�����킯�ɂ��������A�Ƃ肠�����]�����H�ƂȂǂ�n�����Ƃɂ���B
-	PRINTFORML �S�͏Ί�Ŋ��ӂ��q�ׁA�H�Ƃ�j����Ȃ��狎���čs�����c
+	PRINTFORML 流石にこのまま見送るわけにもいかず、とりあえず余った食糧などを渡すことにする。
+	PRINTFORML 鬼は笑顔で感謝を述べ、食糧を頬張りながら去って行った…
 	PRINTFORML 
 	PRINTFORMW 
 	RESETCOLOR

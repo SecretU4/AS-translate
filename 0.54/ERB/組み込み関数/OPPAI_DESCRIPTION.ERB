@@ -1,31 +1,31 @@
-;=================================================
+﻿;=================================================
 ;   sub OPPAI_DESCRIPTION
 ;=================================================
-;   �����
+;   胸情報
 ;-------------------------------------------------
 ; Input:
-;  ARG					�L����
+;  ARG					キャラ
 ; Output:
-;  RETURN				��
+;  RETURN				夢
 ;-------------------------------------------------
 @OPPAI_DESCRIPTION(ARG)
 #FUNCTIONS
 #DIMS L_STR
-SELECTCASE VAR_�o�X�g�T�C�Y(ARG)
+SELECTCASE VAR_バストサイズ(ARG)
 	CASE -2
-		L_STR = �͂��ɖc��݂�����������x�̋�
+		L_STR = 僅かに膨らみが感じられる程度の胸
 	CASE -1
-		L_STR = ���Ԃ�̋�
+		L_STR = 小ぶりの胸
 	CASE 0
-		L_STR = �`�̐�������
+		L_STR = 形の整った胸
 	CASE 1
-		L_STR = �肩���ꂻ���Ȃقǂ̋���
+		L_STR = 手から溢れそうなほどの巨乳
 	CASE 2
-		L_STR = �͂����ꂻ���Ȃقǂ̔���
+		L_STR = はちきれそうなほどの爆乳
 ENDSELECT
-;�I�g�R
+;オトコ
 SIF !VAR_SEX(ARG)
-	L_STR =��
+	L_STR =胸
 
 RETURNF L_STR
 

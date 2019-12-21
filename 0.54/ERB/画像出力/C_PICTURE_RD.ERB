@@ -1,7 +1,7 @@
+ï»¿;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;-------------------------------------------------
-;‹­‰»Ü—p í“¬Ú×‚Ìî•ñ‚Æ—§‚¿ŠG‚ð•À‚×‚½‚à‚Ì
+;å¼·åŒ–å‰¤ç”¨ æˆ¦é—˜è©³ç´°ã®æƒ…å ±ã¨ç«‹ã¡çµµã‚’ä¸¦ã¹ãŸã‚‚ã®
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -15,17 +15,17 @@ L_bkREDRAW = CURRENTREDRAW()
 REDRAW 0
 
 ;-------------------------------------------------
-;•`‰æˆ—
+;æç”»å‡¦ç†
 ;-------------------------------------------------
 
-PRINTFORML ž----------------“÷‘Ìî•ñ----------------ž
+PRINTFORML â—‡----------------è‚‰ä½“æƒ…å ±----------------â—‡
 PRINTFORM %" ",L_OFFSET%
 CALL PRINT_LABEL(CALLNAME:L_T)
-PRINTFORML (Žc‚è‹­‰»‰ñ”@‹­‰»Ü{100-CFLAG:L_T:Zl_‹­‰»‰ñ”, 3 ,RIGHT}, ’´l–ò{100-CFLAG:L_T:Zl_’´l‰ñ”, 3 ,RIGHT})
-PRINTFORML %" ",L_OFFSET%ž----------------g‘Ìî•ñ----------------ž
+PRINTFORML (æ®‹ã‚Šå¼·åŒ–å›žæ•°ã€€å¼·åŒ–å‰¤{100-CFLAG:L_T:ä½äºº_å¼·åŒ–å›žæ•°, 3 ,RIGHT}, è¶…äººè–¬{100-CFLAG:L_T:ä½äºº_è¶…äººå›žæ•°, 3 ,RIGHT})
+PRINTFORML %" ",L_OFFSET%â—‡----------------èº«ä½“æƒ…å ±----------------â—‡
 PRINTFORM %" ",L_OFFSET%
-CALL PRINT_RANGE_STATUS(L_T, "HP", "‘Ì—Í", , 3, , "“")
-CALL PRINT_RANGE_STATUS(L_T, "SP", "‹C—Í", , 3, , "“")
+CALL PRINT_RANGE_STATUS(L_T, "HP", "ä½“åŠ›", , 3, , "ï¼…")
+CALL PRINT_RANGE_STATUS(L_T, "SP", "æ°—åŠ›", , 3, , "ï¼…")
 PRINTL
 PRINTFORM %" ",L_OFFSET%
 CALL PRINT_STATUS(L_T, "GUTS" , , 3)
@@ -33,7 +33,7 @@ CALL PRINT_STATUS(L_T, "BRAVE", , 3)
 CALL PRINT_STATUS(L_T, "SAN"  , , 3)
 PRINTL
 PRINTFORM %" ",L_OFFSET%
-CALL PRINT_STATUS(L_T, "ŒoŒ±’l")
+CALL PRINT_STATUS(L_T, "çµŒé¨“å€¤")
 PRINTL
 PRINTFORM %" ",L_OFFSET%
 CALL PRINT_STATUS(L_T, "ATK"  , , 3)
@@ -45,42 +45,42 @@ CALL PRINT_STATUS(L_T, "SPD"  , , 3)
 CALL PRINT_STATUS(L_T, "LUK"  , , 3)
 PRINTL
 PRINTFORM %" ",L_OFFSET%
-CALL PRINT_RANGE_STATUS(L_T, "BRE", , , 3, "•šŽš", "“")
+CALL PRINT_RANGE_STATUS(L_T, "BRE", , , 3, "ä¼å­—", "ï¼…")
 PRINTL
-PRINTFORML %" ",L_OFFSET%ž----------------‹Z”\î•ñ----------------ž
+PRINTFORML %" ",L_OFFSET%â—‡----------------æŠ€èƒ½æƒ…å ±----------------â—‡
 PRINTFORM %" ",L_OFFSET%
-CALL PRINT_STATUS(L_T, "–Ú¯"    , 8, 3)
-CALL PRINT_STATUS(L_T, "ƒAƒCƒfƒA", 8, 3)
-CALL PRINT_STATUS(L_T, "•·‚«Ž¨"  , 8, 3)
-CALL PRINT_STATUS(L_T, "ˆã—Ã"    , 8, 3)
-PRINTL
-PRINTFORM %" ",L_OFFSET%
-CALL PRINT_STATUS(L_T, "‹@ŠBC—", 8, 3)
-CALL PRINT_STATUS(L_T, "ƒRƒ“ƒsƒ…[ƒ^", 8, 3)
-CALL PRINT_STATUS(L_T, "Œ®ŠJ‚¯",   8, 3)
-CALL PRINT_STATUS(L_T, "‰B‚ê‚é",   8, 3)
+CALL PRINT_STATUS(L_T, "ç›®æ˜Ÿ"    , 8, 3)
+CALL PRINT_STATUS(L_T, "ã‚¢ã‚¤ãƒ‡ã‚¢", 8, 3)
+CALL PRINT_STATUS(L_T, "èžãè€³"  , 8, 3)
+CALL PRINT_STATUS(L_T, "åŒ»ç™‚"    , 8, 3)
 PRINTL
 PRINTFORM %" ",L_OFFSET%
-CALL PRINT_STATUS(L_T, "‰ð‘Ì"    , 8, 3)
-CALL PRINT_STATUS(L_T, "‰ð“Ç"    , 8, 3)
+CALL PRINT_STATUS(L_T, "æ©Ÿæ¢°ä¿®ç†", 8, 3)
+CALL PRINT_STATUS(L_T, "ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿", 8, 3)
+CALL PRINT_STATUS(L_T, "éµé–‹ã‘",   8, 3)
+CALL PRINT_STATUS(L_T, "éš ã‚Œã‚‹",   8, 3)
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "è§£ä½“"    , 8, 3)
+CALL PRINT_STATUS(L_T, "è§£èª­"    , 8, 3)
 PRINTL
 
-PRINTFORML ž----------------•‘•î•ñ----------------ž
-PRINTFORML  -----ƒƒCƒ“•º‘•-----  ----- ƒTƒu•º‘• ----- 
-CALL PRINT_LABEL(CSTR:L_T:4000, -19)	; ¶‹l‚ß‚Í•‰
+PRINTFORML â—‡----------------æ­¦è£…æƒ…å ±----------------â—‡
+PRINTFORML â–¡-----ãƒ¡ã‚¤ãƒ³å…µè£…-----â–¡â–¡----- ã‚µãƒ–å…µè£… -----â–¡
+CALL PRINT_LABEL(CSTR:L_T:4000, -19)	; å·¦è©°ã‚ã¯è² 
 CALL PRINT_LABEL(CSTR:L_T:4010, -19)
 PRINTL
-CALL PRINT_LABEL("ƒ^ƒCƒv",,,INFO_STR_HEISOU(CFLAG:L_T:Zl_M•º‘•))	;  ˜gž‚Ý‚Å•\Ž¦‚µ‚½•¶Žš”‚ªRESULT‚É•Ô‚é
+CALL PRINT_LABEL("ã‚¿ã‚¤ãƒ—",,,INFO_STR_HEISOU(CFLAG:L_T:ä½äºº_Må…µè£…))	;  æž è¾¼ã¿ã§è¡¨ç¤ºã—ãŸæ–‡å­—æ•°ãŒRESULTã«è¿”ã‚‹
 PRINTFORM %" "*MAX(0,  23-RESULT)%
-CALL PRINT_LABEL("ƒ^ƒCƒv",,,INFO_STR_HEISOU(CFlag:L_T:Zl_S•º‘•))
+CALL PRINT_LABEL("ã‚¿ã‚¤ãƒ—",,,INFO_STR_HEISOU(CFlag:L_T:ä½äºº_Så…µè£…))
 PRINTL
-CALL PRINT_LABEL("—û“x",,,@"{CFlag:L_T:Zl_M•º‘•—û“x}", -3)
+CALL PRINT_LABEL("ç·´åº¦",,,@"{CFlag:L_T:ä½äºº_Må…µè£…ç·´åº¦}", -3)
 PRINTFORM %" "*MAX(0,  23-RESULT)%
-CALL PRINT_LABEL("—û“x",,,@"{CFlag:L_T:Zl_S•º‘•—û“x}", -3)
+CALL PRINT_LABEL("ç·´åº¦",,,@"{CFlag:L_T:ä½äºº_Så…µè£…ç·´åº¦}", -3)
 PRINTL
-CALL PRINT_LABEL("ƒ_ƒ[ƒW",,,INFO_STR_MAIN_WEAPON_DAMAGE(L_T))
+CALL PRINT_LABEL("ãƒ€ãƒ¡ãƒ¼ã‚¸",,,INFO_STR_MAIN_WEAPON_DAMAGE(L_T))
 PRINTFORM %" "*MAX(0,  23-RESULT)%
-CALL PRINT_LABEL("ƒ_ƒ[ƒW",,,INFO_STR_SUB_WEAPON_DAMAGE(L_T))
+CALL PRINT_LABEL("ãƒ€ãƒ¡ãƒ¼ã‚¸",,,INFO_STR_SUB_WEAPON_DAMAGE(L_T))
 PRINTL
 
 REDRAW L_bkREDRAW

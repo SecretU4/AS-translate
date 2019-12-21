@@ -1,8 +1,8 @@
-
+ï»¿
 ;-------------------------------------------------
-; ‹i’ƒ“XƒXƒJƒEƒg
+; å–«èŒ¶åº—ã‚¹ã‚«ã‚¦ãƒˆ
 ;-------------------------------------------------
-;–ß‚è’lF‰Á“ü‚µ‚½l”
+;æˆ»ã‚Šå€¤ï¼šåŠ å…¥ã—ãŸäººæ•°
 @CITY_SCOUT
 #DIM L_I
 #DIM L_INPUT
@@ -15,24 +15,24 @@ ELSE
 ENDIF
 CALL CITY_SCOUT_MAKE_CHARA("SOLO")
 REDRAW 0
-PRINTFORM [1] Œˆ’è@@@
-PRINTFORM [2] •Ê‚ÌZl@
-PRINTFORM [3] i‚èž‚Ý@
+PRINTFORM [1] æ±ºå®šã€€ã€€ã€€
+PRINTFORM [2] åˆ¥ã®ä½äººã€€
+PRINTFORM [3] çµžã‚Šè¾¼ã¿ã€€
 PRINTFORML
 SIF CHARANUM < 200
-	PRINTFORML [4] 10l‰Á“ü@
+	PRINTFORML [4] 10äººåŠ å…¥ã€€
 PRINTFORML 
-PRINTFORML [0] ‚â‚ß‚é
+PRINTFORML [0] ã‚„ã‚ã‚‹
 DO
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 1
 		PRINTFORML
-		PRINTFORMW %CALLNAME:(CHARANUM - 1)%‚ªV‚µ‚¢‘ÎÛ‚Æ‚µ‚ÄƒsƒbƒNƒAƒbƒv‚³‚ê‚Ü‚µ‚½B
+		PRINTFORMW %CALLNAME:(CHARANUM - 1)%ãŒæ–°ã—ã„å¯¾è±¡ã¨ã—ã¦ãƒ”ãƒƒã‚¯ã‚¢ãƒƒãƒ—ã•ã‚Œã¾ã—ãŸã€‚
 		ADD_CNT ++
 		IF CHARANUM >= 200
-			PRINTFORMW ƒLƒƒƒ‰”‚ªãŒÀ‚É’B‚µ‚Ä‚¢‚Ü‚·B
+			PRINTFORMW ã‚­ãƒ£ãƒ©æ•°ãŒä¸Šé™ã«é”ã—ã¦ã„ã¾ã™ã€‚
 			RETURN ADD_CNT
 		ENDIF
 	CASE 2
@@ -45,12 +45,12 @@ DO
 			GOTO RETRY
 		FOR LOCAL, 0, 9
 			IF CHARANUM >= 200
-				PRINTFORMW ƒLƒƒƒ‰”‚ªãŒÀ‚É’B‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORMW ã‚­ãƒ£ãƒ©æ•°ãŒä¸Šé™ã«é”ã—ã¦ã„ã¾ã™ã€‚
 				RETURN ADD_CNT
 			ENDIF
 			CALL CITY_SCOUT_MAKE_CHARA
 			PRINTFORML
-			PRINTFORMW %CALLNAME:(CHARANUM - 1)%‚ªV‚µ‚¢‘ÎÛ‚Æ‚µ‚ÄƒsƒbƒNƒAƒbƒv‚³‚ê‚Ü‚µ‚½B
+			PRINTFORMW %CALLNAME:(CHARANUM - 1)%ãŒæ–°ã—ã„å¯¾è±¡ã¨ã—ã¦ãƒ”ãƒƒã‚¯ã‚¢ãƒƒãƒ—ã•ã‚Œã¾ã—ãŸã€‚
 			ADD_CNT ++
 		NEXT
 		NOT_CLEAR = 1
@@ -59,7 +59,7 @@ DO
 		RETURN ADD_CNT
 	CASEELSE
 		$RETRY
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
 	BREAK
@@ -69,7 +69,7 @@ RESTART
 
 
 ;-------------------------------------------------
-;¶¬ˆ—
+;ç”Ÿæˆå‡¦ç†
 ;-------------------------------------------------
 @CITY_SCOUT_MAKE_CHARA(SCENE)
 #DIMS SCENE
@@ -81,13 +81,13 @@ IF SCENE == "SOLO"
 	DRAWLINE
 	CALL CITY_CAFE_NPC_TALK("SCOUT")
 	DRAWLINE
-	PRINTFORML Œ»Ý‚ÌZl‚Ì”{CHARANUM - 2, 3}–¼
+	PRINTFORML ç¾åœ¨ã®ä½äººã®æ•°{CHARANUM - 2, 3}å
 	DRAWLINE
-	PRINTFORML –¼‘O:%CALLNAME:L_I%
+	PRINTFORML åå‰:%CALLNAME:L_I%
 ENDIF
 DRAWLINE
 CALL C_PICTURE_S(L_I)
-PRINTFORML ¡------------------------------------ @‘fŽ¿@ ------------------------------------¡
+PRINTFORML â– ------------------------------------ ã€€ç´ è³ªã€€ ------------------------------------â– 
 CALL INFO_STATUS_TALENT(L_I)
 CALL CHARACTER_SCOUT_PROFILE(L_I)
 ;CALL INFO_PERSONAL(ARG)
@@ -96,188 +96,188 @@ DRAWLINE
 
 
 ;-------------------------------------------------
-; ‹i’ƒ“XƒXƒJƒEƒg@i‚èž‚Ý
+; å–«èŒ¶åº—ã‚¹ã‚«ã‚¦ãƒˆã€€çµžã‚Šè¾¼ã¿
 ;-------------------------------------------------
 @CAFE_SCOUT_OPTION
 #DIM L_INPUT
-SIF FLAG:ƒJƒtƒFi‚èž‚Ý_g•ª == 0
-	FLAG:ƒJƒtƒFi‚èž‚Ý_g•ª =  94
-SIF FLAG:ƒJƒtƒFi‚èž‚Ý_‹¹ == 0
-	FLAG:ƒJƒtƒFi‚èž‚Ý_‹¹ = 60
+SIF FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† == 0
+	FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† =  94
+SIF FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ == 0
+	FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ = 60
 
-SIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 0)
-	CLEARBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 1
-SIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 10)
-	CLEARBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 11
+SIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 0)
+	CLEARBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 1
+SIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 10)
+	CLEARBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 11
 
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORM [1] g•ª:
-SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_g•ª
+PRINTFORM [1] èº«åˆ†:
+SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ†
 CASE 94
-	PRINTFORML Ž©—R
+	PRINTFORML è‡ªç”±
 CASE 95
-	PRINTFORML Šw¶
+	PRINTFORML å­¦ç”Ÿ
 CASE 96
-	PRINTFORML ƒAƒCƒhƒ‹
+	PRINTFORML ã‚¢ã‚¤ãƒ‰ãƒ«
 CASE 97
-	PRINTFORML ŽÐ‰ïl
+	PRINTFORML ç¤¾ä¼šäºº
 CASE 98
-	PRINTFORML ©•w
+	PRINTFORML å¨¼å©¦
 CASE 99
-	PRINTFORML Ž¡ˆÀˆÛŽ‹Çˆõ
+	PRINTFORML æ²»å®‰ç¶­æŒå±€å“¡
 ENDSELECT
 
-PRINTFORM [2] ‹¹‚Ì‘å‚«‚³:
-SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_‹¹
+PRINTFORM [2] èƒ¸ã®å¤§ãã•:
+SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸
 CASE 60
-	PRINTFORML Ž©—R
+	PRINTFORML è‡ªç”±
 CASE 61
-	PRINTFORML â•Ç
+	PRINTFORML çµ¶å£
 CASE 62
-	PRINTFORML •n“û
+	PRINTFORML è²§ä¹³
 CASE 63
-	PRINTFORML ‹“û
+	PRINTFORML å·¨ä¹³
 CASE 64
-	PRINTFORML ”š“û
+	PRINTFORML çˆ†ä¹³
 ENDSELECT
 
 
-PRINTFORM [3] ‚uŒoŒ±:
-IF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 0)
-	PRINTFORML ˆ—Žw’è
-ELSEIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 1)
-	PRINTFORML ”ñˆ—Žw’è
+PRINTFORM [3] ï¼¶çµŒé¨“:
+IF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 0)
+	PRINTFORML å‡¦å¥³æŒ‡å®š
+ELSEIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 1)
+	PRINTFORML éžå‡¦å¥³æŒ‡å®š
 ELSE
-	PRINTFORML Žw’è‚È‚µ
+	PRINTFORML æŒ‡å®šãªã—
 ENDIF
 
-PRINTFORM [4] ‚`ŒoŒ±:
-IF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 10)
-	PRINTFORML ‚`ˆ—Žw’è
-ELSEIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 11)
-	PRINTFORML ‚`”ñˆ—Žw’è
+PRINTFORM [4] ï¼¡çµŒé¨“:
+IF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 10)
+	PRINTFORML ï¼¡å‡¦å¥³æŒ‡å®š
+ELSEIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 11)
+	PRINTFORML ï¼¡éžå‡¦å¥³æŒ‡å®š
 ELSE
-	PRINTFORML Žw’è‚È‚µ
+	PRINTFORML æŒ‡å®šãªã—
 ENDIF
 
-PRINTFORM [5] ‘¼‚Ìl‚Æ‚ÌŒðÛó‘Ô:
-SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_ŒðÛ
+PRINTFORM [5] ä»–ã®äººã¨ã®äº¤éš›çŠ¶æ…‹:
+SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš›
 CASE 0
-	PRINTFORML Ž©—R
+	PRINTFORML è‡ªç”±
 CASE 299
-	PRINTFORML ‚µ‚Ä‚¢‚È‚¢
+	PRINTFORML ã—ã¦ã„ãªã„
 CASE 300
-	PRINTFORML ŒðÛ’†
+	PRINTFORML äº¤éš›ä¸­
 CASE 301
-	PRINTFORML ƒZƒtƒŒŽ‚¿
+	PRINTFORML ã‚»ãƒ•ãƒ¬æŒã¡
 CASE 302
-	PRINTFORML Œ‹¥Ï‚Ý
+	PRINTFORML çµå©šæ¸ˆã¿
 ENDSELECT
 
-PRINTFORM [6] K‚Ì‘å‚«‚³:
-SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_K
+PRINTFORM [6] å°»ã®å¤§ãã•:
+SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°»
 CASE 0
-	PRINTL Ž©—R
+	PRINTL è‡ªç”±
 CASE 80
-	PRINTL ‹K
+	PRINTL å·¨å°»
 CASE 81
-	PRINTL ”šK
+	PRINTL çˆ†å°»
 ENDSELECT
 
-PRINTFORM [7] «Ši:
-SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_«Ši
+PRINTFORM [7] æ€§æ ¼:
+SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼
 CASE 0
-	PRINTL Ž©—R
+	PRINTL è‡ªç”±
 CASE 30
-	PRINTL ˆç‚¿‚Ì—Ç‚¢(—ç‹V³‚µ‚¢E‹C•i‚ª‚‚¢EF‚Á‚Û‚¢EŒÃ•—)
+	PRINTL è‚²ã¡ã®è‰¯ã„(ç¤¼å„€æ­£ã—ã„ãƒ»æ°—å“ãŒé«˜ã„ãƒ»è‰²ã£ã½ã„ãƒ»å¤é¢¨)
 CASE 60
-	PRINTL ‰¸‚â‚©(ƒN[ƒ‹Eƒ}ƒCƒy[ƒXEŽã‹CEƒtƒŒƒ“ƒhƒŠ[)
+	PRINTL ç©ã‚„ã‹(ã‚¯ãƒ¼ãƒ«ãƒ»ãƒžã‚¤ãƒšãƒ¼ã‚¹ãƒ»å¼±æ°—ãƒ»ãƒ•ãƒ¬ãƒ³ãƒ‰ãƒªãƒ¼)
 CASE 90
-	PRINTL ‹C«‚ªr‚¢(ƒcƒ“ƒcƒ“ErX‚µ‚¢E’j‹CE‚ˆ³“I)
+	PRINTL æ°—æ€§ãŒè’ã„(ãƒ„ãƒ³ãƒ„ãƒ³ãƒ»è’ã€…ã—ã„ãƒ»ç”·æ°—ãƒ»é«˜åœ§çš„)
 CASE 120
-	PRINTL —c‚¢(Žq‹Ÿ‚Á‚Û‚¢E‚¨‚µ‚á‚Ü)
+	PRINTL å¹¼ã„(å­ä¾›ã£ã½ã„ãƒ»ãŠã—ã‚ƒã¾)
 ENDSELECT
 
-PRINTFORM [8] Ž¨”¯ˆê’v:
-SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_Ž¨”¯ˆê’v
+PRINTFORM [8] è€³é«ªä¸€è‡´:
+SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_è€³é«ªä¸€è‡´
 CASE 0
-	PRINTL Ž©—R
+	PRINTL è‡ªç”±
 CASE 1
-	PRINTL ˆê’v‚³‚¹‚é
+	PRINTL ä¸€è‡´ã•ã›ã‚‹
 ENDSELECT
 
 PRINTFORML
-PRINTFORML [999] –ß‚é
+PRINTFORML [999] æˆ»ã‚‹
 DO
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 1
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_g•ª <= 100
-			Flag:ƒJƒtƒFi‚èž‚Ý_g•ª += 1
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_g•ª >= 100
-			Flag:ƒJƒtƒFi‚èž‚Ý_g•ª = 94
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† <= 100
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† += 1
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† >= 100
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† = 94
 	CASE 2
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_‹¹ <= 65
-			Flag:ƒJƒtƒFi‚èž‚Ý_‹¹ += 1
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_‹¹ >= 65
-			Flag:ƒJƒtƒFi‚èž‚Ý_‹¹ = 60
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ <= 65
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ += 1
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ >= 65
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ = 60
 	CASE 3
-		IF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 0)
-			CLEARBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 0
-			SETBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 1
-		ELSEIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 1)
-			CLEARBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 1
+		IF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 0)
+			CLEARBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 0
+			SETBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 1
+		ELSEIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 1)
+			CLEARBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 1
 		ELSE
-			SETBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 0
+			SETBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 0
 		ENDIF
 	CASE 4
-		IF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 10)
-			CLEARBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 10
-			SETBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 11
-		ELSEIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 11)
-			CLEARBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 11
+		IF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 10)
+			CLEARBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 10
+			SETBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 11
+		ELSEIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 11)
+			CLEARBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 11
 		ELSE
-			SETBIT FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 10
+			SETBIT FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 10
 		ENDIF
 	CASE 5
-		SELECTCASE Flag:ƒJƒtƒFi‚èž‚Ý_ŒðÛ
+		SELECTCASE Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš›
 		CASE 0
-			FLAG:ƒJƒtƒFi‚èž‚Ý_ŒðÛ = 299
+			FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš› = 299
 		CASE 299 TO 301
-			FLAG:ƒJƒtƒFi‚èž‚Ý_ŒðÛ ++
+			FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš› ++
 		CASE 302
-			Flag:ƒJƒtƒFi‚èž‚Ý_ŒðÛ = 0
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš› = 0
 		ENDSELECT
 	CASE 6
-		Flag:ƒJƒtƒFi‚èž‚Ý_K++
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_K == 1
-			Flag:ƒJƒtƒFi‚èž‚Ý_K = 80
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_K == 82
-			Flag:ƒJƒtƒFi‚èž‚Ý_K = 0
+		Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°»++
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°» == 1
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°» = 80
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°» == 82
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°» = 0
 	CASE 7
-		Flag:ƒJƒtƒFi‚èž‚Ý_«Ši += 1
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_«Ši == 1
-			Flag:ƒJƒtƒFi‚èž‚Ý_«Ši = 30
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_«Ši == 31
-			Flag:ƒJƒtƒFi‚èž‚Ý_«Ši = 60
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_«Ši == 61
-			Flag:ƒJƒtƒFi‚èž‚Ý_«Ši = 90
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_«Ši == 91
-			Flag:ƒJƒtƒFi‚èž‚Ý_«Ši = 120
-		SIF Flag:ƒJƒtƒFi‚èž‚Ý_«Ši == 121
-			Flag:ƒJƒtƒFi‚èž‚Ý_«Ši = 0
+		Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ += 1
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ == 1
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ = 30
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ == 31
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ = 60
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ == 61
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ = 90
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ == 91
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ = 120
+		SIF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ == 121
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ = 0
 	CASE 8
-		IF (Flag:ƒJƒtƒFi‚èž‚Ý_Ž¨”¯ˆê’v == 0)
-			Flag:ƒJƒtƒFi‚èž‚Ý_Ž¨”¯ˆê’v = 1
-		ELSEIF (Flag:ƒJƒtƒFi‚èž‚Ý_Ž¨”¯ˆê’v == 1)
-			Flag:ƒJƒtƒFi‚èž‚Ý_Ž¨”¯ˆê’v = 0
+		IF (Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_è€³é«ªä¸€è‡´ == 0)
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_è€³é«ªä¸€è‡´ = 1
+		ELSEIF (Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_è€³é«ªä¸€è‡´ == 1)
+			Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_è€³é«ªä¸€è‡´ = 0
 		ENDIF
 	CASE 999
 		RETURN
 	CASEELSE
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
 	BREAK
@@ -287,7 +287,7 @@ RESTART
 
 
 ;-------------------------------------------------
-; ‹i’ƒ“XƒXƒJƒEƒg@i‚èž‚Ý“K—p
+; å–«èŒ¶åº—ã‚¹ã‚«ã‚¦ãƒˆã€€çµžã‚Šè¾¼ã¿é©ç”¨
 ;-------------------------------------------------
 @CAFE_SCOUT_OPTION2(L_I,ARG:0,ARG:1,ARG:2)
 #DIM L_I
@@ -305,41 +305,41 @@ L_NAME  '= ""
 L_M = 0
 L_SEIKAKU =-1
 
-IF Flag:ƒJƒtƒFi‚èž‚Ý_g•ª >= 95
-	Talent:L_I:(Flag:ƒJƒtƒFi‚èž‚Ý_g•ª) = 1
+IF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ† >= 95
+	Talent:L_I:(Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èº«åˆ†) = 1
 ELSE
 	SELECTCASE RAND:5
 	CASE 0
-		Talent:L_I:Šw¶ = 1
+		Talent:L_I:å­¦ç”Ÿ = 1
 	CASE 1
-		Talent:L_I:ƒAƒCƒhƒ‹ = 1
+		Talent:L_I:ã‚¢ã‚¤ãƒ‰ãƒ« = 1
 	CASE 2
-		Talent:L_I:ŽÐ‰ïl = 1
+		Talent:L_I:ç¤¾ä¼šäºº = 1
 	CASE 3
-		Talent:L_I:©•w = 1
+		Talent:L_I:å¨¼å©¦ = 1
 	CASE 4
-		Talent:L_I:Ž¡ˆÀˆÛŽ‹Çˆõ = 1
+		Talent:L_I:æ²»å®‰ç¶­æŒå±€å“¡ = 1
 	ENDSELECT
 ENDIF
-IF Talent:L_I:Šw¶
-	Talent:L_I:Šw¶ += RAND:5
-	SELECTCASE TALENT:L_I:Šw¶
+IF Talent:L_I:å­¦ç”Ÿ
+	Talent:L_I:å­¦ç”Ÿ += RAND:5
+	SELECTCASE TALENT:L_I:å­¦ç”Ÿ
 		CASE 5
-			;¬Šw¶‚Í—c‚¢Œû’²‚É‚È‚è‚â‚·‚­A—cŽ™‘ÌŒ^‚É‚È‚è‚â‚·‚¢
+			;å°å­¦ç”Ÿã¯å¹¼ã„å£èª¿ã«ãªã‚Šã‚„ã™ãã€å¹¼å…ä½“åž‹ã«ãªã‚Šã‚„ã™ã„
 			LOCAL = RAND:3
 			SIF LOCAL
 				L_SEIKAKU = 11 + LOCAL
 			IF RAND:2
-				TALENT:L_I:¬•¿‘ÌŒ^ = 1
-				TALENT:L_I:¬l‘ÌŒ^ = 1
-				TALENT:L_I:’·g = 0
+				TALENT:L_I:å°æŸ„ä½“åž‹ = 1
+				TALENT:L_I:å°äººä½“åž‹ = 1
+				TALENT:L_I:é•·èº« = 0
 			ELSEIF RAND:3
-				TALENT:L_I:¬•¿‘ÌŒ^ = 1
-				TALENT:L_I:’·g = 0
+				TALENT:L_I:å°æŸ„ä½“åž‹ = 1
+				TALENT:L_I:é•·èº« = 0
 			ENDIF
-			CFlag:L_I:Zl_‘ÌŠi = 1
+			CFlag:L_I:ä½äºº_ä½“æ ¼ = 1
 		CASE 4
-			;’†Šw¶‚Í—c‚¢Œû’²‚É‚â‚â‚È‚è‚â‚·‚­¬•¿‘ÌŒ^‚É‚È‚è‚â‚·‚¢
+			;ä¸­å­¦ç”Ÿã¯å¹¼ã„å£èª¿ã«ã‚„ã‚„ãªã‚Šã‚„ã™ãå°æŸ„ä½“åž‹ã«ãªã‚Šã‚„ã™ã„
 			LOCAL = RAND:6
 			IF LOCAL == 0
 				L_SEIKAKU = 13
@@ -347,15 +347,15 @@ IF Talent:L_I:Šw¶
 				L_SEIKAKU = 12
 			ENDIF
 			IF RAND:2
-				TALENT:L_I:¬•¿‘ÌŒ^ = 1
-				TALENT:L_I:’·g = 0
+				TALENT:L_I:å°æŸ„ä½“åž‹ = 1
+				TALENT:L_I:é•·èº« = 0
 			ELSEIF RAND:3
-				TALENT:L_I:¬•¿‘ÌŒ^ = 1
-				TALENT:L_I:¬l‘ÌŒ^ = 1
-				TALENT:L_I:’·g = 0
+				TALENT:L_I:å°æŸ„ä½“åž‹ = 1
+				TALENT:L_I:å°äººä½“åž‹ = 1
+				TALENT:L_I:é•·èº« = 0
 			ENDIF
 		CASE 3
-			;‚Z¶‚Í¬l‚æ‚è‚Í—c‚¢Œû’²‚É‚È‚è‚â‚·‚¢
+			;é«˜æ ¡ç”Ÿã¯æˆäººã‚ˆã‚Šã¯å¹¼ã„å£èª¿ã«ãªã‚Šã‚„ã™ã„
 			LOCAL = RAND:12
 			IF LOCAL == 0
 				L_SEIKAKU = 13
@@ -363,48 +363,48 @@ IF Talent:L_I:Šw¶
 				L_SEIKAKU = 12
 			ENDIF
 	ENDSELECT
-	;‘ÌŒ^‚ðÄÝ’è
+	;ä½“åž‹ã‚’å†è¨­å®š
 	CALL CHARACTER_SCOUT_BODYSIZE(L_I)
-	;Œû’²‚ðÄÝ’è
+	;å£èª¿ã‚’å†è¨­å®š
 	IF L_SEIKAKU >= 0
 		VARSET TALENT:L_I:0, 0, 1400, 1450
 		TALENT:L_I:(1400+L_SEIKAKU) = 1
 		CALL CHARACTER_SCOUT_MIND_REPEAT(L_I, L_SEIKAKU)
 	ENDIF
-	;Šw¶ƒAƒCƒhƒ‹‚Æ‚©‰‡•‘Ò‚¿—Šw¶‚Æ‚©‚¢‚¢‚æ‚Ë
+	;å­¦ç”Ÿã‚¢ã‚¤ãƒ‰ãƒ«ã¨ã‹æ´åŠ©å¾…ã¡å¥³å­¦ç”Ÿã¨ã‹ã„ã„ã‚ˆã­
 	IF !RAND:5
-		Talent:L_I:ƒAƒCƒhƒ‹ = 1
-	ELSEIF Flag:ŽžŠÔ‘Ñ == 0
+		Talent:L_I:ã‚¢ã‚¤ãƒ‰ãƒ« = 1
+	ELSEIF Flag:æ™‚é–“å¸¯ == 0
 		SIF !RAND:8
-			Talent:L_I:©•w = 1
-	ELSEIF Flag:ŽžŠÔ‘Ñ == 1
+			Talent:L_I:å¨¼å©¦ = 1
+	ELSEIF Flag:æ™‚é–“å¸¯ == 1
 		SIF !RAND:2
-			Talent:L_I:©•w = 1
+			Talent:L_I:å¨¼å©¦ = 1
 	ENDIF
 ENDIF
 
-IF Flag:ƒJƒtƒFi‚èž‚Ý_‹¹ >= 61
-	Talent:L_I:â•Ç = 0
-	Talent:L_I:•n“û = 0
-	Talent:L_I:‹“û = 0
-	Talent:L_I:”š“û = 0
-	Talent:L_I:(Flag:ƒJƒtƒFi‚èž‚Ý_‹¹) = 1
-	CFLAG:L_I:ƒoƒXƒgƒTƒCƒY = CHARACTER_BUST_RETURN(L_I)
+IF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸ >= 61
+	Talent:L_I:çµ¶å£ = 0
+	Talent:L_I:è²§ä¹³ = 0
+	Talent:L_I:å·¨ä¹³ = 0
+	Talent:L_I:çˆ†ä¹³ = 0
+	Talent:L_I:(Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_èƒ¸) = 1
+	CFLAG:L_I:ãƒã‚¹ãƒˆã‚µã‚¤ã‚º = CHARACTER_BUST_RETURN(L_I)
 ENDIF
-IF Flag:ƒJƒtƒFi‚èž‚Ý_K
-	Talent:L_I:‹K = 0
-	Talent:L_I:”šK = 0
-	Talent:L_I:(Flag:ƒJƒtƒFi‚èž‚Ý_K) = 1
-	CFLAG:L_I:ƒqƒbƒvƒTƒCƒY = CHARACTER_HIP_RETURN(L_I)
+IF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°»
+	Talent:L_I:å·¨å°» = 0
+	Talent:L_I:çˆ†å°» = 0
+	Talent:L_I:(Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å°») = 1
+	CFLAG:L_I:ãƒ’ãƒƒãƒ—ã‚µã‚¤ã‚º = CHARACTER_HIP_RETURN(L_I)
 ENDIF
 
 
-;‚uŒoŒ±
-IF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 0)
+;ï¼¶çµŒé¨“
+IF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 0)
 	V_VIRGIN = 1
-ELSEIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 1)
+ELSEIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 1)
 	V_VIRGIN = 0
-ELSEIF TALENT:L_I:©•w && !RAND:3
+ELSEIF TALENT:L_I:å¨¼å©¦ && !RAND:3
 	V_VIRGIN = 0
 ELSEIF RAND:3
 	V_VIRGIN = 1
@@ -413,18 +413,18 @@ ELSE
 ENDIF
 
 IF !V_VIRGIN
-	TALENT:L_I:”ñˆ— = 1
-	TCVAR:L_I:—š—ð_EXP_ˆ—‘rŽ¸ = 1
-	EXP:L_I:‚uŒoŒ± = (RAND:20) + 1
-	EXP:L_I:«ŒðŒoŒ± = RAND:(EXP:L_I:‚uŒoŒ±) * 5 + RAND:(EXP:L_I:‚uŒoŒ±) + 1
+	TALENT:L_I:éžå‡¦å¥³ = 1
+	TCVAR:L_I:å±¥æ­´_EXP_å‡¦å¥³å–ªå¤± = 1
+	EXP:L_I:ï¼¶çµŒé¨“ = (RAND:20) + 1
+	EXP:L_I:æ€§äº¤çµŒé¨“ = RAND:(EXP:L_I:ï¼¶çµŒé¨“) * 5 + RAND:(EXP:L_I:ï¼¶çµŒé¨“) + 1
 ENDIF
 
-;‚`ŒoŒ±
-IF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 10)
+;ï¼¡çµŒé¨“
+IF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 10)
 	A_VIRGIN = 1
-ELSEIF GETBIT(FLAG:ƒJƒtƒFi‚èž‚Ý_ˆ—, 11)
+ELSEIF GETBIT(FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_å‡¦å¥³, 11)
 	A_VIRGIN = 0
-ELSEIF TALENT:L_I:©•w
+ELSEIF TALENT:L_I:å¨¼å©¦
 	IF V_VIRGIN && RAND:3
 		A_VIRGIN = 0
 	ELSE
@@ -438,133 +438,133 @@ ENDIF
 
 
 IF !A_VIRGIN
-	TALENT:L_I:‚`”ñˆ— = 1
-	TCVAR:L_I:—š—ð_EXP_‚`ˆ—‘rŽ¸ = 1
-	EXP:L_I:‚`ŒoŒ± = (RAND:20) + 1
-	EXP:L_I:‚`«ŒðŒoŒ± = RAND:(EXP:L_I:‚`ŒoŒ±) * 2 + RAND:(EXP:L_I:‚`ŒoŒ±) + 1
+	TALENT:L_I:ï¼¡éžå‡¦å¥³ = 1
+	TCVAR:L_I:å±¥æ­´_EXP_ï¼¡å‡¦å¥³å–ªå¤± = 1
+	EXP:L_I:ï¼¡çµŒé¨“ = (RAND:20) + 1
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ = RAND:(EXP:L_I:ï¼¡çµŒé¨“) * 2 + RAND:(EXP:L_I:ï¼¡çµŒé¨“) + 1
 ENDIF
 
-IF TALENT:L_I:©•w
-	EXP:L_I:”„tŒoŒ± += RAND:20 + 1
-	SIF CFLAG:L_I:Zl_ƒ‚ƒ‰ƒ‹ < 0
-		EXP:L_I:”„tŒoŒ± += RAND:(ABS(CFLAG:L_I:Zl_ƒ‚ƒ‰ƒ‹))
-	EXP:L_I:¸‰tŒoŒ± += RAND:(EXP:L_I:”„tŒoŒ±) / 2 + RAND:3
+IF TALENT:L_I:å¨¼å©¦
+	EXP:L_I:å£²æ˜¥çµŒé¨“ += RAND:20 + 1
+	SIF CFLAG:L_I:ä½äºº_ãƒ¢ãƒ©ãƒ« < 0
+		EXP:L_I:å£²æ˜¥çµŒé¨“ += RAND:(ABS(CFLAG:L_I:ä½äºº_ãƒ¢ãƒ©ãƒ«))
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ += RAND:(EXP:L_I:å£²æ˜¥çµŒé¨“) / 2 + RAND:3
 	
 	IF !V_VIRGIN
-		EXP:L_I:«ŒðŒoŒ± += RAND:(EXP:L_I:”„tŒoŒ±) + RAND:3
+		EXP:L_I:æ€§äº¤çµŒé¨“ += RAND:(EXP:L_I:å£²æ˜¥çµŒé¨“) + RAND:3
 	ELSEIF !A_VIRGIN
-		EXP:L_I:‚`«ŒðŒoŒ± += RAND:(EXP:L_I:”„tŒoŒ±) + RAND:3
+		EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ += RAND:(EXP:L_I:å£²æ˜¥çµŒé¨“) + RAND:3
 	ELSE
-		EXP:L_I:ƒtƒFƒ‰ŒoŒ± += RAND:(EXP:L_I:”„tŒoŒ±) + RAND:3
-		EXP:L_I:¸ˆùŒoŒ± += RAND:(MIN(EXP:L_I:ƒtƒFƒ‰ŒoŒ±, EXP:L_I:¸‰tŒoŒ±) + 1) / 2
+		EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ += RAND:(EXP:L_I:å£²æ˜¥çµŒé¨“) + RAND:3
+		EXP:L_I:ç²¾é£²çµŒé¨“ += RAND:(MIN(EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“, EXP:L_I:ç²¾æ¶²çµŒé¨“) + 1) / 2
 	ENDIF
 ENDIF
 
-IF !FLAG:ƒJƒtƒFi‚èž‚Ý_ŒðÛ && !RAND:3
+IF !FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš› && !RAND:3
 	SELECTCASE RAND:4
 	CASE 0
-		TALENT:L_I:ŒðÛ’† = 1
+		TALENT:L_I:äº¤éš›ä¸­ = 1
 	CASE 1
-		TALENT:L_I:ƒZƒtƒŒŽ‚¿ = 1
+		TALENT:L_I:ã‚»ãƒ•ãƒ¬æŒã¡ = 1
 	CASE 2
-		TALENT:L_I:Œ‹¥Ï‚Ý = 1
+		TALENT:L_I:çµå©šæ¸ˆã¿ = 1
 	ENDSELECT
-	;Œ‹¥ŒoŒ±ŽÒˆÈŠO‚ÌoŽYŒoŒ±‚ð—}§
-	IF !TALENT:L_I:Œ‹¥Ï‚Ý && RAND:2
-	ELSEIF RAND:10 > 5 && EXP:L_I:«ŒðŒoŒ± >= 1
-		EXP:L_I:oŽYŒoŒ± = (RAND:2) + 1
+	;çµå©šçµŒé¨“è€…ä»¥å¤–ã®å‡ºç”£çµŒé¨“ã‚’æŠ‘åˆ¶
+	IF !TALENT:L_I:çµå©šæ¸ˆã¿ && RAND:2
+	ELSEIF RAND:10 > 5 && EXP:L_I:æ€§äº¤çµŒé¨“ >= 1
+		EXP:L_I:å‡ºç”£çµŒé¨“ = (RAND:2) + 1
 	ENDIF
-ELSEIF FLAG:ƒJƒtƒFi‚èž‚Ý_ŒðÛ >= 300
-	TALENT:L_I:(Flag:ƒJƒtƒFi‚èž‚Ý_ŒðÛ) = 1
-	IF !TALENT:L_I:Œ‹¥Ï‚Ý && RAND:2
-	ELSEIF RAND:10 > 5 && EXP:L_I:«ŒðŒoŒ± >= 1
-		EXP:L_I:oŽYŒoŒ± = (RAND:2) + 1
+ELSEIF FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš› >= 300
+	TALENT:L_I:(Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš›) = 1
+	IF !TALENT:L_I:çµå©šæ¸ˆã¿ && RAND:2
+	ELSEIF RAND:10 > 5 && EXP:L_I:æ€§äº¤çµŒé¨“ >= 1
+		EXP:L_I:å‡ºç”£çµŒé¨“ = (RAND:2) + 1
 	ENDIF
 ENDIF
 
 
 
 
-IF TALENT:L_I:Œ‹¥Ï‚Ý && !RAND:20
-	TALENT:L_I:–¢–Sl = 1
-	TALENT:L_I:Œ‹¥Ï‚Ý = 0
+IF TALENT:L_I:çµå©šæ¸ˆã¿ && !RAND:20
+	TALENT:L_I:æœªäº¡äºº = 1
+	TALENT:L_I:çµå©šæ¸ˆã¿ = 0
 ENDIF
 
 
-;ŒoŒ±‚Â‚¯‚é‚Ì‚ªŒ™‚Èl‚Í”ð‚¯‚Ä‚È
-IF FLAG:ƒJƒtƒFi‚èž‚Ý_ŒðÛ == 299
-ELSEIF TALENT:L_I:ŒðÛ’†
-	EXP:L_I:«ŒðŒoŒ± += RAND:3
-	EXP:L_I:‚`«ŒðŒoŒ± += RAND:3
-	EXP:L_I:â’¸ŒoŒ± += RAND:3
-	EXP:L_I:ƒLƒXŒoŒ± += RAND:3
-	EXP:L_I:¸ˆùŒoŒ± += RAND:3
-	EXP:L_I:¸‰tŒoŒ± += RAND:3
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± += RAND:3
-	EXP:L_I:â’¸ŒoŒ± += RAND:3
-ELSEIF TALENT:L_I:ƒZƒtƒŒŽ‚¿
-	EXP:L_I:«ŒðŒoŒ± += RAND:4
-	EXP:L_I:‚`«ŒðŒoŒ± += RAND:4
-	EXP:L_I:â’¸ŒoŒ± += RAND:4
-	EXP:L_I:ƒLƒXŒoŒ± += RAND:4
-	EXP:L_I:¸ˆùŒoŒ± += RAND:4
-	EXP:L_I:¸‰tŒoŒ± += RAND:4
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± += RAND:4
-	EXP:L_I:â’¸ŒoŒ± += RAND:4
-ELSEIF TALENT:L_I:Œ‹¥Ï‚Ý
-	EXP:L_I:«ŒðŒoŒ± += RAND:5
-	EXP:L_I:‚`«ŒðŒoŒ± += RAND:5
-	EXP:L_I:â’¸ŒoŒ± += RAND:5
-	EXP:L_I:ƒLƒXŒoŒ± += RAND:5
-	EXP:L_I:¸ˆùŒoŒ± += RAND:5
-	EXP:L_I:¸‰tŒoŒ± += RAND:5
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± += RAND:5
-	EXP:L_I:â’¸ŒoŒ± += RAND:5
+;çµŒé¨“ã¤ã‘ã‚‹ã®ãŒå«Œãªäººã¯é¿ã‘ã¦ãª
+IF FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_äº¤éš› == 299
+ELSEIF TALENT:L_I:äº¤éš›ä¸­
+	EXP:L_I:æ€§äº¤çµŒé¨“ += RAND:3
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ += RAND:3
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:3
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ += RAND:3
+	EXP:L_I:ç²¾é£²çµŒé¨“ += RAND:3
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ += RAND:3
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ += RAND:3
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:3
+ELSEIF TALENT:L_I:ã‚»ãƒ•ãƒ¬æŒã¡
+	EXP:L_I:æ€§äº¤çµŒé¨“ += RAND:4
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ += RAND:4
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:4
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ += RAND:4
+	EXP:L_I:ç²¾é£²çµŒé¨“ += RAND:4
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ += RAND:4
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ += RAND:4
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:4
+ELSEIF TALENT:L_I:çµå©šæ¸ˆã¿
+	EXP:L_I:æ€§äº¤çµŒé¨“ += RAND:5
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ += RAND:5
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:5
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ += RAND:5
+	EXP:L_I:ç²¾é£²çµŒé¨“ += RAND:5
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ += RAND:5
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ += RAND:5
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:5
 ELSEIF RAND:5 == 0
-	EXP:L_I:«ŒðŒoŒ± += RAND:2
-	EXP:L_I:‚`«ŒðŒoŒ± += RAND:2
-	EXP:L_I:â’¸ŒoŒ± += RAND:2
-	EXP:L_I:ƒLƒXŒoŒ± += RAND:2
-	EXP:L_I:¸ˆùŒoŒ± += RAND:2
-	EXP:L_I:¸‰tŒoŒ± += RAND:2
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± += RAND:2
-	EXP:L_I:â’¸ŒoŒ± += RAND:2
+	EXP:L_I:æ€§äº¤çµŒé¨“ += RAND:2
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ += RAND:2
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:2
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ += RAND:2
+	EXP:L_I:ç²¾é£²çµŒé¨“ += RAND:2
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ += RAND:2
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ += RAND:2
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:2
 ENDIF
 
 
 
-;‚Â‚¶‚Â‚Ü‚ ‚í‚¹
-IF EXP:L_I:¸ˆùŒoŒ±
-	SIF !EXP:L_I:¸‰tŒoŒ±
-		EXP:L_I:¸‰tŒoŒ± ++
-	SIF !EXP:L_I:ƒtƒFƒ‰ŒoŒ±
-		EXP:L_I:ƒtƒFƒ‰ŒoŒ± ++
+;ã¤ã˜ã¤ã¾ã‚ã‚ã›
+IF EXP:L_I:ç²¾é£²çµŒé¨“
+	SIF !EXP:L_I:ç²¾æ¶²çµŒé¨“
+		EXP:L_I:ç²¾æ¶²çµŒé¨“ ++
+	SIF !EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“
+		EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ ++
 ENDIF
 SIF V_VIRGIN
-	EXP:L_I:«ŒðŒoŒ± = 0
+	EXP:L_I:æ€§äº¤çµŒé¨“ = 0
 SIF A_VIRGIN
-	EXP:L_I:‚`«ŒðŒoŒ± = 0
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ = 0
 
 
-;‚©‚í‚¢‚»‚¤‚È‚ñ‚Åæ‚ÉƒLƒX‚ð‚µ‚½‚±‚Æ‚É‚µ‚¿‚á‚¤
-SIF EXP:L_I:ƒtƒFƒ‰ŒoŒ± && !TALENT:L_I:©•w && !EXP:L_I:ƒLƒXŒoŒ±
-	EXP:L_I:ƒLƒXŒoŒ± ++
+;ã‹ã‚ã„ãã†ãªã‚“ã§å…ˆã«ã‚­ã‚¹ã‚’ã—ãŸã“ã¨ã«ã—ã¡ã‚ƒã†
+SIF EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ && !TALENT:L_I:å¨¼å©¦ && !EXP:L_I:ã‚­ã‚¹çµŒé¨“
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ ++
 
 
 
-IF TALENT:L_I:“¯«ˆ¤ == 1 && TALENT:L_I:Œ‹¥Ï‚Ý == 1
-	TALENT:L_I:Œ‹¥Ï‚Ý = 0
-	TALENT:L_I:•S‡Œ‹¥ = 1
-	EXP:L_I:«ŒðŒoŒ± = 0
-	EXP:L_I:‚`«ŒðŒoŒ± = 0
-	EXP:L_I:oŽYŒoŒ± = 0
-	EXP:L_I:â’¸ŒoŒ± += RAND:3
-	EXP:L_I:ƒŒƒYŒoŒ± += RAND:3
-	EXP:L_I:ƒLƒXŒoŒ± += RAND:3
-	EXP:L_I:¸ˆùŒoŒ± = 0
-	EXP:L_I:¸‰tŒoŒ± = 0
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± = 0
-	EXP:L_I:â’¸ŒoŒ± += RAND:3
+IF TALENT:L_I:åŒæ€§æ„› == 1 && TALENT:L_I:çµå©šæ¸ˆã¿ == 1
+	TALENT:L_I:çµå©šæ¸ˆã¿ = 0
+	TALENT:L_I:ç™¾åˆçµå©š = 1
+	EXP:L_I:æ€§äº¤çµŒé¨“ = 0
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ = 0
+	EXP:L_I:å‡ºç”£çµŒé¨“ = 0
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:3
+	EXP:L_I:ãƒ¬ã‚ºçµŒé¨“ += RAND:3
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ += RAND:3
+	EXP:L_I:ç²¾é£²çµŒé¨“ = 0
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ = 0
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ = 0
+	EXP:L_I:çµ¶é ‚çµŒé¨“ += RAND:3
 	ARG:0 = L_I
 	ARG:1 = 0
 	ARG:2 = 3
@@ -581,136 +581,136 @@ ENDIF
 
 
 {
-IF  EXP:L_I:«ŒðŒoŒ± >= 1 || 
-	EXP:L_I:‚`«ŒðŒoŒ± >= 1 || 
-	EXP:L_I:â’¸ŒoŒ± >= 1 || 
-	EXP:L_I:ƒLƒXŒoŒ± >= 1 || 
-	EXP:L_I:¸ˆùŒoŒ± >= 1 || 
-	EXP:L_I:¸‰tŒoŒ± >= 1 || 
-	EXP:L_I:ƒtƒFƒ‰ŒoŒ± >= 1
+IF  EXP:L_I:æ€§äº¤çµŒé¨“ >= 1 || 
+	EXP:L_I:ï¼¡æ€§äº¤çµŒé¨“ >= 1 || 
+	EXP:L_I:çµ¶é ‚çµŒé¨“ >= 1 || 
+	EXP:L_I:ã‚­ã‚¹çµŒé¨“ >= 1 || 
+	EXP:L_I:ç²¾é£²çµŒé¨“ >= 1 || 
+	EXP:L_I:ç²¾æ¶²çµŒé¨“ >= 1 || 
+	EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ >= 1
 }
 	STRDATA L_NAME
-		DATA uƒvƒŒƒCƒ„[v
-		DATA æ”y
-		DATA Œã”y
-		DATA ‹³Žt
-		DATA Œ³ƒJƒŒ
-		DATA •ƒe
-		DATA ’í
-		DATA ŒZ
+		DATA ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+		DATA å…ˆè¼©
+		DATA å¾Œè¼©
+		DATA æ•™å¸«
+		DATA å…ƒã‚«ãƒ¬
+		DATA çˆ¶è¦ª
+		DATA å¼Ÿ
+		DATA å…„
 	ENDDATA
 	IF RAND:10
-		IF TALENT:L_I:ŒðÛ’†
-			L_NAME '= "—öl"
-		ELSEIF TALENT:L_I:ƒZƒtƒŒŽ‚¿
-			L_NAME '= "ƒZƒtƒŒ"
-		ELSEIF TALENT:L_I:Œ‹¥Ï‚Ý
-			L_NAME '= "•v"
+		IF TALENT:L_I:äº¤éš›ä¸­
+			L_NAME '= "æ‹äºº"
+		ELSEIF TALENT:L_I:ã‚»ãƒ•ãƒ¬æŒã¡
+			L_NAME '= "ã‚»ãƒ•ãƒ¬"
+		ELSEIF TALENT:L_I:çµå©šæ¸ˆã¿
+			L_NAME '= "å¤«"
 		ENDIF
 	ENDIF
-	SIF TALENT:L_I:©•w && !RAND:4
-		L_NAME '= "‹q‚Ì’j"
-	SIF TALENT:L_I:•S‡Œ‹¥ 
-		L_NAME '= "•v(—«)"
+	SIF TALENT:L_I:å¨¼å©¦ && !RAND:4
+		L_NAME '= "å®¢ã®ç”·"
+	SIF TALENT:L_I:ç™¾åˆçµå©š 
+		L_NAME '= "å¤«(å¥³æ€§)"
 
 ENDIF
 
 
-IF EXP:L_I:oŽYŒoŒ± >= 1
+IF EXP:L_I:å‡ºç”£çµŒé¨“ >= 1
 	STRDATA L_NAME2
-		DATA uƒvƒŒƒCƒ„[v
-		DATA æ”y
-		DATA Œã”y
-		DATA ‹³Žt
-		DATA Œ³ƒJƒŒ
-		DATA •ƒe
-		DATA ’í
-		DATA ŒZ
+		DATA ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€
+		DATA å…ˆè¼©
+		DATA å¾Œè¼©
+		DATA æ•™å¸«
+		DATA å…ƒã‚«ãƒ¬
+		DATA çˆ¶è¦ª
+		DATA å¼Ÿ
+		DATA å…„
 	ENDDATA
 	IF RAND:20 > 7
-		IF TALENT:L_I:ŒðÛ’†
-			L_NAME '= "—öl"
-		ELSEIF TALENT:L_I:ƒZƒtƒŒŽ‚¿
-			L_NAME '= "ƒZƒtƒŒ"
-		ELSEIF TALENT:L_I:Œ‹¥Ï‚Ý
-			L_NAME '= "•v"
+		IF TALENT:L_I:äº¤éš›ä¸­
+			L_NAME '= "æ‹äºº"
+		ELSEIF TALENT:L_I:ã‚»ãƒ•ãƒ¬æŒã¡
+			L_NAME '= "ã‚»ãƒ•ãƒ¬"
+		ELSEIF TALENT:L_I:çµå©šæ¸ˆã¿
+			L_NAME '= "å¤«"
 		ENDIF
 	ENDIF
 ENDIF
-SIF CSTR:L_I:‰‚¦‚Á‚¿‘ŠŽè–¼ == "" && Talent:L_I:”ñˆ— == 1
-	CSTR:L_I:‰‚¦‚Á‚¿‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰ƒLƒX‘ŠŽè–¼ == "" && EXP:L_I:ƒLƒXŒoŒ± >= 1
-	CSTR:L_I:‰ƒLƒX‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰¸ˆù‘ŠŽè–¼ =="" && EXP:L_I:¸ˆùŒoŒ± >= 1
-	CSTR:L_I:‰¸ˆù‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰ƒtƒFƒ‰‘ŠŽè–¼ =="" && EXP:L_I:ƒtƒFƒ‰ŒoŒ± >= 1
-	CSTR:L_I:‰ƒtƒFƒ‰‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰‚`‚¦‚Á‚¿‘ŠŽè–¼ =="" && Talent:L_I:‚`”ñˆ— == 1
-	CSTR:L_I:‰‚`‚¦‚Á‚¿‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰â’¸‘ŠŽè–¼ =="" && EXP:L_I:â’¸ŒoŒ± >= 1
-	CSTR:L_I:‰â’¸‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰’†o‚µ‘ŠŽè–¼ =="" && Talent:L_I:”ñˆ— == 1 
-	CSTR:L_I:‰’†o‚µ‘ŠŽè–¼ = %L_NAME%
-SIF CSTR:L_I:‰oŽY‘ŠŽè–¼ =="" && EXP:L_I:oŽYŒoŒ± >= 1
-	CSTR:L_I:‰oŽY‘ŠŽè–¼ = %L_NAME2%
+SIF CSTR:L_I:åˆãˆã£ã¡ç›¸æ‰‹å == "" && Talent:L_I:éžå‡¦å¥³ == 1
+	CSTR:L_I:åˆãˆã£ã¡ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆã‚­ã‚¹ç›¸æ‰‹å == "" && EXP:L_I:ã‚­ã‚¹çµŒé¨“ >= 1
+	CSTR:L_I:åˆã‚­ã‚¹ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆç²¾é£²ç›¸æ‰‹å =="" && EXP:L_I:ç²¾é£²çµŒé¨“ >= 1
+	CSTR:L_I:åˆç²¾é£²ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å =="" && EXP:L_I:ãƒ•ã‚§ãƒ©çµŒé¨“ >= 1
+	CSTR:L_I:åˆãƒ•ã‚§ãƒ©ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆï¼¡ãˆã£ã¡ç›¸æ‰‹å =="" && Talent:L_I:ï¼¡éžå‡¦å¥³ == 1
+	CSTR:L_I:åˆï¼¡ãˆã£ã¡ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆçµ¶é ‚ç›¸æ‰‹å =="" && EXP:L_I:çµ¶é ‚çµŒé¨“ >= 1
+	CSTR:L_I:åˆçµ¶é ‚ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆä¸­å‡ºã—ç›¸æ‰‹å =="" && Talent:L_I:éžå‡¦å¥³ == 1 
+	CSTR:L_I:åˆä¸­å‡ºã—ç›¸æ‰‹å = %L_NAME%
+SIF CSTR:L_I:åˆå‡ºç”£ç›¸æ‰‹å =="" && EXP:L_I:å‡ºç”£çµŒé¨“ >= 1
+	CSTR:L_I:åˆå‡ºç”£ç›¸æ‰‹å = %L_NAME2%
 
 L_M = 0
-IF Flag:ƒJƒtƒFi‚èž‚Ý_«Ši != 0
+IF Flag:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼ != 0
 	VARSET TALENT:L_I:0, 0, 1400, 1450
 	L_SEIKAKU = 0
-	SELECTCASE FLAG:ƒJƒtƒFi‚èž‚Ý_«Ši
+	SELECTCASE FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_æ€§æ ¼
 	CASE 30
 		SELECTCASE RAND:4
 		CASE 0
-			TALENT:L_I:—ç‹V³‚µ‚¢ = 1
+			TALENT:L_I:ç¤¼å„€æ­£ã—ã„ = 1
 			L_SEIKAKU = 0
 		CASE 1
-			TALENT:L_I:‹C•i‚‚¢  = 1
+			TALENT:L_I:æ°—å“é«˜ã„  = 1
 			L_SEIKAKU = 7
 		CASE 2
-			TALENT:L_I:F‚Á‚Û‚¢ = 1
+			TALENT:L_I:è‰²ã£ã½ã„ = 1
 			L_SEIKAKU = 9
 		CASE 3
-			TALENT:L_I:ŒÃ•— = 1
+			TALENT:L_I:å¤é¢¨ = 1
 			L_SEIKAKU = 11
 		ENDSELECT
 	CASE 60
 		SELECTCASE RAND:4
 		CASE 0
-			TALENT:L_I:ƒtƒŒƒ“ƒhƒŠ[ = 1
+			TALENT:L_I:ãƒ•ãƒ¬ãƒ³ãƒ‰ãƒªãƒ¼ = 1
 			L_SEIKAKU = 10
 		CASE 1
-			TALENT:L_I:Žã‹C  = 1
+			TALENT:L_I:å¼±æ°—  = 1
 			L_SEIKAKU = 6
 		CASE 2
-			TALENT:L_I:ƒ}ƒCƒy[ƒX  = 1
+			TALENT:L_I:ãƒžã‚¤ãƒšãƒ¼ã‚¹  = 1
 			L_SEIKAKU = 3
 		CASE 3
-			TALENT:L_I:ƒN[ƒ‹ = 1
+			TALENT:L_I:ã‚¯ãƒ¼ãƒ« = 1
 			L_SEIKAKU = 1
 		ENDSELECT
 	CASE 90
 		SELECTCASE RAND:4
 		CASE 0
-			TALENT:L_I:‚ˆ³“I = 1
+			TALENT:L_I:é«˜åœ§çš„ = 1
 			L_SEIKAKU = 4
 		CASE 1
-			TALENT:L_I:ƒcƒ“ƒcƒ“ = 1
+			TALENT:L_I:ãƒ„ãƒ³ãƒ„ãƒ³ = 1
 			L_SEIKAKU = 2
 		CASE 2
-			TALENT:L_I:’j‹C  = 1
+			TALENT:L_I:ç”·æ°—  = 1
 			L_SEIKAKU = 6
 		CASE 3
-			TALENT:L_I:rX‚µ‚¢ = 1
+			TALENT:L_I:è’ã€…ã—ã„ = 1
 			L_SEIKAKU = 5
 		ENDSELECT
 	CASE 120
 		SELECTCASE RAND:2
 		CASE 0
-			TALENT:L_I:Žq‹Ÿ‚Á‚Û‚¢ = 1
+			TALENT:L_I:å­ä¾›ã£ã½ã„ = 1
 			L_SEIKAKU = 12
 		CASE 1
-			TALENT:L_I:‚¨‚µ‚á‚Ü = 1
+			TALENT:L_I:ãŠã—ã‚ƒã¾ = 1
 			L_SEIKAKU = 13
 		ENDSELECT
 	ENDSELECT
@@ -719,16 +719,16 @@ ENDIF
 
 CALL CHARACTER_SCOUT_COSTUME(L_I)
 
-IF FLAG:ƒJƒtƒFi‚èž‚Ý_Ž¨”¯ˆê’v == 1 && CFLAG:L_I:Zl_Ží‘° == 3;ˆŸl
-	IF CFLAG:L_I:Zl_Ží‘°“Á’¥1 == 0 || CFLAG:L_I:Zl_Ží‘°“Á’¥1 == 3
-		CFLAG:L_I:”¯F = 0
-	ELSEIF CFLAG:L_I:Zl_Ží‘°“Á’¥1 == 1
-		CFLAG:L_I:”¯F = 2
-	ELSEIF CFLAG:L_I:Zl_Ží‘°“Á’¥1 == 2
-		IF CFLAG:L_I:Zl_Ží‘°“Á’¥2 == 4
-			CFLAG:L_I:”¯F = 4
+IF FLAG:ã‚«ãƒ•ã‚§çµžã‚Šè¾¼ã¿_è€³é«ªä¸€è‡´ == 1 && CFLAG:L_I:ä½äºº_ç¨®æ— == 3;äºœäºº
+	IF CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´1 == 0 || CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´1 == 3
+		CFLAG:L_I:é«ªè‰² = 0
+	ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´1 == 1
+		CFLAG:L_I:é«ªè‰² = 2
+	ELSEIF CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´1 == 2
+		IF CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´2 == 4
+			CFLAG:L_I:é«ªè‰² = 4
 		ELSE
-			CFLAG:L_I:”¯F = 3 + RAND:2
+			CFLAG:L_I:é«ªè‰² = 3 + RAND:2
 		ENDIF
 	ENDIF
 ENDIF

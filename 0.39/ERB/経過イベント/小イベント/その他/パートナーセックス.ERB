@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�p�[�g�i�[�Z�b�N�X
+﻿;-------------------------------------------------
+;パートナーセックス
 ;-------------------------------------------------
 @PARTNER_SEX
 #DIM L_N
@@ -9,46 +9,46 @@
 
 
 
-L_I = FLAG:�ėp�ϐ�2
+L_I = FLAG:汎用変数2
 
-SIF !FLAG:�D�P�@�\
+SIF !FLAG:妊娠機能
 	RETURN
-SETCOLOR COLOR("�s���N")
+SETCOLOR COLOR("ピンク")
 
-L_N = (RAND:(1+(CFlag:MASTER:���q���x��)*CFlag:MASTER:�j�̃��x��))+(CFLAG:L_I:�󐸍ő�ϋv�l/5)
-	MSG = �󐸑ϋv�l:{CFLAG:L_I:�󐸌��ݑϋv�l} �� {CFLAG:L_I:�󐸌��ݑϋv�l-L_N}
-CFLAG:L_I:�󐸌��ݑϋv�l -= L_N
+L_N = (RAND:(1+(CFlag:MASTER:精子レベル)*CFlag:MASTER:男体レベル))+(CFLAG:L_I:受精最大耐久値/5)
+	MSG = 受精耐久値:{CFLAG:L_I:受精現在耐久値} → {CFLAG:L_I:受精現在耐久値-L_N}
+CFLAG:L_I:受精現在耐久値 -= L_N
 
-SIF CFLAG:L_I:�󐸌��ݑϋv�l <= 0
-	CFLAG:L_I:�󐸌��ݑϋv�l = 0
-IF CFLAG:L_I:�󐸌��ݑϋv�l == 0
+SIF CFLAG:L_I:受精現在耐久値 <= 0
+	CFLAG:L_I:受精現在耐久値 = 0
+IF CFLAG:L_I:受精現在耐久値 == 0
 	 L_N_K = RAND:100
-	IF TALENT:L_I:�D�P���₷�� == 1
+	IF TALENT:L_I:妊娠しやすい == 1
 		L_N_K -= 20
-	ELSEIF TALENT:L_I:�D�P���ɂ��� == 1
+	ELSEIF TALENT:L_I:妊娠しにくい == 1
 		L_N_K += 20
 	ENDIF
-	IF (CFLAG:L_I:�󐸊m��) > L_N_K
-		TALENT:L_I:�� += 1
-		SIF TALENT:L_I:���ے� == 1 || TALENT:L_I:�����ς� == 1�@|| TALENT:L_I:�S������ == 1�@
-			TALENT:L_I:� = 1
-		CFLAG:L_I:�D�P�t���O = 1
-		MSG = �󐸂��܂���
+	IF (CFLAG:L_I:受精確率) > L_N_K
+		TALENT:L_I:受精 += 1
+		SIF TALENT:L_I:交際中 == 1 || TALENT:L_I:結婚済み == 1　|| TALENT:L_I:百合結婚 == 1　
+			TALENT:L_I:托卵 = 1
+		CFLAG:L_I:妊娠フラグ = 1
+		MSG = 受精しました
 	ELSE
-		MSG = �󐸂����c
+		MSG = 受精せず…
 	ENDIF
 ELSE
 
 ENDIF
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
-PRINTFORML �@�@�@�@�@�@�@�@�@�y�p�[�g�i�[�Ɏ�t��:%MSG%�z
+PRINTFORML 　　　　　　　　　【パートナーに種付け:%MSG%】
 RESETCOLOR
 
-EXP:L_I:�u�o�� += 1
-EXP:L_I:�Ⓒ�o�� += 1
-EXP:L_I:�����o�� += 1
-EXP:L_I:�S�ˌo�� += 1
-FLAG:�s�s_�p�[�g�i�[�Z�b�N�X = 1
+EXP:L_I:Ｖ経験 += 1
+EXP:L_I:絶頂経験 += 1
+EXP:L_I:性交経験 += 1
+EXP:L_I:膣射経験 += 1
+FLAG:都市_パートナーセックス = 1
 
 
 

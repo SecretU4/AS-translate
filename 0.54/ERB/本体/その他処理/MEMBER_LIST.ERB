@@ -1,13 +1,13 @@
-;-------------------------------------------------
-;ƒƒ“ƒo[ƒŠƒXƒg
-;ARG:0 ŽQÆ‚·‚é”Ô†FLAG‘¤
-;ARG:1 ŽQÆ‚·‚é”Ô†CFLAG‘¤
+ï»¿;-------------------------------------------------
+;ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆ
+;ARG:0 å‚ç…§ã™ã‚‹ç•ªå·FLAGå´
+;ARG:1 å‚ç…§ã™ã‚‹ç•ªå·CFLAGå´
 ;-------------------------------------------------
 @MEMBER_LIST(L_FLAG_ID, L_CFLAG_ID, OPT_HIGHLIGHT=-1)
-#DIM L_C_ID     ;“o˜^”Ô†
-#DIM L_FLAG_ID  ;ŽQÆFLAG
-#DIM L_CFLAG_ID ;ŽQÆCFLAG
-#DIM OPT_HIGHLIGHT  ; ƒnƒCƒ‰ƒCƒg’…F—p
+#DIM L_C_ID     ;ç™»éŒ²ç•ªå·
+#DIM L_FLAG_ID  ;å‚ç…§FLAG
+#DIM L_CFLAG_ID ;å‚ç…§CFLAG
+#DIM OPT_HIGHLIGHT  ; ãƒã‚¤ãƒ©ã‚¤ãƒˆç€è‰²ç”¨
 FOR L_C_ID, 0, CHARANUM
 	SIF CFLAG:L_C_ID:L_CFLAG_ID != FLAG:L_FLAG_ID
 		CONTINUE
@@ -18,81 +18,81 @@ FOR L_C_ID, 0, CHARANUM
 NEXT
 
 ;-------------------------------------------------
-;ƒƒ“ƒo[ƒŠƒXƒg(ƒ{ƒ‰ƒ“ƒeƒBƒAê—p)
-;ARG:0 ŽQÆ‚·‚é”Ô†FLAG‘¤
-;ARG:1 ŽQÆ‚·‚é”Ô†CFLAG‘¤
+;ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆ(ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢å°‚ç”¨)
+;ARG:0 å‚ç…§ã™ã‚‹ç•ªå·FLAGå´
+;ARG:1 å‚ç…§ã™ã‚‹ç•ªå·CFLAGå´
 ;-------------------------------------------------
 @MEMBER_LIST_B(L_FLAG_ID, L_CFLAG_ID, OPT_HIGHLIGHT=-1)
-#DIM L_C_ID     ;“o˜^”Ô†
-#DIM L_FLAG_ID  ;ŽQÆFLAG
-#DIM L_CFLAG_ID ;ŽQÆCFLAG
-#DIM OPT_HIGHLIGHT  ; ƒnƒCƒ‰ƒCƒg’…F—p
+#DIM L_C_ID     ;ç™»éŒ²ç•ªå·
+#DIM L_FLAG_ID  ;å‚ç…§FLAG
+#DIM L_CFLAG_ID ;å‚ç…§CFLAG
+#DIM OPT_HIGHLIGHT  ; ãƒã‚¤ãƒ©ã‚¤ãƒˆç€è‰²ç”¨
 FOR L_C_ID, 0, CHARANUM
 	SIF CFLAG:L_C_ID:L_CFLAG_ID != FLAG:L_FLAG_ID
 		CONTINUE
 	SIF L_C_ID == OPT_HIGHLIGHT
 		SETCOLOR COLOR("HIGHLIGHT")
-	IF CFLAG:L_C_ID:Zl_“÷‘Ìƒ_ƒ[ƒW >= 100 || CFLAG:L_C_ID:Zl_¸_ƒ_ƒ[ƒW >= 100
+	IF CFLAG:L_C_ID:ä½äºº_è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸ >= 100 || CFLAG:L_C_ID:ä½äºº_ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸ >= 100
 		SETCOLOR 100,100,100
-		PRINTFORM [{L_C_ID}]y%CALLNAME:L_C_ID%  Ž€–Sz
-	ELSEIF TALENT:L_C_ID:ƒ{ƒ‰ƒ“ƒeƒBƒA
-		SIF TALENT:L_C_ID:ƒ{ƒ‰ƒ“ƒeƒBƒA == 2
+		PRINTFORM [{L_C_ID}]ã€%CALLNAME:L_C_ID%  æ­»äº¡ã€‘
+	ELSEIF TALENT:L_C_ID:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
+		SIF TALENT:L_C_ID:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ == 2
 			SETCOLOR 150,250,200
-		SIF TALENT:L_C_ID:ƒ{ƒ‰ƒ“ƒeƒBƒA == 3
+		SIF TALENT:L_C_ID:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ == 3
 			SETCOLOR 150,200,250
-		PRINTFORM [{L_C_ID}] %CALLNAME:L_C_ID% y‘ŒoŒ±:{CFLAG:L_C_ID:Zl_ˆâŒ¤_‘”}z
+		PRINTFORM [{L_C_ID}] %CALLNAME:L_C_ID% ã€ç·çµŒé¨“:{CFLAG:L_C_ID:ä½äºº_éºç ”_ç·æ•°}ã€‘
 		RESETCOLOR
 	ENDIF
 	RESETCOLOR
 NEXT
-;ƒƒ“ƒo[ƒŠƒXƒg(ƒ{ƒ‰ƒ“ƒeƒBƒAê—p)
-;ARG:0 ŽQÆ‚·‚é”Ô†FLAG‘¤
-;ARG:1 ŽQÆ‚·‚é”Ô†CFLAG‘¤
+;ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆ(ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢å°‚ç”¨)
+;ARG:0 å‚ç…§ã™ã‚‹ç•ªå·FLAGå´
+;ARG:1 å‚ç…§ã™ã‚‹ç•ªå·CFLAGå´
 ;-------------------------------------------------
 @MEMBER_LIST_B2(L_FLAG_ID, L_CFLAG_ID, OPT_HIGHLIGHT=-1)
-#DIM L_C_ID     ;“o˜^”Ô†
-#DIM L_FLAG_ID  ;ŽQÆFLAG
-#DIM L_CFLAG_ID ;ŽQÆCFLAG
-#DIM OPT_HIGHLIGHT  ; ƒnƒCƒ‰ƒCƒg’…F—p
-FLAG:ˆâŒ¤_‡ŒvŒoŒ±’l = 0
+#DIM L_C_ID     ;ç™»éŒ²ç•ªå·
+#DIM L_FLAG_ID  ;å‚ç…§FLAG
+#DIM L_CFLAG_ID ;å‚ç…§CFLAG
+#DIM OPT_HIGHLIGHT  ; ãƒã‚¤ãƒ©ã‚¤ãƒˆç€è‰²ç”¨
+FLAG:éºç ”_åˆè¨ˆçµŒé¨“å€¤ = 0
 FOR L_C_ID, 0, CHARANUM
 	SIF CFLAG:L_C_ID:L_CFLAG_ID != FLAG:L_FLAG_ID
 		CONTINUE
 	SIF L_C_ID == OPT_HIGHLIGHT
 		SETCOLOR COLOR("HIGHLIGHT")
-	IF TALENT:L_C_ID:ƒ{ƒ‰ƒ“ƒeƒBƒA >= 2
-		IF TALENT:L_C_ID:ƒ{ƒ‰ƒ“ƒeƒBƒA == 2
+	IF TALENT:L_C_ID:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ >= 2
+		IF TALENT:L_C_ID:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ == 2
 			SETCOLOR 150,250,200
 		ENDIF
-		IF TALENT:L_C_ID:ƒ{ƒ‰ƒ“ƒeƒBƒA == 3
+		IF TALENT:L_C_ID:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ == 3
 			SETCOLOR 150,200,250
 		ENDIF
-		IF CFLAG:L_C_ID:Zl_“÷‘Ìƒ_ƒ[ƒW >= 100 || CFLAG:L_C_ID:Zl_¸_ƒ_ƒ[ƒW >= 100
+		IF CFLAG:L_C_ID:ä½äºº_è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸ >= 100 || CFLAG:L_C_ID:ä½äºº_ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸ >= 100
 			SETCOLOR 100,100,100
-			PRINTFORM y%CALLNAME:L_C_ID%  Ž€–Sz
+			PRINTFORM ã€%CALLNAME:L_C_ID%  æ­»äº¡ã€‘
 		ELSE
-			PRINTFORM y%CALLNAME:L_C_ID%  ‘Œ±:{CFLAG:L_C_ID:Zl_ˆâŒ¤_‘”} “÷D:{CFLAG:L_C_ID:Zl_“÷‘Ìƒ_ƒ[ƒW} ¸D:{CFLAG:L_C_ID:Zl_¸_ƒ_ƒ[ƒW}z
+			PRINTFORM ã€%CALLNAME:L_C_ID%  ç·é¨“:{CFLAG:L_C_ID:ä½äºº_éºç ”_ç·æ•°} è‚‰D:{CFLAG:L_C_ID:ä½äºº_è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸} ç²¾D:{CFLAG:L_C_ID:ä½äºº_ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸}ã€‘
 		ENDIF
 	ENDIF
 	RESETCOLOR
 NEXT
 
 ;-------------------------------------------------
-;ƒƒ“ƒo[ƒŠƒXƒg
-;ARG:0 ŽQÆ‚µ‚½‚¢‚Ì•Ï””Ô†
-;ARG:1 ŽQÆ‚µ‚½‚¢‚Ì’l
-;OPT_ARG:2 ˆê’v‚µ‚½ID‚ðƒnƒCƒ‰ƒCƒg’…F (F‚ÍCOLOR.ERB‚Å’è‹`)
+;ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆ
+;ARG:0 å‚ç…§ã—ãŸã„ã®å¤‰æ•°ç•ªå·
+;ARG:1 å‚ç…§ã—ãŸã„ã®å€¤
+;OPT_ARG:2 ä¸€è‡´ã—ãŸIDã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆç€è‰² (è‰²ã¯COLOR.ERBã§å®šç¾©)
 ;-------------------------------------------------
 
 @MEMBER_LIST2(L_KEY_ID, L_KEY_VALUE, OPT_HIGHLIGHT=-1)
-#DIM L_C_ID      ;“o˜^”Ô†
-#DIM L_KEY_ID    ;ŽQÆ‘ÎÛID
-#DIM L_KEY_VALUE ;ˆê’vŒŸõ’l
-#DIM L_CNT       ;ƒJƒEƒ“ƒg—p
-#DIM OPT_HIGHLIGHT  ; ƒnƒCƒ‰ƒCƒg’…F—p
+#DIM L_C_ID      ;ç™»éŒ²ç•ªå·
+#DIM L_KEY_ID    ;å‚ç…§å¯¾è±¡ID
+#DIM L_KEY_VALUE ;ä¸€è‡´æ¤œç´¢å€¤
+#DIM L_CNT       ;ã‚«ã‚¦ãƒ³ãƒˆç”¨
+#DIM OPT_HIGHLIGHT  ; ãƒã‚¤ãƒ©ã‚¤ãƒˆç€è‰²ç”¨
 L_CNT = 0
 FOR L_C_ID, 0, CHARANUM
-	SIF TALENT:L_C_ID:•sÝ
+	SIF TALENT:L_C_ID:ä¸åœ¨
 		CONTINUE
 	SIF CFLAG:L_C_ID:L_KEY_ID != L_KEY_VALUE
 		CONTINUE
@@ -102,152 +102,152 @@ FOR L_C_ID, 0, CHARANUM
 	RESETCOLOR
 	L_CNT ++
 NEXT
-FLAG:”Ä—p•Ï” = L_CNT
+FLAG:æ±Žç”¨å¤‰æ•° = L_CNT
 
 
 ;-------------------------------------------------
-;ƒƒ“ƒo[‡ŽZ
-;ARG:0 ŽQÆ‚µ‚½‚¢‚Ì•Ï””Ô†
-;ARG:1 ŽQÆ‚µ‚½‚¢‚Ì’l
-;ARG:2 ‡ŽZ‚·‚é•Ï””Ô†
+;ãƒ¡ãƒ³ãƒãƒ¼åˆç®—
+;ARG:0 å‚ç…§ã—ãŸã„ã®å¤‰æ•°ç•ªå·
+;ARG:1 å‚ç…§ã—ãŸã„ã®å€¤
+;ARG:2 åˆç®—ã™ã‚‹å¤‰æ•°ç•ªå·
 ;-------------------------------------------------
 @MEMBER_LIST3(L_MATCH, L_KEY, L_ADD)
-#DIM L_C_ID  ;ƒ‹[ƒv—p
-#DIM L_MATCH ;ŽQÆCFLAG
-#DIM L_KEY   ;ˆê’vŒŸõ’l
-#DIM L_ADD   ;‰ÁŽZ‘ÎÛID
-FLAG:”Ä—p•Ï” = 0
+#DIM L_C_ID  ;ãƒ«ãƒ¼ãƒ—ç”¨
+#DIM L_MATCH ;å‚ç…§CFLAG
+#DIM L_KEY   ;ä¸€è‡´æ¤œç´¢å€¤
+#DIM L_ADD   ;åŠ ç®—å¯¾è±¡ID
+FLAG:æ±Žç”¨å¤‰æ•° = 0
 FOR L_C_ID, 0, CHARANUM
 	SIF CFLAG:L_C_ID:L_MATCH == L_KEY
-		FLAG:”Ä—p•Ï” += CFLAG:L_C_ID:L_ADD
+		FLAG:æ±Žç”¨å¤‰æ•° += CFLAG:L_C_ID:L_ADD
 NEXT
 
 ;-------------------------------------------------
-;ƒƒ“ƒo[ƒŠƒXƒg(ˆê’vŠm”F‚¾‚¯)
-;ARG:0 ŽQÆ‚µ‚½‚¢‚Ì•Ï””Ô†
-;ARG:1 ŽQÆ‚µ‚½‚¢‚Ì’l
-;ARG:2 0ˆÈã‚É‚·‚é‚Æ != 0 ‚ÅŒŸõ
+;ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆ(ä¸€è‡´ç¢ºèªã ã‘)
+;ARG:0 å‚ç…§ã—ãŸã„ã®å¤‰æ•°ç•ªå·
+;ARG:1 å‚ç…§ã—ãŸã„ã®å€¤
+;ARG:2 0ä»¥ä¸Šã«ã™ã‚‹ã¨ != 0 ã§æ¤œç´¢
 ;-------------------------------------------------
 @MEMBER_LIST2_1(L_CFLAG, L_KEY, L_SWITCH)
-#DIM L_CFLAG  ;ŽQÆCFLAG
-#DIM L_KEY    ;ˆê’vŒŸõ’l
-#DIM L_SWITCH ;‹““®•ÏX—p
-#DIM L_C_ID   ;ƒ‹[ƒv—p
-FLAG:”Ä—p•Ï” = 0
+#DIM L_CFLAG  ;å‚ç…§CFLAG
+#DIM L_KEY    ;ä¸€è‡´æ¤œç´¢å€¤
+#DIM L_SWITCH ;æŒ™å‹•å¤‰æ›´ç”¨
+#DIM L_C_ID   ;ãƒ«ãƒ¼ãƒ—ç”¨
+FLAG:æ±Žç”¨å¤‰æ•° = 0
 SELECTCASE L_SWITCH
 CASE 0
-	FLAG:”Ä—p•Ï” = MAX(FINDLASTCHARA(CFLAG:L_CFLAG, L_KEY), 0)
-	;ÅŒã”ö‚Ìˆê’vƒLƒƒƒ‰‚ðŒŸõ
+	FLAG:æ±Žç”¨å¤‰æ•° = MAX(FINDLASTCHARA(CFLAG:L_CFLAG, L_KEY), 0)
+	;æœ€å¾Œå°¾ã®ä¸€è‡´ã‚­ãƒ£ãƒ©ã‚’æ¤œç´¢
 CASE 1
-	;ÅŒã”ö‚Ì’l‚ª0‚Å‚È‚¢ƒLƒƒƒ‰‚ðŒŸõ
+	;æœ€å¾Œå°¾ã®å€¤ãŒ0ã§ãªã„ã‚­ãƒ£ãƒ©ã‚’æ¤œç´¢
 	FOR L_C_ID, CHARANUM - 1, -1, -1
 		SIF CFLAG:L_C_ID:L_CFLAG == 0
 			CONTINUE
-		FLAG:”Ä—p•Ï” = L_C_ID
+		FLAG:æ±Žç”¨å¤‰æ•° = L_C_ID
 		BREAK
 	NEXT
 ENDSELECT
 
 
 ;-------------------------------------------------
-;ƒƒ“ƒo[ŒÄ‚Ño‚µ
-;ARG:0 ŽQÆ‚µ‚½‚¢‚Ì•Ï””Ô†
-;ARG:1 ŽQÆ‚µ‚½‚¢‚Ì’l
+;ãƒ¡ãƒ³ãƒãƒ¼å‘¼ã³å‡ºã—
+;ARG:0 å‚ç…§ã—ãŸã„ã®å¤‰æ•°ç•ªå·
+;ARG:1 å‚ç…§ã—ãŸã„ã®å€¤
 ;-------------------------------------------------
 @MEMBER_CALL(L_CFLAG, L_KEY)
-#DIM L_CFLAG  ;ŽQÆCFLAG
-#DIM L_KEY    ;ˆê’vŒŸõ’l
-#DIM L_C_ID   ;ƒ‹[ƒv—p
-FLAG:”Ä—p•Ï” = 0
-FLAG:Žx‰‡_Š|‚¯‡‚¢ = 0
+#DIM L_CFLAG  ;å‚ç…§CFLAG
+#DIM L_KEY    ;ä¸€è‡´æ¤œç´¢å€¤
+#DIM L_C_ID   ;ãƒ«ãƒ¼ãƒ—ç”¨
+FLAG:æ±Žç”¨å¤‰æ•° = 0
+FLAG:æ”¯æ´_æŽ›ã‘åˆã„ = 0
 FOR L_C_ID, 0, CHARANUM
 	SIF  CFLAG:L_C_ID:L_CFLAG != L_KEY
 		CONTINUE
-	FLAG:”Ä—p•Ï” ++
-	;Šù‚ÉÝ’è‚³‚ê‚Ä‚¢‚éê‡‚Í30“‚Å‘‚«Š·‚¦
-	SIF !FLAG:Žx‰‡_Š|‚¯‡‚¢ || RAND:10 > 6
-		FLAG:Žx‰‡_Š|‚¯‡‚¢ = L_C_ID
+	FLAG:æ±Žç”¨å¤‰æ•° ++
+	;æ—¢ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯30ï¼…ã§æ›¸ãæ›ãˆ
+	SIF !FLAG:æ”¯æ´_æŽ›ã‘åˆã„ || RAND:10 > 6
+		FLAG:æ”¯æ´_æŽ›ã‘åˆã„ = L_C_ID
 NEXT
 
 
 ;-------------------------------------------------
-;ƒƒ“ƒo[ƒŠƒXƒg(”ºŒoŒ±’l‘‰Á)
-;ARG:0 ŽQÆ‚µ‚½‚¢‚Ì•Ï””Ô†
-;ARG:1 ŽQÆ‚µ‚½‚¢‚Ì’l
+;ãƒ¡ãƒ³ãƒãƒ¼ãƒªã‚¹ãƒˆ(éšä¼´çµŒé¨“å€¤å¢—åŠ )
+;ARG:0 å‚ç…§ã—ãŸã„ã®å¤‰æ•°ç•ªå·
+;ARG:1 å‚ç…§ã—ãŸã„ã®å€¤
 ;-------------------------------------------------
 @MEMBER_EXP(L_CFLAG, L_KEY)
-#DIM L_CFLAG  ;ŽQÆCFLAG
-#DIM L_KEY    ;ˆê’vŒŸõ’l
-#DIM L_C_ID   ;ƒ‹[ƒv—p
-FLAG:”Ä—p•Ï” = 0
+#DIM L_CFLAG  ;å‚ç…§CFLAG
+#DIM L_KEY    ;ä¸€è‡´æ¤œç´¢å€¤
+#DIM L_C_ID   ;ãƒ«ãƒ¼ãƒ—ç”¨
+FLAG:æ±Žç”¨å¤‰æ•° = 0
 FOR L_C_ID, 0, CHARANUM
 	SIF CFLAG:L_C_ID:L_CFLAG != L_KEY
 		CONTINUE
-	CFLAG:L_C_ID:Zl_ŒoŒ±’l += FLAG:ƒ^[ƒ“ŒoŒ±’l
-	FLAG:”Ä—p•Ï” ++ 
+	CFLAG:L_C_ID:ä½äºº_çµŒé¨“å€¤ += FLAG:ã‚¿ãƒ¼ãƒ³çµŒé¨“å€¤
+	FLAG:æ±Žç”¨å¤‰æ•° ++ 
 NEXT
 
 
 ;-------------------------------------------------
-;‘SƒLƒƒƒ‰ƒŠƒXƒg”z—ñ¶¬ŠÖ”
+;å…¨ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—ç”Ÿæˆé–¢æ•°
 ;-------------------------------------------------
-;Œ³X‚ÍeraTWŒü‚¯‚ÉŽÀ‘•‚µ‚½ðŒ•t‚«ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ¶¬ŠÖ”
-;ðŒØ‘Ö‚Í‚Î‚Á‚³‚èƒIƒ~ƒbƒg‚µ‚ÄŠÈˆÕ‰»
-;“o˜^”Ô†‚ð•Ï‚¦‚¸‚ÉSORT‚·‚é–Ú“I‚Å“±“ü
-;“n‚³‚ê‚½”z—ñ‚ÉŒ»Ý‘¶Ý‚·‚é‘S‚Ä‚ÌƒLƒƒƒ‰‚Ì”Ô†‚ð‡‚É‚¢‚ê‚Ä‚¢‚­
-;SORT€–Ú‚ª‘‚¦‚Ü‚­‚Á‚½‚Ì‚Å‚±‚ê‚Å‚à‚¢‚¢‚©‚ÈA‚Æ
+;å…ƒã€…ã¯eraTWå‘ã‘ã«å®Ÿè£…ã—ãŸæ¡ä»¶ä»˜ãã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—ç”Ÿæˆé–¢æ•°
+;æ¡ä»¶åˆ‡æ›¿ã¯ã°ã£ã•ã‚Šã‚ªãƒŸãƒƒãƒˆã—ã¦ç°¡æ˜“åŒ–
+;ç™»éŒ²ç•ªå·ã‚’å¤‰ãˆãšã«SORTã™ã‚‹ç›®çš„ã§å°Žå…¥
+;æ¸¡ã•ã‚ŒãŸé…åˆ—ã«ç¾åœ¨å­˜åœ¨ã™ã‚‹å…¨ã¦ã®ã‚­ãƒ£ãƒ©ã®ç•ªå·ã‚’é †ã«ã„ã‚Œã¦ã„ã
+;SORTé …ç›®ãŒå¢—ãˆã¾ãã£ãŸã®ã§ã“ã‚Œã§ã‚‚ã„ã„ã‹ãªã€ã¨
 @MEMBER_LIST_ALL(SCENE = "DEFAULT", CHARA_LIST, CHARA_CNT)
 #FUNCTION
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIMS     SCENE      ;Žg—pê–Ê
-#DIM  REF CHARA_LIST ;ƒLƒƒƒ‰ˆê——
-#DIM  REF CHARA_CNT  ;ƒLƒƒƒ‰ƒJƒEƒ“ƒ^
+#DIMS     SCENE      ;ä½¿ç”¨å ´é¢
+#DIM  REF CHARA_LIST ;ã‚­ãƒ£ãƒ©ä¸€è¦§
+#DIM  REF CHARA_CNT  ;ã‚­ãƒ£ãƒ©ã‚«ã‚¦ãƒ³ã‚¿
 VARSET CHARA_LIST
 VARSET CHARA_CNT
 
-;ƒ‹[ƒv’†‚É•ªŠò‚ðŽdž‚Þ‚Ì‚ÍˆêŒ©ŠÈŒ‰‚É‚Ý‚¦‚é‚ªˆ—‰ñ”‘‚¦‚Ü‚­‚é‚Ì‚Å‚â‚ß‚Æ‚¯
+;ãƒ«ãƒ¼ãƒ—ä¸­ã«åˆ†å²ã‚’ä»•è¾¼ã‚€ã®ã¯ä¸€è¦‹ç°¡æ½”ã«ã¿ãˆã‚‹ãŒå‡¦ç†å›žæ•°å¢—ãˆã¾ãã‚‹ã®ã§ã‚„ã‚ã¨ã‘
 SELECTCASE SCENE
 CASE "EXPLORER"
 	FOR LOCAL, 0, CHARANUM
 		SIF LOCAL == MASTER
 			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
-		SIF CFLAG:LOCAL:Zl_’TõŽÒ == 0
-			CONTINUE
-		CHARA_LIST:CHARA_CNT = LOCAL
-		CHARA_CNT ++
-	NEXT
-CASE "SUPPORT_”º"
-	FOR LOCAL, 0, CHARANUM
-		SIF LOCAL == MASTER
-			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
-			CONTINUE
-		SIF CFLAG:LOCAL:Zl_Žx‰‡_”º == 0
+		SIF CFLAG:LOCAL:ä½äºº_æŽ¢ç´¢è€… == 0
 			CONTINUE
 		CHARA_LIST:CHARA_CNT = LOCAL
 		CHARA_CNT ++
 	NEXT
-CASE "SUPPORT_Œã•û"
+CASE "SUPPORT_éšä¼´"
 	FOR LOCAL, 0, CHARANUM
 		SIF LOCAL == MASTER
 			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
-		SIF CFLAG:LOCAL:Zl_Žx‰‡_Œã•û == 0
+		SIF CFLAG:LOCAL:ä½äºº_æ”¯æ´_éšä¼´ == 0
 			CONTINUE
 		CHARA_LIST:CHARA_CNT = LOCAL
 		CHARA_CNT ++
 	NEXT
-CASE "SUPPORT_‰ñŽû"
+CASE "SUPPORT_å¾Œæ–¹"
 	FOR LOCAL, 0, CHARANUM
 		SIF LOCAL == MASTER
 			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
-		SIF CFLAG:LOCAL:Zl_Žx‰‡_‰ñŽû == 0
+		SIF CFLAG:LOCAL:ä½äºº_æ”¯æ´_å¾Œæ–¹ == 0
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+CASE "SUPPORT_å›žåŽ"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
+			CONTINUE
+		SIF CFLAG:LOCAL:ä½äºº_æ”¯æ´_å›žåŽ == 0
 			CONTINUE
 		CHARA_LIST:CHARA_CNT = LOCAL
 		CHARA_CNT ++
@@ -255,19 +255,19 @@ CASE "SUPPORT_‰ñŽû"
 
 {
 CASE "RPG", 
-	"RPG_•Ší‹­‰»", 
-	"RPG_‹Z”\¬’·", 
-	"RPG_‹­‰»Ü“Š—^", 
-	"RPG_’´l–ò“Š—^", 
-	"RPG_”º”z’u", 
-	"RPG_Œã•û”z’u", 
-	"RPG_‰ñŽû”z’u", 
-	"RPG_’Tõ”z’u"
+	"RPG_æ­¦å™¨å¼·åŒ–", 
+	"RPG_æŠ€èƒ½æˆé•·", 
+	"RPG_å¼·åŒ–å‰¤æŠ•ä¸Ž", 
+	"RPG_è¶…äººè–¬æŠ•ä¸Ž", 
+	"RPG_éšä¼´é…ç½®", 
+	"RPG_å¾Œæ–¹é…ç½®", 
+	"RPG_å›žåŽé…ç½®", 
+	"RPG_æŽ¢ç´¢é…ç½®"
 }
 	FOR LOCAL, 0, CHARANUM
 		SIF LOCAL == MASTER
 			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
 		SIF TALENT:LOCAL:NPC == 999
 			CONTINUE
@@ -276,20 +276,20 @@ CASE "RPG",
 	NEXT
 {
 CASE 
-	"MNG_“o˜^_“o˜^–•Á", 
-	"MNG_“ü‹_ˆê†Žº", "MNG_“ü‹_“ñ†Žº", "MNG_“ü‹_ŽO†Žº", "MNG_“ü‹_Žl†Žº", "MNG_“ü‹_ŒÜ†Žº", 
-	"MNG_“ü‹_˜Z†Žº", "MNG_“ü‹_Žµ†Žº", "MNG_“ü‹_”ª†Žº", "MNG_“ü‹_‹ã†Žº", "MNG_“ü‹_\†Žº", 
+	"MNG_ç™»éŒ²_ç™»éŒ²æŠ¹æ¶ˆ", 
+	"MNG_å…¥å±…_ä¸€å·å®¤", "MNG_å…¥å±…_äºŒå·å®¤", "MNG_å…¥å±…_ä¸‰å·å®¤", "MNG_å…¥å±…_å››å·å®¤", "MNG_å…¥å±…_äº”å·å®¤", 
+	"MNG_å…¥å±…_å…­å·å®¤", "MNG_å…¥å±…_ä¸ƒå·å®¤", "MNG_å…¥å±…_å…«å·å®¤", "MNG_å…¥å±…_ä¹å·å®¤", "MNG_å…¥å±…_åå·å®¤", 
 	
-	"MNG_“o˜^_ƒŒƒMƒ…ƒ‰[", "MNG_“o˜^_“Á•Ê•ÛŒì", "MNG_“o˜^_–¼‘O•ÏX", 
-	"MNG_“]E_¹EŽÒ", "MNG_“]E_ƒƒCƒh", "MNG_“]E_ƒAƒCƒhƒ‹", "MNG_“]E_ŽÐ‰ïl", "MNG_“]E_‹Çˆõ", "MNG_“]E_©•w", 
-	"MNG_”z‘®_Šw‰€¶“k", "MNG_”z‘®_Žx‰‡ƒ{ƒ‰", "MNG_”z‘®_ƒ‰ƒuƒz“Xˆõ", "MNG_”z‘®_ƒJƒWƒm“Xˆõ", 
-	"MNG_“ÁŽê_ŠOŒ©•ÏX", "MNG_“ÁŽê_Ž¡—ÃÝ”õ", "MNG_“ÁŽê_•iŽí‰ü—Ç", "MNG_“ÁŽê_g‘Ì‹­‰»", "MNG_“ÁŽê_ŽŸ¢‘ã‘n‘¢", 
-	"MNG_“o˜^_Œð—F§Œä", "MNG_“o˜^_ˆß‘••ÏX", "MNG_“o˜^_”ÍˆÍÁ‹Ž", "MNG_“o˜^_–•Á’†Ž~"
+	"MNG_ç™»éŒ²_ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼", "MNG_ç™»éŒ²_ç‰¹åˆ¥ä¿è­·", "MNG_ç™»éŒ²_åå‰å¤‰æ›´", 
+	"MNG_è»¢è·_è–è·è€…", "MNG_è»¢è·_ãƒ¡ã‚¤ãƒ‰", "MNG_è»¢è·_ã‚¢ã‚¤ãƒ‰ãƒ«", "MNG_è»¢è·_ç¤¾ä¼šäºº", "MNG_è»¢è·_å±€å“¡", "MNG_è»¢è·_å¨¼å©¦", 
+	"MNG_é…å±ž_å­¦åœ’ç”Ÿå¾’", "MNG_é…å±ž_æ”¯æ´ãƒœãƒ©", "MNG_é…å±ž_ãƒ©ãƒ–ãƒ›åº—å“¡", "MNG_é…å±ž_ã‚«ã‚¸ãƒŽåº—å“¡", 
+	"MNG_ç‰¹æ®Š_å¤–è¦‹å¤‰æ›´", "MNG_ç‰¹æ®Š_æ²»ç™‚è¨­å‚™", "MNG_ç‰¹æ®Š_å“ç¨®æ”¹è‰¯", "MNG_ç‰¹æ®Š_èº«ä½“å¼·åŒ–", "MNG_ç‰¹æ®Š_æ¬¡ä¸–ä»£å‰µé€ ", 
+	"MNG_ç™»éŒ²_äº¤å‹åˆ¶å¾¡", "MNG_ç™»éŒ²_è¡£è£…å¤‰æ›´", "MNG_ç™»éŒ²_ç¯„å›²æ¶ˆåŽ»", "MNG_ç™»éŒ²_æŠ¹æ¶ˆä¸­æ­¢"
 }
 	FOR LOCAL, 0, CHARANUM
 		SIF LOCAL == MASTER
 			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
 		SIF TALENT:LOCAL:NPC == 999
 			CONTINUE
@@ -298,23 +298,23 @@ CASE
 	NEXT
 CASE "NOT_VOLUNTEER"
 	FOR LOCAL, 0, CHARANUM
-		SIF TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
 		CHARA_LIST:CHARA_CNT = LOCAL
 		CHARA_CNT ++
 	NEXT
 {
 CASE
-	"AL_”\—Í•\Ž¦", 
-	"AL_ƒŠ[ƒ_[”C–½", 
-	"AL_ƒTƒ|[ƒ^[”C–½", 
-	"AL_‘h¶ˆ’u", 
-	"AL_ƒ{ƒ‰ƒ“ƒeƒBƒAI—¹"
+	"AL_èƒ½åŠ›è¡¨ç¤º", 
+	"AL_ãƒªãƒ¼ãƒ€ãƒ¼ä»»å‘½", 
+	"AL_ã‚µãƒãƒ¼ã‚¿ãƒ¼ä»»å‘½", 
+	"AL_è˜‡ç”Ÿå‡¦ç½®", 
+	"AL_ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢çµ‚äº†"
 }
 	FOR LOCAL, 0, CHARANUM
-		SIF TALENT:LOCAL:•sÝ
+		SIF TALENT:LOCAL:ä¸åœ¨
 			CONTINUE
-		SIF TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA == 0
+		SIF TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ == 0
 			CONTINUE
 		CHARA_LIST:CHARA_CNT = LOCAL
 		CHARA_CNT ++
@@ -323,7 +323,7 @@ CASE "CAFE"
 	FOR LOCAL, 0, CHARANUM
 		SIF LOCAL == MASTER
 			CONTINUE
-		SIF TALENT:LOCAL:•sÝ || TALENT:LOCAL:ƒ{ƒ‰ƒ“ƒeƒBƒA
+		SIF TALENT:LOCAL:ä¸åœ¨ || TALENT:LOCAL:ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢
 			CONTINUE
 		CHARA_LIST:CHARA_CNT = LOCAL
 		CHARA_CNT ++

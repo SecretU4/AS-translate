@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;����
+﻿;-------------------------------------------------
+;発見
 ;-------------------------------------------------
 @RPG_DISCOVERY(ARG)
 #DIM L_INPUT
@@ -19,71 +19,71 @@ L_I = ARG
 L_S = 0
 L_AG = 0
 
-IF Flag:�t���A_�i�� >= RAND:100
-	IF Flag:�t���A_�i�� >= RAND:100
-		;���i��
+IF Flag:フロア_品質 >= RAND:100
+	IF Flag:フロア_品質 >= RAND:100
+		;高品質
 		I_G = (RAND:6)+20
 	ELSE 
-		;���i��
+		;中品質
 		I_G = (RAND:6)+10
 	ENDIF
 ELSE 
-	;��i��
+	;低品質
 	I_G = (RAND:6)
 ENDIF
 
 CLEARLINE LINECOUNT
 DRAWLINE
-CALL PRINT_LABEL("�\�\�\�\�\�\�\�\�\����!!�\�\�\�\�\�\�\�\�\")
+CALL PRINT_LABEL("―――――――――発見!!―――――――――")
 PRINTL
 DRAWLINE
-IF FLAG:�t���A_���꒲�� == 3
-	PRINTFORML �ӂƋC�ɂȂ���̂������ǂ����ׂĂ݂�ƁA�Õ��ōd�����Ȏ{�����Ȃ��ꂽ����������B
-	PRINTFORML �ȒP�ȍ\���ł͂��邪�A�t�Ɍ����J����ȊO�ɂ܂Ƃ��ɊJ������@�͂Ȃ��悤���B
+IF FLAG:フロア_特殊調査 == 3
+	PRINTFORML ふと気になるものを見つけ良く調べてみると、古風で硬そうな施錠がなされた箱を見つける。
+	PRINTFORML 簡単な構造ではあるが、逆に鍵を開ける以外にまともに開ける方法はないようだ。
 		SETCOLOR 0xFFA500
-		PRINTFORM �y���J���z
+		PRINTFORM 【鍵開け】
 		RESETCOLOR
-	PRINTFORML �̋Z�\������ΊJ���邱�Ƃ��o���邩������Ȃ��B
-	PRINTFORML �Ȃ��Ȃ献��j�󂷂邵���Ȃ����A���g�������Ă��܂���������Ȃ��c
+	PRINTFORML の技能があれば開けることが出来るかもしれない。
+	PRINTFORML ないなら鍵を破壊するしかないが、中身を傷つけてしまうかもしれない…
 	PRINTL 
-	PRINTFORML ���T���ҁF %CALLNAME:L_I%
+	PRINTFORML ◇探索者： %CALLNAME:L_I%
 	PRINTFORML 
-	PRINTFORM �@�@�Z�\�F
-	CALL PRINT_STATUS(L_I, "���J��", SKILL_LABEL_SPAN, 3)
+	PRINTFORM 　　技能：
+	CALL PRINT_STATUS(L_I, "鍵開け", SKILL_LABEL_SPAN, 3)
 	PRINTL 
 	PRINTL 
 	
-ELSEIF FLAG:�t���A_���꒲�� == 2
-	PRINTFORML �Ƃ���{�݂ɐN�����e�����𒲂ׂĂ���Ƌ@�B�I�Ƀ��b�N����Ă������������B
-	PRINTFORM �܂��@�\���Ă͂��邪�J����ɂ�
+ELSEIF FLAG:フロア_特殊調査 == 2
+	PRINTFORML とある施設に侵入し各部屋を調べていると機械的にロックされている扉を見つける。
+	PRINTFORM まだ機能してはいるが開けるには
 		SETCOLOR 0xFFA500
-		PRINTFORM �y�R���s���[�^�z
+		PRINTFORM 【コンピュータ】
 		RESETCOLOR
-	PRINTFORML �̋Z�\�ɒ����Ă��Ȃ��Ɠ�����낤�B
-	PRINTFORML �ʓ|�Ȃ�͋Z�ŊJ���Ă��܂��̂��肾���A�󂵂������Ŏ������Œ��ꒃ�ɂȂ��Ă��܂��\��������c
+	PRINTFORML の技能に長けていないと難しいだろう。
+	PRINTFORML 面倒なら力技で開けてしまうのも手だが、壊した反動で室内が滅茶苦茶になってしまう可能性がある…
 	PRINTFORML 
 	PRINTL 
-	PRINTFORML ���T���ҁF %CALLNAME:L_I%
+	PRINTFORML ◇探索者： %CALLNAME:L_I%
 	PRINTFORML 
-	PRINTFORM �@�@�Z�\�F
-	CALL PRINT_STATUS(L_I, "�R���s���[�^", SKILL_LABEL_SPAN, 3)
+	PRINTFORM 　　技能：
+	CALL PRINT_STATUS(L_I, "コンピュータ", SKILL_LABEL_SPAN, 3)
 	PRINTL 
 	PRINTL 
 	
-ELSEIF FLAG:�t���A_���꒲�� == 1
-	PRINTFORML ���𒲍����Ă���Ɖ�ꂽ��^�A���@�𔭌�����A�ς��ƌ��܂��j�����ĊԂ��Ȃ��悤���B
-	PRINTFORML ���������𒲂ׂ悤�Ƃ����Ƃ���A����ɂ��ً}���b�N���|�����Ă���炵���ȒP�ɂ͊J���Ȃ������B
-	PRINTFORM ����𒲂ׂ�ɂ�
+ELSEIF FLAG:フロア_特殊調査 == 1
+	PRINTFORML 区画を調査していると壊れた大型輸送機を発見する、ぱっと見まだ破損して間もないようだ。
+	PRINTFORML しかし中を調べようとしたところ、損壊による緊急ロックが掛かっているらしく簡単には開かなかった。
+	PRINTFORM これを調べるには
 		SETCOLOR 0xFFA500
-		PRINTFORM �y�@�B�C���z
+		PRINTFORM 【機械修理】
 		RESETCOLOR
-	PRINTFORML �̋Z�\���K�v���낤�A���ӕ���Ȃ�D�悵�����I���ł͂���B
-	PRINTFORML �������͖�����J���Ă��܂����A�������̏ꍇ�͊m�����Ⴍ�l���ł��镨�����Ȃ��Ȃ邩������Ȃ��c
+	PRINTFORML の技能が必要だろう、得意分野なら優先したい選択ではある。
+	PRINTFORML もしくは無理矢理開けてしまうか、だがその場合は確率も低く獲得できる物も少なくなるかもしれない…
 	PRINTL 
-	PRINTFORML ���T���ҁF %CALLNAME:L_I%
+	PRINTFORML ◇探索者： %CALLNAME:L_I%
 	PRINTFORML 
-	PRINTFORM �@�@�Z�\�F
-	CALL PRINT_STATUS(L_I, "�@�B�C��", SKILL_LABEL_SPAN, 3)
+	PRINTFORM 　　技能：
+	CALL PRINT_STATUS(L_I, "機械修理", SKILL_LABEL_SPAN, 3)
 	PRINTL 
 	PRINTL 
 	
@@ -91,8 +91,8 @@ ENDIF
 DRAWLINE
 
 PRINTFORML 
-PRINTFORML [0] �Z�\���g�p
-PRINTFORML [1] ���������
+PRINTFORML [0] 技能を使用
+PRINTFORML [1] 無理矢理解決
 PRINTFORML 
 $INPUT_LOOP
 INPUT
@@ -100,81 +100,81 @@ DRAWLINE
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 0
-	IF FLAG:�t���A_���꒲�� == 3
-		SIF CFlag:L_I:�Z�l_�Z�\_���J�� >=  RAND:100
+	IF FLAG:フロア_特殊調査 == 3
+		SIF CFlag:L_I:住人_技能_鍵開け >=  RAND:100
 			L_S = 1
-	ELSEIF FLAG:�t���A_���꒲�� == 2
-		SIF CFlag:L_I:�Z�l_�Z�\_�R���s���[�^ >=  RAND:100
+	ELSEIF FLAG:フロア_特殊調査 == 2
+		SIF CFlag:L_I:住人_技能_コンピュータ >=  RAND:100
 			L_S = 1
-	ELSEIF FLAG:�t���A_���꒲�� == 1
-		SIF CFlag:L_I:�Z�l_�Z�\_�@�B�C�� >=  RAND:100
+	ELSEIF FLAG:フロア_特殊調査 == 1
+		SIF CFlag:L_I:住人_技能_機械修理 >=  RAND:100
 			L_S = 1
 	ENDIF
 	IF L_S == 1
-		CALL PRINT_LABEL("�\�\�\�\�\�\�\�\�\�����\�\�\�\�\�\�\�\�\",,COLOR("RPG_MESSAGE_SUCCESS"))
+		CALL PRINT_LABEL("―――――――――成功―――――――――",,COLOR("RPG_MESSAGE_SUCCESS"))
 		PRINTL
-		PRINTFORML %CALLNAME:L_I%�̍I�݂ȋZ�\�ɂ��A���͉������邱�Ƃ��o�����悤���B
-		PRINTFORML �����čX�Ȃ钲�������Ă݂��Ƃ���A�g������̂������������ł����B
-		PRINTFORML �z�N�z�N��������������A��������ɔ����𗊂񂾁c
+		PRINTFORML %CALLNAME:L_I%の巧みな技能により、問題は解決することが出来たようだ。
+		PRINTFORML 続いて更なる調査をしてみたところ、使えるものをいくつか発見できた。
+		PRINTFORML ホクホクしつつそれらを回収し、回収部隊に搬送を頼んだ…
 		PRINTFORML
 		L_AG = RAND:4
 		IF L_AG == 3
-			CALL PRINT_LABEL("�A�C�e������")
-			PRINTFORML %FlagNAME:(2100+I_G)%��3���肵��
+			CALL PRINT_LABEL("アイテム入手")
+			PRINTFORML %FlagNAME:(2100+I_G)%を3個入手した
 			FLAG:(2100+I_G) += 3
 		ELSEIF L_AG == 2
-			CALL PRINT_LABEL("�Q�m������")
-			PRINTFORML %FlagNAME:(2500+L_G)%��2���肵��
+			CALL PRINT_LABEL("ゲノム入手")
+			PRINTFORML %FlagNAME:(2500+L_G)%を2個入手した
 			Flag:(2500+L_G) += 2
 		ELSEIF L_AG == 1
-			CALL PRINT_LABEL("�����ܓ���")
-			PRINTFORML %FlagNAME:(2800+L_DG1)%��1���肵��
-			CALL PRINT_LABEL("�����ܓ���")
-			PRINTFORML %FlagNAME:(2800+L_DG2)%��1���肵��
+			CALL PRINT_LABEL("強化剤入手")
+			PRINTFORML %FlagNAME:(2800+L_DG1)%を1個入手した
+			CALL PRINT_LABEL("強化剤入手")
+			PRINTFORML %FlagNAME:(2800+L_DG2)%を1個入手した
 			Flag:(2800+L_DG1) += 1
 			Flag:(2800+L_DG2) += 1
 		ELSE
-			CALL PRINT_LABEL("���l�����")
-			PRINTFORML %FlagNAME:(2800+L_DG1)%��1���肵��
+			CALL PRINT_LABEL("超人薬入手")
+			PRINTFORML %FlagNAME:(2800+L_DG1)%を1個入手した
 			Flag:(2810+L_DG1) += 1
 		ENDIF
 	ELSE
-		CALL PRINT_LABEL("�\�\�\�\�\�\�\�\�\���s�\�\�\�\�\�\�\�\�\",,COLOR("RPG_MESSAGE_BAD"))
+		CALL PRINT_LABEL("―――――――――失敗―――――――――",,COLOR("RPG_MESSAGE_BAD"))
 		PRINTL
-		PRINTFORML ���낢�뎎�s���낵�Ă݂����̂̎��s���Ă��܂����悤���c
-		PRINTFORML ����������������邱�Ƃ͂ł��Ȃ����낤�B
-		PRINTFORML ��◎�_����%CALLNAME:L_I%����撲�����ĊJ�����c
+		PRINTFORML いろいろ試行錯誤してみたものの失敗してしまったようだ…
+		PRINTFORML もうこれを解決することはできないだろう。
+		PRINTFORML やや落胆しつつ%CALLNAME:L_I%が区画調査を再開した…
 	ENDIF
 CASE 1
 	SIF 30 >=  RAND:100
 			L_S = 1
 	IF L_S == 1
-		CALL PRINT_LABEL("�\�\�\�\�\�\�\�\�\�����\�\�\�\�\�\�\�\�\",,COLOR("RPG_MESSAGE_SUCCESS"))
+		CALL PRINT_LABEL("―――――――――成功―――――――――",,COLOR("RPG_MESSAGE_SUCCESS"))
 		PRINTL
-		PRINTFORML �Ȃ�Ƃ��Ώۂ����ɑŌ����s���悤�ɍU����������ƁA�^�悭��肭�������悤���B
-		PRINTFORML �������X���ނɃ_���[�W���s�����悤�Ŋ���̓_���ɂȂ��Ă���B
-		PRINTFORML �܂��d���Ȃ��ƑË���������������A��������ɔ����𗊂񂾁c
+		PRINTFORML なんとか対象だけに打撃が行くように攻撃を加えると、運よく上手くいったようだ。
+		PRINTFORML だが少々資材にダメージが行ったようで幾つかはダメになっている。
+		PRINTFORML まあ仕方ないと妥協しつつそれらを回収し、回収部隊に搬送を頼んだ…
 		PRINTFORML
 		L_AG = RAND:3
 		IF L_AG == 2
-			CALL PRINT_LABEL("�A�C�e������")
-			PRINTFORML %FlagNAME:(2100+I_G)%��1���肵��
+			CALL PRINT_LABEL("アイテム入手")
+			PRINTFORML %FlagNAME:(2100+I_G)%を1個入手した
 			FLAG:(2100+I_G) += 1
 		ELSEIF L_AG == 1
-			CALL PRINT_LABEL("�Q�m������")
-			PRINTFORML %FlagNAME:(2500+L_G)%��1���肵��
+			CALL PRINT_LABEL("ゲノム入手")
+			PRINTFORML %FlagNAME:(2500+L_G)%を1個入手した
 			Flag:(2500+L_G) += 1
 		ELSE
-			CALL PRINT_LABEL("�����ܓ���")
-			PRINTFORML %FlagNAME:(2800+L_DG2)%��1���肵��
+			CALL PRINT_LABEL("強化剤入手")
+			PRINTFORML %FlagNAME:(2800+L_DG2)%を1個入手した
 			Flag:(2800+L_DG2) += 1
 		ENDIF
 	ELSE
-		CALL PRINT_LABEL("�\�\�\�\�\�\�\�\�\���s�\�\�\�\�\�\�\�\�\",,COLOR("RPG_MESSAGE_BAD"))
+		CALL PRINT_LABEL("―――――――――失敗―――――――――",,COLOR("RPG_MESSAGE_BAD"))
 		PRINTL
-		PRINTFORML �͉���������Ĕh��ɔj�󂵂Ă��܂����c�B
-		PRINTFORML ����ł͒��ׂ邱�Ƃ͏o���Ȃ����낤�B
-		PRINTFORML ��◎�_����%CALLNAME:L_I%����撲�����ĊJ�����c
+		PRINTFORML 力加減を誤って派手に破壊してしまった…。
+		PRINTFORML これでは調べることは出来ないだろう。
+		PRINTFORML やや落胆しつつ%CALLNAME:L_I%が区画調査を再開した…
 	ENDIF
 CASEELSE
 	GOTO INPUT_LOOP
@@ -183,7 +183,7 @@ ENDSELECT
 PRINTFORML 
 PRINTFORMW 
 
-Flag:�t���A_���꒲�� = 0
+Flag:フロア_特殊調査 = 0
 
 
 

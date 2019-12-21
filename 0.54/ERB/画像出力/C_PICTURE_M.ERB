@@ -1,4 +1,4 @@
-@C_PICTURE_M(ARG:1)
+ï»¿@C_PICTURE_M(ARG:1)
 #DIM C_T
 #DIM P_S
 #DIM P_S2
@@ -71,58 +71,58 @@ LSTR_15 =
 
 
 ;-------------------------------------------------
-;·•ª”»’f
+;å·®åˆ†åˆ¤æ–­
 ;-------------------------------------------------
 
 
-;–Ú
-C_eye = Cflag:C_T:“µF
-;‘Ì
-C_body = CFLAG:C_T:”§F
-;‹¹
+;ç›®
+C_eye = Cflag:C_T:çž³è‰²
+;ä½“
+C_body = CFLAG:C_T:è‚Œè‰²
+;èƒ¸
 C_bust = C_PICTURE_BUST(C_T)
-;–XŽq
-C_hat = CFLAG:C_T:–XŽq
-;•ž
-C_suit = CFLAG:C_T:•ž‘•
-;”¯F
-C_hairC = CFLAG:C_T:”¯F
-;”¯Œ^
-C_hair = CFLAG:C_T:”¯Œ^
-;Œã”¯Œ^
-C_U_hair = CFLAG:C_T:Œã”¯Œ^
-;ŒC‰º
-C_socks = CFLAG:C_T:ŒC‰º
-;ŒC
-C_boots = CFLAG:C_T:ŒC
-;‰º’…ã
-C_bra = CFLAG:C_T:‰º’…ã
-;‰º’…‰º
-C_panties = CFLAG:C_T:‰º’…‰º
+;å¸½å­
+C_hat = CFLAG:C_T:å¸½å­
+;æœ
+C_suit = CFLAG:C_T:æœè£…
+;é«ªè‰²
+C_hairC = CFLAG:C_T:é«ªè‰²
+;é«ªåž‹
+C_hair = CFLAG:C_T:é«ªåž‹
+;å¾Œé«ªåž‹
+C_U_hair = CFLAG:C_T:å¾Œé«ªåž‹
+;é´ä¸‹
+C_socks = CFLAG:C_T:é´ä¸‹
+;é´
+C_boots = CFLAG:C_T:é´
+;ä¸‹ç€ä¸Š
+C_bra = CFLAG:C_T:ä¸‹ç€ä¸Š
+;ä¸‹ç€ä¸‹
+C_panties = CFLAG:C_T:ä¸‹ç€ä¸‹
 
 
 
 
 ;-------------------------------------------------
-;•`‰æˆ—
+;æç”»å‡¦ç†
 ;-------------------------------------------------
 DRAWLINE
 
 
 
-IF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 100 
+IF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 100 
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_BED2' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 700
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 700
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_ROOM_2' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 510 || CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 520
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 510 || CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 520
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_ROOM_1' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 500
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 500
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_BED2' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 52
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 52
 	LSTR_1 = <nonbutton pos='{P_S2}'><img src='M_ROOM_0' height = '1300'  ypos = '{P_S}'></nonbutton>
 	LSTR_2 = <nonbutton pos='{P_S2}'><img src='M_BED' height = '1300'  ypos = '{P_S}'></nonbutton>
 	LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_acce_2' height = '1300'  ypos = '{P_S}'></nonbutton>
@@ -135,241 +135,241 @@ ENDIF
 
 P_S -= 100
 
-;ƒLƒƒƒ‰
-IF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 9999
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 700
+;ã‚­ãƒ£ãƒ©
+IF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 9999
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 700
 ;-------------------------------------------------
-;ƒpƒCƒYƒŠ
-	;Ží‘°“Á’¥2
-		LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥2}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Œã”¯
+;ãƒ‘ã‚¤ã‚ºãƒª
+	;ç¨®æ—ç‰¹å¾´2
+		LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´2}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;å¾Œé«ª
 		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‘Ì
+	;ä½“
 		LSTR_2 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_700' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥3
-		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:Zl_Ží‘°}_0_2' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;‹¹
+	;ç¨®æ—ç‰¹å¾´3
+		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_2' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;èƒ¸
 		LSTR_4 = <nonbutton pos='{P_S2}'><img src='S_bust_{C_body}_700' height = '1300' ypos = '{P_S}'></nonbutton>
-	;”¯
+	;é«ª
 		LSTR_5 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥1
-		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥1}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;–Ú
+	;ç¨®æ—ç‰¹å¾´1
+		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;ç›®
 		LSTR_7 = <nonbutton pos='{P_S2}'><img src='eye_2_{C_eye}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;ƒxƒbƒh
+	;ãƒ™ãƒƒãƒ‰
 		LSTR_8 = <nonbutton pos='{P_S2}'><img src='M_BED4' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;’j
+	;ç”·
 		LSTR_9 = <nonbutton pos='{P_S2}'><img src='S_Mbody_700' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;•‰e
+	;é»’å½±
 		LSTR_10 = <nonbutton pos='{P_S2}'><img src='M_OPTION_2' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‘Œv
+	;ç·è¨ˆ
 	LSTR = %LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_13%%LSTR_14%%LSTR_15%<nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 520
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 520
 ;-------------------------------------------------
-;‹RæˆÊ
-	;ƒxƒbƒh
+;é¨Žä¹—ä½
+	;ãƒ™ãƒƒãƒ‰
 		LSTR_1 = <nonbutton pos='{P_S2}'><img src='M_BED' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥2
-		LSTR_2 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥2}' height = '1300'  ypos = '{25+P_S-(FLAG:‰æ‘œ_ƒAƒjƒ1*15-20)}'></nonbutton>
-	;Œã”¯
-		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{25+P_S-(FLAG:‰æ‘œ_ƒAƒjƒ1*19-20)}'></nonbutton>
-	;‘Ì
-		LSTR_3 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_520_{FLAG:‰æ‘œ_ƒAƒjƒ1}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥3
-		LSTR_4 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:Zl_Ží‘°}_0_1' height = '1300'  ypos = '{25+P_S-FLAG:‰æ‘œ_ƒAƒjƒ1*10}'></nonbutton>
-	;‹¹
-		LSTR_5 = <nonbutton pos='{P_S2}'><img src='bust_{C_body}_{C_bust}' height = '1300' ypos = '{25+P_S-(FLAG:‰æ‘œ_ƒAƒjƒ1*25-20)}'></nonbutton>
-	;”¯
-		LSTR_6 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{25+P_S-(FLAG:‰æ‘œ_ƒAƒjƒ1*19-20)}'></nonbutton>
-	;Ží‘°“Á’¥1
-		LSTR_7 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥1}' height = '1300'  ypos = '{25+P_S-(FLAG:‰æ‘œ_ƒAƒjƒ1*15-20)}'></nonbutton>
-	;–Ú
-		LSTR_8 = <nonbutton pos='{P_S2}'><img src='S_eye_1' height = '1300' ypos = '{20+P_S-(FLAG:‰æ‘œ_ƒAƒjƒ1*19-20)}'></nonbutton>
-	;•‰e
+	;ç¨®æ—ç‰¹å¾´2
+		LSTR_2 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´2}' height = '1300'  ypos = '{25+P_S-(FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*15-20)}'></nonbutton>
+	;å¾Œé«ª
+		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{25+P_S-(FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*19-20)}'></nonbutton>
+	;ä½“
+		LSTR_3 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_520_{FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;ç¨®æ—ç‰¹å¾´3
+		LSTR_4 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_1' height = '1300'  ypos = '{25+P_S-FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'></nonbutton>
+	;èƒ¸
+		LSTR_5 = <nonbutton pos='{P_S2}'><img src='bust_{C_body}_{C_bust}' height = '1300' ypos = '{25+P_S-(FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*25-20)}'></nonbutton>
+	;é«ª
+		LSTR_6 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{25+P_S-(FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*19-20)}'></nonbutton>
+	;ç¨®æ—ç‰¹å¾´1
+		LSTR_7 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '1300'  ypos = '{25+P_S-(FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*15-20)}'></nonbutton>
+	;ç›®
+		LSTR_8 = <nonbutton pos='{P_S2}'><img src='S_eye_1' height = '1300' ypos = '{20+P_S-(FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*19-20)}'></nonbutton>
+	;é»’å½±
 		LSTR_9 = <nonbutton pos='{P_S2}'><img src='M_OPTION_0' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‘Œv
+	;ç·è¨ˆ
 	LSTR = %LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_13%%LSTR_14%%LSTR_15%<nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 510
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 510
 ;-------------------------------------------------
-;Œã”wˆÊ
-	;ƒxƒbƒh
+;å¾ŒèƒŒä½
+	;ãƒ™ãƒƒãƒ‰
 		LSTR_1 = <nonbutton pos='{P_S2}'><img src='M_BED6' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;’j
-		LSTR_2 = <nonbutton pos='{P_S2}'><img src='S_Mbody_510' height = '1300'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;Œã”¯
-		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '{1300+FLAG:‰æ‘œ_ƒAƒjƒ1*10}' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'></nonbutton>
-	;‘Ì
-		LSTR_3 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_510_{FLAG:‰æ‘œ_ƒAƒjƒ1}' height = '{1300+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'  ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥3
-		LSTR_4 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:Zl_Ží‘°}_0_3' height = '{1300+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'></nonbutton>
-	;”¯
-		LSTR_5 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '{1300+FLAG:‰æ‘œ_ƒAƒjƒ1*10}' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'></nonbutton>
-	;Ží‘°“Á’¥1
-		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥1}' height = '{1300+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'></nonbutton>
-	;–Ú
-		LSTR_7 = <nonbutton pos='{P_S2}'><img src='S_eye_0' height = '{1300+FLAG:‰æ‘œ_ƒAƒjƒ1*10}' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*10}'></nonbutton>
-	;ƒxƒbƒh2
+	;ç”·
+		LSTR_2 = <nonbutton pos='{P_S2}'><img src='S_Mbody_510' height = '1300'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;å¾Œé«ª
+		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '{1300+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'></nonbutton>
+	;ä½“
+		LSTR_3 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_510_{FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1}' height = '{1300+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'  ypos = '{P_S}'></nonbutton>
+	;ç¨®æ—ç‰¹å¾´3
+		LSTR_4 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_3' height = '{1300+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'></nonbutton>
+	;é«ª
+		LSTR_5 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '{1300+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'></nonbutton>
+	;ç¨®æ—ç‰¹å¾´1
+		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '{1300+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'></nonbutton>
+	;ç›®
+		LSTR_7 = <nonbutton pos='{P_S2}'><img src='S_eye_0' height = '{1300+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'></nonbutton>
+	;ãƒ™ãƒƒãƒ‰2
 		LSTR_8 = <nonbutton pos='{P_S2}'><img src='M_BED5' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;•‰e
+	;é»’å½±
 		LSTR_9 = <nonbutton pos='{P_S2}'><img src='M_OPTION_1' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‘Œv
+	;ç·è¨ˆ
 	LSTR = %LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_13%%LSTR_14%%LSTR_15%<nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 500
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 500
 ;-------------------------------------------------
-;³íˆÊ
-	;Ží‘°“Á’¥2
-		LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥2}' height = '1300'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*2}'></nonbutton>
-	;Œã”¯
-		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;‘Ì1
-		LSTR_2 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_500' height = '1300'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;Ží‘°“Á’¥3
-		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:Zl_Ží‘°}_0_2' height = '1300'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;‹¹
-		LSTR_4 = <nonbutton pos='{P_S2}'><img src='bust_{C_body}_{C_bust}' height = '1300' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*3-FLAG:‰æ‘œ_ƒAƒjƒ2*2}'></nonbutton>
-	;”¯
-		LSTR_5 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;Ží‘°“Á’¥1
-		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥1}' height = '1300'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;‘Ì2
-		LSTR_7 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_501_{FLAG:‰æ‘œ_ƒAƒjƒ1}' height = '1300'  ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;–Ú
-		LSTR_8 = <nonbutton pos='{P_S2}'><img src='S_eye_1' height = '1300' ypos = '{P_S+FLAG:‰æ‘œ_ƒAƒjƒ1*3}'></nonbutton>
-	;’j
-		LSTR_9 = <nonbutton pos='{P_S2}'><img src='S_Mbody_500_{FLAG:‰æ‘œ_ƒAƒjƒ1}' height = '{1350-FLAG:‰æ‘œ_ƒAƒjƒ1*10}'  ypos = '{P_S-FLAG:‰æ‘œ_ƒAƒjƒ1*5}'></nonbutton>
-	;‘Œv
+;æ­£å¸¸ä½
+	;ç¨®æ—ç‰¹å¾´2
+		LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´2}' height = '1300'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*2}'></nonbutton>
+	;å¾Œé«ª
+		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;ä½“1
+		LSTR_2 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_500' height = '1300'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;ç¨®æ—ç‰¹å¾´3
+		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_2' height = '1300'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;èƒ¸
+		LSTR_4 = <nonbutton pos='{P_S2}'><img src='bust_{C_body}_{C_bust}' height = '1300' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*3-FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡2*2}'></nonbutton>
+	;é«ª
+		LSTR_5 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;ç¨®æ—ç‰¹å¾´1
+		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '1300'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;ä½“2
+		LSTR_7 = <nonbutton pos='{P_S2}'><img src='S_body_{C_body}_501_{FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1}' height = '1300'  ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;ç›®
+		LSTR_8 = <nonbutton pos='{P_S2}'><img src='S_eye_1' height = '1300' ypos = '{P_S+FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*3}'></nonbutton>
+	;ç”·
+		LSTR_9 = <nonbutton pos='{P_S2}'><img src='S_Mbody_500_{FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1}' height = '{1350-FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*10}'  ypos = '{P_S-FLAG:ç”»åƒ_ã‚¢ãƒ‹ãƒ¡1*5}'></nonbutton>
+	;ç·è¨ˆ
 	LSTR = %LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_13%%LSTR_14%%LSTR_15%<nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 51
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 51
 ;-------------------------------------------------
-;‚¨•—˜Cã‚è
-	;Ží‘°“Á’¥2
-		LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥2}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Œã”¯
+;ãŠé¢¨å‘‚ä¸Šã‚Š
+	;ç¨®æ—ç‰¹å¾´2
+		LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´2}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;å¾Œé«ª
 		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‘Ì
+	;ä½“
 		LSTR_2 = <nonbutton pos='{P_S2}'><img src='body_{C_body}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥3
-		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥3}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;‹¹
+	;ç¨®æ—ç‰¹å¾´3
+		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´3}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;èƒ¸
 		LSTR_4 = <nonbutton pos='{P_S2}'><img src='bust_{C_body}_{C_bust}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;”¯
+	;é«ª
 		LSTR_5 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥1
-		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥1}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;–Ú
+	;ç¨®æ—ç‰¹å¾´1
+		LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;ç›®
 		LSTR_7 = <nonbutton pos='{P_S2}'><img src='eye_{C_eye}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‰º’…ã
+	;ä¸‹ç€ä¸Š
 	    IF C_bra == -1
 			LSTR_8 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_8 = <nonbutton pos='{P_S2}'><img src='bra_{C_bust}_{C_bra}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;‰º’…‰º
+	;ä¸‹ç€ä¸‹
 	    IF C_panties == -1
 			LSTR_9 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_9 = <nonbutton pos='{P_S2}'><img src='panties_{C_panties}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;ƒ^ƒIƒ‹
+	;ã‚¿ã‚ªãƒ«
 		LSTR_10 = <nonbutton pos='{P_S2}'><img src='C_acce_0' height = '1300' ypos = '{P_S}'></nonbutton>
-		;‘Œv
+		;ç·è¨ˆ
 		LSTR = %LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_13%%LSTR_14%%LSTR_15%<nobr>
 		HTML_PRINT LSTR
 		P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 0
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 0
 ELSE
 ;-------------------------------------------------
-;’Êí
-	;Ží‘°“Á’¥2
-	LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥2}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Œã”¯
+;é€šå¸¸
+	;ç¨®æ—ç‰¹å¾´2
+	LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´2}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;å¾Œé«ª
 		LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‘Ì
+	;ä½“
 		LSTR_2 = <nonbutton pos='{P_S2}'><img src='body_{C_body}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥3
-		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥3}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	IF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 100 
-		;–Ú
+	;ç¨®æ—ç‰¹å¾´3
+		LSTR_3 = <nonbutton pos='{P_S2}'><img src='C_RACE_3_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´3}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	IF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 100 
+		;ç›®
 			LSTR_4 = <nonbutton pos='{P_S2}'><img src='C_eye_1' height = '1300' ypos = '{P_S}'></nonbutton>
 		
-	ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 50 || CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 52
-		;–Ú
+	ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 50 || CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 52
+		;ç›®
 			LSTR_4 = <nonbutton pos='{P_S2}'><img src='eye_2_{C_eye}' height = '1300' ypos = '{P_S}'></nonbutton>
 	ELSE
-		;–Ú
+		;ç›®
 			LSTR_4 = <nonbutton pos='{P_S2}'><img src='eye_{C_eye}' height = '1300' ypos = '{P_S}'></nonbutton>
 	ENDIF
-	;‹¹
+	;èƒ¸
 		LSTR_5 = <nonbutton pos='{P_S2}'><img src='bust_{C_body}_{C_bust}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;‰º’…ã
+	;ä¸‹ç€ä¸Š
 	    IF C_bra == -1
 			LSTR_6 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_6 = <nonbutton pos='{P_S2}'><img src='bra_{C_bust}_{C_bra}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;‰º’…‰º
+	;ä¸‹ç€ä¸‹
 	    IF C_panties == -1
 			LSTR_7 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_7 = <nonbutton pos='{P_S2}'><img src='panties_{C_panties}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;ƒ\ƒbƒNƒX
+	;ã‚½ãƒƒã‚¯ã‚¹
 	    IF C_socks == -1
 			LSTR_8 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_8 = <nonbutton pos='{P_S2}'><img src='socks_{C_socks}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;ŒC
+	;é´
 	    IF C_boots == -1
 			LSTR_9 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_9 = <nonbutton pos='{P_S2}'><img src='boots_{C_boots}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;–XŽq
+	;å¸½å­
 	    IF C_hat == 0
 			LSTR_14 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_14 = <nonbutton pos='{P_S2}'><img src='hat_{C_hat}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;•ž
+	;æœ
 	    IF C_suit == -1
 			LSTR_10 = <nonbutton pos='{P_S2}'><img src='C_no' height = '1300' ypos = '{P_S}'></nonbutton>
 		ELSE
 			LSTR_10 = <nonbutton pos='{P_S2}'><img src='suit_{C_bust}_{C_suit}' height = '1300' ypos = '{P_S}'></nonbutton>
 		ENDIF
-	;”¯
+	;é«ª
 		LSTR_11 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '1300' ypos = '{P_S}'></nonbutton>
-	;Ží‘°“Á’¥1
-		LSTR_12 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:Zl_Ží‘°}_0_{CFLAG:C_T:Zl_Ží‘°“Á’¥1}' height = '1300'  ypos = '{P_S}'></nonbutton>
-	;‘Œv
+	;ç¨®æ—ç‰¹å¾´1
+		LSTR_12 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:C_T:ä½äºº_ç¨®æ—}_0_{CFLAG:C_T:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '1300'  ypos = '{P_S}'></nonbutton>
+	;ç·è¨ˆ
 	LSTR = %LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%LSTR_13%%LSTR_15%<nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
 ENDIF
 
-IF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 100 
+IF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 100 
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_BED3' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 52
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 52
 	LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_acce_1' height = '1300'  ypos = '{P_S}'></nonbutton>
 	LSTR_2 = <nonbutton pos='{P_S2}'><img src='M_OPTION_4' height = '1300'  ypos = '{P_S}'></nonbutton>
 	LSTR = %LSTR_1%%LSTR_2%<nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 50
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 50
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_OPTION_3' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
-ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 0
+ELSEIF CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• == 0
 	LSTR_1 = <nonbutton pos='{P_S2}'><img src='M_BED' height = '1300'  ypos = '{P_S}'></nonbutton>
 	LSTR_2 = <nonbutton pos='{P_S2}'><img src='M_OPTION_0' height = '1300'  ypos = '{P_S}'></nonbutton>
 	LSTR = %LSTR_1%%LSTR_2%<nobr>
@@ -377,12 +377,12 @@ ELSEIF CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® == 0
 	P_S -= 100
 ENDIF
 
-IF FLAG:ŽžŠÔ‘Ñ == 1 && CFLAG:C_T:ƒ}ƒ“ƒVƒ‡ƒ“s“® >= 100
+IF FLAG:æ™‚é–“å¸¯ == 1 && CFLAG:C_T:ãƒžãƒ³ã‚·ãƒ§ãƒ³è¡Œå‹• >= 100
 	LSTR = <nonbutton pos='{P_S2}'><img src='M_DARK' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 	HTML_PRINT LSTR
 	P_S -= 100
 ENDIF
-LSTR = <nonbutton pos='{P_S2}'><img src='M_WINDOW_{FLAG:ƒ}ƒ“ƒVƒ‡ƒ“_ƒmƒCƒY}' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
+LSTR = <nonbutton pos='{P_S2}'><img src='M_WINDOW_{FLAG:ãƒžãƒ³ã‚·ãƒ§ãƒ³_ãƒŽã‚¤ã‚º}' height = '1300'  ypos = '{P_S}'></nonbutton><nobr>
 HTML_PRINT LSTR
 P_S2 = 0
 P_S -= 100

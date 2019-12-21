@@ -1,47 +1,47 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:_SYSTEM_VARIANT.ERH
-;	Facility	:ƒwƒbƒ_ƒtƒ@ƒCƒ‹(¢Š«ˆ—)B
+;	Facility	:ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«(å¬å–šå‡¦ç†)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
-;	001		2014/03/10		‚È‚é‚Í‚â				ogì•i‚ÉŠÖ‚·‚é•Ï”‚ð’Ç‰Á
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
+;	001		2014/03/10		ãªã‚‹ã¯ã‚„				å‡ºèº«ä½œå“ã«é–¢ã™ã‚‹å¤‰æ•°ã‚’è¿½åŠ 
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;-------------------------------------------------
-;   ŠeŽíƒtƒ‰ƒO
+;   å„ç¨®ãƒ•ãƒ©ã‚°
 ;-------------------------------------------------
-#DEFINE DEFSMN_LIST_NUM		4400	;ƒf[ƒ^”
-#DIM GSMN_LIST,				4400	;”z—ñ:ƒf[ƒ^
-#DIM SAVEDATA GSMN_STOCK,	4400	;ƒXƒgƒbƒNƒtƒ‰ƒO(0:w“ü‰Â”\ 1:ÝŒÉ–³)
-#DIM SAVEDATA GSMN_VIEW_MODE,	1	;•\Ž¦ƒ‚[ƒh
-#DIM SAVEDATA GSMN_CTL_MODE,	1	;ì•i§Œäƒ‚[ƒh(0:’Êí 1:ì•i•Ê)
+#DEFINE DEFSMN_LIST_NUM		4400	;ãƒ‡ãƒ¼ã‚¿æ•°
+#DIM GSMN_LIST,				4400	;é…åˆ—:ãƒ‡ãƒ¼ã‚¿
+#DIM SAVEDATA GSMN_STOCK,	4400	;ã‚¹ãƒˆãƒƒã‚¯ãƒ•ãƒ©ã‚°(0:è³¼å…¥å¯èƒ½ 1:åœ¨åº«ç„¡)
+#DIM SAVEDATA GSMN_VIEW_MODE,	1	;è¡¨ç¤ºãƒ¢ãƒ¼ãƒ‰
+#DIM SAVEDATA GSMN_CTL_MODE,	1	;ä½œå“åˆ¶å¾¡ãƒ¢ãƒ¼ãƒ‰(0:é€šå¸¸ 1:ä½œå“åˆ¥)
 
-;’†ŒÃˆ—
-#DEFINE ’†ŒÃƒLƒƒƒ‰ƒf[ƒ^”		4400		;ƒf[ƒ^”
-#DIM SAVEDATA ’†ŒÃƒLƒƒƒ‰ABL,	4400,60		;Ž¸çHƒLƒƒƒ‰‚ÌABL•Û‘¶—p
-#DIM SAVEDATA ’†ŒÃƒLƒƒƒ‰BASE,	4400,1		;	@V@@ BASE•Û‘¶—p
-#DIM SAVEDATA ’†ŒÃƒLƒƒƒ‰EXP,	4400,100	;	@V@@ EXP•Û‘¶—p
-#DIM SAVEDATA ’†ŒÃƒLƒƒƒ‰TALENT,	4400,220	;	@V@@ TALENT•Û‘¶—p
-#DIM SAVEDATA ’†ŒÃƒLƒƒƒ‰‰‘ÌŒ±,	4400,8		;	@V@@ ‰‘ÌŒ±•Û‘¶—p
-#DIM SAVEDATA ’†ŒÃƒLƒƒƒ‰”DP‘ŠŽè,4400,1		;	@V@@ Ž¸çHŽž‚Ì”DP‘ŠŽè•Û‘¶—p
+;ä¸­å¤å‡¦ç†
+#DEFINE ä¸­å¤ã‚­ãƒ£ãƒ©ãƒ‡ãƒ¼ã‚¿æ•°		4400		;ãƒ‡ãƒ¼ã‚¿æ•°
+#DIM SAVEDATA ä¸­å¤ã‚­ãƒ£ãƒ©ABL,	4400,60		;å¤±è¸ªã‚­ãƒ£ãƒ©ã®ABLä¿å­˜ç”¨
+#DIM SAVEDATA ä¸­å¤ã‚­ãƒ£ãƒ©BASE,	4400,1		;	ã€€ã€ƒã€€ã€€ BASEä¿å­˜ç”¨
+#DIM SAVEDATA ä¸­å¤ã‚­ãƒ£ãƒ©EXP,	4400,100	;	ã€€ã€ƒã€€ã€€ EXPä¿å­˜ç”¨
+#DIM SAVEDATA ä¸­å¤ã‚­ãƒ£ãƒ©TALENT,	4400,220	;	ã€€ã€ƒã€€ã€€ TALENTä¿å­˜ç”¨
+#DIM SAVEDATA ä¸­å¤ã‚­ãƒ£ãƒ©åˆä½“é¨“,	4400,8		;	ã€€ã€ƒã€€ã€€ åˆä½“é¨“ä¿å­˜ç”¨
+#DIM SAVEDATA ä¸­å¤ã‚­ãƒ£ãƒ©å¦Šå¨ ç›¸æ‰‹,4400,1		;	ã€€ã€ƒã€€ã€€ å¤±è¸ªæ™‚ã®å¦Šå¨ ç›¸æ‰‹ä¿å­˜ç”¨
 
 
-;ƒ†ƒjƒbƒgƒ^ƒCƒv§Œä—p
-#DEFINE DEFSMN_RACE_NUM		50		;ƒ†ƒjƒbƒgƒ^ƒCƒv”
-#DIMS GSMN_RACE,			50		;”z—ñ:ƒ†ƒjƒbƒgƒ^ƒCƒv
-#DIM GSMN_RACE_NO,			1		;ƒ†ƒjƒbƒgƒ^ƒCƒvNO
-#DEFINE DEFSMN_ORIGIN_MAX	500		;ogì•i”
-#DIMS GSMN_ORIGIN,			500		;”z—ñ:ogì•i
-#DIMS GSMN_ORIGIN_KANA,		500		;”z—ñ:ogƒJƒi
-#DIM GSMN_ORIGIN_NO,		1		;ogì•iNO
-#DIM GSMN_ORIGIN_NUM,		1		;ogì•i‘”
-#DIM GSMN_ORIGIN_INITED,	1		;ogì•i€”õÏ
-#DIM GSMN_LIST_START,		1		;ƒŠƒXƒgŠJŽnˆÊ’u
-#DIM GSMN_LIST_END,			1		;ƒŠƒXƒgI—¹ˆÊ’u
+;ãƒ¦ãƒ‹ãƒƒãƒˆã‚¿ã‚¤ãƒ—åˆ¶å¾¡ç”¨
+#DEFINE DEFSMN_RACE_NUM		50		;ãƒ¦ãƒ‹ãƒƒãƒˆã‚¿ã‚¤ãƒ—æ•°
+#DIMS GSMN_RACE,			50		;é…åˆ—:ãƒ¦ãƒ‹ãƒƒãƒˆã‚¿ã‚¤ãƒ—
+#DIM GSMN_RACE_NO,			1		;ãƒ¦ãƒ‹ãƒƒãƒˆã‚¿ã‚¤ãƒ—NO
+#DEFINE DEFSMN_ORIGIN_MAX	500		;å‡ºèº«ä½œå“æ•°
+#DIMS GSMN_ORIGIN,			500		;é…åˆ—:å‡ºèº«ä½œå“
+#DIMS GSMN_ORIGIN_KANA,		500		;é…åˆ—:å‡ºèº«ã‚«ãƒŠ
+#DIM GSMN_ORIGIN_NO,		1		;å‡ºèº«ä½œå“NO
+#DIM GSMN_ORIGIN_NUM,		1		;å‡ºèº«ä½œå“ç·æ•°
+#DIM GSMN_ORIGIN_INITED,	1		;å‡ºèº«ä½œå“æº–å‚™æ¸ˆ
+#DIM GSMN_LIST_START,		1		;ãƒªã‚¹ãƒˆé–‹å§‹ä½ç½®
+#DIM GSMN_LIST_END,			1		;ãƒªã‚¹ãƒˆçµ‚äº†ä½ç½®
 

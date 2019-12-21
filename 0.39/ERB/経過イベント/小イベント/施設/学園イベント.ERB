@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�w���C�x���g
+﻿;-------------------------------------------------
+;学園イベント
 ;-------------------------------------------------
 @TURN_EVENT_F_1
 #DIM L_K
@@ -10,28 +10,28 @@ L_K = (RAND:3)+1
 
 DRAWLINE
 SETCOLOR 150,150,250
-PRINTFORML �y�w���C�x���g(�{��):%CALLNAME%�z
-PRINTFORML %CALLNAME%�͊w���ɂčċ�����󂯂Ă���B
-PRINTFORML �������m���E������g�ɒ����A�펯�͂��l�����Ă����c
+PRINTFORML 【学園イベント(施設):%CALLNAME%】
+PRINTFORML %CALLNAME%は学園にて再教育を受けている。
+PRINTFORML 正しい知識・道徳を身に着け、常識力を獲得していく…
 PRINTFORML  
 
 RESETCOLOR
 
 CALL TURN_EVENT_NNK
 
-;5%�̊m���Ń�����30�����̏ꍇ����
-IF RAND:100 >= 95 && CFLAG:�Z�l_������ < 30
+;5%の確率でモラル30未満の場合発生
+IF RAND:100 >= 95 && CFLAG:住人_モラル < 30
 	CALL TURN_EVENT_F_1_Mi
 	L_K = 0
 	
-	PRINTFORML %CALLNAME%�̍ċ���Ɏ��s�����B
-	PRINTFORMW �������@{CFLAG:�Z�l_������}
+	PRINTFORML %CALLNAME%の再教育に失敗した。
+	PRINTFORMW モラル　{CFLAG:住人_モラル}
 ELSE
-	IF CFLAG:�Z�l_������ < 98
-		PRINTFORML %CALLNAME%�̃��������㏸�����B
-		PRINTFORMW �������@{CFLAG:�Z�l_������} �� {CFLAG:�Z�l_������+L_K}
+	IF CFLAG:住人_モラル < 98
+		PRINTFORML %CALLNAME%のモラルが上昇した。
+		PRINTFORMW モラル　{CFLAG:住人_モラル} → {CFLAG:住人_モラル+L_K}
 
-		CFLAG:�Z�l_������ += L_K
+		CFLAG:住人_モラル += L_K
 	ENDIF
 ENDIF 
 
@@ -39,131 +39,131 @@ ENDIF
 
 
 ;-------------------------------------------------
-;�w���C�x���g�@�ċ��玸�s
+;学園イベント　再教育失敗
 ;-------------------------------------------------
 @TURN_EVENT_F_1_Mi
 
 
 DRAWLINE
 SETCOLOR 250,50,150
-PRINTFORML �y%CALLNAME%�͎��Ƃ������ۂ������c�z
+PRINTFORML 【%CALLNAME%は授業をすっぽかした…】
 
-PRINTFORML �w���܂ő����^��ł݂����̂́A���C���N���Ȃ�����%CALLNAME%�͊w�������Ԃ���Ă����B
-PRINTFORML �����狳���ɖ߂��Ă�������͖̂ڂɌ����Ă������A�w������o�悤���̂Ȃ��q�Ɏ~�߂��񍐂���鋰����������B
-PRINTFORML �䂦�ɐl�ڂ����Ȃ��ꏊ��I��łԂ���Ă����̂����A���ɂ�%CALLNAME%�̂悤�Ȓ��˂��Ԃ�͂���炵���B
+PRINTFORML 学園まで足を運んでみたものの、やる気が湧かなかった%CALLNAME%は学園内をぶらついていた。
+PRINTFORML 今から教室に戻っても叱られるのは目に見えていたし、学園から出ようものなら守衛に止められ報告される恐れもあった。
+PRINTFORML ゆえに人目がつかない場所を選んでぶらついていたのだが、他にも%CALLNAME%のような跳ねっ返りはいるらしい。
 IF RAND:3 == 0
-	PRINTFORML �󂫋����ł͐��l�̒j�q���k���J�[�h�ɋ����Ă���A�����ɂ͕s�v�c�ȍ��肪�[�����Ă����B
-	PRINTFORMW �ɂ����ė]���Ă���%CALLNAME%�������Ă��炦�Ȃ������ݍ��ނƁA�j�����͎w�����ɔ閧�ɂ��邱�Ƃ������ɗ������Ă��ꂽ�B
-	;�J���}30�ȏ�ŗ����ɔ��W
-	IF CFLAG:�Z�l_�J���} >= 30
-		PRINTFORML ���������������c�B
-		PRINTFORML �ڂ�����ɂ����������悤�ȓ���%CALLNAME%�͒j�����ƃJ�[�h�ɋ����Ă����B
-		PRINTFORML ���̊Ԃɂ���������E���Ƃ������[���ŏ������邱�ƂɂȂ�A%CALLNAME%�͈�x�����Ă������ꖇ�ƂȂ��Ă����B
-		PRINTFORML ����ŕ����Ă��܂��Ƒ�؂ȏꏊ�����Ζʂ̒j�����ɎN���H�ڂɂȂ�̂����A�������������̊댯���Ɏv������Ȃ��B
-		PRINTFORML �S�~��ł���͂��Ȃ̂ɏ�����錾���Ă��܂���%CALLNAME%�ɁA�j�����͉��ڂ��΂݂𕂂��ׂȂ����𖾂����Ă����B
-		PRINTFORML �����ɕ�����%CALLNAME%���ꎅ�܂Ƃ�ʎp�ƂȂ����Ƃ��A�j�����͗~�]�𔚔�������%CALLNAME%�������|�����B
-		PRINTFORML ���ŁA���ŁA��ŁA�S�ŁA�K�ŁA�S�g��j�����ɍD���Ȃ悤�Ɏg���Ă���ɂ�������炸�A%CALLNAME%�͒�R���Ȃ������B
-		PRINTFORML �킸���ȗ����͉��y�ɐ�����΂���A���������_���C���������Ȃ�ǂ��ł͂Ȃ����ƒj�����̖\�����󂯓����B
-		PRINTFORMW ���ǁA���ׂĂ̎��Ƃ��I��鎞�Ԃ܂�%CALLNAME%�͒j�����̑�������邱�ƂɂȂ������A���̕\��͊�x�ɐ��܂��Ă����c
+	PRINTFORML 空き教室では数人の男子生徒がカードに興じており、室内には不思議な香りが充満していた。
+	PRINTFORMW 暇を持て余していた%CALLNAME%が混ぜてもらえないか頼み込むと、男たちは指導員に秘密にすることを条件に了承してくれた。
+	;カルマ30以上で乱交に発展
+	IF CFLAG:住人_カルマ >= 30
+		PRINTFORML 何かがおかしい…。
+		PRINTFORML ぼんやりと靄がかかったような頭で%CALLNAME%は男たちとカードに興じていた。
+		PRINTFORML いつの間にか負けたら脱ぐというルールで勝負することになり、%CALLNAME%は一度も勝てず下着一枚となっていた。
+		PRINTFORML これで負けてしまうと大切な場所を初対面の男たちに晒す羽目になるのだが、頭が働かずその危険性に思い至れない。
+		PRINTFORML ゴミ手であるはずなのに勝負を宣言してしまった%CALLNAME%に、男たちは下卑た笑みを浮かべながら手を明かしていく。
+		PRINTFORML 勝負に負けた%CALLNAME%が一糸まとわぬ姿となったとき、男たちは欲望を爆発させて%CALLNAME%を押し倒した。
+		PRINTFORML 口で、胸で、手で、膣で、尻で、全身を男たちに好きなように使われているにもかかわらず、%CALLNAME%は抵抗しなかった。
+		PRINTFORML わずかな理性は快楽に吹き飛ばされ、堕落した精神が気持ちいいなら良いではないかと男たちの暴挙を受け入れる。
+		PRINTFORMW 結局、すべての授業が終わる時間まで%CALLNAME%は男たちの相手をすることになったが、その表情は喜悦に染まっていた…
 		
-		SIF CSTR:�����������薼 == ""
-			CSTR:�����������薼 = �w���̕s�ǐ��k
-		SIF CSTR:���L�X���薼 == "" 
-			CSTR:���L�X���薼 = �w���̕s�ǐ��k
-		SIF CSTR:���������薼 =="" 
-			CSTR:���������薼 = �w���̕s�ǐ��k
-		SIF CSTR:���t�F�����薼 ==""
-			CSTR:���t�F�����薼 = �w���̕s�ǐ��k
-		SIF CSTR:���`���������薼 ==""
-			CSTR:���`���������薼 = �w���̕s�ǐ��k
-		SIF CSTR:���Ⓒ���薼 ==""
-			CSTR:���Ⓒ���薼 = �w���̕s�ǐ��k
-		SIF CSTR:�����o�����薼 ==""
-			CSTR:�����o�����薼 = �w���̕s�ǐ��k
+		SIF CSTR:初えっち相手名 == ""
+			CSTR:初えっち相手名 = 学園の不良生徒
+		SIF CSTR:初キス相手名 == "" 
+			CSTR:初キス相手名 = 学園の不良生徒
+		SIF CSTR:初精飲相手名 =="" 
+			CSTR:初精飲相手名 = 学園の不良生徒
+		SIF CSTR:初フェラ相手名 ==""
+			CSTR:初フェラ相手名 = 学園の不良生徒
+		SIF CSTR:初Ａえっち相手名 ==""
+			CSTR:初Ａえっち相手名 = 学園の不良生徒
+		SIF CSTR:初絶頂相手名 ==""
+			CSTR:初絶頂相手名 = 学園の不良生徒
+		SIF CSTR:初中出し相手名 ==""
+			CSTR:初中出し相手名 = 学園の不良生徒
 		
-		TALENT:�񏈏� = 1
-		TALENT:�`�񏈏� = 1
-		TCVAR:����_EXP_�����r�� = 1
-		TCVAR:����_EXP_�`�����r�� = 1
-		EXP:�L�X�o�� += (RAND:5)
-		EXP:�`�o�� += (RAND:2+1)+1
-		EXP:�a�o�� += (RAND:2)+1
-		EXP:�b�o�� += (RAND:2)
-		EXP:�u�o�� += (RAND:3+1)+1
-		EXP:�t�F���o�� += (RAND:2)+1
-		EXP:�`�����o�� += (RAND:2)+1
-		EXP:�����o�� += (RAND:3+1)+1
-		EXP:�Ⓒ�o�� += (RAND:3)+1
-		EXP:�����o�� += (RAND:2)+1
-		EXP:���t�o�� += (RAND:2)+1
-		EXP:�S�ˌo�� += (RAND:2+1)+1
-		EXP:�����o�� += (RAND:2+1)+1
-		EXP:��ɉ��y�o�� += (RAND:3)
-		EXP:�����o�� += (RAND:3+1)+1
-		EXP:��ɉ��y�o�� += (RAND:3)+1
+		TALENT:非処女 = 1
+		TALENT:Ａ非処女 = 1
+		TCVAR:履歴_EXP_処女喪失 = 1
+		TCVAR:履歴_EXP_Ａ処女喪失 = 1
+		EXP:キス経験 += (RAND:5)
+		EXP:Ａ経験 += (RAND:2+1)+1
+		EXP:Ｂ経験 += (RAND:2)+1
+		EXP:Ｃ経験 += (RAND:2)
+		EXP:Ｖ経験 += (RAND:3+1)+1
+		EXP:フェラ経験 += (RAND:2)+1
+		EXP:Ａ性交経験 += (RAND:2)+1
+		EXP:性交経験 += (RAND:3+1)+1
+		EXP:絶頂経験 += (RAND:3)+1
+		EXP:精飲経験 += (RAND:2)+1
+		EXP:精液経験 += (RAND:2)+1
+		EXP:膣射経験 += (RAND:2+1)+1
+		EXP:強姦経験 += (RAND:2+1)+1
+		EXP:苦痛快楽経験 += (RAND:3)
+		EXP:強姦経験 += (RAND:3+1)+1
+		EXP:苦痛快楽経験 += (RAND:3)+1
 			
 	ELSE
-		PRINTFORMW ���̌�A%CALLNAME%�͊w�����I��鎞�Ԃ܂Œj�����ƃJ�[�h���y���񂾁c
+		PRINTFORMW その後、%CALLNAME%は学園が終わる時間まで男たちとカードを楽しんだ…
 	ENDIF
 	
 ELSEIF RAND:2 == 0
-	PRINTFORMW �������������k��߂܂��邽�߂Ɋw���������񂵂Ă����w�����ɔ�������A%CALLNAME%�͎w�����ɘA�s���ꂽ�B
-	;�J���}30�ȏ�ŃZ�b�N�X�w���ɔ��W
-	IF CFLAG:�Z�l_�J���} >= 30
-		PRINTFORML �w�����̒���������焈Ղ��Ȃ���%CALLNAME%�͍����o���ꂽ���������ɂ��Ă����B
-		PRINTFORML ���َq�͂Ȃ��̂��Ɛg�̒����킫�܂��Ȃ���������ē{��ꂽ���߁A�����������C���𕴂�킷��i�������B
-		PRINTFORML �������ĉ��x�����������ɂ��Ă���ƁA%CALLNAME%�͋���Ȗ��C�ɏP����B
-		PRINTFORMW �Ȃ��}�ɂƖ��C�ŉ��Ȃ����ōl���Ă��邤���ɁA%CALLNAME%�̈ӎ��͖���ւƗ������B
+	PRINTFORMW そういった生徒を捕まえるために学園内を巡回していた指導員に発見され、%CALLNAME%は指導室に連行された。
+	;カルマ30以上でセックス指導に発展
+	IF CFLAG:住人_カルマ >= 30
+		PRINTFORML 指導員の長い説教に辟易しながら%CALLNAME%は差し出された飲料を口にしていた。
+		PRINTFORML お菓子はないのかと身の程をわきまえない質問をして怒られたため、飲料だけが気分を紛らわす手段だった。
+		PRINTFORML そうして何度か飲料を口にしていると、%CALLNAME%は強烈な眠気に襲われる。
+		PRINTFORMW なぜ急にと眠気で回らない頭で考えているうちに、%CALLNAME%の意識は眠りへと落ちた。
 		
-		PRINTFORML ������̌��ʂ͂��܂蒷���Ȃ��B
-		PRINTFORML �w�����͋}���Ŏw�����̔����{�������%CALLNAME%���e�[�u���ɋ����ŐQ�������B
-		PRINTFORML ���������炵�A�����ɂȂ����鏊�Ƀ��[�V������h�肱�ށB
-		PRINTFORML �Ⴂ���̂��D������ɂ������Ċy���݂����Ƃ��낾���A��������Ɩ{�Ԃ��y���ގ��Ԃ������Ă��܂��B
-		PRINTFORML �w�����̓K�`�K�`�ɖu�N���摖��`�ɔG�����_�����o���ƁA�ӎ��̂Ȃ�%CALLNAME%���S���ւƖ������ɑ}�������B
-		SIF !TALENT:�񏈏�
-			PRINTFORML %CALLNAME%�͈�����l�ɕ�����͂��������������A�������ɂ���Ė��c�ɂ��D���Ă��܂����c�B
-		PRINTFORML �����Ă��Ȃ�������̖{�\�ɏ]�����q�_�𗍂܂����t��~����%CALLNAME%�ɁA�w�����͗D�ǂ̔��q���ҊԂ̂�����ɉ����B
-		PRINTFORML ���C�ɕ�d�𑱂����S���\���Ɋ��\�����w�����́A���Ƃ��Ďq��s�ނ��Ƃ��ł��邩�̎����Ɉڂ邱�Ƃɂ����B
-		PRINTFORML ���ʂ��o��͓̂�����ł��邪�A%CALLNAME%�̗D�����}���R�̌��g�Ԃ肩�炷��Ύq�{�������ɗ��q�������o���Ă��邱�Ƃ��낤�B
-		PRINTFORML �Y�̈�`�q��������邱�Ƃ�m�点�邽�߉��x���q�{����˂��A�����Č����J����%CALLNAME%�̎q�{�߂����Ďw�����͎ː������B
-		PRINTFORML �������^����������ƌ}�����ꂽ���t�Ɋ��삷���S���\���ɍ���낤�Ƃ��Ă��Ȃ����ƂɋC�t�����w�����́A�f�X�|�b�g��˂��グ���B
-		PRINTFORML �\�͓I�ȃs�X�g�����S�̑Ӗ����^���Ă��΁A%CALLNAME%���S�͍Ď�����]�ނ悤�Ɏw�����̓��_�ɗ��݂��Ă���B
-		PRINTFORML �Ăюq�{�����J�����Ă���ː�����ƁA���x���S���r�N�r�N���z�����Ȃ��琸�t�������悤�ȓ������������B
-		PRINTFORML ��t���Z�b�N�X�����Ȃ����Ȃ���悤�ɂȂ���%CALLNAME%��J�߂�悤�Ɏw�����͎q�{�̕ӂ�𕏂ŎC��B
-		PRINTFORML ���̌�A�����򂪐؂��M���M���܂ŃZ�b�N�X�w���ɗ�񂾎w�����́A�ڂ��o�܂���%CALLNAME%���Ƃ܂ő���͂����B
-		PRINTFORMW �m�炸�m�炸�̂����Ɍ���̍�@���d���܂ꂽ%CALLNAME%�́A�����Y��������ƂЂ����ɌҊԂ�G�炷�悤�ɂȂ����c
+		PRINTFORML 睡眠薬の効果はあまり長くない。
+		PRINTFORML 指導員は急いで指導室の扉を施錠すると%CALLNAME%をテーブルに仰向けで寝かせた。
+		PRINTFORML 下着をずらし、あらわになった秘所にローションを塗りこむ。
+		PRINTFORML 若い肉体を好き放題にいじって楽しみたいところだが、そうすると本番を楽しむ時間が減ってしまう。
+		PRINTFORML 指導員はガチガチに勃起し先走り汁に濡れる肉棒を取り出すと、意識のない%CALLNAME%の膣穴へと無遠慮に挿入した。
+		SIF !TALENT:非処女
+			PRINTFORML %CALLNAME%は愛する人に捧げるはずだった処女を、睡眠姦によって無残にも奪われてしまった…。
+		PRINTFORML 眠っていながらも雌の本能に従い肉ヒダを絡ませ精液を欲する%CALLNAME%に、指導員は優良の判子を股間のあたりに押す。
+		PRINTFORML 健気に奉仕を続ける膣を十分に堪能した指導員は、雌として子を孕むことができるかの試験に移ることにした。
+		PRINTFORML 結果が出るのは当分先であるが、%CALLNAME%の優等生マンコの献身ぶりからすれば子宮もすぐに卵子を差し出してくることだろう。
+		PRINTFORML 雄の遺伝子が放たれることを知らせるため何度も子宮口を突き、屈して口を開いた%CALLNAME%の子宮めがけて指導員は射精した。
+		PRINTFORML しかし与えられる快感と迎え入れた精液に歓喜する膣が十分に搾り取ろうとしていないことに気付いた指導員は、Ｇスポットを突き上げた。
+		PRINTFORML 暴力的なピストンで膣の怠慢を躾けてやれば、%CALLNAME%の膣は再試験を望むように指導員の肉棒に絡みついてくる。
+		PRINTFORML 再び子宮口を開かせてから射精すると、今度は膣もビクビクと痙攣しながら精液を搾り取るような動きを見せた。
+		PRINTFORML 種付けセックスも問題なくこなせるようになった%CALLNAME%を褒めるように指導員は子宮の辺りを撫で擦る。
+		PRINTFORML その後、睡眠薬が切れるギリギリまでセックス指導に励んだ指導員は、目を覚ました%CALLNAME%を家まで送り届けた。
+		PRINTFORMW 知らず知らずのうちに交尾の作法を仕込まれた%CALLNAME%は、強い雄を見つけるとひそかに股間を濡らすようになった…
 		
-		SIF CSTR:�����������薼 == ""
-			CSTR:�����������薼 = �w���̎w����
-		SIF CSTR:���L�X���薼 == "" 
-			CSTR:���L�X���薼 = �w���̎w����
-		SIF CSTR:���������薼 =="" 
-			CSTR:���������薼 = �w���̎w����
-		SIF CSTR:���t�F�����薼 ==""
-			CSTR:���t�F�����薼 = �w���̎w����
-		SIF CSTR:���`���������薼 ==""
-			CSTR:���`���������薼 = �w���̎w����
-		SIF CSTR:���Ⓒ���薼 ==""
-			CSTR:���Ⓒ���薼 = �w���̎w����
-		SIF CSTR:�����o�����薼 ==""
-			CSTR:�����o�����薼 = �w���̎w����
+		SIF CSTR:初えっち相手名 == ""
+			CSTR:初えっち相手名 = 学園の指導員
+		SIF CSTR:初キス相手名 == "" 
+			CSTR:初キス相手名 = 学園の指導員
+		SIF CSTR:初精飲相手名 =="" 
+			CSTR:初精飲相手名 = 学園の指導員
+		SIF CSTR:初フェラ相手名 ==""
+			CSTR:初フェラ相手名 = 学園の指導員
+		SIF CSTR:初Ａえっち相手名 ==""
+			CSTR:初Ａえっち相手名 = 学園の指導員
+		SIF CSTR:初絶頂相手名 ==""
+			CSTR:初絶頂相手名 = 学園の指導員
+		SIF CSTR:初中出し相手名 ==""
+			CSTR:初中出し相手名 = 学園の指導員
 		
-		TALENT:�񏈏� = 1
-		TCVAR:����_EXP_�����r�� = 1
-		EXP:�u�o�� += (RAND:5+1)+1
-		EXP:�����o�� += (RAND:5+1)+1
-		EXP:�S�ˌo�� += (RAND:2+1)+1
-		EXP:�����o�� += 1
-		EXP:��ɉ��y�o�� += 1
-		EXP:��d���y�o�� += (RAND:3+1)+1
+		TALENT:非処女 = 1
+		TCVAR:履歴_EXP_処女喪失 = 1
+		EXP:Ｖ経験 += (RAND:5+1)+1
+		EXP:性交経験 += (RAND:5+1)+1
+		EXP:膣射経験 += (RAND:2+1)+1
+		EXP:強姦経験 += 1
+		EXP:苦痛快楽経験 += 1
+		EXP:奉仕快楽経験 += (RAND:3+1)+1
 		
 	ELSE
-		PRINTFORML ���̌�A%CALLNAME%�͎��̎��Ƃ��n�܂鎞�Ԃ܂Ő�������������B
-		PRINTFORMW ���ȋC���ɂȂ���%CALLNAME%�͎��Ƃɐg�����炸�A���ǋ����Ŗ��ׂȎ��Ԃ��߂������ƂƂȂ����c
+		PRINTFORML その後、%CALLNAME%は次の授業が始まる時間まで説教をくらった。
+		PRINTFORMW 嫌な気分になった%CALLNAME%は授業に身が入らず、結局教室で無為な時間を過ごすこととなった…
 	ENDIF
 	
 ELSE
-	PRINTFORMW �����悤�Ɏ��Ƃ𔲂��o�������k�Ɣ����킹��%CALLNAME%�́A�w�����Ɍ�����Ȃ��悤���͂��Ă������ڂ��y���񂾁c
+	PRINTFORMW 同じように授業を抜け出した生徒と鉢合わせた%CALLNAME%は、指導員に見つからないよう協力してかくれんぼを楽しんだ…
 	
 ENDIF
 

@@ -1,24 +1,24 @@
-
+﻿
 ;-------------------------------------------------
-;�{�݁@�i����ǎ{��
+;施設　品種改良施設
 ;-------------------------------------------------
 @CITY_F_54
 #DIM L_INPUT
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML �y�i����ǎ{�݁z�@������:{MONEY}
+PRINTFORML 【品種改良施設】　所持金:{MONEY}
 DRAWLINE
-PRINTFORML [0] �Q�m���ڐA ��300000
+PRINTFORML [0] ゲノム移植 ￥300000
 PRINTFORML
 PRINTFORML
-PRINTFORML [999] �߂�
+PRINTFORML [999] 戻る
 INPUT
 
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 	CASE 0
 		IF MONEY < 300000
-			PRINTFORMW �������s�����Ă��܂��B
+			PRINTFORMW 資金が不足しています。
 		ELSE
 			CALL CITY_F_54_GI
 		ENDIF
@@ -32,27 +32,27 @@ RESTART
 
 
 ;-------------------------------------------------
-;�Q�m���ڐA
+;ゲノム移植
 ;-------------------------------------------------
 @CITY_F_54_GI
 #DIM L_INPUT
 #DIM L_C_ID
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML �y�Q�m���ڐA�z
-PRINTFORML �Q�m���A�C�e�����Z���ɈڐA���܂��B
-PRINTFORML �ڐA�����ƃX�e�[�^�X�̒�グ����܂��B
+PRINTFORML 【ゲノム移植】
+PRINTFORML ゲノムアイテムを住民に移植します。
+PRINTFORML 移植されるとステータスの底上げされます。
 DRAWLINE
 CALL LIST_CHARA
 L_C_ID = RESULT
 IF L_C_ID == 1000
 	JUMP CITY_F_54
 ELSEIF !INRANGE(L_C_ID, 0, CHARANUM - 1)
-	PRINTFORMW ���͂��ꂽ�ԍ��̓L�����͈̔͊O�ł�
+	PRINTFORMW 入力された番号はキャラの範囲外です
 ELSEIF L_C_ID == 0
-	PRINTFORMW ���Ȃ��͑I���ł��܂���
+	PRINTFORMW あなたは選択できません
 ELSEIF TALENT:L_C_ID:NPC == 999
-	PRINTFORMW NPC�͑I���ł��܂���
+	PRINTFORMW NPCは選択できません
 ELSE
 	JUMP CITY_F_54_GI2(L_C_ID)
 ENDIF
@@ -61,23 +61,23 @@ RESTART
 
 
 ;-------------------------------------------------
-;�Q�m���ڐA2
+;ゲノム移植2
 ;-------------------------------------------------
 @CITY_F_54_GI2(L_C_ID)
-#DIM L_C_ID  ;�Ώۂ̓o�^�ԍ�
-#DIM L_GENOM ;���[�v�����p�A�Q�Ƃ��Ă���Q�m����FLAG��CFLAG��ID
+#DIM L_C_ID  ;対象の登録番号
+#DIM L_GENOM ;ループ処理用、参照しているゲノム≒FLAGやCFLAGのID
 #DIM L_INPUT ;
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML �y%CALLNAME:L_C_ID%�̈�`�q���z
+PRINTFORML 【%CALLNAME:L_C_ID%の遺伝子情報】
 DRAWLINE
 FOR L_GENOM, 1800, 1820
 	IF CFLAG:L_C_ID:L_GENOM != 0
 		SETCOLOR 50,250,250
-		PRINTFORM �y%CFLAGNAME:L_GENOM%:�ρz
+		PRINTFORM 【%CFLAGNAME:L_GENOM%:済】
 	ELSE
 		SETCOLOR 250,50,50
-		PRINTFORM �y%CFLAGNAME:L_GENOM%:���z
+		PRINTFORM 【%CFLAGNAME:L_GENOM%:未】
 	ENDIF
 	SIF L_GENOM > 1800 && (L_GENOM % 5 == 0)
 		PRINTFORML
@@ -85,19 +85,19 @@ FOR L_GENOM, 1800, 1820
 NEXT
 
 DRAWLINE
-PRINTFORML �ڐA����Q�m����I�����ĉ������B
+PRINTFORML 移植するゲノムを選択して下さい。
 DRAWLINE
-;�����ϐ����g���܂킵�Ă܂���
-;�A����CFLAG�A�R����FLAG�ł�
+;同じ変数を使いまわしてますが
+;アレ↑CFLAG、コレ↓FLAGです
 FOR L_GENOM, 2500, 2520
-	PRINTFORM [{L_GENOM - 2500, 2}]�y%FLAGNAME:L_GENOM%: {FLAG:L_GENOM, 3}�z
+	PRINTFORM [{L_GENOM - 2500, 2}]【%FLAGNAME:L_GENOM%: {FLAG:L_GENOM, 3}個】
 	SIF L_GENOM > 2500 && (L_GENOM % 5 == 0)
 		PRINTFORML
 NEXT
 
 
 PRINTFORML
-PRINTFORML [999] �߂�
+PRINTFORML [999] 戻る
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
@@ -105,28 +105,28 @@ SELECTCASE L_INPUT
 		RETURN
 	CASE 0 TO 19
 		IF MONEY < 300000
-			PRINTFORMW �������s�����Ă��܂��B
+			PRINTFORMW 資金が不足しています。
 			RESTART
 		ELSEIF FLAG:(2500 + L_INPUT) <= 0
-			PRINTFORMW �Q�m��������܂���B
+			PRINTFORMW ゲノムがありません。
 			RESTART
 		ELSEIF CFLAG:L_C_ID:(1800 + L_INPUT) != 0
-			PRINTFORMW ���ɈڐA�ς݂ł�
+			PRINTFORMW 既に移植済みです
 			RESTART
 		ENDIF
-		PRINTFORML %CALLNAME:L_C_ID%��%CFLAGNAME:(1800 + L_INPUT)%���ڐA���܂����B
-		PRINTFORMW �ꕔ�X�e�[�^�X��2�㏸���A�Z�\�|�C���g��5���Z����܂����B
-		CFLAG:L_C_ID:�Z�l_�ő�̗� += 2
-		CFLAG:L_C_ID:�Z�l_���ݑ̗� += 2
-		CFLAG:L_C_ID:�Z�l_�ő�C�� += 2
-		CFLAG:L_C_ID:�Z�l_���݋C�� += 2
-		CFLAG:L_C_ID:�Z�l_ATK      += 2
-		CFLAG:L_C_ID:�Z�l_DEF      += 2
-		CFLAG:L_C_ID:�Z�l_HIT      += 2
-		CFLAG:L_C_ID:�Z�l_SPD      += 2
-		CFLAG:L_C_ID:�Z�l_�ő�BRE  += 2
-		CFLAG:L_C_ID:�Z�l_����BRE  += 2
-		CFLAG:L_C_ID:�Z�l_�Z�\�|�C���g += 5
+		PRINTFORML %CALLNAME:L_C_ID%に%CFLAGNAME:(1800 + L_INPUT)%を移植しました。
+		PRINTFORMW 一部ステータスが2上昇し、技能ポイントに5加算されました。
+		CFLAG:L_C_ID:住人_最大体力 += 2
+		CFLAG:L_C_ID:住人_現在体力 += 2
+		CFLAG:L_C_ID:住人_最大気力 += 2
+		CFLAG:L_C_ID:住人_現在気力 += 2
+		CFLAG:L_C_ID:住人_ATK      += 2
+		CFLAG:L_C_ID:住人_DEF      += 2
+		CFLAG:L_C_ID:住人_HIT      += 2
+		CFLAG:L_C_ID:住人_SPD      += 2
+		CFLAG:L_C_ID:住人_最大BRE  += 2
+		CFLAG:L_C_ID:住人_現在BRE  += 2
+		CFLAG:L_C_ID:住人_技能ポイント += 5
 		
 		CFLAG:L_C_ID:(1800 + L_INPUT) = 1
 		FLAG:(2500 + L_INPUT) -= 1

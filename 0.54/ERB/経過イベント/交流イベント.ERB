@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�𗬃C�x���g
+﻿;-------------------------------------------------
+;交流イベント
 ;-------------------------------------------------
 @TURN_EVENT_COM(ARG:0,ARG:1,ARG:2)
 #DIM L_NPC
@@ -10,16 +10,16 @@ DRAWLINE
 CALL TURN_EVENT_COM_Re
 
 IF CFLAG:3601 != 0 && RAND:10 > 5 && (CFLAG:(3020+L_NPC) != 0)
-;���C�ɓ���Ƃ̌�
+;お気に入りとの交流
 	ARG:1 = CFLAG:3600
 	CALL TURN_EVENT_COM_C(ARG:1)
 ELSEIF CFLAG:(3020+L_NPC) == 0
-;�o�
+;出会い
 	ARG:1 = L_NPC
 	CFLAG:(3000+L_NPC) = L_NPC
 	CALL TURN_EVENT_COM_Cup(ARG:0,ARG:1,ARG:2)
 ELSE
-;��
+;交流
 	ARG:1 = L_NPC
 	CALL TURN_EVENT_COM_C(ARG:0,ARG:1,ARG:2)
 ENDIF
@@ -29,7 +29,7 @@ CALL TURN_EVENT_COM_Cup2
 
 
 ;-------------------------------------------------
-;�𗬃C�x���g�@�o�
+;交流イベント　出会い
 ;-------------------------------------------------
 @TURN_EVENT_COM_Cup(ARG:0,ARG:1,ARG:2)
 #DIM L_NPC
@@ -39,7 +39,7 @@ L_NPC = ARG:1
 CFLAG:3900 -= 1
 CFLAG:(3000+L_NPC) = CFLAG:3900
 CFLAG:(3010+L_NPC) = 1
-IF ((EXP:���Y�o��)/200)+RAND:300 > RAND:999
+IF ((EXP:レズ経験)/200)+RAND:300 > RAND:999
 	CFLAG:(3030+L_NPC) = 2
 ELSE
 	CFLAG:(3030+L_NPC) = 1
@@ -54,18 +54,18 @@ ENDIF
 
 
 SETCOLOR 100,250,100
-PRINTFORM %CALLNAME%�͓��X�̐����̒��ŋ��R
+PRINTFORM %CALLNAME%は日々の生活の中で偶然
 IF CFLAG:(3030+L_NPC) == 1
-	PRINTFORM �j����%CSTR:(3000+L_NPC)%�ƒm�l�ɂȂ����c
+	PRINTFORM 男性の%CSTR:(3000+L_NPC)%と知人になった…
 ELSE
-	PRINTFORM ������%CSTR:(3000+L_NPC)%�ƒm�l�ɂȂ����c
+	PRINTFORM 女性の%CSTR:(3000+L_NPC)%と知人になった…
 ENDIF
-PRINTFORML �y%CALLNAME%�̌𗬃��X�g��%CSTR:(3000+L_NPC)%���ǉ�����܂����z
+PRINTFORML 【%CALLNAME%の交流リストに%CSTR:(3000+L_NPC)%が追加されました】
 RESETCOLOR
 CFLAG:(3020+L_NPC) = 1
 CFLAG:3601 = 1
 ;-------------------------------------------------
-;�𗬃C�x���g�@�֌W�A�b�v
+;交流イベント　関係アップ
 ;-------------------------------------------------
 @TURN_EVENT_COM_Cup2
 #DIM L_NPC
@@ -91,82 +91,82 @@ SIF CFLAG:(3050+L_NPC) >= 100
 L_NPC += 1
 REND
 
-CFLAG:(3040+L_NPC) = (MARK:�ח�����*10)+(CFLAG:(3050+L_NPC)/2)+RAND:20
+CFLAG:(3040+L_NPC) = (MARK:陥落刻印*10)+(CFLAG:(3050+L_NPC)/2)+RAND:20
 
 ;-------------------------------------------------
-;�𗬃C�x���g�@�֌W�����N�A�b�v
+;交流イベント　関係ランクアップ
 ;-------------------------------------------------
 @TURN_EVENT_COM_CRup(ARG:0,ARG:1,ARG:2)
 #DIM L_NPC
 L_NPC = ARG:1
 SETCOLOR 250,100,0
-IF CFLAG:(3010+L_NPC) > 200 && CFLAG:(3020+L_NPC) == 4 && CFLAG:�Z�l�𗬐ݒ� >= 4  && MARK:�ח����� <= 2 && TALENT:�����ς� == 0 && TALENT:�S������ == 0 && TALENT:�ח��x != 3
-	PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	PRINTFORML �y��l�̈��͂��Ɍ��΂�A�v�w�̊֌W�ƂȂ����c�w�֌W:�v�w�x�z
-	PRINTFORMW �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	TALENT:���ے� = 0
+IF CFLAG:(3010+L_NPC) > 200 && CFLAG:(3020+L_NPC) == 4 && CFLAG:住人交流設定 >= 4  && MARK:陥落刻印 <= 2 && TALENT:結婚済み == 0 && TALENT:百合結婚 == 0 && TALENT:陥落度 != 3
+	PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――
+	PRINTFORML 【二人の愛はついに結ばれ、夫婦の関係となった…『関係:夫婦』】
+	PRINTFORMW ―――――――――――――――――――――――――――――――――――――――――――――――――
+	TALENT:交際中 = 0
 	IF CFLAG:(3030+L_NPC) == 1
-		TALENT:�����ς� = 1
+		TALENT:結婚済み = 1
 	ELSEIF CFLAG:(3030+L_NPC) == 2
-		TALENT:�S������ = 1
+		TALENT:百合結婚 = 1
 	ENDIF
 	CFLAG:(3020+L_NPC) = 5
 	SIF CSTR:3500 == ""
 		CSTR:3500 = %CSTR:(3000+L_NPC)%
-ELSEIF CFLAG:(3010+L_NPC) > 150 && CFLAG:(3020+L_NPC) == 3 && CFLAG:�Z�l�𗬐ݒ� >= 3  && MARK:�ח����� <= 2 && TALENT:���ے� == 0 && TALENT:�ח��x != 2 && TALENT:�����ς� == 0 && TALENT:�S������ == 0
-	PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	PRINTFORML �y��l�݂͌��Ɉ��������A���ۂ��n�߂��悤���w�֌W:���l�x�z
-	PRINTFORMW �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	TALENT:���ے� = 1
+ELSEIF CFLAG:(3010+L_NPC) > 150 && CFLAG:(3020+L_NPC) == 3 && CFLAG:住人交流設定 >= 3  && MARK:陥落刻印 <= 2 && TALENT:交際中 == 0 && TALENT:陥落度 != 2 && TALENT:結婚済み == 0 && TALENT:百合結婚 == 0
+	PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――
+	PRINTFORML 【二人は互いに愛情を抱き、交際を始めたようだ『関係:恋人』】
+	PRINTFORMW ―――――――――――――――――――――――――――――――――――――――――――――――――
+	TALENT:交際中 = 1
 	CFLAG:(3020+L_NPC) = 4
 	SIF CSTR:3500 == ""
 		CSTR:3500 = %CSTR:(3000+L_NPC)%
-ELSEIF CFLAG:(3010+L_NPC) > 100 && CFLAG:(3020+L_NPC) == 2 && CFLAG:�Z�l�𗬐ݒ� >= 2
-	PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	PRINTFORML �y��l�͊m���ȐM���֌W��z�����悤���c�w�֌W:�e�F�x�z
-	PRINTFORMW �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+ELSEIF CFLAG:(3010+L_NPC) > 100 && CFLAG:(3020+L_NPC) == 2 && CFLAG:住人交流設定 >= 2
+	PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――
+	PRINTFORML 【二人は確かな信頼関係を築いたようだ…『関係:親友』】
+	PRINTFORMW ―――――――――――――――――――――――――――――――――――――――――――――――――
 	CFLAG:(3020+L_NPC) = 3
-ELSEIF CFLAG:(3010+L_NPC) > 50 && CFLAG:(3020+L_NPC) == 1 && CFLAG:�Z�l�𗬐ݒ� >= 1
-	PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-	PRINTFORML �y%CSTR:(3000+L_NPC)%��%CALLNAME%�ɂƂ��ċC���u���Ȃ��֌W�ɂȂ����悤���c�w�֌W:�F�l�x�z
-	PRINTFORMW �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+ELSEIF CFLAG:(3010+L_NPC) > 50 && CFLAG:(3020+L_NPC) == 1 && CFLAG:住人交流設定 >= 1
+	PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――
+	PRINTFORML 【%CSTR:(3000+L_NPC)%は%CALLNAME%にとって気が置けない関係になったようだ…『関係:友人』】
+	PRINTFORMW ―――――――――――――――――――――――――――――――――――――――――――――――――
 	CFLAG:(3020+L_NPC) = 2
 ENDIF
 RESETCOLOR
 ;-------------------------------------------------
-;�𗬃C�x���g�@��
+;交流イベント　交流
 ;-------------------------------------------------
 @TURN_EVENT_COM_C(ARG:0,ARG:1,ARG:2)
 #DIM L_NPC
 L_NPC = ARG:1
 SETCOLOR 50,250,250
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-PRINTFORM �𗬃C�x���g�y�Ώ�:%CSTR:(3000+L_NPC)%�z
-	PRINTFORM �y
+PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――
+PRINTFORM 交流イベント【対象:%CSTR:(3000+L_NPC)%】
+	PRINTFORM 【
 	IF CFLAG:(3030+L_NPC) == 1
-		PRINTFORM �j
+		PRINTFORM 男
 	ELSE
-		PRINTFORM ��
+		PRINTFORM 女
 	ENDIF
-	PRINTFORM �z�y�֌W:
+	PRINTFORM 】【関係:
 	IF CFLAG:(3020+L_NPC) == 5
-		PRINTFORM �v�w
+		PRINTFORM 夫婦
 	ELSEIF CFLAG:(3020+L_NPC) == 4
-		PRINTFORM ���l
+		PRINTFORM 恋人
 	ELSEIF CFLAG:(3020+L_NPC) == 3
-		PRINTFORM �e�F
+		PRINTFORM 親友
 	ELSEIF CFLAG:(3020+L_NPC) == 2
-		PRINTFORM �F�l
+		PRINTFORM 友人
 	ELSEIF CFLAG:(3020+L_NPC) == 1
-		PRINTFORM �m�l
+		PRINTFORM 知人
 	ELSEIF CFLAG:(3020+L_NPC) == -5
-		PRINTFORM ���l
+		PRINTFORM 愛人
 	ENDIF
-PRINTFORML �y�D���x:{CFLAG:(3010+L_NPC)}�z�y����:{CFLAG:(3050+L_NPC)}�z
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+PRINTFORML 【好感度:{CFLAG:(3010+L_NPC)}】【相性:{CFLAG:(3050+L_NPC)}】
+PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――
 
 IF CFLAG:(3020+L_NPC) == 5
-;�v�w
+;夫婦
 	IF !RAND:10
 		PRINTFORML 
 		PRINTFORML 
@@ -199,7 +199,7 @@ IF CFLAG:(3020+L_NPC) == 5
 		PRINTFORML 
 	ENDIF
 ELSEIF CFLAG:(3020+L_NPC) == 4 &&  RAND:10 > 3
-;���l
+;恋人
 	IF !RAND:10
 		PRINTFORML 
 		PRINTFORML 
@@ -232,16 +232,16 @@ ELSEIF CFLAG:(3020+L_NPC) == 4 &&  RAND:10 > 3
 		PRINTFORML 
 	ENDIF
 ELSEIF CFLAG:(3020+L_NPC) == 3 
-;�e�F
+;親友
 	IF !RAND:10
-		PRINTFORML �V�����[�𗁂тĊ��𗬂���%CALLNAME%�͉����ƃV���c�ꖇ�ŋ��Ԃɖ߂�A���R�҂��Ă���%CSTR:(3000+L_NPC)%�͏��Ȃ���������B
-		PRINTFORML �`���`���ƃV���c�̌��Ԃ��猩����_�������鎋���ɋC�Â���%CALLNAME%�́A�s�G�ȏ΂݂𕂂��ׂĖ��f�I�Ȏd�����Ƃ����c
+		PRINTFORML シャワーを浴びて汗を流した%CALLNAME%は下着とシャツ一枚で居間に戻る、当然待っていた%CSTR:(3000+L_NPC)%は少なかれ驚いた。
+		PRINTFORML チラチラとシャツの隙間から見える柔肌を見る視線に気づいた%CALLNAME%は、不敵な笑みを浮かべて魅惑的な仕草をとった…
 	ELSEIF !RAND:9
-		PRINTFORML %CSTR:(3000+L_NPC)%�̕����ɗ���̂��������Ȃ��Ȃ�A����m������ƌ����΂���Ƀx�b�h�ɐg��a����B
-		PRINTFORML ���łɌ��ԂɉB����Ă��������{���@��o���A�܂�ڂ̂��Ă���y�[�W�𒲂ׂĂ������c
-	ELSEIF !RAND:8 && MARK:�ח����� == 0
-		PRINTFORML �ŋ�%CSTR:(3000+L_NPC)%�̊���݂�ƃh�L���Ƃ�����A�j�炵�������𔭌�����Ƃ����̉����M���Ȃ�̂�������B
-		PRINTFORML �����̒��ɂ���Ă̖{�\��%CSTR:(3000+L_NPC)%���w����x�Ƃ��ĔF�����Ă���̂��ƔF�߂��邨���Ȃ������c
+		PRINTFORML %CSTR:(3000+L_NPC)%の部屋に来るのも珍しくなくなり、勝手知ったると言わんばかりにベッドに身を預ける。
+		PRINTFORML ついでに隙間に隠されていた薄い本を掘り出し、折り目のついているページを調べていった…
+	ELSEIF !RAND:8 && MARK:陥落刻印 == 0
+		PRINTFORML 最近%CSTR:(3000+L_NPC)%の顔をみるとドキリとしたり、男らしい部分を発見するとお腹の奥が熱くなるのを感じる。
+		PRINTFORML 自分の中にある牝の本能が%CSTR:(3000+L_NPC)%を『相手』として認識しているのだと認めざるおえなかった…
 	ELSEIF !RAND:7
 		PRINTFORML 
 		PRINTFORML 
@@ -252,68 +252,68 @@ ELSEIF CFLAG:(3020+L_NPC) == 3
 		PRINTFORML 
 		PRINTFORML 
 	ELSEIF !RAND:4 && CFLAG:(3060+L_NPC) != 0
-		PRINTFORML �����͘b������ł��܂��A�O������Ƃ����Ԃ�ƈÂ��Ȃ��Ă��܂����悤���B
-		PRINTFORML �b��ꂽ�̂�%CSTR:(3000+L_NPC)%�ɂ��Ȃ����ƁA�Y�{���̏ォ��킩��قǃy�j�X���傫���Ȃ��Ă����̂��킩�����B
-		PRINTFORML ���ꂽ�̂����������̂�%CSTR:(3000+L_NPC)%�͐Ԃ��Ȃ�����𔽂炵���c
+		PRINTFORML 今日は話し込んでしまい、外を見るとずいぶんと暗くなってしまったようだ。
+		PRINTFORML 話疲れたので%CSTR:(3000+L_NPC)%にしなだれると、ズボンの上からわかるほどペニスが大きくなっていくのがわかった。
+		PRINTFORML 悟られたのが分かったのか%CSTR:(3000+L_NPC)%は赤くなった顔を反らした…
 	ELSEIF !RAND:3
-		PRINTFORML �����̂悤��%CALLNAME%��%CSTR:(3000+L_NPC)%��U���s�����̋i���X�ŐH�����Ƃ邱�Ƃɂ����B
-		PRINTFORML �ŋߋN�������Ƃ��̘b��%CSTR:(3000+L_NPC)%�Ɖ�b�ɉԂ��炩�����c
+		PRINTFORML いつものように%CALLNAME%は%CSTR:(3000+L_NPC)%を誘い行きつけの喫茶店で食事をとることにした。
+		PRINTFORML 最近起きたことや趣味の話で%CSTR:(3000+L_NPC)%と会話に花を咲かせた…
 	ELSEIF !RAND:2
-		PRINTFORML �ڂ��o�܂���%CALLNAME%�͌�����ʓV������߂�c�������₵���ɂ̂�%CSTR:(3000+L_NPC)%�̉Ƃɂ����肵���̂��Ǝv���o�����B
-		PRINTFORML ���Ȃ̕z�c����N���オ��ƁA�������̒��ɂ���%CSTR:(3000+L_NPC)%�̐Q������\���邱�Ƃɂ����c
+		PRINTFORML 目を覚ました%CALLNAME%は見慣れぬ天井を見つめる…少し自問したにのち%CSTR:(3000+L_NPC)%の家にお泊りしたのだと思い出した。
+		PRINTFORML 即席の布団から起き上がると、未だ夢の中にいる%CSTR:(3000+L_NPC)%の寝顔を堪能することにした…
 	ELSE
-		PRINTFORML ��̘b�ŉ�b�𐷂�グ�Ă�����l���������A���x�����̎��ԂɂȂ����̂Œ��H���Ƃ邽�߂ɊO�o�����B
-		PRINTFORML �ӂƓ�l����ŕ����l�q����A�������Ď��R�ƐM���ł���قǂɂȂ����̂���%CALLNAME%�͎��o���Ă����c
+		PRINTFORML 趣味の話で会話を盛り上げていた二人だったが、丁度お昼の時間になったので昼食をとるために外出した。
+		PRINTFORML ふと二人並んで歩く様子から、こうして自然と信頼できるほどになったのだと%CALLNAME%は自覚していた…
 	ENDIF
 ELSEIF CFLAG:(3020+L_NPC) >= 2 
-;�F�l
+;友人
 	IF !RAND:6
-		PRINTFORML �ɂ�����%CALLNAME%�͗F�l��%CSTR:(3000+L_NPC)%��U���s�����̋i���X�ŐH�����Ƃ邱�Ƃɂ����B
-		PRINTFORML �����������Ă��ꂽ%CSTR:(3000+L_NPC)%�Ɖ�b�ɉԂ��炩�����c
+		PRINTFORML 暇だった%CALLNAME%は友人の%CSTR:(3000+L_NPC)%を誘い行きつけの喫茶店で食事をとることにした。
+		PRINTFORML 快く了承してくれた%CSTR:(3000+L_NPC)%と会話に花を咲かせた…
 	ELSEIF !RAND:5
-		PRINTFORML �e�����Ȃ���%CSTR:(3000+L_NPC)%�̉Ƃɏ��҂��ꂽ�A�ꉞ�x�����Ă��������ɖ��͂Ȃ��悤���B
-		PRINTFORML ����������������߂ɘb�̎�ɂ͍��炸�A�k�΂͓������ނ܂ő������c
+		PRINTFORML 親しくなった%CSTR:(3000+L_NPC)%の家に招待された、一応警戒していたが特に問題はないようだ。
+		PRINTFORML 同じ趣味があったために話の種には困らず、談笑は日が沈むまで続いた…
 	ELSEIF !RAND:4
-		PRINTFORML �A�蓹�ˑR�J�ɍ~���A�Ȃ�Ƃ��J�h�肵�悤�ɂ��K�����ꏊ��������Ȃ��B
-		PRINTFORML ����ƎP��������%CSTR:(3000+L_NPC)%�������A���������C���ɒ��ɓ��点�Ă�������B
-		PRINTFORML %CSTR:(3000+L_NPC)%��%CALLNAME%�̉J�ɔG��ē��������Ƀh�L���Ƃ���𔽂炵���c
+		PRINTFORML 帰り道突然雨に降られ、なんとか雨宿りしようにも適した場所が見つからない。
+		PRINTFORML すると傘を持った%CSTR:(3000+L_NPC)%を見つけ、多少強引気味に中に入らせてもらった。
+		PRINTFORML %CSTR:(3000+L_NPC)%は%CALLNAME%の雨に濡れて透けた服にドキリとしつつ顔を反らした…
 	ELSEIF !RAND:3
-		PRINTFORML �����͎v���؂���%CSTR:(3000+L_NPC)%���Ƃɏ��҂��Ă݂邪�A����Ă���%CSTR:(3000+L_NPC)%�͏����ْ����Ă���悤���B
-		PRINTFORML ������������ŏ��̂����ŁA�b���n�߂�Ƃ����Ɋ��ꂽ�̂��y�����ꎞ�ƂȂ����c
+		PRINTFORML 今日は思い切って%CSTR:(3000+L_NPC)%を家に招待してみるが、やってきた%CSTR:(3000+L_NPC)%は少し緊張しているようだ。
+		PRINTFORML しかしそれも最初のうちで、話を始めるとすぐに慣れたのか楽しい一時となった…
 	ELSEIF !RAND:2
-		PRINTFORML �ړI�n�܂Ō������r��%CSTR:(3000+L_NPC)%�Əo���킷�A�ǂ�����������͂��܂�ς��Ȃ��悤�Ȃ̂ŋ��ɍs�����Ƃɂ����B
-		PRINTFORML ����܂ł̊ԁA�ɂ��Ԃ����ߒk�΂��Ȃ���ړI�n�֌������Ă������c
+		PRINTFORML 目的地まで向かう途中%CSTR:(3000+L_NPC)%と出くわす、どうやら向かう先はあまり変わらないようなので共に行くことにした。
+		PRINTFORML それまでの間、暇をつぶすため談笑しながら目的地へ向かっていった…
 	ELSE
-		PRINTFORML �ړ��Ă̏��i��T���ɃX�[�p�[�܂ŗ����̂����Ȃ��Ȃ�������ȂȂ��A����Ɠ���������������%CSTR:(3000+L_NPC)%�����������Ă����B
-		PRINTFORML %CALLNAME%���T�����𑊒k���Ă݂��Ƃ���A�ꏊ��m���Ă���%CSTR:(3000+L_NPC)%�̈ē��ł悤�₭�����邱�Ƃ��o�����c
+		PRINTFORML 目当ての商品を探しにスーパーまで来たのだがなかなか見つからなない、すると同じく買い物中の%CSTR:(3000+L_NPC)%が声をかけてきた。
+		PRINTFORML %CALLNAME%が探し物を相談してみたところ、場所を知っていた%CSTR:(3000+L_NPC)%の案内でようやく見つけることが出来た…
 	ENDIF
 ELSE
-;�m�l
+;知人
 	IF !RAND:7
-		PRINTFORML �o�X�ł̈ړ����A�ׂ̐ȂɒN�����������̂Ŏ������������%CSTR:(3000+L_NPC)%�������悤���B
-		PRINTFORML ���݂����X�����͂������ړ����ɂ������̂�����A�ړI�n�܂Ő��Ԙb���邱�Ƃɂ����c
+		PRINTFORML バスでの移動中、隣の席に誰かが座ったので視線を向けると%CSTR:(3000+L_NPC)%だったようだ。
+		PRINTFORML お互い少々驚きはしたが移動中暇だったのもあり、目的地まで世間話することにした…
 	ELSEIF !RAND:6
-		PRINTFORML ��悲�Ƃ̔��P�����n�܂�A%CALLNAME%�͔��r����%CSTR:(3000+L_NPC)%��������B
-		PRINTFORML ���ɒm�荇�������Ȃ��̂�%CSTR:(3000+L_NPC)%�ƈꏏ�ɌP���𑱂����c
+		PRINTFORML 区画ごとの避難訓練が始まり、%CALLNAME%は避難途中で%CSTR:(3000+L_NPC)%を見つける。
+		PRINTFORML 他に知り合いもいないので%CSTR:(3000+L_NPC)%と一緒に訓練を続けた…
 	ELSEIF !RAND:5
-		PRINTFORML ��ʂ������Ă���ƌ��m�������̂��������̂��ڂ��䂩���A�ǂ����m�荇����%CSTR:(3000+L_NPC)%�̂悤���B
-		PRINTFORML �ɂ�����%CALLNAME%�͉ɂԂ������˂Ęb�������邱�Ƃɂ����c
+		PRINTFORML 大通りを歩いていると見知ったものがあったのか目を惹かれる、どうやら知り合いの%CSTR:(3000+L_NPC)%のようだ。
+		PRINTFORML 暇だった%CALLNAME%は暇つぶしもかねて話しかけることにした…
 	ELSEIF !RAND:4
-		PRINTFORML �A���������̂ŋ߂��̎����̔��@�ɂ��Ƃǂ�����q�������悤�ŁA�ߊ���Ă݂��%CSTR:(3000+L_NPC)%�ł������B
-		PRINTFORML ���ɂ��邱�Ƃ��Ȃ��̂ŁA�D�݂̃h�����N�𔃂��b�����邱�Ƃɂ����c
+		PRINTFORML 喉が渇いたので近くの自動販売機によるとどうやら先客がいたようで、近寄ってみると%CSTR:(3000+L_NPC)%であった。
+		PRINTFORML 特にすることもないので、好みのドリンクを買いつつ話をすることにした…
 	ELSEIF !RAND:3
-		PRINTFORML ���N�f�f���󂯂邽�ߕa�@�ɗ��Ă݂͂������X�����̔Ԃ�����Ă��Ȃ��B
-		PRINTFORML ���x%CSTR:(3000+L_NPC)%�����Ă����悤�ŁA��b�Ŏ��Ԃ�ׂ����Ƃɂ����c
+		PRINTFORML 健康診断を受けるため病院に来てはみたが中々自分の番が回ってこない。
+		PRINTFORML 丁度%CSTR:(3000+L_NPC)%も来ていたようで、会話で時間を潰すことにした…
 	ELSEIF !RAND:2
-		PRINTFORML ���i���܂藈�Ȃ��n����ړ����Ă�������q�ɂȂ��Ă��܂����B
-		PRINTFORML ����Ƌ��R%CSTR:(3000+L_NPC)%���ʂ肩����A���ē������Ă��ꂽ�̂Ŗ����ɉ߂������c
+		PRINTFORML 普段あまり来ない地区を移動していたら迷子になってしまった。
+		PRINTFORML すると偶然%CSTR:(3000+L_NPC)%が通りかかり、道案内をしてくれたので無事に過ごせた…
 	ELSE
-		PRINTFORML %CALLNAME%�͓��[��%CSTR:(3000+L_NPC)%�Ƃ΂�����o���킵�A�y����b�������B
-		PRINTFORML �����̊Ԃ������������Ȃ��C���������悤���c
+		PRINTFORML %CALLNAME%は道端で%CSTR:(3000+L_NPC)%とばったり出くわし、軽く会話をした。
+		PRINTFORML 多少の間だったが悪くない気分だったようだ…
 	ENDIF
 ENDIF
 
-SIF  (TALENT:�� == 0 && TALENT:�D�P == 0) && CFLAG:(3030+L_NPC) == 1 && ((CFLAG:(3020+L_NPC) >= 3 && MARK:�ח����� <= 2) || (CFLAG:(3020+L_NPC) >= 4 && RAND:100 < CFLAG:(3040+L_NPC)))
+SIF  (TALENT:受精 == 0 && TALENT:妊娠 == 0) && CFLAG:(3030+L_NPC) == 1 && ((CFLAG:(3020+L_NPC) >= 3 && MARK:陥落刻印 <= 2) || (CFLAG:(3020+L_NPC) >= 4 && RAND:100 < CFLAG:(3040+L_NPC)))
 	CALL TURN_EVENT_COM_SEX(ARG:1)
 
 
@@ -325,17 +325,17 @@ CALL TURN_EVENT_COM_CRup(ARG:0,ARG:1,ARG:2)
 PRINTFORMW
 
 ;-------------------------------------------------
-;�𗬃C�x���g�@�Z�b�N�X
+;交流イベント　セックス
 ;-------------------------------------------------
 @TURN_EVENT_COM_SEX(ARG:1)
 #DIM L_NPC
 #DIM SEX_P
 
-;���Ȃ�����L�����͔������Ȃ�
-SIF MARK:�ח����� >= 3 && CFLAG:�Z�l_������ >= -50
+;あなた恋慕キャラは発生しない
+SIF MARK:陥落刻印 >= 3 && CFLAG:住人_モラル >= -50
 	RETURN
-;���l�����̃����������L�����͔������Ȃ�
-SIF  CFLAG:(3020+L_NPC) < 3 && CFLAG:�Z�l_������ >= -20
+;恋人未満のモラル高いキャラは発生しない
+SIF  CFLAG:(3020+L_NPC) < 3 && CFLAG:住人_モラル >= -20
 	RETURN
 
 
@@ -347,189 +347,189 @@ SEX_P = 0
 
 L_NPC = ARG:1
 SETCOLOR 250,50,150
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
-PRINTFORML ��X���ɂȂ�Ɠ�l�͎��R�Ɣ����d�ˎn�߂��c
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+PRINTFORML ――――――――――――――――――――――――――――――――――――
+PRINTFORML 夜更けになると二人は自然と肌を重ね始めた…
+PRINTFORML ――――――――――――――――――――――――――――――――――――
 
 
-IF TCVAR:����_EXP_�����r�� == 0 && TALENT:�񏈏� != 1
-	PRINTFORML �f�������炵�x�b�h�̏�ɓ|����邪�A�K�`�K�`�ɖu�N����%CSTR:(3000+L_NPC)%�̃y�j�X�������%CALLNAME%�͏����Ȕߖ��グ��B
-	PRINTFORML ���̗l�q���݂�%CSTR:(3000+L_NPC)%�͐S�z�����Ɏf���ƁA%CALLNAME%�͊ϔO�������̂悤�Ɏ��g�������ł��邱�Ƃ���������B
-	PRINTFORML �u�o���邾���D��������v��%CALLNAME%���ЂƂ܂����S��������A�܂��͎w�Œj��m��Ȃ��鏊��M��A�ア������T����t�𕪔傳���Ă����B
-	PRINTFORML %CALLNAME%�̕�����������𓾂���ӏ���%CSTR:(3000+L_NPC)%�ɓ`����ƁA��萳�m�Ɏw�������тɐG�ꏙ�X���S��������g���g���ɂȂ����B
-	PRINTFORMW ������m�F����%CSTR:(3000+L_NPC)%�͍������Ƃ݂āA���_��鏊�ɉ������đ}�����邱�Ƃ�ڔz����%CALLNAME%�ɓ`����A��������%CALLNAME%�͏������k���Ȃ��炱������������B
+IF TCVAR:履歴_EXP_処女喪失 == 0 && TALENT:非処女 != 1
+	PRINTFORML 素肌をさらしベッドの上に倒されるが、ガチガチに勃起した%CSTR:(3000+L_NPC)%のペニスを見ると%CALLNAME%は小さな悲鳴を上げる。
+	PRINTFORML その様子をみた%CSTR:(3000+L_NPC)%は心配そうに伺うと、%CALLNAME%は観念したかのように自身が処女であることを告白する。
+	PRINTFORML 「出来るだけ優しくする」と%CALLNAME%をひとまず安心させた後、まずは指で男を知らない秘所を弄り、弱い部分を探りつつ愛液を分泌させていく。
+	PRINTFORML %CALLNAME%の方からも快感を得られる箇所を%CSTR:(3000+L_NPC)%に伝えると、より正確に指が性感帯に触れ徐々に膣内が解れトロトロになった。
+	PRINTFORMW それを確認した%CSTR:(3000+L_NPC)%は頃合いとみて、肉棒を秘所に押し当て挿入することを目配せで%CALLNAME%に伝える、理解した%CALLNAME%は小さく震えながらこくりと頷いた。
 	PRINTFORML 
-	PRINTFORML �T�����S�����L�����ւƓ����Ă���ٕ����ƔM�����`���A%CALLNAME%�͎኱�̋C����������������Ɠ����Ɍ��n�I���邢�͖{�\�I�ȁu�x�сv���g�̂�k�킹��B
-	PRINTFORML �����ċT���̑S�Ă�����؂����u�ԃv�`���Ɣj�Z�̉��Ə؂ł��錌���|�^�|�^�ƃV�[�c�������A���܂Ŋ��������Ƃ̂Ȃ��ɂ݂�%CALLNAME%�͗܂������đς��Ă����B
-	PRINTFORML ���΂ɍ������͖̂������낤��%CSTR:(3000+L_NPC)%���ɂ݂������܂ł��̂܂܂̑̐����ێ�����A�C�𕴂�킹�悤�ƂɃL�X�������%CALLNAME%�̕�������ϋɓI�ɉ����Ă����B
-	PRINTFORMW ���ꂩ��\��������Ƃ悤�₭�����������̂�%CALLNAME%���y�Ȏp���ɖ߂�A���������%CSTR:(3000+L_NPC)%�͂������ƃs�X�g���^�����n�߂��c
+	PRINTFORML 亀頭が膣内を広げ奥へと入ってくる異物感と熱さが伝わる、%CALLNAME%は若干の気持ち悪さを感じると同時に原始的あるいは本能的な「悦び」が身体を震わせる。
+	PRINTFORML そして亀頭の全てが入り切った瞬間プチっと破瓜の音と証である血がポタポタとシーツを汚し、今まで感じたことのない痛みに%CALLNAME%は涙を堪えて耐えていた。
+	PRINTFORML 流石に今動くのは無理だろうと%CSTR:(3000+L_NPC)%も痛みが引くまでそのままの体勢を維持する、気を紛らわせようとにキスをすると%CALLNAME%の方からも積極的に応じてきた。
+	PRINTFORMW それから十数分するとようやく落ち着いたのか%CALLNAME%が楽な姿勢に戻る、それを見て%CSTR:(3000+L_NPC)%はゆっくりとピストン運動を始めた…
 	PRINTFORML 
-	PRINTFORML �y�j�X���S�����������邽�тɃJ�������q�_�������������̎h���������Ƃ���%CALLNAME%���������ĂĂ����B
-	PRINTFORML �j�Z�̒ɂ݂Ɗ���Ȃ��h���ɍ��f�C���ł͂��邪�A%CSTR:(3000+L_NPC)%���D���������Ă����̂������Ēɂ݂͂���قǂł��Ȃ����X�ɉ����̕������܂��Ă������B
-	PRINTFORML �����Â����̂ɂȂ��S�����y�j�X�̌`�Ɋ��ꂽ���ɂ͛g�����グ�n�߁A�΂���%CSTR:(3000+L_NPC)%�����̓��������񂾂�ƌ��������Ă����B
-	PRINTFORML ���ꂪ�������Ă̊�тȂ̂��Ɠ��S���삷��%CALLNAME%�ł͂��邪���߂Ă̐��s�ׂȈׂ�������ɂ���邪�܂܂ɂȂ�A�����������s���Ƃ͎v�����J��S�n�悢�Ƃ����������B
-	PRINTFORMW �݂��Ɍ݂������ߍ������Ƃ���Z�b�N�X�ɓ�l�͉��y�̉Q�Ɉ��܂�Ă����A������n�����������ɂ͕�������͈���Ȑ��Ɛg�̂�ł��t�������������������ȂȂ��Ȃ����c
+	PRINTFORML ペニスが膣内から引かれるたびにカリが肉ヒダを引っかけその刺激が快感として%CALLNAME%を興奮さてていく。
+	PRINTFORML 破瓜の痛みと慣れない刺激に困惑気味ではあるが、%CSTR:(3000+L_NPC)%が優しく動いてくれるのもあって痛みはそれほどでもなく徐々に快感の方が強まっていった。
+	PRINTFORML 声も甘いものになり膣内がペニスの形に慣れた頃には嬌声も上げ始め、対する%CSTR:(3000+L_NPC)%も腰の動きをだんだんと激しくしていく。
+	PRINTFORML これが正しい牝の喜びなのだと内心歓喜する%CALLNAME%ではあるが初めての性行為な為ただ相手にされるがままになる、しかしそれを不快とは思えず寧ろ心地よいとさえ感じた。
+	PRINTFORMW 互いに互いを高め合おうとするセックスに二人は快楽の渦に飲まれていき、理性を溶けきった頃には部屋からは淫らな声と身体を打ち付け合う肉音しか響かななくなった…
 	PRINTFORML 
-	PRINTFORML ���s�ׂ��i���ɑ������Ǝv�������A�s�ӂ�%CSTR:(3000+L_NPC)%�̓���������Ɍ������Ȃ�A%CALLNAME%�����W���Ă������_���S���̒��ő傫���Ȃ�n�߂�B
-	PRINTFORML %CALLNAME%�͂��̗l����{�\�I�Ɏː�����̂��ƌ��ǂ�����ׂ����ꎞ�I�ɗ��������߂��A������قǂ�苭�������ƒ��o�����������ɍ���ł��t����l�q�ɍĂѓ��~�̊C�ɒ��ށB
-	PRINTFORML ���Ƃ��ڂ̑O�̑���͎��g�����ɂ������݂ł���A�����Ɂu�Y�v�Ƃ��ĔF�߂��ҁc�Ȃ�D�G�Ȉ�`�q���󂯎�邱�ƂɂȂ�ً̈c�����낤���B
-	PRINTFORML ���S�ɖĂɂȂ�؂���%CALLNAME%�͎ː����O��%CSTR:(3000+L_NPC)%�̍��ɑ����A��ɘr�𗍂߂Ƃ낯�������Ί�Ō}����B
-	PRINTFORMW �u���v�����肽�̂��Ƃ���w��������%CSTR:(3000+L_NPC)%�́A�������Ȃ�قǍ��𓮂����Ă���ł����ƃy�j�X���h�����c
-	PRINTFORML �\�\�\�ǂ���
-	PRINTFORML �u�\�\�`�`�`%UNICODE(0x2661)%�c���v
-	PRINTFORML �����S�����特���Ȃ����̂��ƍ��o����قǂɃy�j�X���甒���t������������A�N�ɂ����߂��Ă��Ȃ��������C�Ȏq�{���������ߏグ���Ă����B
-	PRINTFORML �q�{���͂Ƃ����ɊJ���ꐸ�t�����ׂĈ��ݍ��ނ̂��ƌ����΂�����×~�ɚT����߁A%CALLNAME%�͑ق��M���Ȃ銴�o�ɂ���ȏ�Ȃ��K���������Ⓒ����B
-	PRINTFORML �S�ẴU�[�������f���o���I����܂œ�l�̓s�N�s�N���z�����A���ꂪ�I���Ɨ͐s�����悤�Ƀx�b�h�ɓ|�ꂱ�񂾁B
-	PRINTFORML �������Ă���͂��Ȃ̂ɓ�l�͉��������؂������̂悤�ɏ΂݂�낵�A�ӂƎ��������킵���Ǝv���ƌ݂��ɃL�X�������ߌ��Â������킵���c
+	PRINTFORML 性行為も永遠に続くかと思えた頃、不意に%CSTR:(3000+L_NPC)%の動きがさらに激しくなり、%CALLNAME%を蹂躙していた肉棒も膣内の中で大きくなり始める。
+	PRINTFORML %CALLNAME%はその様から本能的に射精するのだと悟りどうするべきか一時的に理性を取り戻す、だが先ほどより強い快感と中出ししたそうに腰を打ち付ける様子に再び肉欲の海に沈む。
+	PRINTFORML もとより目の前の相手は自身を女にした存在であり、当時に「雄」として認めた者…なら優秀な遺伝子を受け取ることになんの異議があろうか。
+	PRINTFORML 完全に牝になり切った%CALLNAME%は射精寸前の%CSTR:(3000+L_NPC)%の腰に足を、首に腕を絡めとろけきった笑顔で迎える。
+	PRINTFORMW 「許可」が下りたのだとより一層興奮した%CSTR:(3000+L_NPC)%は、水音がなるほど腰を動かしてこれでもかとペニスを刺激し…
+	PRINTFORML ―――どくっ
+	PRINTFORML 「――～～～%UNICODE(0x2661)%…っ」
+	PRINTFORML そう膣内から音がなったのだと錯覚するほどにペニスから白濁液が解き放たれ、誰にも染められていなかった無垢な子宮が白く染め上げられていく。
+	PRINTFORML 子宮口はとっくに開かれ精液をすべて飲み込むのだと言わんばかりに貪欲に啜り収め、%CALLNAME%は胎が熱くなる感覚にこれ以上ない幸福を感じ絶頂する。
+	PRINTFORML 全てのザーメンが吐き出し終えるまで二人はピクピクと痙攣し、それが終わると力尽きたようにベッドに倒れこんだ。
+	PRINTFORML 酷く疲れているはずなのに二人は何かをやり切ったかのように笑みを零し、ふと視線を交わしたと思うと互いにキスをお求め口づけを交わした…
 ELSE
-;�O�V
-	IF RAND:6 == 0 && (TALENT:���� || TALENT:����)
-		PRINTFORML %CALLNAME%�̓x�b�h�ɍ��|����%CSTR:(3000+L_NPC)%�̑O�ŕG��������������%CSTR:(3000+L_NPC)%�̓��_�Ɉ�L�X�𑗂�B
-		PRINTFORML �ڂ̑O�ɂ���y�j�X��L���ȓ��ŋ��ݍ��ނƗp�ӂ��Ă��������[�V������J�Ԃɓh�肽�����ăp�C�Y�����n�߂��B
-		PRINTFORML ��{�p�C�Y���͋C�����悭�Ȃ��Ƃ������A����̓y�j�X�ƃo�X�g�̑傫���ɂ���x�ɂ��Ƃ��낪�傫���A�v����ɗ����Ƃ��傫�������₷���B
-		PRINTFORML %CALLNAME%�̋��͌����܂ł��Ȃ������Ɏ����Ă���A%CSTR:(3000+L_NPC)%�̂܂��C��グ��ɂ͏\���ȑ傫�������B
-		PRINTFORML �㉺�ɓ������x�Ƀ��[�V�������N�`���N�`���ƈ��r�ȉ���炵�A���x���C�葱���������������ȖA�ɂȂ��ĒJ�Ԃ�����Ă���B
-		PRINTFORML ���܂ɗ��T�C�h���牟���t������A���E���΂ɏ㉺���Ă݂���ƕω���t�������Ȃ��爵���Ă����A���̉�����%CSTR:(3000+L_NPC)%�����炸���c�܂����c
+;前遊
+	IF RAND:6 == 0 && (TALENT:巨乳 || TALENT:爆乳)
+		PRINTFORML %CALLNAME%はベッドに腰掛けた%CSTR:(3000+L_NPC)%の前で膝を下し剛直する%CSTR:(3000+L_NPC)%の肉棒に一つキスを送る。
+		PRINTFORML 目の前にあるペニスを豊満な乳で挟み込むと用意しておいたローションを谷間に塗りたくってパイズリを始めた。
+		PRINTFORML 基本パイズリは気持ちよくないというが、それはペニスとバストの大きさによる難度によるところが大きく、要するに両方とも大きい程やりやすい。
+		PRINTFORML %CALLNAME%の胸は言うまでもなくたわわに実っており、%CSTR:(3000+L_NPC)%のまた擦り上げるには十分な大きさを持つ。
+		PRINTFORML 上下に動かす度にローションがクチャクチャと淫靡な音を鳴らし、何度も擦り続けたせいか小さな泡になって谷間から溢れている。
+		PRINTFORML たまに両サイドから押し付けたり、左右反対に上下してみたりと変化を付け加えながら扱いていく、その快感に%CSTR:(3000+L_NPC)%も堪らず顔を歪ませた…
 		PRINTFORML 
-		PRINTFORML ���낻��~�߂�U����%CALLNAME%�͑��x�ƈ��͂��グ�Ă����A�ː��ւƈ�C�ɓ����Ă����B
-		PRINTFORML %CSTR:(3000+L_NPC)%�͒�R���ł������������������ăU�[������f���o�����A�����悭��яo�������t��%CALLNAME%�̖j�ɂ܂ŋy�є��������Ă����B
-		PRINTFORML �]�C���I���܂ł̂������A�J�ԂŃC�b���΂���̓��_���C���炵�������o���Ȃ���M��ł����c
-	ELSEIF !RAND:5 && (TALENT:���� || TALENT:����)
-		PRINTFORML �x�b�h�̏�ŋ����ɂȂ���%CALLNAME%��%CSTR:(3000+L_NPC)%���������Ԃ���ƁA�M���M���ɖu�N�����y�j�X��傫���������o���̒J�Ԃɋ��ݍ��񂾁B
-		PRINTFORML ���ɓ��_�ɂ̓��[�V�������h���Ă������߂��A%CSTR:(3000+L_NPC)%�����𓮂����x�Ƀj�����j�����ƈ��r�Ȑ�����J�Ԃ���炷�B
-		PRINTFORML ������%CSTR:(3000+L_NPC)%�̎�ŗ}�����܂ꂽ�L���̊Ԃ���͒J�Ԃ����W����T���������B��𑱂��A�ː��֎��낤�Ƃ��̔M�����܂点�Ă���B
-		PRINTFORML ���̗l���ԋ߂Ō������Ă���%CALLNAME%�́A�ː����𑣐i����悤�ɏo�Ă����T�����Ŏh�����n�߂��c
+		PRINTFORML そろそろ止めを誘うと%CALLNAME%は速度と圧力を上げていき、射精へと一気に導いていく。
+		PRINTFORML %CSTR:(3000+L_NPC)%は抵抗もできず小さく声をだしてザーメンを吐き出した、勢いよく飛び出した精液は%CALLNAME%の頬にまで及び白く汚していく。
+		PRINTFORML 余韻が終わるまでのあいだ、谷間でイッたばかりの肉棒をイヤらしい音を出しながら弄んでいた…
+	ELSEIF !RAND:5 && (TALENT:巨乳 || TALENT:爆乳)
+		PRINTFORML ベッドの上で仰向けになった%CALLNAME%に%CSTR:(3000+L_NPC)%が覆いかぶさると、ギンギンに勃起したペニスを大きく実った双乳の谷間に挟み込んだ。
+		PRINTFORML 既に肉棒にはローションが塗られていたためか、%CSTR:(3000+L_NPC)%が腰を動かす度にニュルニュルと淫靡な水音を谷間から鳴らす。
+		PRINTFORML そして%CSTR:(3000+L_NPC)%の手で抑え込まれた豊乳の間からは谷間を蹂躙する亀頭が見え隠れを続け、射精へ至ろうとその熱を高まらせている。
+		PRINTFORML その様を間近で見続けていた%CALLNAME%は、射精感を促進するように出てきた亀頭を舌で刺激し始めた…
 		PRINTFORML 
-		PRINTFORML �b������ƌ��E�������̂�%CSTR:(3000+L_NPC)%�͍��̓����𑬂߂Ďː����悤�Ƒ����r������A�΂���%CALLNAME%�͂�����󂯓����悤�Ɍ����J����B
-		PRINTFORML ����ɉ�������悤�ɓ��_���琨���悭���t���f���o�����A��яo�������t�͊J�������Ɏ��܂肫�炸%CALLNAME%�̊�𔒂����ߏグ�Ă����B
-		PRINTFORML �u���u���Ə������k���ĉ��y�ɐg�ɐZ��%CSTR:(3000+L_NPC)%��%CALLNAME%�͎b���������悤�ɒ��߂Ă����c
+		PRINTFORML 暫くすると限界が来たのか%CSTR:(3000+L_NPC)%は腰の動きを速めて射精しようと息を荒くする、対する%CALLNAME%はそれを受け入れるように口を開ける。
+		PRINTFORML それに応答するように肉棒から勢いよく精液が吐き出される、飛び出た白濁液は開いた口に収まりきらず%CALLNAME%の顔を白く染め上げていく。
+		PRINTFORML ブルブルと小さく震えて快楽に身に浸る%CSTR:(3000+L_NPC)%を%CALLNAME%は暫く惚けたように眺めていた…
 	ELSEIF !RAND:4
-		PRINTFORML %CALLNAME%�͌���������S�̃y�j�X��j����A���𗧂ĂȂ��悤�Ɍ��S�̂ŗD������d���Ă����B
-		PRINTFORML ���߂͒x���������Ƃ�������������������ɂ��̑��x�𑬂߁A���΂Ȑ�����傫���炵�Ď���㉺����B
-		PRINTFORML ��ڌ����ł���Ă�̂������Ă��A%CSTR:(3000+L_NPC)%�̎ː����͐��܂������x�ŏオ���Ă������c
+		PRINTFORML %CALLNAME%は交尾準備万全のペニスを頬張り、歯を立てないように口全体で優しく奉仕していく。
+		PRINTFORML 初めは遅くゆっくりとした動きだったが次第にその速度を速め、卑猥な水音を大きく鳴らして首を上下する。
+		PRINTFORML 上目遣いでされてるのもあってか、%CSTR:(3000+L_NPC)%の射精感は凄まじい速度で上がっていった…
 		PRINTFORML 
-		PRINTFORML �b����d���Ă������������\�z����%CSTR:(3000+L_NPC)%�̌��E�������A��d�Œ��̌����ɃU�[�������Ԃ��܂����B
-		PRINTFORML �ˑR�̎ː��ɋ���%CALLNAME%�����A�y�j�X�𗣂��Ȃ��悤��������ƙ����������܂�鐸�t��S�Ď󂯎~�߂�B
-		PRINTFORML �ː����I���Ɠ��_�����������A%CSTR:(3000+L_NPC)%�ɐ��t�ŋl�܂���������傫�������J���Č������B
-		PRINTFORML �����ĉ��x���𚐂���Ɖ���炵�Ĉ��ݍ��݁A�Ăь����J���Ĉ��ݐ؂������Ƃ��A�s�[�������c
+		PRINTFORML 暫く奉仕していたかったが予想よりも%CSTR:(3000+L_NPC)%の限界が早く、奉仕最中の口内にザーメンをぶちまけた。
+		PRINTFORML 突然の射精に驚く%CALLNAME%だが、ペニスを離さないようしっかりと咥え流し込まれる精液を全て受け止める。
+		PRINTFORML 射精が終わると肉棒を引き抜き、%CSTR:(3000+L_NPC)%に精液で詰まった口内を大きく口を開けて見せた。
+		PRINTFORML そして何度か咀嚼すると音を鳴らして飲み込み、再び口を開けて飲み切ったことをアピールした…
 	ELSEIF !RAND:3
-		PRINTFORML ��l�ŃV�����[�𗁂тȂ���g�̂𒚔J�Ɉ������n�߂�A���ɂ���ăk���k���Ƃ������G����l�̋��������߂Ă����B
-		PRINTFORML %CALLNAME%�͋C����������̂�%CSTR:(3000+L_NPC)%��ǂɊ�肩���点��ƁA���S�ɖu�N�����y�j�X�����ə������B
-		PRINTFORML �t�F�������Ƃ͎v��Ȃ������̂�%CSTR:(3000+L_NPC)%�͏��X���f���Ă������A���킩�痬��Ă�������ɍR���������󂯓���邵���Ȃ������B
-		PRINTFORML ���_��߂炦������O�シ��x�A���C��ƃV�����[�ɂ���Ĉ��C���̉t�̂�����Ȑ����𕔉����ɋ������Ă����B
-		PRINTFORML %CALLNAME%���ǂɎ��t���Ă��̃X�g���[�N���グ�Ă����A�����Ȃ��悤�Ƀy�j�X���ŗ��߂ĕ�d�𑱂��Ă������c
+		PRINTFORML 二人でシャワーを浴びながら身体を丁寧に愛撫を始める、水によってヌルヌルとした感触が二人の興奮を高めていく。
+		PRINTFORML %CALLNAME%は気分が乗ったのか%CSTR:(3000+L_NPC)%を壁に寄りかからせると、完全に勃起したペニスを口に咥えた。
+		PRINTFORML フェラされるとは思わなかったのか%CSTR:(3000+L_NPC)%は少々困惑していたが、性器から流れてくる快感に抗えずただ受け入れるしかなかった。
+		PRINTFORML 肉棒を捕らえた口を前後する度、風呂場とシャワーによって溢れ気味の液体が淫らな水音を部屋中に響かせていく。
+		PRINTFORML %CALLNAME%も壁に手を付いてそのストロークを上げていき、離さないようにペニスを舌で絡めて奉仕を続けていった…
 		PRINTFORML 
-		PRINTFORML �\����������ɑς��؂�Ȃ��Ȃ����̂��A�ˑR%CSTR:(3000+L_NPC)%��%CALLNAME%�̓���͂�Ŏ���I�i�z�̂悤�ɓ������n�߂�B
-		PRINTFORML %CALLNAME%�͂���ɒ�R����Ȃ��󂯓����ǂ��납�A���̓����ɍ����悤�Ɍ����̈��͂𑀍삵�Ă����B
-		PRINTFORML �����Ďː����}�������_��������ꂽ���t��%CALLNAME%�̍A�𐨂��悭�ʂ��Ă����A%CALLNAME%�͂�����S�Ĉ��݊������c
+		PRINTFORML 十数分後快感に耐え切れなくなったのか、突然%CSTR:(3000+L_NPC)%が%CALLNAME%の頭を掴んで首をオナホのように動かし始める。
+		PRINTFORML %CALLNAME%はそれに抵抗するなく受け入れるどころか、その動きに合うように口内の圧力を操作していく。
+		PRINTFORML そして射精を迎えた肉棒から放たれた精液は%CALLNAME%の喉を勢いよく通っていき、%CALLNAME%はそれらを全て飲み乾した…
 	ELSEIF !RAND:2
-		PRINTFORML %CALLNAME%��%CSTR:(3000+L_NPC)%�̈ߕ�����炵������ŒE�����Ă����A���̎d���ɔ������ăX�{���̏ォ��킩��قǃy�j�X���u�N���n�߂��B
-		PRINTFORML ����ɋC�Â��Ɣ��𔇂��悤�ȓ����Ŏ���ҊԂ܂Ŏ����Ă����A�`���b�N�����낵�ăy�j�X��I�o�������B
-		PRINTFORML �Ȃ��Ȃ��̖���ł�����Ƃɖ��x���Ȃ���w�𗍂߁A�܂��͂������Ƃ������x�Ŏ�����J�n�����B
-		PRINTFORML ���ł�%CSTR:(3000+L_NPC)%�̓�����؂��r�߁A�w���I�݂ɑ����ĔM���Ȃ��Ă����y�j�X������������B
-		PRINTFORML �����Ŕ��΂ȑ䎌���󂯂Ȃ��珙�X�ɑ����Ȃ��Ă�����̓����ɁA%CSTR:(3000+L_NPC)%�̐Ⓒ�͂ǂ�ǂ񑁂܂��Ă������c
+		PRINTFORML %CALLNAME%は%CSTR:(3000+L_NPC)%の衣服をやらしい手つきで脱がしていく、その仕草に反応してスボンの上からわかるほどペニスが勃起を始めた。
+		PRINTFORML それに気づくと肌を這うような動きで手を股間まで持っていき、チャックを下ろしてペニスを露出させた。
+		PRINTFORML なかなかの名器である肉竿に満悦しながら指を絡め、まずはゆっくりとした速度で手淫を開始した。
+		PRINTFORML 口では%CSTR:(3000+L_NPC)%の乳首や首筋を舐め、指を巧みに操って熱くなっていくペニスを扱き続ける。
+		PRINTFORML 耳元で卑猥な台詞を受けながら徐々に早くなっていく手の動きに、%CSTR:(3000+L_NPC)%の絶頂はどんどん早まっていった…
 		PRINTFORML 
-		PRINTFORML ���g�ł���������������̂�%CSTR:(3000+L_NPC)%�͏����Ȃ��߂����������Ă������Ȃ��ː�����B
-		PRINTFORML �����ꂽ�����t����Ŏ󂯎~�߂�Ƃ���������܂ŉ^�сA�T��悤�ɐ��t�����ݍ���ł������B
-		PRINTFORML ���̗l�q�ɂ���ɋ��������̂��A%CSTR:(3000+L_NPC)%�̃y�j�X�͈ނ���ǂ��납����悤�ɍ����������Ă����c
+		PRINTFORML 自身でするより快感が強いのか%CSTR:(3000+L_NPC)%は小さなうめき声をあげてあっけなく射精する。
+		PRINTFORML 放たれた白濁液を手で受け止めるとそれを口元まで運び、啜るように精液を飲み込んでいった。
+		PRINTFORML その様子にさらに興奮したのか、%CSTR:(3000+L_NPC)%のペニスは萎えるどころか滾るように剛直し続けていた…
 	ELSE
-		PRINTFORML �݂��ɗ�������Ԃ�%CALLNAME%��%CSTR:(3000+L_NPC)%�̓��_���҂ŋ��ݍ��ނƎ��g�̐g�̂�O��ɗh�炵�n�߂��B
-		PRINTFORML ���C�ł��C�����ǂ��̂�%CALLNAME%�̔鏊����͈��t���R��n�߁A���ꂪ�������Ƃ��Ă��̓������~���ɂ��Ă����B
-		PRINTFORML %CSTR:(3000+L_NPC)%���T�����҂ɎC��邱�ƂŐS�n�悢�����������A�ː��Ɏ��낤�Ǝ���Ɏ��獘�𓮂����Ă������c
+		PRINTFORML 互いに立った状態で%CALLNAME%は%CSTR:(3000+L_NPC)%の肉棒を股で挟み込むと自身の身体を前後に揺らし始めた。
+		PRINTFORML 摩擦でも気持ち良いのか%CALLNAME%の秘所からは愛液が漏れ始め、それが潤滑油としてその動きを円滑にしていく。
+		PRINTFORML %CSTR:(3000+L_NPC)%も亀頭が股に擦れることで心地よい快感が得られ、射精に至ろうと次第に自ら腰を動かしていった…
 		PRINTFORML 
-		PRINTFORML %CSTR:(3000+L_NPC)%���ː����}�������ɂȂ��%CALLNAME%�̓X�g���[�N�𑬂߂Ă����A��葁���Ⓒ�ւ������悤�Ƒ��i����B
-		PRINTFORML �����ĕ����ꂽ�U�[�������҂Ŏ󂯎~�ߎː����I���܂ł̊ԁA�T������������҂̊Ԃŕ߂炦�����Ă����B
-		PRINTFORML �ː������܂�Ɠ��_���҂��痣�����A�܂�Œ��o���ň�ꂽ�悤�ɑ�ʂ̐��t���鏊�⑾�����𔒂����ߏグ�Ă����c
+		PRINTFORML %CSTR:(3000+L_NPC)%が射精を迎えそうになると%CALLNAME%はストロークを速めていき、より早く絶頂へいかせようと促進する。
+		PRINTFORML そして放たれたザーメンを股で受け止め射精が終わるまでの間、亀頭をしっかり股の間で捕らえ続けていた。
+		PRINTFORML 射精が治まると肉棒を股から離すが、まるで中出しで溢れたように大量の精液が秘所や太ももを白く染め上げていた…
 	ENDIF
 	PRINTFORMW 
-;�{��
+;本番
 	IF RAND:6 == 0 
-		PRINTFORML %CSTR:(3000+L_NPC)%�̓x�b�h�ɐg���ς˂�%CALLNAME%�ɕ������Ԃ���ƁA�u�N�������_���S���ւƑ}�����Ă������B
-		PRINTFORML �܂��̓y�j�X��%CALLNAME%�̓��ǂɍ����悤�ɓ����𒲐����Ă����A%CALLNAME%�̎d����b�����ł��̊��x���m���߂Ă����B
-		PRINTFORML ����Ǝア�����тɓ��������̂���ۑ傫�Ȑ��śg�����グ��%CALLNAME%������ƁA���̎��̓������x�[�X�Ƀs�X�g���𑬂߂��B
-		PRINTFORML ���_���������тɃJ�����q�_���������肻�ꂪ�����ƂȂ���%CALLNAME%���P���A�]�T���Ȃ��Ȃ���%CALLNAME%�͉��Ƃ��ς��悤�Ɩ������肵�߂�B
-		PRINTFORML �S����%CSTR:(3000+L_NPC)%�̃��m�ɍ����悤��忂����A���g��Ƃ��y�j�X�����苭�������𓾂悤���S�ǂ��i�߂Ă������c
+		PRINTFORML %CSTR:(3000+L_NPC)%はベッドに身を委ねた%CALLNAME%に覆いかぶさると、勃起した肉棒を膣内へと挿入していった。
+		PRINTFORML まずはペニスが%CALLNAME%の肉壁に合うように動きを調整していき、%CALLNAME%の仕草や喘ぎ声でその感度を確かめていく。
+		PRINTFORML すると弱い性感帯に当たったのか一際大きな声で嬌声を上げる%CALLNAME%を見ると、その時の動きをベースにピストンを速めた。
+		PRINTFORML 肉棒を引くたびにカリがヒダ引っかかりそれが快感となって%CALLNAME%を襲い、余裕がなくなった%CALLNAME%は何とか耐えようと枕を握りしめる。
+		PRINTFORML 膣内も%CSTR:(3000+L_NPC)%のモノに合うように蠢かせ、自身を犯すペニスからより強い快感を得ようと膣壁を絞めていった…
 	ELSEIF !RAND:4
-		PRINTFORML ��w�ʂ̑̐��Ńy�j�X���������ނƁA���x�������݂ɓ������̂������X�g���[�N�ō���ł����ݎn�߂�B
-		PRINTFORML �S�ǂ̐悩�牜�܂ŋT�����S�̂��C����A���̋���������y��%CALLNAME%�͔w�𔽂炵�Ěb�������グ���B
-		PRINTFORML �̐�����Y�Ɍ���ׂ̈ɗ}�����܂�Ă���Ƃ������͋C�������Ă��A%CALLNAME%�͛s�ނ��Ƃ��o�債�����̂悤�ɋ������؂����l�q�ŔƂ���邱�Ƃ��󂯓���Ă���B
-		PRINTFORML �����ėD�G�Ȉ�`�q�͂܂����Ɛk����q�{�ɔ������邩�̂悤�ɁA�S�ǂ͖Z���Ȃ�忂��A�y�j�X���h�����Ďː��ւƓ����Ă����B
-		PRINTFORML �����������%CSTR:(3000+L_NPC)%�͈�C�̗Y�ƂƂ��ĔF�߂��Ă���ƗD�z���ɐZ��Ȃ���A���ꂽ���Ɏ�t������ׂ��s�X�g���̓����𑬂߂Ă������c
+		PRINTFORML 後背位の体勢でペニスを差し込むと、何度か小刻みに動いたのち長いストロークで腰を打ち込み始める。
+		PRINTFORML 膣壁の先から奥まで亀頭が全体を擦りつけ、その強すぎる快楽に%CALLNAME%は背を反らして喘ぎ声を上げた。
+		PRINTFORML 体勢から雄に交尾の為に抑え込まれているという雰囲気もあってか、%CALLNAME%は孕むことを覚悟した雌のように屈服し切った様子で犯されることを受け入れている。
+		PRINTFORML そして優秀な遺伝子はまだかと震える子宮に反応するかのように、膣壁は忙しなく蠢き、ペニスを刺激して射精へと導いていく。
+		PRINTFORML それらを悟った%CSTR:(3000+L_NPC)%は一匹の雄ととして認められていると優越感に浸りながら、惚れた女に種付けするべくピストンの動きを速めていった…
 	ELSEIF !RAND:3
-		PRINTFORML %CALLNAME%��%CSTR:(3000+L_NPC)%�Ɍׂ肻���藧���_���A���t�ň��Ă����S���Ƀk�����ƐH�����܂��Ă����B
-		PRINTFORML �������낷�Ɠ�̐���͍����܂ŏd�Ȃ荇���A����Ɍ`���t�B�b�g����悤�ɃN�`���N�`���ƃO���C���h���s���B
-		PRINTFORML �b�������S�������悭����A�q�_�Ɉ���������T���̑��݊��Ɗm���Ɋ�������%CALLNAME%�͔��΂�낵�Ȃ��獘���㉺�ɓ������n�߂��B
-		PRINTFORML �����グ��x���S�ǂ�Ƃ��y�j�X���^���Ă�����y�ɛg���𔭂��A�����Ǝh���𓾂悤��%CALLNAME%�̃s�X�g�������X�ɑ����Ȃ��Ă����B
-		PRINTFORML %CSTR:(3000+L_NPC)%���������Ɖ����獘��ł��グ�A��̕s�K���Ȍ���肪����w���������ƂȂ��ē�l��Ⓒ�ւƍ��ߏグ�Ă������c
+		PRINTFORML %CALLNAME%は%CSTR:(3000+L_NPC)%に跨りそそり立つ肉棒を、愛液で溢れている膣内にヌルリと食い込ませていく。
+		PRINTFORML 腰を下ろすと二つの性器は根元まで重なり合い、さらに形がフィットするようにクチュクチュとグラインドを行う。
+		PRINTFORML 暫くして膣内が程よく解れ、ヒダに引っかかる亀頭の存在感と確かに感じ取ると%CALLNAME%は微笑を零しながら腰を上下に動かし始めた。
+		PRINTFORML 腰を上げる度に膣壁を犯すペニスが与えてくる快楽に嬌声を発し、もっと刺激を得ようと%CALLNAME%のピストンも徐々に早くなっていく。
+		PRINTFORML %CSTR:(3000+L_NPC)%も負けじと下から腰を打ち上げ、二つの不規則な交わりがより一層強い快感となって二人を絶頂へと高め上げていった…
 	ELSEIF !RAND:2
-		PRINTFORML �����͂��݂��C��������Ă���̂��A�M�����������킵�Ȃ����̐�����d�ˈ�ɂȂ��Ă����B
-		PRINTFORML ���Ɉ��t�ŔG��؂����S����%CSTR:(3000+L_NPC)%�̓��_������Ȃ�Ǝ󂯓���A���x�����킹�邱�ƂȂ������s�X�g�����n�߂��B
-		PRINTFORML %CALLNAME%�͗^����������ɚb������R�炵�A%CSTR:(3000+L_NPC)%�̎�ɗ��r���񂵂Ă���炵��������������������B
-		PRINTFORML ����ɓ�����悤��%CSTR:(3000+L_NPC)%�͑ł��t���鑬�x���グ�A�_�炩�����̂������������悤�ȓ����𕔉����ɋ�������B
-		PRINTFORML ���̋���ȉ��y��%CALLNAME%�̗������S���S���ƍ���Ă����A���̎p�͛s�ނ��߂Ɍ���ɒ^�鎓���̂��̂������c
+		PRINTFORML 今日はお互い気分が乗っているのか、熱い視線を交わしながら二つの性器を重ね一つになっていく。
+		PRINTFORML 既に愛液で濡れ切った膣内は%CSTR:(3000+L_NPC)%の肉棒をすんなりと受け入れ、感度を合わせることなく強いピストンを始めた。
+		PRINTFORML %CALLNAME%は与えられる快感に喘ぎ声を漏らしつつ、%CSTR:(3000+L_NPC)%の首に両腕を回していやらしく激しい交わりを強請る。
+		PRINTFORML それに答えるように%CSTR:(3000+L_NPC)%は打ち付ける速度を上げ、柔らかいものをたたき合うような肉音を部屋中に響かせる。
+		PRINTFORML その強烈な快楽は%CALLNAME%の理性をゴリゴリと削っていき、その姿は孕むために交尾に耽る雌そのものだった…
 	ELSE
-		PRINTFORML ��������d��������%CALLNAME%���R��ʂ̑̐��Ő����}�����g�̂𓮂����n�߂�B
-		PRINTFORML ��d�D��Ȃ̂����̓����͏��߂��猃�����A���𓮂����x��%CALLNAME%�͂��̐g��傫���e�܂���B
-		PRINTFORML �S�������t���ʂɕ��傳���A�ڍ������炻��𐅉���炵�Ȃ���܂��U�炷�B
-		IF TALENT:���� || TALENT:����
-			PRINTFORML %CSTR:(3000+L_NPC)%����̎��_�ł͂����Ɏ��������[���}�V���}���̂悤�ɗh�炵�Ă���A���̗l�Ɋ��\��}�����ꂸ�h�͂�ł��܂��B
-			PRINTFORML �����%CALLNAME%�͉����b�����󂯓���A�j�̎�ɂ���Ĕ��΂Ɍ`��ς����Ă��������ɐg��k�킹���c
+		PRINTFORML 自分が奉仕したいと%CALLNAME%が騎乗位の体勢で性器を挿入し身体を動かし始める。
+		PRINTFORML 奉仕優先なのかその動きは初めから激しく、腰を動かす度に%CALLNAME%はその身を大きく弾ませる。
+		PRINTFORML 膣内も愛液を大量に分泌させ、接合部からそれを水音を鳴らしながらまき散らす。
+		IF TALENT:巨乳 || TALENT:爆乳
+			PRINTFORML %CSTR:(3000+L_NPC)%からの視点ではたわわに実った乳房がマシュマロのように揺らしており、その様に官能を抑えきれず鷲掴んでしまう。
+			PRINTFORML それに%CALLNAME%は可愛く喘ぎつつも受け入れ、男の手によって卑猥に形を変えられていく快感に身を震わせた…
 		ELSE
-			PRINTFORML ����̏�Ŕ������Ȃ̓��_�Śb���������J��Ԃ����܂͊��\���܂����A����ɉx�΂��悤��%CSTR:(3000+L_NPC)%�͍��𓮂����B
-			PRINTFORML �\�z�O�̍s����%CALLNAME%�͈�i�Ƒ傫�țg�����グ�A���̂܂ܑł��t���鋭�������������Ă������c
+			PRINTFORML 自らの上で美女が己の肉棒で喘ぎ淫舞を繰り返すさまは官能凄まじく、さらに悦ばせようと%CSTR:(3000+L_NPC)%は腰を動かす。
+			PRINTFORML 予想外の行動に%CALLNAME%は一段と大きな嬌声を上げ、そのまま打ち付ける強さを激しくしていった…
 		ENDIF
 	ENDIF
 	PRINTFORMW 
-;�ː�
+;射精
 	IF RAND:3 == 0 
-		PRINTFORML ������x�������Ă���ƓˑR%CSTR:(3000+L_NPC)%��%CALLNAME%�̐g�̂�}�����݂Ȃ���������w�������������Ă����B
-		PRINTFORML ���̍s������ː����߂��̂��Ǝ@����%CALLNAME%�͖��ӎ��ɔނ𓦂����Ȃ��悤����̍��ɑ��𗍂߂��B
-		PRINTFORML ���o�������o���̂���%CSTR:(3000+L_NPC)%�͌��_�t����ƁA����Ƀs�X�g���𑬂߂Ďː��ւƎ��낤�Ƃ���B
-		PRINTFORML %CALLNAME%���g����̍s���ɏ��X���f�C���ł��邪�A���̂�����Ɍ�����������ǂ��납���҂݂̂��S���ɂ������B
-		PRINTFORML �����l���Ă������%CSTR:(3000+L_NPC)%�͐Ⓒ�ɒB���A����s�܂����Ƃ����l���ĂȂ����q������%CALLNAME%�̎q�{�ɒ@�����񂾁B
-		PRINTFORML �Ȃ̂����Ƃ��_���ȗ̈��Y�̗~�]�Ő��ߏグ��Ă���Ƃ����̂ɁA�N���オ���Ă��銴��͊���Ɨ~�]�������B
-		PRINTFORML �g�̂��Y�𓦂����܂��Ɨ��藼���ŕߔ����A�Ō�̈�H���q�{�Ɏ��܂�܂Ō݂��ɒ��o���̗]�C�ɐZ���Ă����c
+		PRINTFORML ある程度性交していると突然%CSTR:(3000+L_NPC)%は%CALLNAME%の身体を抑え込みながら先程より一層腰を激しくしていく。
+		PRINTFORML その行動から射精が近いのだと察した%CALLNAME%は無意識に彼を逃がさないよう相手の腰に足を絡めた。
+		PRINTFORML 中出し許可が出たのだと%CSTR:(3000+L_NPC)%は結論付けると、さらにピストンを速めて射精へと至ろうとする。
+		PRINTFORML %CALLNAME%自身自らの行動に少々困惑気味であるが、何故かそれに嫌悪感を抱くどころか期待のみが心中にあった。
+		PRINTFORML そう考えている内に%CSTR:(3000+L_NPC)%は絶頂に達し、女を孕ますことしか考えてない精子たちを%CALLNAME%の子宮に叩きこんだ。
+		PRINTFORML 己のもっとも神聖な領域を雄の欲望で染め上げらているというのに、湧き上がってくる感情は歓喜と欲望だった。
+		PRINTFORML 身体も雄を逃がさまいと両手両足で捕縛し、最後の一滴が子宮に収まるまで互いに中出しの余韻に浸っていた…
 	ELSEIF !RAND:2
-		PRINTFORML ���X�Ɍ�납��ł��t���Ă��鋭�����オ���Ă���Ɗ�����%CALLNAME%�́A�ː�����̂��낤�Ǝ@����B
-		PRINTFORML ��������铮���̂悤�Ɍ�w�ʂ̌`�̂��A��̕ۑ��Ƃ������n�I�ȗ~�]�����܂��Ă������o�ɂȂ�B
-		PRINTFORML �{���Ȃ�O�o���𐄑E������ׂ��Ȃ̂����A���̂����t�����ɏo�������ː��܂ł̎��Ԃ��߂��Ă����B
-		PRINTFORML �����Č�납�畢�����Ԃ���悤�ɂ�����S���ː��̑̐��ɓ������Ƃ���ŁA�Ȃ����Ƃ��ěs�݂����̂��Ǝ��o����B
-		PRINTFORML �����ɓf���o���ꂽ�����t�͑ł����ݕ������������̂��q�{�ł͂Ȃ��S���łƂǂ܂�A%CALLNAME%�͋����s�����������B
-		PRINTFORML %CSTR:(3000+L_NPC)%�����l�������悤�ŁA�ǉ��̃s�X�g�����S���̐��t�𖳗���q�{�ɉ�������ł����B
-		PRINTFORML �q�{�ɏ��������܂��Ă�����`�q�̌Q���M�Ŋ������A%CALLNAME%�̕\��͏΂݂ւƕς���Ă������c
+		PRINTFORML 徐々に後ろから打ち付けてくる強さが上がっていると感じた%CALLNAME%は、射精するのだろうと察する。
+		PRINTFORML 交尾をする動物のように後背位の形故か、種の保存という原始的な欲望が高まっていく感覚になる。
+		PRINTFORML 本来なら外出しを推薦させるべきなのだが、何故か言葉が口に出ずただ射精までの時間が過ぎていく。
+		PRINTFORML そして後ろから覆いかぶさるようにされて膣内射精の体勢に入ったところで、己が雌として孕みたいのだと自覚する。
+		PRINTFORML 同時に吐き出された白濁液は打ち込み方が悪かったのか子宮ではなく膣内でとどまり、%CALLNAME%は強い不満を感じた。
+		PRINTFORML %CSTR:(3000+L_NPC)%も同様だったようで、追加のピストンで膣内の精液を無理矢理子宮に押し込んでいく。
+		PRINTFORML 子宮に少しずつ溜まっていく遺伝子の群れを熱で感じ取り、%CALLNAME%の表情は笑みへと変わっていった…
 	ELSE
-		PRINTFORML %CSTR:(3000+L_NPC)%�̏�ō���U�葱���Ă���%CALLNAME%���������A%CSTR:(3000+L_NPC)%�������䖝���Ă���悤�ɐU�邦�Ă���B
-		PRINTFORML �ǂ������E���߂��悤�ŁA���̂܂܃s�X�g���𑱂��Ă���ƒ��o������Ă��܂����낤�B
-		PRINTFORML �������ς��Ă���l�������炵���������̂��A%CALLNAME%�̓O���C���h�������Ĕނ��ː������悤�Ǝ��ݎn�߂��B
-		PRINTFORML �D�P�̃��X�N�������Ƃ����̂�%CALLNAME%�͂���𖳈ӎ��ɖ]��ł���悤�ŁA�܂����܂����Ɛg�̂�e�܂�������B
-		PRINTFORML �����đς��؂�Ȃ��Ȃ���%CSTR:(3000+L_NPC)%�̓U�[�����𐨂��悭���������A�S���𔒂��Ƃ��Ă������B
-		PRINTFORML �R��ʂ̑̐��ł���яo�����q�����͉��Ƃ��q�{�ɐ��肱�����Ǝq�{���ɑ̓�������s���A�ꕔ�̂��̂����Ԃ�ʂ蔲���ė��q��T���n�߂�B
-		PRINTFORML ���Ɋ��������%CALLNAME%�́A�ĂɂȂ�؂��Ă���%CALLNAME%�͐��q�����̐킢���n�܂��������𖀂��ė��Ƃ̉���F���Ă����c
+		PRINTFORML %CSTR:(3000+L_NPC)%の上で腰を振り続けていた%CALLNAME%だったか、%CSTR:(3000+L_NPC)%が何か我慢しているように振るえている。
+		PRINTFORML どうやら限界が近いようで、このままピストンを続けていると中出しされてしまうだろう。
+		PRINTFORML しかし耐えている様がいじらしく感じたのか、%CALLNAME%はグラインドも加えて彼を射精させようと試み始めた。
+		PRINTFORML 妊娠のリスクが伴うというのに%CALLNAME%はそれを無意識に望んでいるようで、まだかまだかと身体を弾ませ続ける。
+		PRINTFORML そして耐え切れなくなった%CSTR:(3000+L_NPC)%はザーメンを勢いよく解き放ち、膣内を白く犯していった。
+		PRINTFORML 騎乗位の体勢でも飛び出た精子たちは何とか子宮に潜りこもうと子宮口に体当たりを行い、一部のものが隙間を通り抜けて卵子を探し始める。
+		PRINTFORML 直に感じ取った%CALLNAME%は、牝になり切っていた%CALLNAME%は精子たちの戦いが始まったお腹を摩って卵との会合を祈っていた…
 	ENDIF
 ENDIF
 
 
 CFLAG:(3060+L_NPC) += 1
-SIF CSTR:�����������薼 == ""
-	CSTR:�����������薼 = %CSTR:(3000+L_NPC)%
-SIF CSTR:���L�X���薼 == ""
-	CSTR:���L�X���薼 = %CSTR:(3000+L_NPC)%
-SIF CSTR:���������薼 ==""
-	CSTR:���������薼 = %CSTR:(3000+L_NPC)%
-SIF CSTR:���t�F�����薼 ==""
-	CSTR:���t�F�����薼 = %CSTR:(3000+L_NPC)%
-SIF CSTR:���`���������薼 ==""
-	CSTR:���`���������薼 = %CSTR:(3000+L_NPC)%
-SIF CSTR:���Ⓒ���薼 ==""
-	CSTR:���Ⓒ���薼 = %CSTR:(3000+L_NPC)%
-SIF CSTR:�����o�����薼 ==""
-	CSTR:�����o�����薼 = %CSTR:(3000+L_NPC)%
-IF !TALENT:�񏈏�
-	SETCOLOR COLOR("�s���N")
-	PRINTL �����r��
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = %CSTR:(3000+L_NPC)%
+SIF CSTR:初キス相手名 == ""
+	CSTR:初キス相手名 = %CSTR:(3000+L_NPC)%
+SIF CSTR:初精飲相手名 ==""
+	CSTR:初精飲相手名 = %CSTR:(3000+L_NPC)%
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = %CSTR:(3000+L_NPC)%
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = %CSTR:(3000+L_NPC)%
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = %CSTR:(3000+L_NPC)%
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = %CSTR:(3000+L_NPC)%
+IF !TALENT:非処女
+	SETCOLOR COLOR("ピンク")
+	PRINTL 処女喪失
 	RESETCOLOR
-	TALENT:�񏈏� = 1
-	TCVAR:����_EXP_�����r�� = 1
+	TALENT:非処女 = 1
+	TCVAR:履歴_EXP_処女喪失 = 1
 ENDIF
 
 
@@ -543,7 +543,7 @@ CALL JN_SEX_EXP
 
 
 ;-------------------------------------------------
-; �C��
+; 修正
 ;-------------------------------------------------
 @TURN_EVENT_COM_Re
 #DIM L_NPC

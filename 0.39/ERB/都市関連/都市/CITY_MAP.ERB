@@ -1,78 +1,78 @@
-
+ï»¿
 ;-------------------------------------------------
-; “sŽsŠÖ˜A
+; éƒ½å¸‚é–¢é€£
 ;-------------------------------------------------
 
 @CITY_MAP
 
 
-PRINTFORM y“V‹C:
-IF Flag:“sŽs_“V‹C == 0
-	PRINTFORM °‚ê
-ELSEIF Flag:“sŽs_“V‹C == 1
-	PRINTFORM “Ü‚è
-ELSEIF Flag:“sŽs_“V‹C == 2
-	PRINTFORM ‰J
-ELSEIF Flag:“sŽs_“V‹C == 3
-	PRINTFORM ‘å‰J
-ELSEIF Flag:“sŽs_“V‹C == 4
-	PRINTFORM á
+PRINTFORM ã€å¤©æ°—:
+IF Flag:éƒ½å¸‚_å¤©æ°— == 0
+	PRINTFORM æ™´ã‚Œ
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 1
+	PRINTFORM æ›‡ã‚Š
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 2
+	PRINTFORM é›¨
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 3
+	PRINTFORM å¤§é›¨
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 4
+	PRINTFORM é›ª
 ENDIF
 
-PRINTFORM z
+PRINTFORM ã€‘
 
 
-IF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_–h‰q != 0
+IF Flag:éƒ½å¸‚_Lv >= 5 &&  Flag:éƒ½å¸‚_é˜²è¡› != 0
 	SETCOLOR 250,50,50
 	SETBGCOLOR 90,10,10
-	PRINTFORM y–h‰qŠúŠÔŽc‚è:{Flag:“sŽs_–h‰q}“úz y‡Œvƒ_ƒ[ƒW: Œ»Ý{Flag:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW}’~Ï / –Ú•W{Flag:“sŽs_–h‰q¬Œ÷ƒ_ƒ[ƒW}“ž’Bz
-ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 3
+	PRINTFORM ã€é˜²è¡›æœŸé–“æ®‹ã‚Š:{Flag:éƒ½å¸‚_é˜²è¡›}æ—¥ã€‘ ã€åˆè¨ˆãƒ€ãƒ¡ãƒ¼ã‚¸: ç¾åœ¨{Flag:éƒ½å¸‚_é˜²è¡›è“„ç©ãƒ€ãƒ¡ãƒ¼ã‚¸}è“„ç© / ç›®æ¨™{Flag:éƒ½å¸‚_é˜²è¡›æˆåŠŸãƒ€ãƒ¡ãƒ¼ã‚¸}åˆ°é”ã€‘
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 &&  Flag:éƒ½å¸‚_è¥²æ’ƒ <= 3
 	SETCOLOR 250,50,50
-	PRINTFORM yPŒ‚‚Ü‚Å:{Flag:“sŽs_PŒ‚}“úz
-ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 9
+	PRINTFORM ã€è¥²æ’ƒã¾ã§:{Flag:éƒ½å¸‚_è¥²æ’ƒ}æ—¥ã€‘
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 &&  Flag:éƒ½å¸‚_è¥²æ’ƒ <= 9
 	SETCOLOR 250,50,250
-	PRINTFORM yPŒ‚‚Ü‚Å:{Flag:“sŽs_PŒ‚}“úz
-ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_PŒ‚ >= 10
+	PRINTFORM ã€è¥²æ’ƒã¾ã§:{Flag:éƒ½å¸‚_è¥²æ’ƒ}æ—¥ã€‘
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_è¥²æ’ƒ >= 10
 	SETCOLOR 50,250,250
-	PRINTFORM yPŒ‚‚Ü‚Å:{Flag:“sŽs_PŒ‚}“úz
+	PRINTFORM ã€è¥²æ’ƒã¾ã§:{Flag:éƒ½å¸‚_è¥²æ’ƒ}æ—¥ã€‘
 ELSE
 	PRINTFORM 
 ENDIF
 
 
-IF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 75
+IF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ >= 75
 	SETCOLOR 250,50,50
-ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 50
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ >= 50
 	SETCOLOR 250,50,250
-ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ < 50
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ < 50
 	SETCOLOR 50,250,250
 ELSE
 ENDIF
-PRINTFORML y‘¹‰ó—¦:{Flag:“sŽs_–h‰q‘¹‰ó—¦}“z
+PRINTFORML ã€æå£ŠçŽ‡:{Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡}ï¼…ã€‘
 
 RESETCOLOR
-PRINTFORM y“sŽsLv:{Flag:“sŽs_Lv, 3 ,RIGHT}({Flag:“sŽs_ŒoŒ±’l}/{Flag:“sŽs_Lv*10})z
-PRINTFORM y•\ŽÐ‰ï:{Flag:“sŽs_•\ŽÐ‰ï}z
-PRINTFORM y— ŽÐ‰ï:{Flag:“sŽs_— ŽÐ‰ï}z
-PRINTFORM y‡Œvƒtƒ@ƒ“”F{FLAG:“sŽs_‡Œvƒtƒ@ƒ“”}z
-IF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 10
+PRINTFORM ã€éƒ½å¸‚Lv:{Flag:éƒ½å¸‚_Lv, 3 ,RIGHT}({Flag:éƒ½å¸‚_çµŒé¨“å€¤}/{Flag:éƒ½å¸‚_Lv*10})ã€‘
+PRINTFORM ã€è¡¨ç¤¾ä¼š:{Flag:éƒ½å¸‚_è¡¨ç¤¾ä¼š}ã€‘
+PRINTFORM ã€è£ç¤¾ä¼š:{Flag:éƒ½å¸‚_è£ç¤¾ä¼š}ã€‘
+PRINTFORM ã€åˆè¨ˆãƒ•ã‚¡ãƒ³æ•°ï¼š{FLAG:éƒ½å¸‚_åˆè¨ˆãƒ•ã‚¡ãƒ³æ•°}ã€‘
+IF  Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š < 10
 	SETCOLOR 250,50,50
-ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 30
+ELSEIF  Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š < 30
 	SETCOLOR 250,50,250
-ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è >= 30
+ELSEIF  Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š >= 30
 	SETCOLOR 50,250,250
 ELSE
 ENDIF
-PRINTFORML yŒˆŽZ‚Ü‚Å:{Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è}“úz
+PRINTFORML ã€æ±ºç®—ã¾ã§:{Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š}æ—¥ã€‘
 RESETCOLOR
-PRINTFORM yŽ‘‹à:{MONEY}z
-PRINTFORM yTP:{Flag:“sŽs_Œ»ÝTP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åTP, 3 ,RIGHT}z
-PRINTFORM yAP:{Flag:“sŽs_Œ»ÝAP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åAP, 3 ,RIGHT}z
-PRINTFORM ySP:{Flag:“sŽs_Œ»ÝSP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åSP, 3 ,RIGHT}z
-PRINTFORM yKP:{Flag:“sŽs_Œ»ÝKP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åKP, 3 ,LEFT}z
-PRINTFORM yBP:{Flag:“sŽs_Œ»ÝBP, 3 ,RIGHT}z
+PRINTFORM ã€è³‡é‡‘:{MONEY}ã€‘
+PRINTFORM ã€TP:{Flag:éƒ½å¸‚_ç¾åœ¨TP, 3 ,RIGHT}/{Flag:éƒ½å¸‚_æœ€å¤§TP, 3 ,RIGHT}ã€‘
+PRINTFORM ã€AP:{Flag:éƒ½å¸‚_ç¾åœ¨AP, 3 ,RIGHT}/{Flag:éƒ½å¸‚_æœ€å¤§AP, 3 ,RIGHT}ã€‘
+PRINTFORM ã€SP:{Flag:éƒ½å¸‚_ç¾åœ¨SP, 3 ,RIGHT}/{Flag:éƒ½å¸‚_æœ€å¤§SP, 3 ,RIGHT}ã€‘
+PRINTFORM ã€KP:{Flag:éƒ½å¸‚_ç¾åœ¨KP, 3 ,RIGHT}/{Flag:éƒ½å¸‚_æœ€å¤§KP, 3 ,LEFT}ã€‘
+PRINTFORM ã€BP:{Flag:éƒ½å¸‚_ç¾åœ¨BP, 3 ,RIGHT}ã€‘
 PRINTFORML
-PRINTFORML yŒ÷Ñ:{Flag:“sŽs_Œ÷Ñ, 10 ,RIGHT}z
+PRINTFORML ã€åŠŸç¸¾:{Flag:éƒ½å¸‚_åŠŸç¸¾, 10 ,RIGHT}ã€‘
 
 DRAWLINE
 

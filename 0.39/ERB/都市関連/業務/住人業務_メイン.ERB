@@ -1,6 +1,6 @@
-
+ï»¿
 ;-------------------------------------------------
-;Zl‹Æ–±
+;ä½äººæ¥­å‹™
 ;-------------------------------------------------
 @WORK_MAIN(ARG:0,ARG:1,ARGS:0)
 #DIM L_INPUT
@@ -15,17 +15,17 @@ CLEARLINE LINECOUNT
 DRAWLINE
 CALL INFO_CITY_BASE
 DRAWLINE
-PRINTFORML @
-PRINTFORML @
+PRINTFORML ã€€
+PRINTFORML ã€€
 DRAWLINE
-PRINTFORML yZl‹Æ–±z
+PRINTFORML ã€ä½äººæ¥­å‹™ã€‘
 DRAWLINE
-PRINTFORML TP‚ð5Á”ï‚µ‚Ä‹Æ–±‚É‘Î‚·‚é‹Æ–±ŒoŒ±‚ðŠl“¾‚³‚¹‚Ü‚·B
-PRINTFORML ‹Æ–±ŒoŒ±‚ª‘½‚¢‚Ù‚Ç“sŽsvŒ£‚Éƒvƒ‰ƒX•â³‚ª‚©‚©‚è‚Ü‚·B
+PRINTFORML TPã‚’5æ¶ˆè²»ã—ã¦æ¥­å‹™ã«å¯¾ã™ã‚‹æ¥­å‹™çµŒé¨“ã‚’ç²å¾—ã•ã›ã¾ã™ã€‚
+PRINTFORML æ¥­å‹™çµŒé¨“ãŒå¤šã„ã»ã©éƒ½å¸‚è²¢çŒ®ã«ãƒ—ãƒ©ã‚¹è£œæ­£ãŒã‹ã‹ã‚Šã¾ã™ã€‚
 DRAWLINE
-PRINTFORML [0] Š±Â‚·‚é
+PRINTFORML [0] å¹²æ¸‰ã™ã‚‹
 PRINTFORML 
-PRINTFORML [999] –ß‚é
+PRINTFORML [999] æˆ»ã‚‹
 INPUT
 L_INPUT = RESULT
 L_M = RESULT
@@ -40,11 +40,11 @@ SELECTCASE L_INPUT
 		DRAWLINE
 		CALL INFO_CITY_BASE
 		DRAWLINE
-		PRINTFORML @
-		PRINTFORML @
+		PRINTFORML ã€€
+		PRINTFORML ã€€
 		DRAWLINE
-		PRINTFORML ”C–½‚³‚¹‚éZ–¯‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
-		ARGS:0 = ‹Æ–±
+		PRINTFORML ä»»å‘½ã•ã›ã‚‹ä½æ°‘ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
+		ARGS:0 = æ¥­å‹™
 		CALL LIST_CHARA(ARGS:0)
 		ARG:0 = RESULT
 		L_INPUT = RESULT
@@ -52,44 +52,44 @@ SELECTCASE L_INPUT
 		IF L_INPUT == 0
 			GOTO INPUT_LOOP
 		ELSEIF L_INPUT != 1000
-			IF FLAG:“sŽs_Œ»ÝTP < 5 && (FLAG:“sŽs_Œ»ÝBP + FLAG:“sŽs_Œ»ÝTP) > 4
+			IF FLAG:éƒ½å¸‚_ç¾åœ¨TP < 5 && (FLAG:éƒ½å¸‚_ç¾åœ¨BP + FLAG:éƒ½å¸‚_ç¾åœ¨TP) > 4
 				CLEARLINE LINECOUNT
-				PRINTFORML BP‚ðŽ©“®‚Å•â‹‹‚µ‚Ü‚µ‚½B
+				PRINTFORML BPã‚’è‡ªå‹•ã§è£œçµ¦ã—ã¾ã—ãŸã€‚
 				WAIT
 				CALL SYSTEM_BP
 			ENDIF
-			IF FLAG:“sŽs_Œ»ÝTP < 5
+			IF FLAG:éƒ½å¸‚_ç¾åœ¨TP < 5
 				CLEARLINE LINECOUNT
-				PRINTFORML TP‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·B
+				PRINTFORML TPãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚
 				WAIT
 				GOTO INPUT_LOOP
 			ENDIF
-			FLAG:“sŽs_Œ»ÝTP -= 5		; ƒpƒbƒ`‚ÅC³
-			IF Talent:L_I:ƒAƒCƒhƒ‹ != 0
+			FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 5		; ãƒ‘ãƒƒãƒã§ä¿®æ­£
+			IF Talent:L_I:ã‚¢ã‚¤ãƒ‰ãƒ« != 0
 				CALL WORK_T_Ai(ARG:0)
-			ELSEIF Talent:L_I:©•w != 0
+			ELSEIF Talent:L_I:å¨¼å©¦ != 0
 				CALL WORK_T_Hl(ARG:0)
-			ELSEIF Talent:L_I:Šw¶ != 0
+			ELSEIF Talent:L_I:å­¦ç”Ÿ != 0
 				CALL WORK_T_St(ARG:0)
-			ELSEIF Talent:L_I:ŽÐ‰ïl != 0
+			ELSEIF Talent:L_I:ç¤¾ä¼šäºº != 0
 				CALL WORK_T_Ad(ARG:0)
-			ELSEIF Talent:L_I:Ž¡ˆÀˆÛŽ‹Çˆõ != 0
+			ELSEIF Talent:L_I:æ²»å®‰ç¶­æŒå±€å“¡ != 0
 				CALL WORK_T_Ti(ARG:0)
-			ELSEIF Talent:L_I:ƒƒCƒh != 0
+			ELSEIF Talent:L_I:ãƒ¡ã‚¤ãƒ‰ != 0
 				CALL WORK_T_Me(ARG:0)
-			ELSEIF Talent:L_I:¹EŽÒ != 0
+			ELSEIF Talent:L_I:è–è·è€… != 0
 				CALL WORK_T_Si(ARG:0)
 			ELSE
 				CALL WORK_T_Ip(ARG:0)
 			ENDIF
 			
-			CFLAG:L_I:Zl_‹Æ–±ƒ|ƒCƒ“ƒg += 1
-			IF CFLAG:L_I:Zl_‹Æ–±ƒ|ƒCƒ“ƒg >= (CFLAG:L_I:Zl_vŒ£’l/2)+3
+			CFLAG:L_I:ä½äºº_æ¥­å‹™ãƒã‚¤ãƒ³ãƒˆ += 1
+			IF CFLAG:L_I:ä½äºº_æ¥­å‹™ãƒã‚¤ãƒ³ãƒˆ >= (CFLAG:L_I:ä½äºº_è²¢çŒ®å€¤/2)+3
 				PRINTFORML 
-				PRINTFORML %CALLNAME:L_I%‚Í‹Æ–±‚Ì’†‚ÅŒoŒ±‚ð“¾‚ÄA‚³‚ç‚È‚évŒ£‚ª‚Å‚«‚é‚æ‚¤‚É‚È‚Á‚½B
-				PRINTFORMW vŒ£’l@y{CFLAG:L_I:Zl_vŒ£’l}¨{(CFLAG:L_I:Zl_vŒ£’l)+1}z
-				CFLAG:L_I:Zl_‹Æ–±ƒ|ƒCƒ“ƒg = 0
-				CFLAG:L_I:Zl_vŒ£’l += 1
+				PRINTFORML %CALLNAME:L_I%ã¯æ¥­å‹™ã®ä¸­ã§çµŒé¨“ã‚’å¾—ã¦ã€ã•ã‚‰ãªã‚‹è²¢çŒ®ãŒã§ãã‚‹ã‚ˆã†ã«ãªã£ãŸã€‚
+				PRINTFORMW è²¢çŒ®å€¤ã€€ã€{CFLAG:L_I:ä½äºº_è²¢çŒ®å€¤}â†’{(CFLAG:L_I:ä½äºº_è²¢çŒ®å€¤)+1}ã€‘
+				CFLAG:L_I:ä½äºº_æ¥­å‹™ãƒã‚¤ãƒ³ãƒˆ = 0
+				CFLAG:L_I:ä½äºº_è²¢çŒ®å€¤ += 1
 			ENDIF
 		ELSE
 			GOTO INPUT_LOOP

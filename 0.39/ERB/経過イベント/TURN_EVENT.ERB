@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;ƒ^[ƒ“Œo‰ß‚ÌƒCƒxƒ“ƒg
+ï»¿;-------------------------------------------------
+;ã‚¿ãƒ¼ãƒ³çµŒéŽã®ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @TURN_EVENT(ARG)
 #DIM L_I
@@ -11,18 +11,18 @@ L_TGT_BAK = TARGET
 L_P2 = 0
 L_I = 0
 
-FLAG:“sŽs_‡Œvƒtƒ@ƒ“” = 0
+FLAG:éƒ½å¸‚_åˆè¨ˆãƒ•ã‚¡ãƒ³æ•° = 0
 
 FOR L_I, 1, CHARANUM
 	TARGET = L_I
 	ARG =  L_I
 
-	IF TARGET != MASTER  && TALENT:L_I:NPC != 999 && TALENT:L_I:•sÝ == 0
+	IF TARGET != MASTER  && TALENT:L_I:NPC != 999 && TALENT:L_I:ä¸åœ¨ == 0
 		CALL TURN_EVENT_NAYAMI_K
-		IF CFLAG:ƒŒƒMƒ…ƒ‰[ != 0
+		IF CFLAG:ãƒ¬ã‚®ãƒ¥ãƒ©ãƒ¼ != 0
 			CALL TURN_EVENT_NJ
-			;Œð—¬ƒCƒxƒ“ƒg
-			SIF CFLAG:ZlŒð—¬Ý’è != 0 && RAND:100 < CFLAG:ZlƒCƒxƒ“ƒgŒXŒü_Œð—¬
+			;äº¤æµã‚¤ãƒ™ãƒ³ãƒˆ
+			SIF CFLAG:ä½äººäº¤æµè¨­å®š != 0 && RAND:100 < CFLAG:ä½äººã‚¤ãƒ™ãƒ³ãƒˆå‚¾å‘_äº¤æµ
 				CALL TURN_EVENT_COM
 			CALL TURN_EVENT_MORAL
 			CALL TURN_EVENT_FON
@@ -35,147 +35,147 @@ FOR L_I, 1, CHARANUM
 		CALL TURN_EVENT_NAYAMI
 		SIF RAND:100 >= 95
 			CALL TURN_EVENT_NYM_R
-		SIF CFLAG:”DPƒtƒ‰ƒO != 0
+		SIF CFLAG:å¦Šå¨ ãƒ•ãƒ©ã‚° != 0
 			CALL NINSIN_MAIN(ARG)
-		;•K{ƒCƒxƒ“ƒg(‰ñ•œ“™)
+		;å¿…é ˆã‚¤ãƒ™ãƒ³ãƒˆ(å›žå¾©ç­‰)
 		CALL TURN_EVENT_RPG_P
 		CALL TURN_EVENT_PERSONAL_END
 		CALL TURN_EVENT_CITY_EXP
-	ELSEIF TALENT:L_I:•sÝ == 1
-		IF CFlag:f’vŠÄ‹Ö > 0 && FLAG:‚m‚s‚qƒ‚[ƒh == 1
+	ELSEIF TALENT:L_I:ä¸åœ¨ == 1
+		IF CFlag:æ‹‰è‡´ç›£ç¦ > 0 && FLAG:ï¼®ï¼´ï¼²ãƒ¢ãƒ¼ãƒ‰ == 1
 			CALL TURN_EVENT_RPG_RK
 		ENDIF
 	ENDIF
 NEXT
 TARGET = L_TGT_BAK
 
-IF RAND:100 >= 95 && Flag:“sŽs_Lv >= 10 && FLAG:“sŽs_–h‰q == 0 && Flag:“sŽs_PŒ‚ > 1 && Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â == 0
-	Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â = 1
-	Flag:EP“Gí—Í = (RAND:((Flag:“sŽs_Lv)+1))/10
-	SIF Flag:EP“Gí—Í  <= 0
-		Flag:EP“Gí—Í = 1
-	SIF Flag:EP“Gí—Í  >= 10
-		Flag:EP“Gí—Í = 10
+IF RAND:100 >= 95 && Flag:éƒ½å¸‚_Lv >= 10 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 && Flag:éƒ½å¸‚_è¥²æ’ƒ > 1 && Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ == 0
+	Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ = 1
+	Flag:EPæ•µæˆ¦åŠ› = (RAND:((Flag:éƒ½å¸‚_Lv)+1))/10
+	SIF Flag:EPæ•µæˆ¦åŠ›  <= 0
+		Flag:EPæ•µæˆ¦åŠ› = 1
+	SIF Flag:EPæ•µæˆ¦åŠ›  >= 10
+		Flag:EPæ•µæˆ¦åŠ› = 10
 ENDIF
 
-IF Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â == 3 && FLAG:“sŽs_–h‰q == 0 && Flag:“sŽs_PŒ‚ > 1
+IF Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ == 3 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 && Flag:éƒ½å¸‚_è¥²æ’ƒ > 1
 	CLEARLINE LINECOUNT
 	DRAWLINE
-	PRINTFORML ‘¼uƒvƒŒƒCƒ„[v‚É‚±‚¿‚ç‚Ì‹æ‰æ‚Ö‚ÌŠ±Â‚ð‹–‚µ‚Ä‚µ‚Ü‚Á‚½‚æ‚¤‚¾c
-	PRINTFORML y“sŽsLv‚ª’á‰º‚µ‚Ü‚µ‚½z
+	PRINTFORML ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€ã«ã“ã¡ã‚‰ã®åŒºç”»ã¸ã®å¹²æ¸‰ã‚’è¨±ã—ã¦ã—ã¾ã£ãŸã‚ˆã†ã â€¦
+	PRINTFORML ã€éƒ½å¸‚LvãŒä½Žä¸‹ã—ã¾ã—ãŸã€‘
 	DRAWLINE
 	PRINTFORMW 
-	Flag:“sŽs_Lv -= (Flag:“sŽs_Lv/5)+1
-	Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â = 0
-	Flag:EP“Gí—Í = 0
-	Flag:EP’ÇŒ‚•û–@ = 0
-	Flag:EP¬”Û = 0
-ELSEIF Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â != 0 && FLAG:“sŽs_–h‰q == 0 && Flag:“sŽs_PŒ‚ > 1
-	Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â += 1
-ELSEIF Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â != 0 && (FLAG:“sŽs_–h‰q != 0 || Flag:“sŽs_PŒ‚ <= 1)
+	Flag:éƒ½å¸‚_Lv -= (Flag:éƒ½å¸‚_Lv/5)+1
+	Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ = 0
+	Flag:EPæ•µæˆ¦åŠ› = 0
+	Flag:EPè¿½æ’ƒæ–¹æ³• = 0
+	Flag:EPæˆå¦ = 0
+ELSEIF Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ != 0 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 && Flag:éƒ½å¸‚_è¥²æ’ƒ > 1
+	Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ += 1
+ELSEIF Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ != 0 && (FLAG:éƒ½å¸‚_é˜²è¡› != 0 || Flag:éƒ½å¸‚_è¥²æ’ƒ <= 1)
 	CLEARLINE LINECOUNT
 	DRAWLINE
-	PRINTFORML ‘¼uƒvƒŒƒCƒ„[v‚ÍŠOŠE‚ÌˆÙ•Ï‚ðŽ@’m‚µ“P‘Þ‚µ‚½‚æ‚¤‚¾c
+	PRINTFORML ä»–ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€ã¯å¤–ç•Œã®ç•°å¤‰ã‚’å¯ŸçŸ¥ã—æ’¤é€€ã—ãŸã‚ˆã†ã â€¦
 	DRAWLINE
 	PRINTFORMW 
-	Flag:EP‘¼ƒvƒŒƒCƒ„[Š±Â = 0
-	Flag:EP“Gí—Í = 0
-	Flag:EP’ÇŒ‚•û–@ = 0
-	Flag:EP¬”Û = 0
+	Flag:EPä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¹²æ¸‰ = 0
+	Flag:EPæ•µæˆ¦åŠ› = 0
+	Flag:EPè¿½æ’ƒæ–¹æ³• = 0
+	Flag:EPæˆå¦ = 0
 ENDIF
 
 
 SIF RAND:10 > 7
-	Flag:ˆË—Š_ƒXƒpƒCƒeƒ‹ìœ_Lv = RAND:(Flag:“sŽs_Lv+1)+2
+	Flag:ä¾é ¼_ã‚¹ãƒ‘ã‚¤ãƒ†ãƒ­é§†é™¤_Lv = RAND:(Flag:éƒ½å¸‚_Lv+1)+2
 SIF RAND:10 > 7
-	Flag:ˆË—Š_ƒCƒX‚©‚ç‚Ì‹ìœˆË—Š_Lv = RAND:(Flag:“sŽs_Lv+1)+3
+	Flag:ä¾é ¼_ã‚¤ã‚¹ã‹ã‚‰ã®é§†é™¤ä¾é ¼_Lv = RAND:(Flag:éƒ½å¸‚_Lv+1)+3
 
-IF FLAG:Žx‰‡_‘Ì—Í‰ñ•œƒTƒ|[ƒg == 1 && Flag:“sŽs_Œ»ÝSP >= 7
+IF FLAG:æ”¯æ´_ä½“åŠ›å›žå¾©ã‚µãƒãƒ¼ãƒˆ == 1 && Flag:éƒ½å¸‚_ç¾åœ¨SP >= 7
 	L_P2 = 6
-	Flag:“sŽs_Œ»ÝSP -= 7
+	Flag:éƒ½å¸‚_ç¾åœ¨SP -= 7
 ENDIF
 
-Flag:“sŽs_Œ»ÝAP += Flag:“sŽs_Å‘åAP / (10 - L_P2)
-Flag:“sŽs_Œ»ÝSP += Flag:“sŽs_Å‘åSP / 2
-Flag:“sŽs_Œ»ÝTP += Flag:“sŽs_Å‘åTP
+Flag:éƒ½å¸‚_ç¾åœ¨AP += Flag:éƒ½å¸‚_æœ€å¤§AP / (10 - L_P2)
+Flag:éƒ½å¸‚_ç¾åœ¨SP += Flag:éƒ½å¸‚_æœ€å¤§SP / 2
+Flag:éƒ½å¸‚_ç¾åœ¨TP += Flag:éƒ½å¸‚_æœ€å¤§TP
 
 
 
 IF RAND:100 > 50
-	Flag:“sŽs_“V‹C = 0
+	Flag:éƒ½å¸‚_å¤©æ°— = 0
 ELSE
-	Flag:“sŽs_“V‹C = RAND:4+1
+	Flag:éƒ½å¸‚_å¤©æ°— = RAND:4+1
 ENDIF
 
-SIF Flag:“sŽs_Œ»ÝAP >= Flag:“sŽs_Å‘åAP
-	Flag:“sŽs_Œ»ÝAP = Flag:“sŽs_Å‘åAP
-SIF Flag:“sŽs_Œ»ÝSP >= Flag:“sŽs_Å‘åSP
-	Flag:“sŽs_Œ»ÝSP = Flag:“sŽs_Å‘åSP
-SIF Flag:“sŽs_Œ»ÝTP >= Flag:“sŽs_Å‘åTP
-	Flag:“sŽs_Œ»ÝTP = Flag:“sŽs_Å‘åTP
+SIF Flag:éƒ½å¸‚_ç¾åœ¨AP >= Flag:éƒ½å¸‚_æœ€å¤§AP
+	Flag:éƒ½å¸‚_ç¾åœ¨AP = Flag:éƒ½å¸‚_æœ€å¤§AP
+SIF Flag:éƒ½å¸‚_ç¾åœ¨SP >= Flag:éƒ½å¸‚_æœ€å¤§SP
+	Flag:éƒ½å¸‚_ç¾åœ¨SP = Flag:éƒ½å¸‚_æœ€å¤§SP
+SIF Flag:éƒ½å¸‚_ç¾åœ¨TP >= Flag:éƒ½å¸‚_æœ€å¤§TP
+	Flag:éƒ½å¸‚_ç¾åœ¨TP = Flag:éƒ½å¸‚_æœ€å¤§TP
 
-SIF Flag:“sŽs_Lv >= 5 && FLAG:“sŽs_–h‰q == 0 &&  Flag:“sŽs_PŒ‚ > 0
-	FLAG:“sŽs_PŒ‚ -= 1
+SIF Flag:éƒ½å¸‚_Lv >= 5 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 &&  Flag:éƒ½å¸‚_è¥²æ’ƒ > 0
+	FLAG:éƒ½å¸‚_è¥²æ’ƒ -= 1
 
-SIF Flag:“sŽs_Lv >= 5 && FLAG:“sŽs_–h‰q == 0 &&  Flag:“sŽs_PŒ‚ <= 0
+SIF Flag:éƒ½å¸‚_Lv >= 5 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 &&  Flag:éƒ½å¸‚_è¥²æ’ƒ <= 0
 	CALL CITY_RID
 
-SIF FLAG:“sŽs_–h‰q > 0
-	FLAG:“sŽs_–h‰q -= 1
+SIF FLAG:éƒ½å¸‚_é˜²è¡› > 0
+	FLAG:éƒ½å¸‚_é˜²è¡› -= 1
 	
-IF Flag:“sŽs_Lv >= 5 && FLAG:“sŽs_–h‰q == 0 && Flag:“sŽs_PŒ‚ == 0 && FLAG:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW >= FLAG:“sŽs_–h‰q¬Œ÷ƒ_ƒ[ƒW
+IF Flag:éƒ½å¸‚_Lv >= 5 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 && Flag:éƒ½å¸‚_è¥²æ’ƒ == 0 && FLAG:éƒ½å¸‚_é˜²è¡›è“„ç©ãƒ€ãƒ¡ãƒ¼ã‚¸ >= FLAG:éƒ½å¸‚_é˜²è¡›æˆåŠŸãƒ€ãƒ¡ãƒ¼ã‚¸
 	CALL CITY_RID_B_CLEAR
-ELSEIF Flag:“sŽs_Lv >= 5 && FLAG:“sŽs_–h‰q == 0 && Flag:“sŽs_PŒ‚ == 0 && FLAG:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW < FLAG:“sŽs_–h‰q¬Œ÷ƒ_ƒ[ƒW
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && FLAG:éƒ½å¸‚_é˜²è¡› == 0 && Flag:éƒ½å¸‚_è¥²æ’ƒ == 0 && FLAG:éƒ½å¸‚_é˜²è¡›è“„ç©ãƒ€ãƒ¡ãƒ¼ã‚¸ < FLAG:éƒ½å¸‚_é˜²è¡›æˆåŠŸãƒ€ãƒ¡ãƒ¼ã‚¸
 	CALL CITY_RID_B_MISS
 ENDIF
 
 
-IF Flag:“sŽs_T == 6
-	Flag:“sŽs_T = 0
-	SIF Flag:“sŽs_–h‰q‘¹‰ó—¦ > 0
-		Flag:“sŽs_–h‰q‘¹‰ó—¦ -= 2+(RAND:3)
-	SIF Flag:“sŽs_–h‰q‘¹‰ó—¦ < 0
-		Flag:“sŽs_–h‰q‘¹‰ó—¦ = 0
+IF Flag:éƒ½å¸‚_é€± == 6
+	Flag:éƒ½å¸‚_é€± = 0
+	SIF Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ > 0
+		Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ -= 2+(RAND:3)
+	SIF Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ < 0
+		Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ = 0
 ELSE
-	Flag:“sŽs_T += 1
+	Flag:éƒ½å¸‚_é€± += 1
 ENDIF
 
 
 
-FLAG:“sŽs_ƒjƒ…[ƒX = RAND:16
+FLAG:éƒ½å¸‚_ãƒ‹ãƒ¥ãƒ¼ã‚¹ = RAND:16
 
-IF Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è == 0 && Flag:“sŽs_¡Šú‚ÌvŒ£’l == 0
-	Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è = 90
+IF Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š == 0 && Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤ == 0
+	Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š = 90
 	 CALL TURN_EVENT_KSN
-ELSEIF Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è == 0
+ELSEIF Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š == 0
 	CALL TURN_EVENT_KSN
 ELSE
-	Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è -= 1
+	Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š -= 1
 ENDIF
 
 SIF !RAND:10
-	Flag:“sŽs_Œ÷ÑŠl“¾‹@‰ï = 1
+	Flag:éƒ½å¸‚_åŠŸç¸¾ç²å¾—æ©Ÿä¼š = 1
 
 
 
-FLAG:“sŽs_ƒp[ƒgƒi[ƒZƒbƒNƒX = 0
-FLAG:“sŽs_ƒXƒg[ƒŠ[ = RAND:7
+FLAG:éƒ½å¸‚_ãƒ‘ãƒ¼ãƒˆãƒŠãƒ¼ã‚»ãƒƒã‚¯ã‚¹ = 0
+FLAG:éƒ½å¸‚_ã‚¹ãƒˆãƒ¼ãƒªãƒ¼ = RAND:7
 
-Flag:“ú‘Ö‚í‚è‹æ‰æ“ïˆÕ“x = ((RAND:(Flag:“sŽs_Lv))/20)+1
-Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE = ((RAND:(Flag:“sŽs_Lv))/10)+20
-SIF Flag:“ú‘Ö‚í‚è‹æ‰æ“ïˆÕ“x >= 9
-	Flag:“ú‘Ö‚í‚è‹æ‰æ“ïˆÕ“x = 9
-SIF Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE >= 50
-	Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE = 50
-SIF Flag:’²¸‹æˆæ == 90
-	Flag:’²¸[“x = 0
+Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»é›£æ˜“åº¦ = ((RAND:(Flag:éƒ½å¸‚_Lv))/20)+1
+Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ = ((RAND:(Flag:éƒ½å¸‚_Lv))/10)+20
+SIF Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»é›£æ˜“åº¦ >= 9
+	Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»é›£æ˜“åº¦ = 9
+SIF Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ >= 50
+	Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ = 50
+SIF Flag:èª¿æŸ»åŒºåŸŸ == 90
+	Flag:èª¿æŸ»æ·±åº¦ = 0
 
 
 ;CALL TURN_EVENT_CAFE_CHARA_MAIN
 
 
 ;-------------------------------------------------
-;’‹–éŒo‰ß‚ÌƒCƒxƒ“ƒg
+;æ˜¼å¤œçµŒéŽã®ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @TURN_EVENT_1(ARG)
 #DIM L_I
@@ -194,15 +194,15 @@ $IN_LOOP
 	ARG =  L_I
 	IF TARGET != MASTER  
 		CALL C_M_AS(ARG:1)
-		SIF FLAG:“sŽs_Œ»ÝTP > 0
-			CFLAG:L_I:DŠ´“x += (FLAG:“sŽs_Œ»ÝTP)*5
+		SIF FLAG:éƒ½å¸‚_ç¾åœ¨TP > 0
+			CFLAG:L_I:å¥½æ„Ÿåº¦ += (FLAG:éƒ½å¸‚_ç¾åœ¨TP)*5
 	ENDIF
 	L_I += 1
 	SIF L_I != CHARANUM
 		GOTO IN_LOOP
 TARGET = L_TGT_BAK
 
-Flag:ƒ^[ƒ“’²¸Ï‚Ý = 0
+Flag:ã‚¿ãƒ¼ãƒ³èª¿æŸ»æ¸ˆã¿ = 0
 
 
 
@@ -211,15 +211,15 @@ Flag:ƒ^[ƒ“’²¸Ï‚Ý = 0
 
 
 
-SIF FLAG:“sŽs_‡Œvƒtƒ@ƒ“” >= 100000000
-	FLAG:“sŽs_‡Œvƒtƒ@ƒ“” = 100000000
+SIF FLAG:éƒ½å¸‚_åˆè¨ˆãƒ•ã‚¡ãƒ³æ•° >= 100000000
+	FLAG:éƒ½å¸‚_åˆè¨ˆãƒ•ã‚¡ãƒ³æ•° = 100000000
 	
-Flag:“sŽs_Œ»ÝTP += Flag:“sŽs_Å‘åTP
-SIF Flag:“sŽs_Œ»ÝTP >= Flag:“sŽs_Å‘åTP
-	Flag:“sŽs_Œ»ÝTP = Flag:“sŽs_Å‘åTP
+Flag:éƒ½å¸‚_ç¾åœ¨TP += Flag:éƒ½å¸‚_æœ€å¤§TP
+SIF Flag:éƒ½å¸‚_ç¾åœ¨TP >= Flag:éƒ½å¸‚_æœ€å¤§TP
+	Flag:éƒ½å¸‚_ç¾åœ¨TP = Flag:éƒ½å¸‚_æœ€å¤§TP
 
 ;-------------------------------------------------
-;ƒ^[ƒ“Œo‰ß‚Ì”Y‚ÝŠÖ˜AŽZo
+;ã‚¿ãƒ¼ãƒ³çµŒéŽã®æ‚©ã¿é–¢é€£ç®—å‡º
 ;-------------------------------------------------
 @TURN_EVENT_NAYAMI_K
 #DIM L_LOOP
@@ -228,23 +228,23 @@ SIF Flag:“sŽs_Œ»ÝTP >= Flag:“sŽs_Å‘åTP
 L_LOOP = 1
 REPEAT 5
 	IF CFlag:(4000+L_LOOP) == 100 ||CFlag:(4000+L_LOOP) == 101 ||CFlag:(4000+L_LOOP) == 102 ||CFlag:(4000+L_LOOP) == 103 ||CFlag:(4000+L_LOOP) == 105
-		CFlag:Zl_”Y‚Ý‹à‘K—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿é‡‘éŠ­çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 202 ||CFlag:(4000+L_LOOP) == 302 ||CFlag:(4000+L_LOOP) == 303 ||CFlag:(4000+L_LOOP) == 500 ||CFlag:(4000+L_LOOP) == 501 ||CFlag:(4000+L_LOOP) == 502 ||CFlag:(4000+L_LOOP) == 600 ||CFlag:(4000+L_LOOP) == 601 ||CFlag:(4000+L_LOOP) == 102 
-		CFlag:Zl_”Y‚Ý‘Îl—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿å¯¾äººçµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 404 
-		CFlag:Zl_”Y‚Ý•×Šw—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿å‹‰å­¦çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 304 ||CFlag:(4000+L_LOOP) == 305 
-		CFlag:Zl_”Y‚ÝH¶—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿é£Ÿç”Ÿçµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 105 ||CFlag:(4000+L_LOOP) == 104 ||CFlag:(4000+L_LOOP) == 400 ||CFlag:(4000+L_LOOP) == 304 ||CFlag:(4000+L_LOOP) == 401 ||CFlag:(4000+L_LOOP) == 402 ||CFlag:(4000+L_LOOP) == 403
-		CFlag:Zl_”Y‚Ý‰Æ’ë—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿å®¶åº­çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 201 ||CFlag:(4000+L_LOOP) == 202 ||CFlag:(4000+L_LOOP) == 203 ||CFlag:(4000+L_LOOP) == 204 ||CFlag:(4000+L_LOOP) == 205 
-		CFlag:Zl_”Y‚Ý—öˆ¤—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿æ‹æ„›çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 304 ||CFlag:(4000+L_LOOP) == 305 ||CFlag:(4000+L_LOOP) == 204 ||CFlag:(4000+L_LOOP) == 103 
-		CFlag:Zl_”Y‚Ý•a—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿ç—…çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 500 ||CFlag:(4000+L_LOOP) == 501 ||CFlag:(4000+L_LOOP) == 502 ||CFlag:(4000+L_LOOP) == 503 
-		CFlag:Zl_”Y‚Ý”Æß—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿çŠ¯ç½ªçµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 602 ||CFlag:(4000+L_LOOP) == 603 ||CFlag:(4000+L_LOOP) == 604 ||CFlag:(4000+L_LOOP) == 605
-		CFlag:Zl_”Y‚Ý«“I—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿æ€§çš„çµ¡ã¿ = 1
 	ENDIF
 
 	L_LOOP += 1
@@ -252,186 +252,186 @@ REND
 L_LOOP = 11
 REPEAT 5
 	IF CFlag:(4000+L_LOOP) == 100 ||CFlag:(4000+L_LOOP) == 101 ||CFlag:(4000+L_LOOP) == 102 ||CFlag:(4000+L_LOOP) == 103 ||CFlag:(4000+L_LOOP) == 104||CFlag:(4000+L_LOOP) == 304
-		CFlag:Zl_”Y‚Ý‹à‘K—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿é‡‘éŠ­çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 303 
-		CFlag:Zl_”Y‚Ý‘Îl—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿å¯¾äººçµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 302 || CFlag:(4000+L_LOOP) == 404 
-		CFlag:Zl_”Y‚Ý•×Šw—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿å‹‰å­¦çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 402 ||CFlag:(4000+L_LOOP) == 405 ||CFlag:(4000+L_LOOP) == 401 
-		CFlag:Zl_”Y‚ÝH¶—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿é£Ÿç”Ÿçµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 300 ||CFlag:(4000+L_LOOP) == 303 
-		CFlag:Zl_”Y‚Ý‰Æ’ë—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿å®¶åº­çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 200 ||CFlag:(4000+L_LOOP) == 201 ||CFlag:(4000+L_LOOP) == 202 ||CFlag:(4000+L_LOOP) == 203 ||CFlag:(4000+L_LOOP) == 600
-		CFlag:Zl_”Y‚Ý—öˆ¤—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿æ‹æ„›çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 400 ||CFlag:(4000+L_LOOP) == 401 ||CFlag:(4000+L_LOOP) == 404 ||CFlag:(4000+L_LOOP) == 405 ||CFlag:(4000+L_LOOP) == 406 ||CFlag:(4000+L_LOOP) == 407 
-		CFlag:Zl_”Y‚Ý•a—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿ç—…çµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 500 ||CFlag:(4000+L_LOOP) == 501 ||CFlag:(4000+L_LOOP) == 502 
-		CFlag:Zl_”Y‚Ý”Æß—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿çŠ¯ç½ªçµ¡ã¿ = 1
 	ELSEIF CFlag:(4000+L_LOOP) == 600 ||CFlag:(4000+L_LOOP) == 601 ||CFlag:(4000+L_LOOP) == 202 ||CFlag:(4000+L_LOOP) == 204
-		CFlag:Zl_”Y‚Ý«“I—‚Ý = 1
+		CFlag:ä½äºº_æ‚©ã¿æ€§çš„çµ¡ã¿ = 1
 	ENDIF
 	L_LOOP += 1
 REND
 
 
 ;-------------------------------------------------
-;ƒ^[ƒ“Œo‰ß‚Ì‘Œ¸•’²®
+;ã‚¿ãƒ¼ãƒ³çµŒéŽã®å¢—æ¸›ï¼†èª¿æ•´
 ;-------------------------------------------------
 @TURN_EVENT_PERSONAL_END
 
-IF TALENT:Žó¸ == 0 && TALENT:”DP == 0
-	CFLAG:Žó¸Œ»Ý‘Ï‹v’l += CFLAG:Žó¸Å‘å‘Ï‹v’l/10
-	IF CFLAG:Žó¸Œ»Ý‘Ï‹v’l >= CFLAG:Žó¸Å‘å‘Ï‹v’l
-		CFLAG:Žó¸Œ»Ý‘Ï‹v’l = CFLAG:Žó¸Å‘å‘Ï‹v’l
+IF TALENT:å—ç²¾ == 0 && TALENT:å¦Šå¨  == 0
+	CFLAG:å—ç²¾ç¾åœ¨è€ä¹…å€¤ += CFLAG:å—ç²¾æœ€å¤§è€ä¹…å€¤/10
+	IF CFLAG:å—ç²¾ç¾åœ¨è€ä¹…å€¤ >= CFLAG:å—ç²¾æœ€å¤§è€ä¹…å€¤
+		CFLAG:å—ç²¾ç¾åœ¨è€ä¹…å€¤ = CFLAG:å—ç²¾æœ€å¤§è€ä¹…å€¤
 	ENDIF
 ENDIF
 
-CFLAG:ƒ}ƒ“ƒVƒ‡ƒ“ŒoŒ±Šl“¾ = 0
+CFLAG:ãƒžãƒ³ã‚·ãƒ§ãƒ³çµŒé¨“ç²å¾— = 0
 
-CFLAG:Žq‹{¸‰t’™‘ —Ê -= CFLAG:Žq‹{¸‰t’™‘ —Ê/3
-CFLAG:Žq‹{¸‰t’™‘ —Ê -= 500
+CFLAG:å­å®®ç²¾æ¶²è²¯è”µé‡ -= CFLAG:å­å®®ç²¾æ¶²è²¯è”µé‡/3
+CFLAG:å­å®®ç²¾æ¶²è²¯è”µé‡ -= 500
 
-SIF CFLAG:Žq‹{¸‰t’™‘ —Ê <= 100
-	CFLAG:Žq‹{¸‰t’™‘ —Ê = 0
+SIF CFLAG:å­å®®ç²¾æ¶²è²¯è”µé‡ <= 100
+	CFLAG:å­å®®ç²¾æ¶²è²¯è”µé‡ = 0
 
-IF TALENT:Šw¶ && RAND:3 >= 1
-	CFLAG:Zl_‹Æ–±ƒ|ƒCƒ“ƒg += 1
-	IF CFLAG:Zl_‹Æ–±ƒ|ƒCƒ“ƒg >= (CFLAG:Zl_vŒ£’l/2)+3
-		PRINTFORML %CALLNAME%‚Í‹Æ–±‚Ì’†‚ÅŒoŒ±‚ð“¾‚ÄA‚³‚ç‚È‚évŒ£‚ª‚Å‚«‚é‚æ‚¤‚É‚È‚Á‚½B
-		PRINTFORMW vŒ£’l@y{CFLAG:Zl_vŒ£’l}¨{(CFLAG:Zl_vŒ£’l)+1}z
-		CFLAG:Zl_‹Æ–±ƒ|ƒCƒ“ƒg = 0
-		CFLAG:Zl_vŒ£’l += 1
+IF TALENT:å­¦ç”Ÿ && RAND:3 >= 1
+	CFLAG:ä½äºº_æ¥­å‹™ãƒã‚¤ãƒ³ãƒˆ += 1
+	IF CFLAG:ä½äºº_æ¥­å‹™ãƒã‚¤ãƒ³ãƒˆ >= (CFLAG:ä½äºº_è²¢çŒ®å€¤/2)+3
+		PRINTFORML %CALLNAME%ã¯æ¥­å‹™ã®ä¸­ã§çµŒé¨“ã‚’å¾—ã¦ã€ã•ã‚‰ãªã‚‹è²¢çŒ®ãŒã§ãã‚‹ã‚ˆã†ã«ãªã£ãŸã€‚
+		PRINTFORMW è²¢çŒ®å€¤ã€€ã€{CFLAG:ä½äºº_è²¢çŒ®å€¤}â†’{(CFLAG:ä½äºº_è²¢çŒ®å€¤)+1}ã€‘
+		CFLAG:ä½äºº_æ¥­å‹™ãƒã‚¤ãƒ³ãƒˆ = 0
+		CFLAG:ä½äºº_è²¢çŒ®å€¤ += 1
 	ENDIF
 ENDIF
 
-SIF Talent:Ž¡ˆÀˆÛŽ‹Çˆõ != 0
-	CFLAG:Zl_ŒoŒ±’l += RAND:3
+SIF Talent:æ²»å®‰ç¶­æŒå±€å“¡ != 0
+	CFLAG:ä½äºº_çµŒé¨“å€¤ += RAND:3
 
-;‚±‚±‚©‚ç’²®
-IF Talent:‚m‚s‚k == 1 && Talent:–¢–Sl == 1
-	TALENT:‚m‚s‚k = 0
-	TALENT:Œ‹¥Ï‚Ý = 0
+;ã“ã“ã‹ã‚‰èª¿æ•´
+IF Talent:ï¼®ï¼´ï¼¬ == 1 && Talent:æœªäº¡äºº == 1
+	TALENT:ï¼®ï¼´ï¼¬ = 0
+	TALENT:çµå©šæ¸ˆã¿ = 0
 ENDIF
 
-SIF CFlag:Zl_M•º‘•—û“x == 0
-	CFlag:Zl_M•º‘•—û“x = 1
+SIF CFlag:ä½äºº_Må…µè£…ç·´åº¦ == 0
+	CFlag:ä½äºº_Må…µè£…ç·´åº¦ = 1
 
-SIF CFlag:Zl_S•º‘•—û“x == 0
-	CFlag:Zl_S•º‘•—û“x = 1
+SIF CFlag:ä½äºº_Så…µè£…ç·´åº¦ == 0
+	CFlag:ä½äºº_Så…µè£…ç·´åº¦ = 1
 
 
 ;-------------------------------------------------
-;ƒ^[ƒ“Œo‰ß‚Ì”Y‚ÝŠÖ˜A‰Šú‰»
+;ã‚¿ãƒ¼ãƒ³çµŒéŽã®æ‚©ã¿é–¢é€£åˆæœŸåŒ–
 ;-------------------------------------------------
 @TURN_EVENT_NAYAMI_K_END
 
-CFlag:Zl_”Y‚Ý‹à‘K—‚Ý = 0
-CFlag:Zl_”Y‚Ý‘Îl—‚Ý = 0
-CFlag:Zl_”Y‚Ý•×Šw—‚Ý = 0
-CFlag:Zl_”Y‚ÝH¶—‚Ý = 0
-CFlag:Zl_”Y‚Ý‰Æ’ë—‚Ý = 0
-CFlag:Zl_”Y‚Ý—öˆ¤—‚Ý = 0
-CFlag:Zl_”Y‚Ý•a—‚Ý = 0
-CFlag:Zl_”Y‚Ý”Æß—‚Ý = 0
-CFlag:Zl_”Y‚Ý«“I—‚Ý = 0
+CFlag:ä½äºº_æ‚©ã¿é‡‘éŠ­çµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿å¯¾äººçµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿å‹‰å­¦çµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿é£Ÿç”Ÿçµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿å®¶åº­çµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿æ‹æ„›çµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿ç—…çµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿çŠ¯ç½ªçµ¡ã¿ = 0
+CFlag:ä½äºº_æ‚©ã¿æ€§çš„çµ¡ã¿ = 0
 
 ;-------------------------------------------------
-;ƒ^[ƒ“Œo‰ß‚ÌƒCƒxƒ“ƒg‚Ì”Y‚Ý‰ðŒˆ
+;ã‚¿ãƒ¼ãƒ³çµŒéŽã®ã‚¤ãƒ™ãƒ³ãƒˆã®æ‚©ã¿è§£æ±º
 ;-------------------------------------------------
 @TURN_EVENT_NAYAMI
-#DIM L_SP    ;NPC‚É‚æ‚é‰ðŒˆƒTƒ|[ƒg
-#DIM L_GET_AP;”Y‚Ý‰ðŒˆ‚É‚æ‚éŠl“¾¬’·’l
+#DIM L_SP    ;NPCã«ã‚ˆã‚‹è§£æ±ºã‚µãƒãƒ¼ãƒˆ
+#DIM L_GET_AP;æ‚©ã¿è§£æ±ºã«ã‚ˆã‚‹ç²å¾—æˆé•·å€¤
 
-IF CFlag:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” > 0
-	CFlag:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” -= 1
-	CFlag:Zl_”Y‚Ý‰ðŒˆ’† += 1
+IF CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° > 0
+	CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° -= 1
+	CFlag:ä½äºº_æ‚©ã¿è§£æ±ºä¸­ += 1
 	CALL VAR_NAYAMI_SET_ASSIST(TARGET)
-ELSEIF CFlag:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” == 0 && CFlag:Zl_”Y‚Ý‰ðŒˆ’† > 0
+ELSEIF CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° == 0 && CFlag:ä½äºº_æ‚©ã¿è§£æ±ºä¸­ > 0
 	L_SP = 0
-	IF FLAG:Žx‰‡_”Y‚Ý‰ðŒˆƒTƒ|[ƒg == 1 && Flag:“sŽs_Œ»ÝSP >= 4
-	L_SP += (CFlag:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§/5)+15
-		Flag:“sŽs_Œ»ÝSP -= 4
+	IF FLAG:æ”¯æ´_æ‚©ã¿è§£æ±ºã‚µãƒãƒ¼ãƒˆ == 1 && Flag:éƒ½å¸‚_ç¾åœ¨SP >= 4
+	L_SP += (CFlag:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹/5)+15
+		Flag:éƒ½å¸‚_ç¾åœ¨SP -= 4
 	ENDIF
 	REPEAT 3
-		IF (CFlag:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§)+L_SP > RAND:100
-			IF CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð >= 10
-				CFlag:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ += RAND:15+20
-				CFlag:Zl_”Y‚Ý¬Œ÷‰ñ” += 1
+		IF (CFlag:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹)+L_SP > RAND:100
+			IF CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž >= 10
+				CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®— += RAND:15+20
+				CFlag:ä½äºº_æ‚©ã¿æˆåŠŸå›žæ•° += 1
 			ELSE
-				CFlag:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ += RAND:8+8
-				CFlag:Zl_”Y‚Ý¬Œ÷‰ñ” += 1
+				CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®— += RAND:8+8
+				CFlag:ä½äºº_æ‚©ã¿æˆåŠŸå›žæ•° += 1
 			ENDIF
 		ELSE
-			CFlag:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ += 1
+			CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®— += 1
 		ENDIF
 	REND
 	DRAWLINE
 	SETCOLOR 0,250,250
-	PRINTFORML %CALLNAME%‚Ì”Y‚Ý‰ðŒˆŒ‹‰Ê‚ªo‚Ü‚µ‚½I
+	PRINTFORML %CALLNAME%ã®æ‚©ã¿è§£æ±ºçµæžœãŒå‡ºã¾ã—ãŸï¼
 	RESETCOLOR
-	PRINTFORM yŒ‹‰Ê:
-	IF CFlag:Zl_”Y‚Ý¬Œ÷‰ñ” >= 2
+	PRINTFORM ã€çµæžœ:
+	IF CFlag:ä½äºº_æ‚©ã¿æˆåŠŸå›žæ•° >= 2
 		SETCOLOR 0,250,250
-		PRINTFORM ‘å¬Œ÷
-		CFlag:Zl_”Y‚Ý‘O‰ñŒ‹‰Ê = 2		;‘O‰ñŒ‹‰Ê•\Ž¦—p
-	ELSEIF CFlag:Zl_”Y‚Ý¬Œ÷‰ñ” >= 1
+		PRINTFORM å¤§æˆåŠŸ
+		CFlag:ä½äºº_æ‚©ã¿å‰å›žçµæžœ = 2		;å‰å›žçµæžœè¡¨ç¤ºç”¨
+	ELSEIF CFlag:ä½äºº_æ‚©ã¿æˆåŠŸå›žæ•° >= 1
 		SETCOLOR 0,250,250
-		PRINTFORM ¬Œ÷
-		CFlag:Zl_”Y‚Ý‘O‰ñŒ‹‰Ê = 1		;‘O‰ñŒ‹‰Ê•\Ž¦—p
+		PRINTFORM æˆåŠŸ
+		CFlag:ä½äºº_æ‚©ã¿å‰å›žçµæžœ = 1		;å‰å›žçµæžœè¡¨ç¤ºç”¨
 	ELSE
 		SETCOLOR 250,0,0
-		PRINTFORM Ž¸”s
-		CFlag:Zl_”Y‚Ý‘O‰ñŒ‹‰Ê = 0		;‘O‰ñŒ‹‰Ê•\Ž¦—p
+		PRINTFORM å¤±æ•—
+		CFlag:ä½äºº_æ‚©ã¿å‰å›žçµæžœ = 0		;å‰å›žçµæžœè¡¨ç¤ºç”¨
 	ENDIF
 	RESETCOLOR
-	PRINTFORML z
-	PRINTFORML y’B¬—¦z{CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð)}@¨@{CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð)+CFlag:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ}
-	PRINTFORMW yDŠ´“xz{CFlag:DŠ´“x}@¨@{CFlag:DŠ´“x+(20*CFlag:(4300+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð))} 
-	CFlag:DŠ´“x += (20*CFlag:(4300+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð))
-	CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) += CFlag:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ
-	CFlag:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ = 0
-	CFlag:Zl_”Y‚Ý‰ðŒˆ’† = 0
-	CFlag:Zl_”Y‚Ý¬Œ÷‰ñ” = 0
-	CFLAG:Zl_”Y‚Ý‹¦—Íó‹µ = 0
+	PRINTFORML ã€‘
+	PRINTFORML ã€é”æˆçŽ‡ã€‘{CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž)}ã€€â†’ã€€{CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž)+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®—}
+	PRINTFORMW ã€å¥½æ„Ÿåº¦ã€‘{CFlag:å¥½æ„Ÿåº¦}ã€€â†’ã€€{CFlag:å¥½æ„Ÿåº¦+(20*CFlag:(4300+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž))} 
+	CFlag:å¥½æ„Ÿåº¦ += (20*CFlag:(4300+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž))
+	CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) += CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®—
+	CFlag:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®— = 0
+	CFlag:ä½äºº_æ‚©ã¿è§£æ±ºä¸­ = 0
+	CFlag:ä½äºº_æ‚©ã¿æˆåŠŸå›žæ•° = 0
+	CFLAG:ä½äºº_æ‚©ã¿å”åŠ›çŠ¶æ³ = 0
 	RESETCOLOR
 	CALL VAR_NAYAMI_SET_ASSIST(TARGET)
 ENDIF
 
-IF CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) >= 100
-		CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 100
-	L_GET_AP = CFlag:(4300+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) * 15 / 10
-	CFlag:Zl_”Y‚Ý‘O‰ñŒ‹‰Ê = 3		;‘O‰ñŒ‹‰Ê•\Ž¦—p
+IF CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) >= 100
+		CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 100
+	L_GET_AP = CFlag:(4300+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) * 15 / 10
+	CFlag:ä½äºº_æ‚©ã¿å‰å›žçµæžœ = 3		;å‰å›žçµæžœè¡¨ç¤ºç”¨
 
 	SETCOLOR 0,250,250
-	PRINTFORML %CALLNAME:MASTER%‚Ì—Í“Y‚¦‚É‚æ‚èA%CALLNAME%‚ª•ø‚¦‚Ä‚¢‚½”Y‚Ý‚ðˆê‚Â‰ðŒˆ‚µ‚Ü‚µ‚½I
-	PRINTFORMW yÅ‘åAPz{Flag:“sŽs_Å‘åAP}@¨@{Flag:“sŽs_Å‘åAP+L_GET_AP}
-	Flag:“sŽs_Å‘åAP += L_GET_AP
-	Flag:“sŽs_Œ»ÝAP += L_GET_AP / 2
-	IF CFlag:ŠÖŒW’iŠK == 0 && (CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð >= 10)
-		CFlag:ŠÖŒW’iŠK = 1
-		SIF ABL:e–§ < 9
-			ABL:e–§ += 1
-		SIF ABL:˜U— < 9
-			ABL:˜U— += 1
-		PRINTFORMW “ñl‚ÌŠÖŒW‚ªyŠçŒ©’m‚èz‚©‚çy—Flz‚É‚È‚è‚Ü‚µ‚½B
+	PRINTFORML %CALLNAME:MASTER%ã®åŠ›æ·»ãˆã«ã‚ˆã‚Šã€%CALLNAME%ãŒæŠ±ãˆã¦ã„ãŸæ‚©ã¿ã‚’ä¸€ã¤è§£æ±ºã—ã¾ã—ãŸï¼
+	PRINTFORMW ã€æœ€å¤§APã€‘{Flag:éƒ½å¸‚_æœ€å¤§AP}ã€€â†’ã€€{Flag:éƒ½å¸‚_æœ€å¤§AP+L_GET_AP}
+	Flag:éƒ½å¸‚_æœ€å¤§AP += L_GET_AP
+	Flag:éƒ½å¸‚_ç¾åœ¨AP += L_GET_AP / 2
+	IF CFlag:é–¢ä¿‚æ®µéšŽ == 0 && (CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž >= 10)
+		CFlag:é–¢ä¿‚æ®µéšŽ = 1
+		SIF ABL:è¦ªå¯† < 9
+			ABL:è¦ªå¯† += 1
+		SIF ABL:ç¯­çµ¡ < 9
+			ABL:ç¯­çµ¡ += 1
+		PRINTFORMW äºŒäººã®é–¢ä¿‚ãŒã€é¡”è¦‹çŸ¥ã‚Šã€‘ã‹ã‚‰ã€å‹äººã€‘ã«ãªã‚Šã¾ã—ãŸã€‚
 	ENDIF
-	IF CFlag:ŠÖŒW’iŠK == 1 && (CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð <= 9)
-		CFlag:ŠÖŒW’iŠK = 2
-		SIF ABL:e–§ < 9
-			ABL:e–§ += 1
-		SIF ABL:˜U— < 9
-			ABL:˜U— += 1
-		PRINTFORMW “ñl‚ÌŠÖŒW‚ªy—Flz‚©‚çye—Fz‚É‚È‚è‚Ü‚µ‚½B
+	IF CFlag:é–¢ä¿‚æ®µéšŽ == 1 && (CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž <= 9)
+		CFlag:é–¢ä¿‚æ®µéšŽ = 2
+		SIF ABL:è¦ªå¯† < 9
+			ABL:è¦ªå¯† += 1
+		SIF ABL:ç¯­çµ¡ < 9
+			ABL:ç¯­çµ¡ += 1
+		PRINTFORMW äºŒäººã®é–¢ä¿‚ãŒã€å‹äººã€‘ã‹ã‚‰ã€è¦ªå‹ã€‘ã«ãªã‚Šã¾ã—ãŸã€‚
 	ENDIF
-	IF CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) == 100
-		CFlag:(4000+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 0
-		CFlag:(4100+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 0
-		CFlag:(4200+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 0
-		CFlag:(4300+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 0
-		CFlag:(4400+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 0
-		CFlag:(4500+CFlag:Zl_”Y‚Ý‰ðŒˆ‘I‘ð) = 0
+	IF CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) == 100
+		CFlag:(4000+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 0
+		CFlag:(4100+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 0
+		CFlag:(4200+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 0
+		CFlag:(4300+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 0
+		CFlag:(4400+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 0
+		CFlag:(4500+CFlag:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž) = 0
 	ENDIF
-	CFLAG:Zl_”Y‚Ý‰ðŒˆ‘I‘ð = 0
+	CFLAG:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž = 0
 	CALL VAR_NAYAMI_SET_ASSIST(TARGET)
 ENDIF
 RESETCOLOR
@@ -440,28 +440,28 @@ RESETCOLOR
 
 
 ;-------------------------------------------------
-;RPG‰ñ•œ
+;RPGå›žå¾©
 ;-------------------------------------------------
 @TURN_EVENT_RPG_P
 
-IF CFlag:Zl_Œ»Ý‘Ì—Í != CFlag:Zl_Å‘å‘Ì—Í && CFlag:Zl_Œ»Ý‹C—Í != CFlag:Zl_Å‘å‹C—Í
+IF CFlag:ä½äºº_ç¾åœ¨ä½“åŠ› != CFlag:ä½äºº_æœ€å¤§ä½“åŠ› && CFlag:ä½äºº_ç¾åœ¨æ°—åŠ› != CFlag:ä½äºº_æœ€å¤§æ°—åŠ›
 	DRAWLINE
 	SETCOLOR 0,250,250
-	PRINTFORML %CALLNAME%‚Í‹xŒe‚ðŽæ‚èA‘Ì—Í‚ð‰ñ•œ‚³‚¹‚½B
+	PRINTFORML %CALLNAME%ã¯ä¼‘æ†©ã‚’å–ã‚Šã€ä½“åŠ›ã‚’å›žå¾©ã•ã›ãŸã€‚
 	RESETCOLOR
 	DRAWLINE
 ENDIF
-CFlag:Zl_Œ»Ý‘Ì—Í += CFlag:Zl_Å‘å‘Ì—Í/2
-CFlag:Zl_Œ»Ý‹C—Í = CFlag:Zl_Å‘å‹C—Í
-CFlag:Zl_Œ»ÝBRE = CFlag:Zl_Å‘åBRE
+CFlag:ä½äºº_ç¾åœ¨ä½“åŠ› += CFlag:ä½äºº_æœ€å¤§ä½“åŠ›/2
+CFlag:ä½äºº_ç¾åœ¨æ°—åŠ› = CFlag:ä½äºº_æœ€å¤§æ°—åŠ›
+CFlag:ä½äºº_ç¾åœ¨BRE = CFlag:ä½äºº_æœ€å¤§BRE
 
-SIF CFlag:Zl_Œ»Ý‘Ì—Í >= CFlag:Zl_Å‘å‘Ì—Í
-	CFlag:Zl_Œ»Ý‘Ì—Í = CFlag:Zl_Å‘å‘Ì—Í
+SIF CFlag:ä½äºº_ç¾åœ¨ä½“åŠ› >= CFlag:ä½äºº_æœ€å¤§ä½“åŠ›
+	CFlag:ä½äºº_ç¾åœ¨ä½“åŠ› = CFlag:ä½äºº_æœ€å¤§ä½“åŠ›
 
 
 
 ;-------------------------------------------------
-;vŒ£
+;è²¢çŒ®
 ;-------------------------------------------------
 @TURN_EVENT_CITY_EXP
 #DIM L_T
@@ -480,34 +480,34 @@ L_B = 0
 L_LOOP = 0
 
 
-IF CFlag:Zl_‘®« == 2
+IF CFlag:ä½äºº_å±žæ€§ == 2
 	L_T = 80
-ELSEIF CFlag:Zl_‘®« == 1
+ELSEIF CFlag:ä½äºº_å±žæ€§ == 1
 	L_T = 20
 ELSE
 	L_T = 50
 ENDIF
 
-L_FC = FLAG:“sŽs_‡Œvƒtƒ@ƒ“”
+L_FC = FLAG:éƒ½å¸‚_åˆè¨ˆãƒ•ã‚¡ãƒ³æ•°
 
 SIF L_FC >= 50000000
 	L_FC = 50000000
-IF Talent:ƒAƒCƒhƒ‹ != 0
+IF Talent:ã‚¢ã‚¤ãƒ‰ãƒ« != 0
 	L_FH = 4000
-ELSEIF Talent:ŽÐ‰ïl != 0
+ELSEIF Talent:ç¤¾ä¼šäºº != 0
 	L_FH = 5000
-ELSEIF Talent:Šw¶
+ELSEIF Talent:å­¦ç”Ÿ
 	L_FH = 5000
-ELSEIF Talent:©•w != 0
+ELSEIF Talent:å¨¼å©¦ != 0
 	L_FH = 7000
-ELSEIF Talent:¹EŽÒ != 0
+ELSEIF Talent:è–è·è€… != 0
 	L_FH = 500
-	SIF RAND:10 > 4 && CFlag:Zl_ƒJƒ‹ƒ} >= 1
-		CFlag:Zl_ƒJƒ‹ƒ} -= 1
-ELSEIF Talent:ƒƒCƒh != 0
+	SIF RAND:10 > 4 && CFlag:ä½äºº_ã‚«ãƒ«ãƒž >= 1
+		CFlag:ä½äºº_ã‚«ãƒ«ãƒž -= 1
+ELSEIF Talent:ãƒ¡ã‚¤ãƒ‰ != 0
 	L_FH = 500
-	IF Flag:“sŽs_Œ»ÝAP <= Flag:“sŽs_Å‘åAP
-		Flag:“sŽs_Œ»ÝAP += (EXP:‹Æ–±ŒoŒ±/40)+1
+	IF Flag:éƒ½å¸‚_ç¾åœ¨AP <= Flag:éƒ½å¸‚_æœ€å¤§AP
+		Flag:éƒ½å¸‚_ç¾åœ¨AP += (EXP:æ¥­å‹™çµŒé¨“/40)+1
 	ENDIF
 ELSE
 	L_FH = 2000
@@ -522,34 +522,34 @@ IF L_FH >= L_FC
 ENDIF
 
 
-SIF TALENT:î•w == 1
-	L_S = (EXP:”„tŒoŒ±+50)/50
+SIF TALENT:æƒ…å©¦ == 1
+	L_S = (EXP:å£²æ˜¥çµŒé¨“+50)/50
 
 
 
-SIF CFlag:Zl_vŒ£’l <= 0
-	CFlag:Zl_vŒ£’l = 1
+SIF CFlag:ä½äºº_è²¢çŒ®å€¤ <= 0
+	CFlag:ä½äºº_è²¢çŒ®å€¤ = 1
 
 
-SIF TALENT:‡ˆÓ == 1
-	L_B = (CFlag:Zl_vŒ£’l/2)+1
+SIF TALENT:åˆæ„ == 1
+	L_B = (CFlag:ä½äºº_è²¢çŒ®å€¤/2)+1
 
 
-IF (((CFlag:Zl_’nˆÊ)*10)+((CFlag:Zl_vŒ£’l)*10)+RAND:10) >= RAND:100
+IF (((CFlag:ä½äºº_åœ°ä½)*10)+((CFlag:ä½äºº_è²¢çŒ®å€¤)*10)+RAND:10) >= RAND:100
 	IF L_T >= RAND:100
-		;Ž{Ý(ˆ«)
-		Flag:(4150+RAND:6) += (((RAND:(CFlag:Zl_vŒ£’l)+1)+L_B)*(L_FH2+1))+L_S
-		Flag:“sŽs_— ŽÐ‰ï += (RAND:(CFlag:Zl_vŒ£’l)+1)+L_B+RAND:(CFlag:Zl_vŒ£’l*2)
-		Flag:“sŽs_•\ŽÐ‰ï -= (RAND:(CFlag:Zl_vŒ£’l)+1)+L_B
+		;æ–½è¨­(æ‚ª)
+		Flag:(4150+RAND:6) += (((RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤)+1)+L_B)*(L_FH2+1))+L_S
+		Flag:éƒ½å¸‚_è£ç¤¾ä¼š += (RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤)+1)+L_B+RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤*2)
+		Flag:éƒ½å¸‚_è¡¨ç¤¾ä¼š -= (RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤)+1)+L_B
 	ELSE
-		;Ž{Ý(‘P)
-		Flag:(4101+RAND:7) += (((RAND:(CFlag:Zl_vŒ£’l)+1)+L_B)*(L_FH2+1))+L_S
-		Flag:“sŽs_— ŽÐ‰ï -= (RAND:(CFlag:Zl_vŒ£’l)+1)+L_B+RAND:(CFlag:Zl_vŒ£’l*2)
-		Flag:“sŽs_•\ŽÐ‰ï += (RAND:(CFlag:Zl_vŒ£’l)+1)+L_B
+		;æ–½è¨­(å–„)
+		Flag:(4101+RAND:7) += (((RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤)+1)+L_B)*(L_FH2+1))+L_S
+		Flag:éƒ½å¸‚_è£ç¤¾ä¼š -= (RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤)+1)+L_B+RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤*2)
+		Flag:éƒ½å¸‚_è¡¨ç¤¾ä¼š += (RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤)+1)+L_B
 	ENDIF
 
-Flag:“sŽs_ŒoŒ±’l += (RAND:(CFlag:Zl_vŒ£’l))+1+L_B
-Flag:“sŽs_¡Šú‚ÌvŒ£’l += RAND:((CFlag:Zl_vŒ£’l)+1+L_B)
+Flag:éƒ½å¸‚_çµŒé¨“å€¤ += (RAND:(CFlag:ä½äºº_è²¢çŒ®å€¤))+1+L_B
+Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤ += RAND:((CFlag:ä½äºº_è²¢çŒ®å€¤)+1+L_B)
 
 ENDIF
 REPEAT 99
@@ -561,39 +561,39 @@ REPEAT 99
 REND
 
 
-FLAG:“sŽs_‡Œvƒtƒ@ƒ“” += CFLAG:ƒtƒ@ƒ“‚Ì”
+FLAG:éƒ½å¸‚_åˆè¨ˆãƒ•ã‚¡ãƒ³æ•° += CFLAG:ãƒ•ã‚¡ãƒ³ã®æ•°
 
-IF Flag:“sŽs_ŒoŒ±’l >= (Flag:“sŽs_Lv)*10
-	Flag:“sŽs_Lv += 1
-	Flag:“sŽs_ŒoŒ±’l = 0
+IF Flag:éƒ½å¸‚_çµŒé¨“å€¤ >= (Flag:éƒ½å¸‚_Lv)*10
+	Flag:éƒ½å¸‚_Lv += 1
+	Flag:éƒ½å¸‚_çµŒé¨“å€¤ = 0
 ENDIF
 
-SIF Flag:“sŽs_— ŽÐ‰ï <= 0
-	Flag:“sŽs_— ŽÐ‰ï = 0
-SIF Flag:“sŽs_•\ŽÐ‰ï  <= 0
-	Flag:“sŽs_•\ŽÐ‰ï  = 0
+SIF Flag:éƒ½å¸‚_è£ç¤¾ä¼š <= 0
+	Flag:éƒ½å¸‚_è£ç¤¾ä¼š = 0
+SIF Flag:éƒ½å¸‚_è¡¨ç¤¾ä¼š  <= 0
+	Flag:éƒ½å¸‚_è¡¨ç¤¾ä¼š  = 0
 
-Flag:“sŽs_Œ÷Ñ += RAND:(((EXP:‹Æ–±ŒoŒ±+1)/100)+3)
+Flag:éƒ½å¸‚_åŠŸç¸¾ += RAND:(((EXP:æ¥­å‹™çµŒé¨“+1)/100)+3)
 
-MONEY += (Flag:“sŽs_Lv+1)*70+(RAND:(Flag:“sŽs_Lv+1)*70)
+MONEY += (Flag:éƒ½å¸‚_Lv+1)*70+(RAND:(Flag:éƒ½å¸‚_Lv+1)*70)
 
 
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰—ˆ–KƒCƒxƒ“ƒg§Œä
+;ã‚­ãƒ£ãƒ©æ¥è¨ªã‚¤ãƒ™ãƒ³ãƒˆåˆ¶å¾¡
 ;-------------------------------------------------
 @TURN_EVENT_CAFE_CHARA_MAIN
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIM  CHARA_LIST, 1000 ;ƒLƒƒƒ‰ˆê——
-#DIM  CHARA_CNT        ;ƒLƒƒƒ‰ƒJƒEƒ“ƒ^
-#DIMS DUMMY            ;REF‘Îô‚Å“n‚·‚¾‚¯
+#DIM  CHARA_LIST, 1000 ;ã‚­ãƒ£ãƒ©ä¸€è¦§
+#DIM  CHARA_CNT        ;ã‚­ãƒ£ãƒ©ã‚«ã‚¦ãƒ³ã‚¿
+#DIMS DUMMY            ;REFå¯¾ç­–ã§æ¸¡ã™ã ã‘
 CALLF MEMBER_LIST_ALL("CAFE", CHARA_LIST, CHARA_CNT)
-CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "DŠ´“x@@@~‡", DUMMY)
-CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "‹¦—Íó‹µ~‡", DUMMY)
+CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "å¥½æ„Ÿåº¦ã€€ã€€ã€€é™é †", DUMMY)
+CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "å”åŠ›çŠ¶æ³é™é †", DUMMY)
 FOR LOCAL, 0, CHARA_CNT
-	PRINTFORMW ƒJƒtƒF‚Å‚­‚Â‚ë‚®%CALLNAME:MASTER%‚Ì‚à‚Æ‚É%CALLNAME:(CHARA_LIST:LOCAL)%‚ª‚â‚Á‚Ä‚«‚½EEE
+	PRINTFORMW ã‚«ãƒ•ã‚§ã§ãã¤ã‚ã%CALLNAME:MASTER%ã®ã‚‚ã¨ã«%CALLNAME:(CHARA_LIST:LOCAL)%ãŒã‚„ã£ã¦ããŸãƒ»ãƒ»ãƒ»
 	CALL TURN_EVENT_CAFE_CHARA_COMING(CHARA_LIST:LOCAL)
 	SIF RESULT < 0
 		RETURN
@@ -601,10 +601,10 @@ NEXT
 
 
 
-;‚ ‚È‚½‚Ì‚à‚Æ‚ÉƒLƒƒƒ‰‚ª‚â‚Á‚Ä‚­‚éƒCƒxƒ“ƒg
+;ã‚ãªãŸã®ã‚‚ã¨ã«ã‚­ãƒ£ãƒ©ãŒã‚„ã£ã¦ãã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
 @TURN_EVENT_CAFE_CHARA_COMING(C_ID)
-#DIM C_ID    ;ƒLƒƒƒ‰‚Ì“o˜^”Ô†
-#DIM L_INPUT ;“ü—Í“à—e‚ÌˆêŽž•ÛŽ
+#DIM C_ID    ;ã‚­ãƒ£ãƒ©ã®ç™»éŒ²ç•ªå·
+#DIM L_INPUT ;å…¥åŠ›å†…å®¹ã®ä¸€æ™‚ä¿æŒ
 PRINTFORML 
 DRAWLINE
 CALL NAYAMI_PAGE(C_ID)
@@ -612,49 +612,49 @@ CALL C_PICTURE_T(C_ID)
 CALL INFO_CITY_BASE
 DRAWLINE
 PRINTFORML 
-IF FLAG:“sŽs_Œ»ÝTP <= 0
-	PRINTFORML [-] - TP•s‘«‚Å‚·
+IF FLAG:éƒ½å¸‚_ç¾åœ¨TP <= 0
+	PRINTFORML [-] - TPä¸è¶³ã§ã™
 ELSEIF VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID)
-	PRINTFORML [3] - ”Y‚Ý‚ð•·‚­(TP:1)
+	PRINTFORML [3] - æ‚©ã¿ã‚’èžã(TP:1)
 ELSE
-	PRINTFORML [3] - ˜b‚ð‚·‚é@(TP:1)
+	PRINTFORML [3] - è©±ã‚’ã™ã‚‹ã€€(TP:1)
 ENDIF
-PRINTFORML [2] - “K“–‚É‚ ‚µ‚ç‚¤i‘¼‚Ì–º‚ð‘Ò‚Âj
-PRINTFORML [1] - BPÛŽæ
+PRINTFORML [2] - é©å½“ã«ã‚ã—ã‚‰ã†ï¼ˆä»–ã®å¨˜ã‚’å¾…ã¤ï¼‰
+PRINTFORML [1] - BPæ‘‚å–
 PRINTFORML 
-PRINTFORML [0] - ”Y‚Ý‘Š’kI—¹i‘SƒLƒƒƒ‰j
+PRINTFORML [0] - æ‚©ã¿ç›¸è«‡çµ‚äº†ï¼ˆå…¨ã‚­ãƒ£ãƒ©ï¼‰
 DO
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 3
-		IF FLAG:“sŽs_Œ»ÝTP <= 0
-			CALL C_INPUT_ERROR("TP•s‘«‚Å‚·")
+		IF FLAG:éƒ½å¸‚_ç¾åœ¨TP <= 0
+			CALL C_INPUT_ERROR("TPä¸è¶³ã§ã™")
 			CONTINUE
 		ENDIF
 		IF VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID)
 			CALL NAYAMI_CHALLENGE(C_ID)
 			IF RESULT
-				FLAG:“sŽs_Œ»ÝTP --
-				CFLAG:C_ID:Zl_”Y‚Ý‹¦—Íó‹µ = 1
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP --
+				CFLAG:C_ID:ä½äºº_æ‚©ã¿å”åŠ›çŠ¶æ³ = 1
 				RETURN
 			ENDIF
 		ELSE
-			FLAG:“sŽs_Œ»ÝTP --
+			FLAG:éƒ½å¸‚_ç¾åœ¨TP --
 			CALL CAFE_TALK2(C_ID)
 		ENDIF
 	CASE 2
-		PRINTFORMW “K“–‚É‚ ‚µ‚ç‚Á‚Ä‘¼‚Ì–º‚ª—ˆ‚é‚Ì‚ð‘Ò‚Á‚½
+		PRINTFORMW é©å½“ã«ã‚ã—ã‚‰ã£ã¦ä»–ã®å¨˜ãŒæ¥ã‚‹ã®ã‚’å¾…ã£ãŸ
 		PRINTFORML 
 		RETURN
 	CASE 1
 		CALL SYSTEM_BP
 	CASE 0
-		PRINTFORML ¡“ú‚Í‚±‚Ì‚Ö‚ñ‚Å‚â‚ß‚Ä‚¨‚±‚¤
+		PRINTFORML ä»Šæ—¥ã¯ã“ã®ã¸ã‚“ã§ã‚„ã‚ã¦ãŠã“ã†
 		RETURN -1
 	CASEELSE
 		$RETRY
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
 	BREAK

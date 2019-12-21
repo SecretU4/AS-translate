@@ -1,250 +1,250 @@
-;-------------------------------------------------
-;���������ێ��ǈ�
+﻿;-------------------------------------------------
+;悪徳治安維持局員
 ;-------------------------------------------------
 @TURN_EVENT_AKTKC
 #DIM L_INPUT
 #DIM L_S
 
-;����
-IF CFLAG:���������ێ��ǈ� == 0
+;初回
+IF CFLAG:悪徳治安維持局員 == 0
 	DRAWLINE
 	SETCOLOR 150,250,150
-	PRINTFORML �y���������ێ��ǈ�(�J���}):%CALLNAME%�z
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
 	RESETCOLOR
 	PRINTFORML 
-	PRINTFORML �߂炦���C���M�����[�̈�l����A�W�g�̏��𓾂�%CALLNAME%��́A�������ɎQ�����Ă����B
-	PRINTFORML ���������Ƃ��Đ^����ɃA�W�g�֓��ݍ���%CALLNAME%�͌������e������J��L���Ȃ���C���M�����[���E�Q�A�ߔ����Ă����B
-	PRINTFORML ���������S�ɐ�������%CALLNAME%�͌㑱�̑{���ǂɘA�������A�����܂ŃA�W�g���őҋ@���邱�ƂɂȂ����B
-	PRINTFORML ���������C���M�����[�͂����Ē������͂Ȃ����A�����ɓ]�����@���ʉ݁A����e��̗ʂ����O��ɑ����B
-	PRINTFORML �l�g�����̂��߂��A����Ƃ����~�����̂��߂��A�f�v���ꂽ�ł��낤�����̕ی�l�����񌅂ɏ�����B
-	PRINTFORML ����قǑ傫�ȑg�D��ׂ����ƂȂ�΁A���ʂ͎������悭�Ȃ�J�܋������҂ł��邾�낤�B
-	PRINTFORML �����炻�̎g�����Ɏv����y���Ă���%CALLNAME%�́A�����̏㊯���ʉ݂̈ꕔ�����ɂ��܂����񂾂��Ƃɔ������x�ꂽ�B
-	PRINTFORML �������e����̌�Ƃ������Ƃ������Ă��A���͂̓����͒N�����C�̔������l�q�ŎG�k�ɋ����Ă���B
-	PRINTFORML ���ɋC�Â����l�͂��Ȃ��l�q�����A�ǂ����悤���c
+	PRINTFORML 捕らえたイレギュラーの一人からアジトの情報を得た%CALLNAME%らは、鎮圧作戦に参加していた。
+	PRINTFORML 鎮圧部隊として真っ先にアジトへ踏み込んだ%CALLNAME%は激しい銃撃戦を繰り広げながらイレギュラーを殺害、捕縛していく。
+	PRINTFORML 内部を完全に制圧した%CALLNAME%は後続の捜査班に連絡を入れ、到着までアジト内で待機することになった。
+	PRINTFORML 武装したイレギュラーはさして珍しくはないが、室内に転がる違法薬や通貨、武器弾薬の量が桁外れに多い。
+	PRINTFORML 人身売買のためか、それとも性欲処理のためか、拉致されたであろう女性の保護人数も二桁に上った。
+	PRINTFORML これほど大きな組織を潰したとなれば、当面は治安もよくなり褒賞金も期待できるだろう。
+	PRINTFORML 今からその使い道に思いを馳せていた%CALLNAME%は、部隊の上官が通貨の一部を懐にしまい込んだことに反応が遅れた。
+	PRINTFORML 激しい銃撃戦の後ということもあってか、周囲の同僚は誰もが気の抜けた様子で雑談に興じている。
+	PRINTFORML 他に気づいた人はいない様子だが、どうしようか…
 	
 	PRINTFORML 
-	PRINTFORML [1] - �㊯�̒������w�E����
-	PRINTFORML [2] - �㊯�Ɋm�F�����
+	PRINTFORML [1] - 上官の着服を指摘する
+	PRINTFORML [2] - 上官に確認を取る
 	PRINTFORML 
 	
 	INPUT
 	L_INPUT = RESULT
 	
 	SELECTCASE L_INPUT
-	CASE 1	;�㊯�̒������w�E����
-		PRINTFORML �����s�ׂ͋��������̂ł͂Ȃ��B
-		PRINTFORML %CALLNAME%���E�C���o���ď㊯�̒������w�E����ƁA���͂̓����͑f���������ŏ㊯����艟�������B
-		PRINTFORML �㊯�̈ߕ�����͐�قǒ��������ʉ݈ȊO�ɂ������̓��i��������A���̌�̒��ׂœ���I�ɉ��̂⒅����
-		PRINTFORML �s���Ă������Ƃ����o�����B
-		PRINTFORML %CALLNAME%�͕s����\�������Ƃō���̒������ƍ��킹�č��z�ȖJ�܋����󂯎�邱�ƂɂȂ����c
+	CASE 1	;上官の着服を指摘する
+		PRINTFORML 着服行為は許されるものではない。
+		PRINTFORML %CALLNAME%が勇気を出して上官の着服を指摘すると、周囲の同僚は素早い動きで上官を取り押さえた。
+		PRINTFORML 上官の衣服からは先ほど着服した通貨以外にも多数の盗品が見つかり、その後の調べで日常的に横領や着服を
+		PRINTFORML 行っていたことが発覚した。
+		PRINTFORML %CALLNAME%は不正を暴いたことで今回の鎮圧作戦と合わせて高額な褒賞金を受け取ることになった…
 		PRINTFORML 
-		PRINTFORML %CALLNAME%�̃J���}���ቺ�����B
-		PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� {CFLAG:�Z�l_�J���}-5}
-		CFLAG:�Z�l_�J���} -= 5
-		;�t���O��܂�
-		CFLAG:���������ێ��ǈ� = -1
-	CASE 2	;�㊯�Ɋm�F�����
-		PRINTFORML �����������猩�ԈႢ��������Ȃ��B
-		PRINTFORML �O�̂��߂�%CALLNAME%���㊯�Ɋm�F�����ƁA�㊯�͊��̏�ɂ������ʉ݂�%CALLNAME%�̃|�P�b�g�ւƉ������񂾁B
-		PRINTFORML �u�C���M�����[�̂��̂Ȃ񂾂���A�����������Ƃ���ō���񂾂�B����Ɋ댯�蓖�̂悤�Ȃ��񂳁v
-		PRINTFORML ���ꂭ�炢�̖𓾂������Ɠ����b�オ�Ȃ����A�N�ł�����Ă��邱�Ƃ��Ə㊯�͏΂����B
-		PRINTFORML �c�m���ɂ��̒ʂ肩������Ȃ��B
-		PRINTFORML %CALLNAME%���㊯�ɕ���Ă����炩�̒ʉ݂𒅕�����ƁA�{���ǂɌ���̈��p�������ċA�҂����c
+		PRINTFORML %CALLNAME%のカルマが低下した。
+		PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ-5}
+		CFLAG:住人_カルマ -= 5
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
+	CASE 2	;上官に確認を取る
+		PRINTFORML もしかしたら見間違いかもしれない。
+		PRINTFORML 念のために%CALLNAME%が上官に確認を取ると、上官は机の上にあった通貨を%CALLNAME%のポケットへと押し込んだ。
+		PRINTFORML 「イレギュラーのものなんだから、多少減ったところで困らんだろ。それに危険手当のようなもんさ」
+		PRINTFORML これくらいの役得が無いと働き甲斐がないし、誰でもやっていることだと上官は笑った。
+		PRINTFORML …確かにその通りかもしれない。
+		PRINTFORML %CALLNAME%も上官に倣っていくらかの通貨を着服すると、捜査班に現場の引継ぎをして帰還した…
 		PRINTFORML 
-		IF CFLAG:�Z�l_�J���} >= 96
-			PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-			PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� 100
-			CFLAG:�Z�l_�J���} = 100
+		IF CFLAG:住人_カルマ >= 96
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+			CFLAG:住人_カルマ = 100
 		ELSE
-			PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-			PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� {CFLAG:�Z�l_�J���}+5}
-			CFLAG:�Z�l_�J���} += 5
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+5}
+			CFLAG:住人_カルマ += 5
 		ENDIF
-		;�t���O�𗧂Ă�
-		CFLAG:���������ێ��ǈ� = 1
-	CASEELSE	;���[�v�������ɏI���
-		PRINTFORML �ǂ����ׂ����Y��ł��邤���ɑ{���ǂ��������Ă��܂��A%CALLNAME%�͌���̈��p���ŖZ�����Ȃ��Ă��܂����B
-		PRINTFORMW �㊯�͕߂炦���C���M�����[��A��Đ�ɋǂւƖ߂��Ă��܂������߁A�@��𓦂��Ă��܂����c
-		;�t���O��܂�
-		CFLAG:���������ێ��ǈ� = -1
+		;フラグを立てる
+		CFLAG:悪徳治安維持局員 = 1
+	CASEELSE	;ループさせずに終わり
+		PRINTFORML どうすべきか悩んでいるうちに捜査班が到着してしまい、%CALLNAME%は現場の引継ぎで忙しくなってしまった。
+		PRINTFORMW 上官は捕らえたイレギュラーを連れて先に局へと戻ってしまったため、機会を逃してしまった…
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
 	ENDSELECT
-;����
-ELSEIF CFLAG:���������ێ��ǈ� == 1
+;二回目
+ELSEIF CFLAG:悪徳治安維持局員 == 1
 	DRAWLINE
 	SETCOLOR 150,250,150
-	PRINTFORML �y���������ێ��ǈ�(�J���}):%CALLNAME%�z
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
 	PRINTFORML 
-	PRINTFORML ��@���̔�����g�D�̓�����s���Ă���%CALLNAME%�ɑg�D�̑�����ڐG���������B
-	PRINTFORML ���𓾂邽�߂Ɍ��킳�ꂽ�j�ɉ���Ă݂�ƁA�j�͑�������������|���Ă����B
-	PRINTFORML �u���̒j��g�D�̃{�X�Ƃ��đߕ߂���B���������炱�̋�������Ă��v
-	PRINTFORML ���������Ēj�����̏�ɒu�����A�^�b�V���P�[�X�ɂ́A�����ێ��ǂ̋����Ƃ͔�ׂ��̂ɂȂ�Ȃ��قǂ̑����
-	PRINTFORML �l�ߍ��܂�Ă����B
-	PRINTFORML �g�D�͑{���̎肪�L�тĂ��邱�ƂɋC�Â��Ă���A���͂ⓥ�ݍ��܂��̂����Ԃ̖��Ɣc�����Ă���B
-	PRINTFORML �����Ŋ����̈�l���{�X�Ɏd���ďグ�A�����鎞�Ԃ��҂��̂��ƒj�͌�����B
-	PRINTFORML �f������ǂ�����̂��Ɛq�˂�%CALLNAME%�ɒj�͖����Ō��e�����o���Č������B
-	PRINTFORML ���Ƃ��f��C�̂Ȃ�����%CALLNAME%�̓A�^�b�V���P�[�X���󂯎��ƁA�j���瓾���U����񍐂���
-	PRINTFORML �����̈�l��g�D�̃{�X�Ɏd���ďグ���B
-	PRINTFORML ���̋U���ɂ�芲�����߂܂�Ƒ{���̎�͂�������~�܂�A���̌��ɖ{���̃{�X�͎p������܂����B
-	PRINTFORML ���m�ȏ��ł͂Ȃ��������Ƃ����ӂ��ꂽ%CALLNAME%���������A���̎茳�ɂ͑�ʂ̋�����������ł����c
+	PRINTFORML 違法薬を販売する組織の内偵を行っていた%CALLNAME%に組織の側から接触があった。
+	PRINTFORML 情報を得るために遣わされた男に会ってみると、男は早速取引を持ち掛けてきた。
+	PRINTFORML 「この男を組織のボスとして逮捕しろ。そうしたらこの金をくれてやる」
+	PRINTFORML そう言って男が机の上に置いたアタッシュケースには、治安維持局の給料とは比べものにならないほどの大金が
+	PRINTFORML 詰め込まれていた。
+	PRINTFORML 組織は捜査の手が伸びていることに気づいており、もはや踏み込まれるのも時間の問題と把握している。
+	PRINTFORML そこで幹部の一人をボスに仕立て上げ、逃げる時間を稼ぐのだと男は語った。
+	PRINTFORML 断ったらどうするのかと尋ねる%CALLNAME%に男は無言で拳銃を取り出して向けた。
+	PRINTFORML もとより断る気のなかった%CALLNAME%はアタッシュケースを受け取ると、男から得た偽情報を報告して
+	PRINTFORML 幹部の一人を組織のボスに仕立て上げた。
+	PRINTFORML この偽情報により幹部が捕まると捜査の手はいったん止まり、その隙に本物のボスは姿をくらませた。
+	PRINTFORML 正確な情報ではなかったことを叱責された%CALLNAME%だったが、その手元には大量の金が舞い込んでいた…
 	PRINTFORML 
-	IF CFLAG:�Z�l_�J���} >= 96
-		PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-		PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� 100
-		CFLAG:�Z�l_�J���} = 100
+	IF CFLAG:住人_カルマ >= 96
+		PRINTFORML %CALLNAME%のカルマが上昇した。
+		PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+		CFLAG:住人_カルマ = 100
 	ELSE
-		PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-		PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� {CFLAG:�Z�l_�J���}+5}
-		CFLAG:�Z�l_�J���} += 5
+		PRINTFORML %CALLNAME%のカルマが上昇した。
+		PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+5}
+		CFLAG:住人_カルマ += 5
 	ENDIF
 	RESETCOLOR
-	CFLAG:���������ێ��ǈ� += 1
-;�O���
-ELSEIF CFLAG:���������ێ��ǈ� == 2
+	CFLAG:悪徳治安維持局員 += 1
+;三回目
+ELSEIF CFLAG:悪徳治安維持局員 == 2
 	DRAWLINE
 	SETCOLOR 150,250,150
-	PRINTFORML �y���������ێ��ǈ�(�J���}):%CALLNAME%�z
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
 	PRINTFORML 
-	PRINTFORML ��@��̔̔������Ă����g�D�̃{�X�𓦂����Ă���%CALLNAME%�͑g�D�Ƃ̌��т������߂������B
-	PRINTFORML �{�����̗��o�A���l�̌������A�΍R�g�D�̟r�ŁA���������򕨂̉������B
-	PRINTFORML �\�����͋ΕׂȎ����ێ��ǈ��Ƃ��ē���%CALLNAME%�̎p�ɊF���x����A�g�D�̂��߂ɓ������̊��
-	PRINTFORML �N�����C�t���Ȃ��B
-	PRINTFORML �����%CALLNAME%�̒��΂Ԃ�ɖڂ������g�D�̃{�X�́A%CALLNAME%��ӎ`�ւƏ��҂����B
-	PRINTFORML �{�X�{�l�̌Ăяo���Ɍx������%CALLNAME%���������A���Ԃ͎v�������Ȃ������ւƐi�ށB
-	PRINTFORML �u%CALLNAME%�A���̏��ɂȂ�΂����Ɨǂ��v���������Ă�邪�c�ǂ����H�v
-	PRINTFORML �{�X�̌��t���I���Ȃ�������%CALLNAME%�̖ڂ̑O�ɂ͑�ʂ̂����Ɩ򕨂��ςݏグ���Ă����B
-	PRINTFORML �ꎞ�I�ɒׂ��ꂩ�����g�D���A��������l�̏�����ɓ���邽�߂ɂ��ꂾ���̑Ή���p�ӂł���B
-	PRINTFORML ���̈ꏕ�ƂȂ������o��%CALLNAME%�ɂ����邪�A�����܂őg�D�����������̂̓{�X�̎�r���낤�B
-	PRINTFORML ����Ȃ���̒j����u���O�ɂ͂��ꂾ���̉��l������̂��v�Ǝ����グ���Ĉ����C�̂��鏗�͂��Ȃ��B
-	PRINTFORML �����A�悭�l���Ȃ���΂Ȃ�Ȃ��B
-	PRINTFORML �����͎����ێ��ǈ��ł���A����̓C���M�����[�Ȃ̂��c
+	PRINTFORML 違法薬の販売をしていた組織のボスを逃がしてから%CALLNAME%は組織との結びつきを強めつつあった。
+	PRINTFORML 捜査情報の流出、売人の見逃し、対抗組織の殲滅、押収した薬物の横流し。
+	PRINTFORML 表向きは勤勉な治安維持局員として働く%CALLNAME%の姿に皆が騙され、組織のために働く裏の顔に
+	PRINTFORML 誰もが気付かない。
+	PRINTFORML そんな%CALLNAME%の忠勤ぶりに目をつけた組織のボスは、%CALLNAME%を晩餐へと招待した。
+	PRINTFORML ボス本人の呼び出しに警戒した%CALLNAME%だったが、事態は思いもよらない方向へと進む。
+	PRINTFORML 「%CALLNAME%、俺の女になればもっと良い思いをさせてやるが…どうだ？」
+	PRINTFORML ボスの言葉が終わらないうちに%CALLNAME%の目の前には大量のお金と薬物が積み上げられていく。
+	PRINTFORML 一時的に潰されかけた組織が、たった一人の女を手に入れるためにこれだけの対価を用意できる。
+	PRINTFORML その一助となった自覚が%CALLNAME%にもあるが、ここまで組織が復活したのはボスの手腕だろう。
+	PRINTFORML そんなやり手の男から「お前にはこれだけの価値があるのだ」と持ち上げられて悪い気のする女はいない。
+	PRINTFORML だが、よく考えなければならない。
+	PRINTFORML 自分は治安維持局員であり、相手はイレギュラーなのだ…
 	
 	PRINTFORML 
-	PRINTFORML [1] - �{�X�̏��ɂȂ�
-	PRINTFORML [2] - �f��
+	PRINTFORML [1] - ボスの女になる
+	PRINTFORML [2] - 断る
 	PRINTFORML 
 	
 	INPUT
 	L_INPUT = RESULT
 	
 	SELECTCASE L_INPUT
-	CASE 1	;�{�X�̏��ɂȂ�
-		PRINTFORML �����牽������K�v������̂��B
-		PRINTFORML %CALLNAME%���{�X�̐\���o���󂯓����ƁA�{�X��%CALLNAME%������������ĐQ���ւƒ��s�����B
-		PRINTFORML ���[�h���������������̂ł͂Ȃ��������A���݂��ɓG�΂��闧��ł���Ȃ�����̊֌W�����ԂƂ���
-		PRINTFORML �w�����ɋ������A��l�͖�x���܂Ő���オ�����c
+	CASE 1	;ボスの女になる
+		PRINTFORML 今さら何を迷う必要があるのだ。
+		PRINTFORML %CALLNAME%がボスの申し出を受け入れると、ボスは%CALLNAME%を抱きかかえて寝室へと直行した。
+		PRINTFORML ムードも何もあったものではなかったが、お互いに敵対する立場でありながら肉体関係を結ぶという
+		PRINTFORML 背徳感に興奮し、二人は夜遅くまで盛り上がった…
 		PRINTFORML 
-		IF CFLAG:�Z�l_�J���} >= 91
-			PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-			PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� 100
-			CFLAG:�Z�l_�J���} = 100
+		IF CFLAG:住人_カルマ >= 91
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+			CFLAG:住人_カルマ = 100
 		ELSE
-			PRINTFORML %CALLNAME%�̃J���}���㏸�����B
-			PRINTFORMW �J���}�@{CFLAG:�Z�l_�J���}} �� {CFLAG:�Z�l_�J���}+10}
-			CFLAG:�Z�l_�J���} += 10
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+10}
+			CFLAG:住人_カルマ += 10
 		ENDIF
-		;�t���O�𗧂Ă�
-		CFLAG:���������ێ��ǈ� += 1
+		;フラグを立てる
+		CFLAG:悪徳治安維持局員 += 1
 		
-		IF TALENT:�񏈏� == 0
-			TALENT:�񏈏� = 1
-			TCVAR:����_EXP_�����r�� = 1
+		IF TALENT:非処女 == 0
+			TALENT:非処女 = 1
+			TCVAR:履歴_EXP_処女喪失 = 1
 		ENDIF
-		IF TALENT:�`�񏈏� == 0
-			TALENT:�`�񏈏� = 1
-			TCVAR:����_EXP_�`�����r�� = 1
+		IF TALENT:Ａ非処女 == 0
+			TALENT:Ａ非処女 = 1
+			TCVAR:履歴_EXP_Ａ処女喪失 = 1
 		ENDIF
 		
-		SIF CSTR:�����������薼 == ""
-			CSTR:�����������薼 = �g�D�̃{�X
-		SIF CSTR:���`���������薼 == ""
-			CSTR:���`���������薼 = �g�D�̃{�X
-		SIF CSTR:���L�X���薼 == ""
-			CSTR:���L�X���薼 = �g�D�̃{�X
-		SIF CSTR:���t�F�����薼 == ""
-			CSTR:���t�F�����薼 = �g�D�̃{�X
-		SIF CSTR:���Ⓒ���薼 == ""
-			CSTR:���Ⓒ���薼 = �g�D�̃{�X
-		SIF CSTR:�����o�����薼 == ""
-			CSTR:�����o�����薼 = �g�D�̃{�X
+		SIF CSTR:初えっち相手名 == ""
+			CSTR:初えっち相手名 = 組織のボス
+		SIF CSTR:初Ａえっち相手名 == ""
+			CSTR:初Ａえっち相手名 = 組織のボス
+		SIF CSTR:初キス相手名 == ""
+			CSTR:初キス相手名 = 組織のボス
+		SIF CSTR:初フェラ相手名 == ""
+			CSTR:初フェラ相手名 = 組織のボス
+		SIF CSTR:初絶頂相手名 == ""
+			CSTR:初絶頂相手名 = 組織のボス
+		SIF CSTR:初中出し相手名 == ""
+			CSTR:初中出し相手名 = 組織のボス
 		CALL JN_SEX_EXP
 		
-	CASE 2	;�f��
-		PRINTFORML ���΂ɃC���M�����[�̒j�ƕt�������킯�ɂ͂����Ȃ��B
-		PRINTFORML %CALLNAME%���f��ƃ{�X���ʖڂŌ��X�ƍl���Ă����̂��A�����c�O�����ȕ\��𕂂��ׂȂ����
-		PRINTFORMW ��������ƈ������������B
+	CASE 2	;断る
+		PRINTFORML 流石にイレギュラーの男と付き合うわけにはいかない。
+		PRINTFORML %CALLNAME%が断るとボスも駄目で元々と考えていたのか、少し残念そうな表情を浮かべながらも
+		PRINTFORMW あっさりと引き下がった。
 		PRINTFORML 
-		PRINTFORML ���ꂩ�琔����A�g�D�͕ʃv���C���[�̓�������n��ɐi�o���悤�Ƃ��Ď��s����ł����B
-		PRINTFORML �g�D�ɏ������Ă����C���M�����[�̓{�X���܂ߑS�����������ꂽ�ƕ����A%CALLNAME%�͎��g�ɉЂ��y�΂���
-		PRINTFORMW �ς񂾂��Ƃ𖧂��Ɉ��g���A�Ȍ�͈��̑g�D�ƌq���邱�Ƃ��Ȃ��^�ʖڂɓ����������c
-		;�t���O��܂�
-		CFLAG:���������ێ��ǈ� = -1
-	CASEELSE	;���[�v�������ɏI���
-		PRINTFORML �����l�������Ăق����c�B
-		PRINTFORMW �l�����܂Ƃ܂�Ȃ�����%CALLNAME%�͓�����ۗ�����ƁA�Ȃ𗧂����c
+		PRINTFORML それから数日後、組織は別プレイヤーの統括する地域に進出しようとして失敗し壊滅した。
+		PRINTFORML 組織に所属していたイレギュラーはボスも含め全員が処分されたと聞き、%CALLNAME%は自身に禍が及ばずに
+		PRINTFORMW 済んだことを密かに安堵し、以後は悪の組織と繋がることもなく真面目に働き続けた…
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
+	CASEELSE	;ループさせずに終わり
+		PRINTFORML 少し考えさせてほしい…。
+		PRINTFORMW 考えがまとまらなかった%CALLNAME%は答えを保留すると、席を立った…
 		PRINTFORML 
-		PRINTFORML ���ꂩ�琔����A�g�D�͕ʃv���C���[�̓�������n��ɐi�o���悤�Ƃ��Ď��s����ł����B
-		PRINTFORML �g�D�ɏ������Ă����C���M�����[�̓{�X���܂ߑS�����������ꂽ�ƕ����A%CALLNAME%�͎��g�ɉЂ��y�΂���
-		PRINTFORMW �ς񂾂��Ƃ𖧂��Ɉ��g���A�Ȍ�͈��̑g�D�ƌq���邱�Ƃ��Ȃ��^�ʖڂɓ����������c
-		;�t���O��܂�
-		CFLAG:���������ێ��ǈ� = -1
+		PRINTFORML それから数日後、組織は別プレイヤーの統括する地域に進出しようとして失敗し壊滅した。
+		PRINTFORML 組織に所属していたイレギュラーはボスも含め全員が処分されたと聞き、%CALLNAME%は自身に禍が及ばずに
+		PRINTFORMW 済んだことを密かに安堵し、以後は悪の組織と繋がることもなく真面目に働き続けた…
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
 	ENDSELECT
-ELSEIF CFLAG:���������ێ��ǈ� >= 3
+ELSEIF CFLAG:悪徳治安維持局員 >= 3
 	DRAWLINE
 	SETCOLOR 150,250,150
-	PRINTFORML �y���������ێ��ǈ�(�J���}):%CALLNAME%�z
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
 	PRINTFORML 
-	PRINTFORML %CALLNAME%�͑g�D�̃{�X�Ƃ̈������y����ł���c
+	PRINTFORML %CALLNAME%は組織のボスとの逢瀬を楽しんでいる…
 	IF !RAND:5
-		PRINTFORML %CALLNAME%�͎��͂ɎU��΂����R���h�[������Ɏ��Ȃ���\����Ȃ��C���ɂȂ��Ă����B
-		PRINTFORML �D�P����Ε��e�͒N���Ƃ����b�ɂȂ邽�߁A�{�X�Ƃ̐��s�ׂł͈��S���ȊO�͏�ɔ�D���s���Ă���B
-		PRINTFORML �܂��C���M�����[�Ƃ̎q���s�s�Ɏ󂯓������\�����قږ������߁A��D�͕K�{�������B
-		PRINTFORML �K���Ȃ��ƂɃ{�X�������ێ��ǈ����C���M�����[�̎q��s�ނƂ������Ԃ������Ɋ댯�Ȃ��Ƃ�������
-		PRINTFORML ��D�ɋ��͓I�Ȃ��Ƃ��~���ł������B
-		PRINTFORMW ���߂Ă��ƃS�����琸�t�����ގp�ɋ��������{�X�ɉ����|����A%CALLNAME%�͖閾���܂ŗ��ꋶ�����c
+		PRINTFORML %CALLNAME%は周囲に散らばったコンドームを手に取りながら申し訳ない気分になっていた。
+		PRINTFORML 妊娠すれば父親は誰だという話になるため、ボスとの性行為では安全日以外は常に避妊を行っている。
+		PRINTFORML またイレギュラーとの子が都市に受け入れられる可能性もほぼ無いため、避妊は必須だった。
+		PRINTFORML 幸いなことにボスも治安維持局員がイレギュラーの子を孕むという事態がいかに危険なことか理解し
+		PRINTFORML 避妊に協力的なことが救いであった。
+		PRINTFORMW せめてもとゴムから精液を飲む姿に興奮したボスに押し倒され、%CALLNAME%は夜明けまで乱れ狂った…
 	ELSEIF !RAND:4
-		PRINTFORML ���S������������%CALLNAME%�̓{�X�Ƌv���Ԃ�̐��n�����y����ł����B
-		PRINTFORML �ٓ��Ɏ��X�ƕ�����Ă������t���S�Ȃ������i��葽���A��͂蒼�ڏ��̂𖡂킦�������������̂��낤�B
-		PRINTFORML �����{�X�͐^�����ɐ����邱�Ƃ��ł����A�������C���M�����[�Ƃ��Đ����邱�Ƃ͂ł��Ȃ��B
-		PRINTFORML ���݂��ɂ��ꂪ�����Ă��邩�炱���S�͂Ő����Ȃ����n�����y���ނ̂��B
-		PRINTFORMW �t�F���`�I�ŕ��������{�X�̃y�j�X���S���ɓ����Ȃ���A%CALLNAME%�͋C�₷��܂ŃZ�b�N�X���y���񂾁c
+		PRINTFORML 安全日が来たため%CALLNAME%はボスと久しぶりの生ハメを楽しんでいた。
+		PRINTFORML 胎内に次々と放たれていく精液も心なしか普段より多く、やはり直接女体を味わえる方が興奮するのだろう。
+		PRINTFORML だがボスは真っ当に生きることができず、自分もイレギュラーとして生きることはできない。
+		PRINTFORML お互いにそれが解っているからこそ全力で数少ない生ハメを楽しむのだ。
+		PRINTFORMW フェラチオで復活したボスのペニスを膣内に導きながら、%CALLNAME%は気絶するまでセックスを楽しんだ…
 	ELSEIF !RAND:3
-		PRINTFORML ���߂͂�����򂪖Ⴆ�邱�Ƃɏd�_��u���Ă���%CALLNAME%���������A�ŋ߂̓{�X�ɑ΂��Ĉ����̂悤�Ȃ��̂�
-		PRINTFORML �����n�߂Ă����B
-		PRINTFORML �����҂��˂ɐl�𓮂����ˁA�Ƃ�����΁u�v���C���[�v�Ƃ��ēs�s�𓮂����˂����邩������Ȃ��B
-		PRINTFORML ����������C���M�����[�Ƃ����ނ̗��ꂪ��΂ɋ����Ă���Ȃ��B
-		PRINTFORMW %CALLNAME%�̓{�X�̌�������D�������łȂ���{�X�Ɋ��Y���A���̐��E��Y���������c
+		PRINTFORML 初めはお金や薬が貰えることに重点を置いていた%CALLNAME%だったが、最近はボスに対して愛着のようなものも
+		PRINTFORML 抱き始めていた。
+		PRINTFORML 金を稼ぐ才に人を動かす才、ともすれば「プレイヤー」として都市を動かす才もあるかもしれない。
+		PRINTFORML だがそれもイレギュラーという彼の立場が絶対に許してくれない。
+		PRINTFORMW %CALLNAME%はボスの厚い胸板を優しく撫でながらボスに寄り添い、夢の世界を漂い続けた…
 	ELSEIF !RAND:2
-		PRINTFORML �ȑO�����ێ��ǈ��ɎE���ꂩ�������Ƃ�����Ƃ����C���M�����[�̒j��%CALLNAME%�͔Ƃ���Ă����B
-		PRINTFORML ��R����%CALLNAME%�����ɉ��������č���U�葱���Ă����j���������A�s�ӂɓ������~�܂�ٓ��ɐ��t���������B
-		PRINTFORML �S���ː�����đS�g�������点��%CALLNAME%�̔w�ォ��j�����ꗎ���A�Ȃ������ɓ�����˂����񂾁B
-		PRINTFORML �悭����ƒj�͊z������������▽���Ă���A�����̓����ɂ͌��e���\�����{�X�������Ă����B
-		PRINTFORML �������^���Ȃ��Ă��Ȃ��������Ƃ�l�т�{�X�ɁA%CALLNAME%���q���ꂽ�̂��㏑�����Ăق����Ƌ�����B
-		PRINTFORMW %CALLNAME%�͒j�̃y�j�X�̊��G��Y���܂Ń{�X�ƌ���葱�����c
+		PRINTFORML 以前治安維持局員に殺されかけたことがあるというイレギュラーの男に%CALLNAME%は犯されていた。
+		PRINTFORML 抵抗する%CALLNAME%を床に押さえつけて腰を振り続けていた男だったが、不意に動きが止まり胎内に精液が放たれる。
+		PRINTFORML 膣内射精されて全身を強張らせた%CALLNAME%の背後から男が崩れ落ち、なぜか床に頭から突っ込んだ。
+		PRINTFORML よく見ると男は額を撃ち抜かれ絶命しており、部屋の入口には拳銃を構えたボスが立っていた。
+		PRINTFORML 部下の躾がなっていなかったことを詫びるボスに、%CALLNAME%は穢された体を上書きしてほしいと強請る。
+		PRINTFORMW %CALLNAME%は男のペニスの感触を忘れるまでボスと交わり続けた…
 	ELSE
-		PRINTFORML �ō��̖򂪂ł����Ƃ����{�X�̊��߂ŃL���Z�N�ɗՂ�%CALLNAME%�͎O�\�����������Ɉӎ����������B
-		PRINTFORML �ӎ����߂���%CALLNAME%��S�z�����Ɍ��߂�{�X�ɁA�]�̐_�o���Ă��؂��񂶂�Ȃ����Ǝv���قǂ�
-		PRINTFORML ���͂ȉ����ŕa�݂��ɂȂ肻�����Ǝg�p����`����B
-		PRINTFORMW �o���̗ǂ�����ԃ{�X�Ƃ�����x��𕞗p���ăL���Z�N�ɗՂ�%CALLNAME%�͈ӎ����������c
+		PRINTFORML 最高の薬ができたというボスの勧めでキメセクに臨んだ%CALLNAME%は三十分ももたずに意識を失った。
+		PRINTFORML 意識が戻った%CALLNAME%を心配そうに見つめるボスに、脳の神経が焼き切れるんじゃないかと思うほどの
+		PRINTFORML 強力な快感で病みつきになりそうだと使用感を伝える。
+		PRINTFORMW 出来の良さを喜ぶボスともう一度薬を服用してキメセクに臨み%CALLNAME%は意識を失った…
 	ENDIF
 	
 	RESETCOLOR
-	CFLAG:���������ێ��ǈ� += 1
+	CFLAG:悪徳治安維持局員 += 1
 	
-	;�񐔂��d�˂邲�Ƃɔ��o����\����10%���A�b�v
-	L_S = CFLAG:���������ێ��ǈ� * 10
+	;回数を重ねるごとに発覚する可能性が10%ずつアップ
+	L_S = CFLAG:悪徳治安維持局員 * 10
 	
 	IF RAND:100 <= L_S
-		;���o�����ꍇ�A�t���O��܂�
+		;発覚した場合、フラグを折る
 		PRINTFORML 
-		PRINTFORML ��v���C���[�A%CALLNAME%�̓C���M�����[�ƒʂ��Ă��܂����B����͒f���ċ������s�ׂł͂���܂����
-		PRINTFORML ��ʏ�Ȃ�ΎE�������Ó��ȂƂ���ł����A�c�����ł��ˁA���Ȃ��Ȃ炻�������Ǝv���܂�����
-		PRINTFORML �፡��͓��ʂ�%CALLNAME%���L�������ɗ��߁A�Ăт��Ȃ��̊Ǌ����ɒu�����Ƃɂ��܂���
-		PRINTFORML ���x�ڂ͂���܂���A���ꂮ������Ӑ[���Ǘ����Ă��������ˁc�H��
+		PRINTFORML ≪プレイヤー、%CALLNAME%はイレギュラーと通じていました。これは断じて許される行為ではありません≫
+		PRINTFORML ≪通常ならば殺処分が妥当なところですが、…そうですね、あなたならそう言うと思いました≫
+		PRINTFORML ≪今回は特別に%CALLNAME%を記憶処理に留め、再びあなたの管轄下に置くことにします≫
+		PRINTFORML ≪二度目はありません、くれぐれも注意深く管理してくださいね…？≫
 		PRINTFORML 
-		PRINTFORMW %CALLNAME%�͋L���������s���A���ׂĂ̋L�����������c
+		PRINTFORMW %CALLNAME%は記憶処理が行われ、すべての記憶を失った…
 		
-		TALENT:�L��������= 1
-		CFLAG:���������ێ��ǈ� = -1
+		TALENT:記憶処理済= 1
+		CFLAG:悪徳治安維持局員 = -1
 		
 	ENDIF
 

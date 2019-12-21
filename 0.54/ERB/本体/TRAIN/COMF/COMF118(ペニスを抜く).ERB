@@ -1,55 +1,55 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:COMFxxx.ERB
-;	Facility	:TRAINƒRƒ}ƒ“ƒh(118:ƒyƒjƒX‚ð”²‚­)B
+;	Facility	:TRAINã‚³ãƒžãƒ³ãƒ‰(118:ãƒšãƒ‹ã‚¹ã‚’æŠœã)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;-------------------------------------------------
-; ƒƒ‚F
-;   ‰ðœ‚Ì‚Ý‚ÌƒRƒ}ƒ“ƒh
+; ãƒ¡ãƒ¢ï¼š
+;   è§£é™¤ã®ã¿ã®ã‚³ãƒžãƒ³ãƒ‰
 ;-------------------------------------------------
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E COM_FUNC_GET_NAME_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
-;	E COM_FUNC_ABLE_Xxxx				CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
-;	E COM_FUNC_INPUT_Xxxx				ƒRƒ}ƒ“ƒhŽÀsŠm”F
-;	E COM_FUNC_EXE_Xxxx				ƒRƒ}ƒ“ƒhŽÀs
-;	E COM_FUNC_SRC_Xxxx				ƒRƒ}ƒ“ƒhƒ\[ƒX
-;	E COM_FUNC_TRAIN_MSG_Xxxx			ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
-;	E COM_FUNC_GET_TYPE_Xxxx			Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;	ãƒ» COM_FUNC_GET_NAME_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
+;	ãƒ» COM_FUNC_ABLE_Xxxx				CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
+;	ãƒ» COM_FUNC_INPUT_Xxxx				ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œç¢ºèª
+;	ãƒ» COM_FUNC_EXE_Xxxx				ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
+;	ãƒ» COM_FUNC_SRC_Xxxx				ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
+;	ãƒ» COM_FUNC_TRAIN_MSG_Xxxx			ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+;	ãƒ» COM_FUNC_GET_TYPE_Xxxx			å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub COM_FUNC_GET_NAME_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 ; Output:
-;  RESULTS				ƒRƒ}ƒ“ƒh–¼Ì
+;  RESULTS				ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;-------------------------------------------------
 @COM_FUNC_GET_NAME_X118
-RESULTS = ƒyƒjƒX‚ð”²‚­
+RESULTS = ãƒšãƒ‹ã‚¹ã‚’æŠœã
 
 ;=================================================
 ;   sub COM_FUNC_ABLE_Xxxx
 ;=================================================
-;   CHK:ƒRƒ}ƒ“ƒhŽÀsðŒ
+;   CHK:ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œæ¡ä»¶
 ;-------------------------------------------------
 ; Output:
-;  RESULT				^‹U’l
+;  RESULT				çœŸå½å€¤
 ;-------------------------------------------------
 @COM_FUNC_ABLE_X118
 
-;- «Œð’†‚©‚Ç‚¤‚©
-SIF !TEQUIP:ƒ|ƒCƒ“ƒg«Œð
+;- æ€§äº¤ä¸­ã‹ã©ã†ã‹
+SIF !TEQUIP:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤
 	RETURN 0
 
 RETURN 1
@@ -57,10 +57,10 @@ RETURN 1
 ;=================================================
 ;   sub COM_FUNC_INPUT_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhŽÀsŠm”F
+;   ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œç¢ºèª
 ;-------------------------------------------------
 ; Output:
-;  RETURN				^‹U’l
+;  RETURN				çœŸå½å€¤
 ;-------------------------------------------------
 @COM_FUNC_INPUT_X118
 #DIM L_P
@@ -70,12 +70,12 @@ RETURN 1
 L_P = PLAYER
 L_T = TARGET
 
-TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð‘O‰ñ = TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð
+TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤å‰å›ž = TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤
 
-;- POSE:ƒŠƒZƒbƒg
-CALL POSE_RESET("‚o")
+;- POSE:ãƒªã‚»ãƒƒãƒˆ
+CALL POSE_RESET("ï¼°")
 
-TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð = [[TRAIN:–³‚µ]]
+TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤ = [[TRAIN:ç„¡ã—]]
 
 IF TR_PREV_SEX_V() || TR_PREV_SEX_A()
 	L_TMP = 0
@@ -85,25 +85,25 @@ ENDIF
 
 
 CALL C_LINE
-PRINTFORML ƒyƒjƒX‚ð”²‚­
+PRINTFORML ãƒšãƒ‹ã‚¹ã‚’æŠœã
 IF !L_TMP
-	PRINTFORMW %CALLNAME%‚©‚çƒyƒjƒX‚ðˆø‚«”²‚¢‚½c
+	PRINTFORMW %CALLNAME%ã‹ã‚‰ãƒšãƒ‹ã‚¹ã‚’å¼•ãæŠœã„ãŸâ€¦
 ELSE
-	PRINTFORMW %CALLNAME%‚ÌƒyƒjƒX‚ðˆø‚«”²‚¢‚½c
+	PRINTFORMW %CALLNAME%ã®ãƒšãƒ‹ã‚¹ã‚’å¼•ãæŠœã„ãŸâ€¦
 ENDIF
 PRINTL
-PRINTL ccc
-PRINTL cc
-PRINTL c
+PRINTL â€¦â€¦â€¦
+PRINTL â€¦â€¦
+PRINTL â€¦
 WAIT
 
-;‰ðœ‚¾‚¯‚Ìˆ×A0•Ô‚µ
+;è§£é™¤ã ã‘ã®ç‚ºã€0è¿”ã—
 RETURN 0
 
 ;=================================================
 ;   sub COM_FUNC_EXE_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhŽÀs
+;   ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œ
 ;-------------------------------------------------
 @COM_FUNC_EXE_X118
 
@@ -111,7 +111,7 @@ RETURN 0
 ;=================================================
 ;   sub COM_FUNC_SRC_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒ\[ƒX
+;   ã‚³ãƒžãƒ³ãƒ‰ã‚½ãƒ¼ã‚¹
 ;-------------------------------------------------
 @COM_FUNC_SRC_X118
 
@@ -119,7 +119,7 @@ RETURN 0
 ;=================================================
 ;   sub COM_FUNC_TRAIN_MSG_Xxxx
 ;=================================================
-;   ƒRƒ}ƒ“ƒhƒƒbƒZ[ƒW
+;   ã‚³ãƒžãƒ³ãƒ‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 ;-------------------------------------------------
 @COM_FUNC_TRAIN_MSG_X118
 
@@ -127,11 +127,11 @@ RETURN 0
 ;=================================================
 ;   sub COM_FUNC_GET_TYPE_Xxxx
 ;=================================================
-;   Žæ“¾:ƒRƒ}ƒ“ƒhŽí•Ê
+;   å–å¾—:ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 ; Output:
-;  RESULT				ƒRƒ}ƒ“ƒhŽí•Ê
+;  RESULT				ã‚³ãƒžãƒ³ãƒ‰ç¨®åˆ¥
 ;-------------------------------------------------
 @COM_FUNC_GET_TYPE_X118
-RETURN [[COMŽí•Ê:ƒRƒ~ƒ…Œn]]
+RETURN [[COMç¨®åˆ¥:ã‚³ãƒŸãƒ¥ç³»]]
 

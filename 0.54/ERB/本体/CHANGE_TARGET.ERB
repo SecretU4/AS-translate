@@ -1,31 +1,31 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CHANGE_TARGET.ERB
-;	Facility	:�^�[�Q�b�g�ύX�B
+;	Facility	:ターゲット変更。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
-;   002     2019/04/17      M                       ���x���\�����t�@�N�^�����O
+;	001		20XX/XX/XX		----					新規作成
+;   002     2019/04/17      M                       ラベル表示リファクタリング
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
-;	�E CHANGE_TARGET_MAIN				�^�[�Q�b�g�ύX���(�又��)
+;	・ CHANGE_TARGET_MAIN				ターゲット変更画面(主処理)
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub CHANGE_TARGET_MAIN
 ;=================================================
-;   �^�[�Q�b�g�ύX���(�又��)
+;   ターゲット変更画面(主処理)
 ;-------------------------------------------------
 @CHANGE_TARGET_MAIN
 #DIM L_INPUT
@@ -39,7 +39,7 @@
 #DIM L_NEXT
 
 ;-----------------------------
-;- ��������
+;- 初期処理
 ;-----------------------------
 
 L_INPUT=0
@@ -50,53 +50,53 @@ L_PAGE=0
 L_CNT_CHARA=0
 L_CNT_PRINT_CHARA=0
 
-; �L��������
+; キャラ総数
 L_CNT_CHARA = CHARANUM
 
-; �L�����\����/P
+; キャラ表示数/P
 L_CNT_PRINT_CHARA = 15
 
 ;-----------------------------
-;- �����J�n
+;- 処理開始
 ;-----------------------------
 REDRAW 0
 
 $PRINT_LIST
 
-;���C���\��:�V�y�[�W
+;ライン表示:新ページ
 CALL C_LINE
-PRINTFORML �����ΏۂɑI���������L������I��ł��������@��page.{L_PAGE}��
-PRINTFORML �I�𒆂̒����Ώۂ�TARGET�}�[�J�[���\������Ă��܂��B
-PRINTFORML �I���ł���̂́y���Ӂz�y��݁z�y�����ς݁z�����L�����݂̂ł��B
+PRINTFORML 逢引対象に選択したいキャラを選んでください　＜page.{L_PAGE}＞
+PRINTFORML 選択中の調教対象はTARGETマーカーが表示されています。
+PRINTFORML 選択できるのは【合意】【弱み】【調教済み】を持つキャラのみです。
 DRAWLINE
 
 L_I = 0
 WHILE 1
 
-	;SET:�J�n�l
+	;SET:開始値
 	SIF L_I < (L_PAGE * L_CNT_PRINT_CHARA)
 		L_I = (L_PAGE * L_CNT_PRINT_CHARA)
 
-	;�y�[�W�͈͊O
+	;ページ範囲外
 	SIF L_I >= ( (L_PAGE + 1) * L_CNT_PRINT_CHARA)
 		BREAK
 
-	;- �ő�L����������
+	;- 最大キャラ数超過
 	IF L_I >= L_CNT_CHARA
-		;��s
+		;空行
 		PRINTL
 
 	ELSE
 		PRINTFORM [%TOSTR(L_I),3%] 
 		IF L_I == MASTER
-			CALL PRINT_LABEL("MASTER",,COLOR("���F"))
-		ELSEIF CFLAG:L_I:�����Ώۃt���O
-			CALL PRINT_LABEL("TARGET",,COLOR("�s���N"))
+			CALL PRINT_LABEL("MASTER",,COLOR("水色"))
+		ELSEIF CFLAG:L_I:調教対象フラグ
+			CALL PRINT_LABEL("TARGET",,COLOR("ピンク"))
 		ELSE
-			PRINTFORM �@�@�@�@�@
+			PRINTFORM 　　　　　
 		ENDIF
 
-		;- �\��:�^�[�Q�b�g(�ڍ�)
+		;- 表示:ターゲット(詳細)
 		CALL INFO_TARGET_DETAIL(L_I, 1)
 		PRINTL
 	ENDIF
@@ -109,10 +109,10 @@ PRINTL
 L_PREV = (L_PAGE <= 0) ? 0 # 1
 L_NEXT = (L_PAGE >= (L_CNT_CHARA / L_CNT_PRINT_CHARA) ) ? 0 # 1
 
-PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]�O�̃y�[�W\@
-PRINTLC [1000]�߂�
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]前のページ\@
+PRINTLC [1000]戻る
 
-PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]���̃y�[�W\@
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]次のページ\@
 PRINTL 
 PRINTL 
 
@@ -121,65 +121,65 @@ INPUT
 L_INPUT = RESULT
 
 
-;- �\��:�y�[�W��
+;- 表示:ページ別
 SELECTCASE L_INPUT
-	;- �I��
+	;- 終了
 	CASE 1000
 		REDRAW 1
 		RETURN 0
-	;- �L����
+	;- キャラ
 	CASE 0 TO L_CNT_CHARA
-		IF CFLAG:L_INPUT:�����Ώۃt���O
+		IF CFLAG:L_INPUT:調教対象フラグ
 			;DRAWLINE
-			;PRINTFORMW %NAME:L_INPUT%���p�[�g�i�[���珜�O���܂���
-			CFLAG:L_INPUT:�����Ώۃt���O = 0
-			FLAG:�����Ώېl�� --
+			;PRINTFORMW %NAME:L_INPUT%をパートナーから除外しました
+			CFLAG:L_INPUT:調教対象フラグ = 0
+			FLAG:調教対象人数 --
 		ELSE
-			;- ��l
+			;- 主人
 			IF L_INPUT == MASTER
-				CALL C_INPUT_ERROR("��l�̓p�[�g�i�[�ɐݒ�o���܂���")
+				CALL C_INPUT_ERROR("主人はパートナーに設定出来ません")
 				GOTO INPUT_LOOP_1
-			;- �ő�l�ȏ�
-			ELSEIF FLAG:�����Ώېl�� >= 1
-				CALL C_INPUT_ERROR("�����l�����ő�̂��߁A����ȏ�͐ݒ�o���܂���")
+			;- 最大値以上
+			ELSEIF FLAG:調教対象人数 >= 1
+				CALL C_INPUT_ERROR("逢引人数が最大のため、これ以上は設定出来ません")
 				GOTO INPUT_LOOP_1
-			ELSEIF Talent:L_INPUT:���� == 0 && Talent:L_INPUT:��� == 0 && Talent:L_INPUT:�����ς� == 0
-				CALL C_INPUT_ERROR("��������������݂����Ă��܂���")
+			ELSEIF Talent:L_INPUT:合意 == 0 && Talent:L_INPUT:弱み == 0 && Talent:L_INPUT:調教済み == 0
+				CALL C_INPUT_ERROR("逢引する条件をみたしていません")
 				GOTO INPUT_LOOP_1
 			ELSE
-				;- VAR:�^�[�Q�b�g�ݒ�
+				;- VAR:ターゲット設定
 				SELECTCASE VAR_SET_TARGET(L_INPUT)
 					CASE 1
-						;INPUT�G���[�Ή�
-						CALL C_INPUT_ERROR("�j�������s�ł�")
+						;INPUTエラー対応
+						CALL C_INPUT_ERROR("男女混合不可です")
 						GOTO INPUT_LOOP_1
 					CASE 2
-						;INPUT�G���[�Ή�
-						CALL C_INPUT_ERROR("���l�̌^�A����A��l�^�͒����o���܂���")
+						;INPUTエラー対応
+						CALL C_INPUT_ERROR("小人体型、巨躯、非人型は調教出来ません")
 						GOTO INPUT_LOOP_1
 				ENDSELECT
 			ENDIF
 		ENDIF
-		;- VAR:���X�g�X�V
+		;- VAR:リスト更新
 		CALL VAR_MAKE_LIST
 
 		GOTO PRINT_LIST
-	;�O�̃y�[�W
+	;前のページ
 	CASE 1007
 		SIF !L_PREV
 			GOTO ERROR
 		L_PAGE -= 1
 		GOTO PRINT_LIST
-	;���̃y�[�W
+	;次のページ
 	CASE 1009
 		SIF !L_NEXT
 			GOTO ERROR
 		L_PAGE += 1
 		GOTO PRINT_LIST
-	;- ���̑�
+	;- その他
 	CASEELSE
 		$ERROR
-		;INPUT�G���[�Ή�
+		;INPUTエラー対応
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT

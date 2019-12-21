@@ -1,37 +1,37 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:DB_TALENT.ERB
-;	Facility	:ƒf[ƒ^ƒx[ƒX(TALENT)B
+;	Facility	:ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹(TALENT)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E DB_TALENT_NAME					DB:TALENT–¼Ì
+;	ãƒ» DB_TALENT_NAME					DB:TALENTåç§°
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub DB_TALENT_NAME
 ;=================================================
-;   DB:TALENT–¼Ì
+;   DB:TALENTåç§°
 ;-------------------------------------------------
 ; Input:
-;  ARG					‘ÎÛƒLƒƒƒ‰
-;  ARGS					‘ÎÛ’l
-;  ARG:1				CSV—Dæ
+;  ARG					å¯¾è±¡ã‚­ãƒ£ãƒ©
+;  ARGS					å¯¾è±¡å€¤
+;  ARG:1				CSVå„ªå…ˆ
 ; Output:
-;  RETURNF				ŒÂlPALAM–¼Ì(‘fŽ¿)
+;  RETURNF				å€‹äººPALAMåç§°(ç´ è³ª)
 ;-------------------------------------------------
 @DB_TALENT_NAME(ARG, ARGS, ARG:1=0)
 #FUNCTIONS
@@ -42,113 +42,113 @@
 L_STR = %ARGS%
 L_SEX = VAR_SEX(ARG, ARG:1)
 
-SIF L_STR == "ƒoƒXƒgƒTƒCƒY"
-	GOTO ƒoƒXƒgƒTƒCƒY
+SIF L_STR == "ãƒã‚¹ãƒˆã‚µã‚¤ã‚º"
+	GOTO ãƒã‚¹ãƒˆã‚µã‚¤ã‚º
 SIF STRLENS(L_STR) <= 0
 	RETURNF ""
 
-;- CSV—Dæ
+;- CSVå„ªå…ˆ
 IF ARG:1
 	L_VAL = CSVTALENT(ARG,GETNUM(TALENT,ARGS),0)
 ELSE
 	L_VAL = TALENT:ARG:ARGS
 ENDIF
 
-;CHK:‘ÎÛ’l
+;CHK:å¯¾è±¡å€¤
 SELECTCASE L_STR
 	;-----------------------------
-	;- ¡ ABL‘fŽ¿
+	;- â–  ABLç´ è³ª
 	;-----------------------------
 
 	;-----------------------------
-	;- ¡ ‘ÌŽ¿‘fŽ¿
+	;- â–  ä½“è³ªç´ è³ª
 	;-----------------------------
 
-	;«•Ê
-	CASE "ƒIƒgƒR"
+	;æ€§åˆ¥
+	CASE "ã‚ªãƒˆã‚³"
 		SELECTCASE L_VAL
 			CASE 0
-				L_STR = Š
+				L_STR = â™€
 			CASEELSE
-				L_STR = ‰
+				L_STR = â™‚
 		ENDSELECT
-	;”ñˆ—
-	CASE "”ñˆ—"
-		;—‚Ìê‡
+	;éžå‡¦å¥³
+	CASE "éžå‡¦å¥³"
+		;å¥³ã®å ´åˆ
 		IF L_SEX
 			SELECTCASE L_VAL
 				CASE 1
 					L_STR = 
 				CASE -1
-					L_STR = Ä¶ˆ—
+					L_STR = å†ç”Ÿå‡¦å¥³
 				CASEELSE
-					L_STR = ˆ—
+					L_STR = å‡¦å¥³
 			ENDSELECT
 		ELSE
 			L_STR = 
 		ENDIF
-	;”ñ“¶’å
-	CASE "”ñ“¶’å"
-		;’j‚Ìê‡
+	;éžç«¥è²ž
+	CASE "éžç«¥è²ž"
+		;ç”·ã®å ´åˆ
 		IF !L_SEX
 			IF L_VAL == 0
-				L_STR = “¶’å
+				L_STR = ç«¥è²ž
 			ELSE
 				L_STR = 
 			ENDIF
 		ELSE
 			L_STR = 
 		ENDIF
-	;‚`”ñˆ—
-	CASE "‚`”ñˆ—"
-		;—‚Ìê‡
-		IF L_SEX || FLAG:ƒo[ƒWƒ“ƒ‚[ƒh
+	;ï¼¡éžå‡¦å¥³
+	CASE "ï¼¡éžå‡¦å¥³"
+		;å¥³ã®å ´åˆ
+		IF L_SEX || FLAG:ãƒãƒ¼ã‚¸ãƒ³ãƒ¢ãƒ¼ãƒ‰
 			SELECTCASE L_VAL
 				CASE 1
 					L_STR = 
 				CASEELSE
-					L_STR = ‚`ˆ—
+					L_STR = ï¼¡å‡¦å¥³
 			ENDSELECT
 		ELSE
 			L_STR = 
 		ENDIF
 
-	;ƒoƒXƒgƒTƒCƒY
-	CASE "ƒoƒXƒgƒTƒCƒY"
-		$ƒoƒXƒgƒTƒCƒY
+	;ãƒã‚¹ãƒˆã‚µã‚¤ã‚º
+	CASE "ãƒã‚¹ãƒˆã‚µã‚¤ã‚º"
+		$ãƒã‚¹ãƒˆã‚µã‚¤ã‚º
 		L_STR=
 
-		;- CSV—Dæ
+		;- CSVå„ªå…ˆ
 		IF ARG:1
-			SIF CSVTALENT(ARG,GETNUM(TALENT,"â•Ç"),0)
-				L_STR = â•Ç
-			SIF CSVTALENT(ARG,GETNUM(TALENT,"•n“û"),0)
-				L_STR = •n“û
-			SIF CSVTALENT(ARG,GETNUM(TALENT,"‹“û"),0)
-				L_STR = ‹“û
-			SIF CSVTALENT(ARG,GETNUM(TALENT,"”š“û"),0)
-				L_STR = ”š“û
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"çµ¶å£"),0)
+				L_STR = çµ¶å£
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"è²§ä¹³"),0)
+				L_STR = è²§ä¹³
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"å·¨ä¹³"),0)
+				L_STR = å·¨ä¹³
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"çˆ†ä¹³"),0)
+				L_STR = çˆ†ä¹³
 		ELSE
-			SIF TALENT:ARG:â•Ç
-				L_STR = â•Ç
-			SIF TALENT:ARG:•n“û
-				L_STR = •n“û
-			SIF TALENT:ARG:‹“û
-				L_STR = ‹“û
-			SIF TALENT:ARG:”š“û
-				L_STR = ”š“û
+			SIF TALENT:ARG:çµ¶å£
+				L_STR = çµ¶å£
+			SIF TALENT:ARG:è²§ä¹³
+				L_STR = è²§ä¹³
+			SIF TALENT:ARG:å·¨ä¹³
+				L_STR = å·¨ä¹³
+			SIF TALENT:ARG:çˆ†ä¹³
+				L_STR = çˆ†ä¹³
 		ENDIF
 		SIF !STRLENS(L_STR)
-			L_STR = •“û
-		;’j‚Ìê‡
+			L_STR = æ™®ä¹³
+		;ç”·ã®å ´åˆ
 		SIF !L_SEX
 			L_STR = 
-	;‹¹
-	CASE "â•Ç", "•n“û", "‹“û", "”š“û"
+	;èƒ¸
+	CASE "çµ¶å£", "è²§ä¹³", "å·¨ä¹³", "çˆ†ä¹³"
 		L_STR = 
 
-	;K
-	CASE "‹K", "”šK"
+	;å°»
+	CASE "å·¨å°»", "çˆ†å°»"
 		IF ARG:1
 			IF CSVTALENT(ARG,GETNUM(TALENT, L_STR),0)
 				L_STR = %L_STR%
@@ -163,99 +163,99 @@ SELECTCASE L_STR
 			ENDIF
 		ENDIF
 
-	;‹@ŠB
-	CASE "‹@ŠB"
+	;æ©Ÿæ¢°
+	CASE "æ©Ÿæ¢°"
 		SIF L_SEX
-			L_STR = ‹@ŠB‚Ì‰³—
+			L_STR = æ©Ÿæ¢°ã®ä¹™å¥³
 		SIF !L_VAL
 			L_STR = 
 
 	;-----------------------------
-	;- ¡ ŒÂl‘fŽ¿
+	;- â–  å€‹äººç´ è³ª
 	;-----------------------------
 
 	;-----------------------------
-	;- ¡ ‘Îl‘fŽ¿
+	;- â–  å¯¾äººç´ è³ª
 	;-----------------------------
 
-	;—ê‘®“x
-	CASE "—ê‘®“x"
+	;éš·å±žåº¦
+	CASE "éš·å±žåº¦"
 		SELECTCASE L_VAL
 			CASE 1
-				L_STR = •ž]
+				L_STR = æœå¾“
 			CASE 2
-				L_STR = —ê‘®
+				L_STR = éš·å±ž
 			CASE 3
-				L_STR = à€ˆó
+				L_STR = çƒ™å°
 			CASEELSE
 				L_STR = 
 		ENDSELECT
-	;Š×—Ž“x
-	CASE "Š×—Ž“x"
+	;é™¥è½åº¦
+	CASE "é™¥è½åº¦"
 		SELECTCASE L_VAL
 			CASE 1
-				L_STR = —ö•ç
+				L_STR = æ‹æ…•
 			CASE 2
-				L_STR = eˆ¤
+				L_STR = è¦ªæ„›
 			CASE 3
-				L_STR = ”º—µ
+				L_STR = ä¼´ä¾¶
 			CASEELSE
 				L_STR = 
 		ENDSELECT
-	;ˆú—“x
-	CASE "ˆú—“x"
+	;æ·«ä¹±åº¦
+	CASE "æ·«ä¹±åº¦"
 		SELECTCASE L_VAL
 			CASE 1, 2
-				L_STR = ˆú—
+				L_STR = æ·«ä¹±
 			CASE 3
-				L_STR = ˆú–‚
+				L_STR = æ·«é­”
 			CASEELSE
 				L_STR = 
 		ENDSELECT
-	;à€ˆóA”º—µ
-	CASE "à€ˆó", "”º—µ"
-		;—ê‘®“x‚ÆŠ×—Ž“x‚Å•\Ž¦‚·‚éˆ×A‚±‚±‚Å‚Í”ñ•\Ž¦
+	;çƒ™å°ã€ä¼´ä¾¶
+	CASE "çƒ™å°", "ä¼´ä¾¶"
+		;éš·å±žåº¦ã¨é™¥è½åº¦ã§è¡¨ç¤ºã™ã‚‹ç‚ºã€ã“ã“ã§ã¯éžè¡¨ç¤º
 		L_STR = 
-	;‚m‚s‚q“x
-	CASE "‚m‚s‚q“x"
+	;ï¼®ï¼´ï¼²åº¦
+	CASE "ï¼®ï¼´ï¼²åº¦"
 		SELECTCASE L_VAL
 			CASE 1
-				L_STR = ‚m‚s‚q
+				L_STR = ï¼®ï¼´ï¼²
 			CASE 2, 3
-				L_STR = ‚m‚s‚q
+				L_STR = ï¼®ï¼´ï¼²
 			CASEELSE
 				L_STR = 
 		ENDSELECT
-	CASE "Šw¶"
+	CASE "å­¦ç”Ÿ"
 		SELECTCASE L_VAL
 			CASE 5
-				L_STR = ¬Šw¶
+				L_STR = å°å­¦ç”Ÿ
 			CASE 4
-				L_STR = ’†Šw¶
+				L_STR = ä¸­å­¦ç”Ÿ
 			CASE 3
-				L_STR = ‚Z¶
+				L_STR = é«˜æ ¡ç”Ÿ
 			CASE 2
-				L_STR = ‘åŠw¶
+				L_STR = å¤§å­¦ç”Ÿ
 			CASE 1
-				L_STR = Šw¶
+				L_STR = å­¦ç”Ÿ
 			CASEELSE
 				L_STR = 
 		ENDSELECT
-	CASE "¬•¿‘ÌŒ^"
-		IF TALENT:ARG:¬l‘ÌŒ^ || L_VAL < 1
+	CASE "å°æŸ„ä½“åž‹"
+		IF TALENT:ARG:å°äººä½“åž‹ || L_VAL < 1
 			L_STR = 
 		ELSE
-			L_STR = ¬•¿‘ÌŒ^
+			L_STR = å°æŸ„ä½“åž‹
 		ENDIF
-	CASE "¬l‘ÌŒ^"
+	CASE "å°äººä½“åž‹"
 		IF L_SEX && L_VAL
-			L_STR = —cŽ™‘ÌŒ^
+			L_STR = å¹¼å…ä½“åž‹
 		ELSEIF L_VAL
-			L_STR = ¬l‘ÌŒ^
+			L_STR = å°äººä½“åž‹
 		ELSE
 			L_STR = 
 		ENDIF
-	;‚»‚Ì‘¼
+	;ãã®ä»–
 	CASEELSE
 		SIF L_VAL <= 0
 			L_STR = 

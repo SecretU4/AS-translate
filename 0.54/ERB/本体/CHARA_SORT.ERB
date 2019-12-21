@@ -1,42 +1,42 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:CHARA_SORT.ERB
-;	Facility	:ƒLƒƒƒ‰ƒ\[ƒgB
+;	Facility	:ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
-;	002		2017/02/28		morph					ƒ\[ƒgƒAƒ‹ƒSƒŠƒYƒ€‚Ì’Ç‰ÁiCHARA_SORT_CTRL/CHARA_SORT_APPLY/CHARA_SORT_LABEL_TYPE/CHARA_SORT_FIND_LABELj
-;	003		2018/11/11		morph					ƒLƒƒƒ‰ƒ\[ƒg‰æ–Ê‚É‚¨‚¯‚é‘SƒLƒƒƒ‰ˆêŠ‡ƒ\[ƒgˆ—‚ð’Ç‰ÁiAUTO_SORT_MAIN/CALC_SORT_STANDARD(CHARA)/CALC_SORT_JOB(CHARA)/CALC_SORT_MOTHER(CHARA)j
-;   004     2019/04/17      M                       ƒ‰ƒxƒ‹•\Ž¦ƒŠƒtƒ@ƒNƒ^ƒŠƒ“ƒO
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
+;	002		2017/02/28		morph					ã‚½ãƒ¼ãƒˆã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®è¿½åŠ ï¼ˆCHARA_SORT_CTRL/CHARA_SORT_APPLY/CHARA_SORT_LABEL_TYPE/CHARA_SORT_FIND_LABELï¼‰
+;	003		2018/11/11		morph					ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆç”»é¢ã«ãŠã‘ã‚‹å…¨ã‚­ãƒ£ãƒ©ä¸€æ‹¬ã‚½ãƒ¼ãƒˆå‡¦ç†ã‚’è¿½åŠ ï¼ˆAUTO_SORT_MAIN/CALC_SORT_STANDARD(CHARA)/CALC_SORT_JOB(CHARA)/CALC_SORT_MOTHER(CHARA)ï¼‰
+;   004     2019/04/17      M                       ãƒ©ãƒ™ãƒ«è¡¨ç¤ºãƒªãƒ•ã‚¡ã‚¯ã‚¿ãƒªãƒ³ã‚°
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
-;	E CHARA_SORT_MAIN					ƒLƒƒƒ‰ƒ\[ƒg‰æ–Ê(Žåˆ—)
-;	E AUTO_SORT_MAIN					ƒLƒƒƒ‰ƒ\[ƒg‰æ–Ê‚É‚¨‚¯‚é‘SƒLƒƒƒ‰ˆêŠ‡ƒ\[ƒgˆ—
-;	E CALC_SORT_STANDARD(CHARA)		ˆêŠ‡ƒ\[ƒg—p•]‰¿ŠÖ”
-;	E CALC_SORT_JOB(CHARA)				ˆêŠ‡ƒ\[ƒg—p•]‰¿ŠÖ”
-;	E CALC_SORT_MOTHER(CHARA)			ˆêŠ‡ƒ\[ƒg—p•]‰¿ŠÖ”
+;	ãƒ» CHARA_SORT_MAIN					ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆç”»é¢(ä¸»å‡¦ç†)
+;	ãƒ» AUTO_SORT_MAIN					ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆç”»é¢ã«ãŠã‘ã‚‹å…¨ã‚­ãƒ£ãƒ©ä¸€æ‹¬ã‚½ãƒ¼ãƒˆå‡¦ç†
+;	ãƒ» CALC_SORT_STANDARD(CHARA)		ä¸€æ‹¬ã‚½ãƒ¼ãƒˆç”¨è©•ä¾¡é–¢æ•°
+;	ãƒ» CALC_SORT_JOB(CHARA)				ä¸€æ‹¬ã‚½ãƒ¼ãƒˆç”¨è©•ä¾¡é–¢æ•°
+;	ãƒ» CALC_SORT_MOTHER(CHARA)			ä¸€æ‹¬ã‚½ãƒ¼ãƒˆç”¨è©•ä¾¡é–¢æ•°
 ;
-;	ƒAƒ‹ƒSƒŠƒYƒ€‚ðŽg—p‚µ‚½Ž©“®ƒ\[ƒgˆ—iCHARA_SORT_MAIN‚Æ‚Í‘S‚­ŠÖŒW‚È‚­CHARA_SORT_CTRL`CHARA_SORT_FIND_LABEL‚Å“®ì‚·‚éj
-;	E CHARA_SORT_CTRL					ƒLƒƒƒ‰ƒ\[ƒg§ŒäŠÖ”
-;	E CHARA_SORT_APPLY					ƒLƒƒƒ‰ƒ\[ƒgŽÀsŠÖ”
-;	E CHARA_SORT_LABEL_TYPE			ƒ‰ƒxƒ‹—˜—pƒ\[ƒg“à—eŽæ“¾FŠÖ”
-;	E CHARA_SORT_FIND_LABEL			ƒ\[ƒg—pƒ‰ƒxƒ‹î•ñŽæ“¾FŠÖ”
+;	ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ä½¿ç”¨ã—ãŸè‡ªå‹•ã‚½ãƒ¼ãƒˆå‡¦ç†ï¼ˆCHARA_SORT_MAINã¨ã¯å…¨ãé–¢ä¿‚ãªãCHARA_SORT_CTRLï½žCHARA_SORT_FIND_LABELã§å‹•ä½œã™ã‚‹ï¼‰
+;	ãƒ» CHARA_SORT_CTRL					ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆåˆ¶å¾¡é–¢æ•°
+;	ãƒ» CHARA_SORT_APPLY					ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆå®Ÿè¡Œé–¢æ•°
+;	ãƒ» CHARA_SORT_LABEL_TYPE			ãƒ©ãƒ™ãƒ«åˆ©ç”¨ã‚½ãƒ¼ãƒˆå†…å®¹å–å¾—Fé–¢æ•°
+;	ãƒ» CHARA_SORT_FIND_LABEL			ã‚½ãƒ¼ãƒˆç”¨ãƒ©ãƒ™ãƒ«æƒ…å ±å–å¾—Fé–¢æ•°
 ;
 ;===============================================================================
 
 ;=================================================
 ;   sub CHARA_SORT_MAIN
 ;=================================================
-;   ƒLƒƒƒ‰ƒ\[ƒg‰æ–Ê(Žåˆ—)
+;   ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆç”»é¢(ä¸»å‡¦ç†)
 ;-------------------------------------------------
 @CHARA_SORT_MAIN
 #DIM L_INPUT
@@ -49,7 +49,7 @@
 #DIM L_SELECT
 
 ;-----------------------------
-;- ‰Šúˆ—
+;- åˆæœŸå‡¦ç†
 ;-----------------------------
 
 L_INPUT=0
@@ -61,52 +61,52 @@ L_CNT_CHARA=0
 L_CNT_PRINT_CHARA=0
 L_SELECT=-1
 
-; ƒLƒƒƒ‰‘”
+; ã‚­ãƒ£ãƒ©ç·æ•°
 L_CNT_CHARA = CHARANUM
 
-; ƒLƒƒƒ‰•\Ž¦”/P
+; ã‚­ãƒ£ãƒ©è¡¨ç¤ºæ•°/P
 L_CNT_PRINT_CHARA = 15
 
 
 ;-----------------------------
-;- ˆ—ŠJŽn
+;- å‡¦ç†é–‹å§‹
 ;-----------------------------
 
 $PRINT_LIST
 REDRAW 0
 
-;ƒ‰ƒCƒ“•\Ž¦:Vƒy[ƒW
+;ãƒ©ã‚¤ãƒ³è¡¨ç¤º:æ–°ãƒšãƒ¼ã‚¸
 CALL C_LINE
-PRINTFORML ƒ\[ƒg‚µ‚½‚¢ƒLƒƒƒ‰‚ð‘I‚ñ‚Å‚­‚¾‚³‚¢@ƒpage.{L_PAGE}„
-PRINTFORML ‘I‘ð‚µ‚½ƒLƒƒƒ‰“¯Žm‚ÌˆÊ’u‚ª“ü‚êŠ·‚í‚è‚Ü‚·B
+PRINTFORML ã‚½ãƒ¼ãƒˆã—ãŸã„ã‚­ãƒ£ãƒ©ã‚’é¸ã‚“ã§ãã ã•ã„ã€€ï¼œpage.{L_PAGE}ï¼ž
+PRINTFORML é¸æŠžã—ãŸã‚­ãƒ£ãƒ©åŒå£«ã®ä½ç½®ãŒå…¥ã‚Œæ›ã‚ã‚Šã¾ã™ã€‚
 DRAWLINE
 
 L_I = 0
 WHILE 1
 
-	;SET:ŠJŽn’l
+	;SET:é–‹å§‹å€¤
 	SIF L_I < (L_PAGE * L_CNT_PRINT_CHARA)
 		L_I = (L_PAGE * L_CNT_PRINT_CHARA)
 
-	;ƒy[ƒW”ÍˆÍŠO
+	;ãƒšãƒ¼ã‚¸ç¯„å›²å¤–
 	SIF L_I >= ( (L_PAGE + 1) * L_CNT_PRINT_CHARA)
 		BREAK
 
-	;- Å‘åƒLƒƒƒ‰”’´‰ß
+	;- æœ€å¤§ã‚­ãƒ£ãƒ©æ•°è¶…éŽ
 	IF L_I >= L_CNT_CHARA
-		;‹ós
+		;ç©ºè¡Œ
 		PRINTL
 
 	ELSE
 		PRINTFORM [%TOSTR(L_I),3%] 
 		IF L_I == MASTER
-			CALL PRINT_LABEL("MASTER",,COLOR("…F"))
+			CALL PRINT_LABEL("MASTER",,COLOR("æ°´è‰²"))
 		ELSEIF L_I == L_SELECT
-			CALL PRINT_LABEL("SELECT",,COLOR("—Î"))
+			CALL PRINT_LABEL("SELECT",,COLOR("ç·‘"))
 		ELSE
-			PRINTFORM @@@@@
+			PRINTFORM ã€€ã€€ã€€ã€€ã€€
 		ENDIF
-		;- •\Ž¦:ƒ^[ƒQƒbƒg(Ú×)
+		;- è¡¨ç¤º:ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ(è©³ç´°)
 		CALL INFO_TARGET_DETAIL(L_I, 1)
 		PRINTL
 	ENDIF
@@ -118,12 +118,12 @@ WEND
 
 PRINTL
 
-PRINTFORMLC \@(L_PAGE <= 0) ? %" " * 16% # [1007]‘O‚Ìƒy[ƒW\@
-PRINTLC [1000]–ß‚é
+PRINTFORMLC \@(L_PAGE <= 0) ? %" " * 16% # [1007]å‰ã®ãƒšãƒ¼ã‚¸\@
+PRINTLC [1000]æˆ»ã‚‹
 
-PRINTFORMLC \@(L_PAGE >= (L_CNT_CHARA / L_CNT_PRINT_CHARA) ) ? %" " * 16% # [1009]ŽŸ‚Ìƒy[ƒW\@
+PRINTFORMLC \@(L_PAGE >= (L_CNT_CHARA / L_CNT_PRINT_CHARA) ) ? %" " * 16% # [1009]æ¬¡ã®ãƒšãƒ¼ã‚¸\@
 PRINTL 
-PRINTL [2000]ˆêŠ‡ƒ\[ƒg
+PRINTL [2000]ä¸€æ‹¬ã‚½ãƒ¼ãƒˆ
 PRINTL 
 
 $INPUT_LOOP_1
@@ -131,49 +131,49 @@ INPUT
 L_INPUT = RESULT
 
 
-;- •\Ž¦:ƒy[ƒW•Ê
+;- è¡¨ç¤º:ãƒšãƒ¼ã‚¸åˆ¥
 SELECTCASE L_INPUT
-	;- I—¹
+	;- çµ‚äº†
 	CASE 1000
 		REDRAW 1
 		RETURN 0
 	CASE 2000
-	;ˆêŠ‡ƒ\[ƒg
+	;ä¸€æ‹¬ã‚½ãƒ¼ãƒˆ
 		CALL AUTO_SORT_MAIN
-		;- VAR:ƒŠƒXƒgXV
+		;- VAR:ãƒªã‚¹ãƒˆæ›´æ–°
 		CALL VAR_MAKE_LIST
-	;- ƒLƒƒƒ‰
+	;- ã‚­ãƒ£ãƒ©
 	CASE 0 TO L_CNT_CHARA
-		;- Žål
+		;- ä¸»äºº
 		IF L_INPUT == MASTER
-			;INPUTƒGƒ‰[‘Î‰ž
-			CALL C_INPUT_ERROR("Žål‚Íƒ\[ƒg‘ÎÛ‚ÉÝ’èo—ˆ‚Ü‚¹‚ñ")
+			;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
+			CALL C_INPUT_ERROR("ä¸»äººã¯ã‚½ãƒ¼ãƒˆå¯¾è±¡ã«è¨­å®šå‡ºæ¥ã¾ã›ã‚“")
 			GOTO INPUT_LOOP_1
 
-		;‰ðœ
+		;è§£é™¤
 		ELSEIF L_SELECT ==L_INPUT
 ;			DRAWLINE
-;			PRINTFORMW ‘I‘ð‚ð‰ðœ‚µ‚Ü‚µ‚½
+;			PRINTFORMW é¸æŠžã‚’è§£é™¤ã—ã¾ã—ãŸ
 			L_SELECT = -1
 			GOTO PRINT_LIST
 
-		;–¢‘I‘ð
+		;æœªé¸æŠž
 		ELSEIF L_SELECT == -1
 			L_SELECT = L_INPUT
 			GOTO PRINT_LIST
 
-		;‘I‘ðÏ‚Ý
+		;é¸æŠžæ¸ˆã¿
 		ELSE
 ;			DRAWLINE
-;			PRINTFORMW %NAME:L_SELECT%‚Æ%NAME:L_INPUT%‚ÌˆÊ’u‚ð“ü‚ê‘Ö‚¦‚Ü‚µ‚½
+;			PRINTFORMW %NAME:L_SELECT%ã¨%NAME:L_INPUT%ã®ä½ç½®ã‚’å…¥ã‚Œæ›¿ãˆã¾ã—ãŸ
 			SWAPCHARA L_INPUT, L_SELECT
 			L_SELECT = -1
 		ENDIF
-		;- VAR:ƒŠƒXƒgXV
+		;- VAR:ãƒªã‚¹ãƒˆæ›´æ–°
 		CALL VAR_MAKE_LIST
 
 		GOTO PRINT_LIST
-	;‘O‚Ìƒy[ƒW
+	;å‰ã®ãƒšãƒ¼ã‚¸
 	CASE 1007
 		IF L_PAGE > 0
 			L_PAGE -= 1
@@ -181,7 +181,7 @@ SELECTCASE L_INPUT
 		ELSE
 			GOTO ERROR
 		ENDIF
-	;ŽŸ‚Ìƒy[ƒW
+	;æ¬¡ã®ãƒšãƒ¼ã‚¸
 	CASE 1009
 		L_TMP = L_CNT_CHARA / L_CNT_PRINT_CHARA
 		IF L_PAGE < L_TMP
@@ -190,10 +190,10 @@ SELECTCASE L_INPUT
 		ELSE
 			GOTO ERROR
 		ENDIF
-	;- ‚»‚Ì‘¼
+	;- ãã®ä»–
 	CASEELSE
 		$ERROR
-		;INPUTƒGƒ‰[‘Î‰ž
+		;INPUTã‚¨ãƒ©ãƒ¼å¯¾å¿œ
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT
@@ -203,224 +203,224 @@ RESTART
 
 
 ;-------------------------------------------------
-;ˆêŠ‡ƒ\[ƒgŠÖ”
+;ä¸€æ‹¬ã‚½ãƒ¼ãƒˆé–¢æ•°
 ;-------------------------------------------------
-;‚¿‚Ü‚¿‚ÜŽè“®‚ÅSWAP‚â‚é‚Ì‚ª–Ê“|‚¾‚Á‚½‚Ì‚Å
+;ã¡ã¾ã¡ã¾æ‰‹å‹•ã§SWAPã‚„ã‚‹ã®ãŒé¢å€’ã ã£ãŸã®ã§
 @AUTO_SORT_MAIN
 #DIM     PREV_TARGET
 #DIM     UNIQUE_ID
 #DIM     C_ID
-PREV_TARGET = FINDCHARA(CFLAG:’²‹³‘ÎÛƒtƒ‰ƒO, 1, 1)
+PREV_TARGET = FINDCHARA(CFLAG:èª¿æ•™å¯¾è±¡ãƒ•ãƒ©ã‚°, 1, 1)
 SIF PREV_TARGET >= 1
-	UNIQUE_ID = CFLAG:PREV_TARGET:ŒÂ•Ê”Ô†
-CVARSET CFLAG, GETNUM(CFLAG, "ƒ\[ƒg”Ô†"), 0
-CFLAG:MASTER:ƒ\[ƒg”Ô† = -1e14
+	UNIQUE_ID = CFLAG:PREV_TARGET:å€‹åˆ¥ç•ªå·
+CVARSET CFLAG, GETNUM(CFLAG, "ã‚½ãƒ¼ãƒˆç•ªå·"), 0
+CFLAG:MASTER:ã‚½ãƒ¼ãƒˆç•ªå· = -1e14
 
-PRINTFORML Žg—p‚·‚éƒ\[ƒg‚ÌŽí—Þ‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢
-PRINTFORML [9] - ‰Á“ü‡ƒ\[ƒg
-PRINTFORML [8] - “K“–ƒ\[ƒg
-PRINTFORML [7] - E‹Æƒ\[ƒg
-PRINTFORML [6] - •ê‘Ìƒ\[ƒg
+PRINTFORML ä½¿ç”¨ã™ã‚‹ã‚½ãƒ¼ãƒˆã®ç¨®é¡žã‚’é¸æŠžã—ã¦ãã ã•ã„
+PRINTFORML [9] - åŠ å…¥é †ã‚½ãƒ¼ãƒˆ
+PRINTFORML [8] - é©å½“ã‚½ãƒ¼ãƒˆ
+PRINTFORML [7] - è·æ¥­ã‚½ãƒ¼ãƒˆ
+PRINTFORML [6] - æ¯ä½“ã‚½ãƒ¼ãƒˆ
 PRINTFORML 
-PRINTFORML [0] - ‚â‚ß‚é
+PRINTFORML [0] - ã‚„ã‚ã‚‹
 DO
 	INPUT
 	SELECTCASE RESULT
 	CASE 9
 		FOR C_ID, 0, CHARANUM
-			CFLAG:C_ID:ƒ\[ƒg”Ô† = CFLAG:C_ID:ŒÂ•Ê”Ô†
+			CFLAG:C_ID:ã‚½ãƒ¼ãƒˆç•ªå· = CFLAG:C_ID:å€‹åˆ¥ç•ªå·
 		NEXT
 	CASE 8
-		;CVARSET CFLAG:MASTER:ƒ\[ƒg”Ô†
+		;CVARSET CFLAG:MASTER:ã‚½ãƒ¼ãƒˆç•ªå·
 		FOR C_ID, 1, CHARANUM
-			CFLAG:C_ID:ƒ\[ƒg”Ô† = -CALC_SORT_STANDARD(C_ID)
+			CFLAG:C_ID:ã‚½ãƒ¼ãƒˆç•ªå· = -CALC_SORT_STANDARD(C_ID)
 		NEXT
 	CASE 7
 		FOR C_ID, 1, CHARANUM
-			CFLAG:C_ID:ƒ\[ƒg”Ô† = -CALC_SORT_JOB(C_ID)
+			CFLAG:C_ID:ã‚½ãƒ¼ãƒˆç•ªå· = -CALC_SORT_JOB(C_ID)
 		NEXT
 	CASE 6
 		FOR C_ID, 1, CHARANUM
-			CFLAG:C_ID:ƒ\[ƒg”Ô† = -CALC_SORT_MOTHER(C_ID)
+			CFLAG:C_ID:ã‚½ãƒ¼ãƒˆç•ªå· = -CALC_SORT_MOTHER(C_ID)
 		NEXT
 	CASE 0
-		CVARSET CFLAG, GETNUM(CFLAG, "ƒ\[ƒg”Ô†")
+		CVARSET CFLAG, GETNUM(CFLAG, "ã‚½ãƒ¼ãƒˆç•ªå·")
 		RETURN
 	CASEELSE
 		CONTINUE
 	ENDSELECT
 	BREAK
 LOOP 1
-SORTCHARA CFLAG:0:ƒ\[ƒg”Ô†
+SORTCHARA CFLAG:0:ã‚½ãƒ¼ãƒˆç•ªå·
 CALLF CHANGE_TARGET_ARRAY()
 IF PREV_TARGET >= 1
-	CALL CHANGE_TARGET_SET(FINDCHARA(CFLAG:ŒÂ•Ê”Ô†, UNIQUE_ID, 1))
+	CALL CHANGE_TARGET_SET(FINDCHARA(CFLAG:å€‹åˆ¥ç•ªå·, UNIQUE_ID, 1))
 ELSE
 	CALL CHANGE_TARGET_CLEAR
 ENDIF
-CVARSET CFLAG, GETNUM(CFLAG, "ƒ\[ƒg”Ô†")
+CVARSET CFLAG, GETNUM(CFLAG, "ã‚½ãƒ¼ãƒˆç•ªå·")
 
 
 
 ;-------------------------------------------------
-;“K“–ƒ\[ƒg—p•]‰¿ŠÖ”
+;é©å½“ã‚½ãƒ¼ãƒˆç”¨è©•ä¾¡é–¢æ•°
 ;-------------------------------------------------
 @CALC_SORT_STANDARD(CHARA)
 #FUNCTION
 #DIM CHARA
-#DIM DYNAMIC L_NPC      = 0;1Œ…F0`1
-#DIM DYNAMIC L_‹@–§     = 0;1Œ…F0`9
-#DIM DYNAMIC L_ŠÇ—Žw” = 0;1Œ…F0`9
-#DIM DYNAMIC L_eŒð     = 0;2Œ…F0`39
-#DIM DYNAMIC L_‡ˆÓ     = 0;1Œ…F0`4
-#DIM DYNAMIC L_oŽ©     = 0;3Œ…F0`612
-#DIM DYNAMIC L_E‹Æ     = 0;3Œ…F111`666
-#DIM DYNAMIC L_DŠ´“x   = 0;3Œ…F1`999
-#DIM DYNAMIC L_RESULT   = 0;ÅI•]‰¿’l
+#DIM DYNAMIC L_NPC      = 0;1æ¡ï¼š0ï½ž1
+#DIM DYNAMIC L_æ©Ÿå¯†     = 0;1æ¡ï¼š0ï½ž9
+#DIM DYNAMIC L_ç®¡ç†æŒ‡æ•° = 0;1æ¡ï¼š0ï½ž9
+#DIM DYNAMIC L_è¦ªäº¤     = 0;2æ¡ï¼š0ï½ž39
+#DIM DYNAMIC L_åˆæ„     = 0;1æ¡ï¼š0ï½ž4
+#DIM DYNAMIC L_å‡ºè‡ª     = 0;3æ¡ï¼š0ï½ž612
+#DIM DYNAMIC L_è·æ¥­     = 0;3æ¡ï¼š111ï½ž666
+#DIM DYNAMIC L_å¥½æ„Ÿåº¦   = 0;3æ¡ï¼š1ï½ž999
+#DIM DYNAMIC L_RESULT   = 0;æœ€çµ‚è©•ä¾¡å€¤
 SIF TALENT:CHARA:NPC
 	L_NPC = 1
-L_‹@–§     = INFO_STATUS_GET_BY_LABEL(CHARA, "‹@–§")
-L_ŠÇ—Žw” = INFO_STATUS_GET_BY_LABEL(CHARA, "ŠÇ—")
-L_eŒð     = INFO_STATUS_GET_BY_LABEL(CHARA, "eŒð")
-L_‡ˆÓ     = INFO_STATUS_GET_BY_LABEL(CHARA, "‡ˆÓ")
-L_oŽ©     = INFO_STATUS_GET_BY_LABEL(CHARA, "oŽ©")
-L_E‹Æ     = INFO_STATUS_GET_BY_LABEL(CHARA, "E‹Æ")
-L_DŠ´“x   = INFO_STATUS_GET_BY_LABEL(CHARA, "DLV")
+L_æ©Ÿå¯†     = INFO_STATUS_GET_BY_LABEL(CHARA, "æ©Ÿå¯†")
+L_ç®¡ç†æŒ‡æ•° = INFO_STATUS_GET_BY_LABEL(CHARA, "ç®¡ç†")
+L_è¦ªäº¤     = INFO_STATUS_GET_BY_LABEL(CHARA, "è¦ªäº¤")
+L_åˆæ„     = INFO_STATUS_GET_BY_LABEL(CHARA, "åˆæ„")
+L_å‡ºè‡ª     = INFO_STATUS_GET_BY_LABEL(CHARA, "å‡ºè‡ª")
+L_è·æ¥­     = INFO_STATUS_GET_BY_LABEL(CHARA, "è·æ¥­")
+L_å¥½æ„Ÿåº¦   = INFO_STATUS_GET_BY_LABEL(CHARA, "å¥½LV")
 
-;1e3‚Í1*10‚Ì3æ‚ð•\‚µ‚Ü‚·
+;1e3ã¯1*10ã®3ä¹—ã‚’è¡¨ã—ã¾ã™
 {
 L_RESULT = 
-	L_DŠ´“x
-	 + L_E‹Æ * 1e3
-	 + L_oŽ© * 1e6
-	 + L_‡ˆÓ * 1e9
-	 + L_eŒð * 1e10
-	 + L_ŠÇ—Žw” * 1e12
-	 + L_‹@–§ * 1e13
+	L_å¥½æ„Ÿåº¦
+	 + L_è·æ¥­ * 1e3
+	 + L_å‡ºè‡ª * 1e6
+	 + L_åˆæ„ * 1e9
+	 + L_è¦ªäº¤ * 1e10
+	 + L_ç®¡ç†æŒ‡æ•° * 1e12
+	 + L_æ©Ÿå¯† * 1e13
 	 + L_NPC  * 1e14
 }
 RETURNF L_RESULT
 
 
 ;-------------------------------------------------
-;ƒ\[ƒg—pŽí‘°•]‰¿ŠÖ”
+;ã‚½ãƒ¼ãƒˆç”¨ç¨®æ—è©•ä¾¡é–¢æ•°
 ;-------------------------------------------------
-;3Œ…‚ÌŽí‘°Ží•Ê’l‚ð•Ô‚·
-;100‚ÌˆÊ‚Í‘fŽ¿ˆË‘¶‚ÅƒLƒƒƒ‰‚ÌoŽ©‚ð•\‚·
-;‰º2Œ…‚Í•’Ê‚ÌŽí‘°’l
+;3æ¡ã®ç¨®æ—ç¨®åˆ¥å€¤ã‚’è¿”ã™
+;100ã®ä½ã¯ç´ è³ªä¾å­˜ã§ã‚­ãƒ£ãƒ©ã®å‡ºè‡ªã‚’è¡¨ã™
+;ä¸‹2æ¡ã¯æ™®é€šã®ç¨®æ—å€¤
 @CALC_SORT_RACE(CHARA)
 #FUNCTION
 #DIM CHARA
-RETURNF INFO_STATUS_GET_BY_LABEL(CHARA, "oŽ©")
+RETURNF INFO_STATUS_GET_BY_LABEL(CHARA, "å‡ºè‡ª")
 
 
 ;-------------------------------------------------
-;ƒ\[ƒg—pE‹Æ•]‰¿ŠÖ”
+;ã‚½ãƒ¼ãƒˆç”¨è·æ¥­è©•ä¾¡é–¢æ•°
 ;-------------------------------------------------
-;2Œ…‚ÌE‹ÆŽí•Ê’l‚ð•Ô‚·
-;‰º1Œ…‚É‚ÍTALENT:Šw¶‚Ìî•ñ‚ð”N—î‘w‚Æ‰ðŽß‚µ‚Ä‹L˜^‚µ‚Ä‚ ‚é
-;¬Šw¶‚ªæ“ª‚Éo‚é
+;2æ¡ã®è·æ¥­ç¨®åˆ¥å€¤ã‚’è¿”ã™
+;ä¸‹1æ¡ã«ã¯TALENT:å­¦ç”Ÿã®æƒ…å ±ã‚’å¹´é½¢å±¤ã¨è§£é‡ˆã—ã¦è¨˜éŒ²ã—ã¦ã‚ã‚‹
+;å°å­¦ç”ŸãŒå…ˆé ­ã«å‡ºã‚‹
 @CALC_SORT_JOB(CHARA)
 #FUNCTION
 #DIM CHARA
-RETURNF INFO_STATUS_GET_BY_LABEL(CHARA, "E‹Æ")
+RETURNF INFO_STATUS_GET_BY_LABEL(CHARA, "è·æ¥­")
 
 
 
 ;-------------------------------------------------
-;ƒ\[ƒg—p•ê‘Ì•]‰¿ŠÖ”
+;ã‚½ãƒ¼ãƒˆç”¨æ¯ä½“è©•ä¾¡é–¢æ•°
 ;-------------------------------------------------
 @CALC_SORT_MOTHER(CHARA)
 #FUNCTION
 #DIM CHARA
-#DIM DYNAMIC L_Žq‹{   = 0;1Œ…F0`1
-#DIM DYNAMIC L_•ê‘Ì   = 0;3Œ…F0`198
-#DIM DYNAMIC L_¢‘ã   = 0;2Œ…F0`99
-#DIM DYNAMIC L_ˆöŽq   = 0;2Œ…F0`20
-#DIM DYNAMIC L_”\—Í   = 0;3Œ…F1`999
-#DIM DYNAMIC L_RESULT = 0;ÅI•]‰¿’l
-L_Žq‹{ = TALENT:CHARA:¹—‚ÌŽq‹{
-L_•ê‘Ì = CFLAG:CHARA:—‘ŽqƒŒƒxƒ‹ + CFLAG:CHARA:•ê‘ÌƒŒƒxƒ‹
-L_¢‘ã = LIMIT(CFLAG:CHARA:Zl_¢‘ã, 1, 99)
-L_ˆöŽq = LIMIT(SUMARRAY(CFLAG:CHARA:0, 1800, 1820), 0, 20)
-L_”\—Í = SUMARRAY(CFLAG:CHARA:0, 1511, 1516)
+#DIM DYNAMIC L_å­å®®   = 0;1æ¡ï¼š0ï½ž1
+#DIM DYNAMIC L_æ¯ä½“   = 0;3æ¡ï¼š0ï½ž198
+#DIM DYNAMIC L_ä¸–ä»£   = 0;2æ¡ï¼š0ï½ž99
+#DIM DYNAMIC L_å› å­   = 0;2æ¡ï¼š0ï½ž20
+#DIM DYNAMIC L_èƒ½åŠ›   = 0;3æ¡ï¼š1ï½ž999
+#DIM DYNAMIC L_RESULT = 0;æœ€çµ‚è©•ä¾¡å€¤
+L_å­å®® = TALENT:CHARA:è–å¥³ã®å­å®®
+L_æ¯ä½“ = CFLAG:CHARA:åµå­ãƒ¬ãƒ™ãƒ« + CFLAG:CHARA:æ¯ä½“ãƒ¬ãƒ™ãƒ«
+L_ä¸–ä»£ = LIMIT(CFLAG:CHARA:ä½äºº_ä¸–ä»£, 1, 99)
+L_å› å­ = LIMIT(SUMARRAY(CFLAG:CHARA:0, 1800, 1820), 0, 20)
+L_èƒ½åŠ› = SUMARRAY(CFLAG:CHARA:0, 1511, 1516)
 {
-L_”\—Í += 
-	CFLAG:CHARA:Zl_Å‘å‘Ì—Í
-	 + CFLAG:CHARA:Zl_Å‘å‹C—Í
-	 + CFLAG:CHARA:Zl_Å‘åBRE
-	 + CFLAG:CHARA:Zl_SAN
-	 + CFLAG:CHARA:Zl_GUTS
-	 + CFLAG:CHARA:Zl_BRAVE
+L_èƒ½åŠ› += 
+	CFLAG:CHARA:ä½äºº_æœ€å¤§ä½“åŠ›
+	 + CFLAG:CHARA:ä½äºº_æœ€å¤§æ°—åŠ›
+	 + CFLAG:CHARA:ä½äºº_æœ€å¤§BRE
+	 + CFLAG:CHARA:ä½äºº_SAN
+	 + CFLAG:CHARA:ä½äºº_GUTS
+	 + CFLAG:CHARA:ä½äºº_BRAVE
 }
-L_”\—Í = LIMIT(SQRT(MAX(1, L_”\—Í)), 1, 999)
-;1e3‚Í1*10‚Ì3æ‚ð•\‚µ‚Ü‚·
+L_èƒ½åŠ› = LIMIT(SQRT(MAX(1, L_èƒ½åŠ›)), 1, 999)
+;1e3ã¯1*10ã®3ä¹—ã‚’è¡¨ã—ã¾ã™
 {
 L_RESULT = 
-	L_”\—Í
-	+ L_ˆöŽq * 1e3
-	+ L_¢‘ã * 1e5
-	+ L_•ê‘Ì * 1e7
-	+ L_Žq‹{ * 1e10
+	L_èƒ½åŠ›
+	+ L_å› å­ * 1e3
+	+ L_ä¸–ä»£ * 1e5
+	+ L_æ¯ä½“ * 1e7
+	+ L_å­å®® * 1e10
 }
 RETURNF L_RESULT
 
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰ƒ\[ƒg§ŒäŠÖ”
-;–ß‚è’lFSORT‚Ì¬”Û
+;ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆåˆ¶å¾¡é–¢æ•°
+;æˆ»ã‚Šå€¤ï¼šSORTã®æˆå¦
 ;-------------------------------------------------
-;INPUT_STR‚ð‚à‚Æ‚ÉCHARA_LIST”z—ñ‚ÌSORT‚ðŽÀs‚·‚é
-;Žg—p‚Å‚«‚éINPUT_STR‚Ì“à—e‚Í
-;uLABEL_NAMEv{u¸‡/~‡v
-;—áj"‚bŠ´Šo~‡"
-;@DIM_TABLE_CVAR‚Å’è‹`‚³‚ê‚Ä‚¢‚È‚¢LABEL_NAME‚ÍŽg—p‚Å‚«‚È‚¢“_‚É’ˆÓ
-;‹t‚ÉŒ¾‚¦‚Î’è‹`‚³‚¦’Ç‰Á‚µ‚¿‚á‚¦‚ÎSORT€–Ú‚ð_“î‚É‘‚â‚¹‚é
+;INPUT_STRã‚’ã‚‚ã¨ã«CHARA_LISTé…åˆ—ã®SORTã‚’å®Ÿè¡Œã™ã‚‹
+;ä½¿ç”¨ã§ãã‚‹INPUT_STRã®å†…å®¹ã¯
+;ã€ŒLABEL_NAMEã€ï¼‹ã€Œæ˜‡é †/é™é †ã€
+;ä¾‹ï¼‰"ï¼£æ„Ÿè¦šé™é †"
+;@DIM_TABLE_CVARã§å®šç¾©ã•ã‚Œã¦ã„ãªã„LABEL_NAMEã¯ä½¿ç”¨ã§ããªã„ç‚¹ã«æ³¨æ„
+;é€†ã«è¨€ãˆã°å®šç¾©ã•ãˆè¿½åŠ ã—ã¡ã‚ƒãˆã°SORTé …ç›®ã‚’æŸ”è»Ÿã«å¢—ã‚„ã›ã‚‹
 @CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIM  REF CHARA_LIST ;ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ
-#DIM      CHARA_CNT  ;ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ‚Ì—v‘f”àƒŠƒXƒgã‚ÌƒLƒƒƒ‰”
-#DIMS     INPUT_STR  ;“ü—Í“à—e•¶Žš—ñ
-#DIMS     VAR_NAME   ;ŽQÆ‚·‚éƒLƒƒƒ‰•Ï”‚ÌŽí—ÞAABL‚È‚Ç
-#DIM      VAR_ID     ;ŽQÆ‚·‚éƒLƒƒƒ‰•Ï”‚Ì—v‘f
-#DIMS REF SORT_TYPE  ;SORT‡
-#DIMS     SORT_OP    ;Žg—p‚·‚é”äŠr‰‰ŽZŽq
+#DIM  REF CHARA_LIST ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—
+#DIM      CHARA_CNT  ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—ã®è¦ç´ æ•°â‰’ãƒªã‚¹ãƒˆä¸Šã®ã‚­ãƒ£ãƒ©æ•°
+#DIMS     INPUT_STR  ;å…¥åŠ›å†…å®¹æ–‡å­—åˆ—
+#DIMS     VAR_NAME   ;å‚ç…§ã™ã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®ç¨®é¡žã€ABLãªã©
+#DIM      VAR_ID     ;å‚ç…§ã™ã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®è¦ç´ 
+#DIMS REF SORT_TYPE  ;SORTé †
+#DIMS     SORT_OP    ;ä½¿ç”¨ã™ã‚‹æ¯”è¼ƒæ¼”ç®—å­
 IF CHARA_SORT_LABEL_TYPE(INPUT_STR, VAR_NAME, VAR_ID, SORT_OP)
 	CALL CHARA_SORT_APPLY(CHARA_LIST, CHARA_CNT, VAR_NAME, VAR_ID, SORT_OP)
 	SORT_TYPE '= INPUT_STR
 	RETURN 1
 ELSE
-	DEBUGPRINTFORML CHARA_SORT_CTRL:•s³‚ÈINPUT_STR %INPUT_STR%
+	DEBUGPRINTFORML CHARA_SORT_CTRL:ä¸æ­£ãªINPUT_STR %INPUT_STR%
 	RETURN 0
 ENDIF
 
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰ƒ\[ƒgŽÀsŠÖ”
+;ã‚­ãƒ£ãƒ©ã‚½ãƒ¼ãƒˆå®Ÿè¡Œé–¢æ•°
 ;-------------------------------------------------
-;ƒAƒ‹ƒSƒŠƒYƒ€‚Íƒm[ƒ€ƒ\[ƒg
-;Žg—p•Ï”–¼‚Æ•À‚Ñ‡‚ðŽw’è‚µ‚ÄCHARA_LIST”z—ñ‚ÌSORT‚ðŽÀs‚·‚é
-;¡‚Ü‚Å‚Ìˆ—‚ª‚¹‚¢‚º‚¢100ƒLƒƒƒ‰’PˆÊ‚Åˆ—”‚ª‘½‚¢ê‡‚ÌŒŸØ‚Í‚â‚Á‚½‚±‚Æ‚ª‚È‚¢‚Ì‚Å
-;ƒLƒƒƒ‰‘‚¦‚·‚¬‚é‚Æd‚­‚È‚é‚©‚à‚µ‚ê‚ñ
+;ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¯ãƒŽãƒ¼ãƒ ã‚½ãƒ¼ãƒˆ
+;ä½¿ç”¨å¤‰æ•°åã¨ä¸¦ã³é †ã‚’æŒ‡å®šã—ã¦CHARA_LISTé…åˆ—ã®SORTã‚’å®Ÿè¡Œã™ã‚‹
+;ä»Šã¾ã§ã®å‡¦ç†ãŒã›ã„ãœã„100ã‚­ãƒ£ãƒ©å˜ä½ã§å‡¦ç†æ•°ãŒå¤šã„å ´åˆã®æ¤œè¨¼ã¯ã‚„ã£ãŸã“ã¨ãŒãªã„ã®ã§
+;ã‚­ãƒ£ãƒ©å¢—ãˆã™ãŽã‚‹ã¨é‡ããªã‚‹ã‹ã‚‚ã—ã‚Œã‚“
 ;
-;‚Ü[AŠî–{“I‚É‚ÍCHARA_SORT_CTRL‚ð‰î‚µ‚ÄŽg—p‚·‚é‚Ì‚ª‚¢‚¢‚ÆŽv‚¤‚æ
+;ã¾ãƒ¼ã€åŸºæœ¬çš„ã«ã¯CHARA_SORT_CTRLã‚’ä»‹ã—ã¦ä½¿ç”¨ã™ã‚‹ã®ãŒã„ã„ã¨æ€ã†ã‚ˆ
 ;CALL CHARA_SORT_APPLY(CHARA_LIST, CHARA_CNT, "ABL", 0, ">=")
-;‚Æ‚©‚Å‚«‚È‚¢‚±‚Æ‚à‚È‚¢‚ª
-;CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "‚bŠ´Šo~‡", DUMMY)
-;‚Æ‚©‚Ì‚ª‚í‚©‚è‚â‚·‚¢‚Á‚µ‚å
-;ˆê‰žALABEL’è‹`‚µ‚È‚­‚Ä‚àŽg‚¦‚é‚Æ‚¢‚¤‹­‚Ý‚Í‚ ‚é
+;ã¨ã‹ã§ããªã„ã“ã¨ã‚‚ãªã„ãŒ
+;CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "ï¼£æ„Ÿè¦šé™é †", DUMMY)
+;ã¨ã‹ã®ãŒã‚ã‹ã‚Šã‚„ã™ã„ã£ã—ã‚‡
+;ä¸€å¿œã€LABELå®šç¾©ã—ãªãã¦ã‚‚ä½¿ãˆã‚‹ã¨ã„ã†å¼·ã¿ã¯ã‚ã‚‹
 @CHARA_SORT_APPLY(CHARA_LIST, CHARA_CNT, VAR_NAME, VAR_ID, SORT_OP)
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIM REF CHARA_LIST ;ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ
-#DIM     CHARA_CNT  ;ƒLƒƒƒ‰ƒŠƒXƒg”z—ñ‚Ì—v‘f”àƒŠƒXƒgã‚ÌƒLƒƒƒ‰”
-#DIMS    VAR_NAME   ;ƒLƒƒƒ‰•Ï”‚Ì–¼‘OAABL:X:Y‚ÌABL
-#DIM     VAR_ID     ;ƒLƒƒƒ‰•Ï”‚Ì—v‘fAABL:X:Y‚ÌY
-#DIMS    SORT_OP    ;”äŠr‰‰ŽZŽq
-;ƒ\[ƒgŽÀˆ—
+#DIM REF CHARA_LIST ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—
+#DIM     CHARA_CNT  ;ã‚­ãƒ£ãƒ©ãƒªã‚¹ãƒˆé…åˆ—ã®è¦ç´ æ•°â‰’ãƒªã‚¹ãƒˆä¸Šã®ã‚­ãƒ£ãƒ©æ•°
+#DIMS    VAR_NAME   ;ã‚­ãƒ£ãƒ©å¤‰æ•°ã®åå‰ã€ABL:X:Yã®ABL
+#DIM     VAR_ID     ;ã‚­ãƒ£ãƒ©å¤‰æ•°ã®è¦ç´ ã€ABL:X:Yã®Y
+#DIMS    SORT_OP    ;æ¯”è¼ƒæ¼”ç®—å­
+;ã‚½ãƒ¼ãƒˆå®Ÿå‡¦ç†
 LOCAL:0 = 1
 WHILE LOCAL:0 < CHARA_CNT
 	SIF !(LOCAL:0)
@@ -436,25 +436,25 @@ WEND
 
 
 ;-------------------------------------------------
-;ƒ‰ƒxƒ‹—˜—pƒ\[ƒg“à—eŽæ“¾ŠÖ”
-;–ß‚è’lFSORT‚É“K‚³‚È‚¢•¶Žš—ñ‚ðŽó‚¯Žæ‚Á‚½Žž0A‚»‚êˆÈŠO‚È‚çINPUT_STR‚É‰ž‚¶‚½LABEL”z—ñ‚Ì—v‘f
+;ãƒ©ãƒ™ãƒ«åˆ©ç”¨ã‚½ãƒ¼ãƒˆå†…å®¹å–å¾—é–¢æ•°
+;æˆ»ã‚Šå€¤ï¼šSORTã«é©ã•ãªã„æ–‡å­—åˆ—ã‚’å—ã‘å–ã£ãŸæ™‚0ã€ãã‚Œä»¥å¤–ãªã‚‰INPUT_STRã«å¿œã˜ãŸLABELé…åˆ—ã®è¦ç´ 
 ;-------------------------------------------------
-;ƒŠƒXƒg•\Ž¦‚ÌÛ‚Ì•¶Žš“ü—Í‚Ì“à—e‚É‰ž‚¶‚½VAR_NAMEAVAR_IDASORT_OP‚ðŽæ“¾‚·‚é
+;ãƒªã‚¹ãƒˆè¡¨ç¤ºã®éš›ã®æ–‡å­—å…¥åŠ›ã®å†…å®¹ã«å¿œã˜ãŸVAR_NAMEã€VAR_IDã€SORT_OPã‚’å–å¾—ã™ã‚‹
 @CHARA_SORT_LABEL_TYPE(INPUT_STR, VAR_NAME, VAR_ID, SORT_OP)
 #FUNCTION
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIMS INPUT_STR     ;“ü—Í“à—e•¶Žš—ñ
-#DIMS REF VAR_NAME  ;ŽQÆ‚·‚éƒLƒƒƒ‰•Ï”‚ÌŽí—ÞAABL‚È‚Ç
-#DIM  REF VAR_ID    ;ŽQÆ‚·‚éƒLƒƒƒ‰•Ï”‚Ì—v‘f
-#DIMS REF SORT_OP   ;”äŠr‰‰ŽZŽq
-#DIMS     TEMP_STR  ;ˆêŽž•¶Žš—ñA––”ö‚Ì~‡/¸‡‚¾‚¯íœ‚µ‚Ä“n‚·—p
+#DIMS INPUT_STR     ;å…¥åŠ›å†…å®¹æ–‡å­—åˆ—
+#DIMS REF VAR_NAME  ;å‚ç…§ã™ã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®ç¨®é¡žã€ABLãªã©
+#DIM  REF VAR_ID    ;å‚ç…§ã™ã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®è¦ç´ 
+#DIMS REF SORT_OP   ;æ¯”è¼ƒæ¼”ç®—å­
+#DIMS     TEMP_STR  ;ä¸€æ™‚æ–‡å­—åˆ—ã€æœ«å°¾ã®é™é †/æ˜‡é †ã ã‘å‰Šé™¤ã—ã¦æ¸¡ã™ç”¨
 TEMP_STR '= SUBSTRINGU(INPUT_STR, , STRLENSU(INPUT_STR) - 2)
 DEBUGPRINTFORML CHARA_SORT_LABEL_TYPE TEMP_STR%TEMP_STR%
-;SORT‡Žæ“¾
-IF STRCOUNT(INPUT_STR, "~‡")
+;SORTé †å–å¾—
+IF STRCOUNT(INPUT_STR, "é™é †")
 	SORT_OP '= ">="
-ELSEIF STRCOUNT(INPUT_STR, "¸‡")
+ELSEIF STRCOUNT(INPUT_STR, "æ˜‡é †")
 	SORT_OP '= "<="
 ELSE
 	RETURNF 0
@@ -464,27 +464,27 @@ RETURNF CHARA_SORT_FIND_LABEL(TEMP_STR, VAR_NAME, VAR_ID)
 
 
 ;-------------------------------------------------
-;ƒ\[ƒg—pƒ‰ƒxƒ‹î•ñŽæ“¾ŠÖ”
-;–ß‚è’lFARGS‚ÌLABEL”z—ñã‚ÌˆÊ’uiŒ©‚Â‚©‚ç‚È‚¯‚ê‚Î0j
+;ã‚½ãƒ¼ãƒˆç”¨ãƒ©ãƒ™ãƒ«æƒ…å ±å–å¾—é–¢æ•°
+;æˆ»ã‚Šå€¤ï¼šARGSã®LABELé…åˆ—ä¸Šã®ä½ç½®ï¼ˆè¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°0ï¼‰
 ;-------------------------------------------------
-;LABEL_NAMEŒó•âAVAR_NAME—pSTRAVAR_ID—pINT‚ð“n‚·‚Æ
-;LABEL_NAME‚ðŒŸõ‚µ‚Ä‚»‚ÌLABEL_NAME‚Éˆê’v‚·‚éî•ñ‚ð•Ô‚µ‚Ä‚­‚ê‚é
+;LABEL_NAMEå€™è£œã€VAR_NAMEç”¨STRã€VAR_IDç”¨INTã‚’æ¸¡ã™ã¨
+;LABEL_NAMEã‚’æ¤œç´¢ã—ã¦ãã®LABEL_NAMEã«ä¸€è‡´ã™ã‚‹æƒ…å ±ã‚’è¿”ã—ã¦ãã‚Œã‚‹
 
-;LABEL_NAME     •\‹Lã‚Ì–¼‘O
-;LABEL_VAR_NAME Še—v‘f‚ÌLABEL‚ª•\‚·ƒLƒƒƒ‰•Ï”‚Ì–¼‘OAABL:X:Y‚ÌABL
-;LABEL_VAR_ID   Še—v‘f‚ÌLABEL‚ª•\‚·ƒLƒƒƒ‰•Ï”‚Ì—v‘fAABL:X:Y‚ÌY
-;LABEL_MAX      ƒ‰ƒxƒ‹ID‚ÌÅ‘å’l
+;LABEL_NAME     è¡¨è¨˜ä¸Šã®åå‰
+;LABEL_VAR_NAME å„è¦ç´ ã®LABELãŒè¡¨ã™ã‚­ãƒ£ãƒ©å¤‰æ•°ã®åå‰ã€ABL:X:Yã®ABL
+;LABEL_VAR_ID   å„è¦ç´ ã®LABELãŒè¡¨ã™ã‚­ãƒ£ãƒ©å¤‰æ•°ã®è¦ç´ ã€ABL:X:Yã®Y
+;LABEL_MAX      ãƒ©ãƒ™ãƒ«IDã®æœ€å¤§å€¤
 @CHARA_SORT_FIND_LABEL(ARGS, R_NAME, R_ID)
 #FUNCTION
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIMS REF R_NAME          ;–ß‚è’l‚Æ‚È‚éƒLƒƒƒ‰•Ï”‚Ì–¼‘OA—v‘f0‚ð’¼Ú‘‚«Š·‚¦‚é
-#DIM  REF R_ID            ;–ß‚è’l‚Æ‚È‚éƒLƒƒƒ‰•Ï”‚Ì—v‘fA—v‘f0‚ð’¼Ú‘‚«Š·‚¦‚é
-#DIMS LABEL_NAME     ,200 ;î•ñ•ÛŽ—p”z—ñ
-#DIMS LABEL_VAR_NAME ,200 ;î•ñ•ÛŽ—p”z—ñ
-#DIM  LABEL_VAR_ID   ,200 ;î•ñ•ÛŽ—p”z—ñ
-#DIM  LABEL_MAX           ;î•ñ•ÛŽ—p”z—ñ
-#DIM  TEMP_ID             ;ARGS‚ÌLABEL”z—ñã‚ÌˆÊ’u
+#DIMS REF R_NAME          ;æˆ»ã‚Šå€¤ã¨ãªã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®åå‰ã€è¦ç´ 0ã‚’ç›´æŽ¥æ›¸ãæ›ãˆã‚‹
+#DIM  REF R_ID            ;æˆ»ã‚Šå€¤ã¨ãªã‚‹ã‚­ãƒ£ãƒ©å¤‰æ•°ã®è¦ç´ ã€è¦ç´ 0ã‚’ç›´æŽ¥æ›¸ãæ›ãˆã‚‹
+#DIMS LABEL_NAME     ,200 ;æƒ…å ±ä¿æŒç”¨é…åˆ—
+#DIMS LABEL_VAR_NAME ,200 ;æƒ…å ±ä¿æŒç”¨é…åˆ—
+#DIM  LABEL_VAR_ID   ,200 ;æƒ…å ±ä¿æŒç”¨é…åˆ—
+#DIM  LABEL_MAX           ;æƒ…å ±ä¿æŒç”¨é…åˆ—
+#DIM  TEMP_ID             ;ARGSã®LABELé…åˆ—ä¸Šã®ä½ç½®
 SIF !LABEL_MAX
 	CALLF DIM_TABLE_CVAR(LABEL_NAME, LABEL_VAR_NAME, LABEL_VAR_ID, LABEL_MAX)
 R_NAME '= ""

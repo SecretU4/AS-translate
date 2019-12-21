@@ -1,67 +1,67 @@
-;-------------------------------------------------
-;��z�����C�x���g
+﻿;-------------------------------------------------
+;交配実験イベント
 ;
-;���g�p���Ă���CFLAG
-;��z�����t���O					CFLAG:��z����
-;��z������					CFLAG:��z����_��
-;���������̎q��D�P�������H		CFLAG:��z����_�D�P
-;���������̎q���o�Y������		CFLAG:��z����_�o�Y��
-;�q�{�������x					CFLAG:��z����_�q�{�������x
+;■使用しているCFLAG
+;交配実験フラグ					CFLAG:交配実験
+;交配実験回数					CFLAG:交配実験_回数
+;実験生物の子を妊娠したか？		CFLAG:交配実験_妊娠
+;実験生物の子を出産した回数		CFLAG:交配実験_出産回数
+;子宮内汚染度					CFLAG:交配実験_子宮内汚染度
 ;
-;CFLAG:��z����_�D�P == 0�`2
-;0 = ��� , 1 = �D�P , 2 = �o�ߏ���
+;CFLAG:交配実験_妊娠 == 0～2
+;0 = 空胎 , 1 = 妊娠 , 2 = 経過順調
 ;
-;�D�P�ł��Ȃ��Z�l�Ɋւ��Ă͍l�����Ă��܂���(�ⓚ���p�ŔD�P����c�Ǝv��)
+;妊娠できない住人に関しては考慮していません(問答無用で妊娠する…と思う)
 ;
 ;-------------------------------------------------
 @TURN_EVENT_RPG_KJ
 
-;�󐸂������͔D�P���Ă���ꍇ�͑ق�����
-IF TALENT:�� != 0 || TALENT:�D�P != 0
+;受精もしくは妊娠している場合は堕胎させる
+IF TALENT:受精 != 0 || TALENT:妊娠 != 0
 	DRAWLINE
 	SETCOLOR 250,50,200
-	PRINTFORML �y��z�����C�x���g(��):%CALLNAME%�z
-	SIF	TALENT:�� != 0
-		PRINTFORML %CALLNAME%�𝺂��Ă����}�b�h�T�C�G���e�B�X�g�͂��̑ٓ��Ɏ󐸗������݂��邱�ƂɋC�������B
-	SIF TALENT:�D�P != 0
-		PRINTFORML %CALLNAME%�𝺂��Ă����}�b�h�T�C�G���e�B�X�g�͂��̑ٓ��ɑَ������݂��邱�ƂɋC�������B
-	PRINTFORML �u��z�����̎ז��ɂȂ�v
-	PRINTFORML �����������ꂢ���}�b�h�T�C�G���e�B�X�g��%CALLNAME%�̑ٓ��ɏh�鏬���Ȗ��Ɏ���������B
+	PRINTFORML 【交配実験イベント(堕胎):%CALLNAME%】
+	SIF	TALENT:受精 != 0
+		PRINTFORML %CALLNAME%を攫ってきたマッドサイエンティストはその胎内に受精卵が存在することに気がついた。
+	SIF TALENT:妊娠 != 0
+		PRINTFORML %CALLNAME%を攫ってきたマッドサイエンティストはその胎内に胎児が存在することに気がついた。
+	PRINTFORML 「交配実験の邪魔になる」
+	PRINTFORML そう小さく呟いたマッドサイエンティストは%CALLNAME%の胎内に宿る小さな命に手をかけた。
 	PRINTFORML 
-	SIF	TALENT:�� != 0
-		PRINTFORML �c�O�ł���%CALLNAME%�͎󐸏�Ԃł͂Ȃ��Ȃ�܂����c
-	SIF TALENT:�D�P != 0
-		PRINTFORML �c�O�ł���%CALLNAME%�͔D�P��Ԃł͂Ȃ��Ȃ�܂����c
-	CFLAG:�D�P�t���O = 0
-	TALENT:�� = 0
-	TALENT:�D�P = 0
-	TALENT:� = 0 
-	TALENT:�� = 0 
-	CFLAG:�D�P����ԍ� = 0
-	CFLAG:�D�P�J�n�� = 0
-ELSEIF CFLAG:��z����_�D�P == 0
-	;��t��
+	SIF	TALENT:受精 != 0
+		PRINTFORML 残念ですが%CALLNAME%は受精状態ではなくなりました…
+	SIF TALENT:妊娠 != 0
+		PRINTFORML 残念ですが%CALLNAME%は妊娠状態ではなくなりました…
+	CFLAG:妊娠フラグ = 0
+	TALENT:受精 = 0
+	TALENT:妊娠 = 0
+	TALENT:托卵 = 0 
+	TALENT:被托卵 = 0 
+	CFLAG:妊娠相手番号 = 0
+	CFLAG:妊娠開始日 = 0
+ELSEIF CFLAG:交配実験_妊娠 == 0
+	;種付け
 	CALL TURN_EVENT_RPG_KJ_TNTK
-ELSEIF CFLAG:��z����_�D�P == 1
-	;�o�ߊώ@
+ELSEIF CFLAG:交配実験_妊娠 == 1
+	;経過観察
 	CALL TURN_EVENT_RPG_KJ_KNST
-ELSEIF CFLAG:��z����_�D�P == 2
-	;�o�Y
+ELSEIF CFLAG:交配実験_妊娠 == 2
+	;出産
 	CALL TURN_EVENT_RPG_KJ_SYSN
 ENDIF
 
-FLAG:�C�x���g�U���� = 2
+FLAG:イベント誘拐中 = 2
 
 RESETCOLOR
 
 
 
 ;-------------------------------------------------
-;��z�����C�x���g����t��
+;交配実験イベント＠種付け
 ;
-;��x��3�`8��̎�t�����s���A���q�̑ϋv�l��0�ɂȂ����ꍇ�͎󐸔�����s��
-;�󐸔���̎d�g�݂̓q�g�ɑ΂��Ă̂��̂Ƃقړ��l
-;�q�{�������͎�t��1��ɂ����q�̑ϋv���c���Ă����1%�A�c���Ă��Ȃ���4%����
+;一度で3～8回の種付けを行い、卵子の耐久値が0になった場合は受精判定を行う
+;受精判定の仕組みはヒトに対してのものとほぼ同様
+;子宮内汚染は種付け1回につき卵子の耐久が残っていると1%、残っていないと4%増加
 ;-------------------------------------------------
 @TURN_EVENT_RPG_KJ_TNTK
 #DIM L_SIEK
@@ -73,335 +73,335 @@ RESETCOLOR
 
 DRAWLINE
 SETCOLOR 250,50,200
-PRINTFORML �y��z�����C�x���g(��t��):%CALLNAME%�z
-PRINTFORML �����Ɏ���ꂽ%CALLNAME%�̓��͎̂��������Ƃ̌�z�����ɗ��p����Ă���c
+PRINTFORML 【交配実験イベント(種付け):%CALLNAME%】
+PRINTFORML 密室に囚われた%CALLNAME%の肉体は実験生物との交配実験に利用されている…
 
 
-;���������ɑ΂��Ă̗��q�ő�ϋv�l
-IF CFLAG:�󐸍ő�ϋv�l >= 1000	
+;実験生物に対しての卵子最大耐久値
+IF CFLAG:受精最大耐久値 >= 1000	
 	L_RNS_MAX = 900
-	;1000�𒴂��Ă���ꍇ�͎��������Ƃ̐e�a������������
+	;1000を超えている場合は実験生物との親和性が高い扱い
 ELSE
-	L_RNS_MAX = 2000-CFLAG:�󐸍ő�ϋv�l
-	;�ŏ��l��1001�Ȃ̂Őe�a���������̂����Ⴍ�Ȃ邱�Ƃ͂Ȃ�
+	L_RNS_MAX = 2000-CFLAG:受精最大耐久値
+	;最小値が1001なので親和性が高いのよりも低くなることはない
 ENDIF
-;���������ɑ΂��Ă̗��q���ݑϋv�l
+;実験生物に対しての卵子現在耐久値
 L_RNS_NOW = L_RNS_MAX
-;���������ɑ΂��Ă̎󐸊m��
-L_JYSI = 100-CFLAG:�󐸊m��
-;���������Ɏ�t��������
+;実験生物に対しての受精確率
+L_JYSI = 100-CFLAG:受精確率
+;実験生物に種付けされる回数
 L_SEX = (RAND:6)+3
 
-IF TALENT:AI�ꑮ�팱�� == 1
-	PRINTFORML %CALLNAME%�̓��̂Ɉ����̑���̊��Ղ��������}�b�h�T�C�G���e�B�X�g�͎��������ɖ򕨂𓊗^�����y��t���񐔑����z
+IF TALENT:AI専属被験者 == 1
+	PRINTFORML %CALLNAME%の肉体に因縁の相手の干渉跡を見つけたマッドサイエンティストは実験生物に薬物を投与した【種付け回数増加】
 	L_SEX += 2
 ENDIF
-IF CFLAG:��z����_�q�{�������x > 0
-	PRINTFORML %CALLNAME%�̎q�{�͎��������̐��t�ɂ���ĉ�������Ă���y�ϋv�l�ቺ�z
-	L_RNS_NOW -= 1+RAND:(CFLAG:��z����_�q�{�������x*2)
+IF CFLAG:交配実験_子宮内汚染度 > 0
+	PRINTFORML %CALLNAME%の子宮は実験生物の精液によって汚染されている【耐久値低下】
+	L_RNS_NOW -= 1+RAND:(CFLAG:交配実験_子宮内汚染度*2)
 ENDIF
 
 
-;�o���l�֌W
-EXP:�L�X�o�� += 2+RAND:L_SEX
-EXP:�u�o�� += 5+RAND:L_SEX
-EXP:�`�o�� += 2+RAND:(L_SEX/2)
-EXP:�b�o�� += 2+RAND:L_SEX
-EXP:�a�o��  += 2+RAND:L_SEX
-EXP:�����o�� += L_SEX
-EXP:�`�����o�� += L_SEX/2
-EXP:����o�� += L_SEX/2
-EXP:�t�F���o�� += L_SEX/2
-EXP:�Ⓒ�o�� += 5+RAND:L_SEX
-EXP:���t�o�� += 5+RAND:L_SEX
-EXP:�����o�� += 5+RAND:L_SEX
-EXP:�S�ˌo�� += 5+RAND:L_SEX
-EXP:��ɉ��y�o�� += L_SEX
-SIF TALENT:���� == 1 || TALENT:���� == 1
-	EXP:�p�C�Y���o�� += L_SEX/2
-SIF CFLAG:��z����_�� >= 100 && CFLAG:��z����_�o�Y�� >= 30
-	EXP:��d���y�o�� += L_SEX
-SIF CFLAG:��z����_�� >= 50 && CFLAG:��z����_�o�Y�� >= 15
-	EXP:�����o�� += L_SEX
-SIF CFLAG:��z����_�� >= 50
-	MARK:�������� = 3
+;経験値関係
+EXP:キス経験 += 2+RAND:L_SEX
+EXP:Ｖ経験 += 5+RAND:L_SEX
+EXP:Ａ経験 += 2+RAND:(L_SEX/2)
+EXP:Ｃ経験 += 2+RAND:L_SEX
+EXP:Ｂ経験  += 2+RAND:L_SEX
+EXP:性交経験 += L_SEX
+EXP:Ａ性交経験 += L_SEX/2
+EXP:手淫経験 += L_SEX/2
+EXP:フェラ経験 += L_SEX/2
+EXP:絶頂経験 += 5+RAND:L_SEX
+EXP:精液経験 += 5+RAND:L_SEX
+EXP:精飲経験 += 5+RAND:L_SEX
+EXP:膣射経験 += 5+RAND:L_SEX
+EXP:苦痛快楽経験 += L_SEX
+SIF TALENT:巨乳 == 1 || TALENT:爆乳 == 1
+	EXP:パイズリ経験 += L_SEX/2
+SIF CFLAG:交配実験_回数 >= 100 && CFLAG:交配実験_出産回数 >= 30
+	EXP:奉仕快楽経験 += L_SEX
+SIF CFLAG:交配実験_回数 >= 50 && CFLAG:交配実験_出産回数 >= 15
+	EXP:強姦経験 += L_SEX
+SIF CFLAG:交配実験_回数 >= 50
+	MARK:淫乱刻印 = 3
 
 
 DO
-	;���������̐��t�̋���
-	L_SIEK = (100+RAND:101)+CFLAG:��z����_��+(CFLAG:��z����_�q�{�������x*5)+(CFLAG:��z����_�o�Y��*10)
+	;実験生物の精液の強さ
+	L_SIEK = (100+RAND:101)+CFLAG:交配実験_回数+(CFLAG:交配実験_子宮内汚染度*5)+(CFLAG:交配実験_出産回数*10)
 	RESETCOLOR
-	IF CFLAG:��z����_�� >= 100 && CFLAG:��z����_�o�Y�� >= 30
+	IF CFLAG:交配実験_回数 >= 100 && CFLAG:交配実験_出産回数 >= 30
 		IF !RAND:5
-			PRINTFORML �u�c���c���������c�Ƃ����I�@�c�o�c���������c���I�@�c�āc%UNICODE(0x2661)%�v
+			PRINTFORML 「…も…ぉぉおっ…とぉお！　…出…っしぃい…っ！　…て…%UNICODE(0x2661)%」
 		ELSEIF !RAND:4
-			PRINTFORML �u���c���ɂ������I�@�M�����̂��c���������c�I�@�Ă那���I%UNICODE(0x2661)%�v
+			PRINTFORML 「奥…っにぃいっ！　熱いぃのが…当たぁっ…！　てるぅぅ！%UNICODE(0x2661)%」
 		ELSEIF !RAND:3
-			PRINTFORML �u�񂭂��c�c������ł����c�g���Ă���Ă�������ˁc�c�����ς��q��肵��c%UNICODE(0x2661)%�v
+			PRINTFORML 「んくっ……いくらでもっ…使ってくれていいからね……いっぱい子作りしよ…%UNICODE(0x2661)%」
 		ELSEIF !RAND:2
-			PRINTFORML �u�c�c������c���߂����c�c��������Ȃ��c�c�Ђ������I%UNICODE(0x2661)%�v
+			PRINTFORML 「……あんっ…っめぇえ……もう入らなっ……ひぁあっ！%UNICODE(0x2661)%」
 		ELSE
-			PRINTFORML �u�c��Ђ��c�c�����Ƃ��c�����ƒ��Ղ��c�c����������Y��ł��c�����邩����c�c����%UNICODE(0x2661)%�v
+			PRINTFORML 「…んひっ……もっとぉ…もっと頂戴ぃ……たぁくさん産んでぇ…あげるからっ……あっ%UNICODE(0x2661)%」
 		ENDIF
-	ELSEIF CFLAG:��z����_�� >= 50 && CFLAG:��z����_�o�Y�� >= 15
+	ELSEIF CFLAG:交配実験_回数 >= 50 && CFLAG:交配実験_出産回数 >= 15
 		IF !RAND:5
-			PRINTFORML �u�����������c�c�����c���������c�I�@�����c���߂��c���I�v
+			PRINTFORML 「ああぁあぁ……もお…ぉっうぅ…！　だぁ…ぁめぇ…っ！」
 		ELSEIF !RAND:4
-			PRINTFORML �u�c�����c���߂āc�c�O�ɂ����I�I�@�c�����c�c���I�v
+			PRINTFORML 「…せっ…せめて……外にぃっ！！　…おっ……っ！」
 		ELSEIF !RAND:3
-			PRINTFORML �u�₾���c�c�܂��o�P���m�Ɂc�g��ꂿ�Ⴄ���c�c�v
+			PRINTFORML 「やだぁ……またバケモノに…使われちゃうぅ……」
 		ELSEIF !RAND:2
-			PRINTFORML �u�����c�c����c�����c�o���Ȃ��ł�����c�c�����c�I�v
+			PRINTFORML 「あっ……やっ…もう…出さないでったら……んんっ…！」
 		ELSE
-			PRINTFORML �u�c�Ȃ�ł��c�c�����c�c����ȃo�P���m�Ɂc�c�����c�������Ⴄ�́c�c�v
+			PRINTFORML 「…なんでぇ……あっ……こんなバケモノに……かっ…感じちゃうの……」
 		ENDIF
 	ELSE
 		IF !RAND:5
-			PRINTFORML �u�c�����c���c�ɂ����c���߂ėD�����c�c�������I�v
+			PRINTFORML 「…いつっ…ぁ…痛いっ…せめて優しく……いぎっ！」
 		ELSEIF !RAND:4
-			PRINTFORML �u�������c�āc�c���I�c���ꂩ�c�����Ă悧�I�v
+			PRINTFORML 「たすけ…て……っ！…だれか…助けてよぉ！」
 		ELSEIF !RAND:3
-			PRINTFORML �u�o���Ȃ��c�c�����̓o�P���m�Ɏg�킹��ꏊ����c�c�������c�c�v
+			PRINTFORML 「出すなぁ……そこはバケモノに使わせる場所じゃ……ぐすっ……」
 		ELSEIF !RAND:2
-			PRINTFORML �u�c�c�₾�c��߂Ă��c�c�����o���Ȃ��Łc�v
+			PRINTFORML 「……やだ…やめてっ……もう出さないで…」
 		ELSE
-			PRINTFORML �u�c�������c�c�Ⴞ�c����ȃo�P���m�Ɓc�c�v
+			PRINTFORML 「…うぐっ……ゃだ…こんなバケモノと……」
 		ENDIF
 	ENDIF
 	SETCOLOR 250,50,200
-	IF CFLAG:��z����_�D�P == 1
+	IF CFLAG:交配実験_妊娠 == 1
 		IF !RAND:3
-			PRINTFORML ���ł�%CALLNAME%�̗��q�͎��������̐��q�ɋ����Ă������A�����m��Ȃ����������͂���Ɏq��𒍂�����ł����c
+			PRINTFORML すでに%CALLNAME%の卵子は実験生物の精子に屈していたが、それを知らない実験生物はさらに子種を注ぎ込んでいく…
 		ELSEIF !RAND:2
-			PRINTFORML %CALLNAME%�̎󐸗��Ɏ��������̐��q���E�����Ă������A�V���Ȉ�`�q���󂯓���邱�Ƃ͂Ȃ������c
+			PRINTFORML %CALLNAME%の受精卵に実験生物の精子が殺到していくが、新たな遺伝子を受け入れることはなかった…
 		ELSE
-			PRINTFORML �D�P�����m���Ȃ��̂ɂ��悤�ƁA����������%CALLNAME%�̑ٓ��ɐ��t�𑗂葱���Ă���c
+			PRINTFORML 妊娠をより確実なものにしようと、実験生物は%CALLNAME%の胎内に精液を送り続けている…
 		ENDIF
 	ELSE
 		IF L_RNS_NOW != 0
 			IF !RAND:3
-				PRINTFORML �����Y�̐��t�Ɗ��Ⴂ�����q�{�́A���̈�`�q���󂯓����ׂ������𐮂��Ă���c
+				PRINTFORML 強い雄の精液と勘違いした子宮は、その遺伝子を受け入れるべく準備を整えている…
 			ELSEIF !RAND:2
-				PRINTFORML �h���Ă͂Ȃ�Ȃ�����ƋC�t���Ȃ��q�{�́A�󐸂Ɍ����ď������n�߂Ă���c
+				PRINTFORML 宿してはならない相手と気付かない子宮は、受精に向けて準備を始めている…
 			ELSE
-				PRINTFORML ���t���󂯎~�߂��q�{�́A��������悤�Ɏ󐸂̏����𐮂��Ă���c
+				PRINTFORML 精液を受け止めた子宮は、反応するように受精の準備を整えている…
 			ENDIF
-			PRINTFORML �󐸑ϋv�l:{L_RNS_NOW} �� {L_RNS_NOW-L_SIEK} 
+			PRINTFORML 受精耐久値:{L_RNS_NOW} → {L_RNS_NOW-L_SIEK} 
 			L_RNS_NOW -= L_SIEK
 			IF L_RNS_NOW <= 0
 				IF !RAND:3
-					PRINTFORML �y�󐸑̐��z���������̈�`�q���󂯓����ׂ�%CALLNAME%�̎q�{�͒�R���~�ߎ󂯓���Ԑ��𐮂��Ă��܂����B
+					PRINTFORML 【受精体勢】実験生物の遺伝子を受け入れるべく%CALLNAME%の子宮は抵抗を止め受け入れ態勢を整えてしまった。
 				ELSEIF !RAND:2
-					PRINTFORML �y�󐸑̐��z���������̐��t�Ńp���p����%CALLNAME%�̎q�{�ɗ��q�̓�����͖����Ȃ��Ă��܂����B
+					PRINTFORML 【受精体勢】実験生物の精液でパンパンの%CALLNAME%の子宮に卵子の逃げ場は無くなってしまった。
 				ELSE
-					PRINTFORML �y�󐸑̐��z���������̐��t�𗁂т���ꂽ%CALLNAME%�̎q�{�͎󐸂̏������������Ă��܂����B
+					PRINTFORML 【受精体勢】実験生物の精液を浴びせられた%CALLNAME%の子宮は受精の準備が完了してしまった。
 				ENDIF
 				L_RNS_NOW = 0
 			ENDIF
-			IF CFLAG:��z����_�q�{�������x <= 99
-				CFLAG:��z����_�q�{�������x += 1
-				PRINTFORML ���������̐��t�ɂ����%CALLNAME%�̎q�{����������Ă����c
-				PRINTFORML ���݂̎q�{�����x�F{CFLAG:��z����_�q�{�������x}��
+			IF CFLAG:交配実験_子宮内汚染度 <= 99
+				CFLAG:交配実験_子宮内汚染度 += 1
+				PRINTFORML 実験生物の精液によって%CALLNAME%の子宮が汚染されていく…
+				PRINTFORML 現在の子宮汚染度：{CFLAG:交配実験_子宮内汚染度}％
 			ENDIF
 		ELSEIF L_RNS_NOW == 0
-			;�q�{�������x�ɂ����������ɑ΂��Ă̎󐸊m����������
-			IF CFLAG:��z����_�q�{�������x > 0
-				L_JYSI += CFLAG:��z����_�q�{�������x/2
-				PRINTFORML �x�d�Ȃ���������̎ː��ɂ��%CALLNAME%�̎q�{���͉������i�݁A�󐸂��₷���Ȃ��Ă��܂��Ă���c
-				PRINTFORML ���݂̎󐸊m���F{L_JYSI}���i�q�{�������x�ɂ��e���F{CFLAG:��z����_�q�{�������x/2}���j
+			;子宮内汚染度により実験生物に対しての受精確率が増える
+			IF CFLAG:交配実験_子宮内汚染度 > 0
+				L_JYSI += CFLAG:交配実験_子宮内汚染度/2
+				PRINTFORML 度重なる実験生物の射精により%CALLNAME%の子宮内は汚染が進み、受精しやすくなってしまっている…
+				PRINTFORML 現在の受精確率：{L_JYSI}％（子宮内汚染度による影響：{CFLAG:交配実験_子宮内汚染度/2}％）
 			ENDIF
-			;�o��
+			;出目
 			L_JYSI_KKRT = RAND:100
-			;�����̎q�{�����͎�����������Ɏ󐸂��
-			IF TALENT:�����̎q�{ == 1
+			;聖女の子宮持ちは実験生物相手に受精し難い
+			IF TALENT:聖女の子宮 == 1
 				L_JYSI_KKRT += 20
-				PRINTFORML %CALLNAME%�̎q�{�͐����̎q�{�ɂ�舫�ӂ��鐸�q�̓�����j�Q����c�y�o�ڑ����z
+				PRINTFORML %CALLNAME%の子宮は聖女の子宮により悪意ある精子の動きを阻害する…【出目増加】
 			ENDIF
-			;�D�P���₷���A�D�P���ɂ����͒ʏ�̔����̌���
-			IF TALENT:�D�P���₷�� == 1
+			;妊娠しやすい、妊娠しにくいは通常の半分の効果
+			IF TALENT:妊娠しやすい == 1
 				L_JYSI_KKRT -= 10
-				PRINTFORML %CALLNAME%�̎q�{�͎��������ɑ΂��Ă��D�P���₷���悤���c�y�o�ڌ����z
-			ELSEIF TALENT:�D�P���ɂ��� == 1
+				PRINTFORML %CALLNAME%の子宮は実験生物に対しても妊娠しやすいようだ…【出目減少】
+			ELSEIF TALENT:妊娠しにくい == 1
 				L_JYSI_KKRT += 10
-				PRINTFORML %CALLNAME%�̎q�{�͎��������ɑ΂��Ă��D�P���ɂ����悤���c�y�o�ڑ����z
+				PRINTFORML %CALLNAME%の子宮は実験生物に対しても妊娠しにくいようだ…【出目増加】
 			ENDIF
-			PRINTFORML �y�󐸊m��:{L_JYSI}�z�y�o��:{L_JYSI_KKRT}�z
+			PRINTFORML 【受精確率:{L_JYSI}】【出目:{L_JYSI_KKRT}】
 			IF L_JYSI > L_JYSI_KKRT
-				PRINTFORML �y�\�\�\�󐸁\�\�\�z
+				PRINTFORML 【―――受精―――】
 				IF L_RNS_MAX == 900
-					PRINTFORML ���������ƈ�`�q�̐e�a���������̂��A���q�̖��͑債����Q�ɂ��Ȃ炸���q�Ɋт���N�����������B
-					PRINTFORMW ����������%CALLNAME%�̈�`�q�������荇���A�V���Ȑ����̂𐶂݂�����ƕ�̂ɒ蒅�����c
+					PRINTFORML 実験生物と遺伝子の親和性が高いのか、卵子の膜は大した障害にもならず精子に貫かれ侵入を許した。
+					PRINTFORMW 実験生物と%CALLNAME%の遺伝子が混ざり合い、新たな生命体を生みださんと母体に定着した…
 				ELSEIF L_RNS_MAX > 1800
-					PRINTFORML �َ�̐��q�ɑ΂��Ċ拭�Ȓ�R�������Ă������q���������A���ɗ��q�𕢂�����n������ˎ~�߂��Ă��܂����B
-					PRINTFORMW �َ�̈�`�q�ɂ���Ė��c�ɂ����W���ꂽ���q�͖{���s�ނ͂��̂Ȃ������ւƕω����A��̂ɒ蒅�����c
+					PRINTFORML 異種の精子に対して頑強な抵抗を見せていた卵子だったが、ついに卵子を覆う膜を溶かされ射止められてしまった。
+					PRINTFORMW 異種の遺伝子によって無残にも蹂躙された卵子は本来孕むはずのない生命へと変化し、母体に定着した…
 				ELSEIF L_RNS_MAX > 1400
-					PRINTFORML �q�g�̐��q�Ƃ͔�ׂ��̂ɂȂ�Ȃ��قǋ��x�Ȏ��������̐��q�ɌQ�����A���q�͂������Ȃ������ђʂ���N���������B
-					PRINTFORMW ���������̈�`�q�Ɏx�z���ꂽ�󐸗��͖{���s�ނ͂��̂Ȃ������ւƕω����āA��̂ւƒ蒅�����c
+					PRINTFORML ヒトの精子とは比べものにならないほど強靭な実験生物の精子に群がられ、卵子はあっけなく膜を貫通され侵入を許す。
+					PRINTFORMW 実験生物の遺伝子に支配された受精卵は本来孕むはずのない生命へと変化して、母体へと定着した…
 				ELSEIF L_RNS_MAX > 1000
-					PRINTFORML ���������̐��q�ɕ�̂��K���������̂��A���q�̖��͐̓��̂悤�Ȓ�R����������������Ɗђʂ���ĐN���������B
-					PRINTFORMW ���͂����������p�̛s�ݑ܂Ɖ��������Ƃ��ؖ����邩�̂悤�ɁA��̂͊��X�Ƃ��Ď󐸗���蒅�������c
+					PRINTFORML 実験生物の精子に母体が適応されつつあるのか、卵子の膜は昔日のような抵抗も見せずあっさりと貫通されて侵入を許す。
+					PRINTFORMW もはや実験生物専用の孕み袋と化したことを証明するかのように、母体は嬉々として受精卵を定着させた…
 				ENDIF
-				CFLAG:��z����_�D�P = 1
+				CFLAG:交配実験_妊娠 = 1
 			ELSE
-				PRINTFORML �y�\�\�󐸉���\�\�z
-				PRINTFORML �ٓ��ɒ����ꂽ���������̐��q�͗��q�̖����ђʂ��邱�Ƃ��ł��Ȃ������悤���B
-				IF CFLAG:��z����_�q�{�������x == 100
-					PRINTFORMW �������������̐��t�ɂ���Ċ��S�ɉ������ꂽ�q�{�ł͗��q�̒�R�͒��������Ȃ����낤�c
+				PRINTFORML 【――受精回避――】
+				PRINTFORML 胎内に注がれた実験生物の精子は卵子の膜を貫通することができなかったようだ。
+				IF CFLAG:交配実験_子宮内汚染度 == 100
+					PRINTFORMW だが実験生物の精液によって完全に汚染された子宮では卵子の抵抗は長続きしないだろう…
 				ELSE
-					PRINTFORML �������������̐��t�ɂ���ĉ������ꂽ�q�{�͗��q�̒�R�͂���߂���c
-					IF CFLAG:��z����_�q�{�������x >= 97
-						CFLAG:��z����_�q�{�������x = 100
-						PRINTFORMW ���݂̎q�{�����x�F{CFLAG:��z����_�q�{�������x}��
+					PRINTFORML だが実験生物の精液によって汚染された子宮は卵子の抵抗力を弱めつつある…
+					IF CFLAG:交配実験_子宮内汚染度 >= 97
+						CFLAG:交配実験_子宮内汚染度 = 100
+						PRINTFORMW 現在の子宮汚染度：{CFLAG:交配実験_子宮内汚染度}％
 					ELSE
-						CFLAG:��z����_�q�{�������x += 4
-						PRINTFORMW ���݂̎q�{�����x�F{CFLAG:��z����_�q�{�������x}��
+						CFLAG:交配実験_子宮内汚染度 += 4
+						PRINTFORMW 現在の子宮汚染度：{CFLAG:交配実験_子宮内汚染度}％
 					ENDIF
 				ENDIF
 			ENDIF
 		ENDIF
 	ENDIF
-	;��t���񐔂̌���
+	;種付け回数の減少
 	L_SEX -= 1
 	RESETCOLOR
-;��t���񐔂�0�ɂȂ�܂ŌJ��Ԃ�
+;種付け回数が0になるまで繰り返す
 LOOP L_SEX != 0
 
-;�󐸂��Ȃ�����
-IF CFLAG:��z����_�D�P == 0
-	IF CFLAG:��z����_�� >= 100 && CFLAG:��z����_�o�Y�� >= 30
-		PRINTFORML %CALLNAME%���S���炱�ڂꗎ�������t���~���グ��ƁA���̂��߂炢���Ȃ��S���ւƉ����߂����B
-		PRINTFORML ���������Ƃ̊��x�ɂ��킽���z�����Əo�Y�A���ꂪ%CALLNAME%�̐��_��I�݁A�ޏ������������̓��łւƑƂ��Ă��܂��Ă����B
-		PRINTFORMW �S���ɉ����߂��ꂽ���t�͎q�{�܂ŗ��ꍞ�ނƁA�q�{�����������q�̒�R�͂�D���Ă������c
-		;�����܂ŗ���Ǝ����I�Ɏ󐸂��悤�Ƃ��Ďq�{�������x���グ��悤�ɂȂ�
-		CFLAG:��z����_�q�{�������x += 1+CFLAG:��z����_�q�{�������x
-	ELSEIF CFLAG:��z����_�� >= 50
-		PRINTFORML %CALLNAME%�͕������痧��������������𜒍��Ƃ����\��Ō������Ă����B
-		PRINTFORML ����قǌ����Ă����͂��̃o�P���m�Ƃ̌�z������%CALLNAME%�͂��̊Ԃɂ������݂����Ă���B
-		PRINTFORMW ���̉ʂĂɑ҂��󂯂錋�ʂ���ڂ���炵�Ȃ�����A%CALLNAME%�̖{�\�͗Y�Ƃ��Ď󂯓���������c
+;受精しなかった
+IF CFLAG:交配実験_妊娠 == 0
+	IF CFLAG:交配実験_回数 >= 100 && CFLAG:交配実験_出産回数 >= 30
+		PRINTFORML %CALLNAME%は膣からこぼれ落ちた精液を救い上げると、何のためらいもなく膣内へと押し戻した。
+		PRINTFORML 実験生物との幾度にもわたる交配実験と出産、それが%CALLNAME%の精神を蝕み、彼女を実験生物の肉嫁へと堕としてしまっていた。
+		PRINTFORMW 膣内に押し戻された精液は子宮まで流れ込むと、子宮を汚染し卵子の抵抗力を奪っていった…
+		;ここまで来ると自発的に受精しようとして子宮内汚染度を上げるようになる
+		CFLAG:交配実験_子宮内汚染度 += 1+CFLAG:交配実験_子宮内汚染度
+	ELSEIF CFLAG:交配実験_回数 >= 50
+		PRINTFORML %CALLNAME%は部屋から立ち去る実験生物を恍惚とした表情で見送っていた。
+		PRINTFORML あれほど嫌っていたはずのバケモノとの交配実験を%CALLNAME%はいつの間にか愉しみだしている。
+		PRINTFORMW その果てに待ち受ける結果から目を逸らしながらも、%CALLNAME%の本能は雄として受け入れつつあった…
 	ELSE
-		PRINTFORML �����h��ŏ��ɑł��̂Ă�ꂽ%CALLNAME%�͕������痧�������������������ȓ��Ō������Ă����B
-		PRINTFORML �����͉^�悭�󐸂��Ȃ������炵�����A���̂܂܂ł͊m���ɂ��̃o�P���m�̎q��s�ނ��ƂɂȂ�B
-		PRINTFORMW ����%CALLNAME%�ɏo����̂͐k���ė����̌�z������҂��Ƃ����ł������c
+		PRINTFORML 白濁塗れで床に打ち捨てられた%CALLNAME%は部屋から立ち去る実験生物を虚ろな瞳で見送っていた。
+		PRINTFORML 今日は運よく受精しなかったらしいが、このままでは確実にあのバケモノの子を孕むことになる。
+		PRINTFORMW だが%CALLNAME%に出来るのは震えて翌日の交配実験を待つことだけであった…
 	ENDIF
 ENDIF
 
-CFLAG:��z����_�� += 1
+CFLAG:交配実験_回数 += 1
 
-SIF CSTR:�����������薼 == ""
-	CSTR:�����������薼 = ��������
-SIF CSTR:���L�X���薼 == "" 
-	CSTR:���L�X���薼 = ��������
-SIF CSTR:���������薼 =="" 
-	CSTR:���������薼 = ��������
-SIF CSTR:���t�F�����薼 ==""
-	CSTR:���t�F�����薼 = ��������
-SIF CSTR:���`���������薼 ==""
-	CSTR:���`���������薼 = ��������
-SIF CSTR:���Ⓒ���薼 ==""
-	CSTR:���Ⓒ���薼 = ��������
-SIF CSTR:�����o�����薼 ==""
-	CSTR:�����o�����薼 = ��������
-TALENT:�񏈏� = 1
-TALENT:�`�񏈏� = 1
-TCVAR:����_EXP_�����r�� = 1
-TCVAR:����_EXP_�`�����r�� = 1
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = 実験生物
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = 実験生物
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = 実験生物
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = 実験生物
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = 実験生物
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 実験生物
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = 実験生物
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
 
 
 
 
 ;-------------------------------------------------
-;��z�����C�x���g���o�ߊώ@
+;交配実験イベント＠経過観察
 ;
-;��z����_�D�P�̃J�E���^�[��i�߂Ďq�{�������x��0�ɂ��邽�߂̃C���^�[�o��
-;�D�P��Ԃ̕�̂ɃA���R��������e�ɂ��邩��
+;交配実験_妊娠のカウンターを進めて子宮内汚染度を0にするためのインターバル
+;妊娠状態の母体にアレコレする内容にするかも
 ;-------------------------------------------------
 @TURN_EVENT_RPG_KJ_KNST
 
 DRAWLINE
 SETCOLOR 250,50,200
-PRINTFORML �y��z�����C�x���g(�o�ߊώ@):%CALLNAME%�z
-IF CFLAG:��z����_�o�Y�� >= 45 && CFLAG:��z����_�� >= 100
-	PRINTFORML %CALLNAME%�͎��������̕�̂Ƃ��Ċ������Ă����B
-	PRINTFORML ���߂̍��͐�]�Ɋ����߂Ă����Ƃ����̂ɁA���ł͎����ɖ������\��Ŗc��񂾕��𕏂łĂ���B
-	PRINTFORML ��z�����ɂ����͓I�ɂȂ�A�ǂ�Ȏ��������𑊎�ɂ��Ă����Ȋ������Ɋ��X�Ƃ��Ĉ�`�q���󂯓���Ă����B
-	PRINTFORML %CALLNAME%�̍K���͂��̕����߂�ꂽ������Ԃł̔ɐB�s�ׂɂ���A�O�E�ւ̋����͊��S�Ɏ����Ă��܂����悤�������B
-	PRINTFORMW ����Ȏ����̗̂l�q���}�b�h�T�C�G���e�B�X�g�͗�O�ȖڂŊώ@���A�L�^�������Ă���c
-ELSEIF CFLAG:��z����_�o�Y�� >= 30
+PRINTFORML 【交配実験イベント(経過観察):%CALLNAME%】
+IF CFLAG:交配実験_出産回数 >= 45 && CFLAG:交配実験_回数 >= 100
+	PRINTFORML %CALLNAME%は実験生物の母体として完成していた。
+	PRINTFORML 初めの頃は絶望に顔を染めていたというのに、今では慈愛に満ちた表情で膨らんだ腹を撫でている。
+	PRINTFORML 交配実験にも協力的になり、どんな実験動物を相手にしても嫌な顔一つせずに嬉々として遺伝子を受け入れていた。
+	PRINTFORML %CALLNAME%の幸福はこの閉じ込められた狭い空間での繁殖行為にあり、外界への興味は完全に失ってしまったようだった。
+	PRINTFORMW そんな実験体の様子をマッドサイエンティストは冷徹な目で観察し、記録し続けている…
+ELSEIF CFLAG:交配実験_出産回数 >= 30
 	PRINTFORML 
-	PRINTFORML %CALLNAME%�͎��������̎q��s�񂾂Ɗm�M���A���̊m�M���m���Ȃ��̂ł������ƒ��̌��N�����Ŋm�F���ꂽ�B
-	PRINTFORML �D�P��{�\�I�Ɍ���̂̕ω��Ƀ}�b�h�T�C�G���e�B�X�g�͋������o�����悤�ł��������A�ނ̖ړI�͂����ł͂Ȃ��B
-	PRINTFORML ��q�̃f�[�^���W�ߎn�߂��}�b�h�T�C�G���e�B�X�g�ɍ\�����ƂȂ�%CALLNAME%�͖c��݂����̕�����D�������ł�B
-	PRINTFORMW �����ɂ͎��������̎q���������Ă������̎p�͂Ȃ��A�܂����ʉ䂪�q�������ޕ�̎p�����Ȃ������c
-ELSEIF CFLAG:��z����_�o�Y�� >= 15
+	PRINTFORML %CALLNAME%は実験生物の子を孕んだと確信し、その確信が確かなものであったと朝の健康調査で確認された。
+	PRINTFORML 妊娠を本能的に悟る母体の変化にマッドサイエンティストは興味を覚えたようであったが、彼の目的はそこではない。
+	PRINTFORML 母子のデータを集め始めたマッドサイエンティストに構うことなく%CALLNAME%は膨らみかけの腹部を優しく撫でる。
+	PRINTFORMW そこには実験生物の子を嫌悪していた女の姿はなく、まだ見ぬ我が子を慈しむ母の姿しかなかった…
+ELSEIF CFLAG:交配実験_出産回数 >= 15
 	PRINTFORML 
-	PRINTFORML ���̌��N�����Ŏ��������̎q���h���Ă���ƕ������ꂽ%CALLNAME%�͂�͂�ƍ����ꂽ�B
-	PRINTFORML ���������Ƃ̌�����I����Ă���b�����āA�ٓ���������Ɋ����鑽�K���ɂ���ȋC�͂��Ă����̂��B
-	PRINTFORMW �����ɂ͂܂��o�Y���}���邪�A���̊Ԃɂ��ŏ��̍��̂悤�Ȍ�������%CALLNAME%�͊����Ȃ��Ȃ��Ă����c
+	PRINTFORML 朝の健康調査で実験生物の子を宿していると聞かされた%CALLNAME%はやはりと項垂れた。
+	PRINTFORML 実験生物との交尾が終わってから暫くして、胎内から微かに感じる多幸感にそんな気はしていたのだ。
+	PRINTFORMW 明日にはまた出産を迎えるが、いつの間にか最初の頃のような嫌悪感を%CALLNAME%は感じなくなっていた…
 ELSE
 	PRINTFORML 
-	PRINTFORML �����s���Ă����̂̌��N�����ɂ��%CALLNAME%�͎��������̎q���h���Ă��邱�Ƃ����������B
-	PRINTFORML ���X�Ƃ��ăf�[�^���W�߂������}�b�h�T�C�G���e�B�X�g��K�ڂɁA���߂�%CALLNAME%�͎��g�̑ٓ��ň�܂�Ă���
-	PRINTFORMW ���������̎q�ɐk���邱�Ƃ����ł��Ȃ��c
+	PRINTFORML 毎朝行われている母体の健康調査により%CALLNAME%は実験生物の子を宿していることが判明した。
+	PRINTFORML 嬉々としてデータを集めだしたマッドサイエンティストを尻目に、青ざめた%CALLNAME%は自身の胎内で育まれている
+	PRINTFORMW 実験生物の子に震えることしかできない…
 ENDIF
 
-CFLAG:��z����_�D�P += 1
-;�q�{�������x�����Z�b�g
-CFLAG:��z����_�q�{�������x = 0
+CFLAG:交配実験_妊娠 += 1
+;子宮内汚染度をリセット
+CFLAG:交配実験_子宮内汚染度 = 0
 
 
 ;-------------------------------------------------
-;��z�����C�x���g���o�Y
+;交配実験イベント＠出産
 ;
-;�󐸍ő�ϋv�l�A�󐸌��ݑϋv�l�̑���(�q�g�ɑ΂��Ď󐸂��ɂ����A���������ɑ΂��Ď󐸂��₷���Ȃ�)
-;�D�P�m���̒ቺ(�m���ōő��10%�܂ŉ�����B�����̎q�{�ł�������)
-;��́A���q���x���̒ቺ(��m���łǂ����5�܂ŉ�����)
+;受精最大耐久値、受精現在耐久値の増加(ヒトに対して受精しにくく、実験生物に対して受精しやすくなる)
+;妊娠確率の低下(確率で最大で10%まで下がる。聖女の子宮でも下がる)
+;母体、卵子レベルの低下(低確率でどちらも5まで下がる)
 ;-------------------------------------------------
 @TURN_EVENT_RPG_KJ_SYSN
 
 DRAWLINE
 SETCOLOR 250,50,200
-PRINTFORML �y��z�����C�x���g(�o�Y):%CALLNAME%�z
+PRINTFORML 【交配実験イベント(出産):%CALLNAME%】
 PRINTFORML 
-PRINTFORML ���ؑ�ɍS�����ꂽ%CALLNAME%�͎��������̎q�����X�ƎY�ݗ��Ƃ��Ă���c
+PRINTFORML 分娩台に拘束された%CALLNAME%は実験生物の子を次々と産み落としている…
 PRINTFORML 
-PRINTFORML %CALLNAME%�̎q�{�̓q�g�ł͂Ȃ����������̌������Ƃ��čœK������Ă����B
+PRINTFORML %CALLNAME%の子宮はヒトではなく実験生物の交尾相手として最適化されていく。
 
 SETCOLOR 250,50,50
-;�󐸑ϋv�l�̑���
-IF CFLAG:�󐸍ő�ϋv�l >= 1000
-	;�󐸍ő�ϋv�l��1000�ȏ�̏ꍇ�͕ϓ�����
-ELSEIF CFLAG:�󐸍ő�ϋv�l >= 980
-	PRINTFORML �󐸍ő�ϋv�l�@{CFLAG:�󐸍ő�ϋv�l}�@���@999
-	CFLAG:�󐸍ő�ϋv�l = 999
-	CFLAG:�󐸌��ݑϋv�l = CFLAG:�󐸍ő�ϋv�l
+;受精耐久値の増加
+IF CFLAG:受精最大耐久値 >= 1000
+	;受精最大耐久値が1000以上の場合は変動せず
+ELSEIF CFLAG:受精最大耐久値 >= 980
+	PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　999
+	CFLAG:受精最大耐久値 = 999
+	CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
 ELSE
-	PRINTFORML �󐸍ő�ϋv�l�@{CFLAG:�󐸍ő�ϋv�l}�@���@{CFLAG:�󐸍ő�ϋv�l+20}
-	CFLAG:�󐸍ő�ϋv�l += 20
-	CFLAG:�󐸌��ݑϋv�l = CFLAG:�󐸍ő�ϋv�l
+	PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　{CFLAG:受精最大耐久値+20}
+	CFLAG:受精最大耐久値 += 20
+	CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
 ENDIF
-;�󐸊m���̒ቺ(�m��30%�A10��)
-IF RAND:100 >= 70 && CFLAG:�󐸊m�� > 10
-	PRINTFORML �󐸊m���@{CFLAG:�󐸊m��}�@���@{CFLAG:�󐸊m��-1}
-	CFLAG:�󐸊m�� -= 1
+;受精確率の低下(確率30%、10迄)
+IF RAND:100 >= 70 && CFLAG:受精確率 > 10
+	PRINTFORML 受精確率　{CFLAG:受精確率}　→　{CFLAG:受精確率-1}
+	CFLAG:受精確率 -= 1
 ENDIF
-;��́A���q���x���̒ቺ(�m��3%�A5��)
+;母体、卵子レベルの低下(確率3%、5迄)
 IF RAND:100 >= 97
-	IF CFlag:��̃��x�� > 5
-		PRINTFORML %CALLNAME%�̓��͎̂����������o�Y�����_���[�W�ɂ���̃��x�����ቺ�����B
-		PRINTFORML ��̃��x���@{CFLAG:��̃��x��}�@���@{CFLAG:��̃��x��-1}
-		CFlag:��̃��x�� -= 1
+	IF CFlag:母体レベル > 5
+		PRINTFORML %CALLNAME%の肉体は実験生物を出産したダメージにより母体レベルが低下した。
+		PRINTFORML 母体レベル　{CFLAG:母体レベル}　→　{CFLAG:母体レベル-1}
+		CFlag:母体レベル -= 1
 	ENDIF
-	IF CFlag:���q���x�� > 5
-		PRINTFORML %CALLNAME%�̗����͎��������̐��t�ɂ���ĉ������ꗑ�q���x�����ቺ�����B
-		PRINTFORML ���q���x���@{CFLAG:���q���x��}�@���@{CFLAG:���q���x��-1}
-		CFlag:���q���x�� -= 1
+	IF CFlag:卵子レベル > 5
+		PRINTFORML %CALLNAME%の卵巣は実験生物の精液によって汚染され卵子レベルが低下した。
+		PRINTFORML 卵子レベル　{CFLAG:卵子レベル}　→　{CFLAG:卵子レベル-1}
+		CFlag:卵子レベル -= 1
 	ENDIF
 ENDIF
 RESETCOLOR
 PRINTFORMW 
 
-CFLAG:��z����_�D�P = 0
-CFLAG:��z����_�o�Y�� += 1
+CFLAG:交配実験_妊娠 = 0
+CFLAG:交配実験_出産回数 += 1
 
 
 

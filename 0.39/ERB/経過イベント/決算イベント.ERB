@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;ŒˆŽZƒCƒxƒ“ƒg
+ï»¿;-------------------------------------------------
+;æ±ºç®—ã‚¤ãƒ™ãƒ³ãƒˆ
 ;-------------------------------------------------
 @TURN_EVENT_KSN(ARG:0,ARG:1,ARGS:0)
 #DIM L_INPUT
@@ -10,23 +10,23 @@
 H_H = 0
 K_S = 0
 
-Flag:“sŽs_¡Šú‚ÌvŒ£’l += FLAG:“sŽs_vŒ£’lŽ‰z‚µ
+Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤ += FLAG:éƒ½å¸‚_è²¢çŒ®å€¤æŒè¶Šã—
 $INPUT_LOOP
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML á‚±‚ñ‚É‚¿‚íuƒvƒŒƒCƒ„[vA¡Šú‚ÌŒˆŽZ‚ðs‚¢‚Ü‚·‚æâ
-PRINTFORML á‹M•û‚ª•Û—L‚·‚éZ–¯‚½‚¿‚Ì‡ŒvvŒ£’l‚ð•ñ’v‚µ‚Ü‚·â
+PRINTFORML â‰ªã“ã‚“ã«ã¡ã‚ã€Œãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã€ã€ä»ŠæœŸã®æ±ºç®—ã‚’è¡Œã„ã¾ã™ã‚ˆâ‰«
+PRINTFORML â‰ªè²´æ–¹ãŒä¿æœ‰ã™ã‚‹ä½æ°‘ãŸã¡ã®åˆè¨ˆè²¢çŒ®å€¤ã‚’å ±å‘Šè‡´ã—ã¾ã™â‰«
 DRAWLINE
-SIF FLAG:“sŽs_vŒ£’lŽ‰z‚µ > 0
-	PRINTFORML áŽ‚¿‰z‚µ‚Ä‚¢‚évŒ£’l{FLAG:“sŽs_vŒ£’lŽ‰z‚µ}‚ª‚ ‚è‚Ü‚·A‚±‚ê‚ð¡Šú‚É‰ÁŽZ‚µ‚Ü‚·Bâ
-PRINTFORML á¡Šú‚ÌvŒ£’l‚Í{Flag:“sŽs_¡Šú‚ÌvŒ£’l}‚Å‚·Bâ
-PRINTFORML á‚±‚ÌvŒ£’l‚ðŒ³‚Éƒ{[ƒiƒX‚ðŽx‹‹’v‚µ‚Ü‚·Bâ
-PRINTFORML á‚ ‚È‚½‚É’ñŽ¦‚Å‚«‚éƒ{[ƒiƒX‚ÍˆÈ‰º‚Ì’Ê‚è‚Å‚·Bâ
+SIF FLAG:éƒ½å¸‚_è²¢çŒ®å€¤æŒè¶Šã— > 0
+	PRINTFORML â‰ªæŒã¡è¶Šã—ã¦ã„ã‚‹è²¢çŒ®å€¤{FLAG:éƒ½å¸‚_è²¢çŒ®å€¤æŒè¶Šã—}ãŒã‚ã‚Šã¾ã™ã€ã“ã‚Œã‚’ä»ŠæœŸã«åŠ ç®—ã—ã¾ã™ã€‚â‰«
+PRINTFORML â‰ªä»ŠæœŸã®è²¢çŒ®å€¤ã¯{Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤}ã§ã™ã€‚â‰«
+PRINTFORML â‰ªã“ã®è²¢çŒ®å€¤ã‚’å…ƒã«ãƒœãƒ¼ãƒŠã‚¹ã‚’æ”¯çµ¦è‡´ã—ã¾ã™ã€‚â‰«
+PRINTFORML â‰ªã‚ãªãŸã«æç¤ºã§ãã‚‹ãƒœãƒ¼ãƒŠã‚¹ã¯ä»¥ä¸‹ã®é€šã‚Šã§ã™ã€‚â‰«
 DRAWLINE
-PRINTFORML [1]   yŽ‘‹àz(vŒ£’l~3000)
-PRINTFORML [2]   yZlŠK‹‰•t—^z(•K—v:ŠK‹‰~500)
+PRINTFORML [1]   ã€è³‡é‡‘ã€‘(è²¢çŒ®å€¤Ã—3000)
+PRINTFORML [2]   ã€ä½äººéšŽç´šä»˜ä¸Žã€‘(å¿…è¦:éšŽç´šÃ—500)
 PRINTFORML 
-PRINTFORML [900] yŽ‚¿‰z‚·z
+PRINTFORML [900] ã€æŒã¡è¶Šã™ã€‘
 PRINTFORML 
 INPUT
 L_INPUT = RESULT
@@ -34,28 +34,28 @@ SELECTCASE L_INPUT
 CASE 1
 	K_S = 1
 	DRAWLINE
-	MONEY += (Flag:“sŽs_¡Šú‚ÌvŒ£’l)*3000
-	PRINTFORML Ž‘‹à{(Flag:“sŽs_¡Šú‚ÌvŒ£’l)*3000}‚ðŠl“¾‚µ‚Ü‚µ‚½B
+	MONEY += (Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤)*3000
+	PRINTFORML è³‡é‡‘{(Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤)*3000}ã‚’ç²å¾—ã—ã¾ã—ãŸã€‚
 	PRINTFORML 
 	PRINTFORMW 
 CASE 2
 	K_S = 1
 	DRAWLINE
-	PRINTFORML ŠK‹‰‚ðã‚°‚éZl‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+	PRINTFORML éšŽç´šã‚’ä¸Šã’ã‚‹ä½äººã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 	DRAWLINE
-	ARGS:0 = ŠK‹‰•t—^
+	ARGS:0 = éšŽç´šä»˜ä¸Ž
 	CALL LIST_CHARA(ARGS:0)
 	L_INPUT = RESULT
 	L_I = RESULT
 	IF L_INPUT != 1000
 		IF TALENT:L_INPUT:NPC == 999
-			PRINTFORMW NPC‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+			PRINTFORMW NPCã¯é¸æŠžã§ãã¾ã›ã‚“
 			GOTO INPUT_LOOP
 		ELSEIF L_INPUT == 0
-			PRINTFORMW ‚ ‚È‚½‚Í‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+			PRINTFORMW ã‚ãªãŸã¯é¸æŠžã§ãã¾ã›ã‚“
 			GOTO INPUT_LOOP
-		ELSEIF (CFLAG:L_I:Zl_ŠK‹‰*500) > Flag:“sŽs_¡Šú‚ÌvŒ£’l
-			PRINTFORMW vŒ£’l‚ª‘«‚è‚Ü‚¹‚ñ
+		ELSEIF (CFLAG:L_I:ä½äºº_éšŽç´š*500) > Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤
+			PRINTFORMW è²¢çŒ®å€¤ãŒè¶³ã‚Šã¾ã›ã‚“
 			GOTO INPUT_LOOP
 		ELSE
 			H_H = 0
@@ -63,34 +63,34 @@ CASE 2
 				TALENT:L_I:(3100+H_H) = 0
 				H_H += 1
 			REND
-			CFLAG:L_I:Zl_ŠK‹‰ += 1
-			CFLAG:L_I:Zl_vŒ£’l += 1
-			TALENT:L_I:(3100+(CFLAG:L_I:Zl_ŠK‹‰)) = 1
-			PRINTFORML %CALLNAME:L_I%‚ÌŠK‹‰‚ªã‚ª‚è‚Ü‚µ‚½B
-			PRINTFORMW vŒ£’l1ã¸B
+			CFLAG:L_I:ä½äºº_éšŽç´š += 1
+			CFLAG:L_I:ä½äºº_è²¢çŒ®å€¤ += 1
+			TALENT:L_I:(3100+(CFLAG:L_I:ä½äºº_éšŽç´š)) = 1
+			PRINTFORML %CALLNAME:L_I%ã®éšŽç´šãŒä¸ŠãŒã‚Šã¾ã—ãŸã€‚
+			PRINTFORMW è²¢çŒ®å€¤1ä¸Šæ˜‡ã€‚
 		ENDIF
 	ELSEIF L_INPUT == 1000
 		GOTO INPUT_LOOP
 	ENDIF
 CASE 900
 	K_S = 0
-	FLAG:“sŽs_vŒ£’lŽ‰z‚µ += Flag:“sŽs_¡Šú‚ÌvŒ£’l
+	FLAG:éƒ½å¸‚_è²¢çŒ®å€¤æŒè¶Šã— += Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤
 	DRAWLINE
-	PRINTFORMW ¡‰ñ‚Íƒ{[ƒiƒX‚ðŒ©‘—‚èAvŒ£’l‚ðŽ‰z‚µ‚µ‚Ü‚·B
+	PRINTFORMW ä»Šå›žã¯ãƒœãƒ¼ãƒŠã‚¹ã‚’è¦‹é€ã‚Šã€è²¢çŒ®å€¤ã‚’æŒè¶Šã—ã—ã¾ã™ã€‚
 	DRAWLINE
 CASEELSE
 	GOTO INPUT_LOOP
 ENDSELECT
 
 IF K_S == 1
-	FLAG:“sŽs_vŒ£’lŽ‰z‚µ = 0
-	Flag:“sŽs_¡Šú‚ÌvŒ£’l  = 0
+	FLAG:éƒ½å¸‚_è²¢çŒ®å€¤æŒè¶Šã— = 0
+	Flag:éƒ½å¸‚_ä»ŠæœŸã®è²¢çŒ®å€¤  = 0
 ENDIF
 DRAWLINE
-PRINTFORML áˆÈã‚Å¡Šú‚ÌŒˆŽZ‚ðI—¹‚µ‚Ü‚·Bâ
-PRINTFORMW á¡Œã‚à‚æ‚¢¬‰Ê‚ðŠú‘Ò‚µ‚Ä‚¢‚Ü‚·‚æBâ
+PRINTFORML â‰ªä»¥ä¸Šã§ä»ŠæœŸã®æ±ºç®—ã‚’çµ‚äº†ã—ã¾ã™ã€‚â‰«
+PRINTFORMW â‰ªä»Šå¾Œã‚‚ã‚ˆã„æˆæžœã‚’æœŸå¾…ã—ã¦ã„ã¾ã™ã‚ˆã€‚â‰«
 DRAWLINE
-	Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è = 90
+	Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š = 90
 
 
 

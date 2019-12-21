@@ -1,35 +1,35 @@
-;-------------------------------------------------
-;l‹Cã¸
+ï»¿;-------------------------------------------------
+;äººæ°—ä¸Šæ˜‡
 ;-------------------------------------------------
 @TURN_EVENT_NNK
 #DIM L_NNK
 #DIM L_NNK2
 #DIM L_NNK0
 
-L_NNK0 = CFlag:Zl_l‹C
+L_NNK0 = CFlag:ä½äºº_äººæ°—
 L_NNK2 = 1
 
-SIF TALENT:l‹C == 1
+SIF TALENT:äººæ°— == 1
 	L_NNK2 += 3
-SIF TALENT:–£˜f == 1
+SIF TALENT:é­…æƒ‘ == 1
 	L_NNK2 += 3
-SIF TALENT:–£—Í == 1
+SIF TALENT:é­…åŠ› == 1
 	L_NNK2 += 3
-SIF TALENT:”ü–e == 1
+SIF TALENT:ç¾Žè²Œ == 1
 	L_NNK2 += 3
-SIF TALENT:ƒJƒŠƒXƒ} == 1
+SIF TALENT:ã‚«ãƒªã‚¹ãƒž == 1
 	L_NNK2 += 5
 
 
 L_NNK = (RAND:1)+1+RAND:(L_NNK2)
 
-CFlag:Zl_l‹C += L_NNK
+CFlag:ä½äºº_äººæ°— += L_NNK
 
-SIF CFlag:Zl_l‹C >= 99999
-	CFlag:Zl_l‹C = 99999
+SIF CFlag:ä½äºº_äººæ°— >= 99999
+	CFlag:ä½äºº_äººæ°— = 99999
 
 SETCOLOR 250,250,100
-PRINTFORML l‹C@@{L_NNK0}@¨@{CFlag:Zl_l‹C}
+PRINTFORML äººæ°—ã€€ã€€{L_NNK0}ã€€â†’ã€€{CFlag:ä½äºº_äººæ°—}
 RESETCOLOR
 
 

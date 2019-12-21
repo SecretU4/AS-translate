@@ -1,6 +1,6 @@
-
+ï»¿
 ;-------------------------------------------------
-; ‹i’ƒ“X@‰ï˜b
+; å–«èŒ¶åº—ã€€ä¼šè©±
 ;-------------------------------------------------
 
 @CAFE_TALK(L_I, ARG:1)
@@ -15,89 +15,89 @@ CALL INFO_CITY_BASE
 DRAWLINE
 
 REDRAW 0
-PRINTFORML y\\\\\\\\‚±‚Ìê‚Å‚ÌƒAƒNƒVƒ‡ƒ“\\\\\\\\z
-PRINTFORM [1] ˜b‚ð‚·‚é(TP-1)@@
-PRINTFORM [2] ”Y‚Ý‰ðŒˆ(TP-1)@@
-IF CFlag:L_I:ŠÖŒW’iŠK >= 2 && TALENT:L_I:‡ˆÓ == 0
-	PRINTFORM [5] Œûà‚­(TP-5)@@
+PRINTFORML ã€â€•â€•â€•â€•â€•â€•â€•â€•ã“ã®å ´ã§ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³â€•â€•â€•â€•â€•â€•â€•â€•ã€‘
+PRINTFORM [1] è©±ã‚’ã™ã‚‹(TP-1)ã€€ã€€
+PRINTFORM [2] æ‚©ã¿è§£æ±º(TP-1)ã€€ã€€
+IF CFlag:L_I:é–¢ä¿‚æ®µéšŽ >= 2 && TALENT:L_I:åˆæ„ == 0
+	PRINTFORM [5] å£èª¬ã(TP-5)ã€€ã€€
 ENDIF
 PRINTFORML
-IF CFlag:L_I:ŠÖŒW’iŠK >= 2
-	PRINTFORML y\\\\\\ƒvƒ‰ƒCƒx[ƒg‚Å‚ÌƒAƒNƒVƒ‡ƒ“\\\\\\z
-	PRINTFORM [10] ŒXŒü‚È‚µ@
-	PRINTFORM [11] ’‰½ŒXŒü(TP-3)@
-	PRINTFORM [12] ˆ¤îŒXŒü(TP-3)@
-	PRINTFORM [13] ˆú—ŒXŒü(TP-3)@
+IF CFlag:L_I:é–¢ä¿‚æ®µéšŽ >= 2
+	PRINTFORML ã€â€•â€•â€•â€•â€•â€•ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆã§ã®ã‚¢ã‚¯ã‚·ãƒ§ãƒ³â€•â€•â€•â€•â€•â€•ã€‘
+	PRINTFORM [10] å‚¾å‘ãªã—ã€€
+	PRINTFORM [11] å¿ èª å‚¾å‘(TP-3)ã€€
+	PRINTFORM [12] æ„›æƒ…å‚¾å‘(TP-3)ã€€
+	PRINTFORM [13] æ·«ä¹±å‚¾å‘(TP-3)ã€€
 	PRINTFORML 
-	PRINTFORML y\\\\\\\\\\ŠÖŒW\’z\\\\\\\\\\z
-	PRINTFORM [21] ]‘®ã(TP-5)@
-	PRINTFORM [22] —öˆ¤ã(TP-5)@
-	PRINTFORM [23] ˆú—ã(TP-5)@
+	PRINTFORML ã€â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•é–¢ä¿‚æ§‹ç¯‰â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•ã€‘
+	PRINTFORM [21] å¾“å±žâˆš(TP-5)ã€€
+	PRINTFORM [22] æ‹æ„›âˆš(TP-5)ã€€
+	PRINTFORM [23] æ·«ä¹±âˆš(TP-5)ã€€
 ENDIF
 PRINTFORML
 PRINTFORML 
-PRINTFORML [50] BPÛŽæ
+PRINTFORML [50] BPæ‘‚å–
 PRINTFORML 
-PRINTFORML [999] ‚â‚ß‚é
+PRINTFORML [999] ã‚„ã‚ã‚‹
 DO
 	$INPUT_LOOP
 	INPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 1
-		IF Flag:“sŽs_Œ»ÝTP <= 0
+		IF Flag:éƒ½å¸‚_ç¾åœ¨TP <= 0
 			$LESS_TP
-			CALL C_INPUT_ERROR("TP‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·")
+			CALL C_INPUT_ERROR("TPãŒä¸è¶³ã—ã¦ã„ã¾ã™")
 			CONTINUE
 		ELSE
-			Flag:“sŽs_Œ»ÝTP -= 1
+			Flag:éƒ½å¸‚_ç¾åœ¨TP -= 1
 			CALL CAFE_TALK2(L_I)
 		ENDIF
 	CASE 2
-		SIF Flag:“sŽs_Œ»ÝTP <= 0
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP <= 0
 			GOTO LESS_TP
-		IF CFlag:L_I:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” != 0 || CFlag:L_I:Zl_”Y‚Ý‰ðŒˆ’† != 0
-			CALL C_INPUT_ERROR("Œ»Ý”Y‚Ý‚ð‰ðŒˆ’†‚Å‚·AŒ‹‰Ê‚ªo‚é‚Ü‚ÅÄ‘I‘ð‚Ío—ˆ‚Ü‚¹‚ñB")
+		IF CFlag:L_I:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° != 0 || CFlag:L_I:ä½äºº_æ‚©ã¿è§£æ±ºä¸­ != 0
+			CALL C_INPUT_ERROR("ç¾åœ¨æ‚©ã¿ã‚’è§£æ±ºä¸­ã§ã™ã€çµæžœãŒå‡ºã‚‹ã¾ã§å†é¸æŠžã¯å‡ºæ¥ã¾ã›ã‚“ã€‚")
 			CONTINUE
 		ELSE
 			CALL NAYAMI_CHALLENGE(L_I)
 		ENDIF
 	CASE 5
-		SIF Flag:“sŽs_Œ»ÝTP < 5
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 5
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 5
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 5
 		CALL CAFE_TALK_KDK(L_I)
 	CASE 10
-		CFlag:L_I:’lŒXŒü = 0
+		CFlag:L_I:å€¤å‚¾å‘ = 0
 	CASE 11
-		SIF Flag:“sŽs_Œ»ÝTP < 3
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 3
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 3
-		CFlag:L_I:’lŒXŒü = 1
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 3
+		CFlag:L_I:å€¤å‚¾å‘ = 1
 	CASE 12
-		SIF Flag:“sŽs_Œ»ÝTP < 3
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 3
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 3
-		CFlag:L_I:’lŒXŒü = 2
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 3
+		CFlag:L_I:å€¤å‚¾å‘ = 2
 	CASE 13
-		SIF Flag:“sŽs_Œ»ÝTP < 3
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 3
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 3
-		CFlag:L_I:’lŒXŒü = 3
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 3
+		CFlag:L_I:å€¤å‚¾å‘ = 3
 	CASE 21
-		SIF Flag:“sŽs_Œ»ÝTP < 5
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 5
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 5
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 5
 		CALL CAFE_TALK_R_J(L_I)
 	CASE 22
-		SIF Flag:“sŽs_Œ»ÝTP < 5
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 5
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 5
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 5
 		CALL CAFE_TALK_R_R(L_I)
 	CASE 23
-		SIF Flag:“sŽs_Œ»ÝTP < 5
+		SIF Flag:éƒ½å¸‚_ç¾åœ¨TP < 5
 			GOTO LESS_TP
-		Flag:“sŽs_Œ»ÝTP -= 5
+		Flag:éƒ½å¸‚_ç¾åœ¨TP -= 5
 		CALL CAFE_TALK_R_I(L_I)
 	CASE 50
 		CALL SYSTEM_BP
@@ -105,7 +105,7 @@ DO
 		RETURN
 	CASEELSE
 		$RETRY
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
 	BREAK
@@ -124,34 +124,34 @@ RESTART
 
 
 ;-------------------------------------------------
-; ‰ï˜b‚·‚é
+; ä¼šè©±ã™ã‚‹
 ;-------------------------------------------------
 @CAFE_TALK2(L_I)
-#DIM L_I     ;‘ÎÛ“o˜^”Ô†
-#DIM L_K_U   ;DŠ´“xã¸’l
-#DIM L_K_U2  ;DŠ´“xã¸’l
-#DIM L_N_K   ;”Y‚Ý‰ð–¾’l
-#DIM L_N_K2  ;”Y‚Ý‰ð–¾’l
+#DIM L_I     ;å¯¾è±¡ç™»éŒ²ç•ªå·
+#DIM L_K_U   ;å¥½æ„Ÿåº¦ä¸Šæ˜‡å€¤
+#DIM L_K_U2  ;å¥½æ„Ÿåº¦ä¸Šæ˜‡å€¤
+#DIM L_N_K   ;æ‚©ã¿è§£æ˜Žå€¤
+#DIM L_N_K2  ;æ‚©ã¿è§£æ˜Žå€¤
 #DIM I_LOOP
 
-L_K_U2 = (CFLAG:L_I:DŠ´“x / 100) + 1
+L_K_U2 = (CFLAG:L_I:å¥½æ„Ÿåº¦ / 100) + 1
 SIF L_K_U2 >= 100
 	L_K_U2 = 100
 
 L_K_U = (RAND:1) + 1
 L_K_U +=(L_K_U2 / 2)
 L_K_U += RAND:((L_K_U2 / 2) + 2)
-IF TALENT:L_I:‘¦‘Â‚¿ == 1
+IF TALENT:L_I:å³å •ã¡ == 1
 	L_K_U = L_K_U * 5
-ELSEIF TALENT:L_I:›‚ê‚Á‚Û‚¢ == 1
+ELSEIF TALENT:L_I:æƒšã‚Œã£ã½ã„ == 1
 	L_K_U = L_K_U * 2
-ELSEIF TALENT:L_I:Œx‰úS == 1
+ELSEIF TALENT:L_I:è­¦æˆ’å¿ƒ == 1
 	L_K_U -= L_K_U / 5
-ELSEIF TALENT:L_I:lŠÔ•sM == 1
+ELSEIF TALENT:L_I:äººé–“ä¸ä¿¡ == 1
 	L_K_U -= L_K_U / 2
 ENDIF
 
-SIF TALENT:L_I:‚—ä‚Ì‰Ô == 1
+SIF TALENT:L_I:é«˜å¶ºã®èŠ± == 1
 	L_K_U -= L_K_U /3
 
 
@@ -161,66 +161,66 @@ SIF TALENT:L_I:‚—ä‚Ì‰Ô == 1
 
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML %CALLNAME:MASTER%‚Í%CALLNAME:L_I%‚ÆŒy‚­˜b‚ð‚µ‚½c
+PRINTFORML %CALLNAME:MASTER%ã¯%CALLNAME:L_I%ã¨è»½ãè©±ã‚’ã—ãŸâ€¦
 
 
-PRINTFORM u\\
-IF CFlag:L_I:ŠÖŒW’iŠK >= 2 && RAND:100 > 50
+PRINTFORM ã€Œâ€•â€•
+IF CFlag:L_I:é–¢ä¿‚æ®µéšŽ >= 2 && RAND:100 > 50
 	PRINTDATA
-		DATAFORM ‚»‚¤AˆÈ‘O‚Ì˜b‚Í‚È‚ñ‚Æ‚©‚È%CSTR:L_I:Œê”ö‚Ü‚µ‚½%
-		DATAFORM %CSTR:L_I:Œê”ö”÷Î%A%CSTR:L_I:“ñlÌ%‚Í—Š‚à‚µ‚¢%CSTR:L_I:Œê”ö‚Å‚·2%
-		DATAFORM %CSTR:L_I:ˆêlÌ%‚ào—ˆ‚ê‚Î—Í‚É
-		DATAFORM ‚í‚©%CSTR:L_I:Œê”ö‚Ü‚µ‚½%A‚¢‚Â‚à’Ê‚è‚É
-		DATAFORM ‚»‚¤%CSTR:L_I:Œê”öm’è%A‚±‚ê‚Å‚â%CSTR:L_I:Œê”ö‘£i%
+		DATAFORM ãã†ã€ä»¥å‰ã®è©±ã¯ãªã‚“ã¨ã‹ãª%CSTR:L_I:èªžå°¾ã¾ã—ãŸ%
+		DATAFORM %CSTR:L_I:èªžå°¾å¾®ç¬‘%ã€%CSTR:L_I:äºŒäººç§°%ã¯é ¼ã‚‚ã—ã„%CSTR:L_I:èªžå°¾ã§ã™2%
+		DATAFORM %CSTR:L_I:ä¸€äººç§°%ã‚‚å‡ºæ¥ã‚Œã°åŠ›ã«
+		DATAFORM ã‚ã‹%CSTR:L_I:èªžå°¾ã¾ã—ãŸ%ã€ã„ã¤ã‚‚é€šã‚Šã«
+		DATAFORM ãã†%CSTR:L_I:èªžå°¾è‚¯å®š%ã€ã“ã‚Œã§ã‚„%CSTR:L_I:èªžå°¾ä¿ƒé€²%
 	ENDDATA
-ELSEIF CFlag:L_I:ŠÖŒW’iŠK >= 1 && RAND:100 > 50
+ELSEIF CFlag:L_I:é–¢ä¿‚æ®µéšŽ >= 1 && RAND:100 > 50
 	PRINTDATA
-		DATAFORM %CSTR:L_I:Œê”ö”÷Î%A‚»‚¤%CSTR:L_I:Œê”öm’è%
-		DATAFORM ‚ ‚ê‚Í‚»‚¤‚·‚ê‚Î—Ç‚¢%CSTR:L_I:Œê”ösˆ×%
-		DATAFORM ‚»‚¤A‚ ‚ÌŽž‚Í%CSTR:L_I:Œê”ö’š”J%¢˜b‚É‚È%CSTR:L_I:Œê”ö‚Ü‚µ‚½%
-		DATAFORM ‚»‚¤%CSTR:L_I:Œê”ö‹tà%A‚ ‚Ì‚Ü‚Ü‚Å
-		DATAFORM %CSTR:L_I:Œê”ö”½‰ž%A‚»‚¤‚¢‚¦‚Î‚±‚Ì‘O‚Ì
+		DATAFORM %CSTR:L_I:èªžå°¾å¾®ç¬‘%ã€ãã†%CSTR:L_I:èªžå°¾è‚¯å®š%
+		DATAFORM ã‚ã‚Œã¯ãã†ã™ã‚Œã°è‰¯ã„%CSTR:L_I:èªžå°¾è¡Œç‚º%
+		DATAFORM ãã†ã€ã‚ã®æ™‚ã¯%CSTR:L_I:èªžå°¾ä¸å¯§%ä¸–è©±ã«ãª%CSTR:L_I:èªžå°¾ã¾ã—ãŸ%
+		DATAFORM ãã†%CSTR:L_I:èªžå°¾é€†èª¬%ã€ã‚ã®ã¾ã¾ã§
+		DATAFORM %CSTR:L_I:èªžå°¾åå¿œ%ã€ãã†ã„ãˆã°ã“ã®å‰ã®
 	ENDDATA
 ELSE
 	PRINTDATA
-		DATAFORM ‚Ç‚¤%CSTR:L_I:Œê”ö‹^–â%H
-		DATAFORM ŽÀ‚Í‚±‚ñ‚È‚±‚Æ‚ª
-		DATAFORM ‚»‚¤%CSTR:L_I:Œê”ö“¯ˆÓ‹‚Þ%
-		DATAFORM %CSTR:L_I:Œê”ö‹tà%A‚±‚ê‚Í
-		DATAFORM ‚»‚ê‚Í‚¢‚¢%CSTR:L_I:Œê”ö–J‚ß‚é%‚Á
+		DATAFORM ã©ã†%CSTR:L_I:èªžå°¾ç–‘å•%ï¼Ÿ
+		DATAFORM å®Ÿã¯ã“ã‚“ãªã“ã¨ãŒ
+		DATAFORM ãã†%CSTR:L_I:èªžå°¾åŒæ„æ±‚ã‚€%
+		DATAFORM %CSTR:L_I:èªžå°¾é€†èª¬%ã€ã“ã‚Œã¯
+		DATAFORM ãã‚Œã¯ã„ã„%CSTR:L_I:èªžå°¾è¤’ã‚ã‚‹%ã£
 	ENDDATA
 ENDIF
 IF RAND:100 > 50
 	PRINTDATA
-		DATAFORM \\\‚»‚ê‚Æ
-		DATAFORM \\\%CSTR:L_I:Œê”ö‹tà%
-		DATAFORM \\\‚»‚¤‚È‚é%CSTR:L_I:Œê”ö‚Ì‚Å%
-		DATAFORM \\\‚±‚ê‚à
-		DATAFORM \\\‚»‚ê‚É%CSTR:L_I:ˆêlÌ%‚à
+		DATAFORM â€•â€•â€•ãã‚Œã¨
+		DATAFORM â€•â€•â€•%CSTR:L_I:èªžå°¾é€†èª¬%
+		DATAFORM â€•â€•â€•ãã†ãªã‚‹%CSTR:L_I:èªžå°¾ã®ã§%
+		DATAFORM â€•â€•â€•ã“ã‚Œã‚‚
+		DATAFORM â€•â€•â€•ãã‚Œã«%CSTR:L_I:ä¸€äººç§°%ã‚‚
 	ENDDATA
 ENDIF
 IF RAND:100 > 50
 	PRINTDATA
-		DATAFORM \\%CSTR:L_I:Œê”öYES%A‚¨Šè‚¢%CSTR:L_I:Œê”ö‚¨Šè‚¢%
-		DATAFORM \\%CSTR:L_I:Œê”öNo%A‘åä•v%CSTR:L_I:Œê”ö‚Å‚·%
-		DATAFORM \\%CSTR:L_I:Œê”öŽÓß%A•‚©%CSTR:L_I:Œê”ö‚Ü‚µ‚½%
-		DATAFORM \\‘åä•v‚»‚¤%CSTR:L_I:Œê”öm’è%
-		DATAFORM \\%CSTR:L_I:Œê”ö‘Š’Æ%AŒã‚Í\\
+		DATAFORM â€•â€•%CSTR:L_I:èªžå°¾YES%ã€ãŠé¡˜ã„%CSTR:L_I:èªžå°¾ãŠé¡˜ã„%
+		DATAFORM â€•â€•%CSTR:L_I:èªžå°¾No%ã€å¤§ä¸ˆå¤«%CSTR:L_I:èªžå°¾ã§ã™%
+		DATAFORM â€•â€•%CSTR:L_I:èªžå°¾è¬ç½ª%ã€åŠ©ã‹%CSTR:L_I:èªžå°¾ã¾ã—ãŸ%
+		DATAFORM â€•â€•å¤§ä¸ˆå¤«ãã†%CSTR:L_I:èªžå°¾è‚¯å®š%
+		DATAFORM â€•â€•%CSTR:L_I:èªžå°¾ç›¸æ§Œ%ã€å¾Œã¯â€•â€•
 	ENDDATA
 ENDIF
 
-PRINTFORML v
+PRINTFORML ã€
 
 DRAWLINE
-PRINTFORML %CALLNAME:L_I%‚Æ‚Ì’‡‚ª­‚µ[‚Ü‚Á‚½‹C‚ª‚µ‚½c
-PRINTFORML DŠ´“x {CFLAG:L_I:DŠ´“x}@¨@{(CFLAG:L_I:DŠ´“x)+L_K_U}
+PRINTFORML %CALLNAME:L_I%ã¨ã®ä»²ãŒå°‘ã—æ·±ã¾ã£ãŸæ°—ãŒã—ãŸâ€¦
+PRINTFORML å¥½æ„Ÿåº¦ {CFLAG:L_I:å¥½æ„Ÿåº¦}ã€€â†’ã€€{(CFLAG:L_I:å¥½æ„Ÿåº¦)+L_K_U}
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 
 
 
 
-L_N_K2 = (CFLAG:L_I:DŠ´“x / 200) + 1
+L_N_K2 = (CFLAG:L_I:å¥½æ„Ÿåº¦ / 200) + 1
 SIF L_N_K2 >= 20
 	L_N_K2 = 20
 
@@ -242,11 +242,11 @@ FOR I_LOOP, 11, 15
 	SIF CFLAG:L_I:(4100 + I_LOOP) >= 100
 		CFLAG:L_I:(4100 + I_LOOP)  = 100
 NEXT
-CFLAG:L_I:DŠ´“x += L_K_U
+CFLAG:L_I:å¥½æ„Ÿåº¦ += L_K_U
 
 
 ;-------------------------------------------------
-; ”Y‚Ý‰ðŒˆ
+; æ‚©ã¿è§£æ±º
 ;-------------------------------------------------
 @NAYAMI_CHALLENGE(L_I)
 #DIM L_I
@@ -255,9 +255,9 @@ CFLAG:L_I:DŠ´“x += L_K_U
 CLEARLINE LINECOUNT
 CALL INFO_CITY_BASE
 PRINTFORML 
-CALL INFO_STATUS_NAYAMI_LIST(L_I, "uƒ{ƒ^ƒ“v")
+CALL INFO_STATUS_NAYAMI_LIST(L_I, "ã€Œãƒœã‚¿ãƒ³ã€")
 PRINTFORML
-PRINTFORML [999] ‚â‚ß‚é
+PRINTFORML [999] ã‚„ã‚ã‚‹
 DO
 	INPUT
 	L_INPUT = RESULT
@@ -266,33 +266,33 @@ DO
 		RETURN
 	CASE L_INPUT
 		IF !INRANGE(L_INPUT, 1, 9) && !INRANGE(L_INPUT, 11, 19)
-		;‚»‚ñ‚È”Y‚Ý‚Í‚È‚¢
-			CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		;ãã‚“ãªæ‚©ã¿ã¯ãªã„
+			CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 			CONTINUE
 		ENDIF
 		IF CFLAG:L_I:(4000 + L_INPUT) <= 0
-		;‚±‚ê‚Ü‚½‚»‚ñ‚È”Y‚Ý‚Í‚È‚¢
-			CALL C_INPUT_ERROR("‚»‚Ì”Y‚Ý‚Í‘¶Ý‚µ‚Ü‚¹‚ñ")
+		;ã“ã‚Œã¾ãŸãã‚“ãªæ‚©ã¿ã¯ãªã„
+			CALL C_INPUT_ERROR("ãã®æ‚©ã¿ã¯å­˜åœ¨ã—ã¾ã›ã‚“")
 			CONTINUE
 		ENDIF
 		IF CFLAG:L_I:(4100 + L_INPUT) < 100 
-		;“à—e‚ª‚í‚©‚ç‚È‚¢
-			CALL C_INPUT_ERROR("‚Ü‚¾”Y‚Ý‚ª”»–¾‚µ‚Ä‚¢‚Ü‚¹‚ñ")
+		;å†…å®¹ãŒã‚ã‹ã‚‰ãªã„
+			CALL C_INPUT_ERROR("ã¾ã æ‚©ã¿ãŒåˆ¤æ˜Žã—ã¦ã„ã¾ã›ã‚“")
 			CONTINUE
 		ENDIF
-		IF L_INPUT <= 10 && CFLAG:L_I:ŠÖŒW’iŠK == 0
-			CALL C_INPUT_ERROR("‰ðŒˆ‚Å‚«‚é‚Ù‚Ç‚ÌM—Š‚ðŠl“¾‚µ‚Ä‚¢‚Ü‚¹‚ñ")
+		IF L_INPUT <= 10 && CFLAG:L_I:é–¢ä¿‚æ®µéšŽ == 0
+			CALL C_INPUT_ERROR("è§£æ±ºã§ãã‚‹ã»ã©ã®ä¿¡é ¼ã‚’ç²å¾—ã—ã¦ã„ã¾ã›ã‚“")
 			CONTINUE
 		ENDIF
-		CFLAG:L_I:Zl_”Y‚Ý‰ðŒˆ‘I‘ð = L_INPUT
+		CFLAG:L_I:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž = L_INPUT
 		CALL NAYAMI_CHALLENGE2(L_I, L_INPUT)
 		SIF RESULT
 			RETURN RESULT
-		CFLAG:L_I:Zl_”Y‚Ý‰ðŒˆ‘I‘ð = 0
+		CFLAG:L_I:ä½äºº_æ‚©ã¿è§£æ±ºé¸æŠž = 0
 		RESTART
 	CASEELSE
 		$RETRY
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
 LOOP 1
@@ -300,33 +300,33 @@ LOOP 1
 
 
 ;-------------------------------------------------
-; ”Y‚Ý‰ðŒˆ
+; æ‚©ã¿è§£æ±º
 ;-------------------------------------------------
-;–ß‚è’lF‚¢‚¸‚ê‚©‚Ì‰ðŒˆ–@‚Ì’ñŽ¦‚É¬Œ÷‚µ‚½‚ç1
+;æˆ»ã‚Šå€¤ï¼šã„ãšã‚Œã‹ã®è§£æ±ºæ³•ã®æç¤ºã«æˆåŠŸã—ãŸã‚‰1
 @NAYAMI_CHALLENGE2(C_ID, N_ID)
-#DIM  C_ID           ;“o˜^”Ô†
-#DIM  N_ID           ;”Y‚Ý‚ÌID
-#DIMS PLAN_NAME,  11 ;‰ðŒˆ•û–@‚Ì–¼‘O
-#DIM  SUC_PLUS,   11 ;‰ðŒˆ•û–@‚É‚æ‚éŒÅ’è•â³
-#DIM  HAVE_PLAN      ;‰‰ñŒÀ’è‚ÅXV‚·‚é—pƒtƒ‰ƒO
-#DIM  COST_MONEY, 11 ;‚±‚ÌƒLƒƒƒ‰‚Å‚©‚©‚éŠeƒvƒ‰ƒ“‚Ì•K—vŽ‘‹à
-#DIM  COST_AP,    11 ;‚±‚ÌƒLƒƒƒ‰‚Å‚©‚©‚éŠeƒvƒ‰ƒ“‚Ì•K—vAP
-#DIM  L_S            ;¬Œ÷—¦
-#DIM  L_K            ;DŠ´“x•â³’l
-#DIM  L_INPUT        ;“ü—Í‚ÌˆêŽž•ÛŽ—p
+#DIM  C_ID           ;ç™»éŒ²ç•ªå·
+#DIM  N_ID           ;æ‚©ã¿ã®ID
+#DIMS PLAN_NAME,  11 ;è§£æ±ºæ–¹æ³•ã®åå‰
+#DIM  SUC_PLUS,   11 ;è§£æ±ºæ–¹æ³•ã«ã‚ˆã‚‹å›ºå®šè£œæ­£
+#DIM  HAVE_PLAN      ;åˆå›žé™å®šã§æ›´æ–°ã™ã‚‹ç”¨ãƒ•ãƒ©ã‚°
+#DIM  COST_MONEY, 11 ;ã“ã®ã‚­ãƒ£ãƒ©ã§ã‹ã‹ã‚‹å„ãƒ—ãƒ©ãƒ³ã®å¿…è¦è³‡é‡‘
+#DIM  COST_AP,    11 ;ã“ã®ã‚­ãƒ£ãƒ©ã§ã‹ã‹ã‚‹å„ãƒ—ãƒ©ãƒ³ã®å¿…è¦AP
+#DIM  L_S            ;æˆåŠŸçŽ‡
+#DIM  L_K            ;å¥½æ„Ÿåº¦è£œæ­£å€¤
+#DIM  L_INPUT        ;å…¥åŠ›ã®ä¸€æ™‚ä¿æŒç”¨
 
 IF !HAVE_PLAN
 	CALLF DIM_TABLE_NAYAMI_PLAN(PLAN_NAME, SUC_PLUS)
 	HAVE_PLAN = 1
 ENDIF
 PRINTFORML 
-PRINTFORML ‰ðŒˆ•û–@‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢
-PRINTFORML ¦ˆê“x‘I‘ð‚·‚é‚ÆŒã“úŒ‹‰Ê‚ªo‚é‚Ü‚ÅÄ‘I‘ð‚Å‚«‚Ü‚¹‚ñ
+PRINTFORML è§£æ±ºæ–¹æ³•ã‚’é¸æŠžã—ã¦ä¸‹ã•ã„
+PRINTFORML â€»ä¸€åº¦é¸æŠžã™ã‚‹ã¨å¾Œæ—¥çµæžœãŒå‡ºã‚‹ã¾ã§å†é¸æŠžã§ãã¾ã›ã‚“
 ;PRINTFORML {L_P}{ARG:0}
 CALL NAYAMI_PLAN_BUTTON_LIST(C_ID, N_ID, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
 PRINTFORML 
 PRINTFORML
-PRINTFORML [0] - ‚â‚ß‚é
+PRINTFORML [0] - ã‚„ã‚ã‚‹
 DO
 	INPUT
 	L_INPUT = RESULT
@@ -338,85 +338,85 @@ DO
 			GOTO RETRY
 		ENDIF
 		IF MONEY < COST_MONEY:L_INPUT
-			CALL C_INPUT_ERROR("Ž‘‹à‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·")
+			CALL C_INPUT_ERROR("è³‡é‡‘ãŒä¸è¶³ã—ã¦ã„ã¾ã™")
 			CONTINUE
 		ENDIF
-		IF FLAG:“sŽs_Œ»ÝAP < COST_AP:L_INPUT
-			CALL C_INPUT_ERROR("AP‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·")
+		IF FLAG:éƒ½å¸‚_ç¾åœ¨AP < COST_AP:L_INPUT
+			CALL C_INPUT_ERROR("APãŒä¸è¶³ã—ã¦ã„ã¾ã™")
 			CONTINUE
 		ENDIF
 		
 		MONEY -= COST_MONEY:L_INPUT
-		FLAG:“sŽs_Œ»ÝAP -= COST_AP:L_INPUT
+		FLAG:éƒ½å¸‚_ç¾åœ¨AP -= COST_AP:L_INPUT
 		
-		;¬Œ÷Šm—¦‚ÌÝ’è
+		;æˆåŠŸç¢ºçŽ‡ã®è¨­å®š
 		L_S = 30 + SUC_PLUS:L_INPUT
-		;ÅˆÄ‚¾‚Á‚½ê‡•â³{
+		;æœ€æ¡ˆã ã£ãŸå ´åˆè£œæ­£ï¼‹
 		IF L_INPUT == CFLAG:C_ID:(4400 + N_ID)
 			L_S += 50
-		;‹ðˆÄ‚¾‚Á‚½ê‡•â³\
+		;æ„šæ¡ˆã ã£ãŸå ´åˆè£œæ­£â€•
 		ELSEIF L_INPUT == CFLAG:C_ID:(4500 + N_ID)
 			L_S -= 50
 		ENDIF
 		
-		ABL:MASTER:‰ðŒˆ‹Z”\ += 1
-		L_S += L_S * (1 + (ABL:MASTER:‰ðŒˆ‹Z”\ / 100))
-		L_K = (CFLAG:C_ID:DŠ´“x) / 50
+		ABL:MASTER:è§£æ±ºæŠ€èƒ½ += 1
+		L_S += L_S * (1 + (ABL:MASTER:è§£æ±ºæŠ€èƒ½ / 100))
+		L_K = (CFLAG:C_ID:å¥½æ„Ÿåº¦) / 50
 		SIF L_K  > 200
 			L_K  = 200
 		
-		CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§ = (L_K + L_S) - (CFLAG:C_ID:(4300 + N_ID) * 2)
-		SIF CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§ >= 100
-			CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§ = 100
-		CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§ -= CFLAG:C_ID:(4300 + N_ID)
+		CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹ = (L_K + L_S) - (CFLAG:C_ID:(4300 + N_ID) * 2)
+		SIF CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹ >= 100
+			CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹ = 100
+		CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹ -= CFLAG:C_ID:(4300 + N_ID)
 
-		CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” = (RAND:1) + 1
-		CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ‡Œv‰ÁŽZ = 0
+		CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° = (RAND:1) + 1
+		CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºåˆè¨ˆåŠ ç®— = 0
 
-		;“X‚És‚­‚Ì‚Í‹à‚ª—v‚é
-		IF L_INPUT == 5 && (CFLAG:C_ID:Zl_ŠŽ‹à >= (CFLAG:C_ID:(4300 + N_ID) * 5000) * CFLAG:C_ID:Zl_“ï“x)
-			CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§ += 20
+		;åº—ã«è¡Œãã®ã¯é‡‘ãŒè¦ã‚‹
+		IF L_INPUT == 5 && (CFLAG:C_ID:ä½äºº_æ‰€æŒé‡‘ >= (CFLAG:C_ID:(4300 + N_ID) * 5000) * CFLAG:C_ID:ä½äºº_é›£åº¦)
+			CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹ += 20
 		ELSE
-			CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ¬Œ÷Šm—§ -= 20
+			CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºæˆåŠŸç¢ºç«‹ -= 20
 		ENDIF
 		
-		IF CFLAG:C_ID:ŠÖŒW’iŠK >= 2 && RAND:100 > 50
+		IF CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2 && RAND:100 > 50
 			PRINTDATAL
-				DATAFORM u‚à‚¤%CSTR:C_ID:ˆêlÌ%‚ª”Y‚ñ‚Å‚¢‚é‚±‚ÆA‘S•”’m‚ç‚ê‚Ä‚¢‚é‚Ý‚½‚¢%CSTR:C_ID:Œê”öm’è2%cc%CSTR:C_ID:Œê”ö”÷Î%v
-				DATAFORM u%CSTR:C_ID:Œê”öYES%A%CSTR:C_ID:“ñlÌ%‚ª‚¢‚Ä‚­‚ê‚ê‚Î‰ðŒˆ‚Å‚«‚»‚¤%CSTR:C_ID:Œê”ö‚Å‚·%v
-				DATAFORM u%CSTR:C_ID:Œê”öŠ´ŽÓ%A–{“–‚É•‚©‚Á‚Ä‚¢%CSTR:C_ID:Œê”ö‚Ü‚·%v
+				DATAFORM ã€Œã‚‚ã†%CSTR:C_ID:ä¸€äººç§°%ãŒæ‚©ã‚“ã§ã„ã‚‹ã“ã¨ã€å…¨éƒ¨çŸ¥ã‚‰ã‚Œã¦ã„ã‚‹ã¿ãŸã„%CSTR:C_ID:èªžå°¾è‚¯å®š2%â€¦â€¦%CSTR:C_ID:èªžå°¾å¾®ç¬‘%ã€
+				DATAFORM ã€Œ%CSTR:C_ID:èªžå°¾YES%ã€%CSTR:C_ID:äºŒäººç§°%ãŒã„ã¦ãã‚Œã‚Œã°è§£æ±ºã§ããã†%CSTR:C_ID:èªžå°¾ã§ã™%ã€
+				DATAFORM ã€Œ%CSTR:C_ID:èªžå°¾æ„Ÿè¬%ã€æœ¬å½“ã«åŠ©ã‹ã£ã¦ã„%CSTR:C_ID:èªžå°¾ã¾ã™%ã€
 			ENDDATA
-		ELSEIF CFLAG:C_ID:ŠÖŒW’iŠK >= 1 && RAND:100 > 50
+		ELSEIF CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 1 && RAND:100 > 50
 			PRINTDATAL
-				DATAFORM u‚¢‚Â‚à•‚¯‚Ä‚à‚ç‚Á‚Äˆ«‚¢%CSTR:C_ID:Œê”ö‰ž“š2%A‚¨Šè‚¢%CSTR:C_ID:Œê”ö–â‚¤2%v
-				DATAFORM u%CSTR:C_ID:Œê”öYES%A%CSTR:C_ID:“ñlÌ%‚Ì%CSTR:C_ID:Œê”ö’š”J%—Í‚ª‚ ‚ê‚Î‰ðŒˆ‚Å‚«‚»‚¤%CSTR:C_ID:Œê”ö‚Å‚·%v
-				DATAFORM u’š“xA%CSTR:C_ID:“ñlÌ%‚Ì%CSTR:C_ID:Œê”ö’š”J%—Í‚ðŽØ‚è‚æ‚¤‚ÆŽv‚Á‚Ä‚½%CSTR:C_ID:Œê”ö‚Ì‚Å%c%CSTR:C_ID:Œê”öŠ´ŽÓ%v
+				DATAFORM ã€Œã„ã¤ã‚‚åŠ©ã‘ã¦ã‚‚ã‚‰ã£ã¦æ‚ªã„%CSTR:C_ID:èªžå°¾å¿œç­”2%ã€ãŠé¡˜ã„%CSTR:C_ID:èªžå°¾å•ã†2%ã€
+				DATAFORM ã€Œ%CSTR:C_ID:èªžå°¾YES%ã€%CSTR:C_ID:äºŒäººç§°%ã®%CSTR:C_ID:èªžå°¾ä¸å¯§%åŠ›ãŒã‚ã‚Œã°è§£æ±ºã§ããã†%CSTR:C_ID:èªžå°¾ã§ã™%ã€
+				DATAFORM ã€Œä¸åº¦ã€%CSTR:C_ID:äºŒäººç§°%ã®%CSTR:C_ID:èªžå°¾ä¸å¯§%åŠ›ã‚’å€Ÿã‚Šã‚ˆã†ã¨æ€ã£ã¦ãŸ%CSTR:C_ID:èªžå°¾ã®ã§%â€¦%CSTR:C_ID:èªžå°¾æ„Ÿè¬%ã€
 			ENDDATA
 		ELSE
 			PRINTDATAL
-				DATAFORM u%CSTR:C_ID:Œê”öŠ´ŽÓ%AÅ‹ß‚±‚Ì–â‘è‚Å‹ê˜J‚µ‚Ä‚½%CSTR:C_ID:Œê”öŒq‚¬%%CSTR:C_ID:Œê”ö‚Å‚·%cv
-				DATAFORM u‚¸‚Á‚Æ‰ðŒˆô‚ª•‚‚©‚Î‚È‚Á‚½%CSTR:C_ID:Œê”ö‚Ì‚Å%cc%CSTR:C_ID:Œê”öŽÓß%AŠ´ŽÓ%CSTR:C_ID:Œê”ö–â‚¤2%v
-				DATAFORM u–À˜f‚Å‚È‚¢‚È‚ç%CSTR:C_ID:“ñlÌ%‚Ì—Í‚ð%CSTR:C_ID:Œê”ö’š”J%ŽØ‚è%CSTR:C_ID:Œê”ö‚Ü‚·%v
+				DATAFORM ã€Œ%CSTR:C_ID:èªžå°¾æ„Ÿè¬%ã€æœ€è¿‘ã“ã®å•é¡Œã§è‹¦åŠ´ã—ã¦ãŸ%CSTR:C_ID:èªžå°¾ç¹‹ãŽ%%CSTR:C_ID:èªžå°¾ã§ã™%â€¦ã€
+				DATAFORM ã€Œãšã£ã¨è§£æ±ºç­–ãŒæµ®ã‹ã°ãªã£ãŸ%CSTR:C_ID:èªžå°¾ã®ã§%â€¦â€¦%CSTR:C_ID:èªžå°¾è¬ç½ª%ã€æ„Ÿè¬%CSTR:C_ID:èªžå°¾å•ã†2%ã€
+				DATAFORM ã€Œè¿·æƒ‘ã§ãªã„ãªã‚‰%CSTR:C_ID:äºŒäººç§°%ã®åŠ›ã‚’%CSTR:C_ID:èªžå°¾ä¸å¯§%å€Ÿã‚Š%CSTR:C_ID:èªžå°¾ã¾ã™%ã€
 			ENDDATA
 		ENDIF
-		PRINTFORMW ‰ðŒˆŒ‹‰Ê‚Í{(CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ”) + 1}“úŒã‚Å‚·
+		PRINTFORMW è§£æ±ºçµæžœã¯{(CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•°) + 1}æ—¥å¾Œã§ã™
 	CASEELSE
 		$RETRY
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
-	CFlag:C_ID:Zl_”Y‚Ý‘O‰ñ‹¦—Í = RESULT	;‘O‰ñŒ‹‰Ê•\Ž¦—p
+	CFlag:C_ID:ä½äºº_æ‚©ã¿å‰å›žå”åŠ› = RESULT	;å‰å›žçµæžœè¡¨ç¤ºç”¨
 	BREAK
 LOOP 1
-FLAG:“sŽs_Œ»ÝTP -= 1
+FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 1
 RETURN 1
 
 
 
 ;-------------------------------------------------
-;”Y‚Ý‰ðŒˆƒ{ƒ^ƒ“‚ÌƒŠƒXƒg•\Ž¦ŠÖ”
+;æ‚©ã¿è§£æ±ºãƒœã‚¿ãƒ³ã®ãƒªã‚¹ãƒˆè¡¨ç¤ºé–¢æ•°
 ;-------------------------------------------------
-;ƒ{ƒ^ƒ“ƒŠƒXƒg‚ð•\Ž¦‚·‚é‚Æ‚Æ‚à‚ÉŠeŽíƒRƒXƒg‚ðŒvŽZ‚·‚é
+;ãƒœã‚¿ãƒ³ãƒªã‚¹ãƒˆã‚’è¡¨ç¤ºã™ã‚‹ã¨ã¨ã‚‚ã«å„ç¨®ã‚³ã‚¹ãƒˆã‚’è¨ˆç®—ã™ã‚‹
 @NAYAMI_PLAN_BUTTON_LIST(C_ID, N_ID, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
 #DIM  C_ID
 #DIM  N_ID
@@ -432,7 +432,7 @@ NEXT
 
 
 ;-------------------------------------------------
-;ŒÂX‚Ì”Y‚Ý‰ðŒˆƒ{ƒ^ƒ“ŠÖ”
+;å€‹ã€…ã®æ‚©ã¿è§£æ±ºãƒœã‚¿ãƒ³é–¢æ•°
 ;-------------------------------------------------
 @NAYAMI_PLAN_BUTTON(C_ID, P_ID, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
 #DIM  C_ID
@@ -443,17 +443,17 @@ NEXT
 #DIM  REF COST_MONEY
 PRINTFORM [{P_ID, 2}] - %PLAN_NAME:P_ID%
 IF SUC_PLUS:P_ID < 0
-	PRINTFORM y•â³ -{ABS(SUC_PLUS:P_ID), 2}z
+	PRINTFORM ã€è£œæ­£ -{ABS(SUC_PLUS:P_ID), 2}ã€‘
 ELSE
-	PRINTFORM y•â³ +{ABS(SUC_PLUS:P_ID), 2}z
+	PRINTFORM ã€è£œæ­£ +{ABS(SUC_PLUS:P_ID), 2}ã€‘
 ENDIF
 IF COST_AP:P_ID == 0
 	PRINTFORM %" " * 12%
 ELSE
-	PRINTFORM (•K—vAP:{COST_AP:P_ID, 3})
+	PRINTFORM (å¿…è¦AP:{COST_AP:P_ID, 3})
 ENDIF
 SIF COST_MONEY:P_ID
-	PRINTFORM (•K—vŽ‘‹à:{COST_MONEY:P_ID})
+	PRINTFORM (å¿…è¦è³‡é‡‘:{COST_MONEY:P_ID})
 PRINTFORML 
 
 
@@ -463,52 +463,52 @@ PRINTFORML
 
 
 ;-------------------------------------------------
-; Œûà‚­
+; å£èª¬ã
 ;-------------------------------------------------
 @CAFE_TALK_KDK(L_I)
 #DIM L_I
-CFlag:L_I:Œûà‚«’l += CAFE_TALK_KDK_CALC(L_I)
-CFlag:L_I:Œûà‚«’l = LIMIT(CFlag:L_I:Œûà‚«’l, 0, 100)
+CFlag:L_I:å£èª¬ãå€¤ += CAFE_TALK_KDK_CALC(L_I)
+CFlag:L_I:å£èª¬ãå€¤ = LIMIT(CFlag:L_I:å£èª¬ãå€¤, 0, 100)
 
 PRINTFORML 
 DRAWLINE
-PRINTFORML ‰ï˜b‚ÌÅ’†A%CALLNAME:MASTER%‚Í%CALLNAME:L_I%‚ð‚»‚Á‚Æ•ø‚«Šñ‚¹ŠÃ‚¢Œ¾—t‚ð‚©‚¯‚½c
-IF CFlag:L_I:Œûà‚«’l == 100
+PRINTFORML ä¼šè©±ã®æœ€ä¸­ã€%CALLNAME:MASTER%ã¯%CALLNAME:L_I%ã‚’ãã£ã¨æŠ±ãå¯„ã›ç”˜ã„è¨€è‘‰ã‚’ã‹ã‘ãŸâ€¦
+IF CFlag:L_I:å£èª¬ãå€¤ == 100
 	PRINTFORML 
 	PRINTDATAL
-		DATAFORM uccc‚¢‚¢%CSTR:L_I:Œê”ö‹–‰Â%c%CSTR:L_I:“ñlÌ%‚É‚È‚çg‘Ì‚ð”C‚¹‚ç‚ê%CSTR:L_I:Œê”ö‚Ü‚·%cv
-		DATAFORM u%CSTR:L_I:Œê”öYES%cc%CSTR:L_I:ˆêlÌ%‚à%CSTR:L_I:“ñlÌ%‚Æ‚à‚Á‚Æ[‚¢ŠÖŒW‚É‚È‚è‚½‚¢%CSTR:L_I:Œê”ö‚Å‚·2%cv
-		DATAFORM u%CSTR:L_I:Œê”ö”÷Î%cc‚»‚ñ‚È‚ÉÅ‚ç‚È‚­‚Ä‚à‹‘â‚Í‚µ‚È‚¢%CSTR:L_I:Œê”ö‹–‰Â%cc¡“x‹ß‚¢‚¤‚¿‚Éc%UNICODE(0x2661)%v
-		DATAFORM ucc%CSTR:L_I:Œê”öYES%%UNICODE(0x2661)%ccc%CSTR:L_I:ˆêlÌ%‚àcc‚à‚Á‚Æcv
-		DATAFORM uc¡“xA‹ó‚¢‚Ä‚éŽžŠÔ‚ÉŒÄ‚ñ‚Å%CSTR:L_I:Œê”öŠó–]%cHccc‚·‚é‚È‚ç’·‚­ˆ¤‚µ‡‚¢‚½‚¢%CSTR:L_I:Œê”ö‚Å‚·2%c%UNICODE(0x2661)%v
-		DATAFORM uc‚·A‚·‚é‚È‚ç•Ê‚ÌêŠ‚ªcc%CSTR:L_I:“ñlÌ%‚Æ%CSTR:L_I:ˆêlÌ%cc“ñl‚«‚è‚Åc%UNICODE(0x2661)%v
-		DATAFORM ucc%UNICODE(0x2661)%Ac%CSTR:L_I:“ñlÌ%‚ª%CSTR:L_I:ˆêlÌ%‚ð–{‹C‚É‚³‚¹‚½%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‚Å‚·%ccÓ”CŽæ‚Á‚Ä%CSTR:L_I:Œê”öŠó–]%côv
-		DATAFORM u%CSTR:L_I:“ñlÌ%‚É‚±‚±‚Ü‚Å‹ˆ¤‚³‚ê‚½‚çAŽó‚¯“ü‚ê‚é‚µ‚©‚È‚¢%CSTR:L_I:Œê”ö‰ž“š2%c%UNICODE(0x2661)%v
-		DATAFORM ucŒg‘Ñ”Ô†‹³‚¦‚é%CSTR:L_I:Œê”ö‚Ì‚Å%ccŽžŠÔ‚ª‚ ‚é‚Æ‚«ŒÄ‚ñ‚Å%CSTR:L_I:Œê”öŠó–]%c%UNICODE(0x2661)%v
-		DATAFORM uc‚à‚¤AŽd•û‚È‚¢%CSTR:L_I:Œê”ö‰ž“š2%cc—D‚µ‚­‚·‚é‚Á‚Ä–ñ‘©‚Å‚«‚é‚Ì‚È‚çc%UNICODE(0x2661)%v
+		DATAFORM ã€Œâ€¦â€¦â€¦ã„ã„%CSTR:L_I:èªžå°¾è¨±å¯%â€¦%CSTR:L_I:äºŒäººç§°%ã«ãªã‚‰èº«ä½“ã‚’ä»»ã›ã‚‰ã‚Œ%CSTR:L_I:èªžå°¾ã¾ã™%â€¦ã€
+		DATAFORM ã€Œ%CSTR:L_I:èªžå°¾YES%â€¦â€¦%CSTR:L_I:ä¸€äººç§°%ã‚‚%CSTR:L_I:äºŒäººç§°%ã¨ã‚‚ã£ã¨æ·±ã„é–¢ä¿‚ã«ãªã‚ŠãŸã„%CSTR:L_I:èªžå°¾ã§ã™2%â€¦ã€
+		DATAFORM ã€Œ%CSTR:L_I:èªžå°¾å¾®ç¬‘%â€¦â€¦ãã‚“ãªã«ç„¦ã‚‰ãªãã¦ã‚‚æ‹’çµ¶ã¯ã—ãªã„%CSTR:L_I:èªžå°¾è¨±å¯%â€¦â€¦ä»Šåº¦è¿‘ã„ã†ã¡ã«â€¦%UNICODE(0x2661)%ã€
+		DATAFORM ã€Œâ€¦â€¦%CSTR:L_I:èªžå°¾YES%%UNICODE(0x2661)%â€¦â€¦â€¦%CSTR:L_I:ä¸€äººç§°%ã‚‚â€¦â€¦ã‚‚ã£ã¨â€¦ã€
+		DATAFORM ã€Œâ€¦ä»Šåº¦ã€ç©ºã„ã¦ã‚‹æ™‚é–“ã«å‘¼ã‚“ã§%CSTR:L_I:èªžå°¾å¸Œæœ›%â€¦ï¼Ÿâ€¦â€¦â€¦ã™ã‚‹ãªã‚‰é•·ãæ„›ã—åˆã„ãŸã„%CSTR:L_I:èªžå°¾ã§ã™2%â€¦%UNICODE(0x2661)%ã€
+		DATAFORM ã€Œâ€¦ã™ã€ã™ã‚‹ãªã‚‰åˆ¥ã®å ´æ‰€ãŒâ€¦â€¦%CSTR:L_I:äºŒäººç§°%ã¨%CSTR:L_I:ä¸€äººç§°%â€¦â€¦äºŒäººãã‚Šã§â€¦%UNICODE(0x2661)%ã€
+		DATAFORM ã€Œâ€¦â€¦%UNICODE(0x2661)%ã€â€¦%CSTR:L_I:äºŒäººç§°%ãŒ%CSTR:L_I:ä¸€äººç§°%ã‚’æœ¬æ°—ã«ã•ã›ãŸ%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾ã§ã™%â€¦â€¦è²¬ä»»å–ã£ã¦%CSTR:L_I:èªžå°¾å¸Œæœ›%â€¦â™ªã€
+		DATAFORM ã€Œ%CSTR:L_I:äºŒäººç§°%ã«ã“ã“ã¾ã§æ±‚æ„›ã•ã‚ŒãŸã‚‰ã€å—ã‘å…¥ã‚Œã‚‹ã—ã‹ãªã„%CSTR:L_I:èªžå°¾å¿œç­”2%â€¦%UNICODE(0x2661)%ã€
+		DATAFORM ã€Œâ€¦æºå¸¯ç•ªå·æ•™ãˆã‚‹%CSTR:L_I:èªžå°¾ã®ã§%â€¦â€¦æ™‚é–“ãŒã‚ã‚‹ã¨ãå‘¼ã‚“ã§%CSTR:L_I:èªžå°¾å¸Œæœ›%â€¦%UNICODE(0x2661)%ã€
+		DATAFORM ã€Œâ€¦ã‚‚ã†ã€ä»•æ–¹ãªã„%CSTR:L_I:èªžå°¾å¿œç­”2%â€¦â€¦å„ªã—ãã™ã‚‹ã£ã¦ç´„æŸã§ãã‚‹ã®ãªã‚‰â€¦%UNICODE(0x2661)%ã€
 	ENDDATA
-	PRINTFORML ccƒAƒvƒ[ƒ`‚Ì––A%CALLNAME:L_I%‚Í[‚¢ŠÖŒW‚É‚È‚é‚±‚Æ‚ðŽó‚¯“ü‚ê‚Ä‚­‚ê‚½‚æ‚¤‚¾B
-	PRINTFORML %CALLNAME:L_I%‚©‚çŒg‘Ñ”Ô†‚ð“üŽè‚µy‡ˆÓz‚ð“¾‚½I
-	CFlag:L_I:Œg‘Ñ”Ô†“üŽè = 1
-	Talent:L_I:‡ˆÓ = 1
-	SIF MARK:L_I:Š×—Žˆó == 0
-		MARK:L_I:Š×—Žˆó = 1
-	Talent:L_I:”ñ‡ˆÓ = 0
+	PRINTFORML â€¦â€¦ã‚¢ãƒ—ãƒ­ãƒ¼ãƒã®æœ«ã€%CALLNAME:L_I%ã¯æ·±ã„é–¢ä¿‚ã«ãªã‚‹ã“ã¨ã‚’å—ã‘å…¥ã‚Œã¦ãã‚ŒãŸã‚ˆã†ã ã€‚
+	PRINTFORML %CALLNAME:L_I%ã‹ã‚‰æºå¸¯ç•ªå·ã‚’å…¥æ‰‹ã—ã€åˆæ„ã€‘ã‚’å¾—ãŸï¼
+	CFlag:L_I:æºå¸¯ç•ªå·å…¥æ‰‹ = 1
+	Talent:L_I:åˆæ„ = 1
+	SIF MARK:L_I:é™¥è½åˆ»å° == 0
+		MARK:L_I:é™¥è½åˆ»å° = 1
+	Talent:L_I:éžåˆæ„ = 0
 ELSE
 	PRINTFORML
 	PRINTDATAL
-		DATAFORM u‚ÜA‚Ü‚¾ƒ_ƒ%CSTR:L_I:Œê”ö‚Å‚·%‚ÁAcc‚à‚Á‚Æe–§‚É‚È‚Á‚½‚çcv
-		DATAFORM u‚±‚ñ‚È‚É–§’…‚µ‚Äcc‚Å‚àˆ«‚¢‹C‚µ‚È‚¢%CSTR:L_I:Œê”ö‰ž“š2%cv
-		DATAFORM u—‚Íƒ€[ƒh‚ÉŽã‚¢ccŽÀÛ‚ÉŒoŒ±‚·‚é‚Æ”½˜_‚Ì—]’n‚Í‚È‚¢%CSTR:L_I:Œê”ö‰ž“š2%cv
-		DATAFORM uccôA‚¢‚¸‚ê‚Í‚»‚¤‚¢‚¤ŠÖŒW‚É‚È‚é‚Ì‚àˆ«‚­‚È‚¢%CSTR:L_I:Œê”ö‰ž“š2%cv
-		DATAFORM u‚±‚¤‚µ‚ÄG‚ê‡‚Á‚Ä‚¢‚é‚Æc‚Ü‚é‚Å—öl‚Ý‚½‚¢%CSTR:L_I:Œê”öm’è2%cv
-		DATAFORM u‚¢‚ë‚¢‚ë•‚¯‚Ä‚à‚ç‚Á‚½%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‹tà%c‚±‚êˆÈã‚ÌŠÖŒW‚É‚È‚é‚È‚ç‚à‚Á‚Æ[‚­%CSTR:L_I:“ñlÌ%‚ð’m‚è‚½‚¢%CSTR:L_I:Œê”ö‰ž“š2%v
-		DATAFORM u%CSTR:L_I:ˆêlÌ%‚ð•ø‚«‚½‚¢‚Ì‚È‚ç%CSTR:L_I:“ñlÌ%‚ð‚à‚Á‚Æ‹³‚¦%CSTR:L_I:Œê”ö–½—ß‹­%Hc‘Ì‚ð—a‚¯‚ç‚ê‚él‚©‚æ‚­’m‚è‚½‚¢%CSTR:L_I:Œê”öŒq‚¬%%CSTR:L_I:Œê”ö‚Å‚·%v
-		DATAFORM uc‚à‚µ‚©‚µ‚ÄA%CSTR:L_I:ˆêlÌ%‚ðc•ø‚«‚½‚¢‚Ì%CSTR:L_I:Œê”ö–â‚¤%cHv
-		DATAFORM ucDˆÓ‚ðŽ‚½‚ê‚é‚Ì‚ÍŠð‚µ‚¢%CSTR:L_I:Œê”ö‹tà%AcS‚Ì€”õ‚ªcv
-		DATAFORM u‚ÁcIAc‚¢A‚¢‚«‚È‚èŒ¾‚í‚ê‚Ä‚àc¢\@STRFIND("‚ç‚è‚é‚ê‚ë",SUBSTRINGU(CSTR:L_I:Œê”ö‚Ü‚·,0,1)) ?  # ‚è\@%CSTR:L_I:Œê”ö‚Ü‚·%cv
+		DATAFORM ã€Œã¾ã€ã¾ã ãƒ€ãƒ¡%CSTR:L_I:èªžå°¾ã§ã™%ã£ã€â€¦â€¦ã‚‚ã£ã¨è¦ªå¯†ã«ãªã£ãŸã‚‰â€¦ã€
+		DATAFORM ã€Œã“ã‚“ãªã«å¯†ç€ã—ã¦â€¦â€¦ã§ã‚‚æ‚ªã„æ°—ã—ãªã„%CSTR:L_I:èªžå°¾å¿œç­”2%â€¦ã€
+		DATAFORM ã€Œå¥³ã¯ãƒ ãƒ¼ãƒ‰ã«å¼±ã„â€¦â€¦å®Ÿéš›ã«çµŒé¨“ã™ã‚‹ã¨åè«–ã®ä½™åœ°ã¯ãªã„%CSTR:L_I:èªžå°¾å¿œç­”2%â€¦ã€
+		DATAFORM ã€Œâ€¦â€¦â™ªã€ã„ãšã‚Œã¯ãã†ã„ã†é–¢ä¿‚ã«ãªã‚‹ã®ã‚‚æ‚ªããªã„%CSTR:L_I:èªžå°¾å¿œç­”2%â€¦ã€
+		DATAFORM ã€Œã“ã†ã—ã¦è§¦ã‚Œåˆã£ã¦ã„ã‚‹ã¨â€¦ã¾ã‚‹ã§æ‹äººã¿ãŸã„%CSTR:L_I:èªžå°¾è‚¯å®š2%â€¦ã€
+		DATAFORM ã€Œã„ã‚ã„ã‚åŠ©ã‘ã¦ã‚‚ã‚‰ã£ãŸ%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾é€†èª¬%â€¦ã“ã‚Œä»¥ä¸Šã®é–¢ä¿‚ã«ãªã‚‹ãªã‚‰ã‚‚ã£ã¨æ·±ã%CSTR:L_I:äºŒäººç§°%ã‚’çŸ¥ã‚ŠãŸã„%CSTR:L_I:èªžå°¾å¿œç­”2%ã€
+		DATAFORM ã€Œ%CSTR:L_I:ä¸€äººç§°%ã‚’æŠ±ããŸã„ã®ãªã‚‰%CSTR:L_I:äºŒäººç§°%ã‚’ã‚‚ã£ã¨æ•™ãˆ%CSTR:L_I:èªžå°¾å‘½ä»¤å¼·%ï¼Ÿâ€¦ä½“ã‚’é ã‘ã‚‰ã‚Œã‚‹äººã‹ã‚ˆãçŸ¥ã‚ŠãŸã„%CSTR:L_I:èªžå°¾ç¹‹ãŽ%%CSTR:L_I:èªžå°¾ã§ã™%ã€
+		DATAFORM ã€Œâ€¦ã‚‚ã—ã‹ã—ã¦ã€%CSTR:L_I:ä¸€äººç§°%ã‚’â€¦æŠ±ããŸã„ã®%CSTR:L_I:èªžå°¾å•ã†%â€¦ï¼Ÿã€
+		DATAFORM ã€Œâ€¦å¥½æ„ã‚’æŒãŸã‚Œã‚‹ã®ã¯å¬‰ã—ã„%CSTR:L_I:èªžå°¾é€†èª¬%ã€â€¦å¿ƒã®æº–å‚™ãŒâ€¦ã€
+		DATAFORM ã€Œã£â€¦ï¼ã€â€¦ã„ã€ã„ããªã‚Šè¨€ã‚ã‚Œã¦ã‚‚â€¦å›°\@STRFIND("ã‚‰ã‚Šã‚‹ã‚Œã‚",SUBSTRINGU(CSTR:L_I:èªžå°¾ã¾ã™,0,1)) ?  # ã‚Š\@%CSTR:L_I:èªžå°¾ã¾ã™%â€¦ã€
 	ENDDATA
-	PRINTFORML ccŽŠ‚é‚±‚Æ‚Ío—ˆ‚È‚©‚Á‚½‚ªA%CALLNAME:L_I%‚Í­‚µ‚¸‚ÂƒK[ƒh‚ðŠÉ‚ß‚Ä‚¢‚é‚æ‚¤‚¾c
+	PRINTFORML â€¦â€¦è‡³ã‚‹ã“ã¨ã¯å‡ºæ¥ãªã‹ã£ãŸãŒã€%CALLNAME:L_I%ã¯å°‘ã—ãšã¤ã‚¬ãƒ¼ãƒ‰ã‚’ç·©ã‚ã¦ã„ã‚‹ã‚ˆã†ã â€¦
 ENDIF
 PRINTFORMW
 
@@ -518,27 +518,27 @@ PRINTFORMW
 #FUNCTION
 #DIM L_I
 #DIM KDK_POINT
-KDK_POINT = (CFLAG:L_I:DŠ´“x / 200) + RAND(1, 4)
-SIF TALENT:L_I:©•w
+KDK_POINT = (CFLAG:L_I:å¥½æ„Ÿåº¦ / 200) + RAND(1, 4)
+SIF TALENT:L_I:å¨¼å©¦
 	KDK_POINT += 5
 
 KDK_POINT *= 100
-SIF TALENT:L_I:‘¦‘Â‚¿
+SIF TALENT:L_I:å³å •ã¡
 	TIMES KDK_POINT, 5
-SIF TALENT:L_I:›‚ê‚Á‚Û‚¢ == 1
+SIF TALENT:L_I:æƒšã‚Œã£ã½ã„ == 1
 	TIMES KDK_POINT, 2
-SIF TALENT:L_I:’å‘€–³“Ú’…
+SIF TALENT:L_I:è²žæ“ç„¡é “ç€
 	TIMES KDK_POINT, 1.2
 
-SIF TALENT:L_I:’å‘€ŠÏ”O
+SIF TALENT:L_I:è²žæ“è¦³å¿µ
 	TIMES KDK_POINT, 0.8
-SIF TALENT:L_I:Œx‰úS == 1
+SIF TALENT:L_I:è­¦æˆ’å¿ƒ == 1
 	TIMES KDK_POINT, 0.2
-SIF TALENT:L_I:lŠÔ•sM == 1
+SIF TALENT:L_I:äººé–“ä¸ä¿¡ == 1
 	TIMES KDK_POINT, 0.5
-SIF TALENT:L_I:‚—ä‚Ì‰Ô == 1
+SIF TALENT:L_I:é«˜å¶ºã®èŠ± == 1
 	TIMES KDK_POINT, 0.5
-SIF TALENT:L_I:”’•S‡•P == 1
+SIF TALENT:L_I:ç™½ç™¾åˆå§« == 1
 	TIMES KDK_POINT, 0.1
 
 RETURNF MAX(KDK_POINT / 100, 1)
@@ -546,41 +546,41 @@ RETURNF MAX(KDK_POINT / 100, 1)
 
 
 ;-------------------------------------------------
-; ŠÖŒW\’z@]‘®
+; é–¢ä¿‚æ§‹ç¯‰ã€€å¾“å±ž
 ;-------------------------------------------------
 @CAFE_TALK_R_J(L_I)
 #DIM L_I
 CLEARLINE LINECOUNT
 DRAWLINE
-	PRINTFORML %CALLNAME:MASTER%‚Í‚±‚¿‚ç‚ÌŽwŽ¦‚ðŽó‚¯“ü‚ê‚é‚æ‚¤‚ÉŽdž‚ñ‚¾c
+	PRINTFORML %CALLNAME:MASTER%ã¯ã“ã¡ã‚‰ã®æŒ‡ç¤ºã‚’å—ã‘å…¥ã‚Œã‚‹ã‚ˆã†ã«ä»•è¾¼ã‚“ã â€¦
 	PRINTFORML 
 	PRINTFORMW 
-	PRINTFORML cc
-	PRINTFORML ccc
-	PRINTFORML cccc
-IF CFlag:L_I:’‰½’l >= 900 && MARK:L_I:—ê‘®ˆó == 3 && TALENT:L_I:SŒ  == 0 && TALENT:L_I:î•w  == 0 && TALENT:L_I:ˆ¤l  == 0
-	PRINTFORML y¬Œ÷z
-	PRINTFORML ]‘®‰»‚ª‹É‚èA%CALLNAME:L_I%‚Í%CALLNAME:MASTER%‚ÌSŒ‚·‚éˆêl‚É‚È‚Á‚½‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚ÍySŒz‚ðŠl“¾‚µ‚½B
-	TALENT:L_I:SŒ  = 1
-ELSEIF CFlag:L_I:’‰½’l >= 600 && MARK:L_I:—ê‘®ˆó == 2
-	PRINTFORML y¬Œ÷z
-	PRINTFORML ]‘®‰»‚Ì––A‚Ü‚é‚ÅŽd‚¦‚é‚æ‚¤‚ÈŽd‘‚ð‚·‚é‚æ‚¤‚É‚È‚Á‚½cA‚©‚È‚è‚ÌŽdã‚ª‚è‚É‚È‚Á‚½‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚Ì—ê‘®ˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:—ê‘®ˆó += 1
-ELSEIF CFlag:L_I:’‰½’l >= 300 && MARK:L_I:—ê‘®ˆó == 1
-	PRINTFORML y¬Œ÷z
-	PRINTFORML ]‘®‰»‚ªi‚ÝA‚ ‚é’ö“x‚ÌŽwŽ¦‚È‚ç“ï‚È‚­Žó‚¯“ü‚ê‚é‚æ‚¤‚É‚È‚Á‚½‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚Ì—ê‘®ˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:—ê‘®ˆó += 1
-ELSEIF CFlag:L_I:’‰½’l >= 100 && MARK:L_I:—ê‘®ˆó == 0
-	PRINTFORML y¬Œ÷z
-	PRINTFORML ‚ ‚é’ö“x‚ÌˆóÛŒø‰Ê‚ª‚ ‚Á‚½‚Ì‚©A%CALLNAME:L_I%‚Í‚±‚¿‚ç‚ð‘¸Œh‚·‚é‚æ‚¤‚ÈŠá·‚µ‚Å‚±‚¿‚ç‚ðŒ©‚Ä‚¢‚éc
-	PRINTFORML %CALLNAME:L_I%‚Ì—ê‘®ˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:—ê‘®ˆó += 1
+	PRINTFORML â€¦â€¦
+	PRINTFORML â€¦â€¦â€¦
+	PRINTFORML â€¦â€¦â€¦â€¦
+IF CFlag:L_I:å¿ èª å€¤ >= 900 && MARK:L_I:éš·å±žåˆ»å° == 3 && TALENT:L_I:å¿ƒé…”  == 0 && TALENT:L_I:æƒ…å©¦  == 0 && TALENT:L_I:æ„›äºº  == 0
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML å¾“å±žåŒ–ãŒæ¥µã‚Šã€%CALLNAME:L_I%ã¯%CALLNAME:MASTER%ã®å¿ƒé…”ã™ã‚‹ä¸€äººã«ãªã£ãŸã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã¯ã€å¿ƒé…”ã€‘ã‚’ç²å¾—ã—ãŸã€‚
+	TALENT:L_I:å¿ƒé…”  = 1
+ELSEIF CFlag:L_I:å¿ èª å€¤ >= 600 && MARK:L_I:éš·å±žåˆ»å° == 2
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML å¾“å±žåŒ–ã®æœ«ã€ã¾ã‚‹ã§ä»•ãˆã‚‹ã‚ˆã†ãªä»•è‰ã‚’ã™ã‚‹ã‚ˆã†ã«ãªã£ãŸâ€¦ã€ã‹ãªã‚Šã®ä»•ä¸ŠãŒã‚Šã«ãªã£ãŸã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã®éš·å±žåˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:éš·å±žåˆ»å° += 1
+ELSEIF CFlag:L_I:å¿ èª å€¤ >= 300 && MARK:L_I:éš·å±žåˆ»å° == 1
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML å¾“å±žåŒ–ãŒé€²ã¿ã€ã‚ã‚‹ç¨‹åº¦ã®æŒ‡ç¤ºãªã‚‰é›£ãªãå—ã‘å…¥ã‚Œã‚‹ã‚ˆã†ã«ãªã£ãŸã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã®éš·å±žåˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:éš·å±žåˆ»å° += 1
+ELSEIF CFlag:L_I:å¿ èª å€¤ >= 100 && MARK:L_I:éš·å±žåˆ»å° == 0
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML ã‚ã‚‹ç¨‹åº¦ã®å°è±¡åŠ¹æžœãŒã‚ã£ãŸã®ã‹ã€%CALLNAME:L_I%ã¯ã“ã¡ã‚‰ã‚’å°Šæ•¬ã™ã‚‹ã‚ˆã†ãªçœ¼å·®ã—ã§ã“ã¡ã‚‰ã‚’è¦‹ã¦ã„ã‚‹â€¦
+	PRINTFORML %CALLNAME:L_I%ã®éš·å±žåˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:éš·å±žåˆ»å° += 1
 ELSE
-	PRINTFORML y•Ï‰»‚È‚µz
-	PRINTFORML ŽžŠÔ‚ð”ï‚â‚µŒê‚Á‚Ä‚Ý‚½‚à‚Ì‚ÌA“Á‚ÉS‹«‚Ì•Ï‰»‚Í‚È‚©‚Á‚½‚æ‚¤‚¾c
+	PRINTFORML ã€å¤‰åŒ–ãªã—ã€‘
+	PRINTFORML æ™‚é–“ã‚’è²»ã‚„ã—èªžã£ã¦ã¿ãŸã‚‚ã®ã®ã€ç‰¹ã«å¿ƒå¢ƒã®å¤‰åŒ–ã¯ãªã‹ã£ãŸã‚ˆã†ã â€¦
 ENDIF
 
 DRAWLINE
@@ -589,41 +589,41 @@ PRINTFORMW
 
 
 ;-------------------------------------------------
-; ŠÖŒW\’z@—öˆ¤
+; é–¢ä¿‚æ§‹ç¯‰ã€€æ‹æ„›
 ;-------------------------------------------------
 @CAFE_TALK_R_R(L_I)
 #DIM L_I
 CLEARLINE LINECOUNT
 DRAWLINE
-	PRINTFORML %CALLNAME:MASTER%‚Í‰ßè‚É‚È‚ç‚È‚¢’ö“x‚Éˆ¤‚Å‚é‚±‚Æ‚É‚µ‚½c
+	PRINTFORML %CALLNAME:MASTER%ã¯éŽå‰°ã«ãªã‚‰ãªã„ç¨‹åº¦ã«æ„›ã§ã‚‹ã“ã¨ã«ã—ãŸâ€¦
 	PRINTFORML 
 	PRINTFORMW 
-	PRINTFORML cc
-	PRINTFORML ccc
-	PRINTFORML cccc
-IF CFlag:L_I:ˆ¤î’l >= 900 && MARK:L_I:Š×—Žˆó == 3 && TALENT:L_I:SŒ  == 0 && TALENT:L_I:î•w  == 0 && TALENT:L_I:ˆ¤l  == 0
-	PRINTFORML y¬Œ÷z
-	PRINTFORML ­‚µ‚Å‚à%CALLNAME:MASTER%‚Æ’·‚­‚¢‚½‚¢‚Ì‚©Ag‘Ì‚Åˆø‚«—¯‚ß‚é‚Ì‚àŽ«‚³‚È‚­‚È‚Á‚½‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚Íyˆ¤lz‚ðŠl“¾‚µ‚½B
-	TALENT:L_I:ˆ¤l  = 1
-ELSEIF CFlag:L_I:ˆ¤î’l >= 600 && MARK:L_I:Š×—Žˆó == 2
-	PRINTFORML y¬Œ÷z
-	PRINTFORML ˆê‰ß«‚¾‚Á‚½‚Í‚¸‚Ì—ö‚ÍAŠm‚©‚Èˆ¤‚Æ‚È‚Á‚Ä%CALLNAME:L_I%‚ðˆêl‚Ì—‚ÉŽdã‚°‚½‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚ÌŠ×—Žˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:Š×—Žˆó += 1
-ELSEIF CFlag:L_I:ˆ¤î’l >= 300 && MARK:L_I:Š×—Žˆó == 1
-	PRINTFORML y¬Œ÷z
-	PRINTFORML %CALLNAME:L_I%‚Í“à‚É‚ ‚Á‚½—ö•ç‚ðŽ©Šo‚µA‚±‚¿‚ç‚Éˆ¤î‚ð‰B‚³‚¸‚³‚ç‚¯o‚µ‚Ä‚¢‚éc
-	PRINTFORML %CALLNAME:L_I%‚ÌŠ×—Žˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:Š×—Žˆó += 1
-ELSEIF CFlag:L_I:ˆ¤î’l >= 100 && MARK:L_I:Š×—Žˆó == 0
-	PRINTFORML y¬Œ÷z
-	PRINTFORML Œð—¬‚Ì¬‰Ê‚©A%CALLNAME:L_I%‚Í‚±‚¿‚ç‚É‘Î‚µ‚Ä’W‚¢—ö•ç‚ð•ø‚¢‚Ä‚¢‚é‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚ÌŠ×—Žˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:Š×—Žˆó += 1
+	PRINTFORML â€¦â€¦
+	PRINTFORML â€¦â€¦â€¦
+	PRINTFORML â€¦â€¦â€¦â€¦
+IF CFlag:L_I:æ„›æƒ…å€¤ >= 900 && MARK:L_I:é™¥è½åˆ»å° == 3 && TALENT:L_I:å¿ƒé…”  == 0 && TALENT:L_I:æƒ…å©¦  == 0 && TALENT:L_I:æ„›äºº  == 0
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML å°‘ã—ã§ã‚‚%CALLNAME:MASTER%ã¨é•·ãã„ãŸã„ã®ã‹ã€èº«ä½“ã§å¼•ãç•™ã‚ã‚‹ã®ã‚‚è¾žã•ãªããªã£ãŸã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã¯ã€æ„›äººã€‘ã‚’ç²å¾—ã—ãŸã€‚
+	TALENT:L_I:æ„›äºº  = 1
+ELSEIF CFlag:L_I:æ„›æƒ…å€¤ >= 600 && MARK:L_I:é™¥è½åˆ»å° == 2
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML ä¸€éŽæ€§ã ã£ãŸã¯ãšã®æ‹ã¯ã€ç¢ºã‹ãªæ„›ã¨ãªã£ã¦%CALLNAME:L_I%ã‚’ä¸€äººã®å¥³ã«ä»•ä¸Šã’ãŸã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã®é™¥è½åˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:é™¥è½åˆ»å° += 1
+ELSEIF CFlag:L_I:æ„›æƒ…å€¤ >= 300 && MARK:L_I:é™¥è½åˆ»å° == 1
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML %CALLNAME:L_I%ã¯å†…ã«ã‚ã£ãŸæ‹æ…•ã‚’è‡ªè¦šã—ã€ã“ã¡ã‚‰ã«æ„›æƒ…ã‚’éš ã•ãšã•ã‚‰ã‘å‡ºã—ã¦ã„ã‚‹â€¦
+	PRINTFORML %CALLNAME:L_I%ã®é™¥è½åˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:é™¥è½åˆ»å° += 1
+ELSEIF CFlag:L_I:æ„›æƒ…å€¤ >= 100 && MARK:L_I:é™¥è½åˆ»å° == 0
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML äº¤æµã®æˆæžœã‹ã€%CALLNAME:L_I%ã¯ã“ã¡ã‚‰ã«å¯¾ã—ã¦æ·¡ã„æ‹æ…•ã‚’æŠ±ã„ã¦ã„ã‚‹ã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã®é™¥è½åˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:é™¥è½åˆ»å° += 1
 ELSE
-	PRINTFORML y•Ï‰»‚È‚µz
-	PRINTFORML ŽžŠÔ‚ð”ï‚â‚µŒê‚Á‚Ä‚Ý‚½‚à‚Ì‚ÌA“Á‚ÉS‹«‚Ì•Ï‰»‚Í‚È‚©‚Á‚½‚æ‚¤‚¾c
+	PRINTFORML ã€å¤‰åŒ–ãªã—ã€‘
+	PRINTFORML æ™‚é–“ã‚’è²»ã‚„ã—èªžã£ã¦ã¿ãŸã‚‚ã®ã®ã€ç‰¹ã«å¿ƒå¢ƒã®å¤‰åŒ–ã¯ãªã‹ã£ãŸã‚ˆã†ã â€¦
 ENDIF
 DRAWLINE
 PRINTFORMW
@@ -631,41 +631,41 @@ PRINTFORMW
 
 
 ;-------------------------------------------------
-; ŠÖŒW\’z@ˆú—
+; é–¢ä¿‚æ§‹ç¯‰ã€€æ·«ä¹±
 ;-------------------------------------------------
 @CAFE_TALK_R_I(L_I)
 #DIM L_I
 CLEARLINE LINECOUNT
 DRAWLINE
-	PRINTFORML %CALLNAME:MASTER%‚Í%CALLNAME:L_I%‚É–°‚Á‚Ä‚¢‚é—‚Ì«‚ð‚³‚ç‚¯o‚·‚æ‚¤‚ÉŽdŒü‚¯‚½c
+	PRINTFORML %CALLNAME:MASTER%ã¯%CALLNAME:L_I%ã«çœ ã£ã¦ã„ã‚‹å¥³ã®æ€§ã‚’ã•ã‚‰ã‘å‡ºã™ã‚ˆã†ã«ä»•å‘ã‘ãŸâ€¦
 	PRINTFORML 
 	PRINTFORMW 
-	PRINTFORML cc
-	PRINTFORML ccc
-	PRINTFORML cccc
-IF CFlag:L_I:ˆú—’l >= 900 && MARK:L_I:ˆú—ˆó == 3 && TALENT:L_I:SŒ  == 0  && TALENT:L_I:ˆ¤l  == 0 && TALENT:L_I:î•w  == 0
-	PRINTFORML y¬Œ÷z
+	PRINTFORML â€¦â€¦
+	PRINTFORML â€¦â€¦â€¦
+	PRINTFORML â€¦â€¦â€¦â€¦
+IF CFlag:L_I:æ·«ä¹±å€¤ >= 900 && MARK:L_I:æ·«ä¹±åˆ»å° == 3 && TALENT:L_I:å¿ƒé…”  == 0  && TALENT:L_I:æ„›äºº  == 0 && TALENT:L_I:æƒ…å©¦  == 0
+	PRINTFORML ã€æˆåŠŸã€‘
 	PRINTFORML 
-	PRINTFORML %CALLNAME:L_I%‚Íyî•wz‚ðŠl“¾‚µ‚½B
-	TALENT:L_I:î•w  = 1
-ELSEIF CFlag:L_I:ˆú—’l >= 600 && MARK:L_I:ˆú—ˆó == 2
-	PRINTFORML y¬Œ÷z
+	PRINTFORML %CALLNAME:L_I%ã¯ã€æƒ…å©¦ã€‘ã‚’ç²å¾—ã—ãŸã€‚
+	TALENT:L_I:æƒ…å©¦  = 1
+ELSEIF CFlag:L_I:æ·«ä¹±å€¤ >= 600 && MARK:L_I:æ·«ä¹±åˆ»å° == 2
+	PRINTFORML ã€æˆåŠŸã€‘
 	PRINTFORML 
-	PRINTFORML %CALLNAME:L_I%‚Ìˆú—ˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:ˆú—ˆó += 1
-ELSEIF CFlag:L_I:ˆú—’l >= 300 && MARK:L_I:ˆú—ˆó == 1
-	PRINTFORML y¬Œ÷z
-	PRINTFORML Ždž‚Ý‚Ì¬‰Ê‚©A%CALLNAME:L_I%‚ÌŽd‘‚ª‰‚ß‚©‚µ‚­‚È‚Á‚Ä‚«‚½c
-	PRINTFORML %CALLNAME:L_I%‚Ìˆú—ˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:ˆú—ˆó += 1
-ELSEIF CFlag:L_I:ˆú—’l >= 100 && MARK:L_I:ˆú—ˆó == 0
-	PRINTFORML y¬Œ÷z
-	PRINTFORML Šç‚ðÔ‚ç‚ß‚Â‚Â‚àA”é‚ß‚½‚é“÷—~‚ð§Œä‚·‚é‚±‚Æ‚ªo—ˆ‚È‚­‚È‚Á‚Ä‚«‚½‚æ‚¤‚¾c
-	PRINTFORML %CALLNAME:L_I%‚Ìˆú—ˆó‚ª1ã¸‚µ‚½B
-	MARK:L_I:ˆú—ˆó += 1
+	PRINTFORML %CALLNAME:L_I%ã®æ·«ä¹±åˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:æ·«ä¹±åˆ»å° += 1
+ELSEIF CFlag:L_I:æ·«ä¹±å€¤ >= 300 && MARK:L_I:æ·«ä¹±åˆ»å° == 1
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML ä»•è¾¼ã¿ã®æˆæžœã‹ã€%CALLNAME:L_I%ã®ä»•è‰ãŒè‰¶ã‚ã‹ã—ããªã£ã¦ããŸâ€¦
+	PRINTFORML %CALLNAME:L_I%ã®æ·«ä¹±åˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:æ·«ä¹±åˆ»å° += 1
+ELSEIF CFlag:L_I:æ·«ä¹±å€¤ >= 100 && MARK:L_I:æ·«ä¹±åˆ»å° == 0
+	PRINTFORML ã€æˆåŠŸã€‘
+	PRINTFORML é¡”ã‚’èµ¤ã‚‰ã‚ã¤ã¤ã‚‚ã€ç§˜ã‚ãŸã‚‹è‚‰æ¬²ã‚’åˆ¶å¾¡ã™ã‚‹ã“ã¨ãŒå‡ºæ¥ãªããªã£ã¦ããŸã‚ˆã†ã â€¦
+	PRINTFORML %CALLNAME:L_I%ã®æ·«ä¹±åˆ»å°ãŒ1ä¸Šæ˜‡ã—ãŸã€‚
+	MARK:L_I:æ·«ä¹±åˆ»å° += 1
 ELSE
-	PRINTFORML y•Ï‰»‚È‚µz
-	PRINTFORML ŽžŠÔ‚ð”ï‚â‚µŒê‚Á‚Ä‚Ý‚½‚à‚Ì‚ÌA“Á‚ÉS‹«‚Ì•Ï‰»‚Í‚È‚©‚Á‚½‚æ‚¤‚¾c
+	PRINTFORML ã€å¤‰åŒ–ãªã—ã€‘
+	PRINTFORML æ™‚é–“ã‚’è²»ã‚„ã—èªžã£ã¦ã¿ãŸã‚‚ã®ã®ã€ç‰¹ã«å¿ƒå¢ƒã®å¤‰åŒ–ã¯ãªã‹ã£ãŸã‚ˆã†ã â€¦
 ENDIF
 DRAWLINE
 PRINTFORMW
@@ -673,7 +673,7 @@ PRINTFORMW
 
 
 ;-------------------------------------------------
-; ”Y‚Ýˆê——@ŠÈˆÕ”Å
+; æ‚©ã¿ä¸€è¦§ã€€ç°¡æ˜“ç‰ˆ
 ;-------------------------------------------------
 
 @NAYAMI_PAGE(ARG)
@@ -683,54 +683,54 @@ PRINTFORMW
 I_LOOP = 1
 L_I = ARG
 DRAWLINE
-PRINTFORML ž----------------‘å‚«‚È”Y‚Ý----------------ž
+PRINTFORML â—‡----------------å¤§ããªæ‚©ã¿----------------â—‡
 REPEAT 5
 	IF CFlag:L_I:(4000+I_LOOP) != 0
 		IF CFlag:L_I:(4100+I_LOOP) >= 100
 				IF CFlag:L_I:(4000+I_LOOP) <= 199
-					PRINTFORM y‹à‘K–â‘èz
+					PRINTFORM ã€é‡‘éŠ­å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 299
-					PRINTFORM y—öˆ¤–â‘èz
+					PRINTFORM ã€æ‹æ„›å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 399
-					PRINTFORM y‰Æ’ë–â‘èz
+					PRINTFORM ã€å®¶åº­å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 499
-					PRINTFORM y¶Šˆ–â‘èz
+					PRINTFORM ã€ç”Ÿæ´»å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 599
-					PRINTFORM y”Æß–â‘èz
+					PRINTFORM ã€çŠ¯ç½ªå•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 699
-					PRINTFORM y«“I–â‘èz
+					PRINTFORM ã€æ€§çš„å•é¡Œã€‘
 				ENDIF
 			ELSE
-			PRINTFORM HHH(–¢”»–¾)y‰ðÍ:{CFlag:L_I:(4100+I_LOOP)}/100z
+			PRINTFORM ï¼Ÿï¼Ÿï¼Ÿ(æœªåˆ¤æ˜Ž)ã€è§£æž:{CFlag:L_I:(4100+I_LOOP)}/100ã€‘
 		ENDIF
-		PRINTFORM “ï“x:{CFlag:L_I:(4300+I_LOOP)}@
-		PRINTFORML ’B¬—¦:({CFlag:L_I:(4200+I_LOOP)}/100)
+		PRINTFORM é›£åº¦:{CFlag:L_I:(4300+I_LOOP)}ã€€
+		PRINTFORML é”æˆçŽ‡:({CFlag:L_I:(4200+I_LOOP)}/100)
 	ENDIF
 	I_LOOP += 1
 REND
-PRINTFORML ž----------------¬‚³‚È”Y‚Ý----------------ž
+PRINTFORML â—‡----------------å°ã•ãªæ‚©ã¿----------------â—‡
 I_LOOP = 1
 REPEAT 5
 	IF CFlag:L_I:(4010+I_LOOP) != 0
 		IF CFlag:L_I:(4110+I_LOOP) >= 100
 				IF CFlag:L_I:(4010+I_LOOP) <= 199
-					PRINTFORM y‹à‘K–â‘èz
+					PRINTFORM ã€é‡‘éŠ­å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 299
-					PRINTFORM y—öˆ¤–â‘èz
+					PRINTFORM ã€æ‹æ„›å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 399
-					PRINTFORM y‰Æ’ë–â‘èz
+					PRINTFORM ã€å®¶åº­å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 499
-					PRINTFORM y¶Šˆ–â‘èz
+					PRINTFORM ã€ç”Ÿæ´»å•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 599
-					PRINTFORM y”Æß–â‘èz
+					PRINTFORM ã€çŠ¯ç½ªå•é¡Œã€‘
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 699
-					PRINTFORM y«“I–â‘èz
+					PRINTFORM ã€æ€§çš„å•é¡Œã€‘
 				ENDIF
 			ELSE
-			PRINTFORM HHH(–¢”»–¾)y‰ðÍ:{CFlag:L_I:(4110+I_LOOP)}/100z
+			PRINTFORM ï¼Ÿï¼Ÿï¼Ÿ(æœªåˆ¤æ˜Ž)ã€è§£æž:{CFlag:L_I:(4110+I_LOOP)}/100ã€‘
 		ENDIF
-		PRINTFORM “ï“x:{CFlag:L_I:(4310+I_LOOP)}@
-		PRINTFORML ’B¬—¦:({CFlag:L_I:(4210+I_LOOP)}/100)
+		PRINTFORM é›£åº¦:{CFlag:L_I:(4310+I_LOOP)}ã€€
+		PRINTFORML é”æˆçŽ‡:({CFlag:L_I:(4210+I_LOOP)}/100)
 	ENDIF
 	I_LOOP += 1
 REND
@@ -739,7 +739,7 @@ DRAWLINE
 
 
 ;-------------------------------------------------
-;ƒLƒƒƒ‰Ø‘Ö‹@”\‚Â‚«‹i’ƒ“X‰ï˜bŠÖ”
+;ã‚­ãƒ£ãƒ©åˆ‡æ›¿æ©Ÿèƒ½ã¤ãå–«èŒ¶åº—ä¼šè©±é–¢æ•°
 ;-------------------------------------------------
 @CAFE_TALK_GROUP(CHARA_LIST, CHARA_VIEW, CHARA_CNT, OP)
 #DIM REF CHARA_LIST
@@ -753,155 +753,155 @@ CALL INFO_STATUS_NAYAMI_LIST(C_ID)
 CALL C_PICTURE_T(C_ID)
 CALL INFO_CITY_BASE
 DRAWLINE
-IF TALENT:C_ID:‡ˆÓ || CFLAG:C_ID:ŠÖŒW’iŠK >= 2
-	PRINTFORM @
-	PRINTBUTTON "[7] - ŒXŒü•ÏX@@@", 7
+IF TALENT:C_ID:åˆæ„ || CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2
+	PRINTFORM ã€€
+	PRINTBUTTON "[7] - å‚¾å‘å¤‰æ›´ã€€ã€€ã€€", 7
 ELSE
-	PRINTFORM %"@" * 11%
+	PRINTFORM %"ã€€" * 11%
 ENDIF
-IF STRCOUNT(OP, "uƒLƒƒƒ‰ŒÅ’èv")
-	PRINTFORM %"@" * 11%
+IF STRCOUNT(OP, "ã€Œã‚­ãƒ£ãƒ©å›ºå®šã€")
+	PRINTFORM %"ã€€" * 11%
 ELSE
-	PRINTFORM @
-	PRINTBUTTON "[8] - ‘O‚ÌƒLƒƒƒ‰@@", 8
+	PRINTFORM ã€€
+	PRINTBUTTON "[8] - å‰ã®ã‚­ãƒ£ãƒ©ã€€ã€€", 8
 ENDIF
-IF TALENT:C_ID:‡ˆÓ || CFLAG:C_ID:ŠÖŒW’iŠK >= 2
-	PRINTFORM @
-	PRINTBUTTON "[9] - ŠÖŒW\’z@@@", 9
+IF TALENT:C_ID:åˆæ„ || CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2
+	PRINTFORM ã€€
+	PRINTBUTTON "[9] - é–¢ä¿‚æ§‹ç¯‰ã€€ã€€ã€€", 9
 ENDIF
 PRINTFORML 
-PRINTFORM @
-PRINTBUTTON "[4] - ˜b‚ð‚·‚é(TP:1)", 4
-IF VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID) && CFLAG:C_ID:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” == 0 ;!CFLAG:C_ID:Zl_”Y‚Ý‹¦—Íó‹µ
-	PRINTFORM @
-	PRINTBUTTON "[5] - ”Y‚Ý‰ðŒˆ(TP:1)", 5
+PRINTFORM ã€€
+PRINTBUTTON "[4] - è©±ã‚’ã™ã‚‹(TP:1)", 4
+IF VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID) && CFLAG:C_ID:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° == 0 ;!CFLAG:C_ID:ä½äºº_æ‚©ã¿å”åŠ›çŠ¶æ³
+	PRINTFORM ã€€
+	PRINTBUTTON "[5] - æ‚©ã¿è§£æ±º(TP:1)", 5
 ELSE
-	PRINTFORM %"@" * 11%
+	PRINTFORM %"ã€€" * 11%
 ENDIF
-IF TALENT:C_ID:‡ˆÓ == 0 && (CFLAG:C_ID:ŠÖŒW’iŠK >= 2 || TALENT:C_ID:©•w)
-	PRINTFORM @
-	PRINTBUTTON "[6] - Œûà‚­@(TP:5)", 6
+IF TALENT:C_ID:åˆæ„ == 0 && (CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2 || TALENT:C_ID:å¨¼å©¦)
+	PRINTFORM ã€€
+	PRINTBUTTON "[6] - å£èª¬ãã€€(TP:5)", 6
 ENDIF
 PRINTFORML 
-PRINTFORM %"@" * 11%
-IF STRCOUNT(OP, "uƒLƒƒƒ‰ŒÅ’èv")
-	PRINTFORM %"@" * 11%
+PRINTFORM %"ã€€" * 11%
+IF STRCOUNT(OP, "ã€Œã‚­ãƒ£ãƒ©å›ºå®šã€")
+	PRINTFORM %"ã€€" * 11%
 ELSE
-	PRINTFORM @
-	PRINTBUTTON "[2] - ŽŸ‚ÌƒLƒƒƒ‰@@", 2
+	PRINTFORM ã€€
+	PRINTBUTTON "[2] - æ¬¡ã®ã‚­ãƒ£ãƒ©ã€€ã€€", 2
 ENDIF
-PRINTFORM @
-PRINTBUTTON "[3] - BPÛŽæ@@@@", 3
+PRINTFORM ã€€
+PRINTBUTTON "[3] - BPæ‘‚å–ã€€ã€€ã€€ã€€", 3
 PRINTFORML 
 PRINTFORML 
-PRINTBUTTON "[0] - ‚à‚Ç‚é@@@@", 0
+PRINTBUTTON "[0] - ã‚‚ã©ã‚‹ã€€ã€€ã€€ã€€", 0
 DO
 	ONEINPUT
 	L_INPUT = RESULT
 	SELECTCASE L_INPUT
 	CASE 7
-		SIF !(TALENT:C_ID:‡ˆÓ || CFLAG:C_ID:ŠÖŒW’iŠK >= 2)
+		SIF !(TALENT:C_ID:åˆæ„ || CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2)
 			GOTO RETRY
-		PRINTFORML Ú‚µ•û‚ð‚Ç‚Ì‚æ‚¤‚É•ÏX‚µ‚Ü‚·‚©H
-		PRINTFORM @
-		PRINTBUTTON "[1] - ’‰½ŒXŒü(TP:3)", 1
-		PRINTFORM @
-		PRINTBUTTON "[2] - ˆ¤îŒXŒü(TP:3)", 2
-		PRINTFORM @
-		PRINTBUTTON "[3] - ˆú—ŒXŒü(TP:3)", 3
+		PRINTFORML æŽ¥ã—æ–¹ã‚’ã©ã®ã‚ˆã†ã«å¤‰æ›´ã—ã¾ã™ã‹ï¼Ÿ
+		PRINTFORM ã€€
+		PRINTBUTTON "[1] - å¿ èª å‚¾å‘(TP:3)", 1
+		PRINTFORM ã€€
+		PRINTBUTTON "[2] - æ„›æƒ…å‚¾å‘(TP:3)", 2
+		PRINTFORM ã€€
+		PRINTBUTTON "[3] - æ·«ä¹±å‚¾å‘(TP:3)", 3
 		PRINTFORML 
 		PRINTFORML 
-		PRINTFORM @
-		PRINTBUTTON "[0] - ƒLƒƒƒ“ƒZƒ‹@@", 0
-		PRINTFORM %"@" * 11%
-		PRINTFORM @
-		PRINTBUTTON "[9] - ŒXŒü‚È‚µ@@@", 9
+		PRINTFORM ã€€
+		PRINTBUTTON "[0] - ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã€€ã€€", 0
+		PRINTFORM %"ã€€" * 11%
+		PRINTFORM ã€€
+		PRINTBUTTON "[9] - å‚¾å‘ãªã—ã€€ã€€ã€€", 9
 		DO
 			ONEINPUT
-			SIF INRANGE(RESULT, 1, 3) && FLAG:“sŽs_Œ»ÝTP < 3
+			SIF INRANGE(RESULT, 1, 3) && FLAG:éƒ½å¸‚_ç¾åœ¨TP < 3
 				GOTO LESS_TP
 			SELECTCASE RESULT
 			CASE 1
-				FLAG:“sŽs_Œ»ÝTP -= 3
-				CFLAG:C_ID:’lŒXŒü = 1
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 3
+				CFLAG:C_ID:å€¤å‚¾å‘ = 1
 			CASE 2
-				FLAG:“sŽs_Œ»ÝTP -= 3
-				CFLAG:C_ID:’lŒXŒü = 2
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 3
+				CFLAG:C_ID:å€¤å‚¾å‘ = 2
 			CASE 3
-				FLAG:“sŽs_Œ»ÝTP -= 3
-				CFLAG:C_ID:’lŒXŒü = 3
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 3
+				CFLAG:C_ID:å€¤å‚¾å‘ = 3
 			CASE 9
-				CFLAG:C_ID:’lŒXŒü = 0
+				CFLAG:C_ID:å€¤å‚¾å‘ = 0
 			CASEELSE
 			ENDSELECT
 			BREAK
 		LOOP 1
 	CASE 9
-		SIF !(TALENT:C_ID:‡ˆÓ || CFLAG:C_ID:ŠÖŒW’iŠK >= 2)
+		SIF !(TALENT:C_ID:åˆæ„ || CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2)
 			GOTO RETRY
-		PRINTFORML ‚Ç‚Ì‚æ‚¤‚ÈŠÖŒW‚ð\’z‚µ‚Ü‚·‚©H
-		PRINTFORM @
-		PRINTBUTTON "[1] - ]‘®ã(TP:5)", 1
-		PRINTFORM @
-		PRINTBUTTON "[2] - —öˆ¤ã(TP:5)", 2
-		PRINTFORM @
-		PRINTBUTTON "[3] - ˆú—ã(TP:5)", 3
+		PRINTFORML ã©ã®ã‚ˆã†ãªé–¢ä¿‚ã‚’æ§‹ç¯‰ã—ã¾ã™ã‹ï¼Ÿ
+		PRINTFORM ã€€
+		PRINTBUTTON "[1] - å¾“å±žâˆš(TP:5)", 1
+		PRINTFORM ã€€
+		PRINTBUTTON "[2] - æ‹æ„›âˆš(TP:5)", 2
+		PRINTFORM ã€€
+		PRINTBUTTON "[3] - æ·«ä¹±âˆš(TP:5)", 3
 		PRINTFORML 
 		PRINTFORML 
-		PRINTFORM @
-		PRINTBUTTON "[0] - ƒLƒƒƒ“ƒZƒ‹@", 0
+		PRINTFORM ã€€
+		PRINTBUTTON "[0] - ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã€€", 0
 		DO
 			ONEINPUT
-			SIF INRANGE(RESULT, 1, 3) && FLAG:“sŽs_Œ»ÝTP < 5
+			SIF INRANGE(RESULT, 1, 3) && FLAG:éƒ½å¸‚_ç¾åœ¨TP < 5
 				GOTO LESS_TP
 			SELECTCASE RESULT
 			CASE 1
-				FLAG:“sŽs_Œ»ÝTP -= 5
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 5
 				CALL CAFE_TALK_R_J(C_ID)
 			CASE 2
-				FLAG:“sŽs_Œ»ÝTP -= 5
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 5
 				CALL CAFE_TALK_R_R(C_ID)
 			CASE 3
-				FLAG:“sŽs_Œ»ÝTP -= 5
+				FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 5
 				CALL CAFE_TALK_R_I(C_ID)
 			CASEELSE
 			ENDSELECT
 			BREAK
 		LOOP 1
 	CASE 8
-		SIF STRCOUNT(OP, "uƒLƒƒƒ‰ŒÅ’èv")
+		SIF STRCOUNT(OP, "ã€Œã‚­ãƒ£ãƒ©å›ºå®šã€")
 			GOTO RETRY
 		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT - 1) % CHARA_CNT
 	CASE 2
-		SIF STRCOUNT(OP, "uƒLƒƒƒ‰ŒÅ’èv")
+		SIF STRCOUNT(OP, "ã€Œã‚­ãƒ£ãƒ©å›ºå®šã€")
 			GOTO RETRY
 		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT + 1) % CHARA_CNT
 	CASE 4
-		IF FLAG:“sŽs_Œ»ÝTP < 1
+		IF FLAG:éƒ½å¸‚_ç¾åœ¨TP < 1
 			$LESS_TP
-			CALL C_INPUT_ERROR("TP‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·")
+			CALL C_INPUT_ERROR("TPãŒä¸è¶³ã—ã¦ã„ã¾ã™")
 			RESTART
 		ENDIF
-		FLAG:“sŽs_Œ»ÝTP --
+		FLAG:éƒ½å¸‚_ç¾åœ¨TP --
 		CALL CAFE_TALK2(C_ID)
 	CASE 5
-		SIF FLAG:“sŽs_Œ»ÝTP < 1
+		SIF FLAG:éƒ½å¸‚_ç¾åœ¨TP < 1
 			GOTO LESS_TP
-		;SIF CFLAG:C_ID:Zl_”Y‚Ý‹¦—Íó‹µ
+		;SIF CFLAG:C_ID:ä½äºº_æ‚©ã¿å”åŠ›çŠ¶æ³
 			;GOTO RETRY
 		SIF !VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID)
 			GOTO RETRY
-		;FLAG:“sŽs_Œ»ÝTP --
+		;FLAG:éƒ½å¸‚_ç¾åœ¨TP --
 		CALL CAFE_TALK_ASSIST_NAYAMI(C_ID)
 		CALL NAYAMI_CHALLENGE(C_ID)
 	CASE 6
-		SIF FLAG:“sŽs_Œ»ÝTP < 5
+		SIF FLAG:éƒ½å¸‚_ç¾åœ¨TP < 5
 			GOTO LESS_TP
-		SIF TALENT:C_ID:‡ˆÓ != 0
+		SIF TALENT:C_ID:åˆæ„ != 0
 			GOTO RETRY
-		SIF !(CFLAG:C_ID:ŠÖŒW’iŠK >= 2 || TALENT:C_ID:©•w)
+		SIF !(CFLAG:C_ID:é–¢ä¿‚æ®µéšŽ >= 2 || TALENT:C_ID:å¨¼å©¦)
 			GOTO RETRY
-		FLAG:“sŽs_Œ»ÝTP -= 5
+		FLAG:éƒ½å¸‚_ç¾åœ¨TP -= 5
 		CALL CAFE_TALK_KDK(C_ID)
 	CASE 3
 		CALL SYSTEM_BP
@@ -909,7 +909,7 @@ DO
 		RETURN
 	CASEELSE
 		$RETRY
-		CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+		CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
 		CONTINUE
 	ENDSELECT
 	BREAK
@@ -919,15 +919,15 @@ RESTART
 
 
 ;-------------------------------------------------
-;‚¨‚È‚â‚Ý‹¦—ÍŠÖ”
+;ãŠãªã‚„ã¿å”åŠ›é–¢æ•°
 ;-------------------------------------------------
-;‹¦—Í‚µ‚Ä‚ ‚°‚é‚æI‚Á‚Ä‚¢‚¤‚¾‚¯‚Å‚±‚±‚Å‚Í‰½‚à‚¨‚±‚ç‚È‚¢
+;å”åŠ›ã—ã¦ã‚ã’ã‚‹ã‚ˆï¼ã£ã¦ã„ã†ã ã‘ã§ã“ã“ã§ã¯ä½•ã‚‚ãŠã“ã‚‰ãªã„
 @CAFE_TALK_ASSIST_NAYAMI(C_ID)
 #DIM C_ID
 CALL INFO_STATUS_NAYAMI_LIST(C_ID)
 ;PRINTFORML 
-;PRINTFORML %CALLNAME:MASTER%‚Í%CALLNAME:C_ID%‚Ì”Y‚Ý‰ðŒˆ‚Ö‚Ì‹¦—Í‚ð\‚µo‚½
-;PRINTFORMW ŽžŠÔŒo‰ßŽž‚É%CALLNAME:C_ID%‚ª”Y‚Ý‘Š’k‚É‚â‚Á‚Ä‚«‚Ü‚·
+;PRINTFORML %CALLNAME:MASTER%ã¯%CALLNAME:C_ID%ã®æ‚©ã¿è§£æ±ºã¸ã®å”åŠ›ã‚’ç”³ã—å‡ºãŸ
+;PRINTFORMW æ™‚é–“çµŒéŽæ™‚ã«%CALLNAME:C_ID%ãŒæ‚©ã¿ç›¸è«‡ã«ã‚„ã£ã¦ãã¾ã™
 CALL VAR_NAYAMI_SET_ASSIST(C_ID)
 
 

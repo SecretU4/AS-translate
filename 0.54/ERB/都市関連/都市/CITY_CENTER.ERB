@@ -1,9 +1,9 @@
-;-------------------------------------------------
-; �s�s�֘A �{��
+﻿;-------------------------------------------------
+; 都市関連 施設
 ;-------------------------------------------------
 @CITY_CENTER
-#DIM L_FACI_ID ;�{��ID
-#DIM L_INPUT   ;���͓��e
+#DIM L_FACI_ID ;施設ID
+#DIM L_INPUT   ;入力内容
 DRAWLINE
 FOR L_FACI_ID, 1, 8
 	CALL SHOW_FACILITY_LEVEL(L_FACI_ID)
@@ -13,7 +13,7 @@ FOR L_FACI_ID, 50, 56
 NEXT
 DRAWLINE
 PRINTFORML
-PRINTFORML [999] �߂�
+PRINTFORML [999] 戻る
 DO
 	INPUT
 	L_INPUT = RESULT
@@ -22,10 +22,10 @@ DO
 		JUMP SYSTEM_MENU
 	CASEELSE
 		TRYCCALLFORM CITY_F_{L_INPUT}
-			SIF FLAG:�^�[���I���t���O == 1
+			SIF FLAG:ターン終了フラグ == 1
 				RETURN
 		CATCH
-			PRINTFORMW �������̎{�݂ł��B
+			PRINTFORMW 未実装の施設です。
 		ENDCATCH
 		BREAK
 	ENDSELECT
@@ -33,43 +33,43 @@ LOOP 1
 RESTART
 
 
-;�{�݃��x���\���֐�
+;施設レベル表示関数
 @SHOW_FACILITY_LEVEL(L_FACI_ID)
-#DIM  L_FACI_ID    ;�{��ID
-#DIM  L_FACI_LEVEL ;�t���O�Q�Ɨp
-#DIM  L_FACI_POINT ;�t���O�Q�Ɨp
-#DIM  L_color      ;�F�o�b�N�A�b�v
+#DIM  L_FACI_ID    ;施設ID
+#DIM  L_FACI_LEVEL ;フラグ参照用
+#DIM  L_FACI_POINT ;フラグ参照用
+#DIM  L_color      ;色バックアップ
 L_FACI_LEVEL = FLAG:(4000 + L_FACI_ID)
 L_FACI_POINT = FLAG:(4100 + L_FACI_ID)
 IF L_FACI_LEVEL <= 0
 	L_color = GETCOLOR()
-	SIF FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
-	PRINTFORML �H�H�H(������)({L_FACI_LEVEL})
-	SIF FLAG:STATUS�������[�h
+	SIF FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
+	PRINTFORML ？？？(未建設)({L_FACI_LEVEL})
+	SIF FLAG:STATUS伏字モード
 		SETCOLOR L_color
 ELSE
-	PRINTFORML [{L_FACI_ID, 2}]�y%FLAGNAME:(4000 + L_FACI_ID), 20 ,LEFT%:Lv{L_FACI_LEVEL, 3 ,LEFT}({L_FACI_POINT, 3}/{L_FACI_LEVEL * 10, 3})�z
+	PRINTFORML [{L_FACI_ID, 2}]【%FLAGNAME:(4000 + L_FACI_ID), 20 ,LEFT%:Lv{L_FACI_LEVEL, 3 ,LEFT}({L_FACI_POINT, 3}/{L_FACI_LEVEL * 10, 3})】
 ENDIF
 
 
 
-;�{�݂̃L�����z���֐�
+;施設のキャラ配属関数
 @FACILITY_CHARA_SET(L_C_ID, L_FACI_ID)
-#DIM L_C_ID                      ;�C���ΏۃL�����̓o�^�ԍ�
-#DIM L_FACI_ID                   ;�{��ID
-#DIM CONST L_CFLAG_START = 10000 ;�{�ݗpCFLAG�̊J�n�l
-#DIM CONST L_CFLAG_END   = 10100 ;�{�ݗpCFLAG�̏I���l�i����ID���̂͊܂܂�Ȃ��j
-#DIM L_CHARA_ORDER               ;�ΏۃL���������łɔz������Ă���{��
+#DIM L_C_ID                      ;任命対象キャラの登録番号
+#DIM L_FACI_ID                   ;施設ID
+#DIM CONST L_CFLAG_START = 10000 ;施設用CFLAGの開始値
+#DIM CONST L_CFLAG_END   = 10100 ;施設用CFLAGの終了値（このID自体は含まれない）
+#DIM L_CHARA_ORDER               ;対象キャラがすでに配属されている施設
 L_CHARA_ORDER = FINDELEMENT(CFLAG:L_C_ID:0, 1, L_CFLAG_START, L_CFLAG_END)
 IF L_CHARA_ORDER == L_FACI_ID + L_CFLAG_START
-	PRINTFORMW ����%CFLAGNAME:L_CHARA_ORDER%�ɔC������Ă��܂��B
+	PRINTFORMW 既に%CFLAGNAME:L_CHARA_ORDER%に任命されています。
 	RETURN
 ELSEIF L_CHARA_ORDER > 0
-	PRINTFORMW ����%CFLAGNAME:L_CHARA_ORDER%�ɔC������Ă��܂��B
-	PRINTFORML ��C���Ĕz���������܂����H
-	PRINTFORML [1] - �z��������
-	PRINTFORML [0] - ��߂�
+	PRINTFORMW 既に%CFLAGNAME:L_CHARA_ORDER%に任命されています。
+	PRINTFORML 解任して配属し直しますか？
+	PRINTFORML [1] - 配属し直す
+	PRINTFORML [0] - やめる
 	DO
 		INPUT
 		SIF RESULT == 1
@@ -80,45 +80,45 @@ ELSEIF L_CHARA_ORDER > 0
 	CALL FACILITY_CHARA_REMOVE(L_C_ID)
 ENDIF
 CFLAG:L_C_ID:(L_CFLAG_START + L_FACI_ID) = 1
-PRINTFORMW %CALLNAME:L_C_ID%��%CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%�ɔC�����܂����B
+PRINTFORMW %CALLNAME:L_C_ID%を%CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%に任命しました。
 
 
 
-;�{�݂̃L������C�֐�
-;�������͈͂�10000�`10098�i10099���������R�ꂵ�Ă�悤�Ɍ�����j�������̂�10099���������͈͂ɓ��ꂽ
-;�I�[�܂Ŏg���؂��ĂȂ��̂Ŗ��͕\�ʉ����Ȃ��Ƃ͎v��
+;施設のキャラ解任関数
+;初期化範囲が10000～10098（10099が初期化漏れしてるように見える）だったので10099を初期化範囲に入れた
+;終端まで使い切ってないので問題は表面化しないとは思う
 @FACILITY_CHARA_REMOVE(L_C_ID)
-#DIM L_C_ID                      ;�C���ΏۃL�����̓o�^�ԍ�
-#DIM CONST L_CFLAG_START = 10000 ;�{�ݗpCFLAG�̊J�n�l
-#DIM CONST L_CFLAG_END   = 10100 ;�{�ݗpCFLAG�̏I���l�i����ID���̂͊܂܂�Ȃ��j
-SIF TALENT:L_C_ID:�s�� == 0
-	PRINTFORMW %CALLNAME:L_C_ID%��C����O���܂����B
+#DIM L_C_ID                      ;任命対象キャラの登録番号
+#DIM CONST L_CFLAG_START = 10000 ;施設用CFLAGの開始値
+#DIM CONST L_CFLAG_END   = 10100 ;施設用CFLAGの終了値（このID自体は含まれない）
+SIF TALENT:L_C_ID:不在 == 0
+	PRINTFORMW %CALLNAME:L_C_ID%を任から外しました。
 VARSET CFLAG:L_C_ID:0, 0, L_CFLAG_START, L_CFLAG_END
 
 
 
 
 
-;�{�ݔC�������֐�
+;施設任命処理関数
 @CITY_FACILITY_ORDER(L_FACI_ID)
-#DIM L_FACI_ID                   ;�{��ID
-#DIM L_C_ID                      ;�C���ΏۃL�����̓o�^�ԍ�
-#DIM L_ORDER_CNT                 ;�{�݂̔C���ς݂̃L�������̎擾
-#DIM L_INPUT                     ;���͓��e
+#DIM L_FACI_ID                   ;施設ID
+#DIM L_C_ID                      ;任命対象キャラの登録番号
+#DIM L_ORDER_CNT                 ;施設の任命済みのキャラ数の取得
+#DIM L_INPUT                     ;入力内容
 CLEARLINE LINECOUNT
 DRAWLINE
-CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "�{�ݖ�")
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "施設名")
 DRAWLINE
-CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "�Q����")
-L_ORDER_CNT = FLAG:�ėp�ϐ�
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "参加者")
+L_ORDER_CNT = FLAG:汎用変数
 DRAWLINE
-CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "������")
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "説明文")
 DRAWLINE
-CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "�C���{�^��")
-;�{�^���͋��ʂ�
-;2�@�C��
-;1�@�C������
-;0�@���ǂ�
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "任命ボタン")
+;ボタンは共通で
+;2　任命
+;1　任命解除
+;0　もどる
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
@@ -128,20 +128,20 @@ SELECTCASE L_INPUT
 		$LOOP_INPUT2
 		CLEARLINE LINECOUNT
 		DRAWLINE
-		PRINTFORML �C��������Z����I�����ĉ������B
+		PRINTFORML 任命させる住民を選択して下さい。
 		DRAWLINE
-		CALL LIST_CHARA("�{�ݔz��")
+		CALL LIST_CHARA("施設配属")
 		L_C_ID = RESULT
 		IF L_C_ID == 1000
 			RESTART
 		ELSEIF !INRANGE(L_C_ID, 0, CHARANUM - 1)
-			PRINTFORMW ���͂��ꂽ�ԍ��̓L�����͈̔͊O�ł��B
+			PRINTFORMW 入力された番号はキャラの範囲外です。
 			GOTO LOOP_INPUT2
 		ELSEIF L_C_ID == 0
-			PRINTFORMW ���Ȃ��͑I���ł��܂���B
+			PRINTFORMW あなたは選択できません。
 			GOTO LOOP_INPUT2
 		ELSEIF TALENT:L_C_ID:NPC == 999
-			PRINTFORMW NPC�͑I���ł��܂���B
+			PRINTFORMW NPCは選択できません。
 			GOTO LOOP_INPUT2
 		ENDIF
 		
@@ -150,7 +150,7 @@ SELECTCASE L_INPUT
 			GOTO LOOP_INPUT2
 		ELSEIF L_INPUT == 2
 			IF L_ORDER_CNT >= 5
-				PRINTFORMW �z���o����̂͌ܐl�܂łł��B
+				PRINTFORMW 配属出来るのは五人までです。
 				GOTO LOOP_INPUT2
 			ENDIF
 			CALL FACILITY_CHARA_SET(L_C_ID, L_FACI_ID)
@@ -163,124 +163,124 @@ RESTART
 
 
 
-;�C�������̎{�ݕʂ̕\���֐�
+;任命処理の施設別の表示関数
 @SHOW_FACILITY_INTRODUCE(L_FACI_ID, L_TYPE, OPT_MARKER = -1)
-#DIM        L_FACI_ID         ;�{��ID
-#DIMS       L_TYPE            ;�\���^�C�v
-#DIM        OPT_MARKER        ;�����\������ID
-;�ǐ��m�ۂ̂��߂̒萔�n
-#DIM  CONST L_�w��       = 1  
-#DIM  CONST L_�x���Z��   = 7  
-#DIM  CONST L_���u�z�e�� = 50
-#DIM  CONST L_�����J�W�m = 53 
+#DIM        L_FACI_ID         ;施設ID
+#DIMS       L_TYPE            ;表示タイプ
+#DIM        OPT_MARKER        ;強調表示するID
+;可読性確保のための定数系
+#DIM  CONST L_学園       = 1  
+#DIM  CONST L_支援住宅   = 7  
+#DIM  CONST L_ラブホテル = 50
+#DIM  CONST L_高級カジノ = 53 
 SELECTCASE L_TYPE
-CASE "�{�ݖ�"
+CASE "施設名"
 	SELECTCASE L_FACI_ID
-	CASE L_�w��
-		CALL PRINT_LABEL("�w��")
+	CASE L_学園
+		CALL PRINT_LABEL("学園")
 		PRINTL
-	CASE L_�x���Z��
-		CALL PRINT_LABEL("�x���Z��")
+	CASE L_支援住宅
+		CALL PRINT_LABEL("支援住宅")
 		PRINTL
-	CASE L_���u�z�e��
-		CALL PRINT_LABEL("���u�z�e��")
+	CASE L_ラブホテル
+		CALL PRINT_LABEL("ラブホテル")
 		PRINTL
-	CASE L_�����J�W�m
-		CALL PRINT_LABEL("�����J�W�m")
+	CASE L_高級カジノ
+		CALL PRINT_LABEL("高級カジノ")
 		PRINTL
 	ENDSELECT
-CASE "�Q����"
+CASE "参加者"
 	SELECTCASE L_FACI_ID
-		;@MEMBER_LIST2��FLAG:�ėp�ϐ��𑀍삵�܂�
-	CASE L_�w��
-		PRINTFORM �y�w���F
-		CALL MEMBER_LIST2(GETNUM(CFLAG, "�w�����k"), 1, OPT_MARKER)
-		PRINTFORML �z
-	CASE L_�x���Z��
-		PRINTFORM �y�X��:
-		CALL MEMBER_LIST2(GETNUM(CFLAG, "�x���{�����e�B�A"), 1, OPT_MARKER)
-		PRINTFORML �z
-	CASE L_���u�z�e��
-		PRINTFORM �y�X��:
-		CALL MEMBER_LIST2(GETNUM(CFLAG, "���u�z�e���X��"), 1, OPT_MARKER)
-		PRINTFORML �z
-	CASE L_�����J�W�m
-		PRINTFORM �y�X���F
-		CALL MEMBER_LIST2(GETNUM(CFLAG, "�J�W�m�X��"), 1, OPT_MARKER)
-		PRINTFORML �z
+		;@MEMBER_LIST2はFLAG:汎用変数を操作します
+	CASE L_学園
+		PRINTFORM 【学生：
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "学園生徒"), 1, OPT_MARKER)
+		PRINTFORML 】
+	CASE L_支援住宅
+		PRINTFORM 【店員:
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "支援ボランティア"), 1, OPT_MARKER)
+		PRINTFORML 】
+	CASE L_ラブホテル
+		PRINTFORM 【店員:
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "ラブホテル店員"), 1, OPT_MARKER)
+		PRINTFORML 】
+	CASE L_高級カジノ
+		PRINTFORM 【店員：
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "カジノ店員"), 1, OPT_MARKER)
+		PRINTFORML 】
 	ENDSELECT
-CASE "������"
+CASE "説明文"
 	SELECTCASE L_FACI_ID
-	CASE L_�w��
-		PRINTFORML �Z�����ċ��炳���܂��B
-		PRINTFORML �C�����ꂽ�Z���̓��������㏸���܂��B(����ܖ�)
-	CASE L_�x���Z��
-		PRINTFORML �Z�����{�����e�B�A�ɎQ�������܂��B
-		PRINTFORML �����͓����܂��񂪁A�J���}���������܂��B(����ܖ�)
-	CASE L_���u�z�e��
-		PRINTFORML %CALLNAME:MASTER%�͂��������قƂ��ė��p���邱�Ƃ��o���܂��B
-		PRINTFORML �Z���ɔC�����邱�ƂŁA�^�[���I�����ɏ��w�Ƃ��ē����������҂��܂��B(����ܖ�)
-	CASE L_�����J�W�m
-		PRINTFORML �Z���ɔC�����邱�ƂŁA�^�[���I�����ɋq�����Ƃ��ē����������҂��܂��B
-		PRINTFORML �����͏Z���̖����o�f���̎��ɂ���ĕς��܂��B(����ܖ�)
+	CASE L_学園
+		PRINTFORML 住民を再教育させます。
+		PRINTFORML 任命された住民はモラルが上昇します。(定員五名)
+	CASE L_支援住宅
+		PRINTFORML 住民をボランティアに参加させます。
+		PRINTFORML 資金は得られませんが、カルマが減少します。(定員五名)
+	CASE L_ラブホテル
+		PRINTFORML %CALLNAME:MASTER%はここを娼館として利用することが出来ます。
+		PRINTFORML 住民に任命することで、ターン終了時に娼婦として働き資金を稼ぎます。(定員五名)
+	CASE L_高級カジノ
+		PRINTFORML 住民に任命することで、ターン終了時に客引きとして働き資金を稼ぎます。
+		PRINTFORML 収入は住民の無自覚素質の質によって変わります。(定員五名)
 		SETCOLOR 250,50,50
-		PRINTFORML �������A���������Ⴂ�Z���A�܂��̓J���}�������Z���͒���
+		PRINTFORML ただし、モラルが低い住民、またはカルマが高い住民は注意
 		RESETCOLOR
 	ENDSELECT
 	DRAWLINE
-CASE "�C���{�^��"
+CASE "任命ボタン"
 	SELECTCASE L_FACI_ID
-	CASE L_�w��
-		PRINTFORML [2] ���k�C��
-		PRINTFORML [1] �C������
+	CASE L_学園
+		PRINTFORML [2] 生徒任命
+		PRINTFORML [1] 任命解除
 		PRINTFORML 
-		PRINTFORML [0] �߂�
-	CASE L_�x���Z��
-		PRINTFORML [2] �X���C��
-		PRINTFORML [1] �C������
+		PRINTFORML [0] 戻る
+	CASE L_支援住宅
+		PRINTFORML [2] 店員任命
+		PRINTFORML [1] 任命解除
 		PRINTFORML 
-		PRINTFORML [0] �߂�	
-	CASE L_���u�z�e��
-		PRINTFORML [2] �X���C��
-		PRINTFORML [1] �C������
+		PRINTFORML [0] 戻る	
+	CASE L_ラブホテル
+		PRINTFORML [2] 店員任命
+		PRINTFORML [1] 任命解除
 		PRINTFORML 
-		PRINTFORML [0] �߂�	
-	CASE L_�����J�W�m
-		PRINTFORML [2] �X���C��
-		PRINTFORML [1] �C������
+		PRINTFORML [0] 戻る	
+	CASE L_高級カジノ
+		PRINTFORML [2] 店員任命
+		PRINTFORML [1] 任命解除
 		PRINTFORML 
-		PRINTFORML [0] �߂�	
+		PRINTFORML [0] 戻る	
 	ENDSELECT
 ENDSELECT
 
 
 
 
-;�L�����z���֐�
-;�\�͕\������{�݂ɃL������z������p
+;キャラ配属関数
+;能力表示から施設にキャラを配属する用
 @SELECT_WOKER(L_C_ID)
-#DIM         L_C_ID                     ;�Ώۓo�^�ԍ�
-#DIM         L_FACI_ID                  ;�ΏۂɂȂ����{��ID
-#DIM         L_FACI_LIST = 1, 7, 50, 53 ;�w���A�x���Z��A���u�z�e���A�����J�W�m
-#DIM DYNAMIC L_CNT_WOKER, 4             ;�e�{�݂ɔz���ς݂̃L������
-#DIM         L_FACI_LEVEL               ;�t���O�Q�Ɨp�A�{�݃��x��
-#DIM CONST   L_CFLAG_START = 10000      ;�{�ݗpCFLAG�̊J�n�l
-#DIM CONST   L_CFLAG_END   = 10100      ;�{�ݗpCFLAG�̏I���l�i����ID���̂͊܂܂�Ȃ��j
-#DIM         L_C_ID_REMOVE              ;��C�Ώۓo�^�ԍ�
+#DIM         L_C_ID                     ;対象登録番号
+#DIM         L_FACI_ID                  ;対象になった施設ID
+#DIM         L_FACI_LIST = 1, 7, 50, 53 ;学園、支援住宅、ラブホテル、高級カジノ
+#DIM DYNAMIC L_CNT_WOKER, 4             ;各施設に配属済みのキャラ数
+#DIM         L_FACI_LEVEL               ;フラグ参照用、施設レベル
+#DIM CONST   L_CFLAG_START = 10000      ;施設用CFLAGの開始値
+#DIM CONST   L_CFLAG_END   = 10100      ;施設用CFLAGの終了値（このID自体は含まれない）
+#DIM         L_C_ID_REMOVE              ;解任対象登録番号
 IF L_C_ID == 0
-	PRINTFORMW ��u�v���C���[�v�A��k�͂悵�Ă���������
+	PRINTFORMW ≪「プレイヤー」、冗談はよしてください≫
 	RETURN
 ENDIF
 
 L_FACI_ID = FINDELEMENT(CFLAG:L_C_ID:0, 1, L_CFLAG_START, L_CFLAG_END)
 IF L_FACI_ID < 0
-	; L_FACI_ID���蔲���ł����܂킵�Ă܂����߂�Ȃ���
-	PRINTFORML %CALLNAME:L_C_ID%��z������{�݂�I�����Ă��������B
+	; L_FACI_IDを手抜きでつかいまわしてますごめんなさい
+	PRINTFORML %CALLNAME:L_C_ID%を配属する施設を選択してください。
 ELSE
-	PRINTFORML %CALLNAME:L_C_ID%�i%CFLAGNAME:L_FACI_ID%�j��z������{�݂�I�����Ă��������B
+	PRINTFORML %CALLNAME:L_C_ID%（%CFLAGNAME:L_FACI_ID%）を配属する施設を選択してください。
 ENDIF
 CALL SHOW_ALL_WORKERS(L_FACI_LIST, L_CNT_WOKER, , L_C_ID )
-PRINTFORML [ 0] �L�����Z��
+PRINTFORML [ 0] キャンセル
 DO
 	INPUT
 	L_FACI_ID = RESULT
@@ -290,32 +290,32 @@ DO
 	ELSEIF FINDELEMENT(L_FACI_LIST, L_FACI_ID) < 0
 		CONTINUE
 	ELSEIF CFLAG:L_C_ID:(L_CFLAG_START + L_FACI_ID)
-		PRINTFORMW %CALLNAME:L_C_ID%�͊���%CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%�ɔC������Ă��܂��B
+		PRINTFORMW %CALLNAME:L_C_ID%は既に%CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%に任命されています。
 		RESTART
 	ELSEIF L_FACI_LEVEL <= 0
-		PRINTFORMW ���̎{�݂͊������Ă��܂���B
+		PRINTFORMW その施設は完成していません。
 		RESTART
 	ENDIF
 	BREAK
 LOOP 1
 IF L_CNT_WOKER:(FINDELEMENT(L_FACI_LIST, L_FACI_ID)) >= 5
-	PRINTFORML %CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%�̐l�����������܂��B
-	PRINTFORML ��C����L������I�����Ă��������B
+	PRINTFORML %CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%の人数が多すぎます。
+	PRINTFORML 解任するキャラを選択してください。
 	FOR LOCAL, 1, CHARANUM
-		SIF TALENT:LOCAL:�s��
+		SIF TALENT:LOCAL:不在
 			CONTINUE
 		SIF CFLAG:LOCAL:(L_CFLAG_START + L_FACI_ID) != 1
 			CONTINUE
 		PRINTFORML [{LOCAL, 3}] - %CALLNAME:LOCAL%
 	NEXT
-	PRINTFORML [999] - �{�݂̍đI��
+	PRINTFORML [999] - 施設の再選択
 	DO
 		INPUT
 		L_C_ID_REMOVE = RESULT
 		SIF L_C_ID_REMOVE == 999
 			RESTART
 		IF !INRANGE(L_C_ID_REMOVE, 1, CHARANUM - 1)
-		ELSEIF TALENT:L_C_ID_REMOVE:�s��
+		ELSEIF TALENT:L_C_ID_REMOVE:不在
 		ELSEIF CFLAG:L_C_ID_REMOVE:(L_CFLAG_START + L_FACI_ID) != 1
 		ELSE
 			BREAK
@@ -328,32 +328,32 @@ CALL FACILITY_CHARA_SET(L_C_ID, L_FACI_ID)
 
 
 @SHOW_ALL_WORKERS(L_FACI_LIST, L_CNT_WOKER, OP = "", MARKER_CID = -1)
-#DIM  REF  L_FACI_LIST        ;�{��ID���X�g
-#DIM  REF  L_CNT_WOKER        ;�e�{�݂̓X���̐l���A�z��𒼐ڏ���������
-#DIM       L_LIST_ID          ;�Q�ƒ��̃��X�g�ʒu
-#DIM       L_MEMORY           ;�ėp�ϐ��̏��������h�~�[�u
-#DIM       L_FACI_LEVEL       ;�t���O�Q�Ɨp�A�{�݃��x��
-#DIMS      OP                 ;���s�I�v�V����
-#DIM       MARKER_CID         ;�����\������L����ID
+#DIM  REF  L_FACI_LIST        ;施設IDリスト
+#DIM  REF  L_CNT_WOKER        ;各施設の店員の人数、配列を直接書き換える
+#DIM       L_LIST_ID          ;参照中のリスト位置
+#DIM       L_MEMORY           ;汎用変数の書き換え防止措置
+#DIM       L_FACI_LEVEL       ;フラグ参照用、施設レベル
+#DIMS      OP                 ;実行オプション
+#DIM       MARKER_CID         ;強調表示するキャラID
 #DIM       L_color
-L_MEMORY = FLAG:�ėp�ϐ�
+L_MEMORY = FLAG:汎用変数
 VARSET L_CNT_WOKER
 
-IF STRCOUNT(OP, "�u�{�^�������v")
+IF STRCOUNT(OP, "「ボタン無し」")
 	FOR L_LIST_ID, 0, VARSIZE("L_FACI_LIST")
 		L_FACI_LEVEL = FLAG:(4000 + L_FACI_LIST:L_LIST_ID)
 		IF L_FACI_LEVEL <= 0
 			L_color = GETCOLOR()
-			SIF FLAG:STATUS�������[�h
-				SETCOLOR COLOR("����")
-			PRINTFORML �H�H�H(������)
-			SIF FLAG:STATUS�������[�h
+			SIF FLAG:STATUS伏字モード
+				SETCOLOR COLOR("伏字")
+			PRINTFORML ？？？(未建設)
+			SIF FLAG:STATUS伏字モード
 				SETCOLOR L_color
 		ELSE
-			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "�{�ݖ�")
-			PRINTFORM �@�@
-			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "�Q����", MARKER_CID )
-			L_CNT_WOKER:L_LIST_ID = FLAG:�ėp�ϐ�
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "施設名")
+			PRINTFORM 　　
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "参加者", MARKER_CID )
+			L_CNT_WOKER:L_LIST_ID = FLAG:汎用変数
 		ENDIF
 	NEXT
 ELSE
@@ -361,20 +361,20 @@ ELSE
 		L_FACI_LEVEL = FLAG:(4000 + L_FACI_LIST:L_LIST_ID)
 		IF L_FACI_LEVEL <= 0
 			L_color = GETCOLOR()
-			SIF FLAG:STATUS�������[�h
-				SETCOLOR COLOR("����")
-			PRINTFORML �H�H�H(������)
-			SIF FLAG:STATUS�������[�h
+			SIF FLAG:STATUS伏字モード
+				SETCOLOR COLOR("伏字")
+			PRINTFORML ？？？(未建設)
+			SIF FLAG:STATUS伏字モード
 				SETCOLOR L_color
 		ELSE
 			PRINTFORM [{L_FACI_LIST:L_LIST_ID, 2}]
-			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "�{�ݖ�")
-			PRINTFORM �@�@
-			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "�Q����", MARKER_CID)
-			L_CNT_WOKER:L_LIST_ID = FLAG:�ėp�ϐ�
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "施設名")
+			PRINTFORM 　　
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "参加者", MARKER_CID)
+			L_CNT_WOKER:L_LIST_ID = FLAG:汎用変数
 		ENDIF
 	NEXT
 ENDIF
 
-FLAG:�ėp�ϐ� = L_MEMORY
-;�L��ϐ��͂ǂ��Ńo�O�邩�킩��Ȃ��̂ŔO�̈�
+FLAG:汎用変数 = L_MEMORY
+;広域変数はどこでバグるかわからないので念の為

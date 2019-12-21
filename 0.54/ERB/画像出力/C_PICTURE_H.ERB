@@ -1,4 +1,4 @@
-@C_PICTURE_H(ARG:0,ARG:1);ˆ§ˆø’†
+ï»¿@C_PICTURE_H(ARG:0,ARG:1);é€¢å¼•ä¸­
 #DIM L_I
 #DIM L_TMP
 #DIM P_S
@@ -85,23 +85,23 @@ LSTR_17 =
 
 L_Y2 = 0
 LSTR_16 = 
-IF CFlag:L_I:Zl_‘ÌŠi == 1
+IF CFlag:L_I:ä½äºº_ä½“æ ¼ == 1
 	LSTR_16 = 2
 	L_Y2 = 98
 ENDIF
 
 
-;IF TFLAG:ƒTƒuƒRƒ}ƒ“ƒhŽÀs’†ƒtƒ‰ƒO == 1
-;	L_TMP=TEQUIP:L_T:ƒ|ƒCƒ“ƒg«Œð
+;IF TFLAG:ã‚µãƒ–ã‚³ãƒžãƒ³ãƒ‰å®Ÿè¡Œä¸­ãƒ•ãƒ©ã‚° == 1
+;	L_TMP=TEQUIP:L_T:ãƒã‚¤ãƒ³ãƒˆæ€§äº¤
 ;	IF L_TMP
-;		;- Žæ“¾:ƒRƒ}ƒ“ƒh–¼Ì
+;		;- å–å¾—:ã‚³ãƒžãƒ³ãƒ‰åç§°
 ;		CALLFORM COM_FUNC_GET_NAME_X{L_TMP}
 ;		L_STR = %RESULTS%
 ;	ENDIF
 ;ENDIF
 
-IF Talent:L_I:”DP >= 6
-	L_N = (TALENT:L_I:”DP/6)-1
+IF Talent:L_I:å¦Šå¨  >= 6
+	L_N = (TALENT:L_I:å¦Šå¨ /6)-1
 	SIF L_N >= 2
 		L_N = 2
 ELSE
@@ -114,40 +114,40 @@ ENDIF
 
 
 ;-------------------------------------------------
-;·•ª”»’f
+;å·®åˆ†åˆ¤æ–­
 ;-------------------------------------------------
 
 
-;–Ú
-C_eye = Cflag:L_I:“µF
-;‘Ì
-C_body = CFLAG:L_I:”§F
-;‹¹
+;ç›®
+C_eye = Cflag:L_I:çž³è‰²
+;ä½“
+C_body = CFLAG:L_I:è‚Œè‰²
+;èƒ¸
 C_bust = C_PICTURE_BUST(L_I)
 
-;•ž
-C_suit = CFLAG:L_I:•ž‘•
-;”¯F
-C_hairC = CFLAG:L_I:”¯F
-;”¯Œ^
-C_hair = CFLAG:L_I:”¯Œ^
-;Œã”¯Œ^
-C_U_hair = CFLAG:L_I:Œã”¯Œ^
-;ŒC‰º
-C_socks = CFLAG:L_I:ŒC‰º
-;ŒC
-C_boots = CFLAG:L_I:ŒC
-;‰º’…ã
-C_bra = CFLAG:L_I:‰º’…ã
-;‰º’…‰º
-C_panties = CFLAG:L_I:‰º’…‰º
+;æœ
+C_suit = CFLAG:L_I:æœè£…
+;é«ªè‰²
+C_hairC = CFLAG:L_I:é«ªè‰²
+;é«ªåž‹
+C_hair = CFLAG:L_I:é«ªåž‹
+;å¾Œé«ªåž‹
+C_U_hair = CFLAG:L_I:å¾Œé«ªåž‹
+;é´ä¸‹
+C_socks = CFLAG:L_I:é´ä¸‹
+;é´
+C_boots = CFLAG:L_I:é´
+;ä¸‹ç€ä¸Š
+C_bra = CFLAG:L_I:ä¸‹ç€ä¸Š
+;ä¸‹ç€ä¸‹
+C_panties = CFLAG:L_I:ä¸‹ç€ä¸‹
 
-;ˆú–ä
-C_in = CFLAG:L_I:ˆú–ä
+;æ·«ç´‹
+C_in = CFLAG:L_I:æ·«ç´‹
 
 C_NINSIN = C_PICTURE_NINSIN(L_I)
 
-FLAG:”Ä—p•Ï”5 += Source:Žq‹{¸‰t
+FLAG:æ±Žç”¨å¤‰æ•°5 += Source:å­å®®ç²¾æ¶²
 H_TNS = C_PICTURE_SEMEN(L_I)
 
 
@@ -156,49 +156,49 @@ H_TNS = C_PICTURE_SEMEN(L_I)
 P_S2 = 0
 P_S = -600
 ;-------------------------------------------------
-;•`‰æˆ—
+;æç”»å‡¦ç†
 ;-------------------------------------------------
 
-IF TALENT:L_I:”DP != 0 || TALENT:L_I:Žó¸ != 0
+IF TALENT:L_I:å¦Šå¨  != 0 || TALENT:L_I:å—ç²¾ != 0
 	LSTR_0 = <nonbutton pos='{P_S2}'><img src='NINSIN_0_{C_NINSIN}' height = '400'   ypos = '{P_S-400}'></nonbutton>
 ELSE
 	LSTR_0 = <nonbutton pos='{P_S2}'><img src='H_TNS_0_{H_TNS}' height = '400'   ypos = '{P_S-400}'></nonbutton>
 ENDIF
 
-;Ží‘°“Á’¥2
-	LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:L_I:Zl_Ží‘°}_0_{CFLAG:L_I:Zl_Ží‘°“Á’¥2}' height = '850'  width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
-;‘Ì
+;ç¨®æ—ç‰¹å¾´2
+	LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:L_I:ä½äºº_ç¨®æ—}_0_{CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´2}' height = '850'  width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
+;ä½“
 	LSTR_2 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%body_{C_body}' height = '850' width = '-465'  ypos = '{P_S}'></nonbutton>
-;Ží‘°“Á’¥3
-	LSTR_3 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%C_RACE_3_{CFLAG:L_I:Zl_Ží‘°}_0_{CFLAG:L_I:Zl_Ží‘°“Á’¥3}' height = '850'  width = '-465' ypos = '{P_S}'></nonbutton>
-;–Ú
-IF Palam:L_I:—~î >= 30000
+;ç¨®æ—ç‰¹å¾´3
+	LSTR_3 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%C_RACE_3_{CFLAG:L_I:ä½äºº_ç¨®æ—}_0_{CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´3}' height = '850'  width = '-465' ypos = '{P_S}'></nonbutton>
+;ç›®
+IF Palam:L_I:æ¬²æƒ… >= 30000
 	LSTR_4 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%S_eye_1' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
-ELSEIF Palam:L_I:—~î >= 15000
+ELSEIF Palam:L_I:æ¬²æƒ… >= 15000
 	LSTR_4 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%H_eye_0_{C_eye}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ELSE
 	LSTR_4 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%eye_{C_eye}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ENDIF
-;‹¹
+;èƒ¸
 	LSTR_5 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%bust_{C_body}_{C_bust}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
-;”DP
-IF  Talent:L_I:”DP >= 6
-	LSTR_N2 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%C_MB_{CFLAG:L_I:”§F}_{L_N}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+;å¦Šå¨ 
+IF  Talent:L_I:å¦Šå¨  >= 6
+	LSTR_N2 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%C_MB_{CFLAG:L_I:è‚Œè‰²}_{L_N}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ELSE
 	LSTR_N2 = <nonbutton pos='{P_S2}'><img src='C_no' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ENDIF
 
-;‘O”¯
+;å‰é«ª
 	LSTR_11 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '850' width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
-;Œã”¯
+;å¾Œé«ª
 	LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '850' width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
-;Ží‘°“Á’¥1
-	LSTR_12 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:L_I:Zl_Ží‘°}_0_{CFLAG:L_I:Zl_Ží‘°“Á’¥1}' height = '850' width = '-465'  ypos = '{P_S+L_Y2}'></nonbutton>
-;ˆì‚ê¸‰t
+;ç¨®æ—ç‰¹å¾´1
+	LSTR_12 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:L_I:ä½äºº_ç¨®æ—}_0_{CFLAG:L_I:ä½äºº_ç¨®æ—ç‰¹å¾´1}' height = '850' width = '-465'  ypos = '{P_S+L_Y2}'></nonbutton>
+;æº¢ã‚Œç²¾æ¶²
 	LSTR_15 = <nonbutton pos='{P_S2}'><img src='H_A_S_0_{H_TNS}' height = '850' width = '-465'  ypos = '{P_S}'></nonbutton>
 
-;ˆú–ä
-IF CFLAG:L_I:ˆú–ä == 0 || CFLAG:L_I:ˆú–ä == -1 || Talent:L_I:”DP >= 6
+;æ·«ç´‹
+IF CFLAG:L_I:æ·«ç´‹ == 0 || CFLAG:L_I:æ·«ç´‹ == -1 || Talent:L_I:å¦Šå¨  >= 6
 	LSTR_17 = <nonbutton pos='{P_S2}'><img src='C_no' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ELSE
 	LSTR_17 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%in_{C_in}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>

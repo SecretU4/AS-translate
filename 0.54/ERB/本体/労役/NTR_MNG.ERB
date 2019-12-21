@@ -1,28 +1,28 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:NTR_MNG.ERB
-;	Facility	:�m�s�q�i�J���j�B
+;	Facility	:ＮＴＲ（労役）。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
-;													�i��i��eraMegaten���q�؁j
+;	001		20XX/XX/XX		----					新規作成
+;													（情景はeraMegatenより拝借）
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- xxxx
 ;
-;	�E NTR_MNG_CHK						NTR:�J��(�����`�F�b�N)
-;	�E NTR_MNG							NTR:�J��
-;	�E NTR_DISAPPEARANCE				NTR:���H
+;	・ NTR_MNG_CHK						NTR:労役(発生チェック)
+;	・ NTR_MNG							NTR:労役
+;	・ NTR_DISAPPEARANCE				NTR:失踪
 ;
 ;===============================================================================
 
@@ -33,21 +33,21 @@
 ;=================================================
 ;   sub NTR_MNG_CHK
 ;=================================================
-;   NTR:�J��(�����`�F�b�N)
+;   NTR:労役(発生チェック)
 ;-------------------------------------------------
 ; Output:
-;  RETURNF				�^�U�l
+;  RETURNF				真偽値
 ;-------------------------------------------------
 @NTR_MNG_CHK
 #FUNCTION
 #DIM L_TMP
 #DIM L_PER
 L_PER = 0
-;���̓[���Ȃ甭��
-SIF !FLAG:�J�𕐗�
+;武力ゼロなら発生
+SIF !FLAG:労役武力
 	RETURNF 1
-L_TMP = FLAG:�J��l�C / FLAG:�J�𕐗�
-;100%�����Ȃ甭������
+L_TMP = FLAG:労役人気 / FLAG:労役武力
+;100%未満なら発生無し
 SIF !L_TMP
 	RETURNF 0
 RETURNF 1
@@ -56,10 +56,10 @@ RETURNF 1
 ;=================================================
 ;   sub NTR_MNG
 ;=================================================
-;   NTR:�J��
+;   NTR:労役
 ;-------------------------------------------------
 ; Output:
-;  RETURN				����(1:���H)
+;  RETURN				結果(1:失踪)
 ;-------------------------------------------------
 @NTR_MNG
 #DIM L_LV
@@ -67,250 +67,250 @@ RETURNF 1
 #DIM L_ADD
 #DIM L_TMP
 #DIM L_TYPE
-#DIM L_�댯��
+#DIM L_危険日
 #DIMS L_NAME
 
-;�j�͎b��ŏ��O
+;男は暫定で除外
 SIF !VAR_SEX()
 	RETURN
-;MASTER�͏��O
+;MASTERは除外
 SIF TARGET == MASTER
 	RETURN
 
-IF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_���)
-	IF !CFLAG:�m�s�q�D���x
-		L_NAME = �q
+IF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_首輪)
+	IF !CFLAG:ＮＴＲ好感度
+		L_NAME = 客
 	ELSE
-		L_NAME = %CSTR:�m�s�q�L������%
+		L_NAME = %CSTR:ＮＴＲキャラ名%
 	ENDIF
-	PRINTFORMW %CALLNAME%��%L_NAME%�����������Ă���c�c
-	PRINTFORMW %CALLNAME%�͗U����f�����c�c
+	PRINTFORMW %CALLNAME%に%L_NAME%が声をかけている……
+	PRINTFORMW %CALLNAME%は誘いを断った……
 	RETURN
 ENDIF
 
 ;-----------------------------
-;- �v�Z:�D���x
+;- 計算:好感度
 ;-----------------------------
 L_ADD = 50
-SIF TALENT:�呀�ϔO
+SIF TALENT:貞操観念
 	L_ADD -= 25
-SIF TALENT:�呀���ڒ�
+SIF TALENT:貞操無頓着
 	L_ADD += 25
 
-;- ���񎞂ɑ��������
-IF !CFLAG:�m�s�q�D���x
-	SELECTCASE CFLAG:�J���E�^�C�v
-		CASE [[�J���E:�ʏ�E]], [[�J���E:�퓬�E]]
-			L_TMP = [[�m�s�q����:�Q����̋q]]
-			L_NAME = �Q����̋q
-		CASE [[�J���E:�̕P�E]]
-			L_TMP = [[�m�s�q����:�A�C�h���I�[�i�[]]
-			L_NAME = �A�C�h���I�[�i�[
+;- 初回時に相手を決定
+IF !CFLAG:ＮＴＲ好感度
+	SELECTCASE CFLAG:労役役職タイプ
+		CASE [[労役役職:通常職]], [[労役役職:戦闘職]]
+			L_TMP = [[ＮＴＲ相手:寝取り趣味の客]]
+			L_NAME = 寝取り趣味の客
+		CASE [[労役役職:歌姫職]]
+			L_TMP = [[ＮＴＲ相手:アイドルオーナー]]
+			L_NAME = アイドルオーナー
 		CASEELSE
 			RETURN
 	ENDSELECT
 
-	CFLAG:�m�s�q����^�C�v = L_TMP
-	CSTR:�m�s�q�L������ = %L_NAME%
+	CFLAG:ＮＴＲ相手タイプ = L_TMP
+	CSTR:ＮＴＲキャラ名 = %L_NAME%
 ENDIF
 
-CFLAG:�m�s�q�D���x += L_ADD
-L_NAME = %CSTR:�m�s�q�L������%
+CFLAG:ＮＴＲ好感度 += L_ADD
+L_NAME = %CSTR:ＮＴＲキャラ名%
 
 ;-----------------------------
-;- �v�Z:LV
+;- 計算:LV
 ;-----------------------------
 
 L_LV = NTR_LV(TARGET)
 
-;- ���H
+;- 失踪
 IF L_LV == -1
-	;���H�h�~����
-	IF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_���M��)
+	;失踪防止あり
+	IF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_発信器)
 		L_LV = 3
-		CFLAG:�m�s�q�D���x = 950
+		CFLAG:ＮＴＲ好感度 = 950
 	ELSE
-		;- NTR:���H
+		;- NTR:失踪
 		CALL NTR_DISAPPEARANCE
 		RETURN 1
 	ENDIF
 ENDIF
 
-;- NTR:�Z�b�g(�m�s�q�x)
-CALL NTR_SET_�m�s�q�x(TARGET, L_LV)
+;- NTR:セット(ＮＴＲ度)
+CALL NTR_SET_ＮＴＲ度(TARGET, L_LV)
 
 
-;- �ߋ��̍ő�l���ێ�
-SIF CFLAG:�m�s�q�ח��x < L_LV
-	CFLAG:�m�s�q�ח��x = L_LV
+;- 過去の最大値を維持
+SIF CFLAG:ＮＴＲ陥落度 < L_LV
+	CFLAG:ＮＴＲ陥落度 = L_LV
 
 ;-----------------------------
-;- ������
+;- 導入部
 ;-----------------------------
-PRINTFORMW %CALLNAME%��%L_NAME%�����������Ă���c�c
+PRINTFORMW %CALLNAME%に%L_NAME%が声をかけている……
 
 L_TYPE=0
-L_�댯��=C_�댯��(TARGET)
-;�D�P���͊댯������
-SIF TALENT:�D�P
-	L_�댯��=0
+L_危険日=C_危険日(TARGET)
+;妊娠中は危険日解除
+SIF TALENT:妊娠
+	L_危険日=0
 
-SELECTCASE CFLAG:�m�s�q�ח��x
-	;���
+SELECTCASE CFLAG:ＮＴＲ陥落度
+	;回避
 	CASE 0
-		L_TYPE = [[�m�s�q����:���]]
+		L_TYPE = [[ＮＴＲ結果:回避]]
 		PRINTDATA
-			DATAFORM %CALLNAME%�͏Ί�ł��킵�Ă���
-			DATAFORM %CALLNAME%�͎����I�ɑΏ�����
-			DATAFORM %CALLNAME%�͂��܂����������
+			DATAFORM %CALLNAME%は笑顔でかわしている
+			DATAFORM %CALLNAME%は事務的に対処した
+			DATAFORM %CALLNAME%はうまくあしらった
 		ENDDATA
 		PRINTL
 		WAIT
-	;�q��
+	;客室
 	CASE 1
-		L_TYPE = [[�m�s�q����:�q��]]
-		PRINTFORMW %CALLNAME%�͗U����f��؂ꂸ�A%L_NAME%�̋q���֘A��čs���ꂽ�c�c
-		PRINTFORM %CALLNAME%�͓z��ɂȂ�l�ɗU���Ȃ���A
+		L_TYPE = [[ＮＴＲ結果:客室]]
+		PRINTFORMW %CALLNAME%は誘いを断り切れず、%L_NAME%の客室へ連れて行かれた……
+		PRINTFORM %CALLNAME%は奴隷になる様に誘われながら、
 		PRINTDATA
-			DATAFORM �������𕏂ł��Ă���
-			DATAFORM �g�̂�����񂹂��ċ��𝆂܂�Ă���
-			DATAFORM �p���e�B�z���ɔ��Ɏw�𔇂킳��Ă���
+			DATAFORM 太ももを撫でられている
+			DATAFORM 身体を抱き寄せられて胸を揉まれている
+			DATAFORM パンティ越しに秘裂に指を這わされている
 		ENDDATA
-		PRINTL �c�c
+		PRINTL ……
 		WAIT
-	;�ꑮ
+	;隷属
 	CASE 2
-		L_TYPE = [[�m�s�q����:�ꑮ]]
-;		PRINTFORMW %CALLNAME%�͌������ʂ�A���%L_NAME%�̋q����K�ꂽ�c�c
-		PRINTFORMW %CALLNAME%�͌������ɋt�炦���A���%L_NAME%�̋q����K�ꂽ�c�c
-		;�댯��
-		IF L_�댯��
+		L_TYPE = [[ＮＴＲ結果:隷属]]
+;		PRINTFORMW %CALLNAME%は言いつけ通り、夜に%L_NAME%の客室を訪れた……
+		PRINTFORMW %CALLNAME%は言いつけに逆らえず、夜に%L_NAME%の客室を訪れた……
+		;危険日
+		IF L_危険日
 			SELECTCASE RAND:2
 				CASE 1
-					PRINTFORML �댯�������獡���̓_�����ƐS�Ɍ��߂Ă����͂���%CALLNAME%���������A
-					PRINTFORML %L_NAME%�ɕ������߂�ꉟ���|�����ƁA���̂܂܃y�j�X�̑}���������Ă��܂����c�c
-					PRINTFORML ���x���q�{�Ő��t���󂯎~�߂Ȃ���A%CALLNAME%�͎��̖{�\�̂܂܎q�{������������c�c
+					PRINTFORML 危険日だから今日はダメだと心に決めていたはずの%CALLNAME%だったが、
+					PRINTFORML %L_NAME%に抱き締められ押し倒されると、そのままペニスの挿入を許してしまった……
+					PRINTFORML 何度も子宮で精液を受け止めながら、%CALLNAME%は雌の本能のまま子宮を捧げ続けた……
 				CASEELSE
-					PRINTFORML %L_NAME%��%CALLNAME%���댯�����ƒm��ƁA���i����������%CALLNAME%�����߂Ă������c
+					PRINTFORML %L_NAME%は%CALLNAME%が危険日だと知ると、普段よりも激しく%CALLNAME%を求めていった…
 					PRINTFORML 
-					PRINTFORML ���x����ʂɒ����ꂽ���t�������̂����̂܂܂ɂ��āA���E���}���Ă�������x�b�h�ɉ������%CALLNAME%��
-					PRINTFORML %L_NAME%�͍Ăуy�j�X��˂����āA�̂�h���肾�����c�c
-					PRINTFORML %CALLNAME%�̎q�{��%L_NAME%�̐��t�Ŗ������A���������t��������������܂�
-					PRINTFORML %L_NAME%�̗Y�̖{�\���s�ׂ��I��点�悤�Ƃ͂��Ȃ������c�c
+					PRINTFORML 何度も大量に注がれた精液が垂れるのをそのままにして、限界を迎えてぐったりベッドに横たわる%CALLNAME%に
+					PRINTFORML %L_NAME%は再びペニスを突き立て、体を揺すりだした……
+					PRINTFORML %CALLNAME%の子宮を%L_NAME%の精液で満たし、しっかり種付けを完了させるまで
+					PRINTFORML %L_NAME%の雄の本能が行為を終わらせようとはしなかった……
 			ENDSELECT
 			WAIT
-		;�ʏ��
+		;通常日
 		ELSE
 			SELECTCASE RAND:3
 				CASE 3
-					PRINTFORML %L_NAME%�̏�ō���U��l�Ɍ���ꂽ%CALLNAME%�́A
-					PRINTFORML %CALLNAME:MASTER%�̖��߂ł͂Ȃ��Ɨ������Ă���̂ɒj�Ɍׂ�A��t���ׂ̈̑}�����󂯓��ꂽ�c�c
-					PRINTFORML %L_NAME%�̏�ō���U��Ȃ���A%L_NAME%�͐g���S����������Ă���c�c
-					PRINTFORML �����̒��ɂ̓x�b�g���a�މ���%CALLNAME%�̛g���������������c�c
+					PRINTFORML %L_NAME%の上で腰を振る様に言われた%CALLNAME%は、
+					PRINTFORML %CALLNAME:MASTER%の命令ではないと理解しているのに男に跨り、種付けの為の挿入を受け入れた……
+					PRINTFORML %L_NAME%の上で腰を振りながら、%L_NAME%は身も心も調教されている……
+					PRINTFORML 部屋の中にはベットの軋む音と%CALLNAME%の嬌声が響き続けた……
 				CASE 2
-					PRINTFORML �x�b�h�ɐ��܂ꂽ�܂܂̎p�œ���ƁA%CALLNAME%��%L_NAME%�ɋ���������A�O���Â�ꂽ�c�c
-					PRINTFORML ��t�������悤�Ƃ���Y�̈����ɂ�������g�̂��������ꂽ%CALLNAME%�́A����ʂŐg�̂��J���Y�̗~�]���󂯓��ꂽ�c�c
-					PRINTFORML ���x���q�{�Ő��t���󂯎~�߂Ȃ���A%CALLNAME%�͎��̖{�\�̂܂܎q�{������������c�c
+					PRINTFORML ベッドに生まれたままの姿で入ると、%CALLNAME%は%L_NAME%に強く抱かれ、唇を貪られた……
+					PRINTFORML 種付けをしようとする雄の愛撫にすっかり身体を準備された%CALLNAME%は、正常位で身体を開き雄の欲望を受け入れた……
+					PRINTFORML 何度も子宮で精液を受け止めながら、%CALLNAME%は雌の本能のまま子宮を捧げ続けた……
 				CASE 1
-					PRINTFORML %L_NAME%�ɕ���E���悤�Ɍ���ꂽ%CALLNAME%�́A
-					PRINTFORML %CALLNAME:MASTER%�̖��߂ł͂Ȃ��Ɨ������Ă���̂ɕ��𔧏R���A�f�����N���Ă��܂����c�c
-					PRINTFORML ���̂܂�%CALLNAME%�̑S�g�����܂Ȃ����������ƁA%CALLNAME%�͎�t���ׂ̈̑}�����󂯓��ꂽ�c�c
-					PRINTFORML �����̒��ɂ̓x�b�g���a�މ���%CALLNAME%�̛g���������������c�c
+					PRINTFORML %L_NAME%に服を脱ぐように言われた%CALLNAME%は、
+					PRINTFORML %CALLNAME:MASTER%の命令ではないと理解しているのに服を肌蹴け、素肌を晒してしまった……
+					PRINTFORML そのまま%CALLNAME%の全身をくまなく愛撫されると、%CALLNAME%は種付けの為の挿入を受け入れた……
+					PRINTFORML 部屋の中にはベットの軋む音と%CALLNAME%の嬌声が響き続けた……
 				CASEELSE
-					PRINTFORML %CALLNAME%�͕ǂɎ�������i�D��%L_NAME%�Ɍ�납��Ƃ���Ă���c�c
-					PRINTFORML %CALLNAME%�͐K����͂܂�Ȃ���A�������Ɗm����%L_NAME%�̎q�����t�����ꂽ�c�c
+					PRINTFORML %CALLNAME%は壁に手をついた格好で%L_NAME%に後ろから犯されている……
+					PRINTFORML %CALLNAME%は尻肉を掴まれながら、ゆっくりと確実に%L_NAME%の子種を種付けされた……
 			ENDSELECT
 			WAIT
 		ENDIF
-	;�ח�
+	;陥落
 	CASE 3
-		L_TYPE = [[�m�s�q����:�ח�]]
-		PRINTFORMW %CALLNAME%�͊��Ԃ�߂Ȃ���A���%L_NAME%�̋q����K�ꂽ�c�c
-		;�댯��
-		IF L_�댯��
+		L_TYPE = [[ＮＴＲ結果:陥落]]
+		PRINTFORMW %CALLNAME%は顔を赤らめながら、夜に%L_NAME%の客室を訪れた……
+		;危険日
+		IF L_危険日
 			SELECTCASE RAND:6
 				CASE 5
-					PRINTFORML �����̒��Ƀx�b�g���a�މ��������c�c
-					PRINTFORML �x�b�g�ŋ����ɐQ���ׂ�%CALLNAME%��%L_NAME%�ɐg��C���A�����񂹂���y�ɚb���ł���c�c
-					PRINTFORML %L_NAME%���ː����������A��%CALLNAME%�ɓ`�����%CALLNAME%�͏Ί�Łw���ɏo���āx�ƚ������c�c
+					PRINTFORML 部屋の中にベットの軋む音が響く……
+					PRINTFORML ベットで仰向けに寝そべる%CALLNAME%は%L_NAME%に身を任せ、押し寄せる快楽に喘いでいる……
+					PRINTFORML %L_NAME%が射精しそうだ、と%CALLNAME%に伝えると%CALLNAME%は笑顔で『中に出して』と囁いた……
 					PRINTFORML 
-					PRINTFORML ���̏u�ԁA�S���Ńy�j�X�����ˁA%L_NAME%�̐��t���r�����̎q�{���𖄂ߐs�����Ă����c�c
-					PRINTFORML ��l�͎ː����I���������q�������܂܂ŃL�X�����킵�Ȃ���A�v�����m���ߍ����Ă���c�c
+					PRINTFORML その瞬間、膣内でペニスが跳ね、%L_NAME%の精液が排卵日の子宮内を埋め尽くしていく……
+					PRINTFORML 二人は射精が終わった後も繋がったままでキスを交わしながら、思いを確かめ合っている……
 				CASE 4
-					PRINTFORML %CALLNAME%�͕����ɒ����Ȃ�%L_NAME%�ɕ����t���A�����Ŋ댯���ł��鎖���������c�c
-					PRINTFORML %CALLNAME%�����߂Ă�����̂��@����%L_NAME%�́A���܂炸%CALLNAME%�̉����Ɏ���|�����c�c
+					PRINTFORML %CALLNAME%は部屋に着くなり%L_NAME%に抱き付き、耳元で危険日である事を告げた……
+					PRINTFORML %CALLNAME%が求めているものを察した%L_NAME%は、たまらず%CALLNAME%の下着に手を掛けた……
 					PRINTFORML 
-					PRINTFORML ���Ԃ�Y��v�����Ă����q���ׂ̈̃Z�b�N�X���I����%CALLNAME%�́A
-					PRINTFORML �������܂ꂽ�q��ɖ������A�D����%L_NAME%�ɔ��΂񂾁c�c
+					PRINTFORML 時間を忘れ没頭していた子作りの為のセックスを終えた%CALLNAME%は、
+					PRINTFORML 注ぎ込まれた子種に満足し、優しく%L_NAME%に微笑んだ……
 				CASE 3
-					PRINTFORML ������%L_NAME%���󂯓���Ă���%CALLNAME%�́A���𗍂܂����񂾓���%L_NAME%�����߂Ă���c�c
-					PRINTFORML ���̐g�̂𖧒��������[���}�����˂���%CALLNAME%�̐g�̂́A�q�{�܂œ͂��ː���҂��]��ł���c�c
-					PRINTFORML �����āA�M���ː�����ԉ��Ŋ�����ƁA%CALLNAME%�͋�����Ȃ����%L_NAME%�ɂ����݂��A
-					PRINTFORML �Ȃ����y�j�X�𗣂��܂��Ɛg�̂𗍂܂��Ă����c�c
+					PRINTFORML 仰向けで%L_NAME%を受け入れている%CALLNAME%は、足を絡ませ潤んだ瞳で%L_NAME%を見つめている……
+					PRINTFORML 裸の身体を密着させより深い挿入をねだる%CALLNAME%の身体は、子宮まで届く射精を待ち望んでいる……
+					PRINTFORML そして、熱い射精を一番奥で感じると、%CALLNAME%は仰け反りながらも%L_NAME%にしがみつき、
+					PRINTFORML なおもペニスを離すまいと身体を絡ませていく……
 					PRINTFORML 
-					PRINTFORML ���������x����������ƃy�j�X���������%CALLNAME%�́A
-					PRINTFORML �S��������鐸�t��%L_NAME%�Ɍ����Ȃ��獡�����댯�����ƒm�点�A�ɂ�������΂񂾁c�c
+					PRINTFORML 激しく何度も交わりやっとペニスを解放した%CALLNAME%は、
+					PRINTFORML 膣口から溢れる精液を%L_NAME%に見せながら今日が危険日だと知らせ、にっこり微笑んだ……
 				CASE 2
-					PRINTFORML �S���ɓ˂����Ă�����%CALLNAME%�̔����ɁA���i�Ƃ͈Ⴄ�M�C�����������%L_NAME%�́A
-					PRINTFORML %CALLNAME%���댯���ł��鎖�����A�Ζʍ��ʂ�%CALLNAME%�̍�����������ƕ����񂹍ŉ��ւ̎h���ɏW�����n�߂��c�c
-					PRINTFORML �����������g������%L_NAME%���{�C�Ŏ�����s�܂������Ȃ̂��ƒm��ƁA
-					PRINTFORML %CALLNAME%�̊��҂Ƌ����͍X�ɍ��܂��Ă����c�c
-					PRINTFORML %CALLNAME%�̓S���S���Ɖ���M��ꑱ���ĉ��x���C������Ă������A
-					PRINTFORML �X�Ȃ鋭��ȐⒸ�Ƌ����S����C�Ƀy�j�X����ߕt���A�Җ]���S���ː����K�ꂽ�c�c�I
-					PRINTFORML �����������Ə��Ƃ��Ă̊�тɐk���A%CALLNAME%�͗܂𗬂��Ȃ����S���ɍL����%L_NAME%�̐��t�𖡂�����c�c
+					PRINTFORML 膣奥に突き立てた時の%CALLNAME%の反応に、普段とは違う熱気を感じ取った%L_NAME%は、
+					PRINTFORML %CALLNAME%が危険日である事を悟り、対面座位で%CALLNAME%の腰をしっかりと抱き寄せ最奥への刺激に集中し始めた……
+					PRINTFORML 密着した腰使いから%L_NAME%が本気で自分を孕ませるつもりなのだと知ると、
+					PRINTFORML %CALLNAME%の期待と興奮は更に高まっていく……
+					PRINTFORML %CALLNAME%はゴリゴリと奥を弄られ続けて何度もイかされていたが、
+					PRINTFORML 更なる強烈な絶頂と共に膣が一気にペニスを締め付け、待望の膣内射精が訪れた……！
+					PRINTFORML 激しい快感と女としての喜びに震え、%CALLNAME%は涙を流しながら膣内に広がる%L_NAME%の精液を味わった……
 				CASE 1
-					PRINTFORML �댯�������獡���̓_�����ƐS�Ɍ��߂Ă����͂���%CALLNAME%���������A
-					PRINTFORML %L_NAME%�ɕ������߂�ꂻ�̑̉���g�̂Ŋ�����ƁA���ӂ����{�\���ł��������c�c
-					PRINTFORML %L_NAME%�̐��q���q�{�Ɍ}�������A%L_NAME%�ɛs�܂���ꂽ���Ɗ肤�C�����ɁA
-					PRINTFORML %CALLNAME%�͋t�炤���͏o���Ȃ������c�c
+					PRINTFORML 危険日だから今日はダメだと心に決めていたはずの%CALLNAME%だったが、
+					PRINTFORML %L_NAME%に抱き締められその体温を身体で感じると、決意よりも本能が打ち勝った……
+					PRINTFORML %L_NAME%の精子を子宮に迎えたい、%L_NAME%に孕ませられたいと願う気持ちに、
+					PRINTFORML %CALLNAME%は逆らう事は出来なかった……
 				CASEELSE
-					PRINTFORML %L_NAME%��%CALLNAME%���댯�����ƒm��ƁA���i����������%CALLNAME%�����߂Ă������c
+					PRINTFORML %L_NAME%は%CALLNAME%が危険日だと知ると、普段よりも激しく%CALLNAME%を求めていった…
 					PRINTFORML 
-					PRINTFORML ���x����ʂɒ����ꂽ���t�������̂����̂܂܂ɂ��āA���E���}���Ă�������x�b�h�ɉ������%CALLNAME%��
-					PRINTFORML %L_NAME%�͍Ăуy�j�X��˂����āA�̂�h���肾�����c�c
-					PRINTFORML %CALLNAME%�̎q�{��%L_NAME%�̐��t�Ŗ������A���������t��������������܂�
-					PRINTFORML %L_NAME%�̗Y�̖{�\���s�ׂ��I��点�悤�Ƃ͂��Ȃ������c�c
+					PRINTFORML 何度も大量に注がれた精液が垂れるのをそのままにして、限界を迎えてぐったりベッドに横たわる%CALLNAME%に
+					PRINTFORML %L_NAME%は再びペニスを突き立て、体を揺すりだした……
+					PRINTFORML %CALLNAME%の子宮を%L_NAME%の精液で満たし、しっかり種付けを完了させるまで
+					PRINTFORML %L_NAME%の雄の本能が行為を終わらせようとはしなかった……
 			ENDSELECT
 			WAIT
-		;�ʏ��
+		;通常日
 		ELSE
 			SELECTCASE RAND:7
 				CASE 6
-					PRINTFORML %CALLNAME%�͗��r������ɒ͂܂�A����˂��o���i�D��%L_NAME%�ƌ�����Ă���c�c
-					PRINTFORM %L_NAME%������U�邽�тɁA�˂��o���ꂽ
-					IF TALENT:���� || TALENT:����
-						PRINTFORML �����Ɏ��������[������炵���h��Ă���c�c
-					ELSEIF TALENT:�n�� || TALENT:���
-						PRINTFORML �킸���Ȗc��݂��A�ڂ݂��点�Ȃ���v���v���Ɨh��Ă���c�c
+					PRINTFORML %CALLNAME%は両腕を後ろ手に掴まれ、胸を突き出す格好で%L_NAME%と交わっている……
+					PRINTFORM %L_NAME%が腰を振るたびに、突き出された
+					IF TALENT:巨乳 || TALENT:爆乳
+						PRINTFORML たわわに実った乳房がいやらしく揺れている……
+					ELSEIF TALENT:貧乳 || TALENT:絶壁
+						PRINTFORML わずかな膨らみが、つぼみを尖らせながらプルプルと揺れている……
 					ELSE
-						PRINTFORML �_�炩�ȓ��[�����Ȏ咣����悤�ɗh��Ă���c�c
+						PRINTFORML 柔らかな乳房が自己主張するように揺れている……
 					ENDIF
-					PRINTFORML %L_NAME%�͂������Ȃ������グ��%CALLNAME%�̒��ɂ�������Ǝ����̈�`�q�����ݍ��񂾁c�c
+					PRINTFORML %L_NAME%はあられもない声を上げる%CALLNAME%の中にしっかりと自分の遺伝子を刻み込んだ……
 				CASE 5
-					PRINTFORML %L_NAME%�Ɍ�납��˂���Ȃ���%CALLNAME%�͊Â��g���������Ă���c�c
-					PRINTFORML %CALLNAME%�̂ق��ꂽ�S�́A�����ł������̐��q���󂯂Ƃ߂悤��%L_NAME%�̃y�j�X��������ƒ͂�ŗ����Ȃ��c�c
-					PRINTFORML %L_NAME%�ɉ��x���{�C�̎�t������Ȃ���A%CALLNAME%�͎q�{������������c�c
+					PRINTFORML %L_NAME%に後ろから突かれながら%CALLNAME%は甘い嬌声をあげている……
+					PRINTFORML %CALLNAME%のほぐれた膣は、少しでも多くの精子を受けとめようと%L_NAME%のペニスをぎゅっと掴んで離さない……
+					PRINTFORML %L_NAME%に何度も本気の種付けされながら、%CALLNAME%は子宮を捧げ続けた……
 				CASE 4
-					PRINTFORML �x�b�h�ɐ��܂ꂽ�܂܂̎p�œ���ƁA%CALLNAME%��%L_NAME%�͋������������A���݂��̐O���Â����c�c
-					PRINTFORML �������菀���̏o���Ă���%CALLNAME%�́A�т���邱�Ƃ����߂�%L_NAME%�ɖ��ӎ��ɍ����C��t���Ă���c�c
-					PRINTFORML ������%CALLNAME%��%L_NAME%�̃y�j�X���󂯓����ƁA%L_NAME%�̎����ŊÂ����������n�߂��c�c
+					PRINTFORML ベッドに生まれたままの姿で入ると、%CALLNAME%と%L_NAME%は強く抱き合い、お互いの唇を貪った……
+					PRINTFORML すっかり準備の出来ている%CALLNAME%は、貫かれることを求めて%L_NAME%に無意識に腰を擦り付けている……
+					PRINTFORML そして%CALLNAME%は%L_NAME%のペニスを受け入れると、%L_NAME%の耳元で甘い声をあげ始めた……
 				CASE 3
-					PRINTFORML %L_NAME%��%CALLNAME%����납�猃�����˂��Ȃ���A����Ǖ��ւ̈������������Ȃ��c�c
-					PRINTFORML %CALLNAME%�̎ア����m��ʂ����w���A%CALLNAME%���������x�ڂ��̐Ⓒ�ɊȒP�ɒǂ��l�߂�c�c
-					PRINTFORML �����āA���̒����^�����ɂȂ������ōX�ɐӂ߂�ꑱ���A%CALLNAME%��%L_NAME%�ɐg���S���C���Ă������c�c
+					PRINTFORML %L_NAME%は%CALLNAME%を後ろから激しく突きながら、胸や局部への愛撫を欠かさない……
+					PRINTFORML %CALLNAME%の弱い所を知りぬいた指が、%CALLNAME%を今日何度目かの絶頂に簡単に追い詰める……
+					PRINTFORML そして、頭の中が真っ白になった中で更に責められ続け、%CALLNAME%は%L_NAME%に身も心も任せていった……
 				CASE 2
-					PRINTFORML %CALLNAME%��%L_NAME%�͗�������荇���A�����𗍂܂����ߍ����Ȃ��牽�x���M�����t�������Ă���c�c
-					PRINTFORML %CALLNAME%�͂Ƃ��Ƃ����፷���ŁA%L_NAME%�Ƃ̃L�X�ɖ����ɂȂ�A���t�̌����𑱂��Ă���c�c
-					PRINTFORML �����ĔM�����t���ł�������J��������%CALLNAME%�̑̂́A%L_NAME%�̃y�j�X���󂯓���邾���ŐⒸ�����c�c
+					PRINTFORML %CALLNAME%と%L_NAME%は両手を握り合い、視線を絡ませ見つめ合いながら何度も熱い口付けをしている……
+					PRINTFORML %CALLNAME%はとろんとした眼差しで、%L_NAME%とのキスに夢中になり、唾液の交換を続けている……
+					PRINTFORML 長くて熱い口付けですっかり開ききった%CALLNAME%の体は、%L_NAME%のペニスを受け入れるだけで絶頂した……
 				CASE 1
-					PRINTFORML %CALLNAME%�̓x�b�h�ɍ���%L_NAME%�̃y�j�X����ڌ��������Ȃ���ř����Ă���c�c
-					PRINTFORML �y�j�X�ɕt�������t���r�ߎ���Ă���ƁA%L_NAME%���D�������𕏂ł��c�c
-					PRINTFORML %CALLNAME%�͊��������ɖj����߂�ƁA��肢���������J�ɐ�𔇂킹�n�߂��c�c
+					PRINTFORML %CALLNAME%はベッドに座る%L_NAME%のペニスを上目遣いをしながらで咥えている……
+					PRINTFORML ペニスに付いた精液を舐め取っていると、%L_NAME%が優しく頭を撫でた……
+					PRINTFORML %CALLNAME%は嬉しそうに頬を染めると、よりいっそう丁寧に舌を這わせ始めた……
 					PRINTFORML 
-					PRINTFORML ��d�𑱂���%CALLNAME%���S������͐�������ꂽ%L_NAME%�̐��t����ꗎ���Ă���c�c
+					PRINTFORML 奉仕を続ける%CALLNAME%の膣口からは先程放たれた%L_NAME%の精液が零れ落ちている……
 				CASEELSE
-					PRINTFORML %CALLNAME%�͕ǂɎ�������i�D��%L_NAME%�Ɍ�납��Ƃ���Ă���c�c
-					PRINTFORML %CALLNAME%�͐K����͂܂�Ȃ���A�������Ɗm����%L_NAME%�̎q�����t�����ꂽ�c�c
+					PRINTFORML %CALLNAME%は壁に手をついた格好で%L_NAME%に後ろから犯されている……
+					PRINTFORML %CALLNAME%は尻肉を掴まれながら、ゆっくりと確実に%L_NAME%の子種を種付けされた……
 			ENDSELECT
 			WAIT
 		ENDIF
@@ -320,57 +320,57 @@ SELECTCASE CFLAG:�m�s�q�ח��x
 ENDSELECT
 PRINTL
 
-CFLAG:�m�s�q���ʃ^�C�v = L_TYPE
+CFLAG:ＮＴＲ結果タイプ = L_TYPE
 
 
 ;-----------------------------
-;- ����
+;- 口上
 ;-----------------------------
 
-;- ����:�m�s�q�C�x���g
+;- 口上:ＮＴＲイベント
 CALL KOJO_NTR
 
 
 ;-----------------------------
-;- ����
+;- 結果
 ;-----------------------------
 SELECTCASE L_TYPE
-	CASE [[�m�s�q����:���]]
+	CASE [[ＮＴＲ結果:回避]]
 
-	CASE [[�m�s�q����:�q��]]
+	CASE [[ＮＴＲ結果:客室]]
 
-	CASE [[�m�s�q����:�ꑮ]], [[�m�s�q����:�ח�]]
-		L_TMP = CFLAG:�m�s�q�ח��x + (ABL:���z�� / 2)
+	CASE [[ＮＴＲ結果:隷属]], [[ＮＴＲ結果:陥落]]
+		L_TMP = CFLAG:ＮＴＲ陥落度 + (ABL:性奴隷 / 2)
 
-		IF !TALENT:�񏈏�
-			SETCOLOR COLOR("�s���N")
-			PRINTL �����r��
+		IF !TALENT:非処女
+			SETCOLOR COLOR("ピンク")
+			PRINTL 処女喪失
 			RESETCOLOR
-			TALENT:�񏈏� = 1
+			TALENT:非処女 = 1
 		ENDIF
 
 		;- EXP
-		CALL MNG_LOG_ADD("EXP", "�L�X�o��",		(1+L_TMP))
-		CALL MNG_LOG_ADD("EXP", "�t�F���o��",	(2+L_TMP/2))
-		CALL MNG_LOG_ADD("EXP", "�u�o��",		(2+L_TMP))
-		CALL MNG_LOG_ADD("EXP", "�����o��",		(2+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "キス経験",		(1+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "フェラ経験",	(2+L_TMP/2))
+		CALL MNG_LOG_ADD("EXP", "Ｖ経験",		(2+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "性交経験",		(2+L_TMP))
 
-		CALL MNG_LOG_ADD("EXP", "�Ⓒ�o��",	(2+L_TMP))
-		CALL MNG_LOG_ADD("EXP", "�����o��",	(2+L_TMP/2))
-		CALL MNG_LOG_ADD("EXP", "���t�o��",	(2+L_TMP))
-		CALL MNG_LOG_ADD("EXP", "�S�ˌo��",	(2+L_TMP))
-		IF L_TYPE == [[�m�s�q����:�ח�]]
-			CALL MNG_LOG_ADD("EXP", "��d���y�o��",	(2+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "絶頂経験",	(2+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "精飲経験",	(2+L_TMP/2))
+		CALL MNG_LOG_ADD("EXP", "精液経験",	(2+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "膣射経験",	(2+L_TMP))
+		IF L_TYPE == [[ＮＴＲ結果:陥落]]
+			CALL MNG_LOG_ADD("EXP", "奉仕快楽経験",	(2+L_TMP))
 		ENDIF
-		CALL MNG_LOG_ADD("EXP", "�m�s�q�����o��",	(2+L_TMP))
+		CALL MNG_LOG_ADD("EXP", "ＮＴＲ調教経験",	(2+L_TMP))
 
-		;- ���̌��L�^:���̑�
-		TRYCALL ���̌��L�^_OTHER(TARGET, 1, L_NAME)
+		;- 初体験記録:その他
+		TRYCALL 初体験記録_OTHER(TARGET, 1, L_NAME)
 
-		;- �D�P:�\�`�F�b�N
+		;- 妊娠:可能チェック
 		IF NINSIN_ABLE(TARGET)
-			;- �D�P:�`�F�b�N
-			CALL NINSIN_CHK(TARGET, -1, CFLAG:�m�s�q�ח��x * 2, L_NAME)
+			;- 妊娠:チェック
+			CALL NINSIN_CHK(TARGET, -1, CFLAG:ＮＴＲ陥落度 * 2, L_NAME)
 		ENDIF
 
 	;ERROR
@@ -378,18 +378,18 @@ SELECTCASE L_TYPE
 ENDSELECT
 WAIT
 
-;------------------------------------------------- �p���o����܂ŃR�����g�A�E�g
+;------------------------------------------------- 用が出来るまでコメントアウト
 ;;-----------------------------
-;;- ����
+;;- 特殊
 ;;-----------------------------
 ;SELECTCASE L_TYPE
-;	CASE [[�m�s�q����:���]]
+;	CASE [[ＮＴＲ結果:回避]]
 ;
-;	CASE [[�m�s�q����:�q��]]
+;	CASE [[ＮＴＲ結果:客室]]
 ;
-;	CASE [[�m�s�q����:�ꑮ]]
+;	CASE [[ＮＴＲ結果:隷属]]
 ;
-;	CASE [[�m�s�q����:�ח�]]
+;	CASE [[ＮＴＲ結果:陥落]]
 ;
 ;	;ERROR
 ;	CASEELSE
@@ -402,77 +402,77 @@ WAIT
 ;=================================================
 ;   sub NTR_DISAPPEARANCE
 ;=================================================
-;   NTR:���H
+;   NTR:失踪
 ;-------------------------------------------------
 @NTR_DISAPPEARANCE
 #DIMS L_NAME
 
-PRINTFORML %CALLNAME%�����H�����c�c
-PRINTFORML �������d�˂�����Ɠ����o�����l���c�c
-PRINTFORML ����A%CALLNAME:MASTER%�̌��ɓ��悪�����Ă����c�c
+PRINTFORML %CALLNAME%が失踪した……
+PRINTFORML 逢引を重ねた相手と逃げ出した様だ……
+PRINTFORML 後日、%CALLNAME:MASTER%の元に動画が送られてきた……
 WAIT
 PRINTL
 
-L_NAME = %CSTR:�m�s�q�L������%
+L_NAME = %CSTR:ＮＴＲキャラ名%
 
-;- ����ŕ���
-SELECTCASE CFLAG:�m�s�q����^�C�v
-	;�A�C�h���I�[�i�[
-	CASE [[�m�s�q����:�A�C�h���I�[�i�[]]
+;- 相手で分岐
+SELECTCASE CFLAG:ＮＴＲ相手タイプ
+	;アイドルオーナー
+	CASE [[ＮＴＲ相手:アイドルオーナー]]
 		SELECTCASE RAND:3
 			CASE 1 TO 2
-				PRINTFORML ����̒��ł́A%CALLNAME%�������̒j�Ƃ܂�����Ă����c
-				PRINTFORML %L_NAME%�̓s���̗ǂ���ƂȂ���%CALLNAME%�́A�ƊE�l�ɐg�̂ŉc�Ƃ��s���l�Ɏw�������ꂽ�l���c
-				PRINTFORML �A�C�h���Ƃ��Ĕ�߂�ׂ����̂𔘂��o���A%CALLNAME%�͋ƊE�l�̐��z��Ƃ��Ďq�{������Ă���c
-				PRINTFORML %CALLNAME%�͈�����%L_NAME%�̂��߁A��Ɖ��̌��Œj�B�̐��t���󂯎~�ߑ����Ă���c
-				PRINTFORML �������̉��ł͕ʂ̃A�C�h���𔄂�o���b�����Ă���A%L_NAME%�̎p���f���Ă����c
+				PRINTFORML 動画の中では、%CALLNAME%が複数の男とまぐわっていた…
+				PRINTFORML %L_NAME%の都合の良い駒となった%CALLNAME%は、業界人に身体で営業を行う様に指示をされた様だ…
+				PRINTFORML アイドルとして秘めるべき裸体を曝け出し、%CALLNAME%は業界人の性奴隷として子宮を捧げている…
+				PRINTFORML %CALLNAME%は愛する%L_NAME%のため、上と下の口で男達の精液を受け止め続けている…
+				PRINTFORML だがその奥では別のアイドルを売り出す話をしている、%L_NAME%の姿が映っていた…
 
-				CSTR:�D�P���薼 = ���c�Ƃ̑���
-			;����ȊO
+				CSTR:妊娠相手名 = 枕営業の相手
+			;それ以外
 			CASEELSE
 				GOTO NOMAL
 		ENDSELECT
-	;����ȊO
+	;それ以外
 	CASEELSE
 		$NOMAL
 		SELECTCASE RAND:3
 			CASE 2
-				PRINTFORML ����̒��ł́A%CALLNAME%���j�Ƃ܂�����Ă����c
-				PRINTFORML %L_NAME%�ɖO����ꂽ%CALLNAME%�́A���قɔ���ꂽ�l���c
-				PRINTFORML ����ʂō���ł��t�����Ȃ���A%CALLNAME%�͒j�̐��z��Ƃ��Ďq�{������Ă���c
-				PRINTFORML �����̗l�ɂ����Ղ�Ǝ�t���������ƁA%CALLNAME%��%CALLNAME:MASTER%�̖��O���Ă�ŚT�苃���Ă����c
+				PRINTFORML 動画の中では、%CALLNAME%が男とまぐわっていた…
+				PRINTFORML %L_NAME%に飽きられた%CALLNAME%は、娼館に売られた様だ…
+				PRINTFORML 正常位で腰を打ち付けられながら、%CALLNAME%は男の性奴隷として子宮を捧げている…
+				PRINTFORML いつもの様にたっぷりと種付けをされると、%CALLNAME%は%CALLNAME:MASTER%の名前を呼んで啜り泣いていた…
 
-				CSTR:�D�P���薼 =
+				CSTR:妊娠相手名 =
 			CASE 1
-				PRINTFORML ����̒��ł́A%CALLNAME%���b�^�̈����Ƃ܂�����Ă����c
-				PRINTFORML %L_NAME%�ɖO����ꂽ%CALLNAME%�́A�K�C�A���ɔ���ꂽ�l���c
-				PRINTFORML ��w�ʂŔƂ���Ȃ���A%CALLNAME%�͈����̐��z��Ƃ��Ďq�{������Ă���c
-				PRINTFORML �����̗l�ɂ����Ղ�Ǝ�t���������ƁA%CALLNAME%��%CALLNAME:MASTER%�̖��O���Ă�ŚT�苃���Ă����c
+				PRINTFORML 動画の中では、%CALLNAME%が獣型の悪魔とまぐわっていた…
+				PRINTFORML %L_NAME%に飽きられた%CALLNAME%は、ガイア教に売られた様だ…
+				PRINTFORML 後背位で犯されながら、%CALLNAME%は悪魔の性奴隷として子宮を捧げている…
+				PRINTFORML いつもの様にたっぷりと種付けをされると、%CALLNAME%は%CALLNAME:MASTER%の名前を呼んで啜り泣いていた…
 
-				EXP:�b���o�� += 25
-				CSTR:�D�P���薼 = �K�C�A���̈���
+				EXP:獣姦経験 += 25
+				CSTR:妊娠相手名 = ガイア教の悪魔
 			CASEELSE
-				PRINTFORML ����̒��ł́A%CALLNAME%���e���v���i�C�g�Ƃ܂�����Ă����c
-				PRINTFORML %L_NAME%�ɖO����ꂽ%CALLNAME%�́A���V�A���ɔ���ꂽ�l���c
-				PRINTFORML �R��ʂō���U��Ȃ���A%CALLNAME%�͒j�̐��z��Ƃ��Ďq�{������Ă���c
-				PRINTFORML �����̗l�ɂ����Ղ�Ǝ�t���������ƁA%CALLNAME%��%CALLNAME:MASTER%�̖��O���Ă�ŚT�苃���Ă����c
+				PRINTFORML 動画の中では、%CALLNAME%がテンプルナイトとまぐわっていた…
+				PRINTFORML %L_NAME%に飽きられた%CALLNAME%は、メシア教に売られた様だ…
+				PRINTFORML 騎乗位で腰を振りながら、%CALLNAME%は男の性奴隷として子宮を捧げている…
+				PRINTFORML いつもの様にたっぷりと種付けをされると、%CALLNAME%は%CALLNAME:MASTER%の名前を呼んで啜り泣いていた…
 
-				CSTR:�D�P���薼 = �e���v���i�C�g
+				CSTR:妊娠相手名 = テンプルナイト
 		ENDSELECT
 ENDSELECT
-PRINTFORML �c�c�c
-PRINTFORML �c�c
-PRINTFORML �c
+PRINTFORML ………
+PRINTFORML ……
+PRINTFORML …
 WAIT
 
 SETCOLOR 0xFF0000
-PRINTFORMW %CALLNAME%�����H���܂���
+PRINTFORMW %CALLNAME%が失踪しました
 RESETCOLOR
 
-CALL ���Î��H����
+CALL 中古失踪処理
 
 DELCHARA TARGET
 
-;- VAR:���X�g�X�V
+;- VAR:リスト更新
 CALL VAR_MAKE_LIST
 

@@ -1,36 +1,36 @@
-;-------------------------------------------------
-;�����{��
+﻿;-------------------------------------------------
+;書物閲覧
 ;-------------------------------------------------
 @RPG_EVENT_101(ARG:0,ARG:1)
 #DIM L_INPUT
 #DIM L_I
 #DIM L_G
-L_G = 20+RAND:((Flag:�������*(Flag:�����[�x/3))+1)
-ARG = Flag:�����L����
-Flag:�����C�x���g������ = 1
-Flag:�����C�x���g�ԍ� = 101
+L_G = 20+RAND:((Flag:調査区域*(Flag:調査深度/3))+1)
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 101
 
 L_I = ARG
 CLEARLINE LINECOUNT
 DRAWLINE
 SETCOLOR 150,250,150
-PRINTFORML �y�����C�x���g:�����{���z
+PRINTFORML 【調査イベント:書物閲覧】
 PRINTFORML 
-PRINTFORML %CALLNAME:L_I%�͒T���̍Œ����͎g���Ă��Ȃ������_���������B
-PRINTFORML ������̃f�[�^�x�[�X�ɂȂ����Ƃ���A�Ⴄ�w�c�̂��̂��낤�Ǝv�����F���n�߂�B
-PRINTFORML ����ƈ���̎蒠�����Ă���̂������A������������ꂽ%CALLNAME:L_I%�͂��������{�����Ă݂�B
-PRINTFORML ���e�͎��I�ɂ��u�O�G�v�̐��̓������L�������̂ł���A������ǂ�v�������Q�l�ɂȂ镔�����������B
-PRINTFORML �����r���ł��邽�ߗ����ǂ݂ł͂��������̂́A���ꂩ��̌o���ɐ������������c
+PRINTFORML %CALLNAME:L_I%は探索の最中今は使われていない仮拠点を見つけた。
+PRINTFORML こちらのデータベースにないことから、違う陣営のものだろうと思いつつ物色を始める。
+PRINTFORML すると一冊の手帳が堕ちているのを見つけ、興味をそそられた%CALLNAME:L_I%はさっそく閲覧してみる。
+PRINTFORML 内容は私的による「外敵」の生体特徴を記したものであり、多少解読を要したが参考になる部分もあった。
+PRINTFORML 調査途中であるため流し読みではあったものの、これからの経験に生かせそうだ…
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 
-PRINTFORML %CALLNAME:L_I%�͌o���l{L_G}�㏸�����B
+PRINTFORML %CALLNAME:L_I%は経験値{L_G}上昇した。
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 
 
 
-CFlag:L_I:�Z�l_�o���l += L_G
+CFlag:L_I:住人_経験値 += L_G
 
 
 RESETCOLOR

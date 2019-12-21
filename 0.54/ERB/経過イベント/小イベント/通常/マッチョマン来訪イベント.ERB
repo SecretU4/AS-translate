@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�}�b�`���}�����K�C�x���g
+﻿;-------------------------------------------------
+;マッチョマン来訪イベント
 ;-------------------------------------------------
 @TURN_EVENT_NORMAL_MCM
 #DIM L_INPUT
@@ -8,84 +8,84 @@
 #DIM L_DEF
 
 DRAWLINE
-PRINTFORML �y�}�b�`���}�����K�F%CALLNAME%�z
-PRINTFORMW %CALLNAME%������Ŋ����ł���ƓˑR�̗��q���������B
-PRINTFORMW ���֐�܂ŏo�����Ɖ��̂��u�[�������p���c�꒚�̋ؓ��������}�b�`���}�����|�[�W���O�����߂Ȃ��痧���Ă���I
-PRINTFORML �u�ؓ��g���[�j���O�A���܂��񂩃@�b�I�I�I�I�v
-PRINTFORML �\�z�O�̗��q��%CALLNAME%���d�����Ă���ƁA�j�͂������тȂ���V���Ƀ|�[�W���O�����߂��B
+PRINTFORML 【マッチョマン来訪：%CALLNAME%】
+PRINTFORMW %CALLNAME%が自宅で寛いでいると突然の来客があった。
+PRINTFORMW 玄関先まで出向くと何故かブーメランパンツ一丁の筋肉もりもりマッチョマンがポージングを決めながら立っている！
+PRINTFORML 「筋肉トレーニング、しませんかァッ！！！！」
+PRINTFORML 予想外の来客に%CALLNAME%が硬直していると、男はそう叫びながら新たにポージングを決めた。
 PRINTFORML 
 $INPUT_LOOP
-PRINTFORML [1] - �y�؃g�����܂��I�z
-PRINTFORML [999] - �y�������Ă����܂��I�z
+PRINTFORML [1] - 【筋トレします！】
+PRINTFORML [999] - 【遠慮しておきます！】
 PRINTFORML 
 
 INPUT
 L_INPUT = RESULT
 
 SELECTCASE L_INPUT
-CASE 1	;�؃g�����܂��I
-	PRINTFORMW %CALLNAME%�̌��t�Ƀj�J�b�Ə΂����j�͑����g���[�j���O���J�n�����c
-	PRINTFORML �c�c
-	PRINTFORMW �c�c�c�c
-	;95%�̊m���Œʏ�̋؃g��
+CASE 1	;筋トレします！
+	PRINTFORMW %CALLNAME%の言葉にニカッと笑った男は早速トレーニングを開始した…
+	PRINTFORML ……
+	PRINTFORMW …………
+	;95%の確率で通常の筋トレ
 	IF RAND:100 >= 5
-		PRINTFORML �j�̎w���ʂ�ɋؓ��g���[�j���O���s����%CALLNAME%�͐S�n�悢��J���ɕ�܂�Ă����B
-		PRINTFORML ����o�銾���^�I���Ő@���Ȃ���A%CALLNAME%�͒j�Ɠ�l�ŋؓ����Ղߔ����������ɐZ��B
-		PRINTFORML �u�ؓ��́c���؂�Ȃ��b�I�I�I�I�v
-		PRINTFORMW �r�V���ƃ|�[�W���O�����߂��j�͊��ƃI�C���Ńe�J��ؓ����֎����Ȃ��痧�������čs�����c
+		PRINTFORML 男の指示通りに筋肉トレーニングを行った%CALLNAME%は心地よい疲労感に包まれていた。
+		PRINTFORML 流れ出る汗をタオルで拭いながら、%CALLNAME%は男と二人で筋肉を苛め抜いた快感に浸る。
+		PRINTFORML 「筋肉は…裏切らないッ！！！！」
+		PRINTFORMW ビシリとポージングを決めた男は汗とオイルでテカる筋肉を誇示しながら立ち去って行った…
 		
 		L_HP    = 1+(RAND:10)
 		L_ATK   = 1+(RAND:3)
 		L_DEF   = 1+(RAND:3)
 		
-		PRINTFORML �j�̓I�m�ȋؓ��g���[�j���O�ɂ��%CALLNAME%�͒b���グ��ꂽ�I
-		PRINTFORML HP�@{CFLAG:�Z�l_�ő�̗�}�@���@{CFLAG:�Z�l_�ő�̗�+L_HP}
-		PRINTFORML ATK�@{CFLAG:�Z�l_ATK}�@���@{CFLAG:�Z�l_ATK+L_ATK}
-		PRINTFORMW DEF�@{CFLAG:�Z�l_DEF}�@���@{CFLAG:�Z�l_DEF+L_DEF}
+		PRINTFORML 男の的確な筋肉トレーニングにより%CALLNAME%は鍛え上げられた！
+		PRINTFORML HP　{CFLAG:住人_最大体力}　→　{CFLAG:住人_最大体力+L_HP}
+		PRINTFORML ATK　{CFLAG:住人_ATK}　→　{CFLAG:住人_ATK+L_ATK}
+		PRINTFORMW DEF　{CFLAG:住人_DEF}　→　{CFLAG:住人_DEF+L_DEF}
 		
-		CFLAG:�Z�l_�ő�̗� += L_HP
-		CFLAG:�Z�l_���ݑ̗� += L_HP
-		CFLAG:�Z�l_ATK      += L_ATK
-		CFLAG:�Z�l_DEF      += L_DEF
+		CFLAG:住人_最大体力 += L_HP
+		CFLAG:住人_現在体力 += L_HP
+		CFLAG:住人_ATK      += L_ATK
+		CFLAG:住人_DEF      += L_DEF
 		
-	;5%�̊m���łg�ȋ؃g��
+	;5%の確率でＨな筋トレ
 	ELSE
-		PRINTFORML ���֐�Œj�Ɉ����|����ꂽ%CALLNAME%�́A���̔鏊��j�̋���ȓ��_�ɂ���Ďh���т���Ă����B
-		PRINTFORML �b���グ��ꂽ�j�̓��͍̂|�̂悤�Ɍ�����̂悤�ɏd���B
-		PRINTFORMW %CALLNAME%�̗͂ł͉����̂��邱�Ƃ͂��납��R����\���ɏo���Ȃ��܂܏��ɑg�ݕ~����Ă���B
-		PRINTFORML �u�S���g���[�j���O�b�I�I�I�I�@�S���g���[�j���O�C�����������b�I�I�I�I�v
-		PRINTFORML �j������U��x�ɋ��傷������_�����܂�̗ǂ��S�ǂ��������ޗl�ɓ����A���@�őł�����ꂽ�悤��
-		PRINTFORML �Ռ���%CALLNAME%�̎q�{�����P���B
-		PRINTFORML ���܂�ɂ����\�Ŗ\�͓I�Ȍ����%CALLNAME%�̓��̂͑��X�ɍ~�����A�����ł��������̈������I��点�悤��
-		PRINTFORML �K���Ɉ��t�����͂ɔ�U�����Ȃ���j�̓��_�������ɒ��ߕt����B
-		PRINTFORML ���̍b�゠���Ă��A�j�͎q�{���ɋT���̐�[�𔼂΂߂荞�܂���悤�ɂ��Ďː����J�n�����B
-		PRINTFORML �u���b�c�ӃD�b�c�c�c�c����ɂāA�S���g���[�j���O�I���b�I�I�I�I�v
-		PRINTFORML ���̏�ŃO�b�^���Ɛg���������Ă���%CALLNAME%����˂��邱�Ƃ��Ȃ��j�͗��������čs�����B
-		PRINTFORMW %CALLNAME%���S���̓p�b�N���Ƒ傫�������J�����܂ܕ����A�j�̐��t���h���h���Ɛ��ꗬ���Ă����c
+		PRINTFORML 玄関先で男に圧し掛かられた%CALLNAME%は、その秘所を男の巨大な肉棒によって刺し貫かれていた。
+		PRINTFORML 鍛え上げられた男の肉体は鋼のように堅く岩のように重い。
+		PRINTFORMW %CALLNAME%の力では押しのけることはおろか抵抗すら十分に出来ないまま床に組み敷かれている。
+		PRINTFORML 「膣肉トレーニングッ！！！！　膣肉トレーニング気持ちいいぞッ！！！！」
+		PRINTFORML 男が腰を振る度に巨大すぎる肉棒が締まりの良い膣壁を巻き込む様に動き、削岩機で打ちつけられたような
+		PRINTFORML 衝撃が%CALLNAME%の子宮口を襲う。
+		PRINTFORML あまりにも乱暴で暴力的な交尾に%CALLNAME%の肉体は早々に降伏し、少しでも早くこの悪夢を終わらせようと
+		PRINTFORML 必死に愛液を周囲に飛散させながら男の肉棒を懸命に締め付ける。
+		PRINTFORML その甲斐あってか、男は子宮口に亀頭の先端を半ばめり込ませるようにして射精を開始した。
+		PRINTFORML 「うッ…ふゥッ…………これにて、膣肉トレーニング終了ッ！！！！」
+		PRINTFORML 床の上でグッタリと身を横たえている%CALLNAME%を一瞥することもなく男は立ち去って行った。
+		PRINTFORMW %CALLNAME%の膣口はパックリと大きく口を開けたまま閉じず、男の精液をドロドロと垂れ流していた…
 		
-		SIF CSTR:�����������薼 == ""
-			CSTR:�����������薼 = �}�b�`���}��
-		SIF CSTR:���L�X���薼 == "" 
-			CSTR:���L�X���薼 = �}�b�`���}��
-		SIF CSTR:�����o�����薼 ==""
-			CSTR:�����o�����薼 = �}�b�`���}��
+		SIF CSTR:初えっち相手名 == ""
+			CSTR:初えっち相手名 = マッチョマン
+		SIF CSTR:初キス相手名 == "" 
+			CSTR:初キス相手名 = マッチョマン
+		SIF CSTR:初中出し相手名 ==""
+			CSTR:初中出し相手名 = マッチョマン
 		
-		TALENT:�񏈏� = 1
-		TCVAR:����_EXP_�����r�� = 1
+		TALENT:非処女 = 1
+		TCVAR:履歴_EXP_処女喪失 = 1
 		
-		EXP:�L�X�o�� += (RAND:3)+1
-		EXP:�a�o�� += (RAND:3)+1
-		EXP:�u�o�� += 1
-		EXP:�����o�� += 1
-		EXP:���t�o�� += 1
-		EXP:�S�ˌo�� += 1
-		EXP:�����o�� += 1
-		EXP:��ɉ��y�o�� += 1
+		EXP:キス経験 += (RAND:3)+1
+		EXP:Ｂ経験 += (RAND:3)+1
+		EXP:Ｖ経験 += 1
+		EXP:性交経験 += 1
+		EXP:精液経験 += 1
+		EXP:膣射経験 += 1
+		EXP:強姦経験 += 1
+		EXP:苦痛快楽経験 += 1
 	ENDIF
-CASE 999	;�������Ă����܂��I
-	PRINTFORML %CALLNAME%�͒f��̌��t�����тȂ������߂�Ƌ}���Ō����������B
-	PRINTFORML �������Ă��猺�֐�̗l�q�����j�^�[�Ŋm�F���Ɍ������ƁA���傤�ǒj�����𗎂Ƃ��ė�������Ƃ��낾�����B
-	PRINTFORMW �����������������̂��낤���c
+CASE 999	;遠慮しておきます！
+	PRINTFORML %CALLNAME%は断りの言葉を叫びながら扉を閉めると急いで鍵をかけた。
+	PRINTFORML そうしてから玄関先の様子をモニターで確認しに向かうと、ちょうど男が肩を落として立ち去るところだった。
+	PRINTFORMW いったい何だったのだろうか…
 CASEELSE
 	GOTO INPUT_LOOP
 ENDSELECT

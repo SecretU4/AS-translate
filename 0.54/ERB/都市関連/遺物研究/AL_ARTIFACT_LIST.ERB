@@ -1,315 +1,315 @@
-;-------------------------------------------------
-; �╨�̃��X�g��\�����đI������
+﻿;-------------------------------------------------
+; 遺物のリストを表示して選択する
 ;
-; �����́u�S�����J�����邩�v�̓f�o�b�O�p�B1���w�肷��ƌ����񐔂ɐ������ꂸ���ׂĂ̏���\������
-; (��)
+; 引数の「全情報を開示するか」はデバッグ用。1を指定すると研究回数に制限されずすべての情報を表示する
+; (例)
 ; CALL AL_ARTIFACT_LIST(1)
 ;-------------------------------------------------
-@AL_ARTIFACT_LIST(�S�����J�����邩 = 0)
-#DIM �S�����J�����邩
+@AL_ARTIFACT_LIST(全情報を開示するか = 0)
+#DIM 全情報を開示するか
 
-#DIM CONST �╨�̍ő吔 = 100
-#DIM DYNAMIC �╨�̔z��, 100    ; ���񏉊������邽�߂�DYNAMIC�w�肷��
-#DIM �╨�̐�
-#DIM �╨�ԍ�
+#DIM CONST 遺物の最大数 = 100
+#DIM DYNAMIC 遺物の配列, 100    ; 毎回初期化するためにDYNAMIC指定する
+#DIM 遺物の数
+#DIM 遺物番号
 
-#DIM CONST �y�[�W�̍s�� = 20    ; 1�y�[�W�̍s����ς��������͂�����ύX����
-#DIM �y�[�W���
-#DIM ���݂̃y�[�W
-#DIM �\���J�n����ԍ�
-#DIM �\���I������ԍ�
+#DIM CONST ページの行数 = 20    ; 1ページの行数を変えたい時はここを変更する
+#DIM ページ上限
+#DIM 現在のページ
+#DIM 表示開始する番号
+#DIM 表示終了する番号
 
-#DIM ���̌����Ώ�
-#DIM ���̐F
+#DIM 元の研究対象
+#DIM 元の色
 #DIM L_INPUT
 
-���̌����Ώ� = FLAG:�⌤_�����Ώ�
+元の研究対象 = FLAG:遺研_研究対象
 
 CLEARLINE LINECOUNT
-PRINTFORML ��������╨��I�����Ă��������B�������i�ނƏ�񂪊J������܂��B
-���̐F = GETCOLOR()
+PRINTFORML 研究する遺物を選択してください。研究が進むと情報が開示されます。
+元の色 = GETCOLOR()
 SETCOLORBYNAME YELLOW
-PRINTL �� LP���l���������@ �� LP���Ғl�̍����╨
-PRINTL �� ��p��ߖ񂵂��� �� ��p�����̍����╨
-SETCOLOR ���̐F
+PRINTL ※ LPを獲得したい　 → LP期待値の高い遺物
+PRINTL ※ 費用を節約したい → 費用効率の高い遺物
+SETCOLOR 元の色
 
-; �w�b�_�[
+; ヘッダー
 DRAWLINE
-PRINTFORML      %"���O", 20, LEFT% %" ", 12% | %"��p", 6% | %"������", 6% | %"��D", 3% | %"��D", 3% | %"�l��LP", 7% | %"LP���Ғl", 8% | %"��p����", 8%
+PRINTFORML      %"名前", 20, LEFT% %" ", 12% | %"費用", 6% | %"成功率", 6% | %"肉D", 3% | %"精D", 3% | %"獲得LP", 7% | %"LP期待値", 8% | %"費用効率", 8%
 DRAWLINE
 
-; 1�`99�Ԃ̊ԂŒ�`����Ă���╨�𒊏o����
-CALL AL_�╨��z��ɒ��o����(�╨�̔z��)
-�╨�̐� = RESULT
+; 1～99番の間で定義されている遺物を抽出する
+CALL AL_遺物を配列に抽出する(遺物の配列)
+遺物の数 = RESULT
 
-; �y�[�W���ƕ\���͈͂��v�Z����
-�y�[�W��� = (�╨�̐� - 1) / �y�[�W�̍s��
-�\���J�n����ԍ� = �y�[�W�̍s�� * ���݂̃y�[�W
-�\���I������ԍ� = �\���J�n����ԍ� + �y�[�W�̍s��
+; ページ数と表示範囲を計算する
+ページ上限 = (遺物の数 - 1) / ページの行数
+表示開始する番号 = ページの行数 * 現在のページ
+表示終了する番号 = 表示開始する番号 + ページの行数
 
-; ���X�g��\������
-FOR LOCAL, �\���J�n����ԍ�, �\���I������ԍ�
-    �╨�ԍ� = �╨�̔z��:LOCAL
+; リストを表示する
+FOR LOCAL, 表示開始する番号, 表示終了する番号
+    遺物番号 = 遺物の配列:LOCAL
 
-    ; 2�y�[�W�ȍ~�̃��X�g�̋󂫂͋�s�Ŗ��߂�
-    IF LOCAL >= �╨�̐�
-        SIF ���݂̃y�[�W > 0
+    ; 2ページ以降のリストの空きは空行で埋める
+    IF LOCAL >= 遺物の数
+        SIF 現在のページ > 0
             PRINTL
         CONTINUE
     ENDIF
 
-    ; �╨�̃X�e�[�^�X��ǂݍ���
-    CALLFORM AL_Check_{�╨�ԍ�}
-    CALLFORM AL_Set_{�╨�ԍ�}
-    CALLFORM AL_Branch_{�╨�ԍ�}
+    ; 遺物のステータスを読み込む
+    CALLFORM AL_Check_{遺物番号}
+    CALLFORM AL_Set_{遺物番号}
+    CALLFORM AL_Branch_{遺物番号}
 
-    ; ���݂̑Ώۂ͐F��ς��Ėڗ�������
-    IF �╨�ԍ� == ���̌����Ώ�
+    ; 現在の対象は色を変えて目立たせる
+    IF 遺物番号 == 元の研究対象
         SETCOLOR 50,250,250
     ENDIF
-    CALL AL_�╨�̏����P�s�ŕ\������(�S�����J�����邩)
-    SETCOLOR ���̐F
+    CALL AL_遺物の情報を１行で表示する(全情報を開示するか)
+    SETCOLOR 元の色
 NEXT
 DRAWLINE
 
-; ���X�g�\���̂��߂ɕύX���������Ώۂ����ɖ߂�
-IF ���̌����Ώ� > 0
-    CALLFORM AL_Check_{���̌����Ώ�}
-    CALLFORM AL_Set_{���̌����Ώ�}
-    CALLFORM AL_Branch_{���̌����Ώ�}
+; リスト表示のために変更した研究対象を元に戻す
+IF 元の研究対象 > 0
+    CALLFORM AL_Check_{元の研究対象}
+    CALLFORM AL_Set_{元の研究対象}
+    CALLFORM AL_Branch_{元の研究対象}
 ELSE
-    CALL AL_�����Ώۂ���������
+    CALL AL_研究対象を解除する
 ENDIF
 
-; �y�[�W�ړ��{�^����\������
-IF ���݂̃y�[�W > 0
-    PRINTFORMLC [998] �O�y�[�W
+; ページ移動ボタンを表示する
+IF 現在のページ > 0
+    PRINTFORMLC [998] 前ページ
 ELSE
     PRINTFORMLC  
 ENDIF
-PRINTFORMLC [999] �߂�
-IF ���݂̃y�[�W < �y�[�W���
-    PRINTFORMLC [1000] ���y�[�W
+PRINTFORMLC [999] 戻る
+IF 現在のページ < ページ上限
+    PRINTFORMLC [1000] 次ページ
 ENDIF
 
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
-    ; �O�y�[�W
+    ; 前ページ
     CASE 998
-        SIF ���݂̃y�[�W > 0
-            ���݂̃y�[�W --
+        SIF 現在のページ > 0
+            現在のページ --
 
-    ; �߂�
+    ; 戻る
     CASE 999
         RETURN
 
-    ; ���y�[�W
+    ; 次ページ
     CASE 1000
-        SIF ���݂̃y�[�W < �y�[�W���
-            ���݂̃y�[�W ++
+        SIF 現在のページ < ページ上限
+            現在のページ ++
 
-    ; �╨��I��
+    ; 遺物を選択
     CASEELSE
-        ; �������̑Ώۂ��đI���������������
-        IF L_INPUT == ���̌����Ώ�
-            CALL AL_�����Ώۂ���������
-            PRINTFORMW �����Ώۂ��������܂����B
+        ; 研究中の対象を再選択したら解除する
+        IF L_INPUT == 元の研究対象
+            CALL AL_研究対象を解除する
+            PRINTFORMW 研究対象を解除しました。
             RETURN
         ENDIF
 
-        ; �ԍ��̈╨�����݂���Ȃ�Ώۂɐݒ肷��
+        ; 番号の遺物が存在するなら対象に設定する
         RESULT = 0
         TRYCALLFORM AL_Check_{L_INPUT}
         IF RESULT
             CALLFORM AL_Set_{L_INPUT}
             CALLFORM AL_Branch_{L_INPUT}
-            PRINTFORMW �����Ώۂ�ݒ肵�܂����B
+            PRINTFORMW 研究対象を設定しました。
             RETURN
         ENDIF
 ENDSELECT
 RESTART
 
 ;-------------------------------------------------
-; �╨�̏����P�s�ŕ\������
-; �������i�ނƊJ����������������
+; 遺物の情報を１行で表示する
+; 研究が進むと開示される情報も増える
 ;-------------------------------------------------
-@AL_�╨�̏����P�s�ŕ\������(�S�����J�����邩 = 0)
-#DIM �S�����J�����邩
-#DIM CONST ���J��LV1 = 5      ; �������ƃ_���[�W�����J�������
-#DIM CONST ���J��LV2 = 10     ; �l��LP�Ɣ�p�������J�������
-#DIM ������
-#DIMS �ԍ�
-#DIMS ���O
-#DIMS �i��
-#DIMS ��p
-#DIMS ������
-#DIMS ���̃_���[�W
-#DIMS ���_�_���[�W
-#DIMS �l��LP
-#DIMS LP���Ғl
-#DIMS ��p����
+@AL_遺物の情報を１行で表示する(全情報を開示するか = 0)
+#DIM 全情報を開示するか
+#DIM CONST 情報開示LV1 = 5      ; 成功率とダメージ情報を開示する回数
+#DIM CONST 情報開示LV2 = 10     ; 獲得LPと費用効率を開示する回数
+#DIM 研究回数
+#DIMS 番号
+#DIMS 名前
+#DIMS 進捗
+#DIMS 費用
+#DIMS 成功率
+#DIMS 肉体ダメージ
+#DIMS 精神ダメージ
+#DIMS 獲得LP
+#DIMS LP期待値
+#DIMS 費用効率
 
-������ = FLAG:(16000 + FLAG:�⌤_�����Ώ�)
-�ԍ� = {FLAG:�⌤_�����Ώ�}
-���O = %SaveStr:500%
-�i�� = %BARSTR(������, 10, 10)%
-��p = {FLAG:�⌤_��p}
-������ = ???
-���̃_���[�W = ???
-���_�_���[�W = ???
-�l��LP = ???
-LP���Ғl = ???
-��p���� = ???
+研究回数 = FLAG:(16000 + FLAG:遺研_研究対象)
+番号 = {FLAG:遺研_研究対象}
+名前 = %SaveStr:500%
+進捗 = %BARSTR(研究回数, 10, 10)%
+費用 = {FLAG:遺研_費用}
+成功率 = ???
+肉体ダメージ = ???
+精神ダメージ = ???
+獲得LP = ???
+LP期待値 = ???
+費用効率 = ???
 
-IF ������ >= ���J��LV1 || �S�����J�����邩
-    ������ = {AL_������()}\%
-    ���̃_���[�W = {AL_���̃_���[�W()}
-    ���_�_���[�W = {AL_���_�_���[�W()}
+IF 研究回数 >= 情報開示LV1 || 全情報を開示するか
+    成功率 = {AL_成功率()}\%
+    肉体ダメージ = {AL_肉体ダメージ()}
+    精神ダメージ = {AL_精神ダメージ()}
 ENDIF
 
-IF ������ >= ���J��LV2 || �S�����J�����邩
-    �l��LP = 1 �` {AL_�ő�LP()}
-    LP���Ғl = %AL_�����\�L�ɕϊ�(AL_LP���Ғl())%
-    ��p���� = {AL_��p����()}\%
+IF 研究回数 >= 情報開示LV2 || 全情報を開示するか
+    獲得LP = 1 ～ {AL_最大LP()}
+    LP期待値 = %AL_小数表記に変換(AL_LP期待値())%
+    費用効率 = {AL_費用効率()}\%
 ENDIF
 
-PRINTFORM [%�ԍ�, 2%] %���O, 20, LEFT% %�i��% | %��p, 6% | %������, 6% | %���̃_���[�W, 3%
-PRINTFORML  | %���_�_���[�W, 3% | %�l��LP, 7% | %LP���Ғl, 8% | %��p����, 8%
+PRINTFORM [%番号, 2%] %名前, 20, LEFT% %進捗% | %費用, 6% | %成功率, 6% | %肉体ダメージ, 3%
+PRINTFORML  | %精神ダメージ, 3% | %獲得LP, 7% | %LP期待値, 8% | %費用効率, 8%
 
 ;-------------------------------------------------
-; �����̐�����(0�`100)��Ԃ�
+; 研究の成功率(0～100)を返す
 ;-------------------------------------------------
-@AL_������
+@AL_成功率
 #FUNCTION
 #DIM DYNAMIC C_P
 #DIM DYNAMIC U_P
-#DIM �����␮
-#DIM ���s�␮
-#DIM ������
+#DIM 成功補整
+#DIM 失敗補整
+#DIM 成功率
 
-; ��������
-SIF FLAG:�⌤_�Ǝ����� == 10
+; 強制成功
+SIF FLAG:遺研_独自判定 == 10
     RETURNF 100
 
-; �������s
-SIF FLAG:�⌤_�Ǝ����� == -10
+; 強制失敗
+SIF FLAG:遺研_独自判定 == -10
     RETURNF 0
 
-SIF FLAG:�⌤_�Ǝ����� >= 1
-    C_P = FLAG:�⌤_�Ǝ����� * 5
+SIF FLAG:遺研_独自判定 >= 1
+    C_P = FLAG:遺研_独自判定 * 5
 
-SIF FLAG:�⌤_�Ǝ����� <= -1
-    U_P = FLAG:�⌤_�Ǝ����� * 5
+SIF FLAG:遺研_独自判定 <= -1
+    U_P = FLAG:遺研_独自判定 * 5
 
-�����␮ = (FLAG:�⌤_�T�|�[�^�[���� * 5) + C_P + U_P
-���s�␮ = FLAG:�⌤_���s�� + (FLAG:�⌤_�댯�� * 2)
-������ = 100 + �����␮ - ���s�␮
+成功補整 = (FLAG:遺研_サポーター総数 * 5) + C_P + U_P
+失敗補整 = FLAG:遺研_失敗率 + (FLAG:遺研_危険性 * 2)
+成功率 = 100 + 成功補整 - 失敗補整
 
-RETURNF LIMIT(������, 0, 100)
+RETURNF LIMIT(成功率, 0, 100)
 
 ;-------------------------------------------------
-; �e�l�̌v�Z
+; 各値の計算
 ;-------------------------------------------------
-@AL_�ő�LP
+@AL_最大LP
 #FUNCTION
-RETURNF FLAG:�⌤_�������v + (FLAG:�⌤_�댯�� / 2)
+RETURNF FLAG:遺研_研究利益 + (FLAG:遺研_危険性 / 2)
 
 
-; �������������߁A1.72�Ȃ�172��Ԃ��B�v�Z�Ŏg������100����1�ɂ���
-@AL_LP���Ғl
+; 小数を扱うため、1.72なら172を返す。計算で使う時は100分の1にする
+@AL_LP期待値
 #FUNCTION
-#DIM ����LP
-����LP = (1 + AL_�ő�LP()) / 2
-RETURNF ����LP * AL_������()
+#DIM 平均LP
+平均LP = (1 + AL_最大LP()) / 2
+RETURNF 平均LP * AL_成功率()
 
 
-@AL_��p����
+@AL_費用効率
 #FUNCTION
-#DIM CONST ��{������ = 50000   ; 1LP������ɂ������p�i���j
-#DIM LP������̔�p
-SIF AL_LP���Ғl() == 0  ; 0���Z������邽�߂ɐ�ɔ��肵�Ă���
+#DIM CONST 基本研究費 = 50000   ; 1LPあたりにかかる費用（仮）
+#DIM LPあたりの費用
+SIF AL_LP期待値() == 0  ; 0除算を避けるために先に判定しておく
     RETURNF 0
-LP������̔�p = FLAG:�⌤_��p * 100 / AL_LP���Ғl()
-SIF LP������̔�p == 0
+LPあたりの費用 = FLAG:遺研_費用 * 100 / AL_LP期待値()
+SIF LPあたりの費用 == 0
     RETURNF 0
-RETURNF ��{������ * 100 / LP������̔�p
+RETURNF 基本研究費 * 100 / LPあたりの費用
 
 
-@AL_���̃_���[�W
+@AL_肉体ダメージ
 #FUNCTION
-RETURNF FLAG:�⌤_���̃_���[�W + FLAG:�⌤_�댯��
+RETURNF FLAG:遺研_肉体ダメージ + FLAG:遺研_危険性
 
 
-@AL_���_�_���[�W
+@AL_精神ダメージ
 #FUNCTION
-RETURNF FLAG:�⌤_���_�_���[�W + FLAG:�⌤_�댯��
+RETURNF FLAG:遺研_精神ダメージ + FLAG:遺研_危険性
 
 ;-------------------------------------------------
-; �����\�L�ɕϊ�����
-; ARG��172��n���ƁA"1.72"�Ƃ����������Ԃ�
+; 小数表記に変換する
+; ARGに172を渡すと、"1.72"という文字列を返す
 ;
-; (��)
+; (例)
 ; 8    -> "0.08"
 ; 56   -> "0.56"
 ; 3456 -> "34.56"
 ;-------------------------------------------------
-@AL_�����\�L�ɕϊ�(ARG)
+@AL_小数表記に変換(ARG)
 #FUNCTIONS
-#DIMS ������
-#DIM �����_
-#DIMS ����
-#DIMS ����
+#DIMS 文字列
+#DIM 小数点
+#DIMS 整数
+#DIMS 少数
 
-������ '= TOSTR(ARG)
+文字列 '= TOSTR(ARG)
 
-SIF STRLENS(������) == 1
-    ������ '= "00" + ������
-SIF STRLENS(������) == 2
-    ������ '= "0" + ������
+SIF STRLENS(文字列) == 1
+    文字列 '= "00" + 文字列
+SIF STRLENS(文字列) == 2
+    文字列 '= "0" + 文字列
 
-�����_ = STRLENS(������) - 2
-���� '= SUBSTRING(������, 0, �����_)
-���� '= SUBSTRING(������, �����_)
-RETURNF ���� + "." + ����
+小数点 = STRLENS(文字列) - 2
+整数 '= SUBSTRING(文字列, 0, 小数点)
+少数 '= SUBSTRING(文字列, 小数点)
+RETURNF 整数 + "." + 少数
 
 ;-------------------------------------------------
-; �╨1�`99����A��`����Ă���╨�̔ԍ���z��ɒ��o����
+; 遺物1～99から、定義されている遺物の番号を配列に抽出する
 ;-------------------------------------------------
-@AL_�╨��z��ɒ��o����(�z��)
-#DIM CONST �╨�̍ő吔 = 100
-#DIM REF �z��
-#DIM �╨�̐�
-#DIMS ���̖��O
+@AL_遺物を配列に抽出する(配列)
+#DIM CONST 遺物の最大数 = 100
+#DIM REF 配列
+#DIM 遺物の数
+#DIMS 元の名前
 
-���̖��O = %SaveStr:500%
+元の名前 = %SaveStr:500%
 
-�╨�̐� = 0
-FOR LOCAL, 1, �╨�̍ő吔
+遺物の数 = 0
+FOR LOCAL, 1, 遺物の最大数
     RESULT = 0
     TRYCALLFORM AL_Check_{LOCAL}
     IF RESULT
-        �z��:�╨�̐� = LOCAL
-        �╨�̐� ++
+        配列:遺物の数 = LOCAL
+        遺物の数 ++
     ENDIF
 NEXT
 
-; AL_Check���ĂԂƌ����Ώۂ̖��O���ύX�����̂Ō��ɖ߂��Ă���
-SaveStr:500 = %���̖��O%
+; AL_Checkを呼ぶと研究対象の名前が変更されるので元に戻しておく
+SaveStr:500 = %元の名前%
 
-RETURN �╨�̐�
+RETURN 遺物の数
 
 ;-------------------------------------------------
-; �����Ώۂ���������
+; 研究対象を解除する
 ;-------------------------------------------------
-@AL_�����Ώۂ���������
-FLAG:�⌤_�����Ώ� = 0
+@AL_研究対象を解除する
+FLAG:遺研_研究対象 = 0
 SaveStr:500 = 
-FLAG:�⌤_�댯�� = 0
-FLAG:�⌤_�������v = 0
-FLAG:�⌤_���̃_���[�W = 0
-FLAG:�⌤_���_�_���[�W = 0
-FLAG:�⌤_���s�� = 0
-FLAG:�⌤_��p = 0
+FLAG:遺研_危険性 = 0
+FLAG:遺研_研究利益 = 0
+FLAG:遺研_肉体ダメージ = 0
+FLAG:遺研_精神ダメージ = 0
+FLAG:遺研_失敗率 = 0
+FLAG:遺研_費用 = 0
 
 

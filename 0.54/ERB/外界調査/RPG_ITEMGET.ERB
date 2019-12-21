@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;’²¸(ƒAƒCƒeƒ€“üŽè)
+ï»¿;-------------------------------------------------
+;èª¿æŸ»(ã‚¢ã‚¤ãƒ†ãƒ å…¥æ‰‹)
 ;-------------------------------------------------
 @RPG_ITEMGET(ARG)
 #DIM L_INPUT
@@ -8,59 +8,59 @@
 
 L_I = ARG
 
-IF Flag:ƒtƒƒA_”­Œ©—¦ >= RAND:100
-	IF Flag:ƒtƒƒA_•iŽ¿ >= RAND:100
-		IF Flag:ƒtƒƒA_•iŽ¿ >= RAND:100
-			;‚•iŽ¿
+IF Flag:ãƒ•ãƒ­ã‚¢_ç™ºè¦‹çŽ‡ >= RAND:100
+	IF Flag:ãƒ•ãƒ­ã‚¢_å“è³ª >= RAND:100
+		IF Flag:ãƒ•ãƒ­ã‚¢_å“è³ª >= RAND:100
+			;é«˜å“è³ª
 			I_G = (RAND:6)+20
 		ELSE 
-			;’†•iŽ¿
+			;ä¸­å“è³ª
 			I_G = (RAND:6)+10
 		ENDIF
 	ELSE 
-		;’á•iŽ¿
+		;ä½Žå“è³ª
 		I_G = (RAND:6)
 	ENDIF
 ELSE 
-	;“üŽè‚Å‚«‚¸
+	;å…¥æ‰‹ã§ããš
 	I_G = -1
 ENDIF
 
 IF I_G != -1
-	SAVESTR:’²¸_ó‹µ =  y\\\\\\\’²¸Œ‹‰Ê\\\\\\\z
-	SAVESTR:’²¸_ó‹µ2 =  y\\\\%FLAGNAME:(2100+I_G)%‚ð“üŽè‚µ‚½B\\\\z
+	SAVESTR:èª¿æŸ»_çŠ¶æ³ =  ã€â€•â€•â€•â€•â€•â€•â€•èª¿æŸ»çµæžœâ€•â€•â€•â€•â€•â€•â€•ã€‘
+	SAVESTR:èª¿æŸ»_çŠ¶æ³2 =  ã€â€•â€•â€•â€•%FLAGNAME:(2100+I_G)%ã‚’å…¥æ‰‹ã—ãŸã€‚â€•â€•â€•â€•ã€‘
 	IF !RAND:10
-		SAVESTR:’²¸_ˆêŒ¾ = u%CSTR:L_I:Œê”ö”½‰ž%cc‚±‚ê‚ÍcHv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œ%CSTR:L_I:èªžå°¾åå¿œ%â€¦â€¦ã“ã‚Œã¯â€¦ï¼Ÿã€
 	ELSEIF !RAND:9
-		SAVESTR:’²¸_ˆêŒ¾ = u\\\Žg‚¦‚»‚¤%CSTR:L_I:Œê”ö‹tà%cc‘åä•v%CSTR:L_I:Œê”ö‹^–â%cHv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œâ€•â€•â€•ä½¿ãˆãã†%CSTR:L_I:èªžå°¾é€†èª¬%â€¦â€¦å¤§ä¸ˆå¤«%CSTR:L_I:èªžå°¾ç–‘å•%â€¦ï¼Ÿã€
 	ELSEIF !RAND:8
-		SAVESTR:’²¸_ˆêŒ¾ = uc‚ñ‚Å‚È‚¢%CSTR:L_I:Œê”ö‰ž“š2%cv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œâ€¦å‚·ã‚“ã§ãªã„%CSTR:L_I:èªžå°¾å¿œç­”2%â€¦ã€
 	ELSEIF !RAND:7
-		SAVESTR:’²¸_ˆêŒ¾ = ucccôv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œâ€¦â€¦â€¦â™ªã€
 	ELSEIF !RAND:6
-		SAVESTR:’²¸_ˆêŒ¾ = uc‚±‚ê‚Í–³Ž–‚Ý‚½‚¢%CSTR:L_I:Œê”öm’è2%v
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œâ€¦ã“ã‚Œã¯ç„¡äº‹ã¿ãŸã„%CSTR:L_I:èªžå°¾è‚¯å®š2%ã€
 	ELSEIF !RAND:5
-		SAVESTR:’²¸_ˆêŒ¾ = u‚±‚ê‚àE‚Á‚Äs%CSTR:L_I:Œê”ös‚­%v
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œã“ã‚Œã‚‚æ‹¾ã£ã¦è¡Œ%CSTR:L_I:èªžå°¾è¡Œã%ã€
 	ELSEIF !RAND:4
-		SAVESTR:’²¸_ˆêŒ¾ = u‚±‚ñ‚ÈŠ‚ÉcŽ‚Á‚Äs%CSTR:L_I:Œê”ös‚­%cv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œã“ã‚“ãªæ‰€ã«â€¦æŒã£ã¦è¡Œ%CSTR:L_I:èªžå°¾è¡Œã%â€¦ã€
 	ELSEIF !RAND:3
-		SAVESTR:’²¸_ˆêŒ¾ = ucHAc‚±‚ê‚Ícv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œâ€¦ï¼Ÿã€â€¦ã“ã‚Œã¯â€¦ã€
 	ELSEIF !RAND:2
-		SAVESTR:’²¸_ˆêŒ¾ = u%CSTR:L_I:Œê”ö”÷Î%A‘fÞ”­Œ©%CSTR:L_I:Œê”öm’è2%v
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œ%CSTR:L_I:èªžå°¾å¾®ç¬‘%ã€ç´ æç™ºè¦‹%CSTR:L_I:èªžå°¾è‚¯å®š2%ã€
 	ELSE
-		SAVESTR:’²¸_ˆêŒ¾ = u‚Ü‚¸‚Ícˆê‚Âccv
+		SAVESTR:èª¿æŸ»_ä¸€è¨€ = ã€Œã¾ãšã¯â€¦ä¸€ã¤â€¦â€¦ã€
 	ENDIF
 	FLAG:(2100+I_G) += 1
 ELSE 
-	SAVESTR:’²¸_ó‹µ =  y\\\\\\\’²¸Œ‹‰Ê\\\\\\\z
-	SAVESTR:’²¸_ó‹µ2 =  y\\‰½‚àŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B\\z
+	SAVESTR:èª¿æŸ»_çŠ¶æ³ =  ã€â€•â€•â€•â€•â€•â€•â€•èª¿æŸ»çµæžœâ€•â€•â€•â€•â€•â€•â€•ã€‘
+	SAVESTR:èª¿æŸ»_çŠ¶æ³2 =  ã€â€•â€•ä½•ã‚‚è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚â€•â€•ã€‘
 ENDIF
 
 
 
 
 
-Flag:ƒtƒƒA_”­Œ©—¦ = RAND:100
+Flag:ãƒ•ãƒ­ã‚¢_ç™ºè¦‹çŽ‡ = RAND:100
 
 
 

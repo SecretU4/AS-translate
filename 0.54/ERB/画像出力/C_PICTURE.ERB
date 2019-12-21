@@ -1,13 +1,13 @@
-@C_PICTURE(C_T, L_X, L_Y)
+ï»¿@C_PICTURE(C_T, L_X, L_Y)
 #DIM C_T
 #DIM L_X
 #DIM L_Y
 #DIMS LSTR_0
 ;-------------------------------------------------
-;•`‰æˆ—
+;æç”»å‡¦ç†
 ;-------------------------------------------------
 
-LSTR_0 = <nonbutton pos='{L_X}'><img src='MAIN_BG_{FLAG:ŽžŠÔ‘Ñ}' height = '1000'  ypos = '{L_Y-150}'></nonbutton>
+LSTR_0 = <nonbutton pos='{L_X}'><img src='MAIN_BG_{FLAG:æ™‚é–“å¸¯}' height = '1000'  ypos = '{L_Y-150}'></nonbutton>
 IF Talent:C_T:NPC == 0
 	HTML_PRINT C_PICTURE_HTML(C_T, L_X, L_Y, -465, 850, LSTR_0)
 ELSE
@@ -18,7 +18,7 @@ ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;ƒg[ƒNŽž
+;ãƒˆãƒ¼ã‚¯æ™‚
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -31,11 +31,11 @@ ENDIF
 
 L_X = 0
 L_Y = 0
-LS_type   = %INFO_STR_KEIKOU(CFLAG:C_T:’lŒXŒü)%
-LS_kudoki = %INFO_STR_KUDOKI(CFLAG:C_T:Œûà‚«’l)%
+LS_type   = %INFO_STR_KEIKOU(CFLAG:C_T:å€¤å‚¾å‘)%
+LS_kudoki = %INFO_STR_KUDOKI(CFLAG:C_T:å£èª¬ãå€¤)%
 
 ;-------------------------------------------------
-;•`‰æˆ—
+;æç”»å‡¦ç†
 ;-------------------------------------------------
 DRAWLINE
 IF Talent:C_T:NPC == 0
@@ -44,73 +44,73 @@ ELSE
 	HTML_PRINT C_PICTURE_NPC_HTML(C_T, L_X, L_Y, 0, 850)
 ENDIF
 
-PRINTFORM @@@@@
-CALL PRINT_LABEL("–¼‘O",,,CALLNAME:C_T)
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_LABEL("åå‰",,,CALLNAME:C_T)
 PRINTL
-PRINTFORM @@@@@
-CALL PRINT_STATUS(C_T, "DŠ´“x")
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_STATUS(C_T, "å¥½æ„Ÿåº¦")
 PRINTL
-PRINTFORM @@@@@
-CALL PRINT_STATUS(C_T, "’‰½’l")
-CALL PRINT_STATUS(C_T, "ˆ¤î’l")
-CALL PRINT_STATUS(C_T, "ˆú—’l")
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_STATUS(C_T, "å¿ èª å€¤")
+CALL PRINT_STATUS(C_T, "æ„›æƒ…å€¤")
+CALL PRINT_STATUS(C_T, "æ·«ä¹±å€¤")
 PRINTL
-PRINTFORM @@@@@
-CALL PRINT_LABEL("ŒXŒü",,,LS_type)
-CALL PRINT_LABEL("“÷‘ÌŠÖŒW",,,LS_kudoki)
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_LABEL("å‚¾å‘",,,LS_type)
+CALL PRINT_LABEL("è‚‰ä½“é–¢ä¿‚",,,LS_kudoki)
 PRINTL
-PRINTFORML @@@@@
-IF CFlag:C_T:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ” != 0
-	PRINTFORM @@@@@
-	CALL PRINT_LABEL("Œ»Ý”Y‚Ý‰ðŒˆ’†",,,@"Œ‹‰Ê‚Ü‚Å‚ ‚Æ{(CFlag:C_T:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ”)+1}“ú",,COLOR(@"”Y‚Ý_‰ðŒˆ{CFlag:C_T:Zl_”Y‚Ý‰ðŒˆ”»’è‰ñ”}"))
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
+IF CFlag:C_T:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•° != 0
+	PRINTFORM ã€€ã€€ã€€ã€€ã€€
+	CALL PRINT_LABEL("ç¾åœ¨æ‚©ã¿è§£æ±ºä¸­",,,@"çµæžœã¾ã§ã‚ã¨{(CFlag:C_T:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•°)+1}æ—¥",,COLOR(@"æ‚©ã¿_è§£æ±º{CFlag:C_T:ä½äºº_æ‚©ã¿è§£æ±ºåˆ¤å®šå›žæ•°}"))
 	PRINTL
 ELSE
-	;‘O‰ñŒ‹‰Ê•\Ž¦—p
-	IF CFlag:C_T:Zl_”Y‚Ý‰ðŒˆ’† == 0 && CFlag:C_T:Zl_”Y‚Ý‘O‰ñ‹¦—Í > 0
-		SELECTCASE CFlag:C_T:Zl_”Y‚Ý‘O‰ñ‹¦—Í
+	;å‰å›žçµæžœè¡¨ç¤ºç”¨
+	IF CFlag:C_T:ä½äºº_æ‚©ã¿è§£æ±ºä¸­ == 0 && CFlag:C_T:ä½äºº_æ‚©ã¿å‰å›žå”åŠ› > 0
+		SELECTCASE CFlag:C_T:ä½äºº_æ‚©ã¿å‰å›žå”åŠ›
 			CASE 1
-				LOCALS:1 = Ž‘‹àŠñ•t
+				LOCALS:1 = è³‡é‡‘å¯„ä»˜
 			CASE 2
-				LOCALS:1 = –@‚Ì—Í
+				LOCALS:1 = æ³•ã®åŠ›
 			CASE 3
-				LOCALS:1 = Ž¡—Ã
+				LOCALS:1 = æ²»ç™‚
 			CASE 4
-				LOCALS:1 = ƒAƒhƒoƒCƒX
+				LOCALS:1 = ã‚¢ãƒ‰ãƒã‚¤ã‚¹
 			CASE 5
-				LOCALS:1 = “X‚ÌÐ‰î
+				LOCALS:1 = åº—ã®ç´¹ä»‹
 			CASE 6
-				LOCALS:1 = —ã‚Ü‚·
+				LOCALS:1 = åŠ±ã¾ã™
 			CASE 7
-				LOCALS:1 = ‹³Žö
+				LOCALS:1 = æ•™æŽˆ
 			CASE 8
-				LOCALS:1 = ‰\‚ð—¬‚·
+				LOCALS:1 = å™‚ã‚’æµã™
 			CASE 9
-				LOCALS:1 = î•ñ‘€ì
+				LOCALS:1 = æƒ…å ±æ“ä½œ
 			CASE 10
-				LOCALS:1 = —Í‚ðs‚­‚·
+				LOCALS:1 = åŠ›ã‚’å°½ãã™
 		ENDSELECT
-		SELECTCASE CFlag:C_T:Zl_”Y‚Ý‘O‰ñŒ‹‰Ê
+		SELECTCASE CFlag:C_T:ä½äºº_æ‚©ã¿å‰å›žçµæžœ
 			CASE 0
-				LOCALS:2 = Ž¸”s
+				LOCALS:2 = å¤±æ•—
 			CASE 1
-				LOCALS:2 = ¬Œ÷
+				LOCALS:2 = æˆåŠŸ
 			CASE 2
-				LOCALS:2 = ‘å¬Œ÷
+				LOCALS:2 = å¤§æˆåŠŸ
 			CASE 3
-				LOCALS:2 = ‰ðŒˆÏ
+				LOCALS:2 = è§£æ±ºæ¸ˆ
 		ENDSELECT
-		IF LOCALS:2 != "‰ðŒˆÏ"
-			PRINTFORM @@@@@
-			CALL PRINT_LABEL("‘O‰ñ‚Ì‰ðŒˆ•û–@",,,@"%LOCALS:1%(%LOCALS:2%)")
+		IF LOCALS:2 != "è§£æ±ºæ¸ˆ"
+			PRINTFORM ã€€ã€€ã€€ã€€ã€€
+			CALL PRINT_LABEL("å‰å›žã®è§£æ±ºæ–¹æ³•",,,@"%LOCALS:1%(%LOCALS:2%)")
 			PRINTL
 		ELSE
-			PRINTFORML @@@@@
+			PRINTFORML ã€€ã€€ã€€ã€€ã€€
 		ENDIF
 	ELSE
-		PRINTFORML @@@@@
+		PRINTFORML ã€€ã€€ã€€ã€€ã€€
 	ENDIF
 ENDIF
-PRINTFORML @@@@@%CAFE_STR_KANKEIDANKAI(C_T)%
+PRINTFORML ã€€ã€€ã€€ã€€ã€€%CAFE_STR_KANKEIDANKAI(C_T)%
 DRAWLINE
 
 
@@ -118,7 +118,7 @@ DRAWLINE
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;ƒXƒe[ƒ^ƒX•t
+;ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ä»˜
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -141,47 +141,47 @@ DRAWLINE
 L_X = 0
 L_Y = -800
 
-CS_race  = %INFO_STR_SYUZOKU(CFLAG:L_T:Zl_Ží‘°)%
-CS_align = %INFO_STR_ZOKUSEI(CFLAG:L_T:Zl_‘®«)%
-CS_chii  = %INFO_STR_CHII(CFLAG:L_T:Zl_’nˆÊ)%
+CS_race  = %INFO_STR_SYUZOKU(CFLAG:L_T:ä½äºº_ç¨®æ—)%
+CS_align = %INFO_STR_ZOKUSEI(CFLAG:L_T:ä½äºº_å±žæ€§)%
+CS_chii  = %INFO_STR_CHII(CFLAG:L_T:ä½äºº_åœ°ä½)%
 CS_size  = %INFO_STR_THREESIZE(L_T)%
-CS_hairC = %INFO_STR_HAIRCOLOR(CFLAG:L_T:”¯F)%
-CS_hair  = %INFO_STR_HAIR(CFLAG:L_T:”¯Œ^)%
-CS_eye   = %INFO_STR_EYE(CFLAG:L_T:–Ú)%
-CS_eyeC  = %INFO_STR_EYECOLOR(CFLAG:L_T:“µF)%
-CS_body  = %INFO_STR_STYLE(CFLAG:L_T:‘ÌŒ^)%
+CS_hairC = %INFO_STR_HAIRCOLOR(CFLAG:L_T:é«ªè‰²)%
+CS_hair  = %INFO_STR_HAIR(CFLAG:L_T:é«ªåž‹)%
+CS_eye   = %INFO_STR_EYE(CFLAG:L_T:ç›®)%
+CS_eyeC  = %INFO_STR_EYECOLOR(CFLAG:L_T:çž³è‰²)%
+CS_body  = %INFO_STR_STYLE(CFLAG:L_T:ä½“åž‹)%
 
 ;-------------------------------------------------
-;•`‰æˆ—
+;æç”»å‡¦ç†
 ;-------------------------------------------------
-PRINTFORM @@@@@
-CALL PRINT_LABEL("Ží‘°",,,CS_race)
-CALL PRINT_LABEL("‘®«",,,CS_align)
-CALL PRINT_LABEL("’nˆÊ",,,CS_chii)
-CALL PRINT_STATUS(L_T,"vŒ£’l")
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_LABEL("ç¨®æ—",,,CS_race)
+CALL PRINT_LABEL("å±žæ€§",,,CS_align)
+CALL PRINT_LABEL("åœ°ä½",,,CS_chii)
+CALL PRINT_STATUS(L_T,"è²¢çŒ®å€¤")
 PRINTL
-PRINTFORM @@@@@
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
 CALL PRINT_LABEL(CS_size)
 PRINTL
-PRINTFORM @@@@@
-CALL PRINT_LABEL("”¯F",,,CS_hairC)
-CALL PRINT_LABEL("”¯Œ^",,,CS_hair)
-CALL PRINT_LABEL("Šá",,,  CS_eye)
-CALL PRINT_LABEL("ŠáF",,,CS_eyeC)
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_LABEL("é«ªè‰²",,,CS_hairC)
+CALL PRINT_LABEL("é«ªåž‹",,,CS_hair)
+CALL PRINT_LABEL("çœ¼",,,  CS_eye)
+CALL PRINT_LABEL("çœ¼è‰²",,,CS_eyeC)
 PRINTL
-PRINTFORM @@@@@
-CALL PRINT_LABEL("‘ÌŒ^",,,CS_body)
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_LABEL("ä½“åž‹",,,CS_body)
 PRINTL
-PRINTFORM @@@@@
-CALL PRINT_LABEL("ƒ`ƒƒ[ƒ€ƒ|ƒCƒ“ƒg",,,CSTR:L_T:ƒ`ƒƒ[ƒ€ƒ|ƒCƒ“ƒg)
-CALL PRINT_LABEL("•È",,,CSTR:L_T:•È)
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_LABEL("ãƒãƒ£ãƒ¼ãƒ ãƒã‚¤ãƒ³ãƒˆ",,,CSTR:L_T:ãƒãƒ£ãƒ¼ãƒ ãƒã‚¤ãƒ³ãƒˆ)
+CALL PRINT_LABEL("ç™–",,,CSTR:L_T:ç™–)
 PRINTL
-PRINTFORM @@@@@
-PRINTFORM yˆâ“`Žq:
+PRINTFORM ã€€ã€€ã€€ã€€ã€€
+PRINTFORM ã€éºä¼å­:
 CALL INFO_TARGET_GENOM(L_T)
-PRINTFORML z
-PRINTFORML @@@@@
-PRINTFORML @@@@@
+PRINTFORML ã€‘
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
 
 IF Talent:L_T:NPC == 0
 	HTML_PRINT C_PICTURE_HTML(L_T, L_X, L_Y, 0, 850)
@@ -193,7 +193,7 @@ ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;‰B‚µƒXƒe[ƒ^ƒX(—‡)
+;éš ã—ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹(è£¸)
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -202,12 +202,12 @@ ENDIF
 #DIM L_X
 #DIM L_Y
 #DIMS LSTR
-#DIMS LSTR_4 ;”DPó‘Ô‚Ì•\Ž¦i•¶Žš—ñî•ñ‚Ì‚Ýj
-#DIMS LSTR_8 ;ƒAƒCƒRƒ“Š
-#DIMS LSTR_9 ;ƒAƒCƒRƒ“—‘Žq
-#DIMS LSTR_10;ƒAƒCƒRƒ“Žó¸
-#DIMS LSTR_11;‘ÙŽ™•`ŽÊ‰æ‘œ
-#DIMS LSTR_Z ;Œ‹‡—p
+#DIMS LSTR_4 ;å¦Šå¨ çŠ¶æ…‹ã®è¡¨ç¤ºï¼ˆæ–‡å­—åˆ—æƒ…å ±ã®ã¿ï¼‰
+#DIMS LSTR_8 ;ã‚¢ã‚¤ã‚³ãƒ³â™€
+#DIMS LSTR_9 ;ã‚¢ã‚¤ã‚³ãƒ³åµå­
+#DIMS LSTR_10;ã‚¢ã‚¤ã‚³ãƒ³å—ç²¾
+#DIMS LSTR_11;èƒŽå…æå†™ç”»åƒ
+#DIMS LSTR_Z ;çµåˆç”¨
 #DIM C_ninsin
 #DIM L_SIEK
 #DIMS CS_ninsin
@@ -216,46 +216,46 @@ L_T = ARG
 L_X = 0
 L_Y = 0
 C_ninsin = C_PICTURE_NINSIN(ARG)
-L_SIEK = CFLAG:L_T:Žq‹{¸‰t’™‘ —Ê/5000
+L_SIEK = CFLAG:L_T:å­å®®ç²¾æ¶²è²¯è”µé‡/5000
 SIF L_SIEK >= 4
 	L_SIEK = 4
 
-IF CFLAG:L_T:”DPƒtƒ‰ƒO == 1 && TALENT:L_T:”DP != 0
-	CS_ninsin =yŽq‹{:%CALLNAME:MASTER%‚Æ‚ÌŽq‹ŸzyŒo‰ßT”:{TALENT:L_T:”DP}z
-ELSEIF CFLAG:L_T:”DPƒtƒ‰ƒO == 70 && TALENT:L_T:”DP != 0
-	CS_ninsin =yŽq‹{:Žx‰‡Z‘î‚ÌÂ”N‚Æ‚ÌŽq‹ŸzyŒo‰ßT”:{TALENT:L_T:”DP}z
-ELSEIF CFLAG:L_T:”DPƒtƒ‰ƒO == 71 && TALENT:L_T:”DP != 0
-	CS_ninsin =yŽq‹{:­”N‚Æ‚ÌŽq‹ŸzyŒo‰ßT”:{TALENT:L_T:”DP}z
-ELSEIF CFLAG:L_T:”DPƒtƒ‰ƒO == 2 && TALENT:L_T:”DP != 0
-	CS_ninsin =yŽq‹{:%CSTR:L_T:3500%‚Æ‚ÌŽq‹ŸzyŒo‰ßT”:{TALENT:L_T:”DP}z
-ELSEIF CFLAG:L_T:”DPƒtƒ‰ƒO == 3 && TALENT:L_T:”DP != 0
-	CS_ninsin =yŽq‹{:ˆ¤l‚Æ‚ÌŽq‹ŸzyŒo‰ßT”:{TALENT:L_T:”DP}z
-ELSEIF  TALENT:L_T:Žó¸ != 0 
-	CS_ninsin =yŽq‹{:Žó¸’†zy‘Ù‰è’†:{TALENT:L_T:Žó¸}z
-ELSEIF TALENT:L_T:”DP == 0 && TALENT:L_T:Žó¸ == 0 && L_SIEK >= 1
+IF CFLAG:L_T:å¦Šå¨ ãƒ•ãƒ©ã‚° == 1 && TALENT:L_T:å¦Šå¨  != 0
+	CS_ninsin =ã€å­å®®:%CALLNAME:MASTER%ã¨ã®å­ä¾›ã€‘ã€çµŒéŽé€±æ•°:{TALENT:L_T:å¦Šå¨ }ã€‘
+ELSEIF CFLAG:L_T:å¦Šå¨ ãƒ•ãƒ©ã‚° == 70 && TALENT:L_T:å¦Šå¨  != 0
+	CS_ninsin =ã€å­å®®:æ”¯æ´ä½å®…ã®é’å¹´ã¨ã®å­ä¾›ã€‘ã€çµŒéŽé€±æ•°:{TALENT:L_T:å¦Šå¨ }ã€‘
+ELSEIF CFLAG:L_T:å¦Šå¨ ãƒ•ãƒ©ã‚° == 71 && TALENT:L_T:å¦Šå¨  != 0
+	CS_ninsin =ã€å­å®®:å°‘å¹´ã¨ã®å­ä¾›ã€‘ã€çµŒéŽé€±æ•°:{TALENT:L_T:å¦Šå¨ }ã€‘
+ELSEIF CFLAG:L_T:å¦Šå¨ ãƒ•ãƒ©ã‚° == 2 && TALENT:L_T:å¦Šå¨  != 0
+	CS_ninsin =ã€å­å®®:%CSTR:L_T:3500%ã¨ã®å­ä¾›ã€‘ã€çµŒéŽé€±æ•°:{TALENT:L_T:å¦Šå¨ }ã€‘
+ELSEIF CFLAG:L_T:å¦Šå¨ ãƒ•ãƒ©ã‚° == 3 && TALENT:L_T:å¦Šå¨  != 0
+	CS_ninsin =ã€å­å®®:æ„›äººã¨ã®å­ä¾›ã€‘ã€çµŒéŽé€±æ•°:{TALENT:L_T:å¦Šå¨ }ã€‘
+ELSEIF  TALENT:L_T:å—ç²¾ != 0 
+	CS_ninsin =ã€å­å®®:å—ç²¾ä¸­ã€‘ã€èƒŽèŠ½ä¸­:{TALENT:L_T:å—ç²¾}ã€‘
+ELSEIF TALENT:L_T:å¦Šå¨  == 0 && TALENT:L_T:å—ç²¾ == 0 && L_SIEK >= 1
 	IF    L_SIEK >= 4 
-		CS_ninsin =yŽq‹{:‚à‚Í‚â¸‰tƒ^ƒ“ƒNŒÄ‚×‚é’ö‚Ì%CALLNAME:MASTER%‚Ì¸Žq‚ª—‘Žq‚ð‹‚ß‚Äå¿‚¢‚Ä‚¢‚éz
+		CS_ninsin =ã€å­å®®:ã‚‚ã¯ã‚„ç²¾æ¶²ã‚¿ãƒ³ã‚¯å‘¼ã¹ã‚‹ç¨‹ã®%CALLNAME:MASTER%ã®ç²¾å­ãŒåµå­ã‚’æ±‚ã‚ã¦è ¢ã„ã¦ã„ã‚‹ã€‘
 	ELSEIF   L_SIEK >= 3
-		CS_ninsin =yŽq‹{:ˆì‚ê‚ñ‚Î‚©‚è‚Ì%CALLNAME:MASTER%‚Ì¸Žq‚ªŽq‹{“à‚ð‰j‚¬‰ñ‚Á‚Ä‚¢‚éz
+		CS_ninsin =ã€å­å®®:æº¢ã‚Œã‚“ã°ã‹ã‚Šã®%CALLNAME:MASTER%ã®ç²¾å­ãŒå­å®®å†…ã‚’æ³³ãŽå›žã£ã¦ã„ã‚‹ã€‘
 	ELSEIF   L_SIEK >= 2
-		CS_ninsin =yŽq‹{:Žqì‚è‚É\•ª‚È%CALLNAME:MASTER%‚Ì¸‰t‚ªŽq‹{‚É”[‚Ü‚Á‚Ä‚¢‚éz
+		CS_ninsin =ã€å­å®®:å­ä½œã‚Šã«ååˆ†ãª%CALLNAME:MASTER%ã®ç²¾æ¶²ãŒå­å®®ã«ç´ã¾ã£ã¦ã„ã‚‹ã€‘
 	ELSEIF   L_SIEK >= 1
-		CS_ninsin =yŽq‹{:%CALLNAME:MASTER%‚Ì¸‰t‚Å”’‚­õ‚ß‚ç‚ê‚Ä‚¢‚éz
+		CS_ninsin =ã€å­å®®:%CALLNAME:MASTER%ã®ç²¾æ¶²ã§ç™½ãæŸ“ã‚ã‚‰ã‚Œã¦ã„ã‚‹ã€‘
 	ENDIF
 ELSE
-	CS_ninsin =yŽq‹{:z
+	CS_ninsin =ã€å­å®®:ã€‘
 ENDIF
 DRAWLINE
-PRINTFORML ¡----------------‹@–§“o˜^î•ñ----------------¡
+PRINTFORML â– ----------------æ©Ÿå¯†ç™»éŒ²æƒ…å ±----------------â– 
 
-LSTR_4 = <nonbutton pos='{L_X}'>@@@@@@@@@@%CS_ninsin%</nonbutton>
-LSTR_8 = <nonbutton pos='{L_X}'>@@@@@<img src='EX_A_0' height = '100'  ypos = '500'></nonbutton>
-LSTR_9 = <nonbutton pos='{L_X}'>@@@@@<img src='EX_A_1' height = '100'  ypos = '600'></nonbutton>
-LSTR_10 = <nonbutton pos='{L_X}'>@@@@@<img src='EX_A_2' height = '100'  ypos = '700'></nonbutton>
-IF TALENT:L_T:”DP == 0 && TALENT:L_T:Žó¸ == 0
-	LSTR_11 = <nonbutton pos='{L_X}'>@@@@@<img src='H_TNS_0_{L_SIEK}' height = '500'  ypos = '0'></nonbutton>
+LSTR_4 = <nonbutton pos='{L_X}'>ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€%CS_ninsin%</nonbutton>
+LSTR_8 = <nonbutton pos='{L_X}'>ã€€ã€€ã€€ã€€ã€€<img src='EX_A_0' height = '100'  ypos = '500'></nonbutton>
+LSTR_9 = <nonbutton pos='{L_X}'>ã€€ã€€ã€€ã€€ã€€<img src='EX_A_1' height = '100'  ypos = '600'></nonbutton>
+LSTR_10 = <nonbutton pos='{L_X}'>ã€€ã€€ã€€ã€€ã€€<img src='EX_A_2' height = '100'  ypos = '700'></nonbutton>
+IF TALENT:L_T:å¦Šå¨  == 0 && TALENT:L_T:å—ç²¾ == 0
+	LSTR_11 = <nonbutton pos='{L_X}'>ã€€ã€€ã€€ã€€ã€€<img src='H_TNS_0_{L_SIEK}' height = '500'  ypos = '0'></nonbutton>
 ELSE
-	LSTR_11 = <nonbutton pos='{L_X}'>@@@@@<img src='NINSIN_0_{C_ninsin}' height = '500'  ypos = '0'></nonbutton>
+	LSTR_11 = <nonbutton pos='{L_X}'>ã€€ã€€ã€€ã€€ã€€<img src='NINSIN_0_{C_ninsin}' height = '500'  ypos = '0'></nonbutton>
 ENDIF
 LSTR_Z = %LSTR_4%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%
 
@@ -266,30 +266,30 @@ ELSE
 ENDIF
 
 HTML_PRINT LSTR
-;¡‚ÌŠ‚±‚Ì•\Ž¦‚ª•K‚¸ƒZƒbƒg‚Å‚Â‚¢‚Ä‚­‚é‚Ì‚Å‚±‚ÌŠÖ”‘¤‚Å–â‘è‚È‚¢‚Í‚¸
-PRINTFORML @@@@@@@@
-PRINTFORML @@@@@@@@
-PRINTFORML @@@@@@@@
-PRINTFORML @@@@@@@@
-PRINTFORM @@@@@@
-CALL PRINT_STATUS(L_T, "•ê‘ÌƒŒƒxƒ‹")
+;ä»Šã®æ‰€ã“ã®è¡¨ç¤ºãŒå¿…ãšã‚»ãƒƒãƒˆã§ã¤ã„ã¦ãã‚‹ã®ã§ã“ã®é–¢æ•°å´ã§å•é¡Œãªã„ã¯ãš
+PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+PRINTFORM ã€€ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_STATUS(L_T, "æ¯ä½“ãƒ¬ãƒ™ãƒ«")
 PRINTL
-PRINTFORM @@@@@@
-CALL PRINT_STATUS(L_T, "—‘ŽqƒŒƒxƒ‹")
+PRINTFORM ã€€ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_STATUS(L_T, "åµå­ãƒ¬ãƒ™ãƒ«")
 PRINTL
-PRINTFORM @@@@@@
-CALL PRINT_RANGE_STATUS(L_T, "Žó¸‘Ï‹v’l", "Žó¸/‘Ï‹v’l")	; ŒŸõƒL[(‘æ3ˆø”)‚Í/‚ÅPRE/POST•ªŠ„‚µ‚ÄŒŸõ‚·‚éB
-CALL PRINT_STATUS(L_T, "Žó¸Šm—¦")
+PRINTFORM ã€€ã€€ã€€ã€€ã€€ã€€
+CALL PRINT_RANGE_STATUS(L_T, "å—ç²¾è€ä¹…å€¤", "å—ç²¾/è€ä¹…å€¤")	; æ¤œç´¢ã‚­ãƒ¼(ç¬¬3å¼•æ•°)ã¯/ã§PRE/POSTåˆ†å‰²ã—ã¦æ¤œç´¢ã™ã‚‹ã€‚
+CALL PRINT_STATUS(L_T, "å—ç²¾ç¢ºçŽ‡")
 PRINTL
 
 
 
 ;-------------------------------------------------
-;Š|‚¯‡‚¢•\Ž¦—pAŒ»Ý‰¼ŽÀ‘•’†
+;æŽ›ã‘åˆã„è¡¨ç¤ºç”¨ã€ç¾åœ¨ä»®å®Ÿè£…ä¸­
 ;-------------------------------------------------
 @C_PICTURE_PAIR_TALK_A(C_ID)
 #DIM C_ID
-;1sà98‚ÌYÀ•W
+;1è¡Œâ‰’98ã®Yåº§æ¨™
 IF C_ID == 0
 	PRINTFORML
 ELSEIF TALENT:C_ID:NPC == 0
@@ -311,7 +311,7 @@ ENDIF
 
 
 ;-------------------------------------------------
-;‚«‚¹‚©‚¦ˆ—‚ÌƒvƒŒƒrƒ…[—p
+;ãã›ã‹ãˆå‡¦ç†ã®ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ç”¨
 ;-------------------------------------------------
 @C_PICTURE_FITTING(C_ID, MEMO_COS, NEW_COS)
 #DIM         C_ID
@@ -331,9 +331,9 @@ NEXT
 HTML_PRINT C_PICTURE_HTML(C_ID, 1200, -200, 0, 850)
 HTML_PRINT C_PICTURE_HTML_NAKED(C_ID, 1700, -300, 0, 850)
 
-PRINTFORML @@@@@@@@@@¨
-PRINTFORML @@@@@
-PRINTFORML @@@@@
-PRINTFORML @@@@@
-PRINTFORML @@@@@
+PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â†’
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
+PRINTFORML ã€€ã€€ã€€ã€€ã€€
 DRAWLINE

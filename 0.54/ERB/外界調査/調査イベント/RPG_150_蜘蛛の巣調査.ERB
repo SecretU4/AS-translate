@@ -1,30 +1,30 @@
-;-------------------------------------------------
-;�w偂̑�����
+﻿;-------------------------------------------------
+;蜘蛛の巣調査
 ;-------------------------------------------------
 @RPG_EVENT_150(ARG:0,ARG:1)
 #DIM L_INPUT
 #DIM L_I
 #DIM L_G
 L_G = RAND:20
-ARG = Flag:�����L����
-Flag:�����C�x���g������ = 1
-Flag:�����C�x���g�ԍ� = 150
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 150
 
 L_I = ARG
 CLEARLINE LINECOUNT
 DRAWLINE
 SETCOLOR 150,250,150
-PRINTFORML �y�����C�x���g:�w偂̑������z
+PRINTFORML 【調査イベント:蜘蛛の巣調査】
 PRINTFORML 
-PRINTFORML �A�C�z�[�g�����菄�炳�ꂽ�ł��낤����Ȓw偂̑��𔭌�����B
-PRINTFORML �ӂ�����n������͗���ɂ��Ă���悤�ŁA%CALLNAME:L_I%�͍��̂����ɒ��������݂�B
-PRINTFORML ����������Ȃ��悤���𓥂ݓ����ƁA�w偂̑��̒��S�ɂ͗n�����ꂽ��̓��򂪒������Ă����B
-PRINTFORML �߂����l����H�ׂ₷���悤���H�����悤�����A���ꂩ��͋M�d�ȃQ�m�����̎�ł���B
-PRINTFORML %CALLNAME:L_I%�͗~���炸���T�C�Y�قǂɐ؂���A�f�ނƂ��Ċ��p���邱�Ƃɂ����c
+PRINTFORML アイホートが張り巡らされたであろう巨大な蜘蛛の巣を発見する。
+PRINTFORML 辺りを見渡すが主は留守にしているようで、%CALLNAME:L_I%は今のうちに調査を試みる。
+PRINTFORML 引っかからないよう足を踏み入れると、蜘蛛の巣の中心には溶解された謎の肉塊が鎮座していた。
+PRINTFORML 捕った獲物を食べやすいよう加工したようだが、これからは貴重なゲノムが採取できる。
+PRINTFORML %CALLNAME:L_I%は欲張らず掌サイズほどに切り取り、素材として活用することにした…
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 
-PRINTFORML %FlagNAME:(2500+L_G)%��2���肵��
+PRINTFORML %FlagNAME:(2500+L_G)%を2個入手した
 PRINTFORML 
 PRINTFORML 
 PRINTFORMW 

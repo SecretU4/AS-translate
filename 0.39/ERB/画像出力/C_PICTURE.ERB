@@ -1,13 +1,13 @@
-@C_PICTURE(C_T, L_X, L_Y)
+﻿@C_PICTURE(C_T, L_X, L_Y)
 #DIM C_T
 #DIM L_X
 #DIM L_Y
 #DIMS LSTR_0
 ;-------------------------------------------------
-;�`�揈��
+;描画処理
 ;-------------------------------------------------
 
-LSTR_0 = <nonbutton pos='{L_X}'><img src='MAIN_BG_{FLAG:���ԑ�}' height = '1000'  ypos = '{L_Y-150}'></nonbutton>
+LSTR_0 = <nonbutton pos='{L_X}'><img src='MAIN_BG_{FLAG:時間帯}' height = '1000'  ypos = '{L_Y-150}'></nonbutton>
 IF Talent:C_T:NPC == 0
 	HTML_PRINT C_PICTURE_HTML(C_T, L_X, L_Y, -465, 850, LSTR_0)
 ELSE
@@ -18,7 +18,7 @@ ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;�g�[�N��
+;トーク時
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -31,11 +31,11 @@ ENDIF
 
 L_X = 0
 L_Y = 0
-LS_type   = %INFO_STR_KEIKOU(CFLAG:C_T:�l�X��)%
-LS_kudoki = %INFO_STR_KUDOKI(CFLAG:C_T:�������l)%
+LS_type   = %INFO_STR_KEIKOU(CFLAG:C_T:値傾向)%
+LS_kudoki = %INFO_STR_KUDOKI(CFLAG:C_T:口説き値)%
 
 ;-------------------------------------------------
-;�`�揈��
+;描画処理
 ;-------------------------------------------------
 DRAWLINE
 IF Talent:C_T:NPC == 0
@@ -44,58 +44,58 @@ ELSE
 	HTML_PRINT C_PICTURE_NPC_HTML(C_T, L_X, L_Y, 0, 850)
 ENDIF
 
-PRINTFORML �@�@�@�@�@�y���O:%CALLNAME:C_T%�z
-PRINTFORML �@�@�@�@�@�y�D���x:{CFlag:C_T:�D���x}�z
-PRINTFORML �@�@�@�@�@�y�����l:{CFLAG:C_T:�����l}�z�y����l:{CFLAG:C_T:����l}�z�y�����l:{CFLAG:C_T:�����l}�z
-PRINTFORML �@�@�@�@�@�y�X��:%LS_type%�z�y���̊֌W:%LS_kudoki%�z
-PRINTFORML �@�@�@�@�@
-IF CFlag:C_T:�Z�l_�Y�݉�������� != 0
-	PRINTFORML �@�@�@�@�@�y���ݔY�݉�����:���ʂ܂ł���{(CFlag:C_T:�Z�l_�Y�݉��������)+1}���z
+PRINTFORML 　　　　　【名前:%CALLNAME:C_T%】
+PRINTFORML 　　　　　【好感度:{CFlag:C_T:好感度}】
+PRINTFORML 　　　　　【忠誠値:{CFLAG:C_T:忠誠値}】【愛情値:{CFLAG:C_T:愛情値}】【淫乱値:{CFLAG:C_T:淫乱値}】
+PRINTFORML 　　　　　【傾向:%LS_type%】【肉体関係:%LS_kudoki%】
+PRINTFORML 　　　　　
+IF CFlag:C_T:住人_悩み解決判定回数 != 0
+	PRINTFORML 　　　　　【現在悩み解決中:結果まであと{(CFlag:C_T:住人_悩み解決判定回数)+1}日】
 ELSE
-	;�O�񌋉ʕ\���p
-	IF CFlag:C_T:�Z�l_�Y�݉����� == 0 && CFlag:C_T:�Z�l_�Y�ݑO�񋦗� > 0
-		SELECTCASE CFlag:C_T:�Z�l_�Y�ݑO�񋦗�
+	;前回結果表示用
+	IF CFlag:C_T:住人_悩み解決中 == 0 && CFlag:C_T:住人_悩み前回協力 > 0
+		SELECTCASE CFlag:C_T:住人_悩み前回協力
 			CASE 1
-				LOCALS:1 = ������t
+				LOCALS:1 = 資金寄付
 			CASE 2
-				LOCALS:1 = �@�̗�
+				LOCALS:1 = 法の力
 			CASE 3
-				LOCALS:1 = ����
+				LOCALS:1 = 治療
 			CASE 4
-				LOCALS:1 = �A�h�o�C�X
+				LOCALS:1 = アドバイス
 			CASE 5
-				LOCALS:1 = �X�̏Љ�
+				LOCALS:1 = 店の紹介
 			CASE 6
-				LOCALS:1 = ��܂�
+				LOCALS:1 = 励ます
 			CASE 7
-				LOCALS:1 = ����
+				LOCALS:1 = 教授
 			CASE 8
-				LOCALS:1 = �\�𗬂�
+				LOCALS:1 = 噂を流す
 			CASE 9
-				LOCALS:1 = ��񑀍�
+				LOCALS:1 = 情報操作
 			CASE 10
-				LOCALS:1 = �͂�s����
+				LOCALS:1 = 力を尽くす
 		ENDSELECT
-		SELECTCASE CFlag:C_T:�Z�l_�Y�ݑO�񌋉�
+		SELECTCASE CFlag:C_T:住人_悩み前回結果
 			CASE 0
-				LOCALS:2 = ���s
+				LOCALS:2 = 失敗
 			CASE 1
-				LOCALS:2 = ����
+				LOCALS:2 = 成功
 			CASE 2
-				LOCALS:2 = �听��
+				LOCALS:2 = 大成功
 			CASE 3
-				LOCALS:2 = ������
+				LOCALS:2 = 解決済
 		ENDSELECT
-		IF LOCALS:2 != "������"
-			PRINTFORML �@�@�@�@�@�y�O��̉������@:%LOCALS:1%(%LOCALS:2%)�z
+		IF LOCALS:2 != "解決済"
+			PRINTFORML 　　　　　【前回の解決方法:%LOCALS:1%(%LOCALS:2%)】
 		ELSE
-			PRINTFORML �@�@�@�@�@
+			PRINTFORML 　　　　　
 		ENDIF
 	ELSE
-		PRINTFORML �@�@�@�@�@
+		PRINTFORML 　　　　　
 	ENDIF
 ENDIF
-PRINTFORML �@�@�@�@�@%CAFE_STR_KANKEIDANKAI(C_T)%
+PRINTFORML 　　　　　%CAFE_STR_KANKEIDANKAI(C_T)%
 DRAWLINE
 
 
@@ -103,7 +103,7 @@ DRAWLINE
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;�X�e�[�^�X�t
+;ステータス付
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -126,30 +126,30 @@ DRAWLINE
 L_X = 0
 L_Y = -800
 
-CS_race  = %INFO_STR_SYUZOKU(CFLAG:L_T:�Z�l_�푰)%
-CS_align = %INFO_STR_ZOKUSEI(CFLAG:L_T:�Z�l_����)%
-CS_chii  = %INFO_STR_CHII(CFLAG:L_T:�Z�l_�n��)%
+CS_race  = %INFO_STR_SYUZOKU(CFLAG:L_T:住人_種族)%
+CS_align = %INFO_STR_ZOKUSEI(CFLAG:L_T:住人_属性)%
+CS_chii  = %INFO_STR_CHII(CFLAG:L_T:住人_地位)%
 CS_size  = %INFO_STR_THREESIZE(L_T)%
-CS_hairC = %INFO_STR_HAIRCOLOR(CFLAG:L_T:���F)%
-CS_hair  = %INFO_STR_HAIR(CFLAG:L_T:���^)%
-CS_eye   = %INFO_STR_EYE(CFLAG:L_T:��)%
-CS_eyeC  = %INFO_STR_EYECOLOR(CFLAG:L_T:���F)%
-CS_body  = %INFO_STR_STYLE(CFLAG:L_T:�̌^)%
+CS_hairC = %INFO_STR_HAIRCOLOR(CFLAG:L_T:髪色)%
+CS_hair  = %INFO_STR_HAIR(CFLAG:L_T:髪型)%
+CS_eye   = %INFO_STR_EYE(CFLAG:L_T:目)%
+CS_eyeC  = %INFO_STR_EYECOLOR(CFLAG:L_T:瞳色)%
+CS_body  = %INFO_STR_STYLE(CFLAG:L_T:体型)%
 
 ;-------------------------------------------------
-;�`�揈��
+;描画処理
 ;-------------------------------------------------
-PRINTFORM �@�@�@�@�@�y�푰:%CS_race%�z
-PRINTFORM �y����:%CS_align%�z
-PRINTFORM �y�n��:%CS_chii%�z
-PRINTFORML �y�v���l:{CFLAG:L_T:�Z�l_�v���l}�z
-PRINTFORML �@�@�@�@�@�y%CS_size%�z
-PRINTFORML �@�@�@�@�@�y���F:%CS_hairC%�z�y���^:%CS_hair%�z�y��:%CS_eye%�z�y��F:%CS_eyeC%�z
-PRINTFORML �@�@�@�@�@�y�̌^:%CS_body%�z
-PRINTFORML �@�@�@�@�@�y�`���[���|�C���g:%CSTR:L_T:�`���[���|�C���g%�z�y��:%CSTR:L_T:��%�z
-PRINTFORML �@�@�@�@�@
-PRINTFORML �@�@�@�@�@
-PRINTFORML �@�@�@�@�@
+PRINTFORM 　　　　　【種族:%CS_race%】
+PRINTFORM 【属性:%CS_align%】
+PRINTFORM 【地位:%CS_chii%】
+PRINTFORML 【貢献値:{CFLAG:L_T:住人_貢献値}】
+PRINTFORML 　　　　　【%CS_size%】
+PRINTFORML 　　　　　【髪色:%CS_hairC%】【髪型:%CS_hair%】【眼:%CS_eye%】【眼色:%CS_eyeC%】
+PRINTFORML 　　　　　【体型:%CS_body%】
+PRINTFORML 　　　　　【チャームポイント:%CSTR:L_T:チャームポイント%】【癖:%CSTR:L_T:癖%】
+PRINTFORML 　　　　　
+PRINTFORML 　　　　　
+PRINTFORML 　　　　　
 
 IF Talent:L_T:NPC == 0
 	HTML_PRINT C_PICTURE_HTML(L_T, L_X, L_Y, 0, 850)
@@ -161,7 +161,7 @@ ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-;�B���X�e�[�^�X(��)
+;隠しステータス(裸)
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
@@ -170,12 +170,12 @@ ENDIF
 #DIM L_X
 #DIM L_Y
 #DIMS LSTR
-#DIMS LSTR_4 ;�D�P��Ԃ̕\���i��������̂݁j
-#DIMS LSTR_8 ;�A�C�R����
-#DIMS LSTR_9 ;�A�C�R�����q
-#DIMS LSTR_10;�A�C�R����
-#DIMS LSTR_11;�َ��`�ʉ摜
-#DIMS LSTR_Z ;�����p
+#DIMS LSTR_4 ;妊娠状態の表示（文字列情報のみ）
+#DIMS LSTR_8 ;アイコン♀
+#DIMS LSTR_9 ;アイコン卵子
+#DIMS LSTR_10;アイコン受精
+#DIMS LSTR_11;胎児描写画像
+#DIMS LSTR_Z ;結合用
 #DIM C_ninsin
 #DIM L_SIEK
 #DIMS CS_ninsin
@@ -183,39 +183,39 @@ ENDIF
 L_X = 0
 L_Y = 0
 C_ninsin = C_PICTURE_NINSIN(L_T)
-L_SIEK = CFLAG:L_T:�q�{���t������/5000
+L_SIEK = CFLAG:L_T:子宮精液貯蔵量/5000
 SIF L_SIEK >= 4
 	L_SIEK = 4
-IF TALENT:L_T:�D�P == 0 && TALENT:L_T:�� == 0
+IF TALENT:L_T:妊娠 == 0 && TALENT:L_T:受精 == 0
 	IF    L_SIEK >= 4 
-		CS_ninsin =�y�q�{:���͂␸�t�^���N�Ăׂ����%CALLNAME:MASTER%�̐��q�����q�����߂�忂��Ă���z
+		CS_ninsin =【子宮:もはや精液タンク呼べる程の%CALLNAME:MASTER%の精子が卵子を求めて蠢いている】
 	ELSEIF   L_SIEK >= 3
-		CS_ninsin =�y�q�{:����΂����%CALLNAME:MASTER%�̐��q���q�{�����j������Ă���z
+		CS_ninsin =【子宮:溢れんばかりの%CALLNAME:MASTER%の精子が子宮内を泳ぎ回っている】
 	ELSEIF   L_SIEK >= 2
-		CS_ninsin =�y�q�{:�q���ɏ\����%CALLNAME:MASTER%�̐��t���q�{�ɔ[�܂��Ă���z
+		CS_ninsin =【子宮:子作りに十分な%CALLNAME:MASTER%の精液が子宮に納まっている】
 	ELSEIF   L_SIEK >= 1
-		CS_ninsin =�y�q�{:%CALLNAME:MASTER%�̐��t�Ŕ������߂��Ă���z
+		CS_ninsin =【子宮:%CALLNAME:MASTER%の精液で白く染められている】
 	ENDIF
-ELSEIF CFLAG:L_T:�D�P�t���O == 1 && TALENT:L_T:�D�P != 0
-	CS_ninsin =�y�q�{:%CALLNAME:MASTER%�Ƃ̎q���z�y�o�ߏT��:{TALENT:L_T:�D�P}�z
-ELSEIF CFLAG:L_T:�D�P�t���O == 2 && TALENT:L_T:�D�P != 0
-	CS_ninsin =�y�q�{:%CSTR:L_T:3500%�Ƃ̎q���z�y�o�ߏT��:{TALENT:L_T:�D�P}�z
-ELSEIF CFLAG:L_T:�D�P�t���O == 3 && TALENT:L_T:�D�P != 0
-	CS_ninsin =�y�q�{:���l�Ƃ̎q���z�y�o�ߏT��:{TALENT:L_T:�D�P}�z
+ELSEIF CFLAG:L_T:妊娠フラグ == 1 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:%CALLNAME:MASTER%との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 2 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:%CSTR:L_T:3500%との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 3 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:愛人との子供】【経過週数:{TALENT:L_T:妊娠}】
 ELSE
-	CS_ninsin =�y�q�{:�z
+	CS_ninsin =【子宮:】
 ENDIF
 DRAWLINE
-PRINTFORML ��----------------�@���o�^���----------------��
+PRINTFORML ■----------------機密登録情報----------------■
 
-LSTR_4 = <nonbutton pos='{L_X}'>�@�@�@�@�@�@�@�@�@�@%CS_ninsin%</nonbutton>
-LSTR_8 = <nonbutton pos='{L_X}'>�@�@�@�@�@<img src='EX_A_0' height = '100'  ypos = '500'></nonbutton>
-LSTR_9 = <nonbutton pos='{L_X}'>�@�@�@�@�@<img src='EX_A_1' height = '100'  ypos = '600'></nonbutton>
-LSTR_10 = <nonbutton pos='{L_X}'>�@�@�@�@�@<img src='EX_A_2' height = '100'  ypos = '700'></nonbutton>
-IF TALENT:L_T:�D�P == 0 && TALENT:L_T:�� == 0
-	LSTR_11 = <nonbutton pos='{L_X}'>�@�@�@�@�@<img src='H_TNS_0_{L_SIEK}' height = '500'  ypos = '0'></nonbutton>
+LSTR_4 = <nonbutton pos='{L_X}'>　　　　　　　　　　%CS_ninsin%</nonbutton>
+LSTR_8 = <nonbutton pos='{L_X}'>　　　　　<img src='EX_A_0' height = '100'  ypos = '500'></nonbutton>
+LSTR_9 = <nonbutton pos='{L_X}'>　　　　　<img src='EX_A_1' height = '100'  ypos = '600'></nonbutton>
+LSTR_10 = <nonbutton pos='{L_X}'>　　　　　<img src='EX_A_2' height = '100'  ypos = '700'></nonbutton>
+IF TALENT:L_T:妊娠 == 0 && TALENT:L_T:受精 == 0
+	LSTR_11 = <nonbutton pos='{L_X}'>　　　　　<img src='H_TNS_0_{L_SIEK}' height = '500'  ypos = '0'></nonbutton>
 ELSE
-	LSTR_11 = <nonbutton pos='{L_X}'>�@�@�@�@�@<img src='NINSIN_0_{C_ninsin}' height = '500'  ypos = '0'></nonbutton>
+	LSTR_11 = <nonbutton pos='{L_X}'>　　　　　<img src='NINSIN_0_{C_ninsin}' height = '500'  ypos = '0'></nonbutton>
 ENDIF
 LSTR_Z = %LSTR_4%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%
 
@@ -226,23 +226,23 @@ ELSE
 ENDIF
 
 HTML_PRINT LSTR
-;���̏����̕\�����K���Z�b�g�ł��Ă���̂ł��̊֐����Ŗ��Ȃ��͂�
-PRINTFORML �@�@�@�@�@�@�@�@
-PRINTFORML �@�@�@�@�@�@�@�@
-PRINTFORML �@�@�@�@�@�@�@�@
-PRINTFORML �@�@�@�@�@�@�@�@
-PRINTFORML �@�@�@�@�@�@�y��̃��x��:{CFlag:L_T:��̃��x��}�z
-PRINTFORML �@�@�@�@�@�@�y���q���x��:{CFlag:L_T:���q���x��}�z
-PRINTFORML �@�@�@�@�@�@�y�󐸑ϋv�l:{CFlag:L_T:�󐸌��ݑϋv�l}/{CFlag:L_T:�󐸍ő�ϋv�l}�z�y�󐸊m��:{CFlag:L_T:�󐸊m��}�z
+;今の所この表示が必ずセットでついてくるのでこの関数側で問題ないはず
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　【母体レベル:{CFlag:L_T:母体レベル}】
+PRINTFORML 　　　　　　【卵子レベル:{CFlag:L_T:卵子レベル}】
+PRINTFORML 　　　　　　【受精耐久値:{CFlag:L_T:受精現在耐久値}/{CFlag:L_T:受精最大耐久値}】【受精確率:{CFlag:L_T:受精確率}】
 
 
 
 ;-------------------------------------------------
-;�|�������\���p�A���݉�������
+;掛け合い表示用、現在仮実装中
 ;-------------------------------------------------
 @C_PICTURE_PAIR_TALK_A(C_ID)
 #DIM C_ID
-;1�s��98��Y���W
+;1行≒98のY座標
 IF C_ID == 0
 	PRINTFORML
 ELSEIF TALENT:C_ID:NPC == 0

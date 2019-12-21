@@ -1,44 +1,44 @@
-;=================================================
+ï»¿;=================================================
 ;   sub COLOR
 ;=================================================
-;   ’…F
+;   ç€è‰²
 ;-------------------------------------------------
 ; Input:
-;  ARGS					F
+;  ARGS					è‰²
 ; Output:
-;  RETURNF				F
+;  RETURNF				è‰²
 ;-------------------------------------------------
 @COLOR(ARGS)
 #FUNCTION
 
 SELECTCASE ARGS
 	;-----------------------------
-	;- “ÁŽêF
+	;- ç‰¹æ®Šè‰²
 	;-----------------------------
-	CASE "•šŽš"
+	CASE "ä¼å­—"
 		RETURNF 0x666666
-	CASE "Œûã•W€"
+	CASE "å£ä¸Šæ¨™æº–"
 ;		RETURNF 0xFFCCFF
 		RETURNF GETCOLOR()
 
 	;-----------------------------
-	;- •W€F
+	;- æ¨™æº–è‰²
 	;-----------------------------
-	CASE "ŠDF", "gray"
+	CASE "ç°è‰²", "gray"
 		RETURNF 0x666666
-	CASE "Ž‡"
+	CASE "ç´«"
 		RETURNF 0xCC66CC
-	CASE "ƒsƒ“ƒN"
+	CASE "ãƒ”ãƒ³ã‚¯"
 		RETURNF 0xFF00FF
-	CASE "Ô"
+	CASE "èµ¤"
 		RETURNF 0xFF9999
-	CASE "…F"
+	CASE "æ°´è‰²"
 		RETURNF 0x66FFFF
-	CASE "—Î"
+	CASE "ç·‘"
 		RETURNF 0x00FF00
-	CASE "ŒQÂ"
+	CASE "ç¾¤é’"
 		RETURNF 0x9999FF
-	CASE "‰©F"
+	CASE "é»„è‰²"
 		RETURNF 0xffff00
 ENDSELECT
 

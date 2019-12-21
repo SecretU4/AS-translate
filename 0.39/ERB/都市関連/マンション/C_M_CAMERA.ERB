@@ -1,49 +1,49 @@
-
+﻿
 
 
 
 ;-------------------------------------------------
-;  �}���V�����s��
+;  マンション行動
 ;-------------------------------------------------
 @C_M_AS(ARG:1)
-IF FLAG:���ԑ� == 0
+IF FLAG:時間帯 == 0
 	IF RAND:10  > 4
-		CFLAG:�}���V�����s�� = 50+RAND:3
+		CFLAG:マンション行動 = 50+RAND:3
 	ELSEIF !RAND:2
-		CFLAG:�}���V�����s�� = 0
+		CFLAG:マンション行動 = 0
 	ELSE
-		CFLAG:�}���V�����s�� = 100
+		CFLAG:マンション行動 = 100
 	ENDIF
 ELSE
-	IF (TALENT:���ے� == 1 || TALENT:�����ς� == 1 && RAND:10 > 4) && TALENT:�񏈏� == 1
-		IF (TALENT:���� == 1 || TALENT:���� == 1) && RAND:10 > 6
-			CFLAG:�}���V�����s�� = 700
+	IF (TALENT:交際中 == 1 || TALENT:結婚済み == 1 && RAND:10 > 4) && TALENT:非処女 == 1
+		IF (TALENT:巨乳 == 1 || TALENT:爆乳 == 1) && RAND:10 > 6
+			CFLAG:マンション行動 = 700
 		ELSE
-			CFLAG:�}���V�����s�� = 500+((RAND:3)*10)
+			CFLAG:マンション行動 = 500+((RAND:3)*10)
 		ENDIF
 	ELSEIF !RAND:3
-		CFLAG:�}���V�����s�� = 50+RAND:3
+		CFLAG:マンション行動 = 50+RAND:3
 	ELSEIF !RAND:2
-		CFLAG:�}���V�����s�� = 0
+		CFLAG:マンション行動 = 0
 	ELSE
-		CFLAG:�}���V�����s�� = 100
+		CFLAG:マンション行動 = 100
 	ENDIF
 ENDIF
 
 
 
-CFLAG:�}���V�����s���Œ藐�� = RAND:10
+CFLAG:マンション行動固定乱数 = RAND:10
 
 ;-------------------------------------------------
-;  ���B
+;  盗撮
 ;-------------------------------------------------
 @C_M_CAMERA(ARG:1)
 #DIM L_I
 #DIM L_BUG
 
 
-FLAG:�摜_�A�j��1 = 0
-FLAG:�摜_�A�j��2 = 0
+FLAG:画像_アニメ1 = 0
+FLAG:画像_アニメ2 = 0
 
 
 
@@ -52,103 +52,103 @@ L_BUG = TARGET
 TARGET = ARG:1
 
 
-;CFLAG:�}���V�����s�� == 100
+;CFLAG:マンション行動 == 100
 
 $INPUT_LOOP
 CLEARLINE LINECOUNT
 CALL C_PICTURE_M(ARG:1)
-PRINTFORML �y{CFLAG:�}���V����ID}�����z�y�Z�l:%CALLNAME%�z
+PRINTFORML 【{CFLAG:マンションID}号室】【住人:%CALLNAME%】
 DRAWLINE
-IF FLAG:���ԑ� == 0
-	IF CFLAG:�}���V�����s�� == 999
-	ELSEIF CFLAG:�}���V�����s�� == 100
-	;����
-		PRINTFORML �����͌����A�����Ă��炸�Â����B
-		PRINTFORML %CALLNAME%�̓x�b�h�ŏ����ȐQ���𗧂ĂĖ����Ă���c
-	ELSEIF CFLAG:�}���V�����s�� == 52
-	;�Ǐ�
-		PRINTFORML �x�b�h�ɍ��|���Ǐ������Ă���A�֐S�[�����̂Ȃ̂��M�S�ɓǂ݂ӂ����Ă���B
-		PRINTFORML �i�݋���炵�ēǂݎn�߂Ȃ̂��낤�A���΂炭�͂��̏�Ԃ������������c
-	ELSEIF CFLAG:�}���V�����s�� == 51
-	;�����C���
-		PRINTFORML �`���Ă݂�ƃ^�I����g�ɒ����Ă��낮%CALLNAME%��������A�ǂ���畗�C�オ��̂悤���B
-		PRINTFORML �����ɓ��C���o���ΏƂ����̂��ƂĂ����߂������A���̏_�����������ĂĂ���c
-	ELSEIF CFLAG:�}���V�����s�� == 50
-	;�p�\�R��
-		PRINTFORML ���ɗp�����Ȃ��悤�ŁA�ɂԂ��Ȃ̂��l�b�g�T�[�t�B���ł����Ă���悤���B
-		PRINTFORML ����ȊO�ɂ͓��ɖڂ��������̂͂Ȃ��B
-	ELSEIF CFLAG:�}���V�����s�� == 0
-	;����
-		PRINTFORML �N�����Ȃ��c
-		PRINTFORML �ǂ����O�o���̂悤���c
+IF FLAG:時間帯 == 0
+	IF CFLAG:マンション行動 == 999
+	ELSEIF CFLAG:マンション行動 == 100
+	;睡眠
+		PRINTFORML 部屋は光が就けられておらず静かだ。
+		PRINTFORML %CALLNAME%はベッドで小さな寝息を立てて眠っている…
+	ELSEIF CFLAG:マンション行動 == 52
+	;読書
+		PRINTFORML ベッドに腰掛け読書をしている、関心深いものなのか熱心に読みふけっている。
+		PRINTFORML 進み具合からして読み始めなのだろう、しばらくはこの状態が続きそうだ…
+	ELSEIF CFLAG:マンション行動 == 51
+	;お風呂上り
+		PRINTFORML 覗いてみるとタオルを身に着けてくつろぐ%CALLNAME%が見える、どうやら風呂上がりのようだ。
+		PRINTFORML 仄かに湯気を出す火照った体がとても艶めかしく、その柔肌を引き立てている…
+	ELSEIF CFLAG:マンション行動 == 50
+	;パソコン
+		PRINTFORML 特に用事もないようで、暇つぶしなのかネットサーフィンでもしているようだ。
+		PRINTFORML それ以外には特に目を引くものはない。
+	ELSEIF CFLAG:マンション行動 == 0
+	;留守
+		PRINTFORML 誰もいない…
+		PRINTFORML どうやら外出中のようだ…
 	ENDIF
 ELSE
-	IF CFLAG:�}���V�����s�� == 999
-	ELSEIF CFLAG:�}���V�����s�� == 700
-	;�p�C�Y��
-		IF TALENT:�m�s�k == 1
-		;�m�s�k
-			PRINTFORML %CALLNAME%���v�̓��_��L���ȋ��ŕ�ݍ����%CALLNAME:MASTER%�Ɏd���܂ꂽ�����ŕ�d���Ă���B
-			PRINTFORML �ǂ����%CALLNAME%���v�Ƃ̐��s�ׂ����������炵������ɋ��ŕ�d���鎖�ɂȂ����悤��
-			PRINTFORML �I�݂ȕ�d�Ƃ��炩���傫�����������̂���炵�����[�ɂ���d�ŁA%CALLNAME%�̕v�͊��ɉ��x��
-			PRINTFORML �ː������̂���ʂ̔����t��J�Ԃ̒��ɂ��ӂꂳ���Ă��邪����ł���d���~�߂�C�͖���
-			PRINTFORML %CALLNAME%�͕v�ɍs�ׂ������܂�Ȃ��l�ɍ���̕�d�œO��I�ɐ��t���i��s�����Ă��܂�����̗l���c
+	IF CFLAG:マンション行動 == 999
+	ELSEIF CFLAG:マンション行動 == 700
+	;パイズリ
+		IF TALENT:ＮＴＬ == 1
+		;ＮＴＬ
+			PRINTFORML %CALLNAME%が夫の肉棒を豊満な胸で包み込んで%CALLNAME:MASTER%に仕込まれた動きで奉仕している。
+			PRINTFORML どうやら%CALLNAME%が夫との性行為を嫌がったらしく代わりに胸で奉仕する事になったようで
+			PRINTFORML 巧みな奉仕とやわらかく大きく実ったそのいやらしい乳房による奉仕で、%CALLNAME%の夫は既に何度も
+			PRINTFORML 射精したのか大量の白濁液を谷間の中にあふれさせているがそれでも奉仕を止める気は無く
+			PRINTFORML %CALLNAME%は夫に行為をせがまれない様に今回の奉仕で徹底的に精液を絞り尽くしてしまうつもりの様だ…
 		ELSE
-			PRINTFORML %CALLNAME%���j�̓��_��L���ȋ��ŉ��߂�������d���Ă���B
-			PRINTFORML �㉺�ɓ������܂��͎�̋�����ς��邽�тɁA�傫�����������̓��[�͂���炵���`��ς��Ă����B
-			PRINTFORML �J�Ԃ��悭����Ɗ��Ɏː������̂��A��ʂ̔����t���J�Ԃ̒��ɂ��ӂ�Ă���c
+			PRINTFORML %CALLNAME%が男の肉棒を豊満な胸で艶めかしく奉仕している。
+			PRINTFORML 上下に動かしまたは手の強さを変えるたびに、大きく実ったその乳房はいやらしく形を変えていく。
+			PRINTFORML 谷間をよく見ると既に射精したのか、大量の白濁液が谷間の中にあふれている…
 		ENDIF
-	ELSEIF CFLAG:�}���V�����s�� == 520
-	;�R���
-		IF TALENT:�m�s�k == 1
-		;�m�s�k
-			PRINTFORML �v�ɂǂ����Ă��Ƃ����܂�%CALLNAME%�͕s���Ȃ�����������Ȃ��v�̏�ɂ܂������
-			PRINTFORML �Ȃ�ׂ����߂ɏI�点�����̂��v�̃y�j�X�������܂ř������ނƌ������g�̂��㉺����
-			PRINTFORML �������Ǝː������Ė��������悤�ƌ������ς���̗l���c
+	ELSEIF CFLAG:マンション行動 == 520
+	;騎乗位
+		IF TALENT:ＮＴＬ == 1
+		;ＮＴＬ
+			PRINTFORML 夫にどうしてもとせがまれ%CALLNAME%は不満ながらもしかたなく夫の上にまたがると
+			PRINTFORML なるべく早めに終らせたいのか夫のペニスを根元まで咥え込むと激しく身体を上下させ
+			PRINTFORML さっさと射精させて満足させようと言う腹積もりの様だ…
 		ELSE
-			PRINTFORML %CALLNAME%���j�̏�ɂ܂�����A�鏊�Ƀy�j�X������đ傫���g�̂��㉺�����Ă���B
+			PRINTFORML %CALLNAME%が男の上にまたがり、秘所にペニスを咥えて大きく身体を上下させている。
 		ENDIF
-	ELSEIF CFLAG:�}���V�����s�� == 510
-	;��w��
-		IF TALENT:�m�s�k == 1
-		;�m�s�k
-			PRINTFORML �l�񔇂��ɂȂ���%CALLNAME%���A�v�������������ŔƂ��Ă��邪���̚b������
-			PRINTFORML �ǂ����������Ȃ��l�q��%CALLNAME%�͖��ӎ��̓���%CALLNAME:MASTER%�Ƃ̐��s�ׂ�
-			PRINTFORML ��ׂĂ���̂��낤�B���鎖�̏o���Ȃ����ǂ������������ɖ����ł����ɂ���l���c
+	ELSEIF CFLAG:マンション行動 == 510
+	;後背位
+		IF TALENT:ＮＴＬ == 1
+		;ＮＴＬ
+			PRINTFORML 四つん這いになった%CALLNAME%を、夫が激しい腰つきで犯しているがその喘ぎ方は
+			PRINTFORML どこかぎこちない様子で%CALLNAME%は無意識の内に%CALLNAME:MASTER%との性行為と
+			PRINTFORML 比べているのだろう達する事の出来ないもどかしいい快感に満足できずにいる様だ…
 		ELSE
-			PRINTFORML �l�񔇂��ɂȂ���%CALLNAME%���A�j�������������ŔƂ��Ă���B
+			PRINTFORML 四つん這いになった%CALLNAME%を、男が激しい腰つきで犯している。
 		ENDIF
-	ELSEIF CFLAG:�}���V�����s�� == 500
-	;�����
-		IF TALENT:�m�s�k == 1
-		;�m�s�k
-			PRINTFORML �v�ɕ����킳���`�őg�ݕ������A%CALLNAME%�͔Ƃ���b���ł���B
-			PRINTFORML �������̐��͕s���R�Ȃقǂɑ傫��%CALLNAME:MASTER%�ɂ͉��Z�̗l�Ɍ�����
-			PRINTFORML �ǂ����%CALLNAME%��%CALLNAME:MASTER%�Ƃ̌��������s�ׂŊ��炳�ꂽ�̂�
-			PRINTFORML �v�Ƃ̍s�ׂł͖����ł��Ȃ��Ȃ��Ă��܂����l���c
+	ELSEIF CFLAG:マンション行動 == 500
+	;正常位
+		IF TALENT:ＮＴＬ == 1
+		;ＮＴＬ
+			PRINTFORML 夫に覆い被される形で組み伏せられ、%CALLNAME%は犯され喘いでいる。
+			PRINTFORML だがその声は不自然なほどに大きく%CALLNAME:MASTER%には演技の様に見える
+			PRINTFORML どうやら%CALLNAME%は%CALLNAME:MASTER%との激しい性行為で慣らされたのか
+			PRINTFORML 夫との行為では満足できなくなってしまった様だ…
 		ELSE
-			PRINTFORML �j�ɕ������Ԃ����`�ŁA%CALLNAME%���Ƃ���b���ł���B
+			PRINTFORML 男に覆いかぶされる形で、%CALLNAME%が犯され喘いでいる。
 		ENDIF
-	ELSEIF CFLAG:�}���V�����s�� == 100
-	;����
-		PRINTFORML �����͌����A�����Ă��炸�Â����B
-		PRINTFORML %CALLNAME%�̓x�b�h�ŏ����ȐQ���𗧂ĂĖ����Ă���c
-	ELSEIF CFLAG:�}���V�����s�� == 52
-	;�Ǐ�
-		PRINTFORML �x�b�h�ɍ��|���Ǐ������Ă���A�֐S�[�����̂Ȃ̂��M�S�ɓǂ݂ӂ����Ă���B
-		PRINTFORML �i�݋���炵�ēǂݎn�߂Ȃ̂��낤�A���΂炭�͂��̏�Ԃ������������c
-	ELSEIF CFLAG:�}���V�����s�� == 51
-	;�����C���
-		PRINTFORML �`���Ă݂�ƃ^�I����g�ɒ����Ă��낮%CALLNAME%��������A�ǂ���畗�C�オ��̂悤���B
-		PRINTFORML �����ɓ��C���o���ΏƂ����̂��ƂĂ����߂������A���̏_�����������ĂĂ���c
-	ELSEIF CFLAG:�}���V�����s�� == 50
-	;�p�\�R��
-		PRINTFORML ���ɗp�����Ȃ��悤�ŁA�ɂԂ��Ȃ̂��l�b�g�T�[�t�B���ł����Ă���悤���B
-		PRINTFORML ����ȊO�ɂ͓��ɖڂ��������̂͂Ȃ��B
-	ELSEIF CFLAG:�}���V�����s�� == 0
-	;����
-		PRINTFORML �N�����Ȃ��c
-		PRINTFORML �ǂ����O�o���̂悤���c
+	ELSEIF CFLAG:マンション行動 == 100
+	;睡眠
+		PRINTFORML 部屋は光が就けられておらず静かだ。
+		PRINTFORML %CALLNAME%はベッドで小さな寝息を立てて眠っている…
+	ELSEIF CFLAG:マンション行動 == 52
+	;読書
+		PRINTFORML ベッドに腰掛け読書をしている、関心深いものなのか熱心に読みふけっている。
+		PRINTFORML 進み具合からして読み始めなのだろう、しばらくはこの状態が続きそうだ…
+	ELSEIF CFLAG:マンション行動 == 51
+	;お風呂上り
+		PRINTFORML 覗いてみるとタオルを身に着けてくつろぐ%CALLNAME%が見える、どうやら風呂上がりのようだ。
+		PRINTFORML 仄かに湯気を出す火照った体がとても艶めかしく、その柔肌を引き立てている…
+	ELSEIF CFLAG:マンション行動 == 50
+	;パソコン
+		PRINTFORML 特に用事もないようで、暇つぶしなのかネットサーフィンでもしているようだ。
+		PRINTFORML それ以外には特に目を引くものはない。
+	ELSEIF CFLAG:マンション行動 == 0
+	;留守
+		PRINTFORML 誰もいない…
+		PRINTFORML どうやら外出中のようだ…
 	ENDIF
 ENDIF
 
@@ -156,25 +156,25 @@ ENDIF
 
 
 
-SIF CFLAG:�}���V�����s�� >= 500 && CFLAG:�}���V�����s�� <= 699
+SIF CFLAG:マンション行動 >= 500 && CFLAG:マンション行動 <= 699
 	CALL C_M_CAMERA_H(ARG:1)
 
 DRAWLINE
-PRINTFORML  [0] �I��
+PRINTFORML  [0] 終了
 SETCOLOR 0,0,0
 	TINPUT 100, 100, 1
 RESETCOLOR
 IF RESULT == 0
 ELSEIF RESULT == 100
 	FLAG:5900 += 1
-	SIF FLAG:�摜_�A�j��2 == 0
-		FLAG:�摜_�A�j��1 += 1
-	SIF FLAG:�摜_�A�j��2 == 1
-		FLAG:�摜_�A�j��1 -= 2
-	SIF FLAG:�摜_�A�j��1 == 4
-		FLAG:�摜_�A�j��2 = 1
-	SIF FLAG:�摜_�A�j��1 == 0
-		FLAG:�摜_�A�j��2 = 0
+	SIF FLAG:画像_アニメ2 == 0
+		FLAG:画像_アニメ1 += 1
+	SIF FLAG:画像_アニメ2 == 1
+		FLAG:画像_アニメ1 -= 2
+	SIF FLAG:画像_アニメ1 == 4
+		FLAG:画像_アニメ2 = 1
+	SIF FLAG:画像_アニメ1 == 0
+		FLAG:画像_アニメ2 = 0
 
 	SIF FLAG:5900 >= 3
 		FLAG:5900 = 0
@@ -182,28 +182,28 @@ ELSEIF RESULT == 100
 ENDIF
 
 
-IF  CFLAG:�}���V�����o���l�� == 0 && CFLAG:�}���V�����s�� >= 500 && CFLAG:�}���V�����s�� <= 700 
+IF  CFLAG:マンション経験獲得 == 0 && CFLAG:マンション行動 >= 500 && CFLAG:マンション行動 <= 700 
 	CLEARLINE LINECOUNT
-	SIF CSTR:�����������薼 == ""
-		CSTR:�����������薼 = %CSTR:���l���O%
-	SIF CSTR:���L�X���薼 == "" 
-		CSTR:���L�X���薼 = %CSTR:���l���O%
-	SIF CSTR:���������薼 =="" 
-		CSTR:���������薼 = %CSTR:���l���O%
-	SIF CSTR:���t�F�����薼 ==""
-		CSTR:���t�F�����薼 = %CSTR:���l���O%
-	SIF CSTR:���`���������薼 ==""
-		CSTR:���`���������薼 = %CSTR:���l���O%
-	SIF CSTR:���Ⓒ���薼 ==""
-		CSTR:���Ⓒ���薼 = %CSTR:���l���O%
-	SIF CSTR:�����o�����薼 ==""
-		CSTR:�����o�����薼 = %CSTR:���l���O%
-	TALENT:�񏈏� = 1
-	TALENT:�`�񏈏� = 1
-	TCVAR:����_EXP_�����r�� = 1
-	TCVAR:����_EXP_�`�����r�� = 1
+	SIF CSTR:初えっち相手名 == ""
+		CSTR:初えっち相手名 = %CSTR:恋人名前%
+	SIF CSTR:初キス相手名 == "" 
+		CSTR:初キス相手名 = %CSTR:恋人名前%
+	SIF CSTR:初精飲相手名 =="" 
+		CSTR:初精飲相手名 = %CSTR:恋人名前%
+	SIF CSTR:初フェラ相手名 ==""
+		CSTR:初フェラ相手名 = %CSTR:恋人名前%
+	SIF CSTR:初Ａえっち相手名 ==""
+		CSTR:初Ａえっち相手名 = %CSTR:恋人名前%
+	SIF CSTR:初絶頂相手名 ==""
+		CSTR:初絶頂相手名 = %CSTR:恋人名前%
+	SIF CSTR:初中出し相手名 ==""
+		CSTR:初中出し相手名 = %CSTR:恋人名前%
+	TALENT:非処女 = 1
+	TALENT:Ａ非処女 = 1
+	TCVAR:履歴_EXP_処女喪失 = 1
+	TCVAR:履歴_EXP_Ａ処女喪失 = 1
 	CALL JN_SEX_EXP
-	CFLAG:�}���V�����o���l�� = 1
+	CFLAG:マンション経験獲得 = 1
 	PRINTFORMW
 ENDIF
 
@@ -211,67 +211,67 @@ TARGET = L_BUG
 
 
 ;-------------------------------------------------
-;�G���ڍ�
+;エロ詳細
 ;-------------------------------------------------
 @C_M_CAMERA_H(ARG:1)
 #DIMS L_NAME
 
 
-IF TALENT:�����ς� == 1
-	L_NAME = �U��
-ELSEIF TALENT:���ے� == 1
-	L_NAME = ���l
+IF TALENT:結婚済み == 1
+	L_NAME = 旦那
+ELSEIF TALENT:交際中 == 1
+	L_NAME = 恋人
 ELSE
-	L_NAME = �j��
+	L_NAME = 男性
 ENDIF
 
 
-IF CFLAG:�}���V�����s���Œ藐�� == 9
+IF CFLAG:マンション行動固定乱数 == 9
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 8
+ELSEIF CFLAG:マンション行動固定乱数 == 8
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 7
+ELSEIF CFLAG:マンション行動固定乱数 == 7
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 6
+ELSEIF CFLAG:マンション行動固定乱数 == 6
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 5
+ELSEIF CFLAG:マンション行動固定乱数 == 5
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 4
+ELSEIF CFLAG:マンション行動固定乱数 == 4
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 3
+ELSEIF CFLAG:マンション行動固定乱数 == 3
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 2
+ELSEIF CFLAG:マンション行動固定乱数 == 2
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 1
+ELSEIF CFLAG:マンション行動固定乱数 == 1
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-ELSEIF CFLAG:�}���V�����s���Œ藐�� == 0
+ELSEIF CFLAG:マンション行動固定乱数 == 0
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 

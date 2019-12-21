@@ -1,61 +1,61 @@
-;-------------------------------------------------
-;’²¸‹æˆæ‘I‘ð
+ï»¿;-------------------------------------------------
+;èª¿æŸ»åŒºåŸŸé¸æŠž
 ;-------------------------------------------------
 @RPG_STAGESELECT
 #DIM L_INPUT
 $INPUT_LOOP
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML ’²¸‚·‚é‹æˆæ‚ð‘I‘ð‚µ‚Ä‰º‚³‚¢B
+PRINTFORML èª¿æŸ»ã™ã‚‹åŒºåŸŸã‚’é¸æŠžã—ã¦ä¸‹ã•ã„ã€‚
 DRAWLINE
-PRINTFORML \\\\\\\\\\Šî–{’²¸‹æˆæ\\\\\\\\\\
-PRINTLC [0] yLv0:“sŽs‹«ŠEüz(PŒ‚‚È‚µ)@[1] yLv1:–³–@‹æˆæz
+PRINTFORML â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•åŸºæœ¬èª¿æŸ»åŒºåŸŸâ€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+PRINTLC [0] ã€Lv0:éƒ½å¸‚å¢ƒç•Œç·šã€‘(è¥²æ’ƒãªã—)ã€€[1] ã€Lv1:ç„¡æ³•åŒºåŸŸã€‘
 PRINTFORML
-PRINTLC [2] yLv2:‘Â‚¿‚½“sŽsz(ŒµdŒx‰ú)@[3] yLv3:ŠëŒ¯‹æˆæz
+PRINTLC [2] ã€Lv2:å •ã¡ãŸéƒ½å¸‚ã€‘(åŽ³é‡è­¦æˆ’)ã€€[3] ã€Lv3:å±é™ºåŒºåŸŸã€‘
 PRINTFORML
-PRINTFORML [4] yLv4:‹¶‹C‚Ì”p“sz(•s‰ÂNŒx)
-PRINTFORML [5] yLv5:Š®‘SNH‹æˆæ[Œ»‘ã–À‹{]z(á‹CLv1)
-PRINTFORML \\\\\\\\\\“ú‘Ö’²¸‹æˆæ\\\\\\\\\\
-SIF Flag:“ú‘Ö‚í‚è‹æ‰æ“ïˆÕ“x != 0
-	PRINTFORML [90]yLv{Flag:“ú‘Ö‚í‚è‹æ‰æ“ïˆÕ“x}:‚ ‚é‹æ‰æz([“x:{Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE})
-PRINTFORML \\\\\\\\\\ŠO_Šˆ“®‹æˆæ\\\\\\\\\\
-PRINTFORML [50]yLvXX:»o‚Ì“sz(á‹CLv7)
-PRINTFORML [999] ‚â‚ß‚é
+PRINTFORML [4] ã€Lv4:ç‹‚æ°—ã®å»ƒéƒ½ã€‘(ä¸å¯ä¾µè­¦å‘Š)
+PRINTFORML [5] ã€Lv5:å®Œå…¨ä¾µé£ŸåŒºåŸŸ[ç¾ä»£è¿·å®®]ã€‘(ç˜´æ°—Lv1)
+PRINTFORML â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•æ—¥æ›¿èª¿æŸ»åŒºåŸŸâ€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+SIF Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»é›£æ˜“åº¦ != 0
+	PRINTFORML [90]ã€Lv{Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»é›£æ˜“åº¦}:ã‚ã‚‹åŒºç”»ã€‘(æ·±åº¦:{Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ})
+PRINTFORML â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•å¤–ç¥žæ´»å‹•åŒºåŸŸâ€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+PRINTFORML [50]ã€LvXX:ç ‚å¡µã®éƒ½ã€‘(ç˜´æ°—Lv7)
+PRINTFORML [999] ã‚„ã‚ã‚‹
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 0
-	Flag:’²¸‹æˆæ = 0
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 0
+	Flag:èª¿æŸ»åŒºåŸŸ = 0
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 0
 CASE 1
-	Flag:’²¸‹æˆæ = 1
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 0
+	Flag:èª¿æŸ»åŒºåŸŸ = 1
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 0
 CASE 2
-	Flag:’²¸‹æˆæ = 2
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 0
+	Flag:èª¿æŸ»åŒºåŸŸ = 2
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 0
 CASE 3
-	Flag:’²¸‹æˆæ = 3
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 0
+	Flag:èª¿æŸ»åŒºåŸŸ = 3
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 0
 CASE 4
-	Flag:’²¸‹æˆæ = 4
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 0
+	Flag:èª¿æŸ»åŒºåŸŸ = 4
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 0
 CASE 5
-	Flag:’²¸‹æˆæ = 5
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 3
+	Flag:èª¿æŸ»åŒºåŸŸ = 5
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 3
 CASE 50
-	Flag:’²¸‹æˆæ = 50
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 15
+	Flag:èª¿æŸ»åŒºåŸŸ = 50
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 15
 CASE 90
-	Flag:’²¸‹æˆæ = 90
-	Flag:’²¸[“x = 0
-	Flag:’²¸á‹C = 0
+	Flag:èª¿æŸ»åŒºåŸŸ = 90
+	Flag:èª¿æŸ»æ·±åº¦ = 0
+	Flag:èª¿æŸ»ç˜´æ°— = 0
 CASE 999
 	CALL RPG_MAIN
 CASEELSE

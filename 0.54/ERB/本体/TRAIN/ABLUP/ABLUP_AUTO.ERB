@@ -1,26 +1,26 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+ï»¿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:ABLUP_AUTO.ERB
-;	Facility	:ABLUPŠÖ˜Aˆ—(Ž©“®ˆ—)B
+;	Facility	:ABLUPé–¢é€£å‡¦ç†(è‡ªå‹•å‡¦ç†)ã€‚
 ;
-;	Licence		:ƒ‰ƒCƒZƒ“ƒXƒtƒŠ[B
+;	Licence		:ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ãƒ•ãƒªãƒ¼ã€‚
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					V‹Kì¬
+;	001		20XX/XX/XX		----					æ–°è¦ä½œæˆ
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ž‹LÚŠÖ”ˆê——(‹LÚ‡)
+;  â—‡è¨˜è¼‰é–¢æ•°ä¸€è¦§(è¨˜è¼‰é †)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	E ABLUP_AUTO_MAIN			ABLUP:Ž©“®(Žåˆ—)
-;	E ABLUP_AUTO_DATA			ABLUP:Ž©“®
+;	ãƒ» ABLUP_AUTO_MAIN			ABLUP:è‡ªå‹•(ä¸»å‡¦ç†)
+;	ãƒ» ABLUP_AUTO_DATA			ABLUP:è‡ªå‹•
 ;
 ;===============================================================================
 
@@ -31,7 +31,7 @@
 ;=================================================
 ;   sub ABLUP_AUTO_MAIN
 ;=================================================
-;   ABLUP:Ž©“®(Žåˆ—)
+;   ABLUP:è‡ªå‹•(ä¸»å‡¦ç†)
 ;-------------------------------------------------
 @ABLUP_AUTO_MAIN
 #DIM L_T
@@ -40,31 +40,31 @@
 L_T=0
 L_HIT=0
 
-PRINTFORML ¡ ƒpƒ‰ƒ[ƒ^‚Ìã¸Œ‹‰Ê ¡
+PRINTFORML â–  ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®ä¸Šæ˜‡çµæžœ â– 
 ;-----------------------------
-;- ABLUPŽÀs
+;- ABLUPå®Ÿè¡Œ
 ;-----------------------------
 
-;-- ‘SƒLƒƒƒ‰ˆ—(‘ÎÛŽÒ)
+;-- å…¨ã‚­ãƒ£ãƒ©å‡¦ç†(å¯¾è±¡è€…)
 FOR L_T, 0, CHARANUM
 
 	;CHK
-	SIF !TCVAR:L_T:s“®ƒtƒ‰ƒO_ƒ\[ƒX•Ï“®
+	SIF !TCVAR:L_T:è¡Œå‹•ãƒ•ãƒ©ã‚°_ã‚½ãƒ¼ã‚¹å¤‰å‹•
 		CONTINUE
 
-	;Ž©“®ã¸ƒ‚[ƒh‚Å•ªŠò
-	SIF FLAG:Ž©“®ã¸Žè“®ƒ‚[ƒh
+	;è‡ªå‹•ä¸Šæ˜‡ãƒ¢ãƒ¼ãƒ‰ã§åˆ†å²
+	SIF FLAG:è‡ªå‹•ä¸Šæ˜‡æ‰‹å‹•ãƒ¢ãƒ¼ãƒ‰
 		CONTINUE
 
-	;- ABLUP:Ž©“®
+	;- ABLUP:è‡ªå‹•
 	CALL ABLUP_AUTO_DATA(L_T)
 	SIF RESULT
 		L_HIT = 1
 NEXT
 
-;CHK:HIT–³‚µ
+;CHK:HITç„¡ã—
 SIF !L_HIT
-	PRINTL (ã¸ŽÒ–³‚µ)
+	PRINTL (ä¸Šæ˜‡è€…ç„¡ã—)
 
 PRINTL
 
@@ -72,12 +72,12 @@ PRINTL
 ;=================================================
 ;   sub ABLUP_AUTO_DATA
 ;=================================================
-;   ABLUP:Ž©“®
+;   ABLUP:è‡ªå‹•
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				‘ÎÛŽÒ
+;  ARG:0				å¯¾è±¡è€…
 ; Output:
-;  RETURN				Œ‹‰Ê(0:HIT–³‚µ 1:HIT—L‚è)
+;  RETURN				çµæžœ(0:HITç„¡ã— 1:HITæœ‰ã‚Š)
 ;-------------------------------------------------
 @ABLUP_AUTO_DATA(ARG)
 #DIM DYNAMIC L_CHK_UP , 100
@@ -86,7 +86,7 @@ PRINTL
 #DIM L_TMP
 #DIM L_HIT
 #DIM L_SYRPTN
-;- •‰‰×ŒyŒ¸—p‚Ìˆ—‚ÉŽg—p‚·‚é•Ï”(–³‚­‚Ä‚à—Ç‚¢)
+;- è² è·è»½æ¸›ç”¨ã®å‡¦ç†ã«ä½¿ç”¨ã™ã‚‹å¤‰æ•°(ç„¡ãã¦ã‚‚è‰¯ã„)
 #DIM DYNAMIC L_CHK_END , 110
 #DIM L_CHK_END_ALL
 #DIM L_HIT_UP
@@ -112,33 +112,33 @@ VARSET L_CHK_UP, -1
 LOCALS=ABL
 
 ;-- 
-FOR L_J, 0, FLAG:Å‘å”_ABLLV
+FOR L_J, 0, FLAG:æœ€å¤§æ•°_ABLLV
 
-	;- ‘S—v‘fƒ`ƒFƒbƒNƒtƒ‰ƒO‚ªON‚Ì‚Ü‚Ü(ã¸–³‚µ)‚Ìê‡AI—¹
+	;- å…¨è¦ç´ ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°ãŒONã®ã¾ã¾(ä¸Šæ˜‡ç„¡ã—)ã®å ´åˆã€çµ‚äº†
 	SIF L_CHK_END_ALL
 		BREAK
 
-	;- ‘S—v‘fƒ`ƒFƒbƒNƒtƒ‰ƒO:ON
+	;- å…¨è¦ç´ ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°:ON
 	L_CHK_END_ALL = 1
 
-	;-- ‘SABL‚ðCHK
+	;-- å…¨ABLã‚’CHK
 	FOR L_I, 0, VARSIZE("ABL")
 
 		L_COM = L_I
 
-		;- Šù‚Éã¸–³‚µ‚Ìê‡A“Ç‚Ý”ò‚Î‚·
+		;- æ—¢ã«ä¸Šæ˜‡ç„¡ã—ã®å ´åˆã€èª­ã¿é£›ã°ã™
 		SIF L_CHK_END:L_COM
 			CONTINUE
 
-		;- MAX‚ÍI—¹
-		IF ABL:ARG:L_I >= FLAG:Å‘å”_ABLLV
-			ABL:ARG:L_I = FLAG:Å‘å”_ABLLV
+		;- MAXã¯çµ‚äº†
+		IF ABL:ARG:L_I >= FLAG:æœ€å¤§æ•°_ABLLV
+			ABL:ARG:L_I = FLAG:æœ€å¤§æ•°_ABLLV
 			GOTO UP_END
 		ENDIF
 
-		;- ˆ—‘ÎÛƒŒƒxƒ‹ˆÈã‚ÌABL‚ÍƒXƒ‹[(¦’áƒŒƒxƒ‹‚©‚ç‡‚Éƒ`ƒFƒbƒN‚·‚é)
+		;- å‡¦ç†å¯¾è±¡ãƒ¬ãƒ™ãƒ«ä»¥ä¸Šã®ABLã¯ã‚¹ãƒ«ãƒ¼(â€»ä½Žãƒ¬ãƒ™ãƒ«ã‹ã‚‰é †ã«ãƒã‚§ãƒƒã‚¯ã™ã‚‹)
 		IF L_J < ABL:ARG:L_I
-			;- ‘S—v‘fƒ`ƒFƒbƒNƒtƒ‰ƒO:OFF
+			;- å…¨è¦ç´ ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°:OFF
 			L_CHK_END_ALL = 0
 			CONTINUE
 		ENDIF
@@ -146,28 +146,28 @@ FOR L_J, 0, FLAG:Å‘å”_ABLLV
 		;clear
 		VARSET L_HIT_UP
 
-		;- ƒpƒ^[ƒ“‚ð‘Sˆ—
+		;- ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’å…¨å‡¦ç†
 		FOR L_SYRPTN,0,ABLUP_GET_SYRPTN_NUM()
 
-			;- CHK:ABLUP(Ú×)
+			;- CHK:ABLUP(è©³ç´°)
 			CALL CHK_ABLUP_DETAIL(ARG, L_COM, L_SYRPTN,LOCALS)
 
-			;- CHK:Œ‹‰Ê
+			;- CHK:çµæžœ
 			SELECTCASE RESULT
 				;- OK
 				CASE 0
 					L_TMP = ABL:ARG:L_COM
-					;- ƒƒO—p‚É‘Þ”ð
+					;- ãƒ­ã‚°ç”¨ã«é€€é¿
 					SIF L_CHK_UP:L_COM < 0
 						L_CHK_UP:L_COM = L_TMP
 
-					;- ŽÀs:ABLUP
+					;- å®Ÿè¡Œ:ABLUP
 					CALL ABLUP_EXE(ARG,L_COM,L_SYRPTN,LOCALS)
 
 					L_HIT = 1
 					L_HIT_UP = 1
 
-					;- ‘S—v‘fƒ`ƒFƒbƒNƒtƒ‰ƒO:OFF
+					;- å…¨è¦ç´ ãƒã‚§ãƒƒã‚¯ãƒ•ãƒ©ã‚°:OFF
 					L_CHK_END_ALL = 0
 					BREAK
 
@@ -175,7 +175,7 @@ FOR L_J, 0, FLAG:Å‘å”_ABLLV
 		NEXT
 
 		$UP_END
-		;- ‚»‚ÌABL‚ªã¸–³‚µ‚©ƒ`ƒFƒbƒN
+		;- ãã®ABLãŒä¸Šæ˜‡ç„¡ã—ã‹ãƒã‚§ãƒƒã‚¯
 		SIF !L_HIT_UP
 			L_CHK_END:L_COM = 1
 
@@ -185,32 +185,32 @@ NEXT
 L_FIRST=0
 L_CNT=0
 
-;-- ã¸ƒƒOo—Í
+;-- ä¸Šæ˜‡ãƒ­ã‚°å‡ºåŠ›
 FOR L_I, 0, VARSIZE("ABL")
 
-	;- 0ˆÈã(HIT—L‚è)‚È‚ço—Í
+	;- 0ä»¥ä¸Š(HITæœ‰ã‚Š)ãªã‚‰å‡ºåŠ›
 	IF L_CHK_UP:L_I >= 0
 
 		IF 0
 			L_TMP = L_CHK_UP:L_I
-			PRINTFORML %ABLNAME:L_I,10,LEFT% LVUP({L_TMP}¨{ABL:ARG:L_I}) (+{ABL:ARG:L_I - L_TMP}) (%CALLNAME:ARG%)
+			PRINTFORML %ABLNAME:L_I,10,LEFT% LVUP({L_TMP}â†’{ABL:ARG:L_I}) (+{ABL:ARG:L_I - L_TMP}) (%CALLNAME:ARG%)
 		ELSE
 			IF !L_FIRST
 				L_FIRST=1
-				PRINTFORML y%CALLNAME:ARG%z
+				PRINTFORML ã€%CALLNAME:ARG%ã€‘
 			ENDIF
 
 			SELECTCASE ABLNAME:L_I
-				CASE "‰õ‚b", "‰õ‚u", "‰õ‚`", "‰õ‚a"
-					SETCOLOR COLOR("ƒsƒ“ƒN")
-				CASE "—~–]"
-					SETCOLOR COLOR("ƒsƒ“ƒN")
-				CASE "e–§", "]‡", "•òŽd¸_", "«“z—ê", "˜U—"
-					SETCOLOR COLOR("ƒsƒ“ƒN")
+				CASE "å¿«ï¼£", "å¿«ï¼¶", "å¿«ï¼¡", "å¿«ï¼¢"
+					SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+				CASE "æ¬²æœ›"
+					SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
+				CASE "è¦ªå¯†", "å¾“é †", "å¥‰ä»•ç²¾ç¥ž", "æ€§å¥´éš·", "ç¯­çµ¡"
+					SETCOLOR COLOR("ãƒ”ãƒ³ã‚¯")
 			ENDSELECT
 
 			L_TMP = L_CHK_UP:L_I
-			PRINTFORM @[%ABLNAME:L_I,10,LEFT% LVUP({L_TMP}¨{ABL:ARG:L_I}) (+{ABL:ARG:L_I - L_TMP}) ]  
+			PRINTFORM ã€€[%ABLNAME:L_I,10,LEFT% LVUP({L_TMP}â†’{ABL:ARG:L_I}) (+{ABL:ARG:L_I - L_TMP}) ]  
 			RESETCOLOR
 
 			L_CNT ++

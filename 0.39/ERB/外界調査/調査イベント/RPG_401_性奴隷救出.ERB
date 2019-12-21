@@ -1,46 +1,46 @@
-;-------------------------------------------------
-;���z��~�o
+﻿;-------------------------------------------------
+;性奴隷救出
 ;-------------------------------------------------
 @RPG_EVENT_401(ARG:0,ARG:1)
 #DIM L_INPUT
 #DIM L_I
 
-ARG = Flag:�����L����
-Flag:�����C�x���g������ = 1
-Flag:�����C�x���g�ԍ� = 401
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 401
 
 L_I = ARG
 CLEARLINE LINECOUNT
 DRAWLINE
 SETCOLOR 150,250,150
-PRINTFORML �y�����C�x���g:���z��~�o�z
+PRINTFORML 【調査イベント:性奴隷救出】
 PRINTFORML 
 
-PRINTFORML �ʐM�ŕ����̐��̔���������ƕ񍐂��󂯁A���̏ꏊ�ւƑ����^�ԁB
-PRINTFORML �Â��ɗl�q���f���Ƃ����ɂ͕⋭���ꂽ�H��̂悤�ŁA�C���M�����[�����̍���̂悤���B
-PRINTFORML �L�^�ɂ��Ɠs�s�̏Z�l���߂܂��Ă���悤���A���炭�j�����̈Ԃݎ҂ɂ���Ă���̂��낤�B
-PRINTFORML ���͌x�����ɂ߂Ă���悤���A�U�ߍ��ލD�@�ł͂��邪�c
+PRINTFORML 通信で複数の生体反応があると報告を受け、その場所へと足を運ぶ。
+PRINTFORML 静かに様子を伺うとそこには補強された工場のようで、イレギュラーたちの根城のようだ。
+PRINTFORML 記録によると都市の住人が捕まっているようだ、恐らく男たちの慰み者にされているのだろう。
+PRINTFORML 今は警戒を緩めているようだ、攻め込む好機ではあるが…
 PRINTFORML 
 PRINTFORML 
 PRINTFORML 
-PRINTFORML [0] ������@(�Z���o�^���܂�)
-PRINTFORML [1] �����Ȃ�(�Z���o�^�͂��܂���)
+PRINTFORML [0] 助ける　(住民登録します)
+PRINTFORML [1] 助けない(住民登録はしません)
 PRINTFORML 
 $INPUT_LOOP
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 0
-	PRINTFORML �����ŕ�͂������ƁA%CALLNAME:L_I%�̍��}�Ƌ��Ɉ�ĂɍU�ߍ��񂾁B
-	PRINTFORML �ˑR�̏P���ō�������C���M�����[�������A���X�ƎE�������Ă����B
-	PRINTFORML ���������������������܂Ȃ��T���ƁA���Ōq���ꂽ�Z�l�̎p���������B
-	PRINTFORML �I���Ȃ����I�\�s�ŐS���������悤�ɁA��������ŋ�������߂Ă���B
-	PRINTFORML %CALLNAME:L_I%�͂������܉������ƁA�����ɓs�s�։^�Ԃ悤��z�����c
+	PRINTFORML 部隊で包囲したあと、%CALLNAME:L_I%の合図と共に一斉に攻め込んだ。
+	PRINTFORML 突然の襲撃で混乱するイレギュラーたちを、次々と殺処分していく。
+	PRINTFORML 制圧が完了し室内をくまなく探すと、鎖で繋がれた住人の姿があった。
+	PRINTFORML 終わらない性的暴行で心を失ったように、濁った眼で虚空を見つめている。
+	PRINTFORML %CALLNAME:L_I%はすぐさま解放すると、直ちに都市へ運ぶよう手配した…
 	PRINTFORMW 
 	CALL CHARACTER_SCOUT1
 CASE 1
-	PRINTFORML �������A�����̏ڍׂ�������Ȃ��ȏ�I舂ɋߊ��킯�ɂ������Ȃ��B
-	PRINTFORML �����͉��Ƃ������āA���̋@���T�邱�Ƃɂ���c
+	PRINTFORML しかし、内部の詳細が分からない以上迂闊に近寄るわけにもいかない。
+	PRINTFORML ここは何とか堪えて、次の機会を探ることにする…
 	PRINTFORML 
 	PRINTFORMW 
 CASEELSE

@@ -1,16 +1,16 @@
+﻿;-------------------------------------------------
+;キャラ比較関数
 ;-------------------------------------------------
-;�L������r�֐�
-;-------------------------------------------------
-;TYPE�i��r���Z�q�j���w�肵��2�L�����̓���ϐ��̔�r���s���ėp�֐�
+;TYPE（比較演算子）を指定して2キャラの特定変数の比較を行う汎用関数
 @C_CHARA_COMPARE(VAR_NAME, VAR_ID, CHARA_A, TYPE, CHARA_B)
 #FUNCTION
 #LOCALSIZE 1
 #LOCALSSIZE 1
-#DIMS VAR_NAME ;��r�ΏۃL�����ϐ�
-#DIM  VAR_ID   ;��r�ΏۃL�����ϐ���ID
-#DIM  CHARA_A  ;��r�ΏۃL����A�̓o�^�ԍ�
-#DIMS TYPE     ;��r���e
-#DIM  CHARA_B  ;��r�ΏۃL����B�̓o�^�ԍ�
+#DIMS VAR_NAME ;比較対象キャラ変数
+#DIM  VAR_ID   ;比較対象キャラ変数のID
+#DIM  CHARA_A  ;比較対象キャラAの登録番号
+#DIMS TYPE     ;比較内容
+#DIM  CHARA_B  ;比較対象キャラBの登録番号
 SELECTCASE TYPE
 CASE "=="
 	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) == C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
@@ -23,5 +23,5 @@ CASE "<"
 CASE "<="
 	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) <= C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
 CASEELSE
-	THROW �s����TYPE�@%TYPE%
+	THROW 不明なTYPE　%TYPE%
 ENDSELECT

@@ -1,7 +1,7 @@
-
+﻿
 
 ;-------------------------------------------------
-;�A�[�J�C�u
+;アーカイブ
 ;-------------------------------------------------
 @ARCHIVE_TOP
 #DIM L_N
@@ -15,8 +15,8 @@ L_N = 0
 FLAG:17001 = 1
 
 DRAWLINE
-PRINTFORML  �y�A�[�J�C�u�z
-PRINTFORML  �����ł͊O�E�����ŉ�������A�[�J�C�u���{���ł��܂��B
+PRINTFORML  【アーカイブ】
+PRINTFORML  ここでは外界調査で回収したアーカイブを閲覧できます。
 DRAWLINE
 $AL_LOOP
 IF FLAG:(17000+L_N) != 0
@@ -29,7 +29,7 @@ RESULT = 0
 SIF L_N < 500
 	GOTO AL_LOOP
 DRAWLINE
-PRINTFORML [999] - �߂�
+PRINTFORML [999] - 戻る
 INPUT
 L_INPUT = RESULT
 
@@ -47,7 +47,7 @@ RESTART
 
 
 ;-------------------------------------------------
-;�A�[�J�C�u�@���
+;アーカイブ　回収
 ;-------------------------------------------------
 @ARCHIVE_G
 #DIM A_G
@@ -67,12 +67,12 @@ SIF FLAG:(17000+L_N) == 0
 
 FLAG:(17000+L_N) = 1
 SIF A_G == 1
-PRINTFORMW �A�[�J�C�u%FLAGNAME:(17000+L_N)%����肵�܂���
+PRINTFORMW アーカイブ%FLAGNAME:(17000+L_N)%を入手しました
 
 
 
 ;-------------------------------------------------
-;�A�[�J�C�u�@�{��
+;アーカイブ　閲覧
 ;-------------------------------------------------
 @ARCHIVE_C(A_N)
 #DIM A_N
@@ -83,127 +83,127 @@ DRAWLINE
 PRINTFORML %FLAGNAME:(17000+A_N)%
 DRAWLINE
 IF  A_N == 10
-	PRINTFORML �i�m�I�i�m�A�i�m�A�i�m�I�i�m�[�I�c�i�m�I
+	PRINTFORML ナノ！ナノ、ナノ、ナノ！ナノー！…ナノ！
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �i�b�i�b�i�m�i�m�A�i�b�i�b�i�m�i�m�A�i�m�i�m�I
+	PRINTFORML ナッナッナノナノ、ナッナッナノナノ、ナノナノ！
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �@�@�@�@�@�@�O�L�^�i�m
+	PRINTFORML 　　　　　　飽キタナノ
 	PRINTFORML 
 ELSEIF A_N == 9
-	PRINTFORML �u���񂵂Ă���Ƃ��A���ɂ���G�͎a�邩���@�ōU�����Ȃ����I�v
-	PRINTFORML ���Č����Ă����ǖ{�����Ȃ��c�A�ł���y�͖������񂵂Ă邩�炻���Ȃ񂾂낤�ˁB
+	PRINTFORML 「周回しているとき、奥にいる敵は斬るか魔法で攻撃しなさい！」
+	PRINTFORML って言ってたけど本当かなぁ…、でも先輩は毎日周回してるからそうなんだろうね。
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �ł��u����v���ĂȂ�̂��Ƃ��낤�B
+	PRINTFORML でも「周回」ってなんのことだろう。
 	PRINTFORML 
 ELSEIF A_N == 8
-	PRINTFORML ���o���͈ȉ��̒ʂ�
+	PRINTFORML 見出しは以下の通り
 	PRINTFORML 
-	PRINTFORML �E���\�L�̑䕗�ɂ���Q
+	PRINTFORML ・未曾有の台風による被害
 	PRINTFORML 
-	PRINTFORML �E��ʎ��̑�����
+	PRINTFORML ・交通事故多発中
 	PRINTFORML 
-	PRINTFORML �E��̐��_�a�����s
+	PRINTFORML ・謎の精神病が流行
 	PRINTFORML 
-	PRINTFORML �E[���{]�嗤�ɂē�̐�������I
+	PRINTFORML ・[検閲]大陸にて謎の生物現る！
 ELSEIF A_N == 7
-	PRINTFORML �@�@�@�����Z������ꉞ�����Ă���
+	PRINTFORML 　　　霧が濃いから一応書いておく
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �@�オ�X�[�p�[
-	PRINTFORML �E���Z��n
-	PRINTFORML 
-	PRINTFORML 
-	PRINTFORML 
-	PRINTFORML 
-	PRINTFORML �オ�}���فH�ŉE���X�[�p�[�H
-	PRINTFORML �@�@�@�L���Ⴂ���H
+	PRINTFORML 　上がスーパー
+	PRINTFORML 右が住宅地
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �@�@�@�@�@�@�@�@�@����ς�ς�
+	PRINTFORML 
+	PRINTFORML 上が図書館？で右がスーパー？
+	PRINTFORML 　　　記憶違いか？
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 　　　　　　　　　やっぱり変だ
 ELSEIF A_N == 6
-	PRINTFORML �s�s�ُ̈�ɋC�t���ĊO�ɏo�����̂́A�O�͂����ƈُ킾�����B
-	PRINTFORML �o�P���m����̂͒m���Ă������A�܂�������Ȃɂ���Ȃ�āc
-	PRINTFORML ����ɊX�����Ƃ����̂ɏI���̂Ȃ����H�݂����ɂȂ��Ă�B
-	PRINTFORML �ꏏ�ɒE���������ԂƂ͂͂���邵�ŁA�����ǂ��肾�c�c�B
+	PRINTFORML 都市の異常に気付いて外に出たものの、外はもっと異常だった。
+	PRINTFORML バケモノいるのは知っていたが、まさかこんなにいるなんて…
+	PRINTFORML それに街中だというのに終わりのない迷路みたいになってる。
+	PRINTFORML 一緒に脱走した仲間とははぐれるしで、八方塞がりだ……。
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORMW 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �G�[�W�F���g���e�������ċ߂���������Ă���A
-	PRINTFORML �s�s����͎��̓C���M�����[�Ƃ��ĔF������Ă��܂����悤���B
+	PRINTFORML エージェントが銃を持って近くをうろついている、
+	PRINTFORML 都市からは私はイレギュラーとして認識されてしまったようだ。
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORMW 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �@�@�@���@�@�@�@�@�@����@�@�@�@
-	PRINTFORML �@�@�@�@����Ȃ��ƂȂ�@�@�@�@�@�@�@�@�@�@�s�s�ɂ����
+	PRINTFORML 　　　腹　　　　　　喰われ　　　　
+	PRINTFORML 　　　　こんなことなら　　　　　　　　　　都市にいれば
 ELSEIF A_N == 5
-	PRINTFORML �C�����ɂ���q�ɂɏo�Ă������̃o�P���m�͂Ȃ񂾂����񂾁H�B
-	PRINTFORML �C�F�����G��Ƀk���k�������g�́A�C�������������炠��Ⴕ�˂��B
-	PRINTFORML �����Ė_�łԂ��@������C�ɗ����Ă������c����ł͂Ȃ�������
+	PRINTFORML 海沿いにある倉庫に出てきたあのバケモノはなんだったんだ？。
+	PRINTFORML 気色悪い触手にヌメヌメした身体、気持ち悪いったらありゃしねぇ。
+	PRINTFORML 驚いて棒でぶっ叩いたら海に落ちてったが…死んではなさそうだ
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �ŋ߁A�ςȂ��̂������Ƃ��̉\�����邵�A�����͂悭���ꂻ���ɂȂ�
+	PRINTFORML 最近、変なものを見たとかの噂もあるし、今日はよく眠れそうにない
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 ELSEIF A_N == 4
-	PRINTFORML �@�@�@�C���X�}�X�@�@�@�e�Ō���
-	PRINTFORML �~���S�@�@�@�݊�ŉ���
-	PRINTFORML �@�V���S�X�@�@�@�@�@�@�@���@�ōU��
+	PRINTFORML 　　　インスマス　　　銃で撃つ
+	PRINTFORML ミ＝ゴ　　　鈍器で殴る
+	PRINTFORML 　ショゴス　　　　　　　魔法で攻撃
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
 ELSEIF A_N == 3
-	PRINTFORML [���{]�Ɏw�����ꂽ�����B���Ă������B
-	PRINTFORML �o����Α�������������������B
-	PRINTFORML ���Ԃ��o�ƍs����Ƃ��낪�ς�����܂����A
-	PRINTFORML �ň��s�s�̓z��Ɍ������邩������Ȃ�����ȁB
+	PRINTFORML [検閲]に指示された物を隠しておいた。
+	PRINTFORML 出来れば早く回収した方がいい。
+	PRINTFORML 時間が経つと行けるところが変わっちまうし、
+	PRINTFORML 最悪都市の奴らに見つけられるかもしれないからな。
 ELSEIF A_N == 2
-	PRINTFORML �팱�̂�[���{]��E�o���Ď����p�|�{�t�Ŗ��������J�v�Z���Ɋi�[�B
+	PRINTFORML 被験体の[検閲]を摘出して試験用培養液で満たしたカプセルに格納。
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �i�[����P�����o�߁A����ɐ��̐M�����m�F�B
+	PRINTFORML 格納から１ヵ月経過、正常に生体信号を確認。
 	PRINTFORML 
-	PRINTFORML �i�[����Q�����o�߁A����ɐ��̐M�����m�F�B
+	PRINTFORML 格納から２ヶ月経過、正常に生体信号を確認。
 	PRINTFORML 
-	PRINTFORML �i�[����R�����o�߁A���̐M�����m�F��������◐�ꂪ����ꂽ�B
+	PRINTFORML 格納から３ヶ月経過、生体信号を確認したがやや乱れが見られた。
 	PRINTFORML 
-	PRINTFORML �i�[����S�����o�߁A�r�؂�r�؂�ł͂��邪���̐M�����m�F�B
+	PRINTFORML 格納から４ヶ月経過、途切れ途切れではあるが生体信号を確認。
 	PRINTFORML 
-	PRINTFORML �i�[����T�����o�߁A�@�\��~�B
+	PRINTFORML 格納から５ヶ月経過、機能停止。
 	PRINTFORML 
-	PRINTFORML �ȏォ��[���{]�̌����̏ꍇ�Ɉꎞ�ۑ��ɗL�p�B
+	PRINTFORML 以上から[検閲]の交換の場合に一時保存に有用。
 	PRINTFORML 
 ELSEIF A_N == 1
-	PRINTFORML �����Ă������Ă������ꏊ�΂�������Ă�C������c
+	PRINTFORML 歩いても歩いても同じ場所ばかり歩いてる気がする…
 	PRINTFORML 
-	PRINTFORML �@�@�@��R�T�������ǒN�����Ȃ��A����͎̂��̂΂��肾�c
-	PRINTFORML 
-	PRINTFORML 
+	PRINTFORML 　　　沢山探したけど誰もいない、あるのは死体ばかりだ…
 	PRINTFORML 
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �@�@�@�@�@�@�@�@�@�@�@�@�@������ꂽ
 	PRINTFORML 
 	PRINTFORML 
-	PRINTFORML �N�ł�����
-	PRINTFORML �@�@�@�@�@�@�@�@�@�@��l�͐S�������Ȃ�
+	PRINTFORML 　　　　　　　　　　　　　もう疲れた
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 誰でもいい
+	PRINTFORML 　　　　　　　　　　一人は心がもたない
 	PRINTFORML 
 	PRINTFORML 
 ENDIF

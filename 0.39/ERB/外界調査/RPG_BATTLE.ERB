@@ -1,14 +1,14 @@
-;-------------------------------------------------
-;í“¬ŠÖŒW
+ï»¿;-------------------------------------------------
+;æˆ¦é—˜é–¢ä¿‚
 ;-------------------------------------------------
 @RPG_BATTLE(ARG)
 #DIM L_INPUT
 #DIM L_I
 #DIM B_B
 
-ARG = Flag:’²¸ƒLƒƒƒ‰
+ARG = Flag:èª¿æŸ»ã‚­ãƒ£ãƒ©
 
-Flag:í“¬_U¨ = 0
+Flag:æˆ¦é—˜_æ”»å‹¢ = 0
 
 L_I = ARG
 
@@ -16,26 +16,26 @@ B_B = 0
 
 
 CALL RPG_BATTLE_E 
-SIF Flag:“G_ƒŒƒA != 0 || Flag:“sŽs_–h‰q != 0
+SIF Flag:æ•µ_ãƒ¬ã‚¢ != 0 || Flag:éƒ½å¸‚_é˜²è¡› != 0
 	B_B = 1
 CLEARLINE LINECOUNT
 IF B_B == 1
 	SETBGCOLOR 90,10,10
-	PRINTFORML  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	PRINTFORML  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	PRINTFORML  â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+	PRINTFORML  â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 ENDIF
-IF Flag:“G_ƒŒƒA == 100
-	PRINTFORML @@@@@@@@@@@@@@@@@@@@@@ŒxLvXX@@@ŠO_P—ˆ@@@@@@@@
-ELSEIF Flag:“G_ƒŒƒA != 0 && Flag:’²¸‹æˆæ == 90 && (Flag:’²¸[“x >= Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE)
-	PRINTFORML @@@@@@@@@@@@@@@@@@@@@@Å[•”“ž’B@–{ìíÅIH’öŠJŽn@@@@@@@@
-ELSEIF Flag:“G_ƒŒƒA != 0
-	PRINTFORML @@@@@@@@@@@@@@@@@@@@@@Œx‰úLv5@”F’mŠO“G«‘¶ÝP—ˆ@@@@@@@@
-ELSEIF Flag:“sŽs_–h‰q != 0
-	PRINTFORML @@@@@@@@@@@@@@@@@@@@@“sŽs–h‰qí@@”F’mŠO“G«‘¶ÝŒ}Œ‚@@@@@@@@
+IF Flag:æ•µ_ãƒ¬ã‚¢ == 100
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€è­¦å‘ŠLvXXã€€ã€€ã€€å¤–ç¥žè¥²æ¥ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+ELSEIF Flag:æ•µ_ãƒ¬ã‚¢ != 0 && Flag:èª¿æŸ»åŒºåŸŸ == 90 && (Flag:èª¿æŸ»æ·±åº¦ >= Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ)
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æœ€æ·±éƒ¨åˆ°é”ã€€æœ¬ä½œæˆ¦æœ€çµ‚å·¥ç¨‹é–‹å§‹ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+ELSEIF Flag:æ•µ_ãƒ¬ã‚¢ != 0
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€è­¦æˆ’Lv5ã€€èªçŸ¥å¤–æ•µæ€§å­˜åœ¨è¥²æ¥ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
+ELSEIF Flag:éƒ½å¸‚_é˜²è¡› != 0
+	PRINTFORML ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€éƒ½å¸‚é˜²è¡›æˆ¦ã€€ã€€èªçŸ¥å¤–æ•µæ€§å­˜åœ¨è¿Žæ’ƒã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€
 ENDIF
 IF B_B == 1
-	PRINTFORML  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-	PRINTFORML  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	PRINTFORML  â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
+	PRINTFORML  â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•â€•
 	PRINTFORML
 	PRINTFORML
 	PRINTFORML
@@ -48,17 +48,17 @@ ENDIF
 
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML %SAVESTR:“G_–¼‘O%‚ªŒ»‚ê‚½IB
+PRINTFORML %SAVESTR:æ•µ_åå‰%ãŒç¾ã‚ŒãŸï¼ã€‚
 DRAWLINE
 PRINTFORML
 PRINTFORML
 PRINTFORMW
-IF CFlag:L_I:Zl_SPD >= RAND:100
-;ƒtƒ@[ƒXƒgƒAƒ^ƒbƒN
+IF CFlag:L_I:ä½äºº_SPD >= RAND:100
+;ãƒ•ã‚¡ãƒ¼ã‚¹ãƒˆã‚¢ã‚¿ãƒƒã‚¯
 	SETCOLOR 0,240,240
-	PRINTFORML y\\\\FASTATACK!!\\\\z
+	PRINTFORML ã€â€•â€•â€•â€•FASTATACK!!â€•â€•â€•â€•ã€‘
 	RESETCOLOR
-	PRINTFORML %CALLNAME:L_I%‚Í“G‚ª“®‚«o‚·‘O‚ÉUŒ‚‚ð•ú‚Á‚½I
+	PRINTFORML %CALLNAME:L_I%ã¯æ•µãŒå‹•ãå‡ºã™å‰ã«æ”»æ’ƒã‚’æ”¾ã£ãŸï¼
 	CALL RPG_BATTLE_ATTACK_P(ARG)
 ENDIF
 
@@ -66,67 +66,67 @@ ENDIF
 
 
 $INPUT_LOOP
-SIF Flag:“sŽs_–h‰q != 0
-	FLAG:“sŽs_–h‰qƒ^[ƒ“ -= 1
+SIF Flag:éƒ½å¸‚_é˜²è¡› != 0
+	FLAG:éƒ½å¸‚_é˜²è¡›ã‚¿ãƒ¼ãƒ³ -= 1
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORM y%CALLNAME:L_I%z
-IF CFlag:L_I:Zl_Œ»Ý‹C—Í <= CFlag:L_I:Zl_Å‘å‹C—Í-((CFlag:L_I:Zl_Å‘å‹C—Í*7)/10)
+PRINTFORM ã€%CALLNAME:L_I%ã€‘
+IF CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ› <= CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›-((CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›*7)/10)
 	SETCOLOR 220,220,0
-	PRINTFORML y”æ˜Jz
+	PRINTFORML ã€ç–²åŠ´ã€‘
 	RESETCOLOR
 ELSE 
 	PRINTFORML 
 ENDIF
-PRINTFORML yHP:{CFlag:L_I:Zl_Œ»Ý‘Ì—Í}/{CFlag:L_I:Zl_Å‘å‘Ì—Í}zySP:{CFlag:L_I:Zl_Œ»Ý‹C—Í}/{CFlag:L_I:Zl_Å‘å‹C—Í}z
-PRINTFORML yGUTS:{CFlag:L_I:Zl_GUTS}zyBRAVE:{CFlag:L_I:Zl_BRAVE}z
-PRINTFORML ySAN:{CFlag:L_I:Zl_SAN}z
-PRINTFORML yBRE:{CFlag:L_I:Zl_Œ»ÝBRE}/{CFlag:L_I:Zl_Å‘åBRE}z
-SIF Flag:í“¬_U¨ > 0
-	PRINTFORML yU¨(Žc‚è{Flag:í“¬_U¨}ƒ^[ƒ“)z
+PRINTFORML ã€HP:{CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ›}/{CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ›}ã€‘ã€SP:{CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ›}/{CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›}ã€‘
+PRINTFORML ã€GUTS:{CFlag:L_I:ä½äºº_GUTS}ã€‘ã€BRAVE:{CFlag:L_I:ä½äºº_BRAVE}ã€‘
+PRINTFORML ã€SAN:{CFlag:L_I:ä½äºº_SAN}ã€‘
+PRINTFORML ã€BRE:{CFlag:L_I:ä½äºº_ç¾åœ¨BRE}/{CFlag:L_I:ä½äºº_æœ€å¤§BRE}ã€‘
+SIF Flag:æˆ¦é—˜_æ”»å‹¢ > 0
+	PRINTFORML ã€æ”»å‹¢(æ®‹ã‚Š{Flag:æˆ¦é—˜_æ”»å‹¢}ã‚¿ãƒ¼ãƒ³)ã€‘
 DRAWLINE
-PRINTFORML y%SAVESTR:“G_–¼‘O%z
-PRINTFORM yó‘Ô:
-IF Flag:“G_Œ»Ý‘Ì—Í <= Flag:“G_Å‘å‘Ì—Í-((Flag:“G_Å‘å‘Ì—Í*9)/10)
-	PRINTFORM •mŽ€
-ELSEIF Flag:“G_Œ»Ý‘Ì—Í <= Flag:“G_Å‘å‘Ì—Í-((Flag:“G_Å‘å‘Ì—Í*6)/10)
-	PRINTFORM dÇ
-ELSEIF Flag:“G_Œ»Ý‘Ì—Í <= Flag:“G_Å‘å‘Ì—Í-((Flag:“G_Å‘å‘Ì—Í*4)/10)
-	PRINTFORM d
-ELSEIF Flag:“G_Œ»Ý‘Ì—Í <= Flag:“G_Å‘å‘Ì—Í-((Flag:“G_Å‘å‘Ì—Í*2)/10)
-	PRINTFORM Œy
+PRINTFORML ã€%SAVESTR:æ•µ_åå‰%ã€‘
+PRINTFORM ã€çŠ¶æ…‹:
+IF Flag:æ•µ_ç¾åœ¨ä½“åŠ› <= Flag:æ•µ_æœ€å¤§ä½“åŠ›-((Flag:æ•µ_æœ€å¤§ä½“åŠ›*9)/10)
+	PRINTFORM ç€•æ­»
+ELSEIF Flag:æ•µ_ç¾åœ¨ä½“åŠ› <= Flag:æ•µ_æœ€å¤§ä½“åŠ›-((Flag:æ•µ_æœ€å¤§ä½“åŠ›*6)/10)
+	PRINTFORM é‡ç—‡
+ELSEIF Flag:æ•µ_ç¾åœ¨ä½“åŠ› <= Flag:æ•µ_æœ€å¤§ä½“åŠ›-((Flag:æ•µ_æœ€å¤§ä½“åŠ›*4)/10)
+	PRINTFORM é‡å‚·
+ELSEIF Flag:æ•µ_ç¾åœ¨ä½“åŠ› <= Flag:æ•µ_æœ€å¤§ä½“åŠ›-((Flag:æ•µ_æœ€å¤§ä½“åŠ›*2)/10)
+	PRINTFORM è»½å‚·
 ELSE 
-	PRINTFORM –³
+	PRINTFORM ç„¡å‚·
 ENDIF
-PRINTFORML z
+PRINTFORML ã€‘
 
 DRAWLINE
-SIF Flag:Ž©“®í“¬ == 1
+SIF Flag:è‡ªå‹•æˆ¦é—˜ == 1
 	GOTO BATTLE_START
-PRINTFORM [1]  - ƒ^[ƒ“Œo‰ß(SP-1)@
-PRINTFORM [2]  - Ž©“®í“¬
+PRINTFORM [1]  - ã‚¿ãƒ¼ãƒ³çµŒéŽ(SP-1)ã€€
+PRINTFORM [2]  - è‡ªå‹•æˆ¦é—˜
 PRINTFORML 
-PRINTFORM [10] - U¨ŽwŽ¦(SP-10)(—^ƒ_ƒ[ƒW2”{@5ƒ^[ƒ“)
+PRINTFORM [10] - æ”»å‹¢æŒ‡ç¤º(SP-10)(ä¸Žãƒ€ãƒ¡ãƒ¼ã‚¸2å€ã€€5ã‚¿ãƒ¼ãƒ³)
 PRINTFORML 
 PRINTFORML 
-IF Flag:ˆË—Š_ˆË—ŠŠJŽn == 1
-	PRINTFORML ˆË—Š’†‚Í“¦‚°‚ç‚ê‚Ü‚¹‚ñ
-ELSEIF Flag:’²¸‹æˆæ == 90 && (Flag:’²¸[“x >= Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE)
-	PRINTFORML ƒ{ƒXí‚Í“¦‚°‚ç‚ê‚Ü‚¹‚ñ
-ELSEIF Flag:“sŽs_–h‰q != 0
-	PRINTFORML –h‰q’†‚Í“¦‚°‚ç‚ê‚Ü‚¹‚ñ
+IF Flag:ä¾é ¼_ä¾é ¼é–‹å§‹ == 1
+	PRINTFORML ä¾é ¼ä¸­ã¯é€ƒã’ã‚‰ã‚Œã¾ã›ã‚“
+ELSEIF Flag:èª¿æŸ»åŒºåŸŸ == 90 && (Flag:èª¿æŸ»æ·±åº¦ >= Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ)
+	PRINTFORML ãƒœã‚¹æˆ¦ã¯é€ƒã’ã‚‰ã‚Œã¾ã›ã‚“
+ELSEIF Flag:éƒ½å¸‚_é˜²è¡› != 0
+	PRINTFORML é˜²è¡›ä¸­ã¯é€ƒã’ã‚‰ã‚Œã¾ã›ã‚“
 ELSE 
-	PRINTFORML [0] - “¦‚°‚é
+	PRINTFORML [0] - é€ƒã’ã‚‹
 ENDIF
 $INPUT_LOOP22
 INPUT
 L_INPUT = RESULT
-SIF Flag:í“¬_U¨ > 0
-	Flag:í“¬_U¨ -= 1
+SIF Flag:æˆ¦é—˜_æ”»å‹¢ > 0
+	Flag:æˆ¦é—˜_æ”»å‹¢ -= 1
 SELECTCASE L_INPUT
 CASE 1
 	$BATTLE_START
-	IF CFlag:L_I:Zl_SPD >= Flag:“G_SPD
+	IF CFlag:L_I:ä½äºº_SPD >= Flag:æ•µ_SPD
 		CALL RPG_BATTLE_ATTACK_P(ARG)
 		CALL RPG_BATTLE_ATTACK_E(ARG)
 	ELSE 
@@ -134,38 +134,38 @@ CASE 1
 		CALL RPG_BATTLE_ATTACK_P(ARG)
 	ENDIF
 	DRAWLINE
-	IF CFlag:L_I:Zl_BRAVE >= RAND:100
-	;ƒuƒŒƒCƒuƒAƒ^ƒbƒN
+	IF CFlag:L_I:ä½äºº_BRAVE >= RAND:100
+	;ãƒ–ãƒ¬ã‚¤ãƒ–ã‚¢ã‚¿ãƒƒã‚¯
 		SETCOLOR 0,240,240
-		PRINTFORML y\\\\BRAVEATACK!!\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•BRAVEATACK!!â€•â€•â€•â€•ã€‘
 		RESETCOLOR
-		PRINTFORML %CALLNAME:L_I%‚ÍÄ“xUŒ‚‚ðŒJ‚èo‚µ‚½I
+		PRINTFORML %CALLNAME:L_I%ã¯å†åº¦æ”»æ’ƒã‚’ç¹°ã‚Šå‡ºã—ãŸï¼
 		CALL RPG_BATTLE_ATTACK_P(ARG)
 	ENDIF
-	CFlag:L_I:Zl_Œ»Ý‹C—Í -= 1
+	CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ› -= 1
 	GOTO INPUT_LOOP
 CASE 2
-	Flag:Ž©“®í“¬ = 1
+	Flag:è‡ªå‹•æˆ¦é—˜ = 1
 	GOTO BATTLE_START
 CASE 10
-	IF CFlag:L_I:Zl_Œ»Ý‹C—Í >= 10
-		Flag:í“¬_U¨ = 5
-		CFlag:L_I:Zl_Œ»Ý‹C—Í -= 10
-		PRINTFORMW y\\\\U¨ŽwŽ¦”­—ß!!\\\\z
+	IF CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ› >= 10
+		Flag:æˆ¦é—˜_æ”»å‹¢ = 5
+		CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ› -= 10
+		PRINTFORMW ã€â€•â€•â€•â€•æ”»å‹¢æŒ‡ç¤ºç™ºä»¤!!â€•â€•â€•â€•ã€‘
 	ELSE
-		PRINTFORMW y\\\\SP‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·\\\\z
+		PRINTFORMW ã€â€•â€•â€•â€•SPãŒä¸è¶³ã—ã¦ã„ã¾ã™â€•â€•â€•â€•ã€‘
 	ENDIF
 		GOTO INPUT_LOOP
 CASE 0
-	IF Flag:ˆË—Š_ˆË—ŠŠJŽn == 1
+	IF Flag:ä¾é ¼_ä¾é ¼é–‹å§‹ == 1
 		GOTO INPUT_LOOP22
-	ELSEIF Flag:“sŽs_–h‰q != 0
+	ELSEIF Flag:éƒ½å¸‚_é˜²è¡› != 0
 		GOTO INPUT_LOOP22
-	ELSEIF RAND:(CFlag:L_I:Zl_SPD) >= RAND:(Flag:“G_SPD)
+	ELSEIF RAND:(CFlag:L_I:ä½äºº_SPD) >= RAND:(Flag:æ•µ_SPD)
 		CALL RPG_START(ARG)
 	ELSE
 		SETCOLOR 250,40,40
-		PRINTFORML y\\\\“¦‚°‚ç‚ê‚È‚©‚Á‚½I\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•é€ƒã’ã‚‰ã‚Œãªã‹ã£ãŸï¼â€•â€•â€•â€•ã€‘
 		RESETCOLOR
 		CALL RPG_BATTLE_ATTACK_E(ARG)
 		GOTO INPUT_LOOP
@@ -177,7 +177,7 @@ ENDSELECT
 
 
 ;-------------------------------------------------
-;UŒ‚ˆ— –¡•û‘¤
+;æ”»æ’ƒå‡¦ç† å‘³æ–¹å´
 ;-------------------------------------------------
 @RPG_BATTLE_ATTACK_P(ARG)
 #DIM L_INPUT
@@ -197,135 +197,135 @@ L_I = ARG
 $EXTRA_LOOP
 
 IF 70 >= RAND:100
-;ƒƒCƒ“•‘•
+;ãƒ¡ã‚¤ãƒ³æ­¦è£…
 	L_W = 0
 ELSE
-;ƒTƒu•‘•
+;ã‚µãƒ–æ­¦è£…
 	L_W = 10
 ENDIF
 DRAWLINE
-PRINTFORML y%CALLNAME:L_I%‚Ìƒ^[ƒ“zy%CSTR:L_I:(4000+L_W)%:{CFlag:L_I:(6551+L_W)}D{CFlag:L_I:(6552+L_W)}+{CFlag:L_I:(6553+L_W)}z
-PRINTFORMW %CALLNAME:L_I%‚Í%CSTR:L_I:(4000+L_W)%‚ÅUŒ‚B
-IF 100+(CFlag:L_I:Zl_HIT)+(FLAG:ˆâ•¨_HIT‡Œv’l)-Flag:“G_SPD >= RAND:100
-;–½’†
-	;ƒqƒbƒg”
+PRINTFORML ã€%CALLNAME:L_I%ã®ã‚¿ãƒ¼ãƒ³ã€‘ã€%CSTR:L_I:(4000+L_W)%:{CFlag:L_I:(6551+L_W)}D{CFlag:L_I:(6552+L_W)}+{CFlag:L_I:(6553+L_W)}ã€‘
+PRINTFORMW %CALLNAME:L_I%ã¯%CSTR:L_I:(4000+L_W)%ã§æ”»æ’ƒã€‚
+IF 100+(CFlag:L_I:ä½äºº_HIT)+(FLAG:éºç‰©_HITåˆè¨ˆå€¤)-Flag:æ•µ_SPD >= RAND:100
+;å‘½ä¸­
+	;ãƒ’ãƒƒãƒˆæ•°
 	L_DL = CFlag:L_I:(6551+L_W)
 	$DL_LOOP
-		;Šî–{ƒ_ƒ[ƒW&ƒA[ƒeƒBƒtƒ@ƒNƒg•â³
-		L_D += RAND:(CFlag:L_I:(6552+L_W))+1+RAND:((FLAG:ˆâ•¨_ATK‡Œv’l)+1)
-		;ƒ_ƒ[ƒWƒ{[ƒiƒX&ƒA[ƒeƒBƒtƒ@ƒNƒg•â³
-		L_D += CFlag:L_I:(6553+L_W)+((1+RAND:((FLAG:ˆâ•¨_ATK‡Œv’l)+1))/5)
+		;åŸºæœ¬ãƒ€ãƒ¡ãƒ¼ã‚¸&ã‚¢ãƒ¼ãƒ†ã‚£ãƒ•ã‚¡ã‚¯ãƒˆè£œæ­£
+		L_D += RAND:(CFlag:L_I:(6552+L_W))+1+RAND:((FLAG:éºç‰©_ATKåˆè¨ˆå€¤)+1)
+		;ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒœãƒ¼ãƒŠã‚¹&ã‚¢ãƒ¼ãƒ†ã‚£ãƒ•ã‚¡ã‚¯ãƒˆè£œæ­£
+		L_D += CFlag:L_I:(6553+L_W)+((1+RAND:((FLAG:éºç‰©_ATKåˆè¨ˆå€¤)+1))/5)
 		L_DL -= 1
 		SIF L_DL > 0
 			GOTO DL_LOOP
-	L_D += (L_D*((CFlag:L_I:Zl_ATK)))/100
+	L_D += (L_D*((CFlag:L_I:ä½äºº_ATK)))/100
 	
 	IF CFlag:L_I:(6558+L_W) >= 10
-	;•KŽE
+	;å¿…æ®º
 		SETCOLOR 0,240,240
-		PRINTFORML y\\\\SPECIALATACK!!\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•SPECIALATACK!!â€•â€•â€•â€•ã€‘
 		RESETCOLOR
-		PRINTFORML %CALLNAME:L_I%‚ÍŸÓg‚ÌˆêŒ‚‚ðŒJ‚èo‚µ‚½IIB
+		PRINTFORML %CALLNAME:L_I%ã¯æ¸¾èº«ã®ä¸€æ’ƒã‚’ç¹°ã‚Šå‡ºã—ãŸï¼ï¼ã€‚
 		L_D += L_D/2
 	ENDIF
-	SIF CFlag:L_I:(6550+L_W) == Flag:“G_Žã“_
+	SIF CFlag:L_I:(6550+L_W) == Flag:æ•µ_å¼±ç‚¹
 		L_D += L_D/2
-	SIF CFlag:L_I:(6550+L_W) == Flag:“G_‘Ï«
+	SIF CFlag:L_I:(6550+L_W) == Flag:æ•µ_è€æ€§
 		L_D -= L_D/2
-	SIF Flag:í“¬_U¨ > 0
+	SIF Flag:æˆ¦é—˜_æ”»å‹¢ > 0
 		L_D = L_D*2
-	L_D -= (Flag:“G_DEF/3)+RAND:((Flag:“G_DEF/3)+1)+RAND:((Flag:“G_DEF/3)+1)
+	L_D -= (Flag:æ•µ_DEF/3)+RAND:((Flag:æ•µ_DEF/3)+1)+RAND:((Flag:æ•µ_DEF/3)+1)
 	SIF L_D <= 0
 	 L_D = (RAND:3)+1
 	PRINTFORML
-	PRINTFORMW %SAVESTR:“G_–¼‘O%‚É{L_D}ƒ_ƒ[ƒW‚ð—^‚¦‚½B
-	Flag:“G_Œ»Ý‘Ì—Í -= L_D
-	SIF FLAG:“sŽs_–h‰q != 0
-		FLAG:“sŽs_–h‰qƒ_ƒ[ƒW += L_D
+	PRINTFORMW %SAVESTR:æ•µ_åå‰%ã«{L_D}ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ŽãˆãŸã€‚
+	Flag:æ•µ_ç¾åœ¨ä½“åŠ› -= L_D
+	SIF FLAG:éƒ½å¸‚_é˜²è¡› != 0
+		FLAG:éƒ½å¸‚_é˜²è¡›ãƒ€ãƒ¡ãƒ¼ã‚¸ += L_D
 ELSE 
-;–½’†‚¹‚¸
-	PRINTFORMW %SAVESTR:“G_–¼‘O%‚ÍUŒ‚‚ð‰ñ”ð‚µ‚½B
+;å‘½ä¸­ã›ãš
+	PRINTFORMW %SAVESTR:æ•µ_åå‰%ã¯æ”»æ’ƒã‚’å›žé¿ã—ãŸã€‚
 ENDIF
 
 
 
-IF FLAG:Žx‰‡_”º‡ŒvATK != 0 && RAND:((FLAG:Žx‰‡_”º‡ŒvSPD/3)+1) >= (RAND:100)+1
-	;”ºUŒ‚
+IF FLAG:æ”¯æ´_éšä¼´åˆè¨ˆATK != 0 && RAND:((FLAG:æ”¯æ´_éšä¼´åˆè¨ˆSPD/3)+1) >= (RAND:100)+1
+	;éšä¼´æ”»æ’ƒ
 		SETCOLOR 240,140,240
-		PRINTFORML y\\\\SUPPORTATACK!!\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•SUPPORTATACK!!â€•â€•â€•â€•ã€‘
 		RESETCOLOR
-		PRINTFORML ”º‘àˆõ‚½‚¿‚Ì‚æ‚é‰‡ŒìUŒ‚B
+		PRINTFORML éšä¼´éšŠå“¡ãŸã¡ã®ã‚ˆã‚‹æ´è­·æ”»æ’ƒã€‚
 		L_D = 0
-		L_D += FLAG:Žx‰‡_”º‡ŒvATK/5
-		L_D -= (Flag:“G_DEF/2)+RAND:(Flag:“G_DEF/2)
+		L_D += FLAG:æ”¯æ´_éšä¼´åˆè¨ˆATK/5
+		L_D -= (Flag:æ•µ_DEF/2)+RAND:(Flag:æ•µ_DEF/2)
 		SIF L_D <= 0
 		 L_D = 1
 		PRINTFORML
-		PRINTFORMW %SAVESTR:“G_–¼‘O%‚É{L_D}ƒ_ƒ[ƒW‚ð—^‚¦‚½B
-		Flag:“G_Œ»Ý‘Ì—Í -= L_D
-		SIF FLAG:“sŽs_–h‰q != 0
-			FLAG:“sŽs_–h‰qƒ_ƒ[ƒW += L_D
+		PRINTFORMW %SAVESTR:æ•µ_åå‰%ã«{L_D}ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ŽãˆãŸã€‚
+		Flag:æ•µ_ç¾åœ¨ä½“åŠ› -= L_D
+		SIF FLAG:éƒ½å¸‚_é˜²è¡› != 0
+			FLAG:éƒ½å¸‚_é˜²è¡›ãƒ€ãƒ¡ãƒ¼ã‚¸ += L_D
 ENDIF
 
 
 
-IF FLAG:“sŽs_–h‰qƒ^[ƒ“ <= 0 && FLAG:“sŽs_–h‰q != 0
+IF FLAG:éƒ½å¸‚_é˜²è¡›ã‚¿ãƒ¼ãƒ³ <= 0 && FLAG:éƒ½å¸‚_é˜²è¡› != 0
 	JUMP CITY_RID_B_END
 ENDIF
 
 
 
-IF Flag:“G_Œ»Ý‘Ì—Í <= 0
+IF Flag:æ•µ_ç¾åœ¨ä½“åŠ› <= 0
 	PRINTFORML
-	PRINTFORMW %SAVESTR:“G_–¼‘O%‚ð“|‚µ‚½B
-	CFlag:L_I:Zl_ŒoŒ±’l += Flag:“G_Žæ“¾ŒoŒ±’l
-	FLAG:ƒ^[ƒ“ŒoŒ±’l += Flag:“G_Žæ“¾ŒoŒ±’l
-	CFlag:L_I:Zl_Ÿ—˜‰ñ” += 1
-	SIF CFlag:L_I:Zl_Ÿ—˜‰ñ” >= 50 && TALENT:L_I:uƒCƒF[ƒK[v == 0
-		TALENT:L_I:uƒCƒF[ƒK[v = 1
-	Flag:ƒ^[ƒ“í“¬‰ñ” += 1
-	Flag:Ž©“®í“¬ = 0
+	PRINTFORMW %SAVESTR:æ•µ_åå‰%ã‚’å€’ã—ãŸã€‚
+	CFlag:L_I:ä½äºº_çµŒé¨“å€¤ += Flag:æ•µ_å–å¾—çµŒé¨“å€¤
+	FLAG:ã‚¿ãƒ¼ãƒ³çµŒé¨“å€¤ += Flag:æ•µ_å–å¾—çµŒé¨“å€¤
+	CFlag:L_I:ä½äºº_å‹åˆ©å›žæ•° += 1
+	SIF CFlag:L_I:ä½äºº_å‹åˆ©å›žæ•° >= 50 && TALENT:L_I:ã€Œã‚¤ã‚§ãƒ¼ã‚¬ãƒ¼ã€ == 0
+		TALENT:L_I:ã€Œã‚¤ã‚§ãƒ¼ã‚¬ãƒ¼ã€ = 1
+	Flag:ã‚¿ãƒ¼ãƒ³æˆ¦é—˜å›žæ•° += 1
+	Flag:è‡ªå‹•æˆ¦é—˜ = 0
 	
-    IF Flag:ˆË—Š_ˆË—ŠŠJŽn == 1
+    IF Flag:ä¾é ¼_ä¾é ¼é–‹å§‹ == 1
 		JUMP MISSION_CLEAR_B
-	ELSEIF Flag:EP’ÇŒ‚•û–@ == 1
+	ELSEIF Flag:EPè¿½æ’ƒæ–¹æ³• == 1
 		JUMP EP_COUNTER_CLEAR
 	ENDIF
 
-	IF CFLAG:L_I:Zl_‹Z”\_ˆã—Ã >= RAND:100
+	IF CFLAG:L_I:ä½äºº_æŠ€èƒ½_åŒ»ç™‚ >= RAND:100
 		SETCOLOR 0,240,240
-		PRINTFORMW y\\\\%CALLNAME:L_I%‚Í‚Â‚¢‚½g‘Ì‚ðŽ¡—Ã‚µ‚½\\\\z
+		PRINTFORMW ã€â€•â€•â€•â€•%CALLNAME:L_I%ã¯å‚·ã¤ã„ãŸèº«ä½“ã‚’æ²»ç™‚ã—ãŸâ€•â€•â€•â€•ã€‘
 		RESETCOLOR
-		CFlag:L_I:Zl_Œ»Ý‘Ì—Í += CFlag:L_I:Zl_Å‘å‘Ì—Í/7
-		SIF CFlag:L_I:Zl_Œ»Ý‘Ì—Í >= CFlag:L_I:Zl_Å‘å‘Ì—Í 
-			CFlag:L_I:Zl_Œ»Ý‘Ì—Í = CFlag:L_I:Zl_Å‘å‘Ì—Í
+		CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› += CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ›/7
+		SIF CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› >= CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ› 
+			CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› = CFlag:L_I:ä½äºº_æœ€å¤§ä½“åŠ›
 	ENDIF
-	IF CFLAG:L_I:Zl_‹Z”\_‰ð‘Ì >= RAND:100
+	IF CFLAG:L_I:ä½äºº_æŠ€èƒ½_è§£ä½“ >= RAND:100
 		SETCOLOR 0,240,240
-		PRINTFORML y\\\\%CALLNAME:L_I%‚Í“|‚µ‚½“G‚ð‰ð‘Ì‚µ‚½\\\\z
-		IF Flag:“G_Žæ“¾ŒoŒ±’l > 50
-			Flag:IŠ[ += 1
-			PRINTFORMW y\\\\IŠ[‚ðŽè‚É“ü‚ê‚½\\\\z
-		ELSEIF Flag:“G_Žæ“¾ŒoŒ±’l > 25
-			Flag:I‹Ÿ•¨ += 1
-			PRINTFORMW y\\\\I‹Ÿ•¨‚ðŽè‚É“ü‚ê‚½\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•%CALLNAME:L_I%ã¯å€’ã—ãŸæ•µã‚’è§£ä½“ã—ãŸâ€•â€•â€•â€•ã€‘
+		IF Flag:æ•µ_å–å¾—çµŒé¨“å€¤ > 50
+			Flag:Iéª¸ += 1
+			PRINTFORMW ã€â€•â€•â€•â€•Iéª¸ã‚’æ‰‹ã«å…¥ã‚ŒãŸâ€•â€•â€•â€•ã€‘
+		ELSEIF Flag:æ•µ_å–å¾—çµŒé¨“å€¤ > 25
+			Flag:Iä¾›ç‰© += 1
+			PRINTFORMW ã€â€•â€•â€•â€•Iä¾›ç‰©ã‚’æ‰‹ã«å…¥ã‚ŒãŸâ€•â€•â€•â€•ã€‘
 		ELSE
-			Flag:IŒŒ‰t += 1
-			PRINTFORMW y\\\\IŒŒ‰t‚ðŽè‚É“ü‚ê‚½\\\\z
+			Flag:Iè¡€æ¶² += 1
+			PRINTFORMW ã€â€•â€•â€•â€•Iè¡€æ¶²ã‚’æ‰‹ã«å…¥ã‚ŒãŸâ€•â€•â€•â€•ã€‘
 		ENDIF
 		RESETCOLOR
 	ENDIF
-	SIF RAND:((Flag:’²¸[“x)+1) >=  20+RAND:100
+	SIF RAND:((Flag:èª¿æŸ»æ·±åº¦)+1) >=  20+RAND:100
 		CALL RPG_ARTIFACT_GET(ARG)
-	IF Flag:’²¸‹æˆæ == 90 && (Flag:’²¸[“x >= Flag:“ú‘Ö‚í‚è‹æ‰æ[“xŒÀŠE)
+	IF Flag:èª¿æŸ»åŒºåŸŸ == 90 && (Flag:èª¿æŸ»æ·±åº¦ >= Flag:æ—¥æ›¿ã‚ã‚ŠåŒºç”»æ·±åº¦é™ç•Œ)
 		RESETBGCOLOR
-		PRINTFORML á‹æ‰æ“¥”j‚¨‚ß‚Å‚Æ‚¤‚²‚´‚¢‚Ü‚·AuŠO“Gv‚ªªé‚É‚µ‚Ä‚¢‚½ƒtƒƒA‚ÉƒA[ƒeƒBƒtƒ@ƒNƒg”½‰ž‚ðŒŸ’mâ
-		PRINTFORMW á‚¹‚Á‚©‚­‚Å‚·‚µ‰ñŽû‚µ‚Ä‚¢‚«‚Ü‚µ‚å‚¤A—Ç‚¢‚à‚Ì‚ªŒ©‚Â‚©‚é‚Æ‚¢‚¢‚Å‚·‚Ëâ
+		PRINTFORML â‰ªåŒºç”»è¸ç ´ãŠã‚ã§ã¨ã†ã”ã–ã„ã¾ã™ã€ã€Œå¤–æ•µã€ãŒæ ¹åŸŽã«ã—ã¦ã„ãŸãƒ•ãƒ­ã‚¢ã«ã‚¢ãƒ¼ãƒ†ã‚£ãƒ•ã‚¡ã‚¯ãƒˆåå¿œã‚’æ¤œçŸ¥â‰«
+		PRINTFORMW â‰ªã›ã£ã‹ãã§ã™ã—å›žåŽã—ã¦ã„ãã¾ã—ã‚‡ã†ã€è‰¯ã„ã‚‚ã®ãŒè¦‹ã¤ã‹ã‚‹ã¨ã„ã„ã§ã™ã­â‰«
 		CALL RPG_ARTIFACT_GET(ARG)
 		CALL RPG_ARTIFACT_GET(ARG)
 		CALL RPG_ARTIFACT_GET(ARG)
-		Flag:’²¸[“x = 0
-		Flag:ƒ^[ƒ“’²¸Ï‚Ý = 1
+		Flag:èª¿æŸ»æ·±åº¦ = 0
+		Flag:ã‚¿ãƒ¼ãƒ³èª¿æŸ»æ¸ˆã¿ = 1
 			CALL RPG_END
 		JUMP RPG_MAIN
 	ENDIF
@@ -334,18 +334,18 @@ ENDIF
 
 
 IF CFlag:L_I:(6558+L_W) >= 20 && (CFlag:L_I:(6558+L_W)-E_A) > RAND:100
-;˜A‘±UŒ‚
+;é€£ç¶šæ”»æ’ƒ
 	SETCOLOR 0,240,240
-	PRINTFORML y\\\\EXTRAATACK!!\\\\z
+	PRINTFORML ã€â€•â€•â€•â€•EXTRAATACK!!â€•â€•â€•â€•ã€‘
 	RESETCOLOR
-	PRINTFORML %CALLNAME:L_I%‚Í‘±‚¯‚´‚Ü‚ÉÄ“xUŒ‚‚ðŽdŠ|‚¯‚½IB
+	PRINTFORML %CALLNAME:L_I%ã¯ç¶šã‘ã–ã¾ã«å†åº¦æ”»æ’ƒã‚’ä»•æŽ›ã‘ãŸï¼ã€‚
 	E_A += 20
 	GOTO EXTRA_LOOP
 ENDIF
 
 
 ;-------------------------------------------------
-;UŒ‚ˆ— “G‘¤
+;æ”»æ’ƒå‡¦ç† æ•µå´
 ;-------------------------------------------------
 @RPG_BATTLE_ATTACK_E(ARG)
 #DIM L_INPUT
@@ -364,16 +364,16 @@ L_D = 0
 L_I = ARG
 DRAWLINE
 IF 70 >= RAND:100
-;ƒƒCƒ“•‘•
+;ãƒ¡ã‚¤ãƒ³æ­¦è£…
 	L_W = 0
 ELSE
-;ƒTƒu•‘•
+;ã‚µãƒ–æ­¦è£…
 	L_W = 30
 ENDIF
-PRINTFORML y%SAVESTR:“G_–¼‘O%‚Ìƒ^[ƒ“zy{Flag:(9031+L_W)}D{Flag:(9032+L_W)}+{Flag:(9033+L_W)}z
-PRINTFORMW %SAVESTR:“G_–¼‘O%‚Í%CALLNAME:L_I%‚ÉUŒ‚B
-IF 100+Flag:“G_HIT-CFlag:L_I:Zl_SPD-FLAG:ˆâ•¨_SPD‡Œv’l >= RAND:100
-;–½’†
+PRINTFORML ã€%SAVESTR:æ•µ_åå‰%ã®ã‚¿ãƒ¼ãƒ³ã€‘ã€{Flag:(9031+L_W)}D{Flag:(9032+L_W)}+{Flag:(9033+L_W)}ã€‘
+PRINTFORMW %SAVESTR:æ•µ_åå‰%ã¯%CALLNAME:L_I%ã«æ”»æ’ƒã€‚
+IF 100+Flag:æ•µ_HIT-CFlag:L_I:ä½äºº_SPD-FLAG:éºç‰©_SPDåˆè¨ˆå€¤ >= RAND:100
+;å‘½ä¸­
 	L_DL = Flag:(9031+L_W)
 	$DL_LOOP
 	L_D += RAND:(Flag:(9032+L_W))+1
@@ -381,59 +381,59 @@ IF 100+Flag:“G_HIT-CFlag:L_I:Zl_SPD-FLAG:ˆâ•¨_SPD‡Œv’l >= RAND:100
 	L_DL -= 1
 	SIF L_DL > 0
 		GOTO DL_LOOP
-	L_D += (L_D*((Flag:“G_ATK)))/100
+	L_D += (L_D*((Flag:æ•µ_ATK)))/100
 	
-	IF RAND:((CFlag:L_I:Zl_HIT)*5+1+FLAG:ˆâ•¨_HIT‡Œv’l)-RAND:((Flag:“G_HIT)*5+1) >= RAND:100
-	;ƒpƒŠƒB
+	IF RAND:((CFlag:L_I:ä½äºº_HIT)*5+1+FLAG:éºç‰©_HITåˆè¨ˆå€¤)-RAND:((Flag:æ•µ_HIT)*5+1) >= RAND:100
+	;ãƒ‘ãƒªã‚£
 		SETCOLOR 0,240,240
-		PRINTFORML y\\\\PARRY!!\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•PARRY!!â€•â€•â€•â€•ã€‘
 		RESETCOLOR
-		PRINTFORML %CALLNAME:L_I%‚Í%SAVESTR:“G_–¼‘O%‚ÌUŒ‚‚ðŽó‚¯—¬‚µ‚ÄˆÐ—Í‚ð—Ž‚Æ‚µ‚½B
+		PRINTFORML %CALLNAME:L_I%ã¯%SAVESTR:æ•µ_åå‰%ã®æ”»æ’ƒã‚’å—ã‘æµã—ã¦å¨åŠ›ã‚’è½ã¨ã—ãŸã€‚
 		L_D -= L_D/2
 	ENDIF
-	IF FLAG:Žx‰‡_”º‡ŒvDEF != 0 && FLAG:Žx‰‡_”º‡ŒvHIT != 0 && RAND:((FLAG:Žx‰‡_”º‡ŒvSPD/3)+1) >= (RAND:100)+1 && L_D > 0
-	;‰‡Œì–hŒä
+	IF FLAG:æ”¯æ´_éšä¼´åˆè¨ˆDEF != 0 && FLAG:æ”¯æ´_éšä¼´åˆè¨ˆHIT != 0 && RAND:((FLAG:æ”¯æ´_éšä¼´åˆè¨ˆSPD/3)+1) >= (RAND:100)+1 && L_D > 0
+	;æ´è­·é˜²å¾¡
 		SETCOLOR 240,140,240
-		PRINTFORML y\\\\SUPPORTGUARD!!\\\\z
+		PRINTFORML ã€â€•â€•â€•â€•SUPPORTGUARD!!â€•â€•â€•â€•ã€‘
 		RESETCOLOR
-		PRINTFORML ”º‘àˆõ‚Í%CALLNAME:L_I%‚ð”Ý‚¤‚æ‚¤‚É‘O‚É—§‚¿AˆÐ—Í‚ðŒyŒ¸‚µ‚½B
-		L_D /= 2 + FLAG:Žx‰‡_”º‡ŒvDEF / 300 + FLAG:Žx‰‡_”º‡ŒvHIT / 300
+		PRINTFORML éšä¼´éšŠå“¡ã¯%CALLNAME:L_I%ã‚’åº‡ã†ã‚ˆã†ã«å‰ã«ç«‹ã¡ã€å¨åŠ›ã‚’è»½æ¸›ã—ãŸã€‚
+		L_D /= 2 + FLAG:æ”¯æ´_éšä¼´åˆè¨ˆDEF / 300 + FLAG:æ”¯æ´_éšä¼´åˆè¨ˆHIT / 300
 	ENDIF
 	
-	SIF CFlag:L_I:Zl_Œ»Ý‹C—Í <= CFlag:L_I:Zl_Å‘å‹C—Í-((CFlag:L_I:Zl_Å‘å‹C—Í*7)/10)
+	SIF CFlag:L_I:ä½äºº_ç¾åœ¨æ°—åŠ› <= CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›-((CFlag:L_I:ä½äºº_æœ€å¤§æ°—åŠ›*7)/10)
 		L_D += L_D/2
-	L_D -= (CFlag:L_I:Zl_DEF/3)+RAND:(CFlag:L_I:Zl_DEF/3)+RAND:(CFlag:L_I:Zl_DEF/3)+RAND:((FLAG:ˆâ•¨_DEF‡Œv’l/2)+1)
+	L_D -= (CFlag:L_I:ä½äºº_DEF/3)+RAND:(CFlag:L_I:ä½äºº_DEF/3)+RAND:(CFlag:L_I:ä½äºº_DEF/3)+RAND:((FLAG:éºç‰©_DEFåˆè¨ˆå€¤/2)+1)
 	SIF L_D <= 0
 	 L_D = (RAND:3)+1
 	PRINTFORML
 	SETCOLOR 250,50,50
-	PRINTFORMW %CALLNAME:L_I%‚Í{L_D}ƒ_ƒ[ƒW‚ðŽó‚¯‚½B
+	PRINTFORMW %CALLNAME:L_I%ã¯{L_D}ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸã€‚
 	RESETCOLOR
 	PRINTFORML 
-	CFlag:L_I:Zl_Œ»Ý‘Ì—Í -= L_D
+	CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› -= L_D
 ELSE 
-;–½’†‚¹‚¸
-	PRINTFORMW %CALLNAME:L_I%‚ÍUŒ‚‚ð‰ñ”ð‚µ‚½B
+;å‘½ä¸­ã›ãš
+	PRINTFORMW %CALLNAME:L_I%ã¯æ”»æ’ƒã‚’å›žé¿ã—ãŸã€‚
 ENDIF
 
 
 
 
-IF CFlag:L_I:Zl_Œ»Ý‘Ì—Í <= 0
-	CFlag:L_I:Zl_Œ»Ý‘Ì—Í = 1
+IF CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› <= 0
+	CFlag:L_I:ä½äºº_ç¾åœ¨ä½“åŠ› = 1
 	PRINTFORML
 	SETCOLOR 250,50,50
 	PRINTFORMW %WORDS_RPG("DEFEATED_CITY", L_I)%
 	RESETCOLOR
-	Flag:“G_ƒŒƒA = 0
-	Flag:Ž©“®í“¬ = 0
-	IF FLAG:“sŽs_–h‰q != 0
-		FLAG:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW += FLAG:“sŽs_–h‰qƒ_ƒ[ƒW
-		FLAG:ƒ^[ƒ“I—¹ƒtƒ‰ƒO = 1
+	Flag:æ•µ_ãƒ¬ã‚¢ = 0
+	Flag:è‡ªå‹•æˆ¦é—˜ = 0
+	IF FLAG:éƒ½å¸‚_é˜²è¡› != 0
+		FLAG:éƒ½å¸‚_é˜²è¡›è“„ç©ãƒ€ãƒ¡ãƒ¼ã‚¸ += FLAG:éƒ½å¸‚_é˜²è¡›ãƒ€ãƒ¡ãƒ¼ã‚¸
+		FLAG:ã‚¿ãƒ¼ãƒ³çµ‚äº†ãƒ•ãƒ©ã‚° = 1
 		JUMP SYSTEM_MENU
 	ENDIF
 	RESETBGCOLOR
-	IF Flag:ˆË—Š_ˆË—ŠŠJŽn == 1
+	IF Flag:ä¾é ¼_ä¾é ¼é–‹å§‹ == 1
 		REPEAT 50
 			Flag:(800+M_N) = 0
 			Flag:(850+M_N) = 0
@@ -441,9 +441,9 @@ IF CFlag:L_I:Zl_Œ»Ý‘Ì—Í <= 0
 		REND
 		;VARSET FLAG:0, 0, 800, 850
 		;VARSET FLAG:0, 0, 850, 900
-		;849‚Æ900‚ÍƒŠƒZƒbƒg‚³‚ê‚È‚¢H
+		;849ã¨900ã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œãªã„ï¼Ÿ
 		JUMP MISSION_MISS
-	ELSEIF Flag:EP’ÇŒ‚•û–@ == 1
+	ELSEIF Flag:EPè¿½æ’ƒæ–¹æ³• == 1
 		JUMP EP_COUNTER_MISS
 	ENDIF
 

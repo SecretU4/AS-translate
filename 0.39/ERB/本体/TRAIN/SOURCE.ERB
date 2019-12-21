@@ -1,37 +1,37 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:SOURCE.ERB
-;	Facility	:SOURCE�֘A�����B
+;	Facility	:SOURCE関連処理。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
+;	001		20XX/XX/XX		----					新規作成
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXXX
 ;
-;	�E SOURCE_CHECK_MAIN				SRC���f:�又��
-;	�E SRC_CALC_PALAM					SRC�v�Z:PALAM
-;	�E SRC_CALC_GOTJUEL					SRC�v�Z:GOTJUEL
-;	�E SRC_CALC_EXP						SRC�v�Z:EXP
+;	・ SOURCE_CHECK_MAIN				SRC反映:主処理
+;	・ SRC_CALC_PALAM					SRC計算:PALAM
+;	・ SRC_CALC_GOTJUEL					SRC計算:GOTJUEL
+;	・ SRC_CALC_EXP						SRC計算:EXP
 ;
-; *- ���̑�
+; *- その他
 ;
-;	�E SRC_SHOW_SRC_MAIN				SRC�\��:SOURCE(�又��)
-;	�E SRC_SHOW_BASE_EXP_MAIN			SRC�\��:BASE-EXP(�又��)
-;	�E SRC_SHOW_CUP_MAIN				SRC�\��:CUP(�又��)
-;	�E SRC_PRINT_DATA_MAIN				SRC�\��:���ʃf�[�^(�又��)
-;	�E SRC_PRINT_DATA_OUTPUT			SRC�\��:���ʃf�[�^(�o��)
+;	・ SRC_SHOW_SRC_MAIN				SRC表示:SOURCE(主処理)
+;	・ SRC_SHOW_BASE_EXP_MAIN			SRC表示:BASE-EXP(主処理)
+;	・ SRC_SHOW_CUP_MAIN				SRC表示:CUP(主処理)
+;	・ SRC_PRINT_DATA_MAIN				SRC表示:結果データ(主処理)
+;	・ SRC_PRINT_DATA_OUTPUT			SRC表示:結果データ(出力)
 ;
 ;===============================================================================
 
@@ -42,27 +42,27 @@
 ;=================================================
 ;   sub SOURCE_CHECK_MAIN
 ;=================================================
-;   SRC���f:�又��
+;   SRC反映:主処理
 ;-------------------------------------------------
 @SOURCE_CHECK_MAIN
 #DIM L_I
 #DIM L_T
 
 ;-----------------------------
-;-- ��ɕ��ʏW�v �� �Ⓒ����
+;-- 先に部位集計 → 絶頂処理
 ;-----------------------------
 
-;- SRC�v�Z:���o(�又��)
+;- SRC計算:感覚(主処理)
 CALL SRC_CALC_SENSE_MAIN
 
-;- SRC�v�Z:�Ⓒ����(�又��)
+;- SRC計算:絶頂処理(主処理)
 CALL SRC_CALC_ORGASM_MAIN
 
 ;-----------------------------
-;-- �Ⓒ�␳���Z��A�eSOURCE�𔽉f
+;-- 絶頂補正加算後、各SOURCEを反映
 ;-----------------------------
 
-;- SRC�v�Z:�又��
+;- SRC計算:主処理
 CALL SRC_CALC_MAIN
 
 
@@ -74,13 +74,13 @@ FOR L_I, 0, DEFTR_PL_NUM
 	SIF L_T < 0
 		BREAK
 
-	;- SRC�v�Z:PALAM
+	;- SRC計算:PALAM
 	CALL SRC_CALC_PALAM(L_T)
 
-	;- SRC�v�Z:GOTJUEL
+	;- SRC計算:GOTJUEL
 	CALL SRC_CALC_GOTJUEL(L_T)
 
-	;- SRC�v�Z:EXP
+	;- SRC計算:EXP
 	CALL SRC_CALC_EXP(L_T)
 
 NEXT
@@ -88,10 +88,10 @@ NEXT
 ;=================================================
 ;   sub SRC_CALC_PALAM
 ;=================================================
-;   SRC�v�Z:PALAM
+;   SRC計算:PALAM
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
+;  ARG:0				対象者
 ;-------------------------------------------------
 @SRC_CALC_PALAM(ARG)
 #DIM L_I
@@ -105,21 +105,21 @@ FOR L_I, 0, VARSIZE("PALAM")
 	SIF !STRLENS(L_STR)
 		CONTINUE
 
-	;- �擾:(CUP)
+	;- 取得:(CUP)
 	L_TMP = CUP:ARG:L_STR
 	IF L_TMP > 0
 		PALAM:ARG:L_STR += L_TMP
-		PALAM:ARG:L_STR = MIN(PALAM:ARG:L_STR,FLAG:�ő吔_PALAM)
+		PALAM:ARG:L_STR = MIN(PALAM:ARG:L_STR,FLAG:最大数_PALAM)
 	ENDIF
 NEXT
 
 ;=================================================
 ;   sub SRC_CALC_GOTJUEL
 ;=================================================
-;   SRC�v�Z:GOTJUEL
+;   SRC計算:GOTJUEL
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
+;  ARG:0				対象者
 ;-------------------------------------------------
 @SRC_CALC_GOTJUEL(ARG)
 #DIM L_I
@@ -133,10 +133,10 @@ FOR L_I, 0, VARSIZE("GOTJUEL")
 	SIF !STRLENS(L_STR)
 		CONTINUE
 
-	;- �擾:(PALAM)
+	;- 取得:(PALAM)
 	L_TMP = PALAM:ARG:L_STR
 
-	;- TR:�擾�\���
+	;- TR:取得予定珠
 	L_TMP = TR_GOTJUEL(L_TMP)
 
 	IF L_TMP > 0
@@ -147,10 +147,10 @@ NEXT
 ;=================================================
 ;   sub SRC_CALC_EXP
 ;=================================================
-;   SRC�v�Z:EXP
+;   SRC計算:EXP
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
+;  ARG:0				対象者
 ;-------------------------------------------------
 @SRC_CALC_EXP(ARG)
 #DIM L_I
@@ -168,20 +168,20 @@ FOR L_I, 0, VARSIZE("EXP")
 
 	IF L_TMP > 0
 		EXP:ARG:L_I += L_TMP
-		EXP:ARG:L_I = MIN(FLAG:�ő吔_EXP, EXP:ARG:L_I)
+		EXP:ARG:L_I = MIN(FLAG:最大数_EXP, EXP:ARG:L_I)
 	ENDIF
 NEXT
 
 
 
 ;-------------------------------------------------------------------------------
-;   ���̑�
+;   その他
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub SRC_SHOW_SRC_MAIN
 ;=================================================
-;   SRC�\��:SOURCE(�又��)
+;   SRC表示:SOURCE(主処理)
 ;-------------------------------------------------
 @SRC_SHOW_SRC_MAIN
 #DIM L_I
@@ -202,7 +202,7 @@ FOR L_I, 0, DEFTR_PL_NUM
 	SIF L_T == PLAYER
 		CONTINUE
 
-	;- SRC�\��:���ʃf�[�^(�又��)
+	;- SRC表示:結果データ(主処理)
 	CALL SRC_PRINT_DATA_MAIN(L_T, 1)
 	SIF RESULT
 		L_HIT = 1
@@ -215,7 +215,7 @@ SIF L_HIT
 ;=================================================
 ;   sub SRC_SHOW_BASE_EXP_MAIN
 ;=================================================
-;   SRC�\��:BASE-EXP(�又��)
+;   SRC表示:BASE-EXP(主処理)
 ;-------------------------------------------------
 @SRC_SHOW_BASE_EXP_MAIN
 #DIM L_I
@@ -236,7 +236,7 @@ FOR L_I, 0, DEFTR_PL_NUM
 	SIF L_T < 0
 		BREAK
 
-	;- SRC:���ʃf�[�^(�又��)
+	;- SRC:結果データ(主処理)
 	CALL SRC_PRINT_DATA_MAIN(L_T, 2)
 	SIF RESULT
 		L_HIT = 1
@@ -248,7 +248,7 @@ SIF L_HIT
 ;=================================================
 ;   sub SRC_SHOW_CUP_MAIN
 ;=================================================
-;   SRC�\��:CUP(�又��)
+;   SRC表示:CUP(主処理)
 ;-------------------------------------------------
 @SRC_SHOW_CUP_MAIN
 #DIM L_I
@@ -268,7 +268,7 @@ FOR L_I, 0, DEFTR_PL_NUM
 	SIF L_T < 0
 		BREAK
 
-	;- SRC:���ʃf�[�^(�又��)
+	;- SRC:結果データ(主処理)
 	CALL SRC_PRINT_DATA_MAIN(L_T, 3)
 	SIF RESULT
 		L_HIT = 1
@@ -281,13 +281,13 @@ SIF L_HIT
 ;=================================================
 ;   sub SRC_PRINT_DATA_MAIN
 ;=================================================
-;   SRC�\��:���ʃf�[�^(�又��)
+;   SRC表示:結果データ(主処理)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
-;  ARG:1				���[�h(1:SRC 2:BASE�� 3:CUP)
+;  ARG:0				対象者
+;  ARG:1				モード(1:SRC 2:BASE類 3:CUP)
 ; Output:
-;  RETURN				HIT�L��
+;  RETURN				HIT有無
 ;-------------------------------------------------
 @SRC_PRINT_DATA_MAIN(ARG:0, ARG:1)
 #DIM L_I
@@ -296,13 +296,13 @@ SIF L_HIT
 #DIMS L_KEY
 #DIM L_CNT
 
-;- ������
+;- 初期化
 VARSET GVAR_SRC_CHG_NAME
 VARSET GVAR_SRC_CHG_VAL
 VARSET GVAR_SRC_CHG_COLOR
 
 ;-----------------------------
-;- ���[�h�ʏ���
+;- モード別処理
 ;-----------------------------
 L_CNT = 0
 
@@ -329,7 +329,7 @@ SELECTCASE ARG:1
 			L_CNT ++
 		NEXT
 	;-----------------------------
-	;- BASE�ށAEXP��
+	;- BASE類、EXP類
 	;-----------------------------
 	CASE 2
 		FOR L_I, 0, VARSIZE("BASE")
@@ -363,7 +363,7 @@ SELECTCASE ARG:1
 			GVAR_SRC_CHG_VAL:L_CNT		= L_TMP
 
 			SELECTCASE L_KEY
-				CASE "�Ⓒ�o��", "�S�ˌo��"
+				CASE "絶頂経験", "膣射経験"
 					GVAR_SRC_CHG_COLOR:L_CNT		= 2
 			ENDSELECT
 
@@ -389,11 +389,11 @@ SELECTCASE ARG:1
 			GVAR_SRC_CHG_VAL:L_CNT		= L_TMP
 
 			SELECTCASE L_KEY
-				CASE "���b", "���u", "���`", "���a"
+				CASE "快Ｃ", "快Ｖ", "快Ａ", "快Ｂ"
 					GVAR_SRC_CHG_COLOR:L_CNT		= 2
-				CASE "�D��", "����"
+				CASE "好意", "屈服"
 					GVAR_SRC_CHG_COLOR:L_CNT		= 2
-				CASE "���|", "���", "����", "�s��", "�}�T"
+				CASE "恐怖", "苦痛", "反感", "不快", "抑鬱"
 					GVAR_SRC_CHG_COLOR:L_CNT		= 1
 			ENDSELECT
 
@@ -402,7 +402,7 @@ SELECTCASE ARG:1
 
 ENDSELECT
 
-;- SRC�\��:���ʃf�[�^(�o��)
+;- SRC表示:結果データ(出力)
 CALL SRC_PRINT_DATA_OUTPUT(ARG)
 
 RETURNFORM L_CNT
@@ -411,10 +411,10 @@ RETURNFORM L_CNT
 ;=================================================
 ;   sub SRC_PRINT_DATA_OUTPUT
 ;=================================================
-;   SRC�\��:���ʃf�[�^(�o��)
+;   SRC表示:結果データ(出力)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�Ώێ�
+;  ARG:0				対象者
 ;-------------------------------------------------
 @SRC_PRINT_DATA_OUTPUT(ARG)
 #DIM L_I
@@ -431,7 +431,7 @@ L_WIDTH_HEAD = 18
 L_LINE = 0
 L_NEWLINE = 0
 
-;-- �\��:PALAM
+;-- 表示:PALAM
 FOR L_I, 0, VARSIZE("GVAR_SRC_CHG_VAL")
 
 	L_TMP = GVAR_SRC_CHG_VAL:L_I
@@ -464,9 +464,9 @@ FOR L_I, 0, VARSIZE("GVAR_SRC_CHG_VAL")
 
 	SELECTCASE GVAR_SRC_CHG_COLOR:L_I
 		CASE 1
-			SETCOLOR COLOR("�Q��")
+			SETCOLOR COLOR("群青")
 		CASE 2
-			SETCOLOR COLOR("�s���N")
+			SETCOLOR COLOR("ピンク")
 	ENDSELECT
 
 	PRINTS L_STR

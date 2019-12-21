@@ -1,5 +1,5 @@
-;-------------------------------------------------
-;�{�����e�B�A�C�x���g
+﻿;-------------------------------------------------
+;ボランティアイベント
 ;-------------------------------------------------
 @TURN_EVENT_VOLUNTEER
 #DIM L_P
@@ -11,69 +11,69 @@ C_P = 0
 U_P = 0
 E_P = 0
 
-SIF FLAG:�⌤_�Ǝ����� >= 1
-	C_P = FLAG:�⌤_�Ǝ�����*5
+SIF FLAG:遺研_独自判定 >= 1
+	C_P = FLAG:遺研_独自判定*5
 
-SIF FLAG:�⌤_�Ǝ����� <= -1
-	U_P = FLAG:�⌤_�Ǝ�����*5
+SIF FLAG:遺研_独自判定 <= -1
+	U_P = FLAG:遺研_独自判定*5
 
-;�L�����ALv��50�ȏ�̏ꍇ50�܂ŉ�����
-SIF FLAG:�⌤_���v�o���l >= 1500
-	 FLAG:�⌤_���v�o���l = 1500
+;キャリアLvが50以上の場合50まで下げる
+SIF FLAG:遺研_合計経験値 >= 1500
+	 FLAG:遺研_合計経験値 = 1500
 
-E_P = FLAG:�⌤_���v�o���l-((FLAG:�⌤_���v�o���l/20)*(FLAG:�⌤_�댯��*2))
+E_P = FLAG:遺研_合計経験値-((FLAG:遺研_合計経験値/20)*(FLAG:遺研_危険性*2))
 
-;����ł���ꍇ�͖߂�
-SIF CFLAG:�Z�l_���̃_���[�W >= 100 || FLAG:�⌤_���_�_���[�W >= 100
+;死んでいる場合は戻る
+SIF CFLAG:住人_肉体ダメージ >= 100 || FLAG:遺研_精神ダメージ >= 100
 	RETURN
-IF ((FLAG:�⌤_�Œ藐��)+(FLAG:�⌤_�T�|�[�^�[����*5)+E_P+C_P+U_P >= FLAG:�⌤_���s��+(FLAG:�⌤_�댯��*2) &&  FLAG:�⌤_�Ǝ����� != -10) || FLAG:�⌤_�Ǝ����� == 10 
-	CFLAG:�Z�l_���̃_���[�W += (FLAG:�⌤_���̃_���[�W+FLAG:�⌤_�댯��)/5
-	CFLAG:�Z�l_���_�_���[�W += (FLAG:�⌤_���_�_���[�W+FLAG:�⌤_�댯��)/5
-	IF TALENT:�{�����e�B�A == 3
+IF ((FLAG:遺研_固定乱数)+(FLAG:遺研_サポーター総数*5)+E_P+C_P+U_P >= FLAG:遺研_失敗率+(FLAG:遺研_危険性*2) &&  FLAG:遺研_独自判定 != -10) || FLAG:遺研_独自判定 == 10 
+	CFLAG:住人_肉体ダメージ += (FLAG:遺研_肉体ダメージ+FLAG:遺研_危険性)/5
+	CFLAG:住人_精神ダメージ += (FLAG:遺研_精神ダメージ+FLAG:遺研_危険性)/5
+	IF TALENT:ボランティア == 3
 		SETCOLOR 150,250,150
 		DRAWLINE
-		PRINTFORML �y�╨����:�����z
+		PRINTFORML 【遺物研究:成功】
 		DRAWLINE
-		CALLFORM AL_Clear_{FLAG:�⌤_�����Ώ�}
+		CALLFORM AL_Clear_{FLAG:遺研_研究対象}
 		DRAWLINE
-		L_P = (RAND:(FLAG:�⌤_�������v+(FLAG:�⌤_�댯��/2)))+1
-		FLAG:�s�s_����LP += L_P
-			PRINTFORML �k�o�@{FLAG:�s�s_����LP-L_P}�@���@{FLAG:�s�s_����LP}
-		SIF FLAG:�s�s_�ő�LP <= FLAG:�s�s_����LP
-			FLAG:�s�s_����LP = FLAG:�s�s_�ő�LP
+		L_P = (RAND:(FLAG:遺研_研究利益+(FLAG:遺研_危険性/2)))+1
+		FLAG:都市_現在LP += L_P
+			PRINTFORML ＬＰ　{FLAG:都市_現在LP-L_P}　→　{FLAG:都市_現在LP}
+		SIF FLAG:都市_最大LP <= FLAG:都市_現在LP
+			FLAG:都市_現在LP = FLAG:都市_最大LP
 		PRINTFORMW 
 	ENDIF
 ELSE
-	CFLAG:�Z�l_���̃_���[�W += FLAG:�⌤_���̃_���[�W+FLAG:�⌤_�댯��
-	CFLAG:�Z�l_���_�_���[�W += FLAG:�⌤_���_�_���[�W+FLAG:�⌤_�댯��
-	IF TALENT:�{�����e�B�A == 3
+	CFLAG:住人_肉体ダメージ += FLAG:遺研_肉体ダメージ+FLAG:遺研_危険性
+	CFLAG:住人_精神ダメージ += FLAG:遺研_精神ダメージ+FLAG:遺研_危険性
+	IF TALENT:ボランティア == 3
 		SETCOLOR 250,150,150
 		DRAWLINE
-		PRINTFORML �y�╨����:���s�z
+		PRINTFORML 【遺物研究:失敗】
 		DRAWLINE
-		CALLFORM AL_Out_{FLAG:�⌤_�����Ώ�}
+		CALLFORM AL_Out_{FLAG:遺研_研究対象}
 		DRAWLINE
 		PRINTFORMW 
 	ENDIF
 ENDIF
-SIF TALENT:�{�����e�B�A == 3
-	MONEY -= FLAG:�⌤_��p
+SIF TALENT:ボランティア == 3
+	MONEY -= FLAG:遺研_費用
 
-CFLAG:(15000+FLAG:�⌤_�����Ώ�) += 1
-CFLAG:�Z�l_�⌤_���� += 1
+CFLAG:(15000+FLAG:遺研_研究対象) += 1
+CFLAG:住人_遺研_総数 += 1
 
 
-IF CFLAG:�Z�l_���̃_���[�W >= 100
+IF CFLAG:住人_肉体ダメージ >= 100
 	SETCOLOR 250,50,50
-	PRINTFORML %CALLNAME%�͓��̂ɒ~�ς����_���[�W�����E�ɒB�����̂܂ܑ��₦���c
-	SIF TALENT:�{�����e�B�A == 3
-		FLAG:�⌤_���[�_�[ = 0
-ELSEIF CFLAG:�Z�l_���_�_���[�W >= 100
+	PRINTFORML %CALLNAME%は肉体に蓄積したダメージが限界に達しそのまま息絶えた…
+	SIF TALENT:ボランティア == 3
+		FLAG:遺研_リーダー = 0
+ELSEIF CFLAG:住人_精神ダメージ >= 100
 	SETCOLOR 250,50,50
-	PRINTFORML %CALLNAME%�͐��_�ɒ~�ς����_���[�W�����E�ɒB�����̂܂ܑ��₦���c
-	SIF TALENT:�{�����e�B�A == 3
-		FLAG:�⌤_���[�_�[ = 0
-ELSEIF TALENT:�{�����e�B�A == 3
+	PRINTFORML %CALLNAME%は精神に蓄積したダメージが限界に達しそのまま息絶えた…
+	SIF TALENT:ボランティア == 3
+		FLAG:遺研_リーダー = 0
+ELSEIF TALENT:ボランティア == 3
 
 ENDIF
 
@@ -81,17 +81,17 @@ ENDIF
 RESETCOLOR
 
 ;-------------------------------------------------
-;�{�����e�B�A�C�x���g�@��
+;ボランティアイベント　回復
 ;-------------------------------------------------
 @TURN_EVENT_VOLUNTEER_1
 
 
-CFLAG:�Z�l_���̃_���[�W -= 5
-SIF CFLAG:�Z�l_���̃_���[�W <= 0
-	CFLAG:�Z�l_���̃_���[�W = 0
+CFLAG:住人_肉体ダメージ -= 5
+SIF CFLAG:住人_肉体ダメージ <= 0
+	CFLAG:住人_肉体ダメージ = 0
 
-CFLAG:�Z�l_���_�_���[�W -= 5
-SIF CFLAG:�Z�l_���_�_���[�W <= 0
-	CFLAG:�Z�l_���_�_���[�W = 0
+CFLAG:住人_精神ダメージ -= 5
+SIF CFLAG:住人_精神ダメージ <= 0
+	CFLAG:住人_精神ダメージ = 0
 
 

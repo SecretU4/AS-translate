@@ -1,42 +1,42 @@
-;-------------------------------------------------
-;‚Â‚¢‚½’¹l
+ï»¿;-------------------------------------------------
+;å‚·ã¤ã„ãŸé³¥äºº
 ;-------------------------------------------------
 @RPG_EVENT_500(ARG:0,ARG:1)
 #DIM L_INPUT
 #DIM L_I
 
-ARG = Flag:’²¸ƒLƒƒƒ‰
-Flag:’²¸ƒCƒxƒ“ƒg”­¶’† = 1
-Flag:’²¸ƒCƒxƒ“ƒg”Ô† = 500
+ARG = Flag:èª¿æŸ»ã‚­ãƒ£ãƒ©
+Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿä¸­ = 1
+Flag:èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆç•ªå· = 500
 
 L_I = ARG
 CLEARLINE LINECOUNT
 DRAWLINE
 SETCOLOR 150,250,150
-PRINTFORML y’²¸ƒCƒxƒ“ƒg:‚Â‚¢‚½’¹lz
+PRINTFORML ã€èª¿æŸ»ã‚¤ãƒ™ãƒ³ãƒˆ:å‚·ã¤ã„ãŸé³¥äººã€‘
 PRINTFORML 
 
-PRINTFORML %CALLNAME:L_I%‚ª•¨‰¹‚ðŽ@’m‚µA‰¹‚ª‚·‚é•ûŒü‚ÖŒx‰ú‚µ‚È‚ª‚ç‹ßŠñ‚éB
-PRINTFORML ‚·‚é‚ÆA‚»‚±‚É‚Í‰H‚©‚çŒŒ‚ð—¬‚µ‚Ä“|‚ê‚Ä‚¢‚é’¹l‚ÌŽp‚ª‚ ‚Á‚½B
-PRINTFORML ‚Ç‚¤‚â‚çuŠO“Gv‚ÉP‚í‚ê‚½‚ç‚µ‚­A–½‚©‚ç‚ª‚ç‚±‚±‚Ü‚Å“¦‚°‚Ä‚«‚½‚æ‚¤‚¾B
-PRINTFORML cc•‚¯‚é•‚¯‚È‚¢‚Ì‚ÍŽ©—R‚¾‚ªc
+PRINTFORML %CALLNAME:L_I%ãŒç‰©éŸ³ã‚’å¯ŸçŸ¥ã—ã€éŸ³ãŒã™ã‚‹æ–¹å‘ã¸è­¦æˆ’ã—ãªãŒã‚‰è¿‘å¯„ã‚‹ã€‚
+PRINTFORML ã™ã‚‹ã¨ã€ãã“ã«ã¯ç¾½ã‹ã‚‰è¡€ã‚’æµã—ã¦å€’ã‚Œã¦ã„ã‚‹é³¥äººã®å§¿ãŒã‚ã£ãŸã€‚
+PRINTFORML ã©ã†ã‚„ã‚‰ã€Œå¤–æ•µã€ã«è¥²ã‚ã‚ŒãŸã‚‰ã—ãã€å‘½ã‹ã‚‰ãŒã‚‰ã“ã“ã¾ã§é€ƒã’ã¦ããŸã‚ˆã†ã ã€‚
+PRINTFORML â€¦â€¦åŠ©ã‘ã‚‹åŠ©ã‘ãªã„ã®ã¯è‡ªç”±ã ãŒâ€¦
 PRINTFORML 
-PRINTFORML [0] •‚¯‚é@(Z–¯“o˜^‚µ‚Ü‚·)
-PRINTFORML [1] •‚¯‚È‚¢(Z–¯“o˜^‚Í‚µ‚Ü‚¹‚ñ)
+PRINTFORML [0] åŠ©ã‘ã‚‹ã€€(ä½æ°‘ç™»éŒ²ã—ã¾ã™)
+PRINTFORML [1] åŠ©ã‘ãªã„(ä½æ°‘ç™»éŒ²ã¯ã—ã¾ã›ã‚“)
 PRINTFORML 
 $INPUT_LOOP
 INPUT
 L_INPUT = RESULT
 SELECTCASE L_INPUT
 CASE 0
-	PRINTFORML Œ©ŽÌ‚Ä‚é‚í‚¯‚É‚à‚¢‚©‚È‚Á‚½‚Ì‚ÅA‘¼‚Ì‘àˆõ‚É–½‚¶‚Ä‹~•‚ðs‚¤‚±‚Æ‚É‚µ‚½B
-	PRINTFORML ‚´‚Á‚ÆŒ©‚½‚Æ‚±‚ëA‚Í[‚¢‚ª¡‚È‚ç\•ªŠÔ‚É‡‚¤‚¾‚ë‚¤c
+	PRINTFORML è¦‹æ¨ã¦ã‚‹ã‚ã‘ã«ã‚‚ã„ã‹ãªã£ãŸã®ã§ã€ä»–ã®éšŠå“¡ã«å‘½ã˜ã¦æ•‘åŠ©ã‚’è¡Œã†ã“ã¨ã«ã—ãŸã€‚
+	PRINTFORML ã–ã£ã¨è¦‹ãŸã¨ã“ã‚ã€å‚·ã¯æ·±ã„ãŒä»Šãªã‚‰ååˆ†é–“ã«åˆã†ã ã‚ã†â€¦
 	PRINTFORML 
 	PRINTFORMW 
 	CALL CHARACTER_SCOUT1
 CASE 1
-	PRINTFORML ‹~•‚µ‚½‚¢‚Æ‚±‚ë‚¾‚ªAí—Í‚ª–¢’m”‚ÌuŠO“Gv‚ª—ˆ‚é‰Â”\«‚à‚ ‚éB
-	PRINTFORML ‰^‚ªˆ«‚©‚Á‚½‚Æ‚¢‚¤‚±‚Æ‚É‚µ‚ÄA‚»‚Ìê‚ð—£‚ê‚½c
+	PRINTFORML æ•‘åŠ©ã—ãŸã„ã¨ã“ã‚ã ãŒã€æˆ¦åŠ›ãŒæœªçŸ¥æ•°ã®ã€Œå¤–æ•µã€ãŒæ¥ã‚‹å¯èƒ½æ€§ã‚‚ã‚ã‚‹ã€‚
+	PRINTFORML é‹ãŒæ‚ªã‹ã£ãŸã¨ã„ã†ã“ã¨ã«ã—ã¦ã€ãã®å ´ã‚’é›¢ã‚ŒãŸâ€¦
 	PRINTFORML 
 	PRINTFORMW 
 CASEELSE

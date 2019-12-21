@@ -1,79 +1,79 @@
-
+ï»¿
 ;-------------------------------------------------
-; “sŽsŠÖ˜A
+; éƒ½å¸‚é–¢é€£
 ;-------------------------------------------------
 
 @CITY_MAP
 #DIM L_COLOR = -1
 
-PRINTFORM y“V‹C:
-IF Flag:“sŽs_“V‹C == 0
-	PRINTFORM °‚ê
-ELSEIF Flag:“sŽs_“V‹C == 1
-	PRINTFORM “Ü‚è
-ELSEIF Flag:“sŽs_“V‹C == 2
-	PRINTFORM ‰J
-ELSEIF Flag:“sŽs_“V‹C == 3
-	PRINTFORM ‘å‰J
-ELSEIF Flag:“sŽs_“V‹C == 4
-	PRINTFORM á
+PRINTFORM ã€å¤©æ°—:
+IF Flag:éƒ½å¸‚_å¤©æ°— == 0
+	PRINTFORM æ™´ã‚Œ
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 1
+	PRINTFORM æ›‡ã‚Š
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 2
+	PRINTFORM é›¨
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 3
+	PRINTFORM å¤§é›¨
+ELSEIF Flag:éƒ½å¸‚_å¤©æ°— == 4
+	PRINTFORM é›ª
 ENDIF
 
-PRINTFORM z
+PRINTFORM ã€‘
 
 
-IF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_–h‰q != 0
+IF Flag:éƒ½å¸‚_Lv >= 5 &&  Flag:éƒ½å¸‚_é˜²è¡› != 0
 	SETBGCOLOR 90,10,10
-	CALL PRINT_LABEL("–h‰qŠúŠÔŽc‚è",,COLOR("“sŽs–h‰q’†"),@"{Flag:“sŽs_–h‰q}“ú")
+	CALL PRINT_LABEL("é˜²è¡›æœŸé–“æ®‹ã‚Š",,COLOR("éƒ½å¸‚é˜²è¡›ä¸­"),@"{Flag:éƒ½å¸‚_é˜²è¡›}æ—¥")
 	PRINT  
-	CALL PRINT_LABEL("‡Œvƒ_ƒ[ƒW",,,@" Œ»Ý{Flag:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW}’~Ï / –Ú•W{Flag:“sŽs_–h‰q¬Œ÷ƒ_ƒ[ƒW}“ž’B")
-ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 3
-	CALL PRINT_LABEL("PŒ‚‚Ü‚Å", , COLOR("“sŽsPŒ‚_‹ß"), @"{Flag:“sŽs_PŒ‚}“ú")
-ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 9
-	CALL PRINT_LABEL("PŒ‚‚Ü‚Å", , COLOR("“sŽsPŒ‚_’†"), @"{Flag:“sŽs_PŒ‚}“ú")
-ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_PŒ‚ >= 10
-	CALL PRINT_LABEL("PŒ‚‚Ü‚Å", , COLOR("“sŽsPŒ‚_‰“"), @"{Flag:“sŽs_PŒ‚}“ú")
+	CALL PRINT_LABEL("åˆè¨ˆãƒ€ãƒ¡ãƒ¼ã‚¸",,,@" ç¾åœ¨{Flag:éƒ½å¸‚_é˜²è¡›è“„ç©ãƒ€ãƒ¡ãƒ¼ã‚¸}è“„ç© / ç›®æ¨™{Flag:éƒ½å¸‚_é˜²è¡›æˆåŠŸãƒ€ãƒ¡ãƒ¼ã‚¸}åˆ°é”")
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 &&  Flag:éƒ½å¸‚_è¥²æ’ƒ <= 3
+	CALL PRINT_LABEL("è¥²æ’ƒã¾ã§", , COLOR("éƒ½å¸‚è¥²æ’ƒ_è¿‘"), @"{Flag:éƒ½å¸‚_è¥²æ’ƒ}æ—¥")
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 &&  Flag:éƒ½å¸‚_è¥²æ’ƒ <= 9
+	CALL PRINT_LABEL("è¥²æ’ƒã¾ã§", , COLOR("éƒ½å¸‚è¥²æ’ƒ_ä¸­"), @"{Flag:éƒ½å¸‚_è¥²æ’ƒ}æ—¥")
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_è¥²æ’ƒ >= 10
+	CALL PRINT_LABEL("è¥²æ’ƒã¾ã§", , COLOR("éƒ½å¸‚è¥²æ’ƒ_é "), @"{Flag:éƒ½å¸‚_è¥²æ’ƒ}æ—¥")
 ELSE
 	PRINTFORM 
 ENDIF
 RESETCOLOR
 
 L_COLOR = -1
-IF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 75
-	L_COLOR = COLOR("“sŽs‘¹‰ó_‘å")
-ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 50
-	L_COLOR = COLOR("“sŽs‘¹‰ó_’†")
-ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ < 50
-	L_COLOR = COLOR("“sŽs‘¹‰ó_¬")
+IF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ >= 75
+	L_COLOR = COLOR("éƒ½å¸‚æå£Š_å¤§")
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ >= 50
+	L_COLOR = COLOR("éƒ½å¸‚æå£Š_ä¸­")
+ELSEIF Flag:éƒ½å¸‚_Lv >= 5 && Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡ < 50
+	L_COLOR = COLOR("éƒ½å¸‚æå£Š_å°")
 ELSE
 ENDIF
-CALL PRINT_LABEL("‘¹‰ó—¦" , , L_COLOR , @"{Flag:“sŽs_–h‰q‘¹‰ó—¦}“")
+CALL PRINT_LABEL("æå£ŠçŽ‡" , , L_COLOR , @"{Flag:éƒ½å¸‚_é˜²è¡›æå£ŠçŽ‡}ï¼…")
 PRINTL
 
-CALL PRINT_LABEL("“sŽsLv" , , , TOSTR(Flag:“sŽs_Lv), 3,,,@"({Flag:“sŽs_ŒoŒ±’l}/{Flag:“sŽs_Lv*10})")
-CALL PRINT_STATUS(-1, "•\ŽÐ‰ï")
-CALL PRINT_STATUS(-1, "— ŽÐ‰ï")
-CALL PRINT_STATUS(-1, "‡Œvƒtƒ@ƒ“”")
+CALL PRINT_LABEL("éƒ½å¸‚Lv" , , , TOSTR(Flag:éƒ½å¸‚_Lv), 3,,,@"({Flag:éƒ½å¸‚_çµŒé¨“å€¤}/{Flag:éƒ½å¸‚_Lv*10})")
+CALL PRINT_STATUS(-1, "è¡¨ç¤¾ä¼š")
+CALL PRINT_STATUS(-1, "è£ç¤¾ä¼š")
+CALL PRINT_STATUS(-1, "åˆè¨ˆãƒ•ã‚¡ãƒ³æ•°")
 L_COLOR = -1
-IF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 10
-	L_COLOR = COLOR("¡Šú’÷‚ßØ‚è_10“ú–¢–ž")
-ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 30
-	L_COLOR = COLOR("¡Šú’÷‚ßØ‚è_30“ú–¢–ž")
-ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è >= 30
-	L_COLOR = COLOR("¡Šú’÷‚ßØ‚è_30“úˆÈã")
+IF  Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š < 10
+	L_COLOR = COLOR("ä»ŠæœŸç· ã‚åˆ‡ã‚Š_10æ—¥æœªæº€")
+ELSEIF  Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š < 30
+	L_COLOR = COLOR("ä»ŠæœŸç· ã‚åˆ‡ã‚Š_30æ—¥æœªæº€")
+ELSEIF  Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š >= 30
+	L_COLOR = COLOR("ä»ŠæœŸç· ã‚åˆ‡ã‚Š_30æ—¥ä»¥ä¸Š")
 ELSE
 ENDIF
-CALL PRINT_LABEL("ŒˆŽZ‚Ü‚Å",,L_COLOR,@"{Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è}“ú")
+CALL PRINT_LABEL("æ±ºç®—ã¾ã§",,L_COLOR,@"{Flag:éƒ½å¸‚_ä»ŠæœŸã®ç· ã‚åˆ‡ã‚Š}æ—¥")
 PRINTL
 
-CALL PRINT_LABEL("Ž‘‹à",,,@"{MONEY}")
-CALL PRINT_RANGE_STATUS(-1, "TP", , , 3, "•šŽš")
-CALL PRINT_RANGE_STATUS(-1, "AP", , , 3, "•šŽš")
-CALL PRINT_RANGE_STATUS(-1, "SP", , , 3, "•šŽš")
-CALL PRINT_RANGE_STATUS(-1, "LP", , , 3, "•šŽš")
+CALL PRINT_LABEL("è³‡é‡‘",,,@"{MONEY}")
+CALL PRINT_RANGE_STATUS(-1, "TP", , , 3, "ä¼å­—")
+CALL PRINT_RANGE_STATUS(-1, "AP", , , 3, "ä¼å­—")
+CALL PRINT_RANGE_STATUS(-1, "SP", , , 3, "ä¼å­—")
+CALL PRINT_RANGE_STATUS(-1, "LP", , , 3, "ä¼å­—")
 CALL PRINT_STATUS(-1, "BP", , 3)
 PRINTFORML
-CALL PRINT_STATUS(-1, "Œ÷Ñ", , 10)
+CALL PRINT_STATUS(-1, "åŠŸç¸¾", , 10)
 PRINTL
 
 DRAWLINE

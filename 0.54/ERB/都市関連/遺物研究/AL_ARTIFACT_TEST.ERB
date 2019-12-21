@@ -1,29 +1,29 @@
+ï»¿;-------------------------------------------------
+; éºç‰©ã‚’ãƒ†ã‚¹ãƒˆã™ã‚‹é–¢æ•°
+; ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚„ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã€æˆåŠŸï¼å¤±æ•—æ™‚ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ç¢ºèªã™ã‚‹
 ;-------------------------------------------------
-; ˆâ•¨‚ðƒeƒXƒg‚·‚éŠÖ”
-; ƒXƒe[ƒ^ƒX‚âƒvƒƒtƒB[ƒ‹A¬Œ÷^Ž¸”sŽž‚ÌƒeƒLƒXƒg‚ðŠm”F‚·‚é
-;-------------------------------------------------
-@ˆâ•¨Œ¤‹†ƒeƒXƒg
-FLAG:ˆâŒ¤_Œ¤‹†’† = 1
-FLAG:ˆâŒ¤_ƒTƒ|[ƒ^[‘” = 3
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒXƒJƒEƒg
-JUMP ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒƒCƒ“ƒ‹[ƒv
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ
+FLAG:éºç ”_ç ”ç©¶ä¸­ = 1
+FLAG:éºç ”_ã‚µãƒãƒ¼ã‚¿ãƒ¼ç·æ•° = 3
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ã‚¹ã‚«ã‚¦ãƒˆ
+JUMP éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
 
 
-; ƒTƒ“ƒvƒ‹ƒ{ƒ‰ƒ“ƒeƒBƒA‚ð¶¬‚·‚é
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒXƒJƒEƒg
-Flag:‹i’ƒ“XƒXƒJƒEƒg = 1
+; ã‚µãƒ³ãƒ—ãƒ«ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ã‚’ç”Ÿæˆã™ã‚‹
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ã‚¹ã‚«ã‚¦ãƒˆ
+Flag:å–«èŒ¶åº—ã‚¹ã‚«ã‚¦ãƒˆ = 1
 
 CLEARLINE LINECOUNT
 CALL CHARACTER_SCOUT1
 TARGET = CHARANUM - 1
 CALL CAFE_SCOUT_OPTION2(TARGET)
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒ{ƒ‰ƒ“ƒeƒBƒA‚ÌƒvƒƒtƒB[ƒ‹‚ð•\Ž¦‚·‚é
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã‚’è¡¨ç¤ºã™ã‚‹
 
-PRINTL * ˆâ•¨‚ðƒeƒXƒg‚·‚éƒ{ƒ‰ƒ“ƒeƒBƒA‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢
+PRINTL * éºç‰©ã‚’ãƒ†ã‚¹ãƒˆã™ã‚‹ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ã‚’é¸æŠžã—ã¦ãã ã•ã„
 PRINTL
-PRINT [1] Œˆ’è@@@
-PRINT [2] •Ê‚ÌZl@
-PRINT [3] i‚èž‚Ý@
+PRINT [1] æ±ºå®šã€€ã€€ã€€
+PRINT [2] åˆ¥ã®ä½äººã€€
+PRINT [3] çµžã‚Šè¾¼ã¿ã€€
 
 $INPUT_LOOP
 INPUT
@@ -36,61 +36,61 @@ SELECTCASE RESULT
         CALL CANCEL_SCOUT(TARGET)
         CALL CAFE_SCOUT_OPTION
     CASEELSE
-        CALL C_INPUT_ERROR("–³Œø‚È“ü—Í‚Å‚·")
+        CALL C_INPUT_ERROR("ç„¡åŠ¹ãªå…¥åŠ›ã§ã™")
         GOTO INPUT_LOOP
 ENDSELECT
 RESTART
 
 
-; ƒ{ƒ‰ƒ“ƒeƒBƒA‚ÌƒvƒƒtƒB[ƒ‹
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒ{ƒ‰ƒ“ƒeƒBƒA‚ÌƒvƒƒtƒB[ƒ‹‚ð•\Ž¦‚·‚é
+; ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ãƒœãƒ©ãƒ³ãƒ†ã‚£ã‚¢ã®ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã‚’è¡¨ç¤ºã™ã‚‹
 DRAWLINE
-PRINTFORML –¼‘O:%CALLNAME%
+PRINTFORML åå‰:%CALLNAME%
 DRAWLINE
 CALL C_PICTURE_S(TARGET)
-PRINTFORML ¡------------------------------------ @‘fŽ¿@ ------------------------------------¡
+PRINTFORML â– ------------------------------------ ã€€ç´ è³ªã€€ ------------------------------------â– 
 CALL INFO_STATUS_TALENT(TARGET)
 CALL CHARACTER_SCOUT_PROFILE(TARGET)
 DRAWLINE
 
 ;-------------------------------------------------
-; ˆâ•¨‚ðƒŠƒXƒg‚©‚ç‘I‘ð‚µ‚ÄƒeƒXƒg‚·‚é
+; éºç‰©ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰é¸æŠžã—ã¦ãƒ†ã‚¹ãƒˆã™ã‚‹
 ;-------------------------------------------------
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒƒCƒ“ƒ‹[ƒv
-#DIM CONST ‘Sî•ñ‚ðŠJŽ¦‚·‚é = 1
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
+#DIM CONST å…¨æƒ…å ±ã‚’é–‹ç¤ºã™ã‚‹ = 1
 
 CLEARLINE LINECOUNT
-CALL AL_ARTIFACT_LIST(‘Sî•ñ‚ðŠJŽ¦‚·‚é)
+CALL AL_ARTIFACT_LIST(å…¨æƒ…å ±ã‚’é–‹ç¤ºã™ã‚‹)
 
-SIF FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ > 0
-    CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‘ÎÛˆâ•¨‚ðƒeƒXƒg‚·‚é
+SIF FLAG:éºç ”_ç ”ç©¶å¯¾è±¡ > 0
+    CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_å¯¾è±¡éºç‰©ã‚’ãƒ†ã‚¹ãƒˆã™ã‚‹
 
 RESTART
 
 ;-------------------------------------------------
-; ‘ÎÛˆâ•¨‚ðƒeƒXƒg‚·‚é
+; å¯¾è±¡éºç‰©ã‚’ãƒ†ã‚¹ãƒˆã™ã‚‹
 ;-------------------------------------------------
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_‘ÎÛˆâ•¨‚ðƒeƒXƒg‚·‚é(ˆâ•¨ID)
-#DIM ˆâ•¨ID
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_å¯¾è±¡éºç‰©ã‚’ãƒ†ã‚¹ãƒˆã™ã‚‹(éºç‰©ID)
+#DIM éºç‰©ID
 
-ˆâ•¨ID = FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ
+éºç‰©ID = FLAG:éºç ”_ç ”ç©¶å¯¾è±¡
 
-; ƒXƒe[ƒ^ƒX
+; ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
 DRAWLINE
-CALLFORM AL_Status_{ˆâ•¨ID}
+CALLFORM AL_Status_{éºç‰©ID}
 DRAWLINE
 
-; LP‚â”ï—pŒø—¦‚È‚Ç‚ÌÚ×î•ñ
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚ð•\Ž¦‚·‚é
+; LPã‚„è²»ç”¨åŠ¹çŽ‡ãªã©ã®è©³ç´°æƒ…å ±
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã‚’è¡¨ç¤ºã™ã‚‹
 
-; ƒvƒƒtƒB[ƒ‹‚ðLV1`3‚Ü‚Å•\Ž¦‚·‚é‚½‚ßAˆêŽž“I‚ÉŒ¤‹†‰ñ”‚ð100‰ñ‚É‚·‚é
-FLAG:(16000 + FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ) = 100
-CALLFORM AL_Profile_{ˆâ•¨ID}
-FLAG:(16000 + FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ) = 0
+; ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ã‚’LV1ï½ž3ã¾ã§è¡¨ç¤ºã™ã‚‹ãŸã‚ã€ä¸€æ™‚çš„ã«ç ”ç©¶å›žæ•°ã‚’100å›žã«ã™ã‚‹
+FLAG:(16000 + FLAG:éºç ”_ç ”ç©¶å¯¾è±¡) = 100
+CALLFORM AL_Profile_{éºç‰©ID}
+FLAG:(16000 + FLAG:éºç ”_ç ”ç©¶å¯¾è±¡) = 0
 
-; ¬Œ÷^Ž¸”s‚ÌƒeƒLƒXƒg
+; æˆåŠŸï¼å¤±æ•—ã®ãƒ†ã‚­ã‚¹ãƒˆ
 WHILE 1
-    PRINTLC [0] –ß‚é  [1] ¬Œ÷  [2] Ž¸”s  [3] ”»’è
+    PRINTLC [0] æˆ»ã‚‹  [1] æˆåŠŸ  [2] å¤±æ•—  [3] åˆ¤å®š
     INPUT
     SIF RESULT == 0
         BREAK
@@ -98,126 +98,126 @@ WHILE 1
         CONTINUE
 
     PRINTL
-    PRINTFORMDL {FLAG:(16000+FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ)+1}‰ñ–Ú...
+    PRINTFORMDL {FLAG:(16000+FLAG:éºç ”_ç ”ç©¶å¯¾è±¡)+1}å›žç›®...
     SELECTCASE RESULT
         CASE 1
-            CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_¬Œ÷(ˆâ•¨ID)
+            CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_æˆåŠŸ(éºç‰©ID)
         CASE 2
-            CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_Ž¸”s(ˆâ•¨ID)
+            CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_å¤±æ•—(éºç‰©ID)
         CASE 3
-            CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒ‰ƒ“ƒ_ƒ€(ˆâ•¨ID)
+            CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ãƒ©ãƒ³ãƒ€ãƒ (éºç‰©ID)
     ENDSELECT
-    FLAG:(16000+FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ) ++
+    FLAG:(16000+FLAG:éºç ”_ç ”ç©¶å¯¾è±¡) ++
     PRINTL
 WEND
 
-; Œ¤‹†‰ñ”‚ðƒŠƒZƒbƒg
-FLAG:(16000 + FLAG:ˆâŒ¤_Œ¤‹†‘ÎÛ) = 0
+; ç ”ç©¶å›žæ•°ã‚’ãƒªã‚»ãƒƒãƒˆ
+FLAG:(16000 + FLAG:éºç ”_ç ”ç©¶å¯¾è±¡) = 0
 
 ;-------------------------------------------------
-; Šeˆâ•¨‚Ì‰ðÍ•\
+; å„éºç‰©ã®è§£æžè¡¨
 ;-------------------------------------------------
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚ð•\Ž¦‚·‚é
-#DIMS €–Ú
-#DIMS ”’l
-#DIMS à–¾
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã‚’è¡¨ç¤ºã™ã‚‹
+#DIMS é …ç›®
+#DIMS æ•°å€¤
+#DIMS èª¬æ˜Ž
 
 SETCOLOR 50,250,250
 
-€–Ú = ¬Œ÷—¦
-”’l = {AL_¬Œ÷—¦()}\%
-à–¾ = 100\%(Šî–{) +15\%(ƒTƒ|[ƒ^[3l) -{FLAG:ˆâŒ¤_Ž¸”s—¦}\%(Ž¸”s—¦) -{FLAG:ˆâŒ¤_ŠëŒ¯« * 2}\%(ŠëŒ¯«) %ˆâ•¨Œ¤‹†ƒeƒXƒg_“ÆŽ©”»’è()%
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
+é …ç›® = æˆåŠŸçŽ‡
+æ•°å€¤ = {AL_æˆåŠŸçŽ‡()}\%
+èª¬æ˜Ž = 100\%(åŸºæœ¬) +15\%(ã‚µãƒãƒ¼ã‚¿ãƒ¼3äºº) -{FLAG:éºç ”_å¤±æ•—çŽ‡}\%(å¤±æ•—çŽ‡) -{FLAG:éºç ”_å±é™ºæ€§ * 2}\%(å±é™ºæ€§) %éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ç‹¬è‡ªåˆ¤å®š()%
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
 
-€–Ú = Šl“¾LP
-”’l = 1 ` {AL_Å‘åLP()}
-à–¾ = {FLAG:ˆâŒ¤_Œ¤‹†—˜‰v}(Œ¤‹†—˜‰v) + {(FLAG:ˆâŒ¤_ŠëŒ¯« / 2)}(ŠëŒ¯«€2)
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
+é …ç›® = ç²å¾—LP
+æ•°å€¤ = 1 ï½ž {AL_æœ€å¤§LP()}
+èª¬æ˜Ž = {FLAG:éºç ”_ç ”ç©¶åˆ©ç›Š}(ç ”ç©¶åˆ©ç›Š) + {(FLAG:éºç ”_å±é™ºæ€§ / 2)}(å±é™ºæ€§Ã·2)
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
 
-€–Ú = LPŠú‘Ò’l
-”’l = %AL_¬”•\‹L‚É•ÏŠ·(AL_LPŠú‘Ò’l())%
-à–¾ = 1‰ñ‚ÌŒ¤‹†‚Å“¾‚ç‚ê‚éLP‚ÌŠú‘Ò’l
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
+é …ç›® = LPæœŸå¾…å€¤
+æ•°å€¤ = %AL_å°æ•°è¡¨è¨˜ã«å¤‰æ›(AL_LPæœŸå¾…å€¤())%
+èª¬æ˜Ž = 1å›žã®ç ”ç©¶ã§å¾—ã‚‰ã‚Œã‚‹LPã®æœŸå¾…å€¤
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
 
-€–Ú = ”ï—pŒø—¦
-”’l = {AL_”ï—pŒø—¦()}\%
-à–¾ = 1LP‚É‚©‚©‚é”ï—p‚ð50000‚Æ‚µ‚½ê‡‚ÌŒø—¦
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
+é …ç›® = è²»ç”¨åŠ¹çŽ‡
+æ•°å€¤ = {AL_è²»ç”¨åŠ¹çŽ‡()}\%
+èª¬æ˜Ž = 1LPã«ã‹ã‹ã‚‹è²»ç”¨ã‚’50000ã¨ã—ãŸå ´åˆã®åŠ¹çŽ‡
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
 
-€–Ú = “÷‘Ìƒ_ƒ[ƒW
-”’l = {AL_“÷‘Ìƒ_ƒ[ƒW()}
-à–¾ = {FLAG:ˆâŒ¤_“÷‘Ìƒ_ƒ[ƒW}(“÷‘Ìƒ_ƒ[ƒW) + {FLAG:ˆâŒ¤_ŠëŒ¯«}(ŠëŒ¯«)
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
+é …ç›® = è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸
+æ•°å€¤ = {AL_è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸()}
+èª¬æ˜Ž = {FLAG:éºç ”_è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸}(è‚‰ä½“ãƒ€ãƒ¡ãƒ¼ã‚¸) + {FLAG:éºç ”_å±é™ºæ€§}(å±é™ºæ€§)
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
 
-€–Ú = ¸_ƒ_ƒ[ƒW
-”’l = {AL_¸_ƒ_ƒ[ƒW()}
-à–¾ = {FLAG:ˆâŒ¤_¸_ƒ_ƒ[ƒW}(¸_ƒ_ƒ[ƒW) + {FLAG:ˆâŒ¤_ŠëŒ¯«}(ŠëŒ¯«)
-CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
+é …ç›® = ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸
+æ•°å€¤ = {AL_ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸()}
+èª¬æ˜Ž = {FLAG:éºç ”_ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸}(ç²¾ç¥žãƒ€ãƒ¡ãƒ¼ã‚¸) + {FLAG:éºç ”_å±é™ºæ€§}(å±é™ºæ€§)
+CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
 
 RESETCOLOR
 
 
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_‰ðÍ•\‚Ì€–Ú(€–Ú, ”’l, à–¾)
-#DIMS €–Ú
-#DIMS ”’l
-#DIMS à–¾
-PRINTFORML %€–Ú, 20, LEFT% | %”’l, 10, LEFT% | %à–¾%
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_è§£æžè¡¨ã®é …ç›®(é …ç›®, æ•°å€¤, èª¬æ˜Ž)
+#DIMS é …ç›®
+#DIMS æ•°å€¤
+#DIMS èª¬æ˜Ž
+PRINTFORML %é …ç›®, 20, LEFT% | %æ•°å€¤, 10, LEFT% | %èª¬æ˜Ž%
 
 ;-------------------------------------------------
-; Œ¤‹†‚Ì¬Œ÷^Ž¸”sƒeƒLƒXƒg‚ð•\Ž¦‚·‚é
+; ç ”ç©¶ã®æˆåŠŸï¼å¤±æ•—ãƒ†ã‚­ã‚¹ãƒˆã‚’è¡¨ç¤ºã™ã‚‹
 ;-------------------------------------------------
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_¬Œ÷(ˆâ•¨ID)
-#DIM ˆâ•¨ID
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_æˆåŠŸ(éºç‰©ID)
+#DIM éºç‰©ID
 
 SETCOLOR 150,250,150
 DRAWLINE
-PRINTFORML yˆâ•¨Œ¤‹†:¬Œ÷z
+PRINTFORML ã€éºç‰©ç ”ç©¶:æˆåŠŸã€‘
 DRAWLINE
-CALLFORM AL_Clear_{ˆâ•¨ID}
+CALLFORM AL_Clear_{éºç‰©ID}
 RESETCOLOR
 
 
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_Ž¸”s(ˆâ•¨ID)
-#DIM ˆâ•¨ID
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_å¤±æ•—(éºç‰©ID)
+#DIM éºç‰©ID
 
 SETCOLOR 250,150,150
 DRAWLINE
-PRINTFORML yˆâ•¨Œ¤‹†:Ž¸”sz
+PRINTFORML ã€éºç‰©ç ”ç©¶:å¤±æ•—ã€‘
 DRAWLINE
-CALLFORM AL_Out_{ˆâ•¨ID}
+CALLFORM AL_Out_{éºç‰©ID}
 RESETCOLOR
 
 
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_ƒ‰ƒ“ƒ_ƒ€(ˆâ•¨ID)
-#DIM ˆâ•¨ID
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ãƒ©ãƒ³ãƒ€ãƒ (éºç‰©ID)
+#DIM éºç‰©ID
 
-IF RAND:100 < AL_¬Œ÷—¦()
-    CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_¬Œ÷(ˆâ•¨ID)
+IF RAND:100 < AL_æˆåŠŸçŽ‡()
+    CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_æˆåŠŸ(éºç‰©ID)
 ELSE
-    CALL ˆâ•¨Œ¤‹†ƒeƒXƒg_Ž¸”s(ˆâ•¨ID)
+    CALL éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_å¤±æ•—(éºç‰©ID)
 ENDIF
 
 ;-------------------------------------------------
-; “ÆŽ©”»’è‚Ì•¶Žš—ñ‚ð•Ô‚·
-; ‰ðÍ•\‚Å¬Œ÷—¦‚Ìà–¾‚ÉŽg‚¤
+; ç‹¬è‡ªåˆ¤å®šã®æ–‡å­—åˆ—ã‚’è¿”ã™
+; è§£æžè¡¨ã§æˆåŠŸçŽ‡ã®èª¬æ˜Žã«ä½¿ã†
 ;-------------------------------------------------
-@ˆâ•¨Œ¤‹†ƒeƒXƒg_“ÆŽ©”»’è
+@éºç‰©ç ”ç©¶ãƒ†ã‚¹ãƒˆ_ç‹¬è‡ªåˆ¤å®š
 #FUNCTIONS
-#DIM “ÆŽ©”»’è
-#DIMS •\‹L
+#DIM ç‹¬è‡ªåˆ¤å®š
+#DIMS è¡¨è¨˜
 
-“ÆŽ©”»’è = FLAG:ˆâŒ¤_“ÆŽ©”»’è
+ç‹¬è‡ªåˆ¤å®š = FLAG:éºç ”_ç‹¬è‡ªåˆ¤å®š
 
-SELECTCASE “ÆŽ©”»’è
+SELECTCASE ç‹¬è‡ªåˆ¤å®š
     CASE 0
         RETURNF
     CASE 10
-        •\‹L = +100\%
+        è¡¨è¨˜ = +100\%
     CASE -10
-        •\‹L = -100\%
+        è¡¨è¨˜ = -100\%
     CASE IS > 0
-        •\‹L = +{“ÆŽ©”»’è * 5}\%
+        è¡¨è¨˜ = +{ç‹¬è‡ªåˆ¤å®š * 5}\%
     CASE IS < 0
-        •\‹L = {“ÆŽ©”»’è * 5}\%
+        è¡¨è¨˜ = {ç‹¬è‡ªåˆ¤å®š * 5}\%
 ENDSELECT
-RETURNF •\‹L + "(“ÆŽ©”»’è)"
+RETURNF è¡¨è¨˜ + "(ç‹¬è‡ªåˆ¤å®š)"

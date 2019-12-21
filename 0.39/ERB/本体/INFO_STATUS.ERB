@@ -1,94 +1,94 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:INFO_STATUS.ERB
-;	Facility	:���\��(STATUS)�B
-;				 ����\������֐���Z�߂�B
+;	Facility	:情報表示(STATUS)。
+;				 情報を表示する関数を纏める。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
-;	002		2014/09/28		�Ȃ�͂�				���e�\����ǉ�
-;	003		2017/02/28		morph					�֐��ǉ��iINFO_STATUS_GROUP/INFO_STATUS_GET_BY_LABEL�j
-;	004		2018/11/13		����ǂ܂�				@INFO_STATUS_GET_BY_LABEL�ɐ���/���/��������ŕK�v�Ƃ����\�͒l���v��\�����邽�߂�IF����ǉ�
-;	005		2018/11/14		morph					����/���/��������̔\�͒l�Z�o�Ɏg�p�����O������@C_GET_CVAR_VALUE�Ɉړ��A@INFO_STATUS_GET_BY_LABEL�̋L�q�������߂�
+;	001		20XX/XX/XX		----					新規作成
+;	002		2014/09/28		なるはや				両親表示を追加
+;	003		2017/02/28		morph					関数追加（INFO_STATUS_GROUP/INFO_STATUS_GET_BY_LABEL）
+;	004		2018/11/13		いんどまん				@INFO_STATUS_GET_BY_LABELに随伴/後方/回収部隊で必要とされる能力値合計を表示するためのIF分岐追加
+;	005		2018/11/14		morph					随伴/後方/回収部隊の能力値算出に使用する例外処理を@C_GET_CVAR_VALUEに移動、@INFO_STATUS_GET_BY_LABELの記述を差し戻し
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
-; *- �\���n
+; *- 表示系
 ;
-;	�E INFO_STATUS_LIST					�\��:STATUS���(LIST)
+;	・ INFO_STATUS_LIST					表示:STATUS画面(LIST)
 ;
-;	# STATUS�n(���)
-;	�E INFO_STATUS_MAIN					�\��:STATUS���
-;	�E INFO_STATUS_GROUP				�\��:�z�񗘗p���\���֐�
-;	�E INFO_STATUS_BASES_PALAM			�\��:STATUS���(��{PALAM)
-;	�E INFO_STATUS_BASES_LOG			�\��:STATUS���(��{����)
-;	�E INFO_STATUS_TRAIN_DATA			�\��:STATUS���(��������)
+;	# STATUS系(画面)
+;	・ INFO_STATUS_MAIN					表示:STATUS画面
+;	・ INFO_STATUS_GROUP				表示:配列利用情報表示関数
+;	・ INFO_STATUS_BASES_PALAM			表示:STATUS画面(基本PALAM)
+;	・ INFO_STATUS_BASES_LOG			表示:STATUS画面(基本履歴)
+;	・ INFO_STATUS_TRAIN_DATA			表示:STATUS画面(調教履歴)
 ;
-;	# STATUS�n - �ڍ�
-;	�E INFO_STATUS_HEADER				�\��:STATUS(�w�b�_)
-;	�E INFO_STATUS_MARK					�\��:STATUS(����)
-;	�E INFO_STATUS_TALENT				�\��:STATUS(�f��)
-;	�E INFO_STATUS_ABL					�\��:STATUS(�\��)
-;	�E INFO_STATUS_EXP					�\��:STATUS(�o��)
-;	�E INFO_STATUS_JUEL					�\��:STATUS(��)
-;	�E INFO_STATUS_GOTJUEL				�\��:STATUS(�擾��)
-;	�E INFO_STATUS_INTRODUCTION			�\��:STATUS(�Љ�)
-;	�E INFO_STATUS_OTHER				�\��:STATUS(���̑�)
-;	�E INFO_INTRODUCTION				�\��:STATUS(�Љ�)
+;	# STATUS系 - 詳細
+;	・ INFO_STATUS_HEADER				表示:STATUS(ヘッダ)
+;	・ INFO_STATUS_MARK					表示:STATUS(刻印)
+;	・ INFO_STATUS_TALENT				表示:STATUS(素質)
+;	・ INFO_STATUS_ABL					表示:STATUS(能力)
+;	・ INFO_STATUS_EXP					表示:STATUS(経験)
+;	・ INFO_STATUS_JUEL					表示:STATUS(珠)
+;	・ INFO_STATUS_GOTJUEL				表示:STATUS(取得珠)
+;	・ INFO_STATUS_INTRODUCTION			表示:STATUS(紹介)
+;	・ INFO_STATUS_OTHER				表示:STATUS(その他)
+;	・ INFO_INTRODUCTION				表示:STATUS(紹介)
 ;
-;	# ���̑�
-;	�E INFO_SIMPLE_STATUS_EXP			�ȈՕ\��:STATUS(�o��)
-;	�E INFO_STATUS_GET_BY_LABEL			�����֐�:���x���g�p�L�����X�e�[�^�X�Q�Ɗ֐�
+;	# その他
+;	・ INFO_SIMPLE_STATUS_EXP			簡易表示:STATUS(経験)
+;	・ INFO_STATUS_GET_BY_LABEL			式中関数:ラベル使用キャラステータス参照関数
 
 
 ;===============================================================================
 
 ;-------------------------------------------------------------------------------
-;   STATUS�n(���)
+;   STATUS系(画面)
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub INFO_STATUS_LIST
 ;=================================================
-;   �\��:STATUS���(LIST)
+;   表示:STATUS画面(LIST)
 ;-------------------------------------------------
 @INFO_STATUS_LIST
 #DIM L_INPUT
 #DIMS L_ERR_MSG
 
 ;-----------------------------
-;- ��������
+;- 初期処理
 ;-----------------------------
 L_INPUT=0
 L_ERR_MSG=
 
 ;-----------------------------
-;- �f�[�^���X�g
+;- データリスト
 ;-----------------------------
 RESULT:1=0
 $DATA_LIST
 
-;- LIST:�L�������X�g
-CALL LIST_CHARA(@"�X�e�[�^�X��\�����������L������I��ł��������@", RESULT:1, L_ERR_MSG)
+;- LIST:キャラリスト
+CALL LIST_CHARA(@"ステータスを表示させたいキャラを選んでください　", RESULT:1, L_ERR_MSG)
 L_INPUT = RESULT
 
-;- �\��:�y�[�W��
+;- 表示:ページ別
 SELECTCASE L_INPUT
-	;- �I��
+	;- 終了
 	CASE 1000
 		RETURN 0
-	;- �L����
+	;- キャラ
 	CASEELSE
-		;�\��:STATUS���
+		;表示:STATUS画面
 		CALL INFO_STATUS_MAIN(L_INPUT)
 		GOTO DATA_LIST
 ENDSELECT
@@ -98,101 +98,101 @@ RESTART
 ;=================================================
 ;   sub INFO_STATUS_MAIN
 ;=================================================
-;   �\��:STATUS���
+;   表示:STATUS画面
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_MAIN(ARG)
 #DIM L_TMP
 #DIM L_PAGE_NOW
-#DIM L_PAGE_����
-#DIM L_PAGE_���
-#DIM L_PAGE_�O
-#DIM L_PAGE_��
+#DIM L_PAGE_下限
+#DIM L_PAGE_上限
+#DIM L_PAGE_前
+#DIM L_PAGE_次
 
-#DIM L_CHARA_�O
-#DIM L_CHARA_��
+#DIM L_CHARA_前
+#DIM L_CHARA_次
 
 L_TMP=0
-L_PAGE_����=0
-L_PAGE_���=0
+L_PAGE_下限=0
+L_PAGE_上限=0
 
-L_CHARA_�O=0
-L_CHARA_��=0
-
-;-----------------------------
-;- �萔�ݒ�
-;-----------------------------
-L_PAGE_���� = 0
-L_PAGE_��� = 7
-
+L_CHARA_前=0
+L_CHARA_次=0
 
 ;-----------------------------
-;- �����J�n
+;- 定数設定
+;-----------------------------
+L_PAGE_下限 = 0
+L_PAGE_上限 = 7
+
+
+;-----------------------------
+;- 処理開始
 ;-----------------------------
 $PRINT_LOOP_1
 
-L_CHARA_�O = VAR_GET_CL("PREV",ARG)
-L_CHARA_�� = VAR_GET_CL("NEXT",ARG)
+L_CHARA_前 = VAR_GET_CL("PREV",ARG)
+L_CHARA_次 = VAR_GET_CL("NEXT",ARG)
 
-L_PAGE_�O = (L_PAGE_NOW > L_PAGE_����) ? 1 # 0
-L_PAGE_�� = (L_PAGE_NOW < L_PAGE_���) ? 1 # 0
+L_PAGE_前 = (L_PAGE_NOW > L_PAGE_下限) ? 1 # 0
+L_PAGE_次 = (L_PAGE_NOW < L_PAGE_上限) ? 1 # 0
 
-;- �\��:STATUS(�w�b�_)
+;- 表示:STATUS(ヘッダ)
 		REDRAW 0
 		CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(ARG)
 PRINTL
 
-;- �\��:�y�[�W��
+;- 表示:ページ別
 SELECTCASE L_PAGE_NOW
 	CASE 0
-		;- �\��:STATUS���(��{PALAM)
+		;- 表示:STATUS画面(基本PALAM)
 		DRAWLINE
 		CALL INFO_STATUS_BASES_PALAM(ARG)
 	CASE 1
-		;- �\��:STATUS���(�ڍ׏��)
+		;- 表示:STATUS画面(詳細情報)
 		DRAWLINE
 		CALL INFO_PERSONAL(ARG)
 	CASE 2
-		;- �\��:STATUS���(RPG���)
+		;- 表示:STATUS画面(RPG情報)
 		DRAWLINE
 		CALL INFO_RPG(ARG)
 	CASE 3
-		;- �\��:STATUS���(�B�������)
+		;- 表示:STATUS画面(隠し性情報)
 		DRAWLINE
 		CALL INFO_SEX(ARG)
 	CASE 4
-		;- �\��:STATUS���(��������)
+		;- 表示:STATUS画面(調教履歴)
 		DRAWLINE
 		CALL INFO_STATUS_TRAIN_DATA(ARG)
 	CASE 5
-		;- �\��:STATUS���(�f�������̌�)
+		;- 表示:STATUS画面(素質＆初体験)
 		DRAWLINE
 		CALL INFO_STATUS_OTHER(ARG)
 	CASE 6
-		;- �\��:STATUS���(��{����)
+		;- 表示:STATUS画面(基本履歴)
 		DRAWLINE
 		CALL INFO_STATUS_BASES_LOG(ARG)
 	CASE 7
-		;- �\��:STATUS���(�Љ�)
+		;- 表示:STATUS画面(紹介)
 		DRAWLINE
 		CALL INFO_INTRODUCTION(ARG)
 ENDSELECT
 
-;- �\��:�I��
-PRINTFORMLC [1007]�O�̃y�[�W
-PRINTLC [1000]�߂�
-PRINTFORMLC [1009]���̃y�[�W
+;- 表示:選択部
+PRINTFORMLC [1007]前のページ
+PRINTLC [1000]戻る
+PRINTFORMLC [1009]次のページ
 IF L_PAGE_NOW == 2
-	;PRINTFORMLC [3000] �ߑ��ύX
+	;PRINTFORMLC [3000] 衣装変更
 ENDIF
 PRINTL 
 
-PRINTFORMLC \@(L_CHARA_�O > -1) ? [1001]�O�̃L���� # %" " * 16%\@
+PRINTFORMLC \@(L_CHARA_前 > -1) ? [1001]前のキャラ # %" " * 16%\@
 PRINTFORMLC   %" " * 18%
-PRINTFORMLC \@(L_CHARA_�� > -1) ? [1003]���̃L���� # %" " * 16%\@
+PRINTFORMLC \@(L_CHARA_次 > -1) ? [1003]次のキャラ # %" " * 16%\@
 
 
 $INPUT_LOOP_1
@@ -200,35 +200,35 @@ INPUT
 SELECTCASE RESULT
 	CASE 1000
 		RETURN
-	;�ߑ��ύX
+	;衣装変更
 	CASE 3000
-		;- �ߑ�:�ύX���
+		;- 衣装:変更画面
 		CALL CLOTHES_CHG_MAIN(ARG)
 
-	;�O�̃y�[�W
+	;前のページ
 	CASE 1007
 		IF L_PAGE_NOW == 0
 			L_PAGE_NOW += 7
-		ELSEIF L_PAGE_�O
+		ELSEIF L_PAGE_前
 			L_PAGE_NOW -= 1
 		ENDIF
-	;���̃y�[�W
+	;次のページ
 	CASE 1009
 		IF L_PAGE_NOW ==7
 			L_PAGE_NOW -= 7
-		ELSEIF L_PAGE_��
+		ELSEIF L_PAGE_次
 			L_PAGE_NOW += 1
 		ENDIF
-	;�O�̃L����
+	;前のキャラ
 	CASE 1001
-		SIF L_CHARA_�O > -1
-			ARG = L_CHARA_�O
-	;���̃L����
+		SIF L_CHARA_前 > -1
+			ARG = L_CHARA_前
+	;次のキャラ
 	CASE 1003
-		SIF L_CHARA_�� > -1
-			ARG = L_CHARA_��
+		SIF L_CHARA_次 > -1
+			ARG = L_CHARA_次
 	CASEELSE
-		;- INPUT�G���[�Ή�
+		;- INPUTエラー対応
 		CALL C_INPUT_ERROR
 		GOTO INPUT_LOOP_1
 ENDSELECT
@@ -238,165 +238,165 @@ GOTO PRINT_LOOP_1
 
 
 ;-------------------------------------------------
-;�z�񗘗p���\���֐�
+;配列利用情報表示関数
 ;-------------------------------------------------
-;@INFO_STATUS_MAIN����p�N����
-;�z���n���Ȃ��Ƌ@�\���Ȃ��̂Œ���
-;�y�[�W��L�������X�g�̒[�ƒ[���Ȃ����Ă܂�
-;�n���ꂽ�z��Ɋ܂܂��o�^�ԍ��̃L�����̏����{�����邱�Ƃ��o����
-;�߂�l�FOP�Ɂu�ŏI�m�F�v���܂܂��ꍇ�A1�Ō�����s����RESULT�ɕ\���L�����̓o�^�ԍ����L�^�����
+;@INFO_STATUS_MAINからパクった
+;配列を渡さないと機能しないので注意
+;ページやキャラリストの端と端がつながってます
+;渡された配列に含まれる登録番号のキャラの情報を閲覧することが出来る
+;戻り値：OPに「最終確認」が含まれる場合、1で決定を行うとRESULTに表示キャラの登録番号が記録される
 ;
-;OP�Ɋ܂܂�镶����ɂ���ċ@�\��؂�ւ���
-;�u�ŏI�m�F�v�@�@���̃I�v�V�������w�肵��
-;�@�@�@�@�@�@�@�@1�Ō�����s����RESULT�ɕ\���L�����̓o�^�ԍ����L�^�����
-;�u�L�����Œ�v�@���̃I�v�V�������w�肷��ƃL�����̐ؑւ��ł��Ȃ�
+;OPに含まれる文字列によって機能を切り替える
+;「最終確認」　　このオプションを指定して
+;　　　　　　　　1で決定を行うとRESULTに表示キャラの登録番号が記録される
+;「キャラ固定」　このオプションを指定するとキャラの切替ができない
 @INFO_STATUS_GROUP(CHARA_LIST, CHARA_VIEW, CHARA_CNT, OP)
-#DIM REF   CHARA_LIST      ;�\���Ɏg�p����L�������X�g�A�K�{
-#DIM       CHARA_VIEW      ;���݉{�����̃L�����̃��X�g��̈ʒu
-#DIM       CHARA_CNT       ;�L�������X�g�̃T�C�Y
-#DIMS      OP              ;���s�I�v�V����
-#DIM       L_PAGE_NOW  = 0 ;�{�����̃y�[�W��
-#DIM CONST PAGE_SIZE   = 8 ;�y�[�W�̃T�C�Y
+#DIM REF   CHARA_LIST      ;表示に使用するキャラリスト、必須
+#DIM       CHARA_VIEW      ;現在閲覧中のキャラのリスト上の位置
+#DIM       CHARA_CNT       ;キャラリストのサイズ
+#DIMS      OP              ;実行オプション
+#DIM       L_PAGE_NOW  = 0 ;閲覧中のページ数
+#DIM CONST PAGE_SIZE   = 8 ;ページのサイズ
 {
 #DIMS CONST TYPE_STATUS, 8 = 
-	"��{PALAM", 
-	"�ڍ׏��", 
-	"RPG���", 
-	"���B���", 
-	"��������", 
-	"����f�������̌�", 
-	"��{����", 
-	"�l���Љ�"
+	"基本PALAM", 
+	"詳細情報", 
+	"RPG情報", 
+	"生殖情報", 
+	"調教履歴", 
+	"特殊素質＆初体験", 
+	"基本履歴", 
+	"人物紹介"
 }
 
-;- �\��:STATUS(�w�b�_)
+;- 表示:STATUS(ヘッダ)
 REDRAW 0
 CLEARLINE LINECOUNT
 CALL INFO_STATUS_HEADER(CHARA_LIST:CHARA_VIEW)
 PRINTL
 
 SELECTCASE TYPE_STATUS:L_PAGE_NOW
-CASE "��{PALAM", 
-	;- �\��:STATUS���(��{PALAM)
+CASE "基本PALAM", 
+	;- 表示:STATUS画面(基本PALAM)
 	DRAWLINE
 	CALL INFO_STATUS_BASES_PALAM(CHARA_LIST:CHARA_VIEW)
-CASE "�ڍ׏��", 
-	;- �\��:STATUS���(�ڍ׏��)
+CASE "詳細情報", 
+	;- 表示:STATUS画面(詳細情報)
 	DRAWLINE
 	CALL INFO_PERSONAL(CHARA_LIST:CHARA_VIEW)
-CASE "RPG���", 
-	;- �\��:STATUS���(RPG���)
+CASE "RPG情報", 
+	;- 表示:STATUS画面(RPG情報)
 	DRAWLINE
 	CALL INFO_RPG(CHARA_LIST:CHARA_VIEW)
-CASE "���B���", 
-	;- �\��:STATUS���(�B�������)
+CASE "生殖情報", 
+	;- 表示:STATUS画面(隠し性情報)
 	DRAWLINE
 	CALL INFO_SEX(CHARA_LIST:CHARA_VIEW)
-CASE "��������", 
-	;- �\��:STATUS���(��������)
+CASE "調教履歴", 
+	;- 表示:STATUS画面(調教履歴)
 	DRAWLINE
 	CALL INFO_STATUS_TRAIN_DATA(CHARA_LIST:CHARA_VIEW)
-CASE "����f�������̌�", 
-	;- �\��:STATUS���(���̌�)
+CASE "特殊素質＆初体験", 
+	;- 表示:STATUS画面(初体験)
 	DRAWLINE
 	CALL INFO_STATUS_OTHER(CHARA_LIST:CHARA_VIEW)
-CASE "��{����", 
-	;- �\��:STATUS���(��{����)
+CASE "基本履歴", 
+	;- 表示:STATUS画面(基本履歴)
 	DRAWLINE
 	CALL INFO_STATUS_BASES_LOG(CHARA_LIST:CHARA_VIEW)
-CASE "�l���Љ�"
-	;- �\��:STATUS���(�Љ�)
+CASE "人物紹介"
+	;- 表示:STATUS画面(紹介)
 	DRAWLINE
 	CALL INFO_INTRODUCTION(CHARA_LIST:CHARA_VIEW)
 ENDSELECT
 
-IF STRCOUNT(OP, "�u�ŏI�m�F�v") || STRCOUNT(OP, "�u�L�����Œ�v")
-	PRINTFORM %"�@" * 8%
+IF STRCOUNT(OP, "「最終確認」") || STRCOUNT(OP, "「キャラ固定」")
+	PRINTFORM %"　" * 8%
 ELSE
-	PRINTBUTTON "[7] - �@�{�ݔz��", 7
+	PRINTBUTTON "[7] - 　施設配属", 7
 ENDIF
-PRINTFORM %"�@" * 1%
-IF STRCOUNT(OP, "�u�L�����Œ�v")
+PRINTFORM %"　" * 1%
+IF STRCOUNT(OP, "「キャラ固定」")
 ELSE
-	PRINTBUTTON "[8] - �O�̃L����", 8
+	PRINTBUTTON "[8] - 前のキャラ", 8
 ENDIF
-PRINTFORM %"�@" * 1%
-IF STRCOUNT(OP, "�u�ŏI�m�F�v") || STRCOUNT(OP, "�u�L�����Œ�v")
-	PRINTFORM %"�@" * 8%
+PRINTFORM %"　" * 1%
+IF STRCOUNT(OP, "「最終確認」") || STRCOUNT(OP, "「キャラ固定」")
+	PRINTFORM %"　" * 8%
 ELSE
-	PRINTBUTTON "[9] - �@�����z��", 9
+	PRINTBUTTON "[9] - 　部隊配属", 9
 ENDIF
 PRINTFORML 
 
 PRINTBUTTON @"[4] - %TYPE_STATUS:((L_PAGE_NOW + PAGE_SIZE - 1) % PAGE_SIZE), 10%", 4
-PRINTFORM %"�@" * 1%
-PRINTFORM %"�@" * 8%
-PRINTFORM %"�@" * 1%
+PRINTFORM %"　" * 1%
+PRINTFORM %"　" * 8%
+PRINTFORM %"　" * 1%
 PRINTBUTTON @"[6] - %TYPE_STATUS:((L_PAGE_NOW + PAGE_SIZE + 1) % PAGE_SIZE), 10%", 6
 PRINTFORML 
-PRINTFORM %"�@" * 8%
-PRINTFORM %"�@" * 1%
-IF STRCOUNT(OP, "�u�L�����Œ�v")
+PRINTFORM %"　" * 8%
+PRINTFORM %"　" * 1%
+IF STRCOUNT(OP, "「キャラ固定」")
 ELSE
-	PRINTBUTTON "[2] - ���̃L����", 2
+	PRINTBUTTON "[2] - 次のキャラ", 2
 ENDIF
-PRINTFORM %"�@" * 1%
+PRINTFORM %"　" * 1%
 PRINTFORML 
 
-IF STRCOUNT(OP, "�u�ŏI�m�F�v")
-	PRINTBUTTON "[1] - �@�@�@����", 1
-	PRINTFORM �@�@�@�@�@�@�@�@�@�@
-	PRINTBUTTON "[0] - �L�����Z��", 0
+IF STRCOUNT(OP, "「最終確認」")
+	PRINTBUTTON "[1] - 　　　決定", 1
+	PRINTFORM 　　　　　　　　　　
+	PRINTBUTTON "[0] - キャンセル", 0
 	PRINTFORML 
 ELSE
-	PRINTBUTTON "[0] - ���ǂ�", 0
+	PRINTBUTTON "[0] - もどる", 0
 ENDIF
 
 DO
 	ONEINPUT
 	SELECTCASE RESULT
 	CASE 1
-		SIF !STRCOUNT(OP, "�u�ŏI�m�F�v")
+		SIF !STRCOUNT(OP, "「最終確認」")
 			GOTO RETRY
 		RETURN CHARA_LIST:CHARA_VIEW
 	CASE 0
 		RETURN -1
 	[SKIPSTART]
-	;�ߑ��ύX
+	;衣装変更
 	CASE 3000
-		;- �ߑ�:�ύX���
+		;- 衣装:変更画面
 		CALL CLOTHES_CHG_MAIN(ARG)
 	[SKIPEND]
-	;�O�̃y�[�W
+	;前のページ
 	CASE 4
 		L_PAGE_NOW = (L_PAGE_NOW + PAGE_SIZE - 1) % PAGE_SIZE
-	;���̃y�[�W
+	;次のページ
 	CASE 6
 		L_PAGE_NOW = (L_PAGE_NOW + PAGE_SIZE + 1) % PAGE_SIZE
-	;�{�ݔz��
+	;施設配属
 	CASE 7
-		SIF STRCOUNT(OP, "�u�ŏI�m�F�v") || STRCOUNT(OP, "�u�L�����Œ�v")
+		SIF STRCOUNT(OP, "「最終確認」") || STRCOUNT(OP, "「キャラ固定」")
 			GOTO RETRY
 		CALL SELECT_WOKER(CHARA_LIST:CHARA_VIEW)
-	;�O�̃L����
+	;前のキャラ
 	CASE 8
-		SIF STRCOUNT(OP, "�u�L�����Œ�v")
+		SIF STRCOUNT(OP, "「キャラ固定」")
 			GOTO RETRY
 		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT - 1) % CHARA_CNT
-	;�����z��
+	;部隊配属
 	CASE 9
-		SIF STRCOUNT(OP, "�u�ŏI�m�F�v") || STRCOUNT(OP, "�u�L�����Œ�v")
+		SIF STRCOUNT(OP, "「最終確認」") || STRCOUNT(OP, "「キャラ固定」")
 			GOTO RETRY
 		CALL SELECT_SUPPORT(CHARA_LIST:CHARA_VIEW)
-	;���̃L����
+	;次のキャラ
 	CASE 2
-		SIF STRCOUNT(OP, "�u�L�����Œ�v")
+		SIF STRCOUNT(OP, "「キャラ固定」")
 			GOTO RETRY
 		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT + 1) % CHARA_CNT
 	CASEELSE
 		$RETRY
-		;- INPUT�G���[�Ή�
-		CALL C_INPUT_ERROR("�����ȓ��͂ł�")
+		;- INPUTエラー対応
+		CALL C_INPUT_ERROR("無効な入力です")
 		CONTINUE
 	ENDSELECT
 	BREAK
@@ -405,47 +405,47 @@ RESTART
 
 
 
-;@INFO_STATUS_GROUP�̌Ăяo���p�֐�
-;�L�����ԍ���n�����ƂŒP�̂̔\�͕\���֐��Ƃ��ē��삷��
+;@INFO_STATUS_GROUPの呼び出し用関数
+;キャラ番号を渡すことで単体の能力表示関数として動作する
 @INFO_STATUS_SINGLE(L_C_ID, OP)
 #DIM  L_C_ID
 #DIMS OP
-CALL INFO_STATUS_GROUP(L_C_ID, 0, 1, OP + "�u�L�����Œ�v")
+CALL INFO_STATUS_GROUP(L_C_ID, 0, 1, OP + "「キャラ固定」")
 
 
 
 ;=================================================
 ;   sub INFO_STATUS_BASES_PALAM
 ;=================================================
-;   �\��:STATUS���(��{PALAM)
+;   表示:STATUS画面(基本PALAM)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_BASES_PALAM(ARG)
 
-;-- ����
+;-- 刻印
 
-;- ���C���\��:���o��
-CALL C_HEADLINE("����(MARK)")
-;- �\��:STATUS(����)
+;- ライン表示:見出し
+CALL C_HEADLINE("刻印(MARK)")
+;- 表示:STATUS(刻印)
 CALL INFO_STATUS_MARK(ARG)
 PRINTL
 
 
-;-- �f��
+;-- 素質
 
-;- ���C���\��:���o��
-CALL C_HEADLINE("�f��(TALENT)")
-;- �\��:STATUS(�f��)
+;- ライン表示:見出し
+CALL C_HEADLINE("素質(TALENT)")
+;- 表示:STATUS(素質)
 CALL INFO_STATUS_TALENT(ARG)
 PRINTL
 
 
-;-- �\��
-;- ���C���\��:���o��
-CALL C_HEADLINE("�\��(ABL)")
-;- �\��:STATUS(�\��)
+;-- 能力
+;- ライン表示:見出し
+CALL C_HEADLINE("能力(ABL)")
+;- 表示:STATUS(能力)
 CALL INFO_STATUS_ABL(ARG)
 PRINTL
 
@@ -453,203 +453,203 @@ PRINTL
 ;=================================================
 ;   sub INFO_STATUS_BASES_LOG
 ;=================================================
-;   �\��:STATUS���(��{����)
+;   表示:STATUS画面(基本履歴)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_BASES_LOG(ARG)
 
-;-- �o��
+;-- 経験
 
-;- ���C���\��:���o��
-CALL C_HEADLINE("�o��(EXP)")
-;- �\��:STATUS(�o��)
+;- ライン表示:見出し
+CALL C_HEADLINE("経験(EXP)")
+;- 表示:STATUS(経験)
 CALL INFO_STATUS_EXP(ARG)
 PRINTL
 
 
-;-- ��
+;-- 珠
 
-;- ���C���\��:���o��
-CALL C_HEADLINE("��(JUEL)")
-;- �\��:STATUS(��)
+;- ライン表示:見出し
+CALL C_HEADLINE("珠(JUEL)")
+;- 表示:STATUS(珠)
 CALL INFO_STATUS_JUEL(ARG)
 PRINTL
 
 ;=================================================
 ;   sub INFO_STATUS_TRAIN_DATA
 ;=================================================
-;   �\��:STATUS���(��������)
+;   表示:STATUS画面(調教履歴)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_TRAIN_DATA(ARG)
 #DIM L_I
 
 L_I = ARG
 SETCOLOR 250,100,200
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\%CALLNAME:L_I%�̒��������\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+PRINTFORML ――――――――――――――――――――――――%CALLNAME:L_I%の調教履歴――――――――――――――――――――――――
 
 IF  MASTER != L_I
-	IF TALENT:L_I:���� == 1
-		PRINTFORM �y�����z
-		IF CFLAG:L_I:�̌^ == 2
-			PRINTFORML 		%CALLNAME:MASTER%�͂��̐F�C����L���Ȑg�̂ɍ��ꍞ�݁A�����𒍂��ł���B
-		ELSEIF CFLAG:L_I:�̌^ == 0
-			PRINTFORML 		%CALLNAME:MASTER%�͂��̔������ؚ��Ȑg�̂ɍ��ꍞ�݁A�����𒍂��ł���B
+	IF TALENT:L_I:寵愛 == 1
+		PRINTFORM 【寵愛】
+		IF CFLAG:L_I:体型 == 2
+			PRINTFORML 		%CALLNAME:MASTER%はその色気ある豊満な身体に惚れ込み、寵愛を注いでいる。
+		ELSEIF CFLAG:L_I:体型 == 0
+			PRINTFORML 		%CALLNAME:MASTER%はその美しい華奢な身体に惚れ込み、寵愛を注いでいる。
 		ELSE
-			PRINTFORML 		%CALLNAME:MASTER%�͂��̗e�p�ɍ��ꍞ�݁A�����𒍂��ł���B
+			PRINTFORML 		%CALLNAME:MASTER%はその容姿に惚れ込み、寵愛を注いでいる。
 		ENDIF
-	ELSEIF Exp:L_I:��l�����o�� >= 500
-		PRINTFORM �y���C�ɓ���z
-		IF CFLAG:L_I:�̌^ == 2
-			PRINTFORML 		%CALLNAME:MASTER%�ɂ��̐F�C����L���Ȑg�̂�_���A���x��������Ă���B
-		ELSEIF CFLAG:L_I:�̌^ == 0
-			PRINTFORML 		%CALLNAME:MASTER%�ɂ��̔������ؚ��Ȑg�̂�_���A���x��������Ă���B
+	ELSEIF Exp:L_I:主人調教経験 >= 500
+		PRINTFORM 【お気に入り】
+		IF CFLAG:L_I:体型 == 2
+			PRINTFORML 		%CALLNAME:MASTER%にその色気ある豊満な身体を狙われ、幾度も抱かれている。
+		ELSEIF CFLAG:L_I:体型 == 0
+			PRINTFORML 		%CALLNAME:MASTER%にその美しい華奢な身体を狙われ、幾度も抱かれている。
 		ELSE
-			PRINTFORML 		%CALLNAME:MASTER%�ɂ��̗e�p�������߂��A���x��������Ă���B
+			PRINTFORML 		%CALLNAME:MASTER%にその容姿を見染められ、幾度も抱かれている。
 		ENDIF
 	ENDIF
-	IF TALENT:L_I:�S�� == 1
-		PRINTFORML �y�S���z		%CALLNAME:L_I%��%CALLNAME:MASTER%�ɐS���琒�q���Ă���B
-	ELSEIF TALENT:L_I:���l == 1
-		PRINTFORML �y���l�z		%CALLNAME:L_I%��%CALLNAME:MASTER%�ɐ[�����������Ă���B
-	ELSEIF TALENT:L_I:��w == 1
-		PRINTFORML �y��w�z		%CALLNAME:L_I%��%CALLNAME:MASTER%�Ƃ̓��̊֌W�ɐ�������Ă���B
+	IF TALENT:L_I:心酔 == 1
+		PRINTFORML 【心酔】		%CALLNAME:L_I%は%CALLNAME:MASTER%に心から崇拝している。
+	ELSEIF TALENT:L_I:愛人 == 1
+		PRINTFORML 【愛人】		%CALLNAME:L_I%は%CALLNAME:MASTER%に深い愛情を抱いている。
+	ELSEIF TALENT:L_I:情婦 == 1
+		PRINTFORML 【情婦】		%CALLNAME:L_I%は%CALLNAME:MASTER%との肉体関係に酔いしれている。
 	ENDIF
 
-	SIF TALENT:L_I:���� == 1
-		PRINTFORML �y���Ӂz		%CALLNAME:MASTER%�Ɛ��s�ׂ��邱�Ƃɍ��ӂ��Ă���B
+	SIF TALENT:L_I:合意 == 1
+		PRINTFORML 【合意】		%CALLNAME:MASTER%と性行為することに合意している。
 
-	SIF TALENT:L_I:�����ς� == 1
-		PRINTFORML �y�����ς݁z		���I�Ȓ������{����Ă���A�g�̂���ɉ��y�����߂Ă���B
+	SIF TALENT:L_I:調教済み == 1
+		PRINTFORML 【調教済み】		性的な調教を施されており、身体が常に快楽を求めている。
 
-	IF Exp:L_I:�p�C�Y���o�� >= 900
-		PRINTFORML �y�p�C�Y��LvMAX�z	���Ŏː�������ȂǗe�Ղ��قǂ̋Z�I�����B
-	ELSEIF Exp:L_I:�p�C�Y���o�� >= 700
-		PRINTFORML �y�p�C�Y��Lv4�z		���s�ׂƓ����̉��y��^���邱�Ƃ��\�ɂȂ����B
-	ELSEIF Exp:L_I:�p�C�Y���o�� >= 500
-		PRINTFORML �y�p�C�Y��Lv3�z		�ǂ̂悤�ȃy�j�X���낤�Ǝː������邱�Ƃ��o����B
-	ELSEIF Exp:L_I:�p�C�Y���o�� >= 300
-		PRINTFORML �y�p�C�Y��Lv2�z		�I�݂ɋ����g���ː��֓������Ƃ��o����B
-	ELSEIF Exp:L_I:�p�C�Y���o�� >= 100
-		PRINTFORML �y�p�C�Y��Lv1�z		���Ŏː������邱�Ƃ��o����悤�ɂȂ����B
+	IF Exp:L_I:パイズリ経験 >= 900
+		PRINTFORML 【パイズリLvMAX】	胸で射精させるなど容易いほどの技巧を持つ。
+	ELSEIF Exp:L_I:パイズリ経験 >= 700
+		PRINTFORML 【パイズリLv4】		性行為と同等の快楽を与えることが可能になった。
+	ELSEIF Exp:L_I:パイズリ経験 >= 500
+		PRINTFORML 【パイズリLv3】		どのようなペニスだろうと射精させることが出来る。
+	ELSEIF Exp:L_I:パイズリ経験 >= 300
+		PRINTFORML 【パイズリLv2】		巧みに胸を使い射精へ導くことが出来る。
+	ELSEIF Exp:L_I:パイズリ経験 >= 100
+		PRINTFORML 【パイズリLv1】		胸で射精させることが出来るようになった。
 	ENDIF
 
-	IF Exp:L_I:�t�F���o�� >= 900
-		PRINTFORML �y�t�F��LvMAX�z		�ޏ��̃t�F���Ŏː����䖝���邱�Ƃ͂ł��Ȃ��B�B
-	ELSEIF Exp:L_I:�t�F���o�� >= 700
-		PRINTFORML �y�t�F��Lv4�z		���͂␫��̂悤�ȉ��y���������B
-	ELSEIF Exp:L_I:�t�F���o�� >= 500
-		PRINTFORML �y�t�F��Lv3�z		�ː��𑣐i����d����e�N�j�b�N���o����B
-	ELSEIF Exp:L_I:�t�F���o�� >= 300
-		PRINTFORML �y�t�F��Lv2�z		�]�T���o�Ă��Đ���g����悤�ɂȂ����B
-	ELSEIF Exp:L_I:�t�F���o�� >= 100
-		PRINTFORML �y�t�F��Lv1�z		�ː����ꐸ�t�����Ɋ܂ނ̂ɂ�����Ă����B
+	IF Exp:L_I:フェラ経験 >= 900
+		PRINTFORML 【フェラLvMAX】		彼女のフェラで射精を我慢することはできない。。
+	ELSEIF Exp:L_I:フェラ経験 >= 700
+		PRINTFORML 【フェラLv4】		もはや性器のような快楽を持つ口だ。
+	ELSEIF Exp:L_I:フェラ経験 >= 500
+		PRINTFORML 【フェラLv3】		射精を促進する仕草やテクニックも出来る。
+	ELSEIF Exp:L_I:フェラ経験 >= 300
+		PRINTFORML 【フェラLv2】		余裕も出てきて舌も使えるようになった。
+	ELSEIF Exp:L_I:フェラ経験 >= 100
+		PRINTFORML 【フェラLv1】		射精され精液を口に含むのにも慣れてきた。
 	ENDIF
 
-	IF Exp:L_I:�����o�� >= 900
-		PRINTFORML �y�Z�b�N�XLvMAX�z	���r�ȍ����Ŏː��𑣂��A���t��S�ēf���o���܂ŗ����Ȃ��قǌ������D���B
-	ELSEIF Exp:L_I:�����o�� >= 700
-		PRINTFORML �y�Z�b�N�XLv4�z		���ʂ̈Ⴂ���D�ӓI�ɑ�����قǁA�Z�b�N�X�ɖ����B
-	ELSEIF Exp:L_I:�����o�� >= 500
-		PRINTFORML �y�Z�b�N�XLv3�z		�S���Ƀy�j�X���Ȃ��Ɨ����������A�S���͏�Ƀg���g���ɂȂ��Ă���B
-	ELSEIF Exp:L_I:�����o�� >= 300
-		PRINTFORML �y�Z�b�N�XLv2�z		����Ɋ��S�������y�j�X�̋@�\��c���A�S���ł��̏󋵂��@�m�ł���B
-	ELSEIF Exp:L_I:�����o�� >= 100
-		PRINTFORML �y�Z�b�N�XLv1�z		�Y�Ƃ̌���ɂ�����A�S���Ƀy�j�X�����荞�ވٕ����ɓK�������B
+	IF Exp:L_I:性交経験 >= 900
+		PRINTFORML 【セックスLvMAX】	淫靡な腰つきで射精を促し、精液を全て吐き出すまで離さないほど交尾が大好き。
+	ELSEIF Exp:L_I:性交経験 >= 700
+		PRINTFORML 【セックスLv4】		性別の違いを好意的に捉えるほど、セックスに夢中。
+	ELSEIF Exp:L_I:性交経験 >= 500
+		PRINTFORML 【セックスLv3】		膣内にペニスがないと落ち着かず、膣内は常にトロトロになっている。
+	ELSEIF Exp:L_I:性交経験 >= 300
+		PRINTFORML 【セックスLv2】		交尾に完全順応しペニスの機能を把握、膣内でその状況を察知できる。
+	ELSEIF Exp:L_I:性交経験 >= 100
+		PRINTFORML 【セックスLv1】		雄との交尾にも慣れ、膣内にペニスが入り込む異物感に適応した。
 	ENDIF
 
-	SIF TALENT:L_I:�����f�� == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y����H�ދ��C�z		%CALLNAME:MASTER%�Ɉ������ׂȂ�΁A�ǂ�Ȃ��Ƃ����āc
-	SIF TALENT:L_I:�c���f�� == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y  �f����  �z		�c���c�����Ă����̍��͉����ւ��A������������΂͂ɂ��ގp��������B
-	SIF TALENT:L_I:�}�h���i == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y����������Łz		���Ɛ���m���薣�͓I�ɂȂ����A�����Ă����͂��ʂƎv�������ɂȂ�j���}�����B
-	SIF TALENT:L_I:����̉� == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y ����̉� �z		�����邻�̎p�ɊF���\���Ă���c�A�N���ޏ��̐S���ˎ~�߂��̂����B
-	SIF TALENT:L_I:�l�ԕs�M == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y�����ꂽ�S�z		���҂����₷�鍽����j��A�ǓƂ������ޏ��͂悤�₭�l���������B
-	SIF TALENT:L_I:�ɏ�̖� == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y�����̈��l�z		�j�ł���ΒN�����Ƃ��������̎��̂́A%CALLNAME:MASTER%�̐F�Ő��ߏグ��ꂽ�B
-	SIF TALENT:L_I:�����̎q�{ == 1 && Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y���������ގq�{�z	���Ȃ�q�{�͈�l�̈�`�q�݂̂���ނ��Ƃ𐾂����B
-	SIF TALENT:L_I:�A�C�h�� == 1 &&  Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y����ق���z		�t�@���B�͒m��Ȃ��c���̏Ί�͈�l�ɂ����������Ă��Ȃ����Ƃ��B
-	SIF TALENT:L_I:���C�h == 1 &&  Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y��]�𒴂��āz 	%CALLNAME:MASTER%�ɍł��߂����Ƃ��āA�N���������ꂽ���c
-	SIF TALENT:L_I:�w��  &&  Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y�׽1�Ԃ̵�Łz		�N���X�j�q��������ԃh�L�h�L���鑊��A�ꑫ��ɃI�g�i�ɂȂ�����X�������B
-	SIF TALENT:L_I:�j���� == 1 &&  Exp:L_I:��l�����o�� >= 100 && ( TALENT:L_I:�S�� == 1 || TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y�c�j�͌����z		�c�ł����̒j�ɂ͐g�̂������Ă��܂��A�ǂ����Ă��֌W��؂�Ȃ��c�c�B
-	IF TALENT:L_I:������ == 1 && Exp:L_I:��l�����o�� >= 100 && (TALENT:L_I:�S�� == 1|| TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y���Y�Ƃ��z		�Y�Ƃ������݂ɋ������ِ��Ԃ̐��s�ׁA�q��s�ݎY�ނƂ������݂̍����F�߂��B
-	ELSEIF TALENT:L_I:���S���P == 1 && (TALENT:L_I:�S�� == 1|| TALENT:L_I:���l == 1 || TALENT:L_I:��w == 1)
-		PRINTFORML �y�����̕S���P�z		���S�����낤�Ǝ󕲂̒�߂ɂ͓�����Ȃ��A����������߂��ւ̎��ԁB
+	SIF TALENT:L_I:ヤンデレ == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【愛を食む狂気】		%CALLNAME:MASTER%に愛される為ならば、どんなことだって…
+	SIF TALENT:L_I:ツンデレ == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【  デレ期  】		ツンツンしてたあの頃は何処へやら、視線を向ければはにかむ姿が見える。
+	SIF TALENT:L_I:マドンナ == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【恋するﾏﾄﾞﾝﾅ】		愛と性を知りより魅力的になった、そしてもう届かぬと思いつつも虜になる男も急増中。
+	SIF TALENT:L_I:高嶺の花 == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【 恋慕の花 】		恋するその姿に皆が噂している…、誰が彼女の心を射止めたのかを。
+	SIF TALENT:L_I:人間不信 == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【解かれた心】		他者を拒絶する鎖錠を破り、孤独だった彼女はようやく人を愛した。
+	SIF TALENT:L_I:極上の牝 == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【至高の愛人】		男であれば誰もが犯したいその肢体は、%CALLNAME:MASTER%の色で染め上げられた。
+	SIF TALENT:L_I:聖女の子宮 == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【聖痕を刻む子宮】	聖なる子宮は一人の遺伝子のみを育むことを誓った。
+	SIF TALENT:L_I:アイドル == 1 &&  Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【ｱｲﾄﾞﾙのﾋﾐﾂ】		ファン達は知らない…その笑顔は一人にしか向けられていないことを。
+	SIF TALENT:L_I:メイド == 1 &&  Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【主従を超えて】 	%CALLNAME:MASTER%に最も近き女として、誰よりも愛されたい…
+	SIF TALENT:L_I:学生  &&  Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【ｸﾗｽ1番のｵﾄﾅ】		クラス男子たちが一番ドキドキする相手、一足先にオトナになった若々しい雌。
+	SIF TALENT:L_I:男嫌い == 1 &&  Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【…男は嫌い】		…でもあの男には身体を許してしまう、どうしても関係を切れない……。
+	IF TALENT:L_I:同性愛 == 1 && Exp:L_I:主人調教経験 >= 100 && (TALENT:L_I:心酔 == 1|| TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【レズ堕とし】		雄という存在に屈服し異性間の性行為、子を孕み産むという雌の在り方を認めた。
+	ELSEIF TALENT:L_I:白百合姫 == 1 && (TALENT:L_I:心酔 == 1|| TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		PRINTFORML 【白濁の百合姫】		白百合だろうと受粉の定めには逃れられない、今や胤を求める一輪の雌花。
 	ENDIF
-	SIF TALENT:L_I:�m�s�q�x == 1
-		PRINTFORML �y�m�s�q�z		%CALLNAME:L_I%��%CALLNAME:MASTER%�ł͂Ȃ��A�N���ɐQ����Ă��܂����c�B
+	SIF TALENT:L_I:ＮＴＲ度 == 1
+		PRINTFORML 【ＮＴＲ】		%CALLNAME:L_I%は%CALLNAME:MASTER%ではなく、誰かに寝取られてしまった…。
 
-	SIF TALENT:L_I:�m�s�k == 1
-		PRINTFORML �y�m�s�k�z		������l������͂���%CALLNAME:L_I%�̐g�ƐS�́A���͂�%CALLNAME:MASTER%�̂��̂��B
-	SIF TALENT:L_I:�S���E�� == 1
-		PRINTFORML �y�S���E�݁z		�����鏗��������͂���%CALLNAME:L_I%�̐g�ƐS�́A���͂�%CALLNAME:MASTER%�̂��̂��B
-	SIF CFLAG:L_I:���Ȃ��̎q�̏o�Y��
-		PRINTFORML �y�s�܂��ς݁z		%CALLNAME:MASTER%�̐��q�Ŏ󐸂���فA������%CALLNAME:MASTER%�̌����p�������q���o�Y�����B
+	SIF TALENT:L_I:ＮＴＬ == 1
+		PRINTFORML 【ＮＴＬ】		愛する人がいるはずの%CALLNAME:L_I%の身と心は、もはや%CALLNAME:MASTER%のものだ。
+	SIF TALENT:L_I:百合摘み == 1
+		PRINTFORML 【百合摘み】		愛する女性がいるはずの%CALLNAME:L_I%の身と心は、もはや%CALLNAME:MASTER%のものだ。
+	SIF CFLAG:L_I:あなたの子の出産数
+		PRINTFORML 【孕ませ済み】		%CALLNAME:MASTER%の精子で受精し受胎、そして%CALLNAME:MASTER%の血を継承した子を出産した。
 
-	IF TALENT:L_I:��ς� == 1
-		PRINTFORML �y��ς݁z		�v�ƈ�ĂĂ���q�͕v�̌��ł͂Ȃ��A%CALLNAME:MASTER%�̌��������������q���B
-	ELSEIF TALENT:L_I:� == 1
-		PRINTFORML �y��z		�_������񂾑���ł͂Ȃ��A%CALLNAME:MASTER%�Ƃ̎q��s��ł���B
+	IF TALENT:L_I:托卵済み == 1
+		PRINTFORML 【托卵済み】		夫と育てている子は夫の血ではなく、%CALLNAME:MASTER%の血を引いた愛し子だ。
+	ELSEIF TALENT:L_I:托卵 == 1
+		PRINTFORML 【托卵】		契りを結んだ相手ではなく、%CALLNAME:MASTER%との子を孕んでいる。
 	ENDIF
 
-	IF CFLAG:L_I:�q�{���t�����ʍ��v > 0
-		PRINTFORM �y%CALLNAME:MASTER%�Ƃ̎q���z	
-		SIF CFLAG:L_I:�q�{���t������ > 0
+	IF CFLAG:L_I:子宮精液貯蔵量合計 > 0
+		PRINTFORM 【%CALLNAME:MASTER%との子作り】	
+		SIF CFLAG:L_I:子宮精液貯蔵量 > 0
 		PRINTFORM 
-		PRINTFORM %CALLNAME:MASTER%�̎�t����{CFLAG:L_I:�q�{���t������/500}ml�̐��t���q�{�Ɏc�����ł���A
-		PRINTFORML ���݂܂�{CFLAG:L_I:�q�{���t�����ʍ��v/500}ml�̐��t���q�{�ɒ~�����B
+		PRINTFORM %CALLNAME:MASTER%の種付けで{CFLAG:L_I:子宮精液貯蔵量/500}mlの精液が子宮に残留中であり、
+		PRINTFORML 現在まで{CFLAG:L_I:子宮精液貯蔵量合計/500}mlの精液を子宮に蓄えた。
 	ENDIF
 ENDIF
 
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 RESETCOLOR
 ;-------------------------------------------------------------------------------
-;   STATUS�n(�ڍ�)
+;   STATUS系(詳細)
 ;-------------------------------------------------------------------------------
 
 ;=================================================
 ;   sub INFO_STATUS_HEADER
 ;=================================================
-;   �\��:STATUS(�w�b�_)
+;   表示:STATUS(ヘッダ)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_HEADER(ARG)
-;�\��:�y�[�W�w�b�_
+;表示:ページヘッダ
 CALL C_LINE
-PRINTFORM NO.%TOSTR(CFLAG:ARG:�ʔԍ�) , 3, LEFT%:
+PRINTFORM NO.%TOSTR(CFLAG:ARG:個別番号) , 3, LEFT%:
 PRINTFORM %CALLNAME:ARG,24,LEFT%
-;�̗�
+;体力
 CALL VAR_BAR_BASE(ARG, 0, 1)
 
-PRINT �@�@
+PRINT 　　
 
-;- ���:�댯��
-CALL INFO_�댯��(ARG)
+;- 情報:危険日
+CALL INFO_危険日(ARG)
 
 PRINTL
 
 ;=================================================
 ;   sub INFO_STATUS_MARK
 ;=================================================
-;   �\��:STATUS(����)
+;   表示:STATUS(刻印)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_MARK(ARG)
 #DIM L_CNT
@@ -664,8 +664,8 @@ FOR LOCAL,0,VARSIZE("MARK")
 		CONTINUE
 	LOCAL:1 = MARK:ARG:LOCAL
 
-	SIF LOCAL:1 <= 0 && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM %LOCALS , 10%
 	PRINTFORM :LV{LOCAL:1} 
 	BAR LOCAL:1, 3, 3
@@ -686,11 +686,11 @@ SIF !LINEISEMPTY()
 ;=================================================
 ;   sub INFO_STATUS_TALENT
 ;=================================================
-;   �\��:STATUS(�f��)
+;   表示:STATUS(素質)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
-;  ARG:1				CSV�D��
+;  ARG:0				対象キャラ
+;  ARG:1				CSV優先
 ;-------------------------------------------------
 @INFO_STATUS_TALENT(ARG, ARG:1=0)
 #DIM L_CNT
@@ -706,48 +706,48 @@ L_COLOR = GETCOLOR()
 FOR L_I,0,VARSIZE("TALENT")
 	SELECTCASE L_I
 		CASE 0
-			PRINT �yABL�f���z �F
+			PRINT 【ABL素質】 ：
 		CASE 50
 			PRINTL
-			PRINT �y�̎��f���z�F
+			PRINT 【体質素質】：
 			L_CNT = 0
 		CASE 100
 			PRINTL
-			PRINT �y�l�f���z�F
+			PRINT 【個人素質】：
 			L_CNT = 0
 		CASE 200
 			PRINTL
-			PRINT �y�ΐl�f���z�F
+			PRINT 【対人素質】：
 			L_CNT = 0
 		CASE 3000
 			PRINTL
-			PRINT �y�@���f���z�F
+			PRINT 【機密素質】：
 			L_CNT = 0
 	ENDSELECT
 
-	;- DB:TALENT����
+	;- DB:TALENT名称
 	L_STR = %DB_TALENT_NAME(ARG, TALENTNAME:L_I, ARG:1)%
 
-	;-����ϊ�
+	;-特殊変換
 	SELECTCASE TALENTNAME:L_I
-		CASE "�n�c"
-			IF CFLAG:(ARG):������n���q����
-				L_STR = �n�c:�n����{MIN(CFLAG:(ARG):������n���q����, 999), 3, RIGHT}
+		CASE "始祖"
+			IF CFLAG:(ARG):次世代創造子孫数
+				L_STR = 始祖:創造数{MIN(CFLAG:(ARG):次世代創造子孫数, 999), 3, RIGHT}
 			ELSE
 				L_STR = 
 			ENDIF
-		CASE "���F","���^","��","���F","�O","�̌^","����","�A��","�y�j�X�T�C�Y","��e"
+		CASE "髪色","髪型","目","瞳色","唇","体型","乳首","陰毛","ペニスサイズ","母親"
 		L_STR = 
 	ENDSELECT
 
 
-	;-����ϊ�
+	;-特殊変換
 	SELECTCASE TALENTNAME:L_I
-		CASE "�I�g�R"
+		CASE "オトコ"
 			IF VAR_SEX(ARG, ARG:1)
-				L_STR = �I���i
+				L_STR = オンナ
 			ELSE
-				L_STR = �I�g�R
+				L_STR = オトコ
 			ENDIF
 	ENDSELECT
 
@@ -756,52 +756,52 @@ FOR L_I,0,VARSIZE("TALENT")
 
 	IF L_CNT > 75
 		PRINTL
-		PRINT �@�@�@�@�@�@�@
+		PRINT 　　　　　　　
 		L_CNT = 0
 	ENDIF
 
 	L_CNT += STRLENS(L_STR)
 
-	;-���F
+	;-着色
 	SELECTCASE L_STR
-		CASE "����", "�j�̖�"
+		CASE "処女", "男の娘"
 			SETCOLOR 0xFF66CC
-		CASE "����"
-			SETCOLOR COLOR("�Q��")
-		CASE "��퓬��","��l�^","��R","����","�l�ԕs�M"
-			SETCOLOR COLOR("�Q��")
-		CASE "�r����", "�D�P", "��" ,"�S��" ,"���l" ,"��w" ,"������ۂ�" ,"����"
-			SETCOLOR COLOR("�s���N")
-		CASE "�m�s�q", "����", "����", "����", "���", "�m�s�k","�","��ς�"
-			SETCOLOR COLOR("��")
-		CASE "�񍇈�", "�Ƃ���","�s��","�L��������","���C�v��]"
+		CASE "童貞"
+			SETCOLOR COLOR("群青")
+		CASE "非戦闘員","非人型","抵抗","傷物","人間不信"
+			SETCOLOR COLOR("群青")
+		CASE "排卵薬", "妊娠", "受精" ,"心酔" ,"愛人" ,"情婦" ,"惚れっぽい" ,"即堕ち"
+			SETCOLOR COLOR("ピンク")
+		CASE "ＮＴＲ", "悪魔", "半魔", "造魔", "弱み", "ＮＴＬ","托卵","托卵済み"
+			SETCOLOR COLOR("紫")
+		CASE "非合意", "犯され","不在","記憶処理済","レイプ願望"
 			SETCOLOR 250,0,0
-		CASE "������"
+		CASE "青き血族"
 			SETCOLOR 50,50,250
-		CASE "����"
+		CASE "合意"
 			SETCOLOR 250,250,100
-		CASE "�����̎q�{", "�ɏ�̖�"
+		CASE "聖女の子宮", "極上の牝"
 			SETCOLOR 250,250,200
-		CASE "�w��", "��w��", "���Z��", "���w��", "���w��"
-			IF (TALENT:(ARG:0):�A�C�h�� || TALENT:(ARG:0):���w)
+		CASE "学生", "大学生", "高校生", "中学生", "小学生"
+			IF (TALENT:(ARG:0):アイドル || TALENT:(ARG:0):娼婦)
 				SETCOLOR 250,100,50
 			ELSE
 				SETCOLOR 50,250,50
 			ENDIF
-		CASE "�A�C�h��", "�Љ�l", "���w", "�����ێ��ǈ�", "���C�h", "���E��"
+		CASE "アイドル", "社会人", "娼婦", "治安維持局員", "メイド", "聖職者"
 			SETCOLOR 50,250,50
-		CASE "�@��Lv1��", "�@��Lv2��", "�@��Lv3��"
+		CASE "機密Lv1個体", "機密Lv2個体", "機密Lv3個体"
 			SETCOLOR 50,250,50
-		CASE "�@��Lv4��", "�@��Lv5��", "�@��Lv6��"
+		CASE "機密Lv4個体", "機密Lv5個体", "機密Lv6個体"
 			SETCOLOR 250,250,50
-		CASE "�@��Lv7��", "�@��Lv8��", "�@��Lv9��"
+		CASE "機密Lv7個体", "機密Lv8個体", "機密Lv9個体"
 			SETCOLOR 250,50,50
 	ENDSELECT
 
 	PRINTFORM [%L_STR%]
 	SETCOLOR L_COLOR
 
-	;- �O�g�������Z
+	;- 外枠分を加算
 	L_CNT += 2
 
 NEXT
@@ -813,11 +813,11 @@ SIF !LINEISEMPTY()
 ;=================================================
 ;   sub INFO_STATUS_ABL
 ;=================================================
-;   �\��:STATUS(�\��)
+;   表示:STATUS(能力)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
-;  ARG:1				��f�[�^���O
+;  ARG:0				対象キャラ
+;  ARG:1				空データ除外
 ;-------------------------------------------------
 @INFO_STATUS_ABL(ARG, ARG:1=0)
 #DIM L_CNT
@@ -837,8 +837,8 @@ FOR LOCAL,0,VARSIZE("ABL")
 	SIF ARG:1 && !LOCAL:1
 		CONTINUE
 
-	SIF LOCAL:1 <= 0 && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM %LOCALS , 10%
 	PRINTFORM :LV{LOCAL:1} 
 	BAR (LOCAL:1/3), 3, 3
@@ -858,11 +858,11 @@ SIF !LINEISEMPTY()
 ;=================================================
 ;   sub INFO_STATUS_EXP
 ;=================================================
-;   �\��:STATUS(�o��)
+;   表示:STATUS(経験)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
-;  ARG:1				��f�[�^���O
+;  ARG:0				対象キャラ
+;  ARG:1				空データ除外
 ;-------------------------------------------------
 @INFO_STATUS_EXP(ARG, ARG:1=0)
 #DIM L_CNT
@@ -874,20 +874,20 @@ VARSET LOCAL
 
 FOR LOCAL,0,VARSIZE("EXP")
 
-	;�w�b�_�[
+	;ヘッダー
 	SELECTCASE LOCAL
 		CASE 0
-			PRINTFORM %"��======= �ʏ�o�� =======��"% 
+			PRINTFORM %"■======= 通常経験 =======■"% 
 			L_CNT = 1
 		CASE 50
 			SIF !LINEISEMPTY()
 				PRINTL
-			PRINTFORM %"��=== �A�u�m�[�}���o�� ===��"% 
+			PRINTFORM %"■=== アブノーマル経験 ===■"% 
 			L_CNT = 1
 		CASE 80
 			SIF !LINEISEMPTY()
 				PRINTL
-			PRINTFORM %"��====== ���̑��o�� ======��"% 
+			PRINTFORM %"■====== その他経験 ======■"% 
 			L_CNT = 1
 	ENDSELECT
 
@@ -899,7 +899,7 @@ FOR LOCAL,0,VARSIZE("EXP")
 	SIF ARG:1 && !LOCAL:1
 		CONTINUE
 
-	;CHK:����(�K�{�\���̂ݑf�ʂ�)
+	;CHK:数量(必須表示のみ素通り)
 	SELECTCASE LOCAL
 		CASE 0,50,60
 		CASEELSE
@@ -907,11 +907,11 @@ FOR LOCAL,0,VARSIZE("EXP")
 ;				CONTINUE
 	ENDSELECT
 
-	SIF LOCAL:1 <= 0 && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM %LOCALS , 16%
 	PRINTFORM :LV{GETEXPLV(LOCAL:1,9)}
-	PRINTFORM (%TOSTR(LOCAL:1) , 4%��)
+	PRINTFORM (%TOSTR(LOCAL:1) , 4%回)
 	SETCOLOR L_COLOR
 	PRINT  
 
@@ -929,10 +929,10 @@ SIF !LINEISEMPTY()
 ;=================================================
 ;   sub INFO_STATUS_JUEL
 ;=================================================
-;   �\��:STATUS(��)
+;   表示:STATUS(珠)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_JUEL(ARG)
 #DIM L_HIT
@@ -949,9 +949,9 @@ FOR LOCAL,0,VARSIZE("ABL")
 		CONTINUE
 	LOCAL:1 = JUEL:ARG:LOCAL
 
-	SIF LOCAL:1 <= 0 && FLAG:STATUS�������[�h
-		SETCOLOR COLOR("����")
-	LOCALS += "�̎�"
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
+	LOCALS += "の珠"
 	PRINTFORM %LOCALS , 14%:
 	PRINTFORM %TOSTR(LOCAL:1) , 5%
 	PRINT  
@@ -972,10 +972,10 @@ SIF L_HIT
 ;=================================================
 ;   sub INFO_STATUS_GOTJUEL
 ;=================================================
-;   �\��:STATUS(�擾��)
+;   表示:STATUS(取得珠)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_GOTJUEL(ARG)
 #DIM L_HIT
@@ -995,7 +995,7 @@ FOR LOCAL,0,VARSIZE("ABL")
 
 	SIF LOCAL:1 <= 0
 		CONTINUE
-	LOCALS += "�̎�"
+	LOCALS += "の珠"
 	PRINTFORM %LOCALS , 10%:
 	PRINTFORM %TOSTR(LOCAL:2) , 5%(+%TOSTR(LOCAL:1) , 5%)
 	PRINT  
@@ -1016,11 +1016,11 @@ PRINTL
 ;=================================================
 ;   sub INFO_STATUS_INTRODUCTION
 ;=================================================
-;   �\��:STATUS(�Љ�)
+;   表示:STATUS(紹介)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
-;  ARG:1				CSV�D��
+;  ARG:0				対象キャラ
+;  ARG:1				CSV優先
 ;-------------------------------------------------
 @INFO_STATUS_INTRODUCTION(ARG, ARG:1=0)
 #DIM L_TMP
@@ -1032,16 +1032,16 @@ ELSE
 ENDIF
 
 REPEAT 4
-	PRINTSL CSVCSTR(L_TMP, GETNUM(CSTR, "�L�����Љ�" + TOSTR(COUNT)), 0)
+	PRINTSL CSVCSTR(L_TMP, GETNUM(CSTR, "キャラ紹介" + TOSTR(COUNT)), 0)
 REND
 
 ;=================================================
 ;   sub INFO_STATUS_OTHER
 ;=================================================
-;   �\��:STATUS(���̑�)
+;   表示:STATUS(その他)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_STATUS_OTHER(ARG)
 #DIM L_CNT
@@ -1051,9 +1051,9 @@ REND
 
 L_I = ARG
 
-;- ��l�̏ꍇ
+;- 主人の場合
 IF ARG == MASTER
-	PRINTFORML �ח��l��:{FLAG:�ח��l��}�l
+	PRINTFORML 陥落人数:{FLAG:陥落人数}人
 	PRINTFORML 
 	PRINTFORML 
 ELSE
@@ -1061,14 +1061,14 @@ ELSE
 	;- NTR
 	;-----------------------------
 	L_CNT=0
-	L_TMP=CFLAG:ARG:�m�s�q�Ċח���
+	L_TMP=CFLAG:ARG:ＮＴＲ再陥落回数
 	IF L_TMP
-		PRINTFORML �m�s�q�Ċח��񐔁F{L_TMP,2}��
+		PRINTFORML ＮＴＲ再陥落回数：{L_TMP,2}回
 		L_CNT ++
 	ENDIF
-	L_TMP=CFLAG:ARG:�m�s�q�D���x
+	L_TMP=CFLAG:ARG:ＮＴＲ好感度
 	IF L_TMP
-		PRINTFORML �m�s�q�D���x(%CSTR:ARG:�m�s�q�L������%)�F{L_TMP,3}/999
+		PRINTFORML ＮＴＲ好感度(%CSTR:ARG:ＮＴＲキャラ名%)：{L_TMP,3}/999
 		L_CNT ++
 	ENDIF
 	WHILE 1
@@ -1079,57 +1079,57 @@ ELSE
 	WEND
 
 ENDIF
-TRYCALL ���̌��L�^(ARG)
+TRYCALL 初体験記録(ARG)
 
 
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\%CALLNAME:L_I%�̓���f���\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+PRINTFORML ――――――――――――――――――――――――%CALLNAME:L_I%の特殊素質――――――――――――――――――――――――
 
 
-SIF TALENT:L_I:���Ҏ� == 1
-	PRINTFORML �@��Lv1:�y���Ҏҁz		�u�O�G�v�̋��ЂɎN����Ȃ���A�s�s�̊O�����琶���ċA���Ă����ҁB
-SIF TALENT:L_I:������ == 1
-	PRINTFORML �@��Lv2:�y�����́z		��������̎���������Ă����ҁA�v�ώ@�Ώۂł�����B
-SIF TALENT:L_I:������ == 1
-	PRINTFORML �@��Lv1:�y�������z		�̎�E�����Ȃǂ̌������������M�Ȑ��܂�A����ł͔��ɒ������B
-SIF TALENT:L_I:�}���r�g == 1
-	PRINTFORML �@��Lv1:�y�}���r�g�z		�����ł͂Ȃ������痈���ҁA�^���Ȃ��l�����B
-SIF TALENT:L_I:������l == 1
-	PRINTFORML �@��Lv2:�y������l�z		�u�O�G�v�ɖłڂ����O�ɐ����Ă����ҁA�������̎��ɂƂĂ������B
-SIF TALENT:L_I:�����z�� == 1
-	PRINTFORML �@��Lv1:�y�����z��z		�ȑO�͐��z�ꂾ�����ҁA���߂Ă�����ł͑厖�ɂ��悤�B
-SIF TALENT:L_I:�l������ == 1
-	PRINTFORML �@��Lv2:�y�l������z		�l�������������Ȃ��Ă���ҁA���Ȃ��̕ی삪�Ȃ���Ήƒ{�ȉ��̑ҋ��B
-SIF TALENT:L_I:�ˑR�ψ� == 1
-	PRINTFORML �@��Lv3:�y�ˑR�ψفz		�L�v�ȕψق𐋂����́A�ʂɐl�O�ɂȂ��Ă���킯�ł͂Ȃ��B
-SIF TALENT:L_I:��c�Ԃ� == 1
-	PRINTFORML �@��Lv3:�y��c�Ԃ�z		���Ă̐���̓��ِ��𔭌������ҁA�e�p����⎗�Ă���B
-SIF TALENT:L_I:�L�������� == 1
-	PRINTFORML �@��Lv2:�y�L�������ρz		�Ȃɂ������������Ȃ�
-SIF TALENT:L_I:���� == 1
-	PRINTFORML �@��Lv0:�y���Ɓz		������u�v���C���[�v�Ɏd���Ă���ꑰ�A�Z�l�B�̓���̑Ώۂł�����B
-SIF TALENT:L_I:�����̎q�{ == 1
-	PRINTFORML �@��Lv4:�y�����̎q�{�z		�ǂ̂悤�Ȑ��q���󂯓���A�D�G�Ȏq����Ă�q�{�����B
-SIF TALENT:L_I:�ɏ�̖� == 1
-	PRINTFORML �@��Lv1:�y�ɏ�̖āz		�j������͐��I�ɓ�������͎��i�̎����𗁂т�ɑ���e�p�����Ă���B
-SIF TALENT:L_I:�}�h���i == 1
-	PRINTFORML �@��Lv1:�y�}�h���i�z		�j�ɑz�����񂹂�ꂽ���Ɛ��m�ꂸ�A���̐g�ƐS��_���Ă���B
-SIF TALENT:L_I:���S���P == 1
-	PRINTFORML �@��Lv1:�y���S���P�z		���������������݁A�ِ��ɂ͖w�Ǌ֐S���Ȃ��B
-SIF TALENT:L_I:�u�V�X�^�[�v == 1
-	PRINTFORML �@��Lv5:�y�u�V�X�^�[�v�z		���Ȃ��̖��Ƃ����ݒ���������܂ꂽ�́B
-SIF TALENT:L_I:�u�C�F�[�K�[�v == 1
-	PRINTFORML �@��Lv5:�y�u�C�F�[�K�[�v�z		�������́u�O�G�v��ł����҂Ɂu�V�e�B�v���瑗����̍��B
-SIF TALENT:L_I:�u�}�U�[�v == 1
-	PRINTFORML �@��Lv5:�y�u�}�U�[�v�z		�����̎q���Y�ݓs�s�ɍv�������҂Ɂu�V�e�B�v���瑗����̍��B
-PRINTFORML �\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\�\
+SIF TALENT:L_I:生還者 == 1
+	PRINTFORML 機密Lv1:【生還者】		「外敵」の脅威に晒されながら、都市の外側から生きて帰ってきた者。
+SIF TALENT:L_I:実験体 == 1
+	PRINTFORML 機密Lv2:【実験体】		何かしらの実験をされていた者、要観察対象でもある。
+SIF TALENT:L_I:青き血族 == 1
+	PRINTFORML 機密Lv1:【青き血族】		領主・王族などの血を引いた高貴な生まれ、現代では非常に珍しい。
+SIF TALENT:L_I:マレビト == 1
+	PRINTFORML 機密Lv1:【マレビト】		ここではない所から来た者、運がない人たち。
+SIF TALENT:L_I:旧世代人 == 1
+	PRINTFORML 機密Lv2:【旧世代人】		「外敵」に滅ぼされる前に生きていた者、旧文明の事にとても博識。
+SIF TALENT:L_I:元性奴隷 == 1
+	PRINTFORML 機密Lv1:【元性奴隷】		以前は性奴隷だった者、せめてこちらでは大事にしよう。
+SIF TALENT:L_I:人権損壊 == 1
+	PRINTFORML 機密Lv2:【人権損壊】		人権が著しく損なわれている者、あなたの保護がなければ家畜以下の待遇。
+SIF TALENT:L_I:突然変異 == 1
+	PRINTFORML 機密Lv3:【突然変異】		有益な変異を遂げた個体、別に人外になっているわけではない。
+SIF TALENT:L_I:先祖返り == 1
+	PRINTFORML 機密Lv3:【先祖返り】		かつての世代の特異性を発現した者、容姿もやや似ている。
+SIF TALENT:L_I:記憶処理済 == 1
+	PRINTFORML 機密Lv2:【記憶処理済】		なにもおもいだせない
+SIF TALENT:L_I:名家 == 1
+	PRINTFORML 機密Lv0:【名家】		何代も「プレイヤー」に仕えている一族、住人達の憧れの対象でもある。
+SIF TALENT:L_I:聖女の子宮 == 1
+	PRINTFORML 機密Lv4:【聖女の子宮】		どのような精子も受け入れ、優秀な子を育てる子宮を持つ。
+SIF TALENT:L_I:極上の牝 == 1
+	PRINTFORML 機密Lv1:【極上の牝】		男性からは性的に同性からは嫉妬の視線を浴びるに足る容姿をしている。
+SIF TALENT:L_I:マドンナ == 1
+	PRINTFORML 機密Lv1:【マドンナ】		男に想いを寄せられたこと数知れず、その身と心を狙われている。
+SIF TALENT:L_I:白百合姫 == 1
+	PRINTFORML 機密Lv1:【白百合姫】		同性を愛し慈しみ、異性には殆ど関心がない。
+SIF TALENT:L_I:「シスター」 == 1
+	PRINTFORML 機密Lv5:【「シスター」】		あなたの妹という設定を書き込まれた個体。
+SIF TALENT:L_I:「イェーガー」 == 1
+	PRINTFORML 機密Lv5:【「イェーガー」】		数多くの「外敵」を滅した者に「シティ」から送られる称号。
+SIF TALENT:L_I:「マザー」 == 1
+	PRINTFORML 機密Lv5:【「マザー」】		多くの子を産み都市に貢献した者に「シティ」から送られる称号。
+PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 
 ;=================================================
 ;   sub INFO_INTRODUCTION
 ;=================================================
-;   �\��:STATUS���(�ڍ׏��)
+;   表示:STATUS画面(詳細情報)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_PERSONAL(ARG)
 #DIM L_I
@@ -1143,92 +1143,92 @@ L_I = ARG:0
 
 
 DRAWLINE
-PRINTFORML ��------------------------------------ �ڍ׏�� ------------------------------------��
+PRINTFORML ■------------------------------------ 詳細情報 ------------------------------------■
 
-PRINTFORML ��----------------�Z�l���----------------��
-PRINTFORM �y������:{CFLAG:L_I:�Z�l_������}�z�y����:{CFLAG:L_I:�Z�l_����}�z�y�o��:{CFLAG:L_I:�Z�l_�o��}�z
-SIF Talent:L_I:�A�C�h�� != 0
-	PRINTFORM �y�t�@����:{CFLAG:L_I:�t�@���̐�}�z
+PRINTFORML ◇----------------住人情報----------------◇
+PRINTFORM 【所持金:{CFLAG:L_I:住人_所持金}】【収入:{CFLAG:L_I:住人_収入}】【出費:{CFLAG:L_I:住人_出費}】
+SIF Talent:L_I:アイドル != 0
+	PRINTFORM 【ファン数:{CFLAG:L_I:ファンの数}】
 PRINTFORML 
-PRINTFORML �y�l�C:{CFLAG:L_I:�Z�l_�l�C}�z�y������:{CFLAG:L_I:�Z�l_������}�z�y�J���}:{CFLAG:L_I:�Z�l_�J���}}�z�y�i��:{CFLAG:L_I:�Z�l_�i��}�z
-PRINTFORML �y���̃_���[�W:{CFLAG:L_I:�Z�l_���̃_���[�W}�z�y���_�_���[�W:{CFLAG:L_I:�Z�l_���_�_���[�W}�z
+PRINTFORML 【人気:{CFLAG:L_I:住人_人気}】【モラル:{CFLAG:L_I:住人_モラル}】【カルマ:{CFLAG:L_I:住人_カルマ}】【品性:{CFLAG:L_I:住人_品性}】
+PRINTFORML 【肉体ダメージ:{CFLAG:L_I:住人_肉体ダメージ}】【精神ダメージ:{CFLAG:L_I:住人_精神ダメージ}】
 
 
-IF TALENT:L_I:�I�g�R == 1 || TALENT:L_I:�ӂ��Ȃ�
-PRINTFORM �y�y�j�X�T�C�Y:
-	IF CFLAG:L_I:�y�j�X�T�C�Y == 3
-			PRINTFORM ����
-	ELSEIF CFLAG:L_I:�y�j�X�T�C�Y == 2
-			PRINTFORM �Z����s
-	ELSEIF CFLAG:L_I:�y�j�X�T�C�Y == 1
-			PRINTFORM ��s
+IF TALENT:L_I:オトコ == 1 || TALENT:L_I:ふたなり
+PRINTFORM 【ペニスサイズ:
+	IF CFLAG:L_I:ペニスサイズ == 3
+			PRINTFORM 巨根
+	ELSEIF CFLAG:L_I:ペニスサイズ == 2
+			PRINTFORM 短小包茎
+	ELSEIF CFLAG:L_I:ペニスサイズ == 1
+			PRINTFORM 包茎
 	ELSE
-			PRINTFORM �W��
+			PRINTFORM 標準
 	ENDIF
-PRINTFORML �z
+PRINTFORML 】
 ENDIF
 
-PRINTFORML ��----------------���_���----------------��
-PRINTFORM �y�����l:{CFLAG:L_I:�����l}�z
-PRINTFORM �y����l:{CFLAG:L_I:����l}�z
-PRINTFORML �y�����l:{CFLAG:L_I:�����l}�z
+PRINTFORML ◇----------------精神情報----------------◇
+PRINTFORM 【忠誠値:{CFLAG:L_I:忠誠値}】
+PRINTFORM 【愛情値:{CFLAG:L_I:愛情値}】
+PRINTFORML 【淫乱値:{CFLAG:L_I:淫乱値}】
 PRINTFORM 
 
 
-PRINTFORML ��------------------------------------ �Y�݈ꗗ ------------------------------------��
-PRINTFORML ��----------------�傫�ȔY��----------------��
+PRINTFORML ■------------------------------------ 悩み一覧 ------------------------------------■
+PRINTFORML ◇----------------大きな悩み----------------◇
 REPEAT 5
 	IF CFlag:L_I:(4000+I_LOOP) != 0
 		IF CFlag:L_I:(4100+I_LOOP) >= 100
 				IF CFlag:L_I:(4000+I_LOOP) <= 199
-					PRINTFORM �y���K���z
+					PRINTFORM 【金銭問題】
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 299
-					PRINTFORM �y�������z
+					PRINTFORM 【恋愛問題】
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 399
-					PRINTFORM �y�ƒ���z
+					PRINTFORM 【家庭問題】
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 499
-					PRINTFORM �y�������z
+					PRINTFORM 【生活問題】
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 599
-					PRINTFORM �y�ƍߖ��z
+					PRINTFORM 【犯罪問題】
 				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 699
-					PRINTFORM �y���I���z
+					PRINTFORM 【性的問題】
 				ENDIF
 			ELSE
-			PRINTFORM �H�H�H(������)�y���:{CFlag:L_I:(4100+I_LOOP)}/100�z
+			PRINTFORM ？？？(未判明)【解析:{CFlag:L_I:(4100+I_LOOP)}/100】
 		ENDIF
-		PRINTFORM ��x:{CFlag:L_I:(4300+I_LOOP)}�@
-		PRINTFORML �B����:({CFlag:L_I:(4200+I_LOOP)}/100)
+		PRINTFORM 難度:{CFlag:L_I:(4300+I_LOOP)}　
+		PRINTFORML 達成率:({CFlag:L_I:(4200+I_LOOP)}/100)
 	ENDIF
 	I_LOOP += 1
 REND
-PRINTFORML ��----------------�����ȔY��----------------��
+PRINTFORML ◇----------------小さな悩み----------------◇
 I_LOOP = 1
 REPEAT 5
 	IF CFlag:L_I:(4010+I_LOOP) != 0
 		IF CFlag:L_I:(4110+I_LOOP) >= 100
 				IF CFlag:L_I:(4010+I_LOOP) <= 199
-					PRINTFORM �y���K���z
+					PRINTFORM 【金銭問題】
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 299
-					PRINTFORM �y�������z
+					PRINTFORM 【恋愛問題】
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 399
-					PRINTFORM �y�ƒ���z
+					PRINTFORM 【家庭問題】
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 499
-					PRINTFORM �y�������z
+					PRINTFORM 【生活問題】
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 599
-					PRINTFORM �y�ƍߖ��z
+					PRINTFORM 【犯罪問題】
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 699
-					PRINTFORM �y���I���z
+					PRINTFORM 【性的問題】
 				ENDIF
 			ELSE
-			PRINTFORM �H�H�H(������)�y���:{CFlag:L_I:(4110+I_LOOP)}/100�z
+			PRINTFORM ？？？(未判明)【解析:{CFlag:L_I:(4110+I_LOOP)}/100】
 		ENDIF
-		PRINTFORM ��x:{CFlag:L_I:(4310+I_LOOP)}�@
-		PRINTFORML �B����:({CFlag:L_I:(4210+I_LOOP)}/100)
+		PRINTFORM 難度:{CFlag:L_I:(4310+I_LOOP)}　
+		PRINTFORML 達成率:({CFlag:L_I:(4210+I_LOOP)}/100)
 	ENDIF
 	I_LOOP += 1
 REND
-PRINTFORML ��------------------------------------ �g�̏�� ------------------------------------��
-SIF TALENT:L_I:�I�g�R == 0 || MASTER != L_I
+PRINTFORML ■------------------------------------ 身体情報 ------------------------------------■
+SIF TALENT:L_I:オトコ == 0 || MASTER != L_I
 	CALL C_PICTURE_S(ARG:0)
 
 SIF !LINEISEMPTY()
@@ -1236,10 +1236,10 @@ SIF !LINEISEMPTY()
 
 
 ;=================================================
-;   �\��:STATUS���(�B�������)
+;   表示:STATUS画面(隠し性情報)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_SEX(ARG)
 #DIM L_I
@@ -1249,74 +1249,74 @@ L_I = ARG
 P_S = 0
 IF MASTER == L_I
 PRINTFORML 
-PRINTFORML �y�j�̃��x��:{CFlag:L_I:�j�̃��x��}�z({CFlag:L_I:�j�̌o���l}/{CFlag:L_I:�j�̃��x��*2})
-PRINTFORML �y���q���x��:{CFlag:L_I:���q���x��}�z({CFlag:L_I:���q�o���l}/{((CFlag:L_I:���q���x��)*5)+CFlag:L_I:���q���x��})
+PRINTFORML 【男体レベル:{CFlag:L_I:男体レベル}】({CFlag:L_I:男体経験値}/{CFlag:L_I:男体レベル*2})
+PRINTFORML 【精子レベル:{CFlag:L_I:精子レベル}】({CFlag:L_I:精子経験値}/{((CFlag:L_I:精子レベル)*5)+CFlag:L_I:精子レベル})
 PRINTFORML 
-ELSEIF TALENT:L_I:�I�g�R == 0 || MASTER != L_I
+ELSEIF TALENT:L_I:オトコ == 0 || MASTER != L_I
 	CALL C_PICTURE_S_S(ARG)
 
 
-	PRINTFORML ��----------------%CALLNAME:L_I%���������o�̑f��----------------��
-	IF TALENT:L_I:�I�g�R == 0
-		IF CFlag:L_I:�����o�Ȏ� >= 80
+	PRINTFORML ■----------------%CALLNAME:L_I%が持つ無自覚の素質----------------■
+	IF TALENT:L_I:オトコ == 0
+		IF CFlag:L_I:無自覚な雌 >= 80
 			IF !RAND:5
-				PRINTFORML �u�c�c%UNICODE(0x2661)%�v
+				PRINTFORML 「……%UNICODE(0x2661)%」
 			ELSEIF !RAND:4
-				PRINTFORML �u%CSTR:L_I:��l��%�̎q���́A�ƂĂ��D�G�Ȏq�ɂȂ肻��%CSTR:L_I:������Ӌ���%�v
+				PRINTFORML 「%CSTR:L_I:二人称%の子供は、とても優秀な子になりそう%CSTR:L_I:語尾同意求む%」
 			ELSEIF !RAND:3
-				PRINTFORML �u�q���Ƃ�������%CSTR:L_I:����Ή�%�A%CSTR:L_I:��l��%�́H�v
+				PRINTFORML 「子供とか興味あ%CSTR:L_I:語尾対応%、%CSTR:L_I:二人称%は？」
 			ELSEIF !RAND:2
-				PRINTFORML (%CSTR:L_I:��l��%�c���̊Ԃɂ��g�̐���񂹂āc�c)
+				PRINTFORML (%CSTR:L_I:一人称%…いつの間にか身体摺り寄せて……)
 			ELSE
-				PRINTFORML �u�ׂł����v%CSTR:L_I:����₤%�H�A���̕��������₷���Ă���%CSTR:L_I:����q��%%CSTR:L_I:����ł�%�v
+				PRINTFORML 「隣でも大丈夫%CSTR:L_I:語尾問う%？、この方が聞きやすくていい%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%」
 			ENDIF
-		ELSEIF CFlag:L_I:�����o�Ȏ� >= 60
+		ELSEIF CFlag:L_I:無自覚な雌 >= 60
 			IF !RAND:5
-				PRINTFORML �u�������b�������񕷂��Ă�����Ă���%CSTR:L_I:����₤%�H�v
+				PRINTFORML 「今日も話たくさん聞いてもらっていい%CSTR:L_I:語尾問う%？」
 			ELSEIF !RAND:4
-				PRINTFORML �u%CSTR:L_I:��l��%�͏����ɋ�����%CSTR:L_I:�������%�H�v
+				PRINTFORML 「%CSTR:L_I:二人称%は女性に興味あ%CSTR:L_I:語尾聞く%？」
 			ELSEIF !RAND:3
-				PRINTFORML �u�c�c��v
+				PRINTFORML 「……♪」
 			ELSEIF !RAND:2
-				PRINTFORML �u%CSTR:L_I:������H%%UNICODE(0x2661)%�v
+				PRINTFORML 「%CSTR:L_I:語尾何？%%UNICODE(0x2661)%」
 			ELSE
-				PRINTFORML �u�g�̔M���c%CSTR:L_I:����t��%�c�S�n����%CSTR:L_I:�������2%�c�v
+				PRINTFORML 「身体熱い…%CSTR:L_I:語尾逆説%…心地いい%CSTR:L_I:語尾応答2%…」
 			ENDIF
-		ELSEIF CFlag:L_I:�����o�Ȏ� >= 40
+		ELSEIF CFlag:L_I:無自覚な雌 >= 40
 			IF !RAND:5
-				PRINTFORML �u%CSTR:L_I:��l��%�̘b�͂����ʔ���%CSTR:L_I:�������2%�v
+				PRINTFORML 「%CSTR:L_I:二人称%の話はいつも面白い%CSTR:L_I:語尾応答2%」
 			ELSEIF !RAND:4
-				PRINTFORML �u�c����v
+				PRINTFORML 「…っん」
 			ELSEIF !RAND:3
-				PRINTFORML �u�c����%CSTR:L_I:�������%�v
+				PRINTFORML 「…いつも%CSTR:L_I:語尾感謝%」
 			ELSEIF !RAND:2
-				PRINTFORML �u�g�̂��ΏƂ��āc�v
+				PRINTFORML 「身体が火照って…」
 			ELSE
-				PRINTFORML �u%CSTR:L_I:��l��%�ɂȂ�G���Ă����C%CSTR:L_I:�������%�v
+				PRINTFORML 「%CSTR:L_I:二人称%になら触られても平気%CSTR:L_I:語尾許可%」
 			ENDIF
-		ELSEIF CFlag:L_I:�����o�Ȏ� >= 20
+		ELSEIF CFlag:L_I:無自覚な雌 >= 20
 			IF !RAND:5
-				PRINTFORML �u%CSTR:L_I:��l��%�ɘb�𕷂��Ă�����ď�������%CSTR:L_I:����܂�%�v
+				PRINTFORML 「%CSTR:L_I:二人称%に話を聞いてもらって助かって%CSTR:L_I:語尾ます%」
 			ELSEIF !RAND:4
-				PRINTFORML �u�����Ƙb�𕷂��Ă�����Ă���%CSTR:L_I:����₤%�H�v
+				PRINTFORML 「もっと話を聞いてもらっていい%CSTR:L_I:語尾問う%？」
 			ELSEIF !RAND:3
-				PRINTFORML �u%CSTR:L_I:��l��%���Ă悭����Ƃ����������Ǝv��%CSTR:L_I:����q��%%CSTR:L_I:����ł�%�v
+				PRINTFORML 「%CSTR:L_I:二人称%ってよく見るといい感じだと思う%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%」
 			ELSEIF !RAND:2
-				PRINTFORML �u�����߂Â��Ă���%CSTR:L_I:����₤%�H�v
+				PRINTFORML 「少し近づいていい%CSTR:L_I:語尾問う%？」
 			ELSE
-				PRINTFORML �u�����M��%CSTR:L_I:�������2%�A�Ȃ��%CSTR:L_I:����^��%�c�H�v
+				PRINTFORML 「少し熱い%CSTR:L_I:語尾応答2%、なんで%CSTR:L_I:語尾疑問%…？」
 			ENDIF
 		ELSE 
 			IF !RAND:5
-				PRINTFORML �u%CSTR:L_I:��l��%�̊�ɉ������Ă��%CSTR:L_I:����₤%�H�v
+				PRINTFORML 「%CSTR:L_I:一人称%の顔に何かついてるの%CSTR:L_I:語尾問う%？」
 			ELSEIF !RAND:4
-				PRINTFORML �u�c�c�H�v
+				PRINTFORML 「……？」
 			ELSEIF !RAND:3
-				PRINTFORML �u�c�c�c�ǂ���%CSTR:L_I:����₤4%�H�v
+				PRINTFORML 「………どうか%CSTR:L_I:語尾問う4%？」
 			ELSEIF !RAND:2
-				PRINTFORML �u���ɖ��͂Ȃ�%CSTR:L_I:�������%�v
+				PRINTFORML 「特に問題はない%CSTR:L_I:語尾許可%」
 			ELSE
-				PRINTFORML �u�c�H�A%CSTR:L_I:������H%�v
+				PRINTFORML 「…？、%CSTR:L_I:語尾何？%」
 			ENDIF
 		ENDIF
 
@@ -1326,144 +1326,144 @@ ELSEIF TALENT:L_I:�I�g�R == 0 || MASTER != L_I
 
 
 
-		IF CFlag:L_I:�t�F������ >= 1
-		PRINTFORM �E�y�t�F�������z�j��
-			IF CFlag:L_I:�t�F������ >= 90
-				PRINTFORML �ւ̉e���͂��r��ŁA���Ȃ��̕ی�Ȃ��ł͂܂Ƃ��ɐ����ł��Ȃ����̐��܂����t�F������������Ă��܂�%UNICODE(0x2661)%�~10
-			ELSEIF CFlag:L_I:�t�F������ >= 80
-				PRINTFORML �B�̗��������|���A�g�ݕ����ěs�܂��悤�Ƃ�������̃t�F������������Ă��܂�%UNICODE(0x2661)%�~9
-			ELSEIF CFlag:L_I:�t�F������ >= 70
-				PRINTFORML �B���ޏ��̐F���ɂ��u�N��}�����Ȃ��Ȃ���̃t�F������������Ă��܂�%UNICODE(0x2661)%�~8
-			ELSEIF CFlag:L_I:�t�F������ >= 60
-				PRINTFORML �B����ڌ��Ďq��s�܂������Ȃ���̃t�F������������Ă��܂�%UNICODE(0x2661)%�~7
-			ELSEIF CFlag:L_I:�t�F������ >= 50
-				PRINTFORML �B���ǂ��ɂ����Ċ֌W�����ׂȂ����Ɩ��������t�F������������Ă��܂�%UNICODE(0x2661)%�~6
-			ELSEIF CFlag:L_I:�t�F������ >= 40
-				PRINTFORML �B���琫�I�Ȏ�������������̂�������Ȃ����̃t�F������������Ă��܂��B%UNICODE(0x2661)%�~5
-			ELSEIF CFlag:L_I:�t�F������ >= 30
-				PRINTFORML ����ƂĂ��D�������x�̃t�F������������Ă��܂�%UNICODE(0x2661)%�~4
-			ELSEIF CFlag:L_I:�t�F������ >= 20
-				PRINTFORML �ɖ��͓I�ȏ������Ǝv����t�F������������Ă��܂�%UNICODE(0x2661)%�~3
-			ELSEIF CFlag:L_I:�t�F������ >= 10
-				PRINTFORML ���኱���I�����ɂ�����t�F������������Ă��܂�%UNICODE(0x2661)%�~2
+		IF CFlag:L_I:フェロモン >= 1
+		PRINTFORM ・【フェロモン】男性
+			IF CFlag:L_I:フェロモン >= 90
+				PRINTFORML への影響力が甚大で、あなたの保護なしではまともに生活できない程の凄まじいフェロモンを放っています%UNICODE(0x2661)%×10
+			ELSEIF CFlag:L_I:フェロモン >= 80
+				PRINTFORML 達の理性を圧倒し、組み伏せて孕ませようとさせる程のフェロモンを放っています%UNICODE(0x2661)%×9
+			ELSEIF CFlag:L_I:フェロモン >= 70
+				PRINTFORML 達が彼女の色香により勃起を抑えられなくなる程のフェロモンを放っています%UNICODE(0x2661)%×8
+			ELSEIF CFlag:L_I:フェロモン >= 60
+				PRINTFORML 達が一目見て子を孕ませたくなる程のフェロモンを放っています%UNICODE(0x2661)%×7
+			ELSEIF CFlag:L_I:フェロモン >= 50
+				PRINTFORML 達がどうにかして関係を結べないかと魅了されるフェロモンを放っています%UNICODE(0x2661)%×6
+			ELSEIF CFlag:L_I:フェロモン >= 40
+				PRINTFORML 達から性的な視線を向けられるのを避けられない程のフェロモンを放っています。%UNICODE(0x2661)%×5
+			ELSEIF CFlag:L_I:フェロモン >= 30
+				PRINTFORML からとても好かれる程度のフェロモンを放っています%UNICODE(0x2661)%×4
+			ELSEIF CFlag:L_I:フェロモン >= 20
+				PRINTFORML に魅力的な女性だと思われるフェロモンを放っています%UNICODE(0x2661)%×3
+			ELSEIF CFlag:L_I:フェロモン >= 10
+				PRINTFORML を若干性的興奮にさせるフェロモンを放っています%UNICODE(0x2661)%×2
 			ELSE
-				PRINTFORML ����֐S���񂹂�����x�̃t�F������������Ă��܂�%UNICODE(0x2661)%
+				PRINTFORML から関心を寄せられる程度のフェロモンを放っています%UNICODE(0x2661)%
 			ENDIF
 		ENDIF
 
-		PRINTFORM �E�y���̖{�\�@�z
-		IF CFlag:L_I:���̖{�\ >= 90
-			PRINTFORML ��ɔD�P���Ă��Ȃ��Ə�s����ɂȂ���ُ̈�Ȑ��B�{�\�ł�%UNICODE(0x2661)%�~10
-		ELSEIF CFlag:L_I:���̖{�\ >= 80
-			PRINTFORML �D�G�ȗY������Ɩ��ӎ��ɗU�f���Đ��B�s�ׂɎ��낤�Ƃ�����̐��B�{�\�������Ă��܂�%UNICODE(0x2661)%�~9
-		ELSEIF CFlag:L_I:���̖{�\ >= 70
-			PRINTFORML ��D����Ƌt�ɕs�@���ɂȂ���̐��B�{�\������܂�%UNICODE(0x2661)%�~8
-		ELSEIF CFlag:L_I:���̖{�\ >= 60
-			PRINTFORML �D�G�ȗY������Ǝq��s�݂����Ȃ���̐��B�{�\�������Ă��܂�%UNICODE(0x2661)%�~7
-		ELSEIF CFlag:L_I:���̖{�\ >= 50
-			PRINTFORML ���B�{�\�ƌĂԂɂ͂��ُ�ȗ~���x�ł�%UNICODE(0x2661)%�~6
-		ELSEIF CFlag:L_I:���̖{�\ >= 40
-			PRINTFORML �Y���߂��ɂ���Ǝq�{���u�����̐��B�{�\�������Ă��܂�%UNICODE(0x2661)%�~5
-		ELSEIF CFlag:L_I:���̖{�\ >= 30
-			PRINTFORML ���B�ɑ΂��Ă��Ȃ�O�����Ȉӎv������܂�%UNICODE(0x2661)%�~4
-		ELSEIF CFlag:L_I:���̖{�\ >= 20
-			PRINTFORML ���Ƃ��Ă͎኱�������B�{�\�������Ă��܂�%UNICODE(0x2661)%�~3
-		ELSEIF CFlag:L_I:���̖{�\ >= 10
-			PRINTFORML ���Ƃ��ėǍD�Ȑ��B�{�\�������Ă��܂�%UNICODE(0x2661)%�~2
+		PRINTFORM ・【雌の本能　】
+		IF CFlag:L_I:雌の本能 >= 90
+			PRINTFORML 常に妊娠していないと情緒不安定になる程の異常な生殖本能です%UNICODE(0x2661)%×10
+		ELSEIF CFlag:L_I:雌の本能 >= 80
+			PRINTFORML 優秀な雄がいると無意識に誘惑して生殖行為に至ろうとする程の生殖本能を持っています%UNICODE(0x2661)%×9
+		ELSEIF CFlag:L_I:雌の本能 >= 70
+			PRINTFORML 避妊すると逆に不機嫌になる程の生殖本能があります%UNICODE(0x2661)%×8
+		ELSEIF CFlag:L_I:雌の本能 >= 60
+			PRINTFORML 優秀な雄がいると子を孕みたくなる程の生殖本能を持っています%UNICODE(0x2661)%×7
+		ELSEIF CFlag:L_I:雌の本能 >= 50
+			PRINTFORML 生殖本能と呼ぶにはやや異常な欲求度です%UNICODE(0x2661)%×6
+		ELSEIF CFlag:L_I:雌の本能 >= 40
+			PRINTFORML 雄が近くにいると子宮が疼く程の生殖本能を持っています%UNICODE(0x2661)%×5
+		ELSEIF CFlag:L_I:雌の本能 >= 30
+			PRINTFORML 生殖に対してかなり前向きな意思があります%UNICODE(0x2661)%×4
+		ELSEIF CFlag:L_I:雌の本能 >= 20
+			PRINTFORML 雌としては若干強い生殖本能を持っています%UNICODE(0x2661)%×3
+		ELSEIF CFlag:L_I:雌の本能 >= 10
+			PRINTFORML 雌として良好な生殖本能を持っています%UNICODE(0x2661)%×2
 		ELSE
-			PRINTFORML ���Ƃ��Ĉ�ʓI�Ȑ��B�{�\�������Ă��܂�%UNICODE(0x2661)%
+			PRINTFORML 雌として一般的な生殖本能を持っています%UNICODE(0x2661)%
 		ENDIF
 
-		PRINTFORM �E�y���ւ̋����z
-		IF CFlag:L_I:���ւ̋��� >= 90
-			PRINTFORML ���̌���ǋ����邱�Ƃ͐l�Ƃ��ē�����O���Ǝ咣���Ă��܂�%UNICODE(0x2661)%�~10
-		ELSEIF CFlag:L_I:���ւ̋��� >= 80
-			PRINTFORML ���Ɋւ��Ă͒m��s�����Ă���A���̌���[�߂Ă��������Ǝv���قǂł�%UNICODE(0x2661)%�~9
-		ELSEIF CFlag:L_I:���ւ̋��� >= 70
-			PRINTFORML ���Ȃ萫�ւ̋���������A�������I�ϑz�����Ă���قǂł�%UNICODE(0x2661)%�~8
-		ELSEIF CFlag:L_I:���ւ̋��� >= 60
-			PRINTFORML �������ւ̋���������A��Ȗ�ȑz�����Ă͋������Ă��܂�%UNICODE(0x2661)%�~7
-		ELSEIF CFlag:L_I:���ւ̋��� >= 50
-			PRINTFORML �����ł����I�`�ʂ�����ƁA���g��ϑz���Ă��܂��܂�%UNICODE(0x2661)%�~6
-		ELSEIF CFlag:L_I:���ւ̋��� >= 40
-			PRINTFORML ���ւ̒T���̈�Ƃ��Ċ���̐��I��������L���Ă��܂�%UNICODE(0x2661)%�~5
-		ELSEIF CFlag:L_I:���ւ̋��� >= 30
-			PRINTFORML ���I�ȃW�������Ɉ�؂̒�R�������܂���%UNICODE(0x2661)%�~4
-		ELSEIF CFlag:L_I:���ւ̋��� >= 20
-			PRINTFORML �l�ڂ��Ȃ���ΐ��Ɋւ�������d����Ă��܂�%UNICODE(0x2661)%�~3
-		ELSEIF CFlag:L_I:���ւ̋��� >= 10
-			PRINTFORML ����Ȃ�ɐ��ւ̋���������A�֌W������̂𑽏����ׂĂ��܂�%UNICODE(0x2661)%�~2
+		PRINTFORM ・【性への興味】
+		IF CFlag:L_I:性への興味 >= 90
+			PRINTFORML 性体験を追求することは人として当たり前だと主張しています%UNICODE(0x2661)%×10
+		ELSEIF CFlag:L_I:性への興味 >= 80
+			PRINTFORML 性に関しては知り尽くしており、実体験を深めていきたいと思うほどです%UNICODE(0x2661)%×9
+		ELSEIF CFlag:L_I:性への興味 >= 70
+			PRINTFORML かなり性への興味があり、いつも性的妄想をしているほどです%UNICODE(0x2661)%×8
+		ELSEIF CFlag:L_I:性への興味 >= 60
+			PRINTFORML 強い性への興味があり、夜な夜な想像しては興奮しています%UNICODE(0x2661)%×7
+		ELSEIF CFlag:L_I:性への興味 >= 50
+			PRINTFORML 少しでも性的描写があると、つい拡大妄想してしまいます%UNICODE(0x2661)%×6
+		ELSEIF CFlag:L_I:性への興味 >= 40
+			PRINTFORML 性への探求の一環として幾つかの性的道具を所有しています%UNICODE(0x2661)%×5
+		ELSEIF CFlag:L_I:性への興味 >= 30
+			PRINTFORML 性的なジャンルに一切の抵抗を持ちません%UNICODE(0x2661)%×4
+		ELSEIF CFlag:L_I:性への興味 >= 20
+			PRINTFORML 人目がなければ性に関する情報も仕入れています%UNICODE(0x2661)%×3
+		ELSEIF CFlag:L_I:性への興味 >= 10
+			PRINTFORML それなりに性への興味があり、関係するものを多少調べています%UNICODE(0x2661)%×2
 		ELSE
-			PRINTFORML ���ւ̊֐S�͈�ʓI�ł�%UNICODE(0x2661)%
+			PRINTFORML 性への関心は一般的です%UNICODE(0x2661)%
 		ENDIF
 
-		PRINTFORM �E�y�Y�ւ̊֐S�z
-		IF CFlag:L_I:�Y�ւ̊֐S >= 90
-			PRINTFORML �Ӓ��̑���Ɏ���A�������悤�ɛZ�𔄂鎓�̒��̎��ł�%UNICODE(0x2661)%�~10
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 80
-			PRINTFORML �^�C�v�̒j���ɂ͂������Ď��A�s�[��������ɗY�ւ̊֐S������܂�%UNICODE(0x2661)%�~9
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 70
-			PRINTFORML �ِ��ɊÂ��A�����ɂ͌������ԓx�������̗Y�ւ̊֐S������܂�%UNICODE(0x2661)%�~8
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 60
-			PRINTFORML ���B�������Ɛ��I����������ɗY�ւ̊֐S������܂�%UNICODE(0x2661)%�~7
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 50
-			PRINTFORML �j���̗������Ă݂����Ǝv�����ɗY�ւ̊֐S������܂�%UNICODE(0x2661)%�~6
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 40
-			PRINTFORML �^�C�v�̒j���̐��B��͂ǂ̂悤�Ȃ̂��m�肽���Ȃ�قǂɗY�ւ̊֐S������܂�%UNICODE(0x2661)%�~5
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 30
-			PRINTFORML �ِ��ւ̕Ό����܂����������Ă��܂���%UNICODE(0x2661)%�~4
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 20
-			PRINTFORML ���R�ƃ^�C�v�̒j����T�����x�ɂ͗Y�ւ̊֐S������܂�%UNICODE(0x2661)%�~3
-		ELSEIF CFlag:L_I:�Y�ւ̊֐S >= 10
-			PRINTFORML ��R���Ȃ��j���ƑΘb�ł�����x�̗Y�ւ̊֐S������܂�%UNICODE(0x2661)%�~2
+		PRINTFORM ・【雄への関心】
+		IF CFlag:L_I:雄への関心 >= 90
+			PRINTFORML 意中の相手に侍り、蕩けたように媚を売る雌の中の雌です%UNICODE(0x2661)%×10
+		ELSEIF CFlag:L_I:雄への関心 >= 80
+			PRINTFORML タイプの男性にはすり寄って雌アピールする程に雄への関心があります%UNICODE(0x2661)%×9
+		ELSEIF CFlag:L_I:雄への関心 >= 70
+			PRINTFORML 異性に甘く、同性には厳しい態度を取る程の雄への関心があります%UNICODE(0x2661)%×8
+		ELSEIF CFlag:L_I:雄への関心 >= 60
+			PRINTFORML 生殖器を見ると性的興奮する程に雄への関心があります%UNICODE(0x2661)%×7
+		ELSEIF CFlag:L_I:雄への関心 >= 50
+			PRINTFORML 男性の裸を見てみたいと思う程に雄への関心があります%UNICODE(0x2661)%×6
+		ELSEIF CFlag:L_I:雄への関心 >= 40
+			PRINTFORML タイプの男性の生殖器はどのようなのか知りたくなるほどに雄への関心があります%UNICODE(0x2661)%×5
+		ELSEIF CFlag:L_I:雄への関心 >= 30
+			PRINTFORML 異性への偏見をまったく持っていません%UNICODE(0x2661)%×4
+		ELSEIF CFlag:L_I:雄への関心 >= 20
+			PRINTFORML 自然とタイプの男性を探す程度には雄への関心があります%UNICODE(0x2661)%×3
+		ELSEIF CFlag:L_I:雄への関心 >= 10
+			PRINTFORML 抵抗もなく男性と対話できる程度の雄への関心があります%UNICODE(0x2661)%×2
 		ELSE
-			PRINTFORML �j���ւ̊֐S�͂���قǋ�������܂���%UNICODE(0x2661)%
+			PRINTFORML 男性への関心はそれほど強くありません%UNICODE(0x2661)%
 		ENDIF
 
-		PRINTFORM �E�y������]�@�z
-		IF CFlag:L_I:������] >= 90
-			PRINTFORML �T�L���o�X�ƌ��������̐��s�ׂւ̗~���������Ă��܂�%UNICODE(0x2661)%�~10
-		ELSEIF CFlag:L_I:������] >= 80
-			PRINTFORML �o����Ȃ炸���ƌ���������قǂɐ��s�ׂ�]��ł���悤�ł�%UNICODE(0x2661)%�~9
-		ELSEIF CFlag:L_I:������] >= 70
-			PRINTFORML ���x�Ⓒ���Ă��s���Ȃ����s�ׂւ̗~��������܂�%UNICODE(0x2661)%�~8
-		ELSEIF CFlag:L_I:������] >= 60
-			PRINTFORML �b�̂悤�Ȑ��s�ׂ�]��ł���悤�ł�%UNICODE(0x2661)%�~7
-		ELSEIF CFlag:L_I:������] >= 50
-			PRINTFORML �S���������񂷂悤�Ȑ��s�ׂ�]��ł���悤�ł�%UNICODE(0x2661)%�~6
-		ELSEIF CFlag:L_I:������] >= 40
-			PRINTFORML ���������s�ׂ����������ɐ��s�ׂ�]��ł���悤�ł�%UNICODE(0x2661)%�~5
-		ELSEIF CFlag:L_I:������] >= 30
-			PRINTFORML ���������ɂ͋���������]�������Ă���悤�ł�%UNICODE(0x2661)%�~4
-		ELSEIF CFlag:L_I:������] >= 20
-			PRINTFORML �݂��ɖ����ł��鐫�s�ׂ��������悤�ł�%UNICODE(0x2661)%�~3
-		ELSEIF CFlag:L_I:������] >= 10
-			PRINTFORML �C�����悭�Ȃ��Ȃ牞������x�̐�����]������܂�%UNICODE(0x2661)%�~2
+		PRINTFORM ・【性交願望　】
+		IF CFlag:L_I:性交願望 >= 90
+			PRINTFORML サキュバスと見紛う程の性行為への欲求を持っています%UNICODE(0x2661)%×10
+		ELSEIF CFlag:L_I:性交願望 >= 80
+			PRINTFORML 出来るならずっと交尾したいほどに性行為を望んでいるようです%UNICODE(0x2661)%×9
+		ELSEIF CFlag:L_I:性交願望 >= 70
+			PRINTFORML 何度絶頂しても尽きない性行為への欲求があります%UNICODE(0x2661)%×8
+		ELSEIF CFlag:L_I:性交願望 >= 60
+			PRINTFORML 獣のような性行為を望んでいるようです%UNICODE(0x2661)%×7
+		ELSEIF CFlag:L_I:性交願望 >= 50
+			PRINTFORML 膣内をかき回すような性行為を望んでいるようです%UNICODE(0x2661)%×6
+		ELSEIF CFlag:L_I:性交願望 >= 40
+			PRINTFORML 激しい性行為がしたい程に性行為を望んでいるようです%UNICODE(0x2661)%×5
+		ELSEIF CFlag:L_I:性交願望 >= 30
+			PRINTFORML 女性が持つには強い性交願望を持っているようです%UNICODE(0x2661)%×4
+		ELSEIF CFlag:L_I:性交願望 >= 20
+			PRINTFORML 互いに満足できる性行為をしたいようです%UNICODE(0x2661)%×3
+		ELSEIF CFlag:L_I:性交願望 >= 10
+			PRINTFORML 気持ちよくなれるなら応じる程度の性交願望があります%UNICODE(0x2661)%×2
 		ELSE
-			PRINTFORML ���s�ׂɂ��Ă͍D���ł��Ȃ��悤�ł�%UNICODE(0x2661)%
+			PRINTFORML 性行為については好きでもないようです%UNICODE(0x2661)%
 		ENDIF
 
-		PRINTFORM �E�y�D�P��]�@�z
-		IF CFlag:L_I:�D�P��] >= 90
-			PRINTFORML �q�{�Ɣ]���������Ă���̂��Ǝv���قǂ̔D�P��]������܂�%UNICODE(0x2661)%�~10
-		ELSEIF CFlag:L_I:�D�P��] >= 80
-			PRINTFORML �D���Ȑl�Ƃ̌���Ȃ炷�����ܔr�����n�߂���ɔD�P�������悤�ł�%UNICODE(0x2661)%�~9
-		ELSEIF CFlag:L_I:�D�P��] >= 70
-			PRINTFORML �D���Ȑl�Ƃ̎q�Ȃ牽�l�ł��Y�݂����Ǝv���Ă���悤�ł�%UNICODE(0x2661)%�~8
-		ELSEIF CFlag:L_I:�D�P��] >= 60
-			PRINTFORML �q�{���s�݂������u����������ɔD�P�������悤�ł�%UNICODE(0x2661)%�~7
-		ELSEIF CFlag:L_I:�D�P��] >= 50
-			PRINTFORML �q��ɂ͌b�܂ꂽ���ƔD�P�ɂ͑O�����Ȏp���ł�%UNICODE(0x2661)%�~6
-		ELSEIF CFlag:L_I:�D�P��] >= 40
-			PRINTFORML ���s�ׂ�������ɂ͛s�݂����Ǝv���قǔD�P�������悤�ł�%UNICODE(0x2661)%�~5
-		ELSEIF CFlag:L_I:�D�P��] >= 30
-			PRINTFORML ���o���ɂ��D�P�ւ̕s���͂Ȃ��悤�ł�%UNICODE(0x2661)%�~4
-		ELSEIF CFlag:L_I:�D�P��] >= 20
-			PRINTFORML �D���Ȑl�̎q�͎Y�݂����Ǝv���Ă���悤�ł�%UNICODE(0x2661)%�~3
-		ELSEIF CFlag:L_I:�D�P��] >= 10
-			PRINTFORML �i�K�𓥂�ł���̂Ȃ�D�P��e�F����悤�ł�%UNICODE(0x2661)%�~2
+		PRINTFORM ・【妊娠願望　】
+		IF CFlag:L_I:妊娠願望 >= 90
+			PRINTFORML 子宮と脳が直結しているのかと思うほどの妊娠願望があります%UNICODE(0x2661)%×10
+		ELSEIF CFlag:L_I:妊娠願望 >= 80
+			PRINTFORML 好きな人との交尾ならすぐさま排卵が始める程に妊娠したいようです%UNICODE(0x2661)%×9
+		ELSEIF CFlag:L_I:妊娠願望 >= 70
+			PRINTFORML 好きな人との子なら何人でも産みたいと思っているようです%UNICODE(0x2661)%×8
+		ELSEIF CFlag:L_I:妊娠願望 >= 60
+			PRINTFORML 子宮が孕みたいと疼き続ける程に妊娠したいようです%UNICODE(0x2661)%×7
+		ELSEIF CFlag:L_I:妊娠願望 >= 50
+			PRINTFORML 子宝には恵まれたいと妊娠には前向きな姿勢です%UNICODE(0x2661)%×6
+		ELSEIF CFlag:L_I:妊娠願望 >= 40
+			PRINTFORML 性行為したからには孕みたいと思うほど妊娠したいようです%UNICODE(0x2661)%×5
+		ELSEIF CFlag:L_I:妊娠願望 >= 30
+			PRINTFORML 中出しによる妊娠への不安はないようです%UNICODE(0x2661)%×4
+		ELSEIF CFlag:L_I:妊娠願望 >= 20
+			PRINTFORML 好きな人の子は産みたいと思っているようです%UNICODE(0x2661)%×3
+		ELSEIF CFlag:L_I:妊娠願望 >= 10
+			PRINTFORML 段階を踏んでいるのなら妊娠を容認するようです%UNICODE(0x2661)%×2
 		ELSE
-			PRINTFORML ���܂�D�P�͂������Ȃ��Ǝv���Ă���悤�ł�%UNICODE(0x2661)%
+			PRINTFORML あまり妊娠はしたくないと思っているようです%UNICODE(0x2661)%
 		ENDIF
 	ENDIF
 ENDIF
@@ -1475,21 +1475,21 @@ PRINTFORML
 PRINTFORML
 
 ;=================================================
-;   �\��:STATUS���(RPG���)
+;   表示:STATUS画面(RPG情報)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_RPG(L_I)
 #DIM L_I
-PRINTFORML ��------------------------------------ �퓬�ڍ� ------------------------------------��
-PRINTFORML ��----------------�g�̏��----------------��
-PRINTFORML �yHP:{CFlag:L_I:�Z�l_���ݑ̗�, 3 ,RIGHT}/{CFlag:L_I:�Z�l_�ő�̗�, 3 ,RIGHT}�z�ySP:{CFlag:L_I:�Z�l_���݋C��, 3 ,RIGHT}/{CFlag:L_I:�Z�l_�ő�C��, 3 ,RIGHT}�z
-PRINTFORML �yGUTS:{CFlag:L_I:�Z�l_GUTS, 3 ,LEFT}�z�yBRAVE:{CFlag:L_I:�Z�l_BRAVE, 3 ,LEFT}�z�ySAN:{CFlag:L_I:�Z�l_SAN, 3 ,LEFT}�z
-PRINTFORML �y�o���l:{CFlag:L_I:�Z�l_�o���l}�z
-PRINTFORML �yATK:{CFlag:L_I:�Z�l_ATK, 3 ,LEFT}�z�yDEF:{CFlag:L_I:�Z�l_DEF, 3 ,LEFT}�z
-PRINTFORML �yHIT:{CFlag:L_I:�Z�l_HIT, 3 ,LEFT}�z�ySPD:{CFlag:L_I:�Z�l_SPD, 3 ,LEFT}�z�yLUK:{CFlag:L_I:�Z�l_LUK, 3 ,LEFT}�z
-PRINTFORML �yBRE:{CFlag:L_I:�Z�l_����BRE}/{CFlag:L_I:�Z�l_�ő�BRE}�z
+PRINTFORML ■------------------------------------ 戦闘詳細 ------------------------------------■
+PRINTFORML ◇----------------身体情報----------------◇
+PRINTFORML 【HP:{CFlag:L_I:住人_現在体力, 3 ,RIGHT}/{CFlag:L_I:住人_最大体力, 3 ,RIGHT}】【SP:{CFlag:L_I:住人_現在気力, 3 ,RIGHT}/{CFlag:L_I:住人_最大気力, 3 ,RIGHT}】
+PRINTFORML 【GUTS:{CFlag:L_I:住人_GUTS, 3 ,LEFT}】【BRAVE:{CFlag:L_I:住人_BRAVE, 3 ,LEFT}】【SAN:{CFlag:L_I:住人_SAN, 3 ,LEFT}】
+PRINTFORML 【経験値:{CFlag:L_I:住人_経験値}】
+PRINTFORML 【ATK:{CFlag:L_I:住人_ATK, 3 ,LEFT}】【DEF:{CFlag:L_I:住人_DEF, 3 ,LEFT}】
+PRINTFORML 【HIT:{CFlag:L_I:住人_HIT, 3 ,LEFT}】【SPD:{CFlag:L_I:住人_SPD, 3 ,LEFT}】【LUK:{CFlag:L_I:住人_LUK, 3 ,LEFT}】
+PRINTFORML 【BRE:{CFlag:L_I:住人_現在BRE}/{CFlag:L_I:住人_最大BRE}】
 CALL INFO_RPG_SKILL(L_I)
 CALL INFO_RPG_WEAPON(L_I)
 PRINTFORML 
@@ -1497,19 +1497,19 @@ PRINTFORML
 
 @INFO_RPG_SKILL(L_I)
 #DIM L_I
-PRINTFORML ��----------------�Z�\���----------------��
-PRINTFORML �y�ڐ��@�@:{CFLAG:L_I:�Z�l_�Z�\_�ڐ�, 3 ,LEFT}�z�y���ޱ�@ :{CFLAG:L_I:�Z�l_�Z�\_�A�C�f�A, 3 ,LEFT}�z�y�������@:{CFLAG:L_I:�Z�l_�Z�\_������, 3 ,LEFT}�z�y��Á@�@:{CFLAG:L_I:�Z�l_�Z�\_���, 3 ,LEFT}�z
-PRINTFORML �y�@�B�C��:{CFLAG:L_I:�Z�l_�Z�\_�@�B�C��, 3 ,LEFT}�z�y���߭�� :{CFLAG:L_I:�Z�l_�Z�\_�R���s���[�^, 3 ,LEFT}�z�y���J���@:{CFLAG:L_I:�Z�l_�Z�\_���J��, 3 ,LEFT}�z�y�B���@:{CFLAG:L_I:�Z�l_�Z�\_�B���, 3 ,LEFT}�z
-PRINTFORML �y��́@�@:{CFLAG:L_I:�Z�l_�Z�\_���, 3 ,LEFT}�z�y��ǁ@�@:{CFLAG:L_I:�Z�l_�Z�\_���, 3 ,LEFT}�z
+PRINTFORML ◇----------------技能情報----------------◇
+PRINTFORML 【目星　　:{CFLAG:L_I:住人_技能_目星, 3 ,LEFT}】【ｱｲﾃﾞｱ　 :{CFLAG:L_I:住人_技能_アイデア, 3 ,LEFT}】【聞き耳　:{CFLAG:L_I:住人_技能_聞き耳, 3 ,LEFT}】【医療　　:{CFLAG:L_I:住人_技能_医療, 3 ,LEFT}】
+PRINTFORML 【機械修理:{CFLAG:L_I:住人_技能_機械修理, 3 ,LEFT}】【ｺﾝﾋﾟｭｰﾀ :{CFLAG:L_I:住人_技能_コンピュータ, 3 ,LEFT}】【鍵開け　:{CFLAG:L_I:住人_技能_鍵開け, 3 ,LEFT}】【隠れる　:{CFLAG:L_I:住人_技能_隠れる, 3 ,LEFT}】
+PRINTFORML 【解体　　:{CFLAG:L_I:住人_技能_解体, 3 ,LEFT}】【解読　　:{CFLAG:L_I:住人_技能_解読, 3 ,LEFT}】
 
 @INFO_RPG_WEAPON(L_I)
 #DIM L_I
-PRINTFORML ��----------------�������----------------��
-PRINTFORML ��-----���C������-----����----- �T�u���� -----��
-PRINTFORML �y%CSTR:L_I:4000, 19 ,LEFT%�z�y%CSTR:L_I:4010, 19 ,LEFT%�z
-PRINTFORML �y�^�C�v:%INFO_STR_HEISOU(CFlag:L_I:�Z�l_M����)%�z�@�@�@�@�y�^�C�v:%INFO_STR_HEISOU(CFlag:L_I:�Z�l_S����)%�z
-PRINTFORML �y���x:{CFlag:L_I:�Z�l_M�������x, 3 ,LEFT}�z�@�@�@�@�@ �y���x:{CFlag:L_I:�Z�l_S�������x, 3 ,LEFT}�z
-PRINTFORML �y�_���[�W:%INFO_STR_MAIN_WEAPON_DAMAGE(L_I)%�z�@�y�_���[�W:%INFO_STR_SUB_WEAPON_DAMAGE(L_I)%�z
+PRINTFORML ◇----------------武装情報----------------◇
+PRINTFORML □-----メイン兵装-----□□----- サブ兵装 -----□
+PRINTFORML 【%CSTR:L_I:4000, 19 ,LEFT%】【%CSTR:L_I:4010, 19 ,LEFT%】
+PRINTFORML 【タイプ:%INFO_STR_HEISOU(CFlag:L_I:住人_M兵装)%】　　　　【タイプ:%INFO_STR_HEISOU(CFlag:L_I:住人_S兵装)%】
+PRINTFORML 【練度:{CFlag:L_I:住人_M兵装練度, 3 ,LEFT}】　　　　　 【練度:{CFlag:L_I:住人_S兵装練度, 3 ,LEFT}】
+PRINTFORML 【ダメージ:%INFO_STR_MAIN_WEAPON_DAMAGE(L_I)%】　【ダメージ:%INFO_STR_SUB_WEAPON_DAMAGE(L_I)%】
 
 
 
@@ -1517,10 +1517,10 @@ PRINTFORML �y�_���[�W:%INFO_STR_MAIN_WEAPON_DAMAGE(L_I)%�z�@�y�_���[�W:%INFO_STR
 ;=================================================
 ;   sub INFO_INTRODUCTION
 ;=================================================
-;   �\��:STATUS���(�Љ�)
+;   表示:STATUS画面(紹介)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_INTRODUCTION(ARG)
 #DIM L_I
@@ -1529,7 +1529,7 @@ PRINTFORML �y�_���[�W:%INFO_STR_MAIN_WEAPON_DAMAGE(L_I)%�z�@�y�_���[�W:%INFO_STR
 L_I = ARG
 L_LOOP = 0
 DRAWLINE
-PRINTFORML ��------------------------------------�����v���t�B�[�� ------------------------------------��
+PRINTFORML ■------------------------------------初期プロフィール ------------------------------------■
 DRAWLINE
 REPEAT 20
 	SIF L_LOOP >= 2
@@ -1546,18 +1546,18 @@ REPEAT 20
 REND
 IF L_I == MASTER
 	SETCOLOR 250,50,50
-	PRINTFORML �y�@��Lv8:�����z���Ȃ��͓s�s�𔭓W�E�ɉh������u�v���C���[�v�̈�l�ł��B
-	PRINTFORML �y�@��Lv9:�^�c�z��L�̔C�ɂ��Ă���ԁA�s�s�̏Z�l���������������藘�p�ł��܂��B
+	PRINTFORML 【機密Lv8:所属】あなたは都市を発展・繁栄させる「プレイヤー」の一人です。
+	PRINTFORML 【機密Lv9:運営】上記の任についている間、都市の住人を権限が許す限り利用できます。
 	SETCOLOR 250,0,0
-	PRINTFORML �y�d�v�@��:�����z���Ȃ��ɋ�����Ă��錠���́\�\�\�\�\�\�\�\�\�\�|�|�|�|������ł��B
-	PRINTFORML �y�d�v�@��:�ꑰ�z�S�O�S�@�d��������
-	PRINTFORML �y�d�v�@��:�@�@�z�S�O�R�@�d��������
-	PRINTFORML �y�d�v�@��:�@�@�z�S�O�R�@�d��������
-	PRINTFORML �y�d�v�@��:�@�@�z�S�O�R�@�d��������
-	PRINTFORML �y�d�v�@��:�l���z���Ȃ��ɂ͑�ꋉ�l�����t�^����Ă��܂��A�@�@�@�@�@�@�@�@�@�@�l���Ɏ���Ă��܂��B
-	PRINTFORML �y�d�v�@��:�@�@�z�S�O�R�@�d��������
-	PRINTFORML �y�@�@�@��:�@�@�z���Ȃ��ɂ͈�؂̋�������Ă��܂���B
-	PRINTFORML �y�@�@�@��:�@�@�z���Ȃ��́@�@�@�@�@�ւ́@�@�ɕK���@�@�Ȃ���΂Ȃ�܂���B
+	PRINTFORML 【重要機密:権限】あなたに許可されている権限は――――――――――－－－－□○種です。
+	PRINTFORML 【重要機密:一族】４０４　Ｅｒｒｏｒ
+	PRINTFORML 【重要機密:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【重要機密:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【重要機密:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【重要機密:人権】あなたには第一級人権が付与されています、　　　　　　　　　　人権に守られています。
+	PRINTFORML 【重要機密:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【　　機密:　　】あなたには一切の許可がされていません。
+	PRINTFORML 【　　機密:　　】あなたは　　　　　への　　に必ず　　なければなりません。
 ENDIF
 RESETCOLOR
 DRAWLINE
@@ -1569,10 +1569,10 @@ DRAWLINE
 ;=================================================
 ;   sub INFO_SIMPLE_STATUS_EXP
 ;=================================================
-;   �ȈՕ\��:STATUS(�o��)
+;   簡易表示:STATUS(経験)
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
+;  ARG:0				対象キャラ
 ;-------------------------------------------------
 @INFO_SIMPLE_STATUS_EXP(ARG)
 #DIM L_HIT
@@ -1593,7 +1593,7 @@ FOR LOCAL,0,VARSIZE("EXP")
 
 	PRINTFORM %LOCALS , 16%
 	PRINTFORM :LV{GETEXPLV(LOCAL:1,9)}
-	PRINTFORM (%TOSTR(LOCAL:1) , 4%��)
+	PRINTFORM (%TOSTR(LOCAL:1) , 4%回)
 	PRINT  
 	L_HIT = 1
 
@@ -1612,10 +1612,10 @@ SIF L_HIT
 
 
 ;-------------------------------------------------
-;���x���g�p�L�����X�e�[�^�X�Q�Ɗ֐�
+;ラベル使用キャラステータス参照関数
 ;-------------------------------------------------
-;���x��������w��L�����̃X�e�[�^�X�l���Q�Ƃ���
-;���x�������s���ȏꍇ��0
+;ラベル名から指定キャラのステータス値を参照する
+;ラベル名が不正な場合は0
 @INFO_STATUS_GET_BY_LABEL(C_ID, LABEL_NAME)
 #FUNCTION
 #LOCALSIZE 1
@@ -1627,28 +1627,28 @@ SIF L_HIT
 IF CHARA_SORT_FIND_LABEL(LABEL_NAME, LABEL_VAR_NAME, LABEL_VAR_ID)
 	RETURNF C_GET_CVAR_VALUE(C_ID, LABEL_VAR_NAME, LABEL_VAR_ID)
 ELSE
-	DEBUGPRINTFORML INFO_STATUS_GET_BY_LABEL, �s����LABEL_NAME %LABEL_NAME%
+	DEBUGPRINTFORML INFO_STATUS_GET_BY_LABEL, 不正なLABEL_NAME %LABEL_NAME%
 	RETURNF 0
 ENDIF
 
 
 ;-------------------------------------------------
-;�l�̔Y�݈ꗗ�֐�
+;個人の悩み一覧関数
 ;-------------------------------------------------
-;�d�l�����ĂȂ�����悭�킩��ˁ[����
-;�Ƃ肠�����召�e1�`9�܂ł��Y�݃X���b�g�Ɖ��߂�����H
+;仕様書いてないからよくわかんねーけど
+;とりあえず大小各1～9までが悩みスロットと解釈したよ？
 @INFO_STATUS_NAYAMI_LIST(C_ID, OP)
-#DIM  C_ID   ;�o�^�ԍ�
-#DIMS OP     ;���s�I�v�V����
-#DIM  I_LOOP ;���[�v�p
+#DIM  C_ID   ;登録番号
+#DIMS OP     ;実行オプション
+#DIM  I_LOOP ;ループ用
 DRAWLINE
-PRINTFORML ��----------------�傫�ȔY��----------------��
-IF STRCOUNT(OP, "�u�{�^���v")
+PRINTFORML ◇----------------大きな悩み----------------◇
+IF STRCOUNT(OP, "「ボタン」")
 	FOR I_LOOP, 1, 9
 		SIF CFLAG:C_ID:(4000 + I_LOOP) <= 0
 			CONTINUE
 		IF CFLAG:C_ID:(4200 + I_LOOP) >= 100
-			PRINTFORM �����@
+			PRINTFORM 解決　
 		ELSE
 			PRINTFORM [{I_LOOP, 2}]
 		ENDIF
@@ -1661,13 +1661,13 @@ ELSE
 		CALL INFO_STATUS_NAYAMI(C_ID, I_LOOP)
 	NEXT
 ENDIF
-PRINTFORML ��----------------�����ȔY��----------------��
-IF STRCOUNT(OP, "�u�{�^���v")
+PRINTFORML ◇----------------小さな悩み----------------◇
+IF STRCOUNT(OP, "「ボタン」")
 	FOR I_LOOP, 11, 19
 		SIF CFLAG:C_ID:(4000 + I_LOOP) <= 0
 			CONTINUE
 		IF CFLAG:C_ID:(4200 + I_LOOP) >= 100
-			PRINTFORM �����@
+			PRINTFORM 解決　
 		ELSE
 			PRINTFORM [{I_LOOP, 2}]
 		ENDIF
@@ -1682,7 +1682,7 @@ ELSE
 ENDIF
 
 ;-------------------------------------------------
-;�Y�ݏ��\���֐�
+;悩み情報表示関数
 ;-------------------------------------------------
 @INFO_STATUS_NAYAMI(C_ID, NAYAMI_ID)
 #DIM C_ID
@@ -1690,23 +1690,23 @@ ENDIF
 IF CFLAG:C_ID:(4100 + NAYAMI_ID) >= 100
 	SELECTCASE CFLAG:C_ID:(4000 + NAYAMI_ID)
 	CASE IS <= 199
-		PRINTFORM �y���K���z
+		PRINTFORM 【金銭問題】
 	CASE IS <= 299
-		PRINTFORM �y�������z
+		PRINTFORM 【恋愛問題】
 	CASE IS <= 399
-		PRINTFORM �y�ƒ���z
+		PRINTFORM 【家庭問題】
 	CASE IS <= 499
-		PRINTFORM �y�������z
+		PRINTFORM 【生活問題】
 	CASE IS <= 599
-		PRINTFORM �y�ƍߖ��z
+		PRINTFORM 【犯罪問題】
 	CASE IS <= 699
-		PRINTFORM �y���I���z
+		PRINTFORM 【性的問題】
 	ENDSELECT
 ELSE
-	PRINTFORM �H�H�H(������)�y���:{CFLAG:C_ID:(4100 + NAYAMI_ID)}/100�z
+	PRINTFORM ？？？(未判明)【解析:{CFLAG:C_ID:(4100 + NAYAMI_ID)}/100】
 ENDIF
-PRINTFORM �@��x�F{CFLAG:C_ID:(4300 + NAYAMI_ID)}�@
-PRINTFORM �B�����F({CFLAG:C_ID:(4200 + NAYAMI_ID)}/100)
-SIF NAYAMI_ID == CFLAG:C_ID:�Z�l_�Y�݉����I��
-	PRINTFORM �@���݉�����
+PRINTFORM 　難度：{CFLAG:C_ID:(4300 + NAYAMI_ID)}　
+PRINTFORM 達成率：({CFLAG:C_ID:(4200 + NAYAMI_ID)}/100)
+SIF NAYAMI_ID == CFLAG:C_ID:住人_悩み解決選択
+	PRINTFORM 　現在解決中
 PRINTFORML 

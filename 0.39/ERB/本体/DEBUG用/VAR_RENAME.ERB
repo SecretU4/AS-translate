@@ -1,27 +1,27 @@
-;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:VAR_RENAME.ERB
-;	Facility	:VAR:���l�[��CSV�쐬�����B
+;	Facility	:VAR:リネームCSV作成処理。
 ;
-;	Licence		:���C�Z���X�t���[�B
+;	Licence		:ライセンスフリー。
 ;
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
-;	001		20XX/XX/XX		----					�V�K�쐬
+;	001		20XX/XX/XX		----					新規作成
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
-;  ���L�ڊ֐��ꗗ(�L�ڏ�)
+;  ◇記載関数一覧(記載順)
 ;
 ;		Module Name						Explanation
 ;
 ; *- XXX
 ;
-;	�E VAR_MAKE_RENAME_MAIN				VAR:���l�[��CSV�쐬
-;	�E VAR_MAKE_RENAME_PRINT			VAR:���l�[��CSV�o��
-;	�E VAR_MAKE_RENAME_UNIQUE_KEY		VAR:���l�[���p���j�[�N�L�[�擾
+;	・ VAR_MAKE_RENAME_MAIN				VAR:リネームCSV作成
+;	・ VAR_MAKE_RENAME_PRINT			VAR:リネームCSV出力
+;	・ VAR_MAKE_RENAME_UNIQUE_KEY		VAR:リネーム用ユニークキー取得
 ;
 ;===============================================================================
 
@@ -32,19 +32,19 @@
 ;=================================================
 ;   sub VAR_MAKE_RENAME_MAIN
 ;=================================================
-;   VAR:���l�[��CSV�쐬
+;   VAR:リネームCSV作成
 ;-------------------------------------------------
 @VAR_MAKE_RENAME_MAIN
 
 CUSTOMDRAWLINE =
-PRINTL "RENAME.CSV"�p�̃f�[�^���쐬���܂��B
-PRINTL ���L�̒�����ǂ̃f�[�^���o�͂��邩��I��ŉ������B
-PRINTL �\�����ꂽ��R�s�[���x�[�X�g�œ\��t���Ă��������B
-PRINTL �i"RENAME.CSV"�ɂ͍Ō���ɓ\��t���Ă����ƁA�X�V���ɍăR�s�y���s���Ղ��Ȃ�܂��j
+PRINTL "RENAME.CSV"用のデータを作成します。
+PRINTL 下記の中からどのデータを出力するかを選んで下さい。
+PRINTL 表示されたらコピー＆ベーストで貼り付けてください。
+PRINTL （"RENAME.CSV"には最後尾に貼り付けておくと、更新時に再コピペが行い易くなります）
 PRINTL
-PRINTL [0] �o��
+PRINTL [0] 出力
 PRINTL
-PRINTL [9] �߂�
+PRINTL [9] 戻る
 CALL INPUT_INT(0,9)
 SELECTCASE RESULT
 	CASE 0
@@ -61,7 +61,7 @@ RESTART
 ;=================================================
 ;   sub VAR_MAKE_RENAME_PRINT
 ;=================================================
-;   VAR:���l�[��CSV�o��
+;   VAR:リネームCSV出力
 ;-------------------------------------------------
 @VAR_MAKE_RENAME_PRINT
 #DIM L_I
@@ -73,12 +73,12 @@ L_CHARA=1
 
 CLEARLINE LINECOUNT
 PRINTL ;*******************************************************************************
-PRINTL ;��Rename�f�[�^
+PRINTL ;◆Renameデータ
 PRINTL ;*******************************************************************************
 PRINTL ;
-PRINTL ;���̃f�[�^�́uDEBUG�p�v�t�H���_����"VAR_RENAME.ERB"�ɂ���č쐬����Ă��܂��B
-PRINTL ;������ǉ�����ۂ̓R�s�y����̂ł͂Ȃ��A��ERB���N�����ďo�͂��Ă��������B
-PRINTL ;�V����������ǉ��������ꍇ�́A��ERB�̋L�q��ύX���Ă��������B
+PRINTL ;このデータは「DEBUG用」フォルダ内の"VAR_RENAME.ERB"によって作成されています。
+PRINTL ;何かを追加する際はコピペするのではなく、同ERBを起動して出力してください。
+PRINTL ;新しく何かを追加したい場合は、同ERBの記述を変更してください。
 PRINTL ;
 PRINTL ;-------------------------------------------------------------------------------
 L_STR = {GAMEBASE_VERSION/1000,1}.{GAMEBASE_VERSION % 1000, 3}
@@ -90,23 +90,23 @@ PRINTL ;------------------------------------------------------------------------
 PRINTL
 IF L_CHARA
 	PRINTL ;-----------------------------
-	PRINTL ;�L�����N�^�[�ԍ�
+	PRINTL ;キャラクター番号
 	PRINTL ;-----------------------------
 
 	L_TMP = GETNUM(CSTR,"CHARA_RENAME")
 	IF L_TMP == -1
-		PRINTL ��
-		PRINTL "CHARA_RENAME"�����݂��܂���
-		PRINTL RENAME�p�̕�������w�肵�Ă�������
+		PRINTL ※
+		PRINTL "CHARA_RENAME"が存在しません
+		PRINTL RENAME用の文字列を指定してください
 	ELSE
 
-		PRINTFORML -999 , �L����:�c�t�l�l�x
+		PRINTFORML -999 , キャラ:ＤＵＭＭＹ
 
-		FOR L_I, 0, FLAG:�ő吔_�L����
+		FOR L_I, 0, FLAG:最大数_キャラ
 			L_STR = %VAR_MAKE_RENAME_UNIQUE_KEY(L_I)%
 			SIF L_STR == ""
 				CONTINUE
-			PRINTFORML {L_I} , �L����:%L_STR%
+			PRINTFORML {L_I} , キャラ:%L_STR%
 		NEXT
 	ENDIF
 
@@ -114,7 +114,7 @@ IF L_CHARA
 ENDIF
 
 ;-----------------------------
-;- ����
+;- 完了
 ;-----------------------------
 WAIT
 
@@ -122,13 +122,13 @@ WAIT
 ;=================================================
 ;   sub VAR_MAKE_RENAME_UNIQUE_KEY
 ;=================================================
-;   VAR:���l�[���p���j�[�N�L�[�擾
+;   VAR:リネーム用ユニークキー取得
 ;-------------------------------------------------
 ; Input:
-;  ARG:0				�ΏۃL����
-;  ARG:1				CSV�D��t���O(0:CSV 1:�o�^�f�[�^)
+;  ARG:0				対象キャラ
+;  ARG:1				CSV優先フラグ(0:CSV 1:登録データ)
 ; Output:
-;  RETURNF				���j�[�N�L�[
+;  RETURNF				ユニークキー
 ;-------------------------------------------------
 @VAR_MAKE_RENAME_UNIQUE_KEY(ARG, ARG:1=0)
 #FUNCTIONS
