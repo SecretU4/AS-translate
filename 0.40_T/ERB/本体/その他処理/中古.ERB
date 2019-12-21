@@ -1,0 +1,169 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:中古.ERB
+;	Facility	:失踪追加処理
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;	002		2013/08/03		ネトリス				失踪したキャラを中古キャラとして再販する処理
+;	003		2013/08/03		----					取り込み調整
+;	004		2013/12/25		ネトリス				中古での妊娠判定追加
+;	005		2013/XX/XX		----					調整
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;==========================================================
+;@中古失踪処理
+; 失踪したキャラのABL、EXP、TALENTを保存する
+;
+;<引数>
+;
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@中古失踪処理
+
+SIF 中古処理データ限界チェック(NO:TARGET)
+	RETURN
+
+;-----------------------------
+;- 失踪処理
+;-----------------------------
+中古キャラBASE:(NO:TARGET):0 = MAXBASE:TARGET:0
+REPEAT VARSIZE("中古キャラABL", 1)
+	中古キャラABL:(NO:TARGET):COUNT = ABL:TARGET:COUNT
+REND
+REPEAT VARSIZE("中古キャラEXP", 1)
+	中古キャラEXP:(NO:TARGET):COUNT = EXP:TARGET:COUNT
+REND
+REPEAT VARSIZE("中古キャラTALENT", 1)
+	中古キャラTALENT:(NO:TARGET):COUNT = TALENT:TARGET:COUNT
+REND
+REPEAT VARSIZE("中古キャラ初体験", 1)
+	中古キャラ初体験:(NO:TARGET):COUNT = 初体験記録_SAVESTR確認(CSTR:TARGET:(COUNT+60))
+REND
+中古キャラ妊娠相手:(NO:TARGET):0 = 初体験記録_SAVESTR確認(CSTR:TARGET:妊娠相手名)
+;失踪当日のDAY+5を入れる
+GSMN_STOCK:(NO:TARGET) = DAY + 5
+
+
+
+
+;==========================================================
+;@中古購入処理
+; 失踪時に保存したデータに入れ替える
+;<引数>
+;	ARG = 購入した中古キャラ
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@中古購入処理, ARG
+#LOCALSSIZE 20
+
+SIF 中古処理データ限界チェック(NO:ARG)
+	RETURN
+
+MAXBASE:ARG:0 = 中古キャラBASE:(NO:ARG):0
+REPEAT VARSIZE("中古キャラABL", 1)
+	ABL:ARG:COUNT = 中古キャラABL:(NO:ARG):COUNT
+REND
+REPEAT VARSIZE("中古キャラEXP", 1)
+	EXP:ARG:COUNT = 中古キャラEXP:(NO:ARG):COUNT
+REND
+REPEAT VARSIZE("中古キャラTALENT", 1)
+	;陥落系は外しておく（すぐに再取得できるので意味ないかも）
+	SIF INRANGE(COUNT, 200, 209)
+		CONTINUE
+	TALENT:ARG:COUNT = 中古キャラTALENT:(NO:ARG):COUNT
+REND
+REPEAT VARSIZE("中古キャラ初体験", 1)
+	CSTR:ARG:(COUNT+60) = %SAVESTR:(中古キャラ初体験:(NO:ARG):COUNT)%
+REND
+CSTR:ARG:妊娠相手名 = %SAVESTR:(中古キャラ妊娠相手:(NO:ARG):0)%
+
+;-----------------------------
+;- 基本調整
+;-----------------------------
+
+;친밀等は下げておく
+SIF ABL:ARG:친밀 > 2
+	ABL:ARG:친밀 = 2
+SIF ABL:ARG:농락 > 2
+	ABL:ARG:농락 = 2
+
+;面識有りで設定
+TALENT:ARG:중고품 = 1
+
+;-----------------------------
+;- 日数依存
+;-----------------------------
+LOCAL = 3 + (ABL:ARG:성노예 / 2)
+LOCAL:1 = (DAY-(GSMN_STOCK:(NO:ARG)-5))
+;日数経過分の経験を足す
+EXP:ARG:키스경험 += (1+LOCAL)*LOCAL:1
+EXP:ARG:펠라경험 += (2+LOCAL/2)*LOCAL:1
+EXP:ARG:Ｖ경험 += (2+LOCAL)*LOCAL:1
+EXP:ARG:성교경험 += (2+LOCAL)*LOCAL:1
+EXP:ARG:절정경험 += (2+LOCAL)*LOCAL:1
+EXP:ARG:정음경험 += (2+LOCAL/2)*LOCAL:1
+EXP:ARG:정액경험 += (2+LOCAL)*LOCAL:1
+EXP:ARG:질싸경험 += (2+LOCAL)*LOCAL:1
+EXP:ARG:봉사쾌락경험 += (2+LOCAL)*LOCAL:1
+EXP:ARG:ＮＴＲ조교경험 += (2+LOCAL)*LOCAL:1
+
+;Edit004:中古での妊娠判定追加パッチ
+;妊娠
+IF FLAG:妊娠機能
+	;- 妊娠:チェック(陥落最大値と同じ確立にする)
+	CALL NINSIN_CHK(ARG, -1, 6, "名も知らぬ男")
+	IF CFLAG:ARG:妊娠フラグ
+		TALENT:ARG:妊娠 = 1
+	ENDIF
+ENDIF
+;Edit004:中古での妊娠判定追加パッチ
+
+GSMN_STOCK:(NO:ARG) = 1
+
+
+
+;=================================================
+;   sub 中古処理データ限界チェック
+;=================================================
+;   配列の最大数チェック
+;-------------------------------------------------
+; Input:
+;  ARG					キャラNo
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@中古処理データ限界チェック(ARG)
+#FUNCTION
+
+;データ数を越えるとアウト
+SIF ARG >= 中古キャラデータ数
+	RETURNF 1
+
+RETURNF 0
+
+;=================================================
+;   sub 中古処理初期化
+;=================================================
+;   ２週目処理用の初期化処理
+;-------------------------------------------------
+@中古処理初期化
+
+;失踪キャラのデータ消去
+VARSET 中古キャラABL:0:0
+VARSET 中古キャラEXP:0:0
+VARSET 中古キャラTALENT:0:0
+
+
+

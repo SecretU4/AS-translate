@@ -1,0 +1,930 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:INFO.ERB
+;	Facility	:情報表示。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	005		2019/04/14		M						表示系改善 ＆ リファクタリング：
+;														関連して危険日と悩み有無の順序入れ替え
+;														値 0 の物は伏字モード連動
+;														定型ラベル型ステータス表示はPRINT_STATUS.ERBに集約
+;														表示項目桁の指示明確化
+;														交流情報が正常に表示に反映されていなかったのを修正
+;	004		2018/11/14		morph					共通処理を関数化して別の箇所でも使えるように
+;														INFO_TARGET_MARK
+;														INFO_TARGET_RELATION
+;														INFO_TARGET_GENDER
+;														INFO_TARGET_FALLEN
+;														INFO_TARGET_PREGNANCY
+;														INFO_TARGET_NAYAMI
+;	003		2017/03/02		morph					ソート機能追加用に関数追加（INFO_LABEL_LIST/INFO_SORT_BUTTON/INFO_CHARA_DETAIL_LABEL/INFO_LABEL_ARRAY）
+;	002		2017/02/16		「」					AS用に表示改変
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ INFO_DATE						情報:日付
+;	・ INFO_TIME						情報:時間帯
+;	・ INFO_TARGET_MAIN					情報:ターゲット(主処理)
+;	・ INFO_TARGET_DETAIL				情報:ターゲット(詳細)
+;	・ INFO_WORK_NAME					情報:労役役職名
+;	・ INFO_危険日						情報:危険日
+;	・ INFO_LABEL_LIST					情報:ラベル一覧を使用したソート用ボタン作成関数
+;	・ INFO_SORT_BUTTON					情報:ソート用ボタン作成関数
+;	・ INFO_CHARA_DETAIL_LABEL			情報:ラベル使用一行情報表示関数
+;	・ INFO_LABEL_ARRAY					情報:ラベル一覧を使用したキャラステータス簡易表示関数
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub INFO_DATE
+;=================================================
+;   情報:日付
+;-------------------------------------------------
+@INFO_DATE
+
+PRINTFORM {DAY}日目 
+PRINTFORM (%GET_DAY(DAY)%) - 
+
+;- 情報:時間帯
+PRINTFORM %INFO_TIME(), 6, LEFT%
+PRINT  
+
+
+;=================================================
+;   sub INFO_TIME
+;=================================================
+;   情報:時間帯
+;-------------------------------------------------
+@INFO_TIME
+#FUNCTIONS
+
+SELECTCASE FLAG:時間帯
+	CASE [[時間帯:夜]]
+		RETURNF "夜"
+	;- 0:昼
+	CASEELSE
+		RETURNF "昼"
+ENDSELECT
+
+
+;=================================================
+;   sub INFO_TARGET_MAIN
+;=================================================
+;   表示:ターゲット(主処理)
+;-------------------------------------------------
+@INFO_TARGET_MAIN
+#DIM L_I
+#DIM L_T
+
+FOR L_I, 0, DEFTR_PL_NUM
+
+	L_T = GTR_PL:L_I
+
+	;CHK:END
+	SIF L_T < 0
+		BREAK
+
+	IF L_T == MASTER
+		CALL PRINT_LABEL("主人")
+	ELSE
+		PRINT 　　　　
+	ENDIF
+
+	;- 表示:ターゲット(詳細)
+	CALL INFO_TARGET_DETAIL(L_T)
+	PRINTL
+NEXT
+;PRINTL 
+
+
+;=================================================
+;   sub INFO_TARGET_DETAIL
+;=================================================
+;   表示:ターゲット(詳細)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				短縮フラグ(0:オフ 1:オン)
+;-------------------------------------------------
+@INFO_TARGET_DETAIL(ARG:0, ARG:1=0, ARG:2 = 0)
+#DIM L_I
+#DIM L_TMP
+#DIM L_SEX
+#DIM L_COLOR
+#DIMS L_STR
+
+L_I=ARG
+L_COLOR = ARG:1
+SETCOLOR 0xc1c1c1
+RESETCOLOR
+;PRINTFORM \[No.%TOSTR(NO:L_I),3%\] 
+IF ARG:2 > 0
+	PRINTFORM %CSTR:L_I:(ARG:2)%
+ENDIF
+CALL VAR_PRINT_LIST_NAME(L_I)
+
+;VAR:バー出力(基礎)
+;行内で最初にカラー変更が起きると半角スペースが入る仕様？で後ろがズレないためのSETCOLOR
+SETCOLOR 0xc1c1c1
+CALL VAR_BAR_BASE(L_I, 0, 2)
+RESETCOLOR
+CALL INFO_TARGET_MARK(L_I)
+;-----------------------------
+;-- 労役情報
+;-----------------------------
+;未実装みたいなので一時的にコメントアウト
+;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
+CALL INFO_TARGET_RELATION(L_I)
+CALL INFO_TARGET_GENDER(L_I)
+CALL INFO_TARGET_FALLEN(L_I)
+CALL INFO_TARGET_NAYAMI(L_I)
+CALL INFO_TARGET_PREGNANCY(L_I, ARG:1)
+
+
+
+;-----------------------------
+;-- 刻印情報
+;-----------------------------
+@INFO_TARGET_MARK(L_I)
+#DIM L_I
+#DIM L_TMP
+PRINTFORM [
+;- 刻印:隷属
+L_TMP = MARK:L_I:隷属刻印
+SIF !L_TMP
+	SETCOLOR COLOR("伏字")
+PRINTFORM 隷LV{L_TMP} 
+RESETCOLOR
+;- 刻印:陥落
+L_TMP = MARK:L_I:陥落刻印
+SIF !L_TMP
+	SETCOLOR COLOR("伏字")
+PRINTFORM 陥LV{L_TMP} 
+RESETCOLOR
+;- 刻印:淫乱
+L_TMP = MARK:L_I:淫乱刻印
+SIF !L_TMP
+	SETCOLOR COLOR("伏字")
+PRINTFORM 淫LV{L_TMP} 
+RESETCOLOR
+;- 刻印:反発
+L_TMP = MARK:L_I:反発刻印
+SIF !L_TMP
+	SETCOLOR COLOR("伏字")
+PRINTFORM 反LV{L_TMP}
+RESETCOLOR
+PRINTFORM ] 
+
+
+
+;-----------------------------
+;-- 合意と陥落
+;-----------------------------
+@INFO_TARGET_RELATION(L_I)
+#DIM L_I
+IF L_I == MASTER
+	PRINTFORM ─ 
+ELSEIF TALENT:L_I:合意
+;	SETCOLOR COLOR("ピンク")
+	SETCOLOR 250,250,100
+	PRINTFORM 合 
+	RESETCOLOR
+ELSEIF TALENT:L_I:調教済み
+;	SETCOLOR COLOR("ピンク")
+	SETCOLOR 250,0,0
+	PRINTFORM 済 
+	RESETCOLOR
+ELSEIF TALENT:L_I:犯され
+	SETCOLOR COLOR("紫")
+	PRINTFORM 犯 
+	RESETCOLOR
+ELSEIF TALENT:L_I:弱み
+	SETCOLOR COLOR("紫")
+	PRINTFORM 弱 
+	RESETCOLOR
+ELSEIF CFLAG:L_I:関係段階 == 2
+	PRINTFORM 親 
+ELSEIF CFLAG:L_I:関係段階 == 1
+	SETCOLOR 0x999999
+	PRINTFORM 友 
+	RESETCOLOR
+ELSE
+	SETCOLOR 0x444444
+	PRINTFORM 知 
+	RESETCOLOR
+ENDIF
+;各種陥落
+IF TALENT:L_I:心酔
+	SETCOLOR COLOR("紫")
+	PRINTFORM 酔 
+	RESETCOLOR
+ELSEIF TALENT:L_I:愛人
+	SETCOLOR COLOR("紫")
+	PRINTFORM 愛 
+	RESETCOLOR
+ELSEIF TALENT:L_I:情婦
+	SETCOLOR COLOR("紫")
+	PRINTFORM 情 
+	RESETCOLOR
+ELSE
+	PRINTFORM ─ 
+ENDIF
+
+
+
+;-----------------------------
+;-- 性差系の素質表示
+;-----------------------------
+@INFO_TARGET_GENDER(L_I)
+#DIM  L_I
+#DIMS L_STR
+;ふたなり
+IF TALENT:L_I:ふたなり
+	PRINT 双
+ELSE
+	PRINTFORM %DB_TALENT_NAME(L_I, "オトコ")%
+ENDIF
+;女の場合
+IF VAR_SEX(L_I)
+	IF !TALENT:L_I:非処女
+		PRINT ,
+		SETCOLOR 0xFF66CC
+		PRINT 処
+		RESETCOLOR
+	ELSE
+		PRINTFORM ,─
+	ENDIF
+	;ふたなりで童貞の場合
+	IF !TALENT:L_I:非童貞 && TALENT:L_I:ふたなり
+		PRINT ,
+		SETCOLOR 0xFF66CC
+		PRINT 童
+		RESETCOLOR
+	ELSE
+		PRINTFORM ,─
+	ENDIF
+;男の場合
+ELSE
+	PRINTFORM ,─
+	IF !TALENT:L_I:非童貞
+		PRINT ,
+		SETCOLOR COLOR("群青")
+		PRINT 童
+		RESETCOLOR
+	ELSE
+		PRINTFORM ,─
+	ENDIF
+ENDIF
+
+;女の場合
+IF VAR_SEX(L_I)
+	PRINT ,
+	L_STR = %DB_TALENT_NAME(L_I, "バストサイズ")%
+	PRINTFORM %SUBSTRING(L_STR, 0,2), 2%
+ELSE
+	PRINTFORM ,─
+ENDIF
+
+
+;-----------------------------
+;-- 陥落進行度
+;-----------------------------
+@INFO_TARGET_FALLEN(L_I)
+#DIM  L_I
+#DIMS L_STR
+;隷属度
+IF TALENT:L_I:隷属度
+	PRINT ,
+	L_STR = %DB_TALENT_NAME(L_I, "隷属度")%
+;	SETCOLOR COLOR("ピンク")
+	PRINTFORM %SUBSTRING(L_STR, 0,2), 2%
+	RESETCOLOR
+;陥落度
+ELSEIF TALENT:L_I:陥落度
+	PRINT ,
+	L_STR = %DB_TALENT_NAME(L_I, "陥落度")%
+;	SETCOLOR COLOR("ピンク")
+	PRINTFORM %SUBSTRING(L_STR, 0,2), 2%
+	RESETCOLOR
+ELSE
+	PRINTFORM ,　
+ENDIF
+;ＮＴＲ度
+IF TALENT:L_I:ＮＴＲ度
+	PRINT ,
+	L_STR = %DB_TALENT_NAME(L_I, "ＮＴＲ度")%
+	SETCOLOR COLOR("紫")
+	PRINTFORM %SUBSTRING(L_STR, 0,2), 2%
+	RESETCOLOR
+ELSE
+	PRINTFORM ,　
+ENDIF
+
+
+
+;-----------------------------
+;-- 妊娠情報
+;-----------------------------
+@INFO_TARGET_PREGNANCY(L_I, SHORT)
+#DIM L_I
+#DIM SHORT
+;短縮表示
+IF SHORT
+	;妊娠
+	IF TALENT:L_I:妊娠
+		PRINT ,
+		SETCOLOR COLOR("黄色")
+		PRINTFORM 妊
+		RESETCOLOR
+	ELSEIF TALENT:L_I:受精
+		PRINT ,
+		SETCOLOR COLOR("黄色")
+		PRINTFORM 受
+		RESETCOLOR
+	;排卵薬
+	ELSEIF TALENT:L_I:排卵薬
+		PRINT ,
+		SETCOLOR COLOR("紫")
+		CALL CP_HEARTB()
+		PRINTFORM 排
+		CALL CP_HEARTB()
+		RESETCOLOR
+
+	;危険日 且つ 女
+	ELSEIF C_危険日(L_I) && VAR_SEX(L_I)
+		PRINT ,
+		SETCOLOR COLOR("紫")
+		CALL CP_HEARTB()
+		PRINTFORM 危
+		CALL CP_HEARTB()
+		RESETCOLOR
+	ELSE
+		PRINTFORM ,─
+	ENDIF
+ELSE
+	PRINT ,
+	;妊娠
+	IF TALENT:L_I:妊娠
+		SETCOLOR COLOR("黄色")
+		CALL CP_HEARTB()
+		PRINTFORM 妊娠中
+		CALL CP_HEARTB()
+		RESETCOLOR
+	ELSEIF TALENT:L_I:受精
+		SETCOLOR COLOR("黄色")
+		CALL CP_HEARTB()
+		PRINTFORM 受精済
+		CALL CP_HEARTB()
+		RESETCOLOR
+	;排卵薬
+	ELSEIF TALENT:L_I:排卵薬
+		SETCOLOR COLOR("紫")
+		CALL CP_HEARTB()
+		PRINTFORM 排卵薬
+		CALL CP_HEARTB()
+		RESETCOLOR
+	;危険日
+	ELSEIF C_危険日(L_I) && VAR_SEX(L_I)
+		;- 情報:危険日
+		CALL INFO_危険日(L_I)
+	ELSE
+		PRINTFORM 　　　　　
+	ENDIF
+ENDIF
+
+
+
+;-----------------------------
+;-- 悩み解決情報
+;-----------------------------
+@INFO_TARGET_NAYAMI(L_I)
+#DIM L_I
+#DIM NAYAMI
+#DIM CONST NAYAMI_SPAN = 10
+IF CFlag:L_I:住人_悩み解決判定回数 != 0 || CFlag:L_I:住人_悩み解決中 != 0
+	PRINTFORM ,%@"解決迄{(CFlag:L_I:住人_悩み解決判定回数)+1}日",NAYAMI_SPAN,LEFT%
+ELSE
+	NAYAMI = SEARCH_ALL_NAYAMI(L_I)
+	IF INRANGE(NAYAMI, 201, 205)
+		PRINTFORM ,%"要相談！",NAYAMI_SPAN,LEFT%
+	ELSEIF INRANGE(NAYAMI, 211, 215)
+		PRINTFORM ,%"相談在り",NAYAMI_SPAN,LEFT%
+	ELSEIF NAYAMI
+		PRINTFORM ,%"悩み中…",NAYAMI_SPAN,LEFT%
+	ENDIF
+ENDIF
+
+
+
+;-----------------------------
+;-- 武装情報
+;-----------------------------
+@INFO_TARGET_WEAPON(L_I, WEAPON_TYPE = "MAIN")
+#DIM  L_I
+#DIMS WEAPON_TYPE
+SELECTCASE WEAPON_TYPE
+CASE "MAIN"
+	PRINTFORM [
+	PRINTFORM 主{INFO_STATUS_GET_BY_LABEL(L_I, "主練度"),2}
+	PRINTFORM %CHARATU(INFO_STR_HEISOU(CFlag:L_I:住人_M兵装), 0)%
+	PRINTFORM %INFO_STR_MAIN_WEAPON_DAMAGE(L_I)%
+	PRINTFORM ]
+CASE "SUB"
+	PRINTFORM [
+	PRINTFORM 副{INFO_STATUS_GET_BY_LABEL(L_I, "副練度"),2}
+	PRINTFORM %CHARATU(INFO_STR_HEISOU(CFlag:L_I:住人_S兵装), 0)%
+	PRINTFORM %INFO_STR_SUB_WEAPON_DAMAGE(L_I)%
+	PRINTFORM ]
+ENDSELECT
+
+
+
+;-----------------------------
+;-- 登録抹消情報
+;-----------------------------
+@INFO_TARGET_DELETE(C_ID)
+#DIM          C_ID
+IF CFLAG:C_ID:登録抹消 == 1
+	PRINTFORM ×
+ELSE
+	PRINTFORM 　
+ENDIF
+
+;-----------------------------
+;-- レギュラー情報
+;-----------------------------
+@INFO_TARGET_REGULAR(C_ID, SHORT)
+#DIM          C_ID
+#DIM          SHORT
+IF SHORT
+	IF CFLAG:C_ID:レギュラー == 1
+		PRINTFORM レ
+	ELSE
+		PRINTFORM 　
+	ENDIF
+	RETURN
+ENDIF
+CALL PRINT_LABEL("レギュラー",,,(CFLAG:C_ID:レギュラー ? "ON" # "OFF"), -3, ( !CFLAG:C_ID:レギュラー && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,1) ; 左詰めは負
+
+
+
+;-----------------------------
+;-- 特別保護情報
+;-----------------------------
+@INFO_TARGET_PROTECT(C_ID, SHORT)
+#DIM          C_ID
+#DIM          SHORT
+IF SHORT
+	IF CFLAG:C_ID:特別保護 == 1
+		PRINTFORM 特
+	ELSE
+		PRINTFORM 　
+	ENDIF
+	RETURN
+ENDIF
+CALL PRINT_LABEL("特別保護",,,(CFLAG:C_ID:特別保護 ? "ON" # "OFF"), -3, ( !CFLAG:C_ID:特別保護 && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,1) ; 左詰めは負
+
+
+
+;-----------------------------
+;-- 交流イベント情報
+;-----------------------------
+@INFO_TARGET_PARTNER(C_ID)
+#DIM        C_ID
+#DIM        L_NPC
+#DIMS CONST STR_EVE_RATE  = "NG", "少", "並", "多"
+#DIMS CONST STR_EVE_LIMIT = "NG", "友", "親", "恋", "無"
+#DIMS CONST NPC_LV        = "－", "知", "友", "親", "恋", "婚"
+#DIMS CONST NPC_TYPE        = "交", "恋", "犯", "性"
+#DIM        CFLAGNUM_住人イベント傾向_交流
+#DIM        CFLAGNUM_対象1関係
+CFLAGNUM_住人イベント傾向_交流 = GETNUM(CFLAG,"住人イベント傾向_交流")
+CFLAGNUM_対象1関係             = GETNUM(CFLAG,"対象1関係")
+PRINTFORM 上限：%STR_EVE_LIMIT:(LIMIT(CFlag:C_ID:住人交流設定, 0, 4))%
+FOR L_NPC, 0, 4
+	PRINTFORM  %NPC_TYPE:L_NPC%
+	PRINTFORM ：%STR_EVE_RATE:(LIMIT(CFlag:C_ID:(CFLAGNUM_住人イベント傾向_交流+L_NPC) / 30, 0, 3))%/
+	SELECTCASE CFLAG:C_ID:(CFLAGNUM_対象1関係+L_NPC)
+	CASE 0 TO 5
+		PRINTFORM %NPC_LV:(CFLAG:C_ID:(CFLAGNUM_対象1関係+L_NPC))%
+	CASE -5
+		PRINTFORM 愛
+	ENDSELECT
+NEXT
+
+
+
+
+
+
+
+
+;-----------------------------
+;-- 入居室情報
+;-----------------------------
+@INFO_TARGET_ROOM_NUMBER(C_ID)
+#DIM          C_ID
+#DIMS DYNAMIC ROOM_NO
+IF !INRANGE(CFLAG:C_ID:マンションID, 1, 10)
+	PRINTFORM 　
+	RETURN
+ENDIF
+PRINTFORM %UNICODE(0x02460 - 1 + CFLAG:C_ID:マンションID)%
+;FLAG:(5000+L_LS) = CFLAG:C_S:個別番号
+;CFLAG:C_S:マンションID = L_LS
+
+
+
+
+;-----------------------------
+;-- 階級情報
+;-----------------------------
+@INFO_TARGET_RANK(C_ID)
+#DIM        C_ID
+#DIM        TEMP_RANK
+#DIMS CONST RANKNAME    = "NONE-", "SevenR", "SixO", "FiveY", "FourG", "ThreeB", "TwoI", "OneV"
+TEMP_RANK = INFO_STATUS_GET_BY_LABEL(C_ID, "階級")
+CALL PRINT_LABEL( , , , "■", , RANK_TO_COLOR(TEMP_RANK), , RANKNAME:TEMP_RANK, 6, , 1)
+;comment:
+;  ラベルが必要なら第一引数に入れると下のようになる
+;CALL PRINT_LABEL("階級" , , , "■", , RANK_TO_COLOR(TEMP_RANK), , RANKNAME:TEMP_RANK, 6, , 1)
+;> [階級:■NONE-] 
+
+;-----------------------------
+;-- 遺伝子情報
+;-----------------------------
+@INFO_TARGET_GENOM(C_ID)
+#DIM          C_ID
+#DIMS CONST   G_NAME = "人", "獣", "魔", "機", "精", "闇", "外", "雑", "主", "虫", "病", "天", "魚", "鳥", "死", "強", "堕", "勇", "妖", "貴"
+#DIMS DYNAMIC L_STR
+#DIM  CONST   CFLAG_START = 1800
+#DIM          GENOM_ID
+FOR GENOM_ID, 0, 20
+	IF CFLAG:C_ID:(CFLAG_START + GENOM_ID)
+		L_STR += G_NAME:GENOM_ID
+	ELSE
+		L_STR += "　"
+	ENDIF
+NEXT
+PRINTFORM %L_STR%
+
+
+;-----------------------------
+;-- 次世代継承関連情報
+;-----------------------------
+@INFO_TARGET_BREEDING(C_ID)
+#DIM          C_ID
+CALL PRINT_LABEL("出産回数",,(CFlag:C_ID:住人_回収済み数 <= 0 && FLAG:STATUS伏字モード ? COLOR("伏字") # -1),TOSTR(CFLAG:C_ID:住人_回収済み数), 3,,,,,, 1)
+CALL PRINT_LABEL("継承回数",,(CFlag:C_ID:住人_継承 <= 0 && FLAG:STATUS伏字モード ? COLOR("伏字") # -1), TOSTR(CFLAG:C_ID:住人_継承), 3,,,,,, 1)
+
+;-----------------------------
+;-- 人妻関連情報
+;-----------------------------
+@INFO_TARGET_MARRIED(C_ID)
+#DIM          C_ID
+IF CFLAG:C_ID:住人_体格 == 1
+	PRINTFORM 幼
+ELSEIF TALENT:C_ID:未亡人
+	PRINTFORM 亡
+ELSEIF TALENT:C_ID:百合結婚 
+	PRINTFORM 百
+ELSEIF TALENT:C_ID:結婚済み
+	PRINTFORM 妻
+ELSE
+	PRINTFORM 　
+ENDIF
+
+
+;-----------------------------
+;-- 社会関連情報
+;-----------------------------
+@INFO_TARGET_SOCIALITY(C_ID)
+#DIM          C_ID
+CALL PRINT_STATUS(C_ID, "人気",   6, 6, , 10000, ,     , , 1)
+CALL PRINT_STATUS(C_ID, "モラル", 6, 4, (C_ID==MASTER ? "伏字"#""),  500, , -500, , 1)
+CALL PRINT_STATUS(C_ID, "カルマ", 6, 4, (C_ID==MASTER ? "伏字"#""),  500, , -500, , 1)
+CALL PRINT_STATUS(C_ID, "品性",   6, 4, (C_ID==MASTER ? "伏字"#""),  500, , -500, , 1)
+
+;-----------------------------
+;-- 所属部隊情報
+;-----------------------------
+
+@INFO_TARGET_SUPPORT(C_ID)
+#DIM          C_ID
+#DIM  DYNAMIC SUP_ID
+#DIMS CONST   SUP_NAME = "－", "随", "後", "回", "探"
+SUP_ID = INFO_STATUS_GET_BY_LABEL(C_ID, "部隊")
+CALL PRINT_LABEL(SUP_NAME:SUP_ID,,(SUP_NAME:SUP_ID==SUP_NAME && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
+
+
+
+;-----------------------------
+;-- 配属施設情報
+;-----------------------------
+@INFO_TARGET_FACILITY(C_ID, SHORT)
+#DIM          C_ID
+#DIM          SHORT
+#DIMS DYNAMIC FAC_NAME
+IF SHORT
+	IF CFLAG:C_ID:学園生徒 == 1
+		FAC_NAME '= "学園"
+	ELSEIF  CFLAG:C_ID:支援ボランティア == 1
+		FAC_NAME '= "ボラ"
+	ELSEIF  CFLAG:C_ID:ラブホテル店員 == 1
+		FAC_NAME '= "ラブ"
+	ELSEIF  CFLAG:C_ID:カジノ店員 == 1
+		FAC_NAME '= "カジ"
+	ELSE
+		FAC_NAME '= "－－"
+	ENDIF
+	CALL PRINT_LABEL(FAC_NAME,,(FAC_NAME=="－－" && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
+	RETURN
+ENDIF
+IF CFLAG:C_ID:学園生徒 == 1
+	FAC_NAME '= "学園"
+ELSEIF  CFLAG:C_ID:支援ボランティア == 1
+	FAC_NAME '= "支援住宅"
+ELSEIF  CFLAG:C_ID:ラブホテル店員 == 1
+	FAC_NAME '= "ラブホテル"
+ELSEIF  CFLAG:C_ID:カジノ店員 == 1
+	FAC_NAME '= "高級カジノ"
+ELSE
+	FAC_NAME '= "－－"
+ENDIF
+CALL PRINT_LABEL("配属",,(FAC_NAME=="－－" && Flag:STATUS伏字モード ? COLOR("伏字") # -1), FAC_NAME, 10,,,,,,1)
+
+
+
+;-----------------------------
+;-- 身分情報
+;-----------------------------
+@INFO_TARGET_JOB(C_ID, SHORT)
+#DIM          C_ID
+#DIM          SHORT
+#DIM          L_SEX
+#DIMS DYNAMIC JOB_NAME
+IF SHORT
+	SELECTCASE TALENT:C_ID:学生
+	CASE 0
+		JOB_NAME '= "　"
+	CASE 5
+		JOB_NAME '= "小"
+	CASE 4
+		JOB_NAME '= "中"
+	CASE 3
+		JOB_NAME '= "高"
+	CASE 2
+		JOB_NAME '= "大"
+	CASEELSE
+		JOB_NAME '= "学"
+	ENDSELECT
+	
+	IF TALENT:C_ID:聖職者 != 0
+		JOB_NAME += "聖"
+	ELSEIF TALENT:C_ID:メイド != 0
+		JOB_NAME += "メ"
+	ELSEIF TALENT:C_ID:アイドル != 0
+		JOB_NAME += "ア"
+	ELSEIF TALENT:C_ID:社会人 != 0
+		JOB_NAME += "社"
+	ELSEIF TALENT:C_ID:治安維持局員 != 0
+		JOB_NAME += "局"
+	ELSE
+		JOB_NAME += "　"
+	ENDIF
+	IF TALENT:C_ID:娼婦 != 0
+		JOB_NAME += "娼"
+	ELSE
+		JOB_NAME += "　"
+	ENDIF
+
+
+	CALL PRINT_LABEL(JOB_NAME,6,(JOB_NAME=="　　　" && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
+	RETURN
+ENDIF
+
+L_SEX = VAR_SEX(C_ID)
+IF TALENT:C_ID:学生 != 0
+	SELECTCASE TALENT:C_ID:学生
+	CASE 5
+		JOB_NAME '= "小学生"
+	CASE 4
+		JOB_NAME '= "中学生"
+	CASE 3
+		JOB_NAME '= "高校生"
+		SIF L_SEX
+			JOB_NAME '= "女子高生"
+	CASE 2
+		JOB_NAME '= "大学生"
+		SIF L_SEX
+			JOB_NAME '= "女子大生"
+	CASEELSE
+		JOB_NAME '= "学生"
+	ENDSELECT
+	SIF TALENT:C_ID:娼婦 != 0
+		JOB_NAME '= "サポ待ち" + JOB_NAME
+ENDIF
+IF TALENT:C_ID:聖職者 != 0
+	JOB_NAME += "聖職者"
+ELSEIF TALENT:C_ID:メイド != 0
+	JOB_NAME += "メイド"
+ELSEIF TALENT:C_ID:アイドル != 0
+	JOB_NAME '= JOB_NAME + "アイドル"
+ELSEIF TALENT:C_ID:社会人 != 0
+	JOB_NAME '= "社会人"
+ELSEIF TALENT:C_ID:娼婦 != 0
+	JOB_NAME '= "娼婦"
+ELSEIF TALENT:C_ID:治安維持局員 != 0
+	JOB_NAME '= "治安維持局員"
+ENDIF
+CALL PRINT_LABEL(JOB_NAME,24,(JOB_NAME=="" && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
+
+
+
+
+;-----------------------------
+;-- 名前被り情報
+;-----------------------------
+@INFO_TARGET_SAME_NAME(C_ID)
+#DIM C_ID
+#DIM DYNAMIC SAME_CNT
+SAME_CNT = CNT_SAME_NAME(C_ID, CALLNAME:C_ID)
+IF SAME_CNT <= 0
+	PRINTFORM ───
+ELSE
+	PRINTFORM 同名{MIN(99, SAME_CNT), 2}
+ENDIF
+
+
+
+;-----------------------------
+;-- 中毒情報
+;-----------------------------
+@INFO_TARGET_ADDICT(C_ID)
+#DIM C_ID
+IF TALENT:C_ID:快楽中毒 == 1
+	SETCOLOR COLOR("紫")
+	PRINTFORM 快
+	RESETCOLOR
+ELSE
+	PRINTFORM 　
+ENDIF
+
+
+
+
+;=================================================
+;   sub INFO_WORK_NAME
+;=================================================
+;   情報:労役役職名
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+; Output:
+;  RETURNF				労役役職名
+;-------------------------------------------------
+@INFO_WORK_NAME(ARG)
+#FUNCTIONS
+#DIMS L_STR
+
+SELECTCASE CFLAG:ARG:労役役職タイプ
+	CASE [[労役役職:通常職]]
+		L_STR = 通常職
+	CASE [[労役役職:歌姫職]]
+		L_STR = 歌姫職
+	CASE [[労役役職:戦闘職]]
+		L_STR = 戦闘職
+	CASE [[労役役職:娼館職]]
+		L_STR = 娼館職
+	CASEELSE
+		L_STR = ―――
+ENDSELECT
+
+RETURNF L_STR
+
+;=================================================
+;   sub INFO_危険日
+;=================================================
+;   情報:危険日
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				句点有無
+;-------------------------------------------------
+@INFO_危険日(ARG, ARG:1=0)
+
+;危険日 且つ 女
+IF C_危険日(ARG) && VAR_SEX(ARG)
+	SIF ARG:1
+		PRINT ,
+	SETCOLOR COLOR("紫")
+	CALL CP_HEARTB()
+	PRINTFORM 危険日
+	CALL CP_HEARTB()
+	RESETCOLOR
+ENDIF
+
+
+;-------------------------------------------------
+;ラベル一覧を使用したソート用ボタン生成関数
+;-------------------------------------------------
+;渡されたラベル一覧配列をボタンとして表示する
+@INFO_LABEL_LIST(SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIMS     SORT_TYPE  ;現在のSORT内容
+#DIMS REF LABEL_LIST ;この行で使用するラベル一覧配列
+#DIM      LABEL_SIZE ;ラベル一覧配列の要素数
+FOR LOCAL, 0, LABEL_SIZE
+	PRINT |
+	CALL INFO_SORT_BUTTON(SORT_TYPE, LABEL_LIST:LOCAL)
+NEXT
+
+
+
+;-------------------------------------------------
+;ソート用ボタン作成関数
+;-------------------------------------------------
+@INFO_SORT_BUTTON(SORT_TYPE, B_NAME)
+#DIMS SORT_TYPE ;現在のソート順
+#DIMS B_NAME    ;基本のボタン名
+IF SORT_TYPE == @"%B_NAME%降順"
+	PRINTBUTTON @"▼%B_NAME%", @"%B_NAME%昇順"
+ELSEIF SORT_TYPE == @"%B_NAME%昇順"
+	PRINTBUTTON @"▲%B_NAME%", @"%B_NAME%降順"
+ELSE
+	PRINTBUTTON @"　%B_NAME%", @"%B_NAME%降順"
+ENDIF
+
+
+
+;-------------------------------------------------
+;ラベル使用一行情報表示関数
+;-------------------------------------------------
+;キャラの情報を一行で表示しつつボタンとして扱う
+;キャララベル（ボタンとしての番号）と登録番号を別々に指定する必要がある
+@INFO_CHARA_DETAIL_LABEL(C_LABEL, C_ID, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIM      C_LABEL    ;ボタンとして表示させる数値
+#DIM      C_ID       ;キャラの登録番号
+#DIMS     SORT_TYPE  ;現在のソート順
+#DIMS REF LABEL_LIST ;この行で使用するラベル一覧配列
+#DIM      LABEL_SIZE ;ラベル一覧配列の要素数
+;C_LABELが負数はありえないので表示内容のアナウンスに流用してます
+IF C_LABEL < 0
+	PRINTFORM %" " * 26%
+	CALL INFO_LABEL_LIST(SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+	PRINTFORML 
+ELSE
+	PRINTFORM [{C_LABEL, 3}]
+	CALL VAR_PRINT_LIST_NAME(C_ID)
+	CALL INFO_LABEL_ARRAY(C_ID, LABEL_LIST, LABEL_SIZE)
+	PRINTFORML 
+ENDIF
+
+
+
+;-------------------------------------------------
+;ラベル一覧を使用したキャラステータス簡易表示関数
+;-------------------------------------------------
+;渡されたLABEL_LISTに入っているLABEL_NAMEを順に表示していく
+@INFO_LABEL_ARRAY(C_ID, LABEL_LIST, LABEL_SIZE)
+#DIM      C_ID       ;参照する登録番号
+#DIMS REF LABEL_LIST ;この行で使用するラベル一覧配列
+#DIM      LABEL_SIZE ;ラベル一覧配列の要素数
+DEBUGPRINTFORML INFO_LABEL_ARRAY LABEL_SIZE{LABEL_SIZE}
+FOR LOCAL, 0, LABEL_SIZE
+	PRINT |
+	CALL CP_STATUS_BY_LABEL(C_ID, LABEL_LIST:LOCAL)
+NEXT
+
+
+
+;-------------------------------------------------
+;都市の予算情報
+;-------------------------------------------------
+@INFO_CITY_BASE
+CALL PRINT_RANGE_STATUS(-1, "ＴＰ", "TP", , , "伏字")
+CALL PRINT_STATUS(-1, "BP")
+CALL PRINT_STATUS(-1, "AP")
+CALL PRINT_LABEL("所持金",,,@"{MONEY}")
+PRINTL
+
+

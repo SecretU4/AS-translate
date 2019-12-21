@@ -1,0 +1,31 @@
+﻿
+;-------------------------------------------------
+; 喫茶店ターゲット
+;-------------------------------------------------
+
+@CAFE_TARGET(ARG, ARG:1=0)
+#DIM L_I
+#DIM L_INPUT
+$DATA_LIST
+
+
+CALL LIST_CHARA
+
+L_INPUT = RESULT
+
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPC는 선택할 수 없습니다
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW 아나타는 선택할 수 없습니다
+		GOTO DATA_LIST
+	ELSE
+	Flag:カフェ_ターゲット = CFlag:L_INPUT:個別番号
+	ENDIF
+ENDIF
+
+CALL CITY_CAFE
+
+
+

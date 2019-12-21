@@ -1,0 +1,319 @@
+;-------------------------------------------------
+;辞典
+;-------------------------------------------------
+@OPTION_ZITEN
+#DIM L_INPUT
+
+
+CLEARLINE LINECOUNT
+SETCOLOR 250,0,0
+DRAWLINE
+PRINTFORML 要求された権限を確認、申請を受諾しました。
+PRINTFORML プログラムを起動します。
+DRAWLINE
+RESETCOLOR
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+$INPUT_LOOP
+SETCOLOR 0,0,0
+SETBGCOLOR 255,255,255
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ようこそ
+PRINTFORML 閲覧したい項目を選択して下さい。
+DRAWLINE
+PRINTFORML 
+PRINTFORM [0] 管理のススメ　　　
+PRINTFORM [10] 各ポイントについて　　　
+PRINTFORML [20] カルマ＆モラル　　
+PRINTFORM [1] 住民攻略　　　　　
+PRINTFORML [11] 序盤のお勧め攻略
+PRINTFORM [2] 陥落　　　　　　　
+PRINTFORML [12] 住人業務
+PRINTFORML [3] 戦闘関連
+PRINTFORM [4] 探索　　　　　　　
+PRINTFORML [14] 技能
+PRINTFORM [5] 妊娠条件　　　　　
+PRINTFORML [15] アーティファクト
+PRINTFORM [6] 種族　　　　　　　
+PRINTFORML [16] キャラリスト表示項目
+PRINTFORML [7] 決算
+PRINTFORML [8] 襲撃
+PRINTFORML
+PRINTFORML [999] やめる
+INPUT
+L_INPUT = RESULT
+CLEARLINE LINECOUNT
+
+SELECTCASE L_INPUT
+CASE 0
+	PRINTFORML 大まかに説明すると。
+	PRINTFORML 1 住民登録を登録し攻略。
+	PRINTFORML 2 ターン経過で住民たちが都市を発展させる(合意を得ていると＋補正)。
+	PRINTFORML 3 ある程度貯めると施設が解放される。
+	PRINTFORML 4 効率を上げるために新たな住人を攻略する。
+	PRINTFORML となります。
+	PRINTFORMW 
+CASE 1
+	PRINTFORML 住民は『喫茶店』で出会うことで住民登録されます。
+	PRINTFORML 登録された住民と会話することで好感度と悩みの解析度を上げましょう。
+	PRINTFORMW 
+	PRINTFORML 解析が100％になると大まかな情報が開示されます、開示された情報をもとに適切な解決方法を選択しましょう。
+	PRINTFORML 結果が出るまで数日要します、解決度が100％になるまで試してみましょう。
+	PRINTFORML どのような傾向の悩みを抱えているかは日常生活の情報の際に匂わせる程度ではありますが出てくる場合があります。
+	PRINTFORMW 
+CASE 2
+	PRINTFORML 悩みを幾つか解決するとを確かな信頼獲得し、そこから口説くことで『合意』を得ることが出来ます。
+	PRINTFORML ただし性行為をしても陥落を取得することは出来ません。
+	PRINTFORML 『喫茶店』での会話にて新たに『プライベートでのアクション』の項目が増えているので、好きな陥落√を選択しましょう。
+	PRINTFORMW 
+	PRINTFORML ターン終了時に√に応じた陥落度が上昇します、ある程度好感度と陥落度が上がったら『関係構築』で陥落を取得しましょう。
+	PRINTFORML 最大まで貯めていると素質を獲得します、ただし獲得出来る素質は一つまでです。
+	PRINTFORML ・心酔　従属√の素質
+	PRINTFORML ・愛人　恋愛√の素質
+	PRINTFORML ・情婦　淫乱√の素質
+	PRINTFORMW 
+CASE 3
+	PRINTFORML 【ステータス】
+	PRINTFORML HP　　　体力　　0になると戦闘不能になる。
+	PRINTFORML SP　　　気力　　0になると行動不能、3割を切ると被ダメージ増加。
+	PRINTFORML GUTS　　根気　　行動に際する消費SPを抑える。
+	PRINTFORML BRAVE　 勇気　　高いと戦闘で有利な行動が出来る。
+	PRINTFORML SAN　　 正気度　恐怖系に対する耐性。
+	PRINTFORML ATK　　 攻撃力　ダメージにプラス補正が入る。
+	PRINTFORML DEF　　 防御力　被ダメージを軽減する。
+	PRINTFORML HIT　　 器用さ　命中に補正が入る、確率でダメージを緩和する。
+	PRINTFORML SPD　　 素早さ　回避に補正が入り高いほど先制をとれる、確率でFASTATACKが発動。
+	PRINTFORML LUK　　 幸運　　アイテム入手にプラス補正。アクシデントに全般的に対応。
+	PRINTFORML BRE　　 バリア　瘴気を無効化する障壁。
+	PRINTFORMW
+	PRINTFORML 【武装】
+	PRINTFORML ダメージは武装の『攻撃回数』『最大ダメージ』『ダメージボーナス』で決まる。
+	PRINTFORML ・例　2D6+2
+	PRINTFORML 攻撃回数2回、一回の攻撃1～6のランダムダメージ、その合計に2のダメージボーナスを加算する。
+	PRINTFORMW 
+CASE 4
+	PRINTFORML 【外界調査】
+	PRINTFORML 『調査区域』と『調査キャラ』を選択して外界を調査しましょう。
+	PRINTFORML 『調査区域』はレベルが高いほど危険です、最初は襲撃の無いレベル0で調査しましょう。
+	PRINTFORML 行動する度にSPを消費します、0になると調査できなくなります。
+	PRINTFORML 高レベルになると瘴気が湧きHPが減ります、バリア持ち出ないと攻略は難しいでしょう。
+	PRINTFORMW 
+	PRINTFORML 【アイテム】
+	PRINTFORML 調査をするとアイテムを入手できることがあります。
+	PRINTFORML レベルと深度が高いほど高品質なものが手に入ります。
+	PRINTFORML これらの素材は『次世代改良』にて使用します。
+	PRINTFORMW 
+CASE 5
+	PRINTFORML 妊娠の条件は以下の通りです。
+	PRINTFORML ・危険日である
+	PRINTFORML ・受精耐久値が0である(危険日に中出しすることで耐久値は減少する)
+	PRINTFORML 　減少値はあなたの男体レベル・精子レベルに応じる。
+	PRINTFORML ・受精耐久値が0のときに中出しされると受精確率で受精判定を行う
+	PRINTFORML 以上を満たすと住民は妊娠します。
+	PRINTFORMW 妊娠から出産まで約30日要します。
+CASE 6
+	$INPUT_LOOP_SZ
+	CLEARLINE LINECOUNT
+	PRINTFORM [0] 人間　　　　　　　
+	PRINTFORML [11] 精霊
+	PRINTFORML [1] エルフ
+	PRINTFORML [2] 夜魔
+	PRINTFORML [3] 亜人
+	PRINTFORML [4] オートマタ
+	PRINTFORML [5] 天使
+	PRINTFORML [6] 竜人
+	PRINTFORML [7] イス
+	PRINTFORML [8] 海人
+	PRINTFORML [9] 鳥人
+	PRINTFORML [10] 鬼
+	PRINTFORML
+	PRINTFORML [999] 戻る
+	INPUT
+	L_INPUT = RESULT
+	CLEARLINE LINECOUNT
+	SELECTCASE L_INPUT
+	CASE 0
+		PRINTFORML 高度文明を築いた霊長の長(自称)、個々の力は大したことはないが技術進歩については他の追随を許さない。
+		PRINTFORML 現代社会も人間が仕切っており、総数も合わせてもっとも繁栄している種族。
+		PRINTFORML 科学の進歩により老化の克服はされている。
+		PRINTFORML 【出現条件】なし
+		PRINTFORML 【出現場所】喫茶店に出没
+	CASE 1
+		PRINTFORML 不老長寿の種族、かつては自然と共に生きていたようだが文明成長と伴い、自然派も今や少数となっている。
+		PRINTFORML 男女ともにとても繁殖能力が弱く、純血同士の妊娠確率はかなり低い。
+		PRINTFORML 【出現条件】『施設』希少種保護施設＆『施設』学園をレベル5以上にする
+		PRINTFORML 【出現場所】 条件を満たせば喫茶店に出没
+		PRINTFORML 
+	CASE 2
+		PRINTFORML 赤い刻印が特徴の種族、快楽主義かつ好奇心旺盛で人間が生み出す娯楽に興味津々、それ故か人間とは仲が良い。
+		PRINTFORML 古来より夜の眷属と言われるため、よく悪い種族と誤解されがち。
+		PRINTFORML 【出現条件】『施設』ラブホテル＆『施設』高級カジノ＆『施設』ゲームセンターをレベル5以上にする
+		PRINTFORML 【出現場所】 条件を満たせば喫茶店に出没
+		PRINTFORML 
+	CASE 3
+		PRINTFORML 動物の耳と尻尾を持つ種族、性質は種類によって様々で強い者は凄まじい力を誇る。
+		PRINTFORML だが大多数は人間と変わらない性能。
+		PRINTFORML 【出現条件】『施設』品種改良施設＆『施設』支援住宅をレベル5以上にする
+		PRINTFORML 【出現場所】 条件を満たせば喫茶店に出没
+		PRINTFORML 
+	CASE 4
+		PRINTFORML 古代文明の遺産の一つ、ナノマシン・シリコン・古代部品で構成された機械人間、見た目は人間と殆ど大差ない。
+		PRINTFORML 今の文明レベルでも再現は不可能で、稼働前の個体が遺跡の奥に眠っていることがある。
+		PRINTFORML いかなる業か女性個体は、確率はかなり低いが妊娠が可能となっている。
+		PRINTFORML 【出現条件】『施設』研究施設をレベル20以上にする
+		PRINTFORML 【出現場所】 条件を満たせば喫茶店に出没
+	CASE 5
+		PRINTFORML 過去に一度絶滅した種族、白ないし黒の翼と美しい容姿を持つと言われている。
+		PRINTFORML 現在は残された遺伝子を用いて再現したものがごく僅かではあるが存在している。
+		PRINTFORML 【出現条件】『施設』病院をレベル20以上にする
+		PRINTFORML 【出現場所】 条件を満たせば喫茶店に出没
+		PRINTFORML 
+	CASE 6
+		PRINTFORML 絶滅危惧種、難のある性格を持つ者が多い、しかし総じて能力の高い種族。
+		PRINTFORML 生存圏が狭まった現在でも、自身が住みかとして認めなければ居つかない。
+		PRINTFORML 【出現条件】都市レベルを50以上にする
+		PRINTFORML 【出現場所】 条件を満たせば喫茶店に出没
+		PRINTFORML 
+	CASE 7
+		PRINTFORML 時間の秘密を解き明かした偉大なる種族、精神を交換することで実質不老の存在。その中でも人類派の派閥になった変わり者。
+		PRINTFORML 肉体疲労を気にせず書物ばかり見ていたためか近視になり、全員メガネを着用している。
+		PRINTFORML かなり極端な性能をしている、随伴部隊だと心強い味方になるだろう。
+		PRINTFORML 【出現条件】イスからの駆除依頼をクリアする
+		PRINTFORML 
+	CASE 8
+		PRINTFORML 人間よりも遥か以前に種族として完成していた存在、しかし外敵の出現により海から追放された。
+		PRINTFORML とにかく妊娠しない体質な為、大昔から一部の人間たちと密かに交流していた。
+		PRINTFORML ステータスは竜人ほどではないが、良好な水準をしている。
+		PRINTFORML 【出現場所】 ごくまれに喫茶店に出没
+		PRINTFORML 
+	CASE 9
+		PRINTFORML 背中から鳥の羽が生えた種族、基本は「外敵」があまり寄り付かない森の奥地に集団で住んでいる。
+		PRINTFORML 果物が大好物で繁殖力も人間よりも高いが、奔放な性格が多いためか長生きしないようだ。
+		PRINTFORML 素早い動きが可能で敵を翻弄する、反面耐久力が低い。
+		PRINTFORML 【出現条件】区域Lv1以上　&　深度30以上
+		PRINTFORML 【出現場所】 調査イベント「傷ついた鳥人」で仲間になる
+	CASE 10
+		PRINTFORML 二本の角が生えた褐色肌の種族(まれに違う者もいる)、種族総出で絶賛「外敵」と交戦中。
+		PRINTFORML 多くが変わった性格をしており、何より戦いを好む性格をしている。
+		PRINTFORML 火力・耐久力がずば抜けているが、大ざっぱな体質が災いしてか命中・回避がかなり低い。
+		PRINTFORML 運用する場合は命中を補強する必要あり、補強完了するまで随伴にも向いていない。
+		PRINTFORML 【出現条件】区域Lv3以上　&　深度50以上
+		PRINTFORML 【出現場所】調査イベント「鬼との出会い」で勝つと仲間になる
+	CASE 11
+		PRINTFORML 絶滅寸前とも言われている幻の種族、鮮やかな蝶の羽根を持つ。
+		PRINTFORML エルフ以上に自然と同化していた為、「外敵」の出現により生きる糧を失ってしまった。
+		PRINTFORML 今は都市にある植物を拠り所に、一部の個体が細々と生活している。
+		PRINTFORML 攻撃面は貧弱だが速度・命中・幸運がとても高い
+		PRINTFORML 【出現場所】 超低確率で喫茶店に出没
+	CASE 999
+		GOTO INPUT_LOOP
+	ENDSELECT
+	PRINTFORMW
+	GOTO INPUT_LOOP_SZ
+CASE 7
+	PRINTFORML 90日経過すると、その期間に住人が貢献したポイントを発表します。
+	PRINTFORML 量に応じてボーナスを受け取ることが出来ます。
+	PRINTFORML 使わず今期のポイントを次に持ち越すことも可能、ただし一度使うと全てリセットされます。
+	PRINTFORMW 
+CASE 8
+	PRINTFORML 襲撃当日になると大型の外敵が都市に襲撃してきます。
+	PRINTFORML 一定ターンまで指定された累計ダメージを与えると撃退に成功します。
+	PRINTFORML 失敗した場合は都市にダメージを受け、都市Lvなどが低下します。
+	PRINTFORMW 
+CASE 10
+	PRINTFORML 【TP】住民との会話などに使われるポイント
+	PRINTFORML 【AP】住民の悩み解決に使うポイント、悩みを解決することで最大値を増やせる
+	PRINTFORML 【SP】サポートを使う際に使うポイント
+	PRINTFORML 【KP】
+	PRINTFORML 【BP】TPを回復できるポイント、住民が妊娠していると増加
+	PRINTFORMW 
+CASE 11
+	PRINTFORML 序盤はどうしても住民攻略に時間がかかりがちです、
+	PRINTFORML 早く攻略したい場合は「惚れっぽい」または「即堕ち」持ちの住民を攻略しましょう。
+	PRINTFORML 通常の住民と比較して、「惚れっぽい」が2倍、「即堕ち」が5倍のスピードで攻略できます。
+	PRINTFORML 支援指示と併用すればかなり時間短縮できるでしょう。
+	PRINTFORML 
+	PRINTFORMW 
+CASE 12
+	PRINTFORML 業務をしている住人に干渉しより効率的に働いてもらいます。
+	PRINTFORML 【-!-】マークが出ているときは「シティ」に評価され、大量の功績ポイントが獲得できます。
+	PRINTFORML 
+	PRINTFORML 一定以上業務をすると、貢献値が上昇します。貢献値が高いほど必要な業務量が高くなります。
+	PRINTFORML 
+	PRINTFORMW
+	PRINTFORML 以下役職ごとの性質。
+	PRINTFORML 
+	PRINTFORML 【社会人】　　　貢献値上昇に必要な業務ポイントが多めに手に入る。
+	PRINTFORML 【アイドル】　　ファン数合計に応じて全住人の貢献にプラス補正。受ける側は役職によって補正の度合いが違う。
+	PRINTFORML 【学生】　　　　ターン終了時に確率で業務ポイントが上昇する。【アイドル】【娼婦】と並立する場合がある。
+	PRINTFORML 【娼婦】　　　　売春経験に応じて貢献値に最終プラス補正。上げやすいが上限がある。
+	PRINTFORML 【治安維持局員】戦闘経験値が入る、ターン終了時にも少量の戦闘経験値が入ることがある。
+	PRINTFORML 【メイド】　　　ターン終了時、業務経験に応じてAPを少量回復する。
+	PRINTFORML 【聖職者】　　　ターン終了時に確率でカルマが減少する。
+	PRINTFORML 【役職なし】　　アイドルのファン補正を多く受ける。
+	PRINTFORMW 
+CASE 14
+	PRINTFORML 以下実装され効果のある技能
+	PRINTFORML 【目星】1フロアの探索回数に＋補正　　　　　
+	PRINTFORML 【聞き耳】次の戦闘発生確率を視覚できる　　　　　　【医療】戦闘終了時体力を回復
+	PRINTFORML 【鍵開け】一部イベント発生確率に必要
+	PRINTFORML 【隠れる】エンカウントした時に戦闘を回避できる　　【解体】戦闘勝利時アイテム獲得
+	PRINTFORML 【解読】一部イベント発生確率に必要
+	PRINTFORMW 
+CASE 15
+	PRINTFORML 戦闘に勝利するとまれに入手できる武具。(深度が高いほど入手しやすい)
+	PRINTFORML 5つまで装備でき、その総合値の一部を部隊のステータスに反映できる。
+	PRINTFORML 探索キャラには各ステータスに「アーティファクト各合計÷10」が加算。
+	PRINTFORML 部隊には部隊各総合値に「部隊各合計値×アーティファクト各合計値％」が加算される。
+	PRINTFORML 
+	PRINTFORML ようは高い数値を装備するほど強くなる。
+	PRINTFORMW 現在、異能の効果は発揮されません。
+CASE 16
+	PRINTFORML 独自に実装したものを中心に説明します。
+	PRINTFORML 【ID】　各住人に固有の番号。　　　【機密】各住人の機密個体レベル。
+	PRINTFORML 【部隊】所属部隊を示す。　　　　　【施設】配属している施設を示す。
+	PRINTFORML 【管理】住人が「プレイヤー」にどれだけ管理されているか、レギュラー指定や特別保護などで上昇する。
+	PRINTFORML 【親交】10の位が陥落素質の種類、1の位が取得済みの刻印の合計を表す（反発刻印は含まれない）。
+	PRINTFORML 【攻略】関係構築が可能な状態であることを示す。下1桁は関係の方向性、桁数が取得可能な刻印レベルを表し、4桁なら陥落が可能。
+	PRINTFORML 【出自】100の位が「旧世代人」などの来歴を、下2桁が種族を示す。
+	PRINTFORML 【難度】この数値が大きいと、悩みの解決の難易度が上がる。
+	PRINTFORML 【地位】数値が大きいほど身分が高い、2で上流階級、3で貴族。
+	PRINTFORML 【職業】10の位が職業の種類、1の位が年齢層を示す。11と表示された場合は職業が設定されていない。
+	WAIT
+CASE 20
+	PRINTFORML 【モラル】
+	PRINTFORML 低いほどモラルを気にしなくなる。性的イベントが発生する可能性あり。
+	PRINTFORML 
+	PRINTFORML 【カルマ】
+	PRINTFORML 高いほど罪深い。住民そのものに被害が及ぶイベントが発生する。
+	PRINTFORML 
+	WAIT
+CASE 999
+	RESETCOLOR
+	RESETBGCOLOR
+	RETURN
+CASEELSE
+ENDSELECT
+
+
+
+
+GOTO INPUT_LOOP
+
+
+
+
+
+
+
+
+
+

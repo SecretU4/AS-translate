@@ -1,0 +1,639 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:ABLUP_MAIN.ERB
+;	Facility	:ABLUP画面。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- 表示系
+;
+;	・ SYSTEM_ABLUP_LIST				SYSTEM:ABLUP画面(LIST)
+;
+;	# ABLUP:リスト画面
+;	・ ABLUP_MAIN						表示:ABLUP画面 主処理
+;	・ _ABLUP_LIST_PRINT_SIGNAL			表示:ABLUP(LIST-結果)
+;	・ _ABLUP_LIST_MAIN					表示:ABLUP(LIST-MAIN)
+;
+;	# ABLUP:詳細画面
+;	・ _ABLUP_DETAIL_MAIN				表示:ABLUP詳細 主処理
+;	・ _ABLUP_DETAIL					表示:ABLUP詳細
+;
+;===============================================================================
+
+;=================================================
+;   sub SYSTEM_ABLUP_LIST
+;=================================================
+;   SYSTEM:ABLUP画面(LIST)
+;-------------------------------------------------
+@SYSTEM_ABLUP_LIST
+#DIM L_INPUT
+#DIMS L_ERR_MSG
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+L_INPUT=0
+L_ERR_MSG=
+
+;-----------------------------
+;- キャラリスト
+;-----------------------------
+RESULT:1=0
+$CHARA_LIST
+
+;- LIST:キャラリスト
+CALL LIST_CHARA(@"能力を上昇させたいキャラを選んでください　", RESULT:1, L_ERR_MSG)
+L_INPUT = RESULT
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		RETURN 0
+	;- キャラ
+	CASEELSE
+		;- 表示:ABLUP画面 主処理
+		CALL ABLUP_MAIN(L_INPUT)
+		GOTO CHARA_LIST
+ENDSELECT
+RESTART
+
+
+;-------------------------------------------------------------------------------
+;   ABLUP:リスト画面
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub ABLUP_MAIN
+;=================================================
+;   表示:ABLUP画面 主処理
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@ABLUP_MAIN(ARG=-1,ARG:1)
+#DIM L_INPUT
+#DIM L_TMP
+#DIM L_PAGE_NOW
+#DIM L_PAGE_下限
+#DIM L_PAGE_上限
+
+#DIM L_CHARA_前
+#DIM L_CHARA_次
+
+L_INPUT=0
+L_TMP=0
+L_PAGE_NOW=0
+L_PAGE_下限=0
+L_PAGE_上限=0
+
+L_CHARA_前=0
+L_CHARA_次=0
+
+;-----------------------------
+;- 定数設定
+;-----------------------------
+L_PAGE_下限 = 0
+L_PAGE_上限 = 0
+
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+$PRINT_LOOP_1
+VARSET B
+
+L_CHARA_前 = VAR_GET_CL("PREV",ARG)
+L_CHARA_次 = VAR_GET_CL("NEXT",ARG)
+
+;-----------------------------
+;- 表示:ヘッダ
+;-----------------------------
+
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML どの能力を上昇／刻印を消去させますか？
+PRINTFORML （対象キャラクター：%CALLNAME:ARG%）
+PRINTL
+
+;-----------------------------
+;- 表示:内容部
+;-----------------------------
+
+;- 表示:ABLUP(LIST-MAIN)
+CALL _ABLUP_LIST_MAIN(ARG)
+PRINTL
+
+;体力
+B:200 = 1
+
+;- 表示:選択部
+PRINTFORMLC \@(L_CHARA_前 > -1) ? [1001]前のキャラ # %" " * 16%\@
+PRINTLC [1000]戻る
+PRINTFORMLC \@(L_CHARA_次 > -1) ? [1003]次のキャラ # %" " * 16%\@
+
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	CASE 1000
+		RETURN
+	;前のキャラ
+	CASE 1001
+		SIF L_CHARA_前 > -1
+			ARG = L_CHARA_前
+	;次のキャラ
+	CASE 1003
+		SIF L_CHARA_次 > -1
+			ARG = L_CHARA_次
+	CASEELSE
+		;- CHK:NG
+		IF B:L_INPUT == 0
+			;念の為詰め替え
+			RESULT = L_INPUT
+			;INPUTエラー対応
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP_1
+		ENDIF
+
+		;-----------------------------
+		;- パターン選択画面を表示
+		;-----------------------------
+		SELECTCASE L_INPUT
+			;- 個人PALAM(ABL)を変更する場合
+			CASE 0 to ( VARSIZE("ABL") - 1)
+
+				;- 位置作成
+				L_TMP = L_INPUT - 0
+
+				IF ABL:ARG:L_TMP >= FLAG:最大数_ABLLV
+					CLEARLINE 1
+					REUSELASTLINE これ以上%ABLNAME:L_TMP%を上昇させることは出来ません
+					GOTO INPUT_LOOP_1
+				ENDIF
+
+				;- 表示:ABLUP詳細 主処理
+				CALL _ABLUP_DETAIL_MAIN(ARG,L_TMP,"ABL")
+
+			;- 個人PALAM(MARK)を変更する場合
+			CASE VARSIZE("ABL") to ( VARSIZE("ABL") + VARSIZE("MARK") - 1)
+
+				;- 位置作成
+				L_TMP = L_INPUT - VARSIZE("ABL")
+
+				IF MARK:ARG:L_TMP <= 0
+					CLEARLINE 1
+					REUSELASTLINE %MARKNAME:L_TMP%はありません
+					GOTO INPUT_LOOP_1
+				ENDIF
+
+				;- 表示:ABLUP詳細 主処理
+				CALL _ABLUP_DETAIL_MAIN(ARG,L_TMP,"MARK")
+			;- 個人PALAM(BASE)を変更する場合
+			CASE 200
+				$INPUT_LOOP_体力
+				DRAWLINE
+				PRINTFORML 体力を上昇させますか？最大で{FLAG:最大値_体力}まで上昇出来ます。
+				PRINTFORML （上昇には%GVAR_MONEY_NAME%を300消費します。現在%GVAR_MONEY_NAME%:{MONEY}）
+				PRINTL
+				L_TMP = 50
+				PRINTFORML 現在の体力：{MAXBASE:ARG:体力} → {MIN(MAXBASE:ARG:体力 + L_TMP, FLAG:最大値_体力)}
+				PRINTL
+				CALL INPUT_YN
+				SELECTCASE RESULT
+					CASE 0
+						IF MAXBASE:ARG:体力 == FLAG:最大値_体力
+							PRINTW 既に最大値です
+							GOTO INPUT_LOOP_体力
+						ELSE
+							IF MONEY < 300
+								PRINTFORMW %GVAR_MONEY_NAME%が足りません
+								GOTO INPUT_LOOP_体力
+							ENDIF
+							MONEY -= 300
+							MAXBASE:ARG:体力 = MIN(MAXBASE:ARG:体力 + L_TMP, FLAG:最大値_体力)
+
+							PRINTFORML 体力を上昇させました。
+							PRINTFORML 現在の体力：{MAXBASE:ARG:体力}
+							WAIT
+						ENDIF
+					CASE 1
+						;スルー
+				ENDSELECT
+
+		ENDSELECT
+		RESTART
+ENDSELECT
+
+GOTO PRINT_LOOP_1
+
+
+;=================================================
+;   sub _ABLUP_LIST_PRINT_SIGNAL
+;=================================================
+;   表示:ABLUP(LIST-結果)
+;-------------------------------------------------
+; Input:
+;  ARG:0				結果(0:OK 1:NG)
+;  ARG:1				現在値
+;  ARG:2				最大値
+;  ARG:9				計算方法(0:加算方式 1:減算方式)
+;-------------------------------------------------
+@_ABLUP_LIST_PRINT_SIGNAL(ARG,ARG:1=0,ARG:2=0,ARG:9=0)
+
+;- 加算方式
+IF (ARG:9 == 0) && (ARG:1 >= ARG:2)
+	PRINT MAX
+;- 減算方式
+ELSEIF (ARG:9 == 1) && (ARG:1 <= ARG:2)
+	PRINT MIN
+ELSE
+	;- 結果判定
+	IF !ARG
+		SETCOLOR COLOR("水色")
+		PRINT  OK
+		RESETCOLOR
+	ELSE
+		;灰色
+		SETCOLOR COLOR("伏字")
+		PRINT  NG
+		RESETCOLOR
+	ENDIF
+ENDIF
+
+
+;=================================================
+;   sub _ABLUP_LIST_MAIN
+;=================================================
+;   表示:ABLUP(LIST-MAIN)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+; Output:
+;  B[0..x]				存在チェック(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_LIST_MAIN(ARG)
+#DIM L_I
+#DIM L_MAX
+#DIM L_TMP
+
+L_I=0
+L_MAX=0
+L_TMP=0
+
+;-----------------------------
+;-- 表示:ABL
+;-----------------------------
+VARSET LOCAL
+
+L_MAX = FLAG:最大数_ABLLV
+
+;- ライン表示:見出し
+CALL C_HEADLINE("能力(ABL)")
+
+;- 全要素をチェック
+FOR L_I,0,VARSIZE("ABL")
+
+	LOCALS	= %ABLNAME:L_I%
+	LOCAL:1	= ABL:ARG:L_I
+
+	;- CHK:読み飛ばし
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+
+	;- ABLUP可能かを表示させるためのチェック
+	CALLFORM CHK_ABLUP_MAIN(ARG,L_I,"ABL")
+	; CHK:対象外
+	SIF RESULT < 0 || RESULT > 1
+		CONTINUE
+	LOCAL:9 = RESULT
+	;- 番号作成
+	L_TMP = L_I + 0
+	;NG
+;	SIF LOCAL:9
+;		SETCOLOR COLOR("伏字")
+
+	;-- 表示
+	PRINTFORM  [{L_TMP, 3}] %LOCALS,10,LEFT% :LV{ABL:ARG:L_I} 
+	BAR LOCAL:1, L_MAX, 3 
+
+	;-  表示:ABLUP(LIST-結果)
+	CALL _ABLUP_LIST_PRINT_SIGNAL(LOCAL:9,LOCAL:1,L_MAX,0)
+;	RESETCOLOR
+	B:L_TMP = 1
+
+	LOCAL:5 += 1
+	SIF (LOCAL:5%3) == 0
+		PRINTL
+
+NEXT
+
+SIF (LOCAL:5%3) != 0
+	PRINTL
+
+PRINTL
+;-----------------------------
+;-- 表示:MARK
+;-----------------------------
+VARSET LOCAL
+
+L_MAX = FLAG:最大数_MARKLV
+
+;- ライン表示:見出し
+CALL C_HEADLINE("刻印(MARK)")
+
+;- 全要素をチェック
+FOR L_I,0,VARSIZE("MARK")
+
+	LOCALS	= %MARKNAME:L_I%
+	LOCAL:1	= MARK:ARG:L_I
+
+	;- CHK:読み飛ばし
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+
+	;- ABLUP可能かを表示させるためのチェック
+	CALLFORM CHK_ABLUP_MAIN(ARG,L_I,"MARK")
+	; CHK:対象外
+	SIF !(RESULT == 0 || RESULT == 1)
+		CONTINUE
+	LOCAL:9 = RESULT
+	;- 番号作成
+	L_TMP = L_I + VARSIZE("ABL")
+
+	;-- 表示
+	PRINTFORM  [{L_TMP, 3}] %LOCALS,10,LEFT% :LV{MARK:ARG:L_I} 
+	BAR LOCAL:1, L_MAX, 3 
+
+	;-  表示:ABLUP(LIST-結果)
+	CALL _ABLUP_LIST_PRINT_SIGNAL(LOCAL:9,LOCAL:1,0,1)
+
+	B:L_TMP = 1
+
+	LOCAL:5 += 1
+	SIF (LOCAL:5%3) == 0
+		PRINTL
+
+NEXT
+
+SIF (LOCAL:5%3) != 0
+	PRINTL
+
+PRINTL
+
+;-----------------------------
+;-- 表示:BASE
+;-----------------------------
+
+;- ライン表示:見出し
+CALL C_HEADLINE("基礎(BASE)")
+LOCAL:1 = MAXBASE:ARG:体力
+PRINTFORM  [{200, 3}] %"体力",8,LEFT% :{LOCAL:1}/{FLAG:最大値_体力} 
+BAR LOCAL:1, FLAG:最大値_体力, 10 
+PRINTL
+PRINTL
+
+
+;-------------------------------------------------------------------------------
+;   ABLUP:詳細画面
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub _ABLUP_DETAIL_MAIN
+;=================================================
+;   表示:ABLUP詳細 主処理
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				対象要素位置
+;  ARGS					変更対象(ABL,MARK)
+;-------------------------------------------------
+@_ABLUP_DETAIL_MAIN(ARG, ARG:1, ARGS="")
+VARSET LOCAL
+
+$PRINT_LOOP_1
+
+;-----------------------------
+;- 表示:ヘッダ
+;-----------------------------
+
+;表示:ページヘッダ
+CALL C_LINE
+
+;- 処理対象で分岐
+SELECTCASE ARGS
+	CASE "ABL"
+		PRINTFORML どの方法で能力を上昇させますか？
+		PRINTFORML （対象キャラクター：%NAME:ARG%）
+		PRINTFORML （対象能力：%ABLNAME:(ARG:1)% LV:%TOSTR(ABL:ARG:(ARG:1))%）
+	CASE "MARK"
+		PRINTFORML どの方法で刻印を消去させますか？
+		PRINTFORML （対象キャラクター：%NAME:ARG%）
+		PRINTFORML （対象刻印：%MARKNAME:(ARG:1)% LV:%TOSTR(MARK:ARG:(ARG:1))%）
+	CASEELSE
+		;- エラーの為、RETURN
+		PRINTFORML 【ERROR】
+		PRINTFORML _ABLUP_DETAIL_MAINにてエラーが発生しています。
+		PRINTFORML 引数が異常です
+		PRINTFORML 引数:%ARGS%
+		RETURN
+ENDSELECT
+PRINTL
+
+;-----------------------------
+;- 能力
+;-----------------------------
+
+;- ライン表示:見出し
+CALL C_HEADLINE("現在の能力データ")
+
+;- 簡易表示:STATUS(能力)
+CALL INFO_STATUS_ABL(ARG, 1)
+PRINTL
+
+;-----------------------------
+;- 経験
+;-----------------------------
+
+;- ライン表示:見出し
+CALL C_HEADLINE("現在の経験データ")
+
+;- 簡易表示:STATUS(経験)
+CALL INFO_SIMPLE_STATUS_EXP(ARG)
+PRINTL
+
+;-----------------------------
+;- 宝珠
+;-----------------------------
+
+;- ライン表示:見出し
+CALL C_HEADLINE("現在の宝珠データ")
+
+;- 表示:STATUS(珠)
+CALL INFO_STATUS_JUEL(ARG)
+PRINTL
+
+;-----------------------------
+;- 表示:内容部
+;-----------------------------
+
+;- 表示:ABLUP詳細
+CALL _ABLUP_DETAIL(ARG, ARG:1,ARGS)
+
+;- 表示:選択部
+PRINTLC  
+PRINTLC [1000]戻る
+
+
+;-----------------------------
+;- 表示:INPUT
+;-----------------------------
+
+$INPUT_LOOP_1
+INPUT
+LOCAL = RESULT
+SELECTCASE LOCAL
+	CASE 1000
+		RETURN
+
+	;- パターン数の範囲内か
+	CASE 0 to ABLUP_GET_SYRPTN_NUM()
+
+		;- 選択されたパターンをチェック
+
+		;- CHK:ABLUP(詳細)
+		CALL CHK_ABLUP_DETAIL(ARG, ARG:1, LOCAL, ARGS)
+
+		;- CHK:結果
+		SELECTCASE RESULT
+			;- 対象外
+			CASE -1
+				;念の為詰め替え
+				RESULT = LOCAL
+				;INPUTエラー対応
+				CALL C_INPUT_ERROR
+				GOTO INPUT_LOOP_1
+			;- OK
+			CASE 0
+				;- 実行:ABLUP
+				CALL ABLUP_EXE(ARG,ARG:1,LOCAL,ARGS)
+
+				SELECTCASE ARGS
+					CASE "ABL"
+						PRINTFORMW %ABLNAME:(ARG:1)%のレベルが{ABL:ARG:(ARG:1)}になりました。
+					CASE "MARK"
+						PRINTFORMW %MARKNAME:(ARG:1)%のレベルが{MARK:ARG:(ARG:1)}になりました。
+				ENDSELECT
+			;- NG
+			CASEELSE
+				CLEARLINE 1
+				REUSELASTLINE 条件を満たしていません
+				GOTO INPUT_LOOP_1
+		ENDSELECT
+	CASEELSE
+		;念の為詰め替え
+		RESULT = LOCAL
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+GOTO PRINT_LOOP_1
+
+;=================================================
+;   sub _ABLUP_DETAIL
+;=================================================
+;   表示:ABLUP詳細
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				対象要素位置
+;  ARGS					変更対象(ABL,MARK)
+;-------------------------------------------------
+@_ABLUP_DETAIL(ARG, ARG:1, ARGS="")
+#DIM L_SYRPTN
+#DIM L_CHARA_POS
+#DIM L_NG
+
+L_SYRPTN=0
+L_CHARA_POS	= ARG
+L_NG=0
+
+;- 処理対象で分岐
+SELECTCASE ARGS
+	CASE "ABL"
+		LOCALS	= %ABLNAME:(ARG:1)%
+	CASE "MARK"
+		LOCALS	= %MARKNAME:(ARG:1)%
+	CASEELSE
+		;- エラー
+		PRINTFORML 【ERROR】
+		PRINTFORML _ABLUP_DETAIL
+		PRINTFORML 引数:%ARGS%
+		RETURN
+ENDSELECT
+
+;- パターンを全処理
+FOR L_SYRPTN,0,ABLUP_GET_SYRPTN_NUM()
+	
+	VARSET RESULTS
+	VARSET L_NG
+
+	;- CHK:ABLUP(詳細)
+	CALL CHK_ABLUP_DETAIL(ARG, ARG:1, L_SYRPTN, ARGS)
+	L_NG = RESULT
+
+	;-- 必要データの出力
+
+	;- 全件連結
+	LOCALS  =
+	REPEAT ( VARSIZE("JUEL") + VARSIZE("EXP") + VARSIZE("ABL") + VARSIZE("MARK") )
+		SIF !STRLENS(RESULTS:COUNT)
+			CONTINUE
+		SIF STRLENS(LOCALS)
+			LOCALS += "、"
+		LOCALS += RESULTS:COUNT
+	REND
+
+	;- データ無しの場合、次のパターンへ
+	SIF !STRLENS(LOCALS)
+		CONTINUE
+
+	;- データありの場合、表示
+	PRINTFORM [{L_SYRPTN}] - %LOCALS%・・・
+
+	;- 連結
+	LOCALS =
+	IF L_NG == 0
+		LOCALS +="ＯＫ "
+	ELSE
+		SIF GETBIT(L_NG,1)
+			LOCALS +="宝珠 "
+		SIF GETBIT(L_NG,2)
+			LOCALS +="経験 "
+		SIF GETBIT(L_NG,3)
+			LOCALS +="能力 "
+		SIF GETBIT(L_NG,4)
+			LOCALS +="刻印 "
+		LOCALS +="が不足"
+	ENDIF
+
+	PRINTSL LOCALS
+NEXT
+
+PRINTL
+

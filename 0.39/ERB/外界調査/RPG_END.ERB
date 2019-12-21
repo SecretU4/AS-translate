@@ -1,0 +1,317 @@
+;-------------------------------------------------
+;外界調査 終了 回収部隊
+;-------------------------------------------------
+@RPG_END(ARG:0,ARG:1)
+
+Flag:探索中 = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+DRAWLINE
+PRINTFORML 【攻略部隊の撤退準備を確認、各隊に連絡致します】
+DRAWLINE
+DRAWLINE
+
+SIF FLAG:支援_随伴合計ATK > 0 && FLAG:ターン経験値 > 0
+	CALL RPG_END_EXP
+CALL RPG_END_TALK_MAIN
+CALL RPG_END_ITEM
+DRAWLINE
+DRAWLINE
+PRINTFORML 【全部隊撤退準備完了、都市へ帰還します】
+DRAWLINE
+DRAWLINE
+PRINTFORMW
+
+
+;-------------------------------------------------
+;外界調査 終了 随伴部隊
+;-------------------------------------------------
+@RPG_END_EXP(ARG:0,ARG:1)
+#DIM I_G
+#DIM L_L
+#DIM C_I
+ARG:0 = 6800
+ARG:1 = 1
+CALL MEMBER_EXP(ARG:0,ARG:1)
+PRINTFORML 【随伴部隊:今回の探索で、随伴部隊も隊員も経験を積んだようだ…(経験値{FLAG:ターン経験値}取得)】
+DRAWLINE
+
+
+
+@RPG_END_TALK_MAIN
+#DIM  SUP_LIST, 5
+#DIM  SUP_CNT
+#DIM  ID_後方
+#DIM  ID_回収
+CALLF MEMBER_LIST_ALL("SUPPORT_後方", SUP_LIST, SUP_CNT)
+SELECTCASE SUP_CNT
+CASE 1
+	ID_後方 = SUP_LIST:0
+CASE 2 TO 5
+	ID_後方 = SUP_LIST:(RAND:SUP_CNT)
+CASEELSE
+	ID_後方 = 0
+ENDSELECT
+CALLF MEMBER_LIST_ALL("SUPPORT_回収", SUP_LIST, SUP_CNT)
+SELECTCASE SUP_CNT
+CASE 1
+	ID_回収 = SUP_LIST:0
+CASE 2 TO 5
+	ID_回収 = SUP_LIST:(RAND:SUP_CNT)
+CASEELSE
+	ID_回収 = 0
+ENDSELECT
+{
+CALL RPG_PAIR_TALK(
+	ID_後方, "【後方部隊：" + @"%CALLNAME:ID_後方, 20, LEFT%" + "】", "END_SUPPORT_後方", 
+	ID_回収, "【回収部隊：" + @"%CALLNAME:ID_回収, 20, LEFT%" + "】", "END_SUPPORT_回収"
+	)
+}
+
+
+
+
+[SKIPSTART]
+関数設計の調整中...
+
+想定レイアウト
+０００００００００１１１１１１１１１１２２２２２２２２２２３３３３３３３３３３４４４４４４４４４４５５５５５５５５５５６６６６６
+１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４
+
+１２３←LINE_EDGE
+━━━【回収部隊：　　　　　　　　　　】━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+↑HIGH/LEFT
+
+↓LOW/RIGHT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━【回収部隊：　　　　　　　　　　】━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+--------------------------------------------------------------------------------------------------------------------------------
+ウインドウ
+　横幅＝半角128
+　横幅＝全角64
+
+ラベル想定＝全角17、最大全角61
+　１２３４５６７８９０１２３４５６７
+　【回収部隊：　　　　　　　　　　】
+
+[SKIPEND]
+
+@SHOW_TALK_DIALOG(MODE_LR, MODE_HL, LABEL, WORDS)
+#DIMS LABEL  ;発言者の表示名
+#DIMS WORDS  ;発言内容
+#DIMS MODE_LR;RIGHT/LEFT RIGHT:名前欄が右側に/LEFT名前欄が左側に
+#DIMS MODE_HL;HIGH/LOW   HIGH:上部配置想定、名前欄が下に/LOW:下部配置想定、名前欄が上に
+#DIM CONST WINDOW_WIDTH = 64;全角で数える
+#DIM CONST LINE_EDGE    =  3;全角で数える
+SELECTCASE MODE_HL
+CASE "HIGH"
+	SELECTCASE MODE_LR
+	CASE "RIGHT"
+		WORDS += "　"
+		PRINTSINGLEFORM %"━" * WINDOW_WIDTH%
+		PRINTSINGLEFORM %WORDS, 128, RIGHT%
+		PRINTSINGLEFORM %"━" * (WINDOW_WIDTH - LINE_EDGE - 17)%%LABEL, 34 ,LEFT%━━━
+	CASE "LEFT"
+		WORDS '= "　" + WORDS
+		PRINTSINGLEFORM %"━" * WINDOW_WIDTH%
+		PRINTSINGLEFORM %WORDS, 128, LEFT%
+		PRINTSINGLEFORM ━━━%LABEL, 34 ,LEFT%%"━" * (WINDOW_WIDTH - LINE_EDGE - 17)%
+	ENDSELECT
+CASE "LOW"
+	SELECTCASE MODE_LR
+	CASE "RIGHT"
+		WORDS += "　"
+		PRINTSINGLEFORM %"━" * (WINDOW_WIDTH - LINE_EDGE - 17)%%LABEL, 34 ,LEFT%━━━
+		PRINTSINGLEFORM %WORDS, 128, RIGHT%
+		PRINTSINGLEFORM %"━" * WINDOW_WIDTH%
+	CASE "LEFT"
+		WORDS '= "　" + WORDS
+		PRINTSINGLEFORM ━━━%LABEL, 34 ,LEFT%%"━" * (WINDOW_WIDTH - LINE_EDGE - 17)%
+		PRINTSINGLEFORM %WORDS, 128, LEFT%
+		PRINTSINGLEFORM %"━" * WINDOW_WIDTH%
+	ENDSELECT
+ENDSELECT
+
+
+@RPG_PAIR_TALK(CHARA_A, LABEL_A, WORDS_A, CHARA_B, LABEL_B, WORDS_B)
+#DIM  CHARA_A
+#DIMS LABEL_A
+#DIMS WORDS_A;WORDSは直接表示するのではなく、WORDS_RPGに渡して使うので注意してください
+#DIM  CHARA_B
+#DIMS LABEL_B
+#DIMS WORDS_B
+IF CHARA_A <= 0
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+ELSE
+	CALL SHOW_TALK_DIALOG("LEFT", "HIGH", LABEL_A, WORDS_RPG(WORDS_A, CHARA_A))
+ENDIF
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+IF CHARA_B <= 0
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+ELSE
+	CALL SHOW_TALK_DIALOG("RIGHT", "LOW", LABEL_B, WORDS_RPG(WORDS_B, CHARA_B))
+ENDIF
+CALL C_PICTURE_PAIR_TALK_A(CHARA_A)
+CALL C_PICTURE_PAIR_TALK_B(CHARA_B)
+WAIT
+[SKIPSTART]
+・右向きのキャラA画像
+・左向きのキャラB画像
+これらを会話欄同士の中間に配置する
+
+・NPCがどうなるかよくわかんない、左右反転表示を想定してるのか？？？
+[SKIPEND]
+
+
+
+
+
+
+;-------------------------------------------------
+;外界調査 終了 回収部隊
+;-------------------------------------------------
+@RPG_END_ITEM
+#DIM EXPLORE_LEVEL
+#DIM ITEM_LIST,36
+#DIM ITEM_FIND;アイテム発見処理の判定回数
+EXPLORE_LEVEL = 0
+IF Flag:ターン進行深度 >= 3
+	EXPLORE_LEVEL += FLAG:支援_回収合計LUK / 3
+	EXPLORE_LEVEL += FLAG:支援_回収合計SPD / 5
+ELSE
+	EXPLORE_LEVEL += 1
+ENDIF
+
+ITEM_FIND = ((EXPLORE_LEVEL) + (Flag:ターン進行深度 * 3) + (Flag:ターン戦闘回数 * 5))/100
+FOR LOCAL, 0, ITEM_FIND
+	;発見失敗分岐
+	SIF (Flag:フロア_発見率 + (EXPLORE_LEVEL / 2)) < RAND:100
+		CONTINUE
+	IF Flag:フロア_品質 >= RAND:100
+		IF Flag:フロア_品質 >= RAND:100
+			;高品質
+			ITEM_LIST:((RAND:6)+20) += 1
+		ELSE
+			;中品質
+			ITEM_LIST:((RAND:6)+10) += 1
+		ENDIF
+	ELSE
+		;低品質
+		ITEM_LIST:((RAND:6)) += 1
+	ENDIF
+NEXT
+
+FOR LOCAL, 0, VARSIZE("ITEM_LIST")
+	;所持してないならスルー
+	SIF ITEM_LIST:(LOCAL:0) <= 0
+		CONTINUE
+	PRINT 【――――
+	;中品質以上のアイテム名着色
+	SIF LOCAL:0 > 9
+		SETCOLOR 0,240,240
+	SIF LOCAL:0 > 19
+		SETCOLOR 240,140,240
+	PRINTFORM  %FLAGNAME:(2100+(LOCAL:0))%
+	RESETCOLOR
+	PRINTFORML を{ITEM_LIST:(LOCAL:0)}個入手した――――】
+	FLAG:(2100+(LOCAL:0)) += ITEM_LIST:(LOCAL:0)
+NEXT
+
+
+;一行口上、将来的にはファイル独立させたほうがいいかも
+@WORDS_RPG(TYPE, C_ID)
+#FUNCTIONS
+#DIMS TYPE
+#DIM  C_ID
+#DIMS WORDS
+SELECTCASE TYPE
+CASE "END_SUPPORT_後方"
+	STRDATA WORDS
+	DATAFORM 「通信…？、撤退%CSTR:C_ID:語尾疑問%…？」
+	DATAFORM 「ちゃんと支援出来てた%CSTR:C_ID:語尾問う%？、問題なかったらいい%CSTR:C_ID:語尾繋ぎ%%CSTR:C_ID:語尾逆説%…」
+	DATAFORM 「や、やっと終わった%CSTR:C_ID:語尾応答3%…」
+	DATAFORM 「深追いは危険%CSTR:C_ID:語尾です2%、すぐに帰還し%CSTR:C_ID:語尾命令%」
+	DATAFORM 「後方部隊了解%CSTR:C_ID:語尾です%、帰還準備しつつ他部隊と行動を合わせ%CSTR:C_ID:語尾ます%」
+	DATAFORM 「怪我はあ%CSTR:C_ID:語尾聞く%？、酷かったらしっかり休んだ方がいい%CSTR:C_ID:語尾許可%」
+	DATAFORM 「今は安全%CSTR:C_ID:語尾逆説%、念のため他の部隊が準備完了するまで警戒を続け%CSTR:C_ID:語尾ます%」
+	DATAFORM 「レーダーに異常なし…、暫くは問題ない%CSTR:C_ID:語尾です2%」
+	DATAFORM 「もう準備終わってる%CSTR:C_ID:語尾ので%、他が完了したら連絡%CSTR:C_ID:語尾問う5%？」
+	DATAFORM 「ふぅ、気が休まる暇がない%CSTR:C_ID:語尾です2%…、次も警戒しないといけない%CSTR:C_ID:語尾応答2%」
+	ENDDATA
+CASE "END_SUPPORT_回収"
+	STRDATA WORDS
+	DATAFORM 「こちらは既に撤退準備は終わ%CSTR:C_ID:語尾ました%、いつでも下がれ%CSTR:C_ID:語尾ます%」
+	DATAFORM 「%CSTR:C_ID:語尾YES%了解%CSTR:C_ID:語尾です%、準備に取り掛か\@STRFIND("らりるれろ",SUBSTRINGU(CSTR:C_ID:語尾ます,0,1)) ?  # り\@%CSTR:C_ID:語尾ます%」
+	DATAFORM 「こちらは部下が軽傷した程度%CSTR:C_ID:語尾応答%、撤退はすぐ出来%CSTR:C_ID:語尾ます%」
+	DATAFORM 「%CSTR:C_ID:語尾謝罪%、こちらは資材の整理に時間がかかりそう%CSTR:C_ID:語尾応答%」
+	DATAFORM 「無事に終わった%CSTR:C_ID:語尾応答3%、毎日こうだといい%CSTR:C_ID:語尾繋ぎ%%CSTR:C_ID:語尾逆説%…」
+	DATAFORM 「これは持ち帰れそうにない%CSTR:C_ID:語尾応答2%…、置いてい%CSTR:C_ID:語尾行く%」
+	DATAFORM 「%CSTR:C_ID:語尾反応%、撤退%CSTR:C_ID:語尾問う%？」
+	DATAFORM 「この辺りは調べ尽く%CSTR:C_ID:語尾問う4%？、%CSTR:C_ID:一人称%達も下が%CSTR:C_ID:語尾促進%」
+	DATAFORM 「ふぅ、今日はここまで%CSTR:C_ID:語尾同意求む%？、%CSTR:C_ID:二人称%も下がった方がいい%CSTR:C_ID:語尾許可%」
+	DATAFORM 「そろそろ引き揚げ%CSTR:C_ID:語尾ます%、資材は既に送%CSTR:C_ID:語尾ました%」
+	ENDDATA
+CASE "DEFEATED_CITY"
+;探索に限らず、戦闘敗北時共通で表示されます
+	STRDATA WORDS
+	DATAFORM ≪これ以上の負傷は許容できません、エージェント%CALLNAME:C_ID%の緊急搬送を行います≫
+	DATAFORM ≪エージェント%CALLNAME:C_ID%の生命信号が危険水準に達しています、任務を中断します≫
+	DATAFORM ≪エージェント%CALLNAME:C_ID%の緊急転移を実行します、各支援部隊は即時退却を行ってください≫
+	ENDDATA
+
+
+
+;一言口上さんぷる
+CASE "RPG_EVENT_501_1_ONI"
+	WORDS = 「%CSTR:C_ID:語尾謝罪%、他に人がいるとは思わなかったの%CSTR:C_ID:語尾です%」
+CASE "RPG_EVENT_501_1_EXPLORER"
+	STRDATA WORDS
+	DATAFORM 「……\@RAND:2 ? %CSTR:C_ID:語尾相槌% # %CSTR:C_ID:語尾YES%\@、気にしなくていい%CSTR:C_ID:語尾許可%」
+	DATAFORM 「……あ、危ない%CSTR:C_ID:語尾許可%。それにしても凄い腕力%CSTR:C_ID:語尾肯定%」
+	ENDDATA
+
+CASE "RPG_EVENT_501_2_ONI"
+	WORDS = 「安全に暮らせる場所があるの%CSTR:C_ID:語尾問う%……%CSTR:C_ID:一人称%も連れて行ってほしい%CSTR:C_ID:語尾繋ぎ%%CSTR:C_ID:語尾逆説%」
+CASE "RPG_EVENT_501_3_ONI"
+	WORDS = 「“都市”、面白い%CSTR:C_ID:語尾称える%。これも何かの縁%CSTR:C_ID:語尾同意求む%。」
+CASE "RPG_EVENT_501_4_ONI"
+	WORDS = 「本当にそんな場所が存在するの%CSTR:C_ID:語尾問う%？%CSTR:C_ID:語尾逆説%、このまま死ぬよりはマシ%CSTR:C_ID:語尾肯定%。よろしくお願い%CSTR:C_ID:語尾お願い%。」
+CASE "RPG_EVENT_501_2_EXPLORER", "RPG_EVENT_501_3_EXPLORER", "RPG_EVENT_501_4_EXPLORER"
+	STRDATA WORDS
+	DATAFORM 「\@RAND:2 ? %CSTR:C_ID:語尾微笑% # %CSTR:C_ID:語尾YES%\@。あとでみんなに紹介してあげ%CSTR:C_ID:語尾送る%」
+	DATAFORM 「\@RAND:2 ? %CSTR:C_ID:語尾微笑% # %CSTR:C_ID:語尾YES%\@。今度“都市”を案内してあげ%CSTR:C_ID:語尾送る%」
+	DATAFORM 「\@RAND:2 ? %CSTR:C_ID:語尾微笑% # %CSTR:C_ID:語尾YES%\@。帰ったら一緒にご飯を食べに行%CSTR:C_ID:語尾行く%」
+	ENDDATA
+
+;ガワだけ置いておきますよん
+CASE "END_EXPLORER_退却"
+;退却時
+CASE "END_EXPLORER_敗北"
+;敗北撤退時
+ENDSELECT
+RETURNF WORDS
+
+
+
+
+
+
+
+
+
+
+

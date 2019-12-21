@@ -1,0 +1,22 @@
+﻿;----------------------------------------------------------------------------------------------------
+;FISHER_YATES_SHAFFLE（F関数版）
+;ソースはwikipedia
+;CALLF FUNC_FISHER_YATES_SHAFFLE(LOCAL, 10)
+;これでLOCAL:0～9に0～9が重複なしで代入される
+;戻り値を持たず配列を直接書き換える（CALLF必須）
+;----------------------------------------------------------------------------------------------------
+@FUNC_FISHER_YATES_SHAFFLE(ARRAY, ARRAY_SIZE)
+#FUNCTION
+#DIM REF ARRAY   ;対象配列
+#DIM ARRAY_SIZE  ;配列の長さ（2以上の数値にして下さい）
+#DIM ELE_SHAFFLE ;シャッフル対象要素
+VARSET ARRAY, -1
+ARRAY:0 = 0
+;要素0に対する↓の処理は必ず0になるんだから1以降でおｋ
+FOR LOCAL:0, 1, ARRAY_SIZE
+	ELE_SHAFFLE = RAND(0, LOCAL:0 + 1)
+	;挙動変わらないようならif設けるより素通しの方が処理数少なくなったりせんか？
+	;SIF ELE_SHAFFLE != LOCAL:0
+	ARRAY:(LOCAL:0) = ARRAY:ELE_SHAFFLE
+	ARRAY:ELE_SHAFFLE = LOCAL:0
+NEXT

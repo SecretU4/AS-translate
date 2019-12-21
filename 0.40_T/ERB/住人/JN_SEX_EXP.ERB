@@ -1,0 +1,69 @@
+﻿
+;-------------------------------------------------
+;セックス経験増加
+;-------------------------------------------------
+@JN_SEX_EXP
+#DIM SEX_P
+
+PRINTFORML 【――――――――――――――――――경험 축적――――――――――――――――――】
+SEX_P = ((RAND:7)+2)
+EXP:키스경험 += SEX_P
+PRINTFORM 【키스 경험 　　:{EXP:키스경험-SEX_P, 5 ,LEFT}→{EXP:키스경험, 5 ,RIGHT}】
+SEX_P = ((RAND:7)+2)
+EXP:Ｖ경험 += SEX_P
+PRINTFORM 【Ｖ경험　　　:{EXP:Ｖ경험-SEX_P, 5 ,LEFT}→{EXP:Ｖ경험, 5 ,RIGHT}】
+SEX_P = ((RAND:7)+2)
+EXP:Ａ경험 += SEX_P
+PRINTFORM 【Ａ경험　　　:{EXP:Ａ경험-SEX_P, 5 ,LEFT}→{EXP:Ａ경험, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:7)+2)
+EXP:Ｃ경험 += SEX_P
+PRINTFORM 【Ｃ경험　　　:{EXP:Ｃ경험-SEX_P, 5 ,LEFT}→{EXP:Ｃ경험, 5 ,RIGHT}】
+SEX_P = ((RAND:7)+2)
+EXP:Ｂ경험  += SEX_P
+PRINTFORM 【Ｂ경험　　　:{EXP:Ｂ경험-SEX_P, 5 ,LEFT}→{EXP:Ｂ경험, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:2)+1)
+EXP:성교경험 += SEX_P
+PRINTFORM 【성교 경험　　:{EXP:성교경험-SEX_P, 5 ,LEFT}→{EXP:성교경험, 5 ,RIGHT}】
+SEX_P = ((RAND:2)+1)
+EXP:Ａ성교경험 += SEX_P
+PRINTFORM 【Ａ성교 경험　:{EXP:Ａ성교경험-SEX_P, 5 ,LEFT}→{EXP:Ａ성교경험, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:5)+1)
+EXP:수음경험 += SEX_P
+PRINTFORM 【수음 경험　　:{EXP:수음경험-SEX_P, 5 ,LEFT}→{EXP:수음경험, 5 ,RIGHT}】
+SEX_P = ((RAND:5)+1)
+EXP:펠라경험 += SEX_P
+PRINTFORM 【펠라 경험　:{EXP:펠라경험-SEX_P, 5 ,LEFT}→{EXP:펠라경험, 5 ,RIGHT}】
+IF TALENT:거유 == 1 || TALENT:폭유 == 1
+	SEX_P = ((RAND:5)+1)
+	EXP:파이즈리경험 += SEX_P
+	PRINTFORM 【파이즈리 경험:{EXP:파이즈리경험-SEX_P, 5 ,LEFT}→{EXP:파이즈리경험, 5 ,RIGHT}】
+ENDIF
+PRINTFORML
+SEX_P = ((RAND:3)+1)
+EXP:절정경험 += SEX_P
+PRINTFORM 【절정 경험　　:{EXP:절정경험-SEX_P, 5 ,LEFT}→{EXP:절정경험, 5 ,RIGHT}】
+SEX_P = ((RAND:3)+1)
+EXP:정액경험 += SEX_P
+PRINTFORM 【정액 경험　　:{EXP:정액경험-SEX_P, 5 ,LEFT}→{EXP:정액경험, 5 ,RIGHT}】
+SEX_P = ((RAND:3)+1)
+EXP:정음경험 += SEX_P
+PRINTFORM 【정음 경험　　:{EXP:정음경험-SEX_P, 5 ,LEFT}→{EXP:정음경험, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:3)+1)
+EXP:질싸경험 += SEX_P
+PRINTFORM 【질싸 경험　　:{EXP:질싸경험-SEX_P, 5 ,LEFT}→{EXP:질싸경험, 5 ,RIGHT}】
+SEX_P = ((RAND:5)+1)
+EXP:봉사쾌락경험 += SEX_P
+PRINTFORM 【봉사쾌락경험:{EXP:봉사쾌락경험-SEX_P, 5 ,LEFT}→{EXP:봉사쾌락경험, 5 ,RIGHT}】
+PRINTFORML
+PRINTFORML 【――――――――――――――――――――――――――――――――――――――――】
+
+
+
+
+
+
+

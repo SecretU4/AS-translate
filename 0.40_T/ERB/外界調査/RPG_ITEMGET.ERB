@@ -1,0 +1,66 @@
+﻿;-------------------------------------------------
+;調査(アイテム入手)
+;-------------------------------------------------
+@RPG_ITEMGET(ARG)
+#DIM L_INPUT
+#DIM L_I
+#DIM I_G
+
+L_I = ARG
+
+IF Flag:フロア_発見率 >= RAND:100
+	IF Flag:フロア_品質 >= RAND:100
+		IF Flag:フロア_品質 >= RAND:100
+			;高品質
+			I_G = (RAND:6)+20
+		ELSE 
+			;中品質
+			I_G = (RAND:6)+10
+		ENDIF
+	ELSE 
+		;低品質
+		I_G = (RAND:6)
+	ENDIF
+ELSE 
+	;入手できず
+	I_G = -1
+ENDIF
+
+IF I_G != -1
+	SAVESTR:調査_状況 =  【―――――――調査結果―――――――】
+	SAVESTR:調査_状況2 =  【――――%FLAGNAME:(2100+I_G)%을 입수했다。――――】
+	IF !RAND:10
+		SAVESTR:調査_一言 = 「%CSTR:L_I:語尾反応%……これは…？」
+	ELSEIF !RAND:9
+		SAVESTR:調査_一言 = 「―――使えそう%CSTR:L_I:語尾逆説%……大丈夫%CSTR:L_I:語尾疑問%…？」
+	ELSEIF !RAND:8
+		SAVESTR:調査_一言 = 「…傷んでない%CSTR:L_I:語尾応答2%…」
+	ELSEIF !RAND:7
+		SAVESTR:調査_一言 = 「………♪」
+	ELSEIF !RAND:6
+		SAVESTR:調査_一言 = 「…これは無事みたい%CSTR:L_I:語尾肯定2%」
+	ELSEIF !RAND:5
+		SAVESTR:調査_一言 = 「これも拾って行%CSTR:L_I:語尾行く%」
+	ELSEIF !RAND:4
+		SAVESTR:調査_一言 = 「こんな所に…持って行%CSTR:L_I:語尾行く%…」
+	ELSEIF !RAND:3
+		SAVESTR:調査_一言 = 「…？、…これは…」
+	ELSEIF !RAND:2
+		SAVESTR:調査_一言 = 「%CSTR:L_I:語尾微笑%、素材発見%CSTR:L_I:語尾肯定2%」
+	ELSE
+		SAVESTR:調査_一言 = 「まずは…一つ……」
+	ENDIF
+	FLAG:(2100+I_G) += 1
+ELSE 
+	SAVESTR:調査_状況 =  【―――――――조사 결과―――――――】
+	SAVESTR:調査_状況2 =  【――아무것도 발견되지 않았습니다。――】
+ENDIF
+
+
+
+
+
+Flag:フロア_発見率 = RAND:100
+
+
+

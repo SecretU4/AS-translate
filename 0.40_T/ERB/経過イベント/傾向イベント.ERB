@@ -1,0 +1,135 @@
+﻿;-------------------------------------------------
+;傾向イベント
+;-------------------------------------------------
+@TURN_EVENT_TL
+#DIM L_KD
+
+L_KD = 0
+
+IF CFlag:値傾向 == 3 && CFLAG:淫乱値 < 999
+;음란
+DRAWLINE
+	IF !RAND:5
+		PRINTFORML 「んっ…えっ、な…何でもない%CSTR:語尾です2%っ」
+	ELSEIF !RAND:4
+		PRINTFORML (最近…何故か身体が熱く…)
+	ELSEIF !RAND:3
+		PRINTFORML 「はぁ…はぁ……気分が高揚する…」
+	ELSEIF !RAND:2
+		PRINTFORML (身体が疼く……抑えが…っ…)
+	ELSE
+		PRINTFORML 「顔が赤い…？、そっ…そんなことはない%CSTR:語尾です2%っ………んっ…」
+	ENDIF
+	CFLAG:淫乱値 += (RAND:3)+((CFLAG:好感度)/200)+1
+	PRINTFORML 몰래 넣은 미약의 효과에 의해、%CALLNAME%는 성욕이 높아졌다…
+	IF ABL:성노예 < 9 && ((ABL:성노예)*100) < CFLAG:淫乱値
+		SETCOLOR 0,250,250
+		PRINTFORML 성노예가 올랐다
+		RESETCOLOR
+		ABL:성노예 += 1
+	ENDIF
+	IF RAND:10 > 5
+		SETCOLOR 250,250,0
+		CFLAG:住人_モラル -= 1
+		PRINTFORML 모랄이 떨어졌다
+		RESETCOLOR
+	ENDIF
+ELSEIF CFlag:値傾向 == 2 && CFLAG:愛情値 < 999
+;愛情
+DRAWLINE
+	IF !RAND:5
+		PRINTFORML 「――%CSTR:語尾微笑%、それは面白い%CSTR:語尾応答2%」
+	ELSEIF !RAND:4
+		PRINTFORML 「まだ時間あ%CSTR:語尾聞く%……？、なら次行%CSTR:語尾行く%」
+	ELSEIF !RAND:3
+		PRINTFORML 「こっちはどう%CSTR:語尾疑問%？、ほら、良い感じ%CSTR:語尾です%」
+	ELSEIF !RAND:2
+		PRINTFORML 「…ま、まだ寄りたいところあ%CSTR:語尾聞く%？、……」
+	ELSE
+		PRINTFORML 「%CSTR:語尾反応%…あれ面白そう%CSTR:語尾です%、やって%CSTR:語尾行為2%？」
+	ENDIF
+	CFLAG:愛情値 += (RAND:3)+((CFLAG:好感度)/200)+1
+	PRINTFORML 둘만의 가치있는 시간 덕분에、%CALLNAME%는 %CALLNAME:MASTER%에 대한 애정이 조금씩 쌓이고 있다…
+	IF ABL:농락 < 9 && ((ABL:농락)*100) < CFLAG:愛情値
+		SETCOLOR 0,250,250
+		PRINTFORML 농락이 올랐다
+		RESETCOLOR
+		ABL:농락 += 1
+	ENDIF
+ELSEIF CFlag:値傾向 == 1 && CFLAG:忠誠値 < 999
+;忠誠
+DRAWLINE
+	IF !RAND:5
+		PRINTFORML 「―――なるほど、…本当に物知り%CSTR:語尾肯定%」
+	ELSEIF !RAND:4
+		PRINTFORML 「――すごい%CSTR:語尾称える%、%CSTR:一人称%もこれくらいできたら…」
+	ELSEIF !RAND:3
+		PRINTFORML 「手伝って欲しいことが―――いつも%CSTR:語尾感謝%」
+	ELSEIF !RAND:2
+		PRINTFORML 「何か困ってることあ%CSTR:語尾聞く%？」
+	ELSE
+		PRINTFORML (……いつも見てるけど、手際がいい%CSTR:語尾応答2%…)
+	ENDIF
+	CFLAG:忠誠値 += (RAND:3)+((CFLAG:好感度)/200)+1
+	PRINTFORML 공동으로 작업하면서 %CALLNAME%는 %CALLNAME:MASTER%에게 관심과 존경을 품고 있다…
+	IF ABL:순종 < 9 && ((ABL:순종)*100) < CFLAG:忠誠値
+		SETCOLOR 0,250,250
+		PRINTFORML 순종이 올랐다
+		RESETCOLOR
+		ABL:순종 += 1
+	ENDIF
+	IF RAND:10 > 5
+		SETCOLOR 250,250,0
+		CFLAG:住人_モラル += 1
+		PRINTFORML 모랄이 올랐다
+		RESETCOLOR
+	ENDIF
+ELSE
+;なし
+ENDIF
+
+IF ABL:친밀 < 9 && ((ABL:친밀)*500) < CFLAG:好感度
+	SETCOLOR 0,250,250
+	PRINTFORML 친밀이 올랐다
+	RESETCOLOR
+	ABL:친밀 += 1
+ENDIF
+
+L_KD = CFLAG:好感度/10
+SIF L_KD > 100
+	L_KD = 100
+
+IF TALENT:즉각타락 == 1
+	L_KD = L_KD*5
+ELSEIF TALENT:쉽게반함 == 1
+	L_KD = L_KD*2
+ENDIF
+
+CFLAG:好感度 += L_KD
+
+SIF CFLAG:好感度 > 9999999
+	CFLAG:好感度 = 9999999
+
+SIF CFLAG:淫乱値 > 999
+	CFLAG:淫乱値 = 999
+SIF CFLAG:愛情値 > 999
+	CFLAG:愛情値 = 999
+SIF CFLAG:忠誠値 > 999
+	CFLAG:忠誠値 = 999
+SIF CFLAG:住人_モラル > 100
+	CFLAG:住人_モラル = 100
+SIF CFLAG:住人_モラル < -100
+	CFLAG:住人_モラル = -100
+
+
+
+
+
+
+
+
+
+
+
+
+

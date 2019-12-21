@@ -1,0 +1,62 @@
+﻿;-------------------------------------------------
+;人気上昇
+;-------------------------------------------------
+@TURN_EVENT_NNK
+#DIM L_NNK
+#DIM L_NNK2
+#DIM L_NNK0
+
+L_NNK0 = CFlag:住人_人気
+L_NNK2 = 1
+
+SIF TALENT:인기 == 1
+	L_NNK2 += 3
+SIF TALENT:매혹 == 1
+	L_NNK2 += 3
+SIF TALENT:매력 == 1
+	L_NNK2 += 3
+SIF TALENT:미모 == 1
+	L_NNK2 += 3
+SIF TALENT:카리스마 == 1
+	L_NNK2 += 5
+
+
+L_NNK = (RAND:1)+1+RAND:(L_NNK2)
+
+CFlag:住人_人気 += L_NNK
+
+SIF CFlag:住人_人気 >= 99999
+	CFlag:住人_人気 = 99999
+
+SETCOLOR 250,250,100
+PRINTFORML 인기　　{L_NNK0}　→　{CFlag:住人_人気}
+RESETCOLOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

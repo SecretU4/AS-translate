@@ -1,0 +1,914 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CHARACTER_SCOUT.ERB
+;	Facility	:データベース(EXPUP)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ CHARACTER_SCOUT_POS						DB:EXPUP位置
+;
+;===============================================================================
+
+;=================================================
+;   sub CHARACTER_SCOUT_POS
+;=================================================
+;   DB:EXPUP位置
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@CHARACTER_SCOUT_MIND(L_C_ID)
+#DIM L_C_ID                  ;対象キャラ登録番号
+#DIM S_MIND                  ;性格ID
+#DIM CONST L_TAL_START = 1400;口調素質開始値
+S_MIND = RAND:14
+;最初に性格を選びます
+IF TALENT:L_C_ID:NPC == 0
+	IF TALENT:L_C_ID:オトコ == 0
+		;幼い口調は選ばれにくい（3/4で再抽選）
+		SIF RAND:4
+			S_MIND = RAND:12
+	;以下、男性用口調のコンバート処理
+	ELSEIF S_MIND >= 8
+	;男気
+		S_MIND = 8
+	ELSEIF S_MIND >= 6
+	;臆病
+		S_MIND = 6
+	ELSEIF S_MIND >= 5
+	;荒々しい
+		S_MIND = 5
+	ELSEIF S_MIND >= 3
+	;マイペース
+		S_MIND = 3
+	ELSEIF S_MIND >= 1
+	;クール
+		S_MIND = 1
+	ELSE
+	;礼儀正しい
+		S_MIND = 0
+	ENDIF
+	;ここで素質オン
+	TALENT:L_C_ID:(L_TAL_START + S_MIND) = 1
+ENDIF
+CALL CHARACTER_SCOUT_MIND_C(L_C_ID, S_MIND)
+
+;=============================
+;=============================
+;性格別の口調設定
+;=============================
+;=============================
+@CHARACTER_SCOUT_MIND_C(L_C_ID, S_MIND)
+#DIM L_C_ID       ;対象キャラ登録番号
+#DIM S_MIND       ;性格ID
+#DIM L_STR_START  ;STRの範囲開始値
+#DIM L_CSTR_START ;CSTRの範囲開始値
+#DIM L_RANGE      ;対象範囲、実際には0～51まで（eraAS0.3現在）
+L_STR_START  = (S_MIND * 100) + 5000
+L_CSTR_START = 100
+FOR L_RANGE, 0, 95
+	CSTR:L_C_ID:(L_CSTR_START + L_RANGE) = %STR:(L_STR_START + L_RANGE)%
+NEXT
+CALL CHARACTER_SCOUT_MIND_PRONOUN(L_C_ID, S_MIND)
+
+
+;=============================
+;一人称、二人称の設定
+;=============================
+@CHARACTER_SCOUT_MIND_PRONOUN(L_C_ID, S_MIND)
+#DIM L_C_ID                  ;対象キャラ登録番号
+#DIM S_MIND                  ;性格ID
+#DIM CONST L_TAL_START = 1400;口調素質開始値
+SELECTCASE TALENTNAME:(L_TAL_START + S_MIND)
+CASE "礼儀正しい"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = 貴方
+CASE "クール"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = キミ
+CASE "ツンツン"
+	CSTR:L_C_ID:一人称 = アタシ
+	CSTR:L_C_ID:二人称 = アンタ
+CASE "マイペース"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = 君
+CASE "高圧的"
+	CSTR:L_C_ID:一人称 = アタシ
+	CSTR:L_C_ID:二人称 = 貴方
+CASE "荒々しい"
+	CSTR:L_C_ID:一人称 = 俺
+	CSTR:L_C_ID:二人称 = お前
+CASE "弱気"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = 貴方
+CASE "気品高い"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = 貴方
+CASE "男気"
+	CSTR:L_C_ID:一人称 = 俺
+	CSTR:L_C_ID:二人称 = お前
+CASE "色っぽい"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = 貴方
+CASE "フレンドリー"
+	CSTR:L_C_ID:一人称 = 私
+	CSTR:L_C_ID:二人称 = アンタ
+CASE "子供っぽい"
+	CSTR:L_C_ID:一人称 = %CALLNAME:L_C_ID%
+	CSTR:L_C_ID:二人称 = おにーさん
+CASE "おしゃま"
+	CSTR:L_C_ID:一人称 = %CALLNAME:L_C_ID%
+	CSTR:L_C_ID:二人称 = お兄さん
+CASE "古風"
+	CSTR:L_C_ID:一人称 = 妾
+	CSTR:L_C_ID:二人称 = お主
+ENDSELECT
+
+
+;=============================
+;付与されたTALENTから性格IDを取得
+;ただし、
+;・NPCの番号を渡されることは想定してない
+;・バグって素質が2つついてるようなのは想定してない
+;・性格素質がついてないキャラを渡すと-1が返る
+;=============================
+@CHARACTER_SCOUT_TALENT_TO_MIND(L_C_ID)
+#FUNCTION
+#DIM L_C_ID       ;対象キャラ登録番号
+#DIM CONST L_TAL_START = 1400;口調素質開始値
+#DIM CONST L_TAL_END   = 1500;口調素質終値（この数字は含まれない）
+RETURNF MAX(FINDELEMENT(TALENT:L_C_ID:0, 1, L_TAL_START, L_TAL_END) - L_TAL_START, -1)
+
+
+;-------------------------------------------------
+;語尾口調再設定　修正用
+;-------------------------------------------------
+@CHARACTER_SCOUT_MIND_REPEAT0
+#DIM L_C_ID       ;対象キャラ登録番号
+SIF CHARANUM == 1
+	RETURN
+	
+FOR L_C_ID, 0, CHARANUM
+	SIF L_C_ID == MASTER || TALENT:L_C_ID:NPC
+		CONTINUE
+	CALL CHARACTER_SCOUT_MIND_REPEAT(L_C_ID)
+NEXT
+
+PRINTFORMW 修正完了しました。
+
+
+
+;-------------------------------------------------
+;語尾口調再設定
+;-------------------------------------------------
+@CHARACTER_SCOUT_MIND_REPEAT(L_C_ID, S_MIND = -1)
+#DIM L_C_ID       ;対象キャラ登録番号
+#DIM S_MIND       ;性格ID
+;性格IDが渡されていない場合、素質からの取得を試みるがそれも設定されていないならば再設定する
+SIF S_MIND < 0
+	S_MIND = CHARACTER_SCOUT_TALENT_TO_MIND(L_C_ID)
+IF S_MIND < 0
+	CALL CHARACTER_SCOUT_MIND(L_C_ID)
+ELSE
+	CALL CHARACTER_SCOUT_MIND_C(L_C_ID, S_MIND)
+ENDIF
+
+
+
+;-------------------------------------------------
+;身体特徴系のフレーバーデータ設定
+;-------------------------------------------------
+@CHARACTER_SCOUT_PERSONAL(L_C_ID)
+#DIM L_C_ID
+IF TALENT:L_C_ID:NPC == 0
+	IF TALENT:L_C_ID:EPC == 0
+		CFLAG:L_C_ID:肌色 = RAND:6
+		CFLAG:L_C_ID:髪色 = RAND:11
+		CFLAG:L_C_ID:髪型 = RAND:25
+		CFLAG:L_C_ID:目 = RAND:8
+		CFLAG:L_C_ID:瞳色 = RAND:6
+		CFLAG:L_C_ID:体型 = RAND:3
+		IF TALENT:L_C_ID:オトコ == 1 || TALENT:L_C_ID:ふたなり
+			CFLAG:L_C_ID:ペニスサイズ = RAND:4
+		ENDIF
+	ENDIF
+ENDIF
+CALL CHARACTER_SCOUT_CHARM_POINT(L_C_ID)
+CALL CHARACTER_SCOUT_KUSE(L_C_ID)
+CALL CHARACTER_SCOUT_BODYSIZE(L_C_ID)
+
+
+;-------------------------------------------------
+;チャームポイント決定
+;-------------------------------------------------
+@CHARACTER_SCOUT_CHARM_POINT(L_C_ID)
+#DIM L_C_ID
+STRDATA CSTR:L_C_ID:チャームポイント
+	DATA 肌
+	DATA 目元
+	DATA 鼻筋
+	DATA 口元
+	DATA 泣き黒子
+	DATA 鎖骨
+	DATA 二の腕
+	DATA 手首
+	DATA 手
+	DATA 指
+	DATA 臍
+	DATA 美乳
+	DATA くびれ
+	DATA ヒップライン
+	DATA 脚線美
+	DATA 膝
+	DATA 足首
+	DATA かかと
+	DATA 背中
+	DATA 耳
+	DATA 性器
+	DATA 髪の光沢
+	DATA お尻
+	DATA 長いまつげ
+	DATA 八重歯
+	DATA 眉毛
+	DATA 爪
+	DATA 寝癖
+	DATA 髪質
+ENDDATA
+SIF CSTR:L_C_ID:チャームポイント == "お尻" && (TALENT:L_C_ID:巨尻  || TALENT:L_C_ID:爆尻)
+	CSTR:L_C_ID:チャームポイント = 大きな尻
+
+
+;-------------------------------------------------
+;くせ決定
+;-------------------------------------------------
+@CHARACTER_SCOUT_KUSE(L_C_ID)
+#DIM L_C_ID
+STRDATA CSTR:L_C_ID:癖
+	DATA 唇を舐める
+	DATA あさってを見る
+	DATA 髪を触る
+	DATA 腿に手を挟む
+	DATA 腕を組む
+	DATA 指を絡める
+	DATA 貧乏ゆすり
+	DATA リズムを取る
+	DATA 上目遣い
+	DATA 首を傾げる
+	DATA 溜息
+	DATA オーバーアクション
+	DATA 瞬き多い
+	DATA ふくれる
+	DATA 歯を食いしばる
+	DATA 口を隠す
+	DATA 耳を触る
+	DATA だらける
+	DATA 舌打ちする
+	DATA 爪を噛む
+	DATA 鼻をかく
+	DATA 額を押える
+	DATA 拳を握る
+	DATA 指差す
+	DATA 決め台詞がある
+	DATA 腰を捻る
+	DATA 片目を閉じる
+	DATA 目を細める
+	DATA 口を歪める
+	DATA 唸る
+	DATA 隅に行きたがる
+	DATA 長さを測る
+	DATA 話す時の距離が近い
+	DATA 手の甲を舐める
+	DATA ポーズをとる
+	DATA 胸を寄せる
+ENDDATA
+SIF CSTR:L_C_ID:癖 == "胸を寄せる" && TALENT:L_C_ID:オトコ
+	CSTR:L_C_ID:癖 = ポーズをとる
+
+
+;-------------------------------------------------
+;ボディサイズ決定
+;小柄体型などを使用する場合は事前に付与しておくこと
+;-------------------------------------------------
+@CHARACTER_SCOUT_BODYSIZE(L_C_ID)
+#DIM L_C_ID
+#DIM L_HOSEI_WAIST
+;身長
+IF TALENT:L_C_ID:オトコ == 1
+	IF TALENT:L_C_ID:巨躯 == 1
+		CFLAG:L_C_ID:身長 = 220 + RAND:30
+	ELSEIF TALENT:L_C_ID:大柄 == 1
+		CFLAG:L_C_ID:身長 = 190 + RAND:30
+	ELSEIF TALENT:L_C_ID:長身 == 1
+		CFLAG:L_C_ID:身長 = 175 + RAND:20
+	ELSEIF TALENT:L_C_ID:小人体型 == 1
+		CFLAG:L_C_ID:身長 = 100 - RAND:5
+	ELSEIF TALENT:L_C_ID:小柄体型 == 1
+		CFLAG:L_C_ID:身長 = 130 - RAND:5
+	ELSE
+		CFLAG:L_C_ID:身長 = 165 + RAND:7
+	ENDIF
+ELSE
+	IF TALENT:L_C_ID:巨躯 == 1
+		CFLAG:L_C_ID:身長 = 180 + RAND:9
+	ELSEIF TALENT:L_C_ID:大柄 == 1
+		CFLAG:L_C_ID:身長 = 170 + RAND:9
+	ELSEIF TALENT:L_C_ID:長身 == 1
+		CFLAG:L_C_ID:身長 = 160 + RAND:9
+	ELSEIF TALENT:L_C_ID:小人体型 == 1
+		CFLAG:L_C_ID:身長 = 130 - RAND:30
+	ELSEIF TALENT:L_C_ID:小柄体型 == 1
+		CFLAG:L_C_ID:身長 = 145 - RAND:20
+	ELSE
+		CFLAG:L_C_ID:身長 = 145 + RAND:15
+	ENDIF
+ENDIF
+
+;体重
+IF CFLAG:L_C_ID:身長 > 120
+	CFLAG:L_C_ID:体重 = ((CFLAG:L_C_ID:身長 - 100) * 9) / 10 + RAND:10
+ELSE
+	CFLAG:L_C_ID:体重 = ((CFLAG:L_C_ID:身長 - 48) * 3) / 10 + RAND:5
+ENDIF
+
+;ウエストサイズ
+;補正値
+L_HOSEI_WAIST = RAND:100 + CFLAG:L_C_ID:体型 * 100
+CFLAG:L_C_ID:ウエストサイズ = (CFLAG:L_C_ID:身長 * 320) + (RAND:500 * 2 + RAND:500 * 2)
+CFLAG:L_C_ID:ウエストサイズ = CFLAG:L_C_ID:ウエストサイズ * (L_HOSEI_WAIST + 1000) / 1000000
+SIF CFLAG:L_C_ID:身長 < 130
+	CFLAG:L_C_ID:ウエストサイズ += (130 - CFLAG:L_C_ID:身長 + RAND:10 + RAND:(TALENT:L_C_ID:小人体型 + 1)) / 5
+
+CFLAG:L_C_ID:バストサイズ = CHARACTER_BUST_RETURN(L_C_ID)
+CFLAG:L_C_ID:ヒップサイズ = CHARACTER_HIP_RETURN(L_C_ID)
+
+
+;-------------------------------------------------
+;バスト演算
+;-------------------------------------------------
+@CHARACTER_BUST_RETURN(ARG:0)
+#FUNCTION
+#DIM L_I
+#DIM L_BH
+#DIM L_HS
+
+L_I = ARG
+L_BH = CFLAG:L_I:身長*520/1000
+
+IF TALENT:L_I:オトコ == 1
+	IF TALENT:L_I:巨躯 == 1
+		L_BH+= RAND:10
+	ELSEIF TALENT:L_I:大柄 == 1
+		L_BH+= RAND:5
+	ELSEIF TALENT:L_I:長身 == 1
+		L_BH+= RAND:3
+	ELSEIF TALENT:L_I:小人体型 == 1
+		L_BH-= RAND:5
+	ELSEIF TALENT:L_I:小柄体型 == 1
+		L_BH-= RAND:3
+	ELSE
+		L_BH+= RAND:5
+	ENDIF
+ELSE
+	;補正
+	L_BH += (CFLAG:L_I:体型*100 + RAND:100) / 10
+	L_HS += (CFLAG:L_I:体型*100 + RAND:100) / 50
+
+	IF TALENT:L_I:巨躯 == 1
+		L_BH += 15+RAND:10
+	ELSEIF TALENT:L_I:大柄 == 1
+		L_BH += 10+RAND:10
+	ELSEIF TALENT:L_I:長身 == 1
+		L_BH += 5+RAND:10
+	ELSEIF TALENT:L_I:小人体型 == 1
+		L_BH -= 10+RAND:10
+	ELSEIF TALENT:L_I:小柄体型 == 1
+		L_BH -= 5+RAND:10
+	ENDIF
+
+	
+	;カップサイズはバスト-アンダーバストがAAで7.5cm以上10.0cm未満
+	;以降+2.5cm毎にサイズアップし、AA未満で測定不能(=0)
+	L_HS = (CFLAG:L_I:ウエストサイズ+CFLAG:L_I:身長/20)*10
+	SIF TALENT:L_I:小人体型
+		L_HS -= 10+RAND:10
+	IF TALENT:L_I:巨乳 == 1
+		;Eカップ～Fカップまで
+		L_BH = L_HS+200
+	ELSEIF TALENT:L_I:爆乳 == 1
+		;Gカップ～
+		L_BH = MAX(L_BH, L_HS+250)
+	ELSEIF TALENT:L_I:絶壁
+		;測定不能～AAカップまで
+		L_BH = L_HS
+		L_BH += RAND:51
+	ELSEIF TALENT:L_I:貧乳
+		;Aカップ～Bカップまで
+		L_BH = L_HS+100
+	ELSE
+		;Cカップ～Dカップまで
+		L_BH = L_HS+150
+	ENDIF
+	L_BH += RAND:50
+	CFLAG:L_I:カップサイズ = MAX(0, (L_BH-L_HS-50)/25)
+	CFLAG:L_I:体重 += RAND:(CFLAG:L_I:カップサイズ + 1) / 10
+ENDIF
+RETURNF L_BH/10
+
+
+;-------------------------------------------------
+;ヒップ演算
+;-------------------------------------------------
+@CHARACTER_HIP_RETURN(ARG:0)
+#FUNCTION
+#DIM L_I
+#DIM L_BH
+#DIM L_HS
+
+L_I = ARG
+;補正
+L_HS = CFLAG:L_I:体型*100 - RAND:50
+L_BH = (CFLAG:L_I:身長*(48+RAND:4)+RAND:100) * (L_HS+1000) / 10000
+
+IF TALENT:L_I:爆尻
+	L_BH = MAX(CFLAG:L_I:身長*59/10, L_BH)
+	L_BH += CFLAG:L_I:体型*RAND:15
+ELSEIF TALENT:L_I:巨尻
+	L_BH = MAX(CFLAG:L_I:身長*56/10, L_BH)
+	L_BH = MIN(CFLAG:L_I:身長*59/10 - 1, L_BH)
+ELSE
+	L_BH = MIN(CFLAG:L_I:身長*56/10 - 1, L_BH)
+	L_BH = MAX(CFLAG:L_I:身長*48/10, L_BH)
+ENDIF
+
+RETURNF L_BH/10
+
+
+;-------------------------------------------------
+;住人情報
+;-------------------------------------------------
+@CHARACTER_SCOUT_PERSONAL2(ARG:0)
+#DIM L_I
+#DIM P_1
+
+P_1 = 0
+L_I= ARG:0
+
+IF TALENT:L_I:青き血族 == 1
+	P_1 = 3
+ELSEIF     FLAG:都市_Lv >= 30 &&  FLAG:高級カジノ >= 15 && FLAG:エステ >= 15 && FLAG:学園 >= 15 && FLAG:ラブホテル >= 15
+	P_1 = RAND:4
+ELSEIF FLAG:都市_Lv >= 20 &&  FLAG:高級カジノ >= 10 && FLAG:エステ >= 10 && FLAG:学園 >= 10 && FLAG:ラブホテル >= 10
+	P_1 = RAND:3
+ELSEIF FLAG:都市_Lv >= 10 &&  FLAG:高級カジノ >=  5 && FLAG:エステ >=  5 && FLAG:学園 >=  5 && FLAG:ラブホテル >=  5
+	P_1 = RAND:2
+ELSE
+	P_1 = 0
+ENDIF
+
+
+
+IF Flag:掘り出しもの品質 > 0
+	TALENT:L_I:人権損壊 = 1
+	TALENT:L_I:依存 = 1
+	TALENT:L_I:非合意 = 0
+	TALENT:L_I:合意 = 1
+ENDIF
+
+IF Flag:掘り出しもの品質 == 3
+	CFLAG:L_I:住人_地位 = 3
+	TALENT:L_I:青き血族 = 1
+	P_1 = 3
+ELSEIF Flag:掘り出しもの品質 == 2
+	CFLAG:L_I:住人_地位 = 2
+	P_1 = 2
+ELSE
+	CFLAG:L_I:住人_地位 = P_1
+ENDIF
+
+SIF CFLAG:L_I:住人_地位 >= 3 && RAND:100 <= 5
+	TALENT:L_I:青き血族 = 1
+
+
+P_1 += 1
+
+CFlag:L_I:住人_所持金 = ((1000 * (RAND:10 + 1)) + (100 * (RAND:10 + 1)) + (10 * (RAND:10 + 1))) * (CFlag:L_I:住人_地位 + 1 * 10)
+CFlag:L_I:住人_貢献値 = (RAND:3 + 1) * P_1
+CFlag:L_I:住人_出費 = (CFlag:L_I:住人_所持金) / (RAND:4 + 4)
+CFlag:L_I:住人_収入 = ((CFlag:L_I:住人_所持金) / 5) * 2
+CFlag:L_I:住人_人気 = (RAND:50 + 1) * (CFlag:L_I:住人_地位 + 1)
+CFlag:L_I:住人_品性 = (RAND:50 + 1) * (CFlag:L_I:住人_地位 + 1)
+IF Flag:時間帯 == 0
+	IF !RAND:2
+		CFlag:L_I:住人_属性 = 1
+	ELSE
+		CFlag:L_I:住人_属性 = 0
+	ENDIF
+ELSE
+	IF !RAND:2
+		CFlag:L_I:住人_属性 = 2
+	ELSE
+		CFlag:L_I:住人_属性 = 0
+	ENDIF
+ENDIF
+
+SIF TALENT:L_I:人気 == 1
+	CFlag:L_I:住人_人気 += RAND:100+50
+SIF TALENT:L_I:魅惑 == 1
+	CFlag:L_I:住人_人気 += RAND:70+50
+SIF TALENT:L_I:魅力 == 1
+	CFlag:L_I:住人_人気 += RAND:70+50
+SIF TALENT:L_I:美貌 == 1
+	CFlag:L_I:住人_人気 += RAND:100+100
+SIF TALENT:L_I:カリスマ == 1
+	CFlag:L_I:住人_人気 += RAND:200+100
+
+
+
+IF CFlag:L_I:住人_属性 == 1
+	CFlag:L_I:住人_モラル = (RAND:20)+(RAND:40)+40
+	CFlag:L_I:住人_カルマ = (RAND:5)
+ELSEIF CFlag:L_I:住人_属性 == 2
+	CFlag:L_I:住人_モラル = (RAND:20)-(RAND:40)-20
+	CFlag:L_I:住人_カルマ = (RAND:40)+20
+ELSE
+	CFlag:L_I:住人_モラル = (RAND:10)+(RAND:10)+30
+	CFlag:L_I:住人_カルマ = (RAND:20)
+ENDIF
+
+CALL CHARACTER_SCOUT_PERSONAL3(ARG:0)
+
+
+
+;-------------------------------------------------
+;肉体情報
+;-------------------------------------------------
+@CHARACTER_SCOUT_PERSONAL3(L_C_ID)
+#DIM L_C_ID
+#DIM L_OVUM_DEFFENSE
+
+L_OVUM_DEFFENSE = 0
+SELECTCASE INFO_STR_SYUZOKU(CFLAG:L_C_ID:住人_種族)
+CASE "エルフ"
+	L_OVUM_DEFFENSE = 500
+	CFLAG:L_C_ID:受精確率 = 5
+CASE "夜魔"
+	L_OVUM_DEFFENSE = 100
+	CFLAG:L_C_ID:受精確率 = 15
+CASE "亜人"
+	L_OVUM_DEFFENSE = 50
+	CFLAG:L_C_ID:受精確率 = 30
+CASE "オートマタ"
+	L_OVUM_DEFFENSE = 500
+	CFLAG:L_C_ID:受精確率 = 5
+CASE "天使"
+	L_OVUM_DEFFENSE = 200
+	CFLAG:L_C_ID:受精確率 = 10
+CASE "海人"
+	L_OVUM_DEFFENSE = 600
+	CFLAG:L_C_ID:受精確率 = 5
+CASE "鳥人"
+	L_OVUM_DEFFENSE = 50
+	CFLAG:L_C_ID:受精確率 = 30
+CASE "鬼"
+	L_OVUM_DEFFENSE = 500
+	CFLAG:L_C_ID:受精確率 = 20
+CASE "吸血鬼"
+	L_OVUM_DEFFENSE = 500
+	CFLAG:L_C_ID:受精確率 = 5
+CASEELSE
+;CASE "人間", "竜人", "イス", "精霊" デス
+	L_OVUM_DEFFENSE = 0
+	CFLAG:L_C_ID:受精確率 = 20
+ENDSELECT
+
+CFLAG:L_C_ID:受精最大耐久値 = 100 + L_OVUM_DEFFENSE
+CFLAG:L_C_ID:受精現在耐久値 = CFLAG:L_C_ID:受精最大耐久値
+
+CALL CHARACTER_SECRET(L_C_ID)
+
+
+;-------------------------------------------------
+;その他　情報
+;-------------------------------------------------
+@CHARACTER_SCOUT_EXTRA(L_C_ID)
+#DIM L_C_ID
+#DIM L_NAYAMI_SLOT
+
+;本人の難度の設定
+CFLAG:L_C_ID:住人_難度 = RAND(1, 4)
+;大きな悩み
+;1～2回作成
+FOR L_NAYAMI_SLOT, 1, RAND(2, 4)
+	CALL MAKE_BIG_NAYAMI(L_C_ID, L_NAYAMI_SLOT)
+NEXT
+;小さな悩み
+;2～3回作成
+FOR L_NAYAMI_SLOT, 1, RAND(3, 5)
+	CALL MAKE_SMALL_NAYAMI(L_C_ID, L_NAYAMI_SLOT)
+NEXT
+
+
+
+;-------------------------------------------------
+;初期服装&種族特徴
+;-------------------------------------------------
+@CHARACTER_SCOUT_COSTUME(L_C_ID)
+#DIM L_C_ID
+#DIM L_RANDOM
+SELECTCASE INFO_STR_SYUZOKU(CFLAG:L_C_ID:住人_種族)
+CASE "人間"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = 0
+CASE "エルフ"
+	CFLAG:L_C_ID:住人_種族特徴1 = CFLAG:L_C_ID:肌色
+	CFLAG:L_C_ID:住人_種族特徴2 = 0
+CASE "夜魔"
+	IF RAND:999 < 950
+		CFLAG:L_C_ID:住人_種族特徴2 = 0
+	ELSE
+		CFLAG:L_C_ID:住人_種族特徴2 = 1
+	ENDIF
+	CFLAG:L_C_ID:住人_種族特徴3 = 0
+CASE "亜人"
+	IF RAND:999 < 950
+		CFLAG:L_C_ID:住人_種族特徴1 = RAND:4
+		CFLAG:L_C_ID:住人_種族特徴2 = CFLAG:L_C_ID:住人_種族特徴1
+	ELSE
+		CFLAG:L_C_ID:住人_種族特徴1 = 2
+		CFLAG:L_C_ID:住人_種族特徴2 = 4
+	ENDIF
+CASE "オートマタ"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴3 = 0
+CASE "天使"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = RAND:2
+CASE "竜人"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = RAND:8
+CASE "イス"
+	CFLAG:L_C_ID:住人_種族特徴1 = RAND:4
+	CFLAG:L_C_ID:住人_種族特徴2 = 0
+CASE "海人"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = 0
+CASE "鳥人"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = RAND:5
+CASE "鬼"
+	CFLAG:L_C_ID:住人_種族特徴1 = RAND:4
+	CFLAG:L_C_ID:住人_種族特徴2 = 0
+	SIF RAND:10 > 6
+		CFLAG:L_C_ID:肌色 = 4
+CASE "精霊"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = RAND:6
+CASE "吸血鬼"
+	CFLAG:L_C_ID:住人_種族特徴1 = 0
+	CFLAG:L_C_ID:住人_種族特徴2 = RAND:4
+CASEELSE
+ENDSELECT
+
+IF TALENT:L_C_ID:オトコ == 0
+	IF TALENT:L_C_ID:学生
+		CFLAG:L_C_ID:服装 = RAND:3
+		CFLAG:L_C_ID:靴 = (RAND:3)+2
+	ELSEIF TALENT:L_C_ID:アイドル == 1
+		CFLAG:L_C_ID:服装 = (RAND:4)+5
+		CFLAG:L_C_ID:靴 = RAND:5
+	ELSEIF TALENT:L_C_ID:社会人 == 1
+		CFLAG:L_C_ID:服装 = (RAND:6)+3
+		CFLAG:L_C_ID:靴 = RAND:2
+	ELSEIF TALENT:L_C_ID:娼婦 == 1
+		CFLAG:L_C_ID:服装 = (RAND:2)+9
+		CFLAG:L_C_ID:靴 = RAND:2
+	ELSEIF TALENT:L_C_ID:治安維持局員 
+		CFLAG:L_C_ID:服装 = (RAND:3)+20
+		CFLAG:L_C_ID:靴 = RAND:2
+		SIF CFLAG:L_C_ID:服装 == 22
+			CFLAG:L_C_ID:帽子 = 2
+	ELSE
+		CFLAG:L_C_ID:服装 = RAND:12
+		CFLAG:L_C_ID:靴 = RAND:5
+	ENDIF
+ENDIF
+
+L_RANDOM = RAND:2
+CFLAG:L_C_ID:下着上 = L_RANDOM
+CFLAG:L_C_ID:下着下 = (RAND:3)+L_RANDOM 
+CFLAG:L_C_ID:靴下 = RAND:4
+
+
+
+
+IF CFlag:L_C_ID:住人_体格 == 1
+	CFlag:L_C_ID:服装 = (RAND:5)
+	CFlag:L_C_ID:靴 = RAND:3
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+;隠しステータス
+;-------------------------------------------------
+@CHARACTER_SECRET(L_I)
+#DIM  L_I
+#DIM  L_DICE
+#DIMS L_RACE
+
+L_RACE = INFO_STR_SYUZOKU(CFLAG:L_I:住人_種族)
+{
+	L_DICE = 10
+	 + TALENT:L_I:魅惑 * 2
+	 + TALENT:L_I:人気
+	 + TALENT:L_I:カリスマ
+	 + TALENT:L_I:セックス狂 * 3
+	 + TALENT:L_I:小悪魔 * 2
+	 + TALENT:L_I:貞操無頓着
+	 + TALENT:L_I:快感に素直
+	 + TALENT:L_I:解放
+	 + TALENT:L_I:男好き
+	 + TALENT:L_I:惚れっぽい * 2
+	 + TALENT:L_I:即堕ち * 3
+	 + TALENT:L_I:依存
+	 + TALENT:L_I:極上の牝 * 25
+}
+CFlag:L_I:無自覚な雌 = RAND:(L_DICE) + RAND:(L_DICE)
+{
+	L_DICE = 7 + CFlag:L_I:無自覚な雌 / 3
+	 + TALENT:L_I:魅惑
+	 + TALENT:L_I:魅力
+	 + TALENT:L_I:美貌 * 2
+	 + TALENT:L_I:人気 * 2
+	 + TALENT:L_I:小悪魔 * 2
+	 + TALENT:L_I:カリスマ * 3
+	 + TALENT:L_I:アイドル * 3
+	 + TALENT:L_I:娼婦 * 2
+	 + TALENT:L_I:極上の牝 * 25
+}
+CFlag:L_I:フェロモン = RAND:(L_DICE) + RAND:(L_DICE)
+
+{
+	L_DICE = 7 + CFlag:L_I:無自覚な雌 / 3
+	 + TALENT:L_I:セックス狂 * 3
+	 + TALENT:L_I:中毒しやすい * 2
+	 + TALENT:L_I:貞操無頓着 * 2
+	 + TALENT:L_I:快感に素直 * 2
+	 + TALENT:L_I:解放 * 2
+	 + TALENT:L_I:依存
+	 + TALENT:L_I:娼婦 * 3
+	 + TALENT:L_I:極上の牝 * 25
+	 + TALENT:L_I:マドンナ * 10
+}
+CFlag:L_I:雌の本能 = RAND:(L_DICE) + RAND:(L_DICE)
+SIF GROUPMATCH(L_RACE, "亜人", "鬼", "鳥人", "夜魔")
+	CFlag:L_I:雌の本能 +=  RAND:(L_DICE)
+{
+	L_DICE = 7 + CFlag:L_I:無自覚な雌 / 3
+	 + TALENT:L_I:中毒しやすい
+	 + TALENT:L_I:好奇心 * 3
+	 + TALENT:L_I:貞操無頓着
+	 + TALENT:L_I:自慰しやすい * 3
+	 + TALENT:L_I:交際中 
+	 + TALENT:L_I:セフレ持ち * 3
+	 + TALENT:L_I:結婚済み * 2
+	 + (1 - !(TALENT:L_I:学生)) * 2
+	 + TALENT:L_I:娼婦 * 2
+	 + TALENT:L_I:極上の牝 * 25
+}
+CFlag:L_I:性への興味 = RAND:(L_DICE) + RAND:(L_DICE)
+
+{
+	L_DICE = 7 + CFlag:L_I:無自覚な雌 / 3
+	 + TALENT:L_I:魅惑
+	 + TALENT:L_I:中毒しやすい
+	 + TALENT:L_I:貞操無頓着
+	 + TALENT:L_I:快感に素直
+	 + TALENT:L_I:解放
+	 + TALENT:L_I:男好き
+	 + TALENT:L_I:惚れっぽい * 2
+	 + TALENT:L_I:即堕ち * 3
+	 + TALENT:L_I:学生
+	 + TALENT:L_I:極上の牝 * 25
+}
+CFlag:L_I:雄への関心 = RAND:(L_DICE) + RAND:(L_DICE)
+
+{
+	L_DICE = 7 + CFlag:L_I:無自覚な雌 / 3
+	 + TALENT:L_I:セックス狂 * 5
+	 + TALENT:L_I:中毒しやすい * 2
+	 + TALENT:L_I:貞操無頓着
+	 + TALENT:L_I:快感に素直
+	 + TALENT:L_I:解放 * 2
+	 + TALENT:L_I:結婚済み * 3
+	 + TALENT:L_I:極上の牝 * 25
+}
+CFlag:L_I:性交願望 = RAND:(L_DICE) + RAND:(L_DICE)
+
+{
+	L_DICE = 7 + CFlag:L_I:無自覚な雌 / 3
+	 + TALENT:L_I:セックス狂 * 2
+	 + TALENT:L_I:中毒しやすい
+	 + TALENT:L_I:貞操無頓着
+	 + TALENT:L_I:ヤンデレ * 5
+	 + TALENT:L_I:解放
+	 + TALENT:L_I:結婚済み * 5
+	 + TALENT:L_I:極上の牝 * 25
+}
+CFlag:L_I:妊娠願望 = RAND:(L_DICE) + RAND:(L_DICE)
+;繁殖力弱い連中は切実
+SIF GROUPMATCH(L_RACE, "天使", "エルフ", "精霊", "オートマタ", "海人")
+	CFlag:L_I:妊娠願望 +=  RAND:(L_DICE)
+
+CFlag:L_I:無自覚な雌 = LIMIT(CFlag:L_I:無自覚な雌, 0, 35)
+CFlag:L_I:フェロモン = LIMIT(CFlag:L_I:フェロモン, 0, 35)
+CFlag:L_I:雌の本能   = LIMIT(CFlag:L_I:雌の本能,   0, 35)
+CFlag:L_I:性への興味 = LIMIT(CFlag:L_I:性への興味, 0, 35)
+CFlag:L_I:雄への関心 = LIMIT(CFlag:L_I:雄への関心, 0, 35)
+CFlag:L_I:性交願望   = LIMIT(CFlag:L_I:性交願望,   0, 35)
+CFlag:L_I:妊娠願望   = LIMIT(CFlag:L_I:妊娠願望,   0, 35)
+
+SELECTCASE CFLAG:L_I:受精確率
+CASE 30
+;"亜人", "鳥人"
+;こいつら母体としても優秀である
+;期待値4.0×2＝8、0～16
+	CFlag:L_I:卵子レベル = RAND:9 + RAND:9
+CASE 20
+;"人間", "竜人", "イス", "精霊",  "鬼"
+;期待値3.5×2＝7、0～14
+	CFlag:L_I:卵子レベル = RAND:8 + RAND:8
+CASE 15, 10
+;"夜魔", "天使"
+;期待値3.0×2＝6、0～12
+	CFlag:L_I:卵子レベル = RAND:7 + RAND:7
+CASE 5
+;"エルフ", "オートマタ", "海人", "吸血鬼"
+;期待値2.5×2＝5、0～10
+	CFlag:L_I:卵子レベル = RAND:6 + RAND:6
+ENDSELECT
+CFlag:L_I:卵子レベル = LIMIT(CFlag:L_I:卵子レベル, 1, 20)
+
+;妄想：肉体と繁殖行為との親和性と解釈
+SELECTCASE L_RACE
+CASE "亜人", "鬼", "鳥人", "竜人"
+;期待値4.0×2＝8、0～16
+;精強な肉体を持つ連中
+	CFlag:L_I:母体レベル = RAND:9 + RAND:9
+CASE "海人", "エルフ"
+;期待値3.0×2＝6、0～12
+;設定的に繁殖力が弱い
+	CFlag:L_I:母体レベル = RAND:7 + RAND:7
+CASE "オートマタ", "天使", "吸血鬼", "精霊"
+;そもそも繁殖行為やってんのか疑問な連中
+;期待値2.5×2＝5、0～10
+	CFlag:L_I:母体レベル = RAND:6 + RAND:6
+CASEELSE
+;"人間"と"夜魔"
+;種族の標準
+;期待値3.5×2＝7、0～14
+	CFlag:L_I:母体レベル = RAND:8 + RAND:8
+ENDSELECT
+CFlag:L_I:母体レベル = LIMIT(CFlag:L_I:母体レベル, 1, 20)
+
+
+
+
+CFLAG:L_I:受精最大耐久値 += ((CFLAG:L_I:受精最大耐久値)*(CFlag:L_I:母体レベル+CFlag:L_I:卵子レベル))/50
+CFLAG:L_I:受精現在耐久値 = CFLAG:L_I:受精最大耐久値
+
+
+
+IF TALENT:L_I:聖女の子宮 == 1
+	CFLAG:L_I:受精最大耐久値 = CFLAG:L_I:受精最大耐久値/8
+	CFLAG:L_I:受精現在耐久値 = CFLAG:L_I:受精最大耐久値
+	CFLAG:L_I:受精確率 = 100
+	CFlag:L_I:母体レベル += 2
+ENDIF
+
+
+
+
+

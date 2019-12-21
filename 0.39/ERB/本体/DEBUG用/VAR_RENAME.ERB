@@ -1,0 +1,162 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:VAR_RENAME.ERB
+;	Facility	:VAR:リネームCSV作成処理。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXX
+;
+;	・ VAR_MAKE_RENAME_MAIN				VAR:リネームCSV作成
+;	・ VAR_MAKE_RENAME_PRINT			VAR:リネームCSV出力
+;	・ VAR_MAKE_RENAME_UNIQUE_KEY		VAR:リネーム用ユニークキー取得
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub VAR_MAKE_RENAME_MAIN
+;=================================================
+;   VAR:リネームCSV作成
+;-------------------------------------------------
+@VAR_MAKE_RENAME_MAIN
+
+CUSTOMDRAWLINE =
+PRINTL "RENAME.CSV"用のデータを作成します。
+PRINTL 下記の中からどのデータを出力するかを選んで下さい。
+PRINTL 表示されたらコピー＆ベーストで貼り付けてください。
+PRINTL （"RENAME.CSV"には最後尾に貼り付けておくと、更新時に再コピペが行い易くなります）
+PRINTL
+PRINTL [0] 出力
+PRINTL
+PRINTL [9] 戻る
+CALL INPUT_INT(0,9)
+SELECTCASE RESULT
+	CASE 0
+;-------------------------------------------------
+;		CALL VAR_MAKE_RENAME_PRINT
+;------------------------------------------------- 
+		RETURN
+	CASE 9
+		RETURN
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub VAR_MAKE_RENAME_PRINT
+;=================================================
+;   VAR:リネームCSV出力
+;-------------------------------------------------
+@VAR_MAKE_RENAME_PRINT
+#DIM L_I
+#DIM L_CHARA
+#DIM L_TMP
+#DIMS L_STR
+
+L_CHARA=1
+
+CLEARLINE LINECOUNT
+PRINTL ;*******************************************************************************
+PRINTL ;◆Renameデータ
+PRINTL ;*******************************************************************************
+PRINTL ;
+PRINTL ;このデータは「DEBUG用」フォルダ内の"VAR_RENAME.ERB"によって作成されています。
+PRINTL ;何かを追加する際はコピペするのではなく、同ERBを起動して出力してください。
+PRINTL ;新しく何かを追加したい場合は、同ERBの記述を変更してください。
+PRINTL ;
+PRINTL ;-------------------------------------------------------------------------------
+L_STR = {GAMEBASE_VERSION/1000,1}.{GAMEBASE_VERSION % 1000, 3}
+L_STR = %REPLACE(L_STR, " ", "0")%
+PRINTFORML ;%GAMEBASE_TITLE% %L_STR%
+GETTIME
+PRINTFORML ;%RESULTS%
+PRINTL ;-------------------------------------------------------------------------------
+PRINTL
+IF L_CHARA
+	PRINTL ;-----------------------------
+	PRINTL ;キャラクター番号
+	PRINTL ;-----------------------------
+
+	L_TMP = GETNUM(CSTR,"CHARA_RENAME")
+	IF L_TMP == -1
+		PRINTL ※
+		PRINTL "CHARA_RENAME"が存在しません
+		PRINTL RENAME用の文字列を指定してください
+	ELSE
+
+		PRINTFORML -999 , キャラ:ＤＵＭＭＹ
+
+		FOR L_I, 0, FLAG:最大数_キャラ
+			L_STR = %VAR_MAKE_RENAME_UNIQUE_KEY(L_I)%
+			SIF L_STR == ""
+				CONTINUE
+			PRINTFORML {L_I} , キャラ:%L_STR%
+		NEXT
+	ENDIF
+
+	PRINTL
+ENDIF
+
+;-----------------------------
+;- 完了
+;-----------------------------
+WAIT
+
+
+;=================================================
+;   sub VAR_MAKE_RENAME_UNIQUE_KEY
+;=================================================
+;   VAR:リネーム用ユニークキー取得
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				CSV優先フラグ(0:CSV 1:登録データ)
+; Output:
+;  RETURNF				ユニークキー
+;-------------------------------------------------
+@VAR_MAKE_RENAME_UNIQUE_KEY(ARG, ARG:1=0)
+#FUNCTIONS
+#DIM L_I
+#DIM L_TMP
+#DIMS L_STR
+
+L_I = ARG
+
+IF !ARG:1
+	SIF !EXISTCSV(L_I, 0)
+		RETURNF
+
+	L_TMP = GETNUM(CSTR,"CHARA_RENAME")
+	L_STR = %CSVCSTR(L_I, L_TMP, 0)%
+	SIF L_STR == ""
+		L_STR = %CSVCALLNAME(L_I, 0)%
+	SIF L_STR == ""
+		L_STR = %CSVNAME(L_I, 0)%
+ELSE
+	L_STR = %CSTR:L_I:CHARA_RENAME%
+	SIF L_STR == ""
+		L_STR = %CALLNAME:L_I%
+	SIF L_STR == ""
+		L_STR = %NAME:L_I%
+ENDIF
+
+RETURNF L_STR
+
+
+

@@ -1,0 +1,93 @@
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+;強化剤用 戦闘詳細の情報と立ち絵を並べたもの
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+@C_PICTURE_RD(ARG)
+#DIM L_T
+#DIM L_bkREDRAW
+#DIM CONST L_OFFSET = 10
+
+L_T = ARG
+L_bkREDRAW = CURRENTREDRAW()
+REDRAW 0
+
+;-------------------------------------------------
+;描画処理
+;-------------------------------------------------
+
+PRINTFORML ◇----------------肉体情報----------------◇
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_LABEL(CALLNAME:L_T)
+PRINTFORML (残り強化回数　強化剤{100-CFLAG:L_T:住人_強化回数, 3 ,RIGHT}, 超人薬{100-CFLAG:L_T:住人_超人回数, 3 ,RIGHT})
+PRINTFORML %" ",L_OFFSET%◇----------------身体情報----------------◇
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_RANGE_STATUS(L_T, "HP", "体力", , 3, , "％")
+CALL PRINT_RANGE_STATUS(L_T, "SP", "気力", , 3, , "％")
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "GUTS" , , 3)
+CALL PRINT_STATUS(L_T, "BRAVE", , 3)
+CALL PRINT_STATUS(L_T, "SAN"  , , 3)
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "経験値")
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "ATK"  , , 3)
+CALL PRINT_STATUS(L_T, "DEF"  , , 3)
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "HIT"  , , 3)
+CALL PRINT_STATUS(L_T, "SPD"  , , 3)
+CALL PRINT_STATUS(L_T, "LUK"  , , 3)
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_RANGE_STATUS(L_T, "BRE", , , 3, "伏字", "％")
+PRINTL
+PRINTFORML %" ",L_OFFSET%◇----------------技能情報----------------◇
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "目星"    , 8, 3)
+CALL PRINT_STATUS(L_T, "アイデア", 8, 3)
+CALL PRINT_STATUS(L_T, "聞き耳"  , 8, 3)
+CALL PRINT_STATUS(L_T, "医療"    , 8, 3)
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "機械修理", 8, 3)
+CALL PRINT_STATUS(L_T, "コンピュータ", 8, 3)
+CALL PRINT_STATUS(L_T, "鍵開け",   8, 3)
+CALL PRINT_STATUS(L_T, "隠れる",   8, 3)
+PRINTL
+PRINTFORM %" ",L_OFFSET%
+CALL PRINT_STATUS(L_T, "解体"    , 8, 3)
+CALL PRINT_STATUS(L_T, "解読"    , 8, 3)
+PRINTL
+
+PRINTFORML ◇----------------武装情報----------------◇
+PRINTFORML □-----メイン兵装-----□□----- サブ兵装 -----□
+CALL PRINT_LABEL(CSTR:L_T:4000, -19)	; 左詰めは負
+CALL PRINT_LABEL(CSTR:L_T:4010, -19)
+PRINTL
+CALL PRINT_LABEL("タイプ",,,INFO_STR_HEISOU(CFLAG:L_T:住人_M兵装))	;  枠込みで表示した文字数がRESULTに返る
+PRINTFORM %" "*MAX(0,  23-RESULT)%
+CALL PRINT_LABEL("タイプ",,,INFO_STR_HEISOU(CFlag:L_T:住人_S兵装))
+PRINTL
+CALL PRINT_LABEL("練度",,,@"{CFlag:L_T:住人_M兵装練度}", -3)
+PRINTFORM %" "*MAX(0,  23-RESULT)%
+CALL PRINT_LABEL("練度",,,@"{CFlag:L_T:住人_S兵装練度}", -3)
+PRINTL
+CALL PRINT_LABEL("ダメージ",,,INFO_STR_MAIN_WEAPON_DAMAGE(L_T))
+PRINTFORM %" "*MAX(0,  23-RESULT)%
+CALL PRINT_LABEL("ダメージ",,,INFO_STR_SUB_WEAPON_DAMAGE(L_T))
+PRINTL
+
+REDRAW L_bkREDRAW
+IF Talent:L_T:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(L_T, 0, -1700, 0, 850)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(L_T, 0, -1700, 0, 850)
+ENDIF
+
+

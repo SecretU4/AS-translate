@@ -1,0 +1,355 @@
+﻿
+;-------------------------------------------------
+;  拠点MAP
+;-------------------------------------------------
+@C_M_MAP(ARG,ARG:1)
+#DIM L_L
+#DIM L_L2
+#DIM L_T
+#DIM L_T2
+#DIM L_LOOP
+#DIM L_LS
+#DIM L_LSS
+#DIM L_LST
+#DIM L_S_W
+#DIM L_S_S
+#DIM L_S_I
+#DIM L_S_P
+#DIM C_S
+#DIM L_F
+#DIM L_INPUT
+#DIM L_PAGE
+#DIM L_PREV
+#DIM L_NEXT
+
+;ページ表示数の初期化チェック
+SIF !Flag:定数_カフェ表示数
+	Flag:定数_カフェ表示数 = 10
+
+L_PAGE = 0
+L_NEXT = 0
+L_PREV = 0
+L_F = 0
+L_L = 1
+L_L2 = 1
+$INPUT_LOOP
+
+L_L = L_L2
+CLEARLINE LINECOUNT
+CALL C_LINE
+
+CALL C_LINE
+PRINTFORML ――――――――【맨션】――――――――
+REPEAT 10
+PRINTFORM [{L_L}] 
+L_T2 = 0
+L_T = 0
+L_LOOP = 0
+PRINTFORM 【{L_L}호실】
+
+
+L_LOOP = CHARANUM
+$IN_LOOP
+IF FLAG:(5000+L_L) == CFLAG:L_T:個別番号 && L_T2 == 0 && L_T != 0 
+	PRINTFORM [주민:%CALLNAME:L_T%]
+	L_T2 = 1
+ELSE
+ENDIF
+L_T += 1
+SIF L_LOOP > L_T && L_T2 == 0
+	GOTO IN_LOOP
+SIF CHARANUM <= L_T && L_T2 == 0
+	FLAG:(5000+L_L) =  0
+SIF L_T2 == 0
+	PRINTFORM [주민:없음]
+L_L += 1
+PRINTFORML
+REND
+PRINTFORML
+CALL C_LINE
+PRINTFORML
+
+
+
+$INPUT_LOOP2
+PRINTLC [999] 돌아온다
+INPUT
+REDRAW 0
+
+SELECTCASE RESULT
+;マンションの部屋選択画面は3桁、部屋は4桁の数字に
+CASE 999
+
+;この処理何かに使ってますか？
+;CASE 800
+;	L_F -= 1
+;	L_L2 = 1
+;	GOTO INPUT_LOOP
+;CASE 801
+;	L_F += 1
+;	L_L2 = 1
+;	GOTO INPUT_LOOP
+CASEELSE
+	L_LS = RESULT
+	;現在1～10号室ですが今後拡張される可能性や方針が불명한ので固定値でチェック
+	;1～10以外の数値が選択された場合ループ
+	SIF L_LS < 1 || L_LS > 10
+		GOTO INPUT_LOOP
+	$INPUT_LOOP2_1
+
+	;ページ送り処理初期化
+	IF Flag:定数_カフェ表示数 != 1000
+		L_PREV = (L_PAGE <= 0) ? 0 # 1
+		L_NEXT = ( L_PAGE >= (CHARANUM / Flag:定数_カフェ表示数) ) ? 0 # 1
+	ENDIF
+
+	CLEARLINE LINECOUNT
+	CALL C_LINE
+	PRINTFORML ――――――――【{L_LS}호실】――――――――
+	IF FLAG:(5000+L_LS) != 0
+		;---------簡易検索---------
+		L_LOOP = CHARANUM
+		L_T = 0
+		L_T2 = 0
+		$IN_LOOP999
+		IF FLAG:(5000+L_LS) == CFLAG:L_T:個別番号 && L_T2 == 0 && L_T != 0
+			L_T2 = 1
+		ENDIF
+		SIF L_T2 == 0
+			L_T += 1
+		SIF L_LOOP > L_T && L_T2 == 0
+			GOTO IN_LOOP999
+		;--------------------------
+		PRINTFORML 【주민:%CALLNAME:L_T%】
+	ENDIF
+	CALL C_LINE
+	IF FLAG:(5000+L_LS) == 0
+		;PRINTFORML [100] 住人選択
+		;空室時住人リストを呼び出して一括処理に
+		PRINTFORML 【{L_LS}호실】은 현재 비었습니다
+		PRINTFORML 다른 방에 거주하고 있지 않은 시민을 거주시킬 수 있습니다
+
+		;喫茶店のリストを呼び出す際に説明文(引数1)をマンション用の処理の識別子として利用
+		;CAFE_LIST_CHARA側で居住済みのキャラはグレーアウト+部屋番号表示(非表示は分かりにくいよね)
+		CALL CAFE_LIST_CHARA("거주할 시민을 선택하세요",L_PAGE,"리스트 에러")
+		IF Flag:定数_カフェ表示数 == 1000
+			PRINTFORML [3000] 페이지당 캐릭터 표시 수 변경(현재 무제한)
+		ELSE
+			PRINTFORML [3000] 페이지당 캐릭터 표시 수 변경(현재 {Flag:定数_カフェ表示数}명)
+		ENDIF
+	ENDIF
+	PRINTFORML 
+
+	SIF FLAG:(5030+L_LS) == 0 && FLAG:(5000+L_LS) != 0
+		PRINTFORML [2801] 몰래 카메라 도입
+	;条件をカメラが設置済み、かつ住人が存在するに変更
+	SIF FLAG:(5030+L_LS) != 0 && FLAG:(5000+L_LS) != 0
+		PRINTFORML [2005] 도촬
+	PRINTFORML 
+	SIF FLAG:(5000+L_LS) != 0
+		PRINTFORMLC [2950] 해체
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORMLC [9999] 돌아온다
+	PRINTFORML 
+	PRINTFORML 
+	$INPUT_LOOP3
+	INPUT
+	REDRAW 0
+	SELECTCASE RESULT
+	;이전 페이지
+	CASE 1007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO INPUT_LOOP2_1
+	;다음 페이지
+	CASE 1009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO INPUT_LOOP2_1
+	CASE 0
+		PRINTFORMW 아나타는 선택할 수 없습니다
+		GOTO INPUT_LOOP2_1
+
+	CASE 3000
+		PRINTFORML 페이지 최대 표시 인원 숫자를 선택 or 입력하세요
+		PRINTFORM [1000] 모두 표시(페이지 없음) 
+		PRINTFORM [5] 5명 
+		PRINTFORM [10] 10명 
+		PRINTFORM [15] 15명 
+		PRINTFORML [20] 20명 
+		PRINTFORML [-1] 변경하지 않고 돌아온다
+		INPUT
+		L_INPUT = RESULT
+		IF L_INPUT == 1000
+			Flag:定数_カフェ表示数 = L_INPUT
+			L_PAGE = 0
+			PRINTFORMW 항상 전원을 표시합니다
+			L_PAGE = 0
+		ELSEIF L_INPUT <= 999 && L_INPUT > 0
+			Flag:定数_カフェ表示数 = L_INPUT
+			L_PAGE = 0
+			PRINTFORMW 표시 인원을 {L_INPUT}명으로 변경했습니다
+		ELSE
+		ENDIF
+
+	CASE 2005
+		;盗撮
+		;カメラ未実装の場合警告メッセージ(通常表示されない)
+		IF FLAG:(5030+L_LS) == 0
+			PRINTFORMW 카메라가 설치되지 않았습니다
+			GOTO INPUT_LOOP2_1
+		;更に住民が存在しないなら警告メッセージ(通常表示されない)
+		ELSEIF FLAG:(5000+L_LS) == 0
+			PRINTFORMW 아무도 살고 있지 않습니다
+			GOTO INPUT_LOOP2_1
+		ELSEIF TALENT:L_T:부재 == 1
+			PRINTFORMW 부재중이라 선택할 수 없습니다
+			GOTO INPUT_LOOP2_1
+		ENDIF
+		ARG:1 = L_T
+		CALL C_M_CAMERA(ARG:1)
+		GOTO INPUT_LOOP2_1
+
+;旧選択肢 残りの選択肢はリストとの衝突回避に[+2000]しています
+;	CASE 100
+;	;住人選択
+;		PRINTFORMW 住む市民を選択して下さい。
+;		$LIST_LOOP10
+;		PRINTFORML 
+;		CALL LIST_CHARA
+;		C_S = RESULT
+;		IF C_S == 1000
+;			GOTO INPUT_LOOP2_1
+;		ELSEIF C_S == MASTER
+;			PRINTFORMW %CALLNAME:MASTER%는 선택할 수 없습니다
+;			GOTO LIST_LOOP10
+;		ELSEIF CFLAG:C_S:マンションID != 0
+;			PRINTFORMW 既に他のルームに住んでいます。
+;			GOTO LIST_LOOP10
+;		ELSE
+
+;			L_LOOP = 0
+;			REPEAT 10
+;			$SELECT_LOOP0
+;				IF FLAG:(5000+L_LOOP) == CFLAG:RESULT:個別番号
+;				ELSE
+;					L_LOOP += 1
+;				ENDIF
+;			REND
+;			FLAG:(5000+L_LS) = CFLAG:C_S:個別番号
+;			CFLAG:C_S:マンションID = L_LS
+;			PRINTFORMW %CALLNAME:C_S%に[{L_LS}号室]に住ませることにしました。
+;		ENDIF
+;		GOTO INPUT_LOOP2_1
+
+	CASE 2801
+		;カメラ実装
+		;既にカメラ実装済みの場合は弾く(通常表示されない)
+		;やる意味は薄いですが撤去できるようにしたほうがいいですか？
+		;住人がいなくても数値入力で実装できちゃうけど変ではないし現状해체しても残る
+		IF FLAG:(5030+L_LS) == 1
+			PRINTFORMW 그 방엔 이미 설치되어 있습니다
+			GOTO INPUT_LOOP2_1
+		ENDIF
+		PRINTFORML 설치엔 자금 50000엔이 필요합니다만 괜찮을까요？
+		PRINTFORML [1] 네
+		PRINTFORML [2] 아니오
+		INPUT
+		SELECTCASE RESULT
+		CASE 1
+			IF MONEY >= 50000
+				MONEY -= 50000
+				FLAG:(5030+L_LS) = 1
+				PRINTFORMW {L_LS}호실에 몰래 카메라를 설치했습니다。
+			ELSE
+				PRINTFORMW 자금이 부족합니다。
+			ENDIF
+		CASE 2
+		ENDSELECT
+		GOTO INPUT_LOOP2_1
+	CASE 2950
+		;해체
+		;ここは初期化済かチェックする必要は無いかな
+		;해체してもカメラは残る状態ですが住人が居ないと本来選択できない項目
+		;どういう扱いにするのがいいでしょう？ひとまず現状維持
+		PRINTFORML 해체하면 전부 초기화됩니다만、괜찮을까요？
+		PRINTFORML [1] 네
+		PRINTFORML [2] 아니오
+		INPUT
+		SELECTCASE RESULT
+		CASE 1
+			REPEAT CHARANUM
+				IF CFLAG:COUNT:個別番号 == FLAG:(5000+L_LS)
+					CFLAG:COUNT:マンションID = 0
+					BREAK
+				ENDIF
+				;COUNT == CHARANUM-1なら異常
+			REND
+			FLAG:(5000+L_LS) = 0
+			PRINTFORMW [{L_LS}호실]을 해체했습니다。
+			GOTO INPUT_LOOP2_1
+		CASE 2
+		ENDSELECT
+	CASE 9999
+		;戻る
+		GOTO INPUT_LOOP
+	CASEELSE
+		;住人割り当て
+		;正しいキャラ番号かどうかチェック
+		C_S = RESULT
+		IF C_S < CHARANUM
+			;数値入力対策に本当に空き部屋かチェック
+			SIF FLAG:(5000+L_LS) != 0
+			GOTO ERROR
+			;NPCかどうかの判定
+			IF TALENT:C_S:NPC == 1 
+			PRINTFORMW NPC는 선택할 수 없습니다
+			;チェックを終えたら部屋とキャラの相互割り当て処理を従来Verからコピペ
+			ELSEIF C_S == MASTER
+				PRINTFORMW %CALLNAME:MASTER%는 선택할 수 없습니다
+				GOTO INPUT_LOOP2_1
+			ELSEIF CFLAG:C_S:マンションID != 0
+				PRINTFORMW 이미 다른 방에 살고 있습니다。
+				GOTO INPUT_LOOP2_1
+			ELSE
+			IF CFlag:RESULT:住人_体格 == 1
+				PRINTFORMW 아이는 거주할 수 없습니다。
+				GOTO INPUT_LOOP2_1
+			ENDIF
+				L_LOOP = 0
+				REPEAT 10
+				$SELECT_LOOP0
+					IF FLAG:(5000+L_LOOP) == CFLAG:RESULT:個別番号
+					ELSE
+						L_LOOP += 1
+					ENDIF
+				REND
+				FLAG:(5000+L_LS) = CFLAG:C_S:個別番号
+				CFLAG:C_S:マンションID = L_LS
+				PRINTFORMW %CALLNAME:C_S%에게 [{L_LS}호실]에서 거주하도록 했습니다。
+			ENDIF
+			GOTO INPUT_LOOP2_1
+		ENDIF
+		$ERROR
+		PRINTFORMW 제대로 입력하라고
+		GOTO INPUT_LOOP2_1
+	ENDSELECT
+	;戻る
+	GOTO INPUT_LOOP2_1
+ENDSELECT
+;RETURNは多重メニューでは危険とのことなので
+JUMP SYSTEM_MENU
+
+
+
+
+
+
+
+
+
+
+

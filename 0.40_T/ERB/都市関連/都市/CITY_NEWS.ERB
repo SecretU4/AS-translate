@@ -1,0 +1,56 @@
+﻿
+;-------------------------------------------------
+; 都市　ニュース
+;-------------------------------------------------
+
+@CITY_NEWS
+
+
+SETCOLOR 250,250,250
+PRINTFORM 　　　　 【뉴스:
+IF Flag:都市_防衛 != 0
+	PRINTFORM 
+ELSEIF FLAG:都市_ニュース == 15
+	PRINTFORM ≪주민 여러분 안녕하십니까、오늘도 도시는 평화롭군요≫
+ELSEIF FLAG:都市_ニュース == 14
+	PRINTFORM 인기 아이돌 그룹의 신작 CD가 발매중、각 점포마다 매상이 폭발
+ELSEIF FLAG:都市_ニュース == 13
+	PRINTFORM 새로운 정보는 없습니다
+ELSEIF FLAG:都市_ニュース == 12
+	PRINTFORM 都市に異常は見られませんでした
+ELSEIF FLAG:都市_ニュース == 11
+	PRINTFORM 완전 침식 구역の領域が拡大しています、各部隊は対策を…
+ELSEIF FLAG:都市_ニュース == 10
+	PRINTFORM 許可を得ず興味本位で도시 경계선を探索するのは止めましょう。
+ELSEIF FLAG:都市_ニュース == 9
+	PRINTFORM ≪都市に住む住人の方々、今日も都市を運営していきましょう≫
+ELSEIF FLAG:都市_ニュース == 8
+	PRINTFORM 今日の天気は変わりやすいので、雲の様子をよく見て外出しましょう。
+ELSEIF FLAG:都市_ニュース == 7
+	PRINTFORM 時空歪曲により外界の地形が変化しました、該当地域は…
+ELSEIF FLAG:都市_ニュース == 6
+	PRINTFORM 身分の低い住人が消息不明になる事件が多発しています、細心の注意を…
+ELSEIF FLAG:都市_ニュース == 5
+	PRINTFORM 이레귤러によるテロ行為が発生、即座に鎮圧されました。
+ELSEIF FLAG:都市_ニュース == 4
+	PRINTFORM 外界から時空歪曲が発生しています、力場が強い場所には注意して下さい。
+ELSEIF FLAG:都市_ニュース == 3
+	PRINTFORM 「プレイヤーNo.0{RAND:9}」の権限乱用により都市の機能が不安定に…
+ELSEIF FLAG:都市_ニュース == 2
+	PRINTFORM 소형「외적」이 도시에 침입했지만、피해는 없었습니다。
+ELSEIF FLAG:都市_ニュース == 1
+	PRINTFORM 「플레이어 No.0{RAND:9}」의 부대가 외계를 조사중。
+ELSE
+	PRINTFORM 도시 경계선에서「외적」의 반응 검출、주민 여러분은 조심해 주십시오。
+ENDIF
+
+PRINTFORML 】
+RESETCOLOR
+
+
+
+
+
+
+
+

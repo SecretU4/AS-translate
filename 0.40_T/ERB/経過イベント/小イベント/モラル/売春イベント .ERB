@@ -1,0 +1,71 @@
+﻿;-------------------------------------------------
+;売春イベント
+;-------------------------------------------------
+@TURN_EVENT_MORAL_BS
+#DIMS M_NAME
+
+DRAWLINE
+SETCOLOR 100,250,50
+PRINTFORML 【매춘 이벤트(모랄):%CALLNAME%】
+
+
+IF !RAND:3
+	M_NAME = 선배
+ELSEIF !RAND:2
+	M_NAME = 후배
+ELSE
+	M_NAME = 남자 친구
+ENDIF
+PRINTFORML 정욕을 주체할 수 없어진 %CALLNAME%는、알고 지내는 남자에게 성행위를 요구했다…
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF !RAND:5
+	PRINTFORML 愛液で満たされた肉壷に捉えられたペニスを激しいグラインドで腰を振る。
+	PRINTFORML 相手を組み伏せ肉欲のままに腰を振り、流れてくる快楽の奔流に嬌声を上げる。
+	PRINTFORMW 子宮に送り込まれるであろうドロドロの精液を渇望するように、艶めかしいピストンを続けた…
+ELSEIF !RAND:4
+	PRINTFORML 네발로 엎드리면서 상대에게 흠뻑 젖은 보지를 드러내자、남자는 흥분한 모습으로 자지를 삽입했다。
+	PRINTFORML 허리를 흔들 때마다 %CALLNAME%는 소리높여 헐떡이면서、등을 뒤로 젖히고 쾌락을 달게 받아들였다。
+	PRINTFORMW その様は交尾に耽る動物のようで、動きも徐々に激しくなっていった…
+ELSEIF !RAND:3
+	PRINTFORML トロトロになった%CALLNAME%の肉壷を、男は覆いかぶさる姿勢でペニスを使って犯し続ける。
+	PRINTFORML まるで愛し合っているかのような錯覚を覚えた%CALLNAME%に反応するように、子宮が種子を欲しがって降りてくる。
+	PRINTFORMW 亀頭でゴリゴリとヒダをえぐられる感覚によがりつつけ、二人は果てるまで性器を打ち付けあった…
+ELSEIF !RAND:2 && (TALENT:거유 || TALENT:폭유)
+	PRINTFORML %CALLNAME%는 豊満な乳でペニスを挟むと、ローションで谷間を濡らしパイズリを始めた。
+	PRINTFORML 谷間に隠れた肉棒を両腕で胸を圧迫しながらヌチャヌチャと音鳴らしてピストンする。
+	PRINTFORMW 視覚的に興奮させるその光景に、男は射精感を高めていく…
+ELSE
+	PRINTFORML 달라붙듯이 남자의 자지에 밀착한 %CALLNAME%는 자지를 문 채로 음란하게 움직였다。
+	PRINTFORMW 그 추잡한 모습에 남자도 흥분했는지、쾌감을 받을 때마다 자지가 점점 뜨겁고 단단해졌다…
+ENDIF
+
+
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = %M_NAME%
+SIF CSTR:初キス相手名 == ""
+	CSTR:初キス相手名 = %M_NAME%
+SIF CSTR:初精飲相手名 ==""
+	CSTR:初精飲相手名 = %M_NAME%
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = %M_NAME%
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = %M_NAME%
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = %M_NAME%
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = %M_NAME%
+
+
+TALENT:비처녀 = 1
+TALENT:Ａ비처녀 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+CALL JN_SEX_EXP
+
+
+RESETCOLOR
+
+
+

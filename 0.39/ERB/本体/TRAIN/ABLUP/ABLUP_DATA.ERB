@@ -1,0 +1,1249 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:ABLUP_DATA.ERB
+;	Facility	:ABLUPデータ。
+;				 ABLの変更用データを纏める。
+;				 変更データは下記変数にセットされる。
+;
+;				 H…必要な宝珠(JUEL)
+;				 I…必要な経験(EXP)
+;				 J…必要な能力(ABL)
+;				 K…必要な刻印(MARK)(マイナス値で"その値未満"の条件設定可)
+;
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- ABLUP
+;
+;	# ABLUP:統合
+;	・ ABLUP_EXE						実行:ABLUP
+;
+;	# ABLUP:CHK系
+;	・ CHK_ABLUP_MAIN					CHK:ABLUP(主処理)
+;	・ CHK_ABLUP_DETAIL					CHK:ABLUP(詳細)
+;
+; *- ABLUP必要値(主処理)
+;
+;	・ ABLUP_DEMAND_MAIN				ABLUP必要値:主処理
+;
+; *- ABLUP必要値(個人)
+;
+;	・ _ABLUP_DEMAND_Ｃ感覚				ABLUP必要値:(Ｃ感覚)
+;	・ _ABLUP_DEMAND_Ｖ感覚				ABLUP必要値:(Ｖ感覚)
+;	・ _ABLUP_DEMAND_Ａ感覚				ABLUP必要値:(Ａ感覚)
+;	・ _ABLUP_DEMAND_Ｂ感覚				ABLUP必要値:(Ｂ感覚)
+;	・ _ABLUP_DEMAND_技巧				ABLUP必要値:(技巧)
+;	・ _ABLUP_DEMAND_魅了技能			ABLUP必要値:(魅了技能)
+;	・ _ABLUP_DEMAND_欲望				ABLUP必要値:(欲望)
+;	・ _ABLUP_DEMAND_露出癖				ABLUP必要値:(露出癖)
+;	・ _ABLUP_DEMAND_サドっ気			ABLUP必要値:(サドっ気)
+;	・ _ABLUP_DEMAND_マゾっ気			ABLUP必要値:(マゾっ気)
+;	・ _ABLUP_DEMAND_レズっ気			ABLUP必要値:(レズっ気)
+;	・ _ABLUP_DEMAND_ＢＬっ気			ABLUP必要値:(ＢＬっ気)
+;	・ _ABLUP_DEMAND_性交中毒			ABLUP必要値:(性交中毒)
+;	・ _ABLUP_DEMAND_自慰中毒			ABLUP必要値:(自慰中毒)
+;	・ _ABLUP_DEMAND_精液中毒			ABLUP必要値:(精液中毒)
+;	・ _ABLUP_DEMAND_キス中毒			ABLUP必要値:(キス中毒)
+;	・ _ABLUP_DEMAND_家事技能			ABLUP必要値:(家事技能)
+;	・ _ABLUP_DEMAND_歌唱技能			ABLUP必要値:(歌唱技能)
+;	・ _ABLUP_DEMAND_戦闘技能			ABLUP必要値:(戦闘技能)
+;
+; *- ABLUP必要値(対人)
+;
+;	・ _ABLUP_DEMAND_親密				ABLUP必要値:(親密)
+;	・ _ABLUP_DEMAND_従順				ABLUP必要値:(従順)
+;	・ _ABLUP_DEMAND_奉仕精神			ABLUP必要値:(奉仕精神)
+;	・ _ABLUP_DEMAND_性奴隷				ABLUP必要値:(性奴隷)
+;	・ _ABLUP_DEMAND_篭絡				ABLUP必要値:(篭絡)
+;
+; *- MARKDOWN必要値(対人)
+;
+;	・ _ABLUP_DEMAND_反発刻印			ABLUP必要値:(反発刻印)
+;
+;===============================================================================
+
+
+;-------------------------------------------------------------------------------
+;   ABLUP:統合
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub ABLUP_EXE
+;=================================================
+;   実行:ABLUP
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				対象要素位置
+;  ARG:2				処理パターン
+;  ARGS					変更対象(ABL,MARK)
+;-------------------------------------------------
+@ABLUP_EXE(ARG, ARG:1, ARG:2, ARGS="")
+#DIM L_I
+
+;-----------------------------
+;-- 消費:JUEL
+;-----------------------------
+
+;-- ABLUP必要値を取得
+
+;- ABLUP必要値:主処理
+CALL ABLUP_DEMAND_MAIN(ARG,ARG:2,ARG:1,-1,ARGS)
+
+;- Hにセットされた全JUELを消費させる
+FOR L_I,0,VARSIZE("JUEL")
+	SIF !H:L_I
+		CONTINUE
+	;- 消費
+	JUEL:ARG:L_I -= H:L_I
+NEXT
+
+;-----------------------------
+;-- 上昇
+;-----------------------------
+
+;- 処理対象で分岐
+SELECTCASE ARGS
+	CASE "ABL"
+		ABL:ARG:(ARG:1) += 1
+	;- 刻印はダウン系のみで、満たせば即ゼロに
+	CASE "MARK"
+		;減算
+		MARK:ARG:(ARG:1) = 0
+ENDSELECT
+
+;-------------------------------------------------------------------------------
+;   ABLUP:CHK系
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub CHK_ABLUP_MAIN
+;=================================================
+;   CHK:ABLUP(主処理)
+;-------------------------------------------------
+;   対象要素のABLUP可否がNGかOKかを全パターンチェックし、
+;   その結果を返す
+;   読み飛ばし対象の場合はマイナスを返す
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				対象要素位置
+;  ARGS					変更対象(ABL,MARK)
+; Output:
+;  RESULT				結果(0:OK 1:NG -1:対象外)
+;-------------------------------------------------
+@CHK_ABLUP_MAIN(ARG,ARG:1, ARGS="")
+#DIM L_RESULT
+VARSET LOCALS
+
+L_RESULT = -1
+
+;- パターンを全て処理
+FOR LOCAL,0,ABLUP_GET_SYRPTN_NUM()
+
+	;- CHK:ABLUP(詳細)
+	CALL CHK_ABLUP_DETAIL(ARG,ARG:1,LOCAL,ARGS)
+
+	SELECTCASE RESULT
+		;- 対象外
+		CASE -1
+		;- OK有り
+		CASE 0
+			L_RESULT = 0
+			BREAK
+		;- NG
+		CASEELSE
+			L_RESULT = 1
+	ENDSELECT
+NEXT
+
+VARSET RESULTS
+
+RETURNFORM L_RESULT
+
+
+;=================================================
+;   sub CHK_ABLUP_DETAIL
+;=================================================
+;   CHK:ABLUP(詳細)
+;-------------------------------------------------
+;   入力されたパターンに対して、
+;   RESULTとRESULTSに変更対象のNG結果、
+;   及びデータ説明をセットする
+;   (※同時に、必要値情報がセットされる)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				対象要素位置
+;  ARG:2				処理パターン
+;  ARGS					変更対象(ABL,MARK)
+; Output:
+;  RESULT				NG結果(対象有りのみビットで保持)
+;	-1:対象外
+;	 0:OK
+;	 1～x:NG(各ビット 0:OK 1:NG)
+;
+;  RESULTS[0..x]		チェック用データの説明
+;-------------------------------------------------
+@CHK_ABLUP_DETAIL(ARG, ARG:1, ARG:2 = 0, ARGS="")
+#DIM L_I
+#DIM L_NG
+#DIM L_TMP
+VARSET RESULTS
+
+L_I=0
+L_NG=0
+L_TMP=0
+
+;- ABLUP:作業領域CLEAR
+CALL ABLUP_TMP_CLEAR
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+VARSET RESULT
+
+;-- ABLUP必要値を取得
+
+;- ABLUP必要値:主処理
+CALL ABLUP_DEMAND_MAIN(ARG,ARG:2,ARG:1,-1,ARGS)
+
+;- OK以外の場合
+SIF RESULT != 1
+	RETURN -1
+
+;-------------------------------------------------
+;--- データをRESULTSに格納する
+;-------------------------------------------------
+
+
+;-----------------------------
+;- CHK:JUEL
+;-----------------------------
+
+;- RESULTSの始点位置を作成
+L_TMP = 0
+FOR L_I,0,VARSIZE("JUEL")
+	SIF !H:L_I
+		CONTINUE
+	; FORMAT:「○○の珠×xxx」(例：快Ｃの珠×xxx…等)
+	RESULTS:(L_TMP + L_I) = %PALAMNAME:L_I%の珠×%TOSTR(H:L_I)%
+	SIF !(H:L_I <= JUEL:ARG:L_I)
+		SETBIT L_NG, 1
+NEXT
+
+;-----------------------------
+;- CHK:EXP
+;-----------------------------
+
+;- RESULTSの始点位置を作成
+L_TMP = VARSIZE("JUEL")
+FOR L_I,0,VARSIZE("EXP")
+	SIF !I:L_I
+		CONTINUE
+	; FORMAT:「○○xxx以上」(例：自慰経験3以上…等)
+	RESULTS:(L_TMP + L_I) = %EXPNAME:L_I%%TOSTR(I:L_I)%以上
+	SIF !(I:L_I <= EXP:ARG:L_I)
+		SETBIT L_NG, 2
+NEXT
+
+;-----------------------------
+;- CHK:ABL
+;-----------------------------
+
+;- RESULTSの始点位置を作成
+L_TMP = VARSIZE("JUEL") + VARSIZE("EXP")
+FOR L_I,0,VARSIZE("ABL")
+	SIF !J:L_I
+		CONTINUE
+	; FORMAT:「○○LVxxx以上」(例：Ｃ感覚LV1…等)
+	RESULTS:(L_TMP + L_I) = %ABLNAME:L_I%LV%TOSTR(J:L_I)%以上
+	SIF !(J:L_I <= ABL:ARG:L_I)
+		SETBIT L_NG, 3
+NEXT
+;-----------------------------
+;- CHK:MARK
+;-----------------------------
+
+;- RESULTSの始点位置を作成
+L_TMP = VARSIZE("JUEL") + VARSIZE("EXP") + VARSIZE("ABL")
+FOR L_I,0,VARSIZE("MARK")
+	SIF !K:L_I
+		CONTINUE
+	; FORMAT:「○○LVxxx以上」(例：陥落刻印LV1以上…等)
+	IF K:L_I > -1
+		RESULTS:(L_TMP + L_I) = %MARKNAME:L_I%LV%TOSTR(K:L_I)%以上
+		SIF !(K:L_I <= MARK:ARG:L_I)
+			SETBIT L_NG, 4
+	ELSE
+		RESULTS:(L_TMP + L_I) = %MARKNAME:L_I%LV%TOSTR(ABS(K:L_I))%未満
+		SIF !(ABS(K:L_I) > MARK:ARG:L_I)
+			SETBIT L_NG, 4
+	ENDIF
+NEXT
+
+;-----------------------------
+;- RETURN
+;-----------------------------
+RETURNFORM L_NG
+
+;-------------------------------------------------------------------------------
+;   ABLUP必要値(主処理)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub ABLUP_DEMAND_MAIN
+;=================================================
+;   ABLUP必要値:主処理
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:2				対象要素位置
+;  ARG:9				対象レベル(デフォルト:対象要素のLV)
+;  ARGS					変更対象(ABL,MARK)
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK -1:対象外)
+;-------------------------------------------------
+@ABLUP_DEMAND_MAIN(ARG,ARG:1=0,ARG:2=0,ARG:9 = -1,ARGS="")
+
+;-----------------------------
+;- 前処理
+;-----------------------------
+
+;- 処理対象で分岐
+SELECTCASE ARGS
+	CASE "ABL"
+		LOCALS	= %ABLNAME:(ARG:2)%
+
+		;- LV設定
+		SIF ARG:9 < 0
+			ARG:9 = ABL:ARG:(ARG:2)
+
+	CASE "MARK"
+		LOCALS	= %MARKNAME:(ARG:2)%
+
+		;- LV設定
+		SIF ARG:9 < 0
+			ARG:9 = MARK:ARG:(ARG:2)
+
+	CASEELSE
+		;- 仕様上エラーだが、対象外を設定
+		RETURN -1
+ENDSELECT
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+;- ABLUP:作業領域CLEAR
+CALL ABLUP_TMP_CLEAR
+
+;-- ABLUP必要値を取得
+TRYCCALLFORM _ABLUP_DEMAND_%LOCALS%(ARG,ARG:1,ARG:9)
+	;------------------------------------------------- 調整中
+	;MASTERのみ、2.0倍
+	IF ARG == MASTER
+		FOR COUNT, 0, VARSIZE("ABL")
+			SIF H:COUNT
+				H:COUNT = H:COUNT * 200 / 100
+		NEXT
+	ENDIF
+	;-------------------------------------------------
+CATCH
+	;- 存在しない場合は、対象外を設定
+	RETURN -1
+ENDCATCH
+
+;- "_ABLUP_DEMAND_xxxx"の結果を判定
+IF RESULT == 0
+	RETURN 0
+ELSE
+	RETURN 1
+ENDIF
+
+;-------------------------------------------------------------------------------
+;   ABLUP必要値(個人)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub _ABLUP_DEMAND_Ｃ感覚
+;=================================================
+;   ABLUP必要値:(Ｃ感覚)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_Ｃ感覚(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"快Ｃ")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+;			SIF L_LV >= 3
+;				H:(GETNUM(PALAM,"快Ｃ")) += ABLUP_DEMAND_DEFAULT_JUEL(L_LV - 3)
+		;- EXP
+			I:(GETNUM(EXP,"Ｃ経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_Ｖ感覚
+;=================================================
+;   ABLUP必要値:(Ｖ感覚)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_Ｖ感覚(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"快Ｖ")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+;			SIF L_LV >= 3
+;				H:(GETNUM(PALAM,"快Ｖ")) += ABLUP_DEMAND_DEFAULT_JUEL(L_LV - 3)
+		;- EXP
+			I:(GETNUM(EXP,"Ｖ経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_Ａ感覚
+;=================================================
+;   ABLUP必要値:(Ａ感覚)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_Ａ感覚(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"快Ａ")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+;			SIF L_LV >= 3
+;				H:(GETNUM(PALAM,"快Ａ")) += ABLUP_DEMAND_DEFAULT_JUEL(L_LV - 3)
+		;- EXP
+			I:(GETNUM(EXP,"Ａ経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_Ｂ感覚
+;=================================================
+;   ABLUP必要値:(Ｂ感覚)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_Ｂ感覚(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"快Ｂ")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+;			SIF L_LV >= 3
+;				H:(GETNUM(PALAM,"快Ｂ")) += ABLUP_DEMAND_DEFAULT_JUEL(L_LV - 3)
+		;- EXP
+			I:(GETNUM(EXP,"Ｂ経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_技巧
+;=================================================
+;   ABLUP必要値:(技巧)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_技巧(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"習得")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_魅了技能
+;=================================================
+;   ABLUP必要値:(魅了技能)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_魅了技能(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"誘惑")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+	;- パターン
+	CASE 1
+		;- JUEL
+			H:(GETNUM(PALAM,"誘惑")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV) / 2
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV) / 2
+			H:(GETNUM(PALAM,"習得")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV) * 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_欲望
+;=================================================
+;   ABLUP必要値:(欲望)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_欲望(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_露出癖
+;=================================================
+;   ABLUP必要値:(露出癖)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_露出癖(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"恥情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			IF L_LV > 3
+				I:(GETNUM(EXP,"被写経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV - 3) / 2
+			ENDIF
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_サドっ気
+;=================================================
+;   ABLUP必要値:(サドっ気)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_サドっ気(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"誘惑")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			IF L_LV > 3
+				I:(GETNUM(EXP,"嗜虐快楽経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV - 3)
+			ENDIF
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_マゾっ気
+;=================================================
+;   ABLUP必要値:(マゾっ気)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_マゾっ気(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"奉仕快楽経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV)
+			IF L_LV > 3
+				I:(GETNUM(EXP,"被虐快楽経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV - 3)
+			ENDIF
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_レズっ気
+;=================================================
+;   ABLUP必要値:(レズっ気)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_レズっ気(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"レズ経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) * 150 / 100
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_ＢＬっ気
+;=================================================
+;   ABLUP必要値:(ＢＬっ気)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_ＢＬっ気(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"ＢＬ経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) * 150 / 100
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_性交中毒
+;=================================================
+;   ABLUP必要値:(性交中毒)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_性交中毒(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"性交経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) * 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_自慰中毒
+;=================================================
+;   ABLUP必要値:(自慰中毒)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_自慰中毒(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"自慰経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) / 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_精液中毒
+;=================================================
+;   ABLUP必要値:(精液中毒)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_精液中毒(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"精液経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) / 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_キス中毒
+;=================================================
+;   ABLUP必要値:(キス中毒)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_キス中毒(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"欲情")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"キス経験")) = 50 + (ABLUP_DEMAND_DEFAULT_EXP(L_LV) * 2)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_家事技能
+;=================================================
+;   ABLUP必要値:(家事技能)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_家事技能(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"生活")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"家事経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) / 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_歌唱技能
+;=================================================
+;   ABLUP必要値:(歌唱技能)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_歌唱技能(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"生活")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"歌唱経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) / 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_戦闘技能
+;=================================================
+;   ABLUP必要値:(戦闘技能)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_戦闘技能(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"生活")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+		;- EXP
+			I:(GETNUM(EXP,"戦闘経験")) = ABLUP_DEMAND_DEFAULT_EXP(L_LV) / 2
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;-------------------------------------------------------------------------------
+;   ABLUP必要値(対人)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub _ABLUP_DEMAND_親密
+;=================================================
+;   ABLUP必要値:(親密)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_親密(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+#DIM L_VAL
+VARSET RESULT
+
+L_LV = ARG:9
+L_VAL = ABLUP_DEMAND_DEFAULT_JUEL(3)
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン0
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"好意")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV) + L_VAL
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_従順
+;=================================================
+;   ABLUP必要値:(従順)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_従順(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン0
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"屈服")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+	;- パターン1
+	CASE 1
+		;- JUEL
+			H:(GETNUM(PALAM,"好意")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV) + ABLUP_DEMAND_DEFAULT_JUEL(0)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_奉仕精神
+;=================================================
+;   ABLUP必要値:(奉仕精神)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_奉仕精神(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+#DIM L_VAL
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン0
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"好意")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+	;- パターン0
+	CASE 1
+		;- JUEL
+			H:(GETNUM(PALAM,"屈服")) = ABLUP_DEMAND_DEFAULT_JUEL(L_LV)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_性奴隷
+;=================================================
+;   ABLUP必要値:(性奴隷)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_性奴隷(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン
+	CASE 0
+		;- ABL
+			J:(GETNUM(ABL,"従順")) = L_LV + 1
+			J:(GETNUM(ABL,"奉仕精神")) = L_LV + 1
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+
+;=================================================
+;   sub _ABLUP_DEMAND_篭絡
+;=================================================
+;   ABLUP必要値:(篭絡)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_篭絡(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン0
+	CASE 0
+		;- ABL
+			J:(GETNUM(ABL,"親密")) = L_LV + 1
+			J:(GETNUM(ABL,"従順")) = L_LV + 1
+			J:(GETNUM(ABL,"欲望")) = L_LV + 1
+
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+;- 共通キャップ
+SELECTCASE L_LV + 1
+	CASE 4
+		;- MARK
+			K:(GETNUM(MARK,"陥落刻印")) = 1
+	CASE 7
+		;- MARK
+			K:(GETNUM(MARK,"陥落刻印")) = 2
+	CASEELSE
+ENDSELECT
+
+RETURN 1
+
+
+;-------------------------------------------------------------------------------
+;   MARKDOWN必要値(対人)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub _ABLUP_DEMAND_反発刻印
+;=================================================
+;   ABLUP必要値:(反発刻印)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ位置
+;  ARG:1				処理パターン(0..x)
+;  ARG:9				対象レベル
+; Output:
+;  H,I,J,K[0..x]		必要値
+;  RESULT				パターン存在結果(0:NG 1:OK)
+;-------------------------------------------------
+@_ABLUP_DEMAND_反発刻印(ARG,ARG:1=0,ARG:9 = 0)
+#DIM L_LV
+VARSET RESULT
+
+L_LV = ARG:9
+
+;- CHK:処理パターン
+SELECTCASE ARG:1
+	;- パターン0
+	CASE 0
+		;- JUEL
+			H:(GETNUM(PALAM,"屈服")) = ABLUP_DEMAND_DEFAULT_JUEL(3)
+	;- パターン1
+	CASE 1
+		;- JUEL
+			H:(GETNUM(PALAM,"好意")) = ABLUP_DEMAND_DEFAULT_JUEL(2)
+	CASEELSE
+		RETURN 0
+ENDSELECT
+
+RETURN 1
+

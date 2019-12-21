@@ -1,0 +1,706 @@
+
+;-------------------------------------------------
+; 住人設定
+;-------------------------------------------------
+@JN_CONFIG
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+
+DRAWLINE
+PRINTFORML 変更したい項目を選択して下さい。
+PRINTFORML [1] - レギュラー設定(一部イベント発生)
+PRINTFORML [2] - 特別保護設定(被害の保護)
+PRINTFORML [3] - 各住人イベント傾向
+PRINTFORML [4] - 交流対象
+PRINTFORML [5] - 衣装変更
+PRINTFORML [6] - 役職変更
+PRINTFORML
+PRINTFORML [50] - 名前変更
+PRINTFORML
+PRINTFORML
+PRINTFORML [100] - 住人抹消
+PRINTFORML 
+PRINTFORML [999] - 戻る
+
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 1
+	CALL JN_CONFIG_REGULAR
+CASE 2
+	CALL JN_CONFIG_T_BLOCK
+CASE 3
+	CALL JN_CONFIG_EVENT
+CASE 4
+	CALL JN_CONFIG_COM
+CASE 5
+	CALL COSTUME_MAIN
+CASE 6
+	CALL POSITION_CHANGE
+CASE 50
+	CALL JN_CONFIG_N_C
+CASE 100
+	CALL JN_CONFIG_DELETE
+CASE 999
+	RETURN
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+RESTART
+
+
+
+
+;-------------------------------------------------
+; レギュラー設定
+;-------------------------------------------------
+@JN_CONFIG_REGULAR(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_INPUT2
+#DIM L_I
+#DIM L_REGULAR
+$DATA_LIST
+L_INPUT = 0
+L_INPUT2 = 0
+L_REGULAR = 0
+L_I = 0
+
+DRAWLINE
+PRINTFORML レギュラー設定を変更したい住人を選択して下さい(レギュラー入りは最大20人まで)
+DRAWLINE
+SETCOLOR 0,250,250
+PRINTFORM 【レギュラー:
+ARG:0 = 531
+ARG:1 = 1
+CALL MEMBER_LIST2(ARG:0,ARG:1)
+L_REGULAR = FLAG:汎用変数
+PRINTFORML 】
+RESETCOLOR
+
+
+FOR L_I,0,CHARANUM
+	CSTR:L_I:4999 '= \@(CFlag:L_I:レギュラー) ? o # x\@ + " "
+NEXT
+ARGS:0 = レギュラー
+CALL LIST_CHARA(ARGS:0,,,4999)
+
+L_INPUT = RESULT
+
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_REGULAR >= 20 && CFlag:L_INPUT:レギュラー == 0
+		PRINTFORMW レギュラーは20人までです
+		GOTO DATA_LIST
+	ELSEIF CFlag:L_INPUT:レギュラー == 0
+		CFlag:L_INPUT:レギュラー = 1
+		PRINTFORMW %CALLNAME:L_INPUT%をレギュラー入りしました
+		GOTO DATA_LIST
+	ELSEIF CFlag:L_INPUT:レギュラー == 1
+		CFlag:L_INPUT:レギュラー = 0
+		PRINTFORMW %CALLNAME:L_INPUT%をレギュラーから外しました
+		GOTO DATA_LIST
+	ENDIF
+ENDIF
+
+; CALL JN_CONFIG
+
+
+
+;-------------------------------------------------
+; 特別保護設定
+;-------------------------------------------------
+@JN_CONFIG_T_BLOCK(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_INPUT2
+#DIM L_I
+#DIM L_REGULAR
+$DATA_LIST
+L_INPUT = 0
+L_INPUT2 = 0
+L_REGULAR = 0
+L_I = 0
+
+DRAWLINE
+PRINTFORML 特別保護設定を変更したい住人を選択して下さい(特別保護入りは最大30人まで)
+PRINTFORML 特別保護された住人には不利益・被害が及ぶイベントが発生しません。
+DRAWLINE
+SETCOLOR 0,250,250
+PRINTFORM 【保護入り:
+ARG:0 = 532
+ARG:1 = 1
+CALL MEMBER_LIST2(ARG:0,ARG:1)
+L_REGULAR = FLAG:汎用変数
+PRINTFORML 】
+RESETCOLOR
+DRAWLINE
+
+
+
+
+FOR L_I,0,CHARANUM
+	CSTR:L_I:4999 '= \@(CFlag:L_I:特別保護) ? o # x\@ + " "
+NEXT
+ARGS:0 = 特別保護
+CALL LIST_CHARA(ARGS:0,,,4999)
+
+L_INPUT = RESULT
+
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_REGULAR >= 30&& CFlag:L_INPUT:特別保護 == 0
+		PRINTFORMW 特別保護は30人までです
+		GOTO DATA_LIST
+	ELSEIF CFlag:L_INPUT:特別保護 == 0
+		CFlag:L_INPUT:特別保護 = 1
+		PRINTFORMW %CALLNAME:L_INPUT%を特別保護入りしました
+		GOTO DATA_LIST
+	ELSEIF CFlag:L_INPUT:特別保護 == 1
+		CFlag:L_INPUT:特別保護 = 0
+		PRINTFORMW %CALLNAME:L_INPUT%を特別保護から外しました
+		GOTO DATA_LIST
+	ENDIF
+ENDIF
+
+; CALL JN_CONFIG
+
+
+
+
+;-------------------------------------------------
+; 各住人イベント傾向
+;-------------------------------------------------
+@JN_CONFIG_EVENT
+#DIM L_I
+#DIM L_INPUT
+$DATA_LIST
+
+L_I = 0
+
+DRAWLINE
+PRINTFORML 変更したいキャラを選択して下さい
+DRAWLINE
+
+
+
+
+CALL LIST_CHARA
+
+L_INPUT = RESULT
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO DATA_LIST
+	ENDIF
+	L_I = L_INPUT
+	$INPUT_LOOP2
+	CLEARLINE LINECOUNT
+	DRAWLINE
+	PRINTFORML  {L_I} %CALLNAME:L_I% 変更したいイベント傾向を選択して下さい。
+	DRAWLINE
+	PRINTFORM [0] 交流イベント(
+	IF  CFlag:L_I:住人イベント傾向_交流 == 90
+		PRINTFORM 多め
+	ELSEIF CFlag:L_I:住人イベント傾向_交流 == 60
+		PRINTFORM 普通
+	ELSEIF CFlag:L_I:住人イベント傾向_交流 == 30
+		PRINTFORM 少ない
+	ELSE
+		PRINTFORM 発生しない
+	ENDIF
+	PRINTFORML )
+	PRINTFORM [1] 恋愛イベント(
+	IF  CFlag:L_I:住人イベント傾向_恋愛 == 90
+		PRINTFORM 多め
+	ELSEIF CFlag:L_I:住人イベント傾向_恋愛 == 60
+		PRINTFORM 普通
+	ELSEIF CFlag:L_I:住人イベント傾向_恋愛 == 30
+		PRINTFORM 少ない
+	ELSE
+		PRINTFORM 発生しない
+	ENDIF
+	PRINTFORML )
+	PRINTFORM [2] 犯罪イベント(
+	IF  CFlag:L_I:住人イベント傾向_犯罪 == 90
+		PRINTFORM 多め
+	ELSEIF CFlag:L_I:住人イベント傾向_犯罪 == 60
+		PRINTFORM 普通
+	ELSEIF CFlag:L_I:住人イベント傾向_犯罪 == 30
+		PRINTFORM 少ない
+	ELSE
+		PRINTFORM 発生しない
+	ENDIF
+	PRINTFORML )
+	PRINTFORM [3] 性的イベント(
+	IF  CFlag:L_I:住人イベント傾向_性 == 90
+		PRINTFORM 多め
+	ELSEIF CFlag:L_I:住人イベント傾向_性 == 60
+		PRINTFORM 普通
+	ELSEIF CFlag:L_I:住人イベント傾向_性 == 30
+		PRINTFORM 少ない
+	ELSE
+		PRINTFORM 発生しない
+	ENDIF
+	PRINTFORML )
+	PRINTFORM [10] 住人交流上限(
+	IF  CFlag:L_I:住人交流設定 == 4
+		PRINTFORM 上限なし
+	ELSEIF CFlag:L_I:住人交流設定 == 3
+		PRINTFORM 恋人
+	ELSEIF CFlag:L_I:住人交流設定 == 2
+		PRINTFORM 親友
+	ELSEIF CFlag:L_I:住人交流設定 == 1
+		PRINTFORM 友人
+	ELSE
+		PRINTFORM 発生しない
+	ENDIF
+	PRINTFORML )
+	PRINTFORML 
+	PRINTFORML [999] 戻る
+	PRINTFORMLC \@(L_I > 1) ? [1001]前のキャラ # %" " * 16%\@
+	PRINTFORMLC   %" " * 18%
+	PRINTFORMLC \@(L_I < CHARANUM-1) ? [1003]次のキャラ # %" " * 16%\@
+	$INPUT_LOOP
+	INPUT
+	L_INPUT = RESULT
+
+
+	SELECTCASE L_INPUT
+	CASE 999
+		CASE 10
+		CFlag:L_I:(3950+L_INPUT) += 1
+		SIF CFlag:L_I:(3950+L_INPUT) >= 5
+			CFlag:L_I:(3950+L_INPUT) = 0
+		GOTO INPUT_LOOP2
+	CASE 1001
+		IF (L_I > 1) 
+			L_I --
+			GOTO INPUT_LOOP2
+		ENDIF
+		GOTO INPUT_LOOP
+	CASE 1003
+		IF (L_I < CHARANUM-1) 
+			L_I ++
+			GOTO INPUT_LOOP2
+		ENDIF
+		GOTO INPUT_LOOP
+	CASE L_INPUT
+		CFlag:L_I:(3950+L_INPUT) += 30
+		SIF CFlag:L_I:(3950+L_INPUT) >= 100
+			CFlag:L_I:(3950+L_INPUT) = 0
+		GOTO INPUT_LOOP2
+	CASEELSE
+		GOTO INPUT_LOOP
+	ENDSELECT
+ENDIF
+
+
+
+
+
+; CALL JN_CONFIG
+
+
+
+
+;-------------------------------------------------
+; デリート
+;-------------------------------------------------
+@JN_CONFIG_DELETE
+#DIM L_I
+#DIM L_INPUT
+$DATA_LIST
+
+L_I = 0
+
+DRAWLINE
+PRINTFORML 削除したいキャラを選択して下さい
+DRAWLINE
+
+
+
+
+CALL LIST_CHARA
+
+L_INPUT = RESULT
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO DATA_LIST
+	ENDIF
+	L_I = L_INPUT
+	PRINTFORML %CALLNAME:L_I%を削除します、本当によろしいですか？
+	PRINTFORML [0] はい
+	PRINTFORML [999] 戻る
+	$INPUT_LOOP
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+	CASE 0
+	PRINTFORML 
+	PRINTFORMW %CALLNAME:L_I%を削除しました
+	DELCHARA  L_I
+	CASEELSE
+		GOTO INPUT_LOOP
+	ENDSELECT
+ENDIF
+
+
+
+
+
+
+
+
+
+; CALL JN_CONFIG
+
+;-------------------------------------------------
+; 各交流住人
+;-------------------------------------------------
+@JN_CONFIG_COM
+#DIM L_NPC
+#DIM L_INPUT
+#DIM L_T
+#DIM L_NAME
+
+L_T = TARGET
+$COM_LIST
+
+DRAWLINE
+PRINTFORML 参照したいキャラを選択して下さい
+DRAWLINE
+CALL LIST_CHARA
+TARGET = RESULT
+
+SIF RESULT == 1000
+	RETURN
+
+IF TALENT:RESULT:NPC == 999 
+	PRINTFORMW NPCは選択できません
+	GOTO COM_LIST
+ELSEIF RESULT == 0
+	PRINTFORMW あなたは選択できません
+	GOTO COM_LIST
+ENDIF
+
+
+$INPUT_LOOP0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML  {TARGET} %CALLNAME:TARGET%
+PRINTFORML 交流対象のお気に入り、名前変更ができます。
+DRAWLINE
+L_NPC = 0
+PRINTFORML [-1] お気に入り解除
+$INPUT_LOOP
+IF CSTR:(3000+L_NPC) == ""
+	PRINTFORML 【未登録】
+ELSE
+SIF CFLAG:3600 == L_NPC
+	SETCOLOR 50,250,250
+	PRINTFORM [{L_NPC}] %CSTR:(3000+L_NPC), 18 ,LEFT%
+	PRINTFORM 【
+	IF CFLAG:(3030+L_NPC) == 1
+		PRINTFORM 男
+	ELSE
+		PRINTFORM 女
+	ENDIF
+	PRINTFORM 】【関係:
+	IF CFLAG:(3020+L_NPC) == 5
+		PRINTFORM 夫婦
+	ELSEIF CFLAG:(3020+L_NPC) == 4
+		PRINTFORM 恋人
+	ELSEIF CFLAG:(3020+L_NPC) == 3
+		PRINTFORM 親友
+	ELSEIF CFLAG:(3020+L_NPC) == 2
+		PRINTFORM 友人
+	ELSEIF CFLAG:(3020+L_NPC) == 1
+		PRINTFORM 知人
+	ELSEIF CFLAG:(3020+L_NPC) == -5
+		PRINTFORM 愛人
+	ENDIF
+	PRINTFORM 】【好感度:{CFLAG:(3010+L_NPC), 3 ,LEFT}】【相性:{CFLAG:(3050+L_NPC), 3 ,LEFT}】【性行為回数:{CFLAG:(3060+L_NPC)}】
+	PRINTFORML
+ENDIF
+RESETCOLOR
+L_NPC += 1
+SIF L_NPC < 10
+	GOTO INPUT_LOOP
+DRAWLINE
+PRINTFORML
+PRINTFORML 
+PRINTFORML [999] 戻る
+PRINTFORMLC \@(TARGET > 1) ? [1001]前のキャラ # %" " * 16%\@
+PRINTFORMLC   %" " * 18%
+PRINTFORMLC \@(TARGET < CHARANUM-1) ? [1003]次のキャラ # %" " * 16%\@
+$INPUT_LOOP2
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE -1
+	CFLAG:3600 = -1
+	PRINTFORMW 【お気に入りを解除しました】
+	GOTO INPUT_LOOP0
+CASE 999
+	TARGET = L_T
+	; CALL JN_CONFIG
+	RETURN
+CASE 1001
+	IF (TARGET > 1) 
+		TARGET --
+		GOTO INPUT_LOOP0
+	ENDIF
+	GOTO INPUT_LOOP2
+CASE 1003
+	IF (TARGET < CHARANUM-1) 
+		TARGET ++
+		GOTO INPUT_LOOP0
+	ENDIF
+	GOTO INPUT_LOOP2
+CASEELSE
+	CFLAG:3600 = RESULT
+	PRINTFORML 【%CSTR:(3000+RESULT)%をお気に入りにしました】
+	PRINTFORMW お気に入りにした住人とは交流発生が多くなり、好感度・相性増加に補正が入ります。
+	DRAWLINE
+	PRINTFORML 【続けて名前を変更します、未入力で変更しません。】
+	DRAWLINE
+	INPUTS
+	IF RESULTS == ""
+		;スルー
+	ELSE
+		SIF CFLAG:(3020+L_NPC) == 5
+		CSTR:伴侶名前 = %RESULTS%
+		CSTR:(3000+RESULT) = %RESULTS%
+		PRINTFORML 【名前を%CSTR:(3000+RESULT)%に変更しました】
+		SIF TALENT:子供っぽい || TALENT:おしゃま
+			CSTR:一人称 = %CALLNAME:TARGET%
+	ENDIF
+	GOTO INPUT_LOOP0
+ENDSELECT
+
+
+
+
+
+
+
+
+
+IF TALENT:結婚済み == 1
+	PRINTFORML [200] 夫の名前変更
+ENDIF 
+TARGET = L_T
+
+;-------------------------------------------------
+;役職変更
+;-------------------------------------------------
+@POSITION_CHANGE
+#DIM L_INPUT
+#DIM L_INPUT2
+#DIM L_P
+
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+
+DRAWLINE
+PRINTFORML 資金500000消費して住人の役職を変更できます。
+PRINTFORML 以下の役職を選択してください。
+PRINTFORML 
+PRINTFORML [1]  - 役職なし
+PRINTFORML [93] - 聖職者
+PRINTFORML [94] - メイド
+PRINTFORML [95] - 学生
+PRINTFORML [96] - アイドル
+PRINTFORML [97] - 社会人
+PRINTFORML [98] - 娼婦
+PRINTFORML [99] - 治安維持局員
+PRINTFORML
+PRINTFORML 
+PRINTFORML [999] - 戻る
+
+INPUT
+L_P = RESULT
+L_INPUT = RESULT
+
+SIF L_INPUT == 999
+	RETURN
+	
+IF MONEY < 500000
+	PRINTFORML 
+	PRINTFORML 資金が不足しています。
+	PRINTFORMW 
+ENDIF
+
+PRINTFORML 
+PRINTFORML 役職変更したい住人を選択して下さい。
+PRINTFORML 
+
+
+
+
+CALL LIST_CHARA
+
+L_INPUT = RESULT
+SIF L_INPUT == 1000
+	RETURN
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO INPUT_LOOP
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO INPUT_LOOP
+	ENDIF
+	
+	IF TALENT:L_INPUT:学生 != 0 && L_P != 95
+		PRINTFORML 学生の身分を残しますか？
+		PRINTFORML 
+		PRINTFORML [1] - はい
+		PRINTFORML [2] - いいえ
+		INPUT
+		L_INPUT2 = RESULT
+		SIF L_INPUT2 >= 2
+			TALENT:L_INPUT:学生 = 0
+	ELSE
+		TALENT:L_INPUT:学生 = 0
+	ENDIF
+	TALENT:L_INPUT:聖職者 = 0
+	TALENT:L_INPUT:メイド = 0
+	TALENT:L_INPUT:アイドル = 0
+	TALENT:L_INPUT:社会人 = 0
+	TALENT:L_INPUT:娼婦 = 0
+	TALENT:L_INPUT:治安維持局員 = 0
+
+
+	IF L_P == 95
+		PRINTFORML 学生の身分を選択してください
+		PRINTFORML 
+		PRINTFORML [1] - 普通の学生
+		PRINTFORML [2] - 大学生
+		PRINTFORML [3] - 高校生
+		PRINTFORML [4] - 中学生
+		PRINTFORML [5] - 小学生
+		INPUT
+		L_INPUT2 = RESULT
+		TALENT:L_INPUT:L_P = L_INPUT2
+	ELSE
+		TALENT:L_INPUT:L_P = 1
+	ENDIF
+	MONEY -= 500000
+	PRINTFORML 
+	PRINTFORML 変更しました。
+	PRINTFORMW 
+ENDIF
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+;名前変更
+;-------------------------------------------------
+@JN_CONFIG_N_C
+#DIM L_INPUT
+#DIM L_NAME
+
+
+
+$DATA_LIST
+
+DRAWLINE
+PRINTFORML 名前変更したい住人を選択して下さい。
+DRAWLINE
+
+CALL LIST_CHARA
+
+L_INPUT = RESULT
+L_NAME = RESULT
+SIF L_INPUT == 1000
+	RETURN
+	; CALL JN_CONFIG
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO DATA_LIST
+	ENDIF
+	DRAWLINE
+	PRINTL 新しいCALLNAMEを選んで下さい。
+	PRINTL 空入力をすると、何も選択せずに戻ります。
+	DRAWLINE
+	PRINTL
+	INPUTS
+	IF RESULTS == ""
+		;スルー
+	ELSE
+		CALLNAME:L_NAME = %RESULTS%
+		SIF TALENT:L_NAME:子供っぽい || TALENT:L_NAME:おしゃま
+			CSTR:L_NAME:一人称 = %CALLNAME:L_NAME%
+	ENDIF
+ENDIF
+
+
+
+
+
+
+
+
+
+; CALL JN_CONFIG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,227 @@
+﻿;-------------------------------------------------
+;カジノイベント
+;-------------------------------------------------
+@TURN_EVENT_F_53
+#DIM L_MONEY
+#DIM L_MONEY2
+
+DRAWLINE
+PRINTFORML 【카지노 이벤트(시설):%CALLNAME%】
+PRINTFORML %CALLNAME%는 지정된 바니 코스튬으로 몸을 감싸고、호객 행위를 하고 있다。
+IF TALENT:거유 || TALENT:폭유
+	PRINTFORML 하지만 가슴 사이즈가 맞지 않아、당장이라도 옷에서 풍만한 가슴이 흘러넘칠 것 같았다。
+ELSEIF TALENT:빈유 || TALENT:절벽
+	PRINTFORML 하지만 %CALLNAME%의 가슴 사이즈로는 살짝 부족하여、각도에 따라선 유두가 보일 것 같았다。
+ELSE
+	PRINTFORML 제대로 몸에 딱 달라붙어 굴곡이 드러나자、조금이지만 부끄러움이 느껴졌다。
+ENDIF 
+PRINTFORML 그래도 %CALLNAME%는 기합을 넣고 일을 계속했다…
+PRINTFORML 
+	IF CFLAG:フェロモン >= 15
+		PRINTFORML 지각 없이 페로몬을 발산하는 %CALLNAME%는、거기에 휘말린 남자들의 시선을 신경쓰고 있다…
+	ELSEIF CFLAG:フェロモン >= 7
+		PRINTFORML 열광하는 카지노 속에서도 %CALLNAME%의 주위는 그녀에게 넋을 잃은 남성 손님들로 바글거리고 있다…
+	ELSE
+		PRINTFORML 与えられた任をこなし、今日もカジノはギャンブラー達の一喜一憂で賑やかなまま真夜中を過ぎていく…
+	ENDIF
+PRINTFORMW 
+
+
+
+L_MONEY = 500
+
+
+
+L_MONEY += ((CFLAG:無自覚な雌)*20)+(RAND:((CFLAG:無自覚な雌)+1*20))
+L_MONEY += ((CFLAG:フェロモン)*20)+(RAND:((CFLAG:フェロモン)+1*20))
+L_MONEY += ((CFLAG:雌の本能)*20)+(RAND:((CFLAG:雌の本能)+1)*20)
+L_MONEY += ((CFLAG:性への興味)*20)+(RAND:((CFLAG:性への興味)+1*20))
+L_MONEY += ((CFLAG:雄への関心)*20)+(RAND:((CFLAG:雄への関心)+1*20))
+L_MONEY += ((CFLAG:性交願望)*20)+(RAND:((CFLAG:性交願望)+1*20))
+L_MONEY += ((CFLAG:妊娠願望)*20)+(RAND:((CFLAG:妊娠願望)+1*20))
+
+L_MONEY = L_MONEY*(1+(FLAG:高級カジノ/5))+(CFlag:住人_人気/10)
+RESETCOLOR
+
+IF RAND:100 >= 60 && (CFLAG:住人_モラル < 0 || CFLAG:住人_カルマ >= 40)
+	CALL TURN_EVENT_F_53_C
+;10&の確率でフェロモンが高い場合発生
+ELSEIF RAND:100 >= 90 && CFLAG:フェロモン >= 15
+	CALL TURN_EVENT_F_53_B
+	L_MONEY += 500
+ENDIF
+
+
+SIF TALENT:쾌락중독 == 1
+	L_MONEY = L_MONEY/9
+	
+CALL TURN_EVENT_NNK
+
+PRINTFORML 【오늘　%CALLNAME%의 매상:￥{L_MONEY}】
+
+
+MONEY += L_MONEY
+
+
+
+
+;-------------------------------------------------
+;カジノイベント　カルマ
+;-------------------------------------------------
+@TURN_EVENT_F_53_C
+
+
+DRAWLINE
+SETCOLOR 250,50,150
+PRINTFORML 【뭔가 %CALLNAME%의 상태가 이상하다…】
+
+
+PRINTFORML 갑자기 몸이 뜨거워진 %CALLNAME%는、비틀거리는 발걸음으로 직장에서 빠져나왔다。
+PRINTFORML 誰もいない倉庫に逃げるように入り込むと、そのまま弱弱しく倒れ込む。
+PRINTFORML バニースーツをずらし보지를 露わにすると、愛液がトロトロと溢れていた。
+PRINTFORML …どうやら先程飲んだ飲料に何か含まれていたようだ。
+PRINTFORMW 
+PRINTFORML そう確信した瞬間、後ろから何者かに押し倒される。
+PRINTFORML 振り返るも、意識が朦朧としているためか、体格から男であることぐらしか識別できない。
+PRINTFORML 混乱している%CALLNAME%を知ってか知らずが、男はガチガチになったペニスを膣内へ侵入させる。
+PRINTFORML 悲鳴をあげようにも声が出ず、不幸にも壁も扉も防音加工なため、
+PRINTFORML 弱った%CALLNAME%는 恥辱を受け入れるしかできなった…
+PRINTFORMW 
+	IF !RAND:2 
+		PRINTFORML %CALLNAME%を屈服させるためか、男は%CALLNAME%の様子を見つつ腰の動きを変えていく。
+		PRINTFORML 弱い性感帯に当たったのか一際大きな声で嬌声を上げる%CALLNAME%を見ると、その時の動きをベースにピストンを速めた。
+		PRINTFORML 肉棒を引くたびにカリがヒダに引っかかりそれが快感となって%CALLNAME%を襲う。
+		PRINTFORML %CALLNAME%の意思とは裏腹に、膣内は男のモノに合うように蠢かせ、
+		PRINTFORML 自身を犯すペニスからより強い快感を得ようと膣壁を絞めていった…
+	ELSE
+		PRINTFORML 後背位の体勢でペニスを差し込むと、何度か小刻みに動いたのち長いストロークで腰を打ち込み始める。
+		PRINTFORML 膣壁の先から奥まで亀頭が全体を擦りつけ、その強すぎる快楽に%CALLNAME%는 背を反らして喘ぎ声を上げた。
+		PRINTFORML 薬の効果が徐々に強まっているためか%CALLNAME%는 一匹の雌に成り果て、甘い声を漏らしている。
+		PRINTFORML その姿に男は暗い笑みを浮かべつつ、女に種付けするべくピストンの動きを速めていった…
+	ENDIF
+PRINTFORMW 
+PRINTFORML 一時間後、情欲の全てを吐き出した男はようやく膣内からペニスを引き抜く。
+PRINTFORML すると、秘所からは種付けされた証である白濁液が溢れ出す。
+PRINTFORML それに構わず男は%CALLNAME%の口元にペニスをやると、フェラを指示する。
+PRINTFORML 抵抗力を失った%CALLNAME%는、濁った瞳のままそれを口に含むとゆっくりと奉仕していく。
+PRINTFORML 最後には気絶してしまい、朦朧としたうちに起きたこの出来事は%CALLNAME%の記憶に残らないだろう…
+PRINTFORMW 
+
+
+
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = 카지노 손님
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = 카지노 손님
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = 카지노 손님
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = 카지노 손님
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = 카지노 손님
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 카지노 손님
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = 카지노 손님
+
+
+
+TALENT:비처녀 = 1
+TALENT:Ａ비처녀 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
+CALL JN_SEX_EXP
+EXP:강간경험 += (RAND:1+1)+1
+EXP:고통쾌락경험 += (RAND:2)
+
+
+IF TALENT:쾌락중독 == 0 && RAND:100 > 40 && TALENT:정부 == 0
+	SETCOLOR 150,50,250
+	PRINTFORML 【%CALLNAME%의 상태가 이상하다…、임을 잊어버릴 정도로 성행위에 빠진 것 같다…】
+	PRINTFORML 【%CALLNAME%는 「쾌락중독」이 되었다…、자금 획득이 격감합니다】
+	TALENT:쾌락중독 = 1
+ENDIF
+
+
+
+;-------------------------------------------------
+;カジノイベント　客のイタズラ
+;フェロモン強すぎる住人が客にイタズラされる。
+;◆モラル低下、カルマ増加、収入微増
+;-------------------------------------------------
+@TURN_EVENT_F_53_B
+
+
+DRAWLINE
+SETCOLOR 250,50,150
+PRINTFORML 【%CALLNAME%는 취객에게 시비가 걸렸다…】
+
+
+PRINTFORML 홀에서 바삐 일하던 %CALLNAME%는、수상쩍은 눈초리의 남성 손님에게 불러 세워졌다。
+PRINTFORMW 취한 것처럼 보였기 때문에 별로 엮이고 싶진 않았지만、주변에 다른 스탭도 없었기 때문에 마지못해서 대응하기로 했다…
+
+PRINTFORML %CALLNAME%가 남자에게 다가가자、남자는 허리에 손을 두르면서 %CALLNAME%를 끌어안았다。
+IF TALENT:거유 || TALENT:폭유
+	PRINTFORML 抵抗しようとした%CALLNAME%였지만、胸元に滑り込んだ男の手が服をずらしてしまい、豊かな乳房が丸出しになってしまった。
+	PRINTFORML 角度的に他の客からは見えないのが不幸中の幸いだが、大声を上げて助けを求めると視線が集中してしまいそうで声を上げられない。
+	PRINTFORML 何とか穏便に済ませようとする%CALLNAME%の態度を同意と勘違いした男は、ますます行動をエスカレートさせた。
+	PRINTFORML 豊乳の柔らかさを堪能しながら、酒臭い息を乳首に吹きかけつつ%CALLNAME%の乳輪を舌先でなぞる。
+	PRINTFORML %CALLNAME%が止めるよう小声で抗議の声を上げると、男は軽く歯を立てながら乳首をコリコリと甘噛みした。
+	PRINTFORML 男の愛撫でピンと無防備に屹立した乳首に強い刺激が走り、%CALLNAME%는 半ば腰砕けとなって客にしな垂れかかる。
+	PRINTFORML 深い谷間に顔を埋める形になった男はますます機嫌を良くし、%CALLNAME%の秘所に手を伸ばして寂しげなクリトリスを摘まむ。
+	PRINTFORML 敏感になっている乳首とクリトリスを同時に責められて%CALLNAME%는 達してしまったが、なんとか嬌声だけは上げずに済んだ。
+	PRINTFORML 唇をかみ締めながら息を整えている%CALLNAME%の艶姿に満足した男は、余韻に浸る%CALLNAME%に代わって服を整えた。
+	PRINTFORMW これはサービスだと、男は勝っている分の一部を%CALLNAME%の汗でしっとりと湿った谷間にチップとして差し込み解放した…
+ELSEIF TALENT:빈유 || TALENT:절벽
+	PRINTFORML 抱き寄せられた%CALLNAME%는 胸元を真上から覗き込まれる形となり、隙間から小さな突起をしっかりと見られてしまった。
+	PRINTFORML 客を相手に乱暴な対応も出来ず、%CALLNAME%는 やんわりと男を嗜めて逃れようとしたが酔っているため通じない。
+	PRINTFORML それどころか強く拒まれないのをいいことに、隙間から手を差し込むと%CALLNAME%の乳首の先端をカリカリと擦り始める。
+	PRINTFORML 男の度が過ぎる行動に%CALLNAME%が助けを求めようと周囲に視線をやると、血走った目で視姦していた多数の客と目が合う。
+	PRINTFORML 衆人環視の中で乳首を愛撫されている状況に顔を真っ赤に染めた%CALLNAME%는、羞恥に震えながら男のなすがままとなった。
+	PRINTFORML %CALLNAME%の抵抗が止むと、男は大胆にもバニースーツを半脱ぎにさせて剥き出しとなった乳首へとむしゃぶりつく。
+	PRINTFORML 男の執拗な指使いで苛め抜かれていた乳首は早々に屈服し、%CALLNAME%는 背を弓なりに反らして絶頂した。
+	PRINTFORML 床に崩れ落ちた%CALLNAME%に男はサービス料と称していくらかのお金を握らせると、再び遊戯に戻った。
+	PRINTFORML やがて正気を取り戻した%CALLNAME%는 急いで衣服を整えると、その場から足早に立ち去ろうとした。
+	PRINTFORMW だが一部始終を見ていた客は%CALLNAME%を次々に呼び止め、%CALLNAME%는 控え室まで点々と水溜りを作ることとなった…
+ELSE
+	PRINTFORML このカジノでは性的サービスを行っていないと%CALLNAME%는 男に説明したが、深酔いしている相手に通じるはずもなかった。
+	PRINTFORML 店の規則を盾に断ろうとする%CALLNAME%を説得しようと、男は脇から手を差し込んで形のいい胸を揉み始める。
+	PRINTFORML 両手で胸を支えるように下から揉み、人差し指と中指で乳首を挟んで互い違いに動かし扱きあげた。
+	PRINTFORML 初めは抵抗していた%CALLNAME%の口から喘ぎ声が漏れ出すと、ますます自己主張を始めた乳首が集中的に弄られる。
+	PRINTFORML やがて拒絶の言葉を口に出来なくなった%CALLNAME%が絶頂を迎えると男は嫌らしい笑みを浮かべて手を離した。
+	PRINTFORMW 熱い吐息を繰り返す%CALLNAME%の胸元にチップを差し込んだ男は、快楽に震える尻を叩いて%CALLNAME%を仕事に戻した…
+ENDIF
+
+
+IF CFLAG:住人_モラル > 0
+	PRINTFORML %CALLNAME%의 모랄이 떨어졌다。
+	PRINTFORML 모랄　{CFLAG:住人_モラル} → {CFLAG:住人_モラル-1}
+ENDIF
+IF CFLAG:住人_カルマ < 100
+	PRINTFORML %CALLNAME%의 카르마가 올랐다。
+	PRINTFORMW 카르마　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+1}
+ENDIF
+
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 카지노 손님
+
+EXP:Ｂ경험 += (RAND:2)+1
+EXP:절정경험 += (RAND:3)+1
+
+CFLAG:住人_モラル -= 1
+CFLAG:住人_カルマ += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+

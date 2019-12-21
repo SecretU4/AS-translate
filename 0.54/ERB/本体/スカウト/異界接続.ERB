@@ -1,0 +1,80 @@
+;===============================================================================
+;===============================================================================
+;異界接続
+;===============================================================================
+;===============================================================================
+;=================================================
+;   sub CHARACTER_SCOUT_POS
+;=================================================
+;   DB:EXPUP位置
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@WORLD_CONNECT(ARG:0)
+#DIM L_INPUT
+#DIM L_M
+#DIM L_I
+#DIM L_NM
+#DIM N_S
+
+$INPUT_LOOP
+L_NM = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪コードを使用し異界人の情報を抽出し、新たに住民を生成します≫
+PRINTFORML ≪召喚にあたって都市Lvと資金が必要ですので注意して下さい≫
+DRAWLINE
+PRINTFORML ※固有キャラの番号を入力して下さい(例　クローフィ召喚→1100)
+PRINTFORML 　召喚するキャラのスペックが高いほど要求される都市Lv・資金が高くなります。
+PRINTFORML 【注意！】存在しない番号を入力するとエラーになります。
+PRINTFORML 
+PRINTFORML [999] 戻る
+PRINTFORML 
+CALL CHANGE_CHILD_BODY
+INPUT
+L_INPUT = RESULT
+L_M = RESULT
+ARG:0 = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	CALL SYSTEM_MENU
+CASE 0
+	GOTO INPUT_LOOP
+CASE 1
+	GOTO INPUT_LOOP
+CASEELSE
+	IF !EXISTCSV(L_M)
+		PRINTFORMW ≪…………error code:404 world not found≫
+		PRINTFORML ≪平行世界ライブラリに該当するアドレスが登録されていません≫
+		PRINTFORMW ≪召喚プロトコルを中断します≫
+		GOTO INPUT_LOOP
+	ELSEIF FINDCHARA(NO:0, L_M) > 0
+		PRINTFORML ≪「プレイヤー」、対象個体は既に生成済みです≫
+		PRINTFORMW ≪召喚プロトコルを中断します≫
+		GOTO INPUT_LOOP
+	ENDIF
+	CALL CHARACTER_NPC_SCOUT1(ARG:0)
+	CALL SYSTEM_MENU
+ENDSELECT
+
+GOTO INPUT_LOOP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

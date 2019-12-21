@@ -1,0 +1,114 @@
+;-------------------------------------------------
+;冬眠カプセル
+;-------------------------------------------------
+@RPG_EVENT_400(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 400
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【調査イベント:冬眠カプセル】
+PRINTFORML 
+
+PRINTFORML %CALLNAME:L_I%がまだ独自の発電機構で設備が生きている小型シェルターを見つけた。
+PRINTFORML 中に入ると「外敵」の侵入があったのか、室内は酷く荒らされている。
+PRINTFORML 狭い通路の先には「ライノチルHiE-{RAND:10}-{RAND:100}-{RAND:1000}」と記されている冬眠カプセルがあった。
+PRINTFORML 近寄ってみるとカプセルの中には人が入っているようだ、
+PRINTFORML 使われているカプセルの年代からして旧世代の住人かもしれない。
+PRINTFORML だが幾らカプセルの中で眠っているとはいえ、いずれは「外敵」に襲われるだけだろう…
+PRINTFORML 
+PRINTFORML [0] 助ける　(住民登録します)
+PRINTFORML [1] 助けない(住民登録はしません)
+PRINTFORML 
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	PRINTFORML 折角見つけたのだ、このまま放置するのも寝覚めが悪いと思い救助することにした。
+	PRINTFORML カプセルを開けると冷たい冷気が溢れ出し、眠っている人を外気にさらけ出す。
+	PRINTFORML 眠りから覚めるのには時間がかかるだろう、そのうちに都市へ運ぶよう手配した…
+	PRINTFORMW 
+	Flag:イベントキャラ特別補正 = (RAND:10)+10
+	CALL CHARACTER_SCOUT1
+	Flag:イベントキャラ特別補正 = 0
+CASE 1
+	PRINTFORML どんな人物かわからない以上、迂闊に開けるわけにもいかない。
+	PRINTFORML そう判断した%CALLNAME:L_I%は、現状維持として放置することにした…
+	PRINTFORML 
+	PRINTFORMW 
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+
+
+
+
+
+
+
+
+
+
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

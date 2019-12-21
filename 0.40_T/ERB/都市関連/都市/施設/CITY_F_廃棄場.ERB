@@ -1,0 +1,110 @@
+﻿
+;-------------------------------------------------
+;施設　廃棄場
+;-------------------------------------------------
+@CITY_F_55
+#DIM L_INPUT
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 【폐기장】　AP:{FLAG:都市_現在AP}
+DRAWLINE
+PRINTFORML 폐기될 예정인 것을 당신이 보호할 수 있습니다。
+PRINTFORML 거주자일지 아이템일지는 랜덤으로 정해지며、질은 시설 레벨에 의해 오를 수 있다。
+DRAWLINE
+PRINTFORML [0] 발굴한다(AP50소비　턴 경과)
+PRINTFORML
+PRINTFORML
+PRINTFORML [999] 돌아온다
+INPUT
+
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	CASE 0
+		IF FLAG:都市_現在AP < 50
+			PRINTFORMW AP가 부족합니다。
+			RETURN
+		ENDIF
+		IF !RAND:3
+			;住人
+			CALL CITY_F_55_J
+		ELSEIF !RAND:2
+			;アイテム
+			CALL CITY_F_55_I
+		ELSE
+			;何もなし
+			PRINTFORMW 딱히 눈길을 끄는 것은 없었다
+		ENDIF
+		FLAG:都市_現在AP -= 50
+		FLAG:ターン終了フラグ = 1
+		RETURN
+	CASE 999
+		RETURN
+	CASEELSE
+	
+ENDSELECT
+RESTART
+
+
+;-------------------------------------------------
+;施設　廃棄場 住人
+;-------------------------------------------------
+@CITY_F_55_J
+
+#DIM I_G
+;ここの汎用フラグ使ってないっぽい
+
+IF RAND:(Flag:廃棄場+(1)) >= RAND:20
+	IF RAND:(Flag:廃棄場+(1)) >= RAND:20
+		;高品質
+		Flag:掘り出しもの品質 = 3
+		Flag:汎用変数 = RAND:10
+	ELSE
+		;中品質
+		Flag:掘り出しもの品質 = 2
+		Flag:汎用変数 = RAND:10
+	ENDIF
+ELSE
+	;低品質
+		Flag:掘り出しもの品質 = 1
+		Flag:汎用変数 = RAND:10
+ENDIF
+
+CALL CHARACTER_SCOUT1
+
+
+PRINTFORML 【――――주민을 보호했다――――】
+
+
+Flag:掘り出しもの品質 = 0
+Flag:汎用変数 = 0
+
+
+
+;-------------------------------------------------
+;施設　廃棄場 アイテム
+;-------------------------------------------------
+@CITY_F_55_I
+#DIM I_G
+
+
+IF RAND:(Flag:廃棄場+(1)) >= RAND:20
+	IF RAND:(Flag:廃棄場+(1)) >= RAND:20
+		;高品質
+		I_G = (RAND:6)+20
+	ELSE
+		;中品質
+		I_G = (RAND:6)+10
+	ENDIF
+ELSE
+	;低品質
+	I_G = (RAND:6)
+ENDIF
+
+FLAG:(2100+I_G) += 1
+
+PRINTFORML 【――――%FLAGNAME:(2100+I_G)%を 입수했다。――――】
+
+
+
+

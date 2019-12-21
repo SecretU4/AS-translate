@@ -1,0 +1,112 @@
+;-------------------------------------------------
+;数量入力用関数　@INPUT_MANY
+;ARGで最小値、ARG:1で最大値を指定
+;電卓風のコンソールから数値を入力させる
+;
+;ARG・ARG:1　最低値あるいは最大値　順序は逆でもよい
+;ARGS　オプション。とりあえずいまはログを残すのみ
+;ARGS:1　例外の数値設定。範囲外でも通る数値を設定する
+;		 記述方法は0/20/30/-1といったように、文字列で"/"を区切り文字とする
+;-------------------------------------------------
+@INPUT_MANY(ARG, ARG:1, ARGS = "ログを残す", ARGS:1)
+#LOCALSIZE 3
+#LOCALSSIZE 20
+#DIM LINE, 1
+;最初は0
+LOCAL = 0
+LOCAL:1 = 1
+VARSET LOCALS
+SPLIT ARGS:1, "/", LOCALS
+LINE = LINECOUNT
+$START
+REDRAW 0
+CLEARLINE LINECOUNT - LINE
+PRINTFORML 【{LOCAL}】　《【{ARG}】 - 【{ARG:1}】》
+PRINTBUTTON "[7]", "７"
+PRINT 　
+PRINTBUTTON "[8]", "８"
+PRINT 　
+PRINTBUTTON "[9]", "９"
+PRINT 　
+PRINTBUTTON "[ AC]", "AC"
+PRINTL 
+
+PRINTBUTTON "[4]", "４"
+PRINT 　
+PRINTBUTTON "[5]", "５"
+PRINT 　
+PRINTBUTTON "[6]", "６"
+PRINT 　
+PRINTBUTTON "[Max]", "MAX"
+PRINTL 
+
+PRINTBUTTON "[1]", "１"
+PRINT 　
+PRINTBUTTON "[2]", "２"
+PRINT 　
+PRINTBUTTON "[3]", "３"
+PRINT 　
+PRINTBUTTON "[Min]", "MIN"
+PRINTL 
+
+PRINTBUTTON "[0]", "０"
+PRINT 　
+IF LOCAL:1 == -1
+	PRINTBUTTON "[+]", "+"
+ELSE
+	PRINTBUTTON "[-]", "-"
+ENDIF
+PRINT 　
+PRINTBUTTON "[ENTER]", "ENTER"
+PRINTL 
+PRINTFORML ※キーボードから、直接数値を入力することもできます
+INPUTS
+SELECTCASE RESULTS
+	CASE "AC"
+		RESTART
+	CASE "+"
+		LOCAL *= -1
+		LOCAL:1 = 1
+	CASE "-"
+		LOCAL *= -1
+		LOCAL:1 = -1
+	CASE "MIN"
+		LOCAL = ARG
+	CASE "MAX"
+		LOCAL = ARG:1
+	CASE "０", "１", "２", "３", "４", "５", "６", "７", "８", "９"
+		IF LOCAL == 0
+			LOCAL = ABS(LOCAL) + TOINT(TOHALF(RESULTS)) * LOCAL:1
+		ELSE
+			;桁数を取る
+			LOCAL:2 = 1
+			WHILE LOCAL >= POWER(10, LOCAL:2)
+				LOCAL:2++
+				IF LOCAL:2 > 18
+					PRINTFORMW 桁数が多すぎます！
+					GOTO START
+				ENDIF
+			WEND
+			LOCAL = LOCAL * 10 + TOINT(TOHALF(RESULTS))
+		ENDIF
+	CASEELSE
+		IF RESULTS != "ENTER"
+			FOR LOCAL:2, 0, STRLENS(RESULTS)
+				SIF GROUPMATCH(SUBSTRING(RESULTS, LOCAL:2, 1), "0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+					CONTINUE
+				PRINTFORMW 入力が異常です。入力しなおしてください
+				RESTART
+			NEXT
+			LOCAL = TOINT(RESULTS)
+		ENDIF
+		IF INRANGE(LOCAL, ARG, ARG:1) || MATCH(LOCALS, TOSTR(LOCAL))
+			SIF !STRCOUNT(ARGS, "ログを残す")
+				CLEARLINE LINE - LINECOUNT
+			REDRAW 1
+			RETURNFORM LOCAL
+		ELSE
+			PRINTFORMW 数値が範囲外です。入力しなおしてください
+			RESTART
+		ENDIF
+ENDSELECT
+GOTO START

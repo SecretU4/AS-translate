@@ -1,0 +1,740 @@
+﻿
+;-------------------------------------------------
+; 喫茶店スカウト
+;-------------------------------------------------
+;戻り値：加入した人数
+@CITY_SCOUT
+#DIM L_I
+#DIM L_INPUT
+#DIM DYNAMIC ADD_CNT
+#DIM DYNAMIC NOT_CLEAR
+IF NOT_CLEAR
+	NOT_CLEAR = 0
+ELSE
+	CLEARLINE LINECOUNT
+ENDIF
+CALL CITY_SCOUT_MAKE_CHARA("SOLO")
+REDRAW 0
+PRINTFORM [1] 결정　　　
+PRINTFORM [2] 다른 주민　
+PRINTFORM [3] 조건 설정　
+PRINTFORML
+SIF CHARANUM < 200
+	PRINTFORML [4] 10명 가입　
+PRINTFORML 
+PRINTFORML [0] 그만둔다
+DO
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 1
+		PRINTFORML
+		PRINTFORMW %CALLNAME:(CHARANUM - 1)%が 새로운 대상으로 픽업되었습니다。
+		ADD_CNT ++
+		IF CHARANUM >= 200
+			PRINTFORMW 캐릭터 숫자가 상한에 도달했습니다。
+			RETURN ADD_CNT
+		ENDIF
+	CASE 2
+		CALL CANCEL_SCOUT(CHARANUM - 1)
+	CASE 3
+		CALL CANCEL_SCOUT(CHARANUM - 1)
+		CALL CAFE_SCOUT_OPTION
+	CASE 4
+		SIF CHARANUM >= 200
+			GOTO RETRY
+		FOR LOCAL, 0, 9
+			IF CHARANUM >= 200
+				PRINTFORMW 캐릭터 숫자가 상한에 도달했습니다。
+				RETURN ADD_CNT
+			ENDIF
+			CALL CITY_SCOUT_MAKE_CHARA
+			PRINTFORML
+			PRINTFORMW %CALLNAME:(CHARANUM - 1)%が 새로운 대상으로 픽업되었습니다。
+			ADD_CNT ++
+		NEXT
+		NOT_CLEAR = 1
+	CASE 0
+		CALL CANCEL_SCOUT(CHARANUM - 1)
+		RETURN ADD_CNT
+	CASEELSE
+		$RETRY
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+RESTART
+
+
+
+;-------------------------------------------------
+;生成処理
+;-------------------------------------------------
+@CITY_SCOUT_MAKE_CHARA(SCENE)
+#DIMS SCENE
+#DIM  L_I
+CALL CHARACTER_SCOUT1
+L_I = CHARANUM -1
+CALL CAFE_SCOUT_OPTION2(L_I)
+IF SCENE == "SOLO"
+	DRAWLINE
+	CALL CITY_CAFE_NPC_TALK("SCOUT")
+	DRAWLINE
+	PRINTFORML 현재 주민의 수 {CHARANUM - 2, 3}명
+	DRAWLINE
+	PRINTFORML 이름:%CALLNAME:L_I%
+ENDIF
+DRAWLINE
+CALL C_PICTURE_S(L_I)
+PRINTFORML ■------------------------------------　 소질　 ------------------------------------■
+CALL INFO_STATUS_TALENT(L_I)
+CALL CHARACTER_SCOUT_PROFILE(L_I)
+;CALL INFO_PERSONAL(ARG)
+DRAWLINE
+
+
+
+;-------------------------------------------------
+; 喫茶店スカウト　絞り込み
+;-------------------------------------------------
+@CAFE_SCOUT_OPTION
+#DIM L_INPUT
+SIF FLAG:カフェ絞り込み_身分 == 0
+	FLAG:カフェ絞り込み_身分 =  94
+SIF FLAG:カフェ絞り込み_胸 == 0
+	FLAG:カフェ絞り込み_胸 = 60
+
+SIF GETBIT(FLAG:カフェ絞り込み_処女, 0)
+	CLEARBIT FLAG:カフェ絞り込み_処女, 1
+SIF GETBIT(FLAG:カフェ絞り込み_処女, 10)
+	CLEARBIT FLAG:カフェ絞り込み_処女, 11
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORM [1] 신분:
+SELECTCASE FLAG:カフェ絞り込み_身分
+CASE 94
+	PRINTFORML 자유
+CASE 95
+	PRINTFORML 학생
+CASE 96
+	PRINTFORML 아이돌
+CASE 97
+	PRINTFORML 사회인
+CASE 98
+	PRINTFORML 창녀
+CASE 99
+	PRINTFORML 치안 유지국 직원
+ENDSELECT
+
+PRINTFORM [2] 가슴 크기:
+SELECTCASE FLAG:カフェ絞り込み_胸
+CASE 60
+	PRINTFORML 자유
+CASE 61
+	PRINTFORML 절벽
+CASE 62
+	PRINTFORML 빈유
+CASE 63
+	PRINTFORML 거유
+CASE 64
+	PRINTFORML 폭유
+ENDSELECT
+
+
+PRINTFORM [3] Ｖ경험:
+IF GETBIT(FLAG:カフェ絞り込み_処女, 0)
+	PRINTFORML 처녀 지정
+ELSEIF GETBIT(FLAG:カフェ絞り込み_処女, 1)
+	PRINTFORML 비처녀 지정
+ELSE
+	PRINTFORML 지정 없음
+ENDIF
+
+PRINTFORM [4] Ａ경험:
+IF GETBIT(FLAG:カフェ絞り込み_処女, 10)
+	PRINTFORML Ａ처녀 지정
+ELSEIF GETBIT(FLAG:カフェ絞り込み_処女, 11)
+	PRINTFORML Ａ비처녀 지정
+ELSE
+	PRINTFORML 지정 없음
+ENDIF
+
+PRINTFORM [5] 다른 사람과의 교제 상태:
+SELECTCASE FLAG:カフェ絞り込み_交際
+CASE 0
+	PRINTFORML 자유
+CASE 299
+	PRINTFORML 하고있지 않음
+CASE 300
+	PRINTFORML 교제중
+CASE 301
+	PRINTFORML 섹프 있음
+CASE 302
+	PRINTFORML 결혼함
+ENDSELECT
+
+PRINTFORM [6] 엉덩이 크기:
+SELECTCASE FLAG:カフェ絞り込み_尻
+CASE 0
+	PRINTL 자유
+CASE 80
+	PRINTL 커다람
+CASE 81
+	PRINTL 터질듯함
+ENDSELECT
+
+PRINTFORM [7] 성격:
+SELECTCASE FLAG:カフェ絞り込み_性格
+CASE 0
+	PRINTL 자유
+CASE 30
+	PRINTL 제대로 자랐음(예의 바름・품격 있음・섹시함・고풍스러움)
+CASE 60
+	PRINTL 온화함(쿨・마이 페이스・나약함・프렌들리)
+CASE 90
+	PRINTL 천성이 난폭함(츤츤・거침・남성적・고압적)
+CASE 120
+	PRINTL 유치함(어린애 같음・깜찍)
+ENDSELECT
+
+PRINTFORM [8] 귀와 머리카락 일치:
+SELECTCASE FLAG:カフェ絞り込み_耳髪一致
+CASE 0
+	PRINTL 자유
+CASE 1
+	PRINTL 일치시킨다
+ENDSELECT
+
+PRINTFORML
+PRINTFORML [999] 돌아온다
+DO
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 1
+		SIF Flag:カフェ絞り込み_身分 <= 100
+			Flag:カフェ絞り込み_身分 += 1
+		SIF Flag:カフェ絞り込み_身分 >= 100
+			Flag:カフェ絞り込み_身分 = 94
+	CASE 2
+		SIF Flag:カフェ絞り込み_胸 <= 65
+			Flag:カフェ絞り込み_胸 += 1
+		SIF Flag:カフェ絞り込み_胸 >= 65
+			Flag:カフェ絞り込み_胸 = 60
+	CASE 3
+		IF GETBIT(FLAG:カフェ絞り込み_処女, 0)
+			CLEARBIT FLAG:カフェ絞り込み_処女, 0
+			SETBIT FLAG:カフェ絞り込み_処女, 1
+		ELSEIF GETBIT(FLAG:カフェ絞り込み_処女, 1)
+			CLEARBIT FLAG:カフェ絞り込み_処女, 1
+		ELSE
+			SETBIT FLAG:カフェ絞り込み_処女, 0
+		ENDIF
+	CASE 4
+		IF GETBIT(FLAG:カフェ絞り込み_処女, 10)
+			CLEARBIT FLAG:カフェ絞り込み_処女, 10
+			SETBIT FLAG:カフェ絞り込み_処女, 11
+		ELSEIF GETBIT(FLAG:カフェ絞り込み_処女, 11)
+			CLEARBIT FLAG:カフェ絞り込み_処女, 11
+		ELSE
+			SETBIT FLAG:カフェ絞り込み_処女, 10
+		ENDIF
+	CASE 5
+		SELECTCASE Flag:カフェ絞り込み_交際
+		CASE 0
+			FLAG:カフェ絞り込み_交際 = 299
+		CASE 299 TO 301
+			FLAG:カフェ絞り込み_交際 ++
+		CASE 302
+			Flag:カフェ絞り込み_交際 = 0
+		ENDSELECT
+	CASE 6
+		Flag:カフェ絞り込み_尻++
+		SIF Flag:カフェ絞り込み_尻 == 1
+			Flag:カフェ絞り込み_尻 = 80
+		SIF Flag:カフェ絞り込み_尻 == 82
+			Flag:カフェ絞り込み_尻 = 0
+	CASE 7
+		Flag:カフェ絞り込み_性格 += 1
+		SIF Flag:カフェ絞り込み_性格 == 1
+			Flag:カフェ絞り込み_性格 = 30
+		SIF Flag:カフェ絞り込み_性格 == 31
+			Flag:カフェ絞り込み_性格 = 60
+		SIF Flag:カフェ絞り込み_性格 == 61
+			Flag:カフェ絞り込み_性格 = 90
+		SIF Flag:カフェ絞り込み_性格 == 91
+			Flag:カフェ絞り込み_性格 = 120
+		SIF Flag:カフェ絞り込み_性格 == 121
+			Flag:カフェ絞り込み_性格 = 0
+	CASE 8
+		IF (Flag:カフェ絞り込み_耳髪一致 == 0)
+			Flag:カフェ絞り込み_耳髪一致 = 1
+		ELSEIF (Flag:カフェ絞り込み_耳髪一致 == 1)
+			Flag:カフェ絞り込み_耳髪一致 = 0
+		ENDIF
+	CASE 999
+		RETURN
+	CASEELSE
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+RESTART
+
+
+
+;-------------------------------------------------
+; 喫茶店スカウト　絞り込み適用
+;-------------------------------------------------
+@CAFE_SCOUT_OPTION2(L_I,ARG:0,ARG:1,ARG:2)
+#DIM L_I
+#DIM L_M
+#DIM L_SEIKAKU
+#DIMS L_NAME
+#DIMS L_NAME2
+#DIM V_VIRGIN
+#DIM A_VIRGIN
+ARG:0 = 0
+ARG:1 = 0
+ARG:2 = 0
+L_NAME2 '= ""
+L_NAME  '= ""
+L_M = 0
+L_SEIKAKU =-1
+
+IF Flag:カフェ絞り込み_身分 >= 95
+	Talent:L_I:(Flag:カフェ絞り込み_身分) = 1
+ELSE
+	SELECTCASE RAND:5
+	CASE 0
+		Talent:L_I:학생 = 1
+	CASE 1
+		Talent:L_I:아이돌 = 1
+	CASE 2
+		Talent:L_I:사회인 = 1
+	CASE 3
+		Talent:L_I:창녀 = 1
+	CASE 4
+		Talent:L_I:치안유지국직원 = 1
+	ENDSELECT
+ENDIF
+IF Talent:L_I:학생
+	Talent:L_I:학생 += RAND:5
+	SELECTCASE TALENT:L_I:학생
+		CASE 5
+			;초등학생は幼い口調になりやすく、幼児体型になりやすい
+			LOCAL = RAND:3
+			SIF LOCAL
+				L_SEIKAKU = 11 + LOCAL
+			IF RAND:2
+				TALENT:L_I:작은체형 = 1
+				TALENT:L_I:난쟁이체형 = 1
+				TALENT:L_I:장신 = 0
+			ELSEIF RAND:3
+				TALENT:L_I:작은체형 = 1
+				TALENT:L_I:장신 = 0
+			ENDIF
+			CFlag:L_I:住人_体格 = 1
+		CASE 4
+			;중학생は幼い口調にややなりやすく작은체형になりやすい
+			LOCAL = RAND:6
+			IF LOCAL == 0
+				L_SEIKAKU = 13
+			ELSEIF LOCAL < 3
+				L_SEIKAKU = 12
+			ENDIF
+			IF RAND:2
+				TALENT:L_I:작은체형 = 1
+				TALENT:L_I:장신 = 0
+			ELSEIF RAND:3
+				TALENT:L_I:작은체형 = 1
+				TALENT:L_I:난쟁이체형 = 1
+				TALENT:L_I:장신 = 0
+			ENDIF
+		CASE 3
+			;고등학생は成人よりは幼い口調になりやすい
+			LOCAL = RAND:12
+			IF LOCAL == 0
+				L_SEIKAKU = 13
+			ELSEIF LOCAL < 3
+				L_SEIKAKU = 12
+			ENDIF
+	ENDSELECT
+	;体型を再設定
+	CALL CHARACTER_SCOUT_BODYSIZE(L_I)
+	;口調を再設定
+	IF L_SEIKAKU >= 0
+		VARSET TALENT:L_I:0, 0, 1400, 1450
+		TALENT:L_I:(1400+L_SEIKAKU) = 1
+		CALL CHARACTER_SCOUT_MIND_REPEAT(L_I, L_SEIKAKU)
+	ENDIF
+	;학생아이돌とか援助待ち女학생とかいいよね
+	IF !RAND:5
+		Talent:L_I:아이돌 = 1
+	ELSEIF Flag:時間帯 == 0
+		SIF !RAND:8
+			Talent:L_I:창녀 = 1
+	ELSEIF Flag:時間帯 == 1
+		SIF !RAND:2
+			Talent:L_I:창녀 = 1
+	ENDIF
+ENDIF
+
+IF Flag:カフェ絞り込み_胸 >= 61
+	Talent:L_I:절벽 = 0
+	Talent:L_I:빈유 = 0
+	Talent:L_I:거유 = 0
+	Talent:L_I:폭유 = 0
+	Talent:L_I:(Flag:カフェ絞り込み_胸) = 1
+	CFLAG:L_I:바스트사이즈 = CHARACTER_BUST_RETURN(L_I)
+ENDIF
+IF Flag:カフェ絞り込み_尻
+	Talent:L_I:큰엉덩이 = 0
+	Talent:L_I:터질듯한엉덩이 = 0
+	Talent:L_I:(Flag:カフェ絞り込み_尻) = 1
+	CFLAG:L_I:ヒップサイズ = CHARACTER_HIP_RETURN(L_I)
+ENDIF
+
+
+;Ｖ경험
+IF GETBIT(FLAG:カフェ絞り込み_処女, 0)
+	V_VIRGIN = 1
+ELSEIF GETBIT(FLAG:カフェ絞り込み_処女, 1)
+	V_VIRGIN = 0
+ELSEIF TALENT:L_I:창녀 && !RAND:3
+	V_VIRGIN = 0
+ELSEIF RAND:3
+	V_VIRGIN = 1
+ELSE
+	V_VIRGIN = 0
+ENDIF
+
+IF !V_VIRGIN
+	TALENT:L_I:비처녀 = 1
+	TCVAR:L_I:履歴_EXP_処女喪失 = 1
+	EXP:L_I:Ｖ경험 = (RAND:20) + 1
+	EXP:L_I:성교경험 = RAND:(EXP:L_I:Ｖ경험) * 5 + RAND:(EXP:L_I:Ｖ경험) + 1
+ENDIF
+
+;Ａ경험
+IF GETBIT(FLAG:カフェ絞り込み_処女, 10)
+	A_VIRGIN = 1
+ELSEIF GETBIT(FLAG:カフェ絞り込み_処女, 11)
+	A_VIRGIN = 0
+ELSEIF TALENT:L_I:창녀
+	IF V_VIRGIN && RAND:3
+		A_VIRGIN = 0
+	ELSE
+		A_VIRGIN = 1
+	ENDIF
+ELSEIF RAND:10
+	A_VIRGIN = 1
+ELSE
+	A_VIRGIN = 0
+ENDIF
+
+
+IF !A_VIRGIN
+	TALENT:L_I:Ａ비처녀 = 1
+	TCVAR:L_I:履歴_EXP_Ａ処女喪失 = 1
+	EXP:L_I:Ａ경험 = (RAND:20) + 1
+	EXP:L_I:Ａ성교경험 = RAND:(EXP:L_I:Ａ경험) * 2 + RAND:(EXP:L_I:Ａ경험) + 1
+ENDIF
+
+IF TALENT:L_I:창녀
+	EXP:L_I:매춘경험 += RAND:20 + 1
+	SIF CFLAG:L_I:住人_モラル < 0
+		EXP:L_I:매춘경험 += RAND:(ABS(CFLAG:L_I:住人_モラル))
+	EXP:L_I:정액경험 += RAND:(EXP:L_I:매춘경험) / 2 + RAND:3
+	
+	IF !V_VIRGIN
+		EXP:L_I:성교경험 += RAND:(EXP:L_I:매춘경험) + RAND:3
+	ELSEIF !A_VIRGIN
+		EXP:L_I:Ａ성교경험 += RAND:(EXP:L_I:매춘경험) + RAND:3
+	ELSE
+		EXP:L_I:펠라경험 += RAND:(EXP:L_I:매춘경험) + RAND:3
+		EXP:L_I:정음경험 += RAND:(MIN(EXP:L_I:펠라경험, EXP:L_I:정액경험) + 1) / 2
+	ENDIF
+ENDIF
+
+IF !FLAG:カフェ絞り込み_交際 && !RAND:3
+	SELECTCASE RAND:4
+	CASE 0
+		TALENT:L_I:교제중 = 1
+	CASE 1
+		TALENT:L_I:섹프보유 = 1
+	CASE 2
+		TALENT:L_I:결혼완료 = 1
+	ENDSELECT
+	;結婚経験者以外の출산경험を抑制
+	IF !TALENT:L_I:결혼완료 && RAND:2
+	ELSEIF RAND:10 > 5 && EXP:L_I:성교경험 >= 1
+		EXP:L_I:출산경험 = (RAND:2) + 1
+	ENDIF
+ELSEIF FLAG:カフェ絞り込み_交際 >= 300
+	TALENT:L_I:(Flag:カフェ絞り込み_交際) = 1
+	IF !TALENT:L_I:결혼완료 && RAND:2
+	ELSEIF RAND:10 > 5 && EXP:L_I:성교경험 >= 1
+		EXP:L_I:출산경험 = (RAND:2) + 1
+	ENDIF
+ENDIF
+
+
+
+
+IF TALENT:L_I:결혼완료 && !RAND:20
+	TALENT:L_I:미망인 = 1
+	TALENT:L_I:결혼완료 = 0
+ENDIF
+
+
+;経験つけるのが嫌な人は避けてな
+IF FLAG:カフェ絞り込み_交際 == 299
+ELSEIF TALENT:L_I:교제중
+	EXP:L_I:성교경험 += RAND:3
+	EXP:L_I:Ａ성교경험 += RAND:3
+	EXP:L_I:절정경험 += RAND:3
+	EXP:L_I:키스경험 += RAND:3
+	EXP:L_I:정음경험 += RAND:3
+	EXP:L_I:정액경험 += RAND:3
+	EXP:L_I:펠라경험 += RAND:3
+	EXP:L_I:절정경험 += RAND:3
+ELSEIF TALENT:L_I:섹프보유
+	EXP:L_I:성교경험 += RAND:4
+	EXP:L_I:Ａ성교경험 += RAND:4
+	EXP:L_I:절정경험 += RAND:4
+	EXP:L_I:키스경험 += RAND:4
+	EXP:L_I:정음경험 += RAND:4
+	EXP:L_I:정액경험 += RAND:4
+	EXP:L_I:펠라경험 += RAND:4
+	EXP:L_I:절정경험 += RAND:4
+ELSEIF TALENT:L_I:결혼완료
+	EXP:L_I:성교경험 += RAND:5
+	EXP:L_I:Ａ성교경험 += RAND:5
+	EXP:L_I:절정경험 += RAND:5
+	EXP:L_I:키스경험 += RAND:5
+	EXP:L_I:정음경험 += RAND:5
+	EXP:L_I:정액경험 += RAND:5
+	EXP:L_I:펠라경험 += RAND:5
+	EXP:L_I:절정경험 += RAND:5
+ELSEIF RAND:5 == 0
+	EXP:L_I:성교경험 += RAND:2
+	EXP:L_I:Ａ성교경험 += RAND:2
+	EXP:L_I:절정경험 += RAND:2
+	EXP:L_I:키스경험 += RAND:2
+	EXP:L_I:정음경험 += RAND:2
+	EXP:L_I:정액경험 += RAND:2
+	EXP:L_I:펠라경험 += RAND:2
+	EXP:L_I:절정경험 += RAND:2
+ENDIF
+
+
+
+;つじつまあわせ
+IF EXP:L_I:정음경험
+	SIF !EXP:L_I:정액경험
+		EXP:L_I:정액경험 ++
+	SIF !EXP:L_I:펠라경험
+		EXP:L_I:펠라경험 ++
+ENDIF
+SIF V_VIRGIN
+	EXP:L_I:성교경험 = 0
+SIF A_VIRGIN
+	EXP:L_I:Ａ성교경험 = 0
+
+
+;かわいそうなんで先にキスをしたことにしちゃう
+SIF EXP:L_I:펠라경험 && !TALENT:L_I:창녀 && !EXP:L_I:키스경험
+	EXP:L_I:키스경험 ++
+
+
+
+IF TALENT:L_I:동성애 == 1 && TALENT:L_I:결혼완료 == 1
+	TALENT:L_I:결혼완료 = 0
+	TALENT:L_I:백합결혼 = 1
+	EXP:L_I:성교경험 = 0
+	EXP:L_I:Ａ성교경험 = 0
+	EXP:L_I:출산경험 = 0
+	EXP:L_I:절정경험 += RAND:3
+	EXP:L_I:레즈경험 += RAND:3
+	EXP:L_I:키스경험 += RAND:3
+	EXP:L_I:정음경험 = 0
+	EXP:L_I:정액경험 = 0
+	EXP:L_I:펠라경험 = 0
+	EXP:L_I:절정경험 += RAND:3
+	ARG:0 = L_I
+	ARG:1 = 0
+	ARG:2 = 3
+	CALL RANDOM_N_LADY(ARG:0,ARG:1,ARG:2)
+	CFLAG:L_I:3000 = 1
+	CFLAG:L_I:3010 = 200
+	CFLAG:L_I:3020 = 5
+	CFLAG:L_I:3030 = 2
+	CFLAG:L_I:3040 = 10
+	CFLAG:L_I:3050 = 40
+	CFLAG:L_I:3060 = 5
+	
+ENDIF
+
+
+{
+IF  EXP:L_I:성교경험 >= 1 || 
+	EXP:L_I:Ａ성교경험 >= 1 || 
+	EXP:L_I:절정경험 >= 1 || 
+	EXP:L_I:키스경험 >= 1 || 
+	EXP:L_I:정음경험 >= 1 || 
+	EXP:L_I:정액경험 >= 1 || 
+	EXP:L_I:펠라경험 >= 1
+}
+	STRDATA L_NAME
+		DATA 「플레이어」
+		DATA 선배
+		DATA 후배
+		DATA 교사
+		DATA 옛 애인
+		DATA 부친
+		DATA 남동생
+		DATA 오빠
+	ENDDATA
+	IF RAND:10
+		IF TALENT:L_I:교제중
+			L_NAME '= "恋人"
+		ELSEIF TALENT:L_I:섹프보유
+			L_NAME '= "セフレ"
+		ELSEIF TALENT:L_I:결혼완료
+			L_NAME '= "夫"
+		ENDIF
+	ENDIF
+	SIF TALENT:L_I:창녀 && !RAND:4
+		L_NAME '= "客の男"
+	SIF TALENT:L_I:백합결혼 
+		L_NAME '= "夫(女性)"
+
+ENDIF
+
+
+IF EXP:L_I:출산경험 >= 1
+	STRDATA L_NAME2
+		DATA 「플레이어」
+		DATA 선배
+		DATA 후배
+		DATA 교사
+		DATA 옛 애인
+		DATA 부친
+		DATA 남동생
+		DATA 오빠
+	ENDDATA
+	IF RAND:20 > 7
+		IF TALENT:L_I:교제중
+			L_NAME '= "恋人"
+		ELSEIF TALENT:L_I:섹프보유
+			L_NAME '= "セフレ"
+		ELSEIF TALENT:L_I:결혼완료
+			L_NAME '= "夫"
+		ENDIF
+	ENDIF
+ENDIF
+SIF CSTR:L_I:初えっち相手名 == "" && Talent:L_I:비처녀 == 1
+	CSTR:L_I:初えっち相手名 = %L_NAME%
+SIF CSTR:L_I:初キス相手名 == "" && EXP:L_I:키스경험 >= 1
+	CSTR:L_I:初キス相手名 = %L_NAME%
+SIF CSTR:L_I:初精飲相手名 =="" && EXP:L_I:정음경험 >= 1
+	CSTR:L_I:初精飲相手名 = %L_NAME%
+SIF CSTR:L_I:初フェラ相手名 =="" && EXP:L_I:펠라경험 >= 1
+	CSTR:L_I:初フェラ相手名 = %L_NAME%
+SIF CSTR:L_I:初Ａえっち相手名 =="" && Talent:L_I:Ａ비처녀 == 1
+	CSTR:L_I:初Ａえっち相手名 = %L_NAME%
+SIF CSTR:L_I:初絶頂相手名 =="" && EXP:L_I:절정경험 >= 1
+	CSTR:L_I:初絶頂相手名 = %L_NAME%
+SIF CSTR:L_I:初中出し相手名 =="" && Talent:L_I:비처녀 == 1 
+	CSTR:L_I:初中出し相手名 = %L_NAME%
+SIF CSTR:L_I:初出産相手名 =="" && EXP:L_I:출산경험 >= 1
+	CSTR:L_I:初出産相手名 = %L_NAME2%
+
+L_M = 0
+IF Flag:カフェ絞り込み_性格 != 0
+	VARSET TALENT:L_I:0, 0, 1400, 1450
+	L_SEIKAKU = 0
+	SELECTCASE FLAG:カフェ絞り込み_性格
+	CASE 30
+		SELECTCASE RAND:4
+		CASE 0
+			TALENT:L_I:예의바름 = 1
+			L_SEIKAKU = 0
+		CASE 1
+			TALENT:L_I:품위있음  = 1
+			L_SEIKAKU = 7
+		CASE 2
+			TALENT:L_I:섹시함 = 1
+			L_SEIKAKU = 9
+		CASE 3
+			TALENT:L_I:고풍스러움 = 1
+			L_SEIKAKU = 11
+		ENDSELECT
+	CASE 60
+		SELECTCASE RAND:4
+		CASE 0
+			TALENT:L_I:프렌들리 = 1
+			L_SEIKAKU = 10
+		CASE 1
+			TALENT:L_I:나약함  = 1
+			L_SEIKAKU = 6
+		CASE 2
+			TALENT:L_I:마이페이스  = 1
+			L_SEIKAKU = 3
+		CASE 3
+			TALENT:L_I:쿨 = 1
+			L_SEIKAKU = 1
+		ENDSELECT
+	CASE 90
+		SELECTCASE RAND:4
+		CASE 0
+			TALENT:L_I:고압적 = 1
+			L_SEIKAKU = 4
+		CASE 1
+			TALENT:L_I:츤츤 = 1
+			L_SEIKAKU = 2
+		CASE 2
+			TALENT:L_I:남성스러움  = 1
+			L_SEIKAKU = 6
+		CASE 3
+			TALENT:L_I:난폭함 = 1
+			L_SEIKAKU = 5
+		ENDSELECT
+	CASE 120
+		SELECTCASE RAND:2
+		CASE 0
+			TALENT:L_I:아이같음 = 1
+			L_SEIKAKU = 12
+		CASE 1
+			TALENT:L_I:깜찍함 = 1
+			L_SEIKAKU = 13
+		ENDSELECT
+	ENDSELECT
+	CALL CHARACTER_SCOUT_MIND_REPEAT(L_I, L_SEIKAKU)
+ENDIF
+
+CALL CHARACTER_SCOUT_COSTUME(L_I)
+
+IF FLAG:カフェ絞り込み_耳髪一致 == 1 && CFLAG:L_I:住人_種族 == 3;아인
+	IF CFLAG:L_I:住人_種族特徴1 == 0 || CFLAG:L_I:住人_種族特徴1 == 3
+		CFLAG:L_I:髪色 = 0
+	ELSEIF CFLAG:L_I:住人_種族特徴1 == 1
+		CFLAG:L_I:髪色 = 2
+	ELSEIF CFLAG:L_I:住人_種族特徴1 == 2
+		IF CFLAG:L_I:住人_種族特徴2 == 4
+			CFLAG:L_I:髪色 = 4
+		ELSE
+			CFLAG:L_I:髪色 = 3 + RAND:2
+		ENDIF
+	ENDIF
+ENDIF
+
+
+
+
+RETURN
+

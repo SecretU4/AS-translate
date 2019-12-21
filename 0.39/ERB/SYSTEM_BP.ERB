@@ -1,0 +1,18 @@
+@SYSTEM_BP
+#DIM L_P
+
+
+$INPUT_LOOP_1
+
+IF FLAG:ìsés_åªç›BP > 0 && FLAG:ìsés_åªç›TP < FLAG:ìsés_ç≈ëÂTP
+	FLAG:ìsés_åªç›TP += 1
+	FLAG:ìsés_åªç›BP -= 1
+ENDIF
+
+SIF FLAG:ìsés_åªç›BP > 0 && FLAG:ìsés_åªç›TP < FLAG:ìsés_ç≈ëÂTP
+	GOTO INPUT_LOOP_1
+
+
+
+
+

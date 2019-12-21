@@ -1,0 +1,560 @@
+﻿;-------------------------------------------------
+;ラブホテルイベント
+;
+;最終更新：18/11/17
+;妊娠、탁란、陥落済みの場合、それは%CALLNAME:MASTER%の子ということになってます。
+;もし今後、なんらかの手段で%CALLNAME:MASTER%以外の子を住人が孕むようになった場合は
+;一部書き換える必要があることをここに記しておきます(v0.34時)
+;お腹の子どもが誰の子かをチェックすればいいんだけど口上いじるだけの인간は無理ポ
+;-------------------------------------------------
+@TURN_EVENT_F_50
+#DIM L_MONEY
+#DIM L_MONEY2
+#DIM L_K
+
+L_K = (RAND:3)+1
+
+DRAWLINE
+SETCOLOR 250,50,150
+PRINTFORML 【러브 호텔 이벤트(시설):%CALLNAME%】
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+IF MARK:음란각인 || TALENT:창녀 == 1
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:10
+		PRINTFORML 「ナカがっ……こすれっ…%UNICODE(0x2661)%……あぁっ…あっあっあっはぁんっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:9
+		PRINTFORML 「…っ……ぁ…ひゃあっ……あんっ……くぁっ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:8
+		PRINTFORML 「あはっ%UNICODE(0x2661)%……はっ…んっ……くあっ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:7
+		PRINTFORML 「はっ…♪……っ…あっ……きもち…いっ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:6
+		PRINTFORML 「ぁっあっぁっああっ……んぁあっ！…%UNICODE(0x2661)%」
+		ELSEIF !RAND:5
+		PRINTFORML 「…ぅあっ…ぁっ…奥に…っ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「当たっ…て…っ%UNICODE(0x2661)%…ああぁっ！…あんっ…はぁあぁっ！%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+		PRINTFORML 「んぁあっ……はっ……ぃ…いっ…ぱい……出して%CSTR:語尾問う5%っ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「ふぁっ！……んっ…んっあっ……ぁ…%CSTR:語尾微笑%っ%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…ッ気持ち……ぁっ…よすぎ…%CSTR:語尾ます%っ…%UNICODE(0x2661)%……イっちゃっ…ひゃあぁあっ%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+ELSE
+	IF !RAND:5
+	PRINTFORML 「…ぅ…ぁっ…あっ…あっ……はぁっ！」
+	ELSEIF !RAND:4
+	PRINTFORML 「当たっ…て…っ…ああぁっ！…あんっ…はぁあぁっ！」
+	ELSEIF !RAND:3
+	PRINTFORML 「あはっ……ふあっ……っはぁんっ…」
+	ELSEIF !RAND:2
+	PRINTFORML 「……ひゃっ…んっあっ……はっ」
+	ELSE
+	PRINTFORML 「…っ……あ…っ……くぁっ」
+	ENDIF
+ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+
+;妊娠10日以上、発覚済み
+IF TALENT:妊娠 >= 10
+	;탁란判定
+	IF TALENT:탁란
+		;陥落済みかのチェック
+		IF TALENT:심취 == 1 || TALENT:애인 == 1 || TALENT:정부 == 1
+			PRINTFORML 愛する%CALLNAME:MASTER%の子を宿した%CALLNAME%는、大きなお腹を抱えながら客の相手をしていた。
+			PRINTFORML 妊娠する以前ならば心理的抵抗も強かっただろうが、すでに%CALLNAME:MASTER%の種で孕んでいる。
+			PRINTFORML 他の男の精処理を手伝わされるのが癪ではあるものの、妊娠の心配がないという点においては抵抗感も薄れていた。
+			PRINTFORML 半ば事務的な対応になりながらも、%CALLNAME%는 客の指示に従って大量の精液を無駄撃ちにさせていく。
+			PRINTFORMW %CALLNAME:MASTER%に仕込まれたテクで客を散々イかせた%CALLNAME%는、不要な子種をゴミ箱へと放り込んだ…
+		;陥落していない
+		ELSE
+			PRINTFORML 大きくなったお腹に配慮して側位で抱かれていた%CALLNAME%는、客の男から執拗に妊娠予約を迫られていた。
+			PRINTFORML 男は%CALLNAME%が夫以外の子種で孕んだ不貞妻であることを何処からか聞きつけ、自分も種を仕込もうと指名したようだった。
+			PRINTFORML %CALLNAME%に浅く挿入したまま男はピストン運動をせず、乳首とクリトリスを指先で緩急をつけながら責める。
+			PRINTFORML %CALLNAME%が我慢できずに腰を動かそうとしてもガッチリと掴んで固定し、イきそうになれば責め手を休めて焦らす。
+			PRINTFORML 肉棒を締め付ける膣肉の動きから男は%CALLNAME%の性感を完全に掌握し、頷くまで決してイかせなかった。
+			PRINTFORML ジリジリと快楽という名の弱火であぶられ続けた%CALLNAME%の理性は、妊娠と絶頂を天秤にかけて絶頂を選択。
+			PRINTFORML 出産後に種を仕込んでいいからイかせてと%CALLNAME%が涙ながらに懇願すると、男は夫に謝罪してイけとピストンを開始する。
+			PRINTFORMW %CALLNAME%는 夫以外の子種で孕む約束をしてしまったことを謝罪し、再び托卵される未来を想像しながら絶頂した…
+		ENDIF
+	;탁란ではない
+	ELSE
+		IF RAND:3 == 0
+			PRINTFORML %CALLNAME%는 母乳の滲み出した乳首を吸わせながら、男の勃起した肉棒を手で扱いていた。
+			PRINTFORML 大きなお腹がつっかえてやりにくかったが、授乳手コキを希望された以上はやるしかなかった。
+			PRINTFORML ママに甘えるような言動を繰り返す男に優しく言葉をかけながら、精液をピュッピュさせるべく肉棒を扱き続ける。
+			PRINTFORMW やがて我慢できなくなった男が射精すると、%CALLNAME%는 イイコイイコと頭を撫でて褒めた…
+		ELSEIF RAND:2 == 0
+			PRINTFORML 他の雄が一人前の雌として認め孕ませた肉体を楽しみたいと、男は%CALLNAME%にご奉仕を命じた。
+			PRINTFORML お腹に負担がかからないようにと膣以外でご奉仕を試みた%CALLNAME%、男はそれらをすべて拒否した。
+			PRINTFORML 男の視線は%CALLNAME%の腹と膣の間を行き来しており、言わんとしていることを悟った%CALLNAME%는 男に跨った。
+			PRINTFORML 強く突き上げるのだけはやめてくれとゆっくり腰を下ろした%CALLNAME%는、意識して膣肉を動かし子宮への負担を減らそうとする。
+			PRINTFORML 献身的に肉棒を慰める膣肉とボテ腹を見上げるアングルに男は満足そうだったが、%CALLNAME%는 不満を抱いていた。
+			PRINTFORML 腰を激しく動かして快楽を貪っていた記憶が甦り、今の状態ではとてもじゃないが満足のいく絶頂までは届きそうにない。
+			PRINTFORML そのことに気づいてしまった%CALLNAME%는 だんだんと動きを速め、やがて妊娠中であることも忘れてセックスに没頭しだす。
+			PRINTFORMW 女から母へと変化しつつあった%CALLNAME%の意識は、快楽の味を思い出してしまい女へと逆戻りしてしまった…
+		ELSE
+			PRINTFORML ベッドに大の字で拘束された%CALLNAME%는、全身を襲う快感に身もだえしていた。
+			PRINTFORML %CALLNAME%の乳首と클리토리스에 はローターが付けられ、前後の穴にはバイブが突っ込まれて振動している。
+			PRINTFORML かれこれ一時間ほどその状態で放置されている%CALLNAME%を眺めながら、客の男は酒を楽しんでいた。
+			PRINTFORML もう何度目かもわからない絶頂に腰を跳ね上げ、大きくなったお腹を突き出しながら絶頂した%CALLNAME%는 男に許しを請う。
+			PRINTFORMW その言葉を待っていた男は自身の肉棒で%CALLNAME%を犯すと、快感に屈してしまった母体を苛め抜いた…
+		ENDIF
+	ENDIF
+;受精もしくは妊娠済み、未発覚
+ELSEIF TALENT:수정 >= 1 || TALENT:妊娠 >= 1
+	;음란
+	IF MARK:음란각인 || TALENT:창녀 == 1
+		IF RAND:4 == 0
+			PRINTFORML 危険日である%CALLNAME%を妊娠させようと客の男は何度も中出しを繰り返していた。
+			PRINTFORML 子宮に入りきらない精液が膣から零れ落ちると、男はそれを叱るように腰を打ちつけて新たに精液を注ぎ込む。
+			PRINTFORML 初めは零れ落ちた精子を悲しげに見つめていた%CALLNAME%も、新しい精液が注がれるうちに気にも留めなくなった。
+			PRINTFORML そんな雌を孕ませるための、雄の子を孕ませてもらうための交尾は夜明けまで続けられた。
+			PRINTFORMW だがすでに別の雄によって卵子は確保されており、遅れて現れた雄の子を孕むことはなかった…
+		ELSEIF RAND:3 == 0
+			PRINTFORML 客から排卵促進薬を渡された%CALLNAME%는 욕망に目をぎらつかせる客の目の前で薬を服用してみせた。
+			PRINTFORML 子宮を目の前の雄に差し出してもかまわない、支配されてもいいという雌からの挑発ともとれる意思表示に客は発奮した。
+			PRINTFORML 柔らかな女体を堪能する快楽目的のセックスではなく、ただ愚直に雌の腹を膨らませるための生殖行為。
+			PRINTFORML 雌穴を自身の肉棒で躾けながら、客は%CALLNAME%の子宮を己が所有物とすべく膣内射精を繰り返した。
+			PRINTFORMW %CALLNAME%の腹を撫でて種付けの満足感に浸っていた客だったが、%CALLNAME%の子宮だけは無駄撃ちであることを知っていた…
+		ELSEIF RAND:2 == 0
+			PRINTFORML 客の男は%CALLNAME%を後背位で犯しながらどこに出して欲しいかを尋ねてきた。
+			PRINTFORML 今日が危険日であることを告げた%CALLNAME%が物欲しげな視線を背後の男に向けると、男は興奮した様子で腰の動きを速めた。
+			PRINTFORML %CALLNAME%も男の動きに合わせて尻を押し付け、男が射精しやすいようにとかいがいしく射精へと導く。
+			PRINTFORML 妊娠したがる%CALLNAME%の腰つきを見咎めた男は要望通り孕むまで相手してやると何度も精液を子宮へと送り込んだ。
+			PRINTFORMW 精子は卵子へと殺到したがすでに別の雄の支配下に置かれており、その使命を果たすことはできなかった…
+		ELSE
+			;거유
+			IF TALENT:거유  || TALENT:폭유
+				PRINTFORML 胸の大きな女という要望を告げた客の男は、%CALLNAME%が部屋に入るなり裸で仰向けになれと告げた。
+				PRINTFORML %CALLNAME%が言われたとおりにすると男は馬乗りになり、%CALLNAME%の深い谷間でパイズリを楽しみ始める。
+				PRINTFORML やがて射精が間近になった男は%CALLNAME%の股を押し開くと奥まで挿入し、膣奥で精液を吐き出した。
+				PRINTFORML 射精が終われば再びパイズリに戻り、乳首をカリ首で引っかいたり乳輪をなぞったりと%CALLNAME%の胸を堪能する。
+				PRINTFORML 乳房で快感を得て膣で射精するというサイクルを最後まで貫いた男に、%CALLNAME%는 不完全燃焼の体をもてあますことになった。
+				PRINTFORMW 自分勝手な客に不満気な%CALLNAME%였지만、雌も悦ばせてくれる優秀な雄によって種付けされていたため孕まずに済んだ…
+			ELSE
+				PRINTFORML 危険日のセックスはいつも気分が昂ぶる%CALLNAME%였지만、今日はなぜか気乗りしなかった。
+				PRINTFORML 太く大きな肉棒で子宮口をノックされても、膣の浅いところを執拗に責められてもイマイチ盛り上がりに欠けた。
+				PRINTFORML 客に悟られぬよう最後まで嬌態を演じきった%CALLNAME%는、股から流れ落ちる精液を指先ですくいながら小首をかしげた。
+				PRINTFORMW %CALLNAME%는 まだ知る由もないが、卵子を蹂躙され子宮を支配された雌の本能は主が誰であるかをしっかりと認識していた…
+			ENDIF
+		ENDIF
+	ELSE
+	;그 외 
+		IF RAND:3 == 0
+			PRINTFORML 寝そべる客の上で腰を艶かしく動かしていた%CALLNAME%는 今日が危険日だということを思い出した。
+			PRINTFORML 妊娠を避けるため射精しそうな客から逃れようと腰を浮かそうとするが、ガッチリと腰を掴まれ押し付けられる。
+			PRINTFORML 膣奥で撒き散らされる大量の精液と雌に妊娠を強要する腰を押さえつけて離そうとしない手。
+			PRINTFORML 騎乗位という雌に主導権を渡す体位でありながら雄の욕망を黙って受け入れるしかない現状に%CALLNAME%는 ぶるりと体を震わせる。
+			PRINTFORMW 妊娠という文字が%CALLNAME%の頭を過ぎるが、すでに%CALLNAME%の卵子は精子によって犯された後だった…
+		ELSEIF RAND:2 == 0
+			PRINTFORML 腕で顔を隠し上気して色づいた肌を汗で湿らせながら%CALLNAME%는 ベッドの上で仰向けに転がされていた。
+			PRINTFORML 危険日なので外に出して欲しいと告げた%CALLNAME%の願いは無視され、客の男は執拗に膣内射精を繰り返した。
+			PRINTFORML 精液と愛液が混ざった液体が股間からドロリとシーツに垂れ落ちる感触を感じるたびに、%CALLNAME%는 嗚咽を漏らす。
+			PRINTFORML その様子を嫌らしい笑みを浮かべて撮影していた男は、股間が勃ち上がるのに気付いて再び%CALLNAME%に覆いかぶさった。
+			PRINTFORML 上の口では嫌がりながらも雄を求めてやまない下の口を堪能し、男は何度目かもわからない膣内射精に向けて腰を動かした。
+			PRINTFORMW 極上の雌に無理やり種付けしたという征服感に浸っていた男だが、その胎は別の雄に専有されていたため無意味な行為であった…
+		ELSE
+			PRINTFORML 己の準備が出来たため何も告げずにゴムを被せようとした%CALLNAME%を押しとどめると、客の男はそのまま愛撫を続けた。
+			PRINTFORML %CALLNAME%が絶頂しかけると男は手を止め、%CALLNAME%の呼吸が落ち着くと再び絶頂寸前まで押し上げて止める。
+			PRINTFORML 何度もイく寸前で生殺しにしてやると%CALLNAME%는 イかせて欲しいと涙ながらに懇願し始めた。
+			PRINTFORML 生ハメ中出しを条件に出すと%CALLNAME%는 快感で蕩けた瞳を潤ませながら小さく首肯し、男が挿入しやすいよう股を開く。
+			PRINTFORML 今まで溜めていた욕망をすべて叩きつけてくる男の暴力的なセックスに、快感に屈した%CALLNAME%の理性は一分も持たなかった。
+			PRINTFORML 男の体にしがみつきながら何度も中出しを願った%CALLNAME%는 気を失うまで孕ませセックスを楽しんだ。
+			PRINTFORMW すでに受精していることを知らない%CALLNAME%는 快楽に流されて客と危険日に生でしたことを悔いた…
+		ENDIF
+	ENDIF
+;임신하지 않았음
+ELSE
+	;처녀
+	IF !TALENT:비처녀
+		;음란
+		IF MARK:음란각인
+			PRINTFORML 初めての相手は%CALLNAME:MASTER%が良いと思っていた%CALLNAME%だが、命令では仕方がないと諦めて客に股を開く。
+			PRINTFORML 남자를 모르는 と知った客は極めて興奮し、勃起したペニスに感覚を集中しながら挿入していく。
+			PRINTFORMW 意外にすんなりと入ってしまった初めての肉棒の感触に身体を震わせ、淫らな声を上げた…
+		;아이돌
+		ELSEIF TALENT:아이돌 == 1
+			IF RAND:5 == 0
+				PRINTFORML 部屋の片隅の小さなステージに立った%CALLNAME%는、上気した顔で歌と踊りを披露していた。
+				PRINTFORML 乳首と클리토리스에 ローターを付けられ、媚薬が塗りこまれた前後の穴は疼いて集中を削ぐ。
+				PRINTFORML 観客の男は%CALLNAME%が身体を大きく震わせてステージに座りこむと、嫌らしい笑みを浮かべながら勃起した肉棒を取り出した。
+				PRINTFORML 快楽で潤んだ瞳は肉棒から視線を離さず、歌を紡いでいた小さな口はおずおずと肉棒にかぶさっていく。
+				PRINTFORMW 아이돌だった女が快楽に溺れて雌に成り下がったことを確認した男は、%CALLNAME%に自ら処女を捧げさせた…
+			ELSEIF RAND:4 == 0
+				PRINTFORML 男に睡眠薬入りの水を飲まされた%CALLNAME%는 ぐっすりと深い眠りに落ちていた。
+				PRINTFORML 未使用の아이돌マンコに媚薬入りのローションをたっぷり塗りこむと、男は肉棒で%CALLNAME%の処女を容赦なく引き裂いた。
+				PRINTFORML 아이돌が知らないうちに処女を失い、しかも種付けまでされるというシチュエーションに興奮した男はすぐに射精する。
+				PRINTFORML だが一度で満足するはずも無く、男は陰嚢が空になるまで%CALLNAME%の子宮に精液を注ぎ続けた。
+				PRINTFORMW %CALLNAME%が目を覚ますと既に男の姿は無く、男の욕망によって汚された肉体を見て%CALLNAME%는 涙を流した…
+			ELSEIF RAND:3 == 0
+				PRINTFORML %CALLNAME%는 多額の特別料金を支払われ、処女喪失セックスの模様を撮影することになった。
+				PRINTFORML ホテルの用意したカメラの前で自己紹介を行い、普段아이돌業で使用している衣装に着替えて全身をさまざまな角度から撮影される。
+				PRINTFORML 아이돌衣装のままで寝そべる男の上に跨ると、処女をもらってくれることに感謝の言葉を述べさせられた。
+				PRINTFORML その屈辱と初めての性交という不安に全身を震わせながら、%CALLNAME%는 腰を下ろして自ら男の肉棒を受け入れた。
+				PRINTFORML 破瓜の痛みで涙を浮かべながらも、撮影用カメラに笑顔を向けて心にも無い中出しを強請る。
+				PRINTFORMW おねだりを受け入れた男が膣内に射精するのを感じ、%CALLNAME%는 もう戻れない現実に涙をこぼした…
+			ELSEIF RAND:2 == 0
+				PRINTFORML 아이돌이라는 멋진 직업의 뒷면에 숨겨진 음침한 소문에 대해선 %CALLNAME%도 들은 적이 있었다。
+				PRINTFORML そのため多少の覚悟はしていたつもりだったが、予想を超える現実に%CALLNAME%는 半ば錯乱状態に陥っていた。
+				PRINTFORML 衣装で隠れる肌の部分には無数の鞭の跡がついており、三角木馬の上に跨らさせられた秘所には媚薬が塗りこまれて熱く疼いている。
+				PRINTFORML 痛みに対しても、快楽に対してもコントロールの方法を知らない%CALLNAME%는、男のＳＭ調教にされるがままだった。
+				PRINTFORMW 곧 체력의 한계가 찾아온 %CALLNAME%가 무너져 내리자、남자는 %CALLNAME%를 침대로 옮기고 처녀를 빼앗았다…
+			ELSE
+				PRINTFORML %CALLNAME%는 客の希望により、好きでもない男とラブラブ処女喪失セックスをすることになった。
+				PRINTFORML キスしながら正常位で交わり、両手は顔の横で男と恋人つなぎの形で固定され、愛する人へ向けた甘い言葉を囁きあう。
+				PRINTFORML 初めては好きな人にあげたいと思っていた%CALLNAME%는 セックス自体に消極的だったが、フリをする内に気分が乗ってきた。
+				PRINTFORML フリでもお互いに満ち足りた気分になれるのならと思い直し、積極的に男の悦びそうな言動を取る。
+				PRINTFORMW お互いに何度かイッてピロートークを楽しみながら、これはこれでいいんじゃないかと%CALLNAME%는 初体験を振り返っていた…
+			ENDIF
+		;치안유지국직원
+		ELSEIF TALENT:치안유지국직원 == 1
+			IF RAND:5 == 0
+				PRINTFORML %CALLNAME%는 客の要望により家庭用自慰装置のデータ収集に協力することになった。
+				PRINTFORML 両胸にはお椀型の機器が、클리토리스에 はクリキャップが、秘所にはピストンマシーンが、アナルにはアナルビーズが取り付けられる。
+				PRINTFORML その状態でカプセルマシーンの中に四肢を拘束された状態で入った%CALLNAME%는、電源の投入とともに凄まじい快感に襲われた。
+				PRINTFORML カプセル内に催淫効果のあるガスも撒かれ、%CALLNAME%는 処女喪失の痛みで潮を噴き絶頂するほどであった。
+				PRINTFORML 実験の中止を求める%CALLNAME%の懇願もむなしく、客は時間一杯までデータの取得に勤しんだ。
+				PRINTFORMW 処女でもイケる家庭用自慰装置のデータ収集に協力した%CALLNAME%는、기계를 상대로 처녀를 잃어버렸다…
+			ELSEIF RAND:4 == 0
+				PRINTFORML %CALLNAME%는 客の希望により、騎乗位でむりやり童貞を奪う逆レイプをすることになった。
+				PRINTFORML 初めてなのでノーマルな内容にして欲しいと提案した%CALLNAME%였지만、客は逆に興奮した様子で申し出を拒否した。
+				PRINTFORML 仕方なく客を押し倒して動けないように押さえ込んだ%CALLNAME%는、客の童貞を奪うべく腰を下ろす。
+				PRINTFORMW 男性を襲って童貞を奪うという体験に妙な興奮を覚えながら、%CALLNAME%는 처녀를 잃었다…
+			ELSEIF RAND:3 == 0
+				PRINTFORML 客の持ち込んだローションを使用してから%CALLNAME%の様子がおかしくなった。
+				PRINTFORML もじもじと太ももを擦り合わせ、両手は胸や股間の上をせわしなく動き回り、熱っぽい視線は客の股間に向けられている。
+				PRINTFORML それまでは恥じらいを見せていた%CALLNAME%の発情した様子に、客はベッドの縁に腰掛けて%CALLNAME%を招いた。
+				PRINTFORML %CALLNAME%는 躊躇いなく客の膝の上に座ると、屹立した肉棒を蕩けきった媚肉で包み込んでいく。
+				PRINTFORMW 媚薬入りのローションで強制的に発情させられた%CALLNAME%는 初体験にもかかわらず、気絶するまでイキ狂った…
+			ELSEIF RAND:2 == 0
+				PRINTFORML %CALLNAME%는 前々からその肉体を狙っていたという元上司の男に組み敷かれていた。
+				PRINTFORML 男は%CALLNAME%がラブホテルで客を取るという噂を聞きつけ、大金はたいて%CALLNAME%の初夜を買い取ったという。
+				PRINTFORML 粘つく視線が嫌で男が転勤になったときは内心喜んでいた%CALLNAME%는、めぐり合わせの悪さに嘆息する。
+				PRINTFORML 未開通の膣をじわじわと侵略され、やがて強い痛みと同時に男のモノが子宮口を突く。
+				PRINTFORMW 犬に噛まれたようなものと%CALLNAME%는 忘れようとしたが、初めてが嫌っていた男という事実は永遠に消えないのだった…
+			ELSE
+				PRINTFORML %CALLNAME%の初めての相手は、不運なことにかつて%CALLNAME%が捕らえた前科持ちの男だった。
+				PRINTFORML 床に押し倒された%CALLNAME%는 這って逃げようとするが、衣服を裂かれ、ロクな愛撫もなしに背後から処女を貫かれた。
+				PRINTFORML 湿っていない処女膣を引き裂かれる痛みに絶叫する%CALLNAME%を、男は気にも留めずピストン運動を続ける。
+				PRINTFORMW 泣いて許しを請う%CALLNAME%の耳元で恨み言を繰り返した男は、%CALLNAME%の首を絞めながら膣内射精を繰り返した…
+			ENDIF
+		;창녀
+		ELSEIF TALENT:창녀 == 1
+			;초등학생、중학생창녀
+			IF TALENT:학생 == 5 || TALENT:학생 == 4
+				PRINTFORML %CALLNAME%는 男の前で一枚ずつ衣服を脱ぎ捨て、未成熟な肉体を披露していく。
+				PRINTFORML 幼いとはいえ男の興奮を煽る仕草は立派な娼婦のものだが、男を悦ばせる縦筋はぴっちりと閉じて恥らう少女のものだった。
+				PRINTFORML 全身にローションを塗り、初めての男を迎え入れる準備を終えた%CALLNAME%는 男に身を任せる。
+				PRINTFORML 処女、しかも초등학생という幼さに男も承知したもので、負担をかけぬようゆっくりと未開の보지를 刺し貫いていく。
+				PRINTFORMW %CALLNAME%の様子を見ながら初物の보지를 じっくりと堪能した男は、%CALLNAME%が気を失うまで交わりを続けた…
+			ELSE
+				PRINTFORML 男を悦ばせる術を知っていながら、まだ남자를 모르는 %CALLNAME%。
+				PRINTFORML 初めての実践に戸惑いながらも教わったとおりに男のモノを口で咥え、自らの指で보지를 愛撫し準備を整える。
+				PRINTFORML だが技術的に未熟だったためか男は%CALLNAME%を押しのけると、膣にローションを塗りたくり肉棒を挿入した。
+				PRINTFORMW あっけなく処女を散らされた%CALLNAME%が感慨に耽る暇も無く、男は%CALLNAME%の肉体を楽しみ始めた…
+			ENDIF
+		;학생
+		ELSEIF TALENT:학생 >= 1
+			;초등학생
+			IF TALENT:학생 == 5
+				PRINTFORML 未成熟な肉体と精神で無邪気に客の男を誘った%CALLNAME%는、ぴっちりと閉じた雌穴で雄を迎え入れる。
+				PRINTFORML ぎちぎちと挿入を拒む雌穴を力尽くで服従させた男だったが、幼い膣では肉棒を半ばまでしか入れることが出来なかった。
+				PRINTFORML 予想以上の破瓜の痛みに泣きじゃくる%CALLNAME%をよそに、男は肉オナホを前後に動かして堪能する。
+				PRINTFORMW 男が満足して%CALLNAME%を解放する頃には、きれいに閉じていた雌穴はぽっかりと開いたまま戻らなくなってしまっていた…
+			;중학생
+			ELSEIF TALENT:학생 == 4
+				PRINTFORML 雌として完成しつつある、蕾が花開く直前の%CALLNAME%の肉体を前にした男は%CALLNAME%に圧し掛かった。
+				PRINTFORML 準備も不十分な状態での凶行に%CALLNAME%는 抵抗するが、体格差から敵うはずもなかった。
+				PRINTFORML めりめりと湿り気が不十分な膣肉を押し広げられ、処女膜の裂ける感覚に%CALLNAME%는 涙を流す。
+				PRINTFORMW 痛みに涙を流す%CALLNAME%を無視して男は腰を突き上げた…
+			;그 외 
+			ELSE
+				PRINTFORML %CALLNAME%는 若い学生の初物を楽しみたいという客に買われ、さんざん嬲られていた。
+				PRINTFORML まだ雄を受け入れたことのない秘所は白濁した本気汁を垂らし、パクパクと切なげに開閉を繰り返している。
+				PRINTFORML 濃厚な前戯によって熱く蕩けきったのを確認した客は肉棒を差し込み、%CALLNAME%の処女を散らす。
+				PRINTFORMW ぎこちない動きで雄を迎え入れた%CALLNAME%の膣肉は雌としての役割をじっくりと仕込まれた…
+			ENDIF
+		;그 외 
+		ELSE
+			IF TALENT:작은체형
+				PRINTFORML 客は%CALLNAME%の処女膣を貫く下準備として、小柄な体をじっくりと大きな手で揉みしだいた。
+				PRINTFORML 紅潮し出した体にローションを塗りたくり、幼いスリットの中にもボトルから直接注入する。
+				PRINTFORML 粘液塗れのそこにエラの張った大きな亀頭があてがわれ、柔らかな縦筋の中へじわじわめり込んでゆく。
+				PRINTFORMW 圧迫感の果てにぷつん、と小さな衝撃が走り、%CALLNAME%는 処女を失ったことを知覚した…
+			ELSE
+				PRINTFORML %CALLNAME%の処女を奪ってやろうと覆いかぶさり、客は肉棒を秘所にぐいぐいと押し付ける。
+				PRINTFORML 本当なら全力で抗いたい%CALLNAME%だが、相手は自分を買った客。抵抗は出来ない…
+				PRINTFORML 初めての異性がじわじわ嬲るように侵入してゆき、やがてぶつりと姦通する。
+				PRINTFORMW 破瓜の血を流し痛みに堪える%CALLNAME%をよそに、客は腰を打ち付け始めた…
+			ENDIF
+		ENDIF
+	;그 외 
+	ELSE
+	;위험일
+		IF C_危険日(TARGET)
+		;음란
+			IF MARK:음란각인 || TALENT:창녀 == 1
+				IF RAND:5 == 0
+					PRINTFORML ”妊娠予約”を受けていた%CALLNAME%는、排卵促進薬をあらかじめ服用して今夜の売春に臨んだ。
+					PRINTFORML 客はこの日のために十日も精子を溜め込んだ上、精力剤によって気も狂わんばかりに生殖意欲を高めていた。
+					PRINTFORML ベッドの上で向い合い、膝を揃えた%CALLNAME%는 頭を下げながら客の子を孕むことを誓い、種付けを乞い願う。
+					PRINTFORML 堪らず客は%CALLNAME%を押し倒して張り詰めた肉棒を超危険日の膣穴にぶち込み、同時に溜めに溜めた精液を爆発させた。
+					PRINTFORMW 最初の一発目でも溢れ返る程の量。今宵はきっと卵子の逃げ場が無いくらいに注がれてしまうだろうと、%CALLNAME%는 お腹を撫でて微笑んだ…
+				ELSEIF RAND:4 == 0
+					PRINTFORML 客が腰を回すように捻り、そのたび%CALLNAME%の危険日の肉壷がぐちょぐちょと派手な音を奏でた。
+					PRINTFORML 二度に渡って注がれた新鮮な精子が肉棒のマドラーによって愛液と混ぜ合わされ、膣襞の隙間にまで刷り込まれる。
+					PRINTFORML 泡だった淫液がぐにぐにと引き伸ばされる膣口の隙間から漏れ出し、代わりにいくらかの空気を取り込む。
+					PRINTFORMW %CALLNAME%는 妊娠必至のいやらしい壷遊びに頬を上気させ、もっともっとと楽しげに腰を浮かせた…
+				ELSEIF RAND:3 == 0
+					PRINTFORML いつもよりも余裕がなく喘ぎ続ける%CALLNAME%を見て、客は危険日だと悟った。
+					PRINTFORML 狭い膣内を固い肉棒でかき分け、種付けのために深部の子宮へ亀頭をたどり着かせようとする。
+					PRINTFORML コツンコツンと子宮の扉を叩く感触に、%CALLNAME%는 客が何を狙っているのか感じ取った。
+					PRINTFORML 組み伏せられて身じろぎしかできない%CALLNAME%を押さえつけると、とうとう子宮口をこじ開けた状態で子種を流し込んだ。
+					PRINTFORML ビュービューと射精しながら、客は尚も腰をぐりぐり擦りつけて一匹でも多くの精子を流し込もうとする。
+					PRINTFORMW 男は%CALLNAME%と熱烈な子作りセックスを果たした幸福感に包まれながら、放心する奴隷の胸に顔をうずめた…
+				ELSEIF RAND:2 == 0
+					PRINTFORML 始める前に危険日だと言ったのが原因なのか、相手の客は寝バックの体勢でいつもより激しく%CALLNAME%を犯していた。
+					PRINTFORML 種付けを拒めないよう体重を掛けて伸し掛かり、乳房を力強く揉みしだきながら妊娠を強要する。
+					PRINTFORML %CALLNAME%는 口でこそ拒否して腰をくねらすも、膣肉はむしろ中出しを望むかのように男根へむしゃぶりつく。
+					PRINTFORMW それを了承と受け取った客は、%CALLNAME%の体が弓なりになるほど強く腰を押し付けて射精した…
+				ELSE
+					PRINTFORML 客の剛直を膣で咥え、%CALLNAME%는 跨って腰を上下にストロークさせていく。
+					PRINTFORML 普段より高揚し自らここまで腰を動かす自分に、%CALLNAME%는 疑問を覚え、ふと危険日なのだと悟る。
+					PRINTFORML 本来なら外出しさせなければいけないのだが、男性に屈服した女の体は妊娠のリスクよりも肉欲を優先してしまう。
+					PRINTFORMW 今にも射精しそうな客に孕まされることを想像しながら、腰を打ち付ける速度を速めていった…
+				ENDIF
+			;그 외 
+			ELSE
+				IF RAND:3 == 0
+					PRINTFORML %CALLNAME%는 多額の特別料金を支払われ、危険日生中出しセックスの模様を撮影することになった。
+					PRINTFORML ホテル側が用意したカメラの前に立ち、顔を強張らせながら自己紹介をして、ゆっくりと下着を下ろす。
+					PRINTFORML がに股に両膝へ手を置く後背立位の格好でヌプリと挿入され、%CALLNAME%が下唇を噛んだ。
+					PRINTFORML カメラ目線を崩さず、喋り続けるように。抽挿に膝を震わせながら必死で笑顔を浮かべ続ける。
+					PRINTFORMW 中出しのカウントダウンに合わせ、涙目の%CALLNAME%는 ダブルピースでぎこちなく微笑んだ…
+				ELSEIF RAND:2 == 0
+					PRINTFORML しきりに外出しを求める%CALLNAME%に、その態度で今日は危険日なのだと客は悟る。
+					PRINTFORML 『妊娠させてはならない』という決まりはないので、むしろ%CALLNAME%を無理矢理孕ますことが出来ると客は発奮した。
+					PRINTFORML 力無く抵抗する奴隷を押さえつけ、本気の種付けを行うべく爆発寸前の肉棒で膣内を犯し絶頂へと昇ってゆく。
+					PRINTFORMW 必死の懇願も虚しく、最後の一突きでどぽっと子宮に精液を吐きだされた%CALLNAME%는、諦めたように射精の脈動を受け入れた…
+				ELSE
+					PRINTFORML 危険日の%CALLNAME%を確実に孕ませるべく、客の男はもう何度目か分からない膣内射精を行う。
+					PRINTFORML 拒めぬないように腰をがっしり掴まれて、%CALLNAME%もまた諦めたように種付けを受けれる。
+					PRINTFORMW すでに子宮は客の白濁で満杯であり、入りきらない精液が結合部からドロドロとあふれ出た…
+				ENDIF
+			ENDIF
+		ELSE
+		;위험일以外
+		;음란
+			IF MARK:음란각인 || TALENT:창녀 == 1
+				IF RAND:8 == 0
+					PRINTFORML ベランダに置かれた安楽椅子へと客が腰掛け、全裸の%CALLNAME%が抱き合う格好で繋がっていた。
+					PRINTFORML 夜景を見下ろしながら膝の上で美女を鳴かせる。贅沢なシチュエーションに客はいたくご満悦だ。
+					PRINTFORML むにむにとすり付けられる乳房。片時も離れずに睦み合う唇と舌。%CALLNAME%の奉仕には愛すら感じられる。
+					PRINTFORMW 射精の予兆を感じ取ると力強く腰を押し付け、今宵のご主人様の精液を全て子宮頸で受け止めた…
+				ELSEIF RAND:7 == 0
+					PRINTFORML 部屋から温泉に連れ出された%CALLNAME%는、胸を高鳴らせながらタオル一枚で男湯に歩み入った。
+					PRINTFORML 入浴客の視線を一身に浴びつつ洗い場に行き、命じられるがままに彼女を買った男の体を泡踊りで洗う。
+					PRINTFORML 湯に浸かる時はマナーとしてタオルを外し、裸の男たちに囲まれながらその裸身をじっくりと検分された。
+					PRINTFORML 最後は他の入浴客の承諾を得、彼らによく見えるように大股を開いた格好で客の肉棒に貫かれる。
+					PRINTFORMW なんだかんだのうちに全員を順繰りに相手することを承諾させられ、%CALLNAME%の嬌声が浴場に響き渡った…
+				ELSEIF RAND:6 == 0
+					PRINTFORML 団体客に買われた%CALLNAME%는 輪姦さながらに前後の穴を絶え間なく犯されている。
+					PRINTFORML どういった仲間かは不明だが、%CALLNAME%を駅弁の姿勢で抱え上げ、入れ替わり立ち代り息の合ったダブルピストンを繰り返す。
+					PRINTFORML 二本の逞しいペニスはどちらも腹の奥の子宮をドンドンと揺さぶり、%CALLNAME%に奉仕を忘れさせるほど激しい絶頂へ突き上げた。
+					PRINTFORML 全身の肌を紅潮させ、汗だくで乱れ続ける%CALLNAME%に、客たちはダメ押しの同時射精を叩き込む…
+					PRINTFORMW 一巡目がようやく終了し、今度は口も使った二巡目が始まった。
+				ELSEIF RAND:5 == 0
+					IF TALENT:거유  || TALENT:폭유
+						PRINTFORML %CALLNAME%に種付けを終えた客は、%CALLNAME%をベッドに寝転がすと馬乗りパイズリで豊満な胸を犯す。
+						PRINTFORML 鷲掴んだ男の手でも掴みきれない乳房は、指の間からこぼれるように浮き出る。
+						PRINTFORML 胸を揉みくちゃにしながら腰を振る客に、%CALLNAME%는 谷間を行き来するペニスをフェラする。
+						PRINTFORML 訪ねている間に客の男は射精してしまい、%CALLNAME%の顔を生温かい精液で汚す。
+						PRINTFORMW 一しきり射精したあと、残った精液を폭유になすりつけてようやく満足した…
+					ELSE
+						PRINTFORML 客の男は%CALLNAME%をベッドに押さえつけるように後ろから蜜壺を犯し続ける。
+						PRINTFORML 性器同士が強く交わる度に、接合部からは淫らな水音がパチュパチュと部屋に鳴り響く。
+						PRINTFORML 段々と速まるピストンに、腰を打ち付けられる%CALLNAME%も髪を振り乱し大きな声で喘ぐ。
+						PRINTFORMW それらに興奮しきった客は子宮口を貫くと、熱く蕩ける子宮に自分の子を孕ませるべく種付けした…
+					ENDIF
+				ELSEIF RAND:4 == 0
+					PRINTFORML 射精間近な客の男は激しい腰振りで、滾る肉棒を%CALLNAME%の蜜壺に繰り返す様に突き入れていく。
+					PRINTFORML 男が動く度にギシギシとベッドは軋み、膣内を犯される%CALLNAME%는 乱れて淫らな声を上げ続ける。
+					PRINTFORML そして絶頂に達したペニスから、すでに白く染まっている子宮に粘つく精液を飽きずに送り込む。
+					PRINTFORMW 客は何度目かわからない種付けを完了すると、恍惚の笑みを浮かべる%CALLNAME%にキスをした…
+				ELSEIF RAND:3 == 0
+					PRINTFORML 男の客と後背位で結合する最中、絶頂に達した客は%CALLNAME%の子宮へと遺伝子をぶちまけた。
+					PRINTFORML 出し終えても萎えることはなく、再び腰を動かして性器を擦り合わせる。
+					PRINTFORML まだまだ射精し足りないのか先ほどより深く肉棒を打ち付け、種付けされた子宮を犯し続ける。
+					PRINTFORMW %CALLNAME%는 その行為に喘ぎながら、吐き出され続ける精液を受け止めた…
+				ELSEIF RAND:2 == 0
+					PRINTFORML 正常位で%CALLNAME%の身体を犯しているのは、頻繁に%CALLNAME%を指名しているリピーターだった。
+					PRINTFORML 長く娼婦を続けていれば人気も出て、場合によってはその魅力で身も心も魅了されてしまう客もいる。
+					PRINTFORMW 独占欲から湧く劣情を込めつつ%CALLNAME%の膣内を犯し続け、最後は子宮の奥へと種付けした…
+				ELSE
+					IF TALENT:거유  || TALENT:폭유
+						PRINTFORML 客の上に跨り、%CALLNAME%는 騎乗位で妖艶な身体を跳ねさせる。
+						PRINTFORML 跳ねる度に豊満な双丘はぶるんぶるんと跳ねまわり、その光景を見上げる客を愉しませる。
+						PRINTFORMW 自身の上で喘ぐ%CALLNAME%の期待に応え、客は両手で掴みきれない程の폭유を鷲掴んだ…
+					ELSE
+						PRINTFORML 客の上に跨り、%CALLNAME%는 騎乗位で妖艶な身体を跳ねさせる。
+						PRINTFORML %CALLNAME%는 淫らに興奮しつつも、客を気持ちよくさせる為に艶めかしい動きでグラインドする。
+						PRINTFORMW その魅惑的な動きに客も高まる射精感に耐えつつ腰を突き上げていった…
+					ENDIF
+				ENDIF
+			;그 외 
+			ELSE
+				IF RAND:8 == 0
+					PRINTFORML まだまだ娼婦として未熟な%CALLNAME%는、迂闊にもフェラの最中に客のペニスへ歯を当ててしまった。
+					PRINTFORML 激怒した客から謝罪を求められ、%CALLNAME%는 全裸の格好で土下座を命じられた。
+					PRINTFORML 額を床に付けたまま、頭を踏まれ尻を叩かれ、散々になじられる。
+					PRINTFORML 客は無様な格好の%CALLNAME%に後ろから肉棒を突っ込み、しつこく尻に平手を食らわせながら乱暴に腰を振った。
+					PRINTFORML 気が済むまで中出しした頃には、%CALLNAME%の尻は真っ赤に腫れ上がっていた。
+					PRINTFORMW 客は謝罪の言葉を繰り返させながら、%CALLNAME%の頭にジョロジョロと小便を浴びせた…
+				ELSEIF RAND:7 == 0
+					PRINTFORML %CALLNAME%を指名した客は驚くほど立派な逸物を持っていた。
+					PRINTFORML 口に頬ぼることさえ難しいそのサイズに半ば慄きながら、%CALLNAME%는 急ぎ挿入の準備を整える。
+					PRINTFORML 充分に濡らして解した보지를 、極太の上にカリ高のペニスがギチギチと強引に押し広げていく。
+					PRINTFORML メリリ、という強烈な挿入感に、%CALLNAME%が息を止めて丸く口を開ける。
+					PRINTFORMW かつて味わったことのない巨根にごりごりと膣道を最奥までほじくり返され、%CALLNAME%는 激しく身悶えた…
+				ELSEIF RAND:6 == 0
+					PRINTFORML 娼婦としてまだ未熟な%CALLNAME%는、客がその体を自由に弄べる形式の方が喜ばれる。
+					PRINTFORML 開脚椅子へベルトで拘束された%CALLNAME%는 様々な淫具による快楽拷問を受けた。
+					PRINTFORML 客がワインを傾ける傍ら、沢山のローターが乳首と陰核を弾き、ピストンマシーンがひねりを加えて膣穴をほじくり返す。
+					PRINTFORML %CALLNAME%는 無機質で暴力的な快感に目を見開いて叫び続け、幾度も勢い良く潮を吹いた。
+					PRINTFORMW 失禁して気を失った頃、客はようやく自らのペニスで%CALLNAME%を犯した…
+				ELSEIF RAND:5 == 0
+					PRINTFORML 初々しい娘が欲しい。
+					PRINTFORML そう注文した客は露出プレイがお望みのようで、下着姿の%CALLNAME%に首輪を嵌めてホテル内を練り歩いた。
+					PRINTFORML 客室前の廊下。レストラン。売店。娯楽室。中庭…
+					PRINTFORML 一般客や同僚の視線を浴びて全身を紅潮させる%CALLNAME%に、それぞれの場所で羞恥の命令が下される。
+					PRINTFORMW 仕上げはロビーで公開自慰と絶頂を強いられ、客は%CALLNAME%の恥じらいぶりに大いに満足した…
+				ELSEIF RAND:4 == 0
+					PRINTFORML %CALLNAME%が団体客から指名を受けたが、まだ売春に抵抗感を残す彼女では全員にご満足頂けるか不安だ…
+					PRINTFORMW 元々輪姦プレイを希望していた団体客は喜んで%CALLNAME%を受け取り、思う存分に滾る獣欲をぶつけたようだ。
+					PRINTFORMW %CALLNAME%는 散々好きに弄ばれ辱められ、翌日使い飽きた肉便器のような有り様で返却された…
+				ELSEIF RAND:3 == 0
+					PRINTFORML 赤の他人との性行為に未だ拒否感を抱く%CALLNAME%는、目隠しでのプレイを客に提案した。
+					PRINTFORML 乳房を貪る口。伸し掛かる男の体重。内臓奥深くをノックするリズム。体内でじわりと広がる熱感…
+					PRINTFORMW 顔を見ずに済んだとしても、また一人知らない男に体を許したという現実だけは直視せざるを得なかった。
+				ELSEIF RAND:2 == 0
+					PRINTFORML 未だ男に抱かれるには慣れないのか、動きは良いが表情が優れない。
+					PRINTFORMW あまり気を遣わせないよう、後ろから犯してもらい、自分も動いて快感で慣れようと心掛けた…
+				ELSE
+					PRINTFORML ただ自分が気持ち良くなる為に腰を振る客に、なんとか合わせようと%CALLNAME%는 身体をくねらせる。
+					PRINTFORMW その初々しい動きが客を興奮させたのか、打ち付けるスピードをさらに上げていった…
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+
+
+
+
+
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = 창관 손님
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = 창관 손님
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = 창관 손님
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = 창관 손님
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = 창관 손님
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 창관 손님
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = 창관 손님
+
+
+
+TALENT:비처녀 = 1
+TALENT:Ａ비처녀 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
+CALL JN_SEX_EXP
+EXP:매춘경험 += 1
+L_MONEY = 200
+L_MONEY += EXP:성교경험/3
+L_MONEY += EXP:수음경험/3
+L_MONEY += EXP:펠라경험/3
+L_MONEY += EXP:봉사쾌락경험/3
+L_MONEY += EXP:매춘경험 
+L_MONEY += L_MONEY*(1+(FLAG:ラブホテル/5))
+
+L_MONEY2 = L_MONEY
+SIF TALENT:혀놀림 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:손놀림 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:허리놀림 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:매혹 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:매력 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:인기 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:미모 == 1
+	L_MONEY2 += (L_MONEY/5)+RAND:(L_MONEY/5)
+SIF TALENT:창녀 == 1
+	L_MONEY2 += (L_MONEY/2)+RAND:(L_MONEY/2)
+
+L_MONEY += L_MONEY2+(CFlag:住人_人気/10)
+
+IF TALENT:쾌락중독 == 0 && RAND:100 > 90 && TALENT:정부 == 0
+	SETCOLOR 150,50,250
+	PRINTFORML 【%CALLNAME%의 상태가 이상하다…、임을 잊어버릴 정도로 성행위에 빠진 것 같다…】
+	PRINTFORML 【%CALLNAME%는 「쾌락중독」이 되었다…、자금 획득이 격감합니다】
+	TALENT:쾌락중독 = 1
+ENDIF
+
+SIF TALENT:쾌락중독 == 1
+	L_MONEY = L_MONEY/9
+RESETCOLOR
+
+IF CFLAG:住人_モラル > 0
+	PRINTFORML %CALLNAME%의 모랄이 떨어졌다。
+	PRINTFORMW 모랄　{CFLAG:住人_モラル} → {CFLAG:住人_モラル-L_K}
+ENDIF 
+
+CFLAG:住人_モラル -= L_K
+
+
+
+CALL TURN_EVENT_NNK
+
+
+PRINTFORML 【오늘　%CALLNAME%의 매상:￥{L_MONEY}】
+
+
+MONEY += L_MONEY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

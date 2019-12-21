@@ -1,0 +1,101 @@
+﻿;=================================================
+;   sub COLOR
+;=================================================
+;   着色
+;-------------------------------------------------
+; Input:
+;  ARGS					色
+; Output:
+;  RETURNF				色
+;-------------------------------------------------
+@COLOR(ARGS)
+#FUNCTION
+
+SELECTCASE ARGS
+	;-----------------------------
+	;- 特殊色
+	;-----------------------------
+	CASE "伏字"
+		RETURNF 0x666666
+	CASE "口上標準"
+;		RETURNF 0xFFCCFF
+		RETURNF GETCOLOR()
+
+	;-----------------------------
+	;- 標準色
+	;-----------------------------
+	CASE "灰色", "gray"
+		RETURNF 0x666666
+	CASE "紫"
+		RETURNF 0xCC66CC
+	CASE "ピンク"
+		RETURNF 0xFF00FF
+	CASE "赤"
+		RETURNF 0xFF9999
+	CASE "水色"
+		RETURNF 0x66FFFF
+	CASE "緑"
+		RETURNF 0x00FF00
+	CASE "群青"
+		RETURNF 0x9999FF
+	CASE "黄色"
+		RETURNF 0xffff00
+ENDSELECT
+
+RETURNF 0
+
+
+;PERCENT値0～100から色を指定する
+;96～100だとデフォ色
+;ライフバー系での使用を想定
+@PERC_TO_COLOR(PERCENT)
+#FUNCTION
+#DIM PERCENT
+SELECTCASE PERCENT
+CASE IS <= 0
+	RETURNF 0x660000
+CASE IS <= 10
+	RETURNF 0xAA1100
+CASE IS <= 25
+	RETURNF 0xFF6600
+CASE IS <= 50
+	RETURNF 0xFFFF00
+CASE IS <= 95
+	RETURNF 0x808080
+ENDSELECT
+RETURNF GETDEFCOLOR()
+
+
+;RANK値1～7から色を指定する
+;3101,계급SevenR,;特殊階級、「플레이어」と「シティ」に認められた者のみ授かる。
+;3102,계급SixO,;　階級の上昇と共に貢献値も上がる
+;3103,계급FiveY,;
+;3104,계급FourG,;
+;3105,계급ThreeB,;
+;3106,계급ToI,;
+;3107,계급OneV,;
+;
+;1～7の数値に当てはまらない場合は黒色を返す
+@RANK_TO_COLOR(RANK)
+#FUNCTION
+#DIM RANK
+SELECTCASE RANK
+CASE 1
+	RETURNF 0xFF0000
+CASE 2
+	RETURNF 0xFF6600
+CASE 3
+	RETURNF 0xDDFF00
+CASE 4
+	RETURNF 0x33DD33
+CASE 5
+	RETURNF 0x0033FF
+CASE 6
+	RETURNF 0x000099
+CASE 7
+	RETURNF 0x220022
+ENDSELECT
+RETURNF 0x000000
+
+
+

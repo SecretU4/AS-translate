@@ -1,0 +1,46 @@
+;=================================================
+;   sub COLOR
+;=================================================
+;   着色
+;-------------------------------------------------
+; Input:
+;  ARGS					色
+; Output:
+;  RETURNF				色
+;-------------------------------------------------
+@COLOR(ARGS)
+#FUNCTION
+
+SELECTCASE ARGS
+	;-----------------------------
+	;- 特殊色
+	;-----------------------------
+	CASE "伏字"
+		RETURNF 0x666666
+	CASE "口上標準"
+;		RETURNF 0xFFCCFF
+		RETURNF GETCOLOR()
+
+	;-----------------------------
+	;- 標準色
+	;-----------------------------
+	CASE "灰色", "gray"
+		RETURNF 0x666666
+	CASE "紫"
+		RETURNF 0xCC66CC
+	CASE "ピンク"
+		RETURNF 0xFF00FF
+	CASE "赤"
+		RETURNF 0xFF9999
+	CASE "水色"
+		RETURNF 0x66FFFF
+	CASE "緑"
+		RETURNF 0x00FF00
+	CASE "群青"
+		RETURNF 0x9999FF
+	CASE "黄色"
+		RETURNF 0xffff00
+ENDSELECT
+
+RETURNF 0
+

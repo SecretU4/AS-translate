@@ -1,0 +1,407 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CLOTHES_FUNC.ERB
+;	Facility	:関数置き場(衣装)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXX
+;
+;	・ CLOTHE_INIT						衣装:初期化処理
+;	・ CLOTHE_DB_MAKE					衣装:DB作成
+;	・ CLOTHE_ID						衣装:ID取得
+;	・ CLOTHE_EXPLAIN					衣装:説明
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub CLOTHE_INIT
+;=================================================
+;   衣装:初期化処理
+;-------------------------------------------------
+@CLOTHE_INIT
+#DIM L_TMP
+
+;-----------------------------
+;- タイプ設定
+;-----------------------------
+VARSET GCLOTHE_TYPE_NAME
+GCLOTHE_TYPE_NAME:00 = 帽子
+GCLOTHE_TYPE_NAME:01 = 上着トップス
+GCLOTHE_TYPE_NAME:02 = 上着ボトムス
+GCLOTHE_TYPE_NAME:03 = 全身服
+GCLOTHE_TYPE_NAME:04 = 手袋
+GCLOTHE_TYPE_NAME:05 = 下着トップス
+GCLOTHE_TYPE_NAME:06 = 下着ボトムス
+GCLOTHE_TYPE_NAME:07 = 全身下着
+GCLOTHE_TYPE_NAME:08 = 靴下
+GCLOTHE_TYPE_NAME:09 = 靴
+GCLOTHE_TYPE_NAME:10 = 外套
+GCLOTHE_TYPE_NAME:11 = アクセサリー
+
+;-----------------------------
+;- データ設定
+;-----------------------------
+VARSET GCLOTHE_ID
+VARSET GCLOTHE_PRICE
+VARSET GCLOTHE_NAME
+VARSET GCLOTHE_EXPLAIN
+VARSET GCLOTHE_NONSALE
+
+;-------------------------------------------------
+; [0000-0099]			帽子
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0001,     0, "ホワイトブリム",			 "")
+CALL CLOTHE_DB_MAKE(0002,     0, "ナースキャップ",			 "")
+CALL CLOTHE_DB_MAKE(0003,     0, "警官帽",					 "")
+CALL CLOTHE_DB_MAKE(0004,     0, "ウサ耳バンド",			 "")
+CALL CLOTHE_DB_MAKE(0005,     0, "リボン",					 "")
+CALL CLOTHE_DB_MAKE(0006,     0, "フード",					 "")
+CALL CLOTHE_DB_MAKE(0007,     0, "兜",						 "")
+CALL CLOTHE_DB_MAKE(0008,     0, "帽子",					 "")
+CALL CLOTHE_DB_MAKE(0009,     0, "ヴェール",				 "")
+CALL CLOTHE_DB_MAKE(0010,     0, "ティアラ",				 "")
+CALL CLOTHE_DB_MAKE(0011,     0, "カチューシャ",			 "")
+CALL CLOTHE_DB_MAKE(0012,     0, "ヘアバンド",				 "")
+CALL CLOTHE_DB_MAKE(0013,     0, "バンダナ",				 "")
+CALL CLOTHE_DB_MAKE(0014,     0, "フロスト頭巾",			 "")
+CALL CLOTHE_DB_MAKE(0015,     0, "ランタンハット",			 "")
+CALL CLOTHE_DB_MAKE(0016,     0, "冠",						 "")
+CALL CLOTHE_DB_MAKE(0017,     0, "ネコミミカチューシャ",	 "")
+CALL CLOTHE_DB_MAKE(0018,     0, "軍帽",					 "")
+CALL CLOTHE_DB_MAKE(0019,     0, "ヘッドセットマイク",		 "")
+CALL CLOTHE_DB_MAKE(0020,     0, "花の冠",					 "")
+CALL CLOTHE_DB_MAKE(0021,     0, "ヘッドドレス",			 "")
+CALL CLOTHE_DB_MAKE(0022,     0, "ヘアピン",				 "")
+CALL CLOTHE_DB_MAKE(0023,     0, "かんざし",				 "")
+CALL CLOTHE_DB_MAKE(0024,     0, "髪飾り",					 "")
+CALL CLOTHE_DB_MAKE(0025,     0, "髪紐",					 "")
+CALL CLOTHE_DB_MAKE(0026,     0, "花一輪",					 "")
+CALL CLOTHE_DB_MAKE(0027,     0, "王冠",					 "")
+CALL CLOTHE_DB_MAKE(0028,     0, "金剛圏",					 "")
+CALL CLOTHE_DB_MAKE(0029,     0, "月下香の髪飾り",			 "")
+CALL CLOTHE_DB_MAKE(0030,     0, "バンダナ",				 "")
+CALL CLOTHE_DB_MAKE(0050,     0, "メイドカチューシャ",		 "")
+
+;-------------------------------------------------
+; [0100-0199]			上着トップス
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0101,     0, "上着",					 "")
+CALL CLOTHE_DB_MAKE(0102,     0, "セーラー服",				 "")
+CALL CLOTHE_DB_MAKE(0103,     0, "体操服",					 "")
+CALL CLOTHE_DB_MAKE(0104,     0, "警官服",					 "")
+CALL CLOTHE_DB_MAKE(0105,     0, "ナース服",				 "")
+CALL CLOTHE_DB_MAKE(0106,     0, "ブレザー",				 "")
+CALL CLOTHE_DB_MAKE(0107,     0, "ブラウス",				 "")
+CALL CLOTHE_DB_MAKE(0108,     0, "タンクトップ",			 "")
+CALL CLOTHE_DB_MAKE(0109,     0, "チューブトップ",			 "")
+CALL CLOTHE_DB_MAKE(0110,     0, "ランニングシャツ",		 "")
+CALL CLOTHE_DB_MAKE(0111,     0, "タートルネック",			 "")
+CALL CLOTHE_DB_MAKE(0112,     0, "スモックシャツ",			 "")
+CALL CLOTHE_DB_MAKE(0113,     0, "スウェットシャツ",		 "")
+CALL CLOTHE_DB_MAKE(0114,     0, "アンダーシャツ",			 "")
+CALL CLOTHE_DB_MAKE(0115,     0, "和服",					 "")
+CALL CLOTHE_DB_MAKE(0116,     0, "シースルーシャツ",		 "")
+CALL CLOTHE_DB_MAKE(0117,     0, "キャミソール",			 "")
+CALL CLOTHE_DB_MAKE(0118,     0, "ビキニトップ",			 "")
+CALL CLOTHE_DB_MAKE(0119,     0, "詰襟",					 "")
+CALL CLOTHE_DB_MAKE(0120,     0, "ドレスシャツ",			 "")
+CALL CLOTHE_DB_MAKE(0121,     0, "ワイシャツ",				 "")
+CALL CLOTHE_DB_MAKE(0122,     0, "ゴスロリ服(黒)",			 "")
+CALL CLOTHE_DB_MAKE(0123,     0, "ゴスロリ服(白)",			 "")
+CALL CLOTHE_DB_MAKE(0124,     0, "Ｔシャツ",				 "")
+CALL CLOTHE_DB_MAKE(0125,     0, "胸部装甲",				 "")
+CALL CLOTHE_DB_MAKE(0126,     0, "学ラン",					 "")
+CALL CLOTHE_DB_MAKE(0127,     0, "スーツ",					 "")
+
+CALL CLOTHE_DB_MAKE(0151,     0, "軽装鎧",					 "")
+CALL CLOTHE_DB_MAKE(0152,     0, "重装鎧",					 "")
+
+;-------------------------------------------------
+; [0200-0299]			上着ボトムス
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0201,     0, "スカート",				 "")
+CALL CLOTHE_DB_MAKE(0202,     0, "キュロット",				 "")
+CALL CLOTHE_DB_MAKE(0203,     0, "もんぺ",					 "")
+CALL CLOTHE_DB_MAKE(0204,     0, "ズボン",					 "")
+CALL CLOTHE_DB_MAKE(0205,     0, "ロングスカート",			 "")
+CALL CLOTHE_DB_MAKE(0206,     0, "ホットパンツ",			 "")
+CALL CLOTHE_DB_MAKE(0207,     0, "ミニスカート",			 "")
+CALL CLOTHE_DB_MAKE(0208,     0, "タイトスカート",			 "")
+CALL CLOTHE_DB_MAKE(0209,     0, "タイトミニスカート",		 "")
+CALL CLOTHE_DB_MAKE(0210,     0, "オーバーオール",			 "")
+CALL CLOTHE_DB_MAKE(0211,     0, "ブルマ",					 "")
+CALL CLOTHE_DB_MAKE(0212,     0, "ビキニボトム",			 "")
+CALL CLOTHE_DB_MAKE(0213,     0, "サスペンダースカート",	 "")
+CALL CLOTHE_DB_MAKE(0214,     0, "ジャンパースカート",		 "")
+CALL CLOTHE_DB_MAKE(0215,     0, "袴",						 "")
+CALL CLOTHE_DB_MAKE(0216,     0, "ショートパンツ",			 "")
+CALL CLOTHE_DB_MAKE(0217,     0, "腰布",					 "")
+CALL CLOTHE_DB_MAKE(0218,     0, "腰部装甲",				 "")
+
+;-------------------------------------------------
+; [0300-0399]			全身服
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0301,     0, "長着",					 "")
+CALL CLOTHE_DB_MAKE(0302,     0, "ローブ",					 "")
+CALL CLOTHE_DB_MAKE(0303,     0, "ワンピース",				 "")
+CALL CLOTHE_DB_MAKE(0304,     0, "ドレス",					 "")
+CALL CLOTHE_DB_MAKE(0305,     0, "イブニングドレス",		 "")
+CALL CLOTHE_DB_MAKE(0306,     0, "浴衣",					 "")
+CALL CLOTHE_DB_MAKE(0307,     0, "エプロンドレス",			 "")
+CALL CLOTHE_DB_MAKE(0308,     0, "チャイナドレス",			 "")
+CALL CLOTHE_DB_MAKE(0309,     0, "バニースーツ",			 "")
+CALL CLOTHE_DB_MAKE(0310,     0, "ボンテージスーツ",		 "")
+CALL CLOTHE_DB_MAKE(0311,     0, "着ぐるみ",				 "")
+CALL CLOTHE_DB_MAKE(0312,     0, "千早",					 "")
+CALL CLOTHE_DB_MAKE(0313,     0, "軍服",					 "")
+CALL CLOTHE_DB_MAKE(0314,     0, "民族衣装",				 "")
+CALL CLOTHE_DB_MAKE(0315,     0, "法衣",					 "")
+CALL CLOTHE_DB_MAKE(0316,     0, "貫頭衣",					 "")
+CALL CLOTHE_DB_MAKE(0317,     0, "トライブスーツ",			 "")
+CALL CLOTHE_DB_MAKE(0318,     0, "ねこまたすーつ",			 "")
+CALL CLOTHE_DB_MAKE(0319,     0, "ウェディングドレス",		 "")
+CALL CLOTHE_DB_MAKE(0320,     0, "白無垢",					 "")
+CALL CLOTHE_DB_MAKE(0321,     0, "道士服",					 "")
+
+CALL CLOTHE_DB_MAKE(0350,     0, "メイド服(ミニ)",			 "")
+CALL CLOTHE_DB_MAKE(0351,     0, "メイド服(ロング)",		 "")
+CALL CLOTHE_DB_MAKE(0360,     0, "全身鎧",					 "")
+
+;-------------------------------------------------
+; [0400-0499]			手袋
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0401,     0, "手袋",					 "")
+CALL CLOTHE_DB_MAKE(0402,     0, "袖",						 "")
+CALL CLOTHE_DB_MAKE(0403,     0, "カフス",					 "")
+CALL CLOTHE_DB_MAKE(0404,     0, "エルボーグローブ",		 "")
+CALL CLOTHE_DB_MAKE(0405,     0, "レースの手袋",			 "")
+CALL CLOTHE_DB_MAKE(0406,     0, "篭手",					 "")
+CALL CLOTHE_DB_MAKE(0407,     0, "肉球グローブ",			 "")
+CALL CLOTHE_DB_MAKE(0408,     0, "ネギ",					 "")
+CALL CLOTHE_DB_MAKE(0409,     0, "指ぬきグローブ",			 "")
+CALL CLOTHE_DB_MAKE(0410,     0, "指輪",					 "")
+
+;-------------------------------------------------
+; [0500-0599]			下着トップス
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0501,     0, "ブラジャー",				 "")
+CALL CLOTHE_DB_MAKE(0502,     0, "スポーツブラ",			 "")
+CALL CLOTHE_DB_MAKE(0503,     0, "さらし",					 "")
+CALL CLOTHE_DB_MAKE(0504,     0, "オープンブラ",			 "")
+CALL CLOTHE_DB_MAKE(0505,     0, "マイクロブラ",			 "")
+CALL CLOTHE_DB_MAKE(0506,     0, "ネグリジェ",				 "")
+CALL CLOTHE_DB_MAKE(0507,     0, "ブラジャー(黒)",			 "")
+CALL CLOTHE_DB_MAKE(0508,     0, "ブラジャー(赤)",			 "")
+CALL CLOTHE_DB_MAKE(0509,     0, "レースブラ",				 "")
+CALL CLOTHE_DB_MAKE(0510,     0, "ビスチェ",				 "")
+
+CALL CLOTHE_DB_MAKE(0520,     0, "マタニティブラ",			 "")
+CALL CLOTHE_DB_MAKE(0521,     0, "ニップルピアス",			 "")
+CALL CLOTHE_DB_MAKE(0522,     0, "絆創膏",					 "")
+CALL CLOTHE_DB_MAKE(0523,     0, "長襦袢",					 "")
+
+;-------------------------------------------------
+; [0600-0699]			下着ボトムス
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0601,     0, "ドロワーズ",				 "")
+CALL CLOTHE_DB_MAKE(0602,     0, "パンティ",				 "")
+CALL CLOTHE_DB_MAKE(0603,     0, "オープンショーツ",		 "")
+CALL CLOTHE_DB_MAKE(0604,     0, "褌",						 "")
+CALL CLOTHE_DB_MAKE(0605,     0, "マイクロビキニ",			 "")
+CALL CLOTHE_DB_MAKE(0606,     0, "トランクス",				 "")
+CALL CLOTHE_DB_MAKE(0607,     0, "ブーメランパンツ",		 "")
+CALL CLOTHE_DB_MAKE(0608,     0, "巻布",					 "")
+CALL CLOTHE_DB_MAKE(0609,     0, "パンティ(黒)",			 "")
+CALL CLOTHE_DB_MAKE(0610,     0, "パンティ(赤)",			 "")
+CALL CLOTHE_DB_MAKE(0611,     0, "レースパンティ",			 "")
+CALL CLOTHE_DB_MAKE(0611,     0, "スパッツ",				 "")
+CALL CLOTHE_DB_MAKE(0612,     0, "縞パン",					 "")
+CALL CLOTHE_DB_MAKE(0613,     0, "貞操帯",					 "")
+CALL CLOTHE_DB_MAKE(0614,     0, "絆創膏",					 "")
+
+CALL CLOTHE_DB_MAKE(0670,     0, "バイブ付きショーツ",		 "")
+CALL CLOTHE_DB_MAKE(0671,     0, "Ａバイブ付きショーツ",	 "")
+CALL CLOTHE_DB_MAKE(0672,     0, "Ｗバイブ付きショーツ",	 "")
+CALL CLOTHE_DB_MAKE(0673,     0, "尻尾プラグ",				 "")
+CALL CLOTHE_DB_MAKE(0674,     0, "ラビアピアス",			 "")
+CALL CLOTHE_DB_MAKE(0675,     0, "バイブ付き貞操帯",		 "")
+CALL CLOTHE_DB_MAKE(0676,     0, "Ａバイブ付き貞操帯",		 "")
+CALL CLOTHE_DB_MAKE(0677,     0, "Ｗバイブ付き貞操帯",		 "")
+
+;-------------------------------------------------
+; [0700-0799]			全身下着
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0701,     0, "タイツ",					 "")
+CALL CLOTHE_DB_MAKE(0702,     0, "スリングショット",		 "")
+CALL CLOTHE_DB_MAKE(0703,     0, "レオタード",				 "")
+CALL CLOTHE_DB_MAKE(0704,     0, "スクール水着",			 "")
+CALL CLOTHE_DB_MAKE(0705,     0, "競泳水着",				 "")
+CALL CLOTHE_DB_MAKE(0706,     0, "ビキニ水着",				 "")
+CALL CLOTHE_DB_MAKE(0707,     0, "ワンピース水着",			 "")
+
+CALL CLOTHE_DB_MAKE(0770,     0, "タイツ(穴開き)",			 "")
+CALL CLOTHE_DB_MAKE(0771,     0, "レオタード(穴開き)",		 "")
+CALL CLOTHE_DB_MAKE(0772,     0, "スクール水着(穴開き)",	 "")
+CALL CLOTHE_DB_MAKE(0773,     0, "競泳水着(穴開き)",		 "")
+
+;-------------------------------------------------
+; [0800-0899]			靴下
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0801,     0, "靴下",					 "")
+CALL CLOTHE_DB_MAKE(0802,     0, "ハイソックス",			 "")
+CALL CLOTHE_DB_MAKE(0803,     0, "ニーソックス",			 "")
+CALL CLOTHE_DB_MAKE(0804,     0, "サイハイソックス",		 "")
+CALL CLOTHE_DB_MAKE(0805,     0, "ガーターストッキング",	 "")
+CALL CLOTHE_DB_MAKE(0806,     0, "パンティストッキング",	 "")
+CALL CLOTHE_DB_MAKE(0807,     0, "網タイツ",				 "")
+CALL CLOTHE_DB_MAKE(0808,     0, "足袋",					 "")
+
+;-------------------------------------------------
+; [0900-0999]			靴
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(0901,     0, "ブーツ",					 "")
+CALL CLOTHE_DB_MAKE(0902,     0, "ハイブーツ",				 "")
+CALL CLOTHE_DB_MAKE(0903,     0, "サンダル",				 "")
+CALL CLOTHE_DB_MAKE(0904,     0, "グリーブ",				 "")
+CALL CLOTHE_DB_MAKE(0905,     0, "下駄",					 "")
+CALL CLOTHE_DB_MAKE(0906,     0, "ピンヒール",				 "")
+CALL CLOTHE_DB_MAKE(0907,     0, "ハイヒール",				 "")
+CALL CLOTHE_DB_MAKE(0908,     0, "スニーカー",				 "")
+CALL CLOTHE_DB_MAKE(0909,     0, "革靴",					 "")
+CALL CLOTHE_DB_MAKE(0910,     0, "ミュール",				 "")
+CALL CLOTHE_DB_MAKE(0911,     0, "パンプス",				 "")
+CALL CLOTHE_DB_MAKE(0912,     0, "草鞋",					 "")
+CALL CLOTHE_DB_MAKE(0913,     0, "シューズ",				 "")
+CALL CLOTHE_DB_MAKE(0914,     0, "肉球ぶーつ",				 "")
+CALL CLOTHE_DB_MAKE(0915,     0, "スパイク",				 "")
+CALL CLOTHE_DB_MAKE(0916,     0, "草履",					 "")
+CALL CLOTHE_DB_MAKE(0917,     0, "タイヤ",					 "")
+
+CALL CLOTHE_DB_MAKE(0950,     0, "メイドブーツ",			 "")
+
+;-------------------------------------------------
+; [1000-1099]			外套
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(1001,     0, "ボレロ",					 "")
+CALL CLOTHE_DB_MAKE(1002,     0, "マント",					 "")
+CALL CLOTHE_DB_MAKE(1003,     0, "コート",					 "")
+CALL CLOTHE_DB_MAKE(1004,     0, "白衣",					 "")
+CALL CLOTHE_DB_MAKE(1005,     0, "パーカー",				 "")
+CALL CLOTHE_DB_MAKE(1006,     0, "ジャケット",				 "")
+CALL CLOTHE_DB_MAKE(1007,     0, "燕尾服",					 "")
+;CALL CLOTHE_DB_MAKE(1008,     0, "",						 "")	;空き
+CALL CLOTHE_DB_MAKE(1009,     0, "ジャージ",				 "")
+CALL CLOTHE_DB_MAKE(1010,     0, "どてら",					 "")
+CALL CLOTHE_DB_MAKE(1011,     0, "ベスト",					 "")
+CALL CLOTHE_DB_MAKE(1012,     0, "狩衣",					 "")
+CALL CLOTHE_DB_MAKE(1013,     0, "カーディガン",			 "")
+
+CALL CLOTHE_DB_MAKE(1050,     0, "胸当て",					 "")
+
+;-------------------------------------------------
+; [1100-1199]			アクセサリー
+;-------------------------------------------------
+
+CALL CLOTHE_DB_MAKE(1101,     0, "羽衣",					 "")
+CALL CLOTHE_DB_MAKE(1102,     0, "眼鏡",					 "")
+CALL CLOTHE_DB_MAKE(1103,     0, "拘束具",					 "")
+CALL CLOTHE_DB_MAKE(1104,     0, "マフラー",				 "")
+CALL CLOTHE_DB_MAKE(1105,     0, "鞍",						 "")
+CALL CLOTHE_DB_MAKE(1106,     0, "帯",						 "")
+CALL CLOTHE_DB_MAKE(1107,     0, "ベルト",					 "")
+CALL CLOTHE_DB_MAKE(1108,     0, "ヘッドホン",				 "")
+CALL CLOTHE_DB_MAKE(1109,     0, "チョーカー",				 "")
+CALL CLOTHE_DB_MAKE(1110,     0, "ペニスリボン",			 "")
+CALL CLOTHE_DB_MAKE(1111,     0, "ネクタイ",				 "")
+CALL CLOTHE_DB_MAKE(1112,     0, "リボンネクタイ",			 "")
+CALL CLOTHE_DB_MAKE(1113,     0, "眼帯",					 "")
+CALL CLOTHE_DB_MAKE(1114,     0, "ランドセル",				 "")
+CALL CLOTHE_DB_MAKE(1115,     0, "サングラス",				 "")
+CALL CLOTHE_DB_MAKE(1116,     0, "サスペンダー",			 "")
+CALL CLOTHE_DB_MAKE(1117,     0, "コサージュ",				 "")
+CALL CLOTHE_DB_MAKE(1118,     0, "入れ墨",					 "")
+
+CALL CLOTHE_DB_MAKE(1150,     0, "専属奴隷の首輪",			 "")
+
+
+;=================================================
+;   sub CLOTHE_DB_MAKE
+;=================================================
+;   衣装:DB作成
+;-------------------------------------------------
+; Input:
+;  ARG:0				No
+;  ARG:1				価格
+;  ARGS:0				名前
+;  ARGS:1				説明
+;-------------------------------------------------
+@CLOTHE_DB_MAKE(ARG:0, ARG:1, ARGS:0, ARGS:1)
+#DIM L_ID
+L_ID = ARG:0
+
+GCLOTHE_ID:L_ID			= L_ID
+GCLOTHE_PRICE:L_ID		= ARG:1
+GCLOTHE_NAME:L_ID		= %ARGS:0%
+GCLOTHE_EXPLAIN:L_ID	= %ARGS:1%
+
+
+
+;=================================================
+;   sub CLOTHE_ID
+;=================================================
+;   衣装:ID取得
+;-------------------------------------------------
+; Input:
+;  ARGS					名前
+; Output:
+;  RETURNF				ID
+;-------------------------------------------------
+@CLOTHE_ID(ARGS)
+#FUNCTION
+RETURNF FINDELEMENT(GCLOTHE_NAME, ARGS)
+
+
+;=================================================
+;   sub CLOTHE_EXPLAIN
+;=================================================
+;   衣装:説明
+;-------------------------------------------------
+; Input:
+;  ARG					ID
+;-------------------------------------------------
+@CLOTHE_EXPLAIN(ARG)
+PRINTFORML 【%GCLOTHE_NAME:ARG%】
+PRINTFORML %GCLOTHE_EXPLAIN:ARG%
+;SIF GCLOTHE_NONSALE:ARG
+;	PRINT 非売品。
+PRINTL
+
+

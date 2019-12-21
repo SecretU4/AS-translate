@@ -1,0 +1,451 @@
+﻿;-------------------------------------------------
+;日常イベント
+;-------------------------------------------------
+@TURN_EVENT_NJ
+
+DRAWLINE
+
+IF TALENT:학생 && RAND:10 > 5
+	PRINTFORML 【학생 이벤트:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML %CALLNAME%가 교실에서 점심 식사를 하는데、근처의 학생이 뭔가 소문을 떠들고 있었다。
+		PRINTFORML 「―――でさ、バラバラの死体が転がってたんだって」
+		PRINTFORML 「こえー、裏路地には近づかない方がいいな…あそこ危険すぎる…」
+		PRINTFORML 뭔가 최근에 일어난 미스테리한 사건에 대해 수다를 떠는 것 같다。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 그리고 최근 남의 시선을 신경쓰고 있는 %CALLNAME%에게 있어선、너무 무시할 순 없는 내용이었다。
+		PRINTFORMW %CALLNAME%도 같은 꼴을 당하지 않도록 조심하기로 했다…
+	ELSEIF !RAND:9
+		PRINTFORML 수업 중、교사의 강의를 들으면서 노트에 식을 옮겨쓰던 %CALLNAME%는 문득 가까운 자리의 학생에게 시선이 갔다。
+		IF !RAND:3
+			PRINTFORML 그러자 노트를 방패삼아 도시락을 까먹고 있는 학생이 눈에 들어왔다、들키면 큰일일텐데…。
+		ELSEIF !RAND:2
+			PRINTFORML 그러자 노트 구석에 낙서하고 있는 학생이 들어왔다、의외로 능숙했다。
+		ELSE
+			PRINTFORML 그러자 몰래 자고 있는 학생이 눈에들어왔다、요령있게 공부하는 포즈를 취하고 있다。
+		ENDIF
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 그 학생은 어째서 수업중인데 공부를 하지 않는지、매우 의문이 들었다。
+		PRINTFORMW …말려들지 않기 위해 %CALLNAME%는 못 본 척 다시 수업에 집중했다…
+	ELSEIF !RAND:8
+		PRINTFORML %CALLNAME% 앞에서 여학생 두 명이 즐겁게 수다를 떨고 있다。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 이성에 대한 화제도 있었기 때문에、자기도 모르게 귀를 기울이고 말았다。
+		IF !RAND:3
+			PRINTFORML 「동아리 끝나면 또 그 찻집에 갈거지？」
+			PRINTFORML 「으응、그 사람이 있었으면 좋겠는데ー」
+		ELSEIF !RAND:2
+			PRINTFORML 「항상 그 찻집에 있는 사람 있지？、어제 그사람한테 얻어먹었다？」
+			PRINTFORML 「앗 너도 그랬어？ 말도 잘하고 좋은 사람이었지」
+		ELSE
+			PRINTFORML 「월급날 앞두고 핀치가 찾아왔는데、또 그 사람에게 얻어먹을까」
+			PRINTFORML 「너무 기대면 민폐니까、적당히 삼가는게 좋을걸？」
+		ENDIF
+		PRINTFORMW 아무래도 자신도 늘 찾아가는 찻집에 대한 이야기 같았다、여유가 있으면 이쪽도 가봐야지…
+	ELSEIF !RAND:7
+		PRINTFORML 그럴 기분이 들어서 옥상에 점심을 먹으러 올라가자、연인 사이인 두 명이 구석에서 노닥거리고 있었다。
+		PRINTFORML 아무리 보는 눈이 적다곤 해도、지나치게 달라붙어선 하하호호 즐겁게 수다를 떨고 있다。
+		PRINTFORMW 오자마자 연인들의 염장질에 불편해진 %CALLNAME%는 허둥지둥 내려갔다。
+	ELSEIF !RAND:6
+		PRINTFORML 수업이 끝나고 교문을 나서는데、어떤 학생이 벽에 몸을 기댄 채로 한숨을 쉬고 있었다。
+		IF !RAND:3
+			PRINTFORML 「はあ、家に帰りたくないな…、また叩かれるんだろうし…」
+		ELSEIF !RAND:2
+			PRINTFORML 「家は最悪だし、今日も誰かに泊めてもらおうかな…」
+		ELSE
+			PRINTFORML 「近所の雑音なんとかしてくれないかなぁ、家に帰りくなくなるよ…」
+		ENDIF
+		PRINTFORML 아무래도 가정 고민을 품고 있는 모양이다。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML 문득 자신의 가정 사정을 떠올렸지만、곧 뿌리치고 제정신으로 돌아왔다。
+		PRINTFORMW 타인의 가정 사정은 어쩔 수 없는 문제였기 때문에 %CALLNAME%는 시선을 돌리고、혼자서 거리를 향해 발을 옮겼다…
+	ELSEIF !RAND:5
+		PRINTFORML 교재를 돌려놓으려 창고가 된 공실에 향하던 도중에、가까운 교실에서 목소리가 들렸다。
+		PRINTFORML 그 교실도 비었을 텐데…하고 의아한 마음에 %CALLNAME%는、가까이 다가가 귀를 기울였다。
+		IF !RAND:3
+			PRINTFORML 「うふふ、今日も激しかったわね、私も満足したわ」
+			PRINTFORML 「ちょっと腰が抜けるかと思ったぞ…」
+		ELSEIF !RAND:2
+			PRINTFORML 「こんだけでいいのか？、もっと多くても…」
+			PRINTFORML 「いいよこれだけで……そのかわり、また抱いてね…？」
+		ELSE
+			PRINTFORML 「あいつより気持ち良かっただろ？、いつでも抱いてやるぜ」
+			PRINTFORML 「こ、これはただの性処理だし…」
+		ENDIF
+		PRINTFORML …아무래도 작업은 다 끝난 모양이지만、숨어서 밀회를 하고 있었던 모양이다。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 그것은 들으면 안될 내용인데도 불구하고、본능적으로 흥미가 돋고 말았다。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 하지만 자신의 고민과 연애 관계도 상관이 있을 것 같아서、두 사람의 관계를 알고 싶어졌다。
+		PRINTFORMW 무심코 엿듣던 %CALLNAME%는、들키기 전에 서둘러 떠나기로 했다…
+	ELSEIF !RAND:4
+		PRINTFORML 하교 도중에 자전거 보관대 근처에서 학생 두 명이 곤란한 듯이 대화를 나누고 있었다。
+		IF !RAND:3
+			PRINTFORML 「う…今月ヤベぇ、金使いすぎた…」
+			PRINTFORML 「菓子パンくらいなら買ってやらんこともないが…」
+		ELSEIF !RAND:2
+			PRINTFORML 「先輩～お金かしてくださぁい」
+			PRINTFORML 「…貧乏なのは知ってるけど、本当に大丈夫かお前…」
+		ELSE
+			PRINTFORML 「そんなに財布見つめて…また金欠か？」
+			PRINTFORML 「うん……こうなったら身体を売るしか…」
+			PRINTFORML 「やめとけ、女なんだから身体は大事にしろ」
+			PRINTFORML 「じゃあ買ってよぅ、今月はホントにピンチなんだからっ」
+		ENDIF
+		PRINTFORML 금전 문제일까、보아하니 상당히 심각한 것 같았다。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML 자신도 금전 관련 고민을 가지고 있었기 때문에 공감을 느꼈다。
+		PRINTFORMW 어쨋든 타인의 문제였기 때문에、%CALLNAME%는 깊이 파고들지 않고 자리에서 떠났다…
+	ELSEIF !RAND:3
+		PRINTFORML 종종 찾아가던 식당에 방문하자、여전히 사람들로 인해 주변이 혼잡했다。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 컨디션을 신경쓰면서、가능한 가장 밸런스가 좋은 메뉴를 선택했다。
+		PRINTFORML 주문을 마치고 빈 자리에 앉았는데 가까운 곳에 앉은 여학생이 자그맣게 신음하고 있었다。
+		IF !RAND:3
+			PRINTFORML 「う～、最近食べる量減らしてるけどやっぱりお腹空くよー」
+			PRINTFORML 「ダイエット中？、やりすぎは返って逆効果だと思うけど…」
+		ELSEIF !RAND:2
+			PRINTFORML 「もっと食べたい…！、で、でもお腹のタプタプなんとかしたいし…」
+			PRINTFORML 「野菜とかでお腹膨らませるしかないねえ…」
+		ELSE
+			PRINTFORML 「あれもう終わり？、全然食べて無くない？」
+			PRINTFORML 「あはは…今ダイエット中なんだ…」
+		ENDIF
+			IF CFlag:住人_悩み食生絡み == 1
+				PRINTFORMW 이쪽도 평균보다 살짝 윗줄인 양이었기 때문에 귀가 조금 따가웠다。
+			ELSE
+				PRINTFORMW 아무래도 다이어트 중이라 식사를 앞두고 고민하는 모양이다、%CSTR:一人称%도 과식은 조심하자…
+			ENDIF
+	ELSEIF !RAND:2
+		PRINTFORML 등교하자 교문 앞에서 바르게 차려입은 풍기 위원이 학생들을 검문하고 있었다。
+		PRINTFORML %CALLNAME%는 조금 난감한 기색을 드러냈고、다른 학생들도 귀찮다는 얼굴로 마지못해 검문을 받고 있다。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML 딱히 문제는 없을텐데도 불구하고 저런 것에는 왠지 대비하게 된다 …
+		PRINTFORMW …검문을 받지 않으면 들어갈 수 없었기 때문에、결국엔 검문을 받게 되었다…
+	ELSE
+		PRINTFORML 시간 때우기로 도서실에 오니、조용한 분위기 속에서 학생들이 묵묵히 면학에 힘쓰고 있었다。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 그리고 여긴 보는 눈이 적기 때문에、%CALLNAME%에게도 마음이 편해지는 장소이기도 하다。
+		PRINTFORML 괜찮은 책이 없나 하고 책장을 뒤지다가、시선을 끄는 녀석을 발견하고 손에 쥐었다。
+		PRINTFORML 파라락 하고 대강 읽어본 다음、재미있을 것 같았기 때문에 자리에 앉아서 정독하기로 했다。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 하지만、공부 쪽으로 마음이 바뀌면서、잠시 후엔 가지고 있던 노트를 펼치고 자습하기 시작했다。
+		PRINTFORMW 쉬는 시간이 끝날 때까지、%CALLNAME%는 도서실에서 시간을 보냈다…
+	ENDIF
+ELSEIF TALENT:치안유지국직원 == 1 && RAND:10 > 5
+	PRINTFORML 【치안 유지국직원 이벤트:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		IF !RAND:2
+			PRINTFORML 仕事で着用するスーツを購入するために%CALLNAME%는 服飾店を訪れていた。
+			PRINTFORML 事務仕事だけならばそれなりのスーツでも構わないのだが、公的な立場で表に出ることもある。
+			SIF CFlag:住人_悩み金銭絡み == 1
+				PRINTFORML なので良い物をとなるとやはり値段が張ってしまうのが悩みどころだ。
+			SIF TALENT:거유 || TALENT:폭유
+				PRINTFORML それに胸の大きな%CALLNAME%に合うスーツとなると、どうしても上だけはオーダー메이드という形になることが多い。
+		ELSE
+			PRINTFORML 訓練の際に着用する運動着を購入するために%CALLNAME%는 量販店を訪れていた。
+			PRINTFORML 出動時の衣服は局側で用意してくれるが、訓練やトレーニングの際に着用する運動着は自前で用意しなくてはならない。
+			SIF CFlag:住人_悩み金銭絡み == 1
+				PRINTFORML 用途柄消耗が激しいため安く済ませたいが、安かろう悪かろうであまり丈夫ではないものが多い。
+		ENDIF
+		PRINTFORMW やはり多少の出費は覚悟すべきかと%CALLNAME%는 ため息をつきながら服を見て回った…
+	ELSEIF !RAND:9
+		PRINTFORML 「外敵」や이레귤러といった市民の生活を脅かす存在から彼らを守るためか、치안유지국직원は市民から人気が高い。
+		PRINTFORML 出動の際に声をかけられることも多く、局員の多くは身だしなみに気を使っている。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 人目を気にする%CALLNAME%もその例に漏れず、身だしなみには人一倍気を使っていた。
+		PRINTFORMW 戦闘を終えて乱れた髪を整えながら、%CALLNAME%는 人々の歓声を浴びながら帰還した…
+	ELSEIF !RAND:8
+		PRINTFORML 上司から仕事で使用する資格の取得を勧められた%CALLNAME%는 空き時間を利用して机に向かっていた。
+		IF !RAND:2
+			PRINTFORML 事務関係の資格は転職しても活きることが多いため、積極的に取得したほうがいいだろう。
+		ELSE
+			PRINTFORML 装備関係の資格は仕事以外にも外界調査で活きるため、損をすることは無いだろう。
+		ENDIF
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML それに資格を取得しておけば特別手当も出るし、お給料も底上げされる。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML だが勉強があまり得意ではない%CALLNAME%는 いまいち集中できていない。
+		PRINTFORMW プライベートの時間も資格取得の勉強に回すべきだろうかと考えながら、%CALLNAME%는 勉強に励んだ…
+	ELSEIF !RAND:7
+		PRINTFORML シャワーを浴び終えた%CALLNAME%는 脱衣所の片隅に置かれた体重計で体重を量っていた。
+		IF CFlag:住人_悩み食生絡み == 1
+			IF !RAND:2
+				PRINTFORML 사무직은 머리를 쓰기 때문에、어떻게든 당분을 보급하고 싶어진다。
+			ELSE
+				PRINTFORML 언제 출동이 떨어질지 모르기 때문에、아무래도 식사는 빠르고 칼로리가 높은 식단 위주로 정해지고 만다。
+			ENDIF
+			PRINTFORML 그 결과가 체중의 결과에 드러나는 것을 보고 전율하면서、%CALLNAME%는 체중계에서 내려왔다。
+			PRINTFORMW 좀 더 음식에 신경을 쓰거나、운동을 하는 것이 좋을지도 모른다…
+		ELSE
+			PRINTFORML 체중은 유지하고 있지만 방심은 금물이다。
+			PRINTFORMW %CALLNAME%는 체중을 재기 전보다 가벼운 발걸음으로 체중계에서 내려왔다…
+		ENDIF
+	ELSEIF !RAND:6
+		PRINTFORML 치안 유지국에는 지도 목적으로 비행 청소년이 끌려오는 일도 있다。
+		PRINTFORML 사무적인 조서 처리를 끝낸 %CALLNAME%는、개인적인 호기심으로 비행 사유를 물어보았다。
+		IF !RAND:3
+			PRINTFORML 「…あんまり家族と上手くいってなくて…」
+		ELSEIF !RAND:2
+			PRINTFORML 「干渉されるのがウザいんだよ」
+		ELSE
+			PRINTFORML 「家に帰っても誰もいないから…」
+		ENDIF
+		PRINTFORML 그런 고민들 가운데 손꼽히는 것은 사생활、그것도 가장 사적인 가정에 관한 고민이었다。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML 聞き役に徹している%CALLNAME%も同様の悩みを抱えているだけに、人事だとは思えない。
+		PRINTFORML しかし単なる治安維持局の職員でしかない%CALLNAME%에겐 해결할 방법이 없었다。
+		PRINTFORMW 최소한 보호자나 관계자에게 인도할 때까지라도、하는 마음에 %CALLNAME%는 그들의 스트레스를 풀어주기 위해서 계속해서 푸념을 들어주었다…
+	ELSEIF !RAND:5
+		PRINTFORML 휴일에 거리를 순회하던 도중、역시나 커플의 모습이 눈에 들어왔다。
+		PRINTFORML 팔짱을 끼고 달달하게 걷는 남녀의 모습을 부럽다는 듯이 쳐다보는 동료에게 주의를 주면서、%CALLNAME%는 순회를 계속했다。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML %CALLNAME%도 커플의 동향이 신경쓰이지 않는 것은 아니었지만、지금은 근무 중이었기 때문에 애써 의식하지 않도록 노력했다。
+		PRINTFORML 커플이 도로에서 노닥거리고 있다는 것은 치안이 유지되고 있다는 증거다。
+		PRINTFORMW 발을 뗄 줄 모르는 동료에게 그렇게 타이르면서、%CALLNAME%는 순회로 돌아갔다…
+	ELSEIF !RAND:4
+		PRINTFORML 오늘은 자택 대기 예정이었지만、동료가 병으로 결근했기 때문에 출근 명령이 떨어졌다。
+		IF !RAND:2
+			PRINTFORML 서둘러 출근한 %CALLNAME%는 결근한 동료 대신 사무 업무를 소화했다。
+		ELSE
+			PRINTFORML 서둘러 출근한 %CALLNAME%는 결근한 동료 대신 순회 업무를 소화했다。
+		ENDIF
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 업무 도중에 상사에게 동료의 병에 대한 자세한 소식을 듣고、%CALLNAME%도 조심해야 겠다고 마음을 단단히 먹었다。
+		PRINTFORMW 딱히 문제 없이 일을 끝낸 %CALLNAME%는 귀가 후에 꼼꼼히 세수나 양치질을 실시했다…
+	ELSEIF !RAND:3
+		PRINTFORML 치안 유지국 내부에서 대규모 압류품의 부정 유출이 발각되어、외부에서 조사 팀이 조직되었다。
+		PRINTFORML 압류품 관리 내역에 따른 자료 제출을 요구받은 %CALLNAME%들은、과거로 거슬러 올라가 자료 작성에 분주하는 처지가 되었다。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML 악행은 반드시 꼬리를 밟힌다는 것을 직접 목격한 %CALLNAME%는 몸이 움츠러드는 기분이었다。
+		PRINTFORMW 괜히 주목받는 것도 싫었기 때문에 %CALLNAME%는 얌전히 조사 팀의 지시에 따랐다…
+	ELSEIF !RAND:2
+		PRINTFORML 순회하러 나오면、당연히 유곽도 돌게 되어 있었다。
+		PRINTFORML 서서 손님을 끌고 있는 매춘부나 화려한 네온 사인으로 물든 러브호텔 사이를 가로질렀다。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 요염한 창녀가 손님인 남성과 함께 러브 호텔에 들어가는 모습을 보면서、%CALLNAME%는 안에서 어떤 플레이를 할지 자기도 모르게 망상하고 있었다。
+		PRINTFORMW 유곽의 분위기에 맞춰 마음이 싱숭생숭해지기 시작한 동료와 함께 이곳 저곳을 순회한 %CALLNAME%는、서둘러 다음 담당 구역으로 향했다…
+	ELSE
+		PRINTFORML 거리에서 대규모 체포 작업이 이루어지는 바람에、치안 유지국은 자택 대기 인원까지 끌려나오는 등 난리 법석이었다。
+		PRINTFORML 이레귤러 뿐만 아니라、이레귤러에게 불법으로 무기를 유출하던 암거래 상인까지 한번에 적발된 것이었다。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML 그 대응에 쫓기면서、%CALLNAME%는 집 주변의 범죄자는 적발해주지 않으려나 하면서 한숨을 쉬었다。
+		PRINTFORMW 결국 하루를 꼬박 잡아먹는 대형 사건이 되면서、일상 업무는 다음날 이후로 미뤄지게 되었다…
+	ENDIF
+ELSEIF TALENT:사회인 == 1 && RAND:10 > 5
+	PRINTFORML 【사회인 이벤트:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML 직업상 사람들 앞에 나서는 일도 적지 않았기 때문데、%CALLNAME%도 옷차림엔 신경을 쓰고 있었다。
+		PRINTFORML 하지만 괜찮은 옷은 대개 비싼 것이 많아、지출액도 바보처럼 올라가고 만다。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 하지만 사람들 앞에 나서는 이상、나쁜 인상을 주지 않을 정도의 치장은 필요했다。
+		PRINTFORMW 마음에 든 옷의 가격표를 보고 한숨을 쉬면서도、필요 경비라고 결론을 내리기로 했다…
+	ELSEIF !RAND:9
+		PRINTFORML 어느 정도는 전용 기재의 취급에 익숙해져야 했기 때문에、빈 시간에 연습을 시작했다。
+		PRINTFORML 더 고도의 기재를 다루려면 역시 자격히 필요한걸까、%CALLNAME%는 그렇게 생각하면서 시험했다。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 의욕이 너무 앞섰는지、아니면 산만해졌는지、작업은 좀처럼 진행되지 않았다。
+		PRINTFORMW ……하지만 너무 열중했는지、시간이 눈 깜짝할 사이에 지나가고 말았다…
+	ELSEIF !RAND:8
+		PRINTFORML 休憩中、同僚の女性社員達が集まって会話をしている。
+		IF !RAND:3
+			PRINTFORML 「あの喫茶店、料理が美味しすぎてついつい食べ過ぎちゃうんだよね」
+			PRINTFORML 「ホントなんで料理店じゃなくて喫茶店なんだろ」
+		ELSEIF !RAND:2
+			PRINTFORML 「仕事終わったらいつもの喫茶店いく？」
+			PRINTFORML 「そうね、今日は何食べようかしら」
+		ELSE
+			PRINTFORML 「お昼になったら何か食べに行かない？」
+			PRINTFORML 「じゃあ噂の喫茶店はどうかな、料理が美味しいらしいよ」
+		ENDIF
+		PRINTFORML 話を聞く限り、どうやらこちらが知っている喫茶店の話のようだ。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML 確かにあそこの店員が作る料理は絶品で、思い出すとつい涎が分泌される。
+		PRINTFORMW …いましている仕事が一段落したら自分も行ってみよう…
+	ELSEIF !RAND:7
+		PRINTFORML 頼まれた用を済まし持ち場へ戻ろうと廊下を歩いていると、一人の社員が深刻そうに電話をしている。
+		IF !RAND:3
+			PRINTFORML 「まだあいつ帰ってきてないのか……わかった、こっちも探してみるよ」
+		ELSEIF !RAND:2
+			PRINTFORML 「やっぱり迷惑行為してるんだな、本格的に苦情を出すべきだな」
+		ELSE
+			PRINTFORML 「私は知らないから……もとはそっちが勝手にやったことでしょ？」
+		ENDIF
+		PRINTFORML 想像するに家庭問題だろうか？、語っている表情は明るいものではなかった。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML こちらも他人事ではないので、掛かる問題を想起すると憂鬱な気分になる。
+		PRINTFORMW 声を掛けるには気が引けたので、%CALLNAME%는 静かに横を通り過ぎていった…
+	ELSEIF !RAND:6
+		PRINTFORML いつものように持ち場につき仕事を始めようと思ったのだが、人が足らないような気がする。
+		IF !RAND:3
+			PRINTFORML 「事故で休んでるらしいよ、大事にはならなかったから大丈夫だろうけど」
+		ELSEIF !RAND:2
+			PRINTFORML 「休んだ奴、持病が悪化したらしい…快復するといいんだが…」
+		ELSE
+			PRINTFORML 「風邪引いた奴がいるみたいだな、俺たちも気を付けないとな」
+		ENDIF
+		PRINTFORML 聞くところ重病ではないようだが、休んでいる人がいるようだ。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML こうも身近な人物が病に臥せると、こちらも何かに追われている錯覚を覚える。
+		PRINTFORMW 勤務中の事故もありうるので、気を引き締めて務めることにした…
+	ELSEIF !RAND:5
+		PRINTFORML 朝礼の空気が違う…どうやらお得意先とトラブルがあったようだ。
+		PRINTFORML 話の内容からして犯罪臭がする事態だったようで、関係のない話ではないので%CALLNAME%는 思わず身震いした。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML …一社員としての立場だというのに、何故か咎められた気分になる。
+		PRINTFORMW 何はともあれ、これが大事にならないよう祈りながら持ち場に向かった…
+	ELSEIF !RAND:4
+		PRINTFORML 仕事も終わり息抜きに軽い食事をとった%CALLNAME%는 帰路についていた。
+		PRINTFORML だが裏路地付近に視線をやるとふと覚えのある男女が見えた、%CALLNAME%の同僚と上司のようだ。
+		PRINTFORML そしてその二人がラブホテルに入っていく姿をみてしまった……仲が良いのは知っていたがここまでとは。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML …やはり行為も激しいのだろうかと、つい妄想してしまった%CALLNAME%는 顔を赤く染める。
+		PRINTFORMW 流石に中まで追えないので、野次馬根性は控えよう…
+	ELSEIF !RAND:3
+		PRINTFORML 最近他の業界で横流しが横行しているらしく、うちの仕事場にも調査班がやってきた。
+		PRINTFORML 上の者たちに話を聞きながら、検閲の為今までの資料を回収していく。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML その姿を見るとこの事件には全く関係ないというのに、どうしてか身を小さくしてしまう。
+		PRINTFORMW …ただの一社員とはいえ巻き込まれる可能性は十分にあり得るので、静かに潜むことにした…
+	ELSEIF !RAND:2
+		PRINTFORML 仕事が終わるなり、一人の社員が急ぎ足でその場を後にする…何事だろうか。
+		IF !RAND:3
+			PRINTFORML 「あいつバイトもやってるんだよな、金でも必要なんかね」
+		ELSEIF !RAND:2
+			PRINTFORML 「あの人、家の借金返すためにバイトもやってるんだって…大変そう…」
+		ELSE
+			PRINTFORML 「何でも買いたい物があるとかなんとか言ってたな…副業でもしてるのか」
+		ENDIF
+		PRINTFORML 金銭に関する問題らしい、副業をする程困っているのだろうか。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML やはり金銭問題はだれにでもあるかと、%CALLNAME%는 深いため息をついた。
+		PRINTFORMW この手の問題は悪化すると手におえない…気を付けるとしよう…
+	ELSE
+		PRINTFORML 仲良さそうな男女が休憩所で会話している、確か付き合っているという話だ。
+		PRINTFORML お手製のお弁当をいちゃつきながら食べている光景は何とも甘ったるい空気に満ちていた。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 最初は無視していたが最近色恋沙汰には縁があるため、どうにも気になってしまう。
+		PRINTFORMW 何だか自分が場違いな感じがした%CALLNAME%는、その場を後にした…
+	ENDIF
+ELSE
+	PRINTFORML 【휴일 이벤트:%CALLNAME%】
+	IF !RAND:10
+		PRINTFORML 자기 방에서 쉬다가 갑자기 소란스러워진 바깥에 신경이 쓰인 %CALLNAME%는 창 밖을 내다보았다。
+		PRINTFORML 그러자 어떤 남자가 경찰들의 손에 의해 집으로부터 도로까지 끌려나오고 있었다、뭔가 사건이라도 난걸까。
+		PRINTFORML 남자는 한동안 날뛰었지만、아무래도 다수의 구속에서 벗어날 순 없었기 때문에、결국엔 포기한 듯이 동행했다。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML 그 광경을 그저 멀리서 보고 있을 뿐인데도 어째서인지 무서운 기분이 들었기 때문에、%CALLNAME%는 애써 신경을 돌리고 있다。
+		PRINTFORMW 뒤숭숭하긴 했지만 이쪽과 관계있는 것도 아니었기 때문에 %CALLNAME%도 다시 휴식을 즐기기로 했다…
+	ELSEIF !RAND:9
+		PRINTFORML 帰り道、今日は遅くまで時間を潰してしまったため%CALLNAME%는 帰路を変え繁華街の横を通ることにした。
+		PRINTFORML 人ごみはかなり減ったが代わりに怪しい店が所々にあり、その近くでは男女が出入り口を行き交いしている。
+		PRINTFORML 視線を変えると若い男女が体を摺り寄せながらホテルのような建物に入っていく……ラブホテルのようだ。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 耳を澄ますと複数の女性の喘ぐ声が聞こえる……と連鎖反応するように%CALLNAME%の身体も疼き始める。
+		PRINTFORMW 留まると面倒なことになりかねないので、%CALLNAME%는 中央付近を歩きながら区画を通り過ごすことにした…
+	ELSEIF !RAND:8
+		PRINTFORML 繁華街を通っていると、大通りから死角になる場所に若い女性が二人屯っていた。
+		PRINTFORML 携帯で何やら会話しているようだが、表情からすると明るい話ではないようだ。
+		PRINTFORML そういえば「家出少女」なる者たちが最近増加しているとのことだが、彼女たちもそのうちの一人なのだろう。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML そして増え続けているということは、やはりどの家も順風満帆とはいかないようだ。
+		PRINTFORMW だが他人の家庭問題に介入する気はないので、彼女たちから視線を外し歩を進めた…
+	ELSEIF !RAND:7
+		PRINTFORML 어제 무리를 했는지、가벼운 감기에 걸리고 말았다。
+		PRINTFORML 구급 상자에서 감기약을 꺼내고 입에 털어넣었다、이걸로 조금은 빨리 나을 것이다。
+		PRINTFORML 침대에 몸을 맡기고 안정을 취하기로 했다、원래는 취미 활동을 할 예정이었지만 어쩔 수 없었다。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 이것 때문에 몸이 상하게 되는건 싫다、는 마음으로 빨리 낫기를 빌었다。
+		PRINTFORMW 뭔가 생각하고 있었지만、그것도 점점 옅어지면서 %CALLNAME%는 깊은 잠으로 떨어졌다…
+	ELSEIF !RAND:6
+		PRINTFORML 오늘은 딱히 용무도 없었기 때문에 취미 활동을 하자고 %CALLNAME%는 의욕 만땅으로 행동을 개시했다。
+		PRINTFORML ……
+		PRINTFORML …………
+		PRINTFORML ………………
+		PRINTFORMW …！、열중해서 빠졌다가 어느새 저녁이 되고 말았다。
+	ELSEIF !RAND:5
+		PRINTFORML そういえば食材が底を尽きかけているのを思い出し、スーパーで買いだめすることにした。
+		PRINTFORML いざ買い物をするとなると、ついついセールものに手が出てしまい余計なものが増えていく。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML だがあまり使いすぎると後々響くのを思い出し、不要な商品を棚に戻す。
+		PRINTFORMW これ以上増えないように気持ちを抑え、必要な分だけ籠に入れると%CALLNAME%는 レジへと向かった…
+	ELSEIF !RAND:4
+		PRINTFORML 道を歩いていると、目の前に何やら人だかりが出来ている、近づいて覗き込むと一軒家で事件が起きたようだ。
+		PRINTFORML 近所の住民たちの会話に엿듣기をたててみると、金銭がらみでのトラブルが原因で事件が発生したらしい。
+		PRINTFORML 被害者は死んでいないようだが、殺人未遂を起こすほど後がなかったのだろうか。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML こうはなりたくはないと、身近に感じる恐怖に%CALLNAME%는 背筋を震わせる。
+		PRINTFORMW 留まっててもこれ以上進展はなさそうなので、%CALLNAME%는 人だかりから離れることにした…
+	ELSEIF !RAND:3
+		PRINTFORML 気晴らしに公園に来てみると、皆休憩目的で来ているのか人が多い。
+		PRINTFORML 向こうのベンチではカップルだろうか、二人の男女の睦まじい姿が見える。
+		PRINTFORML 先ほどからいちゃついているが、デートともなると周りの目が気にならなくなるのかと第三者視点で眺める。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML そして誰かと付き合うとああなるのかと、想像するだけで気持ちが昂ってしまう。
+		PRINTFORMW これ以上見ていると流石に口の中が甘ったるくなるので、場所を変えることにした…
+	ELSEIF !RAND:2
+		PRINTFORML 住宅地を歩いていると、もはや雑音に近い音楽を響かせている家を見つける。
+		PRINTFORML 近所には何人かの奥様方が眉を潜ませて井戸端会議をしていた。
+		PRINTFORML 流石にこれほどの音を出しているとなると、近くに住む人たちからすればたまったものではないだろう。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML 自分もあまり他人事ではないので、彼女たちの気持ちも分からなくもない。
+		PRINTFORMW 耳が痛くなってきたので、%CALLNAME%는 この場から離れることにした…
+	ELSE
+		IF !RAND:3
+			PRINTFORML 「いらっしゃいませ、空いてる席へご案内いたしますね」
+		ELSEIF !RAND:2
+			PRINTFORML 「かしこまりましたー、少々お待ちください」
+		ELSE
+			PRINTFORML 「おまたせしましたー、ごゆっくりどうぞ♪」
+		ENDIF
+		PRINTFORML いつもの喫茶店で適当なメニューを頼み、軽く小腹を解消する。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML だが最近の出来事のせいで、ついメニューのカロリーを気にしてしまう。
+		PRINTFORML 十数分後、食後のコーヒーを飲みながら「彼」がいないか他の席を見渡すが、どうやら今はいないようだ。
+		PRINTFORMW もう休憩も済んだので%CALLNAME%는 喫茶店を後にした…
+	ENDIF
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

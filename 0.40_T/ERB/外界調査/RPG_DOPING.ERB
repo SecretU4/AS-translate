@@ -1,0 +1,124 @@
+﻿;-------------------------------------------------
+;アイテム使用
+;-------------------------------------------------
+@RPG_DOPING(C_ID, MODE_NOW)
+#DIM          C_ID
+#DIMS REF     MODE_NOW
+#DIMS DYNAMIC LOG_STR       ;××を強化しましたのログ表示用
+#DIM          DOPING_ID     ;0/1で"強化剤", "超人薬"に対応
+#DIMS CONST   DOPING_NAME = "強化剤", "超人薬"
+#DIM          DOPING_FLAG_ID;アイテム個数の用変数のID範囲開始値
+#DIM          DOPING_CNT_ID ;現在のドーピング回数フラグの位置
+#DIM          DOPING_LIMIT  ;現在のドーピング上限
+#DIM          CFLAG_STATUS  ;ステータス用変数のID範囲開始値
+#DIM          DOPING_NUM    ;今回実行したドーピングの回数
+#DIM          ITEM_ID       ;薬剤系のFLAGの種類、下記ST_NAMEのそれぞれ"HP"などに対応
+#DIMS CONST   ST_NAME       = "HP", "SP", "ATK", "DEF", "HIT", "SPD"
+#DIM          CFLAG_ID      ;ITEM_IDが強化するCFLAGの種類、実際に使う時にはCFLAG_STATUSを噛ませます
+                            ;CFLAG_LISTはITEM_ID→CFLAG_ID用の変換リスト
+#DIM  CONST   CFLAG_LIST    = 0, 2, 11, 12, 13, 14
+#DIM          L_INPUT
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL C_PICTURE_RD(C_ID)
+DRAWLINE
+;ステータス用変数のID範囲開始値を取得
+SIF !CFLAG_STATUS
+	CFLAG_STATUS = GETNUM(CFLAG, "住人_최대체력")
+
+;それぞれ
+;・アイテム用変数のID範囲開始値
+;・現在使用しているアイテムのカウンタ変数のID
+;・現在使用しているアイテムの強化上限
+;を取得します
+SELECTCASE MODE_NOW
+CASE "RPG_強化剤投与"
+	DOPING_ID      = 0
+	DOPING_FLAG_ID = GETNUM(FLAG, "I強化剤(HP)")
+	DOPING_CNT_ID  = GETNUM(CFLAG, "住人_強化回数")
+	DOPING_LIMIT   = 100 - CFLAG:C_ID:DOPING_CNT_ID
+CASE "RPG_超人薬投与"
+	DOPING_ID      = 1
+	DOPING_FLAG_ID = GETNUM(FLAG, "I超人薬(HP)")
+	DOPING_CNT_ID  = GETNUM(CFLAG, "住人_超人回数")
+	DOPING_LIMIT   = 100 - CFLAG:C_ID:DOPING_CNT_ID
+ENDSELECT
+IF DOPING_LIMIT <= 0
+	PRINTFORMW 강화 횟수가 충분하지 않습니다
+	RETURN
+ENDIF
+DRAWLINE
+PRINTFORML 사용할 %DOPING_NAME:DOPING_ID%을 선택하세요。
+DRAWLINE
+FOR ITEM_ID, 0, 6
+	PRINTFORM [{ITEM_ID, 3}] %DOPING_NAME:DOPING_ID%(%ST_NAME:ITEM_ID, 3%) 
+	PRINTFORM (소지 수:{Flag:(DOPING_FLAG_ID + ITEM_ID), 4 ,RIGHT}) 
+	PRINTFORM [{100 + ITEM_ID, 3}]x5 [{200 + ITEM_ID, 3}]x10
+	PRINTFORML 
+NEXT
+PRINTFORML %LOG_STR%
+PRINTFORML [900] 강화제 투여　[901] 초인약 투여
+PRINTFORML [999] 그만둔다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 900
+	MODE_NOW '= "RPG_強化剤投与"
+CASE 901
+	MODE_NOW '= "RPG_超人薬投与"
+CASE 999
+	RETURN
+CASEELSE
+	;20170217修正
+	;初稿のバグの主要因として強化剤の番号の並び(Flag2800台)とパラメータ(6500台)がズレているのがバグの原因
+	;二種類の番号を残したほうがいいのでL_PNUMをパラメータ番号用に作成し(+6500) I_Sを強化剤用の番号(分岐後+2800)として処理させてもらいます
+	;20181115
+	;CONSTのリストでさっくり参照出来るように変更
+	ITEM_ID  = L_INPUT % 100
+	SIF !INRANGE(ITEM_ID, 0, 5)
+		RESTART
+	CFLAG_ID = CFLAG_LIST:ITEM_ID
+	SELECTCASE L_INPUT / 100
+	CASE 0
+		DOPING_NUM = 1
+	CASE 1
+		DOPING_NUM = 5
+	CASE 2
+		DOPING_NUM = 10
+	CASEELSE
+		RESTART
+	ENDSELECT
+	IF FLAG:(DOPING_FLAG_ID + ITEM_ID) <= 0
+		PRINTFORMW 아이템이 부족합니다。
+		RETURN
+	ENDIF
+	;制限をかけることで1個でもあれば実行できるように
+	DOPING_NUM = MIN(DOPING_NUM, DOPING_LIMIT, FLAG:(DOPING_FLAG_ID + ITEM_ID))
+	;足りていたらアイテムを消費してパラメータ増加
+	FLAG:(DOPING_FLAG_ID + ITEM_ID)      -= DOPING_NUM
+	CFLAG:C_ID:(CFLAG_STATUS + CFLAG_ID) += DOPING_NUM * (1 + DOPING_ID)
+	CFLAG:C_ID:DOPING_CNT_ID             += DOPING_NUM
+	LOG_STR '= REPLACE(CFLAGNAME:(CFLAG_STATUS + CFLAG_ID), "住人_", "")
+	LOG_STR = %CALLNAME:C_ID%의 %LOG_STR%를 {DOPING_NUM * (1 + DOPING_ID) , 2 ,RIGHT} 강화했습니다。
+ENDSELECT
+RESTART
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

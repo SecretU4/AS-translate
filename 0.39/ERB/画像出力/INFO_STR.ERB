@@ -1,0 +1,555 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ダイスの値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG:0   ダイスの数を表す整数
+;;   ARG:1   ダイスの目を表す整数
+;;   ARG:2   ダイスの修正値を表す整数
+;; 戻値
+;;   ダイスの文字列 (nDm+p)
+;;
+@INFO_STR_DICE(ARG:0,ARG:1,ARG:2)
+#FUNCTIONS
+#DIMS L_S
+
+L_S = {ARG:0, 2 ,RIGHT}D{ARG:1, 2 ,RIGHT}+{ARG:2, 2 ,LEFT}
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; メイン兵装のダメージに対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     キャラ番号を表す整数。
+;; 戻値
+;;   メイン兵装のダメージの文字列。
+;;
+@INFO_STR_MAIN_WEAPON_DAMAGE(ARG)
+#FUNCTIONS
+#DIM L_n
+#DIM L_m
+#DIM L_p
+
+L_n = CFlag:ARG:住人_M兵装ダイス
+L_m = CFlag:ARG:住人_M兵装ダメージ
+L_p = CFlag:ARG:住人_M兵装ボーナス
+
+RETURNF INFO_STR_DICE(L_n, L_m, L_p)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; サブ兵装のダメージに対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     キャラ番号を表す整数。
+;; 戻値
+;;   サブ兵装のダメージの文字列。
+;;
+@INFO_STR_SUB_WEAPON_DAMAGE(ARG)
+#FUNCTIONS
+#DIM L_n
+#DIM L_m
+#DIM L_p
+
+L_n = CFlag:ARG:住人_S兵装ダイス
+L_m = CFlag:ARG:住人_S兵装ダメージ
+L_p = CFlag:ARG:住人_S兵装ボーナス
+
+RETURNF INFO_STR_DICE(L_n, L_m, L_p)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 兵装の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     兵装の値を表す整数
+;; 戻値
+;;   兵装の文字列
+;;
+@INFO_STR_HEISOU(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = 体術
+CASE 1
+	L_S = 刀剣
+CASE 2
+	L_S = 鈍器
+CASE 3
+	L_S = 銃器
+CASE 4
+	L_S = 魔術
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 値傾向の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     値傾向を表す整数
+;; 戻値
+;;   値傾向の文字列 (0:なし, 1:忠誠, 2:愛情, 3:淫乱,)
+;;
+@INFO_STR_KEIKOU(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = なし
+CASE 1
+	L_S = 忠誠
+CASE 2
+	L_S = 愛情
+CASE 3
+	L_S = 淫乱
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 口説き値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     口説き値を表す整数
+;; 戻値
+;;   口説き値の文字列 (合意,非合意,)
+;;
+@INFO_STR_KUDOKI(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+IF ARG >= 100
+	L_S = 合意
+ELSE
+	L_S = 非合意({ARG})
+ENDIF
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 住人_種族の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     住人_種族の値を表す整数
+;; 戻値
+;;   住人_種族の文字列
+;;
+@INFO_STR_SYUZOKU(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = 人間
+CASE 1
+	L_S = エルフ
+CASE 2
+	L_S = 夜魔
+CASE 3
+	L_S = 亜人
+CASE 4
+	L_S = オートマタ
+CASE 5
+	L_S = 天使
+CASE 6
+	L_S = 竜人
+CASE 7
+	L_S = イス
+CASE 8
+	L_S = 海人
+CASE 9
+	L_S = 鳥人
+CASE 10
+	L_S = 鬼
+CASE 11
+	L_S = 精霊
+CASE 12
+	L_S = 吸血鬼
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 住人_属性の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     住人_属性の値を表す整数
+;; 戻値
+;;   住人_属性の文字列
+;;
+@INFO_STR_ZOKUSEI(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = 中立
+CASE 1
+	L_S = 善
+CASE 2
+	L_S = 悪
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 住人_地位の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     住人_地位の値を表す整数
+;; 戻値
+;;   住人_地位の文字列
+;;
+@INFO_STR_CHII(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE -1
+	L_S = 貧民
+CASE 0
+	L_S = 一般
+CASE 1
+	L_S = 中級
+CASE 2
+	L_S = 上級
+CASE 3
+	L_S = 貴族
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; スリーサイズ表示用の文字列を返します。
+;;
+;; 引数
+;;   ARG:0   身長の値を表す整数。
+;;   ARG:1   体重の値を表す整数。
+;;   ARG:2   Ｂの値を表す整数。
+;;   ARG:3   カップの値を表す整数。
+;;   ARG:4   Ｗの値を表す整数。
+;;   ARG:5   Ｈの値を表す整数。
+;; 戻値
+;;   スリーサイズ表示用の文字列。
+;;
+@INFO_STR_THREESIZE(ARG:0,ARG:1,ARG:2,ARG:3,ARG:4,ARG:5)
+#FUNCTIONS
+#DIM L_T
+#DIMS L_S
+
+
+L_T = ARG
+
+
+
+
+
+
+
+L_S = 身長{CFlag:L_T:身長}cm:体重{CFlag:L_T:体重}kg:Ｂ{CFlag:L_T:バストサイズ}cm(%INFO_STR_CUP(ARG)%)Ｗ{CFlag:L_T:ウエストサイズ}cm:Ｈ{CFlag:L_T:ヒップサイズ}cm
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; カップサイズの値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     カップサイズの値を表す整数
+;; 戻値
+;;   カップサイズの文字列 (測定不能,ＡＡ,Ａ,...,Ｚ,測定不能,)
+;;
+@INFO_STR_CUP(ARG)
+#FUNCTIONS
+#DIMS L_S
+#DIM L_T
+
+L_T = ARG
+
+IF CFlag:L_T:カップサイズ <= 0
+	L_S = 測定不能
+ELSEIF CFlag:L_T:カップサイズ == 1
+	L_S = ＡＡ
+ELSEIF CFlag:L_T:カップサイズ >= 2 && CFlag:L_T:カップサイズ <= 27
+	L_S = %UNICODE(0x0ff22 - 2 + CFlag:L_T:カップサイズ)%
+ELSE
+	L_S = 測定不能
+ENDIF
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 体型の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     体型の値を表す整数。
+;; 戻値
+;;   体型の文字列。
+;;
+@INFO_STR_STYLE(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = スレンダー
+CASE 1
+	L_S = 標準
+CASE 2
+	L_S = グラマー
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 髪色の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     髪色の値を表す整数。
+;; 戻値
+;;   髪色の文字列。
+;;
+@INFO_STR_HAIRCOLOR(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 10
+	L_S = 碧髪
+CASE 9
+	L_S = 紫髪
+CASE 8
+	L_S = 桃髪
+CASE 7
+	L_S = 若葉色
+CASE 6
+	L_S = 緑髪
+CASE 5
+	L_S = 青髪
+CASE 4
+	L_S = 金髪
+CASE 3
+	L_S = 栗毛
+CASE 2
+	L_S = 黒髪
+CASE 1
+	L_S = 赤毛
+CASE 0
+	L_S = 銀髪
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 髪型の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     髪型の値を表す整数。
+;; 戻値
+;;   髪型の文字列。
+;;
+@INFO_STR_HAIR(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE  0
+	L_S = ショートヘア
+CASE  1
+	L_S = ミディアムヘア
+CASE  2
+	L_S = ロングヘア
+CASE  3
+	L_S = ツインテール
+CASE  4
+	L_S = ポニーテール
+CASE  5
+	L_S = ウェーブヘア
+CASE  6
+	L_S = サイドテール
+CASE  7
+	L_S = アンバランス
+CASE  8
+	L_S = 内はね
+CASE  9
+	L_S = 外はね
+CASE 10
+	L_S = セミウェーブ
+CASE 11
+	L_S = ロングウェーブ
+CASE 12
+	L_S = 片目隠れ
+CASE 13
+	L_S = メカクレ
+CASE 14
+	L_S = お姫様カット
+CASE 15
+	L_S = ロングサイドテール
+CASE 16
+	L_S = ツーサイドアップ
+CASE 17
+	L_S = 三つ編み
+CASE 18
+	L_S = ドリルヘアー
+CASE 19
+	L_S = ベリーショートヘアー
+CASE 20
+	L_S = ボブヘアー
+CASE 21
+	L_S = ハーフアップ
+CASE 22
+	L_S = 一本三つ編み
+CASE 23
+	L_S = もみあげショート
+CASE 24
+	L_S = ナチュラルロング
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 目の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     目の値を表す整数。
+;; 戻値
+;;   目の文字列。
+;;
+@INFO_STR_EYE(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = たれ目
+CASE 1
+	L_S = 三白眼
+CASE 2
+	L_S = 標準
+CASE 3
+	L_S = 潤み目
+CASE 4
+	L_S = つり目
+CASE 5
+	L_S = 神秘的
+CASE 6
+	L_S = 大きい
+CASE 7
+	L_S = 切れ長
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 瞳色の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     瞳色の値を表す整数。
+;; 戻値
+;;   瞳色の文字列。
+;;
+@INFO_STR_EYECOLOR(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = ブラック
+CASE 1
+	L_S = クリムゾン
+CASE 2
+	L_S = ゴールド
+CASE 3
+	L_S = パープル
+CASE 4
+	L_S = ブラウン
+CASE 5
+	L_S = スカイ
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 肌色の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     肌色の値を表す整数。
+;; 戻値
+;;   肌色の文字列。
+;;
+@INFO_STR_SKINCOLOR(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE 0
+	L_S = 肌
+CASE 1
+	L_S = 薄
+CASE 2
+	L_S = 明
+CASE 3
+	L_S = 褐
+CASE 4
+	L_S = 暗
+CASE 5
+	L_S = 白
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S

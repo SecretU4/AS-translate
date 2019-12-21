@@ -1,0 +1,114 @@
+﻿;-------------------------------------------------
+;冬眠カプセル
+;-------------------------------------------------
+@RPG_EVENT_400(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 400
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【조사 이벤트:동면 캡슐】
+PRINTFORML 
+
+PRINTFORML %CALLNAME:L_I%는 아직 자가발전으로 설비가 살아있는 소형 쉘터를 발견했다。
+PRINTFORML 안에 들어가보니「외적」의 침입이 있었는지、안쪽은 심하게 훼손되어 있었다。
+PRINTFORML 좁은 통로의 끝엔「라이노틸 HiE-{RAND:10}-{RAND:100}-{RAND:1000}」라고 기록된 동면 캡슐이 있었다。
+PRINTFORML 다가가보니 캡슐 안쪽엔 사람이 들어있었다、
+PRINTFORML 사용된 캡슐의 연대로 봐선 구세대의 주민일지도 모른다。
+PRINTFORML 이대로 캡슐에 잠들어있었다곤 해도、머지않아「외적」에게 습격당할텐데…
+PRINTFORML 
+PRINTFORML [0] 돕는다　(주민으로 등록한다)
+PRINTFORML [1] 돕지 않는다(주민으로 등록하지 않는다)
+PRINTFORML 
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	PRINTFORML 모처럼 발견했다、이대로 방치하자니 꿈자리가 사나울 것 같아서 구조하기로 했다。
+	PRINTFORML 캡슐을 열자 싸늘한 냉기가 흘러나오면서、잠든 사람을 바깥 공기에 드러냈다。
+	PRINTFORML 잠에서 깨려면 시간이 좀 걸릴 것이다、신속하게 도시에 옮길 수 있도록 수배를 내렸다…
+	PRINTFORMW 
+	Flag:イベントキャラ特別補正 = (RAND:10)+10
+	CALL CHARACTER_SCOUT1
+	Flag:イベントキャラ特別補正 = 0
+CASE 1
+	PRINTFORML 어떤 인물인지도 모르는 이상、섣불리 열 수도 없다。
+	PRINTFORML 그렇게 판단한 %CALLNAME:L_I%는 현상 유지 차원에서 방치하기로 했다…
+	PRINTFORML 
+	PRINTFORMW 
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+
+
+
+
+
+
+
+
+
+
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

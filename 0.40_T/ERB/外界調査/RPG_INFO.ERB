@@ -1,0 +1,122 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:RPG_INFO_TARGET_DETAIL.ERB
+;	Facility	:정보 표시。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001	2017/02/17		「」					本体側INFO.ERBから調査パート専用に分離
+;	002	2018/11/14		morph					本体側INFO.ERBとの共通処理を関数化
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ RPG_INFO_TARGET_DETAIL					外界調査用情報:ターゲット(詳細)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub RPG_INFO_TARGET_DETAIL
+;=================================================
+;   外界調査用情報:ターゲット(詳細)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				表示カテゴリー小区分フラグ(0:デフォルトRPG表示 1:強化素材用)
+;-------------------------------------------------
+@RPG_INFO_TARGET_DETAIL(L_I, L_CATE)
+#DIM L_I
+#DIM L_TMP
+#DIM L_SEX
+#DIM L_CATE
+#DIMS L_STR
+#DIMS CONST OP_NAME = "NONE", "強化剤", "超人薬", "技能"
+
+L_SEX = VAR_SEX(L_I)
+CALL VAR_PRINT_LIST_NAME(L_I)
+CALL INFO_TARGET_SUPPORT(L_I)
+
+;VAR:バー出力(基礎)
+;CALL VAR_BAR_BASE(L_I, 0, 2)
+
+;強化剤用フラグがある時残り強化回数を表示
+SELECTCASE OP_NAME:L_CATE
+CASE "強化剤"
+	PRINTFORM [잔여 {LIMIT(100-CFLAG:L_I:住人_強化回数, 0, 999), 3 ,RIGHT}]
+CASE "超人薬"
+	PRINTFORM [잔여 {LIMIT(100-CFLAG:L_I:住人_超人回数, 0, 999), 3 ,RIGHT}]
+CASE "技能"
+	PRINTFORM [잔여 {LIMIT(CFLAG:L_I:住人_技能ポイント, 0, 999), 3 ,RIGHT}]
+CASEELSE
+	PRINTFORM [승리 {LIMIT(CFLAG:L_I:住人_勝利回数, 0, 999), 3 ,RIGHT}]
+ENDSELECT
+
+;基礎能力出力
+CALL RPG_INFO_BASE(L_I, "HP")
+CALL RPG_INFO_BASE(L_I, "SP")
+CALL RPG_INFO_BASE(L_I, "BRE")
+
+CALL INFO_TARGET_WEAPON(L_I, "MAIN")
+CALL INFO_TARGET_WEAPON(L_I, "SUB")
+
+;-----------------------------
+;-- 刻印情報
+;-----------------------------
+;現状は調査パートに影響無さそうで長いのでコメントアウト
+
+;-----------------------------
+;-- 労役情報
+;-----------------------------
+;未実装みたいなので一時的にコメントアウト
+;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
+
+CALL INFO_TARGET_RELATION(L_I)
+CALL INFO_TARGET_GENDER(L_I)
+
+
+@RPG_INFO_BASE(L_I, TYPE)
+#DIM  L_I
+#DIMS TYPE
+SELECTCASE TYPE
+CASE "HP"
+	SETCOLOR 0xbbbbbb
+	PRINTFORM [
+	PRINTFORMD HP:
+	SETCOLOR PERC_TO_COLOR(CFlag:L_I:住人_현재체력 * 100 / CFlag:L_I:住人_최대체력)
+	PRINTFORM {CFlag:L_I:住人_현재체력, 3 ,RIGHT}
+	PRINTFORMD /{CFlag:L_I:住人_최대체력, 3 ,RIGHT}
+	SETCOLOR 0xbbbbbb
+	PRINTFORM ]
+	RESETCOLOR
+CASE "SP"
+	SETCOLOR 0xbbbbbb
+	PRINTFORM [
+	PRINTFORMD SP:
+	SETCOLOR PERC_TO_COLOR(CFlag:L_I:住人_現在気力 * 100 / CFlag:L_I:住人_最大気力)
+	PRINTFORM {CFlag:L_I:住人_現在気力, 3 ,RIGHT}
+	PRINTFORMD /{CFlag:L_I:住人_最大気力, 3 ,RIGHT}
+	SETCOLOR 0xbbbbbb
+	PRINTFORM ]
+	RESETCOLOR
+CASE "BRE"
+	SETCOLOR 0xbbbbbb
+	PRINTFORM [
+	PRINTFORMD BRE:{CFlag:L_I:住人_現在BRE, 3 ,RIGHT}/{CFlag:L_I:住人_最大BRE, 3 ,RIGHT}
+	PRINTFORM ]
+	RESETCOLOR
+ENDSELECT
+
+

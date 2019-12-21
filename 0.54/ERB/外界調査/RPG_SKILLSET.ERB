@@ -1,0 +1,169 @@
+;-------------------------------------------------
+;スキル強化
+;-------------------------------------------------
+@RPG_SKILLSET(C_ID)
+#DIM          C_ID    ;対象キャラの登録番号
+#DIM          L_INPUT ;入力受付用
+#DIM          CFLAG_ID;技能CFLAGの範囲
+#DIM          UP_NUM  ;成長数値
+#DIM          SKILL_ID;技能の種類
+#DIM  DYNAMIC DO_CHECK;キャンセル処理用
+{
+#DIMS CONST SKILL_NAME_STR = 
+	"目星"
+	, "ｱｲﾃﾞｱ"
+	, "聞き耳"
+	, "医療"
+	, "機械修理"
+	, "ｺﾝﾋﾟｭｰﾀ"
+	, "鍵開け"
+	, "隠れる"
+	, "解体"
+	, "解読"
+}
+{
+#DIMS CONST SKILL_INFO_STR = 
+	"１フロアの探索回数に＋補正"
+	, "不明"
+	, "次の戦闘発生確率を視覚できる"
+	, "戦闘終了時体力を回復"
+	, "「発見」コマンドにて使用"
+	, "「発見」コマンドにて使用"
+	, "「発見」コマンドにて使用"
+	, "エンカウントした時に戦闘を回避できる"
+	, "戦闘勝利時アイテム獲得"
+	, "不明"
+}
+#DIM  DYNAMIC 変更前_技能ポイント
+#DIM  DYNAMIC 変更前_目星
+#DIM  DYNAMIC 変更前_アイデア
+#DIM  DYNAMIC 変更前_聞き耳
+#DIM  DYNAMIC 変更前_医療
+#DIM  DYNAMIC 変更前_機械修理
+#DIM  DYNAMIC 変更前_コンピュータ
+#DIM  DYNAMIC 変更前_鍵開け
+#DIM  DYNAMIC 変更前_隠れる
+#DIM  DYNAMIC 変更前_解体
+#DIM  DYNAMIC 変更前_解読
+
+IF !DO_CHECK
+	;変更前の現在の技能値を保存。直球。
+	変更前_技能ポイント = CFLAG:C_ID:住人_技能ポイント
+	変更前_目星         = CFLAG:C_ID:6600
+	変更前_アイデア     = CFLAG:C_ID:6601
+	変更前_聞き耳       = CFLAG:C_ID:6602
+	変更前_医療         = CFLAG:C_ID:6603
+	変更前_機械修理     = CFLAG:C_ID:6604
+	変更前_コンピュータ = CFLAG:C_ID:6605
+	変更前_鍵開け       = CFLAG:C_ID:6606
+	変更前_隠れる       = CFLAG:C_ID:6607
+	変更前_解体         = CFLAG:C_ID:6608
+	変更前_解読         = CFLAG:C_ID:6609
+	SIF !CFLAG_ID
+		CFLAG_ID = GETNUM(CFLAG, "住人_技能_目星")
+	DO_CHECK = 1
+ENDIF
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL C_PICTURE_RD(C_ID)
+DRAWLINE
+PRINTL ■技能強化
+DRAWLINE
+FOR SKILL_ID, 0, 10
+	PRINTFORM 　【%SKILL_NAME_STR:SKILL_ID, 8, LEFT%】%SKILL_INFO_STR:SKILL_ID, 40, LEFT%
+	SIF SKILL_ID % 2
+		PRINTFORML 
+NEXT
+DRAWLINE
+PRINTFORML 【技能ポイント:{CFLAG:C_ID:住人_技能ポイント}】　※技能は100が上限
+DRAWLINE
+FOR SKILL_ID, 0, 10
+	PRINTFORM 　[{SKILL_ID, 3}]【%SKILL_NAME_STR:SKILL_ID, 8, LEFT%:{CFLAG:C_ID:(CFLAG_ID + SKILL_ID), 3 ,LEFT}】+1 [{100 + SKILL_ID, 3}]+5 [{200 + SKILL_ID, 3}]+10
+	SIF SKILL_ID % 2
+		PRINTFORML 
+NEXT
+PRINTFORM 　[301]【ランダム　　】+1 
+PRINTFORM [305]+5 
+PRINTFORM [310]+10
+PRINTFORML 　[320]+20  
+PRINTFORMLC 　[399]全てランダム
+PRINTFORMLC [400]キャンセル
+PRINTFORML 
+PRINTFORML 　[999] キャラ選択に戻る
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASE 400
+	CFLAG:C_ID:住人_技能ポイント = 変更前_技能ポイント
+	CFLAG:C_ID:6600 = 変更前_目星
+	CFLAG:C_ID:6601 = 変更前_アイデア
+	CFLAG:C_ID:6602 = 変更前_聞き耳
+	CFLAG:C_ID:6603 = 変更前_医療
+	CFLAG:C_ID:6604 = 変更前_機械修理
+	CFLAG:C_ID:6605 = 変更前_コンピュータ
+	CFLAG:C_ID:6606 = 変更前_鍵開け
+	CFLAG:C_ID:6607 = 変更前_隠れる
+	CFLAG:C_ID:6608 = 変更前_解体
+	CFLAG:C_ID:6609 = 変更前_解読
+	RESTART
+;若干のズルをする
+CASE 301 TO 399
+	IF L_INPUT == 399
+		DRAWLINE
+		PRINTFORML 残保有ポイント{CFLAG:C_ID:住人_技能ポイント}を全てランダムに振り分けます。よろしいですか？
+		PRINTFORML [1] はい
+		PRINTFORML [0] いいえ
+		INPUT
+		L_INPUT = RESULT
+		SELECTCASE L_INPUT
+		CASE 1
+			UP_NUM = CFLAG:C_ID:住人_技能ポイント
+		CASEELSE
+			RESTART
+		ENDSELECT
+	ELSE
+		UP_NUM = MIN(L_INPUT % 100, CFLAG:C_ID:住人_技能ポイント)
+	ENDIF
+	CALL RPG_SKILLSET_RAND_LVUP(C_ID, UP_NUM)
+	RESTART
+CASEELSE
+	SKILL_ID = L_INPUT % 100
+	SIF !INRANGE(SKILL_ID, 0, 9)
+		RESTART
+	SELECTCASE L_INPUT / 100
+	CASE 0
+		UP_NUM = 1
+	CASE 1
+		UP_NUM = 5
+	CASE 2
+		UP_NUM = 10
+	CASEELSE
+		RESTART
+	ENDSELECT
+	UP_NUM = MIN(UP_NUM, CFLAG:C_ID:住人_技能ポイント, 100 - CFLAG:C_ID:(CFLAG_ID + SKILL_ID))
+	CFLAG:C_ID:(CFLAG_ID + SKILL_ID) += UP_NUM
+	CFLAG:C_ID:住人_技能ポイント     -= UP_NUM
+	RESTART
+ENDSELECT
+
+
+
+@RPG_SKILLSET_RAND_LVUP(L_I, UP_NUM)
+#DIM L_I
+#DIM UP_NUM
+#DIM CFLAG_ID
+#DIM SKILL_ID
+SIF !CFLAG_ID
+	CFLAG_ID = GETNUM(CFLAG, "住人_技能_目星")
+FOR LOCAL, 0, UP_NUM
+	SKILL_ID = RAND:10
+	;現状では必要ないがバグ防止
+	SIF CFLAG:L_I:住人_技能ポイント <= 0
+		RETURN
+	SIF CFLAG:L_I:(CFLAG_ID + SKILL_ID) >= 100
+		CONTINUE
+	CFLAG:L_I:(CFLAG_ID + SKILL_ID) ++
+	CFLAG:L_I:住人_技能ポイント --
+NEXT

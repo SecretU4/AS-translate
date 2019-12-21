@@ -1,0 +1,25 @@
+﻿@C_PICTURE_NPC(ARG:2)
+#DIM P_S
+#DIM P_NPC
+#DIMS LSTR
+P_S = 0
+
+P_NPC = ARG:2
+
+;-------------------------------------------------
+;描画処理
+;-------------------------------------------------
+PRINTFORML {P_NPC}
+DRAWLINE
+	LSTR = <img src='NPC_{P_NPC}' height = '850'  ypos = '{P_S}'>
+	HTML_PRINT LSTR
+	P_S -= 100
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+DRAWLINE
+

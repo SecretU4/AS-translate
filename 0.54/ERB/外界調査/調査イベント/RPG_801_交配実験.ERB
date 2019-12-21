@@ -1,0 +1,111 @@
+;-------------------------------------------------
+;交配実験
+;-------------------------------------------------
+@RPG_EVENT_801(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 801
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 250,50,50
+PRINTFORML 【調査イベント:交配実験】
+PRINTFORML 
+
+PRINTFORML 放棄された施設の探索中に%CALLNAME:L_I%は不自然に整えられた部屋を見つけた。
+PRINTFORML 周囲の施設は風化して壁の一部が崩れたり、動植物や「外敵」の入り込んだ形跡が残されていた。
+PRINTFORML だがこの部屋だけは今も人が暮らしているかのようにメンテナンスが行き届き、美しく保たれている。
+PRINTFORMW 都市の外でこれほど状態の良い部屋はいまだかつて見たことがない。
+PRINTFORML あまりにも不自然な部屋に%CALLNAME:L_I%は嫌な予感がした…
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [0] 即座に離脱する
+PRINTFORML 
+$INPUT_LOOP
+TINPUT 2000, 100, 1
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	RESETCOLOR
+	PRINTFORML %CALLNAME:L_I%は己の直感に従い部屋を後にした。
+	PRINTFORML 直後、扉がロックされた音が周囲に響き扉は開かなくなった。
+	PRINTFORML …もし中に残っていたら閉じ込められていたかもしれない。
+	PRINTFORML 間一髪で危機を脱した%CALLNAME:L_I%は冷や汗を拭いながらその場を離れた…
+	PRINTFORMW 
+CASE 100
+	PRINTFORML ガチャリと扉のロックされた音に%CALLNAME:L_I%は慌てて扉へと駆け寄る。
+	PRINTFORML だが扉は閉ざされたまま微動だにせず、%CALLNAME:L_I%は部屋に閉じ込められてしまった。
+	PRINTFORML 仲間に救援を依頼しようにも通信機はノイズ音が流れるばかりで一向に通じる気配がない。
+	PRINTFORML やがて室内に注入されたガスによって%CALLNAME:L_I%は眠りに落ちるように気を失った…
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML 探索中の%CALLNAME:L_I%と連絡が途絶え行方不明となりました。
+	PRINTFORMW 
+	RESETCOLOR
+	CFLAG:L_I:交配実験 = 1
+	FLAG:イベント誘拐中 = 2
+	FLAG:調査イベント番号 = 0
+	CALL CHARA_LEAVE_CITY(L_I)
+	CALL RPG_EVENT_MAIN_END
+	JUMP SYSTEM_MENU
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

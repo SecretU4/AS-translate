@@ -1,0 +1,29 @@
+﻿;-------------------------------------------------
+;汎用イベント(ターン終了)
+;-------------------------------------------------
+@TURN_EVENT_HNYU
+#DIM L_LOOP
+
+L_LOOP = 0
+
+REPEAT 500
+	TRYCCALLFORM TURN_EVENT_HNYU_{L_LOOP}
+	CATCH
+	ENDCATCH
+	L_LOOP += 1
+REND
+
+
+SIF Flag:汎用イベント1 > 0
+	TRYCALLFORM TURN_EVENT_HNYU2_{Flag:汎用イベント1}
+SIF Flag:汎用イベント2 > 0
+	TRYCALLFORM TURN_EVENT_HNYU2_{Flag:汎用イベント2}
+SIF Flag:汎用イベント3 > 0
+	TRYCALLFORM TURN_EVENT_HNYU2_{Flag:汎用イベント3}
+
+
+Flag:汎用イベント1 = 0
+Flag:汎用イベント2 = 0
+Flag:汎用イベント3 = 0
+
+

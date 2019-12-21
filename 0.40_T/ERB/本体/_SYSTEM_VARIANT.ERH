@@ -1,0 +1,56 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:_SYSTEM_VARIANT.ERH
+;	Facility	:ヘッダファイル(本体モジュール)。
+;				 本体モジュール全体で使用するヘッダファイルを定義する。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;-------------------------------------------------
+;   VAR:
+;-------------------------------------------------
+
+;システム定数
+#DEFINE DEFVAR_LEN_CNAME		18		;文字数(CALLNAME)
+
+
+;その他
+#DIMS GVAR_SRC_CHG_NAME,		100		;要素名
+#DIM  GVAR_SRC_CHG_VAL,			100		;変動値
+#DIM  GVAR_SRC_CHG_COLOR,		100		;着色(0:通常 1:ダウン系青色 2:アップ系ピンク)
+
+#DIMS GVAR_MONEY_NAME,	1				;通貨名
+#DIMS SAVEDATA GVAR_COM_FILTER,	1		;コマンドフィルタ文字列
+
+;;NTR
+;#DEFINE DEFVAR_NTR				2		;NTR陥落値
+
+;-------------------------------------------------
+;   TRAIN:
+;-------------------------------------------------
+
+#DEFINE DEFTR_PL_NUM	10				;プレイヤーリスト総数
+#DEFINE DEFTR_CL_NUM	300				;キャラリスト総数
+
+#DIM GTR_PL,			10				;配列:プレイヤーリスト
+#DIM GTR_CL,			300				;配列:キャラリスト
+#DIM GTR_EXPUP,			300,1000			;配列:EXPUP
+#DIM GTR_COMABLE,		1000			;配列:COM実行可否
+#DIM GTR_CHARA_CNT,		1				;キャラ数
+
+#DIMS GTR_COM_NAME,		1				;実行コマンド名
+
+
+;調教メニュー
+#DEFINE DEFTR_MACRO_COM_NUM		8		;調教メニュー:コマンド総数
+#DEFINE DEFTR_MACRO_POS			0350	;調教メニュー:記憶位置
+#DEFINE DEFTR_MACRO_1			0300	;調教メニューNO：1
+#DEFINE DEFTR_MACRO_2			0301	;調教メニューNO：2
+

@@ -1,0 +1,202 @@
+
+;-------------------------------------------------
+;住人業務　業務　社会人
+;-------------------------------------------------
+@WORK_T_Ad(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_T
+#DIM L_F
+#DIM L_K
+#DIM L_N
+
+L_T = TARGET
+TARGET = ARG:0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+
+CALL C_PICTURE(ARG:0,ARG:1)
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORM 　　　　　
+		IF !RAND:3
+			PRINTFORML 「%CSTR:語尾YES%、やれるだけやってみ%CSTR:語尾ます%」
+		ELSEIF !RAND:2
+			PRINTFORML 「……上手くできたみたい%CSTR:語尾肯定2%」
+		ELSE
+			PRINTFORML 「まだ工夫がいるみたい%CSTR:語尾肯定2%」
+		ENDIF
+PRINTFORML 
+PRINTFORM 　　　　　
+PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に促進され、仕事に励んだ…
+PRINTFORMW 
+
+IF (Talent:非処女 == 1 && Talent:合意 == 1) && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1) && RAND:10 >= 5
+SETCOLOR 250,50,200
+DRAWLINE
+	IF !RAND:5
+		PRINTFORML 連日の激務に全身が悲鳴を上げ始めたのを感じ取った%CALLNAME%はマッサージ店の広告を眺めていた。
+		PRINTFORML だがマッサージ店というものは店によってアタリハズレがあると同僚から聞かされていたため何処にするかを決めかねていた。
+		PRINTFORML 誰か詳しい人はいないだろうかと考えた所で、顔の広い%CALLNAME:MASTER%に思い至った%CALLNAME%は連絡を取ることにした。
+		PRINTFORML 
+		PRINTFORML 「あ゛ぁ～、そこそこ……気持ちいい～」
+		PRINTFORML %CALLNAME%はマッサージが得意だという%CALLNAME:MASTER%に押し切られ、彼の部屋でマッサージを受けていた。
+		PRINTFORML うつ伏せになった%CALLNAME%の背中を程よい力加減でマッサージする様子は、確かに得意だと豪語するだけのことはある。
+		PRINTFORML 施術しやすいようにと下着姿にされはしたが、%CALLNAME:MASTER%はいたって真面目にマッサージを続けている。
+		PRINTFORML 上半身のマッサージを終えた%CALLNAME:MASTER%の手が下半身に移るのを感じながら、%CALLNAME%はいつしか眠りに落ちてしまった…
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+		PRINTFORML 
+		PRINTFORML 眠りから目覚めた%CALLNAME%は全身を包み込むような甘い痺れに悶えていた。
+		PRINTFORML 触れるか触れないかといったソフトタッチへと変化した%CALLNAME:MASTER%のマッサージにより全身の性感帯を励起させられた
+		PRINTFORML %CALLNAME%は眠りから覚めるまで微弱な快感を全身に溜め込まれ、今にも爆発しそうなほどの大きなうねりとなっていた。
+		PRINTFORML だが%CALLNAME:MASTER%は乳首やクリトリス、ヴァギナやアナルといった敏感な部分には決して触れようとはしない。
+		PRINTFORML 「ねぇ……%UNICODE(0x2661)%　ちょうだい%UNICODE(0x2661)%」
+		PRINTFORML 我慢できなくなった%CALLNAME%は性的なマッサージへと変化していることを咎めるのも忘れて雄を求めてしまう。
+		PRINTFORML 要望を受けた%CALLNAME:MASTER%は%CALLNAME%を仰向けに寝かせると愛液でドロドロになった秘所へと肉棒を突き入れる。
+		PRINTFORML 待ちかねていた強い刺激と肉棒の熱さに歓喜の声を上げながら%CALLNAME%は%CALLNAME:MASTER%にしがみつく。
+		PRINTFORML 一突き毎に股間から潮を噴出しながら絶頂に絶頂を重ねて高みへと駆け上っていった%CALLNAME%は膣内射精によって意識を失った。
+		PRINTFORML その後も%CALLNAME:MASTER%はほどよく蕩けた雌穴となっていた%CALLNAME%の肉オナホを使って何度か膣内射精を行った。
+		PRINTFORML 
+		PRINTFORML 不思議なことに、翌日から%CALLNAME%の体調はすこぶる良くなった。
+		PRINTFORML あのマッサージが効いたのかと思うと少し恥ずかしかったが、また疲れが溜まったらお願いしようと人知れず股間を濡らすのであった…
+	ELSEIF !RAND:4
+		PRINTFORML 都市の発展に貢献する大型プロジェクトを成功に導いた%CALLNAME%は報酬として%CALLNAME:MASTER%に温泉施設へと招待された。
+		PRINTFORML 温泉施設はお金を払えば誰でも利用することができるが、貴重な水を贅沢に使用する施設であるため料金は高額となっている。
+		PRINTFORML そのため半ば富裕層専用の高級施設となっていて、招待された%CALLNAME%は周囲の人間からとても羨ましがられたほどである。
+		PRINTFORML 一生に一度あるかないかという贅沢な時間を過ごすことになった%CALLNAME%は存分に温泉を堪能した。
+		PRINTFORML 
+		PRINTFORML 女湯に存在したすべての温泉を制覇した%CALLNAME%は施設二階の休憩室で%CALLNAME:MASTER%と合流した。
+		PRINTFORML 休憩室では食事も注文でき、普段から富裕層が利用する施設のためか、どれも頬が落ちそうなほどに美味しかった。
+		PRINTFORML あとは帰るだけかと%CALLNAME%が名残惜しく思っていると、%CALLNAME:MASTER%は家族風呂を予約したから入ろうと%CALLNAME%を誘う。
+		PRINTFORML まだ入っていない温泉があったことに驚いた%CALLNAME%は二つ返事で了承すると%CALLNAME:MASTER%に連れられて家族風呂へと向かった。
+		PRINTFORML 
+		PRINTFORML チャプチャプと湯船のお湯が揺れるのに合わせてパンパンと腰を打ち付ける音が室内に響く。
+		PRINTFORML 湯船の縁に手を付いた%CALLNAME%は後ろから何度も突かれて嬌声を上げ続けていた。
+		PRINTFORML 初めは湯船のお湯を汚してしまうことを気にして乗り気ではなかった%CALLNAME%も、弱点を知り尽くしている%CALLNAME:MASTER%の
+		PRINTFORML 性技によって思考を蕩かされて交尾に集中していた。
+		PRINTFORML 興奮状態にある肉体が火照るのはいつものことだが、今回は湯船に浸かりながらの行為ということで頭が茹るような熱に晒されている。
+		PRINTFORML %CALLNAME%は混濁し始めた意識の中にありながらも、%CALLNAME:MASTER%の肉棒が突き入れられれば優しく受け入れ、引き抜かれると
+		PRINTFORML 強く締め付けて雄を愉しませる膣運動を忘れない。
+		PRINTFORML 限界が近付いた%CALLNAME:MASTER%にどこに射精して欲しいかを問われ、%CALLNAME%は危険日を思い出そうとしたが上手く頭が働かない。
+		PRINTFORML たぶん、きっと、おそらく安全な日のはず――熱と快楽によって完全に我を失っていた%CALLNAME%は安易に中出しを希望してしまった。
+		PRINTFORML 受精を目指して殺到する精液の感触を体内に感じて多幸感に包まれた%CALLNAME%はのぼせて意識を失った…
+	ELSEIF !RAND:3
+		PRINTFORML 仕事帰りに行きつけのバーでお酒を楽しんでいた%CALLNAME%は下心丸出しの男にナンパされていた。
+		PRINTFORML 心に決めた相手がいる%CALLNAME%は執拗な男の口説き文句に辟易しながらも、優越感を感じていたため強く拒絶はしなかった。
+		PRINTFORML 優越感は自身が他の女性よりも魅力的に見えていることに対してでもあるが、それは同時にそんな女性を好きにできる%CALLNAME:MASTER%が
+		PRINTFORML 目の前の男によって間接的にではあるが見る目があると褒められていることと同義だからだ。
+		PRINTFORML 故に%CALLNAME%から男の言葉を遮るようなことはしないし、かと言って男の口車に乗せられて股を開いてやるつもりもない。
+		PRINTFORML やがて諦めた男が席を外すと入れ替わるようにして%CALLNAME:MASTER%が声をかけてきた。
+		PRINTFORML 先ほどとは打って変わって満開の笑顔で%CALLNAME:MASTER%を出迎えた%CALLNAME%の様子に男は面白くなさそうな表情を浮かべていたが
+		PRINTFORML すでに%CALLNAME%の意識からはキレイサッパリと抜け落ちている。
+		PRINTFORML わざと隙を見せて%CALLNAME:MASTER%の視線を胸元や太ももに誘導しながら、%CALLNAME%は%CALLNAME:MASTER%とのお酒を大いに楽しんだ…
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+		PRINTFORML 
+		PRINTFORML 自宅で意識を取り戻した%CALLNAME%は誰かに寝バックの体勢で犯されていることに気付いた。
+		PRINTFORML つい先ほどまで%CALLNAME:MASTER%とお酒を楽しんでいたはずだがと記憶を手繰り寄せようとした%CALLNAME%の胎内に熱い奔流が放たれる。
+		PRINTFORML それが射精であると頭で認識するよりも早く、膣壁が痙攣して精液を搾り取るように収縮を始めた。
+		PRINTFORML 肩を甘噛みされながらの膣内射精は%CALLNAME:MASTER%が送り狼になったときにふざけて行うようになった行為だが、%CALLNAME%にとっては
+		PRINTFORML %CALLNAME:MASTER%の所有物であるという印付けをされているようでお気に入りの行為である。
+		IF TALENT:ＮＴＬ
+			PRINTFORML 夫にバレれば問題になるだろうが、こうして%CALLNAME%の性欲は%CALLNAME:MASTER%が解消してくれるのだ。
+			PRINTFORML 気分ではないと断って適当にAVを与えるか小遣いを渡して娼婦でも買わせておけば、そのうち肩の傷も癒えるだろう。
+		ENDIF
+		PRINTFORML 圧し掛かった相手が%CALLNAME:MASTER%であると理解した%CALLNAME%はお尻を少しだけ持ち上げて挿入しやすい姿勢になる。
+		PRINTFORML %CALLNAME:MASTER%は完全に種付けを受け入れる姿勢になった%CALLNAME%を背後から犯し、夜が明けるまでその肉体を愉しんだ…
+	ELSEIF !RAND:2
+		PRINTFORML %CALLNAME:MASTER%の秘書として一日の活動をサポートすることになった%CALLNAME%は仕事前のフェラに励んでいた。
+		PRINTFORML 今日はまだ一度も射精していないゼリー状の特濃精液一番絞りを口内で受け止めた%CALLNAME%は美味しそうに嚥下していく。
+		PRINTFORML お掃除フェラもしっかりと行い%CALLNAME:MASTER%の性欲を発散させた%CALLNAME%は本日の業務を読み上げる。
+		PRINTFORML 
+		PRINTFORML 車で都市内を移動中、%CALLNAME%は%CALLNAME:MASTER%に体面座位で抱かれていた。
+		PRINTFORML 移動中に暇を持て余した%CALLNAME:MASTER%に性奉仕するよう命じられ、朝に飲んだ精液の濃さで子宮に疼いて仕方なかった
+		PRINTFORML %CALLNAME%はこれ幸いと膣を利用した性奉仕を申し出た。
+		PRINTFORML だが%CALLNAME%の狙いを察知していた%CALLNAME:MASTER%は%CALLNAME%の弱いところばかりを責めてイかせることに終始し
+		PRINTFORML なかなか射精しようとはしなかった。
+		PRINTFORML 目的地を目前にして焦った%CALLNAME%が射精をおねだりすると%CALLNAME:MASTER%は膣内ではなく口内に射精した。
+		PRINTFORML 口から零れ落ちた精液を指先で拭った%CALLNAME%は果たされなかった膣内射精を思い浮かべながら指先の精液を膣壁へと塗りこんだ。
+		PRINTFORML 
+		PRINTFORML 視察を終えて帰宅した%CALLNAME:MASTER%の横では全裸になった%CALLNAME%が膣にバイブを突っ込まれて四つん這いで放置されていた。
+		PRINTFORML それは車内で精液をすべて飲みきれなかった罰と勝手に精液を膣内に入れたことへのお仕置きであった。
+		PRINTFORML 人の言葉を喋るのも禁止された%CALLNAME%は犬や猫の鳴き真似をしながら%CALLNAME:MASTER%を交尾に誘うが、%CALLNAME:MASTER%はニヤニヤ
+		PRINTFORML 笑いながらそれらをすべて無視した。
+		PRINTFORML やがてバイブに繰り返しイかされた%CALLNAME%が床に崩れ落ちると、%CALLNAME:MASTER%は尻肉を左右に押し広げてアナルへと挿入した。
+		PRINTFORML ようやく道具相手ではなく%CALLNAME:MASTER%に抱いてもらえた%CALLNAME%だったが、体力が尽きてしまったため動くことができない。
+		PRINTFORML アナルを蹂躙されて意識が飛びそうになる%CALLNAME%に構うことなく%CALLNAME:MASTER%は何度か射精を行うが、すべてアナルに射精したため
+		PRINTFORML %CALLNAME%の膣内には一滴も射精されることはなかった…
+	ELSE
+		PRINTFORML 外回り営業でいくつかの企業を訪れていた%CALLNAME%は、とある企業の本社ビルで偶然%CALLNAME:MASTER%と出会った。
+		PRINTFORML 何故ここにいるのかと問う%CALLNAME%に%CALLNAME:MASTER%は知り合いが経営者なので遊びに来ていたと答えた。
+		PRINTFORML %CALLNAME%は千載一遇のチャンスと見て%CALLNAME:MASTER%に紹介してもらえないかと頭を下げる。
+		PRINTFORML %CALLNAME:MASTER%は知り合いとの間にビジネスの話をあまり持ち込みたくなかったが、%CALLNAME%たってのお願いということで
+		PRINTFORML あることを条件に紹介してもいいと譲歩してみせた。
+		PRINTFORML %CALLNAME:MASTER%から条件を聞かされた%CALLNAME%は顔を真っ赤にしながらも同意し、経営者との伝を手に入れた。
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は無人となったオフィスで%CALLNAME:MASTER%と口付けを交わしていた。
+		PRINTFORML すでに退勤時間を過ぎているためビル内に残っている人間はおらず、今は二人だけの空間となっている。
+		PRINTFORML デスクに腰掛けた%CALLNAME%のタイトスカートに頭を突っ込んだ%CALLNAME:MASTER%は、外回りによって汗で蒸れた
+		PRINTFORML パンティストッキングの香りを存分に楽しみながら鼻先を秘所に押し付けた。
+		PRINTFORML 恥ずかしさから%CALLNAME%は%CALLNAME:MASTER%の頭を押さえつけて引き抜こうとするが、条件を盾に迫られては嫌とは言えない。
+		PRINTFORML 汗で蒸れた雌臭いアソコの臭いを嗅がれる恥辱と鼻先がクリのあたりを掠めていく快感で%CALLNAME%の股間からは蜜が溢れだす。
+		PRINTFORML それがまた雌臭さを増幅させる結果となり、我慢できなくなった%CALLNAME:MASTER%は%CALLNAME%を後ろ向きにさせるとデスクに
+		PRINTFORML 両手をつかせ、パンティストッキングを裂いて下着を露わにした。
+		PRINTFORML 下着がずらされて秘部が外気に晒される感覚に%CALLNAME%は唇をかみ締める。
+		PRINTFORML 対価として自身の肉体が要求されることに女性として怒りを覚えないわけでもなかったが、相手は%CALLNAME:MASTER%なのだ。
+		PRINTFORML 膣口に亀頭が押し付けられる感触に、%CALLNAME%はブルリと全身を振るわせる。
+		PRINTFORML 忘れようとしても忘れられない、肉体の奥深く、雌の本能ともいえる部分に刻み込まれてしまった快楽の記憶。
+		PRINTFORML 「んっ……早くぅ%UNICODE(0x2661)%　早くちょうだい%UNICODE(0x2661)%」
+		PRINTFORML 愛撫もされていないのにヌチャリと卑猥な音を立てながら%CALLNAME%の雌穴は自ら征服者を迎え入れた。
+		PRINTFORML 「あはぁ%UNICODE(0x2661)%　入っちゃったぁ……%UNICODE(0x2661)%」
+		PRINTFORML もはや先ほどまで感じていた屈辱すらも忘れて%CALLNAME%は身体を前後に揺すって快楽を求める。
+		PRINTFORML %CALLNAME:MASTER%は自動チンポコキ機と化した%CALLNAME%の仕上がり具合に満足しながらも%CALLNAME%が自分勝手に絶頂を迎えると
+		PRINTFORML 尻を叩いて躾することも忘れなかった。
+		PRINTFORML %CALLNAME:MASTER%は歯を食いしばり口の端から涎を垂らしながら絶頂を我慢して奉仕する%CALLNAME%の姿を存分に堪能し、好き勝手に
+		PRINTFORML 膣内へと精液を撒き散らして%CALLNAME%の子宮と意識を白く染め上げた…
+	ENDIF
+DRAWLINE
+
+CALL JN_SEX_EXP
+RESETCOLOR
+
+ENDIF
+
+
+
+
+
+PRINTFORMW
+
+
+
+
+
+CFLAG:住人_業務ポイント += 1
+EXP:業務経験 += 1
+PRINTFORML 【業務経験　　:{EXP:業務経験-1, 5 ,LEFT}→{EXP:業務経験, 5 ,RIGHT}】
+DRAWLINE
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 8
+	L_K = (((EXP:業務経験/100)+1)*1000)+(EXP:業務経験*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 更に%CALLNAME%の活躍が「シティ」に認められ、大量の功績を獲得した！
+	PRINTFORML 【功績　　:{Flag:都市_功績 - L_K, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
+	DRAWLINE
+ENDIF
+PRINTFORMW 
+TARGET = L_T
+
+
+
+
+
+
+
+
+
+
+

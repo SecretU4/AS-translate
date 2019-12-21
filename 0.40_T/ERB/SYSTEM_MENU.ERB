@@ -1,0 +1,347 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_MENU.ERB
+;	Facility	:MENU関連処理。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ SYSTEM_MENU						SYSTEM:MENU
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub SYSTEM_MENU
+;=================================================
+;   SYSTEM:MENU
+;-------------------------------------------------
+@SYSTEM_MENU(ARG:0)
+#DIM L_INPUT
+#DIM NOW_GROUP ;REF用
+FLAG:継承種族 = 0
+Flag:汎用変数6 = 999
+;- VAR:ターン終了処理
+CALL VAR_TURNEND_MAIN
+
+;キャラ数が一致しない場合、リストを再設定
+IF GTR_CHARA_CNT != CHARANUM
+	;- VAR:リスト更新
+	CALL VAR_MAKE_LIST
+ENDIF
+
+;-------------------------------------------------
+
+$MENU_TOP
+
+;表示:ページヘッダ
+CALL C_LINE
+
+;-----------------------------
+;-- データ部表示
+;-----------------------------
+
+;情報:日付
+CALL INFO_DATE
+
+;諸情報
+
+;-----------------------------
+;-- 区画表示
+;-----------------------------
+CALL CITY_MAP
+;-----------------------------
+;-- ターゲット部表示
+;-----------------------------
+
+;- 表示:ターゲット(主処理)
+CALL INFO_TARGET_MAIN
+
+;-----------------------------
+;-- パートナー表示
+;-----------------------------
+SIF FLAG:調教対象人数
+	CALL SYSTEM_PARTNER
+
+
+
+;-----------------------------
+;- メニューコマンド表示
+;-----------------------------
+
+DRAWLINE
+
+SIF !FLAG:調教対象人数
+	SETCOLOR COLOR("伏字")
+PRINTLC [100] - 밀회한다
+RESETCOLOR
+
+
+PRINTLC [101] - 찻집
+PRINTLC [102] - 시간을 진행한다
+IF FLAG:都市_防衛 != 0
+	PRINTLC [300] - 防衛戦
+ENDIF
+PRINTLC [50] - BP 섭취(TP 회복)
+PRINTL
+
+PRINTLC [103] - 시설 상세
+PRINTLC [104] - 주민 설정
+PRINTLC [105] - 맨션 관리
+CALL CITY_STORY_NAME
+PRINTL 
+
+
+
+PRINTLC [106] - 외계 조사
+IF FLAG:都市_防衛 != 0
+	PRINTLC 　　　　의뢰 동결
+ELSEIF Flag:依頼_スパイテロ駆除_Lv > 0 || Flag:依頼_イスからの駆除依頼_Lv > 0
+	PRINTLC [107] - 의뢰-!-
+ELSE
+	SETCOLOR COLOR("伏字")
+	PRINTLC [107] - 의뢰
+	RESETCOLOR
+ENDIF
+PRINTLC [108] - 지원 지시
+PRINTL 
+IF FLAG:都市_功績獲得機会 != 0
+	SETCOLOR 50,250,250
+	PRINTLC [109] - 주민 업무-!-
+	RESETCOLOR
+ELSE
+	PRINTLC [109] - 주민 업무
+ENDIF
+PRINTLC [110] - 능력 표시
+PRINTLC [111] - 능력 상승
+IF Flag:EP他プレイヤー干渉 != 0
+	SETCOLOR 250,50,50
+	PRINTLC [112] - 【경고】
+	RESETCOLOR
+ENDIF
+PRINTL 
+
+;PRINTLC [113] - 
+;PRINTLC [114] - 아이템 구입
+;PRINTLC [115] - 의상 구입
+PRINTL 
+PRINTLC [150] - 어조 수정(Ver3.1)
+PRINTLC [151] - 이계 접속
+PRINTLC [153] ← [152] 파트너 변경 [154] →
+PRINTL
+PRINTLC [200] - 커맨드 필터
+PRINTLC [201] - 캐릭터 정렬
+PRINTLC [202] - 사전
+PRINTL 
+
+PRINTLC [800] - 세이브
+PRINTLC [801] - 로드
+PRINTLC [802] - CONFIG
+SIF FLAG:２週目モード
+	PRINTLC [803] - ２주차로 진행
+PRINTL 
+PRINTL 
+
+
+;-----------------------------
+;- コマンド受付
+;-----------------------------
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+Flag:汎用変数6 = 0
+RESETBGCOLOR
+
+;-------------------------------------------------
+
+SELECTCASE L_INPUT
+	;BP 섭취
+	CASE 50
+		CALL SYSTEM_BP
+	;行動を開始
+	CASE 100
+		FLAG:調教開始時の対象キャラ固定 = 1
+		IF !FLAG:調教対象人数
+			CALL C_INPUT_ERROR("조교 대상이 존재하지 않아 실행할 수 없습니다。조교 대상을 선택하세요。")
+			GOTO INPUT_LOOP
+		ENDIF
+		;TRAIN
+		CALL SYSTEM_TRAIN
+		FLAG:ターン終了フラグ = 1
+
+	;喫茶店
+	CASE 101
+		CALL CITY_CAFE
+	;休憩
+	CASE 102
+		IF !FLAG:休憩確認機能
+			FLAG:ターン終了フラグ = 1
+			RESTART
+		ELSE
+			PRINTFORM 휴식할까요？
+			PRINTL
+			CALL INPUT_YN
+
+			SELECTCASE RESULT
+				;YES
+				CASE 0
+					FLAG:ターン終了フラグ = 1
+					RESTART
+				;NO
+				CASE 1
+					PRINTFORML 휴식을 취소했습니다
+			ENDSELECT
+		ENDIF
+	;施設詳細
+	CASE 103
+		;表示:探索
+		CALL CITY_CENTER
+	;住人設定
+	CASE 104
+		;表示:拠点へ
+		CALL MANAGE_CHARA_SELECT("MNG_레귤러指定")
+		;CALL JN_CONFIG
+	;マンション管理
+	CASE 105
+		;表示:マンション管理
+		CALL C_M_MOVE
+	;外界調査
+	CASE 106
+		;表示:外界調査
+		CALL RPG_MAIN
+	;依頼
+	CASE 107
+		;表示:依頼
+		CALL MISSION_MAIN
+	;支援指示
+	CASE 108
+		;表示:支援指示
+		CALL Support_Order
+	;住人業務
+	CASE 109
+		;表示:住人業務
+		CALL WORK_MAIN
+	;能力表示
+	CASE 110
+		NOW_GROUP = 1
+		CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, "「정보 표시」", , "≪정보 공개 신청이 받아들여졌습니다、대상자를 선택하세요≫")
+	;能力上昇
+	CASE 111
+		;SYSTEM:ABLUP画面(LIST)
+		CALL SYSTEM_ABLUP_LIST
+	;警告
+	CASE 112
+		CALL EP_ACTION
+	CASE 152
+		CALL CHANGE_TARGET_MAIN2
+	CASE 153
+		CALL CHANGE_TARGET_PREV
+	CASE 154
+		CALL CHANGE_TARGET_NEXT
+
+
+	;区画管理
+	CASE 113
+		;SYSTEM:AREA_MENU
+		;CALL SYSTEM_AREA_MENU
+	;アイテム購入
+	CASE 114
+		;アイテム:主処理
+		CALL ITEM_MAIN
+	;衣装購入
+	CASE 115
+		;衣装:主処理
+		CALL COSTUME_MAIN
+	;ストーリー
+	CASE 120
+		CLEARLINE LINECOUNT
+		DRAWLINE
+		TRYCALLFORM CITY_STORY_{FLAG:都市_ストーリー}
+	;口調修正
+	CASE 150
+		;口調修正
+		CALL CHARACTER_SCOUT_MIND_REPEAT0
+	;異界接続
+	CASE 151
+		;異界接続
+		CALL WORLD_CONNECT
+	;コマンドフィルタ
+	CASE 200
+		;- コマンドフィルタ画面:主処理
+		CALL COMMAND_FILTER_MAIN
+	;キャラソート
+	CASE 201
+		;キャラソート画面(主処理)
+		CALL CHARA_SORT_MAIN
+	;調教典
+	CASE 202
+		;SYSTEM:ヘルプ
+		CALL OPTION_ZITEN
+	CASE 300
+		;表示:防衛戦
+		CALL CITY_RID_B
+	;セーブ
+	CASE 800
+		;- SYSTEM:セーブ処理
+		CALL TITLE_SAVEGAME
+;		SAVEGAME
+	;ロード
+	CASE 801
+		;- SYSTEM:ロード処理
+		CALL TITLE_LOADGAME
+;		LOADGAME
+	;コンフィグ
+	CASE 802
+		;表示:コンフィグ(LIST)
+		CALL CONFIG_LIST
+	;２週目に移行
+	CASE 803
+		SIF !FLAG:２週目モード
+			GOTO ERROR
+
+		;表示:ページヘッダ
+		CALL C_LINE
+
+		PRINTFORML 일부 데이터를 계승하여 다음 회차로 넘어갈 수있습니다。
+		PRINTFORML ２회차로 넘어갈까요？
+		PRINTL
+		CALL INPUT_YN
+
+		SELECTCASE RESULT
+			;YES
+			CASE 0
+				PRINTFORMW 다음 회차로 넘어갑니다
+				PRINTL ………
+				PRINTL ……
+				PRINTW …
+				;SYSTEM:二週目処理
+				CALL SYSTEM_RESTART_MAIN
+			;NO
+			CASE 1
+				PRINTFORMW 다음 회차로 넘어가는 것을 취소했습니다
+				PRINTL ………
+				PRINTL ……
+				PRINTW …
+		ENDSELECT
+	CASEELSE
+		$ERROR
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART

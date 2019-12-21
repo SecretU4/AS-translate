@@ -1,0 +1,443 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:KOJO_FUNC.ERB
+;	Facility	:口上用関数置き場。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ KOJO_EXTRA						口上:エキストラモード
+;	・ KOJO_ENCOUNTER					口上:遭遇時
+;	・ KOJO_ACTION						口上:行動部
+;	・ KOJO_LOST_VIRGIN					口上:処女喪失時
+;	・ KOJO_ORGASM						口上:絶頂した時
+;	・ KOJO_ORGASM_M					口上:絶頂させた時
+;	・ KOJO_PALAMCHG					口上:各種PALAM変動時
+;	・ KOJO_DAILY						口上:日常イベント
+;	・ KOJO_WORK						口上:労役イベント
+;	・ KOJO_NTR							口上:ＮＴＲイベント
+;	・ KOJO_DEFAULT						口上:汎用
+;
+; *- FIRSTTIME
+;
+;	・ C_FIRSTTIME_遭遇					CHK:初回(口上-遭遇)
+;	・ C_FIRSTTIME_COM					CHK:初回(口上-コマンド)
+;	・ C_FIRSTTIME_KOJO					CHK:初回(口上-全般)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub KOJO_EXTRA
+;=================================================
+;   口上:エキストラモード
+;-------------------------------------------------
+@KOJO_EXTRA
+TRYCALLFORM KOJO_EXTRA_K{CFLAG:使用口上}
+
+;=================================================
+;   sub KOJO_ENCOUNTER
+;=================================================
+;   口上:遭遇時
+;-------------------------------------------------
+; Input:
+;  ARGS					処理区分
+;-------------------------------------------------
+@KOJO_ENCOUNTER(ARGS)
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+;専用口上
+	;ＮＴＲ時
+	IF TALENT:ＮＴＲ도
+		TRYCALLFORM KOJO_NTR_ENCOUNTER_K{CFLAG:使用口上}(ARGS)
+	ELSE
+		TRYCALLFORM KOJO_ENCOUNTER_K{CFLAG:使用口上}(ARGS)
+	ENDIF
+ELSE
+;特殊口上
+	;IF 
+		;TRYCALLFORM KOJO_ENCOUNTER_K0000(ARGS)
+	;ENDIF
+;汎用口上
+	IF VAR_SEX(TARGET)
+	;女
+		;汎用口上使用チェック
+		IF GETBIT(FLAG:汎用口上制御,1);女汎用の状態
+		;OFF
+ELSE
+		;ON
+			IF TALENT:ＮＴＲ도
+				TRYCALLFORM KOJO_DEFAULT_NTR_ENCOUNTER_K1(ARGS)
+			ELSE
+				TRYCALLFORM KOJO_DEFAULT_ENCOUNTER_K1(ARGS)
+			ENDIF
+
+ENDIF
+		ELSE
+	;男
+		;汎用口上使用チェック
+		IF GETBIT(FLAG:汎用口上制御,20);男汎用の状態
+		;OFF
+	ELSE
+		;ON
+			IF TALENT:ＮＴＲ도
+				TRYCALLFORM KOJO_DEFAULT_NTR_ENCOUNTER_K20(ARGS)
+			ELSE
+				TRYCALLFORM KOJO_DEFAULT_ENCOUNTER_K20(ARGS)
+			ENDIF
+	ENDIF
+ENDIF
+
+;CALL KOJO_DEFAULT("ENCOUNTER")
+
+ENDIF
+PRINTL
+
+;=================================================
+;   sub KOJO_ACTION
+;=================================================
+;   口上:行動部
+;-------------------------------------------------
+@KOJO_ACTION
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+;専用口上
+	;ＮＴＲ時
+	IF TALENT:ＮＴＲ도
+		TRYCALLFORM KOJO_NTR_ACTION_K{CFLAG:使用口上}
+	ELSE
+		TRYCALLFORM KOJO_ACTION_K{CFLAG:使用口上}
+	ENDIF
+ELSE
+;汎用口上
+	CALL KOJO_DEFAULT("ACTION")
+ENDIF
+PRINTL
+
+;=================================================
+;   sub KOJO_LOST_VIRGIN
+;=================================================
+;   口上:処女喪失時
+;-------------------------------------------------
+; Input:
+;  ARG:0					タイプ
+;-------------------------------------------------
+@KOJO_LOST_VIRGIN(ARG)
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	;専用口上
+	TRYCALLFORM KOJO_LOST_VIRGIN_K{CFLAG:使用口上}(ARG)
+ELSE
+	;汎用口上
+	CALL KOJO_DEFAULT("LOST_VIRGIN")
+ENDIF
+PRINTL
+
+
+
+;=================================================
+;   sub KOJO_ORGASM
+;=================================================
+;   口上:絶頂した時
+;-------------------------------------------------
+@KOJO_ORGASM
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	;専用口上
+	TRYCALLFORM KOJO_ORGASM_K{CFLAG:使用口上}
+ELSE
+	;汎用口上
+	CALL KOJO_DEFAULT("ORGASM")
+ENDIF
+PRINTL
+
+;=================================================
+;   sub KOJO_ORGASM_M
+;=================================================
+;   口上:絶頂させた時
+;-------------------------------------------------
+@KOJO_ORGASM_M
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	;専用口上
+	TRYCALLFORM KOJO_ORGASM_M_K{CFLAG:使用口上}
+ELSE
+	;汎用口上
+	CALL KOJO_DEFAULT("ORGASM_M")
+ENDIF
+PRINTL
+
+
+;=================================================
+;   sub KOJO_PALAMCHG
+;=================================================
+;   口上:各種PALAM変動時
+;-------------------------------------------------
+; Input:
+;  ARG:0					キャラ
+;  ARG:1					タイプ
+;-------------------------------------------------
+@KOJO_PALAMCHG(ARG:0, ARG:1)
+#DIM L_BAK
+L_BAK = TARGET
+TARGET = ARG:0
+TRYCALLFORM KOJO_PALAMCHG_K{CFLAG:(ARG:0):使用口上}(ARG:1)
+PRINTL
+TARGET = L_BAK
+
+;=================================================
+;   sub KOJO_DAILY
+;=================================================
+;   口上:日常イベント
+;-------------------------------------------------
+@KOJO_DAILY
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	;専用口上
+	TRYCALLFORM KOJO_DAILY_K{CFLAG:使用口上}
+ELSE
+	;汎用口上
+	CALL KOJO_DEFAULT("DAILY")
+ENDIF
+PRINTL
+
+
+;=================================================
+;   sub KOJO_WORK
+;=================================================
+;   口上:労役イベント
+;-------------------------------------------------
+@KOJO_WORK
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	;専用口上
+	TRYCALLFORM KOJO_WORK_K{CFLAG:使用口上}
+ELSE
+	;汎用口上
+	CALL KOJO_DEFAULT("WORK")
+ENDIF
+PRINTL
+
+
+;=================================================
+;   sub KOJO_NTR
+;=================================================
+;   口上:ＮＴＲイベント
+;-------------------------------------------------
+@KOJO_NTR
+;口上判定
+TRYCCALLFORM KOJO_EXIST_K{CFLAG:使用口上}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	;専用口上
+	TRYCALLFORM KOJO_NTR_K{CFLAG:使用口上}
+ELSE
+	;汎用口上
+	CALL KOJO_DEFAULT("NTR")
+ENDIF
+PRINTL
+
+
+;=================================================
+;   sub KOJO_DEFAULT
+;=================================================
+;   口上:汎用
+;-------------------------------------------------
+; Input:
+;  ARGS					処理
+;  ARG					タイプ
+;-------------------------------------------------
+@KOJO_DEFAULT(ARGS, ARG = 0)
+#DIMS L_KEY
+#DIM L_INPUT
+#DIM L_TYPE
+
+VARSET L_KEY
+VARSET L_INPUT
+VARSET L_TYPE
+
+SELECTCASE ARGS
+	;遭遇時
+	CASE "ENCOUNTER"
+		;ＮＴＲ時
+		IF TALENT:ＮＴＲ도
+			L_KEY = NTR_ENCOUNTER
+		ELSE
+			L_KEY = ENCOUNTER
+		ENDIF
+		L_INPUT = 1
+	;行動部
+	CASE "ACTION"
+		;ＮＴＲ時
+		IF TALENT:ＮＴＲ도
+			L_KEY = NTR_ACTION
+		ELSE
+			L_KEY = ACTION
+		ENDIF
+	;처녀喪失時
+	CASE "LOST_VIRGIN"
+		L_KEY = LOST_VIRGIN
+		L_INPUT = 1
+	;絶頂した時
+	CASE "_ORGASM"
+		L_KEY = ORGASM
+	;絶頂させた時
+	CASE "ORGASM_M"
+		L_KEY = ORGASM_M
+	;日常イベント
+	CASE "DAILY"
+		L_KEY = DAILY
+	;労役イベント
+	CASE "WORK"
+		L_KEY = WORK
+	;ＮＴＲイベント
+	CASE "NTR"
+		L_KEY = NTR
+
+	;その他
+	CASEELSE
+		;スルー
+		RETURN
+ENDSELECT
+
+;タイプ判定
+IF VAR_SEX(TARGET)
+	;女
+	L_TYPE = 1
+ELSE
+	;男
+	L_TYPE = 20
+ENDIF
+
+;汎用口上使用チェック
+SIF GETBIT(FLAG:汎用口上制御, L_TYPE)
+	RETURN
+
+
+;インプット
+IF L_INPUT
+	;有り
+	TRYCALLFORM KOJO_DEFAULT_%L_KEY%_K{L_TYPE}(ARG)
+ELSE
+	;無し
+	TRYCALLFORM KOJO_DEFAULT_%L_KEY%_K{L_TYPE}
+ENDIF
+
+
+
+;-------------------------------------------------------------------------------
+;   FIRSTTIME
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub C_FIRSTTIME_遭遇
+;=================================================
+;   CHK:初回(口上-遭遇)
+;-------------------------------------------------
+; Input:
+;  ARG					チェック値
+; Output:
+;  RETURNF				真偽値(0:更新済み 1:初回)
+;-------------------------------------------------
+@C_FIRSTTIME_遭遇(ARG)
+#FUNCTION
+#DIM L_VAL
+#DIMS L_KEY
+
+L_KEY	= 口上初回遭遇進行度
+L_VAL	= ARG
+
+;- 登録済みの場合
+IF CFLAG:L_KEY >= L_VAL
+	RETURNF 0
+ELSE
+	CFLAG:L_KEY = L_VAL
+	RETURNF 1
+ENDIF
+
+
+;=================================================
+;   sub C_FIRSTTIME_COM
+;=================================================
+;   CHK:初回(口上-コマンド)
+;-------------------------------------------------
+; Input:
+;  ARG:0				チェック値
+; Output:
+;  RETURNF				真偽値( 0:登録済み 1:未登録(初回) )
+;-------------------------------------------------
+@C_FIRSTTIME_COM(ARG:0 = -1)
+#FUNCTION
+#DIM L_VAL
+#DIM L_T
+#DIMS L_KEY
+
+L_VAL	= (ARG:0 < 0) ? SELECTCOM # ARG:0
+L_T		= TARGET
+L_KEY	= FIRSTTIME_コマンド
+
+;- CHK:初回
+RETURNF C_FIRSTTIME(L_T, L_VAL, L_KEY)
+
+;=================================================
+;   sub C_FIRSTTIME_KOJO
+;=================================================
+;   CHK:初回(口上-全般)
+;-------------------------------------------------
+; Input:
+;  ARG:0				チェック値
+; Output:
+;  RETURNF				真偽値( 0:登録済み 1:未登録(初回) )
+;-------------------------------------------------
+@C_FIRSTTIME_KOJO(ARG:0)
+#FUNCTION
+#DIM L_VAL
+#DIM L_T
+#DIMS L_KEY
+
+L_VAL	= ARG:0
+L_T		= TARGET
+L_KEY	= FIRSTTIME_口上全般
+
+;- CHK:初回
+RETURNF C_FIRSTTIME(L_T, L_VAL, L_KEY)
+
+

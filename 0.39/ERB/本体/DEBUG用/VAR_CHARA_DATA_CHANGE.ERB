@@ -1,0 +1,302 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:VAR_CHARA_DATA_CHANGE.ERB
+;	Facility	:VAR:キャラデータ変更機能。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXX
+;
+;	・ VAR_CHARA_DATA_CHANGE_MAIN		VAR:キャラデータ変更
+;	・ VAR_CHARA_DATA_CHANGE_SELECT		VAR:キャラデータ変更(選択)
+;	・ VAR_CHARA_DATA_CHANGE_VIEWER		VAR:キャラデータ変更(項目画面)
+;	・ VAR_CHARA_DATA_CHANGE_NO			VAR:キャラデータ変更(No)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub VAR_CHARA_DATA_CHANGE_MAIN
+;=================================================
+;   VAR:キャラデータ変更
+;-------------------------------------------------
+@VAR_CHARA_DATA_CHANGE_MAIN
+
+CUSTOMDRAWLINE =
+PRINTL キャラデータの変更機能です。
+PRINTL この機能は仕様変更に伴い一部データを書き換えたい場合、あるいは開発用に使用する機能です。
+PRINTL 下記が変更可能です。
+PRINTL
+PRINTL ・NO
+PRINTL ・CALLNAME
+PRINTL ・一人称
+PRINTL ・二人称
+PRINTL ・口上番号
+PRINTL ・初体験データの初期化
+PRINTL
+PRINTL
+PRINTL [0] キャラデータを変更する
+PRINTL
+PRINTL [9] 戻る
+CALL INPUT_INT(0,9)
+SELECTCASE RESULT
+	CASE 0
+		;- VAR:キャラデータ変更(選択)
+		CALL VAR_CHARA_DATA_CHANGE_SELECT
+	CASE 9
+		RETURN
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub VAR_CHARA_DATA_CHANGE_SELECT
+;=================================================
+;   VAR:キャラデータ変更(選択)
+;-------------------------------------------------
+@VAR_CHARA_DATA_CHANGE_SELECT
+#DIM L_INPUT
+#DIMS L_ERR_MSG
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+L_INPUT=0
+L_ERR_MSG=
+
+;-----------------------------
+;- キャラリスト
+;-----------------------------
+RESULT:1=0
+$CHARA_LIST
+
+;- LIST:キャラリスト
+TRYCCALL LIST_CHARA(@"データを変更したいキャラを選んでください　", RESULT:1, L_ERR_MSG)
+CATCH
+	PRINTL ERROR!
+	PRINTW キャラリストを表示する関数がありません
+	RETURN
+ENDCATCH
+L_INPUT = RESULT
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		RETURN 0
+	;- キャラ
+	CASEELSE
+		;- VAR:キャラデータ変更(項目画面)
+		CALL VAR_CHARA_DATA_CHANGE_VIEWER(L_INPUT)
+		GOTO CHARA_LIST
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub VAR_CHARA_DATA_CHANGE_VIEWER
+;=================================================
+;   VAR:キャラデータ変更(項目画面)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@VAR_CHARA_DATA_CHANGE_VIEWER(ARG)
+#DIM L_T
+
+L_T = ARG
+
+$TOP
+CUSTOMDRAWLINE =
+PRINTL 変更する項目を選んで下さい。
+PRINTL
+PRINTFORML [0] No. 　　：{NO:L_T}
+PRINTFORML [-] 名前　　：%NAME:L_T%
+PRINTFORML [1] 呼び名　：%CALLNAME:L_T%
+PRINTFORML [2] 一人称　：%CSTR:L_T:一人称%
+PRINTFORML [3] 二人称　：%CSTR:L_T:二人称%
+PRINTFORML [4] 口上番号：{CFLAG:L_T:使用口上}
+PRINTL
+PRINTFORML [5] 初体験データを初期化
+PRINTL
+PRINTFORML [9] 戻る
+
+$INPUT_LOOP
+INPUT
+SELECTCASE RESULT
+	;戻る
+	CASE 9
+		RETURN
+	;No
+	CASE 0
+
+		;- VAR:キャラデータ変更(No)
+		CALL VAR_CHARA_DATA_CHANGE_NO(L_T)
+
+	;CALLNAME
+	CASE 1
+		CUSTOMDRAWLINE =
+		PRINTL 新しいCALLNAMEを選んで下さい。
+		PRINTL 空入力をすると、何も選択せずに戻ります。
+		PRINTL
+		INPUTS
+		IF RESULTS == ""
+			;スルー
+		ELSE
+			CALLNAME:L_T = %RESULTS%
+		ENDIF
+
+	;一人称
+	CASE 2
+		CUSTOMDRAWLINE =
+		PRINTL 新しい一人称を選んで下さい。
+		PRINTL 空入力をすると、何も選択せずに戻ります。
+		PRINTL
+		INPUTS
+		IF RESULTS == ""
+			;スルー
+		ELSE
+			CSTR:L_T:一人称 = %RESULTS%
+		ENDIF
+	;二人称
+	CASE 3
+		CUSTOMDRAWLINE =
+		PRINTL 新しい二人称を選んで下さい。
+		PRINTL 空入力をすると、何も選択せずに戻ります。
+		PRINTL
+		INPUTS
+		IF RESULTS == ""
+			;スルー
+		ELSE
+			CSTR:L_T:二人称 = %RESULTS%
+		ENDIF
+	;口上番号
+	CASE 4
+		CUSTOMDRAWLINE =
+		PRINTL 新しい使用口上番号を選んで下さい。
+		PRINTL 9999をすると、何も選択せずに戻ります。
+		PRINTL
+		INPUT
+		IF RESULT == 9999
+			;スルー
+		ELSE
+			CFLAG:L_T:使用口上 = RESULT
+		ENDIF
+	;初体験初期化
+	CASE 5
+		CUSTOMDRAWLINE =
+		PRINTL 初体験データの初期化が可能です。
+		PRINTL 初期化をしますか？現在は下記のデータとなっています。
+		PRINTL
+		TRYCALL 初体験記録(L_T)
+		PRINTL
+		PRINTL
+		CALL INPUT_YN
+		IF RESULT
+			;スルー
+		ELSE
+			CSTR:L_T:初キス相手名		=
+			CSTR:L_T:初えっち相手名		=
+			CSTR:L_T:初Ａえっち相手名	=
+			CSTR:L_T:初フェラ相手名		=
+			CSTR:L_T:初中出し相手名		=
+			CSTR:L_T:初絶頂相手名		=
+			CSTR:L_T:初精飲相手名		=
+			CSTR:L_T:初出産相手名		=
+			PRINTW 初期化を行いました。
+		ENDIF
+	;その他
+	CASEELSE
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+GOTO TOP
+
+
+
+;=================================================
+;   sub VAR_CHARA_DATA_CHANGE_NO
+;=================================================
+;   VAR:キャラデータ変更(No)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@VAR_CHARA_DATA_CHANGE_NO(ARG)
+#DIM L_I
+#DIM L_T
+#DIMS L_STR
+#DIMS L_KEY
+
+L_T = ARG
+L_KEY = %VAR_MAKE_RENAME_UNIQUE_KEY(L_T, 1)%
+
+FOR L_I, 0, FLAG:最大数_キャラ
+	L_STR = %VAR_MAKE_RENAME_UNIQUE_KEY(L_I)%
+	SIF L_STR == L_KEY
+		BREAK
+NEXT
+;番号調整
+L_I --
+
+PRINTFORML L_STR:%L_STR%
+PRINTFORML L_KEY:%L_KEY% / L_I:{L_I}
+
+IF L_STR != ""
+	CUSTOMDRAWLINE =
+	PRINTL 新しいNo.を選んで下さい。
+	PRINTFORML 選択キャラクターのCSV候補はNo.{L_I}です。
+	PRINTL NoをCSV候補のNoで上書きしますか？
+	PRINTL
+	PRINTFORML 【対象キャラ】
+	PRINTFORML No:{NO:L_T}
+	PRINTFORML NAME:%NAME:L_T%
+	PRINTL
+	PRINTFORML 【CSV候補】
+	PRINTFORML No:{L_I}
+	PRINTFORML NAME:%CSVNAME(L_I, 0)%
+	PRINTL
+
+	CALL INPUT_YN
+	IF RESULT
+	ELSE
+		NO:L_T = L_I
+		PRINTW Noを上書きしました。
+		RETURN
+	ENDIF
+
+ENDIF
+
+CUSTOMDRAWLINE =
+PRINTL Noを手動で入力しますか？
+PRINTL
+CALL INPUT_YN
+SIF RESULT
+	RETURN
+
+CUSTOMDRAWLINE =
+PRINTL 新しいNo.を選んで下さい。
+PRINTL 9999(MAX)を選択すると、何も選択せずに戻ります。
+PRINTL
+CALL INPUT_MANY(0, 9999)
+IF RESULT == 9999
+	;スルー
+ELSE
+	NO:L_T = RESULT
+ENDIF
+

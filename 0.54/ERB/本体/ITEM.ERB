@@ -1,0 +1,290 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:ITEM.ERB
+;	Facility	:購買機能。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- 表示系
+;
+;	・ ITEM_MAIN						アイテム:主処理
+;	・ ITEM_TR_SALEABLE					アイテム:購入可否
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   表示系
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub ITEM_MAIN
+;=================================================
+;   アイテム:主処理
+;-------------------------------------------------
+@ITEM_MAIN
+#DIM L_I
+#DIM L_T
+#DIM L_HIT
+#DIM L_TMP
+#DIM L_BAK
+#DIM L_LINE, 2
+#DIMS L_ERR_MSG
+#DIMS L_NAME
+#LOCALSIZE 10
+#LOCALSSIZE 1
+L_LINE = LINECOUNT
+
+L_HIT = 0
+L_ERR_MSG=
+
+;-----------------------------
+;- 表示
+;-----------------------------
+REDRAW 0
+
+;ライン表示:新ページ
+CALL C_LINE
+
+PRINTFORML 入手するアイテムを選んでください。 [%GVAR_MONEY_NAME%:{MONEY}]
+PRINTFORML %GVAR_MONEY_NAME%を消費します。
+DRAWLINE
+
+;- データ部
+FOR L_I, 0, 100
+
+	SELECTCASE L_I
+		CASE 80
+			IF !LINEISEMPTY()
+				PRINTL
+				L_HIT=0
+			ENDIF
+		CASE 40, 60
+			SIF !LINEISEMPTY()
+				PRINTL
+			PRINTL
+			L_HIT=0
+	ENDSELECT
+
+	SIF !STRLENS(ITEMNAME:L_I)
+		CONTINUE
+
+	;- 調教アイテム:購入可否
+	SELECTCASE ITEM_TR_SALEABLE(L_I)
+		;非表示
+		CASE -1
+			CONTINUE
+		;NG
+		CASE 0
+			SETCOLOR COLOR("gray")
+			SELECTCASE L_I
+				CASE 00 TO 39, 55 TO 59
+					PRINTFORM [{L_I,2}] %ITEMNAME:L_I,26,LEFT%%"(購入済み)",10,RIGHT%　
+				CASE 60 TO 79
+					PRINTFORM [{L_I,2}] %ITEMNAME:L_I,26,LEFT%%"(習得済み)",10,RIGHT%　
+				CASEELSE
+					PRINTFORM [{L_I,2}] %ITEMNAME:L_I,26,LEFT%%"(対象不在)",10,RIGHT%　
+			ENDSELECT
+		;OK
+		CASE 1
+			SIF MONEY < ITEMPRICE:L_I
+				SETCOLOR COLOR("伏字")
+			PRINTFORM [{L_I,2}] %ITEMNAME:L_I,26,LEFT%%"￥"+@"{ITEMPRICE:L_I}",10, RIGHT%　
+	ENDSELECT
+	RESETCOLOR
+	SIF L_HIT % 2
+		PRINTL 
+	L_HIT++
+
+NEXT
+
+SIF L_HIT % 2
+	PRINTL 
+DRAWLINE
+PRINTL [1000] 戻る
+$INPUT_LOOP
+INPUT
+LOCAL = RESULT
+
+;戻る
+IF LOCAL == 1000
+	REDRAW 1
+	RETURN 0
+ENDIF
+L_ERR_MSG=
+
+SELECTCASE ITEM_TR_SALEABLE(LOCAL)
+	;アイテム
+	CASE 0 TO 100
+		;- アイテム:購入可否
+		IF ITEM_TR_SALEABLE(LOCAL) < 1
+			CLEARLINE 1
+			GOTO INPUT_LOOP
+		ELSEIF MONEY < ITEMPRICE:LOCAL
+			CALL C_INPUT_ERROR(@"%GVAR_MONEY_NAME%が足りません")
+			GOTO INPUT_LOOP
+		ENDIF
+
+		;-----------------------------
+		;- 購入確認画面
+		;-----------------------------
+
+		SIF LOCAL < 60
+			DRAWLINE
+		SELECTCASE LOCAL
+			;非消費アイテム
+			CASE IS < 40
+				PRINTFORML 本当に%ITEMNAME:LOCAL%を購入しますか？
+				CALL INPUT_YN,"購入する","やめる"
+				IF RESULT == 0
+					PRINTFORMW ＜%ITEMNAME:LOCAL%を購入しました＞
+					ITEM:LOCAL += 1
+					MONEY -= ITEMPRICE:LOCAL
+				ELSE
+					PRINTW ＜購入を取りやめました＞
+				ENDIF
+			;消耗品
+			CASE IS < 55
+				PRINTFORML %ITEMNAME:LOCAL%をいくつ買いますか？ (現在 {ITEM:LOCAL}個所持)
+				CALL INPUT_MANY(0,MIN(MONEY/ITEMPRICE:LOCAL,999 - ITEM:LOCAL))
+				IF RESULT == 0
+					PRINTW ＜購入を取りやめました＞
+				ELSEIF RESULT == 1
+					PRINTFORMW ＜%ITEMNAME:LOCAL%を購入しました＞
+				ELSE
+					PRINTFORMW ＜%ITEMNAME:LOCAL%を{RESULT}個購入しました＞
+				ENDIF
+				ITEM:LOCAL += RESULT
+				MONEY -= ITEMPRICE:LOCAL*RESULT
+			;クリアアイテム
+			CASE IS < 60
+				SELECTCASE ITEMNAME:LOCAL
+					CASEELSE
+				ENDSELECT
+				PRINTL
+				CALL INPUT_YN,"購入する","やめる"
+				IF RESULT == 0
+					PRINTFORMW ＜%ITEMNAME:LOCAL%を購入しました＞
+					ITEM:LOCAL += 1
+					MONEY -= ITEMPRICE:LOCAL
+				ELSE
+					PRINTW ＜購入を取りやめました＞
+				ENDIF
+
+			;その他アイテム
+			CASE 60 TO 99
+				SELECTCASE ITEMNAME:LOCAL
+					CASE "【道具:排卵誘発剤】"
+						LOCALS =  %ITEMNAME:LOCAL%:妊娠する確率が上昇します
+					;ERROR
+					CASEELSE
+						CALL C_INPUT_ERROR(@"対象アイテムは調整中です")
+						GOTO INPUT_LOOP
+				ENDSELECT
+
+				RESULT:1=0
+				L_LINE:1 = LINECOUNT
+				CLEARLINE LINECOUNT - L_LINE:1
+				$CHARA_LIST
+
+				;- LIST:キャラリスト
+				CALL LIST_CHARA(@"%LOCALS%　消費%GVAR_MONEY_NAME%:{ITEMPRICE:LOCAL}　所有%GVAR_MONEY_NAME%:{MONEY}", RESULT:1, L_ERR_MSG)
+				IF RESULT == 1000
+					CLEARLINE LINECOUNT - L_LINE
+					RESTART
+				ENDIF
+
+				;- CHK:ERROR
+				L_ERR_MSG=
+				SELECTCASE ITEMNAME:LOCAL
+					CASE "【道具:排卵誘発剤】"
+						IF TALENT:RESULT:排卵薬
+							L_ERR_MSG = 既に排卵誘発剤を使用しています
+						ELSEIF TALENT:RESULT:妊娠
+							L_ERR_MSG = 既に妊娠しています
+						ELSEIF !VAR_SEX(RESULT)
+							L_ERR_MSG = 男性に排卵誘発剤は使用出来ません
+						ENDIF
+				ENDSELECT
+				IF STRLENS(L_ERR_MSG)
+					GOTO CHARA_LIST
+				ENDIF
+
+				L_T=RESULT
+				L_NAME = %CALLNAME:RESULT%
+				DRAWLINE
+				PRINTFORML 本当に%L_NAME%に対して%ITEMNAME:LOCAL%を行いますか？
+				;PRINTFORML （隷属刻印を取得していない場合、反発が発生します）
+				CALL INPUT_YN
+				IF !RESULT
+				ELSE
+					GOTO CHARA_LIST
+				ENDIF
+
+				;- 購買処理
+				SELECTCASE ITEMNAME:LOCAL
+					CASE "【道具:排卵誘発剤】"
+						PRINTFORMW ＜%L_NAME%に排卵誘発剤を使用した＞
+						TALENT:L_T:排卵薬 = 1
+				ENDSELECT
+				;CLEARLINE LINECOUNT - L_LINE
+				L_LINE = LINECOUNT
+				MONEY -= ITEMPRICE:LOCAL
+				RESTART
+			;上記以外
+			CASEELSE
+				CALL C_INPUT_ERROR
+				GOTO INPUT_LOOP
+		ENDSELECT
+	;その他
+	CASEELSE
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub ITEM_TR_SALEABLE
+;=================================================
+;   アイテム:購入可否
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象アイテム
+; Output:
+;  RETURNF				結果(1:販売 0:購入済みなどの理由で購入不能 -1:販売リストにのらない)
+;-------------------------------------------------
+@ITEM_TR_SALEABLE(ARG)
+#FUNCTION
+
+SIF VARSIZE("ITEMPRICE") < ARG
+	RETURNF -1
+
+SIF ITEMPRICE:ARG <= 0
+	RETURNF -1
+
+SELECTCASE ITEMNAME:ARG
+	CASE "ローター", "Ｅマッサージャ", "バイブ", "アナルバイブ"
+		SIF ITEM:ARG
+			RETURNF 0
+	CASE "【設備:シェルター化】"
+		SIF ITEM:ARG
+			RETURNF 0
+	CASEELSE
+ENDSELECT
+
+RETURNF 1
+
+
+

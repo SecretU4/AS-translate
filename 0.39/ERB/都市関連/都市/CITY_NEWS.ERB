@@ -1,0 +1,56 @@
+
+;-------------------------------------------------
+; 都市　ニュース
+;-------------------------------------------------
+
+@CITY_NEWS
+
+
+SETCOLOR 250,250,250
+PRINTFORM 　　　　 【ニュース:
+IF Flag:都市_防衛 != 0
+	PRINTFORM 
+ELSEIF FLAG:都市_ニュース == 15
+	PRINTFORM ≪住人の皆さまおはようございます、今日も都市は平和です≫
+ELSEIF FLAG:都市_ニュース == 14
+	PRINTFORM 人気アイドルユニットの新作CDが発売中、各店舗で売れきれが多発
+ELSEIF FLAG:都市_ニュース == 13
+	PRINTFORM 新情報はありません
+ELSEIF FLAG:都市_ニュース == 12
+	PRINTFORM 都市に異常は見られませんでした
+ELSEIF FLAG:都市_ニュース == 11
+	PRINTFORM 完全侵食区域の領域が拡大しています、各部隊は対策を…
+ELSEIF FLAG:都市_ニュース == 10
+	PRINTFORM 許可を得ず興味本位で都市境界線を探索するのは止めましょう。
+ELSEIF FLAG:都市_ニュース == 9
+	PRINTFORM ≪都市に住む住人の方々、今日も都市を運営していきましょう≫
+ELSEIF FLAG:都市_ニュース == 8
+	PRINTFORM 今日の天気は変わりやすいので、雲の様子をよく見て外出しましょう。
+ELSEIF FLAG:都市_ニュース == 7
+	PRINTFORM 時空歪曲により外界の地形が変化しました、該当地域は…
+ELSEIF FLAG:都市_ニュース == 6
+	PRINTFORM 身分の低い住人が消息不明になる事件が多発しています、細心の注意を…
+ELSEIF FLAG:都市_ニュース == 5
+	PRINTFORM イレギュラーによるテロ行為が発生、即座に鎮圧されました。
+ELSEIF FLAG:都市_ニュース == 4
+	PRINTFORM 外界から時空歪曲が発生しています、力場が強い場所には注意して下さい。
+ELSEIF FLAG:都市_ニュース == 3
+	PRINTFORM 「プレイヤーNo.0{RAND:9}」の権限乱用により都市の機能が不安定に…
+ELSEIF FLAG:都市_ニュース == 2
+	PRINTFORM 小型の「外敵」が都市に侵入しましたが、被害はありませんでした。
+ELSEIF FLAG:都市_ニュース == 1
+	PRINTFORM 「プレイヤーNo.0{RAND:9}」の部隊が外界を調査中。
+ELSE
+	PRINTFORM 都市境界線にて「外敵」の反応あり、住人は気を付けて下さい。
+ENDIF
+
+PRINTFORML 】
+RESETCOLOR
+
+
+
+
+
+
+
+

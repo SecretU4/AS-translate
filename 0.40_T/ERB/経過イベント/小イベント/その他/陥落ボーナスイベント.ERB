@@ -1,0 +1,612 @@
+﻿;-------------------------------------------------
+;陥落ボーナスイベント
+;
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS
+#DIM L_INPUT
+
+
+
+DRAWLINE
+IF TALENT:애인
+	SETCOLOR 250,50,150
+	PRINTFORML 【함락 보너스 이벤트：결혼식(華燭の典)(애인)】
+	RESETCOLOR
+	PRINTFORML %CALLNAME%를 함락시킨 %CALLNAME:MASTER%는 특별한 의상을 준비했다。
+	IF (TALENT:ＮＴＬ || TALENT:백합뜯기)
+		;陥落対象に伴侶がいる場合
+		PRINTFORML 
+		PRINTFORML 반려가 있으면서도 %CALLNAME:MASTER%에게 마음을 빼앗긴 %CALLNAME%는、그 업보를 상징하는 듯한 칠흑빛 웨딩 드레스로 
+		PRINTFORML 몸을 감싸고 카페 안쪽의 방에 나타났다。
+		PRINTFORML 식장에 관계자들을 잔뜩 불러서 했던 반려와의 결혼식과는 달리、오직 둘 뿐이며 입회인도 없다。
+		PRINTFORML しかし、華燭の典に臨む%CALLNAME%의 胸の高鳴りは当時を上回り、気恥ずかしさから%CALLNAME:MASTER%의 얼굴을 직시하지 못하고 있었다。
+		PRINTFORMW そんな%CALLNAME%を抱き寄せた%CALLNAME%는、결혼식을 시작했다…
+		PRINTFORML 
+		PRINTFORML 俯きがちな%CALLNAME%의 頤を持ち上げて口付けを交わすと、%CALLNAME:MASTER%는 舌を絡ませ唾液を流し込んでいく。
+		PRINTFORML 伴侶のものではない唾液を嬉々として啜った%CALLNAME%는、芳醇な酒でも口にしたかのようにうっとりとした表情で嚥下する。
+		PRINTFORML やがて口付けを終える頃にはすっかりと出来上がってしまった%CALLNAME%는 무너지듯이 %CALLNAME:MASTER%의 앞에 무릎을 꿇었다。
+		PRINTFORML 「今日、この日、この時より、%CALLNAME%는 %CALLNAME:MASTER%に真の愛を捧げることを誓います%UNICODE(0x2661)%」
+		PRINTFORML もはや%CALLNAME:MASTER%からの愛を求めて行動することに一片の疑問も抱かなくなっていた%CALLNAME%는、かつて愛を誓い合ったはずの
+		PRINTFORMW 伴侶を裏切り、%CALLNAME:MASTER%의 발등에 입을 맞추면서 배덕의 맹세를 맺었다…
+		PRINTFORML 
+	ELSE
+		;陥落対象に伴侶がいない場合
+		PRINTFORML 
+		PRINTFORML 純白のウエディングドレスに身を包んで登場した%CALLNAME%는 頬を高潮させ、潤んだ瞳で%CALLNAME:MASTER%を見つめている。
+		PRINTFORMW カフェの奥の部屋で二人きり。立会人もいない華燭の典はしめやかに行われようとしていた…
+		PRINTFORML 
+		PRINTFORML 抱き寄せた%CALLNAME:MASTER%に引き寄せられるまま、%CALLNAME%는 その腕の中に納まると口付けを交わす。
+		PRINTFORML %CALLNAME%는 差し込まれた%CALLNAME:MASTER%の舌を嬉しそうに出迎え、流し込まれた唾液を躊躇いなく嚥下していく。
+		PRINTFORML 甘い吐息を零しながら口付けを終えた%CALLNAME%는、ゆっくりとその場にしゃがみ込んだ。
+		PRINTFORML 「今日、この日、この時より、%CALLNAME%는 %CALLNAME:MASTER%を終世愛することを誓います%UNICODE(0x2661)%」
+		PRINTFORMW 両手を組んで祈るように頭を垂れた%CALLNAME%는 %CALLNAME:MASTER%の足の甲に誓いの口付けを落とした…
+		PRINTFORML 
+	ENDIF
+ELSEIF TALENT:심취
+	SETCOLOR 250,50,150
+	PRINTFORML 【함락 보너스 이벤트：결혼식(華燭の典)(심취)】
+	RESETCOLOR
+	PRINTFORML %CALLNAME%를 함락시킨 %CALLNAME:MASTER%는 특별한 의상을 준비했다。
+	IF (TALENT:ＮＴＬ || TALENT:백합뜯기)
+		;陥落対象に伴侶がいる場合
+		PRINTFORML 
+		PRINTFORML 伴侶がいながら新たな主に心奪われてしまった%CALLNAME%는、그 업보를 상징하는 듯한 칠흑빛 웨딩 드레스로 身を包んで登場した。
+		PRINTFORML ドレスは胸元と背中が大きく開かれ、スカートのスリットが深いセクシーなデザインのため肌の露出が多い。
+		PRINTFORML 既婚者ならば慎みを持ち、伴侶以外の人物に対してみだりにその肌を晒すことは避けるべきなのだろうが、%CALLNAME:MASTER%のお願いなのだ。
+		PRINTFORMW 背徳感に胸を高鳴らせた%CALLNAME%が%CALLNAME:MASTER%の正面に立ち、カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まった…
+		PRINTFORML 
+		PRINTFORML %CALLNAME%는 %CALLNAME:MASTER%の口づけに積極的に応じ、差し込まれた舌を丁重に出迎えた。
+		PRINTFORML 伴侶にもしたことのない濃厚なディープキスは%CALLNAME:MASTER%のお眼鏡に適ったらしく、ご褒美として唾液が流し込まれてくる。
+		PRINTFORML それを嬉々として飲み込んだ%CALLNAME%는 忠誠の証を示すため、その場に跪くと肉棒を取り出した。
+		SIF TALENT:ＮＴＬ
+			PRINTFORML 夫の소추とは違う、人妻をダメにする凶悪で愛らしい肉棒にそっと口づけをしてから%CALLNAME%는 フェラチオを開始する。
+		SIF TALENT:백합뜯기
+			PRINTFORML 雌は雄に支配されるための存在であることを思い出させてくれた凶悪で愛らしい肉棒を口に咥え、%CALLNAME%는 フェラチオを開始する。
+		PRINTFORML 儀式のために勃たせるだけだというのに、つい熱心に奉仕をしてしまった%CALLNAME%を%CALLNAME:MASTER%がそこまでだと止めた。
+		PRINTFORML 主の命令で目的を思い出した%CALLNAME%がフェラチオを中断して正面に顔を向けると、その頬に硬くなった肉棒がぴたりと押し当てられた。
+		PRINTFORML 「%CALLNAME%의 身も心も、すべて真の主である%CALLNAME:MASTER%様に捧げます。これよりは自由にお使いください」
+		SIF TALENT:ＮＴＬ
+			PRINTFORML 雌がより強き、より頼りになる雄を求めるのは自然の摂理であり、誓いの口上を述べることになんの躊躇いもなかった。
+		SIF TALENT:백합뜯기
+			PRINTFORML 雌同士では精神的にも肉体的にも足りない部分を埋めてくれる雄への服従を誓うことに、なんの躊躇いもない。
+		PRINTFORML %CALLNAME:MASTER%는 %CALLNAME%의 左右の頬に三度肉棒を押し当ててから亀頭の先端に背徳の誓いの口づけをさせる。
+		PRINTFORMW 人妻が伴侶ではない新たな主を得た瞬間であった…
+		PRINTFORML 
+	ELSE
+		;陥落対象に伴侶がいない場合
+		PRINTFORML 
+		PRINTFORML %CALLNAME%의 着る純白のウエディングドレスは胸元と背中が大きく開かれ、スカートのスリットが深いセクシーなデザインであった。
+		PRINTFORML それを恥らうことなく着用して現れた%CALLNAME%의 忠誠心に満足した%CALLNAME:MASTER%는 、%CALLNAME%を抱き寄せる。
+		PRINTFORMW カフェの奥の部屋で二人きり、立会人もいない華燭の典がしめやかに行われようとしていた…
+		PRINTFORML 
+		PRINTFORML %CALLNAME%는 口付けを交わすと、%CALLNAME:MASTER%の唇を割るように舌を差し込んで舌同士を絡みつかせる。
+		PRINTFORML 積極的に奉仕しようとする%CALLNAME%だが、今回の目的は性奉仕を受けることではない。
+		PRINTFORML %CALLNAME%의 尻を叩いて目的を思い出させた%CALLNAME:MASTER%는 、その場に跪かせると肉棒を取り出した。
+		PRINTFORML まだ勃起していない肉棒を%CALLNAME%にフェラチオさせて起たせると、その頬にぴたりと当てる。
+		PRINTFORML 「%CALLNAME%의 身も心も、すべて%CALLNAME:MASTER%様のものです。これよりは自由にお使いください」
+		PRINTFORMW %CALLNAME%が口上を述べると、%CALLNAME:MASTER%는 左右の頬に三度肉棒を押し当ててから亀頭の先端に誓いの口付けをさせた…
+		PRINTFORML 
+	ENDIF
+ELSEIF TALENT:정부
+	SETCOLOR 250,50,150
+	PRINTFORML 【함락 보너스 이벤트：결혼식(華燭の典)(정부)】
+	RESETCOLOR
+	PRINTFORML %CALLNAME%를 함락시킨 %CALLNAME:MASTER%는 특별한 의상을 준비했다。
+	IF (TALENT:ＮＴＬ || TALENT:백합뜯기)
+		;陥落対象に伴侶がいる場合
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%の与える快楽に逆らえなくなった%CALLNAME%는、伴侶への義理立ても忘れて漆黒のオープンブラとオープンＴバックに
+		PRINTFORML ガーターベルトという淫靡な下着姿でカフェの奥にある部屋へとやってきた。
+		PRINTFORML %CALLNAME%が歩くたびにレースのチョーカーと手錠を繋ぐ鎖が揺れ、チャリチャリと金属音を奏でる。
+		PRINTFORML その音色を聞きながら、%CALLNAME%는 自身が伴侶ではない別の雄によって完全に支配されたことを再確認し恍惚としていた。
+		PRINTFORML もはや伴侶のことなど頭に無い%CALLNAME%を%CALLNAME:MASTER%는 傍らに抱き寄せる。
+		PRINTFORMW %CALLNAME%의 伴侶が知らぬ間に、カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まろうとしていた…
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%の前で跪いた%CALLNAME%는 肉棒を取り出してフェラチオを開始すると、準備のため自身の秘所も指で刺激し始める。
+		PRINTFORML 伴侶ではなく%CALLNAME:MASTER%によって開発された性感帯を的確に刺激すれば、膣はとろとろと愛液をこぼし始める。
+		PRINTFORML 性的刺激により充血した小陰唇がぱっくりと口を開けたのが確認できた頃には、%CALLNAME:MASTER%の肉棒も屹立していた。
+		PRINTFORML 準備を終えて立ち上がった%CALLNAME%が%CALLNAME:MASTER%に抱き着くと、口を開け閉めして肉棒を待ち焦がれている膣口をその先端へと押し付ける。
+		PRINTFORML 亀頭に圧迫された粘膜がぬちゃりと音を立て、腰が砕けそうな快感が下半身から登ってくるが挿入はしない。
+		PRINTFORML 挿入してしまっては儀式は失敗とみなされるので、%CALLNAME%는 必死に我慢して亀頭と膣の口づけだけで済ませる。
+		PRINTFORML 「今日からは%CALLNAME:MASTER%様専用の性欲処理用雌豚です。これからはいつでも%CALLNAME%に性欲処理をお申し付けくださいね」
+		PRINTFORMW そうして背徳の誓いを述べた%CALLNAME%는 本能に逆らって亀頭と膣の口づけを終えると、その場に土下座して%CALLNAME:MASTER%の足の甲へと口づけをした…
+		PRINTFORML 
+	ELSE
+		;陥落対象に伴侶がいない場合
+		PRINTFORML 
+		PRINTFORML %CALLNAME%는 純白のオープンブラとオープンＴバックにガーターベルトという淫靡な下着姿で登場した。
+		PRINTFORML またレースのチョーカーからは銀色の鎖が伸び、途中で枝分かれした鎖はそれぞれ両手首のレースの手錠と繋がっている。
+		PRINTFORML もはや%CALLNAME:MASTER%に対して隠すものは何一つ無い%CALLNAME%는 雌としての本性を曝け出し、胸元の鎖を強く引かれると黙って
+		PRINTFORML 自らを支配している雄の傍らに身を寄せた。
+		PRINTFORMW カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まった…
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%の前にしゃがみ込んだ%CALLNAME%는 自慰フェラチオを行い儀式の準備を始める。
+		PRINTFORML %CALLNAME:MASTER%によって仕込まれたテクニックに、開発された性感帯によって準備はあっけないほどすぐに終わった。
+		PRINTFORML しな垂れかかるように%CALLNAME:MASTER%に抱き着いた%CALLNAME%는、勃起した肉棒を膣へと誘導して宛がう。
+		PRINTFORML 普段の交尾ならばこのまま挿入してしまうのだが、今日は誓いの儀式のために亀頭と膣の口づけだけで済ます必要があった。
+		PRINTFORML %CALLNAME:MASTER%の手によって淫乱な雌へと変貌させられた%CALLNAME%にとっては不満の残る行為であるが、儀式なのだから仕方がない。
+		PRINTFORML ぬちゃぬちゃとわざとらしく音を立てながら亀頭と膣の口づけをたっぷりと味わった%CALLNAME%는、%CALLNAME:MASTER%の耳元で囁く。
+		PRINTFORML 「今日からは%CALLNAME:MASTER%様のモノです。これからはいつでも%CALLNAME%で性欲処理してくださいね」
+		PRINTFORMW 誓いを述べてそっと体を離した%CALLNAME%는、その場に土下座して%CALLNAME:MASTER%の足の甲へと口づけをした…
+		PRINTFORML 
+	ENDIF
+ENDIF
+
+
+SIF TALENT:애인
+	PRINTFORML 식을 마친 %CALLNAME%는 애정이 가득 담긴 시선으로 %CALLNAME:MASTER%를 응시하고 있다。
+SIF TALENT:심취
+	PRINTFORML 식을 마친 %CALLNAME%는 조용히 %CALLNAME:MASTER%의 명령을 기다리고 있다。
+SIF TALENT:정부
+	PRINTFORML 식을 마친 %CALLNAME%는 보란듯이 자위하면서 %CALLNAME:MASTER%를 유혹하고 있다。
+
+PRINTFORML 이번은 말하자면 첫날밤이라는 녀석이 되는데…
+PRINTFORML 
+SETCOLOR 250,50,50
+PRINTFORML （함락 보너스！　결혼식(華燭の典) 보너스는 캐릭터당 한번 뿐입니다）
+RESETCOLOR
+
+$INPUT_LOOP
+PRINTFORML 
+PRINTFORM %CALLNAME%의 상태：
+IF TALENT:수정
+	PRINTFORML 수정 완료
+ELSEIF TALENT:妊娠
+	PRINTFORML 임신중
+ELSE
+	PRINTFORML 비었음（교배 가능）
+ENDIF
+PRINTFORM Ｖ감도：
+IF TALENT:Ｖ민감
+	PRINTFORM 민감
+ELSEIF TALENT:Ｖ둔감
+	PRINTFORM 둔감
+ELSE
+	PRINTFORM 보통
+ENDIF
+
+PRINTFORM 　／　Ａ감도：
+IF TALENT:Ａ민감
+	PRINTFORM 민감
+ELSEIF TALENT:Ａ둔감
+	PRINTFORM 둔감
+ELSE
+	PRINTFORM 보통
+ENDIF
+
+PRINTFORM 　／　Ｂ감도：
+IF TALENT:Ｂ민감
+	PRINTFORM 민감
+ELSEIF TALENT:Ｂ둔감
+	PRINTFORM 둔감
+ELSE
+	PRINTFORM 보통
+ENDIF
+
+PRINTFORM 　／　Ｃ감도：
+IF TALENT:Ｃ민감
+	PRINTFORML 민감
+ELSEIF TALENT:Ｃ둔감
+	PRINTFORML 둔감
+ELSE
+	PRINTFORML 보통
+ENDIF
+PRINTFORML 
+PRINTFORML [1] - 【교배한다】(반드시 수정하며 경험치를 획득한다)
+PRINTFORML [2] - 【무자각 소질 강화】(랜덤으로 하나만 강화한다)
+PRINTFORML [3] - 【육체 강화】(RPG 스테이터스를 육체적으로 강화한다)
+PRINTFORML [4] - 【정신 강화】(RPG 스테이터스를 정신적으로 강화한다)
+PRINTFORM [10] - 【Ｖ감도를 올린다】　
+PRINTFORM [11] - 【Ａ감도를 올린다】　
+PRINTFORM [12] - 【Ｂ감도를 올린다】　
+PRINTFORML [13] - 【Ｃ감도를 올린다】
+PRINTFORML [999] - 【아무것도 하지 않는다】(보너스 획득 권리를 버림。이점 없음)
+PRINTFORML 
+
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 1	;種付けする
+	IF (TALENT:수정 || TALENT:妊娠)
+		PRINTFORMW ≪……들립니까…「플레이어」よ……지금…당신의…마음에…직접… 말을 걸고 있습니다…≫
+		PRINTFORMW ≪…그 여성은…이미…임신 중입니다……다른…여성에게…교배하세요……≫
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_SEX
+	ENDIF
+CASE 2	;無自覚の素質強化
+	CALL TURN_EVENT_FALL_BONUS_TAL
+CASE 3	;肉体強化
+	CALL TURN_EVENT_FALL_BONUS_POW
+CASE 4	;精神強化
+	CALL TURN_EVENT_FALL_BONUS_MIN
+CASE 10	;Ｖ感度を強化
+	IF TALENT:Ｖ민감
+		PRINTFORMW 이미 %CALLNAME%의 Ｖ감도는 예민해져서 더이상 오를 것 같지 않다。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROV
+	ENDIF
+CASE 11	;Ａ感度を強化
+	IF TALENT:Ａ민감
+		PRINTFORMW 이미 %CALLNAME%의 Ａ감도는 예민해져서 더이상 오를 것 같지 않다。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROA
+	ENDIF
+CASE 12	;Ｂ感度を強化
+	IF TALENT:Ｂ민감
+		PRINTFORMW 이미 %CALLNAME%의 Ｂ감도는 예민해져서 더이상 오를 것 같지 않다。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROB
+	ENDIF
+CASE 13	;Ｃ感度を強化
+	IF TALENT:Ｃ민감
+		PRINTFORMW 이미 %CALLNAME%의 Ｃ감도는 예민해져서 더이상 오를 것 같지 않다。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROC
+	ENDIF
+CASE 999	;何もしない
+	PRINTFORML …
+	PRINTFORML ……
+	PRINTFORML 오늘은 이미 늦었다。
+	PRINTFORMW %CALLNAME:MASTER%는 %CALLNAME%를 평상복으로 갈아입히고 집 근처까지 보내주었다…
+	RETURN
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+;１回限りのイベントなので次回以降は発生しないフラグON
+CFLAG:華燭の典 = 1
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　種付けする
+;必ず受精し経験値を獲得します
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_SEX
+
+
+PRINTFORML 교배를 실시하기로 한 %CALLNAME:MASTER%는 %CALLNAME%에게 배란 유발제를 먹이고、자신도 정력 증강제를 복용했다。
+PRINTFORML …
+PRINTFORML ……
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+PRINTFORML 
+IF TALENT:애인
+	IF !RAND:3
+		PRINTFORMW 사랑하는 %CALLNAME:MASTER%의 아이를 갖고 싶다는 %CALLNAME%의 소원이 정자와 난자에 통했는지、%CALLNAME%는 수정되었습니다…
+	ELSEIF !RAND:2
+		PRINTFORMW %CALLNAME:MASTER%의 사랑을 얻기 위해 교배 섹스에 임한 %CALLNAME%는 무사히 수정 완료되었습니다…
+	ELSE
+		PRINTFORMW %CALLNAME%는 필로 토크 도중에 갑자기 강렬한 행복감에 휩쓸리면서、자신이 수정했다는 것을 본능적으로 깨달았다…
+	ENDIF
+ELSEIF TALENT:심취
+	IF !RAND:3
+		PRINTFORMW %CALLNAME:MASTER%에게서 아이를 임신하라고 명령받은 %CALLNAME%가 교배 교미에 힘쓴 결과、%CALLNAME%는 수정되었습니다…
+	ELSEIF !RAND:2
+		PRINTFORMW %CALLNAME%가 자신의 난자가 %CALLNAME:MASTER%의 정자에 패배하길 간절하게 빈 덕분인지、%CALLNAME%는 무사히 수정 완료되었습니다…
+	ELSE
+		PRINTFORMW %CALLNAME:MASTER%의 정액을 뱃속에 오래 두기 위해 전용 정조대까지 준비했던 %CALLNAME%의 노력이 여물면서、%CALLNAME%는 수정되었습니다…
+	ENDIF
+ELSEIF TALENT:정부
+	IF !RAND:3
+		PRINTFORMW %CALLNAME:MASTER%와의 교배 교미의 쾌감에 빠져 헤어나올 수 없게 된 %CALLNAME%는 당연하다는 듯이 수정되었습니다…
+	ELSEIF !RAND:2
+		PRINTFORMW %CALLNAME%는 쾌락에 탐닉한 나머지、원래 목적도 잊고 온몸이 정액 범벅이 되었지만、무사히 수정 완료되었습니다…
+	ELSE
+		PRINTFORMW 넘치는 %CALLNAME:MASTER%의 정액을 자기도 모르게 질 안쪽에 도로 밀어넣던 %CALLNAME%의 생식 본능이 승리하면서、%CALLNAME%는 수정되었습니다…
+	ENDIF
+ENDIF
+
+CFLAG:受精現在耐久値 = 0
+TALENT:수정 += 1
+SIF TALENT:교제중 == 1 || TALENT:결혼완료 == 1　|| TALENT:백합결혼 == 1　
+	TALENT:탁란 = 1
+CFLAG:妊娠フラグ = 1
+
+;--------------------受精現在耐久値を減らしていく処理(演出)を追加する--------------------
+
+CALL JN_SEX_EXP
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　Ｖ감도를 올린다
+;V感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROV
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｖ둔감
+	PRINTFORML 예전부터 %CALLNAME%의 보지가 자극에 둔감하게 반응하는 것을 %CALLNAME:MASTER%는 불만스럽게 여기고 있었다。
+	PRINTFORML 이번 기회에 성감대를 개발하여、평범하게 느끼고 서로 즐길 수 있도록 하고 싶다。
+ELSE
+	PRINTFORML %CALLNAME%의 보지는 이제 폄범하게 자극에 반응하는 것 같지만、좀 더 느끼면서 엉망진창이 되는 모습을 보고 싶다。
+ENDIF
+PRINTFORMW 그렇게 생각한 %CALLNAME:MASTER%는 각종 괴롭힘용 도구를 준비하여 %CALLNAME%를 침대에 밀어 넘어뜨렸다…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ｖ둔감인 경우엔 Ｖ둔감을 삭제
+IF TALENT:Ｖ둔감
+	TALENT:Ｖ둔감 = 0
+	PRINTFORMW %CALLNAME:MASTER%는 타고난 테크닉으로 %CALLNAME%의 보지를 괴롭히면서、평범하게 느낄 수 있을 정도로 개발했다。
+;そうでない場合はＶ민감を追加
+ELSE
+	TALENT:Ｖ민감 = 1
+	PRINTFORMW %CALLNAME:MASTER%의 집요한 괴롭힘에 꺾인 %CALLNAME%의 보지는 극히 사소한 자극에도 반응할 정도로 민감하게 개발되었다。
+ENDIF
+
+;-------------------------------------------------
+;陥落ボーナス　Ａ감도를 올린다
+;A感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROA
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ａ둔감
+	PRINTFORML 예전부터 %CALLNAME%의 애널이 자극에 둔감하게 반응하는 것을 %CALLNAME:MASTER%는 불만스럽게 여기고 있었다。
+	PRINTFORML 이번 기회에 성감대를 개발하여、평범하게 느끼고 서로 즐길 수 있도록 하고 싶다。
+ELSE
+	PRINTFORML %CALLNAME%의 애널은 이제 폄범하게 자극에 반응하는 것 같지만、좀 더 느끼면서 엉망진창이 되는 모습을 보고 싶다。
+ENDIF
+PRINTFORMW 그렇게 생각한 %CALLNAME:MASTER%는 각종 괴롭힘용 도구를 준비하여 %CALLNAME%를 침대에 밀어 넘어뜨렸다…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ａ둔감인 경우엔 Ａ둔감을 삭제
+IF TALENT:Ａ둔감
+	TALENT:Ａ둔감 = 0
+	PRINTFORMW %CALLNAME:MASTER%는 타고난 테크닉으로 %CALLNAME%의 애널을 휘저으면서、평범하게 느낄 수 있을 정도로 개발했다。
+;そうでない場合はＡ민감を追加
+ELSE
+	TALENT:Ａ민감 = 1
+	PRINTFORMW %CALLNAME:MASTER%의 집요한 괴롭힘에 꺾인 %CALLNAME%의 애널은 극히 사소한 자극에도 반응할 정도로 민감하게 개발되었다。
+ENDIF
+
+;-------------------------------------------------
+;陥落ボーナス　Ｂ감도를 올린다
+;B感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROB
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｂ둔감
+	PRINTFORML 예전부터 %CALLNAME%의 젖가슴이 자극에 둔감하게 반응하는 것을 %CALLNAME:MASTER%는 불만스럽게 여기고 있었다。
+	PRINTFORML 이번 기회에 성감대를 개발하여、평범하게 느끼고 서로 즐길 수 있도록 하고 싶다。
+ELSE
+	PRINTFORML %CALLNAME%의 젖가슴은 이제 폄범하게 자극에 반응하는 것 같지만、좀 더 느끼면서 엉망진창이 되는 모습을 보고 싶다。
+ENDIF
+PRINTFORMW 그렇게 생각한 %CALLNAME:MASTER%는 각종 괴롭힘용 도구를 준비하여 %CALLNAME%를 침대에 밀어 넘어뜨렸다…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ｂ둔감인 경우엔 Ｂ둔감을 삭제
+IF TALENT:Ｂ둔감
+	TALENT:Ｂ둔감 = 0
+	PRINTFORMW %CALLNAME:MASTER%는 타고난 테크닉으로 %CALLNAME%의 젖가슴을 이리저리 주무르면서、평범하게 느낄 수 있을 정도로 개발했다。
+;そうでない場合はＢ민감を追加
+ELSE
+	TALENT:Ｂ민감 = 1
+	PRINTFORMW %CALLNAME:MASTER%의 집요한 괴롭힘에 꺾인 %CALLNAME%의 젖가슴은 극히 사소한 자극에도 반응할 정도로 민감하게 개발되었다。
+ENDIF
+
+;-------------------------------------------------
+;陥落ボーナス　Ｃ감도를 올린다
+;C感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROC
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｃ둔감
+	PRINTFORML 예전부터 %CALLNAME%의 클리토리스가 자극에 둔감하게 반응하는 것을 %CALLNAME:MASTER%는 불만스럽게 여기고 있었다。
+	PRINTFORML 이번 기회에 성감대를 개발하여、평범하게 느끼고 서로 즐길 수 있도록 하고 싶다。
+ELSE
+	PRINTFORML %CALLNAME%의 클리토리스는 이제 폄범하게 자극에 반응하는 것 같지만、좀 더 느끼면서 엉망진창이 되는 모습을 보고 싶다。
+ENDIF
+PRINTFORMW 그렇게 생각한 %CALLNAME:MASTER%는 각종 괴롭힘용 도구를 준비하여 %CALLNAME%를 침대에 밀어 넘어뜨렸다…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ｃ둔감인 경우엔 Ｃ둔감을 삭제
+IF TALENT:Ｃ둔감
+	TALENT:Ｃ둔감 = 0
+	PRINTFORMW %CALLNAME:MASTER%는 타고난 테크닉으로 %CALLNAME%의 클리토리스를 계속 희롱하여、평범하게 느낄 수 있을 정도로 개발했다。
+;そうでない場合はＣ민감を追加
+ELSE
+	TALENT:Ｃ민감 = 1
+	PRINTFORMW %CALLNAME:MASTER%의 집요한 고문에 꺾인 %CALLNAME%의 클리토리스는 극히 사소한 자극에도 반응할 정도로 민감하게 개발되었다。
+ENDIF
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　無自覚の素質強化
+;無自覚の素質をランダムで１つだけ強化します
+;『無自覚な雌』に関しては20区切り、ステ画面でハート個数無しのため除外してあります
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_TAL
+
+
+PRINTFORML 특별한 관계가 되었으니 서두를 필요는 없어。
+PRINTFORML %CALLNAME:MASTER%는 %CALLNAME%에게 그렇게 속삭이고 갈아입힌 다음、자택 근처까지 보내주었다。
+PRINTFORML 
+IF !RAND:6	;フェロモン強化
+	PRINTFORML ≪결혼식(華燭の典)을 거치면서 %CALLNAME:MASTER%와의 관계가 깊어지는 동시에、%CALLNAME%의 페로몬이 강해졌습니다≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:フェロモン >= 90
+		PRINTFORML 【페로몬：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW 이미 %CALLNAME:MASTER%의 보호가 없으면 일상 생활이 불가능할 정도로 %CALLNAME%의 페로몬이 짙어졌습니다。
+		
+		CFLAG:フェロモン = 99
+	;그 외 は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【페로몬　{CFLAG:フェロモン} → {CFLAG:フェロモン+10}】
+		PRINTFORMW %CALLNAME%의 온몸에서 더 진하게 페로몬이 흘러 넘치고 있습니다。
+		
+		CFLAG:フェロモン += 10
+	ENDIF
+ELSEIF !RAND:5	;雌の本能強化
+	PRINTFORML ≪결혼식(華燭の典)을 거치면서 %CALLNAME:MASTER%와의 관계가 깊어지는 동시에、%CALLNAME%의 암컷 본능이 강해졌습니다≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雌の本能 >= 90
+		PRINTFORML 【암컷의 본능：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%는 항상 임신하고 있지 않으면 정서 불안에 걸릴 정도로 기이한 생식 본능을 가지고 있습니다。
+		
+		CFLAG:雌の本能 = 99
+	;그 외 は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【암컷의 본능　{CFLAG:雌の本能} → {CFLAG:雌の本能+10}】
+		PRINTFORMW %CALLNAME%는 아이를 낳고 싶다는 욕구가 더욱 강해졌습니다。
+		
+		CFLAG:雌の本能 += 10
+	ENDIF
+ELSEIF !RAND:4	;性への興味強化
+	PRINTFORML ≪결혼식(華燭の典)을 거치면서 %CALLNAME:MASTER%와의 관계가 깊어지는 동시에、%CALLNAME%의 성에 대한 흥미가 강해졌습니다≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性への興味 >= 90
+		PRINTFORML 【성에 대한 흥미：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%는 성에 대해 끝모를 탐구심을 품고 있습니다。
+		
+		CFLAG:性への興味 = 99
+	;그 외 は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【성에 대한 흥미　{CFLAG:性への興味} → {CFLAG:性への興味+10}】
+		PRINTFORMW %CALLNAME%는 성에 대한 흥미가 더욱 깊어지기 시작했습니다。
+		
+		CFLAG:性への興味 += 10
+	ENDIF
+ELSEIF !RAND:3	;雄への関心強化
+	PRINTFORML ≪결혼식(華燭の典)을 거치면서 %CALLNAME:MASTER%와의 관계가 깊어지는 동시에、%CALLNAME%의 수컷에 대한 관심이 강해졌습니다≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雄への関心 >= 90
+		PRINTFORML 【수컷에 대한 관심：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%는 어떻게 하면 수컷에게 완벽하게 어필할 수 있는지 알고 있습니다。
+		
+		CFLAG:雄への関心 = 99
+	;그 외 は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【수컷에 대한 관심　{CFLAG:雄への関心} → {CFLAG:雄への関心+10}】
+		PRINTFORMW %CALLNAME%는 수컷에 대한 관심이 점점 더 강해지기 시작했습니다。
+		
+		CFLAG:雄への関心 += 10
+	ENDIF
+ELSEIF !RAND:2	;性交願望強化
+	PRINTFORML ≪결혼식(華燭の典)을 거치면서 %CALLNAME:MASTER%와의 관계가 깊어지는 동시에、%CALLNAME%의 섹스 욕구가 강해졌습니다≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性交願望 >= 90
+		PRINTFORML 【성교 욕망：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW 이미 %CALLNAME%는 섹스 중독처럼 보일 정도로 성행위에 적극적입니다。
+		
+		CFLAG:性交願望 = 99
+	;그 외 は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【성교 욕망　{CFLAG:性交願望} → {CFLAG:性交願望+10}】
+		PRINTFORMW %CALLNAME%는 보다 강하게 성행위를 갈구하기 시작했습니다。
+		
+		CFLAG:性交願望 += 10
+	ENDIF
+ELSE			;妊娠願望強化
+	PRINTFORML ≪결혼식(華燭の典)을 거치면서 %CALLNAME:MASTER%와의 관계가 깊어지는 동시에、%CALLNAME%의 임신 욕구가 강해졌습니다≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:妊娠願望 >= 90
+		PRINTFORML 【임신 욕망：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%는 항상 자궁을 수컷에게 쓰이고 싶다고 생각할 정도로 임신 욕구가 강해진 것 같습니다。
+		
+		CFLAG:妊娠願望 = 99
+	;그 외 は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【임신 욕망　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+10}】
+		PRINTFORMW %CALLNAME%는 임신하고 싶다는 욕구가 보다 강해지기 시작했습니다。
+		
+		CFLAG:妊娠願望 += 10
+	ENDIF
+ENDIF
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　肉体強化
+;戦闘で必要とされる各種ステータスを増加します
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_POW
+#DIM L_HP
+#DIM L_ATK
+#DIM L_DEF
+#DIM L_SPD
+
+
+L_HP  = (RAND:5)+3
+L_ATK = (RAND:3)+2
+L_DEF = (RAND:3)+2
+L_SPD = (RAND:3)+2
+
+
+PRINTFORML %CALLNAME%에겐 탐색이나 전투에서 활약하는걸 기대하지。
+PRINTFORML %CALLNAME:MASTER%는 %CALLNAME%에게 그렇게 속삭이고 갈아입힌 다음、자택 근처까지 보내주었다。
+PRINTFORML 
+PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%의 기대에 응하기 위해 한계까지 육체를 단련했다…
+PRINTFORML 
+PRINTFORML HP　{CFLAG:住人_최대체력}　→　{CFLAG:住人_최대체력+L_HP}
+PRINTFORML ATK　{CFLAG:住人_ATK}　→　{CFLAG:住人_ATK+L_ATK}
+PRINTFORML DEF　{CFLAG:住人_DEF}　→　{CFLAG:住人_DEF+L_DEF}
+PRINTFORML SPD　{CFLAG:住人_SPD}　→　{CFLAG:住人_SPD+L_SPD}
+PRINTFORMW 
+
+
+CFLAG:住人_최대체력 += L_HP
+CFLAG:住人_현재체력 += L_HP
+CFLAG:住人_ATK      += L_ATK
+CFLAG:住人_DEF      += L_DEF
+CFLAG:住人_SPD      += L_SPD
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　精神強化
+;戦闘で必要とされる各種ステータスを増加します
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_MIN
+#DIM L_SP
+#DIM L_HIT
+#DIM L_BRAVE
+#DIM L_GUTS
+
+
+L_SP    = (RAND:5)+1
+L_HIT   = (RAND:2)+1
+L_BRAVE = (RAND:2)+1
+L_GUTS  = (RAND:2)+1
+
+
+PRINTFORML %CALLNAME%에겐 탐색이나 전투에서 활약하는걸 기대하지。
+PRINTFORML %CALLNAME:MASTER%는 %CALLNAME%에게 그렇게 속삭이고 갈아입힌 다음、자택 근처까지 보내주었다。
+PRINTFORML 
+PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%의 기대에 응하기 위해 한계까지 정신 단련을 실시했다…
+PRINTFORML 
+PRINTFORML SP　{CFLAG:住人_最大気力}　→　{CFLAG:住人_最大気力+L_SP}
+PRINTFORML HIT　{CFLAG:住人_HIT}　→　{CFLAG:住人_HIT+L_HIT}
+PRINTFORML BRAVE　{CFLAG:住人_BRAVE}　→　{CFLAG:住人_BRAVE+L_BRAVE}
+PRINTFORML GUTS　{CFLAG:住人_GUTS}　→　{CFLAG:住人_GUTS+L_GUTS}
+PRINTFORMW 
+
+
+CFLAG:住人_最大気力 += L_SP
+CFLAG:住人_現在気力 += L_SP
+CFLAG:住人_HIT      += L_HIT
+CFLAG:住人_BRAVE    += L_BRAVE
+CFLAG:住人_GUTS     += L_GUTS
+
+
+
+
+

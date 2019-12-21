@@ -1,0 +1,473 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ê‡ñæ
+;;   ÉLÉÉÉââÊëúÇï\é¶Ç≥ÇπÇÈ HTML ï∂éöóÒÇê∂ê¨Çµï‘ÇµÇ‹Ç∑ÅB
+;; à¯êî
+;;   ARG     ÉLÉÉÉâÉNÉ^î‘çÜÇï\Ç∑êÆêî
+;;   ARG:1   x à íuÇï\Ç∑êÆêî
+;;   ARG:2   y à íuÇï\Ç∑êÆêî
+;;   ARG:3   ïùÇï\Ç∑êÆêî
+;;   ARG:4   çÇÇï\Ç∑êÆêî
+;;   ARGS:0  îwåiâÊëúópÇÃ HTML ï∂éöóÒ
+;;   ARGS:1  ÉIÅ[ÉoÅ[ÉâÉbÉvâÊëúópÇÃ HTML ï∂éöóÒ
+;; ñﬂíl
+;;   ÉLÉÉÉââÊëúÇï\é¶Ç≥ÇπÇÈ HTML ï∂éöóÒÅB
+;;
+@C_PICTURE_HTML(L_T, L_X, L_Y, L_W, L_H, BG_STR, OL_STR)
+#FUNCTIONS
+#DIM L_T
+#DIM L_X
+#DIM L_Y
+#DIM L_Y2;è¨ïøëÃäiÇÃà íuí≤êÆóp
+#DIM L_W
+#DIM L_H
+#DIM L_N
+#DIM L_N2
+#DIMS BG_STR
+#DIMS OL_STR
+#DIMS LSTR
+#DIMS LSTR_0
+#DIMS LSTR_1
+#DIMS LSTR_2
+#DIMS LSTR_3
+#DIMS LSTR_4
+#DIMS LSTR_5
+#DIMS LSTR_6
+#DIMS LSTR_7
+#DIMS LSTR_8
+#DIMS LSTR_9
+#DIMS LSTR_10
+#DIMS LSTR_11
+#DIMS LSTR_12
+#DIMS LSTR_14
+#DIMS LSTR_15
+#DIMS LSTR_N2
+#DIMS LSTR_UK
+#DIM DYNAMIC C_bust
+#DIM DYNAMIC ARG_ID
+
+
+SIF Flag:îƒópïœêî6 != 999 && Flag:íTçıíÜ != 1
+	BG_STR = 
+
+C_bust = C_PICTURE_BUST(L_T)
+IF CFlag:L_T:èZêl_ëÃäi == 1
+	LSTR_0 = 2
+	L_Y2 = 98
+ELSE
+	LSTR_0 = 
+	L_Y2 = 0
+ENDIF
+
+IF Talent:L_T:îDêP >= 6
+	L_N = (TALENT:L_T:îDêP/6)-1
+	SIF L_N >= 2
+		L_N = 2
+ELSE
+	L_N = 0
+	L_N2 = 0
+ENDIF
+
+;éÌë∞ì¡í•2
+LSTR_1 = C_RACE_2_{CFLAG:L_T:èZêl_éÌë∞}_0_{CFLAG:L_T:èZêl_éÌë∞ì¡í•2}
+LSTR_1 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_1)%
+;ëÃ
+LSTR_2 = %LSTR_0%body_{CFLAG:L_T:îßêF}
+LSTR_2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_2)%
+;éÌë∞ì¡í•3
+LSTR_3 = %LSTR_0%C_RACE_3_{CFLAG:L_T:èZêl_éÌë∞}_0_{CFLAG:L_T:èZêl_éÌë∞ì¡í•3}
+LSTR_3 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_3)%
+;ñ⁄
+LSTR_4 = %LSTR_0%eye_{CFLAG:L_T:ìµêF}
+LSTR_4 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_4)%
+;ãπ
+LSTR_5 = %LSTR_0%bust_{CFLAG:L_T:îßêF}_{C_bust}
+LSTR_5 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_5)%
+
+;îDêP
+IF  Talent:L_T:îDêP >= 6
+	LSTR_N2 = %LSTR_0%C_MB_{CFLAG:L_T:îßêF}_{L_N}
+ELSE
+	LSTR_N2 = C_no
+ENDIF
+
+LSTR_N2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_N2)%
+ 
+;â∫íÖè„
+IF CFLAG:L_T:â∫íÖè„ == -1 || Talent:L_T:îDêP >= 6
+	LSTR_6 = C_no
+ELSE
+	LSTR_6 = %LSTR_0%bra_{C_bust}_{CFLAG:L_T:â∫íÖè„}
+ENDIF
+LSTR_6 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_6)%
+;â∫íÖâ∫
+IF CFLAG:L_T:â∫íÖâ∫ == -1 || Talent:L_T:îDêP >= 6
+	LSTR_7 = C_no
+ELSE
+	LSTR_7 = %LSTR_0%panties_{CFLAG:L_T:â∫íÖâ∫}
+ENDIF
+LSTR_7 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_7)%
+;É\ÉbÉNÉX
+IF CFLAG:L_T:åCâ∫ == -1 || Talent:L_T:îDêP >= 6
+	LSTR_8 = C_no
+ELSE
+	LSTR_8 = %LSTR_0%socks_{CFLAG:L_T:åCâ∫}
+ENDIF
+LSTR_8 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_8)%
+;åC
+IF CFLAG:L_T:åC == -1 || Talent:L_T:îDêP >= 6
+	LSTR_9 = C_no
+ELSE
+	LSTR_9 = %LSTR_0%boots_{CFLAG:L_T:åC}
+ENDIF
+LSTR_9 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_9)%
+
+;ñXéq
+IF CFLAG:L_T:ñXéq == 0 || CFLAG:L_T:ñXéq == -1 || Talent:L_T:îDêP != 0
+	LSTR_14 = C_no
+ELSE
+	LSTR_14 = hat_{CFLAG:L_T:ñXéq}
+ENDIF
+LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_14)%
+
+;É}É^ÉjÉeÉBÉhÉåÉX
+IF   Talent:L_T:îDêP >= 6 && CFLAG:L_T:ïûëï != -1 
+	LSTR_10 = %LSTR_0%C_M_Dress_{C_bust}_{L_N}
+ELSEIF CFLAG:L_T:ïûëï == -1 
+	LSTR_10 = C_no
+ELSE
+	LSTR_10 = %LSTR_0%suit_{C_bust}_{CFLAG:L_T:ïûëï}
+ENDIF
+LSTR_10 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_10)%
+
+;ëOîØ
+LSTR_11 = hair_{CFLAG:L_T:îØêF}_{CFLAG:L_T:îØå^}
+LSTR_11 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_11)%
+
+;å„îØ
+LSTR_UK = hair_U_{CFLAG:L_T:îØêF}_{CFLAG:L_T:å„îØå^}
+LSTR_UK = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_UK)%
+
+;éÌë∞ì¡í•1
+LSTR_12 = C_RACE_1_{CFLAG:L_T:èZêl_éÌë∞}_0_{CFLAG:L_T:èZêl_éÌë∞ì¡í•1}
+LSTR_12 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_12)%
+
+;à˙ñ‰
+IF CFLAG:L_T:à˙ñ‰ == 0 || CFLAG:L_T:à˙ñ‰ == -1 || Talent:L_T:îDêP >= 6
+	LSTR_15 = C_no
+ELSE
+	LSTR_15 = %LSTR_0%in_{CFLAG:L_T:à˙ñ‰}
+ENDIF
+IF CFlag:L_T:èZêl_ëÃäi == 1
+	LSTR_15 = %C_PICTURE_IMG(L_X, L_Y+L_Y2-110, L_W, L_H, LSTR_15)%
+ELSE
+	LSTR_15 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_15)%
+ENDIF
+
+LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_N2%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_15%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%OL_STR%
+
+
+
+RETURNF LSTR
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ê‡ñæ
+;;   óáÇÃÉLÉÉÉââÊëúÇï\é¶Ç≥ÇπÇÈ HTML ï∂éöóÒÇê∂ê¨Çµï‘ÇµÇ‹Ç∑ÅB
+;; à¯êî
+;;   ARG     ÉLÉÉÉâÉNÉ^î‘çÜÇï\Ç∑êÆêî
+;;   ARG:1   x à íuÇï\Ç∑êÆêî
+;;   ARG:2   y à íuÇï\Ç∑êÆêî
+;;   ARG:3   ïùÇï\Ç∑êÆêî
+;;   ARG:4   çÇÇï\Ç∑êÆêî
+;;   ARGS:0  îwåiâÊëúópÇÃ HTML ï∂éöóÒ
+;; ñﬂíl
+;;   ÉLÉÉÉââÊëúÇï\é¶Ç≥ÇπÇÈ HTML ï∂éöóÒÅB
+;;
+@C_PICTURE_HTML_NAKED(L_T, L_X, L_Y, L_W, L_H, BG_STR)
+#FUNCTIONS
+#DIM L_T
+#DIM L_X
+#DIM L_Y
+#DIM L_Y2
+#DIM L_W
+#DIM L_H
+#DIM L_N
+#DIM L_N2
+#DIMS BG_STR
+#DIMS LSTR
+#DIMS LSTR_0
+#DIMS LSTR_1
+#DIMS LSTR_2
+#DIMS LSTR_3
+#DIMS LSTR_4
+#DIMS LSTR_5
+#DIMS LSTR_11
+#DIMS LSTR_12
+#DIMS LSTR_13
+#DIMS LSTR_14
+#DIMS LSTR_N2
+#DIMS LSTR_UK
+#DIM C_bust
+
+C_bust = C_PICTURE_BUST(L_T)
+
+IF CFlag:L_T:èZêl_ëÃäi == 1
+	LSTR_13 = 2
+	L_Y2 = 98
+ELSE
+	LSTR_13 = 
+	L_Y2 = 0
+ENDIF
+
+IF Talent:L_T:îDêP >= 6
+	L_N = (TALENT:L_T:îDêP/6)-1
+	SIF L_N >= 2
+		L_N = 2
+ELSE
+	L_N = 0
+	L_N2 = 0
+ENDIF
+
+;éÌë∞ì¡í•2
+LSTR_1 = C_RACE_2_{CFLAG:L_T:èZêl_éÌë∞}_0_{CFLAG:L_T:èZêl_éÌë∞ì¡í•2}
+LSTR_1 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_1)%
+;ëÃ
+LSTR_2 = %LSTR_13%body_{CFLAG:L_T:îßêF}
+LSTR_2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_2)%
+;éÌë∞ì¡í•3
+LSTR_3 = %LSTR_13%C_RACE_3_{CFLAG:L_T:èZêl_éÌë∞}_0_{CFLAG:L_T:èZêl_éÌë∞ì¡í•3}
+LSTR_3 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_3)%
+;ñ⁄
+LSTR_4 = %LSTR_13%eye_{CFLAG:L_T:ìµêF}
+LSTR_4 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_4)%
+;ãπ
+LSTR_5 = %LSTR_13%bust_{CFLAG:L_T:îßêF}_{C_bust}
+LSTR_5 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_5)%
+
+IF  Talent:L_T:îDêP >= 6
+	LSTR_N2 = %LSTR_13%C_MB_{CFLAG:L_T:îßêF}_{L_N}
+ELSE
+	LSTR_N2 = C_no
+ENDIF
+
+	LSTR_N2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_N2)%
+
+;ëOîØ
+LSTR_11 = hair_{CFLAG:L_T:îØêF}_{CFLAG:L_T:îØå^}
+LSTR_11 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_11)%
+;å„îØ
+LSTR_UK = hair_U_{CFLAG:L_T:îØêF}_{CFLAG:L_T:å„îØå^}
+LSTR_UK = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_UK)%
+
+;éÌë∞ì¡í•1
+LSTR_12 = C_RACE_1_{CFLAG:L_T:èZêl_éÌë∞}_0_{CFLAG:L_T:èZêl_éÌë∞ì¡í•1}
+LSTR_12 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_12)%
+;à˙ñ‰
+IF CFLAG:L_T:à˙ñ‰ == 0 || CFLAG:L_T:à˙ñ‰ == -1 || Talent:L_T:îDêP >= 6
+	LSTR_14 = C_no
+ELSE
+	LSTR_14 = %LSTR_13%in_{CFLAG:L_T:à˙ñ‰}
+ENDIF
+IF CFlag:L_T:èZêl_ëÃäi == 1
+	LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2-110, L_W, L_H, LSTR_14)%
+ELSE
+	LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_14)%
+ENDIF
+
+
+
+LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_N2%%LSTR_11%%LSTR_12%%LSTR_14%
+
+RETURNF LSTR
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;C_PICTURE_HTMLÇÃNPCî≈
+@C_PICTURE_NPC_HTML(L_T, L_X, L_Y, L_W, L_H, BG_STR, OL_STR)
+#FUNCTIONS
+#DIM L_T
+#DIM L_X
+#DIM L_Y
+#DIM L_W
+#DIM L_H
+#DIMS BG_STR
+#DIMS OL_STR
+#DIMS LSTR
+#DIMS LSTR_0
+#DIMS LSTR_1
+#DIMS LSTR_2
+#DIMS LSTR_3
+#DIMS LSTR_4
+#DIMS LSTR_5
+;éÌë∞ì¡í•2
+LSTR_1 = C_N_RACE_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_1 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_1)%
+;ëÃ
+LSTR_2 = C_N_body_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_2)%
+;ñ⁄
+LSTR_3 = C_N_eye_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_3 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_3)%
+;îØ
+LSTR_4 = C_N_hair_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_4 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_4)%
+;ïû
+LSTR_5 = C_N_suit_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_5 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_5)%
+
+LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%OL_STR%
+RETURNF LSTR
+
+
+;C_PICTURE_HTML_NAKEDÇÃNPCî≈
+@C_PICTURE_NPC_HTML_NAKED(L_T, L_X, L_Y, L_W, L_H, BG_STR)
+#FUNCTIONS
+#DIM L_T
+#DIM L_X
+#DIM L_Y
+#DIM L_W
+#DIM L_H
+#DIMS BG_STR
+#DIMS LSTR
+#DIMS LSTR_0
+#DIMS LSTR_1
+#DIMS LSTR_2
+#DIMS LSTR_3
+#DIMS LSTR_4
+;éÌë∞ì¡í•2
+LSTR_1 = C_N_RACE_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_1 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_1)%
+;ëÃ
+LSTR_2 = C_N_body_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_2)%
+;ñ⁄
+LSTR_3 = C_N_eye_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_3 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_3)%
+;îØ
+LSTR_4 = C_N_hair_{CFLAG:L_T:NPCî‘çÜ}
+LSTR_4 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_4)%
+
+LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_2%%LSTR_3%%LSTR_4%
+RETURNF LSTR
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ê‡ñæ
+;;   ÉLÉÉÉââÊëúÇï\é¶Ç≥ÇπÇÈ HTML ï∂éöóÒÇê∂ê¨Çµï‘ÇµÇ‹Ç∑ÅB
+;; à¯êî
+;;   ARG:0   p à íuÇï\Ç∑êÆêî
+;;   ARG:1   y à íuÇï\Ç∑êÆêî
+;;   ARG:2   ïùÇï\Ç∑êÆêî
+;;   ARG:3   çÇÇï\Ç∑êÆêî
+;;   ARGS:0  É\Å[ÉXï∂éöóÒ
+;; ñﬂíl
+;;   ÉLÉÉÉââÊëúÇï\é¶Ç≥ÇπÇÈ HTML ï∂éöóÒÅB
+;;
+@C_PICTURE_IMG(L_X, L_Y, L_W, L_H, L_SRC)
+#FUNCTIONS
+#DIMS L_SRC
+#DIM L_X
+#DIM L_Y
+#DIM L_W
+#DIM L_H
+#DIMS L_SW
+#DIMS L_SH
+#DIMS L_S
+
+IF STRLENS(L_SRC) > 0
+;	SIF L_W > 0
+		L_SW = width='{L_W}'
+;	SIF L_H > 0
+		L_SH = height='{L_H}'
+	L_S = <nonbutton pos='{L_X}'><img src='%L_SRC%' %L_SW% %L_SH% ypos='{L_Y}'></nonbutton>
+ENDIF
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; ãπÇÃ Talent ([ê‚ï«],[ïnì˚],Ç»Çµ,[ãêì˚],[îöì˚],) Ç…ëŒâûÇ∑ÇÈ
+;; ãπâÊëúî‘çÜÇï‘ÇµÇ‹Ç∑ÅB
+;;
+;; à¯êî
+;;   ARG     ÉLÉÉÉâî‘çÜÇï\Ç∑êÆêî
+;; ñﬂíl
+;;   ãπâÊëúî‘çÜÇï\Ç∑êÆêî
+;;
+@C_PICTURE_BUST(ARG)
+#FUNCTION
+#DIM C_bust    ; ãπâÊëúî‘çÜ
+
+IF Talent:ARG:îöì˚ == 1
+	C_bust = 4
+ELSEIF Talent:ARG:ãêì˚ == 1
+	C_bust = 3
+ELSEIF Talent:ARG:ê‚ï« == 1
+	C_bust = 2
+ELSEIF Talent:ARG:ïnì˚ == 1
+	C_bust = 1
+ELSE
+	C_bust = 0
+ENDIF
+
+RETURNF C_bust
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Talent ([éÛê∏],[îDêP],) Ç…ëŒâûÇ∑ÇÈîDêPâÊëúî‘çÜÇï‘ÇµÇ‹Ç∑ÅB
+;;
+;; à¯êî
+;;   ARG     ÉLÉÉÉâî‘çÜÇï\Ç∑êÆêî
+;; ñﬂíl
+;;   îDêPâÊëúî‘çÜÇï\Ç∑êÆêî
+;;
+@C_PICTURE_NINSIN(ARG)
+#FUNCTION
+#DIM C_ninsin    ; îDêPâÊëúî‘çÜ
+#DIM L_T
+
+SIF TALENT:ARG:îDêP != 0
+	C_ninsin = (TALENT:ARG:îDêP/4)+2
+SIF TALENT:ARG:éÛê∏ != 0
+	C_ninsin = 1
+SIF C_ninsin >= 8
+	C_ninsin = 8
+	
+SIF TALENT:ARG:îDêP == 0 && TALENT:ARG:éÛê∏ == 0
+	C_ninsin = 0
+
+RETURNF C_ninsin
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; í≤ã≥íÜÇÃéqã{ì‡ê∏âtÇ…ëŒâûÇ∑ÇÈâÊëúî‘çÜÇï‘ÇµÇ‹Ç∑ÅB
+;;
+;; à¯êî
+;;   ARG     ÉLÉÉÉâî‘çÜÇï\Ç∑êÆêî
+;; ñﬂíl
+;;   éqã{ì‡ê∏âtî‘çÜÇï\Ç∑êÆêî
+;; îıçl
+;;   çLàÊïœêîàÀë∂ÇÃãììÆÇ≈Ç†ÇÈì_Ç…íçà”
+@C_PICTURE_SEMEN(ARG)
+#FUNCTION
+#DIM C_SEMEN    ; éqã{ì‡ê∏âtâÊëúî‘çÜ
+IF FLAG:îƒópïœêî5 >= 20000
+	C_SEMEN = 4
+ELSEIF FLAG:îƒópïœêî5 >= 5000
+	C_SEMEN = FLAG:îƒópïœêî5 / 5000
+ELSEIF FLAG:îƒópïœêî5 >= 100
+	C_SEMEN = 1
+ELSE
+	C_SEMEN = 0
+ENDIF
+RETURNF C_SEMEN

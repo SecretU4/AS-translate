@@ -1,0 +1,88 @@
+﻿;-------------------------------------------------
+;이레귤러襲撃イベント
+;-------------------------------------------------
+@TURN_EVENT_SS
+#DIM L_MONEY
+#DIM L_MONEY2
+
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【촉수 이벤트(불온):%CALLNAME%】
+
+PRINTFORML %CALLNAME%が家事をしていると突然ベランダのほうからベチャリ、という音がした。
+PRINTFORML 何の音だろうとカーテンを開けるとそこには触手を生やした「외적」がいた。
+PRINTFORML 驚いた%CALLNAME%が助けを求めるより早く外敵は窓をすり抜け、%CALLNAME%を触手で絡め取り凌辱を始めた…
+PRINTFORMW 
+PRINTFORML %CALLNAME%는 穴という穴を犯され、苦悶の声を上げていたが激しいピストンで子宮を突かれてるうちに段々と喘ぎ声が混ざっていく。
+PRINTFORML 触手はさらにピストンを早め、快楽によって降り切った子宮目がけて精液を放つと%CALLNAME%는 体を大きく震わせ絶頂に達した。
+PRINTFORML 外敵による凌辱は%CALLNAME%が気を失っても続いた…
+PRINTFORMW 
+PRINTFORML ………しばらくした後目を覚ました%CALLNAME%는 先程の凌辱のことを忘れており、
+PRINTFORML 突然気を失うほど疲れがたまっていたのだろうかと思いながら普段の生活に戻って行った…
+PRINTFORMW 
+
+
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = 「외적」
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = 「외적」
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = 「외적」
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = 「외적」
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = 「외적」
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 「외적」
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = 「외적」
+
+TALENT:비처녀 = 1
+TALENT:Ａ비처녀 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
+EXP:키스경험 += (RAND:5)
+EXP:Ａ경험 += (RAND:4+1)+1
+EXP:Ｂ경험 += (RAND:4)
+EXP:Ｃ경험 += (RAND:4)
+EXP:Ｖ경험 += (RAND:4+1)+1
+EXP:펠라경험 += (RAND:4)+1
+EXP:Ａ성교경험 += (RAND:2)+1
+EXP:성교경험 += (RAND:2+1)+1
+EXP:절정경험 += (RAND:2)
+EXP:정음경험 += (RAND:2)
+EXP:정액경험 += (RAND:2)
+EXP:질싸경험 += (RAND:2+1)
+EXP:강간경험 += (RAND:2+1)+1
+EXP:촉수경험 += (RAND:3)+1
+EXP:고통쾌락경험 += (RAND:3)
+
+RESETCOLOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

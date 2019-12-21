@@ -1,0 +1,250 @@
+﻿;-------------------------------------------------
+;サポート設定
+;-------------------------------------------------
+;外界調査から部隊にキャラを配属する用
+;-------------------------------------------------
+@RPG_SUPPORT_MENU(L_C_ID, MODE_NOW)
+#DIM         L_C_ID               ;対象登録番号
+#DIMS        MODE_NOW             ;
+#DIM         L_SUP_ID             ;対象になった部隊ID
+#DIM DYNAMIC L_SUP_CNT, 4         ;各部隊に配属済みのキャラ数
+#DIM CONST   L_CFLAG_START = 6800 ;部隊用CFLAGの開始値
+#DIM CONST   L_CFLAG_END   = 6804 ;部隊用CFLAGの終了値（このID自体は含まれない）
+#DIM         L_C_ID_REMOVE        ;解任対象登録番号
+#DIMS CONST  L_SUP_NAME = "수반부대", "후방부대", "회수부대", "탐색부대"
+#DIMS CONST  L_SUP_MODE = "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置"
+IF L_C_ID == 0
+	PRINTFORMW ≪「플레이어」의 안전을 확보할 수 없습니다、신청을 각하합니다≫
+	RETURN
+ENDIF
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL C_PICTURE_RD(L_C_ID)
+DRAWLINE
+CALL SHOW_ALL_SUPPORT(L_SUP_CNT, "「ボタン無し」")
+DRAWLINE
+L_SUP_ID = FINDELEMENT(L_SUP_MODE, MODE_NOW)
+IF L_SUP_ID < 0
+	L_SUP_ID = 0
+	MODE_NOW '= L_SUP_MODE:L_SUP_ID
+ELSEIF L_SUP_ID == INFO_STATUS_GET_BY_LABEL(L_C_ID, "部隊") - 1
+	CALL SUPPORT_CHARA_SET(L_C_ID, L_SUP_ID)
+	RETURN
+ENDIF
+
+IF L_SUP_CNT:L_SUP_ID >= 5
+	PRINTFORML %L_SUP_NAME:(L_SUP_ID)%의 인원 수가 너무 많습니다。
+	PRINTFORML 해임할 캐릭터를 선택하세요。
+	FOR LOCAL, 1, CHARANUM
+		SIF TALENT:LOCAL:부재
+			CONTINUE
+		SIF CFLAG:LOCAL:(L_CFLAG_START + L_SUP_ID) != 1
+			CONTINUE
+		PRINTFORML [{LOCAL, 3}] - %CALLNAME:LOCAL%
+	NEXT
+	PRINTFORML [999] - 캐릭터 선택으로 돌아온다
+	DO
+		INPUT
+		L_C_ID_REMOVE = RESULT
+		SIF L_C_ID_REMOVE == 999
+			RETURN
+		IF !INRANGE(L_C_ID_REMOVE, 1, CHARANUM - 1)
+		ELSEIF TALENT:L_C_ID_REMOVE:부재
+		ELSEIF CFLAG:L_C_ID_REMOVE:(L_CFLAG_START + L_SUP_ID) != 1
+		ELSE
+			BREAK
+		ENDIF
+	LOOP 1
+	CALL SUPPORT_CHARA_REMOVE(L_C_ID_REMOVE)
+ENDIF
+CALL SUPPORT_CHARA_SET(L_C_ID, L_SUP_ID)
+
+
+
+;-------------------------------------------------
+;キャラ配属関数
+;-------------------------------------------------
+;能力表示から部隊にキャラを配属する用
+;-------------------------------------------------
+@SELECT_SUPPORT(L_C_ID)
+#DIM         L_C_ID               ;対象登録番号
+#DIM         L_SUP_ID             ;対象になった部隊ID
+#DIM DYNAMIC L_SUP_CNT, 4         ;各部隊に配属済みのキャラ数
+#DIM CONST   L_CFLAG_START = 6800 ;部隊用CFLAGの開始値
+#DIM CONST   L_CFLAG_END   = 6804 ;部隊用CFLAGの終了値（このID自体は含まれない）
+#DIM         L_C_ID_REMOVE        ;解任対象登録番号
+#DIMS CONST  L_SUP_NAME = "NONE", "수반부대", "후방부대", "회수부대", "탐색부대"
+IF L_C_ID == 0
+	PRINTFORMW ≪「플레이어」의 안전을 확보할 수 없습니다、신청을 각하합니다≫
+	RETURN
+ENDIF
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL C_PICTURE_RD(L_C_ID)
+DRAWLINE
+L_SUP_ID = INFO_STATUS_GET_BY_LABEL(L_C_ID, "部隊")
+IF L_SUP_ID <= 0
+	PRINTFORML %CALLNAME:L_C_ID%を 배속할 부대를 선택하세요。
+ELSE
+	PRINTFORML %CALLNAME:L_C_ID%（%L_SUP_NAME:L_SUP_ID%）を 배속할 부대를 선택하세요。
+ENDIF
+DRAWLINE
+CALL SHOW_ALL_SUPPORT(L_SUP_CNT)
+PRINTFORML [99] 취소
+DO
+	INPUT
+	L_SUP_ID = RESULT
+	IF L_SUP_ID == 99
+		RETURN
+	ELSEIF !INRANGE(L_SUP_ID, 0, 3)
+		CONTINUE
+	ELSEIF CFLAG:L_C_ID:(L_CFLAG_START + L_SUP_ID)
+		CALL SUPPORT_CHARA_SET(L_C_ID, L_SUP_ID)
+		RESTART
+	ENDIF
+	BREAK
+LOOP 1
+IF L_SUP_CNT:L_SUP_ID >= 5
+	PRINTFORML %L_SUP_NAME:(L_SUP_ID + 1)%의 인원 수가 너무 많습니다。
+	PRINTFORML 해임할 캐릭터를 선택하세요。
+	FOR LOCAL, 1, CHARANUM
+		SIF TALENT:LOCAL:부재
+			CONTINUE
+		SIF CFLAG:LOCAL:(L_CFLAG_START + L_SUP_ID) != 1
+			CONTINUE
+		PRINTFORML [{LOCAL, 3}] - %CALLNAME:LOCAL%
+	NEXT
+	PRINTFORML [999] - 부대를 다시 선택
+	DO
+		INPUT
+		L_C_ID_REMOVE = RESULT
+		SIF L_C_ID_REMOVE == 999
+			RESTART
+		IF !INRANGE(L_C_ID_REMOVE, 1, CHARANUM - 1)
+		ELSEIF TALENT:L_C_ID_REMOVE:부재
+		ELSEIF CFLAG:L_C_ID_REMOVE:(L_CFLAG_START + L_SUP_ID) != 1
+		ELSE
+			BREAK
+		ENDIF
+	LOOP 1
+	CALL SUPPORT_CHARA_REMOVE(L_C_ID_REMOVE)
+ENDIF
+CALL SUPPORT_CHARA_SET(L_C_ID, L_SUP_ID)
+
+
+
+@SUPPORT_CHARA_ALL_REMOVE
+CVARSET CFLAG, 6800, 0
+CVARSET CFLAG, 6801, 0
+CVARSET CFLAG, 6802, 0
+CVARSET CFLAG, 6803, 0
+PRINTFORMW 全てのキャラを 해임했습니다。
+
+
+
+@SUPPORT_CHARA_REMOVE(L_C_ID)
+#DIM         L_C_ID               ;解任対象キャラの登録番号
+#DIM CONST   L_CFLAG_START = 6800 ;部隊用CFLAGの開始値
+#DIM CONST   L_CFLAG_END   = 6804 ;部隊用CFLAGの終了値（このID自体は含まれない）
+SIF TALENT:L_C_ID:부재 == 0
+	PRINTFORMW %CALLNAME:L_C_ID%を 해임했습니다。
+VARSET CFLAG:L_C_ID:0, 0, L_CFLAG_START, L_CFLAG_END
+
+
+
+@SUPPORT_CHARA_SET(L_C_ID, L_SUP_ID)
+#DIM        L_C_ID               ;任命対象キャラの登録番号
+#DIM        L_SUP_ID             ;部隊ID
+#DIM  CONST L_CFLAG_START = 6800 ;部隊用CFLAGの開始値
+#DIM  CONST L_CFLAG_END   = 6804 ;部隊用CFLAGの終了値（このID自体は含まれない）
+#DIM        L_CHARA_ORDER        ;対象キャラがすでに配属されている施設
+#DIMS CONST L_SUP_NAME = "NONE", "수반부대", "후방부대", "회수부대", "탐색부대"
+L_CHARA_ORDER = INFO_STATUS_GET_BY_LABEL(L_C_ID, "部隊")
+IF L_CHARA_ORDER >= 1
+	PRINTFORMW 이미 %L_SUP_NAME:L_CHARA_ORDER%에 임명되어 있습니다。
+	IF L_CHARA_ORDER == (L_SUP_ID + 1)
+		PRINTFORML 해임할까요？
+		PRINTFORML [1] - 해임한다
+		PRINTFORML [0] - 그만둔다
+	ELSE
+		PRINTFORML 해임하고 다시 배속시킬까요？
+		PRINTFORML [1] - 다시 배속시킨다
+		PRINTFORML [0] - 그만둔다
+	ENDIF
+	DO
+		INPUT
+		SIF RESULT == 1
+			BREAK
+		SIF RESULT == 0
+			RETURN
+	LOOP 1
+	CALL SUPPORT_CHARA_REMOVE(L_C_ID)
+	SIF L_CHARA_ORDER == (L_SUP_ID + 1)
+		RETURN
+ENDIF
+CFLAG:L_C_ID:(L_CFLAG_START + L_SUP_ID) = 1
+PRINTFORMW %CALLNAME:L_C_ID%を%L_SUP_NAME:(L_SUP_ID + 1)%에 임명했습니다。
+
+
+
+@SHOW_ALL_SUPPORT(L_CNT_SUP, OP)
+#DIM REF    L_CNT_SUP            ;各部隊の人員の人数、配列を直接書き換える
+#DIMS       OP                   ;動作オプション
+#DIM        L_LIST_ID            ;参照中のリスト位置
+#DIM CONST  L_CFLAG_START = 6800 ;部隊用CFLAGの開始値
+#DIM CONST  L_CFLAG_END   = 6804 ;部隊用CFLAGの終了値（このID自体は含まれない）
+#DIM        L_MEMORY             ;汎用変数の書き換え防止措置
+{
+#DIMS CONST L_SUP_MEMO = 
+	"수반 부대(탐색자의 전투를 원호한다、최대 5명)　　【원호 공격】【원호 방어】", 
+	"후방 부대(탐색자에게 정보를 준다、최대 5명)　　　【전투 회피】【좋은 이벤트 발생 확률 상승】【보스 전투 확률 저하】", 
+	"회수 부대(탐색 종료시 자재를 회수한다、최대 5명)【아이템 회수】", 
+	"탐색 부대(실제 조사를 실시하는 탐색자、최대 5명)　　　※탐색 부대에 한정하여、참가하는 것은 등록된 5명 중 1명"
+}
+L_MEMORY = FLAG:汎用変数
+VARSET L_CNT_SUP
+IF STRCOUNT(OP, "「ボタン無し」")
+	FOR L_LIST_ID, 0, VARSIZE("L_CNT_SUP")
+		PRINTFORML %L_SUP_MEMO:L_LIST_ID%
+		PRINTFORM 　　　
+		CALL MEMBER_LIST2(L_CFLAG_START + L_LIST_ID, 1)
+		L_CNT_SUP:L_LIST_ID = FLAG:汎用変数
+		PRINTL
+	NEXT
+ELSE
+	FOR L_LIST_ID, 0, VARSIZE("L_CNT_SUP")
+		PRINTFORML [{L_LIST_ID, 2}]：%L_SUP_MEMO:L_LIST_ID%
+		PRINTFORM 　　　
+		CALL MEMBER_LIST2(L_CFLAG_START + L_LIST_ID, 1)
+		L_CNT_SUP:L_LIST_ID = FLAG:汎用変数
+		PRINTL
+	NEXT
+ENDIF
+FLAG:汎用変数 = L_MEMORY
+;広域変数はどこでバグるかわからないので念の為
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

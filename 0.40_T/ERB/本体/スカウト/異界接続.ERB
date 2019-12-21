@@ -1,0 +1,80 @@
+﻿;===============================================================================
+;===============================================================================
+;異界接続
+;===============================================================================
+;===============================================================================
+;=================================================
+;   sub CHARACTER_SCOUT_POS
+;=================================================
+;   DB:EXPUP位置
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@WORLD_CONNECT(ARG:0)
+#DIM L_INPUT
+#DIM L_M
+#DIM L_I
+#DIM L_NM
+#DIM N_S
+
+$INPUT_LOOP
+L_NM = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪코드를 사용하여 이계인의 정보를 추출、새로운 주민을 생성합니다≫
+PRINTFORML ≪소환에는 도시 Lv과 자금이 필요하니 주의해 주세요≫
+DRAWLINE
+PRINTFORML ※고유 캐릭터의 번호를 입력해 주세요(ex　クローフィ소환 → 1100)
+PRINTFORML 　소환하려는 캐릭터의 스펙이 높을 수록 요구하는 도시 Lv・자금이 오릅니다。
+PRINTFORML 【주의！】존재하지 않는 번호를 입력하면 에러가 뜹니다。
+PRINTFORML 
+PRINTFORML [999] 돌아온다
+PRINTFORML 
+CALL CHANGE_CHILD_BODY
+INPUT
+L_INPUT = RESULT
+L_M = RESULT
+ARG:0 = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	CALL SYSTEM_MENU
+CASE 0
+	GOTO INPUT_LOOP
+CASE 1
+	GOTO INPUT_LOOP
+CASEELSE
+	IF !EXISTCSV(L_M)
+		PRINTFORMW ≪…………error code:404 world not found≫
+		PRINTFORML ≪평행 세계 라이브러리에 해당 주소가 등록되어 있지 않습니다≫
+		PRINTFORMW ≪소환 프로토콜을 중단합니다≫
+		GOTO INPUT_LOOP
+	ELSEIF FINDCHARA(NO:0, L_M) > 0
+		PRINTFORML ≪「플레이어」、대상 개체는 이미 생성이 끝났습니다≫
+		PRINTFORMW ≪소환 프로토콜을 중단합니다≫
+		GOTO INPUT_LOOP
+	ENDIF
+	CALL CHARACTER_NPC_SCOUT1(ARG:0)
+	CALL SYSTEM_MENU
+ENDSELECT
+
+GOTO INPUT_LOOP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

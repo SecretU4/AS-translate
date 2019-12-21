@@ -1,0 +1,350 @@
+;-------------------------------------------------
+;日常イベント
+;-------------------------------------------------
+@TURN_EVENT_NJ
+
+DRAWLINE
+
+IF TALENT:学生 && RAND:10 > 5
+	PRINTFORML 【学生イベント:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML %CALLNAME%が教室で昼の食事をとっていると、近くの生徒が何やら噂話をしている。
+		PRINTFORML 「―――でさ、バラバラの死体が転がってたんだって」
+		PRINTFORML 「こえー、裏路地には近づかない方がいいな…あそこ危険すぎる…」
+		PRINTFORML どうやら最近起きた怪奇事件について語り合っているようだ。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML そして最近人目を気にする%CALLNAME%にとって、余り無視できない内容である。
+		PRINTFORMW %CALLNAME%も同じ目に合わぬよう、気を付けることにした…
+	ELSEIF !RAND:9
+		PRINTFORML 授業中、教師の話を聞きながらノートに式を書いていた%CALLNAME%はふと近くの席の生徒に目をやる。
+		IF !RAND:3
+			PRINTFORML するとノートを盾に早弁をしていた生徒が眼に入った、バレたら大変だと思うのだが…。
+		ELSEIF !RAND:2
+			PRINTFORML するとノートの端に落書きをしている生徒が眼に入る、意外と上手い。
+		ELSE
+			PRINTFORML すると居眠りしている生徒が眼に入った、器用に勉強しているポーズをしている。
+		ENDIF
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML あの生徒は何故授業中なのに勉強しないのか、甚だ疑問に思った。
+		PRINTFORMW …巻き込まれないよう%CALLNAME%は見てみないふりをして授業に戻った…
+	ELSEIF !RAND:8
+		PRINTFORML %CALLNAME%の前で女子生徒二人が楽しそうに会話している。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 異性の話も混じっているようで、つい耳を傾けてしまった。
+		IF !RAND:3
+			PRINTFORML 「部活終わったらいつもの喫茶に行く？」
+			PRINTFORML 「うん、あの人いるといいんだけどなー」
+		ELSEIF !RAND:2
+			PRINTFORML 「あの喫茶店にいつもいる人いるじゃない？、昨日ご馳走して貰っちゃった」
+			PRINTFORML 「あっ私もあるよ？話面白いしいい人だよね」
+		ELSE
+			PRINTFORML 「給料日前でピンチなんだよねぇ、またあの人に奢ってもらおうかなぁ」
+			PRINTFORML 「あんまりたかると迷惑だし、なるべく控えた方が良いよ？」
+		ENDIF
+		PRINTFORMW どうやら自分も行きつけの喫茶店の話をしているようだ、自分も余裕があれば行ってみよう…
+	ELSEIF !RAND:7
+		PRINTFORML 気が向いたので屋上でお昼を過ごそうとやってみると、恋人同士らしい二人が端っこでいちゃついていた。
+		PRINTFORML ここは人目が少ないとはいえ、やたら肌を密着させて楽しそうに会話している。
+		PRINTFORMW 来て早々他人の惚気を見せつけられ、居心地が悪くなった%CALLNAME%はそそくさと退散した。
+	ELSEIF !RAND:6
+		PRINTFORML 授業も終わり校門まで出てみると、一人の生徒が壁に身を預け溜息を吐いていた。
+		IF !RAND:3
+			PRINTFORML 「はあ、家に帰りたくないな…、また叩かれるんだろうし…」
+		ELSEIF !RAND:2
+			PRINTFORML 「家は最悪だし、今日も誰かに泊めてもらおうかな…」
+		ELSE
+			PRINTFORML 「近所の雑音なんとかしてくれないかなぁ、家に帰りくなくなるよ…」
+		ENDIF
+		PRINTFORML 生徒はどうやら家庭に関する悩みを抱いているようだ。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML ふと自分の家庭事情を想起したが、すぐさま振り払い我に返る。
+		PRINTFORMW 他人の家庭事情はどうしようもないので%CALLNAME%は視線を切り、一人街へと向かっていった…
+	ELSEIF !RAND:5
+		PRINTFORML 教材を戻しに倉庫と化した、空き部屋に向かう最中近くの教室から声が聞こえた。
+		PRINTFORML あの教室も空き部屋のはずだが…と不思議に思った%CALLNAME%は、近づいて耳を傾けてみる。
+		IF !RAND:3
+			PRINTFORML 「うふふ、今日も激しかったわね、私も満足したわ」
+			PRINTFORML 「ちょっと腰が抜けるかと思ったぞ…」
+		ELSEIF !RAND:2
+			PRINTFORML 「こんだけでいいのか？、もっと多くても…」
+			PRINTFORML 「いいよこれだけで……そのかわり、また抱いてね…？」
+		ELSE
+			PRINTFORML 「あいつより気持ち良かっただろ？、いつでも抱いてやるぜ」
+			PRINTFORML 「こ、これはただの性処理だし…」
+		ENDIF
+		PRINTFORML …事は終わっているようだが、どうやら隠れて逢引していたようだ。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML それは聞いてはいけない内容の筈なのに、本能的に興味を向けてしまう。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML だが恋愛関係も絡んでそうで、二人の関係を知りたくなってしまった。。
+		PRINTFORMW ついつい聞き入っていた%CALLNAME%は、見つかる前にさっさと退散することにした…
+	ELSEIF !RAND:4
+		PRINTFORML 下校途中で駐輪場近くで二人の生徒が困った様子で話をしている。
+		IF !RAND:3
+			PRINTFORML 「う…今月ヤベぇ、金使いすぎた…」
+			PRINTFORML 「菓子パンくらいなら買ってやらんこともないが…」
+		ELSEIF !RAND:2
+			PRINTFORML 「先輩～お金かしてくださぁい」
+			PRINTFORML 「…貧乏なのは知ってるけど、本当に大丈夫かお前…」
+		ELSE
+			PRINTFORML 「そんなに財布見つめて…また金欠か？」
+			PRINTFORML 「うん……こうなったら身体を売るしか…」
+			PRINTFORML 「やめとけ、女なんだから身体は大事にしろ」
+			PRINTFORML 「じゃあ買ってよぅ、今月はホントにピンチなんだからっ」
+		ENDIF
+		PRINTFORML 金銭問題だろうか、見た限り結構深刻そうであった。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML 自身も金銭が絡む悩みを持っているので少々共感を覚える。
+		PRINTFORMW ともあれ他人の問題故、%CALLNAME%は首を突っ込まずその場を後にした…
+	ELSEIF !RAND:3
+		PRINTFORML 偶にはと食堂に足を運ぶと、相変わらずの人だかりで辺りは混雑している。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 体調を気にして、出来るだけ栄養バランスのよいメニューを選択する。
+		PRINTFORML 注文を済ませたあと空いている席につくと近くの席で女子生徒が何やら小さく唸っていた。
+		IF !RAND:3
+			PRINTFORML 「う～、最近食べる量減らしてるけどやっぱりお腹空くよー」
+			PRINTFORML 「ダイエット中？、やりすぎは返って逆効果だと思うけど…」
+		ELSEIF !RAND:2
+			PRINTFORML 「もっと食べたい…！、で、でもお腹のタプタプなんとかしたいし…」
+			PRINTFORML 「野菜とかでお腹膨らませるしかないねえ…」
+		ELSE
+			PRINTFORML 「あれもう終わり？、全然食べて無くない？」
+			PRINTFORML 「あはは…今ダイエット中なんだ…」
+		ENDIF
+			IF CFlag:住人_悩み食生絡み == 1
+				PRINTFORMW こちらも人並みからやや外れている量なので少し耳が痛かった。
+			ELSE
+				PRINTFORMW どうやらダイエット中の為食事を控えているようだ、%CSTR:一人称%も食べすぎには気を付けよう…
+			ENDIF
+	ELSEIF !RAND:2
+		PRINTFORML 登校すると校門前で正しい身なりをした風紀委員が生徒達を検問をしていた。
+		PRINTFORML %CALLNAME%は少々難色を露わにし、他の生徒達もちょっと面倒そうな顔をして渋々検問を受けている。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML とくに問題ないハズなのにああいったものには何故か身構えてしまう…
+		PRINTFORMW …だが受けないことには入れないので、結局検問を受けることになった…
+	ELSE
+		PRINTFORML 暇つぶしに図書室に来ると静かな空気を漂わせる中、生徒達が黙々と勉学に励んでいた。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML そしてここは人目が少ないので、%CALLNAME%にとっては落ち着ける場所でもある。
+		PRINTFORML 興味を引くモノがないか本棚をしらみつぶしに探すと、気になる一冊を見つけたので手に取る。
+		PRINTFORML パラパラと流し読みしたあと、面白そうだったので席についてしっかり読むことにした。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML しかし、勉学の方に気が向いてしまうのか、暫くすると持っていたノートを開いて自習を始めた。
+		PRINTFORMW 休み時間が終わるまでの間、%CALLNAME%は図書室で時間を潰した…
+	ENDIF
+ELSEIF TALENT:社会人 == 1 && RAND:10 > 5
+	PRINTFORML 【社会人イベント:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML 職業柄人前に出ることも少なくないため、%CALLNAME%もファッションには気を使っている。
+		PRINTFORML だが見栄えの良いものは大抵値を張るのが多く、出費もバカに出来ない。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML しかし人前に出る以上、悪印象にならない程度の装いは必要だろう。
+		PRINTFORMW 気に入った服の値札を見て溜息を洩らしつつも、必要経費として割り切ることにした…
+	ELSEIF !RAND:9
+		PRINTFORML ある程度は専用機材の扱いには慣れなければと、空いた時間で練習を始める。
+		PRINTFORML さらに高度な機材などはやはり資格が必要なのだろうかと、%CALLNAME%は思いながら試していく。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 意気込みすぎか、もしくは散漫してるか、作業はなかなか進まない。
+		PRINTFORMW ……だが夢中になり過ぎてしまったのか、時間はあっという間に過ぎていった…
+	ELSEIF !RAND:8
+		PRINTFORML 休憩中、同僚の女性社員達が集まって会話をしている。
+		IF !RAND:3
+			PRINTFORML 「あの喫茶店、料理が美味しすぎてついつい食べ過ぎちゃうんだよね」
+			PRINTFORML 「ホントなんで料理店じゃなくて喫茶店なんだろ」
+		ELSEIF !RAND:2
+			PRINTFORML 「仕事終わったらいつもの喫茶店いく？」
+			PRINTFORML 「そうね、今日は何食べようかしら」
+		ELSE
+			PRINTFORML 「お昼になったら何か食べに行かない？」
+			PRINTFORML 「じゃあ噂の喫茶店はどうかな、料理が美味しいらしいよ」
+		ENDIF
+		PRINTFORML 話を聞く限り、どうやらこちらが知っている喫茶店の話のようだ。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML 確かにあそこの店員が作る料理は絶品で、思い出すとつい涎が分泌される。
+		PRINTFORMW …いましている仕事が一段落したら自分も行ってみよう…
+	ELSEIF !RAND:7
+		PRINTFORML 頼まれた用を済まし持ち場へ戻ろうと廊下を歩いていると、一人の社員が深刻そうに電話をしている。
+		IF !RAND:3
+			PRINTFORML 「まだあいつ帰ってきてないのか……わかった、こっちも探してみるよ」
+		ELSEIF !RAND:2
+			PRINTFORML 「やっぱり迷惑行為してるんだな、本格的に苦情を出すべきだな」
+		ELSE
+			PRINTFORML 「私は知らないから……もとはそっちが勝手にやったことでしょ？」
+		ENDIF
+		PRINTFORML 想像するに家庭問題だろうか？、語っている表情は明るいものではなかった。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML こちらも他人事ではないので、掛かる問題を想起すると憂鬱な気分になる。
+		PRINTFORMW 声を掛けるには気が引けたので、%CALLNAME%は静かに横を通り過ぎていった…
+	ELSEIF !RAND:6
+		PRINTFORML いつものように持ち場につき仕事を始めようと思ったのだが、人が足らないような気がする。
+		IF !RAND:3
+			PRINTFORML 「事故で休んでるらしいよ、大事にはならなかったから大丈夫だろうけど」
+		ELSEIF !RAND:2
+			PRINTFORML 「休んだ奴、持病が悪化したらしい…快復するといいんだが…」
+		ELSE
+			PRINTFORML 「風邪引いた奴がいるみたいだな、俺たちも気を付けないとな」
+		ENDIF
+		PRINTFORML 聞くところ重病ではないようだが、休んでいる人がいるようだ。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML こうも身近な人物が病に臥せると、こちらも何かに追われている錯覚を覚える。
+		PRINTFORMW 勤務中の事故もありうるので、気を引き締めて務めることにした…
+	ELSEIF !RAND:5
+		PRINTFORML 朝礼の空気が違う…どうやらお得意先とトラブルがあったようだ。
+		PRINTFORML 話の内容からして犯罪臭がする事態だったようで、関係のない話ではないので%CALLNAME%は思わず身震いした。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML …一社員としての立場だというのに、何故か咎められた気分になる。
+		PRINTFORMW 何はともあれ、これが大事にならないよう祈りながら持ち場に向かった…
+	ELSEIF !RAND:4
+		PRINTFORML 仕事も終わり息抜きに軽い食事をとった%CALLNAME%は帰路についていた。
+		PRINTFORML だが裏路地付近に視線をやるとふと覚えのある男女が見えた、%CALLNAME%の同僚と上司のようだ。
+		PRINTFORML そしてその二人がラブホテルに入っていく姿をみてしまった……仲が良いのは知っていたがここまでとは。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML …やはり行為も激しいのだろうかと、つい妄想してしまった%CALLNAME%は顔を赤く染める。
+		PRINTFORMW 流石に中まで追えないので、野次馬根性は控えよう…
+	ELSEIF !RAND:3
+		PRINTFORML 最近他の業界で横流しが横行しているらしく、うちの仕事場にも調査班がやってきた。
+		PRINTFORML 上の者たちに話を聞きながら、検閲の為今までの資料を回収していく。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML その姿を見るとこの事件には全く関係ないというのに、どうしてか身を小さくしてしまう。
+		PRINTFORMW …ただの一社員とはいえ巻き込まれる可能性は十分にあり得るので、静かに潜むことにした…
+	ELSEIF !RAND:2
+		PRINTFORML 仕事が終わるなり、一人の社員が急ぎ足でその場を後にする…何事だろうか。
+		IF !RAND:3
+			PRINTFORML 「あいつバイトもやってるんだよな、金でも必要なんかね」
+		ELSEIF !RAND:2
+			PRINTFORML 「あの人、家の借金返すためにバイトもやってるんだって…大変そう…」
+		ELSE
+			PRINTFORML 「何でも買いたい物があるとかなんとか言ってたな…副業でもしてるのか」
+		ENDIF
+		PRINTFORML 金銭に関する問題らしい、副業をする程困っているのだろうか。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML やはり金銭問題はだれにでもあるかと、%CALLNAME%は深いため息をついた。
+		PRINTFORMW この手の問題は悪化すると手におえない…気を付けるとしよう…
+	ELSE
+		PRINTFORML 仲良さそうな男女が休憩所で会話している、確か付き合っているという話だ。
+		PRINTFORML お手製のお弁当をいちゃつきながら食べている光景は何とも甘ったるい空気に満ちていた。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 最初は無視していたが最近色恋沙汰には縁があるため、どうにも気になってしまう。
+		PRINTFORMW 何だか自分が場違いな感じがした%CALLNAME%は、その場を後にした…
+	ENDIF
+ELSE
+	PRINTFORML 【休日イベント:%CALLNAME%】
+	IF !RAND:10
+		PRINTFORML 自室で休んでいると何やら外が騒がしい、気になった%CALLNAME%は窓から様子を伺う。
+		PRINTFORML すると警察たちの手により、家から道路へ一人の男が引きずり出されているようだ、何かの事件だろうか。
+		PRINTFORML 男は暫く暴れていたが、流石に多勢の拘束から逃れることは出来ず、最後は観念したように同行していった。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML その光景を遠目で見ているだけだというのになぜか怖い気持ちになってしまう、%CALLNAME%は何とか気を張って気分をそらした。
+		PRINTFORMW 物騒ではあったがこちらとは無縁、騒ぎも終わったことで%CALLNAME%も再び体を休めることにした…
+	ELSEIF !RAND:9
+		PRINTFORML 帰り道、今日は遅くまで時間を潰してしまったため%CALLNAME%は帰路を変え繁華街の横を通ることにした。
+		PRINTFORML 人ごみはかなり減ったが代わりに怪しい店が所々にあり、その近くでは男女が出入り口を行き交いしている。
+		PRINTFORML 視線を変えると若い男女が体を摺り寄せながらホテルのような建物に入っていく……ラブホテルのようだ。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 耳を澄ますと複数の女性の喘ぐ声が聞こえる……と連鎖反応するように%CALLNAME%の身体も疼き始める。
+		PRINTFORMW 留まると面倒なことになりかねないので、%CALLNAME%は中央付近を歩きながら区画を通り過ごすことにした…
+	ELSEIF !RAND:8
+		PRINTFORML 繁華街を通っていると、大通りから死角になる場所に若い女性が二人屯っていた。
+		PRINTFORML 携帯で何やら会話しているようだが、表情からすると明るい話ではないようだ。
+		PRINTFORML そういえば「家出少女」なる者たちが最近増加しているとのことだが、彼女たちもそのうちの一人なのだろう。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML そして増え続けているということは、やはりどの家も順風満帆とはいかないようだ。
+		PRINTFORMW だが他人の家庭問題に介入する気はないので、彼女たちから視線を外し歩を進めた…
+	ELSEIF !RAND:7
+		PRINTFORML 昨日無茶をしてしまったのか、軽い風邪をひいてしまった。
+		PRINTFORML 救急箱から風邪薬を取り出し口に含む、これで多少は早く治るだろう。
+		PRINTFORML ベッドに身を預け後は安静にする、本来なら趣味で遊べたが仕方がない。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML これが原因で身体を壊すわけにはいかない、と早く完治することを祈る。
+		PRINTFORMW などと思考していたが、それもだんだんと鈍くなり%CALLNAME%は深い眠りへと落ちていった…
+	ELSEIF !RAND:6
+		PRINTFORML 今日は特に用もないので趣味のことでもしようと%CALLNAME%は意気揚々と行動を開始した。
+		PRINTFORML ……
+		PRINTFORML …………
+		PRINTFORML ………………
+		PRINTFORMW …！、夢中になり過ぎて夕方になってしまった。
+	ELSEIF !RAND:5
+		PRINTFORML そういえば食材が底を尽きかけているのを思い出し、スーパーで買いだめすることにした。
+		PRINTFORML いざ買い物をするとなると、ついついセールものに手が出てしまい余計なものが増えていく。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML だがあまり使いすぎると後々響くのを思い出し、不要な商品を棚に戻す。
+		PRINTFORMW これ以上増えないように気持ちを抑え、必要な分だけ籠に入れると%CALLNAME%はレジへと向かった…
+	ELSEIF !RAND:4
+		PRINTFORML 道を歩いていると、目の前に何やら人だかりが出来ている、近づいて覗き込むと一軒家で事件が起きたようだ。
+		PRINTFORML 近所の住民たちの会話に聞き耳をたててみると、金銭がらみでのトラブルが原因で事件が発生したらしい。
+		PRINTFORML 被害者は死んでいないようだが、殺人未遂を起こすほど後がなかったのだろうか。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML こうはなりたくはないと、身近に感じる恐怖に%CALLNAME%は背筋を震わせる。
+		PRINTFORMW 留まっててもこれ以上進展はなさそうなので、%CALLNAME%は人だかりから離れることにした…
+	ELSEIF !RAND:3
+		PRINTFORML 気晴らしに公園に来てみると、皆休憩目的で来ているのか人が多い。
+		PRINTFORML 向こうのベンチではカップルだろうか、二人の男女の睦まじい姿が見える。
+		PRINTFORML 先ほどからいちゃついているが、デートともなると周りの目が気にならなくなるのかと第三者視点で眺める。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML そして誰かと付き合うとああなるのかと、想像するだけで気持ちが昂ってしまう。
+		PRINTFORMW これ以上見ていると流石に口の中が甘ったるくなるので、場所を変えることにした…
+	ELSEIF !RAND:2
+		PRINTFORML 住宅地を歩いていると、もはや雑音に近い音楽を響かせている家を見つける。
+		PRINTFORML 近所には何人かの奥様方が眉を潜ませて井戸端会議をしていた。
+		PRINTFORML 流石にこれほどの音を出しているとなると、近くに住む人たちからすればたまったものではないだろう。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML 自分もあまり他人事ではないので、彼女たちの気持ちも分からなくもない。
+		PRINTFORMW 耳が痛くなってきたので、%CALLNAME%はこの場から離れることにした…
+	ELSE
+		IF !RAND:3
+			PRINTFORML 「いらっしゃいませ、空いてる席へご案内いたしますね」
+		ELSEIF !RAND:2
+			PRINTFORML 「かしこまりましたー、少々お待ちください」
+		ELSE
+			PRINTFORML 「おまたせしましたー、ごゆっくりどうぞ♪」
+		ENDIF
+		PRINTFORML いつもの喫茶店で適当なメニューを頼み、軽く小腹を解消する。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML だが最近の出来事のせいで、ついメニューのカロリーを気にしてしまう。
+		PRINTFORML 十数分後、食後のコーヒーを飲みながら「彼」がいないか他の席を見渡すが、どうやら今はいないようだ。
+		PRINTFORMW もう休憩も済んだので%CALLNAME%は喫茶店を後にした…
+	ENDIF
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,117 @@
+;-------------------------------------------------
+;住民拉致
+;-------------------------------------------------
+@RPG_EVENT_800(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 800
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 250,50,50
+PRINTFORML 【調査イベント:住民拉致】
+PRINTFORML 
+
+PRINTFORML 散開行動していた%CALLNAME:L_I%は暗い路地裏を歩いていた。
+PRINTFORML しかし突然、後ろから謎の男に口と片腕を抑えつけられてしまった！。
+PRINTFORML しかも口には、何かしらの薬品を含ませた手拭を押し付けられている。
+PRINTFORML このままでは意識を奪われてしまう……！
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [0] 抵抗する
+PRINTFORML 
+$INPUT_LOOP
+TINPUT 2000, 100, 1
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	RESETCOLOR
+	PRINTFORML 残った片腕で男の腹を肘打ちで強打すると、男は咽るように大きく揺らいだ。
+	PRINTFORML 弱まった拘束から抜け出し、続けざまに蹴りを見舞う。
+	PRINTFORML だが薬の効果があったためか威力が落ちており、すぐに体勢を整えた男は一目散に逃げていった…
+	PRINTFORMW 
+CASE 100
+	PRINTFORML あまりの出来事に対応できなかった%CALLNAME:L_I%は、無意識に薬品を吸い込んでしまう。
+	PRINTFORML 薬の効果はすぐに発揮され、意識は一気に暗闇へと堕ちていった…
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML %CALLNAME:L_I%が拉致されました……
+	PRINTFORMW 
+	CFlag:L_I:拉致監禁 = 1
+	Flag:イベント誘拐中 = 1
+	Flag:調査イベント番号 = 0
+	CALL CHARA_LEAVE_CITY(L_I)
+	CALL RPG_EVENT_MAIN_END
+	JUMP SYSTEM_MENU
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+RESETCOLOR
+DRAWLINE
+
+
+
+;キャラの不在化処理
+;DELではなく一時離脱するだけ
+@CHARA_LEAVE_CITY(L_C_ID)
+#DIM L_C_ID
+TALENT:L_C_ID:不在 = 1
+IF CFLAG:L_C_ID:調教対象フラグ != 0
+	CFLAG:L_C_ID:調教対象フラグ = 0
+	FLAG:調教対象人数 = 0
+ENDIF
+CALL FACILITY_CHARA_REMOVE(L_C_ID)
+CALL SUPPORT_CHARA_REMOVE(L_C_ID)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,191 @@
+;-------------------------------------------------
+;浮気イベント　発生判定
+;-------------------------------------------------
+@TURN_EVENT_UWK
+
+
+	
+;浮気してない住民は戻す
+SIF TALENT:浮気 == 0 
+	RETURN
+
+SIF RAND:100 >= 30
+CALL TURN_EVENT_UWK_1
+
+
+
+;-------------------------------------------------
+;浮気イベント　イベント内容
+;-------------------------------------------------
+@TURN_EVENT_UWK_1
+
+SETCOLOR 200,50,250
+DRAWLINE
+PRINTFORML 【浮気イベント:%CALLNAME%】
+DRAWLINE
+IF !RAND:10
+PRINTFORML 「ナカがっ……こすれっ…%UNICODE(0x2661)%……あぁっ…あっあっあっはぁんっ%UNICODE(0x2661)%」
+ELSEIF !RAND:9
+PRINTFORML 「…っ……ぁ…ひゃあっ……あんっ……くぁっ…%UNICODE(0x2661)%」
+ELSEIF !RAND:8
+PRINTFORML 「あはっ%UNICODE(0x2661)%……はっ…んっ……くあっ…%UNICODE(0x2661)%」
+ELSEIF !RAND:7
+PRINTFORML 「はっ…♪……っ…あっ……きもち…いっ……%UNICODE(0x2661)%」
+ELSEIF !RAND:6
+PRINTFORML 「ぁっあっぁっああっ……んぁあっ！…%UNICODE(0x2661)%」
+ELSEIF !RAND:5
+PRINTFORML 「…ぅあっ…ぁっ…奥に…っ……%UNICODE(0x2661)%」
+ELSEIF !RAND:4
+PRINTFORML 「当たっ…て…っ%UNICODE(0x2661)%…ああぁっ！…あんっ…はぁあぁっ！%UNICODE(0x2661)%」
+ELSEIF !RAND:3
+PRINTFORML 「んぁあっ……はっ……ぃ…いっ…ぱい……出して%CSTR:語尾問う5%っ…%UNICODE(0x2661)%」
+ELSEIF !RAND:2
+PRINTFORML 「ふぁっ！……んっ…んっあっ……ぁ…%CSTR:語尾微笑%っ%UNICODE(0x2661)%」
+ELSE
+PRINTFORML 「…ッ気持ち……ぁっ…よすぎ…%CSTR:語尾ます%っ…%UNICODE(0x2661)%……イっちゃっ…ひゃあぁあっ%UNICODE(0x2661)%」
+ENDIF
+IF TALENT:浮気 == 3
+;夫の上司
+	IF !RAND:3
+		PRINTFORML 【夫の上司の家】
+		PRINTFORML しばらく夫の上司に犯されていた%CALLNAME%は、お返しとばかりに騎乗位で腰を淫らに動かし始めた。
+		PRINTFORML %CALLNAME%は声を荒げつつも男の肉棒を覚えるように、根元まで飲み込む度に膣内の形を夫から彼のモノへと合わせていく。
+		PRINTFORML 心では夫に謝りながら、雌の身体は相性の良い男を選んでしまい、更なる快楽を求めて腰を振りたくった…
+		PRINTFORML 
+		PRINTFORML 子宮を叩く度に中でタプンと揺れる精液を感じながら、%CALLNAME%はさらなる種付けを求めて腰を振り動かす。
+		PRINTFORML 動く度に膣内のヒダでカリ首を攻め続け、再びお互い絶頂へ至る。
+		PRINTFORML 今度の種付けでついに満タンになった子宮を、%CALLNAME%は幸せそうにお腹の上から優しく撫でた。
+		PRINTFORML 自分は誰かの妻であることを、今の%CALLNAME%の思考には存在しなかった…
+		PRINTFORMW 
+	ELSEIF !RAND:2
+		PRINTFORML 【夫婦の寝室】
+		PRINTFORML 上司である彼指示で夫はしばらく帰ってこないようにし、二人は夫婦の寝室で愛し合う。
+		PRINTFORML %CALLNAME%を四つん這いにさせると、男はそのまま膣内を貫くように腰を打ち付け始めた。
+		PRINTFORML 獣の交尾のような体勢に雌の本能が目覚めたのか、%CALLNAME%の声は理性を失い妖艶なものになってく。
+		PRINTFORML 寝室に響く肉を打つ音に興奮を高めながら、二人の行為は徐々に速度を速めていった…
+		PRINTFORML 
+		PRINTFORML そして荒々しくなった夫の上司の動きで射精間近を察した%CALLNAME%は、中出しを許していいものかと逡巡する。
+		PRINTFORML しかし、気付けば身体は勝手に男へ抱き付いて、膣内射精を全力で受け止める体勢に入っていた。
+		PRINTFORML 最後の一突きが下りきった子宮に直撃し、%CALLNAME%は深い絶頂の中でトドメの射精を感じ取った。
+		PRINTFORML 夫抜きの二人の子作りは日を跨いでも行われ続けた…
+		PRINTFORMW 
+	ELSE
+		PRINTFORML 【ラブホテル】
+		PRINTFORML 夫の上司が覆いかぶさったまま腰を激しくピストンさせ、高いカリにゴリゴリ抉られる膣壁の快感に%CALLNAME%も耐え切れず嬌声を上げる。
+		PRINTFORML %CALLNAME%はギシギシと揺れるベッドに身を預け、男の首に腕を回して恋人のように全てを任せる。
+		PRINTFORML 打ち込まれる甘悦によって激しく乱れ、上げる余力もなくなった腕でシーツを掴み、男の腰に足を絡めて膣内出しを促す。
+		PRINTFORML 
+		PRINTFORML そして最後の突き込みが子宮口をこじ開け、そのまま女の胎に雄の遺伝子を注ぎ込んだ。
+		PRINTFORML たまに蓄えている夫の精液に男の白濁液が迫り、劣勢遺伝子は出てけと言わんばかりに外へと押し出してしまった。
+		PRINTFORML 自らの膣内で起きる雄たちの戦いを想像し、%CALLNAME%は勝ち抜いた夫の上司の体にそっと腕を回した…
+		PRINTFORML 自分が彼の部下の妻であることも忘れ、子宮に居座る新たな支配者が形を成すことに淡い期待を抱いていた。
+		PRINTFORMW 
+	ENDIF
+ELSEIF TALENT:浮気 == 2
+;幼馴染
+	IF !RAND:3
+		PRINTFORML 【幼馴染の家】
+		PRINTFORML 幼馴染が%CALLNAME%を押し倒す形で行為を始め、最初から準備完了だった肉路を亀頭でこじ開けていく。
+		PRINTFORML 快楽に声が漏れそうなのを必死に堪えつつ、%CALLNAME%は幼馴染の首に腕を回して優しく微笑む。
+		PRINTFORML そんな愛らしい彼女にディープキスを交わし、二人の気持ちに合わせるように腰の動きも早くなる。
+		PRINTFORML 夫の気持ちが薄れていく代償に味わえる快楽を%CALLNAME%は余さず味わい続けた…
+		PRINTFORMW 
+	ELSEIF !RAND:2
+		PRINTFORML 【幼馴染の家】
+		PRINTFORML 幼馴染の家族にはこの関係を知られてはいけないため、二人は息を殺してセックスに明け暮れる。
+		PRINTFORML 互いの声を抑える建前でドロドロのディープキスを交わし、腰はいつもより激しく腰を振る。
+		PRINTFORML 音を気にするのも限界になり、幼馴染は%CALLNAME%の腰を掴むと先ほどよりも早い速度で腰を打ち付ける。
+		PRINTFORML %CALLNAME%も膣壁をカリで削られる強烈な快感に思わず声を上げ、荒い息を漏らしてよがり始めた。
+		PRINTFORML それを聞いてより興奮した幼馴染は獣のように腰をふり始め、そのまま子宮にザーメンを勢いよく吐き出した…
+		PRINTFORML 
+		PRINTFORML バレないようにする隠姦に背徳感を満たしながら、イチャラブックスはその後も続いていった…
+		PRINTFORMW 
+	ELSE
+		PRINTFORML 【ラブホテル】
+		PRINTFORML かつてなあなあで許してしまった幼馴染との肉体関係、それは結婚した後ひょんなことで復縁してしまった。
+		PRINTFORML こちらの性感帯を把握しているかのようなピストンで、%CALLNAME%は何度も潮を吹きながら絶頂を繰り返す。
+		PRINTFORML 夫とでは味わえない至福の快楽に身を委ねながら、二人の関係はより深くなっていく。
+		PRINTFORML 寝取ろうとする幼馴染の欲望に気づかないまま、%CALLNAME%は彼の牝へと成り下がっていった…
+		PRINTFORMW 
+	ENDIF
+ELSE
+;元カレ
+IF !RAND:3 && Talent:巨乳 == 1 || Talent:爆乳 == 1
+	PRINTFORML 【元カレの家】
+	PRINTFORML 沢山子宮にザーメンを貯めこまされたあと、元カレが最後に「いつもの」を%CALLNAME%に命令してきた。
+	PRINTFORML それを未だ覚えていたのか微笑みながらそそり立つ肉棒を豊満な乳房で挟み込み慣れた動作でパイズリをし始めた。
+	PRINTFORML 夫ではすぐ果ててしまう巧みな動きは、さしも元カレも徐々に余裕がなくなっていく。
+	PRINTFORML そして大量の精液を乳内で飲み込み、彼がイく様を%CALLNAME%は嬉しそうに見ていた…
+	PRINTFORMW 
+ELSEIF !RAND:2
+	PRINTFORML 【元カレの家】
+	PRINTFORML 嘗て散々楽しんだベッドの上で元カレと浮気ックスを興じる%CALLNAME%。
+	PRINTFORML 逞しい身体を四肢で絡め、ゴムなし肉棒による生の快楽を味わい子宮を白く染めていく。
+	PRINTFORML 夫の着信に気づかぬまま、二人は交際していたときのように愛し合い続けた…
+	PRINTFORMW 
+ELSE
+	PRINTFORML 【ラブホテル】
+	PRINTFORML 今この身体を犯している男は既に関係を絶ったハズの元彼氏、だがどうしても身体の関係を止められずにいる。
+	PRINTFORML 雌の本能がこの太いペニスを忘れられず、屈服仕切っている子宮は夫とするときよりも活発に胎動してうまう。
+	PRINTFORML 定期的に注がれる精液に自分は誰の牝か思い知らされ、恥辱と背徳で絶頂する。
+	PRINTFORML ねっとりとしたキスを交わすとトロンと思考が鈍り、%CSTR:一人称%はさらに快楽の沼へと沈んでいく。
+	PRINTFORML ……この関係はやめられそうに、ない…
+	PRINTFORMW 
+ENDIF
+ENDIF
+
+DRAWLINE
+PRINTFORMW 
+
+
+
+
+;イベントによる経験加算
+CALL TURN_EVENT_UWK_EXP
+
+RESETCOLOR
+;-------------------------------------------------
+;浮気イベント　経験
+;-------------------------------------------------
+@TURN_EVENT_UWK_EXP
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = 浮気相手
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = 浮気相手
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = 浮気相手
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = 浮気相手
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = 浮気相手
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 浮気相手
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = 浮気相手
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
+
+CALL JN_SEX_EXP
+
+EXP:浮気経験 += 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

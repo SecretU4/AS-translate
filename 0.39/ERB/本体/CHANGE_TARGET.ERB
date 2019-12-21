@@ -1,0 +1,191 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CHANGE_TARGET.ERB
+;	Facility	:ターゲット変更。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ CHANGE_TARGET_MAIN				ターゲット変更画面(主処理)
+;
+;===============================================================================
+
+;=================================================
+;   sub CHANGE_TARGET_MAIN
+;=================================================
+;   ターゲット変更画面(主処理)
+;-------------------------------------------------
+@CHANGE_TARGET_MAIN
+#DIM L_INPUT
+#DIM L_I
+#DIM L_TMP
+#DIM L_TGT
+#DIM L_PAGE
+#DIM L_CNT_CHARA
+#DIM L_CNT_PRINT_CHARA
+#DIM L_PREV
+#DIM L_NEXT
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+
+L_INPUT=0
+L_I=0
+L_TMP=0
+L_TGT=0
+L_PAGE=0
+L_CNT_CHARA=0
+L_CNT_PRINT_CHARA=0
+
+; キャラ総数
+L_CNT_CHARA = CHARANUM
+
+; キャラ表示数/P
+L_CNT_PRINT_CHARA = 15
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+REDRAW 0
+
+$PRINT_LIST
+
+;ライン表示:新ページ
+CALL C_LINE
+PRINTFORML 逢引対象に選択したいキャラを選んでください　＜page.{L_PAGE}＞
+PRINTFORML 選択中の調教対象はTARGETマーカーが表示されています。
+PRINTFORML 選択できるのは【合意】【弱み】【調教済み】を持つキャラのみです。
+DRAWLINE
+
+L_I = 0
+WHILE 1
+
+	;SET:開始値
+	SIF L_I < (L_PAGE * L_CNT_PRINT_CHARA)
+		L_I = (L_PAGE * L_CNT_PRINT_CHARA)
+
+	;ページ範囲外
+	SIF L_I >= ( (L_PAGE + 1) * L_CNT_PRINT_CHARA)
+		BREAK
+
+	;- 最大キャラ数超過
+	IF L_I >= L_CNT_CHARA
+		;空行
+		PRINTL
+
+	ELSE
+		PRINTFORM [%TOSTR(L_I),3%] 
+		IF L_I == MASTER
+			SETCOLOR COLOR("水色")
+			PRINTFORM 【MASTER】
+			RESETCOLOR
+		ELSEIF CFLAG:L_I:調教対象フラグ
+			SETCOLOR COLOR("ピンク")
+			PRINTFORM 【TARGET】
+			RESETCOLOR
+		ELSE
+			PRINTFORM 　　　　　
+		ENDIF
+
+		;- 表示:ターゲット(詳細)
+		CALL INFO_TARGET_DETAIL(L_I, 1)
+		PRINTL
+	ENDIF
+
+	L_I += 1
+
+WEND
+PRINTL
+
+L_PREV = (L_PAGE <= 0) ? 0 # 1
+L_NEXT = (L_PAGE >= (L_CNT_CHARA / L_CNT_PRINT_CHARA) ) ? 0 # 1
+
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]前のページ\@
+PRINTLC [1000]戻る
+
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]次のページ\@
+PRINTL 
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		REDRAW 1
+		RETURN 0
+	;- キャラ
+	CASE 0 TO L_CNT_CHARA
+		IF CFLAG:L_INPUT:調教対象フラグ
+			;DRAWLINE
+			;PRINTFORMW %NAME:L_INPUT%をパートナーから除外しました
+			CFLAG:L_INPUT:調教対象フラグ = 0
+			FLAG:調教対象人数 --
+		ELSE
+			;- 主人
+			IF L_INPUT == MASTER
+				CALL C_INPUT_ERROR("主人はパートナーに設定出来ません")
+				GOTO INPUT_LOOP_1
+			;- 最大値以上
+			ELSEIF FLAG:調教対象人数 >= 1
+				CALL C_INPUT_ERROR("逢引人数が最大のため、これ以上は設定出来ません")
+				GOTO INPUT_LOOP_1
+			ELSEIF Talent:L_INPUT:合意 == 0 && Talent:L_INPUT:弱み == 0 && Talent:L_INPUT:調教済み == 0
+				CALL C_INPUT_ERROR("逢引する条件をみたしていません")
+				GOTO INPUT_LOOP_1
+			ELSE
+				;- VAR:ターゲット設定
+				SELECTCASE VAR_SET_TARGET(L_INPUT)
+					CASE 1
+						;INPUTエラー対応
+						CALL C_INPUT_ERROR("男女混合不可です")
+						GOTO INPUT_LOOP_1
+					CASE 2
+						;INPUTエラー対応
+						CALL C_INPUT_ERROR("小人体型、巨躯、非人型は調教出来ません")
+						GOTO INPUT_LOOP_1
+				ENDSELECT
+			ENDIF
+		ENDIF
+		;- VAR:リスト更新
+		CALL VAR_MAKE_LIST
+
+		GOTO PRINT_LIST
+	;前のページ
+	CASE 1007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO PRINT_LIST
+	;次のページ
+	CASE 1009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO PRINT_LIST
+	;- その他
+	CASEELSE
+		$ERROR
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+RESTART
+

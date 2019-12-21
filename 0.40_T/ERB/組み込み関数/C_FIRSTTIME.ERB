@@ -1,0 +1,39 @@
+﻿;=================================================
+;   sub C_FIRSTTIME
+;=================================================
+;   CHK:初回
+;-------------------------------------------------
+;   "CSTR:ARG:ARGS"に「/3/」といった書式で対象値を保存する
+;   同時に既に保存されているかどうかのチェックを行う
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				対象値
+;  ARGS					CSTRの対象変数名
+; Output:
+;  RETURNF				真偽値( 0:登録済み 1:未登録(初回) )
+;-------------------------------------------------
+@C_FIRSTTIME(ARG:0, ARG:1, ARGS)
+#FUNCTION
+#DIMS L_KEY
+#DIMS L_STR
+
+L_KEY = %TOSTR(ARG:1)%
+L_STR = /%L_KEY%/
+
+;- 登録済みの場合
+IF STRCOUNT(CSTR:ARG:ARGS, L_STR)
+	RETURNF 0
+
+;- 未登録の場合
+ELSEIF ARG
+
+	SIF CSTR:ARG:ARGS == ""
+		CSTR:ARG:ARGS = /
+
+	;- 登録
+	CSTR:ARG:ARGS += L_KEY + "/"
+
+	RETURNF 1
+ENDIF
+

@@ -1,0 +1,760 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:TRAIN_PROCESS.ERB
+;	Facility	:TRAIN処理群。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ TR_REFLECT_MAIN					TR:反映処理
+;	・ TR_GOTJUEL_DATA					TR:珠取得処理
+;	・ TR_DELJUEL_個人					TR:珠相殺処理(個人)
+;	・ TR_DELJUEL_対人					TR:珠相殺処理(対人)
+;	・ TR_MARKUP_MAIN					TR:MARKUP(メイン)
+;	・ TR_MARKUP_DATA					TR:MARKUP(データ)
+;	・ TR_MARKUP_LECHERY				TR:MARKUP(淫乱)
+;	・ TR_PALAMCHG_MARK_MAIN			TR:パラメータ変動(刻印)
+;	・ TR_PALAMCHG_AFTER				TR:パラメータ変動(終了時)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TR_REFLECT_MAIN
+;=================================================
+;   TR:反映処理
+;-------------------------------------------------
+@TR_REFLECT_MAIN
+#DIM L_T
+
+;-- 全キャラ処理
+FOR L_T, 0, CHARANUM
+
+	;CHK
+	SIF !TCVAR:L_T:行動フラグ_ソース変動
+		CONTINUE
+
+	;- TR:珠取得処理
+	CALL TR_GOTJUEL_DATA(L_T)
+
+	IF 1
+		;- TR:珠相殺処理(個人)
+		CALL TR_DELJUEL_個人(L_T)
+
+		;-----------------------------
+		;- 相殺:恐怖
+		;-----------------------------
+
+		;- TR:珠相殺処理(対人)
+		CALL TR_DELJUEL_対人(L_T,"恐怖","配下")
+		CALL TR_DELJUEL_対人(L_T,"恐怖","屈服")
+
+		;-----------------------------
+		;- 相殺:反感
+		;-----------------------------
+
+		;- TR:珠相殺処理(対人)
+		CALL TR_DELJUEL_対人(L_T,"反感","配下")
+		CALL TR_DELJUEL_対人(L_T,"反感","屈服")
+
+		;-----------------------------
+		;- 相殺:不快
+		;-----------------------------
+
+		;- TR:珠相殺処理(対人)
+		CALL TR_DELJUEL_対人(L_T,"不快","配下")
+		CALL TR_DELJUEL_対人(L_T,"不快","屈服")
+	ENDIF
+NEXT
+
+;=================================================
+;   sub TR_GOTJUEL_DATA
+;=================================================
+;   TR:珠取得処理
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;-------------------------------------------------
+@TR_GOTJUEL_DATA(ARG=-1)
+#DIM L_I
+#DIM L_TMP
+
+L_TMP=0
+
+FOR L_I, 0, VARSIZE("GOTJUEL")
+
+	LOCALS = %PALAMNAME:L_I%
+
+	SIF !STRLENS(LOCALS)
+		CONTINUE
+
+	;- 取得:GOTJUEL
+	L_TMP = GOTJUEL:ARG:L_I
+
+	IF L_TMP > 0
+		JUEL:ARG:L_I += L_TMP
+		JUEL:ARG:L_I = MIN(FLAG:最大数_JUEL, JUEL:ARG:L_I)
+	ENDIF
+
+NEXT
+
+
+;=================================================
+;   sub TR_DELJUEL_個人
+;=================================================
+;   TR:珠相殺処理(個人)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;-------------------------------------------------
+@TR_DELJUEL_個人(ARG=-1)
+#DIM L_TMP
+#DIM L_CNT
+#DIM L_POS
+#DIM L_POS_MAX
+#DIM L_RATIO
+#DIM L_JUEL_DEL
+
+#DIMS L_STR_SOUSAI_BASE
+#DIMS L_STR_SOUSAI_TARGET
+#DIM L_SOUSAI_BASE_OLD
+#DIM L_SOUSAI_BASE_NEW
+#DIM L_SOUSAI_TARGET_OLD
+#DIM L_SOUSAI_TARGET_NEW
+#DIM L_LOG
+
+L_TMP=0
+L_CNT=0
+L_POS=0
+L_POS_MAX=0
+L_RATIO=0
+L_JUEL_DEL=0
+
+L_STR_SOUSAI_BASE=
+L_STR_SOUSAI_TARGET=
+
+L_SOUSAI_BASE_OLD=0
+L_SOUSAI_BASE_NEW=0
+L_SOUSAI_TARGET_OLD=0
+L_SOUSAI_TARGET_NEW=0
+L_LOG=0
+
+VARSET LOCALS
+
+;- 対象を格納(相殺優先順に設定)
+SPLIT "欲情/誘惑/習得", "/", LOCALS
+
+L_STR_SOUSAI_BASE	= 抑鬱
+
+;- 定数:最大位置(相殺対象の数)
+L_POS_MAX = 3
+L_JUEL_DEL = JUEL:ARG:L_STR_SOUSAI_BASE
+
+;ログフラグ
+L_LOG = FLAG:LOG表示_相殺
+
+;- 相殺
+WHILE 1
+	SIF JUEL:ARG:L_STR_SOUSAI_BASE <= 0
+		BREAK
+
+	;- 減算倍率設定(1回目で均等相殺、2回目で余りを優先順に相殺)
+	SELECTCASE L_CNT
+		CASE 0
+			;- 20%ずつ分散
+			L_RATIO = 20
+		CASE 1
+			L_RATIO = 100
+		CASEELSE
+			; 終了
+			BREAK
+	ENDSELECT
+
+
+	;- 全体を減算
+	L_POS=0
+	WHILE 1
+		;- 最大位置超えで終了
+		SIF L_POS > (L_POS_MAX - 1)
+			BREAK
+
+		L_STR_SOUSAI_TARGET	= %LOCALS:L_POS%
+
+		;デバッグ用
+		IF L_LOG
+			L_SOUSAI_BASE_OLD	= L_JUEL_DEL
+			L_SOUSAI_TARGET_OLD	= JUEL:ARG:L_STR_SOUSAI_TARGET
+		ENDIF
+
+		;- 計算:相殺量
+		L_TMP = (L_JUEL_DEL * L_RATIO) / 100
+
+		SIF L_TMP > JUEL:ARG:L_STR_SOUSAI_TARGET
+			L_TMP = JUEL:ARG:L_STR_SOUSAI_TARGET
+
+		;- 減算
+		JUEL:ARG:L_STR_SOUSAI_BASE		-= L_TMP
+		JUEL:ARG:L_STR_SOUSAI_TARGET	-= L_TMP
+		L_JUEL_DEL -= L_TMP
+
+		L_POS ++
+
+		;デバッグ用
+		IF L_LOG
+
+			L_SOUSAI_BASE_NEW	= JUEL:ARG:L_STR_SOUSAI_BASE
+			L_SOUSAI_TARGET_NEW	= JUEL:ARG:L_STR_SOUSAI_TARGET
+
+			PRINTFORM 相殺ログ(IP)：[%CALLNAME:ARG%] 
+			PRINTFORM %L_STR_SOUSAI_BASE%({L_SOUSAI_BASE_OLD}→{L_SOUSAI_BASE_NEW} ({L_SOUSAI_BASE_NEW - L_SOUSAI_BASE_OLD}) ) 
+			PRINTFORM %L_STR_SOUSAI_TARGET%({L_SOUSAI_TARGET_OLD}→{L_SOUSAI_TARGET_NEW} ({L_SOUSAI_TARGET_NEW - L_SOUSAI_TARGET_OLD}) ) 
+			PRINTL
+		ENDIF
+
+	WEND
+
+	L_CNT ++
+
+WEND
+
+
+;=================================================
+;   sub TR_DELJUEL_対人
+;=================================================
+;   TR:珠相殺処理(対人)
+;-------------------------------------------------
+;   引数の相殺元・相殺パラメータを相殺する
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARGS:0				相殺元パラメータ
+;  ARGS:1				相殺先パラメータ
+;-------------------------------------------------
+@TR_DELJUEL_対人(ARG,ARGS:0,ARGS:1)
+#DIM L_TMP
+#DIM L_JUEL_DEL
+#DIMS L_STR_SOUSAI_BASE
+#DIMS L_STR_SOUSAI_TARGET
+
+#DIM L_SOUSAI_BASE_OLD
+#DIM L_SOUSAI_BASE_NEW
+#DIM L_SOUSAI_TARGET_OLD
+#DIM L_SOUSAI_TARGET_NEW
+#DIM L_LOG
+
+L_TMP=0
+L_JUEL_DEL=0
+L_STR_SOUSAI_BASE=
+L_STR_SOUSAI_TARGET=
+
+L_SOUSAI_BASE_OLD=0
+L_SOUSAI_BASE_NEW=0
+L_SOUSAI_TARGET_OLD=0
+L_SOUSAI_TARGET_NEW=0
+L_LOG=0
+
+L_STR_SOUSAI_BASE	= %ARGS:0%
+L_STR_SOUSAI_TARGET	= %ARGS:1%
+
+;- 取得:(JUEL)(相殺元)
+L_JUEL_DEL = JUEL:ARG:L_STR_SOUSAI_BASE
+
+;ログフラグ
+L_LOG = FLAG:LOG表示_相殺
+
+
+;-------------------
+;-- 相殺処理
+;-------------------
+IF L_JUEL_DEL > 0
+
+	;デバッグ用
+	IF L_LOG
+		L_SOUSAI_BASE_OLD = L_JUEL_DEL
+
+		;- 取得:(JUEL)(相殺元)
+		L_SOUSAI_TARGET_OLD = JUEL:ARG:L_STR_SOUSAI_TARGET
+	ENDIF
+
+	;- 取得:JUEL(相殺元)
+	L_TMP = JUEL:ARG:L_STR_SOUSAI_TARGET
+
+	;- 相殺先より多い場合は、相殺先の値に丸める
+	SIF L_JUEL_DEL > L_TMP
+		L_JUEL_DEL = L_TMP
+
+	;- 相殺先と相殺元、双方を減算
+	JUEL:ARG:L_STR_SOUSAI_TARGET -= L_JUEL_DEL
+	JUEL:ARG:L_STR_SOUSAI_BASE   -= L_JUEL_DEL
+
+	;デバッグ用
+	IF L_LOG
+
+		;- 取得:(JUEL)(相殺元)
+		L_SOUSAI_BASE_NEW = JUEL:ARG:L_STR_SOUSAI_BASE
+
+		;- 取得:(JUEL)(相殺先)
+		L_SOUSAI_TARGET_NEW = JUEL:ARG:L_STR_SOUSAI_TARGET
+
+		PRINTFORM 相殺ログ(PP)：[%CALLNAME:ARG%] 
+		PRINTFORM %L_STR_SOUSAI_BASE%({L_SOUSAI_BASE_OLD}→{L_SOUSAI_BASE_NEW} ({L_SOUSAI_BASE_NEW - L_SOUSAI_BASE_OLD}) ) 
+		PRINTFORM %L_STR_SOUSAI_TARGET%({L_SOUSAI_TARGET_OLD}→{L_SOUSAI_TARGET_NEW} ({L_SOUSAI_TARGET_NEW - L_SOUSAI_TARGET_OLD}) ) 
+		PRINTL
+	ENDIF
+
+ENDIF
+
+
+;=================================================
+;   sub TR_MARKUP_MAIN
+;=================================================
+;   TR:MARKUP(メイン)
+;-------------------------------------------------
+@TR_MARKUP_MAIN
+#DIM L_I
+#DIM L_T
+#DIM L_HIT
+
+L_HIT=0
+
+FOR L_I, 0, DEFTR_PL_NUM
+
+	L_T = GTR_PL:L_I
+
+	;CHK
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+
+	;- TR:MARKUP(データ)
+	CALL TR_MARKUP_DATA(L_T)
+;	L_HIT += RESULT
+
+	TRYCALL C_BTL_SYNC_CHARA(L_T)
+
+NEXT
+;SIF L_HIT
+;	PRINTW
+
+;=================================================
+;   sub TR_MARKUP_DATA
+;=================================================
+;   TR:MARKUP(データ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURN				結果(0:HIT無し 1:HIT有り)
+;-------------------------------------------------
+@TR_MARKUP_DATA(ARG)
+#DIM L_HIT
+#DIM L_TMP
+#DIM L_MARK
+#DIM L_TYPE
+#DIM L_LOG
+
+L_HIT=0
+L_TMP=0
+L_MARK=0
+L_TYPE=0
+L_LOG=1
+
+;-----------------------------
+;- MARKDOWN:反発刻印
+;-----------------------------
+
+IF MARK:ARG:反発刻印
+
+	;- CHK:ABLUP(詳細)
+	CALL CHK_ABLUP_DETAIL(ARG, GETNUM(MARK,"反発刻印"), 0,"MARK")
+
+	;- CHK:結果
+	SELECTCASE RESULT
+		;- OK
+		CASE 0
+			;- 実行:ABLUP
+			CALL ABLUP_EXE(ARG, GETNUM(MARK,"反発刻印"), 0,"MARK")
+
+			IF L_LOG
+				CALL CP_PRINTFORMW_COLORED("【刻印消去】", COLOR("ピンク"), @"%CALLNAME:ARG%の反発刻印がLV{MARK:ARG:反発刻印}になった")
+				PRINTL
+			ENDIF
+
+	ENDSELECT
+
+ENDIF
+
+RETURNFORM L_HIT
+
+
+;=================================================
+;   sub TR_MARKUP_LECHERY
+;=================================================
+;   TR:MARKUP(淫乱)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;-------------------------------------------------
+@TR_MARKUP_LECHERY(ARG)
+#DIM L_HIT
+#DIM L_MARK
+#DIM L_TYPE
+#DIM L_LOG
+
+L_LOG = 1
+
+;-----------------------------
+;- MARKUP:淫乱刻印
+;-----------------------------
+
+L_HIT = 0
+L_MARK= MARK:ARG:淫乱刻印
+
+SELECTCASE L_MARK
+	CASE 0
+		;売春 50 + 魅了技能LV6 + 欲望LV6
+		IF (EXP:ARG:売春経験 >= 50) && (ABL:ARG:魅了技能 >= 6) && (ABL:ARG:欲望 >= 6)
+			L_HIT = 1
+			L_TYPE=[[口上:素質取得_淫乱]]
+		ENDIF
+	CASE 1
+		;売春150 + 魅了技能LV9 + 欲望LV9
+		IF (EXP:ARG:売春経験 >= 150) && (ABL:ARG:魅了技能 >= 9) && (ABL:ARG:欲望 >= 9)
+			L_HIT = 1
+			L_TYPE=0
+		ENDIF
+ENDSELECT
+
+IF L_HIT
+	MARK:ARG:淫乱刻印 += 1
+
+	IF L_LOG
+
+		PRINTFORMW %CALLNAME:ARG%は妖艶な雰囲気を漂わせている……
+		CALL CP_PRINTFORMW_COLORED("【刻印取得】", COLOR("ピンク"), @"%CALLNAME:ARG%は淫乱刻印LV{L_MARK+1}を得た")
+		SIF MARK:ARG:淫乱刻印 == 1
+			CALL CP_PRINTFORMW_COLORED("【素質取得】", COLOR("ピンク"), @"%CALLNAME:ARG%は[淫乱]となった…")
+		IF L_TYPE
+			;- 口上:各種PALAM変動時
+			CALLFORM KOJO_PALAMCHG(ARG, L_TYPE)
+		ENDIF
+	ENDIF
+
+ENDIF
+
+
+
+
+;=================================================
+;   sub TR_PALAMCHG_MARK_MAIN
+;=================================================
+;   TR:パラメータ変動(刻印)
+;-------------------------------------------------
+@TR_PALAMCHG_MARK_MAIN
+#DIM L_I
+#DIM L_T
+#DIM L_HIT
+#DIM L_TMP
+
+L_HIT=0
+
+FOR L_I, 0, DEFTR_PL_NUM
+
+	L_T = GTR_PL:L_I
+
+	;CHK
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+
+	;-----------------------------
+	;- 反発刻印
+	;-----------------------------
+	L_TMP = CUP:L_T:反感 + CUP:L_T:不快
+	SELECTCASE L_TMP
+		CASE IS > 1500
+			IF MARK:L_T:反発刻印 < 3
+				MARK:L_T:反発刻印 = 3
+				CALL CP_PRINTFORMW_COLORED("【反発】", COLOR("群青"), @"%CALLNAME:L_T%は反発刻印LV{MARK:L_T:反発刻印}を得た")
+				;- 口上:各種PALAM変動時
+				CALLFORM KOJO_PALAMCHG(L_T, [[口上:刻印取得_反発刻印最大]])
+			ENDIF
+		CASE IS > 1000
+			IF MARK:L_T:反発刻印 < 2
+				MARK:L_T:反発刻印 = 2
+				CALL CP_PRINTFORMW_COLORED("【反発】", COLOR("群青"), @"%CALLNAME:L_T%は反発刻印LV{MARK:L_T:反発刻印}を得た")
+				PRINTL
+			ENDIF
+		CASE IS > 500
+			IF MARK:L_T:反発刻印 < 1
+				MARK:L_T:反発刻印 = 1
+				CALL CP_PRINTFORMW_COLORED("【反発】", COLOR("群青"), @"%CALLNAME:L_T%は反発刻印LV{MARK:L_T:反発刻印}を得た")
+				PRINTL
+			ENDIF
+	ENDSELECT
+
+
+	L_HIT += RESULT
+
+NEXT
+SIF L_HIT
+	PRINTW
+
+
+
+;=================================================
+;   sub TR_PALAMCHG_AFTER
+;=================================================
+;   TR:パラメータ変動(終了時)
+;-------------------------------------------------
+@TR_PALAMCHG_AFTER
+#DIM L_I
+#DIM L_T
+#DIM L_BAK
+#DIM L_HIT
+
+;-----------------------------
+;- MASTERのみ
+;-----------------------------
+
+L_T = MASTER
+
+IF (ABL:L_T:魅了技能 >= 6) && !(TALENT:L_T:魅惑) && (FLAG:陥落人数 >= 5)
+	TALENT:L_T:魅惑 = 1
+	SETCOLOR COLOR("ピンク")
+	PRINTFORM 【魅了技能Lv6＋上位陥落人数5】
+	RESETCOLOR
+	PRINTFORML %CALLNAME:L_T%は[魅惑]を身に付けた…
+	WAIT
+ENDIF
+
+;-----------------------------
+;- その他
+;-----------------------------
+
+L_BAK = TARGET
+
+FOR L_I, 0, DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+
+	;CHK:END
+	SIF L_T < 0
+		BREAK
+
+	TARGET = L_T
+
+	IF !(TALENT:L_T:キス魔) && (EXP:L_T:キス経験 >= EXPLV:7)
+		TALENT:L_T:キス魔 = 1
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【キス経験LV7】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は[キス魔]を得た…
+		WAIT
+		;- 口上:各種PALAM変動時
+		CALLFORM KOJO_PALAMCHG(L_T, [[口上:素質取得_キス魔]])
+	ENDIF
+
+;------------------------------------------------------------------------------- 暫定でオミット
+;	IF !(TALENT:L_T:セックス狂) && (EXP:L_T:性交経験 >= EXPLV:8)
+;		TALENT:L_T:セックス狂 = 1
+;		SETCOLOR COLOR("ピンク")
+;		PRINTFORM 【セックス経験LV8】
+;		RESETCOLOR
+;		PRINTFORML %CALLNAME:L_T%は[セックス狂]を得た…
+;		WAIT
+;		;- 口上:各種PALAM変動時
+;		CALLFORM KOJO_PALAMCHG(L_T, [[口上:素質取得_セックス狂]])
+;	ENDIF
+;
+;	IF !(TALENT:L_T:自慰狂い) && (EXP:L_T:自慰経験 >= EXPLV:7)
+;		TALENT:L_T:自慰狂い = 1
+;		SETCOLOR COLOR("ピンク")
+;		PRINTFORM 【自慰経験】
+;		RESETCOLOR
+;		PRINTFORML %CALLNAME:L_T%は[自慰狂い]を得た…
+;		WAIT
+;		;- 口上:各種PALAM変動時
+;		CALLFORM KOJO_PALAMCHG(L_T, [[口上:素質取得_自慰狂い]])
+;	ENDIF
+;
+;	IF !(TALENT:L_T:尻穴狂い) && (EXP:L_T:Ａ性交経験 >= EXPLV:8)
+;		TALENT:L_T:尻穴狂い = 1
+;		SETCOLOR COLOR("ピンク")
+;		PRINTFORM 【Ａセックス経験】
+;		RESETCOLOR
+;		PRINTFORML %CALLNAME:L_T%は[尻穴狂い]を得た…
+;		WAIT
+;		;- 口上:各種PALAM変動時
+;		CALLFORM KOJO_PALAMCHG(L_T, [[口上:素質取得_尻穴狂い]])
+;	ENDIF
+;-------------------------------------------------------------------------------
+
+	;CHK:
+	SIF L_T == MASTER
+		CONTINUE
+
+	IF (ABL:L_T:従順 < 1) && (ABL:L_T:欲望 >= 3)
+		ABL:L_T:従順 = 1
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【欲望Lv3】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%の従順が1になった…
+		WAIT
+	ENDIF
+
+	IF (ABL:L_T:親密 < 1) && (MARK:L_T:隷属刻印)
+		ABL:L_T:親密 = 1
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【隷属】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%の親密が1になった…
+		WAIT
+	ENDIF
+
+	IF (ABL:L_T:性奴隷 < 1) && (ABL:L_T:従順 >= 1) && (ABL:L_T:奉仕精神 >= 1)
+		ABL:L_T:性奴隷 = 1
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【性奴Lv1】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%の性奴隷が1になった…
+		WAIT
+	ENDIF
+
+	;-----------------------------
+	;- TALENT
+	;-----------------------------
+	IF (TALENT:L_T:抵抗) && (MARK:L_T:隷属刻印)
+		TALENT:L_T:抵抗 = 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【隷属】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は抵抗を失った…
+		WAIT
+	ENDIF
+	IF (TALENT:L_T:抑圧) && (MARK:L_T:隷属刻印)
+		TALENT:L_T:抑圧 = 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【隷属】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は抑圧を失った…
+		WAIT
+	ENDIF
+	IF (TALENT:L_T:反抗的) && (MARK:L_T:隷属刻印)
+		TALENT:L_T:反抗的 = 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【隷属】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は反抗的を失った…
+		WAIT
+	ENDIF
+	IF (TALENT:L_T:快感の否定) && (MARK:L_T:隷属刻印)
+		TALENT:L_T:快感の否定 = 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【隷属】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は快感の否定を失った…
+		WAIT
+	ENDIF
+	IF EXP:L_T:ＮＴＬ調教経験 >= 500 && TALENT:未亡人 == 0 && TALENT:L_T:百合結婚 == 0 && TALENT:L_T:ＮＴＬ == 0 && (TALENT:L_T:主人持ち || TALENT:L_T:結婚済み || TALENT:L_T:交際中)
+		TALENT:L_T:ＮＴＬ = 1
+		TALENT:L_T:調教済み = 1
+		MARK:L_T:反発刻印 = 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【ＮＴＬ】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は度重なる性行為で%CALLNAME:MASTER%の雌に堕ちてしまったようだ…
+		WAIT
+	ENDIF
+	IF EXP:L_T:ＮＴＬ調教経験 >= 500 && TALENT:未亡人 == 0 && TALENT:L_T:百合摘み == 0 && TALENT:L_T:百合結婚 == 1
+		TALENT:L_T:百合摘み = 1
+		TALENT:L_T:調教済み = 1
+		MARK:L_T:反発刻印 = 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【百合摘み】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は度重なる性行為で、同性の夫より%CALLNAME:MASTER%の牝になることを誓った…
+		WAIT
+	ENDIF
+	IF TALENT:L_T:寵愛 == 0 && EXP:L_T:主人調教経験 >= 1000
+		SETCOLOR COLOR("ピンク")
+		TALENT:L_T:寵愛 = 1
+		PRINTFORM 【寵愛】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%は%CALLNAME:MASTER%にとても気に入られたようだ…。
+		WAIT
+	ENDIF
+NEXT
+
+
+
+
+
+
+
+;-----------------------------
+;- ＮＴＲ
+;-----------------------------
+FOR L_I, 0, DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+
+	;CHK:
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+
+	TARGET = L_T
+
+	L_HIT=0
+
+	IF TALENT:L_T:ＮＴＲ度 && !CFLAG:L_T:ＮＴＲ好感度
+		L_HIT=1
+	ELSEIF (CFLAG:L_T:ＮＴＲ陥落度 == 2) && !CFLAG:L_T:ＮＴＲ好感度
+		L_HIT=1
+	ENDIF
+
+	IF L_HIT
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 【ＮＴＲ再陥落】
+		RESETCOLOR
+		PRINTFORML %CALLNAME:L_T%はＮＴＲ相手を完全に忘れ、%CALLNAME:MASTER%に忠誠を誓った…
+		WAIT
+		CFLAG:L_T:ＮＴＲ結果タイプ = [[ＮＴＲ結果:再陥落]]
+		;- 口上:ＮＴＲイベント
+		CALLFORM KOJO_NTR
+		;初期化
+		TALENT:L_T:ＮＴＲ度 = 0
+		CFLAG:L_T:ＮＴＲ陥落度 = 0
+		CFLAG:L_T:ＮＴＲ口上初回遭遇フラグ = 0
+		CFLAG:L_T:ＮＴＲ後初調教フラグ = 0
+
+		CFLAG:L_T:ＮＴＲ口上初回会話 = 0
+		CFLAG:L_T:ＮＴＲ口上初回客室 = 0
+		CFLAG:L_T:ＮＴＲ口上初回隷属 = 0
+		CFLAG:L_T:ＮＴＲ口上初回陥落 = 0
+
+		;回数加算
+		CFLAG:L_T:ＮＴＲ再陥落回数 ++
+	ENDIF
+NEXT
+
+TARGET = L_BAK
+

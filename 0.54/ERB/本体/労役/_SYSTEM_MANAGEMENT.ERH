@@ -1,0 +1,36 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:_SYSTEM_MANAGEMENT.ERH
+;	Facility	:ヘッダファイル(経営)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;-------------------------------------------------
+;   MNG:
+;-------------------------------------------------
+
+#DEFINE DEFMNG_CL_NUM	300				;キャラリスト総数
+
+#DIM GMNG_CL,			300				;配列:キャラリスト
+#DIM GMNG_CL_NUM,		1				;キャラ数
+
+;労役アイテム
+#DEFINE DEFMNG_ITEM_発信器		1		;労役アイテム:発信器
+#DEFINE DEFMNG_ITEM_特集記事	2		;労役アイテム:特集記事
+#DEFINE DEFMNG_ITEM_首輪		3		;労役アイテム:首輪
+#DEFINE DEFMNG_ITEM_避妊薬		4		;労役アイテム:避妊薬
+#DEFINE DEFMNG_ITEM_セクハラ	7		;労役アイテム:セクハラ
+
+;労役設備
+#DEFINE DEFMNG_FC_PRICE_LV1		300		;労役設備:アップグレード費用(LV1)
+#DEFINE DEFMNG_FC_PRICE_LV2		500		;労役設備:アップグレード費用(LV2)
+#DEFINE DEFMNG_FC_PRICE_LV3		700		;労役設備:アップグレード費用(LV3)
+
+

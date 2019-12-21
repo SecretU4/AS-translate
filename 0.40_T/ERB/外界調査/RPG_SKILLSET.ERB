@@ -1,0 +1,169 @@
+﻿;-------------------------------------------------
+;スキル強化
+;-------------------------------------------------
+@RPG_SKILLSET(C_ID)
+#DIM          C_ID    ;対象キャラの登録番号
+#DIM          L_INPUT ;入力受付用
+#DIM          CFLAG_ID;技能CFLAGの範囲
+#DIM          UP_NUM  ;成長数値
+#DIM          SKILL_ID;技能の種類
+#DIM  DYNAMIC DO_CHECK;キャンセル処理用
+{
+#DIMS CONST SKILL_NAME_STR = 
+	"目星"
+	, "아이디어"
+	, "엿듣기"
+	, "의료"
+	, "기계수리"
+	, "컴퓨터"
+	, "자물쇠"
+	, "은신"
+	, "해체"
+	, "해독"
+}
+{
+#DIMS CONST SKILL_INFO_STR = 
+	"１층 탐색 회수에 ＋보정"
+	, "불명"
+	, "다음 전투 발생 확률을 시각적으로 볼 수 있다"
+	, "전투 종료시 체력을 회복"
+	, "「발견」커맨드에서 사용"
+	, "「발견」커맨드에서 사용"
+	, "「발견」커맨드에서 사용"
+	, "인카운터시 전투 회피 가능"
+	, "전투 승리시 아이템 획득"
+	, "불명"
+}
+#DIM  DYNAMIC 変更前_技能ポイント
+#DIM  DYNAMIC 変更前_目星
+#DIM  DYNAMIC 変更前_아이디어
+#DIM  DYNAMIC 変更前_엿듣기
+#DIM  DYNAMIC 変更前_의료
+#DIM  DYNAMIC 変更前_기계수리
+#DIM  DYNAMIC 変更前_컴퓨터
+#DIM  DYNAMIC 変更前_자물쇠
+#DIM  DYNAMIC 変更前_은신
+#DIM  DYNAMIC 変更前_해체
+#DIM  DYNAMIC 変更前_해독
+
+IF !DO_CHECK
+	;変更前の現在の技能値を保存。直球。
+	変更前_技能ポイント = CFLAG:C_ID:住人_技能ポイント
+	変更前_目星         = CFLAG:C_ID:6600
+	変更前_아이디어     = CFLAG:C_ID:6601
+	変更前_엿듣기       = CFLAG:C_ID:6602
+	変更前_의료         = CFLAG:C_ID:6603
+	変更前_기계수리     = CFLAG:C_ID:6604
+	変更前_컴퓨터 = CFLAG:C_ID:6605
+	変更前_자물쇠       = CFLAG:C_ID:6606
+	変更前_은신       = CFLAG:C_ID:6607
+	変更前_해체         = CFLAG:C_ID:6608
+	変更前_해독         = CFLAG:C_ID:6609
+	SIF !CFLAG_ID
+		CFLAG_ID = GETNUM(CFLAG, "住人_技能_目星")
+	DO_CHECK = 1
+ENDIF
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL C_PICTURE_RD(C_ID)
+DRAWLINE
+PRINTL ■기능 강화
+DRAWLINE
+FOR SKILL_ID, 0, 10
+	PRINTFORM 　【%SKILL_NAME_STR:SKILL_ID, 8, LEFT%】%SKILL_INFO_STR:SKILL_ID, 40, LEFT%
+	SIF SKILL_ID % 2
+		PRINTFORML 
+NEXT
+DRAWLINE
+PRINTFORML 【기능 포인트:{CFLAG:C_ID:住人_技能ポイント}】　※기능은 100이 상한
+DRAWLINE
+FOR SKILL_ID, 0, 10
+	PRINTFORM 　[{SKILL_ID, 3}]【%SKILL_NAME_STR:SKILL_ID, 8, LEFT%:{CFLAG:C_ID:(CFLAG_ID + SKILL_ID), 3 ,LEFT}】+1 [{100 + SKILL_ID, 3}]+5 [{200 + SKILL_ID, 3}]+10
+	SIF SKILL_ID % 2
+		PRINTFORML 
+NEXT
+PRINTFORM 　[301]【랜덤　　】+1 
+PRINTFORM [305]+5 
+PRINTFORM [310]+10
+PRINTFORML 　[320]+20  
+PRINTFORMLC 　[399]전부 랜덤
+PRINTFORMLC [400]취소
+PRINTFORML 
+PRINTFORML 　[999] 캐릭터 선택으로 돌아온다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASE 400
+	CFLAG:C_ID:住人_技能ポイント = 変更前_技能ポイント
+	CFLAG:C_ID:6600 = 変更前_目星
+	CFLAG:C_ID:6601 = 変更前_아이디어
+	CFLAG:C_ID:6602 = 変更前_엿듣기
+	CFLAG:C_ID:6603 = 変更前_의료
+	CFLAG:C_ID:6604 = 変更前_기계수리
+	CFLAG:C_ID:6605 = 変更前_컴퓨터
+	CFLAG:C_ID:6606 = 変更前_자물쇠
+	CFLAG:C_ID:6607 = 変更前_은신
+	CFLAG:C_ID:6608 = 変更前_해체
+	CFLAG:C_ID:6609 = 変更前_해독
+	RESTART
+;若干のズルをする
+CASE 301 TO 399
+	IF L_INPUT == 399
+		DRAWLINE
+		PRINTFORML 남은 보유 포인트 {CFLAG:C_ID:住人_技能ポイント}を 전부 무작위로 배분합니다。괜찮을까요？
+		PRINTFORML [1] 네
+		PRINTFORML [0] 아니오
+		INPUT
+		L_INPUT = RESULT
+		SELECTCASE L_INPUT
+		CASE 1
+			UP_NUM = CFLAG:C_ID:住人_技能ポイント
+		CASEELSE
+			RESTART
+		ENDSELECT
+	ELSE
+		UP_NUM = MIN(L_INPUT % 100, CFLAG:C_ID:住人_技能ポイント)
+	ENDIF
+	CALL RPG_SKILLSET_RAND_LVUP(C_ID, UP_NUM)
+	RESTART
+CASEELSE
+	SKILL_ID = L_INPUT % 100
+	SIF !INRANGE(SKILL_ID, 0, 9)
+		RESTART
+	SELECTCASE L_INPUT / 100
+	CASE 0
+		UP_NUM = 1
+	CASE 1
+		UP_NUM = 5
+	CASE 2
+		UP_NUM = 10
+	CASEELSE
+		RESTART
+	ENDSELECT
+	UP_NUM = MIN(UP_NUM, CFLAG:C_ID:住人_技能ポイント, 100 - CFLAG:C_ID:(CFLAG_ID + SKILL_ID))
+	CFLAG:C_ID:(CFLAG_ID + SKILL_ID) += UP_NUM
+	CFLAG:C_ID:住人_技能ポイント     -= UP_NUM
+	RESTART
+ENDSELECT
+
+
+
+@RPG_SKILLSET_RAND_LVUP(L_I, UP_NUM)
+#DIM L_I
+#DIM UP_NUM
+#DIM CFLAG_ID
+#DIM SKILL_ID
+SIF !CFLAG_ID
+	CFLAG_ID = GETNUM(CFLAG, "住人_技能_目星")
+FOR LOCAL, 0, UP_NUM
+	SKILL_ID = RAND:10
+	;現状では必要ないがバグ防止
+	SIF CFLAG:L_I:住人_技能ポイント <= 0
+		RETURN
+	SIF CFLAG:L_I:(CFLAG_ID + SKILL_ID) >= 100
+		CONTINUE
+	CFLAG:L_I:(CFLAG_ID + SKILL_ID) ++
+	CFLAG:L_I:住人_技能ポイント --
+NEXT

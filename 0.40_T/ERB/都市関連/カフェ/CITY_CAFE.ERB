@@ -1,0 +1,47 @@
+﻿
+;-------------------------------------------------
+; 喫茶店
+;-------------------------------------------------
+@CITY_CAFE(OP)
+#DIMS OP       ;実行オプション
+#DIM NOW_GROUP ;REF用
+SIF !FLAG:定数_カフェ表示数
+	FLAG:定数_カフェ表示数 = 10
+NOW_GROUP = 1
+CALL CITY_CAFE_NPC_TALK("ENTER")
+CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP, "CAFE")
+CALL CITY_CAFE_NPC_TALK("EXIT")
+
+
+;-------------------------------------------------
+;喫茶店員のセリフ制御関数
+;-------------------------------------------------
+@CITY_CAFE_NPC_TALK(EVENT)
+#DIMS EVENT
+SELECTCASE EVENT
+CASE "ENTER"
+;入店時
+	DRAWLINE
+	CALL C_PICTURE_NPC(100)
+	PRINTFORML 점장씨　「어머나、어서 오세요。언제나대로의 자리면 될까요？」
+	PRINTFORML 점원쨩「그럼、안내해드리겠습니다！」
+	DRAWLINE
+	WAIT
+CASE "EXIT"
+;退店時
+	DRAWLINE
+	CALL C_PICTURE_NPC(100)
+	PRINTFORML 점원쨩「안녕히 가시길」
+	PRINTFORML 점장씨　「네ー에、또 와주세요」
+	DRAWLINE
+	WAIT
+CASE "SCOUT"
+;勧誘用
+	PRINTDATAL
+		DATAFORM 점장「그렇네요、이 아이는 어떠세요？」
+		DATAFORM 점장「그러고보니、이런 사람이 있었는데 말이죠？」
+		DATAFORM 점장「방금 별난 아이가 왔었어요、그게 분명히…」
+		DATAFORM 점장「맞아맞아、인상적인 분이 오셨었죠。아직 계실 것 같은데 말이죠」
+		DATAFORM 점장「일에 열심이시네요♪、그렇다면 저 사람은 어떨까요」
+	ENDDATA
+ENDSELECT

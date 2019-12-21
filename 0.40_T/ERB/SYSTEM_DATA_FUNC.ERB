@@ -1,0 +1,269 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_DATA_FUNC.ERB
+;	Facility	:システムデータ管理 - 関数置き場。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;-------------------------------------------------
+; メモ：
+;   特になし
+;-------------------------------------------------
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ TITLE_SAVEGAME_FUNC				SYSTEM:セーブ処理関数
+;	・ _MAKE_SAVEDATA					作成:セーブデータ
+;	・ TITLE_LOADGAME_FUNC				SYSTEM:ロード処理関数
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TITLE_SAVEGAME_FUNC
+;=================================================
+;   SYSTEM:セーブ処理関数
+;-------------------------------------------------
+@TITLE_SAVEGAME_FUNC
+#DIM L_I
+#DIM L_MAX
+#DIM L_MIN
+#DIM L_IDX
+#DIMS LSTR
+
+LSTR = 　　　　　　　　　　　　　　　　　　　<img src='Logo_0' height = '2500' ypos = '200'>
+HTML_PRINT LSTR
+L_MIN = 0
+SAVENOS L_MAX
+
+;ライン表示:新ページ
+CALL C_LINE
+
+PRINTL 【세이브 화면】
+PRINTL 세이브할 위치를 선택하세요。
+PRINTL 
+
+;- 表示:セーブデータ
+FOR L_I, L_MIN, L_MAX
+	CHKDATA L_I
+	IF !RESULT
+		PRINTFORML [{L_I,3}] %RESULTS%
+	ELSE
+		PRINTFORML [{L_I,3}] ----
+	ENDIF
+NEXT
+PRINTL
+PRINTFORMLC [1001] 돌아온다
+
+$INPUT_LOOP
+INPUT
+
+SELECTCASE RESULT
+	;- 돌아온다
+	CASE 1001
+		RETURN
+
+	;- 範囲内
+	CASE L_MIN TO (L_MAX - 1)
+		;- 後続処理へ遷移
+
+	;- 範囲外
+	CASEELSE
+		CLEARLINE 1
+		REUSELASTLINE 無効な値です
+		GOTO INPUT_LOOP
+ENDSELECT
+
+L_IDX = RESULT
+
+CHKDATA L_IDX
+IF !RESULT
+	PRINTL 既にデータが存在しています。上書きしますか？
+	;- 入力提示:２托
+	CALL INPUT_YN
+	SIF RESULT == 1
+		RESTART
+ENDIF
+
+;- SYSTEM:セーブ実行
+CALL SYS_SAVE_EXE(L_IDX)
+
+;=================================================
+;   sub _MAKE_SAVEDATA
+;=================================================
+;   作成:セーブデータ
+;-------------------------------------------------
+@_MAKE_SAVEDATA
+#DIMS L_WORK
+
+;- PUTFORMで"SAVEDATA_TEXT"に文字列をセット
+
+PUTFORM {DAY,3}일째 
+PUTFORM (%INFO_TIME()%) 
+
+PUTFORM 주민:%CALLNAME:MASTER, 20, LEFT% 
+SIF GETNUM(BASE, "LV") != -1
+	PUTFORM LV:{BASE:MASTER:LV, 2} 
+
+L_WORK = {GAMEBASE_VERSION/1000,1}.{GAMEBASE_VERSION % 1000, 3}
+L_WORK = %REPLACE(L_WORK, " ", "0")%
+SIF FLAG:周回プレイ数
+	L_WORK += @" ☆{1+FLAG:周回プレイ数,2}주차"
+PUTFORM Ver%L_WORK% 
+
+
+
+;-----------------------------
+;- セーブデータサイズ削減処理
+;-----------------------------
+
+VARSET A
+VARSET B
+VARSET C
+VARSET D
+VARSET E
+VARSET F
+VARSET G
+VARSET H
+VARSET I
+VARSET J
+VARSET K
+VARSET L
+VARSET M
+VARSET N
+VARSET O
+VARSET P
+VARSET Q
+VARSET R
+VARSET S
+VARSET T
+VARSET U
+VARSET V
+VARSET W
+VARSET X
+VARSET Y
+VARSET Z
+
+REPEAT CHARANUM
+	VARSET SOURCE:COUNT:0
+REND
+
+;-----------------------------
+;- 行動中以外の場合は、下記も初期化
+;  (※行動中にセーブ出来るかどうかは検討中)
+;-----------------------------
+
+;- 取り合えず実行。行動中にセーブ可能にする場合は、下記はIFで制御
+REPEAT CHARANUM
+	VARSET GOTJUEL:COUNT:0
+	VARSET EX:COUNT:0
+	VARSET PALAM:COUNT:0
+REND
+
+
+
+;=================================================
+;   sub TITLE_LOADGAME_FUNC
+;=================================================
+;   SYSTEM:ロード処理関数
+;-------------------------------------------------
+@TITLE_LOADGAME_FUNC
+#DIM L_I
+#DIM L_MAX
+#DIM L_MIN
+#DIM L_IDX
+#DIMS LSTR
+
+LSTR = 　　　　　　　　　　　　　　　　　　　<img src='Logo_0' height = '2500' ypos = '200'>
+HTML_PRINT LSTR
+L_MIN = 0
+SAVENOS L_MAX
+;ライン表示:新ページ
+CALL C_LINE
+PRINTL 【로드 화면】
+PRINTL 로드할 데이터를 선택하세요。
+PRINTL 
+
+;- 表示:セーブデータ
+FOR L_I, L_MIN, L_MAX
+	CHKDATA L_I
+	IF !RESULT
+		PRINTFORML [{L_I,3}] %RESULTS%
+	ELSE
+		PRINTFORML [{L_I,3}] ----
+	ENDIF
+NEXT
+
+IF 1
+	L_I = 98
+	CHKDATA L_I
+	IF !RESULT
+		PRINTFORML [{L_I,3}] %RESULTS%
+	ELSE
+		PRINTFORML [{L_I,3}] ----
+	ENDIF
+ENDIF
+
+IF 1
+	L_I = 99
+	CHKDATA L_I
+	IF !RESULT
+		PRINTFORML [{L_I,3}] %RESULTS%
+	ELSE
+		PRINTFORML [{L_I,3}] ----
+	ENDIF
+ENDIF
+
+PRINTL
+PRINTFORMLC [1001] 돌아온다
+
+$INPUT_LOOP
+INPUT
+
+SELECTCASE RESULT
+	;- 돌아온다
+	CASE 1001
+		RETURN
+
+	;- オートセーブ
+	CASE 98, 99
+		;- 後続処理へ遷移
+
+	;- 範囲内
+	CASE L_MIN TO (L_MAX - 1)
+		;- 後続処理へ遷移
+
+	;- 範囲外
+	CASEELSE
+		CLEARLINE 1
+		REUSELASTLINE 無効な値です
+		GOTO INPUT_LOOP
+ENDSELECT
+
+L_IDX = RESULT
+
+CHKDATA L_IDX
+IF RESULT
+	CLEARLINE 1
+	REUSELASTLINE 無効な値です
+	GOTO INPUT_LOOP
+ENDIF
+
+;- ロード(実行後、@EVENTLOADへ遷移)
+LOADDATA L_IDX
+

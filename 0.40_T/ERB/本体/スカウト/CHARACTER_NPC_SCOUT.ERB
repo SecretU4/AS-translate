@@ -1,0 +1,219 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CHARACTER_SCOUT.ERB
+;	Facility	:データベース(EXPUP)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ CHARACTER_SCOUT_POS						DB:EXPUP位置
+;
+;===============================================================================
+
+;=================================================
+;   sub CHARACTER_SCOUT_POS
+;=================================================
+;   DB:EXPUP位置
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@CHARACTER_NPC_SCOUT1(ARG:0)
+#DIM S_LOOP
+#DIM S_RACE
+#DIM S_MEMBER
+#DIM L_I
+#DIMS S_NAME
+
+ADDCHARA ARG:0
+
+
+CALL CHARACTER_NPC_SCOUT2
+
+
+L_I = CHARANUM -1
+ARG:0 = L_I
+
+CALL CHARACTER_NPC_T(ARG:0)
+
+
+
+
+;-------------------------------------------------
+; 名前　性格　素質　経験　設定
+;ランダムキャラならば追加したあと必ず使うこと
+;-------------------------------------------------
+@CHARACTER_NPC_SCOUT2(ARG:0)
+#DIM L_I
+#DIM S_MIND
+#DIM S_RACE
+L_I = CHARANUM -1
+
+ARG:0 = L_I
+
+;性格と口調の設定
+SIF CFLAG:L_I:使用口上 == 0
+	CALL CHARACTER_SCOUT_MIND_REPEAT(L_I)
+SIF !STRLENS(CSVCSTR(CFLAG:L_I:NPC番号, GETNUM(CSTR, "一人称")))
+	CSTR:L_I:一人称 '= CSVCSTR(CFLAG:L_I:NPC番号, GETNUM(CSTR, "一人称"))
+SIF !STRLENS(CSVCSTR(CFLAG:L_I:NPC番号, GETNUM(CSTR, "二人称")))
+	CSTR:L_I:二人称 '= CSVCSTR(CFLAG:L_I:NPC番号, GETNUM(CSTR, "二人称"))
+
+SIF !STRLENS(CSTR:L_I:チャームポイント)
+	CALL CHARACTER_SCOUT_CHARM_POINT(L_I)
+SIF !STRLENS(CSTR:L_I:癖)
+	CALL CHARACTER_SCOUT_KUSE(L_I)
+SIF !CFLAG:L_I:身長
+	CALL CHARACTER_SCOUT_BODYSIZE(L_I)
+
+CALL CHARACTER_SCOUT_EXTRA(ARG:0)
+;悩みの設定
+SIF CALLNAME:L_I == ""
+	CALLNAME:L_I = %NAME:L_I%
+
+
+
+
+
+
+MAXBASE:L_I:체력 = 200
+BASE:L_I:체력 = MAXBASE:L_I:체력
+MAXBASE:L_I:絶頂 = FLAG:最大値_絶頂
+MAXBASE:L_I:무드 = FLAG:最大数_무드
+
+CFLAG:L_I:使用口上 = NO:L_I
+CFLAG:L_I:危険日 = RAND:6
+
+FLAG:個別番号カウント += 1
+CFLAG:L_I:個別番号 = FLAG:個別番号カウント
+
+CALL CHARACTER_SCOUT_PROFILE(ARG:0)
+;初期プロフィール
+
+
+
+
+
+;-------------------------------------------------
+;能力制限&対価要求
+;-------------------------------------------------
+@CHARACTER_NPC_T(L_I)
+#DIM L_I
+#DIM S_C
+#DIM S_LOOP
+#DIM L_INPUT
+
+FOR S_LOOP, 1000, 1300
+	CFlag:L_I:(S_LOOP) = LIMIT(CFlag:L_I:(S_LOOP), 0, 99)
+NEXT
+
+CFlag:L_I:住人_최대체력 = MIN(CFlag:L_I:住人_최대체력, 99)
+CFlag:L_I:住人_현재체력 = CFlag:L_I:住人_최대체력
+CFlag:L_I:住人_最大気力 = MIN(CFlag:L_I:住人_最大気力, 99)
+CFlag:L_I:住人_現在気力 = CFlag:L_I:住人_最大気力
+
+CFlag:L_I:住人_貢献値  = MIN(CFlag:L_I:住人_貢献値, 9)
+CFlag:L_I:住人_SAN  = MIN(CFlag:L_I:住人_SAN, 70)
+CFlag:L_I:住人_GUTS  = MIN(CFlag:L_I:住人_GUTS, 50)
+CFlag:L_I:住人_BRAVE  = MIN(CFlag:L_I:住人_BRAVE, 50)
+
+CFlag:L_I:住人_ATK  = MIN(CFlag:L_I:住人_ATK, 80)
+CFlag:L_I:住人_DEF  = MIN(CFlag:L_I:住人_DEF, 80)
+CFlag:L_I:住人_HIT  = MIN(CFlag:L_I:住人_HIT, 80)
+CFlag:L_I:住人_SPD  = MIN(CFlag:L_I:住人_SPD, 80)
+CFlag:L_I:住人_LUK  = MIN(CFlag:L_I:住人_LUK, 50)
+CFlag:L_I:住人_最大BRE  = MIN(CFlag:L_I:住人_最大BRE, 150)
+CFlag:L_I:住人_現在BRE = CFlag:L_I:住人_最大BRE
+
+CFlag:L_I:住人_M兵装練度      = 1
+CFlag:L_I:住人_M兵装ダイス    = MIN(CFlag:L_I:住人_M兵装ダイス, 4)
+CFlag:L_I:住人_M兵装ダメージ  = MIN(CFlag:L_I:住人_M兵装ダメージ, 20)
+CFlag:L_I:住人_M兵装ボーナス  = MIN(CFlag:L_I:住人_M兵装ボーナス, 10)
+
+CFlag:L_I:住人_S兵装練度      = 1
+CFlag:L_I:住人_S兵装ダイス    = MIN(CFlag:L_I:住人_S兵装ダイス, 3)
+CFlag:L_I:住人_S兵装ダメージ  = MIN(CFlag:L_I:住人_S兵装ダメージ, 10)
+CFlag:L_I:住人_S兵装ボーナス  = MIN(CFlag:L_I:住人_S兵装ボーナス, 5)
+
+S_C = SUMARRAY(CFlag:L_I:0, 1000, 1300) * 10 + SUMARRAY(CFlag:L_I:0, 6500, 6600)
+
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪접속 성공、대상 개체「%CALLNAME:L_I%」를 생성하려면、≫
+PRINTFORML ≪도시 Lv {S_C/160}、자금 {S_C*500}를 필요로 합니다。≫
+PRINTFORML ≪생성하시겠습니까？≫
+DRAWLINE
+PRINTFORML 
+PRINTFORML [1] 생성한다
+PRINTFORML [2] 생성 중지
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 1
+	IF FLAG:都市_Lv < (S_C/160)
+		PRINTFORMW 도시 Lv이 부족합니다。
+		CALL CANCEL_SCOUT(L_I)
+		JUMP WORLD_CONNECT
+	ELSEIF MONEY < (S_C*500)
+		PRINTFORMW 자금이 부족합니다。
+		CALL CANCEL_SCOUT(L_I)
+		JUMP WORLD_CONNECT
+	ENDIF
+	MONEY -= (S_C*500)
+	CLEARLINE LINECOUNT
+	DRAWLINE
+	PRINTFORML ≪「시스템:SILVER_KEY」、생성 공정으로 이행…≫
+	PRINTFORML ≪Phase_1_개체 정보 해석……Phase_2_인체 형성……………형성 종료했습니다≫
+	DRAWLINE
+	FLAG:汎用変数 = -800
+	FLAG:汎用変数2 = 800
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	HTML_PRINT C_PICTURE_NPC_HTML(L_I, 800, -800, 0, 850)
+	PRINTFORML %CSTR:L_I:自己紹介0%
+	PRINTFORML %CSTR:L_I:自己紹介1%
+	PRINTFORML %CSTR:L_I:自己紹介2%
+	PRINTFORML %CSTR:L_I:自己紹介3%
+	PRINTFORML %CSTR:L_I:自己紹介4%
+	PRINTFORMW %CSTR:L_I:自己紹介5%
+	DRAWLINE
+CASE 2
+	CALL CANCEL_SCOUT(L_I)
+	JUMP WORLD_CONNECT
+CASEELSE
+	CALL CANCEL_SCOUT(L_I)
+	JUMP WORLD_CONNECT
+ENDSELECT
+
+
+
+
+
+
+
+
+
+
+
+
+

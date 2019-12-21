@@ -1,0 +1,10 @@
+﻿@CHANGE_CHILD_BODY
+PRINTL !주의! 작은 몸집、난쟁이 체형의 화상 교환 처리를 실시합니다
+PRINTL 해당 처리는 한번 실행하고 나면 불필요합니다。
+FOR LOCAL, 1, CHARANUM-1
+	IF TALENT:LOCAL:작은체형==1  || TALENT:LOCAL:난쟁이체형==1
+		PRINTFORML {LOCAL}
+		CFLAG:LOCAL:住人_体格=1
+	ENDIF
+NEXT
+RETURN

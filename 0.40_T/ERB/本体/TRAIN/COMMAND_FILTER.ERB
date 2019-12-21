@@ -1,0 +1,310 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:COMMAND_FILTER.ERB
+;	Facility	:コマンドフィルタ画面。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- 表示系
+;
+;	・ COMMAND_FILTER_MAIN				コマンドフィルタ画面:主処理
+;
+;	# 個別処理
+;	・ COMMAND_FILTER_DATA_GET			取得:コマンドフィルタ(DATA)
+;	・ COMMAND_FILTER_DATA_INVERT		反転:コマンドフィルタ(DATA)
+;	・ COMMAND_FILTER_MEMORY_GET		取得:コマンドフィルタ(記憶領域)
+;	・ COMMAND_FILTER_MEMORY_SET		設定:コマンドフィルタ(記憶領域)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   表示系
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub COMMAND_FILTER_MAIN
+;=================================================
+;   コマンドフィルタ画面:主処理
+;-------------------------------------------------
+@COMMAND_FILTER_MAIN
+#DIM DYNAMIC L_HIT ,1000
+#DIM DYNAMIC L_LIST ,1000
+#DIM L_I
+#DIM L_COM
+#DIM L_INPUT
+#DIM L_PAGE
+#DIM L_CNT
+#DIM L_MIN
+#DIM L_MAX
+#DIM L_COM_MAX
+#DIM L_NEXT
+#DIM L_MODE
+#DIMS L_FILTER
+#DIMS L_STR
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+
+;--初期化
+L_PAGE=0
+L_MODE=0
+L_FILTER=
+
+;表示アイテム数/P
+L_MAX = 60
+
+;- コマンド最大数
+L_COM_MAX = 900
+
+;- 実行モード
+L_MODE = 0
+
+;- 取得:コマンドフィルタ(記憶領域)
+L_FILTER = %COMMAND_FILTER_MEMORY_GET(L_MODE)%
+
+;-----------------------------
+;- リスト作成
+;-----------------------------
+VARSET L_LIST
+VARSET L_HIT
+L_CNT=0
+FOR L_I, 0, L_COM_MAX
+	;- 取得:コマンド名称
+	TRYCCALLFORM COM_FUNC_GET_NAME_X{L_I}
+		L_LIST:L_CNT = L_I
+		L_CNT ++
+		L_HIT:L_I = 1
+	CATCH
+		;- 無しの場合は次へ
+		CONTINUE
+	ENDCATCH
+NEXT
+
+;-----------------------------
+;- 表示開始
+;-----------------------------
+$PRINT_LIST
+L_INPUT=0
+
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML 커맨드 필터를 설정합니다。
+PRINTFORML 필터링하고 싶은 커맨드를 선택하세요。（모든 캐릭터 공통）
+PRINTL
+
+L_CNT=0
+L_NEXT=0
+L_MIN=(L_PAGE * L_MAX)
+FOR L_I, L_MIN, L_COM_MAX
+	L_COM = L_LIST:L_I
+	SIF !L_COM
+		BREAK
+
+	SELECTCASE L_CNT
+		;- 最大数越え
+		CASE IS >= L_MAX
+			;- 다음 페이지有り
+			L_NEXT = 1
+			BREAK
+		;- 範囲内
+		CASEELSE
+			;- 取得:コマンド名称
+			CALLFORM COM_FUNC_GET_NAME_X{L_COM}
+			L_STR = %RESULTS%
+
+			;- 取得:コマンドフィルタ(DATA)
+			SIF COMMAND_FILTER_DATA_GET(L_COM,L_FILTER)
+				SETCOLOR COLOR("伏字")
+			PRINTFORMC %L_STR%[{L_COM,3}]
+			RESETCOLOR
+	ENDSELECT
+
+	;- 計上
+	L_CNT ++ 
+
+	SIF (L_CNT % PRINTCPERLINE() ) == 0
+		PRINTL
+NEXT
+SIF !LINEISEMPTY()
+	PRINTL
+PRINTL
+
+PRINTFORMLC \@(L_PAGE <= 0) ? %" " * 16% # [1007]이전 페이지\@
+PRINTLC [1000] 돌아온다
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]다음 페이지\@
+PRINTL 
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	CASE 1000
+		RETURN 0
+	CASE 0 TO L_COM_MAX - 1
+		;- CHK:ヒット
+		IF !L_HIT:L_INPUT
+			;INPUTエラー対応
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP_1
+		ENDIF
+
+		;- 反転:コマンドフィルタ(DATA)
+		L_FILTER = %COMMAND_FILTER_DATA_INVERT(L_INPUT,L_FILTER)%
+
+		;- 設定:コマンドフィルタ(記憶領域)
+		CALLF COMMAND_FILTER_MEMORY_SET(L_MODE,TARGET,L_FILTER)
+
+		GOTO PRINT_LIST
+	CASE 1007
+		IF L_PAGE > 0
+			L_PAGE -= 1
+			GOTO PRINT_LIST
+		ELSE
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP_1
+		ENDIF
+	CASE 1009
+		IF (L_NEXT)
+			L_PAGE += 1
+			GOTO PRINT_LIST
+		ELSE
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP_1
+		ENDIF
+	CASEELSE
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+RESTART
+
+;-------------------------------------------------------------------------------
+;   個別処理
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub COMMAND_FILTER_DATA_GET
+;=================================================
+;   取得:コマンドフィルタ(DATA)
+;-------------------------------------------------
+; Input:
+;  ARG					対象コマンドNo
+;  ARGS					コマンドフィルタ
+; Output:
+;  RETURNF				フィルタ真偽値(0:OFF 1:ON)
+;-------------------------------------------------
+@COMMAND_FILTER_DATA_GET(ARG=-1,ARGS="")
+#FUNCTION
+LOCALS = /{ARG}/
+IF STRCOUNT(ARGS,LOCALS)
+	RETURNF 1
+ELSE
+	RETURNF 0
+ENDIF
+
+;=================================================
+;   sub COMMAND_FILTER_DATA_INVERT
+;=================================================
+;   反転:コマンドフィルタ(DATA)
+;-------------------------------------------------
+; Input:
+;  ARG					対象コマンドNo
+;  ARGS					コマンドフィルタ
+; Output:
+;  RETURNF				コマンドフィルタ
+;-------------------------------------------------
+@COMMAND_FILTER_DATA_INVERT(ARG=-1,ARGS="")
+#FUNCTIONS
+
+;-----------------------------
+;-- 置換して元データを消去、または追加する
+;-----------------------------
+
+LOCALS = /{ARG}/
+IF STRCOUNT(ARGS,LOCALS)
+	;- 消去
+	ARGS = %REPLACE(ARGS, LOCALS, "/")%
+ELSE
+	SIF !STRLENS(ARGS)
+		ARGS = /
+	;- 追加
+	ARGS += TOSTR(ARG) + "/"
+ENDIF
+RETURNF ARGS
+
+;=================================================
+;   sub COMMAND_FILTER_MEMORY_GET
+;=================================================
+;   取得:コマンドフィルタ(記憶領域)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象フィルタ(0:共通 1:キャラ別)
+;  ARG:5				対象キャラ
+; Output:
+;  RETURNF				フィルタ文字列
+;-------------------------------------------------
+@COMMAND_FILTER_MEMORY_GET(ARG:0=0, ARG:5=-1)
+#FUNCTIONS
+
+SIF ARG:5 < 0
+	ARG:5 = TARGET
+
+;- CHK
+SELECTCASE ARG:0
+;-------------------------------------------------
+;	;- 1:キャラ別
+;	CASE 1
+;		RETURNF CSTR:(ARG:5):キャラ別コマンドフィルタ
+;-------------------------------------------------
+	;- その他
+	CASEELSE
+		RETURNF GVAR_COM_FILTER
+ENDSELECT
+
+
+;=================================================
+;   sub COMMAND_FILTER_MEMORY_SET
+;=================================================
+;   設定:コマンドフィルタ(記憶領域)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象フィルタ(0:共通 1:キャラ別)
+;  ARG:5				対象キャラ
+;  ARGS					コマンドフィルタ
+;-------------------------------------------------
+@COMMAND_FILTER_MEMORY_SET(ARG:0=0, ARG:5=-1,ARGS="")
+#FUNCTION
+
+SIF ARG:5 < 0
+	ARG:5 = TARGET
+
+;- CHK
+SELECTCASE ARG:0
+;-------------------------------------------------
+;	;- 1:キャラ別
+;	CASE 1
+;		CSTR:(ARG:5):キャラ別コマンドフィルタ = %ARGS%
+;-------------------------------------------------
+	;- その他
+	CASEELSE
+		GVAR_COM_FILTER = %ARGS%
+ENDSELECT
+
+
+

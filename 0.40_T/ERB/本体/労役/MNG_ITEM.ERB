@@ -1,0 +1,326 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:MNG_ITEM.ERB
+;	Facility	:労役アイテム。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ MNG_ITEM_MAIN					経営:アイテム
+;	・ MNG_ITEM_SELECT					経営:アイテム選択
+;	・ MNG_ITEM_NAME					経営:アイテム名
+;	・ MNG_ITEM_CHK						経営:アイテム確認
+;	・ MNG_ITEM_RENEW					経営:アイテム更新
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub MNG_ITEM_MAIN
+;=================================================
+;   経営:アイテム
+;-------------------------------------------------
+@MNG_ITEM_MAIN
+#DIM L_CNT_DATA
+#DIM L_CNT_PRINT
+#DIM L_START
+#DIM L_END
+#DIM L_I
+#DIM L_T
+#DIM L_CNT
+#DIM L_PAGE
+#DIM L_NEXT
+#DIM L_PREV
+#DIM L_INPUT
+#DIM L_TMP
+
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+
+L_PAGE=0
+
+; データ総数
+L_CNT_DATA = GMNG_CL_NUM
+
+; データ表示数/P
+L_CNT_PRINT = FLAG:定数_キャラ表示数
+
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+$PRINT_LIST
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML 종업원의 노역 아이템을 선택하세요。　＜page.{L_PAGE}＞
+PRINTFORML 최대 ２개까지 선택 가능합니다。
+DRAWLINE
+
+L_START	= L_CNT_PRINT * L_PAGE
+L_END	= L_CNT_PRINT * (L_PAGE + 1)
+
+;ヘッダ
+PRINT 　　　　　　　　　　　　　　　　　　　　　
+PRINT 　　　아이템 １　　　 
+PRINT 　　　아이템 ２　　　 
+PRINTL
+
+L_CNT = 0
+FOR L_I, L_START, L_END
+	L_T = GMNG_CL:L_I
+
+	IF L_T < 0
+		;空
+	ELSE
+
+		;表示
+		PRINTFORM [%TOSTR(L_T),3%] %CALLNAME:L_T, DEFVAR_LEN_CNAME, LEFT% 
+		PRINTFORM %DB_TALENT_NAME(L_T, "남자")% 
+		PRINTFORM 【%INFO_WORK_NAME(L_T)%】 
+
+		;アイテム
+		PRINTFORM [{500+L_CNT}] %MNG_ITEM_NAME(L_T, 1)% 
+		PRINTFORM [{600+L_CNT}] %MNG_ITEM_NAME(L_T, 2)% 
+
+		L_CNT ++
+
+	ENDIF
+
+	PRINTL
+
+NEXT
+
+PRINTL
+
+L_PREV = (L_PAGE <= 0) ? 0 # 1
+L_NEXT = (L_PAGE >= (L_CNT_DATA / L_CNT_PRINT) ) ? 0 # 1
+
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]이전 페이지\@
+PRINTLC [1000] 돌아온다
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]다음 페이지\@
+PRINTL 
+PRINTL 
+
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		RETURN
+	;- アイテム１
+	CASE 500 TO 599
+
+		L_TMP = L_CNT_PRINT * L_PAGE
+		L_TMP += L_INPUT - 500
+
+		L_T = GMNG_CL:L_TMP
+		L_TMP = 1
+
+		GOTO ITEM_SELECT
+
+	;- アイテム
+	CASE 600 TO 699
+
+		L_TMP = L_CNT_PRINT * L_PAGE
+		L_TMP += L_INPUT - 600
+
+		L_T = GMNG_CL:L_TMP
+		L_TMP = 2
+
+		GOTO ITEM_SELECT
+
+	;이전 페이지
+	CASE 1007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO PRINT_LIST
+	;다음 페이지
+	CASE 1009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO PRINT_LIST
+	;- その他
+	CASEELSE
+		$ERROR
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+;- アイテム選択
+IF 0
+	$ITEM_SELECT
+	IF L_T < 0
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+;-------------------------------------------------
+;	ELSEIF L_T == MASTER
+;		CALL C_INPUT_ERROR("主人に労役アイテムは設定できません")
+;		GOTO INPUT_LOOP_1
+;-------------------------------------------------
+	ENDIF
+
+	;- 経営:アイテム選択
+	CALL MNG_ITEM_SELECT(L_T, L_TMP)
+
+ENDIF
+
+RESTART
+
+
+;=================================================
+;   sub MNG_ITEM_SELECT
+;=================================================
+;   経営:アイテム選択
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;  ARG:1				アイテム位置
+;-------------------------------------------------
+@MNG_ITEM_SELECT(ARG:0, ARG:1)
+#DIM L_T
+#DIMS L_KEY
+#DIM L_TNPUT
+
+L_T = ARG:0
+L_KEY = 労役アイテム{ARG:1}
+
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML 세트할 노역 아이템을 선택하세요。
+PRINTFORML 
+PRINTFORML 대상：%CALLNAME:L_T%
+PRINTFORML 위치：%L_KEY%　… %MNG_ITEM_NAME(L_T, ARG:1)%
+DRAWLINE
+PRINTL
+PRINTL
+PRINTFORML [0] 없음　　　　　
+PRINTFORML [1] 발신기　　　　	… NTR에 의한 실종 방지。
+PRINTFORML [2] 특집 기사　　　	… 주목을 끌어 노역 수입이 상승。하지만 NTR이 발생。
+PRINTFORML [3] 목걸이			… 주인에 대한 충성을 상기시켜、NTR을 격퇴。하지만 수입이 반감。
+PRINTFORML [4] 피임약　　　　	… 창관이나 NTR、밤시중에서 임신을 막는다。
+PRINTL
+PRINTFORML [-] 성희롱　　　	… 주인이 성희롱을 하러 간다。최대 ５명까지。（조정 중）
+PRINTL
+PRINTFORML [9] 돌아온다
+PRINTL
+CALL INPUT_INT(0,1,2,3,4,9)
+L_TNPUT = RESULT
+
+SELECTCASE L_TNPUT
+	CASE 9
+		RETURN
+	CASEELSE
+		;更新
+		CFLAG:ARG:L_KEY = L_TNPUT
+
+		;- 経営:アイテム更新
+		CALL MNG_ITEM_RENEW(ARG)
+
+		RETURN
+ENDSELECT
+
+
+;=================================================
+;   sub MNG_ITEM_NAME
+;=================================================
+;   経営:アイテム名
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;  ARG:1				アイテム位置
+;-------------------------------------------------
+@MNG_ITEM_NAME(ARG:0, ARG:1)
+#FUNCTIONS
+#DIMS L_STR
+
+SELECTCASE CFLAG:ARG:@"労役アイテム{ARG:1}"
+	;-----------------------------
+	;- NTR
+	;-----------------------------
+	CASE DEFMNG_ITEM_発信器
+		L_STR = 발신기
+	CASE DEFMNG_ITEM_特集記事
+		L_STR = 특집기사
+	CASE DEFMNG_ITEM_首輪
+		L_STR = 목걸이
+	CASE DEFMNG_ITEM_避妊薬
+		L_STR = 피임약
+	;-----------------------------
+	;- 通常
+	;-----------------------------
+	CASE DEFMNG_ITEM_セクハラ
+		L_STR = 성희롱
+	CASEELSE
+;		L_STR = 　　　　　　
+		L_STR = ―――
+;		L_STR = 　　　
+ENDSELECT
+SIF STRLENS(L_STR)
+	L_STR = 【%L_STR%】
+
+RETURNF @"%L_STR, 12+4, LEFT%"
+
+
+;=================================================
+;   sub MNG_ITEM_CHK
+;=================================================
+;   経営:アイテム確認
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;  ARG:1				アイテムNo
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@MNG_ITEM_CHK(ARG:0, ARG:1)
+#FUNCTION
+#DIM L_T
+
+L_T = ARG:0
+
+SIF !GROUPMATCH(ARG:1, CFLAG:L_T:労役アイテム1, CFLAG:L_T:労役アイテム2)
+	RETURNF 0
+
+;有り
+RETURNF 1
+
+
+
+;=================================================
+;   sub MNG_ITEM_RENEW
+;=================================================
+;   経営:アイテム更新
+;-------------------------------------------------
+; Input:
+;  ARG					キャラ
+;-------------------------------------------------
+@MNG_ITEM_RENEW(ARG)
+
+;アイテム設定
+CFLAG:ARG:避妊薬 = MNG_ITEM_CHK(ARG, DEFMNG_ITEM_避妊薬)
+
+

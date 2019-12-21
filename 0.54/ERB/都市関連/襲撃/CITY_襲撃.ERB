@@ -1,0 +1,198 @@
+
+;-------------------------------------------------
+;襲撃
+;-------------------------------------------------
+@CITY_RID
+
+SETCOLOR 250,50,50
+DRAWLINE
+DRAWLINE
+DRAWLINE
+PRINTFORML ≪「シティ」の権限に基づき「プレイヤー」に緊急発令≫
+PRINTFORML ≪異質な性質を持つ「外敵」群が都市に侵入しました≫
+PRINTFORML ≪各「プレイヤー」は配下を駆使し、直ちに防衛を開始して下さい≫
+PRINTFORML ≪防衛不可能の場合は非常システムを使い撃退しますが、都市に悪影響を及ぼしてしまうでしょう≫
+PRINTFORML ≪その前に一定のダメージを与えることで、「外敵」の戦力を削ぎましょう≫
+PRINTFORML ≪内容は以上です、各人の健闘を祈ります≫
+DRAWLINE
+DRAWLINE
+DRAWLINE
+PRINTFORMW 
+RESETCOLOR
+
+FLAG:都市_防衛 = 5
+FLAG:都市_防衛ダメージ = 0
+FLAG:都市_防衛蓄積ダメージ = 0
+FLAG:都市_防衛成功ダメージ = ((FLAG:都市_Lv)*10)+RAND:((FLAG:都市_Lv)*10)
+
+
+;-------------------------------------------------
+;防衛戦
+;-------------------------------------------------
+@CITY_RID_B
+#DIM L_INPUT
+
+FLAG:都市_防衛ターン = 5
+FLAG:都市_防衛ダメージ = 0
+
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORMW ≪防衛を遂行させる代理人を選択して下さい≫
+CALL RPG_LIST_CHARA
+L_INPUT = RESULT
+SIF L_INPUT == 1000
+	JUMP SYSTEM_MENU
+IF TALENT:L_INPUT:NPC == 999
+	PRINTFORMW NPCは選択できません
+	GOTO INPUT_LOOP2
+ELSEIF L_INPUT == 0
+	PRINTFORMW あなたは選択できません
+	GOTO INPUT_LOOP2
+ELSE
+	Flag:調査キャラ = L_INPUT
+	DRAWLINE
+	PRINTFORMW ≪確認しました、防衛を開始します≫
+	CALL RPG_BATTLE
+ENDIF
+JUMP SYSTEM_MENU
+
+;-------------------------------------------------
+;防衛戦　終了
+;-------------------------------------------------
+@CITY_RID_B_END
+
+DRAWLINE
+PRINTFORML 　　　　　　　　　　　　　　　　　　　　　　　　　　本日の防衛終了　　　　　　　　　　　　　　　　　　　　　　　　
+DRAWLINE
+PRINTFORMW 
+
+
+
+FLAG:都市_防衛蓄積ダメージ += FLAG:都市_防衛ダメージ
+FLAG:ターン終了フラグ = 1
+JUMP SYSTEM_MENU
+
+;-------------------------------------------------
+;防衛戦 成功
+;-------------------------------------------------
+@CITY_RID_B_CLEAR
+#DIM I_G
+
+I_G = 0
+DRAWLINE
+DRAWLINE
+DRAWLINE
+CALL PRINT_LABEL("　　　　　　　　　　　　　　　　　　　　　　防衛　成功　　　　　　　　　　　　　　　　　　　　")
+PRINTFORML 
+DRAWLINE
+DRAWLINE
+DRAWLINE
+PRINTFORML ≪防衛成功しました、「プレイヤー」の皆様お見事でした≫
+PRINTFORML ≪その過程として撃退した「外敵」から素材を入手しました≫
+PRINTFORML ≪これらを資材として解体し、各「プレイヤー」に配分いたします≫
+PRINTFORML ≪「シティ」は今後もあなた達の活躍に期待していますよ≫
+PRINTFORMW 
+
+
+REPEAT 5
+	IF Flag:都市_Lv >= RAND:50
+		;高品質
+		I_G = (RAND:6)+20
+	ELSE 
+		;中品質
+		I_G = (RAND:6)+10
+	ENDIF
+	PRINTS " "
+	CALL PRINT_LABEL(@"――――%FLAGNAME:(2100+I_G)%を入手した――――")
+	FLAG:(2100+I_G) += 1
+REND
+
+
+;ゲノム
+I_G = (RAND:20)
+PRINTS " "
+CALL PRINT_LABEL(@"――――%FLAGNAME:(2500+I_G)%を入手した――――")
+FLAG:(2500+I_G) += 1
+
+
+
+CALL CITY_RID_END
+
+;-------------------------------------------------
+;防衛戦 失敗
+;-------------------------------------------------
+@CITY_RID_B_MISS
+#DIM CC_D1
+#DIM CC_D2
+
+
+DRAWLINE
+DRAWLINE
+DRAWLINE
+CALL PRINT_LABEL("　　　　　　　　　　　　　　　　　　　　　　防衛　失敗　　　　　　　　　　　　　　　　　　　　")
+PRINTFORML 
+DRAWLINE
+DRAWLINE
+DRAWLINE
+PRINTFORML ≪防衛線を破られたため、非常システムを起動しました≫
+PRINTFORML ≪これで当面の問題には対処できたようです≫
+PRINTFORML ≪しかしシステムの余波が都市に悪影響を及ぼしてしまったようです≫
+PRINTFORML ≪各「プレイヤー」はそのことも踏まえて、復興に勤しんで下さい≫
+PRINTFORMW 
+
+
+Flag:都市_Lv -= (Flag:都市_Lv/9)+1
+Flag:都市_経験値 = 0
+
+CC_D1 = RAND:7
+CC_D2 = 50+RAND:5
+
+Flag:(4001+CC_D1) -= (Flag:(4001+CC_D1)/9)+1
+SIF Flag:(4001+CC_D1) <= 1
+	Flag:(4001+CC_D1) = 1
+Flag:(4101+CC_D1) = 0
+
+Flag:(4001+CC_D2) -= (Flag:(4001+CC_D2)/9)+1
+SIF Flag:(4001+CC_D2) <= 1
+	Flag:(4001+CC_D2) = 1
+Flag:(4101+CC_D2) = 0
+Flag:都市_防衛損壊率 += 20+RAND:10
+
+IF Flag:都市_防衛損壊率 >= 100
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORMW ≪損壊率100％、都市の機能維持は不可能となりました≫
+	PRINTFORMW ≪都市の境界線より空間侵食を確認、システムに甚大な被害が発生≫
+	PRINTFORMW ≪バックアップ…不可能、システムの緊急転送…不可能≫
+	PRINTFORMW ≪　　　　　への再接続のしンsei――――――――
+	QUIT
+ENDIF 
+
+
+CALL CITY_RID_END
+;-------------------------------------------------
+;襲撃　終わり
+;-------------------------------------------------
+@CITY_RID_END
+
+
+
+FLAG:都市_防衛蓄積ダメージ = 0
+FLAG:都市_襲撃 = 30+RAND:30
+FLAG:都市_防衛 = 0
+
+
+
+
+
+
+
+
+
+
+
+

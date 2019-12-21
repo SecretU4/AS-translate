@@ -1,0 +1,423 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:COMMAND_MACRO.ERB
+;	Facility	:コマンドマクロ。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ COM_MACRO_MAIN					コマンドマクロ:設定
+;	・ COM_MACRO_DATA					コマンドマクロ:データ
+;	・ COM_MACRO_SHOW					コマンドマクロ:表示
+;	・ COM_MACRO_EXE					コマンドマクロ:実行
+;
+;===============================================================================
+
+;=================================================
+;   sub COM_MACRO_SET
+;=================================================
+;   コマンドマクロ:設定
+;-------------------------------------------------
+; Input:
+;  ARG					対象マクロNo
+;-------------------------------------------------
+@COM_MACRO_SET(ARG=0)
+#DIM DYNAMIC L_HIT ,1000
+#DIM DYNAMIC L_LIST ,1000
+#DIM L_I
+#DIM L_COM
+#DIM L_INPUT
+#DIM L_PAGE
+#DIM L_CNT
+#DIM L_MIN
+#DIM L_MAX
+#DIM L_COM_MAX
+#DIM L_PREV
+#DIM L_NEXT
+#DIM L_POS
+#DIM L_ADD
+#DIM L_TMP
+#DIM L_VAL
+#DIM L_NO
+#DIM L_MACRO
+#DIMS L_FILTER
+#DIMS L_STR
+#DIMS L_TITLE
+#DIMS L_SWITCH
+#DIM L_LINE
+#DIM L_MODE
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+REDRAW 0
+
+;--初期化
+L_PAGE=0
+L_FILTER=
+
+;表示アイテム数/P
+L_MAX = 60
+
+;- コマンド最大数
+L_COM_MAX = 900
+
+;- 取得:コマンドフィルタ(記憶領域)
+L_FILTER = %COMMAND_FILTER_MEMORY_GET()%
+
+;- コマンドマクロ:データ
+CALL COM_MACRO_DATA(ARG)
+L_ADD	= RESULT
+L_POS	= DEFTR_MACRO_POS + L_ADD
+L_TITLE	= %RESULTS%
+L_MACRO	= DEFTR_MACRO_POS + DEFTR_MACRO_COM_NUM + L_ADD
+
+
+L_NO = 0
+L_LINE = LINECOUNT
+
+;-----------------------------
+;- リスト作成
+;-----------------------------
+VARSET L_LIST
+VARSET L_HIT
+L_CNT=0
+FOR L_I, 0, L_COM_MAX
+	;- 取得:コマンド名称
+	TRYCCALLFORM COM_FUNC_GET_NAME_X{L_I}
+
+		IF !L_MODE
+			SELECTCOM=L_I
+
+			;- TR:コマンド実行条件チェック
+			CALL TR_COM_ABLE_MAIN
+			SIF !RESULT
+				CONTINUE
+		ENDIF
+
+		L_LIST:L_CNT = L_I
+		L_CNT ++
+		L_HIT:L_I = 1
+	CATCH
+		;- 無しの場合は次へ
+		CONTINUE
+	ENDCATCH
+NEXT
+
+;-----------------------------
+;- 表示開始
+;-----------------------------
+$PRINT_LIST
+CLEARLINE LINECOUNT - L_LINE
+L_INPUT=0
+
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML %L_TITLE%を設定します。
+PRINTFORML 設定したいコマンドを選んでください。（全キャラ共通）
+PRINTL
+
+;- コマンドマクロ:表示
+CALL COM_MACRO_SHOW(ARG, L_NO)
+
+PRINTL
+
+
+L_CNT=0
+L_NEXT=0
+L_MIN=(L_PAGE * L_MAX)
+FOR L_I, L_MIN, L_COM_MAX
+	L_COM = L_LIST:L_I
+	SIF !L_COM
+		BREAK
+
+	SELECTCASE L_CNT
+		;- 最大数越え
+		CASE IS >= L_MAX
+			;- 次のページ有り
+			L_NEXT = 1
+			BREAK
+		;- 範囲内
+		CASEELSE
+			;- 取得:コマンド名称
+			CALLFORM COM_FUNC_GET_NAME_X{L_COM}
+			L_STR = %RESULTS%
+
+			;- 取得:コマンドフィルタ(DATA)
+			SIF COMMAND_FILTER_DATA_GET(L_COM,L_FILTER)
+				SETCOLOR COLOR("伏字")
+			PRINTFORMC %L_STR%[{L_COM,3}]
+			RESETCOLOR
+	ENDSELECT
+
+	;- 計上
+	L_CNT ++ 
+
+	SIF (L_CNT % PRINTCPERLINE() ) == 0
+		PRINTL
+NEXT
+SIF !LINEISEMPTY()
+	PRINTL
+PRINTL
+PRINTFORMC ＥＭＰＴＹ設定[900]
+PRINTFORMC 繰り返し設定[901]
+PRINTL
+PRINTL
+
+L_PREV = (L_PAGE <= 0) ? 0 # 1
+
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]前のページ\@
+PRINTLC [1000]戻る
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]次のページ\@
+IF !FLAG:L_MACRO
+	L_SWITCH = ON
+ELSE
+	L_SWITCH = OFF
+ENDIF
+PRINTFORMLC [1010]調教メニュー使用:%L_SWITCH%
+PRINTL 
+PRINTFORMLC 　
+PRINTFORMLC 　
+PRINTFORMLC 　
+PRINTFORMLC [1011]表示モード:\@(!L_MODE) ? 使用可能 # 全コマンド\@
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	CASE 1000
+		REDRAW 1
+		RETURN
+	CASE 0 TO DEFTR_MACRO_COM_NUM - 1
+		L_NO = L_INPUT
+		GOTO PRINT_LIST
+	;コマンド
+	CASE 10 TO L_COM_MAX - 1, 900
+
+		IF L_INPUT == 900
+			;ＥＭＰＴＹ
+			L_INPUT = 0
+		ELSE
+			;- CHK:ヒット
+			IF !L_HIT:L_INPUT
+				GOTO ERROR
+			ENDIF
+		ENDIF
+
+		FLAG:(L_POS + L_NO) = L_INPUT
+
+		IF L_NO == (DEFTR_MACRO_COM_NUM - 1)
+		ELSE
+			L_NO ++
+		ENDIF
+
+		GOTO PRINT_LIST
+	;繰り返し
+	CASE 901
+		SIF L_NO >= 7
+			GOTO PRINT_LIST
+		L_TMP = L_NO
+		L_I = 0
+		REPEAT 8 - L_NO
+			FLAG:(L_POS + L_NO) = FLAG:(L_POS + L_I)
+			IF L_I > L_NO
+				L_I = 0
+			ELSE
+				L_I ++
+			ENDIF
+			L_NO ++
+		REND
+		L_NO = 7
+		GOTO PRINT_LIST
+
+	CASE 1007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO PRINT_LIST
+	CASE 1009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO PRINT_LIST
+	;マクロ使用
+	CASE 1010
+		FLAG:L_MACRO = !FLAG:L_MACRO
+		GOTO PRINT_LIST
+	;表示モード
+	CASE 1011
+		L_MODE = !L_MODE
+	CASEELSE
+		$ERROR
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+RESTART
+
+
+;=================================================
+;   sub COM_MACRO_DATA
+;=================================================
+;   コマンドマクロ:データ
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象マクロNo
+; Output:
+;  RESULTS				マクロ名
+;  RESULT				マクロ開始位置
+;-------------------------------------------------
+@COM_MACRO_DATA(ARG:0=0, ARG:1=-1)
+#DIMS L_TITLE
+#DIM L_ADD
+
+SELECTCASE ARG
+	CASE 1
+		L_TITLE = 調教メニュー２
+		L_ADD = 10
+	CASEELSE
+		L_TITLE = 調教メニュー１
+		L_ADD = 0
+ENDSELECT
+
+RESULTS = %L_TITLE%
+RETURNFORM L_ADD
+
+
+;=================================================
+;   sub COM_MACRO_SHOW
+;=================================================
+;   コマンドマクロ:表示
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象マクロNo
+;  ARG:1				選択コマンド(-1:表示のみ 0～:該当選択No)
+;-------------------------------------------------
+@COM_MACRO_SHOW(ARG:0=0, ARG:1=-1)
+#DIM L_I
+#DIM L_TMP
+#DIM L_CNT
+#DIM L_MACRO_CNT
+#DIM L_NO
+#DIM L_POS
+#DIM L_ADD
+#DIMS L_TITLE
+#DIMS L_STR
+
+L_NO = ARG:1
+
+;- コマンドマクロ:データ
+CALL COM_MACRO_DATA(ARG)
+L_ADD	= RESULT
+L_POS	= DEFTR_MACRO_POS + L_ADD
+L_TITLE	= %RESULTS%
+
+
+PRINTFORML 【%L_TITLE%】
+L_CNT=0
+L_MACRO_CNT=0
+FOR L_I, 0, DEFTR_MACRO_COM_NUM
+	L_TMP = FLAG:(L_POS + L_I)
+	IF  !L_TMP
+		L_STR = ＥＭＰＴＹ
+	ELSE
+		;- 取得:コマンド名称
+		CALLFORM COM_FUNC_GET_NAME_X{L_TMP}
+		L_STR = %RESULTS%
+		L_MACRO_CNT ++
+	ENDIF
+
+	SIF L_NO == L_I
+		SETCOLOR COLOR("水色")
+	PRINTFORM [{L_I}]%L_STR, 20, LEFT%
+	RESETCOLOR
+	L_CNT ++
+	IF !(L_CNT % 4)
+		PRINTL
+	ELSE
+		PRINT →　
+	ENDIF
+NEXT
+PRINTL
+
+;マクロ登録数
+L_TMP = DEFTR_MACRO_POS + DEFTR_MACRO_COM_NUM + L_ADD + 1
+FLAG:L_TMP = L_MACRO_CNT
+
+
+;=================================================
+;   sub COM_MACRO_EXE
+;=================================================
+;   コマンドマクロ:実行
+;-------------------------------------------------
+; Input:
+;  ARG					対象マクロNo
+;-------------------------------------------------
+@COM_MACRO_EXE(ARG=0)
+#DIM L_I
+#DIM L_CNT
+#DIM L_POS
+#DIM L_ADD
+#DIM L_TMP
+#DIM L_ERROR
+#DIMS L_TITLE
+
+VARSET NEXTCOM
+
+;- コマンドマクロ:データ
+CALL COM_MACRO_DATA(ARG)
+L_ADD	= RESULT
+L_POS	= DEFTR_MACRO_POS + L_ADD
+L_TITLE	= %RESULTS%
+
+
+L_ERROR = 0
+L_CNT = 0
+FOR L_I, 0, DEFTR_MACRO_COM_NUM
+	L_TMP = FLAG:(L_POS + L_I)
+	SIF  !L_TMP
+		CONTINUE
+
+	SELECTCOM=L_TMP
+
+	;- TR:コマンド実行条件チェック
+	CALL TR_COM_ABLE_MAIN
+	IF !RESULT
+		L_ERROR ++
+		CONTINUE
+	ENDIF
+
+	NEXTCOM:L_CNT = L_TMP
+	L_CNT ++
+NEXT
+
+;- コマンドマクロ:表示
+CALL COM_MACRO_SHOW(ARG, -1)
+
+PRINTL
+
+IF L_ERROR
+	VARSET NEXTCOM
+	PRINTFORMW 実行出来ないコマンドがあるため調教メニューを中止します
+ELSEIF !L_CNT
+	VARSET NEXTCOM
+	PRINTFORMW 実行出来るコマンドが無いため調教メニューを中止します
+ELSE
+	PRINTFORMW 調教メニューを開始します
+ENDIF
+
+

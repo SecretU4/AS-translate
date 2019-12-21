@@ -1,0 +1,71 @@
+;-------------------------------------------------
+;売春イベント
+;-------------------------------------------------
+@TURN_EVENT_MORAL_BS
+#DIMS M_NAME
+
+DRAWLINE
+SETCOLOR 100,250,50
+PRINTFORML 【売春イベント(モラル):%CALLNAME%】
+
+
+IF !RAND:3
+	M_NAME = 先輩
+ELSEIF !RAND:2
+	M_NAME = 後輩
+ELSE
+	M_NAME = 男友達
+ENDIF
+PRINTFORML 情欲を持て余した%CALLNAME%は、知り合いの男相手に性行為を求めた…
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF !RAND:5
+	PRINTFORML 愛液で満たされた肉壷に捉えられたペニスを激しいグラインドで腰を振る。
+	PRINTFORML 相手を組み伏せ肉欲のままに腰を振り、流れてくる快楽の奔流に嬌声を上げる。
+	PRINTFORMW 子宮に送り込まれるであろうドロドロの精液を渇望するように、艶めかしいピストンを続けた…
+ELSEIF !RAND:4
+	PRINTFORML 四つん這いになって相手に濡れきった秘所をさらけ出すと、男は興奮した様子でペニスを挿入する。
+	PRINTFORML 腰を振るたびに%CALLNAME%は甲高い喘ぎ声を漏らし、背を反らして快楽を甘受する。
+	PRINTFORMW その様は交尾に耽る動物のようで、動きも徐々に激しくなっていった…
+ELSEIF !RAND:3
+	PRINTFORML トロトロになった%CALLNAME%の肉壷を、男は覆いかぶさる姿勢でペニスを使って犯し続ける。
+	PRINTFORML まるで愛し合っているかのような錯覚を覚えた%CALLNAME%に反応するように、子宮が種子を欲しがって降りてくる。
+	PRINTFORMW 亀頭でゴリゴリとヒダをえぐられる感覚によがりつつけ、二人は果てるまで性器を打ち付けあった…
+ELSEIF !RAND:2 && (TALENT:巨乳 || TALENT:爆乳)
+	PRINTFORML %CALLNAME%は豊満な乳でペニスを挟むと、ローションで谷間を濡らしパイズリを始めた。
+	PRINTFORML 谷間に隠れた肉棒を両腕で胸を圧迫しながらヌチャヌチャと音鳴らしてピストンする。
+	PRINTFORMW 視覚的に興奮させるその光景に、男は射精感を高めていく…
+ELSE
+	PRINTFORML 男の肉棒に吸い付くかのように、%CALLNAME%はペニスを咥えたまま淫らに動かす。
+	PRINTFORMW そのいやらしい光景に男も興奮したのか、快感を受けるごとにペニスを熱く固めていった…
+ENDIF
+
+
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = %M_NAME%
+SIF CSTR:初キス相手名 == ""
+	CSTR:初キス相手名 = %M_NAME%
+SIF CSTR:初精飲相手名 ==""
+	CSTR:初精飲相手名 = %M_NAME%
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = %M_NAME%
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = %M_NAME%
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = %M_NAME%
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = %M_NAME%
+
+
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+CALL JN_SEX_EXP
+
+
+RESETCOLOR
+
+
+

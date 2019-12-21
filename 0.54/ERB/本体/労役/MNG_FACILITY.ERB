@@ -1,0 +1,1019 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:MNG_FACILITY.ERB
+;	Facility	:労役設備。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;-------------------------------------------------
+; メモ：
+;   開発中
+;   
+;   各種設備を強化する事で収入が上がる予定
+;-------------------------------------------------
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ MNG_FACILITY_MAIN				経営:設備
+;	・ MNG_FC_MAP_PRINT_LINE			経営:設備(マップ行表示)
+;	・ MNG_FC_BIT_PRINT					経営:設備(ビット表示)
+;	・ MNG_FC_BENEFIT_MEMBER			経営:設備(恩恵:メンバー)
+;	・ MNG_FC_UPGRADE					経営:設備(アップグレード)
+;	・ MNG_FC_LV_GET					経営:設備(レベル取得)
+;	・ MNG_FC_X1						経営:設備(項目:ホテルについて)
+;
+;	・ MNG_FC_X5						経営:設備(項目:配下個室)
+;	・ MNG_FC_X6						経営:設備(項目:食堂)
+;	・ MNG_FC_X7						経営:設備(項目:倉庫)
+;	・ MNG_FC_X8						経営:設備(項目:訓練場)
+;	・ MNG_FC_X9						経営:設備(項目:図書室)
+;	・ MNG_FC_X10						経営:設備(項目:工房)
+;
+;	・ MNG_FC_X15						経営:設備(項目:客室)
+;	・ MNG_FC_X17						経営:設備(項目:レストラン)
+;	・ MNG_FC_X18						経営:設備(項目:コンサートホール)
+;	・ MNG_FC_X19						経営:設備(項目:温泉)
+;	・ MNG_FC_X20						経営:設備(項目:売店)
+;	・ MNG_FC_X21						経営:設備(項目:ロビー)
+;	・ MNG_FC_X22						経営:設備(項目:フロント)
+;	・ MNG_FC_X23						経営:設備(項目:娯楽室)
+;	・ MNG_FC_X24						経営:設備(項目:休憩所)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub MNG_FACILITY_MAIN
+;=================================================
+;   経営:設備
+;-------------------------------------------------
+@MNG_FACILITY_MAIN
+#DIM L_BIT, 30
+
+;-----------------------------
+;- 前処理
+;-----------------------------
+VARSET L_BIT
+
+L_BIT:05 = MNG_FC_LV_GET("労役設備ビット奴隷個室", 0) + MNG_FC_LV_GET("労役設備ビット奴隷個室", 3) + MNG_FC_LV_GET("労役設備ビット奴隷個室", 6)
+L_BIT:06 = MNG_FC_LV_GET("労役設備ビット食堂")
+L_BIT:07 = MNG_FC_LV_GET("労役設備ビット倉庫")
+L_BIT:08 = MNG_FC_LV_GET("労役設備ビット訓練場")
+L_BIT:09 = MNG_FC_LV_GET("労役設備ビット図書室")
+L_BIT:10 = MNG_FC_LV_GET("労役設備ビット工房")
+
+L_BIT:15 = MNG_FC_LV_GET("労役設備ビット客室")
+L_BIT:17 = MNG_FC_LV_GET("労役設備ビットレストラン")
+L_BIT:18 = MNG_FC_LV_GET("労役設備ビットコンサートホール")
+L_BIT:19 = MNG_FC_LV_GET("労役設備ビット温泉")
+L_BIT:20 = MNG_FC_LV_GET("労役設備ビット売店")
+L_BIT:21 = MNG_FC_LV_GET("労役設備ビットロビー")
+L_BIT:22 = MNG_FC_LV_GET("労役設備ビットフロント")
+L_BIT:23 = MNG_FC_LV_GET("労役設備ビット娯楽室")
+
+;-----------------------------
+;- 表示開始
+;-----------------------------
+CALL C_LINE
+PRINTFORML 【設備強化】
+PRINTFORML 設備を強化します。右の項目からランクを上げる設備を選んで下さい。
+PRINTFORML 各項目は最大３までランクを上げられ、配下個室のみ最大９まで上げる事が可能です。
+PRINTL
+CALL MNG_FC_MAP_PRINT_LINE, "【２Ｆ】　■■■■■■■■■■■■■■■■■■■■■■■　　", @"┌─────────────────────┐"
+CALL MNG_FC_MAP_PRINT_LINE, "　　　　　■客■客■客■　■　　Ｒ　　■Ｅ■客■客■客■　　", @"｜ 【住居区画】…１Ｆ西、２Ｆ南西　　　　　 ｜"
+CALL MNG_FC_MAP_PRINT_LINE, "■■■■■■─■─■─■　■　　　　　■　■─■─■─■　　", @"｜ [--] 私…あなた個室　　　　　　　　　　　｜"
+CALL MNG_FC_MAP_PRINT_LINE, "■休憩■　■　　　　　　　■■■─■■■　　　　　　　■　　", @"｜ [05] 奴…配下個室×３　　Rank:{L_BIT:05} %BARSTR(L_BIT:05,9,3)%　　｜", 05
+CALL MNG_FC_MAP_PRINT_LINE, "■室　｜　■■■■■■■　　　　　　　　　■─■─■─■　　", @"｜ [06] 食…食堂　　　　　　Rank:{L_BIT:06} %BARSTR(L_BIT:06,3,3)%　　｜", 06
+CALL MNG_FC_MAP_PRINT_LINE, "■■■■　■図書■工房■　■階┌─┐階■　■客■客■客■　　", @"｜ [07] 倉…倉庫　　　　　　Rank:{L_BIT:07} %BARSTR(L_BIT:07,3,3)%　　｜", 07
+CALL MNG_FC_MAP_PRINT_LINE, "■　　｜　■■─■─■■　┌─┘　└─┐　■■■■■■■　　", @"｜ [08] 訓…訓練場　　　　　Rank:{L_BIT:08} %BARSTR(L_BIT:08,3,3)%　　｜", 08
+CALL MNG_FC_MAP_PRINT_LINE, "■倉庫■　　　　　　　┃　｜　 吹抜 　｜　｜　　　　　■　　", @"｜ [09] 図…図書室　　　　　Rank:{L_BIT:09} %BARSTR(L_BIT:09,3,3)%　　｜", 09
+CALL MNG_FC_MAP_PRINT_LINE, "■■■■　■■─■─■■　｜　　　　　｜　■■─■■─■　　", @"｜ [10] 工…工房　　　　　　Rank:{L_BIT:10} %BARSTR(L_BIT:10,3,3)%　　｜", 10
+CALL MNG_FC_MAP_PRINT_LINE, "　　■階　■　　■　　■　└─────┘　■　　■　　■　　", @"｜ [--] 事…事務所　　　　　　　　　　　　　｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　■■Ｅ■訓練■訓練■　　　　　　　　　■高　■高　■　　", @"｜ 　　　　　　　　　　　　　　　　　　　　 ｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　　■■■■■■■■■■■■■■■■■■■■■■■■■　　", @"｜ 【ホテル区画】…住居区画以外　　　　　　 ｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　", @"｜ [15] 客…客室×３　　　　Rank:{L_BIT:15} %BARSTR(L_BIT:15,3,3)%　　｜", 15
+CALL MNG_FC_MAP_PRINT_LINE, "【１Ｆ】　■■■■■■■■■■■■■■■■■■■■■■■　　", @"｜ [--] 高…高級客室　　　　　　　　　　　　｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　　　　■奴■奴■奴■温■　　コ　　■Ｅ■娯■　温　■　　", @"｜ [17] Ｒ…レストラン　　　Rank:{L_BIT:17} %BARSTR(L_BIT:17,3,3)%　　｜", 17
+CALL MNG_FC_MAP_PRINT_LINE, "■■■■■■─■─■─■─■　　　　　■　■　■　　　■　　", @"｜ [18] コ…コンサートホールRank:{L_BIT:18} %BARSTR(L_BIT:18,3,3)%　　｜", 18
+CALL MNG_FC_MAP_PRINT_LINE, "■休憩■　　　　　　　　　■■■─■■■　■─■■─■■　　", @"｜ [19] 温…温泉　　　　　　Rank:{L_BIT:19} %BARSTR(L_BIT:19,3,3)%　　｜", 19
+CALL MNG_FC_MAP_PRINT_LINE, "■室　｜　■─■─■─■　┃　　　　　　　　　　　　　■　　", @"｜ [20] 売…売店＆案内所　　Rank:{L_BIT:20} %BARSTR(L_BIT:20,3,3)%　　｜", 20
+CALL MNG_FC_MAP_PRINT_LINE, "■■■■　■奴■奴■奴■　■■■　■■■　■■■　■■■　　", @"｜ [21] ロ…ロビー　　　　　Rank:{L_BIT:21} %BARSTR(L_BIT:21,3,3)%　　｜", 21
+CALL MNG_FC_MAP_PRINT_LINE, "■　　｜　■■■■■■■　■階　　　階■　休　■　｜客■　　", @"｜ [22] FR…フロント　　　　Rank:{L_BIT:22} %BARSTR(L_BIT:22,3,3)%　　｜", 22
+CALL MNG_FC_MAP_PRINT_LINE, "■倉庫■　　　　　　　　　■　　ロ　　■　　　■　■■■　　", @"｜ [23] 娯…娯楽室　　　　　Rank:{L_BIT:23} %BARSTR(L_BIT:23,3,3)%　　｜", 23
+CALL MNG_FC_MAP_PRINT_LINE, "■■■■　■■■─■─■　┃　　　　　　　　　■　｜客■　　", @"｜ [--] 休…休憩所　　　　　　　　　　　　　｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　■階　■　　　■　■━■■■─■■■─■─■　■■■　　", @"｜ 　　　　　　　　　　　　　　　　　　　　 ｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　■■Ｅ■　私　■食■事｜FR　　　出■案■売■　｜客■　　", @"｜ Ｅ…エレベータ　　階…階段　　出…出口　 ｜"
+CALL MNG_FC_MAP_PRINT_LINE, "　　　■■■■■■■■■■■■■■■■■■■■■■■■■　　", @"└─────────────────────┘"
+
+PRINTL
+PRINTLC [0] 戻る
+PRINTLC [1] ホテルについて
+PRINTLC [2] 設備について
+PRINTL
+PRINTL
+$INPUT_LOOP
+INPUT
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1, 2, 5 TO 11, 15, 17 TO 23
+		;経営:設備(項目:xxx)
+		CALLFORM MNG_FC_X{RESULT}
+	CASEELSE
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_MAP_PRINT_LINE
+;=================================================
+;   経営:設備(マップ行表示)
+;-------------------------------------------------
+; Input:
+;  ARGS:0				マップデータ
+;  ARGS:1				ボタン部用文字列
+;  ARG					ボタン部用数値
+;-------------------------------------------------
+@MNG_FC_MAP_PRINT_LINE(ARGS:0, ARGS:1="", ARG=-1)
+
+PRINTFORM %ARGS:0% 
+IF ARG != -1
+	PRINTBUTTON ARGS:1, ARG
+ELSE
+	PRINTFORM %ARGS:1%
+ENDIF
+PRINTL
+
+
+;=================================================
+;   sub MNG_FC_BIT_PRINT
+;=================================================
+;   経営:設備(ビット表示)
+;-------------------------------------------------
+;   該当BITがオンの場合、加工して表示
+;-------------------------------------------------
+; Input:
+;  ARGS					変数名
+;  ARG:0				BIT位置
+;  ARG:1				値段
+;  ARGS:1				出力文字１
+;  ARGS:2				出力文字２
+;-------------------------------------------------
+@MNG_FC_BIT_PRINT(ARGS:0, ARG:0, ARG:1, ARGS:1, ARGS:2)
+
+LOCALS = (￥%TOSTR(ARG:1)%)
+
+PRINTFORM [%TOSTR(ARG)%] 
+IF GETBIT(FLAG:(ARGS:0), ARG)
+	SETCOLOR COLOR("水色")
+	PRINT 済
+ELSE
+	PRINT 　
+ENDIF
+RESETCOLOR
+PRINT  
+
+PRINTFORM %ARGS:1, 20, LEFT% 
+PRINTFORM %LOCALS, 10% … 
+PRINTFORM %ARGS:2% 
+PRINTL
+
+
+;=================================================
+;   sub MNG_FC_BENEFIT_MEMBER
+;=================================================
+;   経営:設備(恩恵:メンバー)
+;-------------------------------------------------
+@MNG_FC_BENEFIT_MEMBER
+#DIM L_VAL
+#DIM L_MAX
+L_MAX = 100
+
+VARSET L_VAL
+
+;基本値
+L_VAL += 1
+
+;- 個室
+REPEAT 9
+	L_VAL += GETBIT(FLAG:労役設備ビット奴隷個室, COUNT+1)
+REND
+
+DRAWLINE
+PRINTFORML 【配下待遇】
+
+SELECTCASE L_VAL
+	CASE IS >= 6
+		PRINTFORML 配下達は館の待遇に満足している様です。
+	CASE IS >= 3
+		PRINTFORML 配下達は館の待遇に好印象を持っている様です。
+	CASEELSE
+		PRINTFORML 配下達は館の待遇に不満は無い様です。
+ENDSELECT
+PRINTL
+
+L_VAL *= 10
+L_VAL = MIN(L_VAL, L_MAX)
+
+;- 加算
+REPEAT CHARANUM
+	SIF COUNT == MASTER
+		CONTINUE
+	JUEL:COUNT:配下 += L_VAL
+	JUEL:COUNT:配下 = MIN(FLAG:最大数_JUEL, JUEL:COUNT:配下)
+REND
+
+PRINTFORML 配下の珠 +{L_VAL,2}
+PRINTL
+WAIT
+
+
+;=================================================
+;   sub MNG_FC_UPGRADE
+;=================================================
+;   経営:設備(アップグレード)
+;-------------------------------------------------
+; Input:
+;  ARGS					変数名
+;  ARG:0				BIT位置
+;  ARG:1				コスト
+; Output:
+;  RETURN				結果(真偽値)
+;-------------------------------------------------
+@MNG_FC_UPGRADE(ARGS, ARG:0, ARG:1)
+
+IF GETBIT(FLAG:ARGS, ARG:0)
+	CALL C_INPUT_ERROR("その項目は既にアップグレード済みです。")
+	RETURN 0
+ELSEIF MONEY < ARG:1
+	CALL C_INPUT_ERROR(@"費用が足りません。（現在の所持金：{MONEY} / 費用：{ARG:1}）")
+	RETURN 0
+ELSE
+	MONEY -= ARG:1
+	SETBIT FLAG:ARGS, ARG
+
+	PRINTL
+	PRINTL ＜設備をアップグレードしました＞
+	WAIT
+	RETURN 1
+ENDIF
+
+;=================================================
+;   sub MNG_FC_LV_GET
+;=================================================
+;   経営:設備(レベル取得)
+;-------------------------------------------------
+; Input:
+;  ARGS					変数名
+;  ARG					BIT位置(計算用起点)
+; Output:
+;  RETURNF				LV
+;-------------------------------------------------
+@MNG_FC_LV_GET(ARGS, ARG=0)
+#FUNCTION
+RETURNF GETBIT(FLAG:ARGS, ARG + 1) + GETBIT(FLAG:ARGS, ARG + 2) + GETBIT(FLAG:ARGS, ARG + 3)
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:ホテルについて)
+;-------------------------------------------------
+@MNG_FC_X1
+CALL C_LINE
+PRINTFORML 【ホテルについて】
+PRINTFORML ホテルは住居区画とホテル区画に分かれています。
+PRINTFORML 住居区画は１Ｆ西側と２Ｆ南西側、それ以外がホテル区画です。
+PRINTFORML ホテルは吹き抜けを中心とした構造になっています。
+PRINTL
+PRINTFORML 奴隷は配下として個室が与えられ、住居区画で自由に過ごしています。
+PRINTFORML 溜まり場は個室に集まっているか、休憩室です。
+PRINTL
+PRINTFORML なお、勢力が大きくなるに連れて地下に住居区画が、３Ｆ以降に客室が拡張されて行く様です。
+WAIT
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:設備について)
+;-------------------------------------------------
+@MNG_FC_X2
+CALL C_LINE
+PRINTFORML 【設備について】
+PRINTFORML 設備を強化すると各収益に補正が掛かります。
+PRINTFORML 補正の値は下記になります。
+PRINTL
+PRINTFORML 基礎：ランク×１０％。
+PRINTFORML 人気：ランク×１０％。
+PRINTFORML 歌姫：ランク×２０％。
+PRINTFORML 戦闘：ランク×２０％。
+;PRINTFORML 娼館：ランク×２０％。
+PRINTFORML 開発：ランク×２０％。
+PRINTL
+PRINTL
+PRINTFORML 設備を強化する場合は、安い物からアップグレードしていくと効率が良いでしょう。
+PRINTL
+WAIT
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:配下個室)
+;-------------------------------------------------
+@MNG_FC_X5
+CALL C_LINE
+PRINTFORML 【設備:配下個室】
+PRINTFORML 配下の個室と住居用の設備を強化します。
+;PRINTFORML 配下の住環境を良くする事で、基礎収入が上がります。
+;PRINTFORML この設備はランクが９まで上がり、またランクが上がると配下の珠の獲得量が上昇します。
+PRINTFORML 配下の住環境を良くする事で、基礎収入が上がります。
+PRINTFORML またこの設備のランクが上がると、配下の珠の獲得量が上昇します。
+PRINTL
+PRINTFORML 基本設備…ベッド、家具一式、小型冷蔵庫、ノートパソコン、ミニキッチン、バスルーム
+PRINTFORML 住居設備…温泉、休憩室、売店
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV1
+LOCAL:2 = DEFMNG_FC_PRICE_LV1
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+LOCAL:4 = DEFMNG_FC_PRICE_LV2
+LOCAL:5 = DEFMNG_FC_PRICE_LV2
+LOCAL:6 = DEFMNG_FC_PRICE_LV2
+LOCAL:7 = DEFMNG_FC_PRICE_LV3
+LOCAL:8 = DEFMNG_FC_PRICE_LV3
+LOCAL:9 = DEFMNG_FC_PRICE_LV3
+
+LOCALS = 労役設備ビット奴隷個室
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "高級ベッド"		, "ふかふかのベッドで安眠"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "高級浴室"		, "個室のバスルームを快適に"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "サーバ設置"		, "個室に映画などを配信"
+CALL MNG_FC_BIT_PRINT, LOCALS, 4, LOCAL:4, "売店割引"		, "配下は３割引きに"
+CALL MNG_FC_BIT_PRINT, LOCALS, 5, LOCAL:5, "売店拡張"		, "配下の好みの商品を入荷"
+CALL MNG_FC_BIT_PRINT, LOCALS, 6, LOCAL:6, "高級ソファー"	, "休憩室を快適に"
+CALL MNG_FC_BIT_PRINT, LOCALS, 7, LOCAL:7, "自販機"			, "休憩室を快適に"
+CALL MNG_FC_BIT_PRINT, LOCALS, 8, LOCAL:8, "高級温泉"		, "大きな温泉で疲れを取る"
+CALL MNG_FC_BIT_PRINT, LOCALS, 9, LOCAL:9, "医薬品"			, "自分で体調を管理"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3, 4, 5, 6, ,7 ,8 ,9)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 9
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:食堂)
+;-------------------------------------------------
+@MNG_FC_X6
+CALL C_LINE
+PRINTFORML 【設備:食堂】
+PRINTFORML 住居用の食堂を強化します。
+PRINTFORML 配下の住環境を良くする事で、基礎収入が上がります。
+PRINTL
+PRINTFORML 基本設備…キッチン、テーブル
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV2
+LOCAL:2 = DEFMNG_FC_PRICE_LV3
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビット食堂
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "ドリンクサーバー"	, "確かな存在感"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "システムキッチン"	, "食事の種類が増加"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "おしゃれテーブル"	, "食事が楽しくなる"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:倉庫)
+;-------------------------------------------------
+@MNG_FC_X7
+CALL C_LINE
+PRINTFORML 【設備:倉庫】
+PRINTFORML 倉庫を強化します。
+PRINTFORML 各種物品の保管以外に、ホテル用の業務用洗濯機等も併設されています。
+PRINTFORML 一部設備は倉庫のアップグレードが前提条件になっています。
+PRINTL
+PRINTFORML 基本設備…多目的倉庫、業務用冷蔵庫、業務用洗濯機
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV1
+LOCAL:2 = DEFMNG_FC_PRICE_LV2
+LOCAL:3 = DEFMNG_FC_PRICE_LV2
+
+LOCALS = 労役設備ビット倉庫
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "倉庫増設"			, "収納量増加。倉庫系アップグレードに必要"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "訓練用機材"			, "訓練場のアップグレードに必要"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "工房用機材"			, "工房のアップグレードに必要"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		IF GROUPMATCH(RESULT, 2, 3) && !GETBIT(FLAG:LOCALS, 1)
+			CALL C_INPUT_ERROR("[訓練用機材]、[工房用機材]　は[倉庫増設]が必要です")
+			GOTO INPUT_LOOP
+		ENDIF
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:訓練場)
+;-------------------------------------------------
+@MNG_FC_X8
+CALL C_LINE
+PRINTFORML 【設備:訓練場】
+PRINTFORML 訓練場を強化します。
+PRINTFORML 戦闘職での収入が上がります。
+PRINTL
+PRINTFORML 基本設備…警備教本、射撃場、多目的室
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV2
+LOCAL:2 = DEFMNG_FC_PRICE_LV3
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビット訓練場
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "キルハウス"			, "室内戦、市街戦が出来る演習小屋"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "ＶＲシステム"		, "仮想空間での訓練が出来る装置"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "屋外訓練場"			, "野戦訓練用の広い敷地"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		IF GROUPMATCH(RESULT, 2, 3) && !GETBIT(FLAG:LOCALS, 1)
+			CALL C_INPUT_ERROR("訓練場の設備のアップグレードには[倉庫:訓練用機材]が必要です")
+			GOTO INPUT_LOOP
+		ENDIF
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:図書室)
+;-------------------------------------------------
+@MNG_FC_X9
+CALL C_LINE
+PRINTFORML 【設備:図書室】
+PRINTFORML 図書室を強化します。
+PRINTFORML 配下への娯楽の提供や学習で知能を向上させる事で、基礎収入が上がります。
+PRINTFORML 工房のアップグレードの前提条件になっています。
+PRINTL
+PRINTFORML 基本設備…各種教科書、娯楽雑誌、百科辞書、デスクトップ
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV2
+LOCAL:2 = DEFMNG_FC_PRICE_LV3
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビット図書室
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "教育プログラム"		, "諸学科の教育を行い知能を向上させる"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "専門書籍"			, "工房のアップグレードに必要"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "コミック"			, "娯楽として配下から要望"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:工房)
+;-------------------------------------------------
+@MNG_FC_X10
+CALL C_LINE
+PRINTFORML 【設備:工房】
+PRINTFORML 工房を強化します。
+PRINTFORML 開発職での収入が上がります。
+PRINTFORML 倉庫の工房用機材、図書室の専門書籍の取得が工房のアップグレードの前提条件になっています。
+PRINTL
+PRINTFORML 基本設備…弾薬製造装置、小型農園
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV3
+LOCAL:2 = DEFMNG_FC_PRICE_LV2
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビット工房
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "弾薬材料"			, "銃弾を製造販売する"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "自家栽培"			, "自家用の農園を設営する"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "工具追加"			, "対応可能な修理・製造が増加"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		IF GROUPMATCH(RESULT, 1, 2) && (!GETBIT(FLAG:労役設備ビット図書室, 2) || !GETBIT(FLAG:労役設備ビット倉庫, 3) )
+			CALL C_INPUT_ERROR("[弾薬材料]、[自家栽培]　は[図書室:専門書籍]、[倉庫:工房用機材]が必要です")
+			GOTO INPUT_LOOP
+		ENDIF
+
+		CALL C_INPUT_ERROR()
+		GOTO INPUT_LOOP
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:客室)
+;-------------------------------------------------
+@MNG_FC_X15
+CALL C_LINE
+PRINTFORML 【設備:客室】
+PRINTFORML 客室を強化します。
+PRINTFORML 客室の住環境を良くする事で、基礎収入が上がります。
+PRINTL
+PRINTFORML 基本設備…ベッド、テーブル、小型冷蔵庫、バスルーム
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV1
+LOCAL:2 = DEFMNG_FC_PRICE_LV1
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビット客室
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "高級ベッド"		, "ふかふかのベッドで安眠"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "高級浴室"		, "個室のバスルームを快適に"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "レンタルPC"		, "貸し出し用パソコンを用意"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:レストラン)
+;-------------------------------------------------
+@MNG_FC_X17
+CALL C_LINE
+PRINTFORML 【設備:レストラン】
+PRINTFORML レストランを強化します。
+PRINTFORML レストランの環境を良くする事で、人気が上がります。
+PRINTL
+PRINTFORML 基本設備…テーブル、ドリンクサーバー
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV2
+LOCAL:2 = DEFMNG_FC_PRICE_LV2
+LOCAL:3 = DEFMNG_FC_PRICE_LV2
+
+LOCALS = 労役設備ビットレストラン
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "高級内装"			, "雰囲気の良いレストランに"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "ＢＡＲ増設"			, "大人の空間も必要"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "防音個室"			, "裏社会の会合の場に"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:コンサートホール)
+;-------------------------------------------------
+@MNG_FC_X18
+CALL C_LINE
+PRINTFORML 【設備:コンサートホール】
+PRINTFORML コンサートホールを強化します。
+PRINTFORML コンサートホールの環境を良くする事で、コンサート収入が上がります。
+PRINTL
+PRINTFORML 基本設備…ステージ、照明、スモークマシーン、レーザー照射装置、楽屋
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV2
+LOCAL:2 = DEFMNG_FC_PRICE_LV2
+LOCAL:3 = DEFMNG_FC_PRICE_LV3
+
+LOCALS = 労役設備ビットコンサートホール
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "高級楽屋"			, "雰囲気の良い楽屋でライブに集中"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "特殊効果装置"		, "花火や雪などの演出装置"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "大型ディスプレイ"	, "アイドルの姿がよく見える"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:温泉)
+;-------------------------------------------------
+@MNG_FC_X19
+CALL C_LINE
+PRINTFORML 【設備:温泉】
+PRINTFORML 温泉を強化します。
+PRINTFORML 温泉の環境を良くする事で、基礎収入が上がります。
+PRINTL
+PRINTFORML 基本設備…室内温泉
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV3
+LOCAL:2 = DEFMNG_FC_PRICE_LV3
+LOCAL:3 = DEFMNG_FC_PRICE_LV3
+
+LOCALS = 労役設備ビット温泉
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "種類増加"			, "泡風呂などを追加"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "個室温泉"			, "性奴隷を侍らすのに最適"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "露天温泉"			, "屋上に露天風呂を設置"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:売店)
+;-------------------------------------------------
+@MNG_FC_X20
+CALL C_LINE
+PRINTFORML 【設備:売店＆案内所】
+PRINTFORML 売店を強化します。
+PRINTFORML 売店の環境を良くする事で、人気が上がります。
+PRINTFORML 案内所としての機能も持ちます。
+PRINTL
+PRINTFORML 基本設備…自販機、商品棚、案内板、周辺地図、休憩室
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV1
+LOCAL:2 = DEFMNG_FC_PRICE_LV2
+LOCAL:3 = DEFMNG_FC_PRICE_LV3
+
+LOCALS = 労役設備ビット売店
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "商品増加"			, "商品量を増やします"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "自販機増設"			, "夜間でも困らない"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "休憩室拡張"			, "配下の疲れを取ります"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:ロビー)
+;-------------------------------------------------
+@MNG_FC_X21
+CALL C_LINE
+PRINTFORML 【設備:ロビー】
+PRINTFORML ロビーを強化します。
+PRINTFORML ロビーの環境を良くする事で、基礎収入が上がります。
+PRINTL
+PRINTFORML 基本設備…案内板、ベンチ
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV3
+LOCAL:2 = DEFMNG_FC_PRICE_LV1
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビットロビー
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "噴水"				, "高級感溢れるホテルに"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "高級ソファー"		, "高級感溢れるホテルに"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "観葉植物"			, "荒廃した世界では好評"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:フロント)
+;-------------------------------------------------
+@MNG_FC_X22
+CALL C_LINE
+PRINTFORML 【設備:フロント】
+PRINTFORML フロントを強化します。
+PRINTFORML フロントの環境を良くする事で、基礎収入が上がります。
+PRINTFORML フロントにはターミナルが設置されており、徒歩以外の客の玄関になっています。
+PRINTL
+PRINTFORML 基本設備…無人受付機、ベンチ、ターミナル
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV2
+LOCAL:2 = DEFMNG_FC_PRICE_LV3
+LOCAL:3 = DEFMNG_FC_PRICE_LV1
+
+LOCALS = 労役設備ビットフロント
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "トランクルーム"		, "荷物の貸し倉庫を提供"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "オブジェ"			, "高級感溢れるホテルに"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "観葉植物"			, "荒廃した世界では好評"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub MNG_FC_XXX
+;=================================================
+;   経営:設備(項目:娯楽室)
+;-------------------------------------------------
+@MNG_FC_X23
+CALL C_LINE
+PRINTFORML 【設備:娯楽室】
+PRINTFORML 娯楽室を強化します。
+PRINTFORML 娯楽室の環境を良くする事で、人気が上がります。
+PRINTL
+PRINTFORML 基本設備…ビリヤード、自販機
+PRINTL
+
+VARSET LOCAL
+LOCAL:1 = DEFMNG_FC_PRICE_LV3
+LOCAL:2 = DEFMNG_FC_PRICE_LV3
+LOCAL:3 = DEFMNG_FC_PRICE_LV2
+
+LOCALS = 労役設備ビット娯楽室
+
+CALL MNG_FC_BIT_PRINT, LOCALS, 1, LOCAL:1, "ＶＲシステム"		, "仮想空間での戦闘が出来る装置"
+CALL MNG_FC_BIT_PRINT, LOCALS, 2, LOCAL:2, "アーケード"			, "大破壊前の空気が楽しめるゲーム"
+CALL MNG_FC_BIT_PRINT, LOCALS, 3, LOCAL:3, "高級内装"			, "雰囲気の良い娯楽室に"
+PRINTL
+PRINTFORMLC [0] 戻る
+PRINTFORMLC (資金:{MONEY})
+PRINTL
+PRINTL
+$INPUT_LOOP
+CALL INPUT_INT(0, 1, 2, 3)
+
+SELECTCASE RESULT
+	CASE 0
+		RETURN
+	CASE 1 TO 3
+
+		CALL MNG_FC_UPGRADE(LOCALS, RESULT, LOCAL:RESULT)
+		SIF !RESULT
+			GOTO INPUT_LOOP
+
+	CASEELSE
+ENDSELECT
+RESTART
+
+

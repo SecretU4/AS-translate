@@ -1,0 +1,45 @@
+﻿;-------------------------------------------------
+;支援住宅イベント
+;-------------------------------------------------
+@TURN_EVENT_F_7
+#DIM L_K
+
+
+L_K = (RAND:3)+1
+
+
+DRAWLINE
+SETCOLOR 150,150,250
+PRINTFORML 【자원 봉사 이벤트(시설):%CALLNAME%】
+PRINTFORML %CALLNAME%는 다른 멤버와 함께 자원 봉사에 참가하고 있다。
+PRINTFORML 지원 받는 사람들에게 감사를 들으면서、%CALLNAME%의 마음도 한결 밝아졌다…
+PRINTFORML  
+
+RESETCOLOR
+CALL TURN_EVENT_NNK
+IF CFLAG:住人_カルマ > 2
+	PRINTFORML %CALLNAME%의 카르마가 감소했다。
+	PRINTFORMW 카르마　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ-L_K}
+ENDIF 
+
+CFLAG:住人_カルマ -= L_K
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

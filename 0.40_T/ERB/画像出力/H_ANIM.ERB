@@ -1,0 +1,92 @@
+﻿;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+;調教時のアニメ
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+@H_ANIM_1
+#DIMS LSTR
+#DIMS LTYPE
+#DIM S_D
+
+
+
+IF !(GROUPMATCH(TEQUIP:ポイント性交, [[TRAIN:正常位]], [[TRAIN:騎乗位]], [[TRAIN:後背位]],) || GROUPMATCH(TEQUIP:ポイント奉仕, [[TRAIN:パイズリ]]))
+	PRINTFORML
+	RETURN 
+ENDIF
+
+IF (GROUPMATCH(TEQUIP:ポイント奉仕, [[TRAIN:パイズリ]]) && !(TALENT:거유 || TALENT:폭유))
+	PRINTFORML
+	RETURN 
+ENDIF
+
+SIF GROUPMATCH(TEQUIP:ポイント性交, [[TRAIN:正常位]])
+LTYPE = Sj
+
+SIF GROUPMATCH(TEQUIP:ポイント性交, [[TRAIN:騎乗位]])
+LTYPE = Kj
+
+SIF GROUPMATCH(TEQUIP:ポイント性交, [[TRAIN:後背位]])
+LTYPE = Bk
+
+SIF GROUPMATCH(TEQUIP:ポイント奉仕, [[TRAIN:パイズリ]])
+LTYPE = Pz
+
+IF FLAG:画像_調教アニメS == 0
+	IF !RAND:6
+		FLAG:画像_調教アニメF = 7
+	ELSEIF !RAND:6
+		FLAG:画像_調教アニメF = 6
+	ELSEIF !RAND:5
+		FLAG:画像_調教アニメF = 5
+	ELSEIF !RAND:4
+		FLAG:画像_調教アニメF = 4
+	ELSEIF !RAND:3
+		FLAG:画像_調教アニメF = 3
+	ELSEIF !RAND:2
+		FLAG:画像_調教アニメF = 2
+	ELSE
+		FLAG:画像_調教アニメF = 1
+	ENDIF
+	FLAG:画像_調教アニメS = 40
+ENDIF
+
+
+
+LSTR = <nobr>　　　　　<img src='Anim_%LTYPE%_{FLAG:画像_調教アニメ1}' height = '1000'  ypos = '{-2600}'>
+HTML_PRINT LSTR
+
+IF FLAG:画像_調教アニメ2 == 0 && FLAG:画像_調教アニメ1 >=18
+	FLAG:画像_調教アニメ1 += ((FLAG:画像_調教アニメF/3)+1)
+ELSEIF FLAG:画像_調教アニメ2 == 0
+	FLAG:画像_調教アニメ1 += FLAG:画像_調教アニメF
+ELSEIF FLAG:画像_調教アニメ2 == 1 && FLAG:画像_調教アニメF != 1 && FLAG:画像_調教アニメ1 >= 8 
+		FLAG:画像_調教アニメ1 -= ((FLAG:画像_調教アニメF/3)+1)
+ELSEIF FLAG:画像_調教アニメ2 == 1 && FLAG:画像_調教アニメF != 1 && FLAG:画像_調教アニメ1 <= 8 
+		FLAG:画像_調教アニメ1 -= ((FLAG:画像_調教アニメF/4)+1)
+ELSEIF FLAG:画像_調教アニメ2 == 1 && FLAG:画像_調教アニメF == 1
+		FLAG:画像_調教アニメ1 -= 1
+ENDIF
+
+
+
+
+SIF FLAG:画像_調教アニメ1 >= 29
+	FLAG:画像_調教アニメ1 = 29
+
+SIF FLAG:画像_調教アニメ1 <= 0
+	FLAG:画像_調教アニメ1 = 0
+	
+IF FLAG:画像_調教アニメ1 == 29 && FLAG:画像_調教アニメ2 == 0
+	FLAG:画像_調教アニメ2 = 1
+	FLAG:画像_調教アニメ1 = 18
+ELSEIF FLAG:画像_調教アニメ1 == 0 && FLAG:画像_調教アニメ2 == 1
+	FLAG:画像_調教アニメ2 = 0
+ENDIF
+
+SIF FLAG:画像_調教アニメS > 0
+ FLAG:画像_調教アニメS -= 1
+
+

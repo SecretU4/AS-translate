@@ -1,0 +1,159 @@
+﻿;-------------------------------------------------
+;外界調査
+;-------------------------------------------------
+@RPG_MAIN
+#DIM L_INPUT
+#DIMS DYNAMIC OP_RELOAD     ;初回以外のページ更新とリスト更新を抑制する
+Flag:ターン進行深度 = 0
+Flag:ターン戦闘回数 = 0
+FLAG:ターン経験値 = 0
+Flag:調査イベント番号 = 0
+
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORM 【조사 대상:
+IF Flag:調査区域 == 90
+	PRINTFORM Lv{Flag:日替わり区画難易度}:어느 구획】(최심부:{Flag:日替わり区画深度限界})
+ELSEIF Flag:調査区域 == 50
+	PRINTFORM LvXX:砂塵の都】
+ELSEIF Flag:調査区域 == 5
+	PRINTFORM Lv5:완전 침식 구역[현대 미궁]】
+ELSEIF Flag:調査区域 == 4
+	PRINTFORM Lv4:광기의 폐도시】
+ELSEIF Flag:調査区域 == 3
+	PRINTFORM Lv3:위험 구역】
+ELSEIF Flag:調査区域 == 2
+	PRINTFORM Lv2:타락한 도시】
+ELSEIF Flag:調査区域 == 1
+	PRINTFORM Lv1:무법 구역】
+ELSE
+	PRINTFORM Lv0:도시 경계선】
+ENDIF
+PRINTFORML (현재 심도:{Flag:調査深度})
+DRAWLINE
+IF Flag:ターン調査済み == 1
+	PRINTFORML 이 턴은 조사를 마쳤습니다 
+ELSEIF  Flag:都市_防衛 != 0
+	PRINTFORML 방위전엔 조사할 수 없습니다
+ELSE
+	PRINTFORML [0] 조사 개시
+ENDIF
+PRINTFORML [1] 조사 구역 선택
+PRINTFORML 
+PRINTFORML [5] 부대 배치
+PRINTFORM [2] 무장 개량　　
+PRINTFORM [10] 아티팩트　　
+PRINTFORML [20] 크래프트(제조)
+PRINTFORM [3] 기능 강화　　
+PRINTFORML [21] 아이템 사용
+PRINTFORML [4] 아이템 확인
+PRINTFORML 
+PRINTFORML [999] 그만둔다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	CALL RPG_EXPLORER_SELECT
+CASE 1
+	CALL RPG_STAGESELECT
+CASE 2
+	CALL RPG_CHARA_SELECT("RPG_武器強化")
+CASE 3
+	CALL RPG_CHARA_SELECT("RPG_技能成長")
+CASE 4
+	CALL RPG_ITEM
+CASE 5
+	CALL RPG_CHARA_SELECT("RPG_随伴配置")
+CASE 10
+	CALL RPG_ARTIFACT
+CASE 20
+	CALL RPG_CRAFT
+CASE 21
+	CALL RPG_CHARA_SELECT("RPG_強化剤投与")
+CASE 999
+	CALL SYSTEM_MENU
+CASEELSE
+ENDSELECT
+
+GOTO INPUT_LOOP
+
+
+
+
+@RPG_CHARA_SELECT(MODE_NOW = "RPG_武器強化")
+#DIMS         MODE_NOW
+#DIM          MODE_ID
+#DIM          L_INPUT
+#DIM          NOW_GROUP = 1 ;ページ記憶用
+#DIMS DYNAMIC OP_RELOAD     ;初回以外のページ更新とリスト更新を抑制する
+{
+#DIMS CONST   MODE_NAME = 
+	"RPG_武器強化", 
+	"RPG_技能成長", 
+	"RPG_強化剤投与", 
+	"RPG_超人薬投与", 
+	"RPG_随伴配置", 
+	"RPG_後方配置", 
+	"RPG_回収配置", 
+	"RPG_探索配置"
+}
+{
+#DIMS CONST   MEMO_STR = 
+	"무기 강화 대상자를 선택하세요。", 
+	"기능 성장 대상자를 선택하세요。", 
+	"강화제 투여 대상자를 선택하세요。", 
+	"초인약 투여 대상자를 선택하세요。", 
+	"수반 부대에 배치할 인물을 선택하세요。", 
+	"후방 부대에 배치할 인물을 선택하세요。", 
+	"회수 부대에 배치할 인물을 선택하세요。", 
+	"탐색 부대에 배치할 인물을 선택하세요。"
+}
+
+
+
+MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
+SELECTCASE MODE_ID
+CASE -1
+	MODE_NOW '= "RPG_武器強化"
+	RESTART
+ENDSELECT
+CLEARLINE LINECOUNT
+
+CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP_RELOAD, MODE_NOW, MEMO_STR:MODE_ID)
+
+L_INPUT = RESULT
+OP_RELOAD '= "「ページ更新無し」「リスト更新無し」"
+SELECTCASE L_INPUT
+CASE 0
+	NOW_GROUP = 1
+	RETURN
+CASE 1 TO CHARANUM - 1
+	SELECTCASE MODE_NOW
+	CASE "RPG_武器強化"
+		CALL RPG_WEAPON_MENU(L_INPUT)
+	CASE "RPG_技能成長"
+		CALL RPG_SKILLSET(L_INPUT)
+	CASE "RPG_強化剤投与", "RPG_超人薬投与"
+		CALL RPG_DOPING(L_INPUT, MODE_NOW)
+	CASE "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置"
+		CALL RPG_SUPPORT_MENU(L_INPUT, MODE_NOW)
+	ENDSELECT
+CASE 1000 TO 1007
+	MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+CASEELSE
+ENDSELECT
+RESTART
+
+
+
+
+
+
+
+
+
+
+
+
+

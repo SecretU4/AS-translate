@@ -1,0 +1,313 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CLOTHES.ERB
+;	Facility	:衣装システム。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXX
+;
+;	・ INFO_STATUS_CLOTHES				表示:STATUS(衣装)
+;	・ CLOTHES_SET_CUSTOM				衣装:セット(カスタム衣装)
+;	・ CLOTHES_CLEAR					衣装:クリア
+;	・ CLOTHES_CHG_MAIN					衣装:変更画面
+;	・ CLOTHES_INFO						衣装:情報
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub INFO_STATUS_CLOTHES
+;=================================================
+;   表示:STATUS(衣装)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_CLOTHES(ARG)
+#DIM L_CNT
+#DIM L_POS
+#DIM L_LEN
+#DIMS L_KEY
+#DIMS L_STR
+
+L_POS = GETNUM(CSTR, "衣装名_帽子")
+L_LEN = 7
+
+L_CNT=0
+REPEAT DEFCLOTHE_TYPE_NUM
+
+	L_STR = %CSTR:ARG:(L_POS+COUNT)%
+	SIF !STRLENS(L_STR)
+		CONTINUE
+
+	L_KEY = %CSTRNAME:(L_POS+COUNT)%
+	L_KEY = %SUBSTRING(L_KEY, L_LEN)%
+	PRINTFORM %L_KEY, 12, LEFT%：%L_STR%
+	PRINTL
+	L_CNT ++
+
+REND
+IF L_CNT < 6
+	REPEAT 6 - L_CNT
+		PRINTL
+	REND
+ENDIF
+
+PRINTL
+
+;=================================================
+;   sub CLOTHES_SET_CUSTOM
+;=================================================
+;   衣装:セット(カスタム衣装)
+;-------------------------------------------------
+; Input:
+;  ARG					キャラ
+;  ARG:1				衣装タイプ("デフォルト", "メイド服")
+;-------------------------------------------------
+@CLOTHES_SET_CUSTOM(ARG, ARGS)
+#DIM L_POS
+#DIM L_TMP
+
+L_POS = GETNUM(CSTR, "衣装名_帽子")
+
+SELECTCASE ARGS
+	CASE "デフォルト"
+		CALL CLOTHES_CLEAR(ARG)
+		REPEAT DEFCLOTHE_TYPE_NUM
+			L_TMP = L_POS + COUNT
+			CSTR:ARG:L_TMP = %CSVCSTR(NO:ARG, L_TMP, 0)%
+		REND
+	CASE "ビッチギャル"
+		CALL CLOTHES_CLEAR(ARG)
+		CSTR:ARG:衣装名_上着トップス = ショートキャミソール
+		CSTR:ARG:衣装名_上着ボトムス = マイクロミニスカート
+		CSTR:ARG:衣装名_下着トップス = 
+		CSTR:ARG:衣装名_下着ボトムス = 
+		CSTR:ARG:衣装名_靴下 = ニーソックス
+		CSTR:ARG:衣装名_靴 = ミュール
+	CASE "メイド服"
+		CALL CLOTHES_CLEAR(ARG)
+		CSTR:ARG:衣装名_帽子			= ホワイトブリム
+		CSTR:ARG:衣装名_全身服			= メイド服(ミニ)
+		CSTR:ARG:衣装名_下着トップス	= ブラジャー
+		CSTR:ARG:衣装名_下着ボトムス	= パンティ
+		CSTR:ARG:衣装名_靴下			= ガーターストッキング
+		CSTR:ARG:衣装名_靴				= メイドブーツ
+	CASE "ギャル衣装"
+		
+	CASEELSE
+ENDSELECT
+
+
+;=================================================
+;   sub CLOTHES_CLEAR
+;=================================================
+;   衣装:クリア
+;-------------------------------------------------
+; Input:
+;  ARG					キャラ
+;-------------------------------------------------
+@CLOTHES_CLEAR(ARG)
+
+CSTR:ARG:衣装名_帽子			= 
+CSTR:ARG:衣装名_上着トップス	= 
+CSTR:ARG:衣装名_上着ボトムス	= 
+CSTR:ARG:衣装名_全身服			= 
+CSTR:ARG:衣装名_手袋			= 
+CSTR:ARG:衣装名_下着トップス	= 
+CSTR:ARG:衣装名_下着ボトムス	= 
+CSTR:ARG:衣装名_全身下着		= 
+CSTR:ARG:衣装名_靴下			= 
+CSTR:ARG:衣装名_靴				= 
+CSTR:ARG:衣装名_外套			= 
+CSTR:ARG:衣装名_アクセサリー	= 
+
+
+;=================================================
+;   sub CLOTHES_CHG_MAIN
+;=================================================
+;   衣装:変更画面
+;-------------------------------------------------
+; Input:
+;  ARG					キャラ
+;-------------------------------------------------
+@CLOTHES_CHG_MAIN(ARG)
+#DIM L_CNT
+#DIM L_POS
+#DIM L_LEN
+#DIMS L_KEY
+#DIMS L_STR
+#DIM L_INPUT
+#DIM L_ID
+#DIMS L_LIST, 100
+#DIM L_TMP
+
+L_POS = GETNUM(CSTR, "衣装名_帽子")
+L_LEN = 7
+
+CUSTOMDRAWLINE =
+PRINTL 変更する衣装の個所を選んでください
+DRAWLINE
+REPEAT DEFCLOTHE_TYPE_NUM
+
+	L_STR = %CSTR:ARG:(L_POS+COUNT)%
+
+	L_KEY = %CSTRNAME:(L_POS+COUNT)%
+	L_KEY = %SUBSTRING(L_KEY, L_LEN)%
+	PRINTFORM [{COUNT,2}] %L_KEY, 12, LEFT%：%L_STR%
+	PRINTL
+
+REND
+PRINTL
+PRINTLC [100] 戻る
+PRINTLC [20] デフォルト
+PRINTLC [21] メイド服
+;NTR陥落以上
+IF NTR_LV(ARG) >= 3
+	PRINTLC [22] ビッチギャル
+ENDIF
+PRINTL
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+	;戻る
+	CASE 100
+		RETURN
+	CASE 0 TO (DEFCLOTHE_TYPE_NUM - 1)
+
+		DRAWLINE
+		PRINTL 変更する衣装を選んでください
+		DRAWLINE
+		VARSET L_LIST
+		L_CNT = 0
+		REPEAT 100
+
+			IF !COUNT
+				L_STR = %CSVCSTR(NO:ARG, GETNUM(CSTR, "衣装名_帽子")+L_INPUT, 0)%
+				;存在する場合は除外
+				SIF FINDELEMENT(GCLOTHE_NAME, L_STR) != -1
+					L_STR = 
+			ELSE
+				L_STR = %GCLOTHE_NAME:( (L_INPUT*100) +COUNT)%
+			ENDIF
+			SIF !STRLENS(L_STR)
+				CONTINUE
+
+			L_LIST:COUNT = %L_STR%
+
+			PRINTFORMLC [{COUNT,2}] %L_STR%
+			L_CNT ++
+			SIF !(L_CNT % 3)
+				PRINTL
+
+		REND
+		SIF !LINEISEMPTY()
+			PRINTL
+		PRINTL
+		PRINTL [100] 解除
+		PRINTL [200] 戻る
+
+		$INPUT_LOOP_2
+		INPUT
+		L_TMP = RESULT
+		SELECTCASE L_TMP
+			;解除
+			CASE 100
+				CSTR:ARG:(L_POS+L_INPUT) = 
+			;戻る
+			CASE 200
+				RESTART
+			CASE 0 TO 99
+				SIF !STRLENS(L_LIST:L_TMP)
+					GOTO ERROR_2
+				CSTR:ARG:(L_POS+L_INPUT) = %L_LIST:L_TMP%
+			CASEELSE
+				$ERROR_2
+				;INPUTエラー対応
+				CALL C_INPUT_ERROR
+				GOTO INPUT_LOOP_2
+		ENDSELECT
+	;デフォルト
+	CASE 20
+		CALL CLOTHES_SET_CUSTOM(ARG, "デフォルト")
+
+	;メイド服
+	CASE 21
+		CALL CLOTHES_SET_CUSTOM(ARG, "メイド服")
+
+	;ビッチギャル
+	CASE 22,(NTR_LV(ARG) >= 3)
+		CALL CLOTHES_SET_CUSTOM(ARG, "ビッチギャル")
+
+	CASEELSE
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub CLOTHES_INFO
+;=================================================
+;   衣装:情報
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;  ARG:1				CSV優先フラグ
+;-------------------------------------------------
+@CLOTHES_INFO(ARG, ARG:1=0)
+#DIM L_POS
+#DIM L_LEN
+#DIM L_W
+#DIMS L_STR
+
+L_POS = GETNUM(CSTR, "衣装名_帽子")
+L_W = 75
+
+PRINTFORM %"【衣装】", 12, LEFT%：
+L_LEN=0
+REPEAT DEFCLOTHE_TYPE_NUM
+
+	IF ARG:1
+		L_STR = %CSVCSTR(ARG, L_POS+COUNT, 0)%
+	ELSE
+		L_STR = %CSTR:ARG:(L_POS+COUNT)%
+	ENDIF
+	SIF !STRLENS(L_STR)
+		CONTINUE
+	L_LEN += STRLENS(L_STR)
+	IF L_LEN > L_W
+		L_LEN = 0
+		PRINTL
+		PRINTFORM %"", 12, LEFT%　
+	ENDIF
+
+;	SIF GROUPMATCH(COUNT, 5, 6, 7)
+;		SETCOLOR COLOR("ピンク")
+	PRINTFORM [%L_STR%]
+;	RESETCOLOR
+REND
+PRINTL
+
+
+
+

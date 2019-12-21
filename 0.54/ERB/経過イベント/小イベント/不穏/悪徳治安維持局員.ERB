@@ -1,0 +1,273 @@
+;-------------------------------------------------
+;悪徳治安維持局員
+;-------------------------------------------------
+@TURN_EVENT_AKTKC
+#DIM L_INPUT
+#DIM L_S
+
+;初回
+IF CFLAG:悪徳治安維持局員 == 0
+	DRAWLINE
+	SETCOLOR 150,250,150
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
+	RESETCOLOR
+	PRINTFORML 
+	PRINTFORML 捕らえたイレギュラーの一人からアジトの情報を得た%CALLNAME%らは、鎮圧作戦に参加していた。
+	PRINTFORML 鎮圧部隊として真っ先にアジトへ踏み込んだ%CALLNAME%は激しい銃撃戦を繰り広げながらイレギュラーを殺害、捕縛していく。
+	PRINTFORML 内部を完全に制圧した%CALLNAME%は後続の捜査班に連絡を入れ、到着までアジト内で待機することになった。
+	PRINTFORML 武装したイレギュラーはさして珍しくはないが、室内に転がる違法薬や通貨、武器弾薬の量が桁外れに多い。
+	PRINTFORML 人身売買のためか、それとも性欲処理のためか、拉致されたであろう女性の保護人数も二桁に上った。
+	PRINTFORML これほど大きな組織を潰したとなれば、当面は治安もよくなり褒賞金も期待できるだろう。
+	PRINTFORML 今からその使い道に思いを馳せていた%CALLNAME%は、部隊の上官が通貨の一部を懐にしまい込んだことに反応が遅れた。
+	PRINTFORML 激しい銃撃戦の後ということもあってか、周囲の同僚は誰もが気の抜けた様子で雑談に興じている。
+	PRINTFORML 他に気づいた人はいない様子だが、どうしようか…
+	
+	PRINTFORML 
+	PRINTFORML [1] - 上官の着服を指摘する
+	PRINTFORML [2] - 上官に確認を取る
+	PRINTFORML 
+	
+	INPUT
+	L_INPUT = RESULT
+	
+	SELECTCASE L_INPUT
+	CASE 1	;上官の着服を指摘する
+		PRINTFORML 着服行為は許されるものではない。
+		PRINTFORML %CALLNAME%が勇気を出して上官の着服を指摘すると、周囲の同僚は素早い動きで上官を取り押さえた。
+		PRINTFORML 上官の衣服からは先ほど着服した通貨以外にも多数の盗品が見つかり、その後の調べで日常的に横領や着服を
+		PRINTFORML 行っていたことが発覚した。
+		PRINTFORML %CALLNAME%は不正を暴いたことで今回の鎮圧作戦と合わせて高額な褒賞金を受け取ることになった…
+		PRINTFORML 
+		PRINTFORML %CALLNAME%のカルマが低下した。
+		PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ-5}
+		CFLAG:住人_カルマ -= 5
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
+	CASE 2	;上官に確認を取る
+		PRINTFORML もしかしたら見間違いかもしれない。
+		PRINTFORML 念のために%CALLNAME%が上官に確認を取ると、上官は机の上にあった通貨を%CALLNAME%のポケットへと押し込んだ。
+		PRINTFORML 「イレギュラーのものなんだから、多少減ったところで困らんだろ。それに危険手当のようなもんさ」
+		PRINTFORML これくらいの役得が無いと働き甲斐がないし、誰でもやっていることだと上官は笑った。
+		PRINTFORML …確かにその通りかもしれない。
+		PRINTFORML %CALLNAME%も上官に倣っていくらかの通貨を着服すると、捜査班に現場の引継ぎをして帰還した…
+		PRINTFORML 
+		IF CFLAG:住人_カルマ >= 96
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+			CFLAG:住人_カルマ = 100
+		ELSE
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+5}
+			CFLAG:住人_カルマ += 5
+		ENDIF
+		;フラグを立てる
+		CFLAG:悪徳治安維持局員 = 1
+	CASEELSE	;ループさせずに終わり
+		PRINTFORML どうすべきか悩んでいるうちに捜査班が到着してしまい、%CALLNAME%は現場の引継ぎで忙しくなってしまった。
+		PRINTFORMW 上官は捕らえたイレギュラーを連れて先に局へと戻ってしまったため、機会を逃してしまった…
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
+	ENDSELECT
+;二回目
+ELSEIF CFLAG:悪徳治安維持局員 == 1
+	DRAWLINE
+	SETCOLOR 150,250,150
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
+	PRINTFORML 
+	PRINTFORML 違法薬を販売する組織の内偵を行っていた%CALLNAME%に組織の側から接触があった。
+	PRINTFORML 情報を得るために遣わされた男に会ってみると、男は早速取引を持ち掛けてきた。
+	PRINTFORML 「この男を組織のボスとして逮捕しろ。そうしたらこの金をくれてやる」
+	PRINTFORML そう言って男が机の上に置いたアタッシュケースには、治安維持局の給料とは比べものにならないほどの大金が
+	PRINTFORML 詰め込まれていた。
+	PRINTFORML 組織は捜査の手が伸びていることに気づいており、もはや踏み込まれるのも時間の問題と把握している。
+	PRINTFORML そこで幹部の一人をボスに仕立て上げ、逃げる時間を稼ぐのだと男は語った。
+	PRINTFORML 断ったらどうするのかと尋ねる%CALLNAME%に男は無言で拳銃を取り出して向けた。
+	PRINTFORML もとより断る気のなかった%CALLNAME%はアタッシュケースを受け取ると、男から得た偽情報を報告して
+	PRINTFORML 幹部の一人を組織のボスに仕立て上げた。
+	PRINTFORML この偽情報により幹部が捕まると捜査の手はいったん止まり、その隙に本物のボスは姿をくらませた。
+	PRINTFORML 正確な情報ではなかったことを叱責された%CALLNAME%だったが、その手元には大量の金が舞い込んでいた…
+	PRINTFORML 
+	IF CFLAG:住人_カルマ >= 96
+		PRINTFORML %CALLNAME%のカルマが上昇した。
+		PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+		CFLAG:住人_カルマ = 100
+	ELSE
+		PRINTFORML %CALLNAME%のカルマが上昇した。
+		PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+5}
+		CFLAG:住人_カルマ += 5
+	ENDIF
+	RESETCOLOR
+	CFLAG:悪徳治安維持局員 += 1
+;三回目
+ELSEIF CFLAG:悪徳治安維持局員 == 2
+	DRAWLINE
+	SETCOLOR 150,250,150
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
+	PRINTFORML 
+	PRINTFORML 違法薬の販売をしていた組織のボスを逃がしてから%CALLNAME%は組織との結びつきを強めつつあった。
+	PRINTFORML 捜査情報の流出、売人の見逃し、対抗組織の殲滅、押収した薬物の横流し。
+	PRINTFORML 表向きは勤勉な治安維持局員として働く%CALLNAME%の姿に皆が騙され、組織のために働く裏の顔に
+	PRINTFORML 誰もが気付かない。
+	PRINTFORML そんな%CALLNAME%の忠勤ぶりに目をつけた組織のボスは、%CALLNAME%を晩餐へと招待した。
+	PRINTFORML ボス本人の呼び出しに警戒した%CALLNAME%だったが、事態は思いもよらない方向へと進む。
+	PRINTFORML 「%CALLNAME%、俺の女になればもっと良い思いをさせてやるが…どうだ？」
+	PRINTFORML ボスの言葉が終わらないうちに%CALLNAME%の目の前には大量のお金と薬物が積み上げられていく。
+	PRINTFORML 一時的に潰されかけた組織が、たった一人の女を手に入れるためにこれだけの対価を用意できる。
+	PRINTFORML その一助となった自覚が%CALLNAME%にもあるが、ここまで組織が復活したのはボスの手腕だろう。
+	PRINTFORML そんなやり手の男から「お前にはこれだけの価値があるのだ」と持ち上げられて悪い気のする女はいない。
+	PRINTFORML だが、よく考えなければならない。
+	PRINTFORML 自分は治安維持局員であり、相手はイレギュラーなのだ…
+	
+	PRINTFORML 
+	PRINTFORML [1] - ボスの女になる
+	PRINTFORML [2] - 断る
+	PRINTFORML 
+	
+	INPUT
+	L_INPUT = RESULT
+	
+	SELECTCASE L_INPUT
+	CASE 1	;ボスの女になる
+		PRINTFORML 今さら何を迷う必要があるのだ。
+		PRINTFORML %CALLNAME%がボスの申し出を受け入れると、ボスは%CALLNAME%を抱きかかえて寝室へと直行した。
+		PRINTFORML ムードも何もあったものではなかったが、お互いに敵対する立場でありながら肉体関係を結ぶという
+		PRINTFORML 背徳感に興奮し、二人は夜遅くまで盛り上がった…
+		PRINTFORML 
+		IF CFLAG:住人_カルマ >= 91
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+			CFLAG:住人_カルマ = 100
+		ELSE
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+10}
+			CFLAG:住人_カルマ += 10
+		ENDIF
+		;フラグを立てる
+		CFLAG:悪徳治安維持局員 += 1
+		
+		IF TALENT:非処女 == 0
+			TALENT:非処女 = 1
+			TCVAR:履歴_EXP_処女喪失 = 1
+		ENDIF
+		IF TALENT:Ａ非処女 == 0
+			TALENT:Ａ非処女 = 1
+			TCVAR:履歴_EXP_Ａ処女喪失 = 1
+		ENDIF
+		
+		SIF CSTR:初えっち相手名 == ""
+			CSTR:初えっち相手名 = 組織のボス
+		SIF CSTR:初Ａえっち相手名 == ""
+			CSTR:初Ａえっち相手名 = 組織のボス
+		SIF CSTR:初キス相手名 == ""
+			CSTR:初キス相手名 = 組織のボス
+		SIF CSTR:初フェラ相手名 == ""
+			CSTR:初フェラ相手名 = 組織のボス
+		SIF CSTR:初絶頂相手名 == ""
+			CSTR:初絶頂相手名 = 組織のボス
+		SIF CSTR:初中出し相手名 == ""
+			CSTR:初中出し相手名 = 組織のボス
+		CALL JN_SEX_EXP
+		
+	CASE 2	;断る
+		PRINTFORML 流石にイレギュラーの男と付き合うわけにはいかない。
+		PRINTFORML %CALLNAME%が断るとボスも駄目で元々と考えていたのか、少し残念そうな表情を浮かべながらも
+		PRINTFORMW あっさりと引き下がった。
+		PRINTFORML 
+		PRINTFORML それから数日後、組織は別プレイヤーの統括する地域に進出しようとして失敗し壊滅した。
+		PRINTFORML 組織に所属していたイレギュラーはボスも含め全員が処分されたと聞き、%CALLNAME%は自身に禍が及ばずに
+		PRINTFORMW 済んだことを密かに安堵し、以後は悪の組織と繋がることもなく真面目に働き続けた…
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
+	CASEELSE	;ループさせずに終わり
+		PRINTFORML 少し考えさせてほしい…。
+		PRINTFORMW 考えがまとまらなかった%CALLNAME%は答えを保留すると、席を立った…
+		PRINTFORML 
+		PRINTFORML それから数日後、組織は別プレイヤーの統括する地域に進出しようとして失敗し壊滅した。
+		PRINTFORML 組織に所属していたイレギュラーはボスも含め全員が処分されたと聞き、%CALLNAME%は自身に禍が及ばずに
+		PRINTFORMW 済んだことを密かに安堵し、以後は悪の組織と繋がることもなく真面目に働き続けた…
+		;フラグを折る
+		CFLAG:悪徳治安維持局員 = -1
+	ENDSELECT
+ELSEIF CFLAG:悪徳治安維持局員 >= 3
+	DRAWLINE
+	SETCOLOR 150,250,150
+	PRINTFORML 【悪徳治安維持局員(カルマ):%CALLNAME%】
+	PRINTFORML 
+	PRINTFORML %CALLNAME%は組織のボスとの逢瀬を楽しんでいる…
+	IF !RAND:5
+		PRINTFORML %CALLNAME%は周囲に散らばったコンドームを手に取りながら申し訳ない気分になっていた。
+		PRINTFORML 妊娠すれば父親は誰だという話になるため、ボスとの性行為では安全日以外は常に避妊を行っている。
+		PRINTFORML またイレギュラーとの子が都市に受け入れられる可能性もほぼ無いため、避妊は必須だった。
+		PRINTFORML 幸いなことにボスも治安維持局員がイレギュラーの子を孕むという事態がいかに危険なことか理解し
+		PRINTFORML 避妊に協力的なことが救いであった。
+		PRINTFORMW せめてもとゴムから精液を飲む姿に興奮したボスに押し倒され、%CALLNAME%は夜明けまで乱れ狂った…
+	ELSEIF !RAND:4
+		PRINTFORML 安全日が来たため%CALLNAME%はボスと久しぶりの生ハメを楽しんでいた。
+		PRINTFORML 胎内に次々と放たれていく精液も心なしか普段より多く、やはり直接女体を味わえる方が興奮するのだろう。
+		PRINTFORML だがボスは真っ当に生きることができず、自分もイレギュラーとして生きることはできない。
+		PRINTFORML お互いにそれが解っているからこそ全力で数少ない生ハメを楽しむのだ。
+		PRINTFORMW フェラチオで復活したボスのペニスを膣内に導きながら、%CALLNAME%は気絶するまでセックスを楽しんだ…
+	ELSEIF !RAND:3
+		PRINTFORML 初めはお金や薬が貰えることに重点を置いていた%CALLNAME%だったが、最近はボスに対して愛着のようなものも
+		PRINTFORML 抱き始めていた。
+		PRINTFORML 金を稼ぐ才に人を動かす才、ともすれば「プレイヤー」として都市を動かす才もあるかもしれない。
+		PRINTFORML だがそれもイレギュラーという彼の立場が絶対に許してくれない。
+		PRINTFORMW %CALLNAME%はボスの厚い胸板を優しく撫でながらボスに寄り添い、夢の世界を漂い続けた…
+	ELSEIF !RAND:2
+		PRINTFORML 以前治安維持局員に殺されかけたことがあるというイレギュラーの男に%CALLNAME%は犯されていた。
+		PRINTFORML 抵抗する%CALLNAME%を床に押さえつけて腰を振り続けていた男だったが、不意に動きが止まり胎内に精液が放たれる。
+		PRINTFORML 膣内射精されて全身を強張らせた%CALLNAME%の背後から男が崩れ落ち、なぜか床に頭から突っ込んだ。
+		PRINTFORML よく見ると男は額を撃ち抜かれ絶命しており、部屋の入口には拳銃を構えたボスが立っていた。
+		PRINTFORML 部下の躾がなっていなかったことを詫びるボスに、%CALLNAME%は穢された体を上書きしてほしいと強請る。
+		PRINTFORMW %CALLNAME%は男のペニスの感触を忘れるまでボスと交わり続けた…
+	ELSE
+		PRINTFORML 最高の薬ができたというボスの勧めでキメセクに臨んだ%CALLNAME%は三十分ももたずに意識を失った。
+		PRINTFORML 意識が戻った%CALLNAME%を心配そうに見つめるボスに、脳の神経が焼き切れるんじゃないかと思うほどの
+		PRINTFORML 強力な快感で病みつきになりそうだと使用感を伝える。
+		PRINTFORMW 出来の良さを喜ぶボスともう一度薬を服用してキメセクに臨み%CALLNAME%は意識を失った…
+	ENDIF
+	
+	RESETCOLOR
+	CFLAG:悪徳治安維持局員 += 1
+	
+	;回数を重ねるごとに発覚する可能性が10%ずつアップ
+	L_S = CFLAG:悪徳治安維持局員 * 10
+	
+	IF RAND:100 <= L_S
+		;発覚した場合、フラグを折る
+		PRINTFORML 
+		PRINTFORML ≪プレイヤー、%CALLNAME%はイレギュラーと通じていました。これは断じて許される行為ではありません≫
+		PRINTFORML ≪通常ならば殺処分が妥当なところですが、…そうですね、あなたならそう言うと思いました≫
+		PRINTFORML ≪今回は特別に%CALLNAME%を記憶処理に留め、再びあなたの管轄下に置くことにします≫
+		PRINTFORML ≪二度目はありません、くれぐれも注意深く管理してくださいね…？≫
+		PRINTFORML 
+		PRINTFORMW %CALLNAME%は記憶処理が行われ、すべての記憶を失った…
+		
+		TALENT:記憶処理済= 1
+		CFLAG:悪徳治安維持局員 = -1
+		
+	ENDIF
+
+
+
+
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

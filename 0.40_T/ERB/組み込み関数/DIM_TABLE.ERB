@@ -1,0 +1,695 @@
+﻿;-------------------------------------------------
+;ソート用ラベル定義関数
+;-------------------------------------------------
+;INT型のキャラクタ変数を区別なしに扱うためのテーブルを定義する
+;数字決め打ちでconst使いまくるのってのも正直褒められたもんじゃないが
+;ABLやCFLAGを区別せずにLABEL_NAMEだけでサクッと参照できるのはかなり簡略化出来て便利
+;
+;F関数でも使えるようにこの関数自体をF関数化してCALLFで使用するようにする
+;注意）
+;・CONST配列は要素0を空けておくこと
+;・@C_GET_CVAR_VALUEに記載がないLABEL_VAR_NAMEは使用出来ない
+;・キャラ変数CSVをイジったら見直しが必要
+;・「単一のCVARに属さないステータス」の参照用に"EXTRA"を増設
+;　実際の算出は@C_GET_CVAR_VALUE内部で行っている
+;　この関数内でのEXTRA:XとEXTRA参照用CONSTを一致させておくこと
+@DIM_TABLE_CVAR(LABEL_NAME, LABEL_VAR_NAME, LABEL_VAR_ID, LABEL_MAX)
+#FUNCTION
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIMS REF LABEL_NAME     ;戻り値用、配列を直接書き換える
+#DIMS REF LABEL_VAR_NAME ;各ラベル文字列
+#DIM  REF LABEL_VAR_ID   ;各ラベル文字列が対応するキャラ変数の名前、ABLやMARK
+#DIM  REF LABEL_MAX      ;各ラベル文字列が対応するキャラ変数の要素
+;STR系は左揃えでINTは右揃えになってるが気にするな
+{
+#DIMS CONST C_LABEL_NAME = "none",
+	"ID",             "협력 상황",       "관계 단계",     "설득도",       "호감도　　　", 
+	"충성도",         "예속 각인",       "애정도",       "함락 각인",       "음란도", 
+	"음란 각인",       "반발 각인",       "난이도",         "인기",           "모랄", 
+	"카르마",         "품성",           "육체DMG",     "정신DMG",       "지위", 
+	"선악",           "공헌",           "소지금　",     "수입　　",       "지출　　", 
+	"원조교제 수",         "종족",           "신장",         "체중",           "BUST", 
+	"CUP",            "WAIST",          "HIP",          "머리 색",           "머리 모양", 
+	"눈",             "눈동자 색",           "체형",         "생식 평가",       "난자 LV", 
+	"모체 LV",         "　암컷",           "페로몬",   "본능",           "흥미",
+	"관심",           "성교 욕망",       "임신 욕망",     "Ｃ감각",         "Ｖ감각", 
+	"Ａ감각",         "Ｂ감각",         "기교",         "매료",           "욕망", 
+	"노출증",         "새디즘 성향",       "마조 성향",     "레즈 성향",       "ＢＬ 성향", 
+	"성교 중독",       "자위 중독",       "정액 중독",     "키스 중독",       "친밀", 
+	"순종",           "봉사정신",       "성노예",       "농락",           "절정경험", 
+	"Ｃ경험",         "Ｖ경험",         "Ｂ경험",       "Ａ경험",         "키스 경험", 
+	"수음 경험",       "펠라 경험",     "자위 경험",     "파이즈리 경험",   "Ｖ성교 경험", 
+	"Ａ성교 경험",     "정액 경험",       "정음 경험",     "질싸 경험",       "주민 조교 경험", 
+	"ＮＴＲ조교 경험", "봉사쾌락경험",   "유혹 경험",     "ＮＴＬ조교 경험", "레즈 경험", 
+	"ＢＬ경험",       "고통쾌락경험",   "피학쾌락경험", "기학쾌락경험",   "긴박 경험", 
+	"촉수 경험",       "수간 경험",       "강간 경험",     "가사 경험",       "촬영 경험", 
+	"피사 경험",       "가창 경험",       "전투 경험",     "매춘 경험",       "출산 경험", 
+	"승리 횟수",       "경험치",         "현재 HP",         "최대 HP",           "현재 SP", 
+	"최대 SP",           "현재 BRE",          "최대 BRE",        "SAN",            "GUTS", 
+	"BRAVE",          "ATK",            "DEF",          "HIT",            "SPD", 
+	"LUK",            "기능 점수",         "目星",         "아이디어",       "엿듣기", 
+	"의료",           "기계 수리",       "컴퓨터", "자물쇠",         "은신", 
+	"해체",           "해독",           "주 종족",       "주 숙련도",         "주 DICE 갯수", 
+	"주 DICE 면",       "주 BONUS",        "부 종족",       "부 숙련도",         "副DICE数", 
+	"副DICE面",       "副BONUS",        "수반",         "후방",           "회수", 
+	"부대",           "시설",           "친교",         "탐색",           "출신", 
+	"직업",           "관리",           "기밀",         "합의",           "호감LV", 
+	"공략",           "팬",         "계급"
+}
+
+
+
+{
+#DIMS CONST C_LABEL_VAR_NAME = "none",
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "MARK",  "CFLAG", "MARK",  "CFLAG", 
+	"MARK",  "MARK",  "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG",
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "ABL",   "ABL", 
+	"ABL",   "ABL",   "ABL",   "ABL",   "ABL", 
+	"ABL",   "ABL",   "ABL",   "ABL",   "ABL", 
+	"ABL",   "ABL",   "ABL",   "ABL",   "ABL", 
+	"ABL",   "ABL",   "ABL",   "ABL",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"EXP",   "EXP",   "EXP",   "EXP",   "EXP", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "CFLAG", "CFLAG", "CFLAG", 
+	"CFLAG", "CFLAG", "EXTRA", "EXTRA", "EXTRA", 
+	"EXTRA", "EXTRA", "EXTRA", "EXTRA", "EXTRA", 
+	"EXTRA", "EXTRA", "EXTRA", "EXTRA", "EXTRA", 
+	"EXTRA", "CFLAG", "EXTRA"
+}
+
+{
+#DIM  CONST C_LABEL_VAR_ID = 0, 
+	 530, 5016,  551,  510,  550, 
+	 500,    0,  501,    1,  502, 
+	   2,    9, 5000 ,6005, 6006, 
+	6007, 6008, 6040, 6041, 6002, 
+	6009, 6003, 6001, 6011, 6004, 
+	6080, 6010,  300,  301,  302, 
+	 303,  304,  305,  400,  401, 
+	 403,  404,  406, 1500, 1200, 
+	1201, 1001, 1002, 1010, 1011, 
+	1012, 1020, 1021,    0,    1, 
+	   2,    3,   10,   16,   17, 
+	  18,   20,   21,   22,   23, 
+	  30,   31,   32,   33,   50, 
+	  51,   52,   53,   59,   10, 
+	   1,    2,    4,   50,   35, 
+	  36,   37,   38,   39,   30, 
+	  51,   20,   21,   22,   80, 
+	  81,   82,   83,   85,   55, 
+	  56,   57,   60,   61,   62, 
+	  63,   64,   65,   90,   91, 
+	  92,   93,   94,   95,   99, 
+	6901, 6900, 6501, 6500, 6503, 
+	6502, 6517, 6516, 6505, 6507, 
+	6508, 6511, 6512, 6513, 6514, 
+	6515, 6902, 6600, 6601, 6602, 
+	6603, 6604, 6605, 6606, 6607, 
+	6608, 6609, 6550, 6558, 6551, 
+	6552, 6553, 6560, 6568, 6561, 
+	6562, 6563,    0,    1,    2, 
+	   3,    4,    5,    6,    7, 
+	   8,    9,   10,   11,   12, 
+	  13,  555,   14
+}
+
+#DIM C_LABEL_MAX
+SIF !C_LABEL_MAX
+	C_LABEL_MAX = VARSIZE("C_LABEL_NAME") -1
+
+VARSET LABEL_NAME
+VARSET LABEL_VAR_NAME
+VARSET LABEL_VAR_ID
+ARRAYCOPY "C_LABEL_NAME"    , "LABEL_NAME"
+ARRAYCOPY "C_LABEL_VAR_NAME", "LABEL_VAR_NAME"
+ARRAYCOPY "C_LABEL_VAR_ID"  , "LABEL_VAR_ID"
+LABEL_MAX = C_LABEL_MAX
+
+[SKIPSTART]
+ラベル一覧
+000:[none,         none,  none]
+
+001:[식별 ID,       CFLAG, 530]
+002:[협력 상황,     CFLAG, 5016]
+003:[관계 단계,     CFLAG, 551]
+004:[설득도,     CFLAG, 510]
+005:[호감도　　　, CFLAG, 550]
+
+006:[충성도,       CFLAG, 500]
+007:[예속 각인,     MARK,  0]
+008:[애정도,       CFLAG, 501]
+009:[함락 각인,     MARK,  1]
+010:[음란도,       CFLAG, 502]
+
+011:[음란 각인,     MARK,  2]
+012:[반발 각인,     MARK,  9]
+013:[인물 난이도,     CFLAG, 5000]
+014:[인기,     CFLAG, 6005]
+015:[모랄,   CFLAG, 6006]
+
+016:[카르마,   CFLAG, 6007]
+017:[품성,     CFLAG, 6008]
+018:[육체DMG, CFLAG, 6040]
+019:[정신DMG, CFLAG, 6041]
+020:[지위,     CFLAG, 6002]
+
+021:[선악,     CFLAG, 6009]
+022:[공헌도,   CFLAG, 6003]
+023:[소지금　, CFLAG, 6001]
+024:[수입　　, CFLAG, 6011]
+025:[지출　　, CFLAG, 6004]
+
+026:[원조교제 수,   CFLAG, 6080]
+027:[종족,           CFLAG, 6010]
+028:[신장,           CFLAG, 300]
+029:[체중,           CFLAG, 301]
+030:[BUST,     CFLAG, 302]
+
+031:[CUP,   CFLAG, 303]
+032:[WAIST, CFLAG, 304]
+033:[HIP,   CFLAG, 305]
+034:[머리 색,           CFLAG, 400]
+035:[머리 모양,           CFLAG, 401]
+
+036:[눈,             CFLAG, 403]
+037:[눈동자 색,           CFLAG, 404]
+038:[체형,         CFLAG, 406]
+039:[생식 평가,   CFLAG, 1500]
+040:[난자 LV,     CFLAG, 1200]
+
+041:[모체 LV,     CFLAG, 1201]
+042:[암컷,         CFLAG, 1001]
+043:[페로몬, CFLAG, 1002]
+044:[본능,       CFLAG, 1010]
+045:[흥미,       CFLAG, 1011]
+
+046:[관심,       CFLAG, 1012]
+047:[성교 욕망,   CFLAG, 1020]
+048:[임신 욕망,   CFLAG, 1021]
+049:[Ｃ감각,   ABL, 0]
+050:[Ｖ감각,   ABL, 1]
+
+051:[Ａ감각,   ABL, 2]
+052:[Ｂ감각,   ABL, 3]
+053:[기교,     ABL, 10]
+054:[매료,     ABL, 16]
+055:[욕망,     ABL, 17]
+
+056:[노출증,   ABL, 18]
+057:[새디즘 성향, ABL, 20]
+058:[마조 성향, ABL, 21]
+059:[레즈 성향, ABL, 22]
+060:[ＢＬ 성향, ABL, 23]
+
+061:[성교 중독, ABL, 30]
+062:[자위 중독, ABL, 31]
+063:[정액 중독, ABL, 32]
+064:[키스 중독, ABL, 33]
+065:[친밀,     ABL, 50]
+
+066:[순종,     ABL, 51]
+067:[봉사정신, ABL, 52]
+068:[성노예,   ABL, 53]
+069:[농락,     ABL, 59]
+070:[절정경험,     EXP, 10]
+
+071:[Ｃ경험,       EXP, 1]
+072:[Ｖ경험,       EXP, 2]
+073:[Ｂ경험,       EXP, 4]
+074:[Ａ경험,       EXP, 50]
+075:[키스 경험,     EXP, 35]
+
+076:[수음 경험,     EXP, 36]
+077:[펠라 경험,   EXP, 37]
+078:[자위 경험,     EXP, 38]
+079:[파이즈리 경험, EXP, 39]
+080:[Ｖ성교 경험,   EXP, 30]
+
+081:[Ａ성교 경험,   EXP, 51]
+082:[정액 경험,     EXP, 20]
+083:[정음 경험,     EXP, 21]
+084:[질싸 경험,     EXP, 22]
+085:[주민 조교 경험,   EXP, 80]
+
+086:[ＮＴＲ조교 경험, EXP, 81]
+087:[봉사쾌락경험,   EXP, 82]
+088:[유혹 경험,       EXP, 83]
+089:[ＮＴＬ조교 경험, EXP, 85]
+090:[레즈 경험,       EXP, 55]
+
+091:[ＢＬ경험,       EXP, 56]
+092:[고통쾌락경험,   EXP, 57]
+093:[피학쾌락경험,   EXP, 60]
+094:[기학쾌락경험,   EXP, 61]
+095:[긴박 경험,       EXP, 62]
+
+096:[촉수 경험,       EXP, 63]
+097:[수간 경험,       EXP, 64]
+098:[강간 경험,       EXP, 65]
+099:[가사 경험, EXP, 90]
+100:[촬영 경험, EXP, 91]
+
+101:[피사 경험, EXP, 92]
+102:[가창 경험, EXP, 93]
+103:[전투 경험, EXP, 94]
+104:[매춘 경험, EXP, 95]
+105:[출산 경험, EXP, 99]
+
+106:[승리 횟수, CFLAG, 6901]
+107:[경험치,   CFLAG, 6900]
+108:[현재 HP,     CFLAG, 6501]
+109:[최대 HP,     CFLAG, 6500]
+110:[현재 SP,     CFLAG, 6503]
+
+111:[최대 SP,     CFLAG, 6502]
+112:[현재 BRE,    CFLAG, 6517]
+113:[최대 BRE,    CFLAG, 6516]
+114:[SAN,      CFLAG, 6505]
+115:[GUTS,     CFLAG, 6507]
+
+116:[BRAVE,    CFLAG, 6508]
+117:[ATK,      CFLAG, 6511]
+118:[DEF,      CFLAG, 6512]
+119:[HIT,      CFLAG, 6513]
+120:[SPD,      CFLAG, 6514]
+
+121:[LUK,      CFLAG, 6515]
+122:[기능 점수,       CFLAG, 6902]
+123:[目星,         CFLAG, 6600]
+124:[아이디어,     CFLAG, 6601]
+125:[엿듣기,       CFLAG, 6602]
+
+126:[의료,         CFLAG, 6603]
+127:[기계 수리,     CFLAG, 6604]
+128:[컴퓨터, CFLAG, 6605]
+129:[자물쇠,       CFLAG, 6606]
+130:[은신,       CFLAG, 6607]
+
+131:[해체,         CFLAG, 6608]
+132:[해독,         CFLAG, 6609]
+133:[주 종족,   CFLAG, 6550]
+134:[주 숙련도,   CFLAG, 6558]
+135:[주 DICE 갯수, CFLAG, 6551]
+
+136:[주 DICE 면, CFLAG, 6552]
+137:[주 BONUS,  CFLAG, 6553]
+138:[부 종족,     CFLAG, 6560]
+139:[부 숙련도,     CFLAG, 6568]
+140:[副DICE数,   CFLAG, 6561]
+
+141:[副DICE面,   CFLAG, 6562]
+142:[副BONUS,    CFLAG, 6563]
+143:[수반, EXTRA, 0]
+144:[후방, EXTRA, 1]
+145:[회수, EXTRA, 2]
+
+146:[소속 부대, EXTRA, 3]
+147:[배속 시설, EXTRA, 4]
+148:[친교,     EXTRA, 5]
+149:[탐색,     EXTRA, 6]
+150:[출신,     EXTRA, 7]
+
+151:[직업,     EXTRA, 8]
+152:[관리 지수, EXTRA, 9]
+153:[기밀,     EXTRA, 10]
+154:[합의,     EXTRA, 11]
+155:[호감도LV, EXTRA, 12]
+
+156:[공략,     EXTRA, 13]
+157:[팬,   CFLAG, 555]
+156:[계급,     EXTRA, 14]
+
+[SKIPEND]
+
+
+
+;-------------------------------------------------
+;ラベルリスト定義関数
+;-------------------------------------------------
+;一連のラベル（キャラ変数）をひとまとめにして扱うために作成
+;注意事項
+;・LABEL_LISTの名前には2ケタの番号をふること≒現状では99種類まで
+;・LABEL_LISTを追加したらC_LIST_NAMEに名前を追加のこと（,によるエラーに注意）
+;・LIST_NAME/LABEL_NAMEともに呼び出し側とDIM側で差異が出ないようにすること
+;　これが呼び出しKEYになるので誤字ってたり表記ゆれがあるとうまくいかない
+@DIM_TABLE_LABEL_LIST(LIST_NAME, LABEL_LIST, LABEL_SIZE)
+#FUNCTION
+#DIMS LIST_NAME
+#DIMS REF LABEL_LIST ;戻り値用、ラベル配列
+#DIM  REF LABEL_SIZE ;
+#DIM      TEMP_ID    ;LISTNAME判別ID
+#DIMS     TEMP_LIST  ;LISTNAMEの一次取得用
+{
+#DIMS CONST C_LIST_NAME, 21 = "none", 
+	"교류 ST", 
+	"함락 ST", 
+	"성격  ST", 
+	"경제 ST", 
+	"신체 ST", 
+	"페로몬 ST", 
+	"성감각 ST", 
+	"성기능 ST", 
+	"성벽 ABL", 
+	"성행동 경험", 
+	"성교 경험", 
+	"조교 경험", 
+	"특수 쾌락 경험", 
+	"일상 경험", 
+	"전투 BASE", 
+	"전투 ST", 
+	"탐색 ABL", 
+	"무장", 
+	"관리 정보", 
+	"사회 정보", 
+}
+
+
+
+;情報 01.교류 ST
+{
+#DIMS CONST LABEL_LIST01, 6 = 
+	"ID",   "협력 상황", "관계 단계", "설득도",  "호감도　　　", 
+	"난이도"
+}
+;情報 02.함락 ST
+{
+#DIMS CONST LABEL_LIST02, 8 = 
+	"친교", "충성도", "예속 각인", "애정도", "함락 각인", 
+	"음란도", "음란 각인", "반발 각인"
+}
+;情報 03.성격  ST
+{
+#DIMS CONST LABEL_LIST03, 7 = 
+	"선악", "인기", "모랄", "카르마", "품성", 
+	"육체DMG", "정신DMG"
+}
+
+;情報 04.경제 ST
+{
+#DIMS CONST LABEL_LIST04, 6 = 
+	"지위", "공헌", "소지금　", "수입　　", "지출　　", 
+	"원조교제 수"
+}
+
+;情報 05.신체 ST
+{
+#DIMS CONST LABEL_LIST05, 12 = 
+	"종족", "신장", "체중", "BUST", "CUP", 
+	"WAIST", "HIP", "머리 색", "머리 모양", "눈", 
+	"눈동자 색", "체형"
+}
+
+;情報 06.페로몬 ST
+{
+#DIMS CONST LABEL_LIST06, 10 = 
+	"생식 평가", "난자 LV", "모체 LV", "　암컷",     "페로몬", 
+	"본능",     "흥미",   "관심",   "성교 욕망", "임신 욕망"
+}
+
+;情報 07.性감각ABL
+{
+#DIMS CONST LABEL_LIST07, 9 = 
+	"절정경험", "Ｃ감각", "Ｃ경험", "Ｖ감각", "Ｖ경험", 
+	"Ａ감각",   "Ａ경험", "Ｂ감각", "Ｂ경험"
+}
+
+;情報 08.성기능 ST
+{
+#DIMS CONST LABEL_LIST08, 8 = 
+	"기교", "매료", "욕망", "친밀", "순종", 
+	"봉사정신", "성노예", "농락"
+}
+
+;情報 09.성벽 ABL
+{
+#DIMS CONST LABEL_LIST09, 9 = 
+	"노출증", "새디즘 성향", "마조 성향", "레즈 성향", "ＢＬ 성향", 
+	"성교 중독", "자위 중독", "정액 중독", "키스 중독"
+}
+
+;情報 10.성행동 경험
+{
+#DIMS CONST LABEL_LIST10, 5 = 
+	"키스 경험", "수음 경험", "펠라 경험", "자위 경험", "파이즈리 경험"
+}
+
+;情報 11.성교 경험
+{
+#DIMS CONST LABEL_LIST11, 6 = 
+	"주민 조교 경험", "Ｖ성교 경험", "Ａ성교 경험", "정액 경험", "정음 경험", 
+	"질싸 경험"
+}
+
+;情報 12.조교 경험
+{
+#DIMS CONST LABEL_LIST12, 6 = 
+	"유혹 경험", "봉사쾌락경험", "레즈 경험", "ＢＬ경험", "ＮＴＲ조교 경험", 
+	"ＮＴＬ조교 경험"
+}
+
+;情報 13.특수 쾌락 경험
+{
+#DIMS CONST LABEL_LIST13, 7 = 
+	"고통쾌락경험", "피학쾌락경험", "기학쾌락경험", "긴박 경험", "촉수 경험", 
+	"수간 경험", "강간 경험"
+}
+
+;情報 14.일상 경험
+{
+#DIMS CONST LABEL_LIST14, 7 = 
+	"가사 경험", "촬영 경험", "피사 경험", "가창 경험", "전투 경험", 
+	"매춘 경험", "출산 경험"
+}
+
+;情報 15.전투 BASE
+{
+#DIMS CONST LABEL_LIST15, 8 = 
+	"승리 횟수", "경험치", "현재 HP", "최대 HP", "현재 SP", 
+	"최대 SP", "현재 BRE", "최대 BRE"
+}
+
+;情報 16.전투 ST
+{
+#DIMS CONST LABEL_LIST16, 13 = 
+	"SAN", "GUTS", "BRAVE", "ATK",  "DEF", 
+	"HIT", "SPD",  "LUK",   "부대", "수반", 
+	"후방" , "회수", "탐색"
+}
+
+;情報 17.탐색 ABL
+{
+#DIMS CONST LABEL_LIST17, 11 = 
+	"기능 점수", "目星", "아이디어", "엿듣기", "의료", 
+	"기계 수리", "컴퓨터", "자물쇠", "은신", "해체", 
+	"해독"
+}
+
+;情報 18.メイン무장
+{
+#DIMS CONST LABEL_LIST18, 10 = 
+	"주 종족", "주 숙련도", "주 DICE 갯수", "주 DICE 면", "주 BONUS", 
+	"부 종족", "부 숙련도", "副DICE数", "副DICE面", "副BONUS"
+}
+;情報 19.관리 정보
+{
+#DIMS CONST LABEL_LIST19, 14 = 
+	"ID",   "기밀",   "관리",   "친교", "공략",
+	"호감LV", "부대",   "시설",   "난이도", "공헌", 
+	"인기", "모랄", "카르마", "품성"
+}
+
+;情報 20.사회 정보
+{
+#DIMS CONST LABEL_LIST20, 10 = 
+	"ID",     "기밀",     "계급",     "출신",     "지위",
+	"직업",   "팬",   "소지금　", "수입　　", "지출　　"
+}
+
+
+TEMP_ID = FINDELEMENT(C_LIST_NAME, LIST_NAME, , , 1)
+SIF TEMP_ID <= 0
+	THROW 不正なLIST_NAME %LIST_NAME%
+
+VARSET LABEL_LIST
+TEMP_LIST '= @"LABEL_LIST%TOSTR(TEMP_ID, "D2")%"
+ARRAYCOPY TEMP_LIST, "LABEL_LIST"
+LABEL_SIZE = VARSIZE(TEMP_LIST)
+
+
+
+;-------------------------------------------------
+;リストパック定義関数
+;-------------------------------------------------
+;一連のリストをひとまとめにして扱うために作成
+;注意事項
+;・SCENE＝使用する場面ごとに表示項目を切り替えることを想定する
+;・当関数のLABEL_TYPEは@DIM_TABLE_LABEL_LIST側のC_LIST_NAMEと対応する
+;　しかし、C_LIST_NAMEは0をnoneとするのに対して
+;　LABEL_TYPEは0も使用していてそのままコピペでは使えない
+;　（当関数ではページ循環処理の都合、C_LIST_NAME側は変数名取得処理の都合）
+;・基本的にはLABEL_LISTの内容に準拠しているが
+;　"基礎情報"だけは例外、この表示項目はLIST_CHARA_STATUS_GROUPで個別に処理している
+@DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+#FUNCTION
+#DIMS SCENE
+#DIMS REF LIST_PACK ;戻り値用、リスト配列
+#DIM  REF PACK_SIZE ;
+#DIMS     TEMP_PACK ;LISTNAMEの一次取得用
+{
+#DIMS CONST C_PACK_ALL = "基礎情報", 
+	"교류 ST", 
+	"함락 ST", 
+	"성격  ST", 
+	"경제 ST", 
+	"신체 ST", 
+	"페로몬 ST", 
+	"성감각 ST", 
+	"성기능 ST", 
+	"성벽 ABL", 
+	"성행동 경험", 
+	"성교 경험", 
+	"조교 경험", 
+	"특수 쾌락 경험", 
+	"일상 경험", 
+	"전투 BASE", 
+	"전투 ST", 
+	"탐색 ABL", 
+	"무장", 
+}
+{
+#DIMS CONST C_PACK_DEFAULT = "基礎情報", 
+	"관리 정보", 
+	"사회 정보", 
+	"신체 ST", 
+	"페로몬 ST", 
+	"성감각 ST", 
+	"성기능 ST", 
+	"성벽 ABL", 
+	"성행동 경험", 
+	"성교 경험", 
+	"조교 경험", 
+	"특수 쾌락 경험", 
+	"일상 경험", 
+	"전투 BASE", 
+	"전투 ST", 
+	"탐색 ABL", 
+	"무장", 
+}
+
+{
+#DIMS CONST C_PACK_RPG = "基礎情報", 
+	"관리 정보", 
+	"신체 ST", 
+	"탐색 ABL", 
+	"무장", 
+	"전투 BASE", 
+	"전투 ST"
+}
+
+{
+#DIMS CONST C_PACK_MNG = "基礎情報", 
+	"관리 정보", 
+	"사회 정보", 
+	"신체 ST", 
+	"페로몬 ST", 
+	"탐색 ABL", 
+	"전투 ST", 
+	"무장"
+}
+
+
+VARSET TEMP_PACK
+VARSET LIST_PACK
+SELECTCASE SCENE
+CASE "ALL"
+	TEMP_PACK '= "C_PACK_ALL"
+CASE "CAFE", "DEFAULT"
+	TEMP_PACK '= "C_PACK_DEFAULT"
+{
+CASE "EXPLORER", "RPG", 
+	"RPG_武器強化", 
+	"RPG_技能成長", 
+	"RPG_強化剤投与", 
+	"RPG_超人薬投与", 
+	"RPG_随伴配置", 
+	"RPG_後方配置", 
+	"RPG_回収配置", 
+	"RPG_探索配置"
+}
+	TEMP_PACK '= "C_PACK_RPG"
+{
+CASE 
+	"MNG_登録_登録抹消", 
+	"MNG_입주_一号室", "MNG_입주_二号室", "MNG_입주_三号室", "MNG_입주_四号室", "MNG_입주_五号室", 
+	"MNG_입주_六号室", "MNG_입주_七号室", "MNG_입주_八号室", "MNG_입주_九号室", "MNG_입주_十号室", 
+	
+	"MNG_登録_레귤러", "MNG_登録_특별보호", "MNG_登録_名前変更", 
+	"MNG_転職_성직자", "MNG_転職_메이드", "MNG_転職_아이돌", "MNG_転職_사회인", "MNG_転職_局員", "MNG_転職_창녀", 
+	"MNG_配属_学園生徒", "MNG_配属_支援ボラ", "MNG_配属_ラブホ店員", "MNG_配属_カジノ店員", 
+	"MNG_特殊_外見変更", "MNG_特殊_治療設備", "MNG_特殊_품종개량", "MNG_特殊_신체강화", "MNG_特殊_차세대창조", 
+	"MNG_登録_교우제어", "MNG_登録_衣装変更"
+}
+	TEMP_PACK '= "C_PACK_MNG"
+
+CASEELSE
+	TEMP_PACK '= "C_PACK_DEFAULT"
+ENDSELECT
+ARRAYCOPY TEMP_PACK, "LIST_PACK"
+PACK_SIZE = VARSIZE(TEMP_PACK)
+
+
+
+;-------------------------------------------------
+;悩みプラン定義関数
+;-------------------------------------------------
+@DIM_TABLE_NAYAMI_PLAN(PLAN_NAME, SUC_PLUS)
+#FUNCTION
+#DIMS REF PLAN_NAME ;戻り値用、プラン名
+#DIM  REF SUC_PLUS  ;各プランの成功補正値
+{
+#DIMS CONST C_PLAN_NAME, 11 = "none", 
+	"자금 기부		", 
+	"법의 힘		", 
+	"치료　　　	", 
+	"조언			", 
+	"가게 소개		", 
+	"격려한다		", 
+	"가르친다		", 
+	"소문을 퍼뜨린다	", 
+	"정보 조작		", 
+	"힘을 다한다	"
+}
+{
+#DIM  CONST C_SUC_PLUS, 11 = 0, 
+	0, 
+	0, 
+	0, 
+	-10, 
+	-5, 
+	0, 
+	5, 
+	10, 
+	15, 
+	60
+}
+ARRAYCOPY "C_PLAN_NAME", "PLAN_NAME"
+ARRAYCOPY "C_SUC_PLUS", "SUC_PLUS"

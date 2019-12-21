@@ -1,0 +1,231 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:ABLUP_AUTO.ERB
+;	Facility	:ABLUP関連処理(自動処理)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ ABLUP_AUTO_MAIN			ABLUP:自動(主処理)
+;	・ ABLUP_AUTO_DATA			ABLUP:自動
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub ABLUP_AUTO_MAIN
+;=================================================
+;   ABLUP:自動(主処理)
+;-------------------------------------------------
+@ABLUP_AUTO_MAIN
+#DIM L_T
+#DIM L_HIT
+
+L_T=0
+L_HIT=0
+
+PRINTFORML ■ パラメータの上昇結果 ■
+;-----------------------------
+;- ABLUP実行
+;-----------------------------
+
+;-- 全キャラ処理(対象者)
+FOR L_T, 0, CHARANUM
+
+	;CHK
+	SIF !TCVAR:L_T:行動フラグ_ソース変動
+		CONTINUE
+
+	;自動上昇モードで分岐
+	SIF FLAG:自動上昇手動モード
+		CONTINUE
+
+	;- ABLUP:自動
+	CALL ABLUP_AUTO_DATA(L_T)
+	SIF RESULT
+		L_HIT = 1
+NEXT
+
+;CHK:HIT無し
+SIF !L_HIT
+	PRINTL (上昇者無し)
+
+PRINTL
+
+
+;=================================================
+;   sub ABLUP_AUTO_DATA
+;=================================================
+;   ABLUP:自動
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURN				結果(0:HIT無し 1:HIT有り)
+;-------------------------------------------------
+@ABLUP_AUTO_DATA(ARG)
+#DIM DYNAMIC L_CHK_UP , 100
+#DIM L_I
+#DIM L_J
+#DIM L_TMP
+#DIM L_HIT
+#DIM L_SYRPTN
+;- 負荷軽減用の処理に使用する変数(無くても良い)
+#DIM DYNAMIC L_CHK_END , 110
+#DIM L_CHK_END_ALL
+#DIM L_HIT_UP
+#DIM L_FIRST
+#DIM L_CNT
+#DIM L_COM
+VARSET L_CHK_END
+
+L_I=0
+L_J=0
+L_TMP=0
+L_HIT=0
+L_SYRPTN=0
+
+L_CHK_END=0
+L_HIT_UP=0
+L_CHK_END_ALL=0
+
+;-----------------------------
+;- ABLUP:ABL
+;-----------------------------
+VARSET L_CHK_UP, -1
+LOCALS=ABL
+
+;-- 
+FOR L_J, 0, FLAG:最大数_ABLLV
+
+	;- 全要素チェックフラグがONのまま(上昇無し)の場合、終了
+	SIF L_CHK_END_ALL
+		BREAK
+
+	;- 全要素チェックフラグ:ON
+	L_CHK_END_ALL = 1
+
+	;-- 全ABLをCHK
+	FOR L_I, 0, VARSIZE("ABL")
+
+		L_COM = L_I
+
+		;- 既に上昇無しの場合、読み飛ばす
+		SIF L_CHK_END:L_COM
+			CONTINUE
+
+		;- MAXは終了
+		IF ABL:ARG:L_I >= FLAG:最大数_ABLLV
+			ABL:ARG:L_I = FLAG:最大数_ABLLV
+			GOTO UP_END
+		ENDIF
+
+		;- 処理対象レベル以上のABLはスルー(※低レベルから順にチェックする)
+		IF L_J < ABL:ARG:L_I
+			;- 全要素チェックフラグ:OFF
+			L_CHK_END_ALL = 0
+			CONTINUE
+		ENDIF
+
+		;clear
+		VARSET L_HIT_UP
+
+		;- パターンを全処理
+		FOR L_SYRPTN,0,ABLUP_GET_SYRPTN_NUM()
+
+			;- CHK:ABLUP(詳細)
+			CALL CHK_ABLUP_DETAIL(ARG, L_COM, L_SYRPTN,LOCALS)
+
+			;- CHK:結果
+			SELECTCASE RESULT
+				;- OK
+				CASE 0
+					L_TMP = ABL:ARG:L_COM
+					;- ログ用に退避
+					SIF L_CHK_UP:L_COM < 0
+						L_CHK_UP:L_COM = L_TMP
+
+					;- 実行:ABLUP
+					CALL ABLUP_EXE(ARG,L_COM,L_SYRPTN,LOCALS)
+
+					L_HIT = 1
+					L_HIT_UP = 1
+
+					;- 全要素チェックフラグ:OFF
+					L_CHK_END_ALL = 0
+					BREAK
+
+			ENDSELECT
+		NEXT
+
+		$UP_END
+		;- そのABLが上昇無しかチェック
+		SIF !L_HIT_UP
+			L_CHK_END:L_COM = 1
+
+	NEXT
+NEXT
+
+L_FIRST=0
+L_CNT=0
+
+;-- 上昇ログ出力
+FOR L_I, 0, VARSIZE("ABL")
+
+	;- 0以上(HIT有り)なら出力
+	IF L_CHK_UP:L_I >= 0
+
+		IF 0
+			L_TMP = L_CHK_UP:L_I
+			PRINTFORML %ABLNAME:L_I,10,LEFT% LVUP({L_TMP}→{ABL:ARG:L_I}) (+{ABL:ARG:L_I - L_TMP}) (%CALLNAME:ARG%)
+		ELSE
+			IF !L_FIRST
+				L_FIRST=1
+				PRINTFORML 【%CALLNAME:ARG%】
+			ENDIF
+
+			SELECTCASE ABLNAME:L_I
+				CASE "快Ｃ", "快Ｖ", "快Ａ", "快Ｂ"
+					SETCOLOR COLOR("ピンク")
+				CASE "욕망"
+					SETCOLOR COLOR("ピンク")
+				CASE "친밀", "순종", "봉사정신", "성노예", "농락"
+					SETCOLOR COLOR("ピンク")
+			ENDSELECT
+
+			L_TMP = L_CHK_UP:L_I
+			PRINTFORM 　[%ABLNAME:L_I,10,LEFT% LVUP({L_TMP}→{ABL:ARG:L_I}) (+{ABL:ARG:L_I - L_TMP}) ]  
+			RESETCOLOR
+
+			L_CNT ++
+			IF !(L_CNT % 3)
+				PRINTL
+			ENDIF
+		ENDIF
+	ENDIF
+
+NEXT
+SIF !LINEISEMPTY()
+	PRINTL
+SIF L_FIRST
+	PRINTL
+
+RETURNFORM L_HIT
+
+

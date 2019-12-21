@@ -1,0 +1,514 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CHARA_SORT.ERB
+;	Facility	:キャラソート。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;	002		2017/02/28		morph					ソートアルゴリズムの追加（CHARA_SORT_CTRL/CHARA_SORT_APPLY/CHARA_SORT_LABEL_TYPE/CHARA_SORT_FIND_LABEL）
+;	003		2018/11/11		morph					キャラソート画面における全キャラ一括ソート処理を追加（AUTO_SORT_MAIN/CALC_SORT_STANDARD(CHARA)/CALC_SORT_JOB(CHARA)/CALC_SORT_MOTHER(CHARA)）
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ CHARA_SORT_MAIN					キャラソート画面(主処理)
+;	・ AUTO_SORT_MAIN					キャラソート画面における全キャラ一括ソート処理
+;	・ CALC_SORT_STANDARD(CHARA)		一括ソート用評価関数
+;	・ CALC_SORT_JOB(CHARA)				一括ソート用評価関数
+;	・ CALC_SORT_MOTHER(CHARA)			一括ソート用評価関数
+;
+;	アルゴリズムを使用した自動ソート処理（CHARA_SORT_MAINとは全く関係なくCHARA_SORT_CTRL～CHARA_SORT_FIND_LABELで動作する）
+;	・ CHARA_SORT_CTRL					キャラソート制御関数
+;	・ CHARA_SORT_APPLY					キャラソート実行関数
+;	・ CHARA_SORT_LABEL_TYPE			ラベル利用ソート内容取得F関数
+;	・ CHARA_SORT_FIND_LABEL			ソート用ラベル情報取得F関数
+;
+;===============================================================================
+
+;=================================================
+;   sub CHARA_SORT_MAIN
+;=================================================
+;   キャラソート画面(主処理)
+;-------------------------------------------------
+@CHARA_SORT_MAIN
+#DIM L_INPUT
+#DIM L_I
+#DIM L_TMP
+#DIM L_TGT
+#DIM L_PAGE
+#DIM L_CNT_CHARA
+#DIM L_CNT_PRINT_CHARA
+#DIM L_SELECT
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+
+L_INPUT=0
+L_I=0
+L_TMP=0
+L_TGT=0
+L_PAGE=0
+L_CNT_CHARA=0
+L_CNT_PRINT_CHARA=0
+L_SELECT=-1
+
+; キャラ総数
+L_CNT_CHARA = CHARANUM
+
+; キャラ表示数/P
+L_CNT_PRINT_CHARA = 15
+
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+$PRINT_LIST
+REDRAW 0
+
+;ライン表示:新ページ
+CALL C_LINE
+PRINTFORML ソートしたいキャラを選んでください　＜page.{L_PAGE}＞
+PRINTFORML 選択したキャラ同士の位置が入れ換わります。
+DRAWLINE
+
+L_I = 0
+WHILE 1
+
+	;SET:開始値
+	SIF L_I < (L_PAGE * L_CNT_PRINT_CHARA)
+		L_I = (L_PAGE * L_CNT_PRINT_CHARA)
+
+	;ページ範囲外
+	SIF L_I >= ( (L_PAGE + 1) * L_CNT_PRINT_CHARA)
+		BREAK
+
+	;- 最大キャラ数超過
+	IF L_I >= L_CNT_CHARA
+		;空行
+		PRINTL
+
+	ELSE
+		PRINTFORM [%TOSTR(L_I),3%] 
+		IF L_I == MASTER
+			SETCOLOR COLOR("水色")
+			PRINTFORM 【MASTER】
+			RESETCOLOR
+		ELSEIF L_I == L_SELECT
+			SETCOLOR COLOR("緑")
+			PRINTFORM 【SELECT】
+			RESETCOLOR
+		ELSE
+			PRINTFORM 　　　　　
+		ENDIF
+		;- 表示:ターゲット(詳細)
+		CALL INFO_TARGET_DETAIL(L_I, 1)
+		PRINTL
+	ENDIF
+
+	L_I += 1
+
+WEND
+
+
+PRINTL
+
+PRINTFORMLC \@(L_PAGE <= 0) ? %" " * 16% # [1007]前のページ\@
+PRINTLC [1000]戻る
+
+PRINTFORMLC \@(L_PAGE >= (L_CNT_CHARA / L_CNT_PRINT_CHARA) ) ? %" " * 16% # [1009]次のページ\@
+PRINTL 
+PRINTL [2000]一括ソート
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		REDRAW 1
+		RETURN 0
+	CASE 2000
+	;一括ソート
+		CALL AUTO_SORT_MAIN
+		;- VAR:リスト更新
+		CALL VAR_MAKE_LIST
+	;- キャラ
+	CASE 0 TO L_CNT_CHARA
+		;- 主人
+		IF L_INPUT == MASTER
+			;INPUTエラー対応
+			CALL C_INPUT_ERROR("主人はソート対象に設定出来ません")
+			GOTO INPUT_LOOP_1
+
+		;解除
+		ELSEIF L_SELECT ==L_INPUT
+;			DRAWLINE
+;			PRINTFORMW 選択を解除しました
+			L_SELECT = -1
+			GOTO PRINT_LIST
+
+		;未選択
+		ELSEIF L_SELECT == -1
+			L_SELECT = L_INPUT
+			GOTO PRINT_LIST
+
+		;選択済み
+		ELSE
+;			DRAWLINE
+;			PRINTFORMW %NAME:L_SELECT%と%NAME:L_INPUT%の位置を入れ替えました
+			SWAPCHARA L_INPUT, L_SELECT
+			L_SELECT = -1
+		ENDIF
+		;- VAR:リスト更新
+		CALL VAR_MAKE_LIST
+
+		GOTO PRINT_LIST
+	;前のページ
+	CASE 1007
+		IF L_PAGE > 0
+			L_PAGE -= 1
+			GOTO PRINT_LIST
+		ELSE
+			GOTO ERROR
+		ENDIF
+	;次のページ
+	CASE 1009
+		L_TMP = L_CNT_CHARA / L_CNT_PRINT_CHARA
+		IF L_PAGE < L_TMP
+			L_PAGE += 1
+			GOTO PRINT_LIST
+		ELSE
+			GOTO ERROR
+		ENDIF
+	;- その他
+	CASEELSE
+		$ERROR
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+RESTART
+
+
+
+;-------------------------------------------------
+;一括ソート関数
+;-------------------------------------------------
+;ちまちま手動でSWAPやるのが面倒だったので
+@AUTO_SORT_MAIN
+#DIM     PREV_TARGET
+#DIM     UNIQUE_ID
+#DIM     C_ID
+PREV_TARGET = FINDCHARA(CFLAG:調教対象フラグ, 1, 1)
+SIF PREV_TARGET >= 1
+	UNIQUE_ID = CFLAG:PREV_TARGET:個別番号
+CVARSET CFLAG, GETNUM(CFLAG, "ソート番号"), 0
+CFLAG:MASTER:ソート番号 = -1e14
+
+PRINTFORML 使用するソートの種類を選択してください
+PRINTFORML [9] - 加入順ソート
+PRINTFORML [8] - 適当ソート
+PRINTFORML [7] - 職業ソート
+PRINTFORML [6] - 母体ソート
+PRINTFORML 
+PRINTFORML [0] - やめる
+DO
+	INPUT
+	SELECTCASE RESULT
+	CASE 9
+		FOR C_ID, 0, CHARANUM
+			CFLAG:C_ID:ソート番号 = CFLAG:C_ID:個別番号
+		NEXT
+	CASE 8
+		;CVARSET CFLAG:MASTER:ソート番号
+		FOR C_ID, 1, CHARANUM
+			CFLAG:C_ID:ソート番号 = -CALC_SORT_STANDARD(C_ID)
+		NEXT
+	CASE 7
+		FOR C_ID, 1, CHARANUM
+			CFLAG:C_ID:ソート番号 = -CALC_SORT_JOB(C_ID)
+		NEXT
+	CASE 6
+		FOR C_ID, 1, CHARANUM
+			CFLAG:C_ID:ソート番号 = -CALC_SORT_MOTHER(C_ID)
+		NEXT
+	CASE 0
+		CVARSET CFLAG, GETNUM(CFLAG, "ソート番号")
+		RETURN
+	CASEELSE
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+SORTCHARA CFLAG:0:ソート番号
+CALLF CHANGE_TARGET_ARRAY()
+IF PREV_TARGET >= 1
+	CALL CHANGE_TARGET_SET(FINDCHARA(CFLAG:個別番号, UNIQUE_ID, 1))
+ELSE
+	CALL CHANGE_TARGET_CLEAR
+ENDIF
+CVARSET CFLAG, GETNUM(CFLAG, "ソート番号")
+
+
+
+;-------------------------------------------------
+;適当ソート用評価関数
+;-------------------------------------------------
+@CALC_SORT_STANDARD(CHARA)
+#FUNCTION
+#DIM CHARA
+#DIM DYNAMIC L_NPC      = 0;1桁：0～1
+#DIM DYNAMIC L_機密     = 0;1桁：0～9
+#DIM DYNAMIC L_管理指数 = 0;1桁：0～9
+#DIM DYNAMIC L_親交     = 0;2桁：0～39
+#DIM DYNAMIC L_合意     = 0;1桁：0～4
+#DIM DYNAMIC L_出自     = 0;3桁：0～612
+#DIM DYNAMIC L_職業     = 0;2桁：11～66
+#DIM DYNAMIC L_好感度   = 0;3桁：1～999
+#DIM DYNAMIC L_RESULT   = 0;最終評価値
+SIF TALENT:CHARA:NPC
+	L_NPC = 1
+L_機密     = INFO_STATUS_GET_BY_LABEL(CHARA, "機密")
+L_管理指数 = INFO_STATUS_GET_BY_LABEL(CHARA, "管理")
+L_親交     = INFO_STATUS_GET_BY_LABEL(CHARA, "親交")
+L_合意     = INFO_STATUS_GET_BY_LABEL(CHARA, "合意")
+L_出自     = INFO_STATUS_GET_BY_LABEL(CHARA, "出自")
+L_職業     = INFO_STATUS_GET_BY_LABEL(CHARA, "職業")
+L_好感度   = INFO_STATUS_GET_BY_LABEL(CHARA, "好LV")
+
+;1e3は1*10の3乗を表します
+{
+L_RESULT = 
+	L_好感度
+	 + L_職業 * 1e3
+	 + L_出自 * 1e5
+	 + L_合意 * 1e8
+	 + L_親交 * 1e9
+	 + L_管理指数 * 1e11
+	 + L_機密 * 1e12
+	 + L_NPC  * 1e13
+}
+RETURNF L_RESULT
+
+
+;-------------------------------------------------
+;ソート用種族評価関数
+;-------------------------------------------------
+;3桁の種族種別値を返す
+;100の位は素質依存でキャラの出自を表す
+;下2桁は普通の種族値
+@CALC_SORT_RACE(CHARA)
+#FUNCTION
+#DIM CHARA
+#DIM L_出自
+IF TALENT:CHARA:人権損壊 == 1
+	L_出自 = 5
+ELSEIF TALENT:CHARA:主人持ち == 1
+	L_出自 = 4
+ELSEIF TALENT:CHARA:元性奴隷 == 1
+	L_出自 = 3
+ELSEIF TALENT:CHARA:旧世代人 == 1
+	L_出自 = 2
+ELSEIF TALENT:CHARA:青き血族 == 1
+	L_出自 = 1
+ELSE
+	L_出自 = 0
+ENDIF
+RETURNF L_出自 * 100 + CFLAG:CHARA:住人_種族
+
+
+;-------------------------------------------------
+;ソート用職業評価関数
+;-------------------------------------------------
+;2桁の職業種別値を返す
+;下1桁にはTALENT:学生の情報を年齢層と解釈して記録してある
+;小学生が先頭に出る
+@CALC_SORT_JOB(CHARA)
+#FUNCTION
+#DIM CHARA
+RETURNF INFO_STATUS_GET_BY_LABEL(CHARA, "職業")
+
+
+
+;-------------------------------------------------
+;ソート用母体評価関数
+;-------------------------------------------------
+@CALC_SORT_MOTHER(CHARA)
+#FUNCTION
+#DIM CHARA
+#DIM DYNAMIC L_子宮   = 0;1桁：0～1
+#DIM DYNAMIC L_母体   = 0;3桁：0～198
+#DIM DYNAMIC L_世代   = 0;2桁：0～99
+#DIM DYNAMIC L_因子   = 0;2桁：0～20
+#DIM DYNAMIC L_能力   = 0;3桁：1～999
+#DIM DYNAMIC L_RESULT = 0;最終評価値
+L_子宮 = TALENT:CHARA:聖女の子宮
+L_母体 = CFLAG:CHARA:卵子レベル + CFLAG:CHARA:母体レベル
+L_世代 = LIMIT(CFLAG:CHARA:住人_世代, 1, 99)
+L_因子 = LIMIT(SUMARRAY(CFLAG:CHARA:0, 1800, 1820), 0, 20)
+L_能力 = SUMARRAY(CFLAG:CHARA:0, 1511, 1516)
+{
+L_能力 += 
+	CFLAG:CHARA:住人_最大体力
+	 + CFLAG:CHARA:住人_最大気力
+	 + CFLAG:CHARA:住人_最大BRE
+	 + CFLAG:CHARA:住人_SAN
+	 + CFLAG:CHARA:住人_GUTS
+	 + CFLAG:CHARA:住人_BRAVE
+}
+L_能力 = LIMIT(SQRT(MAX(1, L_能力)), 1, 999)
+;1e3は1*10の3乗を表します
+{
+L_RESULT = 
+	L_能力
+	+ L_因子 * 1e3
+	+ L_世代 * 1e5
+	+ L_母体 * 1e7
+	+ L_子宮 * 1e10
+}
+RETURNF L_RESULT
+
+
+
+;-------------------------------------------------
+;キャラソート制御関数
+;戻り値：SORTの成否
+;-------------------------------------------------
+;INPUT_STRをもとにCHARA_LIST配列のSORTを実行する
+;使用できるINPUT_STRの内容は
+;「LABEL_NAME」＋「昇順/降順」
+;例）"Ｃ感覚降順"
+;@DIM_TABLE_CVARで定義されていないLABEL_NAMEは使用できない点に注意
+;逆に言えば定義さえ追加しちゃえばSORT項目を柔軟に増やせる
+@CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIM  REF CHARA_LIST ;キャラリスト配列
+#DIM      CHARA_CNT  ;キャラリスト配列の要素数≒リスト上のキャラ数
+#DIMS     INPUT_STR  ;入力内容文字列
+#DIMS     VAR_NAME   ;参照するキャラ変数の種類、ABLなど
+#DIM      VAR_ID     ;参照するキャラ変数の要素
+#DIMS REF SORT_TYPE  ;SORT順
+#DIMS     SORT_OP    ;使用する比較演算子
+IF CHARA_SORT_LABEL_TYPE(INPUT_STR, VAR_NAME, VAR_ID, SORT_OP)
+	CALL CHARA_SORT_APPLY(CHARA_LIST, CHARA_CNT, VAR_NAME, VAR_ID, SORT_OP)
+	SORT_TYPE '= INPUT_STR
+	RETURN 1
+ELSE
+	DEBUGPRINTFORML CHARA_SORT_CTRL:不正なINPUT_STR %INPUT_STR%
+	RETURN 0
+ENDIF
+
+
+
+;-------------------------------------------------
+;キャラソート実行関数
+;-------------------------------------------------
+;アルゴリズムはノームソート
+;使用変数名と並び順を指定してCHARA_LIST配列のSORTを実行する
+;今までの処理がせいぜい100キャラ単位で処理数が多い場合の検証はやったことがないので
+;キャラ増えすぎると重くなるかもしれん
+;
+;まー、基本的にはCHARA_SORT_CTRLを介して使用するのがいいと思うよ
+;CALL CHARA_SORT_APPLY(CHARA_LIST, CHARA_CNT, "ABL", 0, ">=")
+;とかできないこともないが
+;CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, "Ｃ感覚降順", DUMMY)
+;とかのがわかりやすいっしょ
+;一応、LABEL定義しなくても使えるという強みはある
+@CHARA_SORT_APPLY(CHARA_LIST, CHARA_CNT, VAR_NAME, VAR_ID, SORT_OP)
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIM REF CHARA_LIST ;キャラリスト配列
+#DIM     CHARA_CNT  ;キャラリスト配列の要素数≒リスト上のキャラ数
+#DIMS    VAR_NAME   ;キャラ変数の名前、ABL:X:YのABL
+#DIM     VAR_ID     ;キャラ変数の要素、ABL:X:YのY
+#DIMS    SORT_OP    ;比較演算子
+;ソート実処理
+LOCAL:0 = 1
+WHILE LOCAL:0 < CHARA_CNT
+	SIF !(LOCAL:0)
+		LOCAL:0 ++
+	IF C_CHARA_COMPARE(VAR_NAME, VAR_ID, CHARA_LIST:(LOCAL:0 - 1), SORT_OP, CHARA_LIST:(LOCAL:0))
+		LOCAL:0 ++
+	ELSE
+		SWAP CHARA_LIST:(LOCAL:0 - 1), CHARA_LIST:(LOCAL:0)
+		LOCAL:0 --
+	ENDIF
+WEND
+
+
+
+;-------------------------------------------------
+;ラベル利用ソート内容取得関数
+;戻り値：SORTに適さない文字列を受け取った時0、それ以外ならINPUT_STRに応じたLABEL配列の要素
+;-------------------------------------------------
+;リスト表示の際の文字入力の内容に応じたVAR_NAME、VAR_ID、SORT_OPを取得する
+@CHARA_SORT_LABEL_TYPE(INPUT_STR, VAR_NAME, VAR_ID, SORT_OP)
+#FUNCTION
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIMS INPUT_STR     ;入力内容文字列
+#DIMS REF VAR_NAME  ;参照するキャラ変数の種類、ABLなど
+#DIM  REF VAR_ID    ;参照するキャラ変数の要素
+#DIMS REF SORT_OP   ;比較演算子
+#DIMS     TEMP_STR  ;一時文字列、末尾の降順/昇順だけ削除して渡す用
+TEMP_STR '= SUBSTRINGU(INPUT_STR, , STRLENSU(INPUT_STR) - 2)
+DEBUGPRINTFORML CHARA_SORT_LABEL_TYPE TEMP_STR%TEMP_STR%
+;SORT順取得
+IF STRCOUNT(INPUT_STR, "降順")
+	SORT_OP '= ">="
+ELSEIF STRCOUNT(INPUT_STR, "昇順")
+	SORT_OP '= "<="
+ELSE
+	RETURNF 0
+ENDIF
+RETURNF CHARA_SORT_FIND_LABEL(TEMP_STR, VAR_NAME, VAR_ID)
+
+
+
+;-------------------------------------------------
+;ソート用ラベル情報取得関数
+;戻り値：ARGSのLABEL配列上の位置（見つからなければ0）
+;-------------------------------------------------
+;LABEL_NAME候補、VAR_NAME用STR、VAR_ID用INTを渡すと
+;LABEL_NAMEを検索してそのLABEL_NAMEに一致する情報を返してくれる
+
+;LABEL_NAME     表記上の名前
+;LABEL_VAR_NAME 各要素のLABELが表すキャラ変数の名前、ABL:X:YのABL
+;LABEL_VAR_ID   各要素のLABELが表すキャラ変数の要素、ABL:X:YのY
+;LABEL_MAX      ラベルIDの最大値
+@CHARA_SORT_FIND_LABEL(ARGS, R_NAME, R_ID)
+#FUNCTION
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIMS REF R_NAME          ;戻り値となるキャラ変数の名前、要素0を直接書き換える
+#DIM  REF R_ID            ;戻り値となるキャラ変数の要素、要素0を直接書き換える
+#DIMS LABEL_NAME     ,200 ;情報保持用配列
+#DIMS LABEL_VAR_NAME ,200 ;情報保持用配列
+#DIM  LABEL_VAR_ID   ,200 ;情報保持用配列
+#DIM  LABEL_MAX           ;情報保持用配列
+#DIM  TEMP_ID             ;ARGSのLABEL配列上の位置
+SIF !LABEL_MAX
+	CALLF DIM_TABLE_CVAR(LABEL_NAME, LABEL_VAR_NAME, LABEL_VAR_ID, LABEL_MAX)
+R_NAME '= ""
+R_ID    = 0
+TEMP_ID = FINDELEMENT(LABEL_NAME, ARGS, , , 1)
+SIF !INRANGE(TEMP_ID, 1, LABEL_MAX)
+	RETURNF 0
+R_NAME '= LABEL_VAR_NAME:TEMP_ID
+R_ID    = LABEL_VAR_ID:TEMP_ID
+RETURNF TEMP_ID

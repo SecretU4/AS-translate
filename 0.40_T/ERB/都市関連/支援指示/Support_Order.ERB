@@ -1,0 +1,88 @@
+﻿
+;-------------------------------------------------
+; 支援指示
+;-------------------------------------------------
+@Support_Order(ARG:0,ARG:2)
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+ARG:2 = 101
+CALL C_PICTURE_NPC(ARG:2)
+PRINTFORML 조수쨩「헤헷、부르셨습니까 보스！」
+PRINTFORML 후배쨩「뭐든지 분부만 해주세요 선배」
+DRAWLINE
+PRINTFORML 
+PRINTFORM [1]   - 【고민 해결 서포트:
+IF FLAG:支援_悩み解決サポート == 1
+	PRINTFORML ○】(소비 SP4)
+ELSE
+	PRINTFORML ×】(소비 SP4)
+ENDIF
+PRINTFORM [2]   - 【체력 회복 서포트:
+IF FLAG:支援_체력回復サポート == 1
+	PRINTFORML ○】(소비 SP7)
+ELSE
+	PRINTFORML ×】(소비 SP7)
+ENDIF
+PRINTFORML 
+PRINTFORML [999] - 돌아온다
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 1
+	PRINTFORML 고민 해결 성공 판정에＋보정을 자동으로 부여한다。
+	PRINTFORML 한 사람씩 개별로 소비하며、부족한 경우엔 불발됩니다。
+	PRINTFORML ON OFF를 결정하세요。
+	PRINTFORML [1] ON
+	PRINTFORML [2] OFF
+	$INPUT_LOOP3
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 1
+		FLAG:支援_悩み解決サポート = 1
+	CASE 2
+		FLAG:支援_悩み解決サポート = 0
+	CASEELSE
+		GOTO INPUT_LOOP3
+	ENDSELECT
+	GOTO INPUT_LOOP2
+CASE 2
+	PRINTFORML AP 회복시＋보정을 자동으로 줍니다。
+	PRINTFORML 부족한 경우엔 불발됩니다。
+	PRINTFORML 
+	PRINTFORML [1] ON
+	PRINTFORML [2] OFF
+	$INPUT_LOOP4
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 1
+		FLAG:支援_체력回復サポート = 1
+	CASE 2
+		FLAG:支援_체력回復サポート = 0
+	CASEELSE
+		GOTO INPUT_LOOP4
+	ENDSELECT
+	GOTO INPUT_LOOP2
+CASE 3
+CASE 4
+CASE 5
+CASE 999
+PRINTFORML 조수쨩「알겠슴다앗！」
+PRINTFORMW 후배쨩「제대로 해낸다면、포상을 내려주세요…%UNICODE(0x2661)%」
+	RETURN
+CASEELSE
+	GOTO INPUT_LOOP2
+ENDSELECT
+
+
+
+
+
+
+
+

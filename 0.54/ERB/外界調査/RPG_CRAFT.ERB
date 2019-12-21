@@ -1,0 +1,260 @@
+;-------------------------------------------------
+;クラフト
+;-------------------------------------------------
+@RPG_CRAFT
+#DIM L_INPUT
+#DIM L_LOOP
+#DIM L_LOOP2
+#DIM I_S
+#DIM L_CL
+#DIM L_CV
+
+$INPUT_LOOP
+I_S = 0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML クラフト内容を選択して下さい。
+DRAWLINE
+PRINTFORML [0] 強化剤生成
+PRINTFORML [1] 超人薬生成
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [999] やめる
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	$INPUT_LOOP2
+	CLEARLINE LINECOUNT
+	DRAWLINE
+	PRINTFORML 生成する強化剤を選択して下さい。
+	DRAWLINE
+	;5個 10個 全素材投入の選択肢を追加
+	CALL RPG_CRAFT_PRINTITEM(0, "強化剤", "HP", 2800, "霊木", 2100)
+	CALL RPG_CRAFT_PRINTITEM(1, "強化剤", "SP", 2801, "霊石", 2101)
+	CALL RPG_CRAFT_PRINTITEM(2, "強化剤", "ATK", 2802, "霊水", 2102)
+	CALL RPG_CRAFT_PRINTITEM(3, "強化剤", "DEF", 2803, "機械", 2103)
+	CALL RPG_CRAFT_PRINTITEM(4, "強化剤", "HIT", 2804, "血液", 2104)
+	CALL RPG_CRAFT_PRINTITEM(5, "強化剤", "SPD", 2805, "心臓", 2105)
+	PRINTFORML [100] 全素材使用
+	PRINTFORML 
+	PRINTFORML [999] やめる
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+		GOTO INPUT_LOOP
+	CASE 100
+		PRINTFORML 所持している全ての素材から作れるだけの強化剤を生成します
+		PRINTFORML よろしいですか？
+		PRINTFORML [0] はい
+		PRINTFORML [1] いいえ
+		INPUT
+		L_INPUT = RESULT
+			SELECTCASE L_INPUT
+			CASE 0
+			;ループ用初期化処理
+				L_CL = 0
+				;元素材の個数を5で割った整数分強化剤を入手し、素材を消費
+				REPEAT 6
+					L_CV = Flag:(2100+L_CL) / 5
+					Flag:(2800+L_CL) += L_CV
+					Flag:(2100+L_CL) -= 5 * L_CV
+					SIF !L_CV && FLAG:STATUS伏字モード
+						SETCOLOR COLOR("伏字")
+					PRINTFORML %FLAGNAME:(2100+L_CL)%を{5 * L_CV , 3 , RIGHT}個消費して %FLAGNAME:(2800+L_CL)%を{L_CV , 3 , RIGHT}個生成しました。
+					RESETCOLOR
+					L_CL += 1
+				REND
+				PRINTW
+				GOTO INPUT_LOOP2
+			CASEELSE
+				GOTO INPUT_LOOP2
+			ENDSELECT
+	CASEELSE
+		;作成個数チェック
+		IF L_INPUT >= 20 && L_INPUT < 26
+			;10個生成用処理
+			IF Flag:(2080+L_INPUT) >= 50
+				Flag:(2080+L_INPUT) -= 50
+				Flag:(2780+L_INPUT) += 10
+				PRINTFORMW %FlagNAME:(2780+L_INPUT)%を10個生成しました。
+				GOTO INPUT_LOOP2
+			ELSE 
+				PRINTFORMW 素材が不足しています。
+			ENDIF
+		ELSEIF L_INPUT >= 10 && L_INPUT < 16
+			;5個生成用処理
+			IF Flag:(2090+L_INPUT) >= 25
+				Flag:(2090+L_INPUT) -= 25
+				Flag:(2790+L_INPUT) += 5
+				PRINTFORMW %FlagNAME:(2790+L_INPUT)%を5個生成しました。
+				GOTO INPUT_LOOP2
+			ELSE 
+				PRINTFORMW 素材が不足しています。
+			ENDIF
+		ELSEIF L_INPUT >= 0 && L_INPUT < 6
+			;1個生成用処理
+			IF Flag:(2100+L_INPUT) >= 5
+				Flag:(2100+L_INPUT) -= 5
+				Flag:(2800+L_INPUT) += 1
+				PRINTFORMW %FlagNAME:(2800+L_INPUT)%を生成しました。
+				GOTO INPUT_LOOP2
+			ELSE 
+				PRINTFORMW 素材が不足しています。
+			ENDIF
+		ELSE
+		GOTO INPUT_LOOP2
+		ENDIF
+	ENDSELECT
+	;ループ階層を一つ手前にしました
+	GOTO INPUT_LOOP2
+CASE 1
+	$INPUT_LOOP3
+	CLEARLINE LINECOUNT
+	DRAWLINE
+	PRINTFORML 生成する超人薬を選択して下さい。
+	DRAWLINE
+	;5個 10個 全素材投入の選択肢を追加
+	CALL RPG_CRAFT_PRINTITEM(0, "超人薬", "HP", 2810, "神木", 2110)
+	CALL RPG_CRAFT_PRINTITEM(1, "超人薬", "SP", 2811, "魔石", 2111)
+	CALL RPG_CRAFT_PRINTITEM(2, "超人薬", "ATK", 2812, "聖水", 2112)
+	CALL RPG_CRAFT_PRINTITEM(3, "超人薬", "DEF", 2813, "宝具", 2113)
+	CALL RPG_CRAFT_PRINTITEM(4, "超人薬", "HIT", 2814, "供物", 2114)
+	CALL RPG_CRAFT_PRINTITEM(5, "超人薬", "SPD", 2815, "魂魄", 2115)
+	PRINTFORML [100] 全素材使用
+	PRINTFORML 
+	PRINTFORML [999] やめる
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+		GOTO INPUT_LOOP
+	CASE 100
+		PRINTFORML 所持している全ての素材から作れるだけの超人薬を生成します
+		PRINTFORML よろしいですか？
+		PRINTFORML [0] はい
+		PRINTFORML [1] いいえ
+		INPUT
+		L_INPUT = RESULT
+			SELECTCASE L_INPUT
+			CASE 0
+			;ループ用初期化処理
+				L_CL = 0
+				;元素材の個数を5で割った整数分超人薬を入手し、素材を消費
+				REPEAT 6
+					L_CV = Flag:(2110+L_CL) / 5
+					Flag:(2810+L_CL) += L_CV
+					Flag:(2110+L_CL) -= 5 * L_CV
+					SIF !L_CV && FLAG:STATUS伏字モード
+						SETCOLOR COLOR("伏字")
+					PRINTFORML %FLAGNAME:(2110+L_CL)%を{5 * L_CV , 3 , RIGHT}個消費して %FLAGNAME:(2810+L_CL)%を{L_CV , 3 , RIGHT}個生成しました。
+					RESETCOLOR
+					L_CL += 1
+				REND
+				PRINTW
+				GOTO INPUT_LOOP3
+			CASEELSE
+				GOTO INPUT_LOOP3
+			ENDSELECT
+	CASEELSE
+		;作成個数チェック
+		IF L_INPUT >= 20 && L_INPUT < 26
+			;10個生成用処理
+			IF Flag:(2090+L_INPUT) >= 50
+				Flag:(2090+L_INPUT) -= 50
+				Flag:(2790+L_INPUT) += 10
+				PRINTFORMW %FlagNAME:(2790+L_INPUT)%を10個生成しました。
+				GOTO INPUT_LOOP3
+			ELSE 
+				PRINTFORMW 素材が不足しています。
+			ENDIF
+		ELSEIF L_INPUT >= 10 && L_INPUT < 16
+			;5個生成用処理
+			IF Flag:(2100+L_INPUT) >= 25
+				Flag:(2100+L_INPUT) -= 25
+				Flag:(2800+L_INPUT) += 5
+				PRINTFORMW %FlagNAME:(2800+L_INPUT)%を5個生成しました。
+				GOTO INPUT_LOOP3
+			ELSE 
+				PRINTFORMW 素材が不足しています。
+			ENDIF
+		ELSEIF L_INPUT >= 0 && L_INPUT < 6
+			;1個生成用処理
+			IF Flag:(2110+L_INPUT) >= 5
+				Flag:(2110+L_INPUT) -= 5
+				Flag:(2810+L_INPUT) += 1
+				PRINTFORMW %FlagNAME:(2810+L_INPUT)%を生成しました。
+				GOTO INPUT_LOOP3
+			ELSE 
+				PRINTFORMW 素材が不足しています。
+			ENDIF
+		ELSE
+		GOTO INPUT_LOOP3
+		ENDIF
+	ENDSELECT
+	;ループ階層を一つ手前にしました
+	GOTO INPUT_LOOP3
+CASE 999
+	JUMP RPG_MAIN
+CASEELSE
+ENDSELECT
+
+GOTO INPUT_LOOP
+
+@RPG_CRAFT_PRINTITEM(MENU_NUM, TYPE, SUBTYPE, CRAFT_FLAG_NUM, SRC_ITEM_NAME, SRC_FLAG_NUM)
+#DIM MENU_NUM
+#DIMS TYPE
+#DIMS SUBTYPE
+#DIM CRAFT_FLAG_NUM
+#DIMS SRC_ITEM_NAME
+#DIM SRC_FLAG_NUM
+
+SIF Flag:SRC_FLAG_NUM < 5 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{MENU_NUM}] %TYPE, 6 ,LEFT%(%SUBTYPE, 3 ,LEFT%) 
+RESETCOLOR
+SIF !Flag:CRAFT_FLAG_NUM && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM (所持数:{Flag:CRAFT_FLAG_NUM , 3 , RIGHT})
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 5 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM 　(%SRC_ITEM_NAME%×5消費)(所持数:{Flag:SRC_FLAG_NUM , 3 , RIGHT}) 
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 25 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{10+MENU_NUM}] x5 
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 50 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{20+MENU_NUM}] x10
+RESETCOLOR
+PRINTL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

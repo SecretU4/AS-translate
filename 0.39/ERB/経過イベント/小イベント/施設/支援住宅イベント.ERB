@@ -1,0 +1,45 @@
+;-------------------------------------------------
+;支援住宅イベント
+;-------------------------------------------------
+@TURN_EVENT_F_7
+#DIM L_K
+
+
+L_K = (RAND:3)+1
+
+
+DRAWLINE
+SETCOLOR 150,150,250
+PRINTFORML 【ボランティアイベント(施設):%CALLNAME%】
+PRINTFORML %CALLNAME%は他のメンバーと共にボランティアに参加している。
+PRINTFORML 支援を受ける人々に感謝され、%CALLNAME%の心も晴れやかになっていった…
+PRINTFORML  
+
+RESETCOLOR
+CALL TURN_EVENT_NNK
+IF CFLAG:住人_カルマ > 2
+	PRINTFORML %CALLNAME%のカルマが減少した。
+	PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ-L_K}
+ENDIF 
+
+CFLAG:住人_カルマ -= L_K
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

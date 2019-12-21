@@ -1,0 +1,96 @@
+;-------------------------------------------------
+;外界調査
+;-------------------------------------------------
+@RPG_MAIN
+#DIM L_INPUT
+#DIMS DYNAMIC OP_RELOAD     ;初回以外のページ更新とリスト更新を抑制する
+Flag:ターン進行深度 = 0
+Flag:ターン戦闘回数 = 0
+FLAG:ターン経験値 = 0
+Flag:調査イベント番号 = 0
+
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORM 【調査先:
+IF Flag:調査区域 == 90
+	PRINTFORM Lv{Flag:日替わり区画難易度}:ある区画】(最深部:{Flag:日替わり区画深度限界})
+ELSEIF Flag:調査区域 == 50
+	PRINTFORM LvXX:砂塵の都】
+ELSEIF Flag:調査区域 == 5
+	PRINTFORM Lv5:完全侵食区域[現代迷宮]】
+ELSEIF Flag:調査区域 == 4
+	PRINTFORM Lv4:狂気の廃都】
+ELSEIF Flag:調査区域 == 3
+	PRINTFORM Lv3:危険区域】
+ELSEIF Flag:調査区域 == 2
+	PRINTFORM Lv2:堕ちた都市】
+ELSEIF Flag:調査区域 == 1
+	PRINTFORM Lv1:無法区域】
+ELSE
+	PRINTFORM Lv0:都市境界線】
+ENDIF
+PRINTFORML (現在深度:{Flag:調査深度})
+DRAWLINE
+IF Flag:ターン調査済み == 1
+	PRINTFORML このターンは調査済みです 
+ELSEIF  Flag:都市_防衛 != 0
+	PRINTFORML 防衛戦時は調査出来ません
+ELSE
+	PRINTFORML [0] 調査開始
+ENDIF
+PRINTFORML [1] 調査区域選択
+PRINTFORML 
+PRINTFORML [5] 部隊配置
+PRINTFORM [2] 武装改良　　
+PRINTFORM [10] アーティファクト　　
+PRINTFORML [20] クラフト
+PRINTFORM [3] 技能強化　　
+PRINTFORML [21] アイテム使用
+PRINTFORML [4] アイテム確認
+PRINTFORML 
+PRINTFORML [999] やめる
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	CALL RPG_EXPLORER_SELECT
+CASE 1
+	CALL RPG_STAGESELECT
+CASE 2
+	CALL RPG_CHARA_SELECT("RPG_武器強化")
+CASE 3
+	CALL RPG_CHARA_SELECT("RPG_技能成長")
+CASE 4
+	CALL RPG_ITEM
+CASE 5
+	CALL RPG_CHARA_SELECT("RPG_随伴配置")
+CASE 10
+	CALL RPG_ARTIFACT
+CASE 20
+	CALL RPG_CRAFT
+CASE 21
+	CALL RPG_CHARA_SELECT("RPG_強化剤投与")
+CASE 999
+	CALL SYSTEM_MENU
+CASEELSE
+ENDSELECT
+
+GOTO INPUT_LOOP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

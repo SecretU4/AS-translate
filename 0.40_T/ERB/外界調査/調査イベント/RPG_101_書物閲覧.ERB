@@ -1,0 +1,89 @@
+﻿;-------------------------------------------------
+;書物閲覧
+;-------------------------------------------------
+@RPG_EVENT_101(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+#DIM L_G
+L_G = 20+RAND:((Flag:調査区域*(Flag:調査深度/3))+1)
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 101
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【조사 이벤트:서적 열람】
+PRINTFORML 
+PRINTFORML %CALLNAME:L_I%는 탐색 도중에 지금은 사용되지 않는 거점을 발견했다。
+PRINTFORML 이쪽의 데이터 베이스에 없는 것으로 보아、다른 진영의 것이라고 생각하면서 탐색을 시작했다。
+PRINTFORML 그러다 한권의 떨어진 수첩을 발견하고、흥미가 동한 %CALLNAME:L_I%는 즉시 펼쳐서 보기 시작했다。
+PRINTFORML 내용은 사적으로「외적」의 생체 특징을 기록한 것이며、다소 해독할 필요가 있었지만 참고가 되는 부분도 있었다。
+PRINTFORML 조사 중이었기 때문에 대충 읽었지만、앞으로의 경험에 활용할 수 있을 것 같다…
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML %CALLNAME:L_I%는 경험치가 {L_G} 올랐다。
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+
+
+CFlag:L_I:住人_経験値 += L_G
+
+
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

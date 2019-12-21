@@ -1,0 +1,357 @@
+
+
+@CITY_STORY_NAME
+#DIMS S_N
+
+IF FLAG:都市_ストーリー == 6
+	S_N = 店員ちゃん
+ELSEIF FLAG:都市_ストーリー == 5
+	S_N = 後輩ちゃん
+ELSEIF FLAG:都市_ストーリー == 4
+	S_N = 店長さん
+ELSEIF FLAG:都市_ストーリー == 3
+	S_N = 復習「外界」
+ELSEIF FLAG:都市_ストーリー == 2
+	S_N = 復習「都市の住人」
+ELSEIF FLAG:都市_ストーリー == 1
+	S_N = 復習「都市」
+ELSEIF FLAG:都市_ストーリー == 0
+	S_N = 復習「旧西暦と外敵」
+ENDIF
+
+PRINTFORM [120] - STORY【%S_N%】
+
+
+;-------------------------------------------------
+@CITY_STORY_0
+
+PRINTFORML ≪こんにちは「プレイヤー」復習の時間です、今日は「旧西暦と外敵」について話しましょう。≫
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML ≪この星には人間をはじめとした数多くの知的生命体が生息しています、この都市もその末裔たちにより運営・維持されていますね≫
+PRINTFORML ≪さらにその昔は国がいくつも形成されており、この星を隙間なく活用していました。≫
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML ≪しかし旧20西暦頃、突如宇宙から未知の生命体が襲来、見境なくこの星に生きる生命体たちを殺戮し始めました。≫
+PRINTFORML ≪対話不可能、行動原理不明、形状不可解、以上により我々はこれを共存できない存在として認識≫
+PRINTFORML ≪以後敵性存在を「外敵」と総称し、生存競争へと身を投じていったのです。≫
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML ≪この大いなる脅威に全ての種族が持てる力・技術を駆使して抵抗しましたが≫
+PRINTFORML ≪その圧倒的な戦力の前に空しく敗れ去りました、当時存在していた国々も例外なく滅亡です。≫
+PRINTFORML ≪一部例外はいますが生き残った僅かな人々は「外敵」の脅威から逃れるため、地下暮らしを余儀なくされました。≫
+PRINTFORML ≪彼らはこの都市が出来るまで…約1500年間耐え忍ぶ日々を送ったのです。≫
+PRINTFORMW 
+PRINTFORML ≪「外敵」には派閥や系統があるようで、原住民を地下に追いやった後は派閥同士で争い始めました≫
+PRINTFORML ≪当時から大した障害とも思われていまいようです、誠に遺憾です。≫
+PRINTFORML ≪ですが現在まで我々がこうして生きていられるのは、≫
+PRINTFORML ≪都市の防衛機能とは別にこの派閥争いに夢中であることも要因と言えるでしょうね≫
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML ≪さて、今日はこの辺りでお終いに致しましょう、お疲れさまでした「プレイヤー」。≫
+PRINTFORML ≪次回はまた後ほど改めて行います、これからもよい運営を期待していますよ。≫
+PRINTFORMW 
+
+;-------------------------------------------------
+@CITY_STORY_1
+
+PRINTFORML ≪こんにちは「プレイヤー」復習の時間です、今日は「都市」について話しましょう。≫
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML ≪地下暮らしを続けていた生き残り達、ただ「外敵」に怯え続ける毎日に転機が訪れました。≫
+PRINTFORML ≪地下深くに眠っていた遺跡…そこからアーティファクトが発掘されたのです。≫
+PRINTFORML ≪名を「シルバーキー」、限定的に時空を制御・操作できる禁断のアーティファクト。≫
+PRINTFORML ≪生き残り達はこれを核に、自らの生活圏を地上に作ることを決めたのです。≫
+PRINTFORMW 
+PRINTFORML ≪「シルバーキー」の領域内の時空間を安定させ、境界は深く長い霧が続く迷宮を作り侵入を防ぐ、≫
+PRINTFORML ≪ほんの一部は入ってきてしまいますが、比較的安全に地上で活動できるようになりました。≫
+PRINTFORML ≪次に生き残り達は残った技術を総動員して生活基盤を固めることを始めます、≫
+PRINTFORML ≪旧西暦を模倣した都市……この都市を作ったのです。≫
+PRINTFORMW 
+PRINTFORML ≪都市の雛型が完成した以降は、文明・種の継続、生活圏を広げていくことを目的に活動≫
+PRINTFORML ≪都市の制御には「シルバーキー」にインプットした学習機能付きAIを利用…そう私「シティ」のことです。≫
+PRINTFORML ≪そして私の代わりに運営を行うもの…あなた達「プレイヤー」によって都市の歴史が始まったのです。≫
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML ≪さて、今日はこの辺りでお終いに致しましょう、お疲れさまでした「プレイヤー」。≫
+PRINTFORML ≪次回はまた後ほど改めて行います、これからもよい運営を期待していますよ。≫
+PRINTFORMW 
+
+
+;-------------------------------------------------
+@CITY_STORY_2
+
+PRINTFORML ≪こんにちは「プレイヤー」復習の時間です、今日は「都市の住人」について話しましょう。≫
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML ≪当然ながら私とあなた達「プレイヤー」だけがいても都市は発展しません。≫
+PRINTFORML ≪そこで登場するのが旧世代の末裔たちである住人達です≫
+PRINTFORML ≪人間をはじめとした多くの種族たちで構成されており、皆生き残るために必死で都市を盛り立ててくれています。≫
+PRINTFORML ≪例外を除き、彼らは行動の自由と一般的な権利を持っており、その辺りは旧世代と大して差はありません。≫
+PRINTFORMW 
+PRINTFORML ≪ですが「シティ」と「プレイヤー」の指示や検閲には自由・権利は無視されます。≫
+PRINTFORML ≪精神空間…集合的無意識を制御することで彼らの記憶や行動はオンラインで把握でき、また認識や記憶の改ざんも可能です。≫
+PRINTFORML ≪あなた達はこれを駆使することで都市の発展の促進を行います、とても便利ですね。≫
+PRINTFORMW 
+PRINTFORML ≪そして都市に特殊な法があります、住人には育児の権利はありません、「プレイヤー」たるあなたも例外ではありません。≫
+PRINTFORML ≪出産についてはとくに制限はありませんが、「プレイヤー」との交配は最優先事項となっています≫
+PRINTFORML ≪あなた達はとても優秀な遺伝子を持っていますからね、都市の為に沢山子孫を増やして下さいね。≫
+PRINTFORML ≪その為に異性との性交渉も無制限です、相手に恋人や伴侶がいても問題ありません。≫
+PRINTFORML ≪逆に未成年でも同じことが言えます、都市の女性たちは生殖適性能力が高く、〇学生でも交尾可能ですよ。≫
+PRINTFORMW 
+PRINTFORML ≪何故ここまで出産・育児が広く推薦されているのかというと、「年間の死亡率」がとても高いのです。≫
+PRINTFORML ≪都市では比較的安全とは言え、「外敵」の被害がないわけではありません、調査に行く住人はさらに死亡率が高いです。≫
+PRINTFORML ≪なのでそれを埋めるために積極的な子作りが求められています。、≫
+PRINTFORML ≪……ところで今日はちゃんと子作りしましたか？、あら朝からお盛んですね素晴らしい！≫
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML ≪さて、今日はこの辺りでお終いに致しましょう、お疲れさまでした「プレイヤー」。≫
+PRINTFORML ≪次回はまた後ほど改めて行います、これからもよい運営を期待していますよ。≫
+PRINTFORMW 
+
+
+
+;-------------------------------------------------
+@CITY_STORY_3
+
+PRINTFORML ≪こんにちは「プレイヤー」復習の時間です、今日は「外界」について話しましょう。≫
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML ≪まず都市の境界線の向こうたる外界は時空間が不安定になっています。≫
+PRINTFORML ≪ある場所は旧世代のままであったり、ある場所は「外敵」の浸食を受けて巣窟と化していたりと様々です。≫
+PRINTFORML ≪なので私のサポートなしに外出してはいけませんよ？、二度と帰って来れなくなりますから≫
+PRINTFORMW 
+PRINTFORML ≪調査の際は私が「シルバーキー」を介して時空間を安定させ、調査区画を直に調べられる状態にさせます。≫
+PRINTFORML ≪ですが外界には当然「外敵」がいますので調査には実力に見合った区画を選びましょう。≫
+PRINTFORML ≪部隊の編成もしっかりしていくと強敵相手でも意外と対応できますよ≫
+PRINTFORML ≪一定間隔で中継地点も配置されていますので、見つけたら利用してみてください。≫
+PRINTFORML ≪更に外界には有力なアーティファクトが見つかることもあるので、余力がある際には探して見ては如何でしょうか。≫
+PRINTFORMW 
+PRINTFORML ≪それと外界には自由という名の無法を求めて都市から離れた集団…イレギュラーがいることもあります。≫
+PRINTFORML ≪気が触れてるのか味方であるはずの都市の住人達に敵対的です、とても嘆かわしいです。≫
+PRINTFORML ≪おまけに時として住人を攫い発情した猿のごとく強姦までする始末、非常に嘆かわしいです。≫
+PRINTFORML ≪調査で見かけたときは遠慮なく討伐して下さいね、彼らに与える慈悲などありません。≫
+PRINTFORMW 
+PRINTFORML ≪イレギュラーではなく何かしらの理由で外界にいる者もいます。≫
+PRINTFORML ≪もし出会えたのなら都市の移住を誘ってみてはどうでしょうか、珍しい種族と出会えるかもです≫
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML ≪さて、今日はこの辺りでお終いに致しましょう、お疲れさまでした「プレイヤー」。≫
+PRINTFORML ≪次回はまた後ほど改めて行います、これからもよい運営を期待していますよ。≫
+PRINTFORMW 
+
+
+
+;-------------------------------------------------
+@CITY_STORY_4
+
+PRINTFORML 店長さん「今から店を閉めるのだけど…このあと話に付き合ってくれるかしら？」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 十数分後…
+PRINTFORML 
+PRINTFORML 【奥の部屋】
+PRINTFORML 
+PRINTFORML 「…ふふっ、退屈そうに見えてあなたも大変なのね」
+PRINTFORML 「私？…私の方は「キャリア」としての仕事もあるけれど、都市をうろつくだけでいいから楽よ？」
+PRINTFORML 「因子をばら撒いて都市の住人の身体を弄るなんて物騒だけど……このご時世だと仕方ないのかもね…」
+PRINTFORMW 
+PRINTFORML 「あなたには本当に感謝しているの、…あの人が亡くなった時は自殺も考えてたもの」
+PRINTFORML 「それをあなたが親身になって私を支え続けてくれたから、あの悲しみから立ち直れたの」
+PRINTFORML 「まぁ…一時しのぎの依存先とはいえ、私をセックス漬けにしたことは、文句の一つや二つあるけれどね」
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 「だって……あなたとこうして話してると、身体が疼いてきちゃうんだもの…」
+PRINTFORML 「あなただってその気でしょ…？……「この部屋」で談話してる以上は…ね%UNICODE(0x2661)%」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 「んっ…%UNICODE(0x2661)%、こうしてゆったりとセックスするのも、悪くないわね…っ」
+PRINTFORML 「いいわぁっ…おっきなカリで膣をえぐるようにするピストン…最高よ%UNICODE(0x2661)%」
+PRINTFORML 「わかる？、コツンコツンって亀頭が奥に当たってるの……子宮がね……精子欲しがってるの…」
+PRINTFORML 「くす、もう習性になってるみたい……だってあなたのおちんちんの形を覚えちゃったから%UNICODE(0x2661)%」
+PRINTFORML 「ようは子宮あなたのことを、繁殖する相手だって認識してるってことね…」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 「えっ…「最近お誘いが多い」って…？、くすっ%UNICODE(0x2661)%…あの子の妹たちがそろそろ施設から出てくるみたいなの」
+PRINTFORML 「そうしたら喫茶店の経営も楽になるし…私も負担が減るでしょう？」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 「だから……もう一人増やそうかなって%UNICODE(0x2661)%」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 「あんっ%UNICODE(0x2661)%、急に激しくなって…っ……」
+PRINTFORML 「くす、こんなに腰振って…未亡人に種付けしたくなったのかしら？…いけない人…%UNICODE(0x2661)%」
+PRINTFORML 「ふふっ…、これが初めてじゃないでしょうに……くすくす%UNICODE(0x2661)%」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 「そう………「あの子」も下の子たちもあなたの精子で孕まされて産んだんだもの」
+PRINTFORML 「始めは傷心に漬け込むかのように半ば無理矢理に」
+PRINTFORML 「次はあの人に詫びつつも望んでしまい」
+PRINTFORML 「その次は愛を紡ぎながら子を孕んだ…」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 「私、弱い女だから…結局支えてくれる人が必要なの、その繋がりとして子供がもっと欲しいの」
+PRINTFORML 「……次の子も元気な子を産ませて、愛しいあなた」
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 次の朝…
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 「…ちゅる……んっ…あら起きたのね、おはよう……この子は朝からギンギンになってたけれど」
+PRINTFORML 「ふふ、好きでしょ朝パイフェラ、昔は毎日のようにしてあげたものね？」
+PRINTFORML 「さ、一回射精して気持ちよくお仕事してくださいね%UNICODE(0x2661)%」
+PRINTFORML …結局二人は激しく交わり、迎えに来た店員ちゃんに怒られた。
+PRINTFORMW 
+
+
+;-------------------------------------------------
+@CITY_STORY_5
+
+PRINTFORML 後輩ちゃん「あっ先輩おはようございます、今お仕事が一段落したところです」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 【%CALLNAME:MASTER%の家】
+PRINTFORML 
+PRINTFORML 「お食事ができましたよ、どうぞお召し上がりください…栄養たっぷりですよ♪」
+PRINTFORML 「美味しいですか……よかったぁ、今日のは味付けを変えてみたのでお口に合うか心配だったんです」
+PRINTFORML 「早速お代わりですね、はい沢山ありますからいっぱい食べて下さいね！」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 「お粗末様でした、…えっ「私の今日の仕事」…ですか？、大したものでもありませんでしたよ？」
+PRINTFORML 「不穏な態度を取っていた役人、スーパーで騒いでいたクレーマー、施設に落書きしていた児童…」
+PRINTFORML 「目に余るものだったので私の独断で「退去」して頂きました」
+PRINTFORML 「えへへ、褒めて下さるなんて…私は当然のことをしたまでです」
+PRINTFORML 「「シティ」様や「プレイヤー」である先輩方の運営に支障が出ないよう不安の芽を摘む…」
+PRINTFORML 「それが先輩の刃たる「エンフォーサー」の仕事ですから！」
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 「それでは私は仕事に戻りますので、先輩はごゆっくり……」
+PRINTFORML 「ふぇっ？…あ、あの急に引き寄せて何を…あっ%UNICODE(0x2661)%」
+PRINTFORML 「いつの間にこんなに大きく……私で興奮しているのですか…？……嬉しい」
+PRINTFORML 「はい、ご自由にお使い下さいませ……この身体は全て先輩のものです%UNICODE(0x2661)%」
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 「あっあっあぁっ%UNICODE(0x2661)%、後ろからされると支配されてるみたいで…っ%UNICODE(0x2661)%」
+PRINTFORML 「亜人だからでしょうかっ…原始的なこの姿勢だと…余計に興奮して…%UNICODE(0x2661)%」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 「射精く時は…が、我慢なさらずっ、子宮に子種沢山ぶちまけて下さいねっ%UNICODE(0x2661)%、その方が子宮も卵子も喜びますっ…ので%UNICODE(0x2661)%」
+PRINTFORML 「ふ…二人目もっ、頑張って産みますっ……だから遺伝子まぜまぜしてくださいっ%UNICODE(0x2661)%」
+PRINTFORML 「…っぁあっ…ぁああああぁあっ%UNICODE(0x2661)%」
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 【後輩の家・バスルーム】
+PRINTFORML 
+PRINTFORML (はぁ…っ%UNICODE(0x2661)%……今日は一杯愛されちゃったな…%UNICODE(0x2661)%)
+PRINTFORML (今この胎に入ってるんだよね…先輩の精液、先輩の精子、先輩の遺伝子………先輩先輩先輩……%UNICODE(0x2661)%)
+PRINTFORML 「はやく会いたいなぁ…二人の赤ちゃん…」
+PRINTFORML 幸せそうに下腹部をさする少女の瞳は光を宿さず、呟きはうわ言のように延々と続いた…
+PRINTFORMW 
+
+
+
+;-------------------------------------------------
+@CITY_STORY_6
+
+PRINTFORML 店員ちゃん「ご注文のサンドイッチです、……ところでお兄さん、今の商談だったんですか？」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 「いえ、ビジネス風のスーツ着てましたけども、わざわざ「あの部屋」行く必要もないんじゃ…」
+PRINTFORML 「…まぁ大体予想はつきますけどね、とっっても美人でしたからねー」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 「別にそれはいいんですけど、ウチの従業員にはあんまり手を出さないで下さいよ？」
+PRINTFORML 「一辺に身持ちになられると大変なんですから、最悪ワンオペになっちゃいますよ！」
+PRINTFORML 「お母さ……店長なら別に構いませんけどね、……幸せになってもらいたいですし？」
+PRINTFORMW 
+PRINTFORML 「というか私自身そろそろお相手見つけないと」
+PRINTFORML 「そも友達が彼氏ゲットしていく中、私だけ未だ処女とか……」
+PRINTFORML 「…うわーん、私そんなに魅力ないですかぁ…後輩ちゃんすらお兄さんと子供作ったみたいですし…」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 「店長とあれだけエッチしておいて娘の私はスルーですか！、まぁ確かに店長ほどスタイル良くないですけども！」
+PRINTFORML 「「血が繋がってる」わけでもなし、何か理由でもあるんですか？」
+PRINTFORML 「えっ秘密？、そんなー」
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 数十分後…
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 【街道】
+PRINTFORML 
+PRINTFORML ≪彼女は次世代創造の対象外でしたね、故に遺伝子上でも父母の遺伝子と合致するということです≫
+PRINTFORML ≪そして彼女の両親は喫茶店の店長と……おや検閲制限を掛けていますね≫
+PRINTFORML ≪私には無意味ですが……ここはあなたなりの優しさとして開示しないでおきましょうか≫
+PRINTFORML 
+PRINTFORMW 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

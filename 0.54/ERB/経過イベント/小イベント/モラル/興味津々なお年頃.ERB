@@ -1,0 +1,151 @@
+;-------------------------------------------------
+;興味津々なお年頃／学生限定イベント
+;
+;性への興味、雄への関心、性交願望がそれぞれ一定値以上で進行
+;-------------------------------------------------
+@TURN_EVENT_MORAL_OTSGR
+#DIMS M_NAME
+
+
+IF !RAND:3
+	M_NAME = 先輩
+ELSEIF !RAND:2
+	M_NAME = 後輩
+ELSE
+	M_NAME = 同級生
+ENDIF
+
+
+DRAWLINE
+SETCOLOR 100,250,50
+PRINTFORML 【興味津々なお年頃(モラル):%CALLNAME%】
+PRINTFORML %CALLNAME%は異性の%M_NAME%に呼びだされて空き教室へと来ていた。
+PRINTFORML %M_NAME%は異性の身体に興味があるらしく、お互いの身体を見せあおうと提案してくる。
+PRINTFORML %CALLNAME%も異性の肉体に興味があったので了承し、教室の扉を施錠すると服を一枚ずつ脱ぎ捨てていった…
+PRINTFORMW 
+;◆雄への関心が40以上の場合
+IF CFLAG:雄への関心 >= 40
+	PRINTFORML 異性の裸体を前にした%CALLNAME%の視線は%M_NAME%のペニスに固定されていた。
+	PRINTFORML 一糸纏わぬ%CALLNAME%の肉体に興奮したペニスは天井に向けてそそり立ち、力強く揺れている。
+	PRINTFORML 触ってみたい…そう思ったのは%CALLNAME%だけではなかったようだ。
+	;でかちち
+	IF TALENT:巨乳 || TALENT:爆乳
+		PRINTFORML %CALLNAME%がペニスに触れるとお返しとばかりに%M_NAME%は豊乳へと手を伸ばし、指が沈むほどに強く揉しだく。
+		PRINTFORML 少しばかり痛みを感じる乱暴な扱いに抗議の意味をこめてペニスを強く握り締めれば、今度は乳首に吸い付かれる。
+		PRINTFORML 母乳は出ないというのに執拗に乳首を吸われ続けた%CALLNAME%は一気に腰砕けになって押し倒された。
+	;ないちち
+	ELSEIF TALENT:貧乳 || TALENT:絶壁
+		PRINTFORML お互いの視線が絡み合い、どちらからともなくお互いの性器に触れる。
+		PRINTFORML 熱いペニスの感触に%CALLNAME%がうっとりと感じ入っていると、%M_NAME%は膣の浅い部分を責めたてはじめた。
+		PRINTFORML 技術的には拙いながらも暴力的な刺激の連続に%CALLNAME%は一気に腰砕けになって押し倒された。
+	;ふにゅー
+	ELSE
+		PRINTFORML 初めはお互いの性器を確かめるように軽く触れる程度だったのが、時間が経つにつれて揉んだり擦ったりといった
+		PRINTFORML 性的快感をもたらす触り方へと変化していく。
+		PRINTFORML ペニスだけ触られている%M_NAME%と違い、%CALLNAME%はクリトリスや胸なども同時に責められている。
+		PRINTFORML 複数の敏感なポイントを刺激された%CALLNAME%は一気に腰砕けになって押し倒された。
+	ENDIF
+	PRINTFORMW お互いの肌がぴたりと密着し、勃起した%M_NAME%のペニスが%CALLNAME%の腹を撫でる。
+	;◆性への興味が40以上の場合
+	IF CFLAG:性への興味 >= 40
+		PRINTFORML セックスする気はない%CALLNAME%だが、このまま放置するのもかわいそうに思えてきた。
+		PRINTFORML そこで%CALLNAME%が口で抜いてあげようかと申し出ると、%M_NAME%は一も二もなく頷いた。
+		;ファーストキスがペニスにならないための分岐
+		IF CSTR:初キス相手名 == ""
+			PRINTFORML まだファーストキスを済ましていなかった%CALLNAME%は%M_NAME%に口づけをする。
+			PRINTFORML 突然の行動に驚いている%M_NAME%に微笑んで誤魔化すと、%CALLNAME%は身体を半回転させてペニスを口に含んだ。
+			SIF CSTR:初キス相手名 == ""
+				CSTR:初キス相手名 = %M_NAME%
+			EXP:キス経験 += 1
+		ELSE
+			PRINTFORML 体勢を入れ替えるために身体を半回転させた%CALLNAME%は、目の前に来たペニスを口に含んだ。
+		ENDIF
+		PRINTFORML 初めてのフェラチオを経験した%M_NAME%はそれだけで射精してしまい、%CALLNAME%の口内に精液が撃ち出された。
+		PRINTFORML 精液の生臭さと苦味に咽た%CALLNAME%が床に精液を吐き出すと、%M_NAME%は口内に射精してしまったことを何度も謝罪する。
+		PRINTFORML 気にしないように%CALLNAME%は言うが、申し訳なさそうにしている%M_NAME%は何かを思いついたのか%CALLNAME%の股間に顔を埋めた。
+		PRINTFORML 突然の行動に%CALLNAME%が悲鳴を上げるより早く%M_NAME%はクンニし始める。
+		PRINTFORML これまでの触れ合いで十分に興奮していた%CALLNAME%の秘所は愛液の量を徐々に増やしていき、快感からヒクヒクと痙攣しだす。
+		PRINTFORML イキそうだから止めて欲しいと%CALLNAME%は懇願するが、射精させてもらったお礼だからと%M_NAME%は動きを止めない。
+		PRINTFORML わざとらしく水音を響かせながらヴァギナにむしゃぶりつき、興奮から勃起し皮から顔を覗かせたクリトリスを指先で弾く。
+		PRINTFORMW その強烈な快感に頭の中が真っ白になった%CALLNAME%は背を反らし、秘所から潮のアーチを描きながら派手にイキ散らかした。
+		
+		SIF CSTR:初フェラ相手名 ==""
+			CSTR:初フェラ相手名 = %M_NAME%
+		SIF CSTR:初絶頂相手名 ==""
+			CSTR:初絶頂相手名 = %M_NAME%
+		
+		EXP:フェラ経験 += 1
+		EXP:Ｃ経験 += 1
+		EXP:Ｖ経験 += 1
+		EXP:精液経験 += 1
+		EXP:奉仕快楽経験 += 1
+		;◆性交願望が40以上の場合
+		IF CFLAG:性交願望 >= 40
+			PRINTFORML 激しい絶頂の余韻に浸っていた%CALLNAME%の視界に%M_NAME%の勃起したペニスが映りこむ。
+			PRINTFORML 先ほど射精させてあげたというのにバキバキに勃起しているペニスを見て、好奇心が沸き起こる。
+			PRINTFORML 愛撫の絶頂ですらあれほど激しいものであったのだ。
+			PRINTFORML このペニスを受け入れ、赤ちゃんの部屋をノックされる快感はいかほどのものであろうか。
+			PRINTFORML %CALLNAME%は好奇心に誘われるままうつ伏せになると、何も言わずに腰を持ち上げて秘所を雄の前に晒した。
+			PRINTFORML その行動の意味を理解した%M_NAME%は本当にいいのかと尋ね、%CALLNAME%は無言のままお尻を振って雄を誘う。
+			PRINTFORML %CALLNAME%の腰を抱え込んで狙いを定めた%M_NAME%は、一息に秘所を刺し貫いた。
+			;処女の場合
+			IF TALENT:非処女 == 0
+				PRINTFORML ぶつりと処女膜が破れる痛みがしたかと思うと、膣壁をペニスが押し広げていく感触に%CALLNAME%は嬌声を上げる。
+				PRINTFORML 初めてだというのに快感に身悶えする%CALLNAME%を身体で抑え込んだ%M_NAME%はがむしゃらに腰を打ち付ける。
+				TALENT:非処女 = 1
+				TCVAR:履歴_EXP_処女喪失 = 1
+			;非処女の場合
+			ELSE
+				PRINTFORML 快感に身悶えする%CALLNAME%を身体で抑え込んだ%M_NAME%はがむしゃらに腰を打ち付ける。
+			ENDIF
+			PRINTFORML テクニックも何もない、若さ特有の獣欲に身を任せた荒々しい突き上げに晒された子宮が徐々に口を開き始める。
+			PRINTFORML 口を開けた子宮口が鈴口に吸い付くのを本能的に感じ取った%M_NAME%は、許可も取らずに子宮内へ精液を流し込んだ。
+			PRINTFORML %CALLNAME%は子宮口をイジメ抜かれた上に、不意に子宮内を襲った熱量で絶頂へと押し上げられた。
+			PRINTFORMW 
+			PRINTFORML 思わず最後まで致してしまった二人は照れながらも後片付けを終えた。
+			PRINTFORML %M_NAME%はこの関係を続けたいと願ったが、好奇心の満たされた%CALLNAME%は今回限りにしようと断った…
+			
+			SIF CSTR:初えっち相手名 == ""
+				CSTR:初えっち相手名 = %M_NAME%
+			SIF CSTR:初中出し相手名 ==""
+				CSTR:初中出し相手名 = %M_NAME%
+			
+			EXP:Ｖ経験 += 1
+			EXP:性交経験 += 1
+			EXP:精液経験 += 1
+			EXP:膣射経験 += 1
+		;性交願望が40未満の場合終わり
+		ELSE
+			PRINTFORML 激しい絶頂の余韻から回復した%CALLNAME%は視界に%M_NAME%の勃起したペニスが映りこみ我に返った。
+			PRINTFORML 正体を失ったままでいたら%M_NAME%に犯されていたかもしれない。
+			PRINTFORML そのことに思い至った%CALLNAME%は慌てて%M_NAME%を押しのけると、急いで服を着て教室を飛び出した…
+		ENDIF
+	;性への興味が40未満の場合終わり
+	ELSE
+		PRINTFORML 女体の柔らかさに%M_NAME%は夢中になっているようだったが、%CALLNAME%はこれ以上続ける気は起きなかった。
+		PRINTFORML %M_NAME%を押しのけて服を着込むと制止を振り切って教室を後にした…
+		
+		EXP:Ｂ経験 += 1
+		EXP:Ｃ経験 += 1
+		EXP:Ｖ経験 += 1
+		EXP:奉仕快楽経験 += 1
+	ENDIF
+;雄への関心が40未満の場合終わり
+ELSE
+	PRINTFORML 異性の裸体を前にした%CALLNAME%は興奮しきりの%M_NAME%とは違い、どこか冷めた様子で相手の肉体を観察していた。
+	PRINTFORML 画像や映像で見た異性の肉体はもっと雄の風格を漂わせ、雌を支配するのに足る威容を誇っているものが多かった。
+	PRINTFORML だが目の前の%M_NAME%はどうかと言うと、どこか幼さや未熟さを感じさせて気分が乗ってこない。
+	PRINTFORML %CALLNAME%は引き止める%M_NAME%を無視して服を着なおすと教室を後にした…
+ENDIF
+
+RESETCOLOR
+
+
+
+
+
+
+
+
+
+

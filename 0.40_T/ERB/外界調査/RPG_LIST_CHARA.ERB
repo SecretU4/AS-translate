@@ -1,0 +1,174 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:RPG_LIST_CHARA.ERB
+;	Facility	:リスト（キャラ）。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	002		2017/02/16		----					LIST_CHARA.ERBから外界調査時専用に分離
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ LIST_CHARA						LIST:キャラリスト
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub LIST_CHARA
+;=================================================
+;   LIST:キャラリスト
+;-------------------------------------------------
+; Input:
+;  ARGS:0				説明文
+;  ARG:0				ページ位置
+;  ARGS:1				再帰した際のエラーメッセージ
+; Output:
+;  RESULT:0				キャラ(1000の場合は"戻る")
+;  RESULT:1				ページ位置
+;-------------------------------------------------
+@RPG_LIST_CHARA(ARGS:0, ARG:0, ARGS:1)
+#DIM L_INPUT
+#DIM L_I
+#DIM L_PAGE
+#DIM L_CNT_DATA
+#DIM L_CNT_PRINT
+#DIM L_PREV
+#DIM L_NEXT
+#DIMS L_ERR_MSG
+#DIMS L_CMSG
+#DIM L_CFL
+;-----------------------------
+;- 初期処理
+;-----------------------------
+
+L_INPUT=0
+L_I=0
+L_PAGE=ARG:0
+L_CNT_DATA=0
+L_CNT_PRINT=0
+L_CMSG = %ARGS:0%
+L_CFL = 0
+
+; キャラ総数
+L_CNT_DATA = CHARANUM
+
+; キャラ表示数/P
+L_CNT_PRINT = FLAG:定数_キャラ表示数
+
+L_ERR_MSG = %ARGS:1%
+
+SIF !INRANGE(L_PAGE, 0, L_CNT_DATA / L_CNT_PRINT)
+	L_PAGE = 0
+
+;リスト小区分判別(現在強化剤用)
+SIF L_CMSG == "強化対象を선택하세요"
+	L_CFL = 1
+;リスト小区分判別(現在強化剤用)
+SIF L_CMSG == "초인약의 강화 대상을 선택하세요"
+	L_CFL = 2
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+$PRINT_LIST
+	
+
+	;ライン表示:新ページ
+	CALL C_LINE
+	;PRINTFORML RPG用キャラリスト出力
+	PRINTFORML %ARGS:0%　＜page.{L_PAGE}＞ (합 {L_CNT_DATA-1}명)
+	DRAWLINE
+
+	L_I = 0
+	WHILE 1
+
+		;SET:開始値
+		SIF L_I < (L_PAGE * L_CNT_PRINT) + 1
+			L_I = (L_PAGE * L_CNT_PRINT) + 1
+
+		;ページ範囲外
+		SIF L_I - 1 >= ( (L_PAGE + 1) * L_CNT_PRINT)
+			BREAK
+
+		;- 最大キャラ数超過
+		IF L_I >= L_CNT_DATA
+			;空行
+			PRINTL
+		;あなたは非表示
+		ELSEIF L_I == 0 && L_PAGE == 0
+
+		ELSE
+			PRINTFORM [%TOSTR(L_I),3%] 
+
+			;- 表示:ターゲット(詳細)
+			CALL RPG_INFO_TARGET_DETAIL(L_I,L_CFL)
+			PRINTL
+		ENDIF
+
+		L_I += 1
+
+	WEND
+	PRINTL
+
+	L_PREV = (L_PAGE <= 0) ? 0 # 1
+	L_NEXT = ( L_PAGE >= (L_CNT_DATA / L_CNT_PRINT) ) ? 0 # 1
+
+	PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]이전 페이지\@
+	PRINTFORMLC [1000] 돌아온다
+	PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]다음 페이지\@
+	PRINTL 
+	PRINTL 
+
+	SIF STRLENS(L_ERR_MSG)
+		REUSELASTLINE （%L_ERR_MSG%）
+
+	$INPUT_LOOP_1
+	INPUT
+	L_INPUT = RESULT
+	L_ERR_MSG=
+
+	;- 表示:ページ別
+	SELECTCASE L_INPUT
+		;- 終了
+		CASE 1000
+			RETURN 1000
+		;- キャラ
+		CASE 0 TO L_CNT_DATA -1
+			RESULT:1 = L_PAGE
+			RETURNFORM L_INPUT
+		;이전 페이지
+		CASE 1007
+			SIF !L_PREV
+				GOTO ERROR
+			L_PAGE -= 1
+		;다음 페이지
+		CASE 1009
+			SIF !L_NEXT
+				GOTO ERROR
+			L_PAGE += 1
+		;- その他
+		CASEELSE
+			$ERROR
+			;INPUTエラー対応
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP_1
+	ENDSELECT
+
+	GOTO PRINT_LIST
+

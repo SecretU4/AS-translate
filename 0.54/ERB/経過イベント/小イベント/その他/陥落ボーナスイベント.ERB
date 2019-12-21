@@ -1,0 +1,666 @@
+;-------------------------------------------------
+;陥落ボーナスイベント
+;
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS
+#DIM L_INPUT
+
+
+
+DRAWLINE
+IF TALENT:愛人
+	SETCOLOR 250,50,150
+	PRINTFORML 【陥落ボーナスイベント：華燭の典(愛人)】
+	RESETCOLOR
+	PRINTFORML %CALLNAME%を陥落させた%CALLNAME:MASTER%は特別な衣装を用意した。
+	IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+		;陥落対象に伴侶がいる場合
+		PRINTFORML 
+		PRINTFORML 伴侶を持ちながら%CALLNAME:MASTER%に心奪われてしまった%CALLNAME%は、その咎を象徴するかのような漆黒のウエディングドレスに
+		PRINTFORML 身を包んでカフェの奥の部屋へと現れた。
+		PRINTFORML 式場に多数の関係者を集めて行った伴侶との結婚式とは異なり、二人きりで立会人もいない。
+		PRINTFORML しかし、華燭の典に臨む%CALLNAME%の胸の高鳴りは当時を上回り、気恥ずかしさから%CALLNAME:MASTER%の顔を直視できないでいた。
+		PRINTFORMW そんな%CALLNAME%を抱き寄せた%CALLNAME%は、華燭の典を開始した…
+		PRINTFORML 
+		PRINTFORML 俯きがちな%CALLNAME%の頤を持ち上げて口付けを交わすと、%CALLNAME:MASTER%は舌を絡ませ唾液を流し込んでいく。
+		PRINTFORML 伴侶のものではない唾液を嬉々として啜った%CALLNAME%は、芳醇な酒でも口にしたかのようにうっとりとした表情で嚥下する。
+		PRINTFORML やがて口付けを終える頃にはすっかりと出来上がってしまった%CALLNAME%は崩れ落ちるように%CALLNAME:MASTER%の前に跪いた。
+		PRINTFORML 「今日、この日、この時より、%CALLNAME%は%CALLNAME:MASTER%に真の愛を捧げることを誓います%UNICODE(0x2661)%」
+		PRINTFORML もはや%CALLNAME:MASTER%からの愛を求めて行動することに一片の疑問も抱かなくなっていた%CALLNAME%は、かつて愛を誓い合ったはずの
+		PRINTFORMW 伴侶を裏切り、%CALLNAME:MASTER%の足の甲に口付けを落として背徳の誓いを結んだ…
+		PRINTFORML 
+	ELSE
+		;陥落対象に伴侶がいない場合
+		PRINTFORML 
+		PRINTFORML 純白のウエディングドレスに身を包んで登場した%CALLNAME%は頬を高潮させ、潤んだ瞳で%CALLNAME:MASTER%を見つめている。
+		PRINTFORMW カフェの奥の部屋で二人きり。立会人もいない華燭の典はしめやかに行われようとしていた…
+		PRINTFORML 
+		PRINTFORML 抱き寄せた%CALLNAME:MASTER%に引き寄せられるまま、%CALLNAME%はその腕の中に納まると口付けを交わす。
+		PRINTFORML %CALLNAME%は差し込まれた%CALLNAME:MASTER%の舌を嬉しそうに出迎え、流し込まれた唾液を躊躇いなく嚥下していく。
+		PRINTFORML 甘い吐息を零しながら口付けを終えた%CALLNAME%は、ゆっくりとその場にしゃがみ込んだ。
+		PRINTFORML 「今日、この日、この時より、%CALLNAME%は%CALLNAME:MASTER%を終世愛することを誓います%UNICODE(0x2661)%」
+		PRINTFORMW 両手を組んで祈るように頭を垂れた%CALLNAME%は%CALLNAME:MASTER%の足の甲に誓いの口付けを落とした…
+		PRINTFORML 
+	ENDIF
+ELSEIF TALENT:心酔
+	SETCOLOR 250,50,150
+	PRINTFORML 【陥落ボーナスイベント：華燭の典(心酔)】
+	RESETCOLOR
+	PRINTFORML %CALLNAME%を陥落させた%CALLNAME:MASTER%は特別な衣装を用意した。
+	IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+		;陥落対象に伴侶がいる場合
+		PRINTFORML 
+		PRINTFORML 伴侶がいながら新たな主に心奪われてしまった%CALLNAME%は、その咎を象徴するかのような漆黒のウエディングドレスに身を包んで登場した。
+		PRINTFORML ドレスは胸元と背中が大きく開かれ、スカートのスリットが深いセクシーなデザインのため肌の露出が多い。
+		PRINTFORML 既婚者ならば慎みを持ち、伴侶以外の人物に対してみだりにその肌を晒すことは避けるべきなのだろうが、%CALLNAME:MASTER%のお願いなのだ。
+		PRINTFORMW 背徳感に胸を高鳴らせた%CALLNAME%が%CALLNAME:MASTER%の正面に立ち、カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まった…
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は%CALLNAME:MASTER%の口づけに積極的に応じ、差し込まれた舌を丁重に出迎えた。
+		PRINTFORML 伴侶にもしたことのない濃厚なディープキスは%CALLNAME:MASTER%のお眼鏡に適ったらしく、ご褒美として唾液が流し込まれてくる。
+		PRINTFORML それを嬉々として飲み込んだ%CALLNAME%は忠誠の証を示すため、その場に跪くと肉棒を取り出した。
+		SIF TALENT:ＮＴＬ
+			PRINTFORML 夫の粗チンとは違う、人妻をダメにする凶悪で愛らしい肉棒にそっと口づけをしてから%CALLNAME%はフェラチオを開始する。
+		SIF TALENT:百合摘み
+			PRINTFORML 雌は雄に支配されるための存在であることを思い出させてくれた凶悪で愛らしい肉棒を口に咥え、%CALLNAME%はフェラチオを開始する。
+		PRINTFORML 儀式のために勃たせるだけだというのに、つい熱心に奉仕をしてしまった%CALLNAME%を%CALLNAME:MASTER%がそこまでだと止めた。
+		PRINTFORML 主の命令で目的を思い出した%CALLNAME%がフェラチオを中断して正面に顔を向けると、その頬に硬くなった肉棒がぴたりと押し当てられた。
+		PRINTFORML 「%CALLNAME%の身も心も、すべて真の主である%CALLNAME:MASTER%様に捧げます。これよりは自由にお使いください」
+		SIF TALENT:ＮＴＬ
+			PRINTFORML 雌がより強き、より頼りになる雄を求めるのは自然の摂理であり、誓いの口上を述べることになんの躊躇いもなかった。
+		SIF TALENT:百合摘み
+			PRINTFORML 雌同士では精神的にも肉体的にも足りない部分を埋めてくれる雄への服従を誓うことに、なんの躊躇いもない。
+		PRINTFORML %CALLNAME:MASTER%は%CALLNAME%の左右の頬に三度肉棒を押し当ててから亀頭の先端に背徳の誓いの口づけをさせる。
+		PRINTFORMW 人妻が伴侶ではない新たな主を得た瞬間であった…
+		PRINTFORML 
+	ELSE
+		;陥落対象に伴侶がいない場合
+		PRINTFORML 
+		PRINTFORML %CALLNAME%の着る純白のウエディングドレスは胸元と背中が大きく開かれ、スカートのスリットが深いセクシーなデザインであった。
+		PRINTFORML それを恥らうことなく着用して現れた%CALLNAME%の忠誠心に満足した%CALLNAME:MASTER%は、%CALLNAME%を抱き寄せる。
+		PRINTFORMW カフェの奥の部屋で二人きり、立会人もいない華燭の典がしめやかに行われようとしていた…
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は口付けを交わすと、%CALLNAME:MASTER%の唇を割るように舌を差し込んで舌同士を絡みつかせる。
+		PRINTFORML 積極的に奉仕しようとする%CALLNAME%だが、今回の目的は性奉仕を受けることではない。
+		PRINTFORML %CALLNAME%の尻を叩いて目的を思い出させた%CALLNAME:MASTER%は、その場に跪かせると肉棒を取り出した。
+		PRINTFORML まだ勃起していない肉棒を%CALLNAME%にフェラチオさせて起たせると、その頬にぴたりと当てる。
+		PRINTFORML 「%CALLNAME%の身も心も、すべて%CALLNAME:MASTER%様のものです。これよりは自由にお使いください」
+		PRINTFORMW %CALLNAME%が口上を述べると、%CALLNAME:MASTER%は左右の頬に三度肉棒を押し当ててから亀頭の先端に誓いの口付けをさせた…
+		PRINTFORML 
+	ENDIF
+ELSEIF TALENT:情婦
+	SETCOLOR 250,50,150
+	PRINTFORML 【陥落ボーナスイベント：華燭の典(情婦)】
+	RESETCOLOR
+	PRINTFORML %CALLNAME%を陥落させた%CALLNAME:MASTER%は特別な衣装を用意した。
+	IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+		;陥落対象に伴侶がいる場合
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%の与える快楽に逆らえなくなった%CALLNAME%は、伴侶への義理立ても忘れて漆黒のオープンブラとオープンＴバックに
+		PRINTFORML ガーターベルトという淫靡な下着姿でカフェの奥にある部屋へとやってきた。
+		PRINTFORML %CALLNAME%が歩くたびにレースのチョーカーと手錠を繋ぐ鎖が揺れ、チャリチャリと金属音を奏でる。
+		PRINTFORML その音色を聞きながら、%CALLNAME%は自身が伴侶ではない別の雄によって完全に支配されたことを再確認し恍惚としていた。
+		PRINTFORML もはや伴侶のことなど頭に無い%CALLNAME%を%CALLNAME:MASTER%は傍らに抱き寄せる。
+		PRINTFORMW %CALLNAME%の伴侶が知らぬ間に、カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まろうとしていた…
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%の前で跪いた%CALLNAME%は肉棒を取り出してフェラチオを開始すると、準備のため自身の秘所も指で刺激し始める。
+		PRINTFORML 伴侶ではなく%CALLNAME:MASTER%によって開発された性感帯を的確に刺激すれば、膣はとろとろと愛液をこぼし始める。
+		PRINTFORML 性的刺激により充血した小陰唇がぱっくりと口を開けたのが確認できた頃には、%CALLNAME:MASTER%の肉棒も屹立していた。
+		PRINTFORML 準備を終えて立ち上がった%CALLNAME%が%CALLNAME:MASTER%に抱き着くと、口を開け閉めして肉棒を待ち焦がれている膣口をその先端へと押し付ける。
+		PRINTFORML 亀頭に圧迫された粘膜がぬちゃりと音を立て、腰が砕けそうな快感が下半身から登ってくるが挿入はしない。
+		PRINTFORML 挿入してしまっては儀式は失敗とみなされるので、%CALLNAME%は必死に我慢して亀頭と膣の口づけだけで済ませる。
+		PRINTFORML 「今日からは%CALLNAME:MASTER%様専用の性欲処理用雌豚です。これからはいつでも%CALLNAME%に性欲処理をお申し付けくださいね」
+		PRINTFORMW そうして背徳の誓いを述べた%CALLNAME%は本能に逆らって亀頭と膣の口づけを終えると、その場に土下座して%CALLNAME:MASTER%の足の甲へと口づけをした…
+		PRINTFORML 
+	ELSE
+		;陥落対象に伴侶がいない場合
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は純白のオープンブラとオープンＴバックにガーターベルトという淫靡な下着姿で登場した。
+		PRINTFORML またレースのチョーカーからは銀色の鎖が伸び、途中で枝分かれした鎖はそれぞれ両手首のレースの手錠と繋がっている。
+		PRINTFORML もはや%CALLNAME:MASTER%に対して隠すものは何一つ無い%CALLNAME%は雌としての本性を曝け出し、胸元の鎖を強く引かれると黙って
+		PRINTFORML 自らを支配している雄の傍らに身を寄せた。
+		PRINTFORMW カフェの奥の部屋で二人きり、立会人もいない華燭の典が始まった…
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%の前にしゃがみ込んだ%CALLNAME%は自慰フェラチオを行い儀式の準備を始める。
+		PRINTFORML %CALLNAME:MASTER%によって仕込まれたテクニックに、開発された性感帯によって準備はあっけないほどすぐに終わった。
+		PRINTFORML しな垂れかかるように%CALLNAME:MASTER%に抱き着いた%CALLNAME%は、勃起した肉棒を膣へと誘導して宛がう。
+		PRINTFORML 普段の交尾ならばこのまま挿入してしまうのだが、今日は誓いの儀式のために亀頭と膣の口づけだけで済ます必要があった。
+		PRINTFORML %CALLNAME:MASTER%の手によって淫乱な雌へと変貌させられた%CALLNAME%にとっては不満の残る行為であるが、儀式なのだから仕方がない。
+		PRINTFORML ぬちゃぬちゃとわざとらしく音を立てながら亀頭と膣の口づけをたっぷりと味わった%CALLNAME%は、%CALLNAME:MASTER%の耳元で囁く。
+		PRINTFORML 「今日からは%CALLNAME:MASTER%様のモノです。これからはいつでも%CALLNAME%で性欲処理してくださいね」
+		PRINTFORMW 誓いを述べてそっと体を離した%CALLNAME%は、その場に土下座して%CALLNAME:MASTER%の足の甲へと口づけをした…
+		PRINTFORML 
+	ENDIF
+ENDIF
+
+
+SIF TALENT:愛人
+	PRINTFORML 儀式を終えた%CALLNAME%は愛情に満ちた目で%CALLNAME:MASTER%を見つめている。
+SIF TALENT:心酔
+	PRINTFORML 儀式を終えた%CALLNAME%は%CALLNAME:MASTER%からの命令を静かに待っている。
+SIF TALENT:情婦
+	PRINTFORML 儀式を終えた%CALLNAME%は見せつけるように自慰を始めて%CALLNAME:MASTER%を誘っている。
+
+PRINTFORML 今回は言わば初夜ということになるが…
+PRINTFORML 
+SETCOLOR 250,50,50
+PRINTFORML （陥落ボーナス！　華燭の典のボーナスは１キャラにつき１度だけです）
+RESETCOLOR
+
+$INPUT_LOOP
+PRINTFORML 
+PRINTFORM %CALLNAME%の状態：
+IF TALENT:受精
+	PRINTFORML 受精済み
+ELSEIF TALENT:妊娠
+	PRINTFORML 妊娠中
+ELSE
+	PRINTFORML 空胎（種付け可能）
+ENDIF
+PRINTFORM Ｖ感度：
+IF TALENT:Ｖ敏感
+	PRINTFORM 敏感
+ELSEIF TALENT:Ｖ鈍感
+	PRINTFORM 鈍感
+ELSE
+	PRINTFORM 普通
+ENDIF
+
+PRINTFORM 　／　Ａ感度：
+IF TALENT:Ａ敏感
+	PRINTFORM 敏感
+ELSEIF TALENT:Ａ鈍感
+	PRINTFORM 鈍感
+ELSE
+	PRINTFORM 普通
+ENDIF
+
+PRINTFORM 　／　Ｂ感度：
+IF TALENT:Ｂ敏感
+	PRINTFORM 敏感
+ELSEIF TALENT:Ｂ鈍感
+	PRINTFORM 鈍感
+ELSE
+	PRINTFORM 普通
+ENDIF
+
+PRINTFORM 　／　Ｃ感度：
+IF TALENT:Ｃ敏感
+	PRINTFORML 敏感
+ELSEIF TALENT:Ｃ鈍感
+	PRINTFORML 鈍感
+ELSE
+	PRINTFORML 普通
+ENDIF
+PRINTFORML 
+PRINTFORML [1] - 【種付けする】(必ず受精し経験値を獲得します)
+PRINTFORML [2] - 【無自覚の素質強化】(ランダムで１つだけ強化します)
+PRINTFORML [3] - 【肉体強化】(RPGステータスを肉体的に強化します)
+PRINTFORML [4] - 【精神強化】(RPGステータスを精神的に強化します)
+PRINTFORM [10] - 【Ｖ感度を上げる】　
+PRINTFORM [11] - 【Ａ感度を上げる】　
+PRINTFORM [12] - 【Ｂ感度を上げる】　
+PRINTFORML [13] - 【Ｃ感度を上げる】
+PRINTFORML [999] - 【何もしない】(ボーナス獲得の権利を放棄。利点なし)
+PRINTFORML 
+
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 1	;種付けする
+	IF (TALENT:受精 || TALENT:妊娠)
+		PRINTFORMW ≪……きこえますか…「プレイヤー」よ……今…あなたの…心に…直接… 呼びかけています…≫
+		PRINTFORMW ≪…その女性は…すでに…妊娠中です……他の…女性に…種付けするのです……≫
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_SEX
+	ENDIF
+CASE 2	;無自覚の素質強化
+	CALL TURN_EVENT_FALL_BONUS_TAL
+CASE 3	;肉体強化
+	CALL TURN_EVENT_FALL_BONUS_POW
+CASE 4	;精神強化
+	CALL TURN_EVENT_FALL_BONUS_MIN
+CASE 10	;Ｖ感度を強化
+	IF TALENT:Ｖ敏感
+		PRINTFORMW すでに%CALLNAME%のＶ感度は敏感でこれ以上は上がりそうにない。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROV
+	ENDIF
+CASE 11	;Ａ感度を強化
+	IF TALENT:Ａ敏感
+		PRINTFORMW すでに%CALLNAME%のＡ感度は敏感でこれ以上は上がりそうにない。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROA
+	ENDIF
+CASE 12	;Ｂ感度を強化
+	IF TALENT:Ｂ敏感
+		PRINTFORMW すでに%CALLNAME%のＢ感度は敏感でこれ以上は上がりそうにない。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROB
+	ENDIF
+CASE 13	;Ｃ感度を強化
+	IF TALENT:Ｃ敏感
+		PRINTFORMW すでに%CALLNAME%のＣ感度は敏感でこれ以上は上がりそうにない。
+		GOTO INPUT_LOOP
+	ELSE
+		CALL TURN_EVENT_FALL_BONUS_EROC
+	ENDIF
+CASE 999	;何もしない
+	PRINTFORML …
+	PRINTFORML ……
+	PRINTFORML 今日はもう遅い。
+	PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%を普段着に着替えなおさせると家の傍まで送ってやった…
+	;１回限りのイベントなので次回以降は発生しないフラグON
+	CFLAG:華燭の典 = 1
+	RETURN
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+;１回限りのイベントなので次回以降は発生しないフラグON
+CFLAG:華燭の典 = 1
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　種付けする
+;必ず受精し経験値を獲得します
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_SEX
+
+
+PRINTFORML 種付けを行うことにした%CALLNAME:MASTER%は%CALLNAME%に排卵誘発剤を飲ませると、自身も精力増強剤を服用した。
+PRINTFORML …
+PRINTFORML ……
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+PRINTFORML 
+;対象が処女の場合
+IF !TALENT:非処女
+	IF TALENT:愛人
+		PRINTFORML 『結婚式を経て初夜に処女を捧げて子を孕む』
+		PRINTFORML 今回は結婚式を模した儀式だが、かつて夢見た光景が現実のものとなっていることに%CALLNAME%は胸を高鳴らせていた。
+		IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+			PRINTFORML しかも相手が偽りの愛を誓わされた伴侶ではなく、真の番である%CALLNAME:MASTER%に処女を捧げるのだからなおさらである。
+		ELSE
+			PRINTFORML しかも相手は最愛の%CALLNAME:MASTER%であり、もはやこれ以上の幸せはないだろう。
+		ENDIF
+		PRINTFORMW 優しくベッドへと導かれた%CALLNAME%は%CALLNAME:MASTER%の種を何度もその身に受け入れ、しっかりと子どもを宿した…
+	ELSEIF TALENT:心酔
+		PRINTFORML 今まで一度も使われることのなかった処女膣を使うということで、%CALLNAME%はかつてないほどに緊張していた。
+		PRINTFORML %CALLNAME:MASTER%に気に入ってもらえるだろうか？
+		PRINTFORML うまく務めを果たせるだろうか？
+		PRINTFORML 不安渦巻く%CALLNAME%の心中を察した%CALLNAME:MASTER%は普段よりも優しく声をかけると、緊張をほぐすように軽いスキンシップから開始した。
+		PRINTFORMW だが一度交合してしまえば事前に%CALLNAME:MASTER%に仕込まれていたこともあり、%CALLNAME%はしっかりと務めを果たして受精した…
+	ELSEIF TALENT:情婦
+		PRINTFORML いよいよ目前に迫った%CALLNAME:MASTER%との初交尾に%CALLNAME%の肉体は期待に打ち震えていた。
+		PRINTFORML 今夜まで一度も使われることのなかった膣、そこから得られる快楽はいかほどのものであろうか。
+		PRINTFORML 何度も処女を破って欲しいと願い出ていたのに、%CALLNAME:MASTER%はいやらしい笑みを浮かべるばかりで取り合ってくれなかった。
+		PRINTFORML だがそれも今日まで。
+		PRINTFORML %CALLNAME:MASTER%の熱い肉棒と子種を胎内に受け入れた%CALLNAME%は、この世のものとは思えない快感と幸福感に包まれた。
+		PRINTFORMW 性の悦びを知った%CALLNAME%は体力の続く限り%CALLNAME:MASTER%との種付け交尾に励み受精しました…
+	ENDIF
+
+	TALENT:非処女 = 1
+	TCVAR:履歴_EXP_処女喪失 = 1
+
+	SIF CSTR:初えっち相手名 == ""
+		CSTR:初えっち相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初キス相手名 == "" 
+		CSTR:初キス相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初フェラ相手名 ==""
+		CSTR:初フェラ相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初絶頂相手名 ==""
+		CSTR:初絶頂相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初中出し相手名 ==""
+		CSTR:初中出し相手名 = %CALLNAME:MASTER%
+;対象が非処女の場合
+ELSE
+	IF TALENT:愛人
+		IF !RAND:3
+			PRINTFORMW 愛する%CALLNAME:MASTER%の子が欲しいという%CALLNAME%の願いが精子と卵子に通じたのか、%CALLNAME%は受精しました…
+		ELSEIF !RAND:2
+			PRINTFORMW %CALLNAME:MASTER%の愛を得るため種付けセックスに臨んだ%CALLNAME%は無事に受精しました…
+		ELSE
+			PRINTFORMW %CALLNAME%はピロートーク中に突然強烈な幸福感に見舞われ、自身が受精したことを本能的に悟った…
+		ENDIF
+	ELSEIF TALENT:心酔
+		IF !RAND:3
+			PRINTFORMW %CALLNAME:MASTER%から子を孕むように命じられた%CALLNAME%が種付け交尾に励んだ結果、%CALLNAME%は受精しました…
+		ELSEIF !RAND:2
+			PRINTFORMW %CALLNAME%が自身の卵子に対して%CALLNAME:MASTER%の精子に負けるよう強く念じたおかげか、%CALLNAME%は無事に受精しました…
+		ELSE
+			PRINTFORMW %CALLNAME:MASTER%の精液を胎内に長く留めるために専用の貞操帯まで用意していた%CALLNAME%の努力が実り、%CALLNAME%は受精しました…
+		ENDIF
+	ELSEIF TALENT:情婦
+		IF !RAND:3
+			PRINTFORMW %CALLNAME:MASTER%との種付け交尾の快感にハマって抜け出せなくなった%CALLNAME%は当然のように受精しました…
+		ELSEIF !RAND:2
+			PRINTFORMW 快楽を求めるあまり当初の目的を忘れて全身精液まみれになった%CALLNAME%だが、無事に受精しました…
+		ELSE
+			PRINTFORMW 溢れ出た%CALLNAME:MASTER%の精液を無意識のうちに膣内へ指で押し戻していた%CALLNAME%の生殖本能が勝利し、%CALLNAME%は受精しました…
+		ENDIF
+	ENDIF
+ENDIF
+
+CFLAG:受精現在耐久値 = 0
+TALENT:受精 += 1
+SIF TALENT:交際中 == 1 || TALENT:結婚済み == 1　|| TALENT:百合結婚 == 1　
+	TALENT:托卵 = 1
+CFLAG:妊娠フラグ = 1
+
+;男体経験値は妊娠2回分、精子経験値は膣内射精20回分を加算
+;余剰の経験値は持ち越さず0にリセット
+CFLAG:MASTER:男体経験値 += 2
+IF CFLAG:MASTER:男体経験値 >= CFlag:MASTER:男体レベル*2
+	CFLAG:MASTER:男体経験値 = 0
+	CFlag:MASTER:男体レベル += 1
+ENDIF
+CFLAG:MASTER:精子経験値 += 20
+IF CFLAG:MASTER:精子経験値 >= ((CFlag:MASTER:精子レベル)*5)+CFlag:MASTER:精子レベル
+	CFLAG:MASTER:精子経験値 = 0
+	CFlag:MASTER:精子レベル += 1
+ENDIF
+CALL JN_SEX_EXP
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　Ｖ感度を上げる
+;V感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROV
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｖ鈍感
+	PRINTFORML 以前から%CALLNAME%のヴァギナが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
+ELSE
+	PRINTFORML %CALLNAME%のヴァギナは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
+ENDIF
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ｖ鈍感の場合はＶ鈍感を削除
+IF TALENT:Ｖ鈍感
+	TALENT:Ｖ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のヴァギナをイジメぬき、人並みに感じるまで開発した。
+;そうでない場合はＶ敏感を追加
+ELSE
+	TALENT:Ｖ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のヴァギナはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
+ENDIF
+
+;-------------------------------------------------
+;陥落ボーナス　Ａ感度を上げる
+;A感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROA
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ａ鈍感
+	PRINTFORML 以前から%CALLNAME%のアナルが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
+ELSE
+	PRINTFORML %CALLNAME%のアナルは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
+ENDIF
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ａ鈍感の場合はＡ鈍感を削除
+IF TALENT:Ａ鈍感
+	TALENT:Ａ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のアナルを穿り回し、人並みに感じるまで開発した。
+;そうでない場合はＡ敏感を追加
+ELSE
+	TALENT:Ａ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のアナルはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
+ENDIF
+
+;-------------------------------------------------
+;陥落ボーナス　Ｂ感度を上げる
+;B感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROB
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｂ鈍感
+	PRINTFORML 以前から%CALLNAME%のバストが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
+ELSE
+	PRINTFORML %CALLNAME%のバストは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
+ENDIF
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ｂ鈍感の場合はＢ鈍感を削除
+IF TALENT:Ｂ鈍感
+	TALENT:Ｂ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のバストを捏ね繰り回し、人並みに感じるまで開発した。
+;そうでない場合はＢ敏感を追加
+ELSE
+	TALENT:Ｂ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のバストはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
+ENDIF
+
+;-------------------------------------------------
+;陥落ボーナス　Ｃ感度を上げる
+;C感度を上げます
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_EROC
+
+PRINTFORML …
+PRINTFORML ……
+IF TALENT:Ｃ鈍感
+	PRINTFORML 以前から%CALLNAME%のクリトリスが刺激に対して反応が鈍いことを%CALLNAME:MASTER%は不満に思っていた。
+	PRINTFORML これを機に性感帯の開発を行い、人並みに感じるようにしてお互いに楽しめるようにしたい。
+ELSE
+	PRINTFORML %CALLNAME%のクリトリスは刺激に対して人並みに感じるようだが、もっと感じて乱れる姿が見てみたい。
+ENDIF
+PRINTFORMW そう思い立った%CALLNAME:MASTER%は各種責め具を用意して%CALLNAME%をベッドに押し倒した…
+PRINTFORML 
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+PRINTFORML 
+;Ｃ鈍感の場合はＣ鈍感を削除
+IF TALENT:Ｃ鈍感
+	TALENT:Ｃ鈍感 = 0
+	PRINTFORMW %CALLNAME:MASTER%は持ち前のテクニックで%CALLNAME%のクリトリスを嬲り続け、人並みに感じるまで開発した。
+;そうでない場合はＣ敏感を追加
+ELSE
+	TALENT:Ｃ敏感 = 1
+	PRINTFORMW %CALLNAME:MASTER%の執拗な責めに屈した%CALLNAME%のクリトリスはとても敏感になり、些細な刺激にも反応を示すほどに開発された。
+ENDIF
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　無自覚の素質強化
+;無自覚の素質をランダムで１つだけ強化します
+;『無自覚な雌』に関しては20区切り、ステ画面でハート個数無しのため除外してあります
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_TAL
+
+
+PRINTFORML 特別な関係になったのだから急ぐ必要はない。
+PRINTFORML %CALLNAME:MASTER%は%CALLNAME%にそう囁いて着替えさせると、自宅の傍まで送ることにした。
+PRINTFORML 
+IF !RAND:6	;フェロモン強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%のフェロモンが強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:フェロモン >= 90
+		PRINTFORML 【フェロモン：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW もはや%CALLNAME:MASTER%の保護がなければまともに生活できないほど%CALLNAME%のフェロモンは高まっています。
+		
+		CFLAG:フェロモン = 99
+	;それ以外は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン+10}】
+		PRINTFORMW %CALLNAME%の全身からより強くフェロモンが滲み出ています。
+		
+		CFLAG:フェロモン += 10
+	ENDIF
+ELSEIF !RAND:5	;雌の本能強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の雌の本能が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雌の本能 >= 90
+		PRINTFORML 【雌の本能：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は常に妊娠していないと情緒不安定になる程の異常な生殖本能です。
+		
+		CFLAG:雌の本能 = 99
+	;それ以外は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能+10}】
+		PRINTFORMW %CALLNAME%はより強く子を成したいと思い始めています。
+		
+		CFLAG:雌の本能 += 10
+	ENDIF
+ELSEIF !RAND:4	;性への興味強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の性への興味が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性への興味 >= 90
+		PRINTFORML 【性への興味：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は性に対して飽くなき探求心を抱いているようです。
+		
+		CFLAG:性への興味 = 99
+	;それ以外は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味+10}】
+		PRINTFORMW %CALLNAME%はより強く性への興味を持ち始めています。
+		
+		CFLAG:性への興味 += 10
+	ENDIF
+ELSEIF !RAND:3	;雄への関心強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の雄への関心が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雄への関心 >= 90
+		PRINTFORML 【雄への関心：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は雄に対してどのようにアピールすればいいかを完璧に承知しているようです。
+		
+		CFLAG:雄への関心 = 99
+	;それ以外は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心+10}】
+		PRINTFORMW %CALLNAME%はより強く雄への関心を持ち始めています。
+		
+		CFLAG:雄への関心 += 10
+	ENDIF
+ELSEIF !RAND:2	;性交願望強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の性交願望が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性交願望 >= 90
+		PRINTFORML 【性交願望：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW もはや%CALLNAME%はセックス中毒と見紛うほどに性行為に積極的です。
+		
+		CFLAG:性交願望 = 99
+	;それ以外は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望+10}】
+		PRINTFORMW %CALLNAME%はより強く性行為を行いたいと思い始めています。
+		
+		CFLAG:性交願望 += 10
+	ENDIF
+ELSE			;妊娠願望強化
+	PRINTFORML ≪華燭の典を経て%CALLNAME:MASTER%との関係が深まったことで、%CALLNAME%の妊娠願望が強化されました≫
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:妊娠願望 >= 90
+		PRINTFORML 【妊娠願望：%UNICODE(0x2661)%×10(MAX)】
+		PRINTFORMW %CALLNAME%は常に子宮を雄に利用されていたいと考えるほどに妊娠願望が強いようです。
+		
+		CFLAG:妊娠願望 = 99
+	;それ以外は+10(ハート１段階)増加する
+	ELSE
+		PRINTFORML 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+10}】
+		PRINTFORMW %CALLNAME%はより強く妊娠したいと思い始めています。
+		
+		CFLAG:妊娠願望 += 10
+	ENDIF
+ENDIF
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　肉体強化
+;戦闘で必要とされる各種ステータスを増加します
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_POW
+#DIM L_HP
+#DIM L_ATK
+#DIM L_DEF
+#DIM L_SPD
+
+
+L_HP  = (RAND:5)+3
+L_ATK = (RAND:3)+2
+L_DEF = (RAND:3)+2
+L_SPD = (RAND:3)+2
+
+
+PRINTFORML %CALLNAME%には探索や戦闘での活躍に期待している。
+PRINTFORML %CALLNAME:MASTER%は%CALLNAME%にそう囁いて着替えさせると、自宅の傍まで送ることにした。
+PRINTFORML 
+PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の期待に応えるべく限界まで肉体を鍛えた…
+PRINTFORML 
+PRINTFORML HP　{CFLAG:住人_最大体力}　→　{CFLAG:住人_最大体力+L_HP}
+PRINTFORML ATK　{CFLAG:住人_ATK}　→　{CFLAG:住人_ATK+L_ATK}
+PRINTFORML DEF　{CFLAG:住人_DEF}　→　{CFLAG:住人_DEF+L_DEF}
+PRINTFORML SPD　{CFLAG:住人_SPD}　→　{CFLAG:住人_SPD+L_SPD}
+PRINTFORMW 
+
+
+CFLAG:住人_最大体力 += L_HP
+CFLAG:住人_現在体力 += L_HP
+CFLAG:住人_ATK      += L_ATK
+CFLAG:住人_DEF      += L_DEF
+CFLAG:住人_SPD      += L_SPD
+
+
+
+;-------------------------------------------------
+;陥落ボーナス　精神強化
+;戦闘で必要とされる各種ステータスを増加します
+;-------------------------------------------------
+@TURN_EVENT_FALL_BONUS_MIN
+#DIM L_SP
+#DIM L_HIT
+#DIM L_BRAVE
+#DIM L_GUTS
+
+
+L_SP    = (RAND:5)+1
+L_HIT   = (RAND:2)+1
+L_BRAVE = (RAND:2)+1
+L_GUTS  = (RAND:2)+1
+
+
+PRINTFORML %CALLNAME%には探索や戦闘での活躍に期待している。
+PRINTFORML %CALLNAME:MASTER%は%CALLNAME%にそう囁いて着替えさせると、自宅の傍まで送ることにした。
+PRINTFORML 
+PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の期待に応えるべく限界まで精神鍛錬を行った…
+PRINTFORML 
+PRINTFORML SP　{CFLAG:住人_最大気力}　→　{CFLAG:住人_最大気力+L_SP}
+PRINTFORML HIT　{CFLAG:住人_HIT}　→　{CFLAG:住人_HIT+L_HIT}
+PRINTFORML BRAVE　{CFLAG:住人_BRAVE}　→　{CFLAG:住人_BRAVE+L_BRAVE}
+PRINTFORML GUTS　{CFLAG:住人_GUTS}　→　{CFLAG:住人_GUTS+L_GUTS}
+PRINTFORMW 
+
+
+CFLAG:住人_最大気力 += L_SP
+CFLAG:住人_現在気力 += L_SP
+CFLAG:住人_HIT      += L_HIT
+CFLAG:住人_BRAVE    += L_BRAVE
+CFLAG:住人_GUTS     += L_GUTS
+
+
+
+
+

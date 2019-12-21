@@ -1,0 +1,93 @@
+
+;-------------------------------------------------
+; “sŽsŠÖ˜A
+;-------------------------------------------------
+
+@CITY_MAP
+#DIM L_COLOR = -1
+
+PRINTFORM y“V‹C:
+IF Flag:“sŽs_“V‹C == 0
+	PRINTFORM °‚ê
+ELSEIF Flag:“sŽs_“V‹C == 1
+	PRINTFORM “Ü‚è
+ELSEIF Flag:“sŽs_“V‹C == 2
+	PRINTFORM ‰J
+ELSEIF Flag:“sŽs_“V‹C == 3
+	PRINTFORM ‘å‰J
+ELSEIF Flag:“sŽs_“V‹C == 4
+	PRINTFORM á
+ENDIF
+
+PRINTFORM z
+
+
+IF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_–h‰q != 0
+	SETBGCOLOR 90,10,10
+	CALL PRINT_LABEL("–h‰qŠúŠÔŽc‚è",,COLOR("“sŽs–h‰q’†"),@"{Flag:“sŽs_–h‰q}“ú")
+	PRINT  
+	CALL PRINT_LABEL("‡Œvƒ_ƒ[ƒW",,,@" Œ»Ý{Flag:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW}’~Ï / –Ú•W{Flag:“sŽs_–h‰q¬Œ÷ƒ_ƒ[ƒW}“ž’B")
+ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 3
+	CALL PRINT_LABEL("PŒ‚‚Ü‚Å", , COLOR("“sŽsPŒ‚_‹ß"), @"{Flag:“sŽs_PŒ‚}“ú")
+ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 9
+	CALL PRINT_LABEL("PŒ‚‚Ü‚Å", , COLOR("“sŽsPŒ‚_’†"), @"{Flag:“sŽs_PŒ‚}“ú")
+ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_PŒ‚ >= 10
+	CALL PRINT_LABEL("PŒ‚‚Ü‚Å", , COLOR("“sŽsPŒ‚_‰“"), @"{Flag:“sŽs_PŒ‚}“ú")
+ELSE
+	PRINTFORM 
+ENDIF
+RESETCOLOR
+
+L_COLOR = -1
+IF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 75
+	L_COLOR = COLOR("“sŽs‘¹‰ó_‘å")
+ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 50
+	L_COLOR = COLOR("“sŽs‘¹‰ó_’†")
+ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ < 50
+	L_COLOR = COLOR("“sŽs‘¹‰ó_¬")
+ELSE
+ENDIF
+CALL PRINT_LABEL("‘¹‰ó—¦" , , L_COLOR , @"{Flag:“sŽs_–h‰q‘¹‰ó—¦}“")
+PRINTL
+
+CALL PRINT_LABEL("“sŽsLv" , , , TOSTR(Flag:“sŽs_Lv), 3,,,@"({Flag:“sŽs_ŒoŒ±’l}/{Flag:“sŽs_Lv*10})")
+CALL PRINT_STATUS(-1, "•\ŽÐ‰ï")
+CALL PRINT_STATUS(-1, "— ŽÐ‰ï")
+CALL PRINT_STATUS(-1, "‡Œvƒtƒ@ƒ“”")
+L_COLOR = -1
+IF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 10
+	L_COLOR = COLOR("¡Šú’÷‚ßØ‚è_10“ú–¢–ž")
+ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 30
+	L_COLOR = COLOR("¡Šú’÷‚ßØ‚è_30“ú–¢–ž")
+ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è >= 30
+	L_COLOR = COLOR("¡Šú’÷‚ßØ‚è_30“úˆÈã")
+ELSE
+ENDIF
+CALL PRINT_LABEL("ŒˆŽZ‚Ü‚Å",,L_COLOR,@"{Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è}“ú")
+PRINTL
+
+CALL PRINT_LABEL("Ž‘‹à",,,@"{MONEY}")
+CALL PRINT_RANGE_STATUS(-1, "TP", , , 3, "•šŽš")
+CALL PRINT_RANGE_STATUS(-1, "AP", , , 3, "•šŽš")
+CALL PRINT_RANGE_STATUS(-1, "SP", , , 3, "•šŽš")
+CALL PRINT_RANGE_STATUS(-1, "LP", , , 3, "•šŽš")
+CALL PRINT_STATUS(-1, "BP", , 3)
+PRINTFORML
+CALL PRINT_STATUS(-1, "Œ÷Ñ", , 10)
+PRINTL
+
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+

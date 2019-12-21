@@ -1,0 +1,189 @@
+﻿
+;-------------------------------------------------
+;住人業務　業務　メイド
+;-------------------------------------------------
+@WORK_T_Me(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_T
+#DIM L_F
+#DIM L_K
+#DIM L_N
+
+L_T = TARGET
+TARGET = ARG:0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+
+CALL C_PICTURE(ARG:0,ARG:1)
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORM 　　　　　
+		IF !RAND:3
+			PRINTFORML 「畏まりましたご主人様、直ちに作業に移ります。」
+		ELSEIF !RAND:2
+			PRINTFORML 「ご主人様ご用件をどうぞ」
+		ELSE
+			PRINTFORML 「ご主人様のお世話はお任せくださいませ…%UNICODE(0x2661)%」
+		ENDIF
+PRINTFORML 
+PRINTFORM 　　　　　
+PRINTFORML %CALLNAME%는 %CALLNAME:MASTER%에게 떠밀려、업무에 힘썼다…
+PRINTFORMW
+
+
+
+PRINTFORML 
+
+IF (Talent:비처녀 == 1 && Talent:합의 == 1) && (Talent:심취 == 1 || Talent:애인 == 1 || Talent:정부 == 1) && RAND:10 >= 5
+SETCOLOR 250,50,200
+DRAWLINE
+	IF !RAND:7 && TALENT:학생 == 5
+		PRINTFORML %CALLNAME%는 초등학생であり、メイドである。それも「플레이어」に仕えるトップメイドだ。
+		PRINTFORML そんな%CALLNAME%への風当たりは、厳しくは無いが優しくもなかった。
+		PRINTFORML 勿論「플레이어」の所有物である以上その身は先々に渡り保障されている、
+		PRINTFORML しかし幼さの残る%CALLNAME%는、周りの大人達の小さな悪意を受け流しきれずにいた。
+		PRINTFORMW
+		PRINTFORML 「……ぁ、…っごしゅじん…様っ！もうし訳、ございません、ご用事でしょうか？」
+		PRINTFORML 一仕事終え自室に戻った%CALLNAME:MASTER%が声を掛けると泣いていたのか、瞳は揺れ、声は震えている。
+		PRINTFORML 「…っ…すみません、失礼致します！」
+		PRINTFORML これ以上の醜態を晒すまいと、駆け出そうとした幼い身体を抱きしめた。
+		PRINTFORML 「あっ……ご主じ…んっ…！」
+		PRINTFORML そのまま強引に唇を塞ぎ深く舌を差し入れると、応えるように小さな舌が触れた。
+		PRINTFORML 「ん……%UNICODE(0x2661)%っ…は……んむ…っ%UNICODE(0x2661)%…ぷぁ…」
+		PRINTFORML %CALLNAME%からゆっくりと力が抜け、%CALLNAME:MASTER%の片腕でその小さな身体が支えられる。
+		PRINTFORMW 
+		PRINTFORML 「…ありがとうございます…%CSTR:一人称%はご主人様の、なのに」
+		PRINTFORML 言い掛けた唇をもう一度塞ぎ身体を抱えあげると、近くのソファへ倒れ込んだ。
+		PRINTFORML 「ぇっ…あっ…あのっ…！」
+		PRINTFORML 困惑する%CALLNAME%に一言、もう一度お前が誰の所有物か教えてやる、と告げた。
+		PRINTFORML 「ぁっ%UNICODE(0x2661)%…%CSTR:一人称%に、教えてください。%CSTR:一人称%はご主人様のだって…っ%UNICODE(0x2661)%」
+		PRINTFORML そう言って%CALLNAME:MASTER%を受け入れる少女の顔は、雌の歓びにぐちゃぐちゃになっていった…
+	ELSEIF !RAND:6 && TALENT:학생
+		PRINTFORML 「お待たせして、申し訳ございません、ご主人様」
+		PRINTFORML 「플레이어」に仕えるメイド。それはメイドならば誰もが羨み、願う。一つの到達点。
+		PRINTFORML しかし、学生との両立ともなると本人に掛かる負担は大きい、息せき切ってやってきた%CALLNAME%는 必死に走ってきたのだろう。
+		PRINTFORML 所々衣服は乱れ、必死に息を整えようとしているが瞳は潤み、首筋には汗が伝っている。
+		PRINTFORMW 
+		PRINTFORML 「も…申し訳御座いませんご主人様。…っは…少しばかり、お時間をっ…」
+		PRINTFORML そんなつもりで呼んだわけでは無かったが、催してしまった%CALLNAME:MASTER%はがちがちになった肉棒を眼の前に突きつける。
+		PRINTFORML 咽返る雄臭を放つそれに%CALLNAME%는 女の顔を浮かべた。
+		PRINTFORML 「…っ%UNICODE(0x2661)%はい…どうぞ%CSTR:一人称%をお使いください…%UNICODE(0x2661)%ごしゅじんさま…%UNICODE(0x2661)%」
+		PRINTFORMW 
+		PRINTFORML 「はー…っ…%UNICODE(0x2661)%…ひゅ……っ……ぁ…%UNICODE(0x2661)%……じ……さま…%UNICODE(0x2661)%」
+		PRINTFORML 身体中を使われた%CALLNAME%는、未だ小さな絶頂を繰り返していた。
+		PRINTFORML 余りに健気な態度を取る%CALLNAME%についやりすぎてしまったが、%CALLNAME%の顔は蕩けきった雌の顔となっている。
+		PRINTFORML %CALLNAME:MASTER%が此方を見る%CALLNAME%の頭を撫でてやると、柔らかな笑みを浮かべるのだった。
+	ELSEIF !RAND:5 && TALENT:얀데레
+		PRINTFORML 「あはっ…！……ご主人様…%UNICODE(0x2661)%、ご主人様ぁっ！……%UNICODE(0x2661)%、もっと気持ちよくなって下さいませっ%UNICODE(0x2661)%」
+		PRINTFORML %CALLNAME:MASTER%が保有するメイドの中で、%CALLNAME%는 特に「過激派」のメイドだ。
+		PRINTFORML 己が仕えるべき相手が全てであり、邪魔する者にはとても攻撃的でやや扱い辛い。
+		PRINTFORML だが、それを考慮してもその献身は素晴らしいもので、今も女の身体を存分に使い%CALLNAME:MASTER%を愉しませている。
+		PRINTFORMW 
+		PRINTFORML 自身の快楽など二の次で、ひたすら腰を淫らに激しく振り、膣内に咥えたペニスにご奉仕を行う。
+		PRINTFORML 無理に動き続ければ痛みもあるだろうに、それしか知らないようにピストンを繰り返す。
+		PRINTFORML その献身に報いてやろうとこちらが腰を打ち付けると、ビクンと身体を跳ねらせ歓喜の声を響かせた。
+		PRINTFORML 「あぁ…素敵です%UNICODE(0x2661)%…その逞しいおちんちんで…ぁあんっ%UNICODE(0x2661)%、――――っ%UNICODE(0x2661)%」
+		PRINTFORML 怯んだ隙に今度は%CALLNAME:MASTER%が攻勢に回り、子宮に肉棒を叩きつけていく。
+		PRINTFORML それだけで興奮すさまじいのか、%CALLNAME%는 断続的に絶頂を繰り返す。
+		PRINTFORML 続くように%CALLNAME:MASTER%も射精すると、両手足を絡めてその快感を余さず受け止めようとする。
+		PRINTFORML 子宮を満たされていく幸福感に浸るように、%CALLNAME%는 頬を緩ませて放心していた…
+	ELSEIF !RAND:4 && TALENT:푸른혈족
+		PRINTFORML 푸른혈족と呼ばれるほどの高貴な家系と言えど、「플레이어」が相手ならば跪き奉仕する立場である。
+		PRINTFORML だが、貴族の女とってその立場こそが最も理想とされている、
+		PRINTFORML なぜならば「プレイヤーのメイド」とは彼らの妾にも等しいからだ。
+		PRINTFORMW 
+		PRINTFORML 「ご、ご主人様…はげしっ…%UNICODE(0x2661)%……っ…ぁんっ%UNICODE(0x2661)%」
+		PRINTFORML そんな立場の%CALLNAME%는 シミ一つない柔肌を%CALLNAME:MASTER%に晒し、その肢体を容赦なく貪られていく。
+		PRINTFORML すでに膣内は肉棒に屈服仕切っており、突かれるたびにその膣壁をウネウネと蠢かせている。
+		PRINTFORML 後背位で犯されてはただ喘ぐことしかできず、ピストンの動きも徐々に激しくなり%CALLNAME%の嬌声も乱れていった…
+		PRINTFORMW 
+		PRINTFORML 「…はぁ…はぁ…っ…%UNICODE(0x2661)%……ごしゅじん…さまぁ…%UNICODE(0x2661)%」
+		PRINTFORML 一時間後、激しい行為がやっと終わったのか、膣からペニスが抜き取られる。
+		PRINTFORML それと同時に、ごぽっ…と秘所から種付けの証たる精液が溢れシーツを汚していく。
+		PRINTFORML このような大量の精液を注がれ続ければ、まず受精と妊娠は逃れられない。
+		PRINTFORML だがこうして尊き血は紡がれ続ける、%CALLNAME%も望んでその結末を受け入れるだろう。
+		PRINTFORML 新たなる青き血が産まれることを祈りながら%CALLNAME%는 微笑みながらお腹を摩った…
+	ELSEIF !RAND:3 && (TALENT:거유 || TALENT:폭유)
+		PRINTFORML 「…ぁむ……んっ…ふ………んんぅ……ちゅっ%UNICODE(0x2661)%」
+		PRINTFORML 書斎で作業する%CALLNAME:MASTER%だが、その下には跪いて性処理をするメイドが一人。今回の性処理担当の%CALLNAME%だ。
+		PRINTFORML 彼女は%CALLNAME:MASTER%が作業している机の下に潜り込んで、その豊満な乳房でペニスを挟み口を交えて奉仕している。
+		PRINTFORML この胸目当ても込みで雇われていると自覚がある%CALLNAME%는、パイズリも必須技能として心得ている。
+		PRINTFORML 両胸から押さえ乳圧を強めたり、左右別に上下させたりと味わう快感が単調にならないよう高度なテクを披露していく。
+		PRINTFORMW 
+		PRINTFORML 「っ！！……――%UNICODE(0x2661)%、んっ…熱い…%UNICODE(0x2661)%」
+		PRINTFORML ご奉仕を続けているとついに精液を吐き出し、%CALLNAME%の顔が白濁液で染め上げられた。
+		PRINTFORML 勢いが強くなる前にペニスを谷間の中に捕らえ、射精が終わるまで乳内で留めさせる
+		PRINTFORML 
+		PRINTFORML 「お疲れ様でしたご主人さ……？…」
+		PRINTFORML 後は掃除してお勤めが終わったかと思いきや、%CALLNAME:MASTER%の肉棒はまだ硬くそそり立ったままだった。
+		PRINTFORML 「まだ満足していない」とばかりに、%CALLNAME%는 ぺちぺちっと亀頭で頬を軽く叩かれる。
+		PRINTFORMW 
+		PRINTFORML 「…………%UNICODE(0x2661)%、ではご希望にお応え致します%UNICODE(0x2661)%、存分に%CSTR:一人称%のおっぱいを堪能して下さいませ%UNICODE(0x2661)%」
+		PRINTFORML 絶倫ぶりに驚きながらも、未だ身体を求められていることに、少々優越感と独占欲に浸る。
+		PRINTFORML そして%CALLNAME%는 口元に付いたザーメンをペロリと舐めとり、胸元から卑猥な水音を鳴らしてパイズリを再開した…
+		PRINTFORML 
+	ELSEIF !RAND:2
+		PRINTFORML 都市ではメイド職はメジャーなもので、大手の企業などを仕切る家系はメイドを雇うのが常識とされている。
+		PRINTFORML その中でも「플레이어」に仕えるメイドはメイド達の憧れであり、その座に就く女性たちはトップメイドと呼ばれる。
+		PRINTFORML 「お勤めお疲れ様でございますご主人様、定期の性処理に参りました」
+		PRINTFORML %CALLNAME:MASTER%に仕える%CALLNAME%もまたトップメイド、主人の生活を支えその身体で癒すのが仕事だ。
+		PRINTFORMW 
+		PRINTFORML 「はぁっ…！…んぁっ…ご主人様…ご主人様ぁっ！……%UNICODE(0x2661)%」
+		PRINTFORML 「플레이어」の御眼鏡にかなった肢体を惜しみなく使い、主人に猛る肉棒で貪られる%CALLNAME%。
+		PRINTFORML だがトップメイドの特権である「플레이어」の子種を定期的に授かれるというのもあり、%CALLNAME%는 自ら身体を差し出し嬲られ続ける。
+		PRINTFORMW 
+		PRINTFORML 「ご主人様っ、ご慈悲をっ%UNICODE(0x2661)%……子宮にご主人様の子種を下さいませっ%UNICODE(0x2661)%」
+		PRINTFORML 余程種付けがご希望なのか、%CALLNAME:MASTER%の腰に両足を絡ませて涙目で懇願する%CALLNAME%。
+		PRINTFORML そんなかわいいメイドのおねだりに応えるべく、%CALLNAME:MASTER%は亀頭で子宮口をこじ開け直接特濃精液をぶちまける。
+		PRINTFORML 「――%UNICODE(0x2661)%――――っ%UNICODE(0x2661)%……ぁあっ%UNICODE(0x2661)%%UNICODE(0x2661)%」
+		PRINTFORML 子宮内が真っ白に染まっていく感覚に喘ぎさえできない程の快楽に、%CALLNAME%는 ただ身体を震わせる。
+		PRINTFORML 強い雄に侍り屈服し子を授かる……これ以上の女の幸福はない。と、彼女はぼんやりとした思考で種付けを味わっていた…
+	ELSE
+		PRINTFORML 「はっ…はっ…%UNICODE(0x2661)%……ご主人様…如何でしょうか…？…あんっ%UNICODE(0x2661)%」
+		PRINTFORML ベッドの上で資料を読み耽っている%CALLNAME:MASTER%に%CALLNAME%が跨る形で、硬い肉棒を自身の膣内で愉しませている。
+		PRINTFORML もう長く続けているのか結合部は精液と愛液の混合液が泡立ち、腰を打ち付けるたびに逆流したザーメンが膣内からあふれ出る。
+		PRINTFORML いつ終わるかわからないが、%CALLNAME:MASTER%のメイドであるという自負と誇りから、絶対に満足させてみせると健気に乱れ続けていく。
+		PRINTFORMW 
+		PRINTFORML さらに数十分後、ようやく終わりが見えて来たのか、%CALLNAME:MASTER%は資料を手放すと%CALLNAME%をベッドへ倒し射精寸前のペニスで突き始めた。
+		PRINTFORML 激しい快感に襲われた%CALLNAME%는 ただただ喘ぎ続けるだけで、そのままトドメとばかりに濃い精液を満タンの子宮へ無理矢理注ぎ込んだ。
+		PRINTFORML 至福のように蕩けた顔で絶頂と余韻を味わい、子宮も喜びを隠せないように胎動した…
+	ENDIF
+
+DRAWLINE
+
+CALL JN_SEX_EXP
+RESETCOLOR
+
+ENDIF
+
+
+
+
+EXP:업무경험 += 1
+PRINTFORML 【업무 경험　　:{EXP:업무경험-1, 5 ,LEFT}→{EXP:업무경험, 5 ,RIGHT}】
+DRAWLINE
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 5
+	L_K = (((EXP:업무경험/100)+1)*1000)+(EXP:업무경험*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 더 나아가 %CALLNAME%의 활약이「시티」에 인정받으면서、대량의 공적을 획득했다！
+	PRINTFORML 【공적　　:{Flag:都市_功績 - L_K, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
+	DRAWLINE
+ENDIF
+PRINTFORMW 
+TARGET = L_T
+
+
+
+
+
+
+
+
+
+
+

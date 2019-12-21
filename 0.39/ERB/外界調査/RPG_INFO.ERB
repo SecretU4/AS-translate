@@ -1,0 +1,141 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:RPG_INFO_TARGET_DETAIL.ERB
+;	Facility	:情報表示。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001	2017/02/17		「」					本体側INFO.ERBから調査パート専用に分離
+;	002	2018/11/14		morph					本体側INFO.ERBとの共通処理を関数化
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ RPG_INFO_TARGET_DETAIL					外界調査用情報:ターゲット(詳細)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub RPG_INFO_TARGET_DETAIL
+;=================================================
+;   外界調査用情報:ターゲット(詳細)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				表示カテゴリー小区分フラグ(0:デフォルトRPG表示 1:強化素材用)
+;-------------------------------------------------
+@RPG_INFO_TARGET_DETAIL(ARG:0, L_CATE)
+#DIM L_I
+#DIM L_TMP
+#DIM L_SEX
+#DIM L_CATE
+#DIMS L_STR
+#DIMS CONST OP_NAME = "NONE", "強化剤", "超人薬", "技能"
+
+L_I=ARG
+L_SEX = VAR_SEX(L_I)
+
+
+;PRINTFORM \[No.%TOSTR(NO:L_I),3%\] 
+IF CFlag:(ARG:0):(6800) == 1
+	PRINT 随 
+ELSEIF CFlag:(ARG:0):(6801) == 1
+	PRINT 後 
+ELSEIF CFlag:(ARG:0):(6802) == 1
+	PRINT 回 
+ELSEIF CFlag:(ARG:0):(6803) == 1
+	PRINT 探 
+ELSE
+	PRINT 　 
+ENDIF
+CALL VAR_PRINT_LIST_NAME(L_I)
+
+;VAR:バー出力(基礎)
+;CALL VAR_BAR_BASE(L_I, 0, 2)
+
+;強化剤用フラグがある時残り強化回数を表示
+SELECTCASE OP_NAME:L_CATE
+CASE "強化剤"
+	PRINTFORM [残{LIMIT(100-CFLAG:L_I:住人_強化回数, 0, 999), 3 ,RIGHT}]
+CASE "超人薬"
+	PRINTFORM [残{LIMIT(100-CFLAG:L_I:住人_超人回数, 0, 999), 3 ,RIGHT}]
+CASE "技能"
+	PRINTFORM [残{LIMIT(CFLAG:L_I:住人_技能ポイント, 0, 999), 3 ,RIGHT}]
+CASEELSE
+	PRINTFORM [勝{LIMIT(CFLAG:L_I:住人_勝利回数, 0, 999), 3 ,RIGHT}]
+ENDSELECT
+
+
+;基礎能力出力
+;体力
+SETCOLOR 0xbbbbbb
+PRINTFORM [
+RESETCOLOR
+PRINT HP:
+IF (CFlag:L_I:住人_現在体力 <= 0) && (L_I != MASTER)
+	SETCOLOR 0xAA0000
+ELSEIF (CFlag:L_I:住人_現在体力)*4 < CFlag:L_I:住人_最大体力
+	SETCOLOR 0xFF6600
+ELSEIF (CFlag:L_I:住人_現在体力)*2 < CFlag:L_I:住人_最大体力
+	SETCOLOR 0xFFFF00
+ELSEIF	CFlag:L_I:住人_現在体力 != CFlag:L_I:住人_最大体力
+	SETCOLOR 0x808080
+ENDIF
+PRINTFORM {CFlag:L_I:住人_現在体力, 3 ,RIGHT}
+RESETCOLOR
+PRINTFORM /{CFlag:L_I:住人_最大体力, 3 ,RIGHT}
+SETCOLOR 0xbbbbbb
+PRINTFORM ][
+RESETCOLOR
+
+PRINT SP:
+IF (CFlag:L_I:住人_現在気力 <= 0) && (L_I != MASTER)
+	SETCOLOR 0xAA0000
+ELSEIF (CFlag:L_I:住人_現在気力)*4 < CFlag:L_I:住人_最大気力
+	SETCOLOR 0xFF6600
+ELSEIF (CFlag:L_I:住人_現在気力)*2 < CFlag:L_I:住人_最大気力
+	SETCOLOR 0xFFFF00
+ELSEIF	CFlag:L_I:住人_現在気力 != CFlag:L_I:住人_最大気力
+	SETCOLOR 0x808080
+ENDIF
+PRINTFORM {CFlag:L_I:住人_現在気力, 3 ,RIGHT}
+RESETCOLOR
+PRINTFORM /{CFlag:L_I:住人_最大気力, 3 ,RIGHT}
+SETCOLOR 0xbbbbbb
+PRINTFORM ][
+RESETCOLOR
+
+PRINTFORM BRE:{CFlag:L_I:住人_現在BRE, 3 ,RIGHT}/{CFlag:L_I:住人_最大BRE, 3 ,RIGHT}
+SETCOLOR 0xbbbbbb
+PRINTFORM ]
+RESETCOLOR
+
+CALL INFO_TARGET_WEAPON(L_I, "MAIN")
+CALL INFO_TARGET_WEAPON(L_I, "SUB")
+
+;-----------------------------
+;-- 刻印情報
+;-----------------------------
+;現状は調査パートに影響無さそうで長いのでコメントアウト
+
+;-----------------------------
+;-- 労役情報
+;-----------------------------
+;未実装みたいなので一時的にコメントアウト
+;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
+
+CALL INFO_TARGET_RELATION(L_I)
+CALL INFO_TARGET_GENDER(L_I)

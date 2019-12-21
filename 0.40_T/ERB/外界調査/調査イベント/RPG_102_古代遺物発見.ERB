@@ -1,0 +1,86 @@
+﻿;-------------------------------------------------
+;古代遺物発見
+;-------------------------------------------------
+@RPG_EVENT_102(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+#DIM L_G
+L_G = 200*RAND:((Flag:調査区域*(Flag:調査深度/3))+1)
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 102
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【조사 이벤트:고대 유물 발견】
+PRINTFORML 
+PRINTFORML %CALLNAME:L_I%는 탐색 도중에、본 적 없는 희귀한 유물을 발견했다。
+PRINTFORML 만약 귀중한 물건이라면 상부에서 보너스가 내려올 것이다。
+PRINTFORML 가슴에 기대를 품으면서 %CALLNAME:L_I%는 그것을 가지고 돌아가기로 했다…
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML 자금 {L_G} 획득했다。
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+
+
+MONEY += L_G
+
+
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

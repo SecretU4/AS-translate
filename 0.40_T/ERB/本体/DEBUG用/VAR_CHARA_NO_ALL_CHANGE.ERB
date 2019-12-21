@@ -1,0 +1,204 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:VAR_CHARA_NO_ALL_CHANGE.ERB
+;	Facility	:VAR:キャラNo一括変更。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXX
+;
+;	・ VAR_CHARA_NO_ALL_CHANGE_MAIN		VAR:キャラNo一括変更
+;	・ VAR_CHARA_NO_ALL_CHANGE_SELECT	VAR:キャラNo一括変更(選択)
+;	・ VAR_CHARA_NO_ALL_CHANGE_VIEWER	VAR:キャラNo一括変更(項目画面)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub VAR_CHARA_NO_ALL_CHANGE_MAIN
+;=================================================
+;   VAR:キャラNo一括変更
+;-------------------------------------------------
+@VAR_CHARA_NO_ALL_CHANGE_MAIN
+#DIM L_CHK,		DEFTR_CL_NUM
+#DIM L_No,		DEFTR_CL_NUM
+#DIMS L_NAME,	DEFTR_CL_NUM
+#DIM L_I
+#DIM L_J
+#DIMS L_STR
+#DIMS L_KEY
+
+;ページ制御
+#DIM L_INPUT
+#DIM L_PAGE
+#DIM L_CNT_DATA
+#DIM L_CNT_PRINT
+#DIM L_PREV
+#DIM L_NEXT
+
+;初期化
+VARSET L_PAGE
+VARSET L_PREV
+VARSET L_NEXT
+
+;データ総数
+L_CNT_DATA	= CHARANUM
+;データ表示数/P
+L_CNT_PRINT	= FLAG:定数_キャラ表示数
+
+;-----------------------------
+;- 前処理
+;-----------------------------
+VARSET L_CHK
+VARSET L_No
+VARSET L_NAME
+
+FOR L_J, 0, CHARANUM
+
+	L_KEY = %VAR_MAKE_RENAME_UNIQUE_KEY(L_J, 1)%
+
+	FOR L_I, 0, FLAG:最大数_キャラ
+		L_STR = %VAR_MAKE_RENAME_UNIQUE_KEY(L_I)%
+		;HIT
+		IF L_STR == L_KEY
+			;Noが違う場合
+			IF NO:L_J != L_I
+				L_CHK:L_J = 1
+			ENDIF
+			L_No:L_J = L_I
+			L_NAME:L_J = %CSVNAME(L_I, 0)%
+			BREAK
+		ENDIF
+	NEXT
+
+NEXT
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+$PRINT_LIST
+REDRAW 0
+
+CUSTOMDRAWLINE =
+PRINTL キャラNoの一括変更機能です。
+PRINTL チェックを付けたキャラのNoを最新の状態へ一括変更出来ます。
+PRINTL 仕様変更等でキャラNoが移動した場合に、この機能にて一括変更して下さい。
+PRINTL
+PRINTL （左から右へ変更します。キャラ名が変更前後で違う場合は、そのキャラはキャラデータ変更機能で変更して下さい）
+DRAWLINE
+
+L_I = 0
+WHILE 1
+
+	;SET:開始値
+	SIF L_I < (L_PAGE * L_CNT_PRINT)
+		L_I = (L_PAGE * L_CNT_PRINT)
+
+	;ページ範囲外
+	SIF L_I >= ( (L_PAGE + 1) * L_CNT_PRINT)
+		BREAK
+
+	;- 最大キャラ数超過
+	IF L_I >= L_CNT_DATA
+		;空行
+		PRINTL
+
+	ELSE
+		PRINTFORM [{L_I, 3}] 
+		IF L_CHK:L_I
+			SETCOLOR COLOR("緑")
+			PRINTFORM 【CHANGE】
+			RESETCOLOR
+		ELSE
+			PRINTFORM 　　　　　
+		ENDIF
+		PRINTFORM %NAME:L_I, 20, LEFT% [No.{NO:L_I, 4}] 
+		PRINTFORM →| 
+		SIF !L_CHK:L_I
+			SETCOLOR COLOR("伏字")
+		PRINTFORM [No.{L_No:L_I, 4}] (%L_NAME:L_I, 20, LEFT%) 
+		RESETCOLOR
+		PRINTL
+	ENDIF
+
+	L_I += 1
+
+WEND
+PRINTL
+PRINTL [1100] 変更実行
+PRINTL
+
+
+L_PREV = (L_PAGE <= 0) ? 0 # 1
+L_NEXT = ( L_PAGE >= (L_CNT_DATA / L_CNT_PRINT) ) ? 0 # 1
+
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]이전 페이지\@
+PRINTFORMLC [1000] 돌아온다
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]다음 페이지\@
+PRINTL 
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		$END
+		REDRAW 1
+		RETURN
+	;- 変更
+	CASE 1100
+
+		FOR L_I, 0, CHARANUM
+			SIF !L_CHK:L_I
+				CONTINUE
+			;変更
+			NO:L_I = L_No:L_I
+			CFLAG:L_I:使用口上 = NO:L_I
+
+		NEXT
+
+		PRINTW 一括変更を行いました。
+
+		GOTO END
+	;- キャラ
+	CASE 0 TO L_CNT_DATA -1
+		;反転
+		L_CHK:L_INPUT = !L_CHK:L_INPUT
+	;이전 페이지
+	CASE 1007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+	;다음 페이지
+	CASE 1009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+	;- その他
+	CASEELSE
+		$ERROR
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+GOTO PRINT_LIST
+

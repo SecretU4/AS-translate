@@ -1,0 +1,926 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:LIB_COM.ERB
+;	Facility	:関数置き場(TRAIN)。先頭に"TR_"を付与。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ TR_COM_ABLE_BASIC				TR:コマンド実行条件チェック
+;	・ TR_DOWNBASE_ADD_DEFAULT			TR:消費デフォルト
+;	・ TR_GETPALAMLV					TR:PALAMLV
+;	・ TR_CALC_GOTJUEL					TR:取得予定珠
+;	・ TR_PARTY_NAME					TR:パーティー名
+;
+; *- コマンド効果系
+;
+;	・ TR_EXP_ADD_HETEROSEX				TR:異性愛経験
+;	・ TR_SOURCE_ADD_部位苦痛			TR:ソース追加(部位苦痛)
+;	・ TR_COM_PALAMCHG_SEX_V			TR:PALAM変動(Ｖ性交時)
+;	・ TR_COM_PALAMCHG_SEX_A			TR:PALAM変動(Ａ性交時)
+;	・ TR_COM_PALAMCHG_SEX_ADD			TR:PALAM変動(性交時ソース追加)
+;	・ TR_CHK_LOST_VIRGIN_V				TR:処女喪失(Ｖ)
+;	・ TR_CHK_LOST_VIRGIN_A				TR:処女喪失(Ａ)
+;	・ TR_CHK_LOST_VIRGIN_P				TR:処女喪失(Ｐ)
+;
+; *- その他
+;
+;	・ TR_CHK_奉仕可能					TR:奉仕可能
+;	・ TR_CHK_ABLE_SEX_V				TR:性交可能(Ｖ)
+;	・ TR_CHK_ABLE_SEX_A				TR:性交可能(Ａ)
+;	・ TR_CHK_ABLE_SEX_POINT			TR:性交可能(位置別)
+;	・ TR_CHK_ABLE_REV_SEX_POINT		TR:性交可能(逆位置別)
+;	・ TR_POINT_RESET					TR:部位ポイントリセット
+;	・ TR_PREV_SEX_V					TR:前回性交体位チェック(Ｖ)
+;	・ TR_PREV_SEX_A					TR:前回性交体位チェック(Ａ)
+;	・ TR_PREV_SEX_REV_V				TR:前回性交体位チェック(逆Ｖ)
+;	・ TR_PREV_SEX_REV_A				TR:前回性交体位チェック(逆Ａ)
+;	・ TR_ASSI_SET						TR:アシ設定
+;	・ TR_ASSI_ABLE						TR:アシ実行条件
+;	・ TR_ASSI_SEXUAL_DESIRE			TR:アシ欲情
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TR_COM_ABLE_MAIN
+;=================================================
+;   TR:コマンド実行条件チェック
+;-------------------------------------------------
+; Output:
+;  RETURN				真偽値
+;-------------------------------------------------
+@TR_COM_ABLE_MAIN
+#DIM L_COM
+#DIMS L_FILTER
+L_COM = SELECTCOM
+
+;- 取得:コマンドフィルタ(記憶領域)
+L_FILTER = %COMMAND_FILTER_MEMORY_GET(0)%
+
+;- CHK:フィルタ
+SIF COMMAND_FILTER_DATA_GET(L_COM, L_FILTER)
+	RETURN 0
+
+TRYCCALLFORM COM_FUNC_ABLE_X{L_COM}
+	SIF !RESULT
+		RETURN 0
+CATCH
+	RETURN 0
+ENDCATCH
+
+RETURN 1
+
+;=================================================
+;   sub TR_DOWNBASE_ADD_DEFAULT
+;=================================================
+;   TR:消費デフォルト
+;-------------------------------------------------
+; Input:
+;  ARG					キャラ
+;-------------------------------------------------
+@TR_DOWNBASE_ADD_DEFAULT(ARG=-1)
+SIF ARG==-1
+	ARG = TARGET
+
+DOWNBASE:ARG:체력 += FLAG:定数_체력消費
+
+;=================================================
+;   sub TR_GETPALAMLV
+;=================================================
+;   TR:PALAMLV
+;-------------------------------------------------
+; Input:
+;  ARGS					対象文字列
+;  ARG					キャラ
+; Output:
+;  RETURNF				PALAMLV
+;-------------------------------------------------
+@TR_GETPALAMLV(ARGS, ARG=-1)
+#FUNCTION
+
+SIF ARG==-1
+	ARG = TARGET
+
+RETURNF GETPALAMLV(PALAM:ARG:ARGS, FLAG:最大数_PALAMLV)
+
+;=================================================
+;   sub TR_GOTJUEL
+;=================================================
+;   TR:取得予定珠
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象PALAM値
+; Output:
+;  RETURNF				取得予定珠
+;-------------------------------------------------
+@TR_GOTJUEL(ARG)
+#FUNCTION
+#DIM L_MAX
+#DIM L_VAL
+
+;--定数設定
+;LOCAL:10 ;MAX:対象PALAM LV
+L_MAX = FLAG:最大数_PALAMLV
+
+;- 対象PALAMのLVを取得
+L_VAL = GETPALAMLV(ARG,L_MAX)
+
+;CHK:上限
+SIF L_VAL > L_MAX
+	L_VAL = L_MAX
+
+;- 式: 10 * 2^LV
+;LV    0/ 1/ 2/ 3/  4/  5/  6/  7/    8/   9/
+;JUEL, 0/20/40/80/160/320/640/1280/2560/5120
+;20
+;40
+;80
+;160
+;320
+;640
+;1280
+;2560
+;5120
+IF L_VAL
+	RETURNF 10 * ( POWER(2,L_VAL) )
+ELSE
+	RETURNF 0
+ENDIF
+
+
+;=================================================
+;   sub TR_PARTY_NAME
+;=================================================
+;   TR:パーティー名
+;-------------------------------------------------
+; Output:
+;  RETURNF				対象キャラ名
+;-------------------------------------------------
+@TR_PARTY_NAME
+#FUNCTIONS
+#DIMS L_PARTY
+
+SELECTCASE FLAG:調教対象人数
+	;3人以上
+	CASE IS >= 3
+		L_PARTY = %CALLNAME:(GTR_PL:1)%들
+	;2人
+	CASE 2
+		L_PARTY = %CALLNAME:(GTR_PL:1)%와 %CALLNAME:(GTR_PL:2)%
+	;1人
+	CASEELSE
+		L_PARTY = %CALLNAME:(GTR_PL:1)%
+ENDSELECT
+
+RETURNF L_PARTY
+
+
+
+;-------------------------------------------------------------------------------
+;   コマンド効果系
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TR_EXP_ADD_HETEROSEX
+;=================================================
+;   TR:異性愛経験
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				実行者
+;  ARG:2				加算値
+;-------------------------------------------------
+@TR_EXP_ADD_HETEROSEX(ARG, ARG:1, ARG:2=1)
+#DIM L_CHK
+#DIM L_POS
+
+L_CHK = VAR_HETEROSEX(ARG,ARG:1)
+L_POS = GETNUM(EXP, "레즈경험") + (L_CHK - 1)
+
+;CHK:異性愛
+IF L_CHK
+	;レズ or ＢＬ경험を加算
+	GTR_EXPUP:(ARG:0):(DB_EXPUP_POS(@"%EXPNAME:L_POS%")) += ARG:2
+	GTR_EXPUP:(ARG:1):(DB_EXPUP_POS(@"%EXPNAME:L_POS%")) += ARG:2
+ENDIF
+
+
+;=================================================
+;   sub TR_SOURCE_ADD_部位苦痛
+;=================================================
+;   TR:ソース追加(部位苦痛)
+;-------------------------------------------------
+; Input:
+;  ARGS:0				対象部位
+;  ARG:0				対象者
+;  ARG:1				値
+;-------------------------------------------------
+@TR_SOURCE_ADD_部位苦痛(ARGS, ARG:0, ARG:1=100)
+#DIM L_T
+#DIM L_TMP
+#DIM L_VAL
+
+L_T = ARG
+
+;苦痛 (潤滑Lv + ○○感覚Lv)
+L_VAL = ARG:1
+L_TMP = TR_GETPALAMLV("潤滑", L_T) + ABL:L_T:ARGS
+SELECTCASE L_TMP
+	CASE 0 to 5
+		L_TMP = 100 - (15 * L_TMP)
+	CASEELSE
+		L_TMP = 0
+ENDSELECT
+L_VAL = L_VAL * L_TMP / 100
+SIF ARGS == "Ａ감각"
+	L_VAL = L_VAL * 2
+SOURCE:L_T:苦痛 += L_VAL
+
+
+;=================================================
+;   sub TR_COM_PALAMCHG_SEX_V
+;=================================================
+;   TR:PALAM変動(Ｖ性交時)
+;-------------------------------------------------
+;   セックス系コマンドでの共通PALAM変動処理を纏める
+;-------------------------------------------------
+; Input:
+;  ARG:0				実行者
+;  ARG:1				対象者
+;  ARG:2				逆性交フラグ
+;-------------------------------------------------
+@TR_COM_PALAMCHG_SEX_V(ARG:0=-1, ARG:1=-1, ARG:2=0)
+#DIM L_P
+#DIM L_T
+#DIM L_TMP
+
+L_P = ((ARG:0 == -1) ? PLAYER # ARG:0)
+L_T = ((ARG:1 == -1) ? TARGET # ARG:1)
+
+;どちらかが主人なら真
+IF (L_P == MASTER) || (L_T == MASTER)
+	SIF L_P == TARGET
+		TCVAR:主人性交フラグＰ = 1
+	IF L_T == TARGET
+		TCVAR:主人性交フラグＶ = 1
+		CFLAG:主人初Ｖ性交 = 1
+	ENDIF
+ENDIF
+
+GTR_EXPUP:L_P:DB_EXPUP_POS("성교경험") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("성교경험") += 1
+
+;처녀チェック
+CALL TR_CHK_LOST_VIRGIN_V(L_T)
+CALL TR_CHK_LOST_VIRGIN_P(L_P)
+
+;- TR:異性愛経験
+CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
+
+;-----------------------------
+;ソース追加処理
+;-----------------------------
+
+CALL TR_COM_PALAMCHG_SEX_ADD(L_P, L_T, "Ｖ", ARG:2)
+
+;- 通常性交時
+IF !ARG:2
+	;- TR:ソース追加(部位苦痛)
+	CALL TR_SOURCE_ADD_部位苦痛("Ｖ감각", L_T)
+ELSE
+ENDIF
+
+
+;=================================================
+;   sub TR_COM_PALAMCHG_SEX_A
+;=================================================
+;   TR:PALAM変動(Ａ性交時)
+;-------------------------------------------------
+;   アナルセックス系コマンドでの共通PALAM変動処理を纏める
+;-------------------------------------------------
+; Input:
+;  ARG:0				実行者
+;  ARG:1				対象者
+;  ARG:2				逆性交フラグ
+;-------------------------------------------------
+@TR_COM_PALAMCHG_SEX_A(ARG:0=-1, ARG:1=-1, ARG:2=0)
+#DIM L_P
+#DIM L_T
+#DIM L_TMP
+
+L_P = ((ARG:0 == -1) ? PLAYER # ARG:0)
+L_T = ((ARG:1 == -1) ? TARGET # ARG:1)
+
+;どちらかが主人なら真
+IF (L_P == MASTER) || (L_T == MASTER)
+	SIF L_P == TARGET
+		TCVAR:主人性交フラグＰ = 1
+	IF L_T == TARGET
+		TCVAR:主人性交フラグＡ = 1
+		CFLAG:主人初Ａ性交 = 1
+	ENDIF
+ENDIF
+
+GTR_EXPUP:L_P:DB_EXPUP_POS("성교경험") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("Ａ성교경험") += 1
+
+;처녀チェック
+CALL TR_CHK_LOST_VIRGIN_A(L_T)
+;CALL TR_CHK_LOST_VIRGIN_P(L_P)
+
+;- TR:異性愛経験
+CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
+
+;-----------------------------
+;ソース追加処理
+;-----------------------------
+
+CALL TR_COM_PALAMCHG_SEX_ADD(L_P, L_T, "Ａ", ARG:2)
+
+;- 通常性交時
+IF !ARG:2
+	;- TR:ソース追加(部位苦痛)
+	CALL TR_SOURCE_ADD_部位苦痛("Ａ감각", L_T)
+ELSE
+ENDIF
+
+
+;=================================================
+;   sub TR_COM_PALAMCHG_SEX_ADD
+;=================================================
+;   TR:PALAM変動(性交時ソース追加)
+;-------------------------------------------------
+; Input:
+;  ARG:0				実行者
+;  ARG:1				対象者
+;  ARGS					部位("Ｖ"、"Ａ")
+;  ARG:2				逆性交フラグ
+;-------------------------------------------------
+@TR_COM_PALAMCHG_SEX_ADD(ARG:0, ARG:1, ARGS, ARG:2)
+#DIM L_P
+#DIM L_T
+#DIM L_TMP
+#DIMS L_KEY_P
+#DIMS L_KEY_T
+
+L_P = ARG:0
+L_T = ARG:1
+
+SELECTCASE ARGS
+	CASE "Ｖ"
+		L_KEY_P = 快Ｃ
+		L_KEY_T = 快Ｖ
+	CASE "Ａ"
+		L_KEY_P = 快Ｃ
+		L_KEY_T = 快Ａ
+	;ERROR
+	CASEELSE
+		RETURN
+ENDSELECT
+
+;-----------------------------
+;ソース追加処理
+;-----------------------------
+
+SOURCE:L_P:L_KEY_P += 300
+;SIF MARK:L_T:예속각인
+;	SOURCE:L_T:L_KEY_T += 100
+;SIF MARK:L_T:함락각인
+;	SOURCE:L_T:L_KEY_T += 200
+
+;- 通常性交時
+IF !ARG:2
+
+	IF TCVAR:L_T:キャラ潤滑
+		;無し
+	ELSEIF TR_GETPALAMLV("潤滑", L_T) < 3
+		SOURCE:L_T:苦痛 += 200
+	ELSEIF TR_GETPALAMLV("潤滑", L_T) < 1
+		SOURCE:L_T:苦痛 += 400
+	ENDIF
+
+;- 逆性交時
+ELSE
+
+	TCVAR:L_T:@"固定加算_%L_KEY_T%" += 1000
+	TCVAR:L_P:@"固定加算_%L_KEY_P%" += 1000
+
+	;計算用に攻守を戻す
+	SWAP L_P, L_T
+
+ENDIF
+
+L_TMP = (10 * (ABL:L_T:농락 + ABL:L_P:기교))
+SOURCE:L_T:征服 += L_TMP
+SIF MARK:L_T:함락각인
+	SOURCE:L_T:純愛 += L_TMP
+
+
+;=================================================
+;   sub TR_CHK_LOST_VIRGIN_V
+;=================================================
+;   TR:処女喪失(Ｖ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				タイプ(0:性交 1:道具)
+;-------------------------------------------------
+@TR_CHK_LOST_VIRGIN_V(ARG, ARG:1=0)
+
+;- CHK:処女
+IF !TALENT:ARG:비처녀
+	TALENT:ARG:비처녀 = 1
+	TCVAR:ARG:履歴_EXP_処女喪失 = 1
+
+	IF TR_GETPALAMLV("潤滑", ARG) < 5
+		SOURCE:ARG:苦痛 += 100
+	ELSEIF TR_GETPALAMLV("潤滑", ARG) < 3
+		SOURCE:ARG:苦痛 += 400
+	ELSEIF TR_GETPALAMLV("潤滑", ARG) < 1
+		SOURCE:ARG:苦痛 += 1000
+	ENDIF
+
+	;主人以外
+	IF ARG != MASTER
+		;- 陥落なら純愛追加
+		IF MARK:ARG:함락각인
+			SOURCE:ARG:純愛 += 500
+		ENDIF
+
+		IF ARG:1
+			SOURCE:ARG:征服 += 150
+		ELSE
+			SOURCE:ARG:征服 += 500
+		ENDIF
+	ENDIF
+ENDIF
+
+
+;=================================================
+;   sub TR_CHK_LOST_VIRGIN_A
+;=================================================
+;   TR:処女喪失(Ａ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;-------------------------------------------------
+@TR_CHK_LOST_VIRGIN_A(ARG)
+
+;- CHK:男でバージン無効
+IF !VAR_WOMAN(ARG) && !FLAG:バージンモード
+	;スルー
+;- CHK:処女
+ELSEIF !TALENT:ARG:Ａ비처녀
+	TALENT:ARG:Ａ비처녀 = 1
+	TCVAR:ARG:履歴_EXP_Ａ処女喪失 = 1
+
+	IF TR_GETPALAMLV("潤滑", ARG) < 5
+		SOURCE:ARG:苦痛 += 100
+	ELSEIF TR_GETPALAMLV("潤滑", ARG) < 3
+		SOURCE:ARG:苦痛 += 400
+	ELSEIF TR_GETPALAMLV("潤滑", ARG) < 1
+		SOURCE:ARG:苦痛 += 1000
+	ENDIF
+
+	;主人以外
+	IF ARG != MASTER
+		;- 陥落なら純愛追加
+		IF MARK:ARG:함락각인
+			SOURCE:ARG:純愛 += 500
+		ENDIF
+
+		SOURCE:ARG:征服 += 300
+	ENDIF
+ENDIF
+
+
+;=================================================
+;   sub TR_CHK_LOST_VIRGIN_P
+;=================================================
+;   TR:処女喪失(Ｐ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				タイプ(0:性交 1:道具)
+;-------------------------------------------------
+@TR_CHK_LOST_VIRGIN_P(ARG, ARG:1=0)
+
+;- CHK:童貞
+IF !TALENT:ARG:비동정
+	TALENT:ARG:비동정 = 1
+	TCVAR:ARG:履歴_EXP_童貞喪失 = 1
+
+	;主人以外
+	IF ARG != MASTER
+		;- 陥落なら純愛追加
+		IF MARK:ARG:함락각인
+			SOURCE:ARG:純愛 += 500
+		ENDIF
+
+		IF ARG:1
+			SOURCE:ARG:征服 += 150
+		ELSE
+			SOURCE:ARG:征服 += 200
+		ENDIF
+	ENDIF
+ENDIF
+
+
+;-------------------------------------------------------------------------------
+;   その他
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TR_CHK_奉仕可能
+;=================================================
+;   TR:奉仕可能
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_CHK_奉仕可能(ARG:0=-1)
+#FUNCTION
+#DIM L_T
+
+L_T = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+;욕망Lv3
+IF ABL:L_T:욕망 >= 3
+	RETURNF 1
+;무드Lv3
+ELSEIF VAR_MOOD_LV(L_T) >= 3
+	RETURNF 1
+;봉사정신Lv2
+ELSEIF ABL:L_T:봉사정신 >= 2
+	RETURNF 1
+ENDIF
+
+RETURNF 0
+
+;=================================================
+;   sub TR_CHK_ABLE_SEX_V
+;=================================================
+;   TR:性交可能(Ｖ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				実行者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_CHK_ABLE_SEX_V(ARG:0=-1, ARG:1=-1)
+#FUNCTION
+#DIM L_T
+#DIM L_P
+
+L_T = ( (ARG:0 < 0) ? TARGET # ARG:0)
+L_P = ( (ARG:1 < 0) ? PLAYER # ARG:1)
+
+;- 男性器有り
+IF VAR_PENIS(L_P)
+	;- 女性器有り
+	RETURNF VAR_SEX(L_T)
+ELSE
+	RETURNF 0
+ENDIF
+
+;=================================================
+;   sub TR_CHK_ABLE_SEX_A
+;=================================================
+;   TR:性交可能(Ａ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				実行者
+; Output:
+;  RETURNF				真偽値
+;  RESULT				〃
+;-------------------------------------------------
+@TR_CHK_ABLE_SEX_A(ARG:0=-1, ARG:1=-1)
+#FUNCTION
+#DIM L_T
+#DIM L_P
+
+L_T = ( (ARG:0 < 0) ? TARGET # ARG:0)
+L_P = ( (ARG:1 < 0) ? PLAYER # ARG:1)
+
+;- 男性器有り
+IF VAR_PENIS(L_P)
+	RETURNF 1
+ELSE
+	RETURNF 0
+ENDIF
+
+;=================================================
+;   sub TR_CHK_ABLE_SEX_POINT
+;=================================================
+;   TR:性交可能(位置別)
+;-------------------------------------------------
+; Input:
+;  ARGS					位置
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_CHK_ABLE_SEX_POINT(ARGS)
+#FUNCTION
+#DIM L_T
+#DIM L_P
+
+SELECTCASE ARGS
+	CASE "正常位"
+		;スルー
+	CASE "騎乗位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASE "後背位"
+		;スルー
+	CASE "対面座位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASE "背面座位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASEELSE
+ENDSELECT
+RETURNF 1
+
+
+;=================================================
+;   sub TR_CHK_ABLE_REV_SEX_POINT
+;=================================================
+;   TR:性交可能(逆性交位置別)
+;-------------------------------------------------
+; Input:
+;  ARGS					位置
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_CHK_ABLE_REV_SEX_POINT(ARGS)
+#FUNCTION
+#DIM L_T
+#DIM L_P
+
+;;- 欲情が必要
+;SIF PALAM:欲情 < PALAMLV:3
+;	RETURNF 0
+
+RETURNF 1
+
+SELECTCASE ARGS
+	CASE "正常位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASE "騎乗位"
+		;スルー
+	CASE "後背位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASE "対面座位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASE "背面座位"
+		SIF ABL:성노예 < 1
+			RETURNF 0
+	CASEELSE
+ENDSELECT
+RETURNF 1
+
+
+;=================================================
+;   sub TR_POINT_RESET
+;=================================================
+;   TR:部位ポイントリセット
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;-------------------------------------------------
+@TR_POINT_RESET(ARG=-1)
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+TEQUIP:ARG:ポイント性交 = [[TRAIN:無し]]
+TEQUIP:ARG:ポイント奉仕 = [[TRAIN:無し]]
+TEQUIP:ARG:ポイント愛撫 = [[TRAIN:無し]]
+TCVAR:ARG:登録サブコマンド = [[TRAIN:無し]]
+
+TEQUIP:ARG:ポイント性交前回 = [[TRAIN:無し]]
+TEQUIP:ARG:ポイント奉仕前回 = [[TRAIN:無し]]
+TEQUIP:ARG:ポイント愛撫前回 = [[TRAIN:無し]]
+
+TEQUIP:ARG:Ｖ器具 = 0
+TEQUIP:ARG:Ａ器具 = 0
+TEQUIP:ARG:Ｖ器具経過ターン = 0
+TEQUIP:ARG:Ａ器具経過ターン = 0
+
+;=================================================
+;   sub TR_PREV_SEX_V
+;=================================================
+;   TR:前回性交体位チェック(Ｖ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_PREV_SEX_V(ARG=-1)
+#FUNCTION
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+SIF GROUPMATCH(TEQUIP:ポイント性交前回, [[TRAIN:正常位]], [[TRAIN:騎乗位]], [[TRAIN:後背位]], [[TRAIN:対面座位]], [[TRAIN:背面座位]])
+	RETURNF 1
+RETURNF 0
+
+
+;=================================================
+;   sub TR_PREV_SEX_A
+;=================================================
+;   TR:前回性交体位チェック(Ａ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_PREV_SEX_A(ARG=-1)
+#FUNCTION
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+SIF GROUPMATCH(TEQUIP:ポイント性交前回, [[TRAIN:正常位アナル]], [[TRAIN:騎乗位アナル]], [[TRAIN:後背位アナル]], [[TRAIN:対面座位アナル]], [[TRAIN:背面座位アナル]])
+	RETURNF 1
+RETURNF 0
+
+
+;=================================================
+;   sub TR_PREV_SEX_REV_V
+;=================================================
+;   TR:前回性交体位チェック(逆Ｖ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_PREV_SEX_REV_V(ARG=-1)
+#FUNCTION
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+SIF GROUPMATCH(TEQUIP:ポイント性交前回, [[TRAIN:騎乗位する]], [[TRAIN:対面座位する]], [[TRAIN:正常位させる]], [[TRAIN:後背位させる]], [[TRAIN:背面座位させる]])
+	RETURNF 1
+RETURNF 0
+
+
+;=================================================
+;   sub TR_PREV_SEX_REV_A
+;=================================================
+;   TR:前回性交体位チェック(逆Ａ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_PREV_SEX_REV_A(ARG=-1)
+#FUNCTION
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+SIF GROUPMATCH(TEQUIP:ポイント性交前回, [[TRAIN:Ａ騎乗位する]], [[TRAIN:Ａ対面座位する]], [[TRAIN:Ａ正常位させる]], [[TRAIN:Ａ後背位させる]], [[TRAIN:Ａ背面座位させる]])
+	RETURNF 1
+RETURNF 0
+
+
+;=================================================
+;   sub TR_ASSI_SET
+;=================================================
+;   TR:アシ設定
+;-------------------------------------------------
+@TR_ASSI_SET
+#DIM L_I
+#DIM L_T
+#DIM L_CNT
+VARSET ASSI
+
+L_CNT=0
+FOR L_I, 0, DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+	SIF L_T == TARGET
+		CONTINUE
+	ASSI = L_T
+
+	L_CNT ++
+NEXT
+
+;３人以上居る場合はASSI無し
+SIF L_CNT >= 3
+	VARSET ASSI
+
+
+;=================================================
+;   sub TR_ASSI_ABLE
+;=================================================
+;   TR:アシ実行条件
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_ASSI_ABLE(ARG=-1)
+#FUNCTION
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+;アシが存在
+SIF ASSI < 0
+	RETURNF 0
+
+;両方체력あり
+SIF (!BASE:ARG:체력) || (!BASE:ASSI:체력)
+	RETURNF 0
+
+;両方隷属以上
+SIF (!MARK:ARG:예속각인) || (!MARK:ASSI:예속각인)
+	RETURNF 0
+
+;ＮＴＲ時は無し
+SIF (TALENT:ARG:ＮＴＲ도) || (TALENT:ASSI:ＮＴＲ도)
+	RETURNF 0
+
+RETURNF 1
+
+
+;=================================================
+;   sub TR_ASSI_SEXUAL_DESIRE
+;=================================================
+;   TR:アシ欲情
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@TR_ASSI_SEXUAL_DESIRE(ARG=-1)
+#FUNCTION
+#DIMS L_STR
+#DIM L_TMP
+
+L_STR = 
+
+ARG = ( (ARG:0 < 0) ? TARGET # ARG:0)
+
+L_TMP = 3
+
+SELECTCASE VAR_HETEROSEX(ARG, ASSI)
+	;異性
+	CASE 0
+
+		;욕망Lv6
+		SIF (ABL:ARG:욕망 < 6) && (ABL:ASSI:욕망 < 6)
+			RETURNF 0
+
+	;女同士
+	CASE 1
+
+		;레즈성향Lv3
+		SIF (ABL:ARG:레즈성향 < L_TMP) && (ABL:ASSI:레즈성향 < L_TMP)
+			RETURNF 0
+
+	;男同士
+	CASE 2
+
+		;ＢＬ성향Lv3
+		SIF (ABL:ARG:ＢＬ성향 < L_TMP) && (ABL:ASSI:ＢＬ성향 < L_TMP)
+			RETURNF 0
+
+ENDSELECT
+
+;欲情
+FLAG:調教コマンド派生 = 1
+
+RETURNF 1

@@ -1,0 +1,627 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SUMMONS_MAIN.ERB
+;	Facility	:召喚画面。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;	002		2014/03/10		なるはや				性別フィルタと出身作品別表示を追加
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ SYSTEM_SUMMONS_MAIN				SYSTEM:召喚画面
+;	・ SUMMONS_DATA_MAIN				召喚:情報(メイン)
+;	・ SUMMONS_DATA_BASIC				召喚:情報(基本)
+;	・ SUMMONS_EXE						召喚:実行
+;
+;===============================================================================
+
+;=================================================
+;   sub SYSTEM_SUMMONS_MAIN
+;=================================================
+;   SYSTEM:召喚画面
+;-------------------------------------------------
+@SYSTEM_SUMMONS_MAIN
+#DIM L_INPUT
+#DIM L_I
+#DIM L_CNT
+#DIM L_T
+#DIM L_PAGE
+#DIM L_PAGE_MAX
+#DIM L_START
+#DIM L_END
+#DIM L_RANGE
+#DIM L_PREV
+#DIM L_NEXT
+#DIM L_CHARA_NOW
+#DIM L_CNT_PRINT_DATA
+#DIM L_HIT
+#DIM L_HIT_CNT
+#DIM L_MODE
+#DIM L_TMP
+#DIM L_ORIGIN_CNT
+#DIM L_SEX
+#DIMS L_STR
+#DIMS L_ORIGIN, DEFSMN_ORIGIN_MAX
+#DIMS L_PART, 2
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+L_PAGE=0
+L_MODE=0
+
+;- SMN:初期化
+CALL SMN_INIT
+GSMN_RACE_NO = 50
+GSMN_ORIGIN_NO = -1
+
+; キャラ表示数/P
+L_CNT_PRINT_DATA = FLAG:定数_キャラ表示数 * 2
+
+;-----------------------------
+;- 前処理
+;-----------------------------
+$MAKE_LIST
+
+;作品制御で表示分岐
+IF !GSMN_CTL_MODE
+	L_TMP = GSMN_RACE_NO
+ELSE
+	L_TMP = 50
+ENDIF
+
+;- SMN:リスト範囲
+CALL SMN_LIST_RANGE(L_TMP)
+
+L_START	= GSMN_LIST_START
+L_END	= GSMN_LIST_END
+
+L_RANGE = L_END - L_START
+
+;-----------------------------
+;- リスト作成
+;-----------------------------
+
+;- 初回に出身作品リストの準備
+IF !GSMN_ORIGIN_INITED
+	L_ORIGIN_CNT = 0
+
+	FOR L_I, L_START, L_END
+
+		;- キャラファイル:存在チェック
+		SIF !EXISTCSV(L_I, 0)
+			CONTINUE
+
+		IF STRLENS(CSVCSTR(L_I, GETNUM(CSTR, "出身作品")))
+			IF FINDELEMENT(L_ORIGIN, CSVCSTR(L_I, GETNUM(CSTR, "出身作品"))) == -1
+				L_ORIGIN:L_ORIGIN_CNT = %CSVCSTR(L_I, GETNUM(CSTR, "出身作品"))%
+				GSMN_ORIGIN_KANA:L_ORIGIN_CNT = %CSVCSTR(L_I, GETNUM(CSTR, "出身カナ"))%_{L_ORIGIN_CNT}
+				L_ORIGIN_CNT ++
+			ENDIF
+		ENDIF
+
+	NEXT
+
+	ARRAYSORT GSMN_ORIGIN_KANA, FORWARD, 0, L_ORIGIN_CNT
+	FOR L_I, 0, L_ORIGIN_CNT
+		SPLIT GSMN_ORIGIN_KANA:L_I, "_", L_PART
+		GSMN_ORIGIN_KANA:L_I = %L_PART:0%
+		GSMN_ORIGIN:L_I = %L_ORIGIN:TOINT(L_PART:1)%
+	NEXT
+	GSMN_ORIGIN:L_ORIGIN_CNT = その他
+	GSMN_ORIGIN_NUM = L_ORIGIN_CNT + 1
+	GSMN_ORIGIN_INITED = 1
+ENDIF
+
+VARSET GSMN_LIST, -1
+L_CNT=0
+
+FOR L_I, L_START, L_END
+
+	;- キャラファイル:存在チェック
+	SIF !EXISTCSV(L_I, 0)
+		CONTINUE
+
+	;악마フォルダは除外
+	IF INRANGE(L_I, 2001,4098)
+		;ただしこれらは除外しない
+		SIF !GROUPMATCH(L_I, [[キャラ:アマテラス]], [[キャラ:モー・ショボー]], [[キャラ:ベルゼブブ]], [[キャラ:ユキジョロウ]], [[キャラ:アリス]])
+			CONTINUE
+	ENDIF
+
+	;作品制御で表示分岐
+	IF !GSMN_CTL_MODE
+
+	ELSE
+		;出身作品によるフィルタ
+		;-1は全てのキャラを通す
+		IF GSMN_ORIGIN_NO == -1
+		;作品の最後尾は『その他』
+		ELSEIF GSMN_ORIGIN_NO == GSMN_ORIGIN_NUM - 1
+			SIF STRLENS(CSVCSTR(L_I, GETNUM(CSTR, "出身作品")))
+				CONTINUE
+		ELSE
+			SIF CSVCSTR(L_I, GETNUM(CSTR, "出身作品")) != GSMN_ORIGIN:GSMN_ORIGIN_NO
+				CONTINUE
+		ENDIF
+
+		;性別によるフィルタ
+		SIF L_SEX == 2 - CSVTALENT(L_I, GETNUM(TALENT, "남자"))
+			CONTINUE
+	ENDIF
+
+	GSMN_LIST:L_CNT = L_I
+	L_CNT ++
+
+NEXT
+
+L_PAGE_MAX = (L_CNT-1) / L_CNT_PRINT_DATA
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+$PRINT_LIST
+
+;ライン表示:新ページ
+CALL C_LINE
+PRINTFORML 【奴隷購入】
+PRINTFORML 新たな奴隷を購入します。購入には資金を100消費します。
+;PRINTFORML 購入したいキャラを선택하세요。口上が存在するキャラクターは、名前がピンクで表示されます。
+PRINTFORML 購入したいキャラを선택하세요。
+PRINTFORML （現在の奴隷人数：{CHARANUM-1}명／資金：{MONEY}）＜page.{L_PAGE}/{L_PAGE_MAX}＞ (합 {L_CNT}명)
+DRAWLINE
+
+
+L_PREV = 0
+L_NEXT = 0
+L_HIT_CNT = 0
+L_HIT = 0
+FOR L_I, 0 + (L_PAGE * L_CNT_PRINT_DATA), L_RANGE
+
+	;- 存在チェック
+	SIF GSMN_LIST:L_I < 0
+		CONTINUE
+
+	;-----------------------------
+	;- キャラクター表示
+	;-----------------------------
+	L_HIT_CNT ++
+
+	;- 次ページを作成する必要があるか
+	IF L_HIT_CNT > (L_CNT_PRINT_DATA)
+		;次ページ有りの場合、当ページは出力完了の為終了
+		L_NEXT = 1
+		BREAK
+	ENDIF
+
+	L_T = GSMN_LIST:L_I
+
+	;表示
+	PRINTFORM [%TOSTR(L_T),4%] 
+;------------------------------------------------- 暫定でオミット
+;	TRYCCALLFORM KOJO_EXIST_K{L_T}
+;		SETCOLOR COLOR("ピンク")
+;	CATCH
+;	ENDCATCH
+;-------------------------------------------------
+	PRINTFORM %CSVNAME(L_T,0), 24, LEFT% 
+	RESETCOLOR
+	PRINTFORM %DB_TALENT_NAME(L_T, "남자", 1)% 
+
+	IF GSMN_VIEW_MODE
+		PRINT [
+		SIF !CSVABL(L_T, GETNUM(ABL, "가창기능"))
+			SETCOLOR COLOR("伏字")
+		PRINT 가희
+		RESETCOLOR
+		SIF !CSVABL(L_T, GETNUM(ABL, "전투기능"))
+			SETCOLOR COLOR("伏字")
+		PRINT 전투
+		RESETCOLOR
+;		SIF !CSVABL(L_T, GETNUM(ABL, "공작기능"))
+;			SETCOLOR COLOR("伏字")
+;		PRINT 工
+		RESETCOLOR
+		PRINT ] 
+	ENDIF
+
+
+	L_STR=
+	IF L_T == MASTER
+		SETCOLOR COLOR("水色")
+		L_STR = MASTER
+	; 既に所有済
+	ELSEIF GETCHARA(L_T, 0) > -1
+		SETCOLOR COLOR("ピンク")
+		L_STR = 소유중
+		;在庫
+		SIF !GSMN_STOCK:L_T
+			GSMN_STOCK:L_T =1
+	;中古販売：失踪後5日経過すると中古品として並ぶ
+	ELSEIF GSMN_STOCK:L_T > 1 && GSMN_STOCK:L_T < DAY
+		SETCOLOR COLOR("黄色")
+		L_STR = 중고품
+	; 在庫無し
+	ELSEIF GSMN_STOCK:L_T
+		SETCOLOR COLOR("群青")
+		L_STR = 재고없음
+	ELSE
+	ENDIF
+	SIF STRLENS(L_STR)
+		L_STR = 【%L_STR%】
+	PRINTFORM %L_STR, 10, LEFT%
+	PRINT  
+	RESETCOLOR
+
+	L_HIT ++
+
+	;改行
+	SIF (L_HIT % 2) == 0
+		PRINTL
+
+NEXT
+
+L_PREV = (L_PAGE <= 0) ? 0 # 1
+
+;- 空行
+FOR L_I, 0, (L_CNT_PRINT_DATA / 2) - (L_HIT / 2)
+	PRINTL
+NEXT
+
+PRINTL
+
+;作品制御で表示分岐
+IF !GSMN_CTL_MODE
+	;- SMN:ユニットタイプリスト
+	CALL SMN_PRINT_UNIT_TYPE_LIST(GSMN_RACE_NO)
+ELSE
+	DRAWLINE
+	PRINTFORMLC [5012]성별：\@(L_SEX == 2) ? %"  "% # ♀\@\@(L_SEX == 1) ? %"  "% # ♂\@
+	IF GSMN_ORIGIN_NO == -1
+		PRINTFORMLC [5013]출신：전부
+	ELSE
+		PRINTFORMLC [5013]출신：%GSMN_ORIGIN:GSMN_ORIGIN_NO%
+	ENDIF
+	PRINTFORMLC [5014]모든 작품
+	PRINTL
+	DRAWLINE
+ENDIF
+
+
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [5007]이전 페이지\@
+PRINTLC [5000] 돌아온다
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [5009]다음 페이지\@
+PRINTFORMLC [5010]작품 제어：\@(!GSMN_CTL_MODE) ? 通常 # 作品別 \@
+PRINTL
+PRINTFORMLC 　
+PRINTFORMLC 　
+PRINTFORMLC 　
+PRINTFORMLC [5011]표시 모드：\@(!GSMN_VIEW_MODE) ? 通常 # 詳細 \@
+PRINTL
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 5000
+		RETURN 0
+
+	;- 位置変更
+	CASE 4000 TO 4050
+		SIF GSMN_CTL_MODE
+			GOTO ERROR
+
+		L_TMP = L_INPUT-4000
+
+		IF L_TMP == 50
+
+		ELSEIF L_TMP < DEFSMN_RACE_NUM
+			IF !STRLENS(GSMN_RACE:L_TMP)
+				GOTO ERROR
+			ELSE
+
+			ENDIF
+		ENDIF
+
+		L_PAGE=0
+		GSMN_RACE_NO = L_TMP
+		GOTO MAKE_LIST
+
+	;- キャラ
+	CASE L_START TO L_END -1
+
+		;- CHK:ABLE
+		IF !MATCH(GSMN_LIST, L_INPUT)
+			GOTO ERROR
+		ENDIF
+
+		;- 召喚:情報(メイン)
+		CALL SUMMONS_DATA_MAIN(L_INPUT)
+		FINDELEMENT GSMN_LIST, RESULT
+		L_PAGE = RESULT / L_CNT_PRINT_DATA
+		GOTO PRINT_LIST
+
+	;이전 페이지
+	CASE 5007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO PRINT_LIST
+	;다음 페이지
+	CASE 5009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO PRINT_LIST
+
+	;- 作品制御
+	CASE 5010
+		GSMN_CTL_MODE = !GSMN_CTL_MODE
+		L_PAGE = 0
+		GOTO MAKE_LIST
+
+	;- 表示モード
+	CASE 5011
+		GSMN_VIEW_MODE = !GSMN_VIEW_MODE
+		GOTO PRINT_LIST
+
+	;- 性別制御
+	CASE 5012
+		SIF !GSMN_CTL_MODE
+			GOTO ERROR
+		L_SEX = (L_SEX + 1) % 3
+		L_PAGE = 0
+		GOTO MAKE_LIST
+
+	;- 出身作品制御
+	CASE 5013
+		SIF !GSMN_CTL_MODE
+			GOTO ERROR
+		CALL SMN_ORIGIN_CTL
+		L_PAGE = 0
+		GOTO MAKE_LIST
+
+	;- 全作品
+	CASE 5014
+		SIF !GSMN_CTL_MODE
+			GOTO ERROR
+		GSMN_ORIGIN_NO = -1
+		L_PAGE = 0
+		GOTO MAKE_LIST
+
+	;- その他
+	CASEELSE
+		$ERROR
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+GOTO PRINT_LIST
+
+
+;=================================================
+;   sub SUMMONS_DATA_MAIN
+;=================================================
+;   召喚:情報(メイン)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+; Output:
+;  RETURN				対象キャラ
+;-------------------------------------------------
+@SUMMONS_DATA_MAIN(ARG)
+#DIM L_T
+#DIM L_PAGE
+#DIM L_INPUT
+#DIM L_PREV
+#DIM L_NEXT
+#DIM L_CHK
+#DIM L_TMP
+
+REDRAW 0
+
+L_T = ARG
+
+;ライン表示:新ページ
+CALL C_LINE
+FINDELEMENT GSMN_LIST, L_T
+IF RESULT > 0
+	L_TMP = GSMN_LIST:(RESULT-1)
+	L_PREV = (L_TMP < 0) ? -1 # L_TMP
+ELSE
+	L_PREV = -1
+ENDIF
+L_TMP = GSMN_LIST:(RESULT+1)
+L_NEXT = (L_TMP < 0) ? -1 # L_TMP
+
+SELECTCASE L_PAGE
+	CASE 0
+		;- 召喚情報:基本
+		CALL SUMMONS_DATA_BASIC(L_T)
+ENDSELECT
+DRAWLINE
+
+PRINTFORML このキャラ를 구입할까요？
+
+PRINTL
+L_CHK=0
+IF L_T == MASTER
+	L_CHK = 0
+	PRINTFORML （※このキャラクターはプレイヤーキャラ(MASTER)の為、購入出来ません）
+ELSEIF L_T == 167
+	L_CHK = 1
+	PRINTFORMLC [1] 구입한다
+	PRINTL
+ELSEIF GROUPMATCH(L_T, [[キャラ:あなたの娘]], [[キャラ:奴隷の娘]])
+	L_CHK = 0
+	PRINTFORML （※このキャラクターは購入出来ません）
+ELSEIF FINDCHARA(NO, L_T, 0) > -1 
+	L_CHK = 0
+	PRINTFORML （※このキャラクターは所有済みの為、新たに購入は出来ません）
+ELSEIF GSMN_STOCK:L_T > 1 && GSMN_STOCK:L_T < DAY
+	L_CHK = 1
+	SETCOLOR COLOR("群青")
+	PRINTFORML （※このキャラクターは中古品の為、表示されている情報と違う場合があります）
+	RESETCOLOR
+	PRINTFORMLC [1] 구입한다
+	PRINTL
+ELSEIF GSMN_STOCK:L_T
+	SIF FLAG:デバッグモード
+		GOTO DATA_OK
+	L_CHK = 0
+	PRINTFORML （※このキャラクターは在庫無しの為、新たに購入は出来ません）
+ELSE
+	$DATA_OK
+	L_CHK = 1
+	PRINTFORMLC [1] 구입한다
+	PRINTL
+ENDIF
+PRINTL
+PRINTFORMLC \@(L_PREV < 0) ? %" " * 16% # [1007]이전 캐릭터\@
+PRINTFORMLC [0] 돌아온다
+PRINTFORMLC \@(L_NEXT < 0) ? %" " * 16% # [1009]다음 캐릭터\@
+PRINTL
+
+;-----------------------------
+;- コマンド受付
+;-----------------------------
+
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+	;戻る
+	CASE 0
+		REDRAW 1
+		RETURNFORM ARG
+
+	;設定
+	CASE 1
+		SIF !L_CHK
+			GOTO ERROR
+
+		IF MONEY < 100
+			;INPUTエラー対応
+			CALL C_INPUT_ERROR("구입에 필요한 자금이 부족합니다")
+			GOTO INPUT_LOOP
+		ENDIF
+		MONEY -= 100
+
+		;- 召喚:実行
+		CALL SUMMONS_EXE(L_T)
+
+		PRINTFORMW %CSVNAME(L_T, 0)%를 구입했습니다。
+
+		SIF GSMN_STOCK:L_T > 1 && GSMN_STOCK:L_T < DAY
+			CALL 中古購入処理, CHARANUM-1
+
+		REDRAW 1
+		RETURN
+	;前
+	CASE 1007
+		SIF L_PREV < 0
+			GOTO ERROR
+		ARG = L_PREV
+
+	;次
+	CASE 1009
+		SIF L_NEXT < 0
+			GOTO ERROR
+		ARG = L_NEXT
+
+	;- その他
+	CASEELSE
+		$ERROR
+		RESULT = L_INPUT
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+
+;=================================================
+;   sub SUMMONS_DATA_BASIC
+;=================================================
+;   召喚:情報(基本)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@SUMMONS_DATA_BASIC(ARG)
+#DIM L_T
+L_T = ARG
+
+;-- 紹介
+PRINTFORML キャラクターNo.{L_T,3,LEFT}
+PRINTFORM キャラクター名:%CSVNAME(L_T, 0), 40, LEFT%
+PRINTFORML 出身作品:%CSVCSTR(L_T, GETNUM(CSTR, "出身作品"))%
+PRINTFORML
+
+;- 表示:STATUS(素質)
+PRINTFORML ■ TALENT(素質) ■
+CALL INFO_STATUS_TALENT(L_T, 1)
+PRINTL
+;- 衣装:情報
+CALL CLOTHES_INFO(L_T, 1)
+PRINTL
+
+;- 表示:STATUS(紹介)
+PRINTFORML ■ 인물소개 ■
+CALL INFO_STATUS_INTRODUCTION(L_T, 1)
+PRINTL
+
+
+
+;=================================================
+;   sub SUMMONS_EXE
+;=================================================
+;   召喚:実行
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@SUMMONS_EXE(ARG)
+#DIM L_TGT_BAK
+
+L_TGT_BAK = TARGET
+
+;- 共通:キャラ追加
+CALL C_ADD_CHARA(ARG, 5)
+;登録失敗時
+SIF RESULT
+	RETURN
+
+TARGET = CHARANUM-1
+
+;- VAR:ターゲット設定
+CALLF VAR_SET_TARGET(TARGET)
+
+CFLAG:イベント加入 = 0
+
+;在庫
+SIF !GSMN_STOCK:(NO:TARGET)
+	GSMN_STOCK:(NO:TARGET) =1
+
+SIF L_TGT_BAK > -1
+	TARGET = L_TGT_BAK
+
+;- VAR:リスト更新
+CALL VAR_MAKE_LIST
+
+

@@ -1,0 +1,268 @@
+
+;-------------------------------------------------
+;住人業務　業務　娼婦
+;-------------------------------------------------
+@WORK_T_Hl(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_T
+#DIMS M_NAME
+#DIM L_K
+
+L_T = TARGET
+TARGET = ARG:0
+
+IF !RAND:3
+	M_NAME = 年若い青年
+ELSEIF !RAND:2
+	M_NAME = 中年サラリーマン
+ELSE
+	M_NAME = ややマセた少年
+ENDIF
+
+
+CLEARLINE LINECOUNT
+DRAWLINE
+
+CALL C_PICTURE(ARG:0,ARG:1)
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORM 　　　　　
+		IF !RAND:3
+			PRINTFORML 「%CSTR:語尾YES%、やれるだけやってみ%CSTR:語尾ます%」
+		ELSEIF !RAND:2
+			PRINTFORML 「……上手くできたみたい%CSTR:語尾肯定2%」
+		ELSE
+			PRINTFORML 「まだ工夫がいるみたい%CSTR:語尾肯定2%」
+		ENDIF
+PRINTFORML 
+PRINTFORM 　　　　　
+PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に促進され、繁華街でひっそりと援交を始めた…
+PRINTFORMW 
+
+
+
+
+IF (Talent:非処女 == 1 && Talent:合意 == 1) && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1) && RAND:10 >= 5
+SETCOLOR 250,50,200
+DRAWLINE
+	IF !RAND:5 && TALENT:学生
+		PRINTFORML %CALLNAME:MASTER%は仕事の関係で%CALLNAME%の通う学校を訪れていた。
+		;小学生
+		IF TALENT:学生 == 5
+			PRINTFORML %CALLNAME%はちょうど体育の時間だったらしく、体操服に身を包んで運動する姿を見つけた。
+			PRINTFORML 仕事を終えて後は帰るだけとなっていた%CALLNAME:MASTER%は教師に依頼し、%CALLNAME%を体育館裏に誘い出した…
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+			PRINTFORML 
+			PRINTFORML クラスメイトが体育の授業を受けている中、%CALLNAME%だけは保健体育の実技を行っていた。
+			PRINTFORML 授業中のセックスは気の咎める%CALLNAME%だったが、娼婦として金を払われてしまえば従うしかない。
+			PRINTFORML 教師役である%CALLNAME:MASTER%の指示に従い、%CALLNAME%はオナニーしながらフェラチオを行って手早く準備する。
+			PRINTFORML 初めは気乗りしなかった%CALLNAME%も、ペニスの臭いを嗅がされれば雌としての本能が疼きだす。
+			PRINTFORML %CALLNAME:MASTER%に制止されるまで熱心に口腔で奉仕を行い、無意識のうちにカリ首の裏まで丁寧に舐めていた。
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+			PRINTFORML 
+			PRINTFORML 壁に手を付いて尻を突き出した%CALLNAME%は腰をガッチリと掴まれ、背後から%CALLNAME:MASTER%のペニスを挿入された。
+			PRINTFORML 調教された幼い膣穴はサイズの違う%CALLNAME:MASTER%のペニスも大口開けて呑み込み、きつく締め上げる。
+			PRINTFORML 子宮口を突かれるたびに膣肉が絡みつき、ぱっくりと口を開けた子宮に精液を求めてしまう。
+			PRINTFORML はしたなく中出しを求める%CALLNAME%に、%CALLNAME:MASTER%は射精と妊娠についての説明を%CALLNAME%にさせる。
+			PRINTFORML その上で中出しをしても、赤子ができてもいいのか質問された%CALLNAME%は髪を振り乱しながら頷く。
+			PRINTFORML 微かに残った理性が同意の言葉こそ発させなかったが、肉体は子宮口を開いて屈従していた。
+			PRINTFORML %CALLNAME:MASTER%が子宮に精液を注ぎ込むのと同時に%CALLNAME%は絶頂する。
+			PRINTFORML 排卵日はいつだっただろうかと考えながらも、雌の作法を仕込まれた%CALLNAME%の肉体は無意識のうちにお掃除フェラを行っていた…
+		;中学生
+		ELSEIF TALENT:学生 == 4
+			PRINTFORML %CALLNAME%はちょうど移動教室だったらしく、勉強道具を抱えながら友達と廊下を歩いていた。
+			PRINTFORML 仕事を終えて後は帰るだけとなっていた%CALLNAME:MASTER%は、%CALLNAME%を呼び出すと人目のつかない場所へと移動した。
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+			PRINTFORML 
+			PRINTFORML 次の時間に使用する教室から廊下を曲がってすぐの場所で、%CALLNAME%は%CALLNAME:MASTER%のペニスを咥えていた。
+			PRINTFORML 廊下の先には次の時間に使用される教室がないので、人が来ないことを%CALLNAME:MASTER%は知っていた。
+			PRINTFORML だが人が来ないうちに終わらせたいと焦る%CALLNAME%の様子が可愛らしかったため、%CALLNAME%には教えないでいる。
+			PRINTFORML 娼婦としての仕事だと金を渡されてしまった%CALLNAME%は、注意力散漫な様子でフェラチオを続ける。
+			PRINTFORML そんな拙い奉仕で射精に導けるはずもなく、廊下に予鈴が鳴り響く。
+			PRINTFORML ますます焦りだした%CALLNAME%は大胆にも下着をずらして秘所をあらわにすると、有無を言わさず肉棒を招き入れた。
+			PRINTFORML 立ち正常位で抱き合うことになった%CALLNAME:MASTER%は、ふと悪戯心が芽生えて%CALLNAME%を壁に押し付ける。
+			PRINTFORML 不思議そうに%CALLNAME:MASTER%を見上げた%CALLNAME%は、友達が探しに来ていると教えられて身を硬くした。
+			PRINTFORML 娼婦であることを学校の友達には隠している%CALLNAME%は、バレるかもしれない状況に肉棒を抜こうとする。
+			PRINTFORML しかし、壁に押し付けられてしまっているため抜くことができず、ジタバタと暴れることしか出来ない。
+			PRINTFORML %CALLNAME:MASTER%が友達の動きを実況するたびに%CALLNAME%の膣内はきつく締まり、快感を助長する。
+			PRINTFORML やがてイキそうになってきた%CALLNAME%が中断を願い出るが、%CALLNAME:MASTER%は無視してピストンを続ける。
+			PRINTFORML 「友達と目が合った。こっちに来る。%CALLNAME%のイってる姿、見られちゃうよ」
+			PRINTFORML もはや絶頂を崖っぷちで我慢している状況の%CALLNAME%には、その言葉が後押しにしかならなかった。
+			PRINTFORML 
+			PRINTFORML 「イっちゃう！　イっちゃう！　あぁぁぁぁぁぁーーーーーっ！」
+			PRINTFORML 
+			PRINTFORML 盛大に潮を撒き散らしながら絶頂した%CALLNAME%は、過去最高の締め付けで%CALLNAME:MASTER%の肉棒に絡みつく。
+			PRINTFORML 思わぬ%CALLNAME%の反撃に射精させられた%CALLNAME:MASTER%は、呆然とした様子の%CALLNAME%に謝罪した。
+			PRINTFORML 友達が探しに来たのが嘘であると知った%CALLNAME%は顔を真っ赤にして怒ったかと思えば、%CALLNAME:MASTER%に口づけをした。
+			PRINTFORML 目を白黒させる%CALLNAME:MASTER%に、完全に火がついてしまったから責任を取るよう%CALLNAME%は迫る。
+			PRINTFORML 結局、次の授業を丸々サボって種付け交尾に勤しんだ%CALLNAME%は、子宮に精液を溜め込んだまま教室へと戻った…
+		;高校生
+		ELSEIF TALENT:学生 == 3
+			PRINTFORML %CALLNAME%はちょうど昼休みだったらしく、お弁当を手にして屋上へと向かっていた。
+			PRINTFORML 仕事を終えて後は帰るだけとなっていた%CALLNAME:MASTER%は、昼食を共にしようと屋上へと向かった。
+			PRINTFORML 
+			PRINTFORML 外向きに設置されたベンチの背後には花壇が並び、しゃがめば左右以外からは目隠しとなって見えなくなる。
+			PRINTFORML そのことに気付いた%CALLNAME:MASTER%は%CALLNAME%にお金を払うと、性欲の処理を依頼した。
+			PRINTFORML 念のため校舎の一辺が短い部分のベンチに移動し、左右に人が来にくい状況にしてから%CALLNAME%は跪く。
+			PRINTFORML 屋上で談笑する生徒の声をどこか別の世界の音のように聞き流しながら、%CALLNAME%はガチガチに勃起したペニスを口に含んだ。
+			PRINTFORML 誰かが左右のベンチに座ったときのことを考え、股間へと顔を深く埋めて顔を見られないように注意することも忘れない。
+			PRINTFORML おかげでフェラチオというよりもディープスロートのようになってしまったが、%CALLNAME:MASTER%が気にした様子はなかった。
+			PRINTFORML そのまま何度か咽喉奥に精液を送り込んだ%CALLNAME:MASTER%は、%CALLNAME%に四つん這いになるよう命じる。
+			PRINTFORML 仕事である以上、客の命令は聞けるならば聞かなくてはならない。
+			PRINTFORML %CALLNAME%は四つん這いになると、ベンチに座った%CALLNAME:MASTER%が挿入しやすいようお尻を上げた。
+			PRINTFORML フリフリと無意識に雄を誘う腰つきでお尻を揺らす%CALLNAME%の期待に沿うべく、%CALLNAME:MASTER%は一気に膣奥を貫く。
+			PRINTFORML さんざん胃袋に精液を流し込まれて発情していた%CALLNAME%の肉体は歓喜の叫びを上げ、征服者を迎え入れる。
+			PRINTFORML 他に生徒がいるにもかかわらず喘ぎ声を上げ続けた%CALLNAME%は、子宮にたっぷりと子種を注がれた。
+			PRINTFORML 身だしなみを整えた%CALLNAME%が立ち上がる頃にはすでに屋上に人影はなく、特定されることはなかった。
+			PRINTFORML しかし、それから暫くの間、屋上でセックスする生徒がいるという噂で校内は持ちきりになってしまった…
+		;大学生、学生
+		ELSE
+			PRINTFORML %CALLNAME%はちょうど講義が入っていなかったらしく、ベンチに腰掛けて読書の最中だった。
+			PRINTFORML 仕事を終えて後は帰るだけとなっていた%CALLNAME:MASTER%は、若い雌のフェロモンに中てられて溜まった性欲を
+			PRINTFORML 発散させようと%CALLNAME%に金を渡して空き教室へと連れ込んだ…
+			PRINTFORML 
+			PRINTFORML 「ここが大陰唇で、ここが小陰唇です……この上にあるのが陰核包皮で……」
+			PRINTFORML 
+			PRINTFORML 全裸にされた%CALLNAME%は教卓の上でＭ字開脚を行い、女体の解説をさせられていた。
+			PRINTFORML 自らの指で指し示しながら名称を述べ、もし弱点であるのならばそのことも併せて申告しなければならない。
+			PRINTFORML %CALLNAME:MASTER%に性の屈従を申し出るような女性としての暴挙にも関わらず、%CALLNAME%は解説を続ける。
+			PRINTFORML これが別の人間に対してならば%CALLNAME%も抵抗しただろうが、相手は愛する%CALLNAME:MASTER%だ。
+			PRINTFORML 自分を征服するための地図を譲り渡すことに何の躊躇いがあるだろうか。
+			PRINTFORML 尻穴や乳房、唇に臍といった部分まで解説を終える頃には、秘所から愛液が溢れ小さな水溜りを形成していた。
+			PRINTFORML その秘所をＶの字にした指で押し開いた%CALLNAME%は、いよいよ子宮の説明に入る。
+			PRINTFORML 期待からバキバキに勃起したペニスを隠そうともしない%CALLNAME:MASTER%に、%CALLNAME%は膣奥に隠れていた子宮口を示す。
+			PRINTFORML どのようにして子作りするのか、精子と卵子の働きについて簡単に解説した%CALLNAME%は、実習を提案する。
+			PRINTFORML 性の知識に乏しい童貞を導くように、%CALLNAME%は%CALLNAME:MASTER%を優しく膣内へと迎え入れた。
+			PRINTFORML 暴れようとするペニスを宥めようと肉ヒダが絡みつくが、所詮は調教された雌穴である。
+			PRINTFORML 少しばかり弱点を突き上げられただけですっかり従順になり、種付けをせがむだけの卑しい雌穴へと成り下がった。
+			PRINTFORML 何度もペニスに捏ねられ射精された%CALLNAME%の膣肉は、娼婦に相応しい柔蕩穴となった…
+		ENDIF
+	ELSEIF !RAND:4
+		PRINTFORML 日頃お世話になっている%CALLNAME:MASTER%に恩返しをするべく、%CALLNAME%は娼婦仲間を集めてパーティーを開いた。
+		PRINTFORML 大きなソファに横臥した%CALLNAME:MASTER%の前に食べ物が運ばれ、集められた娼婦が甲斐甲斐しく世話を始める。
+		PRINTFORML そうしてお腹を満たした%CALLNAME:MASTER%が食事を終えると、お楽しみの時間が始まった…
+		PRINTFORML 
+		IF !RAND:2
+			PRINTFORML 目隠しをされた%CALLNAME:MASTER%は、膣当てゲームに興じていた。
+			PRINTFORML 膝立ちになった%CALLNAME:MASTER%に娼婦が名乗りながら四つん這いで近付き、一度だけ肉棒を挿入して感触を覚えてもらう。
+			PRINTFORML そうして一通り名前と感触を覚えてもらったら、次は名乗らずに肉棒を挿入する。
+			PRINTFORML 絡み付く膣肉の感触だけで誰のものか当て、正解したら種付けする権利を得るという内容だった。
+			PRINTFORML %CALLNAME:MASTER%は次々と正解して集まった娼婦に種付けしていくが、%CALLNAME%の番になると急に悩みだす。
+			PRINTFORML 違う娼婦の名前を出しては迷う%CALLNAME:MASTER%に、%CALLNAME%は心臓が破裂しそうだった。
+			PRINTFORML %CALLNAME%は絶対に解ってもらえるという自信があったが、なかなか自分の名前が呼ばれないことに焦りだす。
+			PRINTFORML 普段から抱かれているのに、娼婦仲間の前で当ててもらえないなど恥辱以外の何物でもない。
+			PRINTFORML 早く当てて種付けして欲しいと、%CALLNAME%の膣肉が甘えるように肉棒に縋りつく。
+			PRINTFORML 「わかった、%CALLNAME%だ」
+			PRINTFORML 無事に正解してもらえた%CALLNAME%の心は安堵と歓喜に包まれ、キツイくらいの締め付けでもって精液を強請る。
+			PRINTFORML 一度の射精で満足できなかった%CALLNAME%が二回戦に突入したことで膣当てゲームは終了したが、乱交は夜更けまで続いた…
+		ELSE
+			PRINTFORML %CALLNAME:MASTER%は目の前に並んだわかめ酒を一つずつ口にしていた。
+			PRINTFORML 注がれた酒をすべて飲み干してもらった娼婦から抱いてもらえるというルールに、アピール合戦が始まった。
+			PRINTFORML 初めは和気藹々と進められていたアピール合戦だったが、なかなか飲まれない娼婦は膣からアルコールを摂取し続けることとなる。
+			PRINTFORML 酩酊状態になった娼婦はルールを無視して%CALLNAME:MASTER%に襲い掛かり、好き勝手に乱交を始めてしまう。
+			PRINTFORML 混沌と化した状況でなお自制心を保っていた%CALLNAME%だったが、相手をしてもらえない寂しさと酔いから怒りを爆発。
+			PRINTFORML %CALLNAME:MASTER%にまとわりつく娼婦を蹴散らして独占すると、対面座位の姿勢で交わったまま抱きつき離れようとしなかった。
+			PRINTFORML 子供のように駄々をこねて離れようとしない%CALLNAME%が満足するまで、%CALLNAME:MASTER%は精液を注ぐ羽目になった…
+		ENDIF
+	ELSEIF !RAND:3
+		PRINTFORML %CALLNAME%はカフェに偶然居合わせた%CALLNAME:MASTER%に客の愚痴をこぼしていた。
+		PRINTFORML 娼婦という仕事柄、人と肌を合わせる回数が多いためいつかは当たる『地雷客』に、つい先ほど当たってしまったのである。
+		PRINTFORML 『地雷客』は大してセックスが上手くないのに自信に満ち溢れ、ドヤ顔で大事な部分を雑に扱ってくるので相手をするのが非常に苦痛なのだ。
+		PRINTFORML 熟練のテクニックも無いくせに、ここが気持ちいいんだろと見当外れの場所を責められては演技も乗らない。
+		PRINTFORML お金を貰ってしまった以上は、きちんと愉しませてあげなければならない。当然、次回は指名されてもお断りするのだが。
+		PRINTFORML そうして何とか『地雷客』の相手を終えた%CALLNAME%は、ストレスの発散にカフェで甘味を物色していたのである。
+		PRINTFORML 一通り愚痴を聞き終えた%CALLNAME:MASTER%は、誘うような%CALLNAME%の視線に苦笑しながらカフェの奥へと案内した。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML 『地雷客』の後だったためか、%CALLNAME%は%CALLNAME:MASTER%に抱かれることが普段の何倍も気持ちよく感じられた。
+		PRINTFORML %CALLNAME%の開発、調教をしたのは%CALLNAME:MASTER%なので当然なのだが、性感帯をきちんと刺激してくれる。
+		PRINTFORML また%CALLNAME%の反応を見ながら責め方に緩急をつけるので単調にならず、最後まで楽しむことが出来た。
+		PRINTFORML 演技など必要ない、本気の交尾を存分に楽しんだ%CALLNAME%は、また仕事を頑張ろうと気持ちを入れ替える。
+		PRINTFORML だが今は、お互いに燃料をくべすぎて消えそうもない情欲の火を小さくするために、再び肌を重ねるのだった…
+	ELSEIF !RAND:2
+		PRINTFORML %CALLNAME:MASTER%のお気に入りである%CALLNAME%に回される客というのは、重要人物であることが多い。
+		PRINTFORML 自ら手塩にかけて仕込んだ娼婦ということも選ばれる理由であるのだろうが、それ以上に期待されているのが情報収集である。
+		PRINTFORML 
+		PRINTFORML 「……いつもみたいに、私の記憶にアクセスして……？」
+		PRINTFORML 
+		PRINTFORML 聞き出した情報を口頭では報告せず、%CALLNAME:MASTER%の権限において閲覧されることを望む%CALLNAME%。
+		PRINTFORML 通常ならば知ることができない情報も、%CALLNAME:MASTER%にかかれば丸裸である。
+		PRINTFORML 記憶だけでなく心の内のすべてを一方的に曝け出しながら抱かれる、%CALLNAME:MASTER%の所有物として犯されていく感覚。
+		PRINTFORML もはや普通のセックスでは満足しきれず、肉体だけでなく、記憶や精神すらも犯してもらって%CALLNAME%は絶頂した。
+		PRINTFORML %CALLNAME:MASTER%に役立つ情報をもたらすことができれば、また記憶を覗いてもらえる。
+		PRINTFORML %CALLNAME%もまた次回の性行為に期待して、情報収集に励むのであった…
+	ELSE
+		PRINTFORML %CALLNAME%はホテルの一室で客の男から自分のモノになるよう執拗に迫られていた。
+		PRINTFORML 常連客である男は%CALLNAME%の弱点を熟知しており、理性を溶かす方法も心得ていた。
+		PRINTFORML 例えば、乳首には決して触れず乳輪をなぞる。アヌスの皺を数えながら皺に沿って指を滑らすが、挿入はしないなど。
+		PRINTFORML 強い刺激を与えて絶頂に押し上げるのではなく、弱い刺激で理性を炙り続けることによって考える力を奪うのだ。
+		PRINTFORML 絶頂を迎えたくとも刺激が足りず、また持続的に与えられる快感が身体に染み付いた絶頂の記憶を甦らせて期待に肉体を疼かせる。
+		PRINTFORML 数時間にも及ぶ男の責めに、これ以上の抵抗は後戻りできなくなると判断した%CALLNAME%はやむなく男に屈する言葉を口にした。
+		PRINTFORML 口先だけの言葉に嬉々として種付け交尾を始めた男を心の中で嘲笑いながら、%CALLNAME%の肉体は潮吹き絶頂していた…
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は%CALLNAME:MASTER%への思いが消えないうちに、その肉体を調教しなおしてもらっていた。
+		PRINTFORML 娼婦仲間の間でも、やけに身体の相性がいい客が現れることは稀によくあると言われている。
+		PRINTFORML 今回の客がそうだったのだろうと男の顔を思い出そうとした%CALLNAME%だったが、愛しい人の顔しか思い浮かばなかった。
+		PRINTFORML その愛しい人が射精間近の際に浮かべる表情を見て取った%CALLNAME%は、腰を押し付け肉棒を奥へと迎え入れようとする。
+		PRINTFORML 大事な場所はこの人にしか使わせないのだと固く決心した%CALLNAME%の心から客の影は完全に消え去っていた…
+	ENDIF
+DRAWLINE
+PRINTFORMW
+CALL JN_SEX_EXP
+RESETCOLOR
+
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+EXP:業務経験 += 1
+PRINTFORML 【業務経験　　:{EXP:業務経験-1, 5 ,LEFT}→{EXP:業務経験, 5 ,RIGHT}】
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = %M_NAME%
+SIF CSTR:初キス相手名 == ""
+	CSTR:初キス相手名 = %M_NAME%
+SIF CSTR:初精飲相手名 ==""
+	CSTR:初精飲相手名 = %M_NAME%
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = %M_NAME%
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = %M_NAME%
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = %M_NAME%
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = %M_NAME%
+
+
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+CALL JN_SEX_EXP
+
+DRAWLINE
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 5
+	L_K = (((EXP:業務経験/100)+1)*1000)+(EXP:業務経験*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 更に%CALLNAME%の活躍が「シティ」に認められ、大量の功績を獲得した！
+	PRINTFORML 【功績　　:{Flag:都市_功績 - L_K, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
+	DRAWLINE
+ENDIF
+PRINTFORMW 
+TARGET = L_T
+

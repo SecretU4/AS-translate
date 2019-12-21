@@ -1,0 +1,69 @@
+
+;-------------------------------------------------
+;セックス経験増加
+;-------------------------------------------------
+@JN_SEX_EXP
+#DIM SEX_P
+
+PRINTFORML 【――――――――――――――――――経験蓄積――――――――――――――――――】
+SEX_P = ((RAND:7)+2)
+EXP:キス経験 += SEX_P
+PRINTFORM 【キス経験　　:{EXP:キス経験-SEX_P, 5 ,LEFT}→{EXP:キス経験, 5 ,RIGHT}】
+SEX_P = ((RAND:7)+2)
+EXP:Ｖ経験 += SEX_P
+PRINTFORM 【Ｖ経験　　　:{EXP:Ｖ経験-SEX_P, 5 ,LEFT}→{EXP:Ｖ経験, 5 ,RIGHT}】
+SEX_P = ((RAND:7)+2)
+EXP:Ａ経験 += SEX_P
+PRINTFORM 【Ａ経験　　　:{EXP:Ａ経験-SEX_P, 5 ,LEFT}→{EXP:Ａ経験, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:7)+2)
+EXP:Ｃ経験 += SEX_P
+PRINTFORM 【Ｃ経験　　　:{EXP:Ｃ経験-SEX_P, 5 ,LEFT}→{EXP:Ｃ経験, 5 ,RIGHT}】
+SEX_P = ((RAND:7)+2)
+EXP:Ｂ経験  += SEX_P
+PRINTFORM 【Ｂ経験　　　:{EXP:Ｂ経験-SEX_P, 5 ,LEFT}→{EXP:Ｂ経験, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:2)+1)
+EXP:性交経験 += SEX_P
+PRINTFORM 【性交経験　　:{EXP:性交経験-SEX_P, 5 ,LEFT}→{EXP:性交経験, 5 ,RIGHT}】
+SEX_P = ((RAND:2)+1)
+EXP:Ａ性交経験 += SEX_P
+PRINTFORM 【Ａ性交経験　:{EXP:Ａ性交経験-SEX_P, 5 ,LEFT}→{EXP:Ａ性交経験, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:5)+1)
+EXP:手淫経験 += SEX_P
+PRINTFORM 【手淫経験　　:{EXP:手淫経験-SEX_P, 5 ,LEFT}→{EXP:手淫経験, 5 ,RIGHT}】
+SEX_P = ((RAND:5)+1)
+EXP:フェラ経験 += SEX_P
+PRINTFORM 【フェラ経験　:{EXP:フェラ経験-SEX_P, 5 ,LEFT}→{EXP:フェラ経験, 5 ,RIGHT}】
+IF TALENT:巨乳 == 1 || TALENT:爆乳 == 1
+	SEX_P = ((RAND:5)+1)
+	EXP:パイズリ経験 += SEX_P
+	PRINTFORM 【パイズリ経験:{EXP:パイズリ経験-SEX_P, 5 ,LEFT}→{EXP:パイズリ経験, 5 ,RIGHT}】
+ENDIF
+PRINTFORML
+SEX_P = ((RAND:3)+1)
+EXP:絶頂経験 += SEX_P
+PRINTFORM 【絶頂経験　　:{EXP:絶頂経験-SEX_P, 5 ,LEFT}→{EXP:絶頂経験, 5 ,RIGHT}】
+SEX_P = ((RAND:3)+1)
+EXP:精液経験 += SEX_P
+PRINTFORM 【精液経験　　:{EXP:精液経験-SEX_P, 5 ,LEFT}→{EXP:精液経験, 5 ,RIGHT}】
+SEX_P = ((RAND:3)+1)
+EXP:精飲経験 += SEX_P
+PRINTFORM 【精飲経験　　:{EXP:精飲経験-SEX_P, 5 ,LEFT}→{EXP:精飲経験, 5 ,RIGHT}】
+PRINTFORML
+SEX_P = ((RAND:3)+1)
+EXP:膣射経験 += SEX_P
+PRINTFORM 【膣射経験　　:{EXP:膣射経験-SEX_P, 5 ,LEFT}→{EXP:膣射経験, 5 ,RIGHT}】
+SEX_P = ((RAND:5)+1)
+EXP:奉仕快楽経験 += SEX_P
+PRINTFORM 【奉仕快楽経験:{EXP:奉仕快楽経験-SEX_P, 5 ,LEFT}→{EXP:奉仕快楽経験, 5 ,RIGHT}】
+PRINTFORML
+PRINTFORML 【――――――――――――――――――――――――――――――――――――――――】
+
+
+
+
+
+
+

@@ -1,0 +1,715 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CONFIG.ERB
+;	Facility	:コンフィグ画面。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- 表示系
+;
+;	・ CONFIG_LIST					RGP:コンフィグ(LIST)
+;
+;	# 個別処理
+;	・ CONFIG_PRINT_STATUS			コンフィグ表示:状態
+;	・ CONFIG_MAIN					表示:コンフィグ 主処理
+;
+;	# データ
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: デバッグモード
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: STATUS伏字モード
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: ＮＴＲモード
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: 自動上昇手動モード
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: 妊娠機能
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: 休憩確認機能
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: レイプイベント機能
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: 調教開始時の対象キャラ固定
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: ２週目モード
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: RENAME作成
+;	・ CONFIG_DATA_xx				コンフィグNo.xx: キャラデータ変更
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   表示系
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub CONFIG_LIST
+;=================================================
+;   コンフィグ(LIST)
+;-------------------------------------------------
+@CONFIG_LIST
+#DIM L_I
+#DIM L_CNT
+#DIM L_INPUT
+#DIM L_MAX
+#DIM L_TMP
+#DIM DYNAMIC L_HIT ,100
+#DIM DYNAMIC L_SWITCH ,100
+#DIMS L_STR
+
+;--初期化
+L_INPUT=0
+L_MAX = 20
+
+$PRINT_LIST
+
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML 設定したい本体機能のコンフィグを選んでください
+PRINTL
+
+;- 初期化
+VARSET L_HIT
+VARSET L_SWITCH
+L_CNT=0
+
+FOR L_I, 0, L_MAX
+	IF 1
+		;- コンフィグNo.xx: xxxx (表題)
+		TRYCCALLFORM CONFIG_DATA_{L_I}(L_I,"TITLE")
+
+			L_STR = %RESULTS%
+
+			;表示
+			PRINTFORM [%TOSTR(L_I),3%] 状態:
+
+			;- コンフィグ (PALAM)
+			CALLFORM CONFIG_DATA_{L_I}(L_I,"PALAM")
+
+			;- 表示:コンフィグ 主処理
+			CALL CONFIG_PRINT_STATUS(RESULT)
+
+			PRINTFORM | 
+			PRINTFORM %L_STR, 40, LEFT% 
+
+			;- コンフィグ (スイッチ)
+			CALLFORM CONFIG_DATA_{L_I}(L_I,"SWITCH")
+			IF RESULT
+				PRINTFORM [%TOSTR(L_I + 100),3%] 【反転】 
+				L_SWITCH:L_I = 1
+			ENDIF
+
+			L_HIT:L_I = 1
+			PRINTL
+			L_CNT ++
+		CATCH
+			;空行
+			PRINTL
+		ENDCATCH
+	ENDIF
+NEXT
+
+
+PRINTL
+
+PRINTLC  
+PRINTLC [1000]戻る
+PRINTLC  
+PRINTL 
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	CASE 1000
+		RETURN 0
+	CASE 0 TO 99
+		;- CHK:ヒット
+		IF !L_HIT:(L_INPUT)
+			GOTO ERROR
+		ENDIF
+
+		;表示:状態
+		CALL CONFIG_MAIN(L_INPUT)
+		GOTO PRINT_LIST
+
+	CASE 100 TO 199
+		L_TMP = L_INPUT - 100
+		;- CHK:スイッチ
+		IF !L_SWITCH:L_TMP
+			GOTO ERROR
+		ENDIF
+
+		;- コンフィグNo.xx: xxxx (値)
+		CALLFORM CONFIG_DATA_{L_TMP}(L_TMP,"SWITCH")
+
+		;- コンフィグ変更(反転)
+		FLAG:RESULTS = !FLAG:RESULTS
+		GOTO PRINT_LIST
+
+	CASEELSE
+		$ERROR
+		RESULT = L_INPUT
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+RESTART
+
+;-------------------------------------------------------------------------------
+;   個別処理
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub CONFIG_PRINT_STATUS
+;=================================================
+;   コンフィグ(表示:状態)
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+;-------------------------------------------------
+@CONFIG_PRINT_STATUS(ARG)
+IF ARG == 1
+	;水色
+	SETCOLOR 0x66FFFF
+	PRINT  ON 
+	RESETCOLOR
+ELSEIF ARG == 0
+	PRINT OFF 
+ELSE
+	PRINT --- 
+ENDIF
+
+;=================================================
+;   sub CONFIG_MAIN
+;=================================================
+;   表示:コンフィグ
+;-------------------------------------------------
+; Input:
+;  ARGS					対象コンフィグNo
+;-------------------------------------------------
+@CONFIG_MAIN(ARG)
+
+;表示:ページヘッダ
+CALL C_LINE
+
+;- コンフィグNo.xx: xxxx (表題)
+CALLFORM CONFIG_DATA_{ARG}(ARG,"TITLE")
+
+PRINTFORM 【%RESULTS%】
+
+;- コンフィグNo.xx: xxxx (値)
+CALLFORM CONFIG_DATA_{ARG}(ARG,"PALAM")
+
+PRINT 現在：
+;- 表示:コンフィグ 主処理
+CALL CONFIG_PRINT_STATUS(RESULT)
+PRINTL
+PRINTL
+
+;- コンフィグNo.xx: xxxx (説明)
+CALLFORM CONFIG_DATA_{ARG}(ARG,"EXPLANATION")
+
+RETURN
+
+;-------------------------------------------------------------------------------
+;   データ
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: STATUS伏字モード
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_1(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = STATUS伏字モード
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 1
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = STATUS伏字モード
+	;- 説明
+	CASE "EXPLANATION"
+		PRINTL STATUS画面の表示の際、値が0のステータスを伏字（グレー表示）にするかを選択します。
+		PRINTL ONにすると、値が0のステータスは伏字になります。
+		PRINTL 
+		PRINTL 
+		PRINTL [1] ONにする
+		PRINTL [0] OFFにする
+		PRINTL
+		PRINTL [100] 変更せずに戻る
+		CALL INPUT_INT(0,1,100)
+		SELECTCASE RESULT
+			CASE 0
+				PRINTW コンフィグをOFFにしました。
+				FLAG:L_STR = 0
+			CASE 1
+				PRINTW コンフィグをONにしました。
+				FLAG:L_STR = 1
+			CASE 100
+				;何も無し
+		ENDSELECT
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: バックバージンモード
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_2(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = バージンモード
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 1
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = バージンモード
+	;- 説明
+	CASE "EXPLANATION"
+		PRINTL 男性にもＡ処女を有効にするかどうかを選択します。
+		PRINTL ONにすると、男性にもＡ処女が表示されて、有効になります。
+		PRINTL 
+		PRINTL 
+		PRINTL [1] ONにする
+		PRINTL [0] OFFにする
+		PRINTL
+		PRINTL [100] 変更せずに戻る
+		CALL INPUT_INT(0,1,100)
+		SELECTCASE RESULT
+			CASE 0
+				PRINTW コンフィグをOFFにしました。
+				FLAG:L_STR = 0
+			CASE 1
+				PRINTW コンフィグをONにしました。
+				FLAG:L_STR = 1
+			CASE 100
+				;何も無し
+		ENDSELECT
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: ＮＴＲモード
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_3(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = ＮＴＲモード
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 1
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = ＮＴＲモード
+	;- 説明
+	CASE "EXPLANATION"
+		PRINTL NTR機能を有効にするかどうかを選択します。
+		PRINTL OFFにすると、労役等でのNTR関連機能がオフになります。
+		PRINTL 
+		PRINTL 
+		PRINTL [1] ONにする
+		PRINTL [0] OFFにする
+		PRINTL
+		PRINTL [100] 変更せずに戻る
+		CALL INPUT_INT(0,1,100)
+		SELECTCASE RESULT
+			CASE 0
+				PRINTW コンフィグをOFFにしました。
+				FLAG:L_STR = 0
+			CASE 1
+				PRINTW コンフィグをONにしました。
+				FLAG:L_STR = 1
+			CASE 100
+				;何も無し
+		ENDSELECT
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: 自動上昇手動モード
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_4(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = 自動上昇手動モード
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 1
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = 自動上昇手動モード
+	;- 説明
+	CASE "EXPLANATION"
+		PRINTL ABLUP自動上昇処理を手動に切り替えるかどうかを選択します。
+		PRINTL ONにすると、自動上昇処理が止まります。
+		PRINTL 
+		PRINTL 
+		PRINTL [1] ONにする
+		PRINTL [0] OFFにする
+		PRINTL
+		PRINTL [100] 変更せずに戻る
+		CALL INPUT_INT(0,1,100)
+		SELECTCASE RESULT
+			CASE 0
+				PRINTW コンフィグをOFFにしました。
+				FLAG:L_STR = 0
+			CASE 1
+				PRINTW コンフィグをONにしました。
+				FLAG:L_STR = 1
+			CASE 100
+				;何も無し
+		ENDSELECT
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: 妊娠機能
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_5(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = 妊娠機能
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 1
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = 妊娠機能
+	;- 説明
+	CASE "EXPLANATION"
+		PRINTL 妊娠機能を使用するかどうかを選択します。
+		PRINTL ONにすると、以下の条件の場合に妊娠し、数日後に出産します。
+		PRINTL 
+		PRINTL ・危険日に膣内射精（低確率）
+		PRINTL ・危険日に排卵誘発剤を使用して膣内射精（中確率）
+		PRINTL 
+		PRINTL 
+		PRINTL [1] ONにする
+		PRINTL [0] OFFにする
+		PRINTL
+		PRINTL [100] 変更せずに戻る
+		CALL INPUT_INT(0,1,100)
+		SELECTCASE RESULT
+			CASE 0
+				PRINTW コンフィグをOFFにしました。
+				FLAG:L_STR = 0
+			CASE 1
+				PRINTW コンフィグをONにしました。
+				FLAG:L_STR = 1
+			CASE 100
+				;何も無し
+		ENDSELECT
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: 休憩確認機能
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_6(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = 休憩確認機能
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 1
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = 休憩確認機能
+	;- 説明
+	CASE "EXPLANATION"
+		PRINTL 休憩の確認を使用するかどうかを選択します。
+		PRINTL ONにすると、休憩選択時に確認が出る様になります。
+		PRINTL 
+		PRINTL 
+		PRINTL [1] ONにする
+		PRINTL [0] OFFにする
+		PRINTL
+		PRINTL [100] 変更せずに戻る
+		CALL INPUT_INT(0,1,100)
+		SELECTCASE RESULT
+			CASE 0
+				PRINTW コンフィグをOFFにしました。
+				FLAG:L_STR = 0
+			CASE 1
+				PRINTW コンフィグをONにしました。
+				FLAG:L_STR = 1
+			CASE 100
+				;何も無し
+		ENDSELECT
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+
+
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: キャラデータ変更
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_16(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = ＤＵＭＭＹ
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = -1
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 0
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS =  開発用 - キャラデータ変更
+	;- 説明
+	CASE "EXPLANATION"
+
+		;- VAR:キャラデータ変更
+		CALL VAR_CHARA_DATA_CHANGE_MAIN
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: キャラNo一括変更
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_17(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = ＤＵＭＭＹ
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = -1
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 0
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS =  開発用 - キャラNo一括変更
+	;- 説明
+	CASE "EXPLANATION"
+
+		;- VAR:キャラNo一括変更
+		CALL VAR_CHARA_NO_ALL_CHANGE_MAIN
+
+ENDSELECT
+
+RETURNFORM RESULT
+
+
+;=================================================
+;   sub CONFIG_DATA_xx
+;=================================================
+;   コンフィグNo.xx: アニメフレーム間隔
+;-------------------------------------------------
+; Input:
+;  ARG					コンフィグNo
+;  ARGS					対象KEY(PALAM,TITLE,EXPLANATION)
+; Output:
+;  RESULTS				結果文字列
+;  RESULT				（※ARGSで分岐）
+;	[PALAM]				FLAGの値
+;	[SWITCH]			スイッチ属性(1:スイッチ 0:スイッチではない)
+;-------------------------------------------------
+@CONFIG_DATA_18(ARG,ARGS)
+#DIMS L_STR
+VARSET RESULT
+VARSET RESULTS
+
+L_STR = アニメフレーム間隔
+
+SELECTCASE ARGS
+	;- 値
+	CASE "PALAM"
+		RESULT = FLAG:L_STR
+	;- スイッチ
+	CASE "SWITCH"
+		;- ONかOFFしか無い場合は1、それ以外は0を設定
+		RESULT = 0
+		RESULTS = %L_STR%
+	;- 表題
+	CASE "TITLE"
+		RESULTS = アニメフレーム間隔【現在フレーム:{FLAG:アニメフレーム間隔}】
+	;- 説明
+	CASE "EXPLANATION"
+		IF FLAG:アニメフレーム間隔 >= 150
+			FLAG:アニメフレーム間隔 = 50
+		ELSE
+			FLAG:アニメフレーム間隔 += 10
+		ENDIF
+ENDSELECT
+
+RETURNFORM RESULT
+

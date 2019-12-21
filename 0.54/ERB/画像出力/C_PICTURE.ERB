@@ -1,0 +1,339 @@
+@C_PICTURE(C_T, L_X, L_Y)
+#DIM C_T
+#DIM L_X
+#DIM L_Y
+#DIMS LSTR_0
+;-------------------------------------------------
+;描画処理
+;-------------------------------------------------
+
+LSTR_0 = <nonbutton pos='{L_X}'><img src='MAIN_BG_{FLAG:時間帯}' height = '1000'  ypos = '{L_Y-150}'></nonbutton>
+IF Talent:C_T:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(C_T, L_X, L_Y, -465, 850, LSTR_0)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(C_T, L_X, L_Y, -465, 850, LSTR_0)
+ENDIF
+
+
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+;トーク時
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+@C_PICTURE_T(C_T)
+#DIM C_T
+#DIM L_X
+#DIM L_Y
+#DIMS LS_type
+#DIMS LS_kudoki
+
+L_X = 0
+L_Y = 0
+LS_type   = %INFO_STR_KEIKOU(CFLAG:C_T:値傾向)%
+LS_kudoki = %INFO_STR_KUDOKI(CFLAG:C_T:口説き値)%
+
+;-------------------------------------------------
+;描画処理
+;-------------------------------------------------
+DRAWLINE
+IF Talent:C_T:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(C_T, L_X, L_Y, 0, 850)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(C_T, L_X, L_Y, 0, 850)
+ENDIF
+
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("名前",,,CALLNAME:C_T)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_STATUS(C_T, "好感度")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_STATUS(C_T, "忠誠値")
+CALL PRINT_STATUS(C_T, "愛情値")
+CALL PRINT_STATUS(C_T, "淫乱値")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("傾向",,,LS_type)
+CALL PRINT_LABEL("肉体関係",,,LS_kudoki)
+PRINTL
+PRINTFORML 　　　　　
+IF CFlag:C_T:住人_悩み解決判定回数 != 0
+	PRINTFORM 　　　　　
+	CALL PRINT_LABEL("現在悩み解決中",,,@"結果まであと{(CFlag:C_T:住人_悩み解決判定回数)+1}日",,COLOR(@"悩み_解決{CFlag:C_T:住人_悩み解決判定回数}"))
+	PRINTL
+ELSE
+	;前回結果表示用
+	IF CFlag:C_T:住人_悩み解決中 == 0 && CFlag:C_T:住人_悩み前回協力 > 0
+		SELECTCASE CFlag:C_T:住人_悩み前回協力
+			CASE 1
+				LOCALS:1 = 資金寄付
+			CASE 2
+				LOCALS:1 = 法の力
+			CASE 3
+				LOCALS:1 = 治療
+			CASE 4
+				LOCALS:1 = アドバイス
+			CASE 5
+				LOCALS:1 = 店の紹介
+			CASE 6
+				LOCALS:1 = 励ます
+			CASE 7
+				LOCALS:1 = 教授
+			CASE 8
+				LOCALS:1 = 噂を流す
+			CASE 9
+				LOCALS:1 = 情報操作
+			CASE 10
+				LOCALS:1 = 力を尽くす
+		ENDSELECT
+		SELECTCASE CFlag:C_T:住人_悩み前回結果
+			CASE 0
+				LOCALS:2 = 失敗
+			CASE 1
+				LOCALS:2 = 成功
+			CASE 2
+				LOCALS:2 = 大成功
+			CASE 3
+				LOCALS:2 = 解決済
+		ENDSELECT
+		IF LOCALS:2 != "解決済"
+			PRINTFORM 　　　　　
+			CALL PRINT_LABEL("前回の解決方法",,,@"%LOCALS:1%(%LOCALS:2%)")
+			PRINTL
+		ELSE
+			PRINTFORML 　　　　　
+		ENDIF
+	ELSE
+		PRINTFORML 　　　　　
+	ENDIF
+ENDIF
+PRINTFORML 　　　　　%CAFE_STR_KANKEIDANKAI(C_T)%
+DRAWLINE
+
+
+
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+;ステータス付
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+@C_PICTURE_S(L_T)
+#DIM L_T
+#DIM L_X
+#DIM L_Y
+
+#DIMS CS_race
+#DIMS CS_align
+#DIMS CS_chii
+#DIMS CS_size
+#DIMS CS_hairC
+#DIMS CS_hair
+#DIMS CS_eye
+#DIMS CS_eyeC
+#DIMS CS_body
+#DIMS CS
+
+L_X = 0
+L_Y = -800
+
+CS_race  = %INFO_STR_SYUZOKU(CFLAG:L_T:住人_種族)%
+CS_align = %INFO_STR_ZOKUSEI(CFLAG:L_T:住人_属性)%
+CS_chii  = %INFO_STR_CHII(CFLAG:L_T:住人_地位)%
+CS_size  = %INFO_STR_THREESIZE(L_T)%
+CS_hairC = %INFO_STR_HAIRCOLOR(CFLAG:L_T:髪色)%
+CS_hair  = %INFO_STR_HAIR(CFLAG:L_T:髪型)%
+CS_eye   = %INFO_STR_EYE(CFLAG:L_T:目)%
+CS_eyeC  = %INFO_STR_EYECOLOR(CFLAG:L_T:瞳色)%
+CS_body  = %INFO_STR_STYLE(CFLAG:L_T:体型)%
+
+;-------------------------------------------------
+;描画処理
+;-------------------------------------------------
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("種族",,,CS_race)
+CALL PRINT_LABEL("属性",,,CS_align)
+CALL PRINT_LABEL("地位",,,CS_chii)
+CALL PRINT_STATUS(L_T,"貢献値")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL(CS_size)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("髪色",,,CS_hairC)
+CALL PRINT_LABEL("髪型",,,CS_hair)
+CALL PRINT_LABEL("眼",,,  CS_eye)
+CALL PRINT_LABEL("眼色",,,CS_eyeC)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("体型",,,CS_body)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("チャームポイント",,,CSTR:L_T:チャームポイント)
+CALL PRINT_LABEL("癖",,,CSTR:L_T:癖)
+PRINTL
+PRINTFORM 　　　　　
+PRINTFORM 【遺伝子:
+CALL INFO_TARGET_GENOM(L_T)
+PRINTFORML 】
+PRINTFORML 　　　　　
+PRINTFORML 　　　　　
+
+IF Talent:L_T:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(L_T, L_X, L_Y, 0, 850)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(L_T, L_X, L_Y, 0, 850)
+ENDIF
+
+
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+;隠しステータス(裸)
+;-------------------------------------------------
+;-------------------------------------------------
+;-------------------------------------------------
+@C_PICTURE_S_S(ARG)
+#DIM L_T
+#DIM L_X
+#DIM L_Y
+#DIMS LSTR
+#DIMS LSTR_4 ;妊娠状態の表示（文字列情報のみ）
+#DIMS LSTR_8 ;アイコン♀
+#DIMS LSTR_9 ;アイコン卵子
+#DIMS LSTR_10;アイコン受精
+#DIMS LSTR_11;胎児描写画像
+#DIMS LSTR_Z ;結合用
+#DIM C_ninsin
+#DIM L_SIEK
+#DIMS CS_ninsin
+
+L_T = ARG
+L_X = 0
+L_Y = 0
+C_ninsin = C_PICTURE_NINSIN(ARG)
+L_SIEK = CFLAG:L_T:子宮精液貯蔵量/5000
+SIF L_SIEK >= 4
+	L_SIEK = 4
+
+IF CFLAG:L_T:妊娠フラグ == 1 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:%CALLNAME:MASTER%との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 70 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:支援住宅の青年との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 71 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:少年との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 2 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:%CSTR:L_T:3500%との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 3 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:愛人との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF  TALENT:L_T:受精 != 0 
+	CS_ninsin =【子宮:受精中】【胎芽中:{TALENT:L_T:受精}】
+ELSEIF TALENT:L_T:妊娠 == 0 && TALENT:L_T:受精 == 0 && L_SIEK >= 1
+	IF    L_SIEK >= 4 
+		CS_ninsin =【子宮:もはや精液タンク呼べる程の%CALLNAME:MASTER%の精子が卵子を求めて蠢いている】
+	ELSEIF   L_SIEK >= 3
+		CS_ninsin =【子宮:溢れんばかりの%CALLNAME:MASTER%の精子が子宮内を泳ぎ回っている】
+	ELSEIF   L_SIEK >= 2
+		CS_ninsin =【子宮:子作りに十分な%CALLNAME:MASTER%の精液が子宮に納まっている】
+	ELSEIF   L_SIEK >= 1
+		CS_ninsin =【子宮:%CALLNAME:MASTER%の精液で白く染められている】
+	ENDIF
+ELSE
+	CS_ninsin =【子宮:】
+ENDIF
+DRAWLINE
+PRINTFORML ■----------------機密登録情報----------------■
+
+LSTR_4 = <nonbutton pos='{L_X}'>　　　　　　　　　　%CS_ninsin%</nonbutton>
+LSTR_8 = <nonbutton pos='{L_X}'>　　　　　<img src='EX_A_0' height = '100'  ypos = '500'></nonbutton>
+LSTR_9 = <nonbutton pos='{L_X}'>　　　　　<img src='EX_A_1' height = '100'  ypos = '600'></nonbutton>
+LSTR_10 = <nonbutton pos='{L_X}'>　　　　　<img src='EX_A_2' height = '100'  ypos = '700'></nonbutton>
+IF TALENT:L_T:妊娠 == 0 && TALENT:L_T:受精 == 0
+	LSTR_11 = <nonbutton pos='{L_X}'>　　　　　<img src='H_TNS_0_{L_SIEK}' height = '500'  ypos = '0'></nonbutton>
+ELSE
+	LSTR_11 = <nonbutton pos='{L_X}'>　　　　　<img src='NINSIN_0_{C_ninsin}' height = '500'  ypos = '0'></nonbutton>
+ENDIF
+LSTR_Z = %LSTR_4%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%
+
+IF Talent:L_T:NPC == 0
+	HTML_PRINT C_PICTURE_HTML_NAKED(L_T, L_X, L_Y, 0, 800, LSTR_Z)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML_NAKED(L_T, L_X, L_Y, 0, 800, LSTR_Z)
+ENDIF
+
+HTML_PRINT LSTR
+;今の所この表示が必ずセットでついてくるのでこの関数側で問題ないはず
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　　　
+PRINTFORML 　　　　　　　　
+PRINTFORM 　　　　　　
+CALL PRINT_STATUS(L_T, "母体レベル")
+PRINTL
+PRINTFORM 　　　　　　
+CALL PRINT_STATUS(L_T, "卵子レベル")
+PRINTL
+PRINTFORM 　　　　　　
+CALL PRINT_RANGE_STATUS(L_T, "受精耐久値", "受精/耐久値")	; 検索キー(第3引数)は/でPRE/POST分割して検索する。
+CALL PRINT_STATUS(L_T, "受精確率")
+PRINTL
+
+
+
+;-------------------------------------------------
+;掛け合い表示用、現在仮実装中
+;-------------------------------------------------
+@C_PICTURE_PAIR_TALK_A(C_ID)
+#DIM C_ID
+;1行≒98のY座標
+IF C_ID == 0
+	PRINTFORML
+ELSEIF TALENT:C_ID:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(C_ID, 2500, -1192, -450, 850)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(C_ID, 2500, -1192, -450, 850)
+ENDIF
+
+@C_PICTURE_PAIR_TALK_B(C_ID)
+#DIM C_ID
+IF C_ID == 0
+	PRINTFORML
+ELSEIF TALENT:C_ID:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(C_ID, 3500, -1290, 0, 850)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(C_ID, 3500, -1290, 0, 850)
+ENDIF
+
+
+
+;-------------------------------------------------
+;きせかえ処理のプレビュー用
+;-------------------------------------------------
+@C_PICTURE_FITTING(C_ID, MEMO_COS, NEW_COS)
+#DIM         C_ID
+#DIM REF     MEMO_COS
+#DIM REF     NEW_COS
+#DIM CONST   COS_CFLAG_ID  = 420, 423, 424, 421, 422, 419, 418
+FOR LOCAL, 0, 7
+	CFLAG:C_ID:(COS_CFLAG_ID:LOCAL) = MEMO_COS:LOCAL
+NEXT
+DRAWLINE
+HTML_PRINT C_PICTURE_HTML(C_ID, 50, 0, 0, 850)
+;HTML_PRINT C_PICTURE_HTML_NAKED(C_ID, 700, 98, 0, 850)
+HTML_PRINT C_PICTURE_HTML_NAKED(C_ID, 550, -100, 0, 850)
+FOR LOCAL, 0, 7
+	CFLAG:C_ID:(COS_CFLAG_ID:LOCAL) = NEW_COS:LOCAL
+NEXT
+HTML_PRINT C_PICTURE_HTML(C_ID, 1200, -200, 0, 850)
+HTML_PRINT C_PICTURE_HTML_NAKED(C_ID, 1700, -300, 0, 850)
+
+PRINTFORML 　　　　　　　　　　→
+PRINTFORML 　　　　　
+PRINTFORML 　　　　　
+PRINTFORML 　　　　　
+PRINTFORML 　　　　　
+DRAWLINE

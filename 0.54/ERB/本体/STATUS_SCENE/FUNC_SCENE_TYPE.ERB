@@ -1,0 +1,221 @@
+;シーン分類関数
+@SCENE_TYPE(SCENE)
+#FUNCTIONS
+#DIMS SCENE
+SELECTCASE SCENE
+{
+CASE "EXPLORER", "RPG", 
+	"RPG_武器強化", 
+	"RPG_技能成長", 
+	"RPG_強化剤投与", 
+	"RPG_超人薬投与", 
+	"RPG_随伴配置", 
+	"RPG_後方配置", 
+	"RPG_回収配置", 
+	"RPG_探索配置"
+}
+	RETURNF "RPG"
+{
+CASE 
+	"MNG_登録_登録抹消", 
+	"MNG_入居_一号室", "MNG_入居_二号室", "MNG_入居_三号室", "MNG_入居_四号室", "MNG_入居_五号室", 
+	"MNG_入居_六号室", "MNG_入居_七号室", "MNG_入居_八号室", "MNG_入居_九号室", "MNG_入居_十号室", 
+	
+	"MNG_登録_レギュラー", "MNG_登録_特別保護", "MNG_登録_名前変更", 
+	"MNG_転職_聖職者", "MNG_転職_メイド", "MNG_転職_アイドル", "MNG_転職_社会人", "MNG_転職_局員", "MNG_転職_娼婦", 
+	"MNG_配属_学園生徒", "MNG_配属_支援ボラ", "MNG_配属_ラブホ店員", "MNG_配属_カジノ店員", 
+	"MNG_特殊_外見変更", "MNG_特殊_治療設備", "MNG_特殊_品種改良", "MNG_特殊_身体強化", "MNG_特殊_次世代創造", 
+	"MNG_登録_交友制御", "MNG_登録_衣装変更", "MNG_登録_範囲消去", "MNG_登録_抹消中止"
+}
+	RETURNF "MNG"
+{
+CASE 
+	"AL_能力表示", 
+	"AL_リーダー任命", 
+	"AL_サポーター任命", 
+	"AL_蘇生処置", 
+	"AL_ボランティア終了"
+}
+	RETURNF "AL"
+CASE "CAFE"
+	RETURNF "CAFE"
+CASEELSE
+	RETURNF "DEFAULT"
+ENDSELECT
+
+
+
+
+[SKIPSTART]
+2019/08/24
+
+てきとうに解説
+　SCENE_TYPE
+　　@SCENE_TYPE(SCENE)にて定義
+　　SCENEのおおざっぱな分類
+　　@LIST_CHARA_STATUS系の関数の動作はおおまかにこれに従って決定される
+　SCENE
+　　"RPG_武器強化"/"RPG_技能成長"…などのキャラリストの個別の動作モード
+　　基本的には同じSCENE_TYPEのSCENEには移行できるが
+　　SCENE_TYPEが違うSCENEには移行できない
+　
+　関数@DIM_TABLE_CVAR
+　　ABLやCFLAGを区別せずにLABEL_NAMEだけでサクッと参照する関数
+　　「単一のCVARに属さないステータス」の参照用に"EXTRA"も用意
+　　弱点としては番号決め打ち≒マジックナンバーの塊なので、仕様変更があった場合は追加変更が必要
+　　
+
+
+
+SCENE追加実装手順
+
+例）SCENE_TYPE、HOGEの追加
+・仕様
+HOGEにはHOGE_ぺろぺろ、HOGE_ぷにぷに、HOGE_もみもみがあるとする
+
+・@SCENE_TYPE(SCENE)に追加
+CASE "HOGE_ぺろぺろ", "HOGE_ぷにぷに", "HOGE_もみもみ"
+	RETURNF "HOGE"
+
+※記述しなかった場合、DEFAULTで処理される
+
+・@MEMBER_LIST_ALLに追加
+
+CASE "HOGE_ぺろぺろ", "HOGE_ぷにぷに", "HOGE_もみもみ"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在 || TALENT:LOCAL:ボランティア
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+
+※記述しなかった場合、CASEELSEで処理される
+
+・SCENE_HOGE.ERBの作成
+・@HOGE_CHARA_SELECTの作成
+この関数からLIST_CHARA_STATUS_MAINに飛ぶ
+この関数があるがゆえに、"HOGE_ぺろぺろ"/"HOGE_ぷにぷに"/"HOGE_もみもみ"は相互に連続的に移動でき
+ひとつのまとまりとして扱われる
+SCENEを移動する必要がない時（SHOPでの能力表示など）は直接LIST_CHARA_STATUS_MAINをCALLすればよい
+
+@HOGE_CHARA_SELECT(MODE_NOW = "HOGE_ぺろぺろ")
+#DIMS         MODE_NOW
+#DIM          MODE_ID
+#DIM          L_INPUT
+#DIM          NOW_GROUP = 1 ;ページ記憶用
+#DIMS DYNAMIC OP_RELOAD     ;初回以外のページ更新とリスト更新を抑制する
+{
+#DIMS CONST   MODE_NAME = 
+	"HOGE_ぺろぺろ", 
+	"HOGE_ぷにぷに", 
+	"HOGE_もみもみ"
+}
+
+{
+#DIMS CONST   MEMO_STR = 
+	"ぺろぺろの対象者を選択して下さい。", 
+	"ぷにぷにの対象者を選択して下さい。", 
+	"もみもみの対象者を選択して下さい。"
+}
+
+MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
+SELECTCASE MODE_ID
+CASE -1
+	MODE_NOW '= "HOGE_ぺろぺろ"
+	RESTART
+ENDSELECT
+CLEARLINE LINECOUNT
+
+CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP_RELOAD, MODE_NOW, MEMO_STR:MODE_ID)
+
+L_INPUT = RESULT
+OP_RELOAD '= "「ページ更新無し」「リスト更新無し」"
+SELECTCASE L_INPUT
+CASE 0
+	NOW_GROUP = 1
+	RETURN
+CASE 1 TO CHARANUM - 1
+	;キャラ番号を受け取ったあとに
+	;"HOGE_ぺろぺろ"/"HOGE_ぷにぷに"/"HOGE_もみもみ"で別の処理をさせる
+	SELECTCASE MODE_NOW
+	CASE "HOGE_ぺろぺろ"
+		PRINTFORMW %CALLNAME:L_INPUT%ちゃんぺろぺろ
+	CASE "HOGE_ぷにぷに"
+		PRINTFORMW %CALLNAME:L_INPUT%ちゃんぷにぷに
+	CASE "HOGE_もみもみ"
+		PRINTFORMW %CALLNAME:L_INPUT%ちゃんもみもみ
+	ENDSELECT
+CASE 1000 TO 1002
+	;"HOGE_ぺろぺろ"/"HOGE_ぷにぷに"/"HOGE_もみもみ"の移行
+	;@HOGE_LIST_CHARA_INPUTにてそれぞれ1000～1002のボタンとして作成しておくこと
+	MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+CASEELSE
+ENDSELECT
+RESTART
+
+
+・@HOGE_LIST_NAME(C_ID)
+キャラリストでの名前の表記用、"基礎情報"とその他の情報表示で共通される情報
+RPG用のSCENEで言えば
+名前＋MASTERとの関係、所属部隊は共通して表示される
+
+・@HOGE_INFO_TARGET_DETAILの作成
+標準だと"基礎情報"での1行表示での表示内容を記述している
+
+・@HOGE_INFO_CHARA_DETAIL_LABEL
+"基礎情報"以外での1行表示での表示処理
+
+・@DIM_TABLE_LIST_PACKの変更
+CASE "HOGE"
+	CALLF HOGE_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+
+※記述しない場合、DEFAULTとして処理される
+　@SCENE_TYPE(SCENE)に変更を加えなかった場合もDEFAULT
+
+
+・@HOGE_DIM_TABLE_LIST_PACKの作成
+上記@DIM_TABLE_LIST_PACKの変更を行った場合は作成しないとエラー落ちする
+いつものUIで←→で移動できる表示情報のまとまり
+C_PACKに必要な情報を書き出す
+各情報項目の意味については@DIM_TABLE_LABEL_LISTを参照
+
+@HOGE_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+#FUNCTION
+#DIMS SCENE
+#DIMS REF LIST_PACK ;戻り値用、リスト配列
+#DIM  REF PACK_SIZE ;
+{
+#DIMS CONST C_PACK = "基礎情報", 
+	"交流ST", 
+	"陥落ST", 
+	"身体ST", 
+	"フェロモンST", 
+	"性感覚ST", 
+	"性技能ABL", 
+	"性癖ABL", 
+	"性行動経験", 
+	"性交経験", 
+	"調教経験", 
+	"特殊快楽経験", 
+	"日常経験", 
+}
+ARRAYCOPY "C_PACK", "LIST_PACK"
+PACK_SIZE = VARSIZE("C_PACK")
+RETURNF
+
+・@HOGE_LIST_CHARA_STATUS_HEADERの作成
+キャラの一覧表示の前になにか追加で表示したければここに書く
+不要ならつくらなくてよい
+
+・@HOGE_LIST_CHARA_STATUS_GROUPの作成
+指定範囲のキャラに対して情報表示を行う関数
+
+※記述しない場合、DEFAULTとして処理される
+
+・@HOGE_LIST_CHARA_INPUT
+キャラ以外のボタン部分の表示～入力の受付までを行う関数
+
+※記述しない場合、DEFAULTとして処理される
+[SKIPEND]

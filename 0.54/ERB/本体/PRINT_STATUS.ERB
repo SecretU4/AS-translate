@@ -1,0 +1,510 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:INFO_STATUS.ERB
+;	Facility	:情報表示(STATUS)。
+;				 情報を表示する関数を纏める。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		2019/04/14		M						新規作成
+;
+;Method:
+;	PRINT_LABEL				【ラベル:値】の低レベル表示ルーチン
+;	PRINT_STATUS			【ラベル:値】や [ラベル:値] のような定型ステータス表示
+;	PRINT_RANGE_STATUS		【ラベル:値/MAX値】のような範囲のあるステータス表示
+;
+;SUPPORT METHOD
+;	PS_GetValue					文字列配列を渡すとFLAG/CFlag から 値を取得する
+;	┣	PS_FINDKEYS_from_Flag	文字列配列を渡すとFLAGから GETNUM で定義の存在を検索する
+;	┗	PS_FINDKEYS_from_CFlag	文字列配列を渡すとCFLAGから GETNUM で定義の存在を検索する
+;
+;	COMMENT: METHOD/FUNCTION 内部での RESETCOLOR 厳禁! 変えたら元の色に戻すこと
+;----------------------------------------------------------------------------
+;- PRINT_LABEL
+;----------------------------------------------------------------------------
+; パラメータの表示枠（ 【ラベル:[VALUE][SUB_VALUE]】）を表示する
+;戻り値:
+;	正常終了時、表示文字数(真)
+;
+;-----------------------------------------------------------------------
+@PRINT_LABEL(LABEL_NAME, LABELCOL=0, LABEL_COLOR=-1, VALUESTR, VALUECOL=0, VALUE_COLOR=-1, SEPARATOR="", SUB_VALUES="", SUB_VALUECOL=0, SUB_VALUE_COLOR = -1, NarrowBracket = 0, Wide_colon=0)
+;-- Params -----------------------------------------------------------------
+#DIMS LABEL_NAME		; ラベル名
+#DIM LABELCOL			; ラベルの絡む幅、デフォルト0で、1未満は指定なしの意味。正で右詰め、負で左詰め
+#DIM LABEL_COLOR		; ラベル及び枠全体の指定色。0～0xFFFFFFの範囲外は指定なしの意味
+#DIMS VALUESTR			; 値文字列。少なくとも空白でないか、次の幅指定がないと無視される
+#DIM VALUECOL			; 値部分の幅指定、デフォルト0で、0は指定なしの意味。正で右詰め、負で左詰め
+#DIM VALUE_COLOR		; 値の指定色。0～0xFFFFFFの範囲外は指定なしの意味
+#DIMS SEPARATOR			; セパレータ
+#DIMS SUB_VALUES		; 2つ目のラベル文字列
+#DIM SUB_VALUECOL		; 同、幅指定
+#DIM SUB_VALUE_COLOR	; 同、色指定
+#DIM NarrowBracket		; ラベルの枠が全角か半角か。0で【】、1で[]。直接配列番号に当てているので、現時点では0と1以外をセットしてはいけない
+#DIM Wide_Colon			; ラベルと値の間のコロンを全角にするフラグ。省略時0で半角。
+;--  Constant emum.  --------------------------------------------------------
+#DIMS CONST BRACKETS_First	= "【","["
+#DIMS CONST BRACKETS_End	= "】","]"
+;--  local variables  -------------------------------------------------------
+#DIM DYNAMIC L_bk_redraw	; 再描画状態のバックアップ
+#DIM DYNAMIC L_bk_c			; 文字色バックアップ
+#DIM S_LEN,2			; ラベル文字列の長さ
+#DIM C_Labelcolor		; ラベル色
+#DIMS L_TMP				; 作業用
+#DIM DYNAMIC L_CH		; 出力文字数カウント
+
+VARSET S_LEN
+L_CH = 0
+L_bk_redraw = CURRENTREDRAW()
+REDRAW 0
+
+L_bk_c = GETCOLOR()		; 現在の表示色をバックアップ
+IF INRANGE(LABEL_COLOR, 0, 0xFFFFFF)
+	C_Labelcolor = LABEL_COLOR
+	;SETCOLOR C_Labelcolor
+ELSE
+	C_Labelcolor = L_bk_c
+ENDIF
+; 枠はわずかに輝度落とし
+SETCOLOR Intermediate_Color(0xbb, 192, C_Labelcolor )
+PRINTFORM %BRACKETS_First:(LIMIT(NarrowBracket,0,VARSIZE("BRACKETS_First")-1))%
+SETCOLOR C_Labelcolor
+L_CH += 2 * STRLENS(BRACKETS_First:NarrowBracket)
+
+;ラベル名表示
+IF LABEL_NAME != "" || LABELCOL != 0
+	;この時、幅指定より長い時に半角化したら収まるなら半角化する
+	S_LEN = MAX(0, STRLENS(LABEL_NAME)), MAX(0, STRLENS(TOHALF(LABEL_NAME)))
+	SELECTCASE LABELCOL
+	CASE IS >= S_LEN
+		L_TMP = %LABEL_NAME, LABELCOL, RIGHT%
+	CASE S_LEN:1 TO S_LEN
+		L_TMP = %TOHALF(LABEL_NAME), LABELCOL, RIGHT%
+	CASE IS <= -S_LEN
+		L_TMP = %LABEL_NAME, -LABELCOL, LEFT%
+	CASE -S_LEN TO -(S_LEN:1)
+		L_TMP = %TOHALF(LABEL_NAME), -LABELCOL, LEFT%
+	CASEELSE
+		L_TMP '= LABEL_NAME
+	ENDSELECT
+	L_CH += STRLENS(L_TMP)
+	PRINTS L_TMP
+ENDIF
+; コロン (ラベル・VALUEがない時は付与されない: セパレータだけの時は付与)
+IF (LABEL_NAME != "" || LABELCOL != 0) && (VALUESTR != "" || VALUECOL != 0 || SUB_VALUES != "" || SUB_VALUECOL != 0)
+	IF Wide_Colon
+		PRINT ：
+		L_CH += 2
+	ELSE
+		PRINT :
+		L_CH ++
+	ENDIF
+ENDIF
+SETCOLOR C_Labelcolor
+
+IF VALUESTR != "" || VALUECOL != 0
+	SIF INRANGE(VALUE_COLOR, 0, 0xFFFFFF)
+		SETCOLOR VALUE_COLOR
+	SELECTCASE VALUECOL
+	CASE IS > 0
+		L_TMP = %VALUESTR, VALUECOL, RIGHT%
+	CASE IS < 0
+		L_TMP = %VALUESTR, ABS(VALUECOL), LEFT%
+	CASEELSE
+		L_TMP '= VALUESTR
+	ENDSELECT
+	PRINTS L_TMP
+	L_CH += STRLENS(L_TMP)
+	SETCOLOR C_Labelcolor
+ENDIF
+
+;セパレータ: ラベル色で表示する任意の文字列
+IF SEPARATOR != ""
+	PRINTS SEPARATOR
+	L_CH += STRLENS(SEPARATOR)
+ENDIF
+
+IF SUB_VALUES != "" || SUB_VALUECOL != 0
+	SIF INRANGE(SUB_VALUE_COLOR, 0, 0xFFFFFF)
+		SETCOLOR SUB_VALUE_COLOR
+	SELECTCASE SUB_VALUECOL
+	CASE IS > 0
+		L_TMP = %SUB_VALUES, SUB_VALUECOL, RIGHT%
+	CASE IS < 0
+		L_TMP = %SUB_VALUES, ABS(SUB_VALUECOL), LEFT%
+	CASEELSE
+		L_TMP '= SUB_VALUES
+	ENDSELECT
+	PRINTS L_TMP
+	L_CH += STRLENS(L_TMP)
+	SETCOLOR C_Labelcolor
+ENDIF
+
+SETCOLOR Intermediate_Color(0xbb, 192, C_Labelcolor )
+PRINTFORM %BRACKETS_End:(LIMIT(NarrowBracket,0,VARSIZE("BRACKETS_End")-1))%
+SETCOLOR L_bk_c
+REDRAW L_bk_redraw	; ちかちかするので、強制再描画しちゃダメ
+RETURN L_CH
+
+;----------------------------------------------------------------------------
+;- PRINT_STATUS
+;----------------------------------------------------------------------------
+; 住人のパラメータ、例えば好感度や人気などを表示する
+;戻り値:
+;	正常終了時、RESULTが表示文字数(真)。パラメータ異常などの場合は表示なしで0
+;
+;	COMMENT:
+;		BESTとしては、パラメータは引数ではなくて、
+;		cssのような別に定義したスタイルテーブルか JSON 実装したいね
+;-----------------------------------------------------------------------
+@PRINT_STATUS(C_ID, PARAM_NAME, NAMECOL=1, VALUECOL=1, WHEN_COLOR_0 = "伏字", WHEN_UPPER_TARGET = __INT_MIN__, WHEN_COLOR_UPPER = "", WHEN_LOWER_TARGET = __INT_MAX__, WHEN_COLOR_LOWER = "", NarrowBracket = 0)
+;-- Params -----------------------------------------------------------------
+#DIM C_ID				; キャラID (CFlag)、負の場合は Flag を参照
+#DIMS PARAM_NAME		; パラメータ名。表示名であると同時に、CFlag/Flagのキー (etc: "好感度" --> CFlag:住人_好感度) でもある
+#DIM NAMECOL			; 表示名桁
+#DIM VALUECOL			; 値の桁
+#DIMS WHEN_COLOR_0		; 値が0の時の色。デフォルトではFLAG:STATUS伏字モードに従うが、無効化するには""を指定
+#DIM WHEN_UPPER_TARGET	; 値が正の時のターゲット値
+#DIMS WHEN_COLOR_UPPER	; 正ターゲット値の時の目標色
+#DIM WHEN_LOWER_TARGET	; 値が負の時のターゲット値
+#DIMS WHEN_COLOR_LOWER	; 負ターゲット値の時の目標色
+#DIM NarrowBracket		; 偽で【】で囲む。真で[]囲む
+;--  local variables  -------------------------------------------------------
+#DIM DYNAMIC I_C,2		; ローカル:演算用 色変数
+#DIM DYNAMIC value		; ローカル:演算用 値変数
+#DIM DYNAMIC label_color; ラベル全体の色
+#DIM DYNAMIC value_color; 値の色
+#DIM DYNAMIC L_backup_color	; 現在の表示色 (呼び出し元で変えている可能性がある)
+;--  Constant emum.  --------------------------------------------------------
+#DIMS FLAG_SCAN_KEY  = "", "都市_", "都市_現在", "現在"
+#DIMS CFLAG_SCAN_KEY = "", "住人_", "住人_技能_"
+
+; ローカル変数の初期化
+VARSET I_C
+VARSET value
+label_color = -1
+value_color = -1
+L_backup_color = GETCOLOR()
+
+; 引数チェック
+SIF VALUECOL < 1
+	VALUECOL = 1
+;- Flag/CFlagから値を取得
+IF C_ID < 0
+	CALL PS_GetValue(C_ID, PARAM_NAME,  FLAG_SCAN_KEY)
+ELSE
+	CALL PS_GetValue(C_ID, PARAM_NAME, CFLAG_SCAN_KEY)
+ENDIF
+IF !RESULT:1
+	; エラー::
+[IF_DEBUG]
+	CALL PRINT_LABEL(PARAM_NAME, NAMECOL, COLOR("赤"), @"\@C_ID>=0?C#\@Flag:%SUBSTRINGU(PARAM_NAME,0,STRFINDU(PARAM_NAME,"/")-1)%＊%SUBSTRINGU(PARAM_NAME,STRFINDU(PARAM_NAME,"/")+1)%値取得エラー", ,COLOR("赤"), , , , , NarrowBracket)
+	ASSERT 0
+[ENDIF]
+	RETURN 0
+ENDIF
+value = RESULT
+
+;- 色指定処理
+IF value == 0 && FLAG:STATUS伏字モード && WHEN_COLOR_0 != ""
+	label_color = COLOR(WHEN_COLOR_0)	; ラベルに伏字色設定
+	
+; 値の色指定
+ELSEIF WHEN_UPPER_TARGET != __INT_MIN__ && WHEN_LOWER_TARGET != __INT_MAX__
+	IF WHEN_COLOR_UPPER == ""
+		I_C = COLOR(PARAM_NAME + "_UPPER")
+		SIF !I_C
+			I_C = COLOR("口上標準")
+	ELSE
+		I_C = COLOR(WHEN_COLOR_UPPER)
+	ENDIF
+	IF WHEN_COLOR_LOWER == ""
+		I_C:1 = COLOR(PARAM_NAME + "_LOWER")
+		SIF !I_C:1
+			I_C:1 = COLOR("口上標準")
+	ELSE
+		I_C:1 = COLOR(WHEN_COLOR_LOWER)
+	ENDIF
+	; 2点指定されているときはちょっと複雑な処理
+{
+	IF (WHEN_UPPER_TARGET > value && WHEN_LOWER_TARGET > value ) || (WHEN_UPPER_TARGET < value && WHEN_LOWER_TARGET < value ) ||
+		(WHEN_UPPER_TARGET > 0 && WHEN_LOWER_TARGET > 0 ) || (WHEN_UPPER_TARGET < 0 && WHEN_LOWER_TARGET < 0 )
+}
+		value_color = Intermediate_Color(value, WHEN_UPPER_TARGET, I_C, WHEN_LOWER_TARGET, I_C:1 )
+
+	ELSEIF (WHEN_LOWER_TARGET <= 0 && 0 <= WHEN_UPPER_TARGET) || (WHEN_LOWER_TARGET <= 0 && 0 <= WHEN_UPPER_TARGET)
+		; 0を挟んでいるときは、MIN～0～MAX
+		IF WHEN_COLOR_0 == ""
+			IF Sign(WHEN_UPPER_TARGET) * Sign(value) >= 0
+				value_color = Intermediate_Color(value, WHEN_UPPER_TARGET, I_C )
+			ELSE
+				value_color = Intermediate_Color(value, WHEN_LOWER_TARGET, I_C:1 )
+			ENDIF
+		ELSE
+			IF Sign(WHEN_UPPER_TARGET) * Sign(value) >= 0
+				value_color = Intermediate_Color(value, WHEN_UPPER_TARGET, I_C, 0, COLOR(WHEN_COLOR_0) )
+			ELSE
+				value_color = Intermediate_Color(value, WHEN_LOWER_TARGET, I_C:1, 0, COLOR(WHEN_COLOR_0) )
+			ENDIF
+		ENDIF
+	ENDIF
+
+ELSEIF WHEN_UPPER_TARGET != __INT_MIN__ && WHEN_LOWER_TARGET == __INT_MAX__
+	IF WHEN_COLOR_UPPER == ""
+		I_C = COLOR(PARAM_NAME + "_UPPER")
+		SIF !I_C
+			I_C = COLOR("口上標準")
+	ELSE
+		I_C = COLOR(WHEN_COLOR_UPPER)
+	ENDIF
+	value_color = Intermediate_Color(value, WHEN_UPPER_TARGET, I_C )
+	
+ELSEIF WHEN_LOWER_TARGET != __INT_MAX__ && WHEN_UPPER_TARGET == __INT_MIN__
+	IF WHEN_COLOR_LOWER == ""
+		I_C = COLOR(PARAM_NAME + "_LOWER")
+		SIF !I_C
+			I_C = COLOR("口上標準")
+	ELSE
+		I_C = COLOR(WHEN_COLOR_LOWER)
+	ENDIF
+	value_color = Intermediate_Color(value, WHEN_LOWER_TARGET, I_C )
+ENDIF
+
+; カウンターストップ処理
+SIF VALUECOL > 1
+	value = LIMIT(value, -POWER(10, VALUECOL-1)-1, POWER(10, VALUECOL)-1 )
+
+; 枠などの整形は PRINT_LABEL に委託
+; 右詰めは正指定、左詰めはマイナス指定
+CALL PRINT_LABEL(PARAM_NAME, -NAMECOL, label_color, TOSTR(value), VALUECOL, value_color, , , , , NarrowBracket)
+value = RESULT
+SETCOLOR L_backup_color
+RETURN value
+
+;----------------------------------------------------------------------------
+;- PRINT_RANGE_STATUS
+;----------------------------------------------------------------------------
+; 住人の範囲付きパラメータ、例えばHPやSPなどを表示する
+;戻り値:
+;	正常終了時、RESULTが真
+;
+@PRINT_RANGE_STATUS(C_ID, DISP_NAME, PARAM_NAME="", NAMECOL=1, VALUECOL=0, WHEN_COLOR_0 = "", WHEN_COLOR_UPPER = "", WHEN_LOWER_TARGET = __INT_MAX__, WHEN_COLOR_LOWER = "", NarrowBracket = 0)
+;-- Params -----------------------------------------------------------------
+#DIM C_ID				; キャラID (CFlag)、負の場合は Flag を参照
+#DIMS DISP_NAME			; パラメータ表示名
+#DIMS PARAM_NAME		; パラメータ値名。CFlag/Flagのキー (etc: "好感度" --> CFlag:住人_好感度)
+						; 何パターンか、既定のパターン文字列をつけて検索する。
+						; 名前文字列の中に/を入れると(ex,"＊＊/★★") Flag:＊＊都市_現在★★などパターン文字列を挟んで検索する
+						;	Comment: FindElement も GetNum も正規表現を受け付けないからね...
+#DIM NAMECOL			; 表示名桁、1より大きい時はMAXと桁数を合わせる
+#DIM VALUECOL			; 値の桁、省略時は最大値の桁数分を最小限に確保
+#DIMS WHEN_COLOR_0		; 値が0の時の色。デフォルトでは通常色だが、"伏字"とすればFLAG:STATUS伏字モードに従う。
+#DIMS WHEN_COLOR_UPPER	; 正ターゲット値(MAX)の時の目標色。"PERC" または "％"としたときは特別に @PERC_TO_COLOR を参照する
+#DIM WHEN_LOWER_TARGET	; 値が負の時のターゲット値
+#DIMS WHEN_COLOR_LOWER	; 負ターゲット値の時の目標色
+#DIM NarrowBracket		; 偽で【】で囲む。真で[]囲む
+;--  local variables  -------------------------------------------------------
+#DIM DYNAMIC I_C,2		; 演算用 色変数
+#DIM DYNAMIC label_color; 枠全体・ラベルの色
+#DIM DYNAMIC value		; 演算用 値変数
+#DIM DYNAMIC value_color; 値の色
+#DIM DYNAMIC value_max	; 演算用 値変数
+#DIM DYNAMIC L_backup_color	; 現在の表示色 (呼び出し元で変えている可能性がある)
+;--  Constant emum.  --------------------------------------------------------
+#DIMS FLAG_SCAN_KEY_CURRENT  =     "",      "現在", "都市_", "都市_現在", ""
+#DIMS FLAG_SCAN_KEY_MAX      = "合計",      "最大", "都市_", "都市_最大", ""
+#DIMS CFLAG_SCAN_KEY_CURRENT =     "", "住人_現在", "現在"
+#DIMS CFLAG_SCAN_KEY_MAX     = "合計", "住人_最大", "最大"
+
+; ローカル変数の初期化
+VARSET I_C
+VARSET value
+VARSET value_max
+label_color = -1
+value_color = -1
+L_backup_color = GETCOLOR()
+
+; 引数チェック
+SIF PARAM_NAME == ""
+	PARAM_NAME '= DISP_NAME
+IF C_ID < 0
+	CALL PS_GetValue(C_ID, PARAM_NAME,  FLAG_SCAN_KEY_CURRENT)
+ELSE
+	CALL PS_GetValue(C_ID, PARAM_NAME, CFLAG_SCAN_KEY_CURRENT)
+ENDIF
+IF !RESULT:1
+	; エラー::
+[IF_DEBUG]
+	SETCOLOR COLOR("赤")
+	PRINTFORM \@ NarrowBracket ?%"["%#【\@%DISP_NAME,NAMECOL,LEFT%:\@C_ID>=0?C#\@Flag:%SUBSTRINGU(PARAM_NAME,0,STRFINDU(PARAM_NAME,"/")-1)%＊現在%SUBSTRINGU(PARAM_NAME,STRFINDU(PARAM_NAME,"/")+1)%が見つかりません
+	RESETCOLOR
+	ASSERT 0
+[ENDIF]
+	RETURN 0
+ENDIF
+value = RESULT
+
+IF C_ID < 0
+	CALL PS_GetValue(C_ID, PARAM_NAME,  FLAG_SCAN_KEY_MAX)
+ELSE
+	CALL PS_GetValue(C_ID, PARAM_NAME, CFLAG_SCAN_KEY_MAX)
+ENDIF
+IF !RESULT:1
+[IF_DEBUG]
+	SETCOLOR COLOR("赤")
+	PRINTFORM /\@C_ID>=0?C#\@Flag:%SUBSTRINGU(PARAM_NAME,0,STRFINDU(PARAM_NAME,"/")-1)%＊最大%SUBSTRINGU(PARAM_NAME,STRFINDU(PARAM_NAME,"/")+1)%が見つかりません\@ NarrowBracket ?%"]"%#】\@
+	RESETCOLOR
+	ASSERT 0
+[ENDIF]
+	RETURN 0
+ENDIF
+value_max = RESULT
+
+;- 値の桁設定: 
+SIF VALUECOL && value && value_max
+	VALUECOL = MAX(1, VALUECOL, LOG10(ABS(value)) + 1 + (value < 0), LOG10(ABS(value_max)) + 1 + (value_max < 0))
+
+; 値の色指定
+IF value == value_max && value == 0 && FLAG:STATUS伏字モード && WHEN_COLOR_0 != ""
+	; 値の色指定(現行値もmaxも0)
+	label_color = COLOR(WHEN_COLOR_0)	; 枠ごとグレーアウト
+
+ELSEIF value == 0 && value_max != 0 && FLAG:STATUS伏字モード && WHEN_COLOR_0 != ""
+	value_color = COLOR(WHEN_COLOR_0)
+
+ELSEIF value == value_max || value_max == 0
+	;色変えしない
+
+ELSEIF GROUPMATCH(WHEN_COLOR_UPPER, "PERC", "％")
+	value_color = PERC_TO_COLOR(100 * value / value_max)
+
+ELSEIF (WHEN_COLOR_UPPER != "" || COLOR(DISP_NAME + "_UPPER")) && WHEN_LOWER_TARGET != __INT_MAX__
+	; (value_max,COLOR_UPPER) - (LOWER_TARGET,COLOR_LOWER)二点を基準に色を指定
+	IF WHEN_COLOR_UPPER == ""
+		I_C = COLOR(DISP_NAME + "_UPPER")
+	ELSE
+		I_C = COLOR(WHEN_COLOR_UPPER)
+	ENDIF
+	IF WHEN_COLOR_LOWER == ""
+		I_C:1 = COLOR(DISP_NAME + "_LOWER")
+		SIF !I_C
+			I_C:1 = COLOR("口上標準")
+	ELSE
+		I_C:1 = COLOR(WHEN_COLOR_LOWER)
+	ENDIF
+	value_color = Intermediate_Color(value, value_max, I_C, WHEN_LOWER_TARGET, I_C:1 )
+	
+ELSEIF (WHEN_COLOR_UPPER != "" || COLOR(DISP_NAME + "_UPPER") ) && WHEN_LOWER_TARGET == __INT_MAX__
+	; UPPERだけのときは、(value_max,COLOR_UPPER)を基準に色を指定
+	IF WHEN_COLOR_UPPER == ""
+		I_C = COLOR(DISP_NAME + "_UPPER")
+	ELSE
+		I_C = COLOR(WHEN_COLOR_UPPER)
+	ENDIF
+	value_color = Intermediate_Color(value, value_max, I_C )
+	
+ELSEIF (WHEN_COLOR_UPPER == "" && 0 == COLOR(DISP_NAME + "_UPPER") ) && WHEN_LOWER_TARGET != __INT_MAX__
+	; LOWERだけの時は, (LOWER_TARGET,COLOR_LOWER)を基準に色を指定
+	IF WHEN_COLOR_LOWER == ""
+		I_C:1 = COLOR(DISP_NAME + "_LOWER")
+		SIF !I_C
+			I_C:1 = COLOR("口上標準")
+	ELSE
+		I_C:1 = COLOR(WHEN_COLOR_LOWER)
+	ENDIF
+	value_color = Intermediate_Color(value, WHEN_LOWER_TARGET, I_C:1 )
+ENDIF
+
+SIF VALUECOL > 0
+	; カウンターストップ処理
+	value = LIMIT(value, -POWER(10, VALUECOL-1)-1, POWER(10, VALUECOL)-1 )
+
+; 枠などの整形は PRINT_LABEL に委託
+; 右詰めは正指定、左詰めはマイナス指定
+CALL PRINT_LABEL(DISP_NAME, -NAMECOL, label_color, TOSTR(value), VALUECOL, value_color, "/", TOSTR(value_max), VALUECOL, , NarrowBracket)
+value = RESULT
+SETCOLOR L_backup_color
+RETURN value
+
+; 値を取得する
+; C_ID <0ならFlagから、0～ならCFLAGから検索する
+; 該当の値があれば値をRESULT:0返し、RESULT:1を1にする
+; 該当の値がなければ RESULT:0 と 、RESULT:1を0 にする。
+@PS_GetValue( C_ID, PARAM_NAME, SCAN_KEY_ARRAY )
+;-- Params -----------------------------------------------------------------
+#DIM C_ID				; < 0 ならFlagを検索対象、0～CHARANUMならCharaID
+#DIMS PARAM_NAME		; パラメータ名。表示名であると同時に、CFlag/Flagのキー 
+						; (etc: "好感度" --> CFlag:住人_好感度) でもある
+						; 文字 / で分割し、SCAN_KEY_ARRAYで指定する文字列を挟んで検索する
+#DIMS REF SCAN_KEY_ARRAY, 0	; Flag/CFlagの検索キー文字列。PANAM_NAMEと繋げて探す文字列
+						; 上記の例での「住人_」部分に当たる
+;--  local variables  -------------------------------------------------------
+#DIM I_L				; ループ用
+#DIM I_P				; スプリット文字の位置
+#DIMS KEYS, 10			; ローカル:取得キー文字列
+#DIMS KEY_PRE			; 取得キー文字列処理用(/分割の前部分)
+#DIMS KEY_POST			; 取得キー文字列処理用(/分割の後部分)
+#DIMS IsCFlag
+;--  Constant emum.  --------------------------------------------------------
+#DIMS CONST PS_SPLITTER = "/"
+
+;- 初期化
+VARSET KEYS
+IF INRANGE(C_ID, 0, CHARANUM-1)
+	IsCFlag '= "C"
+Else
+	IsCFlag  =
+EndIf
+;- パラメータ検索キー生成
+I_P = STRFIND( PARAM_NAME, PS_SPLITTER)
+IF I_P > -1
+	KEY_PRE  '= SUBSTRING( PARAM_NAME, 0, I_P-1 )
+	KEY_POST '= SUBSTRING( PARAM_NAME, I_P+1)	; 分割は1個しか対応しません
+ELSE
+	KEY_PRE   =
+	KEY_POST '= PARAM_NAME
+ENDIF
+FOR I_L, 0, VARSIZE("SCAN_KEY_ARRAY")
+	KEYS:I_L = %KEY_PRE%%SCAN_KEY_ARRAY:I_L%%KEY_POST%
+NEXT
+
+CALLFORM PS_FINDKEYS_from_%IsCFlag%Flag, C_ID, KEYS
+IF !RESULT:1
+	RETURN 0, 0
+ENDIF
+RETURN RESULT, RESULT:1
+
+
+
+; 文字列配列 KEYS をキーに、Flag に該当の値があれば値をRESULT:0返し、RESULT:1を1にする
+; 該当の値がなければ RESULT:0 と 、RESULT:1を0 にする。
+@PS_FINDKEYS_from_Flag, C_ID, KEYS
+#DIM C_ID				; C_ID: 特に使わないが、負であること。
+#DIMS REF KEYS, 0
+RESULT:1 = 0
+
+ASSERT C_ID == -1		; これが真ならCFlag呼び出しと間違えている可能性大
+WHILE KEYS != ""
+	SIF GETNUM(Flag, KEYS) > -1
+		RETURN Flag:KEYS, 1
+	ARRAYSHIFT KEYS, -1, ""
+WEND
+RETURN 0, 0
+
+; 文字列配列 KEYS をキーに、CFlag に該当の値があれば値をRESULT:0返し、RESULT:1を1にする
+; 該当の値がなければ RESULT:0 と 、RESULT:1を0 にする。
+@PS_FINDKEYS_from_CFlag, C_ID, KEYS
+#DIM C_ID
+#DIMS REF KEYS, 0
+RESULT:1 = 0
+
+WHILE KEYS != ""
+	SIF GETNUM(CFlag, KEYS) > -1
+		RETURN CFlag:C_ID:KEYS, 1
+	ARRAYSHIFT KEYS, -1, ""
+WEND
+RETURN 0, 0
+
+;[EOF]

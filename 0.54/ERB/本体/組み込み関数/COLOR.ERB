@@ -1,0 +1,279 @@
+;=================================================
+;   sub COLOR
+;=================================================
+;   着色
+;-------------------------------------------------
+; Input:
+;  ARGS					色
+; Output:
+;  RETURNF				色
+;-------------------------------------------------
+@COLOR(ARGS)
+#FUNCTION
+
+SELECTCASE ARGS
+	;-----------------------------
+	;- 特殊色
+	;-----------------------------
+	CASE "伏字"
+		RETURNF 0x666666
+	CASE "口上標準"
+;		RETURNF 0xFFCCFF
+		RETURNF GETCOLOR()
+
+	;-----------------------------
+	;- 標準色
+	;-----------------------------
+	CASE "灰色", "gray"
+		RETURNF 0x666666
+	CASE "紫"
+		RETURNF 0xCC66CC
+	CASE "ピンク"
+		RETURNF 0xFF00FF
+	CASE "赤"
+		RETURNF 0xFF9999
+	CASE "水色"
+		RETURNF 0x66FFFF
+	CASE "緑"
+		RETURNF 0x00FF00
+	CASE "群青"
+		RETURNF 0x9999FF
+	CASE "黄色"
+		RETURNF 0xffff00
+	
+	;-----------------------------
+	;- 悩み区別色
+	;-----------------------------
+	CASE "悩み_金銭"
+		RETURNF COLOR_FROMNAME("LemonChiffon")
+
+	CASE "悩み_恋愛"
+		RETURNF COLOR_FROMNAME("Salmon")
+	
+	CASE "悩み_家庭"
+		RETURNF COLOR_FROMNAME("Lime")
+	
+	CASE "悩み_生活"
+		RETURNF COLOR_FROMNAME("Aqua")
+	
+	CASE "悩み_犯罪"
+		RETURNF COLOR_FROMNAME("LightSteelBlue")
+	
+	CASE "悩み_性的"
+		RETURNF COLOR_FROMNAME("Fuchsia")
+	
+	;-----------------------------
+	;- ステータス表示
+	;-----------------------------
+	CASE "人気_UPPER"
+		RETURNF COLOR_FROMNAME("Yellow")
+	
+	CASE "モラル_UPPER"
+		RETURNF COLOR_FROMNAME("Aqua")
+	
+	CASE "モラル_LOWER"
+		RETURNF COLOR_FROMNAME("Tomato")
+	
+	CASE "カルマ_UPPER"
+		RETURNF COLOR_FROMNAME("Pink")
+	
+	CASE "カルマ_LOWER"
+		RETURNF COLOR_FROMNAME("Lime")
+	
+	CASE "品性_UPPER"
+		RETURNF COLOR_FROMNAME("Lime")
+	
+	CASE "品性_LOWER"
+		RETURNF COLOR_FROMNAME("Violet")
+	
+	CASE "収入_UPPER"
+		RETURNF COLOR_FROMNAME("Gold")
+
+	CASE "出費_UPPER"
+		RETURNF COLOR_FROMNAME("Gold")
+
+	;-----------------------------
+	;- OTHER
+	;-----------------------------
+	CASE "ITEM_EXIST"
+		RETURNF COLOR_FROMNAME("AQUA")
+	
+	CASE "LOG"
+		RETURNF COLOR_FROMNAME("Green")
+
+	CASE "HIGHLIGHT"
+		RETURNF COLOR_FROMNAME("lemonyellow")
+
+	CASE "悩み_解決2"
+		RETURNF COLOR_FROMNAME("lightsalmon")
+	CASE "悩み_解決1"
+		RETURNF COLOR_FROMNAME("lemonyellow")
+	CASE "悩み_解決0"
+		RETURNF COLOR_FROMNAME("LimeGreen")
+
+	;-----------------------------
+	;- CITY MAP 色設定
+	;-----------------------------
+
+	CASE "都市防衛中"
+		RETURNF COLOR_FROMRGB(250, 50, 50)
+	CASE "都市襲撃_近"
+		RETURNF COLOR_FROMRGB(250, 50, 50)
+	CASE "都市襲撃_中"
+		RETURNF COLOR_FROMRGB(250, 50, 250)
+	CASE "都市襲撃_遠"
+		RETURNF COLOR_FROMRGB(50, 250, 250)
+	
+	CASE "都市損壊_大"
+		RETURNF COLOR_FROMRGB(250, 50, 50)
+	CASE "都市損壊_中"
+		RETURNF COLOR_FROMRGB(250, 50, 250)
+	CASE "都市損壊_小"
+		RETURNF COLOR_FROMRGB(50, 250, 250)
+	
+	CASE "今期締め切り_10日未満"
+		RETURNF COLOR_FROMRGB(250, 50, 50)
+	CASE "今期締め切り_30日未満"
+		RETURNF COLOR_FROMRGB(250, 50, 250)
+	CASE "今期締め切り_30日以上"
+		RETURNF COLOR_FROMRGB(50, 250, 250)
+
+	;-----------------------------
+	;- RPG_BATTLE 敵色設定
+	;-----------------------------
+	CASE "敵_瀕死"			; IS <= 10%
+		RETURNF 0xAA1100
+	CASE "敵_重症"			; IS <= 40%
+		RETURNF 0xDD6600
+	CASE "敵_重傷"			; IS <= 60%
+		RETURNF 0xEE9900
+	CASE "敵_軽傷"			; IS <= 80%
+		RETURNF 0xFFFF00
+	CASE "敵_無傷"			; CASEELSE
+		RETURNF 0xA0FFA0
+	
+	CASE "RPG_MESSAGE_GOOD"
+		RETURNF COLOR_FROMRGB(0,240,240)
+	CASE "RPG_MESSAGE_SUCCESS"
+		RETURNF COLOR_FROMRGB(50,250,250)
+	CASE "RPG_MESSAGE_BAD"
+		RETURNF COLOR_FROMRGB(250,50,50)
+	CASE "RPG_MESSAGE_ALART"
+		RETURNF COLOR_FROMRGB(250,40,40)
+	CASE "RPG_MESSAGE_SUPPORT"
+		RETURNF COLOR_FROMRGB(240,140,240)
+	CASE "RPG_MESSAGE_WARNING"
+		RETURNF COLOR_FROMRGB(220,220,0)
+	CASE "RPG_CLEANHIT"
+		RETURNF COLOR_FROMRGB(0,140,240)
+	CASE "RPG_HIT"
+		RETURNF COLOR_FROMRGB(240,40,240)
+	
+ENDSELECT
+
+RETURNF 0
+
+
+;PERCENT値0～100から色を指定する
+;96～100だとデフォ色
+;ライフバー系での使用を想定
+@PERC_TO_COLOR(PERCENT)
+#FUNCTION
+#DIM PERCENT
+SELECTCASE PERCENT
+CASE IS <= 0
+	RETURNF 0x660000
+CASE IS <= 10
+	RETURNF 0xAA1100
+CASE IS <= 25
+	RETURNF 0xFF6600
+CASE IS <= 50
+	RETURNF 0xFFFF00
+CASE IS <= 95
+	RETURNF 0x808080
+ENDSELECT
+RETURNF GETDEFCOLOR()
+
+
+;RANK値1～7から色を指定する
+;3101,階級SevenR,;特殊階級、「プレイヤー」と「シティ」に認められた者のみ授かる。
+;3102,階級SixO,;　階級の上昇と共に貢献値も上がる
+;3103,階級FiveY,;
+;3104,階級FourG,;
+;3105,階級ThreeB,;
+;3106,階級ToI,;
+;3107,階級OneV,;
+;
+;1～7の数値に当てはまらない場合は黒色を返す
+@RANK_TO_COLOR(RANK)
+#FUNCTION
+#DIM RANK
+SELECTCASE RANK
+CASE 1
+	RETURNF 0xFF0000
+CASE 2
+	RETURNF 0xFF6600
+CASE 3
+	RETURNF 0xDDFF00
+CASE 4
+	RETURNF 0x33DD33
+CASE 5
+	RETURNF 0x0033FF
+CASE 6
+	RETURNF 0x000099
+CASE 7
+	RETURNF 0x220022
+ENDSELECT
+RETURNF 0x000000
+
+
+;===========================================================================================================================
+;RGB空間における2点 (REF_POINT0, REF_COLOR0) - (REF_POINT1, REF_COLOR1)間の中間色を返す
+; 中間色の点 TARGET_POINT は REF_POINT0～REF_POINT1の範囲内にある必要はない
+; 色の値を省略するか負の値にすると現在のフォアグラウンド色になる
+; POINT0のほうが後指定なのに注意
+; example:
+;	(0, forgraund色) - (100, 赤)間で 中間点 x --> Intermediate_Color( x, 100, COLOR("赤色"))
+;	(-100, 青色) - (100, 緑色)間で 中間点 x ----> Intermediate_Color( x, 100, COLOE("緑色"), -100, COLOR("青色"))
+;===========================================================================================================================
+@Intermediate_Color(TARGET_POINT, REF_POINT1, REF_COLOR1 = -1, REF_POINT0 = 0, REF_COLOR0 = -1 )
+#FUNCTION
+#DIM REF_POINT0
+#DIM REF_POINT1
+#DIM REF_COLOR0
+#DIM REF_COLOR1
+#DIM DYNAMIC REFC_0, 3
+#DIM DYNAMIC REFC_1, 3
+#DIM DYNAMIC TARGET_POINT
+#DIM DYNAMIC TARGET_COLOR, 3
+#DIM CONST _RED___	= 0
+#DIM CONST _GREEN_	= 1
+#DIM CONST _BLUE__	= 2
+#DIM DYNAMIC _OFFSET_	; 計算精度向上のためのゲタ
+#DIM DYNAMIC TP_RP0		; TARGET_POINT - REF_POINT0
+#DIM DYNAMIC RP1_RP0	; REF_POINT1 - REF_POINT0
+
+TP_RP0  = TARGET_POINT - REF_POINT0
+RP1_RP0 = REF_POINT1 - REF_POINT0
+SIF !INRANGE(REF_COLOR0, 0, 0xFFFFFF)
+	REF_COLOR0 = GETCOLOR() 
+SIF !INRANGE(REF_COLOR1, 0, 0xFFFFFF)
+	REF_COLOR1 = GETCOLOR()
+SIF RP1_RP0 == 0
+	RETURNF ( (REF_COLOR0 + REF_COLOR1) / 2)
+_OFFSET_ = MAX(256, ABS(RP1_RP0))
+
+REFC_0:_RED___ = ( REF_COLOR0 >> 16 ) & 0xFF
+REFC_0:_GREEN_ = ( REF_COLOR0 >> 8  ) & 0xFF
+REFC_0:_BLUE__ = ( REF_COLOR0       ) & 0xFF
+
+REFC_1:_RED___ = ( REF_COLOR1 >> 16 ) & 0xFF
+REFC_1:_GREEN_ = ( REF_COLOR1 >> 8  ) & 0xFF
+REFC_1:_BLUE__ = ( REF_COLOR1       ) & 0xFF
+
+TARGET_COLOR:_RED___ = LIMIT( REFC_0:_RED___ + ((_OFFSET_ * TP_RP0 * (REFC_1:_RED___ - REFC_0:_RED___)) / RP1_RP0) / _OFFSET_, 0, 255 )
+TARGET_COLOR:_GREEN_ = LIMIT( REFC_0:_GREEN_ + ((_OFFSET_ * TP_RP0 * (REFC_1:_GREEN_ - REFC_0:_GREEN_)) / RP1_RP0) / _OFFSET_, 0, 255 )
+TARGET_COLOR:_BLUE__ = LIMIT( REFC_0:_BLUE__ + ((_OFFSET_ * TP_RP0 * (REFC_1:_BLUE__ - REFC_0:_BLUE__)) / RP1_RP0) / _OFFSET_, 0, 255 )
+
+RETURNF (TARGET_COLOR:_RED___ << 16 | TARGET_COLOR:_GREEN_ << 8 | TARGET_COLOR:_BLUE__ )
+;[EOF]

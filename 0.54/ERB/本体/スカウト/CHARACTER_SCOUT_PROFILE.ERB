@@ -1,0 +1,240 @@
+;-------------------------------------------------
+;スカウト時のプロフィール
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@CHARACTER_SCOUT_PROFILE(ARG:0)
+#DIM L_I
+#DIMS P_1
+#DIMS P_2
+#DIMS P_3
+
+L_I= ARG:0
+
+
+
+CSTR:L_I:キャラ解説00 = 【%NAME:L_I%】【身長{CFLAG:L_I:身長}cm:体重{CFLAG:L_I:体重}kg:Ｂ{CFLAG:L_I:バストサイズ}cm:Ｗ{CFLAG:L_I:ウエストサイズ}cm:Ｈ{CFLAG:L_I:ヒップサイズ}cm】
+
+
+IF CFLAG:L_I:住人_地位 == 3
+	P_1 = 名のある高貴な家系
+ELSEIF CFLAG:L_I:住人_地位 == 2
+	P_1 = 上流階級
+ELSEIF CFLAG:L_I:住人_地位 == 1
+	P_1 = 裕福な家庭
+ELSEIF CFLAG:L_I:住人_地位 == -1
+	P_1 = 貧乏家庭
+ELSE
+	P_1 = 一般家庭
+ENDIF 
+
+IF CFLAG:L_I:住人_種族 == 13
+	P_2 = ニア
+ELSEIF CFLAG:L_I:住人_種族 == 12
+	P_2 = 吸血鬼
+ELSEIF CFLAG:L_I:住人_種族 == 11
+	P_2 = 精霊
+ELSEIF CFLAG:L_I:住人_種族 == 10
+	P_2 = 鬼
+ELSEIF CFLAG:L_I:住人_種族 == 9
+	P_2 = 鳥人
+ELSEIF CFLAG:L_I:住人_種族 == 8
+	P_2 = 海人
+ELSEIF CFLAG:L_I:住人_種族 == 7
+	P_2 = イス
+ELSEIF CFLAG:L_I:住人_種族 == 6
+	P_2 = 竜人
+ELSEIF CFLAG:L_I:住人_種族 == 5
+	P_2 = 天使
+ELSEIF CFLAG:L_I:住人_種族 == 4
+	P_2 = オートマタ
+ELSEIF CFLAG:L_I:住人_種族 == 3
+	P_2 = 亜人
+ELSEIF CFLAG:L_I:住人_種族 == 2
+	P_2 = 魔族
+ELSEIF CFLAG:L_I:住人_種族 == 1
+	P_2 = エルフ
+ELSE
+	P_2 = 人間
+ENDIF 
+
+IF TALENT:L_I:人権損壊 == 1
+	P_3 = ある事情により廃棄処理されるところを保護。
+ELSEIF TALENT:L_I:主人持ち == 1
+	P_3 = 元、他「プレイヤー」の配下。
+ELSEIF TALENT:L_I:元性奴隷 == 1
+	P_3 = 男達に慰み者にされていた元性奴隷。
+ELSEIF TALENT:L_I:旧世代人 == 1
+	P_3 = 旧世代から生きている数少ない生き証人。
+ELSEIF Flag:調査イベント番号 >= 500 
+	P_3 = 攻略部隊が外界から連れてきた異邦人。
+ELSEIF TALENT:L_I:イレギュラー == 1
+	P_3 = 都市の秩序に逆らったイレギュラー。
+ELSEIF TALENT:L_I:治安維持局員 == 1
+	IF !RAND:11
+		P_3 = 衛生区画の治安維持に務めている局員。
+	ELSEIF !RAND:10
+		P_3 = 教育区画の治安維持に務めている局員。
+	ELSEIF !RAND:9
+		P_3 = 家畜区画の治安維持に務めている局員。
+	ELSEIF !RAND:8
+		P_3 = 農産区画の治安維持に務めている局員。
+	ELSEIF !RAND:7
+		P_3 = 水産区画の治安維持に務めている局員。
+	ELSEIF !RAND:6
+		P_3 = 薬品区画の治安維持に務めている局員。
+	ELSEIF !RAND:5
+		P_3 = 工場区画の治安維持に務めている局員。
+	ELSEIF !RAND:4
+		P_3 = 科学区画の治安維持に務めている局員。
+	ELSEIF !RAND:3
+		P_3 = 娯楽区画の治安維持に務めている局員。
+	ELSEIF !RAND:2
+		P_3 = 居住区画の治安維持に務めている局員。
+	ELSE
+		P_3 = 生産区画の治安維持に務めている局員。
+	ENDIF
+ELSEIF TALENT:L_I:娼婦 == 1
+	SELECTCASE TALENT:L_I:学生
+		CASE 5
+			P_3 = 幼い肢体で金と精液を搾り取る小学生娼婦。
+		CASE 4
+			P_3 = 孕みざかりの子宮で男の欲望を受け止める中学生娼婦。
+		CASE 3
+			P_3 = 金のために瑞々しい肉体を男にさらけ出す高校生娼婦。
+		CASE 2
+			P_3 = 大学に通いながら春をひさぐ大学生娼婦。
+		CASE 1
+			P_3 = 都市にある学園でサポを待つ学生娼婦。
+		CASEELSE
+			P_3 = 男の欲望を受け止める娼婦。
+	ENDSELECT
+ELSEIF TALENT:L_I:社会人 == 1
+	P_3 = この都市を支える社会人。
+ELSEIF TALENT:L_I:アイドル == 1
+	P_3 = 
+	SELECTCASE TALENT:L_I:学生
+		CASE 5
+			P_3 = 小学生
+		CASE 4
+			P_3 = 中学生
+		CASE 3
+			P_3 = 女子高生
+		CASE 2
+			P_3 = 女子大生
+		CASE 1
+			P_3 = 学園
+	ENDSELECT
+	P_3 = 歌と踊りで皆を元気づける%P_3%アイドル。
+ELSEIF TALENT:L_I:学生
+	SELECTCASE TALENT:L_I:学生
+		CASE 5
+			P_3 = 都市にある小学校に通う生徒。
+		CASE 4
+			P_3 = 都市にある中学校に通う生徒。
+		CASE 3
+			P_3 = 都市にある高校に通う生徒。
+		CASE 2
+			P_3 = 都市にある大学に通う学生。
+		CASEELSE
+			P_3 = 都市にある学園に通う学生。
+	ENDSELECT
+ELSE
+	P_3 = 至って普通の住人。
+ENDIF 
+
+CSTR:L_I:キャラ解説01 = 【一般情報】%P_1%出身の%P_2%、%P_3%
+
+IF TALENT:L_I:非処女 == 1 
+	P_1 = 男性経験はあり、
+ELSE
+	P_1 = 男性経験はなく、
+ENDIF 
+IF TALENT:L_I:元性奴隷 == 1
+	P_2 = 数えきれない程犯されていたようだ。
+ELSEIF EXP:L_I:性交経験 >= 90
+	P_2 = そのうえ経験も非常に多く随分と男慣れしている。
+ELSEIF EXP:L_I:性交経験 >= 60
+	P_2 = 重ねた回数も多く性行為をすることに抵抗がない。
+ELSEIF EXP:L_I:性交経験 >= 30
+	P_2 = 性行為も相応に重ねている。
+ELSEIF EXP:L_I:性交経験 >= 1
+	P_2 = 処女は既に捨て去っている。
+ELSE
+	P_2 = 穢れを知らない女性。
+ENDIF 
+
+SIF FLAG:遺研_研究中 ==  0
+	CSTR:L_I:キャラ解説02 = 【機密Lv1:経験】%P_1%%P_2%
+
+P_1 = 機関による採取は行われていません。
+
+CFLAG:L_I:機関評価 = CFLAG:L_I:母体レベル+CFLAG:L_I:卵子レベル
+
+IF TALENT:L_I:元性奴隷 == 1
+	P_1 = 外界での出来事は記録されていません。
+ELSEIF EXP:L_I:性交経験 >= 1 && CFLAG:L_I:機関評価 >= RAND:10
+	P_1 = 経験の中に機関の者との性行為あり、受精卵も回収済み。
+ELSEIF !RAND:2 && EXP:L_I:性交経験 >= 1
+	IF !RAND:5
+		P_1 = 秘匿されていたが上記よりも多く性行為をしている模様。
+		EXP:L_I:性交経験 += (RAND:50)+50
+	ELSEIF !RAND:4 && CFlag:L_I:住人_カルマ >= 40
+		P_1 = 生殖は裏社会で男たちに強姦された模様。
+		EXP:L_I:強姦経験 += (RAND:20)+10
+	ELSEIF !RAND:3 && CFlag:L_I:住人_モラル <= 0
+		P_1 = 生殖は援交で頻繁に行っていた模様。
+		EXP:L_I:売春経験 += (RAND:20)+10
+	ELSEIF !RAND:2
+		P_1 = 生殖は同年代の異性と頻繁に行っていた模様。
+	ELSE
+		P_1 = 生殖は意中の相手と頻繁に行っていた模様。
+	ENDIF
+ELSE
+	P_1 = 経験の中に機関の者との性行為なし。採取もしていません。
+ENDIF 
+
+SIF FLAG:遺研_研究中 ==  0
+	CSTR:L_I:キャラ解説03 = 【機密Lv2:採取】%P_1%
+
+IF TALENT:L_I:主人持ち == 1
+	P_1 = 他「プレイヤー」でしたが
+ELSEIF Flag:調査イベント番号 > 0 
+	P_1 = 元々存在せず
+ELSEIF !RAND:5
+	P_1 = □△でしたが権利を放棄したため
+ELSEIF !RAND:4
+	P_1 = ○○年前にロストしたため
+ELSEIF !RAND:3
+	P_1 = 機関支援者でしたが
+ELSEIF !RAND:2
+	P_1 = 機関の者でしたが
+ELSE
+	P_1 = 存在せず申請待ちでしたが
+ENDIF
+
+IF FLAG:遺研_研究中 ==  0
+	CSTR:L_I:キャラ解説04 = 【機密Lv3:権利(財産)】前権利者は%P_1%、あなたに『個人財産』の権利が移譲されました。
+	CSTR:L_I:キャラ解説05 = 【機密Lv4:権利(保護)】あなたが%NAME:L_I%の『個人財産』を放棄しない限り、他権利者の申請・権限は無効となります。
+	CSTR:L_I:キャラ解説06 = 【機密Lv5:権利(申請)】あなたが%NAME:L_I%に許可されている申請は『記憶改竄』『個人情報閲覧』『緊急廃棄処分』となります。
+	CSTR:L_I:キャラ解説07 = 【機密Lv6:保存1】あなたは任意で%NAME:L_I%を用いて遺伝子を残すことが許可されています。
+	CSTR:L_I:キャラ解説08 = 【機密Lv6:保存2】遺伝子保存の際、%NAME:L_I%が交際・結婚していても上記の行為が許可されています。
+ENDIF
+
+
+IF FLAG:遺研_研究中 !=  0
+	CSTR:L_I:キャラ解説09 = 【重要機密:再利用(概要)】イレギュラーとして確保後、身体検査の結果障害がなかった為再利用されました。
+	CSTR:L_I:キャラ解説10 = 【重要機密:再利用(権利)】全ての権限は『研究機関ＡＬＣ』が所持しています。
+	CSTR:L_I:キャラ解説11 = 【重要機密:再利用(所属)】%NAME:L_I%は『研究機関ＡＬＣ』のボランティアとして所属しています。
+	CSTR:L_I:キャラ解説12 = 【重要機密:再利用(破棄)】どのような理由であれ権利者は好きな時に処分してもよい。
+ENDIF
+
+
+
+
+
+ 
+

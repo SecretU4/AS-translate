@@ -1,0 +1,259 @@
+﻿;-------------------------------------------------
+;スカウト時の戦闘能力
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@CHARACTER_SCOUT_RPG(ARG:0)
+#DIM L_I
+#DIM L_HP
+#DIM L_SP
+#DIM L_ATK
+#DIM L_DEF
+#DIM L_HIT
+#DIM L_SPD
+#DIM L_LUK
+#DIM L_BRE
+#DIM L_SBP
+
+L_I = ARG:0
+L_SBP = 0
+
+IF CFLAG:L_I:住人_種族 == 12
+;흡혈귀
+	L_HP = 60
+	L_SP = 60
+	L_ATK = 50
+	L_DEF = 45
+	L_HIT = 40
+	L_SPD = 50
+	L_LUK = 5
+	L_BRE = 100
+ELSEIF CFLAG:L_I:住人_種族 == 11
+;정령
+	L_HP = 25
+	L_SP = 25
+	L_ATK = 10
+	L_DEF = 10
+	L_HIT = 50
+	L_SPD = 60
+	L_LUK = 70
+	L_BRE = 0
+ELSEIF CFLAG:L_I:住人_種族 == 10
+;鬼
+	L_HP = 60
+	L_SP = 60
+	L_ATK = 80
+	L_DEF = 80
+	L_HIT = 5
+	L_SPD = 5
+	L_LUK = 5
+	L_BRE = 0
+ELSEIF CFLAG:L_I:住人_種族 == 9
+;조인
+	L_HP = 15
+	L_SP = 50
+	L_ATK = 15
+	L_DEF = 10
+	L_HIT = 30
+	L_SPD = 80
+	L_LUK = 10
+	L_BRE = 0
+ELSEIF CFLAG:L_I:住人_種族 == 8
+;어인
+	L_HP = 30
+	L_SP = 40
+	L_ATK = 25
+	L_DEF = 40
+	L_HIT = 50
+	L_SPD = 50
+	L_LUK = 30
+	L_BRE = 50
+ELSEIF CFLAG:L_I:住人_種族 == 7
+;イス
+	L_HP = 2
+	L_SP = 2
+	L_ATK = 80
+	L_DEF = 80
+	L_HIT = 5
+	L_SPD = 60
+	L_LUK = 5
+	L_BRE = 200
+ELSEIF CFLAG:L_I:住人_種族 == 6
+;용인
+	L_HP = 80
+	L_SP = 80
+	L_ATK = 60
+	L_DEF = 60
+	L_HIT = 40
+	L_SPD = 60
+	L_LUK = 20
+	L_BRE = 50
+ELSEIF CFLAG:L_I:住人_種族 == 5
+;천사
+	L_HP = 30
+	L_SP = 30
+	L_ATK = 20
+	L_DEF = 20
+	L_HIT = 25
+	L_SPD = 25
+	L_LUK = 50
+	L_BRE = 0
+ELSEIF CFLAG:L_I:住人_種族 == 4
+;오토마타
+	L_HP = 30
+	L_SP = 30
+	L_ATK = 30
+	L_DEF = 40
+	L_HIT = 30
+	L_SPD = 30
+	L_LUK = 10
+	L_BRE = 0
+ELSEIF CFLAG:L_I:住人_種族 == 3
+;아인
+	L_HP = 50
+	L_SP = 50
+	L_ATK = 25
+	L_DEF = 25
+	L_HIT = 10
+	L_SPD = 35
+	L_LUK = 5
+	L_BRE = 0
+ELSEIF CFLAG:L_I:住人_種族 == 2
+;야마
+	L_HP = 20
+	L_SP = 40
+	L_ATK = 25
+	L_DEF = 25
+	L_HIT = 20
+	L_SPD = 30
+	L_LUK = 10
+	L_BRE = 30
+ELSEIF CFLAG:L_I:住人_種族 == 1
+;엘프
+	L_HP = 10
+	L_SP = 30
+	L_ATK = 5
+	L_DEF = 5
+	L_HIT = 40
+	L_SPD = 40
+	L_LUK = 10
+	L_BRE = 60
+ELSE
+;인간
+	L_HP = 35
+	L_SP = 35
+	L_ATK = 20
+	L_DEF = 20
+	L_HIT = 20
+	L_SPD = 50
+	L_LUK = 20
+	L_BRE = 0
+ENDIF
+
+
+
+
+
+SIF TALENT:L_I:「시스터」== 1
+	L_SBP = 10+(RAND:10)
+
+IF RAND:100 >= 97 && FLAG:汎用変数 == 52
+	TALENT:L_I:돌연변이 = 1
+	L_SBP = 10+(RAND:10)
+ENDIF
+
+IF RAND:100 >= 97 && FLAG:汎用変数 == 52
+	TALENT:L_I:격세유전 = 1
+	L_SBP = 10+(RAND:10)
+ENDIF
+
+
+
+CFlag:L_I:住人_최대체력 = (RAND:20)+L_HP+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_현재체력 = CFlag:L_I:住人_최대체력
+CFlag:L_I:住人_最大気力 = (RAND:20)+L_SP+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_現在気力 = CFlag:L_I:住人_最大気力
+CFlag:L_I:住人_SAN      = (RAND:40)+40+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_GUTS     = (RAND:40)+40+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_BRAVE    = (RAND:40)+40+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+
+CFlag:L_I:住人_ATK      = (RAND:20)+L_ATK+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_DEF      = (RAND:20)+L_DEF+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_HIT      = (RAND:20)+L_HIT+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_SPD      = (RAND:20)+L_SPD+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_LUK      = (RAND:20)+L_LUK+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_最大BRE  = L_BRE+(RAND:(Flag:イベントキャラ特別補正+1))+L_SBP
+CFlag:L_I:住人_現在BRE  = CFlag:L_I:住人_最大BRE
+
+
+CFlag:L_I:住人_技能ポイント = 200
+
+CSTR:L_I:住人_M兵装_名前 = メイン兵装
+CFlag:L_I:住人_M兵装ダイス = 2
+CFlag:L_I:住人_M兵装ダメージ = 3
+CFlag:L_I:住人_M兵装ボーナス = 2
+CFlag:L_I:住人_M兵装練度 = 1
+
+CSTR:L_I:住人_S兵装_名前 = サブ兵装
+CFlag:L_I:住人_S兵装ダイス = 1
+CFlag:L_I:住人_S兵装ダメージ = 3
+CFlag:L_I:住人_S兵装ボーナス = 1
+CFlag:L_I:住人_S兵装練度 = 1
+
+
+;必要ならフラグで制御
+;IF FLAG:兵装ランダム
+	CFlag:L_I:住人_M兵装 = RAND:5
+	CSTR:L_I:住人_M兵装_名前 = %ランダム兵装名(CFlag:L_I:住人_M兵装)%
+	CFlag:L_I:住人_S兵装 = RAND:5
+	CSTR:L_I:住人_S兵装_名前 = %ランダム兵装名(CFlag:L_I:住人_S兵装)%
+;ENDIF
+
+@ランダム兵装名(ARG)
+#FUNCTIONS
+#DIM T_R
+
+T_R = RESULT 
+VARSET LOCALS
+SELECTCASE ARG
+	CASE 0
+		;格闘
+		SPLIT "가라테/유술/골법/호신술/스모/복싱/무에타이/코만도 삼보/카포에라/시스테마", "/", LOCALS
+		LOCAL = RAND:RESULT
+	CASE 1
+		;刀剣
+		SPLIT "나이프/일본도/롱소드/사브르/레이피어/양손검/손도끼/양손도끼/자벨린/랜스/할버드/사모/청룡언월도/방천화극", "/", LOCALS
+		LOCAL = RAND:RESULT
+	CASE 2
+		;鈍器
+		SPLIT "곤봉/메이스/통나무/모닝스타/채찍/해머/곡괭이/봉술/톤파", "/", LOCALS
+		LOCAL = RAND:RESULT
+	CASE 3
+		;銃器
+		SPLIT "핸드건/샷건/머신건/블로우건/라이플/크로스보우/화궁/양궁", "/", LOCALS
+		LOCAL = RAND:RESULT
+	CASE 4
+		;魔法
+		SPLIT "불 마법/얼음 마법/바람 마법/번개 마법/흑마법/백마법/고대 마법/수비술/소환 마법", "/", LOCALS
+		LOCAL = RAND:RESULT
+	CASEELSE
+		LOCALS = 병기
+		LOCAL = 0
+ENDSELECT
+
+RESULT = T_R
+RETURNF LOCALS:LOCAL
+
+
+
+
+
+
+
+
+
+
+

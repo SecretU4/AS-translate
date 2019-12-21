@@ -1,0 +1,27 @@
+;-------------------------------------------------
+;ƒLƒƒƒ‰”äŠrŠÖ”
+;-------------------------------------------------
+;TYPEi”äŠr‰‰ŽZŽqj‚ðŽw’è‚µ‚Ä2ƒLƒƒƒ‰‚Ì“Á’è•Ï”‚Ì”äŠr‚ðs‚¤”Ä—pŠÖ”
+@C_CHARA_COMPARE(VAR_NAME, VAR_ID, CHARA_A, TYPE, CHARA_B)
+#FUNCTION
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIMS VAR_NAME ;”äŠr‘ÎÛƒLƒƒƒ‰•Ï”
+#DIM  VAR_ID   ;”äŠr‘ÎÛƒLƒƒƒ‰•Ï”‚ÌID
+#DIM  CHARA_A  ;”äŠr‘ÎÛƒLƒƒƒ‰A‚Ì“o˜^”Ô†
+#DIMS TYPE     ;”äŠr“à—e
+#DIM  CHARA_B  ;”äŠr‘ÎÛƒLƒƒƒ‰B‚Ì“o˜^”Ô†
+SELECTCASE TYPE
+CASE "=="
+	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) == C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
+CASE ">"
+	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) > C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
+CASE ">="
+	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) >= C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
+CASE "<"
+	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) < C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
+CASE "<="
+	RETURNF C_GET_CVAR_VALUE(CHARA_A, VAR_NAME, VAR_ID) <= C_GET_CVAR_VALUE(CHARA_B, VAR_NAME, VAR_ID)
+CASEELSE
+	THROW •s–¾‚ÈTYPE@%TYPE%
+ENDSELECT

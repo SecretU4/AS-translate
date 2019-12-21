@@ -1,0 +1,43 @@
+
+;-------------------------------------------------
+;é{ê›Å@è§ìXäX
+;-------------------------------------------------
+@CITY_F_6(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_M
+#DIM L_I
+#DIM L_NM
+L_NM = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML Åyè§ìXäXÅz
+DRAWLINE
+PRINTFORML ëΩÇ≠ÇÃèZñØÇ™ê∂äàÇÃÇΩÇﬂÇ…égópÇµÇƒÇ¢ÇÈèÍèäÅB
+PRINTFORML 
+DRAWLINE
+PRINTFORML [0] îÉÇ¢ï®
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [999] ñﬂÇÈ
+INPUT
+L_INPUT = RESULT
+L_M = RESULT
+SELECTCASE L_INPUT
+	CASE 999
+		RETURN
+	CASE 0
+		CALL ITEM_MAIN
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+
+
+
+
+
+
+

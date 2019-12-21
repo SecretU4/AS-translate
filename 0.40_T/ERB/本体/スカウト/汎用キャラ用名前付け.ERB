@@ -1,0 +1,5480 @@
+﻿;＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+;ランダムキャラ命名
+;＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+;日本人風女性系の名前を出力します
+;2016/04/19作成 deme
+
+@ランダムキャラ_命名(ARG)
+#FUNCTIONS
+
+;苗字
+SELECTCASE  RAND:421
+	CASE 0
+		LOCALS:0 = 杉井
+		LOCALS:2 = すぎい
+	CASE 1
+		LOCALS:0 = 一ノ瀬
+		LOCALS:2 = いちのせ
+	CASE 2
+		LOCALS:0 = 久城
+		LOCALS:2 = くじょう
+	CASE 3
+		LOCALS:0 = 遠野
+		LOCALS:2 = とおの
+	CASE 4
+		LOCALS:0 = 高野
+		LOCALS:2 = たかの
+	CASE 5
+		LOCALS:0 = 古宮
+		IF RAND:1
+			LOCALS:2 = ふるみや
+		ELSE
+			LOCALS:2 = こみや
+		ENDIF
+	CASE 6
+		LOCALS:0 = 御坂
+		LOCALS:2 = みさか
+	CASE 7
+		LOCALS:0 = 荒川
+		LOCALS:2 = あらかわ
+	CASE 8
+		LOCALS:0 = 久保
+		LOCALS:2 = くぼ
+	CASE 9
+		LOCALS:0 = 榎本
+		LOCALS:2 = えのもと
+	CASE 10
+		LOCALS:0 = 上野
+		LOCALS:2 = うえの
+	CASE 11
+		LOCALS:0 = 小川
+		LOCALS:2 = おがわ
+	CASE 12
+		LOCALS:0 = 加藤
+		LOCALS:2 = かとう
+	CASE 13
+		LOCALS:0 = 木下
+		LOCALS:2 = きのした
+	CASE 14
+		LOCALS:0 = 熊沢
+		LOCALS:2 = くまさわ
+	CASE 15
+		LOCALS:0 = 斎藤
+		LOCALS:2 = さいとう
+	CASE 16
+		LOCALS:0 = 篠崎
+		LOCALS:2 = しのざき
+	CASE 17
+		LOCALS:0 = 諏訪
+		LOCALS:2 = すわ
+	CASE 18
+		LOCALS:0 = 園崎
+		LOCALS:2 = そのざき
+	CASE 19
+		LOCALS:0 = 高槻
+		LOCALS:2 = たかつき
+	CASE 20
+		LOCALS:0 = 高町
+		LOCALS:2 = たかまち
+	CASE 21
+		LOCALS:0 = 立花
+		LOCALS:2 = たちばな
+	CASE 22
+		LOCALS:0 = 十ノ瀬
+		LOCALS:2 = とおのせ
+	CASE 23
+		LOCALS:0 = 月詠
+		LOCALS:2 = つくよみ
+	CASE 24
+		LOCALS:0 = 鶴屋
+		LOCALS:2 = つるや
+	CASE 25
+		LOCALS:0 = 天堂
+		LOCALS:2 = てんどう
+	CASE 26
+		LOCALS:0 = 東横
+		LOCALS:2 = とうよこ
+	CASE 27
+		LOCALS:0 = 遠坂
+		LOCALS:2 = とおさか
+	CASE 28
+		LOCALS:0 = 能登
+		LOCALS:2 = のと
+	CASE 29
+		LOCALS:0 = 橋田
+		LOCALS:2 = はしだ
+	CASE 30
+		LOCALS:0 = 藤原
+		LOCALS:2 = ふじわら
+	CASE 31
+		LOCALS:0 = 古手
+		LOCALS:2 = ふるで
+	CASE 32
+		LOCALS:0 = 柊
+		LOCALS:2 = ひいらぎ
+	CASE 33
+		LOCALS:0 = 平沢
+		LOCALS:2 = ひらさわ
+	CASE 34
+		LOCALS:0 = 原村
+		LOCALS:2 = はらむら
+	CASE 35
+		LOCALS:0 = 北条
+		LOCALS:2 = ほうじょう
+	CASE 36
+		LOCALS:0 = 星井
+		LOCALS:2 = ほしい
+	CASE 37
+		LOCALS:0 = 牧瀬
+		LOCALS:2 = まきせ
+	CASE 38
+		LOCALS:0 = 柚原
+		LOCALS:2 = ゆずはら
+	CASE 39
+		LOCALS:0 = 八神
+		LOCALS:2 = やがみ
+	CASE 40
+		LOCALS:0 = 三浦
+		LOCALS:2 = みうら
+	CASE 41
+		LOCALS:0 = 水橋
+		LOCALS:2 = みずはし
+	CASE 42
+		LOCALS:0 = 田村
+		LOCALS:2 = たむら
+	CASE 43
+		LOCALS:0 = 桐ケ谷
+		LOCALS:2 = きりがや
+	CASE 44
+		LOCALS:0 = 今井
+		LOCALS:2 = いまい
+	CASE 45
+		LOCALS:0 = 工藤
+		LOCALS:2 = くどう
+	CASE 46
+		LOCALS:0 = 武田
+		LOCALS:2 = たけだ
+	CASE 47
+		LOCALS:0 = 菊池
+		LOCALS:2 = きくち
+	CASE 48
+		LOCALS:0 = 結城
+		LOCALS:2 = ゆうき
+	CASE 49
+		LOCALS:0 = 水瀬
+		LOCALS:2 = みなせ
+	CASE 50
+		LOCALS:0 = 如月
+		LOCALS:2 = きさらぎ
+	CASE 51
+		LOCALS:0 = 小田嶋
+		LOCALS:2 = おだじま
+	CASE 52
+		LOCALS:0 = 杉下
+		LOCALS:2 = すぎした
+	CASE 53
+		LOCALS:0 = 鈴木
+		LOCALS:2 = すずき
+	CASE 54
+		LOCALS:0 = 坂本
+		LOCALS:2 = さかもと
+	CASE 55
+		LOCALS:0 = 佐藤
+		LOCALS:2 = さとう
+	CASE 56
+		LOCALS:0 = 暁美
+		LOCALS:2 = あけみ
+	CASE 57
+		LOCALS:0 = 高橋
+		LOCALS:2 = たかはし
+	CASE 58
+		LOCALS:0 = 田中
+		LOCALS:2 = たなか
+	CASE 59
+		LOCALS:0 = 渡辺
+		LOCALS:2 = わたなべ
+	CASE 60
+		LOCALS:0 = 伊藤
+		LOCALS:2 = いとう
+	CASE 61
+		LOCALS:0 = 山本
+		LOCALS:2 = やまもと
+	CASE 62
+		LOCALS:0 = 中村
+		LOCALS:2 = なかむら
+	CASE 63
+		LOCALS:0 = 小林
+		LOCALS:2 = こばやし
+	CASE 64
+		LOCALS:0 = 加藤
+		LOCALS:2 = かとう
+	CASE 65
+		LOCALS:0 = 吉田
+		LOCALS:2 = よしだ
+	CASE 66
+		LOCALS:0 = 山田
+		LOCALS:2 = やまだ
+	CASE 67
+		LOCALS:0 = 佐々木
+		LOCALS:2 = ささき
+	CASE 68
+		LOCALS:0 = 山口
+		LOCALS:2 = やまぐち
+	CASE 69
+		LOCALS:0 = 松本
+		LOCALS:2 = まつもと
+	CASE 70
+		LOCALS:0 = 井上
+		LOCALS:2 = いのうえ
+	CASE 71
+		LOCALS:0 = 斉藤
+		LOCALS:2 = さいとう
+	CASE 72
+		LOCALS:0 = 木村
+		LOCALS:2 = きむら
+	CASE 73
+		LOCALS:0 = 林
+		LOCALS:2 = はやし
+	CASE 74
+		LOCALS:0 = 清水
+		LOCALS:2 = しみず
+	CASE 75
+		LOCALS:0 = 山崎
+		LOCALS:2 = やまさき
+	CASE 76
+		LOCALS:0 = 池田
+		LOCALS:2 = いけだ
+	CASE 77
+		LOCALS:0 = 阿部
+		LOCALS:2 = あべ
+	CASE 78
+		LOCALS:0 = 森
+		LOCALS:2 = もり
+	CASE 79
+		LOCALS:0 = 橋本
+		LOCALS:2 = はしもと
+	CASE 80
+		LOCALS:0 = 山下
+		LOCALS:2 = やました
+	CASE 81
+		LOCALS:0 = 石川
+		LOCALS:2 = いしかわ
+	CASE 82
+		LOCALS:0 = 中島
+		LOCALS:2 = なかじま
+	CASE 83
+		LOCALS:0 = 前田
+		LOCALS:2 = まえだ
+	CASE 84
+		LOCALS:0 = 藤田
+		LOCALS:2 = ふじた
+	CASE 85
+		LOCALS:0 = 小川
+		LOCALS:2 = おがわ
+	CASE 86
+		LOCALS:0 = 岡田
+		LOCALS:2 = おかだ
+	CASE 87
+		LOCALS:0 = 後藤
+		LOCALS:2 = ごとう
+	CASE 88
+		LOCALS:0 = 長谷川
+		LOCALS:2 = はせがわ
+	CASE 89
+		LOCALS:0 = 村上
+		LOCALS:2 = むらかみ
+	CASE 90
+		LOCALS:0 = 近藤
+		LOCALS:2 = こんどう
+	CASE 91
+		LOCALS:0 = 金堂
+		LOCALS:2 = こんどう
+	CASE 92
+		LOCALS:0 = 今藤
+		LOCALS:2 = こんどう
+	CASE 93
+		LOCALS:0 = 石井
+		LOCALS:2 = いしい
+	CASE 94
+		LOCALS:0 = 遠藤
+		LOCALS:2 = えんどう
+	CASE 95
+		LOCALS:0 = 円堂
+		LOCALS:2 = えんどう
+	CASE 96
+		LOCALS:0 = 青木
+		LOCALS:2 = あおき
+	CASE 97
+		LOCALS:0 = 青樹
+		LOCALS:2 = あおき
+	CASE 98
+		LOCALS:0 = 蒼樹
+		LOCALS:2 = あおき
+	CASE 99
+		LOCALS:0 = 藤井
+		LOCALS:2 = ふじい
+	CASE 100
+		LOCALS:0 = 藤居
+		LOCALS:2 = ふじい
+	CASE 101
+		LOCALS:0 = 不二井
+		LOCALS:2 = ふじい
+	CASE 102
+		LOCALS:0 = 西村
+		LOCALS:2 = にしむら
+	CASE 103
+		LOCALS:0 = 福田
+		LOCALS:2 = ふくだ
+	CASE 104
+		LOCALS:0 = 多田
+		LOCALS:2 = おおた
+	CASE 105
+		LOCALS:0 = 大田
+		LOCALS:2 = おおた
+	CASE 106
+		LOCALS:0 = 太田
+		LOCALS:2 = おおた
+	CASE 107
+		LOCALS:0 = 水浦
+		LOCALS:2 = みうら
+	CASE 108
+		LOCALS:0 = 藤原
+		LOCALS:2 = ふじわら
+	CASE 109
+		LOCALS:0 = 岡本
+		LOCALS:2 = おかもと
+	CASE 110
+		LOCALS:0 = 松田
+		LOCALS:2 = まつだ
+	CASE 111
+		LOCALS:0 = 斉藤
+		LOCALS:2 = さいとう
+	CASE 112
+		LOCALS:0 = 斎藤
+		LOCALS:2 = さいとう
+	CASE 113
+		LOCALS:0 = 齋藤
+		LOCALS:2 = さいとう
+	CASE 114
+		LOCALS:0 = 中川
+		LOCALS:2 = なかがわ
+	CASE 115
+		LOCALS:0 = 仲川
+		LOCALS:2 = なかがわ
+	CASE 116
+		LOCALS:0 = 中野
+		LOCALS:2 = なかの
+	CASE 117
+		LOCALS:0 = 原田
+		LOCALS:2 = はらだ
+	CASE 118
+		LOCALS:0 = 小野
+		LOCALS:2 = おの
+	CASE 119
+		LOCALS:0 = 尾野
+		LOCALS:2 = おの
+	CASE 120
+		LOCALS:0 = 竹内
+		LOCALS:2 = たけうち
+	CASE 121
+		LOCALS:0 = 武内
+		LOCALS:2 = たけうち
+	CASE 122
+		LOCALS:0 = 田村
+		LOCALS:2 = たむら
+	CASE 123
+		LOCALS:0 = 多村
+		LOCALS:2 = たむら
+	CASE 124
+		LOCALS:0 = 金子
+		LOCALS:2 = かねこ
+	CASE 125
+		LOCALS:0 = 和田
+		LOCALS:2 = わだ
+	CASE 126
+		LOCALS:0 = 中山
+		LOCALS:2 = なかやま
+	CASE 127
+		LOCALS:0 = 石田
+		LOCALS:2 = いしだ
+	CASE 128
+		LOCALS:0 = 上田
+		LOCALS:2 = うえだ
+	CASE 129
+		LOCALS:0 = 植田
+		LOCALS:2 = うえだ
+	CASE 130
+		LOCALS:0 = 森田
+		LOCALS:2 = もりた
+	CASE 131
+		LOCALS:0 = 盛田
+		LOCALS:2 = もりた
+	CASE 132
+		LOCALS:0 = 守田
+		LOCALS:2 = もりた
+	CASE 133
+		LOCALS:0 = 原
+		LOCALS:2 = はら
+	CASE 134
+		LOCALS:0 = 柴田
+		LOCALS:2 = しばた
+	CASE 135
+		LOCALS:0 = 芝田
+		LOCALS:2 = しばた
+	CASE 136
+		LOCALS:0 = 酒井
+		LOCALS:2 = さかい
+	CASE 137
+		LOCALS:0 = 境
+		LOCALS:2 = さかい
+	CASE 138
+		LOCALS:0 = 堺
+		LOCALS:2 = さかい
+	CASE 139
+		LOCALS:0 = 坂井
+		LOCALS:2 = さかい
+	CASE 140
+		LOCALS:0 = 工藤
+		LOCALS:2 = くどう
+	CASE 141
+		LOCALS:0 = 横山
+		LOCALS:2 = よこやま
+	CASE 142
+		LOCALS:0 = 宮崎
+		LOCALS:2 = みやざき
+	CASE 143
+		LOCALS:0 = 宮本
+		LOCALS:2 = みやもと
+	CASE 144
+		LOCALS:0 = 内田
+		LOCALS:2 = うちだ
+	CASE 145
+		LOCALS:0 = 高木
+		LOCALS:2 = たかぎ
+	CASE 146
+		LOCALS:0 = 高城
+		LOCALS:2 = たかぎ
+	CASE 147
+		LOCALS:0 = 高樹
+		LOCALS:2 = たかぎ
+	CASE 148
+		LOCALS:0 = 安藤
+		LOCALS:2 = あんどう
+	CASE 149
+		LOCALS:0 = 安東
+		LOCALS:2 = あんどう
+	CASE 150
+		LOCALS:0 = 谷口
+		LOCALS:2 = たにぐち
+	CASE 151
+		LOCALS:0 = 大野
+		LOCALS:2 = おおの
+	CASE 152
+		LOCALS:0 = 大乃
+		LOCALS:2 = おおの
+	CASE 153
+		LOCALS:0 = 高田
+		LOCALS:2 = たかだ
+	CASE 154
+		LOCALS:0 = 河野
+		LOCALS:2 = かわの
+	CASE 155
+		LOCALS:0 = 藤本
+		LOCALS:2 = ふじもと
+	CASE 156
+		LOCALS:0 = 藤元
+		LOCALS:2 = ふじもと
+	CASE 157
+		LOCALS:0 = 小島
+		LOCALS:2 = こじま
+	CASE 158
+		LOCALS:0 = 児島
+		LOCALS:2 = こじま
+	CASE 159
+		LOCALS:0 = 竹田
+		LOCALS:2 = たけだ
+	CASE 160
+		LOCALS:0 = 村田
+		LOCALS:2 = むらた
+	CASE 161
+		LOCALS:0 = 上野
+		LOCALS:2 = うえの
+	CASE 162
+		LOCALS:0 = 杉山
+		LOCALS:2 = すぎやま
+	CASE 163
+		LOCALS:0 = 増田
+		LOCALS:2 = ますだ
+	CASE 164
+		LOCALS:0 = 益田
+		LOCALS:2 = ますだ
+	CASE 165
+		LOCALS:0 = 菅原
+		LOCALS:2 = すがわら
+	CASE 166
+		LOCALS:0 = 平野
+		LOCALS:2 = ひらの
+	CASE 167
+		LOCALS:0 = 小山
+		LOCALS:2 = こやま
+	CASE 168
+		LOCALS:0 = 大塚
+		LOCALS:2 = おおつか
+	CASE 169
+		LOCALS:0 = 久保
+		LOCALS:2 = くぼ
+	CASE 170
+		LOCALS:0 = 千葉
+		LOCALS:2 = ちば
+	CASE 171
+		LOCALS:0 = 松井
+		LOCALS:2 = まつい
+	CASE 172
+		LOCALS:0 = 岩崎
+		LOCALS:2 = いわさき
+	CASE 173
+		LOCALS:0 = 野口
+		LOCALS:2 = のぐち
+	CASE 174
+		LOCALS:0 = 松尾
+		LOCALS:2 = まつお
+	CASE 175
+		LOCALS:0 = 宮守
+		LOCALS:2 = みやもり
+	CASE 176
+		LOCALS:0 = 野村
+		LOCALS:2 = のむら
+	CASE 177
+		LOCALS:0 = 佐野
+		LOCALS:2 = さの
+	CASE 178
+		LOCALS:0 = 渡部
+		LOCALS:2 = わたべ
+	CASE 179
+		LOCALS:0 = 新井
+		LOCALS:2 = あらい
+	CASE 180
+		LOCALS:0 = 荒井
+		LOCALS:2 = あらい
+	CASE 181
+		LOCALS:0 = 杉本
+		LOCALS:2 = すぎもと
+	CASE 182
+		LOCALS:0 = 大西
+		LOCALS:2 = おおにし
+	CASE 183
+		LOCALS:0 = 桜井
+		LOCALS:2 = さくらい
+	CASE 184
+		LOCALS:0 = 櫻井
+		LOCALS:2 = さくらい
+	CASE 185
+		LOCALS:0 = 古川
+		LOCALS:2 = ふるかわ
+	CASE 186
+		LOCALS:0 = 市川
+		LOCALS:2 = いちかわ
+	CASE 187
+		LOCALS:0 = 古河
+		LOCALS:2 = ふるかわ
+	CASE 188
+		LOCALS:0 = 島田
+		LOCALS:2 = しまだ
+	CASE 189
+		LOCALS:0 = 小松
+		LOCALS:2 = こまつ
+	CASE 190
+		LOCALS:0 = 鷹野
+		LOCALS:2 = たかの
+	CASE 191
+		LOCALS:0 = 水野
+		LOCALS:2 = みずの
+	CASE 192
+		LOCALS:0 = 吉川
+		LOCALS:2 = よしかわ
+	CASE 193
+		LOCALS:0 = 山内
+		LOCALS:2 = やまうち
+	CASE 194
+		LOCALS:0 = 西田
+		LOCALS:2 = にしだ
+	CASE 195
+		LOCALS:0 = 西川
+		LOCALS:2 = にしかわ
+	CASE 196
+		LOCALS:0 = 北村
+		LOCALS:2 = きたむら
+	CASE 197
+		LOCALS:0 = 浜田
+		LOCALS:2 = はまだ
+	CASE 198
+		LOCALS:0 = 五十嵐
+		LOCALS:2 = いがらし
+	CASE 199
+		LOCALS:0 = 安田
+		LOCALS:2 = やすだ
+	CASE 200
+		LOCALS:0 = 中田
+		LOCALS:2 = なかだ
+	CASE 201
+		LOCALS:0 = 仲田
+		LOCALS:2 = なかだ
+	CASE 202
+		LOCALS:0 = 川口
+		LOCALS:2 = かわぐち
+	CASE 203
+		LOCALS:0 = 平田
+		LOCALS:2 = ひらた
+	CASE 204
+		LOCALS:0 = 川崎
+		LOCALS:2 = かわさき
+	CASE 205
+		LOCALS:0 = 東
+		LOCALS:2 = あずま
+	CASE 206
+		LOCALS:0 = 飯田
+		LOCALS:2 = いいだ
+	CASE 207
+		LOCALS:0 = 本田
+		LOCALS:2 = ほんだ
+	CASE 208
+		LOCALS:0 = 久保田
+		LOCALS:2 = くぼた
+	CASE 209
+		LOCALS:0 = 吉村
+		LOCALS:2 = よしむら
+	CASE 210
+		LOCALS:0 = 辻
+		LOCALS:2 = つじ
+	CASE 211
+		LOCALS:0 = 関
+		LOCALS:2 = せき
+	CASE 212
+		LOCALS:0 = 中西
+		LOCALS:2 = なかにし
+	CASE 213
+		LOCALS:0 = 福島
+		LOCALS:2 = ふくしま
+	CASE 214
+		LOCALS:0 = 岩田
+		LOCALS:2 = いわた
+	CASE 215
+		LOCALS:0 = 服部
+		LOCALS:2 = はっとり
+	CASE 216
+		LOCALS:0 = 樋口
+		LOCALS:2 = ひぐち
+	CASE 217
+		LOCALS:0 = 川上
+		LOCALS:2 = かわかみ
+	CASE 218
+		LOCALS:0 = 松岡
+		LOCALS:2 = まつおか
+	CASE 219
+		LOCALS:0 = 永井
+		LOCALS:2 = ながい
+	CASE 220
+		LOCALS:0 = 山中
+		LOCALS:2 = やまなか
+	CASE 221
+		LOCALS:0 = 長井
+		LOCALS:2 = ながい
+	CASE 222
+		LOCALS:0 = 田口
+		LOCALS:2 = たぐち
+	CASE 223
+		LOCALS:0 = 森本
+		LOCALS:2 = もりもと
+	CASE 224
+		LOCALS:0 = 森元
+		LOCALS:2 = もりもと
+	CASE 225
+		LOCALS:0 = 守本
+		LOCALS:2 = もりもと
+	CASE 226
+		LOCALS:0 = 盛本
+		LOCALS:2 = もりもと
+	CASE 227
+		LOCALS:0 = 矢野
+		LOCALS:2 = やの
+	CASE 228
+		LOCALS:0 = 谷野
+		LOCALS:2 = やの
+	CASE 229
+		LOCALS:0 = 秋山
+		LOCALS:2 = あきやま
+	CASE 230
+		LOCALS:0 = 暁山
+		LOCALS:2 = あきやま
+	CASE 231
+		LOCALS:0 = 明山
+		LOCALS:2 = あきやま
+	CASE 232
+		LOCALS:0 = 土屋
+		LOCALS:2 = つちや
+	CASE 233
+		LOCALS:0 = 種田
+		LOCALS:2 = たねだ
+	CASE 234
+		LOCALS:0 = 土谷
+		LOCALS:2 = つちや
+	CASE 235
+		LOCALS:0 = 石原
+		LOCALS:2 = いしはら
+	CASE 236
+		LOCALS:0 = 松下
+		LOCALS:2 = まつした
+	CASE 237
+		LOCALS:0 = 馬場
+		LOCALS:2 = ばば
+	CASE 238
+		LOCALS:0 = 大橋
+		LOCALS:2 = おおはし
+	CASE 239
+		LOCALS:0 = 吉岡
+		LOCALS:2 = よしおか
+	CASE 240
+		LOCALS:0 = 松浦
+		LOCALS:2 = まつうら
+	CASE 241
+		LOCALS:0 = 小池
+		LOCALS:2 = こいけ
+	CASE 242
+		LOCALS:0 = 古池
+		LOCALS:2 = こいけ
+	CASE 243
+		LOCALS:0 = 浅野
+		LOCALS:2 = あさの
+	CASE 244
+		LOCALS:0 = 朝野
+		LOCALS:2 = あさの
+	CASE 245
+		LOCALS:0 = 大久保
+		LOCALS:2 = おおくぼ
+	CASE 246
+		LOCALS:0 = 熊谷
+		LOCALS:2 = くまがい
+	CASE 247
+		LOCALS:0 = 荒木
+		LOCALS:2 = あらき
+	CASE 248
+		LOCALS:0 = 新木
+		LOCALS:2 = あらき
+	CASE 249
+		LOCALS:0 = 野田
+		LOCALS:2 = のだ
+	CASE 250
+		LOCALS:0 = 川村
+		LOCALS:2 = かわむら
+	CASE 251
+		LOCALS:0 = 河村
+		LOCALS:2 = かわむら
+	CASE 252
+		LOCALS:0 = 星野
+		LOCALS:2 = ほしの
+	CASE 253
+		LOCALS:0 = 大谷
+		LOCALS:2 = おおたに
+	CASE 254
+		LOCALS:0 = 広瀬
+		LOCALS:2 = ひろせ
+	CASE 255
+		LOCALS:0 = 廣瀬
+		LOCALS:2 = ひろせ
+	CASE 256
+		LOCALS:0 = 黒田
+		LOCALS:2 = くろだ
+	CASE 257
+		LOCALS:0 = 尾崎
+		LOCALS:2 = おざき
+	CASE 258
+		LOCALS:0 = 田辺
+		LOCALS:2 = たなべ
+	CASE 259
+		LOCALS:0 = 長田
+		LOCALS:2 = ながた
+	CASE 260
+		LOCALS:0 = 永田
+		LOCALS:2 = ながた
+	CASE 261
+		LOCALS:0 = 松村
+		LOCALS:2 = まつむら
+	CASE 262
+		LOCALS:0 = 望月
+		LOCALS:2 = もちづき
+	CASE 263
+		LOCALS:0 = 掘
+		LOCALS:2 = ほり
+	CASE 264
+		LOCALS:0 = 内藤
+		LOCALS:2 = ないとう
+	CASE 265
+		LOCALS:0 = 菅野
+		LOCALS:2 = かんの
+	CASE 266
+		LOCALS:0 = 西山
+		LOCALS:2 = にしやま
+	CASE 267
+		LOCALS:0 = 大島
+		LOCALS:2 = おおしま
+	CASE 268
+		LOCALS:0 = 大嶋
+		LOCALS:2 = おおしま
+	CASE 269
+		LOCALS:0 = 平井
+		LOCALS:2 = ひらい
+	CASE 270
+		LOCALS:0 = 岩本
+		LOCALS:2 = いわもと
+	CASE 271
+		LOCALS:0 = 片山
+		LOCALS:2 = かたやま
+	CASE 272
+		LOCALS:0 = 沢田
+		LOCALS:2 = さわだ
+	CASE 273
+		LOCALS:0 = 澤田
+		LOCALS:2 = さわだ
+	CASE 274
+		LOCALS:0 = 本間
+		LOCALS:2 = ほんま
+	CASE 275
+		LOCALS:0 = 早川
+		LOCALS:2 = はやかわ
+	CASE 276
+		LOCALS:0 = 横田
+		LOCALS:2 = よこた
+	CASE 277
+		LOCALS:0 = 岡崎
+		LOCALS:2 = おかざき
+	CASE 278
+		LOCALS:0 = 鎌田
+		LOCALS:2 = かまた
+	CASE 279
+		LOCALS:0 = 蒲田
+		LOCALS:2 = かまた
+	CASE 280
+		LOCALS:0 = 大石
+		LOCALS:2 = おおいし
+	CASE 281
+		LOCALS:0 = 成田
+		LOCALS:2 = なりた
+	CASE 282
+		LOCALS:0 = 小田
+		LOCALS:2 = おだ
+	CASE 283
+		LOCALS:0 = 尾田
+		LOCALS:2 = おだ
+	CASE 284
+		LOCALS:0 = 宮田
+		LOCALS:2 = みやた
+	CASE 285
+		LOCALS:0 = 石橋
+		LOCALS:2 = いしばし
+	CASE 286
+		LOCALS:0 = 須藤
+		LOCALS:2 = すどう
+	CASE 287
+		LOCALS:0 = 篠原
+		LOCALS:2 = しのはら
+	CASE 288
+		LOCALS:0 = 萩原
+		LOCALS:2 = はぎわら
+	CASE 289
+		LOCALS:0 = 高山
+		LOCALS:2 = たかやま
+	CASE 290
+		LOCALS:0 = 小西
+		LOCALS:2 = こにし
+	CASE 291
+		LOCALS:0 = 栗原
+		LOCALS:2 = くりはら
+	CASE 292
+		LOCALS:0 = 松原
+		LOCALS:2 = まつばら
+	CASE 293
+		LOCALS:0 = 伊東
+		LOCALS:2 = いとう
+	CASE 294
+		LOCALS:0 = 三宅
+		LOCALS:2 = みやけ
+	CASE 295
+		LOCALS:0 = 福井
+		LOCALS:2 = ふくい
+	CASE 296
+		LOCALS:0 = 小沢
+		LOCALS:2 = おざわ
+	CASE 297
+		LOCALS:0 = 南
+		LOCALS:2 = みなみ
+	CASE 298
+		LOCALS:0 = 大森
+		LOCALS:2 = おおもり
+	CASE 299
+		LOCALS:0 = 奥村
+		LOCALS:2 = おくむら
+	CASE 300
+		LOCALS:0 = 片岡
+		LOCALS:2 = かたおか
+	CASE 301
+		LOCALS:0 = 内山
+		LOCALS:2 = うちやま
+	CASE 302
+		LOCALS:0 = 桑原
+		LOCALS:2 = くわはら
+	CASE 303
+		LOCALS:0 = 岡
+		LOCALS:2 = おか
+	CASE 304
+		LOCALS:0 = 富田
+		LOCALS:2 = とみた
+	CASE 305
+		LOCALS:0 = 関口
+		LOCALS:2 = せきぐち
+	CASE 306
+		LOCALS:0 = 松永
+		LOCALS:2 = まつなが
+	CASE 307
+		LOCALS:0 = 奥田
+		LOCALS:2 = おくだ
+	CASE 308
+		LOCALS:0 = 北川
+		LOCALS:2 = きたがわ
+	CASE 309
+		LOCALS:0 = 古賀
+		LOCALS:2 = こが
+	CASE 310
+		LOCALS:0 = 上原
+		LOCALS:2 = うえはら
+	CASE 311
+		LOCALS:0 = 八木
+		LOCALS:2 = やぎ
+	CASE 312
+		LOCALS:0 = 吉野
+		LOCALS:2 = よしの
+	CASE 313
+		LOCALS:0 = 白石
+		LOCALS:2 = しらいし
+	CASE 314
+		LOCALS:0 = 今村
+		LOCALS:2 = いまむら
+	CASE 315
+		LOCALS:0 = 川島
+		LOCALS:2 = かわしま
+	CASE 316
+		LOCALS:0 = 上村
+		LOCALS:2 = うえむら
+	CASE 317
+		LOCALS:0 = 小泉
+		LOCALS:2 = こいずみ
+	CASE 318
+		LOCALS:0 = 中尾
+		LOCALS:2 = なかお
+	CASE 319
+		LOCALS:0 = 青山
+		LOCALS:2 = あおやま
+	CASE 320
+		LOCALS:0 = 平山
+		LOCALS:2 = ひらやま
+	CASE 321
+		LOCALS:0 = 牧野
+		LOCALS:2 = まきの
+	CASE 322
+		LOCALS:0 = 寺田
+		LOCALS:2 = てらだ
+	CASE 323
+		LOCALS:0 = 渋谷
+		LOCALS:2 = しぶや
+	CASE 324
+		LOCALS:0 = 岡村
+		LOCALS:2 = おかむら
+	CASE 325
+		LOCALS:0 = 児玉
+		LOCALS:2 = こだま
+	CASE 326
+		LOCALS:0 = 坂口
+		LOCALS:2 = さかぐち
+	CASE 327
+		LOCALS:0 = 河合
+		LOCALS:2 = かわい
+	CASE 328
+		LOCALS:0 = 大山
+		LOCALS:2 = おおやま
+	CASE 329
+		LOCALS:0 = 多田
+		LOCALS:2 = ただ
+	CASE 330
+		LOCALS:0 = 小野寺
+		LOCALS:2 = おのでら
+	CASE 331
+		LOCALS:0 = 宮下
+		LOCALS:2 = みやした
+	CASE 332
+		LOCALS:0 = 小倉
+		LOCALS:2 = おぐら
+	CASE 333
+		LOCALS:0 = 竹田
+		LOCALS:2 = たけだ
+	CASE 334
+		LOCALS:0 = 足立
+		LOCALS:2 = あだち
+	CASE 335
+		LOCALS:0 = 小笠原
+		LOCALS:2 = おがさわら
+	CASE 336
+		LOCALS:0 = 天野
+		LOCALS:2 = あまの
+	CASE 337
+		LOCALS:0 = 村山
+		LOCALS:2 = むらやま
+	CASE 338
+		LOCALS:0 = 坂井
+		LOCALS:2 = さかい
+	CASE 339
+		LOCALS:0 = 西
+		LOCALS:2 = にし
+	CASE 340
+		LOCALS:0 = 杉浦
+		LOCALS:2 = すぎうら
+	CASE 341
+		LOCALS:0 = 坂田
+		LOCALS:2 = さかた
+	CASE 342
+		LOCALS:0 = 小原
+		LOCALS:2 = おはら
+	CASE 343
+		LOCALS:0 = 豊田
+		LOCALS:2 = とよだ
+	CASE 344
+		LOCALS:0 = 河村
+		LOCALS:2 = かわむら
+	CASE 345
+		LOCALS:0 = 武藤
+		LOCALS:2 = むとう
+	CASE 346
+		LOCALS:0 = 角田
+		LOCALS:2 = つのだ
+	CASE 347
+		LOCALS:0 = 水谷
+		LOCALS:2 = みずたに
+	CASE 348
+		LOCALS:0 = 根本
+		LOCALS:2 = ねもと
+	CASE 349
+		LOCALS:0 = 関根
+		LOCALS:2 = せきね
+	CASE 350
+		LOCALS:0 = 森下
+		LOCALS:2 = もりした
+	CASE 351
+		LOCALS:0 = 中井
+		LOCALS:2 = なかい
+	CASE 352
+		LOCALS:0 = 神田
+		LOCALS:2 = かんだ
+	CASE 353
+		LOCALS:0 = 田島
+		LOCALS:2 = たじま
+	CASE 354
+		LOCALS:0 = 植田
+		LOCALS:2 = うえだ
+	CASE 355
+		LOCALS:0 = 塚本
+		LOCALS:2 = つかもと
+	CASE 356
+		LOCALS:0 = 佐久間
+		LOCALS:2 = さくま
+	CASE 357
+		LOCALS:0 = 飯塚
+		LOCALS:2 = いいづか
+	CASE 358
+		LOCALS:0 = 前川
+		LOCALS:2 = まえかわ
+	CASE 359
+		LOCALS:0 = 安部
+		LOCALS:2 = あべ
+	CASE 360
+		LOCALS:0 = 浅井
+		LOCALS:2 = あさい
+	CASE 361
+		LOCALS:0 = 山根
+		LOCALS:2 = やまね
+	CASE 362
+		LOCALS:0 = 白井
+		LOCALS:2 = しらい
+	CASE 363
+		LOCALS:0 = 宮川
+		LOCALS:2 = みやかわ
+	CASE 364
+		LOCALS:0 = 岡部
+		LOCALS:2 = おかべ
+	CASE 365
+		LOCALS:0 = 大沢
+		LOCALS:2 = おおさわ
+	CASE 366
+		LOCALS:0 = 大川
+		LOCALS:2 = おおかわ
+	CASE 367
+		LOCALS:0 = 長田
+		LOCALS:2 = おさだ
+	CASE 368
+		LOCALS:0 = 堀内
+		LOCALS:2 = ほりうち
+	CASE 369
+		LOCALS:0 = 稲垣
+		LOCALS:2 = いながき
+	CASE 370
+		LOCALS:0 = 若林
+		LOCALS:2 = わかばやし
+	CASE 371
+		LOCALS:0 = 松崎
+		LOCALS:2 = まつざき
+	CASE 372
+		LOCALS:0 = 榎本
+		LOCALS:2 = えのもと
+	CASE 373
+		LOCALS:0 = 森山
+		LOCALS:2 = もりやま
+	CASE 374
+		LOCALS:0 = 神谷
+		LOCALS:2 = かみや
+	CASE 375
+		LOCALS:0 = 中沢
+		LOCALS:2 = なかざわ
+	CASE 376
+		LOCALS:0 = 江口
+		LOCALS:2 = えぐち
+	CASE 377
+		LOCALS:0 = 中谷
+		LOCALS:2 = なかたに
+	CASE 378
+		LOCALS:0 = 畠山
+		LOCALS:2 = はたけやま
+	CASE 379
+		LOCALS:0 = 谷
+		LOCALS:2 = たに
+	CASE 380
+		LOCALS:0 = 及川
+		LOCALS:2 = おいかわ
+	CASE 381
+		LOCALS:0 = 細川
+		LOCALS:2 = ほそかわ
+	CASE 382
+		LOCALS:0 = 三上
+		LOCALS:2 = みかみ
+	CASE 383
+		LOCALS:0 = 今野
+		LOCALS:2 = こんの
+	CASE 384
+		LOCALS:0 = 西尾
+		LOCALS:2 = にしお
+	CASE 385
+		LOCALS:0 = 安達
+		LOCALS:2 = あだち
+	CASE 386
+		LOCALS:0 = 田代
+		LOCALS:2 = たしろ
+	CASE 387
+		LOCALS:0 = 飯島
+		LOCALS:2 = いいじま
+	CASE 388
+		LOCALS:0 = 石塚
+		LOCALS:2 = いしづか
+	CASE 389
+		LOCALS:0 = 津田
+		LOCALS:2 = つだ
+	CASE 390
+		LOCALS:0 = 岸本
+		LOCALS:2 = きしもと
+	CASE 391
+		LOCALS:0 = 荒川
+		LOCALS:2 = あらかわ
+	CASE 392
+		LOCALS:0 = 中原
+		LOCALS:2 = なかはら
+	CASE 393
+		LOCALS:0 = 長尾
+		LOCALS:2 = ながお
+	CASE 394
+		LOCALS:0 = 土井
+		LOCALS:2 = どい
+	CASE 395
+		LOCALS:0 = 本多
+		LOCALS:2 = ほんだ
+	CASE 396
+		LOCALS:0 = 森川
+		LOCALS:2 = もりかわ
+	CASE 397
+		LOCALS:0 = 三好
+		LOCALS:2 = みよし
+	CASE 398
+		LOCALS:0 = 戸田
+		LOCALS:2 = とだ
+	CASE 399
+		LOCALS:0 = 金井
+		LOCALS:2 = かない
+	CASE 400
+		LOCALS:0 = 米田
+		LOCALS:2 = よねだ
+	CASE 401
+		LOCALS:0 = 稲葉
+		LOCALS:2 = いなば
+	CASE 402
+		LOCALS:0 = 岡野
+		LOCALS:2 = おかの
+	CASE 403
+		LOCALS:0 = 村松
+		LOCALS:2 = むらまつ
+	CASE 404
+		LOCALS:0 = 佐伯
+		LOCALS:2 = さえき
+	CASE 405
+		LOCALS:0 = 西岡
+		LOCALS:2 = にしおか
+	CASE 406
+		LOCALS:0 = 甲斐
+		LOCALS:2 = かい
+	CASE 407
+		LOCALS:0 = 星
+		LOCALS:2 = ほし
+	CASE 408
+		LOCALS:0 = 中嶋
+		LOCALS:2 = なかじま
+	CASE 409
+		LOCALS:0 = 岩井
+		LOCALS:2 = いわい
+	CASE 410
+		LOCALS:0 = 黒木
+		LOCALS:2 = くろき
+	CASE 411
+		LOCALS:0 = 堤
+		LOCALS:2 = つつみ
+	CASE 412
+		LOCALS:0 = 金田
+		LOCALS:2 = かねだ
+	CASE 413
+		LOCALS:0 = 野崎
+		LOCALS:2 = のざき
+	CASE 414
+		LOCALS:0 = 落合
+		LOCALS:2 = おちあい
+	CASE 415
+		LOCALS:0 = 堀田
+		LOCALS:2 = ほった
+	CASE 416
+		LOCALS:0 = 泉
+		LOCALS:2 = いずみ
+	CASE 417
+		LOCALS:0 = 西野
+		LOCALS:2 = にしの
+	CASE 418
+		LOCALS:0 = 町田
+		LOCALS:2 = まちだ
+	CASE 419
+		LOCALS:0 = 齋藤
+		LOCALS:2 = さいとう
+	CASE 420
+		LOCALS:0 = 山岸
+		LOCALS:2 = やまぎし
+ENDSELECT
+
+LOCALS:3 '= R_NAME_MAKE_YOMIGANA()
+LOCALS:1 '= R_NAME_MAKE_KANJI(LOCALS:3)
+
+SELECTCASE ARG
+	CASE 0
+		LOCALS:10 = %LOCALS:0%%LOCALS:1%
+	CASE 1
+		LOCALS:10 = %LOCALS:0% %LOCALS:1%
+	CASE 2
+		LOCALS:10 = %LOCALS:0%
+	CASE 3
+		LOCALS:10 = %LOCALS:1%
+	CASE 4
+		LOCALS:10 = %LOCALS:0%%LOCALS:1%%LOCALS:2%%LOCALS:3%
+	CASE 5
+		LOCALS:10 = %LOCALS:0%/%LOCALS:1%/%LOCALS:2%/%LOCALS:3%
+		
+ENDSELECT
+RETURNF LOCALS:10
+
+
+
+@R_NAME_MAKE_YOMIGANA
+#FUNCTIONS
+#DIMS DYNAMIC YOMIGANA
+IF !RAND:10
+	STRDATA YOMIGANA
+	;変換の都合上、ここに記載してある連中はバリエーションが少なくなるので頻度を減らす
+	;変換で多少特殊な扱いが必要になりそうなやつを先に別記
+	;STRLENSU == 4
+		DATA さくらこ
+		DATA ほたるこ
+		DATA もみじこ
+		DATA かおるこ
+
+	;「Ｘゃ」「Ｘゅ」「Ｘょ」は必ず一括で変換しないとまずい
+		DATA きょうか
+		DATA きょうこ
+		DATA しゅうこ
+		DATA しょうこ
+		DATA しゅんこ
+		DATA じゅんこ
+
+		DATA りゅう
+		DATA りゅうこ
+		DATA りゅうか
+		DATA りゅうな
+
+		DATA りょうこ
+
+		DATA しゃな
+		DATA しゃみ
+		DATA しゅり
+		DATA じゅり
+
+		DATA かりゅう
+		DATA みりょう
+		DATA かしゃ
+		DATA さしゃ
+		DATA ちしゃ
+		DATA みしゃ
+		DATA らしゃ
+		DATA るしゃ
+		DATA かじゅ
+
+	;「Ｘん」は必ず一括で変換しないとまずい
+		DATA あん
+		DATA あんず
+		DATA あんな
+		DATA あんり
+		DATA りあん
+
+		DATA いんこ
+		DATA いんな
+		DATA こいん
+		DATA まいん
+
+		DATA しおん
+		DATA みおん
+		DATA りおん
+		
+		DATA しのん
+		DATA かのん
+		DATA れのん
+		DATA みのん
+
+		DATA れんこ
+		DATA れんな
+		DATA かれん
+
+		DATA りん
+		DATA りんこ
+		DATA りんな
+		DATA かりん
+		DATA かれん
+		DATA まりん
+		DATA ぐりん
+		DATA ぐれん
+
+		DATA かろん
+		DATA まろん
+
+		;二文字も三文字よりもバリエーションが少なくなるのでここに
+		DATA あい
+		DATA あお
+		DATA あき
+		DATA あさ
+		DATA あみ
+		DATA あや
+		DATA あゆ
+		DATA いお
+		DATA いく
+		DATA いよ
+
+		DATA うい
+		DATA うみ
+		DATA うた
+		DATA えな
+		DATA えま
+		DATA えみ
+		DATA えり
+		DATA かえ
+		DATA かこ
+		DATA かな
+		DATA かの
+		DATA かほ
+		DATA かや
+		DATA かよ
+		DATA きい
+		DATA きの
+		DATA きみ
+		DATA きら
+		DATA くみ
+		DATA けい
+		DATA さえ
+		DATA さき
+		DATA さち
+		DATA さな
+		DATA さほ
+		DATA さや
+		DATA さゆ
+		DATA さよ
+		DATA さら
+		DATA さり
+		DATA さわ
+		DATA しあ
+		DATA しき
+		DATA しの
+		DATA しほ
+		DATA すず
+		DATA せな
+		DATA せら
+		DATA そら
+		DATA たえ
+		DATA ちあ
+		DATA ちえ
+		DATA ちか
+		DATA ちこ
+		DATA ちさ
+		DATA ちせ
+		DATA ちほ
+		DATA ちゆ
+		DATA ちづ
+		DATA つき
+		DATA つゆ
+		DATA とき
+		DATA とも
+		DATA なえ
+		DATA なお
+		DATA なこ
+		DATA なつ
+		DATA なな
+		DATA なの
+		DATA なほ
+		DATA なみ
+		DATA なゆ
+		DATA にな
+		DATA にほ
+		DATA ねね
+		DATA のあ
+		DATA のえ
+		DATA のか
+		DATA のの
+		DATA はく
+		DATA はな
+		DATA はる
+		DATA ひさ
+		DATA ひな
+		DATA ふみ
+		DATA まい
+		DATA まお
+		DATA まき
+		DATA まこ
+		DATA まさ
+		DATA まな
+		DATA まほ
+		DATA まみ
+		DATA まや
+		DATA まゆ
+		DATA まり
+		DATA みあ
+		DATA みう
+		DATA みお
+		DATA みか
+		DATA みき
+		DATA みく
+		DATA みこ
+		DATA みさ
+		DATA みな
+		DATA みほ
+		DATA みみ
+		DATA みゆ
+		DATA みよ
+		DATA みわ
+		DATA めい
+		DATA めう
+		DATA めぐ
+		DATA もえ
+		DATA もも
+		DATA やえ
+		DATA やこ
+		DATA ゆあ
+		DATA ゆい
+		DATA ゆう
+		DATA ゆえ
+		DATA ゆか
+		DATA ゆき
+		DATA ゆさ
+		DATA ゆず
+		DATA ゆな
+		DATA ゆの
+		DATA ゆみ
+		DATA ゆめ
+		DATA ゆり
+		DATA らら
+		DATA りい
+		DATA りえ
+		DATA りお
+		DATA りか
+		DATA りこ
+		DATA りさ
+		DATA りつ
+		DATA りな
+		DATA りの
+		DATA りほ
+		DATA りり
+		DATA りん
+		DATA るか
+		DATA るな
+		DATA るり
+		DATA るる
+		DATA れあ
+		DATA れい
+		DATA れな
+		DATA わこ
+	ENDDATA
+	RETURNF YOMIGANA
+ENDIF
+
+;名前
+STRDATA YOMIGANA
+;その他
+	DATA あいか
+	DATA あいこ
+	DATA あいさ
+	DATA あいな
+	DATA あいの
+	DATA あいり
+	
+	DATA あおい
+	DATA あおえ
+	DATA あおか
+	DATA あおな
+	DATA あおひ
+	DATA あおみ
+	DATA あおば
+	DATA あおば
+
+	DATA あかえ
+	DATA あかな
+	DATA あかね
+	DATA あかひ
+	DATA あかみ
+	DATA あかり
+	DATA あかる
+	
+	DATA あきこ
+	DATA あきな
+	DATA あきの
+	DATA あきほ
+
+	DATA あけみ
+
+	DATA あさか
+	DATA あさひ
+	DATA あさみ
+	DATA あさこ
+
+	DATA あすか
+	DATA あすな
+	DATA あすみ
+	DATA あすら
+
+	DATA あつこ
+	DATA あとり
+
+	DATA あまね
+	
+	DATA あやか
+	DATA あやこ
+	DATA あやな
+	DATA あやね
+	DATA あやの
+	DATA あやみ
+	DATA あやめ
+	
+	DATA あゆか
+	DATA あゆみ
+	
+	DATA ありさ
+	DATA ありす
+	DATA ありな
+
+	DATA あざか
+	DATA あざみ
+	DATA あずき
+	DATA あずさ
+	DATA あずみ
+	DATA あびや
+	
+
+	DATA いおり
+	DATA いくみ
+	DATA いくの
+	
+	DATA いちか
+	DATA いちこ
+	DATA いちご
+	DATA いつか
+	DATA いつみ
+	DATA いなみ
+	DATA いのり
+	DATA いりあ
+	DATA いろは
+	DATA いずみ
+	DATA いぶき
+	DATA うたこ
+
+	DATA えいこ
+	DATA えいな
+	DATA えいみ
+	DATA えつこ
+	DATA えなこ
+	DATA えみか
+	DATA えみこ
+	DATA えみな
+	DATA えみほ
+	DATA えみり
+	DATA えりか
+	DATA えりこ
+	DATA えりさ
+	DATA えりな
+	DATA えりほ
+	DATA えれあ
+	DATA えれな
+
+	DATA おうか
+	DATA おとは
+	DATA おとめ
+	DATA おとわ
+	DATA おりえ
+	DATA おりか
+	DATA おりね
+
+	DATA かえで
+	DATA かおり
+	DATA かおる
+	DATA かすみ
+	DATA かなこ
+	DATA かなえ
+	DATA かなた
+	DATA かなで
+	DATA かのこ
+	DATA かみら
+	DATA かやこ
+	DATA かよこ
+	DATA かぐや
+	DATA かずこ
+	DATA かずは
+	DATA かづみ
+
+	DATA きさら
+	DATA きみえ
+	DATA きみこ
+	DATA きよの
+	DATA きらら
+	DATA きりあ
+	DATA きりこ
+	DATA きりな
+	DATA きれあ
+	DATA きれな
+
+	DATA くみこ
+	DATA くれあ
+	DATA くれは
+
+	DATA けいこ
+	DATA けいな
+
+	DATA ここあ
+	DATA こころ
+	DATA ここゆ
+	DATA こさく
+	DATA こずえ
+	DATA ことね
+	DATA ことは
+	DATA ことな
+	DATA ことの
+	DATA ことみ
+	DATA このは
+	DATA ことり
+	DATA こはく
+	DATA こはる
+	DATA こよみ
+	DATA こより
+
+	DATA さあや
+	DATA さえこ
+	DATA さおり
+	DATA さくや
+	DATA さくら
+	DATA ささみ
+	DATA さちえ
+	DATA さちか
+	DATA さちこ
+	DATA さつき
+	DATA さとこ
+	DATA さとみ
+	DATA さなえ
+	DATA さやか
+	DATA さやこ
+	DATA さやね
+	DATA さやの
+	DATA さゆか
+	DATA さゆこ
+	DATA さゆみ
+	DATA さゆり
+	DATA さよこ
+	DATA さらか
+	DATA さらこ
+	DATA さらさ
+	DATA さわこ
+	DATA しいな
+	DATA しいか
+	DATA しいら
+	DATA しおり
+
+	DATA しのぶ
+	DATA しほみ
+	DATA しほこ
+	DATA しずか
+	DATA しずく
+	DATA しずね
+
+	DATA すいか
+	DATA すみえ
+	DATA すみか
+	DATA すみこ
+	DATA すみの
+	DATA すみれ
+	DATA すぐは
+	DATA すぐな
+	DATA すずか
+	DATA すずな
+	DATA すずね
+
+	DATA せつな
+	DATA せりあ
+	DATA せりか
+	DATA せりな
+	DATA せれあ
+	DATA せれな
+
+	DATA そのか
+
+	DATA たえこ
+	DATA たかこ
+	DATA たかね
+	DATA たまき
+	DATA たまみ
+
+	DATA ちあき
+	DATA ちえこ
+	DATA ちえり
+	DATA ちかこ
+	DATA ちさこ
+	DATA ちさと
+	DATA ちとせ
+	DATA ちなつ
+	DATA ちはや
+	DATA ちはる
+	DATA ちひろ
+	DATA ちふゆ
+	DATA ちほこ
+	DATA ちゆこ
+	DATA ちゆり
+	DATA ちぐさ
+	DATA ちづこ
+	DATA ちづる
+
+	DATA つぐみ
+	DATA つばさ
+	DATA つむぎ
+	DATA つかさ
+	DATA つきこ
+	DATA つきの
+	DATA つきよ
+	DATA つゆこ
+
+	DATA てるこ
+	DATA てるね
+
+	DATA とうか
+	DATA とうこ
+	DATA とうみ
+	DATA ときこ
+	DATA ときの
+	DATA ともえ
+	DATA ともか
+	DATA ともこ
+	DATA ともみ
+
+	DATA なえか
+	DATA なえこ
+	DATA なおこ
+	DATA なおみ
+	DATA なぎさ
+	DATA なつか
+	DATA なつき
+	DATA なつこ
+	DATA なつひ
+	DATA なつみ
+	DATA なつめ
+	DATA ななか
+	DATA ななこ
+	DATA ななみ
+	DATA なのは
+	DATA なほこ
+	DATA なみこ
+	DATA なるみ
+
+	DATA にいな
+
+	DATA ねねこ
+
+	DATA のえる
+	DATA のぞみ
+	DATA のどか
+	DATA ののか
+	DATA ののこ
+	DATA ののみ
+	DATA のりか
+	DATA のりこ
+
+	DATA はすみ
+	DATA はつみ
+	DATA はなこ
+	DATA はなえ
+	DATA はるえ
+	DATA はるか
+	DATA はるこ
+	DATA はるな
+	DATA はるひ
+	DATA はるみ
+	DATA はづき
+
+	DATA ひかり
+	DATA ひかる
+	DATA ひさの
+	DATA ひさみ
+	DATA ひすい
+	DATA ひとは
+	DATA ひとみ
+	DATA ひなた
+	DATA ひなの
+	DATA ひまり
+	DATA ひめか
+	DATA ひより
+	DATA ひろこ
+	DATA ひろか
+	DATA ひろみ
+	DATA ひでこ
+
+	DATA ふうか
+	DATA ふきの
+	DATA ふたば
+	DATA ふみか
+	DATA ふみこ
+	DATA ふゆえ
+	DATA ふゆか
+	DATA ふゆみ
+	DATA ふゆの
+
+	DATA ほしえ
+	DATA ほしこ
+	DATA ほしの
+	DATA ほしみ
+	DATA ほたる
+	DATA ほなみ
+	DATA ほのか
+	DATA ほのみ
+
+	DATA まあや
+	DATA まいや
+	DATA まいか
+	DATA まいこ
+	DATA まきこ
+	DATA まきえ
+	DATA まきな
+	DATA まこと
+	DATA まさこ
+	DATA ましき
+	DATA ますみ
+	DATA まどか
+	DATA まなか
+	DATA まなこ
+	DATA まなみ
+	DATA まひろ
+	DATA まほろ
+	DATA まみか
+	DATA まみこ
+	DATA まやか
+	DATA まゆこ
+	DATA まゆか
+	DATA まゆな
+	DATA まゆみ
+	DATA まゆり
+	DATA まりあ
+	DATA まりか
+	DATA まりこ
+	DATA まりな
+	DATA まりの
+
+	DATA みえこ
+	DATA みおり
+	DATA みかさ
+	DATA みかみ
+	DATA みきこ
+	DATA みくう
+	DATA みこと
+	DATA みさえ
+	DATA みさお
+	DATA みさき
+	DATA みさこ
+	DATA みすず
+	DATA みそら
+	DATA みちか
+	DATA みちこ
+	DATA みちよ
+	DATA みつき
+	DATA みつよ
+	DATA みなこ
+	DATA みなみ
+	DATA みなも
+	DATA みなよ
+	DATA みのり
+	DATA みはる
+	DATA みひろ
+	DATA みふゆ
+	DATA みほこ
+	DATA みみか
+	DATA みみこ
+	DATA みやこ
+	DATA みゆう
+	DATA みゆき
+	DATA みよこ
+	DATA みらい
+	DATA みれい
+	DATA みずき
+	DATA みずほ
+	DATA みづき
+	DATA みどり
+
+	DATA むつは
+
+	DATA めりい
+	DATA めぐみ
+
+	DATA もえか
+	DATA もえこ
+	DATA もえぎ
+	DATA もとこ
+	DATA もなみ
+	DATA もにか
+	DATA もみじ
+	DATA ももか
+	DATA ももこ
+	DATA ももえ
+	DATA ももよ
+
+	DATA やえこ
+	DATA やよい
+
+	DATA ゆいか
+	DATA ゆいこ
+	DATA ゆいな
+	DATA ゆいね
+	DATA ゆうか
+	DATA ゆうき
+	DATA ゆうこ
+	DATA ゆうな
+	DATA ゆうは
+	DATA ゆうひ
+	DATA ゆうみ
+	DATA ゆかこ
+	DATA ゆかり
+	DATA ゆかな
+	DATA ゆきえ
+	DATA ゆきこ
+	DATA ゆきな
+	DATA ゆきね
+	DATA ゆきの
+	DATA ゆきほ
+	DATA ゆきみ
+	DATA ゆきや
+	DATA ゆきよ
+	DATA ゆさこ
+	DATA ゆのか
+	DATA ゆのは
+	DATA ゆみか
+	DATA ゆみこ
+	DATA ゆめこ
+	DATA ゆりあ
+	DATA ゆりえ
+	DATA ゆりか
+	DATA ゆりこ
+	DATA ゆりな
+	DATA ゆずか
+	DATA ゆずき
+	DATA ゆずな
+	DATA ゆずは
+	DATA ゆづき
+
+	DATA ようこ
+	DATA よりこ
+	DATA よしか
+
+	DATA らいか
+	DATA りいか
+	DATA りいこ
+	DATA りいさ
+	DATA りえこ
+	DATA りおな
+	DATA りかこ
+	DATA りさこ
+	DATA りつこ
+	DATA りつか
+	DATA りなこ
+	DATA りのあ
+	DATA りりあ
+	DATA りりか
+	DATA りりこ
+	DATA りんか
+	DATA りんこ
+
+	DATA るりこ
+	DATA るりか
+	DATA るるか
+	DATA るるこ
+
+	DATA れいか
+	DATA れいこ
+	DATA れいな
+	DATA れいら
+
+	DATA わかな
+	DATA わかば
+ENDDATA
+RETURNF YOMIGANA
+
+
+@R_NAME_MAKE_KANJI(YOMIGANA)
+#FUNCTIONS
+#DIMS DYNAMIC YOMIGANA
+#DIMS DYNAMIC KANJI
+KANJI '= YOMIGANA
+;稀にひらがな名
+SIF !RAND:20
+	RETURNF KANJI
+SELECTCASE STRLENSU(YOMIGANA)
+CASE 4
+	IF CHARATU(YOMIGANA, 3) == "こ" && RAND:3
+		KANJI '= KANJI_REPLACE_LENS3(SUBSTRINGU(YOMIGANA, 0, 3)) + "子"
+	;×ゅん×
+	ELSEIF GROUPMATCH(CHARATU(YOMIGANA, 1), "ゃ", "ゅ", "ょ") && CHARATU(YOMIGANA, 2) == "ん"
+		KANJI '= KANJI_REPLACE_LENS3(SUBSTRINGU(YOMIGANA, 0, 3)) + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 3))
+	;××ゃ×
+	ELSEIF GROUPMATCH(CHARATU(YOMIGANA, 2), "ゃ", "ゅ", "ょ", "ん")
+		KANJI '= KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + KANJI_REPLACE_LENS3(SUBSTRINGU(YOMIGANA, 1, 3))
+	ELSE
+		KANJI '= KANJI_REPLACE_LENS3(SUBSTRINGU(YOMIGANA, 0, 3)) + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 3))
+	ENDIF
+CASE 3
+	KANJI '= KANJI_REPLACE_LENS3(YOMIGANA)
+CASE 2
+	IF GROUPMATCH(CHARATU(YOMIGANA, 2), "こ") && RAND:2
+		KANJI '= KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + "子"
+	ELSE
+		KANJI '= KANJI_REPLACE_LENS2(YOMIGANA)
+	ENDIF
+ENDSELECT
+RETURNF KANJI
+
+
+
+@KANJI_REPLACE_LENS3(YOMIGANA)
+#FUNCTIONS
+#DIMS DYNAMIC YOMIGANA
+#DIMS DYNAMIC KANJI
+#DIM CONST   RAND_MANYOUGANA = 2
+KANJI '= YOMIGANA
+SELECTCASE YOMIGANA
+CASE "きょう"
+	STRDATA KANJI
+	DATA 鏡
+	DATA 京
+	DATA 杏
+	DATA 教
+	DATA 響
+	DATA 恭
+	DATA 境
+	DATA 叫
+	DATA 凶
+	DATA 兇
+	DATA 恐
+	ENDDATA
+
+CASE "しゅう"
+	STRDATA KANJI
+	DATA 修
+	DATA 秀
+	DATA 秋
+	DATA 囚
+	DATA 襲
+	ENDDATA
+CASE "しょう"
+	STRDATA KANJI
+	DATA 松
+	DATA 宵
+	DATA 祥
+	DATA 笑
+	DATA 章
+	DATA 紹
+	DATA 菖
+	DATA 晶
+	DATA 彰
+	DATA 憧
+	DATA 抄
+	DATA 捷
+	ENDDATA
+
+CASE "しゅん"
+	STRDATA KANJI
+	DATA 旬
+	DATA 瞬
+	DATA 春
+	DATA 隼
+	ENDDATA
+
+CASE "じゅん"
+	STRDATA KANJI
+	DATA 純
+	DATA 順
+	DATA 潤
+	ENDDATA
+
+CASE "りゅう"
+	STRDATA KANJI
+	DATA 柳
+	DATA 流
+	DATA 琉
+	DATA 龍
+	DATA 竜
+	DATA 劉
+	ENDDATA
+
+CASE "りょう"
+	STRDATA KANJI
+	DATA 良
+	DATA 亮
+	DATA 涼
+	DATA 菱
+	DATA 陵
+	DATA 僚
+	DATA 遼
+	DATA 燎
+	DATA 魎
+	DATA 霊
+	ENDDATA
+
+CASE "さくら"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 桜
+		DATA 櫻
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ほたる"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 蛍
+		DATA 螢
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "もみじ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 椛
+		DATA 紅葉
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あんず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 杏
+		DATA 杏子
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "まろん"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 栗
+		DATA 甘栗
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あとり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 花鶏
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あおい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 葵
+		DATA 青
+		DATA 蒼
+		DATA 碧
+		DATA 靑
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "あかね"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 茜
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "あかり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 明
+		DATA 灯
+		DATA 燈
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あすか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 飛鳥
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "あずさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 梓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "いおり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 庵
+		DATA 五百里
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いちご"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 苺
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いろは"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 伊呂波
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いずみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 泉
+		DATA 和泉
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "いぶき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 息吹
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "いのり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 祈
+		DATA 祷
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "かえで"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 楓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "かおり", "かおる"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 香
+		DATA 薫
+		DATA 馨
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かすみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 霞
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "かなえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 叶
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "かなた"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 彼方
+		DATA 叶
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "かなで"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 奏
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "きらら"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 雲母
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "くいな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 秧鶏
+		DATA 水鶏
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ここね"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 子々々
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "こころ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 心
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "こはく"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 琥珀
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "こずえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 梢
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しおり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 栞
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "しのぶ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 忍
+		DATA 偲
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "しずく"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 雫
+		DATA 滴
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "すみれ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 菫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ちとせ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 千歳
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "つぐみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鶫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "つばさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 翼
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "つむぎ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 紬
+		DATA 紡
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "つかさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 司
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "つきこ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 月隠
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "なぎさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 渚
+		DATA 汀
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "なつめ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 棗
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ねねこ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 子々々
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "のぞみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 希
+		DATA 望
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ひかり", "ひかる"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 光
+		DATA 晶
+		DATA 閃
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ひすい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 翡翠
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ひまり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		KANJI '= KANJI_REPLACE_LENS2(CHARATU(YOMIGANA, 0)) + "葵"
+	ENDIF
+
+CASE "ふたば"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 双葉
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ひより"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 日和
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "まどか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 円
+		DATA 圓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みさお"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 操
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みこと"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 勅
+		DATA 詔
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みなみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 南
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みのり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 実
+		DATA 稔
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みやこ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 都
+		DATA 京
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みゆき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 深雪
+		DATA 深幸
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みらい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 未来
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "みどり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 緑
+		DATA 碧
+		DATA 翠
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "めのう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 瑪瑙
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "めぐみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 恵
+		DATA 慈
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "やよい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 弥生
+		DATA 彌生
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "ゆかり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 縁
+		DATA 紫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+ENDSELECT
+
+SIF KANJI != YOMIGANA
+	RETURNF KANJI
+;×ゃ×
+IF GROUPMATCH(CHARATU(YOMIGANA, 1), "ゃ", "ゅ", "ょ", "ん")
+	;×んこ
+	IF CHARATU(YOMIGANA, 3) == "こ" && RAND:3
+		KANJI '= KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 0, 2)) + "子"
+	ELSE
+		KANJI '= KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 0, 2)) + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 2))
+	ENDIF
+;××ゃ
+ELSEIF GROUPMATCH(CHARATU(YOMIGANA, 2), "ゃ", "ゅ", "ょ", "ん")
+		KANJI '= KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 1, 2))
+;××こ
+ELSEIF GROUPMATCH(CHARATU(YOMIGANA, 2), "こ") && RAND:3
+		KANJI '= KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 0, 2)) + "子"
+ELSEIF GROUPMATCH(CHARATU(YOMIGANA, 1), "の") && RAND:3
+	IF RAND:2
+		KANJI '= KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + "ノ" + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 2))
+	ELSE
+		KANJI '= KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + "之" + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 2))
+	ENDIF
+ELSEIF GROUPMATCH(CHARATU(YOMIGANA, 0), "み") && RAND:3
+		KANJI '= "御" + KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 1, 2))
+ELSEIF RAND:2
+		KANJI '= KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 0, 2)) + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 2))
+ELSE
+		KANJI '= KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + KANJI_REPLACE_LENS2(SUBSTRINGU(YOMIGANA, 1, 2))
+ENDIF
+RETURNF KANJI
+
+
+
+@KANJI_REPLACE_LENS2(YOMIGANA)
+#FUNCTIONS
+#DIMS DYNAMIC YOMIGANA
+#DIMS DYNAMIC KANJI
+#DIM CONST   RAND_MANYOUGANA = 2
+KANJI '= YOMIGANA
+SELECTCASE YOMIGANA
+;必ず変換してくれないと困るやつを冒頭に
+;※「じゅ」→「じ」「ゅ」で分解して一字ずつ変換ができない
+CASE "じゅ"
+	STRDATA KANJI
+	DATA 寿
+	DATA 樹
+	DATA 珠
+	DATA 呪
+	DATA 咒
+	ENDDATA
+CASE "しゃ"
+	STRDATA KANJI
+	DATA 沙
+	DATA 紗
+	ENDDATA
+CASE "しゅ"
+	STRDATA KANJI
+	DATA 朱
+	DATA 珠
+	DATA 殊
+	DATA 種
+	DATA 修
+	ENDDATA
+CASE "あん"
+	STRDATA KANJI
+	DATA 安
+	DATA 杏
+	DATA 庵
+	DATA 諳
+	DATA 暗
+	DATA 闇
+	ENDDATA
+CASE "いん"
+	STRDATA KANJI
+	DATA 印
+	DATA 音
+	DATA 韻
+	ENDDATA
+CASE "おん"
+	STRDATA KANJI
+	DATA 音
+	DATA 恩
+	DATA 温
+	DATA 穏
+	DATA 苑
+	DATA 怨
+	ENDDATA
+CASE "のん"
+	STRDATA KANJI
+	DATA 音
+	DATA 穏
+	ENDDATA
+CASE "らん"
+	STRDATA KANJI
+	DATA 蘭
+	DATA 藍
+	DATA 嵐
+	DATA 乱
+	DATA 走
+	ENDDATA
+CASE "りん"
+	STRDATA KANJI
+	DATA 林
+	DATA 倫
+	DATA 琳
+	DATA 凜
+	DATA 輪
+	DATA 鈴
+	DATA 燐
+	DATA 麟
+	ENDDATA
+CASE "れん"
+	STRDATA KANJI
+	DATA 恋
+	DATA 連
+	DATA 漣
+	DATA 憐
+	DATA 煉
+	ENDDATA
+CASE "ろん"
+	STRDATA KANJI
+	DATA 龍
+	DATA 崙
+	ENDDATA
+
+CASE "あい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 愛
+		DATA 藍
+		DATA 逢
+		DATA 哀
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あお"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 葵
+		DATA 青
+		DATA 蒼
+		DATA 碧
+		DATA 靑
+		DATA 碧
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 赤
+		DATA 朱
+		DATA 赫
+		DATA 明
+		DATA 紅
+		DATA 緋
+		DATA 暁
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 秋
+		DATA 安芸
+		DATA 明
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あけ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 赤
+		DATA 朱
+		DATA 赫
+		DATA 明
+		DATA 暁
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 朝
+		DATA 麻
+		DATA 旭
+		DATA 暁
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あす"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 明日
+		DATA 遊
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 淳
+		DATA 敦
+		DATA 熱
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あま"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 天
+		DATA 海
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あや"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 文
+		DATA 彩
+		DATA 綾
+		DATA 絢
+		DATA 妖
+		DATA 怪
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あゆ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鮎
+		DATA 歩
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 在
+		DATA 有
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あざ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鮮
+		DATA 薊
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "あず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 杏
+		DATA 梓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いく"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 育
+		DATA 郁
+		DATA 幾
+		DATA 生
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いち"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 一
+		DATA 市
+		DATA 壱
+		DATA 苺
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 一
+		DATA 壱
+		DATA 五
+		DATA 逸
+		DATA 慈
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 稲
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いの"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 祈
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "いず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 出
+		DATA 泉
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "うみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 海
+		DATA 溟
+		DATA 汐
+		DATA 潮
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "うた"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 歌
+		DATA 唄
+		DATA 詩
+		DATA 謡
+		DATA 詠
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "えい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 英
+		DATA 栄
+		DATA 叡
+		DATA 永
+		DATA 映
+		DATA 詠
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+
+CASE "えつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 悦
+		DATA 越
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "えみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 笑
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "えで"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 楓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "おう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 王
+		DATA 凰
+		DATA 汪
+		DATA 央
+		DATA 皇
+		DATA 桜
+		DATA 櫻
+		DATA 扇
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "おと"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 音
+		DATA 乙
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "おり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 織
+		DATA 折
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 楓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かお"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 香
+		DATA 薫
+		DATA 馨
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 傘
+		DATA 笠
+		DATA 重
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かね"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鐘
+		DATA 兼
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 神
+		DATA 守
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かや"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 茅
+		DATA 萱
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 雁
+		DATA 刈
+		DATA 狩
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かぐ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 輝
+		DATA 耀
+		DATA 燿
+		DATA 赫
+		DATA 香
+		DATA 薫
+		DATA 馨
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "かず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 数
+		DATA 和
+		DATA 葛
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "きさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 妃
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "きみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 君
+		DATA 公
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "きよ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 清
+		DATA 浄
+		DATA 聖
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "きら"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 煌
+		DATA 閃
+		DATA 輝
+		DATA 耀
+		DATA 燿
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "きり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 霧
+		DATA 桐
+		DATA 切
+		DATA 斬
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "きれ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 切
+		DATA 斬
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "くれ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 呉
+		DATA 暮
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "くう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 空
+		DATA 宮
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "けい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 京
+		DATA 景
+		DATA 敬
+		DATA 慶
+		DATA 啓
+		DATA 恵
+		DATA 蛍
+		DATA 螢
+		DATA 圭
+		DATA 炯
+		DATA 渓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ここ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 心
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "こと"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 琴
+		DATA 殊
+		DATA 言
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "この"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 此
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 冴
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 咲
+		DATA 先
+		DATA 裂
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さく"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 咲
+		DATA 裂
+		DATA 炸
+		DATA 朔
+		DATA 桜
+		DATA 櫻
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ささ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 笹
+		DATA 篠
+		DATA 細
+		DATA 刺
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+		
+	ENDIF
+CASE "さち"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 幸
+		DATA 祥
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 颯
+		DATA 殺
+		DATA 刹
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さと"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 里
+		DATA 聡
+		DATA 覚
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さや"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 清
+		DATA 涼
+		DATA 爽
+		DATA 冴
+		DATA 彩
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さよ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 小夜
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さら"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 更
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "さわ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 爽
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しあ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 幸
+		DATA 祥
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 弑
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しお"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 潮
+		DATA 汐
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鹿
+		DATA 爾
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 識
+		DATA 式
+		DATA 色
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しの"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 篠
+		DATA 偲
+		DATA 忍
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "しず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 静
+		DATA 靜
+		DATA 鎮
+		DATA 雫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "すい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 翠
+		DATA 彗
+		DATA 睡
+		DATA 酔
+		DATA 水
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "すな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 沙
+		DATA 砂
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "すみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 澄
+		DATA 隅
+		DATA 菫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "すぐ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 優
+		DATA 直
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "すず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鈴
+		DATA 涼
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "せつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 刹
+		DATA 雪
+		DATA 殺
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "せり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 芹
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "その"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 園
+		DATA 苑
+		DATA 薗
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "そら"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 空
+		DATA 宇
+		DATA 宙
+		DATA 諳
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "たえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 妙
+		DATA 泰
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "たか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鷹
+		DATA 貴
+		DATA 孝
+		DATA 昂
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "たま"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 珠
+		DATA 玉
+		DATA 霊
+		DATA 魂
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つぐ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 継
+		DATA 嗣
+		DATA 次
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つむ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 紬
+		DATA 紡
+		DATA 積
+		DATA 瞑
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 柄
+		DATA 塚
+		DATA 束
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 月
+		DATA 憑
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つゆ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 露
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 綱
+		DATA 緤
+		DATA 繋
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "つみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 摘
+		DATA 積
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "てる"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 輝
+		DATA 照
+		DATA 光
+		DATA 瑛
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "とう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 塔
+		DATA 籐
+		DATA 刀
+		DATA 透
+		DATA 瞳
+		DATA 桃
+		DATA 冬
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "とき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 時
+		DATA 朱鷺
+		DATA 鴇
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "とみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 富
+		DATA 冨
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "とも"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 友
+		DATA 智
+		DATA 朋
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "とり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 酉
+		DATA 鳥
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "とわ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 永久
+		DATA 永遠
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 秧
+		DATA 苗
+		DATA 綯
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なお"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 尚
+		DATA 直
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 仲
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 夏
+		DATA 懐
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 七
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 浪
+		DATA 波
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なる"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鳴
+		DATA 成
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なぎ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 凪
+		DATA 薙
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "なで"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 撫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "にい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 新
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ねこ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 猫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ねね"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 袮々
+		DATA 禰々
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "のり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 則
+		DATA 紀
+		DATA 典
+		DATA 宣
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "のぞ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 希
+		DATA 望
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "のぶ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 信
+		DATA 伸
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "はく"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 博
+		DATA 白
+		DATA 珀
+		DATA 拍
+		DATA 伯
+		DATA 狛
+		DATA 魄
+		DATA 百
+		DATA 佰
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "はす"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 蓮
+		DATA 芙
+		DATA 覇
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "はつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 初
+		DATA 発
+		DATA 溌
+		DATA 祓
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "はな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 華
+		DATA 花
+		DATA 端
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "はや"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 早
+		DATA 速
+		DATA 疾
+		DATA 捷
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "はる"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 春
+		DATA 治
+		DATA 晴
+		DATA 遙
+		DATA 遥
+		DATA 悠
+		DATA 陽
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ひさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 久
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ひと"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 人
+		DATA 一
+		DATA 壱
+		DATA 仁
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ひな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 雛
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ひめ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 姫
+		DATA 媛
+		DATA 秘
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ひろ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 弘
+		DATA 尋
+		DATA 広
+		DATA 紘
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ひで"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 秀
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ふう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 風
+		DATA 封
+		DATA 楓
+		DATA 烽
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ふき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 吹
+		DATA 蕗
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ふみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 文
+		DATA 書
+		DATA 史
+		DATA 章
+		DATA 詞
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ふゆ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 冬
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ほこ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鉾
+		DATA 矛
+		DATA 戈
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ほし"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 星
+		DATA 光
+		DATA 願
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ほた"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 螢
+		DATA 蛍
+		DATA 火垂
+		DATA 火照
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ほの"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 仄
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ほろ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 幌
+		DATA 滅
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "まい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 舞
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "まさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 雅
+		DATA 昌
+		DATA 政
+		DATA 正
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ます"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 増
+		DATA 枡
+		DATA 益
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "まな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 愛
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "まゆ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 繭
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "まり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鞠
+		DATA 毬
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みお"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 澪
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みく"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 未来
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みこ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 巫女
+		DATA 神子
+		DATA 皇女
+		DATA 詔
+		DATA 勅
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みち"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 道
+		DATA 路
+		DATA 途
+		DATA 満
+		DATA 充
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 満
+		DATA 充
+		DATA 蜜
+		DATA 密
+		DATA 光
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 皆
+		DATA 南
+		DATA 水
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みら"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 鏡
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "みず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 水
+		DATA 瑞
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "むつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 睦
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "むぎ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 麦
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "めい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 名
+		DATA 明
+		DATA 命
+		DATA 冥
+		DATA 鳴
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "めぐ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 慈
+		DATA 恵
+		DATA 廻
+		DATA 巡
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "もえ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 萌
+		DATA 燃
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "もと"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 元
+		DATA 素
+		DATA 求
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "もみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 樅
+		DATA 紅絹
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "もも"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 桃
+		DATA 百
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "やみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 闇
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 結
+		DATA 唯
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 有
+		DATA 優
+		DATA 遊
+		DATA 結
+		DATA 夕
+		DATA 勇
+		DATA 悠
+		DATA 祐
+		DATA 裕
+		DATA 憂
+		DATA 柚
+		DATA 由
+		DATA 幽
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 紫
+		DATA 縁
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 雪
+		DATA 幸
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 弓
+		DATA 夢
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆめ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 夢
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ゆず"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 柚
+		DATA 柚子
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "よう"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 陽
+		DATA 洋
+		DATA 容
+		DATA 曜
+		DATA 楊
+		DATA 燿
+		DATA 瑤
+		DATA 羊
+		DATA 謡
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "よみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 読
+		DATA 詠
+		DATA 闇
+		DATA 黄泉
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "より"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 依
+		DATA 憑
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "よし"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 良
+		DATA 好
+		DATA 芳
+		DATA 吉
+		DATA 善
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "らい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 来
+		DATA 來
+		DATA 雷
+		DATA 礼
+		DATA 禮
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "りつ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 律
+		DATA 慄
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "るな"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 月
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "るり"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 璃
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "れあ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 稀
+		DATA 宝
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "れい"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 霊
+		DATA 伶
+		DATA 礼
+		DATA 禮
+		DATA 零
+		DATA 令
+		DATA 麗
+		DATA 玲
+		DATA 怜
+		DATA 灑
+		DATA 励
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "わか"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 若
+		DATA 稚
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ぐさ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 草
+		DATA 種
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ぐみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 組
+		DATA 茱萸
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ずみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 澄
+		DATA 隅
+		DATA 菫
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "づき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 月
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "づみ"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 摘
+		DATA 積
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+CASE "ぶき"
+	IF RAND:RAND_MANYOUGANA
+	ELSE
+		STRDATA KANJI
+		DATA 吹
+		DATA 蕗
+		DATAFORM %YOMIGANA%
+		DATAFORM %YOMIGANA%
+		ENDDATA
+	ENDIF
+ENDSELECT
+SIF KANJI != YOMIGANA
+	RETURNF KANJI
+SIF CHARATU(YOMIGANA, 0) == CHARATU(YOMIGANA, 1) && RAND:3
+	RETURNF KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + "々"
+RETURNF KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 0)) + KANJI_REPLACE_LENS1(CHARATU(YOMIGANA, 1))
+
+
+
+@KANJI_REPLACE_LENS1(YOMIGANA)
+#FUNCTIONS
+#DIMS DYNAMIC YOMIGANA
+#DIMS DYNAMIC KANJI
+KANJI '= YOMIGANA
+SELECTCASE YOMIGANA
+;すべて過不足無く変換できなくてはいけない
+CASE "あ"
+	STRDATA KANJI
+	DATA 愛
+	DATA 葵
+	DATA 青
+	DATA 蒼
+	DATA 靑
+	DATA 赤
+	DATA 朱
+	DATA 赫
+	DATA 明
+	DATA 暁
+	DATA 朝
+	DATA 在
+	DATA 有
+	DATA 亜
+	DATA 亞
+	DATA 吾
+	ENDDATA
+CASE "い"
+	STRDATA KANJI
+	DATA 意
+	DATA 衣
+	DATA 伊
+	DATA 威
+	DATA 李
+	DATA 依
+	DATA 維
+	DATA 畏
+	ENDDATA
+CASE "う"
+	STRDATA KANJI
+	DATA 烏
+	DATA 卯
+	DATA 憂
+	DATA 雨
+	DATA 兎
+	DATA 海
+	DATA 歌
+	ENDDATA
+CASE "え"
+	STRDATA KANJI
+	DATA 絵
+	DATA 江
+	DATA 依
+	DATA 恵
+	DATA 映
+	DATA 笑
+	DATA 得
+	ENDDATA
+CASE "お"
+	STRDATA KANJI
+	DATA 御
+	DATA 緒
+	DATA 淤
+	DATA 王
+	DATA 凰
+	DATA 汪
+	DATA 央
+	DATA 皇
+	DATA 桜
+	DATA 櫻
+	DATA 扇
+	ENDDATA
+CASE "か"
+	STRDATA KANJI
+	DATA 香
+	DATA 神
+	DATA 加
+	DATA 歌
+	DATA 夏
+	DATA 華
+	DATA 架
+	DATA 火
+	DATA 禍
+	DATA 佳
+	DATA 日
+	DATA 可
+	DATA 戈
+	DATA 果
+	DATA 花
+	DATA 迦
+	DATA 河
+	ENDDATA
+CASE "き"
+	STRDATA KANJI
+	DATA 妃
+	DATA 姫
+	DATA 気
+	DATA 氣
+	DATA 来
+	DATA 來
+	DATA 希
+	DATA 오니
+	DATA 稀
+	ENDDATA
+CASE "く"
+	STRDATA KANJI
+	DATA 久
+	DATA 宮
+	DATA 空
+	DATA 句
+	DATA 駆
+	DATA 狗
+	DATA 吼
+	ENDDATA
+CASE "け"
+	STRDATA KANJI
+	DATA 華
+	DATA 卦
+	DATA 気
+	DATA 氣
+	ENDDATA
+CASE "こ"
+	STRDATA KANJI
+	DATA 恋
+	DATA 心
+	DATA 己
+	DATA 胡
+	DATA 呼
+	DATA 弧
+	DATA 虹
+	DATA 紅
+	ENDDATA
+CASE "さ"
+	STRDATA KANJI
+	DATA 冴
+	DATA 咲
+	DATA 幸
+	DATA 祥
+	DATA 彩
+	DATA 沙
+	DATA 砂
+	DATA 叉
+	ENDDATA
+CASE "し"
+	STRDATA KANJI
+	DATA 詞
+	DATA 氏
+	DATA 誌
+	DATA 詩
+	DATA 志
+	DATA 史
+	DATA 示
+	DATA 枝
+	DATA 支
+	ENDDATA
+CASE "す"
+	STRDATA KANJI
+	DATA 州
+	DATA 洲
+	DATA 主
+	DATA 須
+	DATA 守
+	DATA 数
+	DATA 珠
+	ENDDATA
+CASE "せ"
+	STRDATA KANJI
+	DATA 瀬
+	DATA 世
+	DATA 勢
+	DATA 聖
+	DATA 西
+	ENDDATA
+CASE "そ"
+	STRDATA KANJI
+	DATA 想
+	DATA 曽
+	DATA 素
+	DATA 蘇
+	DATA 遡
+	DATA 創
+	DATA 奏
+	DATA 爽
+	DATA 双
+	DATA 颯
+	DATA 蒼
+	ENDDATA
+CASE "た"
+	STRDATA KANJI
+	DATA 多
+	DATA 手
+	DATA 咫
+	DATA 詑
+	ENDDATA
+CASE "ち"
+	STRDATA KANJI
+	DATA 知
+	DATA 智
+	DATA 治
+	DATA 千
+	DATA 血
+	DATA 散
+	DATA 魑
+	DATA 雉
+	DATA 茅
+	ENDDATA
+CASE "つ"
+	STRDATA KANJI
+	DATA 都
+	DATA 津
+	DATA 吊
+	DATA 通
+	ENDDATA
+CASE "て"
+	STRDATA KANJI
+	DATA 手
+	DATA 天
+	ENDDATA
+CASE "と"
+	STRDATA KANJI
+	DATA 斗
+	DATA 都
+	DATA 登
+	DATA 度
+	DATA 兎
+	DATA 刀
+	ENDDATA
+CASE "な"
+	STRDATA KANJI
+	DATA 名
+	DATA 菜
+	DATA 奈
+	DATA 那
+	DATA 南
+	DATA 永
+	DATA 夏
+	DATA 七
+	DATA 儺
+	ENDDATA
+CASE "に"
+	STRDATA KANJI
+	DATA 二
+	DATA 丹
+	DATA 爾
+	DATA 弐
+	ENDDATA
+CASE "ぬ"
+	STRDATA KANJI
+	DATA 奴
+	DATA 縫
+	ENDDATA
+CASE "ね"
+	STRDATA KANJI
+	DATA 涅
+	DATA 根
+	DATA 音
+	ENDDATA
+CASE "の"
+	STRDATA KANJI
+	DATA 能
+	DATA 乃
+	ENDDATA
+CASE "は"
+	STRDATA KANJI
+	DATA 葉
+	DATA 刃
+	DATA 波
+	DATA 羽
+	DATA 覇
+	DATA 把
+	DATA 破
+	DATA 晴
+	DATA 玻
+	DATA 祓
+	DATA 花
+	ENDDATA
+CASE "ひ"
+	STRDATA KANJI
+	DATA 火
+	DATA 陽
+	DATA 日
+	DATA 秘
+	DATA 飛
+	DATA 妃
+	DATA 姫
+	DATA 緋
+	DATA 灯
+	DATA 燈
+	DATA 氷
+	ENDDATA
+CASE "ふ"
+	STRDATA KANJI
+	DATA 布
+	DATA 富
+	DATA 巫
+	DATA 福
+	DATA 封
+	ENDDATA
+CASE "へ"
+	STRDATA KANJI
+	DATA 辺
+	DATA 兵
+	DATA 丙
+	DATA 平
+	DATA 幣
+	ENDDATA
+CASE "ほ"
+	STRDATA KANJI
+	DATA 宝
+	DATA 穂
+	DATA 保
+	DATA 帆
+	DATA 峰
+	DATA 火
+	DATA 炎
+	DATA 蛍
+	DATA 螢
+	DATA 星
+	DATA 封
+	DATA 鳳
+	ENDDATA
+CASE "ま"
+	STRDATA KANJI
+	DATA 魔
+	DATA 摩
+	DATA 真
+	DATA 麻
+	DATA 愛
+	ENDDATA
+CASE "み"
+	STRDATA KANJI
+	DATA 未
+	DATA 見
+	DATA 実
+	DATA 美
+	DATA 海
+	DATA 魅
+	DATA 満
+	DATA 水
+	DATA 充
+	DATA 密
+	DATA 蜜
+	DATA 巳
+	ENDDATA
+CASE "む"
+	STRDATA KANJI
+	DATA 夢
+	DATA 無
+	DATA 霧
+	DATA 矛
+	ENDDATA
+CASE "め"
+	STRDATA KANJI
+	DATA 芽
+	DATA 女
+	DATA 瞳
+	DATA 梅
+	DATA 瑪
+	ENDDATA
+CASE "も"
+	STRDATA KANJI
+	DATA 母
+	DATA 桃
+	DATA 百
+	ENDDATA
+CASE "や"
+	STRDATA KANJI
+	DATA 弥
+	DATA 彌
+	DATA 矢
+	DATA 夜
+	DATA 呀
+	DATA 耶
+	DATA 闇
+	ENDDATA
+CASE "ゆ"
+	STRDATA KANJI
+	DATA 有
+	DATA 優
+	DATA 遊
+	DATA 結
+	DATA 夕
+	DATA 勇
+	DATA 悠
+	DATA 祐
+	DATA 裕
+	DATA 憂
+	DATA 柚
+	DATA 幽
+	DATA 由
+	DATA 弓
+	DATA 夢
+	ENDDATA
+CASE "よ"
+	STRDATA KANJI
+	DATA 夜
+	DATA 世
+	DATA 予
+	DATA 誉
+	DATA 代
+	DATA 読
+	DATA 詠
+	DATA 宵
+	ENDDATA
+CASE "ら"
+	STRDATA KANJI
+	DATA 楽
+	DATA 羅
+	DATA 良
+	DATA 邏
+	DATA 螺
+	ENDDATA
+CASE "り"
+	STRDATA KANJI
+	DATA 理
+	DATA 里
+	DATA 利
+	DATA 李
+	DATA 璃
+	DATA 悧
+	ENDDATA
+CASE "る"
+	STRDATA KANJI
+	DATA 流
+	DATA 留
+	DATA 瑠
+	ENDDATA
+CASE "れ"
+	STRDATA KANJI
+	DATA 霊
+	DATA 礼
+	DATA 禮
+	DATA 令
+	DATA 零
+	DATA 伶
+	DATA 玲
+	DATA 怜
+	DATA 麗
+	DATA 灑
+	DATA 励
+	DATA 恋
+	ENDDATA
+CASE "ろ"
+	STRDATA KANJI
+	DATA 露
+	DATA 路
+	DATA 絽
+	DATA 浪
+	DATA 朗
+	ENDDATA
+CASE "わ"
+	STRDATA KANJI
+	DATA 和
+	DATA 環
+	DATA 羽
+	DATA 琶
+	DATA 湧
+	DATA 倭
+	DATA 話
+	DATA 若
+	DATA 稚
+	ENDDATA
+CASE "が"
+	STRDATA KANJI
+	DATA 賀
+	DATA 臥
+	DATA 牙
+	DATA 芽
+	DATA 呀
+	DATA 雅
+	DATA 我
+	DATA 哦
+	DATA 娥
+	DATA 峨
+	ENDDATA
+CASE "ぎ"
+	STRDATA KANJI
+	DATA 義
+	DATA 儀
+	DATA 犠
+	DATA 魏
+	DATA 戯
+	DATA 偽
+	DATA 技
+	DATA 祗
+	DATA 岐
+	DATA 伎
+	ENDDATA
+CASE "ぐ"
+	STRDATA KANJI
+	DATA 具
+	DATA 紅
+	DATA 倶
+	ENDDATA
+CASE "げ"
+	STRDATA KANJI
+	DATA 偈
+	DATA 気
+	DATA 解
+	ENDDATA
+CASE "ご"
+	STRDATA KANJI
+	DATA 御
+	DATA 伍
+	DATA 呉
+	DATA 護
+	ENDDATA
+CASE "ざ"
+	STRDATA KANJI
+	DATA 佐
+	DATA 座
+	DATA 戯
+	ENDDATA
+CASE "じ"
+	STRDATA KANJI
+	DATA 時
+	DATA 児
+	DATA 路
+	DATA 次
+	DATA 慈
+	DATA 磁
+	DATA 爾
+	ENDDATA
+CASE "ず"
+	STRDATA KANJI
+	DATA 図
+	DATA 主
+	DATA 逗
+	DATA 厨
+	ENDDATA
+CASE "ぜ"
+	STRDATA KANJI
+	DATA 是
+	DATA 世
+	DATA 瀬
+	ENDDATA
+CASE "ぞ"
+	STRDATA KANJI
+	DATA 宗
+	ENDDATA
+CASE "だ"
+	STRDATA KANJI
+	DATA 蛇
+	DATA 堕
+	DATA 妥
+	DATA 詑
+	DATA 儺
+	DATA 娜
+	ENDDATA
+CASE "ぢ"
+	STRDATA KANJI
+	DATA 血
+	DATA 地
+	ENDDATA
+CASE "づ"
+	STRDATA KANJI
+	DATA 津
+	DATA 鶴
+	DATA 都
+	ENDDATA
+CASE "で"
+	STRDATA KANJI
+	DATA 出
+	DATA 手
+	ENDDATA
+CASE "ど"
+	STRDATA KANJI
+	DATA 度
+	DATA 渡
+	DATA 奴
+	DATA 怒
+	ENDDATA
+CASE "ば"
+	STRDATA KANJI
+	DATA 葉
+	DATA 瑪
+	DATA 羽
+	ENDDATA
+CASE "び"
+	STRDATA KANJI
+	DATA 美
+	DATA 嵋
+	DATA 毘
+	ENDDATA
+CASE "ぶ"
+	STRDATA KANJI
+	DATA 武
+	DATA 舞
+	DATA 奉
+	ENDDATA
+CASE "べ"
+	STRDATA KANJI
+	DATA 辺
+	ENDDATA
+CASE "ぼ"
+	STRDATA KANJI
+	DATA 墓
+	DATA 戊
+	DATA 慕
+	ENDDATA
+ENDSELECT
+RETURNF KANJI

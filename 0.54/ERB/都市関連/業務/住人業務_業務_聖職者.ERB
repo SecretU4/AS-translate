@@ -1,0 +1,267 @@
+
+;-------------------------------------------------
+;住人業務　業務　聖職者
+;-------------------------------------------------
+@WORK_T_Si(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_T
+#DIM L_F
+#DIM L_K
+#DIM L_N
+
+L_T = TARGET
+TARGET = ARG:0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+
+CALL C_PICTURE(ARG:0,ARG:1)
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORM 　　　　　
+		IF !RAND:3
+			PRINTFORML 「%CSTR:語尾YES%、やれるだけやってみ%CSTR:語尾ます%」
+		ELSEIF !RAND:2
+			PRINTFORML 「……上手くできたみたい%CSTR:語尾肯定2%」
+		ELSE
+			PRINTFORML 「まだ工夫がいるみたい%CSTR:語尾肯定2%」
+		ENDIF
+PRINTFORML 
+PRINTFORM 　　　　　
+PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に促進され、仕事に励んだ…
+PRINTFORMW 
+
+
+IF (Talent:非処女 == 1 && Talent:合意 == 1) && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1) && RAND:10 >= 5
+SETCOLOR 250,50,200
+DRAWLINE
+	IF !RAND:9 
+		PRINTFORML 都市内に建ち並ぶ施設の中でも長い歴史を持つ礼拝堂。
+		PRINTFORML その地下には、かつて異教徒を弾圧するために造られた拷問室があった。
+		PRINTFORML 現在では封鎖され立ち入りが制限されているはずの拷問室、その扉の奥からはくぐもった声が漏れ聞こえていた…
+		PRINTFORML 
+		PRINTFORML Ｘ字に組まれた磔台には全裸にされた%CALLNAME%が四肢を拘束されて磔にされ、各部を道具によって責められていた。
+		PRINTFORML 媚薬が塗り込まれて過敏になった乳首とクリトリスはローターによってイジメぬかれ、二股の極太バイブが重い駆動音を響かせながら
+		PRINTFORML 洪水のように愛液を垂れ流す膣と性交用の器官と化した尻穴をランダムに刺し貫き、何度も絶頂へと追いやっていく。
+		PRINTFORML 普段礼拝堂で見せている凛とした表情も快楽に蕩かされ、涙と涎を垂れ流しながらすっかり雌の顔になっている。
+		PRINTFORML その様子を近くで観察していた%CALLNAME:MASTER%は、聖職者たるもの欲に溺れるのはどうなのかと苦言を呈す。
+		PRINTFORML だが調教によって性感帯をくまなく開発されてしまっている%CALLNAME%に抗うすべなどない。
+		PRINTFORML 神へ謝罪の言葉を繰り返しながら押し寄せてきた絶頂の波に押し流され、%CALLNAME%は盛大に潮を噴きながらイキ散らかした。
+		PRINTFORML その後、体力が尽きるまで%CALLNAME:MASTER%に弄ばれた%CALLNAME%は、光の消えた瞳で神の名を繰り返し呟いていた…
+	ELSEIF !RAND:8 && TALENT:「イェーガー」
+		PRINTFORML 聖職者である%CALLNAME%は己を『神に遣わされた人類の守護者』と位置付けていた。
+		PRINTFORML 神の威光を示すべく人類に仇成す敵性生物の駆逐に日夜奮闘し、今では称号を戴くほどである。
+		PRINTFORML しかし、終わりの見えない戦いはいつしか人類を疲弊させ、滅びを迎えてしまうだろう。
+		PRINTFORML それを防ぐために人類は新しい活力を生み続ける必要がある。
+		PRINTFORML 人類の守護者を自負する%CALLNAME%は、率先してその任務に従事していた。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML %CALLNAME:MASTER%に跨って腰を振る%CALLNAME%の瞳には情欲の炎だけでなく、使命感も燃えている。
+		PRINTFORML いくら敵性生物を駆除したところで、守るべき人類が滅んでしまっては意味がないのだ。
+		PRINTFORML こうして男女が交わり子を成すことで減少に歯止めをかけ、来るべき再興の時に備えねばならない。
+		PRINTFORML 故に、%CALLNAME%は人類を増やすべく日夜生殖行為に励んでいるのであった。
+		PRINTFORML 決して性欲に溺れているわけではないと、心の中で言い訳を繰り返しながら…
+	ELSEIF !RAND:7 && TALENT:ＮＴＬ
+		PRINTFORML 世界の終焉が近付いている時こそ人々から笑顔をなくしてはいけない。
+		PRINTFORML 祭典を楽しむ人々が行き交う区画を眺めながら%CALLNAME%は部下に指示を出していた。
+		PRINTFORML 古くは世界中で行われていた祭典も、今ではこうしてシティで不定期に催されるだけとなってしまっている。
+		PRINTFORML だからこそ失敗は許されないと%CALLNAME%は表情を引き締め、次々と指示を飛ばしていく。
+		PRINTFORML %CALLNAME%の奮闘もあって祭典の前半は無事に終わりを迎え、後半の担当者と引継ぎを行い%CALLNAME%は自由の身となった。
+		PRINTFORML 夫から誘われていたことを思い出した%CALLNAME%は通信機を取り出すと、連絡先一覧を表示する。
+		PRINTFORML そこで少し考え込んでから、%CALLNAME%は連絡先を選んだ…
+		PRINTFORML 
+		PRINTFORML 昔から続く祭典を一目見ようと、シティ中から多くの観光客がホテルにつめかけていた。
+		PRINTFORML その多くは祭典の参加者でごった返す地上を避け、ホテルの窓やベランダから祭典を楽しんでいる。
+		PRINTFORML そのためホテルの窓はどこもカーテンが開かれているが、その一室だけはぴっちりとカーテンが閉じられていた。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+		PRINTFORML 
+		PRINTFORML カーテンの閉め切られた室内では、%CALLNAME%と%CALLNAME:MASTER%が一糸まとわぬ姿で絡み合っていた。
+		PRINTFORML %CALLNAME%の膣からは子宮に入りきらなかった精液が溢れ、ベッドに大きな染みを作り出している。
+		PRINTFORML それでも種付けを続ける%CALLNAME:MASTER%の欲望を受け止めるべく、%CALLNAME%は主の肉棒を優しく締め上げた。
+		PRINTFORML もはや夫の粗チンの形を忘れ、%CALLNAME:MASTER%の立派な肉棒の形を主として覚え込まされた膣である。
+		PRINTFORML 非常に馴染む膣壁の圧力を楽しみながら%CALLNAME:MASTER%は何度目かの膣内射精を行い、他人妻の子宮に遺伝子を注ぎ込んだ。
+		PRINTFORML とその時、ベッドサイドに置かれていた%CALLNAME%の通信機に着信が入る。
+		PRINTFORML 気を利かせて種付けを中断した%CALLNAME:MASTER%だったが、着信相手の名前を確認した%CALLNAME%は露骨に顔を顰めた。
+		PRINTFORML 「……なに？　今忙しいんだけど……」
+		PRINTFORML 胸を揉んだり吸ったりと甘える%CALLNAME:MASTER%の頭を優しく撫でさすりながら%CALLNAME%は夫との通話を開始する。
+		PRINTFORML 「え？　まだ仕事中……うん、そう……だから一緒には行けないから、一人で行って」
+		PRINTFORML どうやら祭典へのお誘いらしいが、%CALLNAME%は仕事を理由に断った。
+		PRINTFORML だが夫の方は諦めがつかないらしく、誰かに代わってもらえないのかと尋ねる。
+		PRINTFORML 「責任者なんだから仕方ないでしょ……大事な仕事なんだから……あっ、んんっ、もう切るよ」
+		PRINTFORML 未練がましく言葉を続けようとする夫の言葉を遮って%CALLNAME%は通話を終えた。
+		PRINTFORML それとほぼ同時に子宮口を突き上げた%CALLNAME:MASTER%の肉棒によって、硬かった%CALLNAME%の表情が蕩かされる。
+		PRINTFORML 脱力した%CALLNAME%の手から通信機が床に滑り落ちるが、気にした風もなく%CALLNAME:MASTER%の背に腕を回す。
+		PRINTFORML 濃厚な口付けを交わしながら再び一対の雌雄となった二人は、祭典に沸く人々の声を遠くに聞きながら遅くまで交尾を続けた…
+	ELSEIF !RAND:6 && TALENT:聖女の子宮
+		PRINTFORML %CALLNAME:MASTER%が礼拝堂を訪れると%CALLNAME%は女性のお腹に触れて感謝されていた。
+		PRINTFORML 不思議な光景はその後も続き、集まっていた女性全てに触れたところで%CALLNAME%は解放されたようだった。
+		PRINTFORML その様子を信者席から眺めていた%CALLNAME:MASTER%に気づいた%CALLNAME%は、嬉しそうな笑みを浮かべて近寄ってくる。
+		PRINTFORML 何をしていたのかと尋ねる%CALLNAME:MASTER%に、%CALLNAME%ははにかみながら理由を説明し始めた。
+		PRINTFORML %CALLNAME%は『聖女の子宮』と呼ばれる先天的に妊娠しやすい肉体の持ち主で、組織の中でも特別扱いされている。
+		PRINTFORML そんな%CALLNAME%の妊娠のしやすさにあやかろうと、不妊に悩む信徒の女性から祝福を授けてくれるよう依頼が来るのだそうだ。
+		PRINTFORML 実際に祝福を受けてから妊娠したという信徒も多く、噂が噂を呼んで最近では信徒でない女性も訪れるという。
+		PRINTFORML 今も幸せそうにお腹を撫でながら参拝に訪れた信徒が%CALLNAME%のおかげで子を授かったと嬉しそうに報告し立ち去った。
+		PRINTFORML その背中を羨ましそうに見送った%CALLNAME%の眼差しに気がついた%CALLNAME:MASTER%は、そっと肩に手を回して抱き寄せた。
+		PRINTFORML 突然の行動に%CALLNAME%は驚いたようだったが、嗅ぎ慣れた%CALLNAME:MASTER%の匂いに包まれて安心しきった表情で頭を預けてくる。
+		PRINTFORML 暫くそのまま過ごしていた二人はどちらからともなく体を離すと啄むようなキスを繰り返し見つめ合う。
+		PRINTFORML %CALLNAME%は%CALLNAME:MASTER%の手を引いて礼拝堂の奥に姿を消すと、やがて礼拝堂の奥からはくぐもった嬌声が聞こえ始めた…
+	ELSEIF !RAND:5 
+		PRINTFORML 礼拝堂で祈祷を行っていた%CALLNAME%のもとに%CALLNAME:MASTER%がフラリと訪ねてきた。
+		PRINTFORML 用件を尋ねると、ここ最近悪いことが続いているのでお祓いをしてもらいに来たのだという。
+		PRINTFORML %CALLNAME:MASTER%の様子をよくよく観察してみれば、確かに穢れの気配が身体から滲み出ている。
+		PRINTFORML 穢れを祓う必要性を感じた%CALLNAME%は%CALLNAME:MASTER%に特別なお祓いをしないかと持ち掛けた…
+		PRINTFORML 
+		PRINTFORML 礼拝堂に隣接した沐浴施設に%CALLNAME:MASTER%を案内した%CALLNAME%は手早く準備を進める。
+		PRINTFORML お香を焚き、部屋に流れ込んでいる水路から水を汲み上げて服を脱いだ%CALLNAME:MASTER%の身体を洗い清めていく。
+		PRINTFORML 途中、刺激を受けた肉棒が勃ちかけたが、%CALLNAME%は「後でね」と口づけをすると洗うのを優先した。
+		PRINTFORML %CALLNAME:MASTER%の全身を洗い終えると次はジェル状の聖水を用意し、顔と股間以外の肌に塗り込んでいく。
+		PRINTFORML それが終わるとマットを床に敷き、そこで二人は折り重なった。
+		PRINTFORML 「さあ、この身体を使って存分に穢れを吐き出してくださいね……%UNICODE(0x2661)%」
+		PRINTFORML お香は聖なる気を肺から体内に送り込んで穢れを弱め、聖水は弱った穢れを遠ざける効果がある。
+		PRINTFORML そうして顔と股間に集中した穢れを聖職者はキスとセックスにより吸い上げ、代わりに体内の清浄な気を送り込む。
+		PRINTFORML それが特別なお祓いなのだと告げた%CALLNAME%は、お互いの舌を絡め合いながら唾液を交換する濃厚なディープキスを交わす。
+		PRINTFORML 体内に取り込んだ穢れは日常の祈りや沐浴によって次第に薄れていくため、躊躇することはない。
+		PRINTFORML だが%CALLNAME:MASTER%の手によってさんざん開発された肉体は神聖な儀式であるお祓いよりも、本能全開の野蛮な儀式である
+		PRINTFORML 種付け交尾を求めて疼き出して集中力と理性を少しずつ削いでいく。
+		PRINTFORML お祓いを行う聖職者には己を律する強い精神力が求められるが、%CALLNAME%は雄臭い肉棒から穢れを吸い出そうと顔を寄せたところで
+		PRINTFORML %CALLNAME:MASTER%のフェロモンに中てられて理性が本能に屈してしまった。
+		PRINTFORML %CALLNAME:MASTER%の肉棒をバキュームフェラで刺激しながら、%CALLNAME%は両手で自身の胸と股間を弄って交尾の準備を整える。
+		PRINTFORML 一度イけば冷静になれるだろうと%CALLNAME%は安易に考えていたが、その思考は理性ではなく本能によって導き出されたものだった。
+		PRINTFORML 準備もそこそこに、しかし涎を垂らすほどに濡れている膣で%CALLNAME:MASTER%の肉棒を招き入れた%CALLNAME%は己の浅はかさを呪うしかなかった。
+		PRINTFORML 「あっ…だめっ……これダメ……イッたら戻れなく……－－ッ！」
+		PRINTFORML ガクガクと絶頂に震える腰を前後に揺らしながら、肉厚な女性的なお尻を%CALLNAME:MASTER%の太ももに打ちつける。
+		PRINTFORML びたんびたんと肉同士を打ちつけ合う音が響くたびに、接合部からは%CALLNAME%のイキ潮がピュッピュと噴き出し%CALLNAME:MASTER%を濡らしていく。
+		PRINTFORML %CALLNAME:MASTER%によって与えられる快感にドハマリしている%CALLNAME%が、その肉棒を挿入されて冷静さを取り戻すわけがない。
+		PRINTFORML 逆に%CALLNAME%の肉体はかつての快感を思い出し、再び歓喜に震える機会を得たと本能を暴走させる始末であった。
+		PRINTFORML もはや穢れのことなど頭の片隅からも消え去った%CALLNAME%は、単なる繁殖活動と化した種付け交尾を体力が続く限り愉しんだ。
+		PRINTFORML 気絶から目覚めた%CALLNAME%は心地よい気怠さに浸る肉体を何とか動かし、%CALLNAME:MASTER%の身体に残った穢れを取り除いた。
+		PRINTFORML しかし、再戦を求められたと勘違いした%CALLNAME:MASTER%によってイキ狂わされ、その日は他の仕事ができなかった…
+	ELSEIF !RAND:4
+		PRINTFORML 蝋燭の灯された薄暗い一室では甘い香りのするお香が焚かれ、薄く桃色に色づいた煙が部屋中に充満していた。
+		PRINTFORML その一室に集められた女性は誰もが局部を隠す程度の面積しかない衣服を身に付け、顔には薄いヴェールを被って素顔を隠している。
+		PRINTFORML そんな彼女たちの視線の先にはフード以外に一糸まとわぬ姿の%CALLNAME:MASTER%が椅子に座っていた。
+		PRINTFORML %CALLNAME:MASTER%も素性がわからぬようにフードを目深に被っていることもあってか、女性たちの視線はもっぱら股間に集中している。
+		PRINTFORML すでに%CALLNAME%の肉体で一戦を終えた肉棒は硬度を失うことなくそそり立ち、種付け相手を求めて先走り汁を垂らしていた。
+		PRINTFORML 優秀な雄であることを象徴するその威容に女性たちは誰もが期待に瞳を輝かせ、子宮は雄の精液を求めて疼き出す。
+		PRINTFORML 「これより夜会を開始します。主へと祈りを捧げ受胎を祈願しましょう」
+		PRINTFORML %CALLNAME%が夜会の開始を宣言すると、誰もがその場に膝をついて熱心に祈りの言葉を紡ぎ出す。
+		PRINTFORML 祈りの言葉を紡ぎ終われば、事前に通達された順番に従って%CALLNAME:MASTER%の肉棒に腰を下ろす。
+		PRINTFORML 一人、また一人と%CALLNAME:MASTER%と交合い精液を胎内で受け止め、感謝と祈りの言葉を紡いで部屋を後にしていく。
+		PRINTFORML この夜会に集まった女性は不妊に悩む信徒もしくは信徒の知り合いであり、%CALLNAME:MASTER%のためにと%CALLNAME%が集めた繁殖相手であった。
+		PRINTFORML 不妊に悩む女性は子を孕むことができ、%CALLNAME:MASTER%はその遺伝子をより多く残すとともに性欲を満たせる。
+		PRINTFORML 誰もが幸せになれる夜会の存在は参加者にも非常に好評で、中には夫や彼氏よりもセックスが上手いからという快楽目的で参加する者もいた。
+		PRINTFORML もはや夜会に参加する女性は%CALLNAME:MASTER%に対して雄と雌という繁殖本能によって服従を誓ったものがほとんどであり、そうでない女性も
+		PRINTFORML 雌として屈することになるのは時間の問題と言えよう。
+		PRINTFORML それは即ち%CALLNAME:MASTER%の意を受けた女性信徒を大量に動員し、都市内で一大勢力を築くことが可能になることを意味する。
+		PRINTFORML %CALLNAME:MASTER%が望むのならば、かつての宗教戦争時代のように宗教を利用した騒乱を起こすことすら厭わない。
+		PRINTFORML 狂信的ともいえる%CALLNAME:MASTER%への信奉に身を捧げた%CALLNAME%は快楽に蕩けた雌たちの顔を眺めながら内心ほくそ笑んだ…
+	ELSEIF !RAND:3
+		PRINTFORML 礼拝堂の掃除を行っていた%CALLNAME%は、ベンチに腰掛けた信者の中に%CALLNAME:MASTER%の姿を見つけた。
+		PRINTFORML 何の用事だろうかと気になった%CALLNAME%が声をかけると、%CALLNAME:MASTER%は懺悔に来たのだという。
+		PRINTFORML それならばと%CALLNAME%は礼拝堂の片隅に用意されている懺悔室へと%CALLNAME:MASTER%を案内し、自身も対面の部屋へと入った。
+		PRINTFORML 
+		PRINTFORML 懺悔室は壁一枚で信者と聖職者を隔てているが、腰の高さに大きな四角形の穴があり、聖職者側に布が張られて目隠しされている。
+		PRINTFORML その布をスライドさせて穴を露出させた%CALLNAME%は、その穴にはまるように胸を押し付けて声をかけた。
+		PRINTFORML 「さあ……懺悔のお時間ですよ……%UNICODE(0x2661)%」
+		IF TALENT:巨乳 || TALENT:爆乳
+			PRINTFORML 祭服に隠された巨大な膨らみを解き放つと、期待からか乳首は既にツンと上を向いていた。
+			PRINTFORML %CALLNAME:MASTER%は片方の乳首を口に含んで優しく舐めまわしながら、反対側の乳首は強く抓りあげる。
+			PRINTFORML 左右の乳首を快感と痛みで刺激された%CALLNAME%は悲鳴にも似た嬌声を上げるが、壁際から動こうとはしない。
+			PRINTFORML やがて乳首だけでなく乳房全体も掌でこねくり回され、%CALLNAME%は胸だけで絶頂を迎えた。
+		ELSEIF TALENT:貧乳 || TALENT:絶壁
+			PRINTFORML 重ね着されている祭服を肌蹴させると、壁とほぼ水平な胸板があらわになる。
+			PRINTFORML 肌に指を這わせて女性的な柔らかさと弾力をしばし堪能した%CALLNAME:MASTER%は、乳首を指先でカリカリと引っ掻く。
+			PRINTFORML 初めは指の腹を使って撫でるように、ピンと勃起してからは爪の先をひっかけるように。
+			PRINTFORML %CALLNAME%の喘ぎ声がいよいよ切羽詰まったものになると、%CALLNAME:MASTER%は乳房全体を口で覆う様にしゃぶりつく。
+			PRINTFORML それがトドメとなり、%CALLNAME%は胸だけで絶頂を迎えた。
+		ELSE
+			PRINTFORML 祭服の前部分を肌蹴させると、お椀型の美乳が姿を現した。
+			PRINTFORML %CALLNAME:MASTER%は片方の乳首だけを執拗に舌先で転がしたり、甘噛みしたりして刺激を続ける。
+			PRINTFORML だが反対側の乳房には一切触れず、快感を欲して勃起した乳首が切なそうに震えているのを放置し続けた。
+			PRINTFORML やがて我慢できなくなった%CALLNAME%が逆の胸も弄って欲しいと願い出ると、快楽に屈した聖職者を咎めるように
+			PRINTFORML %CALLNAME:MASTER%は今まで放置していた乳首を思い切り抓りあげ、絶頂へと強引に押し上げた。
+		ENDIF
+		PRINTFORML 絶頂で力が抜け落ちた%CALLNAME%がその場に崩れ落ちると、今度は信者側から%CALLNAME:MASTER%のペニスが差し出される。
+		PRINTFORML ガチガチに勃起したペニスは先走り汁で妖しく黒光り、%CALLNAME%が顔を近づけずとも咽そうになるほどの濃い精臭がした。
+		PRINTFORML 雌を発情させる香りに誘われるまま亀頭を口に含むと、唇を窄めて水音をたてながらフェラをする。
+		PRINTFORML じゅぽじゅぽと卑猥な音を響かせながらフェラをするうちに盛り上がった%CALLNAME%の両手は自身の胸と股間に伸びていた。
+		PRINTFORML 自慰しながらフェラを続けようとした%CALLNAME%だったが、突然ペニスが口から引き抜かれる。
+		PRINTFORML 困惑する%CALLNAME%は差し込まれたペニスに頬をペチペチと叩かれたことで、自慰をしようとしたことがバレたと悟った。
+		PRINTFORML 奉仕を疎かにするなという%CALLNAME:MASTER%のペニスビンタに目を覚ました%CALLNAME%は、両手も使って丁寧に奉仕を続けた…
+	ELSEIF !RAND:2
+		PRINTFORML 布教活動からの帰り道、行きつけのカフェの傍を通りかかった%CALLNAME%は少し休憩していくことにした。
+		PRINTFORML 今日は客入りが悪いらしく、テーブルでお茶を楽しんでいる人も疎らだった。
+		PRINTFORML だがそんな疎らな客の中に、一人でお茶を楽しむ%CALLNAME:MASTER%の姿を見つけた。
+		PRINTFORML 突然降って湧いた幸運に%CALLNAME%は神への感謝の言葉を心の中で何度も繰り返しながら同席を願い出た。
+		PRINTFORML 暇を持て余していた%CALLNAME:MASTER%は二つ返事で受け入れると、今日は何をしていたのかと訊ねた。
+		PRINTFORML 布教活動の帰りだと告げる%CALLNAME%に、宗教という存在に興味を抱いた%CALLNAME:MASTER%は少し話を聞くことにした。
+		PRINTFORML 
+		PRINTFORML …
+		PRINTFORML ………
+		PRINTFORML どれほどの時間が経過しただろうか。
+		PRINTFORML カウンター越しの店長さんと店員ちゃんからの同情の眼差しを感じながら、%CALLNAME:MASTER%は話を聞いていた。
+		PRINTFORML 流石にこれ以上の時間は惜しいと感じた%CALLNAME:MASTER%は%CALLNAME%の手を握ると、顔を近づけた。
+		PRINTFORML 「もう少し詳しい話は向こうで聞くよ」とカフェの奥を視線で示しながら囁くと、%CALLNAME%は頬を紅潮させながらもしっかりと頷く。
+		PRINTFORML %CALLNAME:MASTER%に手を引かれるまま、フワフワとした足取りで%CALLNAME%はヤリ部屋へと向かった。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML ベッドで仰向けになった%CALLNAME:MASTER%の上では、%CALLNAME%が熱心に腰を振っていた。
+		PRINTFORML 宗教の話はもういいのかと%CALLNAME:MASTER%が尋ねると、%CALLNAME%は今にも泣きそうな表情で「イジワルしないで」と囁く。
+		PRINTFORML 与えられる快感によって頭の働きが鈍くなるせいか、%CALLNAME%は交尾を始めるなり会話そっちのけで愉しみ始めてしまった。
+		PRINTFORML もはや%CALLNAME:MASTER%から与えられる快楽の虜となってしまった%CALLNAME%は、休憩のつもりが閉店間際まで交合を愉しんでしまった…
+	ELSE
+		PRINTFORML 礼拝堂へと集まった信徒を前に、%CALLNAME%は教典の一節を説いていた。
+		PRINTFORML 敬虔な信徒たちは誰もが神妙な顔つきで聞き入り、それぞれが神への祈りを真剣に捧げている。
+		PRINTFORML 説法が中程まで進んだころ、%CALLNAME%の表情に変化が現れた。
+		PRINTFORML 瞳は熱に浮かされたように潤み、頬は赤く上気し、言葉が不自然に途切れたりつっかえる様になる。
+		PRINTFORML 時折何かに耐えるように口を噤んでは身体を震わせ、深呼吸を繰り返す。
+		PRINTFORML だが信徒たちはその異常な様子に誰一人気付かず、礼拝は最後まで続けられた。
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は信徒が全員退出したのを見届けると、その場にへたり込んだ。
+		PRINTFORML 股間の部分に染みが広がっていく様を蕩け顔で眺めていた%CALLNAME%は、%CALLNAME:MASTER%が礼拝堂へと
+		PRINTFORML 入ってきたのに気がつくと嫣然とした笑みを浮かべて歓迎の意を示した。
+		PRINTFORML %CALLNAME:MASTER%は無言で%CALLNAME%に歩み寄ると、祭祀用の衣装を肌蹴させて胸と股間を確認する。
+		PRINTFORML そこにはローターに嬲られる乳首とクリトリス、そしてバイブを突っ込まれた前後の穴があった。
+		PRINTFORML 礼拝中、それらの玩具に躾けられ続けた%CALLNAME%は何度も絶頂を繰り返しながらも、信仰心で何とか乗り切ったのである。
+		PRINTFORML 聖職者から一匹の雌へと表情を変化させた%CALLNAME%は、%CALLNAME:MASTER%の股間に顔を押し当てると息を吸い込む。
+		PRINTFORML もはや一刻の我慢もならないと言わんばかりの%CALLNAME%に、%CALLNAME:MASTER%は肉棒を差し出す。
+		PRINTFORML 本来は神に向けて紡ぐはずの祈りの言葉を%CALLNAME:MASTER%に対して紡いだ%CALLNAME%は、肉棒に飛びついた…
+	ENDIF
+DRAWLINE
+
+CALL JN_SEX_EXP
+RESETCOLOR
+
+ENDIF
+
+
+EXP:業務経験 += 1
+PRINTFORML 【業務経験　　:{EXP:業務経験-1, 5 ,LEFT}→{EXP:業務経験, 5 ,RIGHT}】
+DRAWLINE
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 5
+	L_K = (((EXP:業務経験/100)+1)*1000)+(EXP:業務経験*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 更に%CALLNAME%の活躍が「シティ」に認められ、大量の功績を獲得した！
+	PRINTFORML 【功績　　:{Flag:都市_功績 - L_K, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
+	DRAWLINE
+ENDIF
+PRINTFORMW 
+TARGET = L_T
+
+
+
+
+
+
+
+
+
+
+

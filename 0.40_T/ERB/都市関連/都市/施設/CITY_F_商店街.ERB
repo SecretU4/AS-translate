@@ -1,0 +1,43 @@
+﻿
+;-------------------------------------------------
+;施設　商店街
+;-------------------------------------------------
+@CITY_F_6(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_M
+#DIM L_I
+#DIM L_NM
+L_NM = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 【商店街】
+DRAWLINE
+PRINTFORML 多くの住民が生活のために使用している場所。
+PRINTFORML 
+DRAWLINE
+PRINTFORML [0] 買い物
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [999] 돌아온다
+INPUT
+L_INPUT = RESULT
+L_M = RESULT
+SELECTCASE L_INPUT
+	CASE 999
+		RETURN
+	CASE 0
+		CALL ITEM_MAIN
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+
+
+
+
+
+
+

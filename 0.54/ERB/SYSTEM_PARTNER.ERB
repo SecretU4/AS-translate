@@ -1,0 +1,120 @@
+;-------------------------------------------------
+;メニューにパートナー表示
+;-------------------------------------------------
+@SYSTEM_PARTNER
+#DIM L_I
+#DIM P_S
+#DIMS LSTR
+
+CALL MEMBER_LIST2_1(1, 1 ,1)
+L_I = FLAG:汎用変数
+FLAG:汎用変数2 = FLAG:汎用変数
+FLAG:汎用変数 = 100
+IF FLAG:都市_パートナーセックス == 0 && TALENT:L_I:妊娠 == 0 && TALENT:L_I:受精 == 0 && TALENT:L_I:非処女 && (TALENT:L_I:心酔 || TALENT:L_I:愛人 || TALENT:L_I:情婦) && FLAG:妊娠機能 == 1 && FLAG:種付けイベント == 1
+P_S = RAND:5
+LSTR =  <nonbutton pos='0'><img src='P_SEX_{P_S}' height = '900'  ypos = '0'></nonbutton><nobr>
+HTML_PRINT LSTR
+
+ELSEIF TALENT:L_I:不在 == 0
+	CALL C_PICTURE(L_I, 0, -100)
+ENDIF
+FLAG:汎用変数 = 0
+; 実際には必要ないのに、見た目を揃えるためだけに綺麗さだけで幅を増やしてみる
+PRINTFORM 　　 　　
+CALL PRINT_RANGE_STATUS(L_I, "HP", "体力", 3, 4, "伏字", "％")
+CALL PRINT_RANGE_STATUS(L_I, "SP", "気力", 3, 4, "伏字", "％")
+PRINTL
+PRINT 　　 　　
+CALL PRINT_STATUS(L_I, "好感度", 6, 6)
+CALL PRINT_STATUS(L_I, "忠誠値", 6, 6)
+CALL PRINT_STATUS(L_I, "愛情値", 6, 6)
+CALL PRINT_STATUS(L_I, "淫乱値", 6, 6)
+PRINTL
+PRINT 　　 　　
+CALL PRINT_STATUS(L_I, "人気",   6, 6, , 10000)
+CALL PRINT_STATUS(L_I, "モラル", 6, 6, (L_I==MASTER ? "伏字"#""), 500, , -500)
+CALL PRINT_STATUS(L_I, "カルマ", 6, 6, (L_I==MASTER ? "伏字"#""), 500, , -500)
+CALL PRINT_STATUS(L_I, "品性",   6, 6, (L_I==MASTER ? "伏字"#""), 500, , -500)
+PRINTL
+PRINTFORML 　　 　　
+
+
+PRINTFORM 　　　　　
+SIF TALENT:L_I:不在 == 0
+	PRINTFORM %CALLNAME:L_I%
+IF FLAG:都市_パートナーセックス == 0 && TALENT:L_I:妊娠 == 0 && TALENT:L_I:受精 == 0 &&  TALENT:L_I:非処女 && (TALENT:L_I:心酔 || TALENT:L_I:愛人 || TALENT:L_I:情婦) && FLAG:妊娠機能 == 1  && FLAG:種付けイベント == 1
+	CALL PARTNER_SEX
+ELSEIF TALENT:L_I:合意 != 1
+	PRINTFORML 
+;こっから下は全て合意有り
+ELSEIF FLAG:都市_防衛 != 0
+	PRINTDATAL
+		DATAFORM 「準備が出来たらすぐに行%CSTR:L_I:語尾行く%！」
+		DATAFORM 「倒せなくてもダメージさえ通れば効果はあ%CSTR:L_I:語尾対応%！」
+		DATAFORM 「ダメージを蓄積させれば、いずれ敵も引き下がると思う%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾逆説%…」
+		;無駄にヒロイックなセリフを追加してみる
+		DATAFORM 「なんとかして食い止めないと%CSTR:L_I:語尾肯定2%……頑張%CSTR:L_I:語尾促進%」
+		DATAFORM 「この都市が%CSTR:L_I:一人称%たちに残された最後の居場所な%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%、絶対に撃退%CSTR:L_I:語尾問う2%！」
+	ENDDATA
+ELSEIF FLAG:ターン調査済み != 0
+	PRINTDATAL
+		DATAFORM 「一先ず調査終了%CSTR:L_I:語尾同意求む%？、少し休憩%CSTR:L_I:語尾お願い%」
+		DATAFORM 「休憩を挟んだら次の出撃の準備をしないと%CSTR:L_I:語尾同意求む%？」
+		DATAFORM 「獲得した資材は確認%CSTR:L_I:語尾問う4%？、量があればクラフトしてみて%CSTR:L_I:語尾希望%」
+		DATAFORM 「外敵が来る前、世界はどんな風だった%CSTR:L_I:語尾行為%？」
+	ENDDATA
+ELSEIF TALENT:L_I:不在 == 0
+	IF TALENT:L_I:治安維持局員 && RAND:10 <= 1
+		PRINTDATAL
+			DATAFORM 「うちの管区は平和そのもの%CSTR:L_I:語尾です%」
+			DATAFORM 「隣の地区にイレギュラーが出たらしい%CSTR:L_I:語尾許可%」
+			DATAFORM 「%CSTR:L_I:語尾何？%？……あぁ、これは最近現れた小型の外敵の資料%CSTR:L_I:語尾応答%」
+		ENDDATA
+	ELSE
+		PRINTDATAL
+			DATAFORM 「次の襲撃までに準備してお%CSTR:L_I:語尾行く%」
+			DATAFORM 「今度は%CSTR:L_I:一人称%が%CSTR:L_I:二人称%を支え%CSTR:L_I:語尾ます%」
+			DATAFORM 「少しは休んで%CSTR:L_I:語尾希望%、これでも心配してる%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%」
+			DATAFORM 「次の襲撃までに準備してお%CSTR:L_I:語尾行く%」
+			DATAFORM 「解放された施設は運用して%CSTR:L_I:語尾問う6%？」
+			DATAFORM 「はあ…イレギュラー退治も大変%CSTR:L_I:語尾応答%…」
+			DATAFORM 「外界だと珍しい種族に会えるかもしれない%CSTR:L_I:語尾許可%」
+			DATAFORM 「外界が気になる%CSTR:L_I:語尾ので%調査に行%CSTR:L_I:語尾行く%？」
+			DATAFORM 「…たまには%CSTR:L_I:一人称%も構って欲しい%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾逆説%…」
+			DATAFORM 「…するなら一声掛け%CSTR:L_I:語尾命令%…%UNICODE(0x2661)%」
+			DATAFORM 「%CSTR:L_I:語尾微笑%、今日は何をする%CSTR:L_I:語尾行為%？」
+		ENDDATA
+	ENDIF
+ENDIF
+
+IF TALENT:L_I:妊娠 != 0
+	SETCOLOR COLOR("ピンク")
+	PRINTFORM 　　　　　　　　　【妊娠:経過週数{TALENT:L_I:妊娠}】
+ELSEIF TALENT:L_I:受精 != 0
+	SETCOLOR COLOR("ピンク")
+	PRINTFORM 　　　　　　　　　【受精:経過週数{TALENT:L_I:妊娠}】
+ENDIF
+IF TALENT:L_I:托卵 != 0
+	SETCOLOR COLOR("紫")
+	PRINTFORM (托卵%UNICODE(0x2661)%)
+ENDIF
+PRINTFORML 
+RESETCOLOR
+CALL CITY_NEWS
+
+
+
+
+FLAG:汎用変数 = 0
+
+
+
+
+
+
+
+
+
+
+
+

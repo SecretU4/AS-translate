@@ -1,0 +1,114 @@
+﻿;-------------------------------------------------
+;성노예救出
+;-------------------------------------------------
+@RPG_EVENT_401(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 401
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【조사 이벤트:성노예 구출】
+PRINTFORML 
+
+PRINTFORML 통신에서 여러개의 생체 반응이 있었다는 보고를 받고、그 장소로 발길을 옮겼다。
+PRINTFORML 조용히 상황을 살피니、그곳은 보강된 공장으로 이레귤러들의 근거지 같았다。
+PRINTFORML 기록에 의하면 도시의 주민이 잡혀 있는 것 같다、아마 남자들의 노리개가 되어 있을 것이다。
+PRINTFORML 지금은 경계가 느슨해 보이는 것이、공격하려면 좋은 타이밍이지만…
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [0] 돕는다　(주민으로 등록한다)
+PRINTFORML [1] 돕지 않는다(주민으로 등록하지 않는다)
+PRINTFORML 
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	PRINTFORML 부대로 포위한 뒤、%CALLNAME:L_I%의 신호와 함께 일제히 쳐들어갔다。
+	PRINTFORML 갑작스런 습격에 혼란에 빠진 이레귤러들을、하나하나 도살 처분해 나갔다。
+	PRINTFORML 제압을 완료하고 실내를 샅샅이 뒤지자、쇠사슬에 묶인 주민이 있었다。
+	PRINTFORML 끝없이 이어진 성폭행으로 마음이 망가졌는지、텅 빈 눈으로 허공을 응시하고 있다。
+	PRINTFORML %CALLNAME:L_I%는 즉시 풀어주고、도시로 이송할 수 있도록 손을 썼다…
+	PRINTFORMW 
+	CALL CHARACTER_SCOUT1
+CASE 1
+	PRINTFORML 하지만、내부의 자세한 정보를 알 수 없는 이상 섣불리 접근할 수도 없다。
+	PRINTFORML 지금은 어떻게든 참고、다음 기회를 노리기로 했다…
+	PRINTFORML 
+	PRINTFORMW 
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+
+
+
+
+
+
+
+
+
+
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

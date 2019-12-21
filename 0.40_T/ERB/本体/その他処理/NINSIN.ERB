@@ -1,0 +1,429 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:NINSIN.ERB
+;	Facility	:妊娠機能。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;	002		2014/09/28		なるはや				CSVキャラ誕生を追加
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ NINSIN_CLEAR						妊娠:初期化
+;	・ NINSIN_CHK						妊娠:チェック
+;	・ NINSIN_ABLE						妊娠:可能チェック
+;	・ NINSIN_MAIN						妊娠:主処理
+;	・ NINSIN_CHILD_BIRTH				妊娠:出産処理
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub NINSIN_CLEAR
+;=================================================
+;   妊娠:初期化
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@NINSIN_CLEAR(ARG)
+#DIM L_T
+L_T = ARG
+
+TALENT:L_T:妊娠			= 0
+CFLAG:L_T:妊娠フラグ	= 0
+CFLAG:L_T:妊娠開始日	= 0
+CFLAG:L_T:妊娠相手番号	= 0
+CSTR:L_T:妊娠相手名		= 
+
+
+;=================================================
+;   sub NINSIN_ABLE
+;=================================================
+;   妊娠:可能チェック
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+; Output:
+;  RETURN				真偽値
+;-------------------------------------------------
+@NINSIN_ABLE(ARG)
+#FUNCTION
+
+;妊娠前＋避妊薬無し
+RETURNF !CFLAG:ARG:妊娠フラグ && !CFLAG:ARG:避妊薬
+
+
+;=================================================
+;   sub NINSIN_CHK
+;=================================================
+;   妊娠:チェック
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				相手キャラ(-1:恋人 -2:애인 -3:娼館 それ以外:キャラ)
+;  ARG:2				精液量
+;  ARGS					相手キャラ名
+;-------------------------------------------------
+@NINSIN_CHK(ARG:0, ARG:1, ARG:2, ARGS="")
+#DIM L_T
+#DIM L_P
+#DIM L_VAL
+#DIM L_HIT
+#DIM L_危険日
+
+SIF !FLAG:妊娠機能
+	RETURN
+
+L_T = ARG:0
+L_P = ARG:1
+
+SIF TALENT:L_T:수정 != 0 || TALENT:L_T:妊娠 != 0 
+	RETURN
+
+;存在してるキャラ
+IF L_P > -1
+	CFLAG:L_T:妊娠相手番号	= NO:L_P
+	CSTR:L_T:妊娠相手名		= %NAME:L_P%
+;그 외 
+ELSE
+	CFLAG:L_T:妊娠相手番号 = -1
+	;相手名は呼び出し元で設定
+	IF ARG:1 == -1
+		CSTR:L_T:妊娠相手名 = %CSTR:L_T:恋人名前%
+	ELSEIF ARG:1 == -2
+		CSTR:L_T:妊娠相手名 = 애인
+	ELSE
+		CSTR:L_T:妊娠相手名 = 불명
+	ENDIF
+ENDIF
+SIF CSTR:L_T:妊娠相手名 == ""
+	CSTR:L_T:妊娠相手名		= %ARGS%
+
+;主人の子供
+IF CFLAG:L_T:妊娠相手番号 == MASTER
+	CFLAG:L_T:妊娠フラグ = 1
+	CFLAG:MASTER:男体経験値 += 1
+	IF CFLAG:MASTER:男体経験値 >= CFlag:MASTER:男体レベル*2
+		CFLAG:MASTER:男体経験値 = 0
+		CFlag:MASTER:男体レベル += 1
+	ENDIF
+;主人以外の恋人伴侶の子供
+ELSEIF ARG:1 == -1 || ARG:1 > 0 
+	CFLAG:L_T:妊娠フラグ = -1
+;애인の子供
+ELSEIF ARG:1 == -2
+	CFLAG:L_T:妊娠フラグ = -2
+;그 외 
+ELSE
+	CFLAG:L_T:妊娠フラグ = -3
+ENDIF
+CFLAG:L_T:妊娠開始日 = DAY
+
+
+TALENT:L_T:수정 = 1
+SIF TALENT:L_T:교제중 == 1 || TALENT:L_T:결혼완료 == 1　|| TALENT:L_T:백합결혼 == 1　
+	TALENT:L_T:탁란 = 1
+
+;=================================================
+;   sub NINSIN_MAIN
+;=================================================
+
+;-------------------------------------------------
+@NAKATDASI_MAIN(ARG,ARG:1,ARG:2, ARGS="")
+#DIM L_I
+#DIM L_N
+#DIM L_N_K
+#DIM L_N_D
+#DIM L_危険日
+
+
+L_N = (RAND:(1+(CFlag:MASTER:精子レベル)*CFlag:MASTER:男体レベル))+5
+L_I = ARG
+L_N_D = 0
+
+SIF !FLAG:妊娠機能
+	RETURN
+
+SIF TALENT:L_I:수정 != 0 || TALENT:L_I:妊娠 != 0
+	RETURN
+
+L_危険日 = C_危険日(L_I)
+
+;위험일以外は無し(배란약使用時は除く)
+SIF !L_危険日 && TALENT:L_I:배란약 == 0
+	RETURN
+SIF TALENT:L_I:배란약 != 0
+L_N_D = 20
+
+SETCOLOR COLOR("ピンク")
+IF CFLAG:L_I:受精現在耐久値 != 0
+	PRINTFORML 정액을 받아들인 자궁은、거기에 반응이라도 한 듯이 수정 준비를 갖추고 있다…
+	PRINTFORML 수정 내구도:{CFLAG:L_I:受精現在耐久値} → {CFLAG:L_I:受精現在耐久値-L_N} 
+	CFLAG:L_I:受精現在耐久値 -= L_N+L_N_D
+	IF CFLAG:L_I:受精現在耐久値 <= 0
+		PRINTFORML 【수정 태세】계속해서 정액을 받는 사이에、%CALLNAME:L_I%의 자궁은 수정 준비가 완료되었다。
+		CFLAG:L_I:受精現在耐久値 = 0
+	ENDIF
+ELSEIF CFLAG:L_I:受精現在耐久値 == 0
+	 L_N_K = RAND:100
+	IF TALENT:L_I:임신하기쉬움 == 1
+		L_N_K -= 20
+	ELSEIF TALENT:L_I:임신하기어려움 == 1
+		L_N_K += 20
+	ENDIF
+	 PRINTFORML 【수정 확률:{(CFLAG:L_I:受精確率)+L_N_D}】【주사위 굴림:{L_N_K}】
+	 IF (CFLAG:L_I:受精確率)+L_N_D > L_N_K
+	 	PRINTFORML 【―――수정―――】
+	 	IF TALENT:L_I:ＮＴＬ == 1
+			IF !RAND:3
+				PRINTFORML 마침내 남편의 것이 아닌 정자가 난자의 막을 찢으면서、두 유전자는 서로 섞여서 하나의 생명의 싹이 되었다。
+				PRINTFORMW 그러나 자궁은 오히려 기다렸다는 듯이 그것을 안쪽에 거두었다…
+			ELSEIF !RAND:2
+				PRINTFORML 두 사람의 사랑이 담긴 섹스라 오인한 것일까、아니면 본능적으로 남편보다 강한 수컷이라고 인정한 것일까。
+				PRINTFORMW 마침내 정자와 난자는 하나가 되면서、준비 만전인 자궁이 그 싹을 자신의 안쪽에 심었다…
+			ELSE
+				PRINTFORML 긴 공방의 끝에 남편의 대신 이 수컷의 정자를 선택한 난자는、환영하면서 자신의 안쪽으로 받아들였다。
+				PRINTFORMW 그리고 그 몸은 하나의 수정란이 되어、배덕적인 생명이 자궁에 싹을 틔우려 하고 있다…
+			ENDIF
+		ELSEIF CFLAG:L_I:受精最大耐久値 >= 500
+			IF !RAND:3
+				PRINTFORML 인간의 난자와는 차원이 다른 방벽을 자랑하는 인외의 난자였지만、마침내 막이 관통되면서 침입을 허용하고 말았다。
+				PRINTFORMW 난자는 단념했는지 그것을 받아들이면서、혼혈 생명의 싹을 틔우며 자신의 몸을 바꾸기 시작했다…
+			ELSEIF !RAND:2
+				PRINTFORML 이종족이기 때문에 거듭된 교배로도 좀처럼 수정되지 않았지만、마침내 한마리의 정자가 난자의 안쪽으로 기어들었다。
+				PRINTFORMW 두개의 유전자는 열심히 얽히고 결합하면서、다른 피를 이어받은 수정란으로 변모했다…
+			ELSE
+				PRINTFORML 인간의 정자가 인외의 난자를 굴복시키면서、수컷을 모르던 순진한 유전자와 섞이기 위해 안쪽으로 파고들었다。
+				PRINTFORMW 잠시 후 혼혈의 수정란이 되자、만물의 근원인 자궁은 자비롭게 그것을 맞아들였다…
+			ENDIF
+	 	ELSE
+			IF !RAND:3
+				PRINTFORML 대량으로 쏟아진 정자 중 한마리가、마침내 난자의 막을 찢으면서 수정에 이르렀다。
+				PRINTFORMW 자궁은 환희에 젖어 떨면서、새로운 생명을 축복하듯이 자신의 안쪽에 거두었다…
+			ELSEIF !RAND:2
+				PRINTFORML 두개의 유전자가 결합되면서 하나의 수정란으로 변모했다。
+				PRINTFORMW 만물의 근원인 자궁은 그것을 감싸듯이 착상시켰다…
+			ELSE
+				PRINTFORML 거듭된 사정에 마침내 난자도 굴복하면서、수컷의 유전자를 받아들이고 하나의 생명으로 합쳐졌다。
+				PRINTFORMW 자궁은 완성된 수정란을 맞이하면서、감싸듯이 안쪽에 심었다…
+			ENDIF
+		ENDIF
+		CALL NINSIN_CHK(ARG,ARG:1,ARG:2)
+	 ELSE
+	 	PRINTFORML 【――수정 실패――】
+		IF !RAND:3
+			PRINTFORML 정자들이 쏟아지긴 했지만、난자를 찾아내진 못한 것 같다。
+			PRINTFORMW 있어야 할 것이 없는 자궁은 수정은 아직인가 하고 기다리면서、욱신거리고 있다…
+		ELSEIF !RAND:2
+			PRINTFORML 두 사람의 유전자는 서로 만나지 못했고、수정하는 일도 없었다。
+			PRINTFORMW 하지만 굶주린 자궁은 단념하지 않고、보지를 범하는 자궁에게서 새로운 정액을 짜내기 위해 꿈틀거리기 시작했다…
+		ELSE
+			PRINTFORML 수많은 정자들의 분투에도 불구하고、난자에 도달은 했지만 수정하진 못한 것 같다。
+			PRINTFORMW 여전히 방비를 굳히고 있는 난자는、자신을 굴복시킬 강한 정자를 기다리고 있다…
+		ENDIF
+	 ENDIF
+ENDIF
+
+
+
+
+
+
+
+
+
+
+
+
+RESETCOLOR
+
+
+;-------------------------------------------------
+;   妊娠:日数経過
+;-------------------------------------------------
+@NINSIN_MAIN(ARG)
+#DIM L_T
+#DIM L_A
+#DIM L_N
+#DIM L_N_K
+
+
+L_T = ARG
+
+
+
+SIF TALENT:L_T:妊娠 != 0 || TALENT:L_T:수정 != 0
+DRAWLINE
+
+SETCOLOR COLOR("ピンク")
+SIF CFLAG:L_T:妊娠フラグ != 0 && TALENT:L_T:妊娠 == 0
+	TALENT:L_T:수정 += 1
+
+SIF TALENT:L_T:妊娠 >= 1 
+	TALENT:L_T:妊娠 += 1
+
+IF TALENT:L_T:妊娠 >= 1 && TALENT:L_T:부재 == 0
+	FLAG:都市_現在BP += (RAND:3)+1
+	PRINTFORML 임신했기 때문인지 %CALLNAME%는 모유가 나오게 되었다。
+	PRINTFORMW %CALLNAME:MASTER%는 그것을 채취하여、BP로 변환했다。
+ENDIF
+
+IF TALENT:L_T:수정 >= 5
+	TALENT:L_T:수정 = 0
+	TALENT:L_T:妊娠 = 1
+	PRINTFORML 요즘 들어、%CALLNAME:L_T%는 컨디션이 좋지 않다고 주위에 투덜거리고 있다。
+	PRINTFORMW 아직 자궁에 새로운 생명이 깃든 것을 눈치채지 못한 것 같다…
+ENDIF
+
+
+IF TALENT:L_T:妊娠 == 10
+	PRINTFORML 수정 후 날이 지나면서、배가 날로 부풀어오르자 %CALLNAME:L_T%도 그제야 자신이 임신했다는 것을 자각한 것 같다。
+	IF CFLAG:L_T:妊娠フラグ == 1
+		PRINTFORML 곧바로 검사한 결과 %CALLNAME:MASTER%와의 아이인 것을 알고、어떻게 해야 할지 %CALLNAME:MASTER%에게 물었다。
+		PRINTFORML 「아이는 이쪽이 책임지고 신용 있는 시설에 맡길게」라고 달래자、그것을 믿은 %CALLNAME:L_T%는 일단 안심한 것 같다。
+		PRINTFORMW 불안 요소가 사라졌기 때문인지 배를 천천히 문지르면서、뱃속에 머문 자신의 아이를 인지하고 있다…
+	;主人以外の恋人伴侶の子供
+	ELSEIF CFLAG:L_T:妊娠フラグ == 2
+		PRINTFORMW 
+	;애인の子供
+	ELSEIF CFLAG:L_T:妊娠フラグ == 3
+		PRINTFORMW 
+	;그 외 
+	ELSE
+		PRINTFORMW 
+	ENDIF
+ENDIF
+
+
+IF TALENT:L_T:妊娠 == 20
+	PRINTFORML 妊娠発覚からさらに日にちが経ち、かなり大きくなったお腹から%CALLNAME:L_T%는 出産が近いと予感している。
+	IF CFLAG:L_T:妊娠フラグ == 1
+		PRINTFORML 予め生まれた子供がどうなるのか%CALLNAME:MASTER%に尋ね、%CALLNAME:MASTER%も有名な孤児院に預けると詳細も込みで答えた。
+		PRINTFORML 同時に仕送り等もするとのことを聞き、%CALLNAME%는 「この人はお腹の子を「父親」として認知している」のだと安堵した。
+		PRINTFORMW これで憂いも無くなり安心して産めると笑顔で答える%CALLNAME:L_T%に、%CALLNAME:MASTER%はそっと%CALLNAME%を抱き締めた…
+	;主人以外の恋人伴侶の子供
+	ELSEIF CFLAG:L_T:妊娠フラグ == 2
+		PRINTFORMW 
+	;애인の子供
+	ELSEIF CFLAG:L_T:妊娠フラグ == 3
+		PRINTFORMW 
+	;그 외 
+	ELSE
+		PRINTFORMW 
+	ENDIF
+ENDIF
+
+
+SIF TALENT:L_T:妊娠 >= 30
+	CALL NINSIN_CHILD_BIRTH(ARG)
+RESETCOLOR
+;=================================================
+;   sub NINSIN_CHILD_BIRTH
+;=================================================
+;   妊娠:出産処理
+;-------------------------------------------------
+@NINSIN_CHILD_BIRTH(ARG)
+#DIM L_T
+#DIM L_A
+#DIM L_N
+#DIM L_N_K
+
+
+L_T = ARG
+
+
+
+
+IF CFLAG:L_T:妊娠フラグ == 1 && MARK:L_T:반발각인 < 1
+	PRINTFORML %CALLNAME:L_T%는 %CALLNAME:MASTER%の子を出産した、生まれたての赤子を%CALLNAME:L_T%는 そっと抱きしめる。
+	PRINTFORML 見守っていた%CALLNAME:MASTER%と一緒に、この世へ生まれてきたことを祝福した。
+	PRINTFORML 生まれた子は一定の期間病院で育児された後、信頼ある孤児院へ送られることとなる…
+	IF MARK:L_T:함락각인 >= 1
+		PRINTFORML 
+	ELSEIF MARK:L_T:예속각인 >= 1
+		PRINTFORML 
+	ELSEIF MARK:L_T:음란각인 >= 1
+		PRINTFORML 
+	ELSE
+		PRINTFORML 
+	ENDIF
+	PRINTFORMW 
+;主人以外の恋人伴侶の子供
+ELSEIF CFLAG:L_T:妊娠フラグ == 2
+	PRINTFORMW 
+;애인の子供
+ELSEIF CFLAG:L_T:妊娠フラグ == 3
+	PRINTFORMW 
+;그 외 
+ELSE
+	PRINTFORMW 
+ENDIF
+
+
+
+
+IF CSTR:L_T:初出産相手名 == ""
+	IF CFLAG:L_T:妊娠フラグ == 1
+		CSTR:L_T:初出産相手名 = %CALLNAME:MASTER%
+	ELSEIF CFLAG:L_T:妊娠フラグ == 1
+		CSTR:L_T:初出産相手名 = %CSTR:L_T:恋人名前%
+	ELSEIF CFLAG:L_T:妊娠フラグ== 2
+		CSTR:L_T:初出産相手名 = 애인
+	ELSE
+		CSTR:L_T:初出産相手名 = 불명
+	ENDIF
+ENDIF
+
+
+
+
+
+
+IF !RAND:6
+	CFLAG:L_T:住人_최대체력 += 5
+ELSEIF !RAND:5
+	CFLAG:L_T:住人_最大気力 += 5
+ELSEIF !RAND:4
+	CFLAG:L_T:住人_ATK += 2
+ELSEIF !RAND:3
+	CFLAG:L_T:住人_DEF += 2
+ELSEIF !RAND:2
+	CFLAG:L_T:住人_HIT += 2
+ELSE
+	CFLAG:L_T:住人_SPD += 2
+ENDIF
+
+SIF CFLAG:L_T:妊娠フラグ == 1
+	CFLAG:L_T:あなたの子の出産数 += 1
+EXP:L_T:출산경험 += 1
+
+SIF EXP:L_T:출산경험 >= 10 && TALENT:L_T:「마더」 == 0
+	TALENT:L_T:「마더」 = 1
+TALENT:L_T:모성 = 1 
+CFLAG:L_T:妊娠フラグ = 0
+CFLAG:L_T:住人_回収済み数 += 1
+TALENT:L_T:수정 = 0 
+TALENT:L_T:妊娠 = 0
+SIF TALENT:L_T:탁란 != 0 
+	TALENT:L_T:탁란완료 = 1
+TALENT:L_T:탁란 = 0 
+CFLAG:L_T:妊娠相手番号 = 0
+CFLAG:L_T:妊娠開始日 = 0
+
+
+

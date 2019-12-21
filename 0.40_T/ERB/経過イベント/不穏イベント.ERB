@@ -1,0 +1,29 @@
+﻿;-------------------------------------------------
+;不穏イベント
+;-------------------------------------------------
+@TURN_EVENT_FON
+
+;保護されている住民は戻す
+SIF CFLAG:특별보호 != 0
+	RETURN
+
+;性関係
+IF CFlag:住人イベント傾向_性 > RAND:100 
+	IF !RAND:4 && CFLAG:住人_モラル < 0
+		CALL TURN_EVENT_FON_1
+	ELSEIF !RAND:3 && CFLAG:住人_カルマ >= 20
+		CALL TURN_EVENT_I_R
+	ELSEIF !RAND:2 && CFLAG:住人_モラル < 0
+		CALL TURN_EVENT_HJ_S
+	ELSE 
+		CALL TURN_EVENT_SS
+	ENDIF
+ENDIF
+
+
+
+
+
+
+
+

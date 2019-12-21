@@ -1,0 +1,3743 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:KOJO_K_DEFAULT_K01_女_通常.ERB
+;	Facility	:キャラクター口上(No.0000:???)
+;
+;	Licence		:ライセンス詳細を参照。
+;
+;	口上テンプレート version :0.3
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		2014/06/03		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;-------------------------------------------------------------------------------
+; 【作者コメント】
+;これを元に専用口上作成も構いません
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+;【ライセンス詳細】
+;	・基本項目(許可する項目を"○"に、許可しない項目を"×"に変更してください。)
+;	+----+----+-------------------------------+
+;	|番号|許可|ライセンス内容                 |
+;	+----+----+-------------------------------+
+;	|   1| ○ | 処理上のバグ修正              |
+;	+----+----+-------------------------------+
+;	|   2| ○ | 口上の誤字・脱字の修正        |
+;	+----+----+-------------------------------+
+;	|   3| ○ | 口上まとめへの収録            |
+;	+----+----+-------------------------------+
+;	|   4| ○ | 口上の新規追加                |
+;	+----+----+-------------------------------+
+;	|   5| ○ | 既存口上の改変                |
+;	+----+----+-------------------------------+
+;	|   6| ○ | 改変した口上の自由な再配布    |
+;	+----+----+-------------------------------+
+;	|   7| ○ | 口上内容の移植・転載          |
+;	+----+----+-------------------------------+
+;
+;【ライセンス特記】
+;	特になし。ライセンスフリー。
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+; 【フラグ使用状況】
+;  ※CFLAG:500～999まで自由に使用可能
+;
+;CFLAG:500 
+;CFLAG:501 
+;CFLAG:502 
+;CFLAG:503 
+;CFLAG:504 
+;…
+;
+;-------------------------------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+;【口上の新規作成手順】
+;
+;①「K_DEFAULT」をキャラ番に、文字を詰めて全置換する。
+;  （例：キャラ番が17番なら、「K17」と置換する）
+;
+;以上で完了です。
+;-------------------------------------------------------------------------------
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- 標準関数
+;
+;	・ KOJO_EXIST_Kxxx					キャラ口上:存在チェック
+;	・ KOJO_EXTRA_Kxxx					キャラ口上:エキストラモード
+;	・ KOJO_ENCOUNTER_Kxxx				キャラ口上:遭遇時
+;	・ KOJO_ACTION_Kxxx					キャラ口上:行動部
+;	・ KOJO_LOST_VIRGIN_Kxxx			キャラ口上:処女喪失時
+;	・ KOJO_ORGASM_Kxxx					キャラ口上:絶頂時
+;	・ KOJO_ORGASM_M_Kxxx				キャラ口上:絶頂させた時
+;	・ KOJO_PALAMCHG_Kxxx				キャラ口上:各種PALAM変動時
+;	・ KOJO_DAILY_Kxxx					キャラ口上:日常イベント
+;	・ KOJO_WORK_Kxxx					キャラ口上:労役イベント
+;	・ KOJO_NTR_Kxxx					キャラ口上:ＮＴＲイベント
+;	・ KOJO_NTR_ENCOUNTER_Kxxx			キャラ口上:ＮＴＲ遭遇時
+;	・ KOJO_NTR_ACTION_Kxxx				キャラ口上:ＮＴＲ行動部
+;	・ KOJO_RAPE_Kxxx					キャラ口上:レイプイベント
+;
+; *- RPG機能関数
+;
+;	・ KOJO_RPG_BTL_ACTION_Kxxx			キャラ口上:RPG戦闘行動部
+;
+; *- 独自関数
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   標準関数
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub KOJO_EXIST_Kxxx
+;=================================================
+;   キャラ口上:存在チェック
+;-------------------------------------------------
+; Output:
+;  RETURN				真偽値(口上有無)
+;-------------------------------------------------
+@KOJO_DEFAULT_EXIST_K1
+RETURN 1
+
+;=================================================
+;   sub KOJO_EXTRA_Kxxx
+;=================================================
+;   キャラ口上:エキストラモード
+;-------------------------------------------------
+;   初回時に素質などを変更する関数
+;-------------------------------------------------
+@KOJO_DEFAULT_EXTRA_K1
+
+;-------------------------------------------------
+;下記に処女化する場合の構文をサンプルとして載せておきます
+;-------------------------------------------------
+;IF !CFLAG:エキストラモード確認
+;	CFLAG:エキストラモード確認 = 1
+;	PRINTFORML %CALLNAME%を処女モードに移行しますか？
+;	PRINTL [0] はい
+;	PRINTL [1] いいえ
+;	$INPUT_LOOP_EX
+;	INPUT
+;	IF RESULT == 0
+;		PRINTFORMW ―処女モードに素質、能力を変更します―
+;		;- VAR:処女化
+;		CALL VAR_RESET_VIRGIN
+;	ELSEIF RESULT == 1
+;		PRINTFORMW ―通常モードで調教を開始します―
+;	ELSE
+;		CLEARLINE 1
+;		GOTO INPUT_LOOP_EX
+;	ENDIF
+;ENDIF
+;-------------------------------------------------
+
+
+;=================================================
+;   sub KOJO_ENCOUNTER_Kxxx
+;=================================================
+;   キャラ口上:遭遇時
+;-------------------------------------------------
+; Input:
+;  ARGS					処理区分
+;	[START]				調教開始時
+;	[END]				調教終了時
+;-------------------------------------------------
+@KOJO_DEFAULT_ENCOUNTER_K1(ARGS)
+
+SELECTCASE ARGS
+	;-------------------------------------------------
+	;【START】 調教開始時の口上
+	;-------------------------------------------------
+	CASE "START"
+		;-------------------------------------------------
+		;- １回のみの口上
+		;-------------------------------------------------
+
+;初回調教
+IF  C_FIRSTTIME_遭遇(1)
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+TRYCALLFORM KOJO_DEFAULT_ENCOUNTER_K1_TALK1
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+	IF TALENT:弱み == 1 && TALENT:犯され == 0 && TALENT:調教済み == 0
+		IF TALENT:主人持ち == 1
+		TALENT:犯され = 1
+			PRINTFORML 前の主人に忠誠…または愛情を抱いているのか、%CALLNAME%は露骨に拒否の姿勢をとる。
+			PRINTFORML しかし、%CALLNAME:MASTER%のモノになっている以上、抵抗は許されず弱弱しくベッドに押し倒された。
+			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の衣服を一枚一枚剥ぎ取り、かつて一人の男のモノだった女体を愉しむことにした…
+			PRINTFORML 
+			PRINTFORMW %CALLNAME%は「犯され」になった…
+			PRINTFORML 
+		ELSE
+		TALENT:犯され = 1
+			PRINTFORML 記憶処理が半端な為か、%CALLNAME:MASTER%を見るなり怯えた表情をする。
+			PRINTFORML だがすぐに強張った顔を繕うものの、内心逆らえない恐怖で満たされているのがまるわかりだった。
+			PRINTFORMW %CALLNAME:MASTER%は%CALLNAME%の肢体を隠しているシーツを剥ぎ取りつつ、イレギュラーの調教を始めた…
+			PRINTFORML 
+			PRINTFORMW %CALLNAME%は「犯され」になった…
+			PRINTFORML 
+		ENDIF
+	ELSEIF TALENT:合意 == 1
+		IF TALENT:結婚済み == 1 
+			PRINTFORML %CALLNAME%をマンションに呼び出し%CALLNAME:MASTER%は部屋のドアを開け中へ誘うと
+			PRINTFORML %CALLNAME%は迷いながらも申し訳なさそうな顔をでそれを断ろうとしたのを見て
+			PRINTFORML 強引に%CALLNAME%を抱き締め部屋へと連れ込み鍵を閉めると驚きながらも何かを期待する様な
+			PRINTFORMW 瞳で%CALLNAME:MASTER%をみつめる%CALLNAME%を淡い暖色の照明以外に明かりの無い薄暗い部屋へと案内した…
+		ELSE
+			PRINTFORML %CALLNAME%をマンションに呼び出しとある一室を秘め事の場として用いる、これから二人は肉体関係へと深めることになる。
+			PRINTFORML ムードを高めるように薄暗いつつも淡いオレンジ色に照らされた室内に%CALLNAME%の気が当てられているのか、表情から高揚していのがわかる。
+			PRINTFORMW %CALLNAME:MASTER%はベッドに腰掛け薄いシーツに素肌を隠す%CALLNAME%に寄り添うと、ゆっくりとシーツをはがし始めた…
+		ENDIF
+	ELSE
+
+	ENDIF
+
+
+
+
+
+;-------------------------------------------------
+;- ２回目以降
+;-------------------------------------------------
+ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+TRYCALLFORM KOJO_DEFAULT_ENCOUNTER_K1_TALK2
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+	IF TALENT:弱み == 1 && TALENT:犯され == 1 && TALENT:調教済み == 0 && EXP:主人調教経験 >= 300
+		TALENT:犯され = 0
+		TALENT:弱み = 0
+		TALENT:調教済み = 1
+		MARK:反発刻印 = 0
+		MARK:隷属刻印 = 1
+		MARK:淫乱刻印 = 3
+		PRINTFORML 度重なる性行為に屈服したのか、それとも開発された身体に順応してしまったのか、自らの本能に抗えなくなったようだ。
+		PRINTFORML %CALLNAME:MASTER%を見ると始めの頃のような嫌悪の顔は見せなくなり、ただ発情して蕩けた笑みを見せる。
+		PRINTFORMW 完全に従順になった%CALLNAME%を見て満足しつつ、甘えてくる%CALLNAME:TARGET%に褒美をあげることにした…
+		PRINTFORML 
+		PRINTFORMW %CALLNAME%は「調教済み」になった…
+		PRINTFORML 
+	ELSEIF TALENT:結婚済み == 1 
+		IF   TALENT:ＮＴＬ == 1 
+			;反発刻印LV3
+			IF MARK:反発刻印 == 3
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML ベッドに寝転がる%CALLNAME%に覆いかぶさり調教を始めようとしたのだが、%CALLNAME%は首を曲げてこちらを見ようとしない。
+					PRINTFORML 片手でこちらに向けさせると、失望の籠った視線で%CALLNAME:MASTER%を見つめた。
+					PRINTFORMW だが身体を預けることは許しているようで、ここから挽回しようと調教を開始した…
+				;それ以外
+				ELSE
+					PRINTFORML 身体を触ろうとするこちらを手で払いのける%CALLNAME%を、仕方なく無理矢理に押し倒す。
+					PRINTFORMW 屈辱に涙を堪えて睨みつける%CALLNAME%の視線を、%CALLNAME:MASTER%は無視して服を剥ぎ取っていった…
+				ENDIF
+			;上位陥落
+			ELSEIF TALENT:心酔 || TALENT:愛人 || TALENT:情婦
+				IF RAND:6 == 0 && TALENT:非処女 == 1
+					PRINTFORML %CALLNAME%は騎乗位の体勢のまま、身につけていた上着と下着を脱ぎ捨てていく。
+					PRINTFORML その姿が何処か艶めかしく、%CALLNAME:MASTER%は子宮口と口付けしている鈴口から先走りを迸らせた。
+					PRINTFORML ブラジャーのフックを外す%CALLNAME%の指には既に婚姻の証は無く、胎内に広がる感触に嬉しそうに笑いながら膣壁をキツくさせてくる。
+					PRINTFORMW 準備を終えた%CALLNAME%は恋人とするように%CALLNAME:MASTER%と手を重ね指を絡ませ合うと、射精を促す様に激しく腰を振り始めた…
+				ELSEIF !RAND:5
+					PRINTFORML 入ってきた%CALLNAME:MASTER%を%CALLNAME%は笑顔で出迎える。
+					PRINTFORML どうやら%CALLNAME%はシャワーから出たばかりらしくベッドに向かう途中だったようだ。
+					PRINTFORML それにしても湯で身体を温めた姿は艶めかしく普段よりも人妻を自分の物にした征服感がある…
+					PRINTFORMW …ベッドに着くと%CALLNAME%はバスローブを脱ぎシャワーを浴びてしっとりとした柔肌を曝け出した…
+				ELSEIF !RAND:4
+					IF TALENT:狂気 || TALENT:ヤンデレ
+						PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は警戒しながら部屋を進んでゆく。
+						PRINTFORML すると秘め事の場から%CALLNAME%の喘ぎ声が漏れて聞こえてくるので気づかれない様に静かに部屋へと入る。
+						PRINTFORML どうやら%CALLNAME%はベッドに寝転び携帯端末で動画を観ながら自慰をして一人で楽しんでいたようだ。
+						PRINTFORML 覗き込んでみるとそれは何時撮ったのだろうか、%CALLNAME%が%CALLNAME:MASTER%に激しく犯されながら絶頂する場面だった。
+						PRINTFORML %CALLNAME:MASTER%が覗いているのに気がつくと、恥ずかしそうに端末を隠すがひときわ大きな音量で動画の%CALLNAME%が喘ぐ声が漏れ顔を真っ赤にする。
+						PRINTFORMW 照れる%CALLNAME%の表情は、最早%CALLNAME:MASTER%以外の男の妻とは思えない程に乙女そのものだった…
+					ELSE
+						PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は警戒しながら部屋を進んでゆく。
+						PRINTFORML すると%CALLNAME%は鏡の前で、難しそうな表情を浮かべながら自分の身体を観察しているようだった。
+						PRINTFORML %CALLNAME:MASTER%は気づかれない様に静かに近づいていくと%CALLNAME%の身体に僅かに下着の跡が残っているのが分かる。
+						PRINTFORMW 真剣に悩んでいる%CALLNAME%には悪いが、とても肉付きの良い抱き心地よさそうな身体だ…
+					ENDIF
+				ELSEIF !RAND:3
+					PRINTFORML 待ち合わせの部屋に入ってみると、ベッドで寝そべる%CALLNAME%は何故か指を咥えて淫らにしゃぶっていた。
+					PRINTFORML こちらには気づいていないようで、もう片手で秘所を弄りながら一心不乱に続ける。
+					PRINTFORML ……どうやらフェラの練習がてらに自慰に耽っているようだ。
+					PRINTFORML 流石に始める前にイかれ過ぎて体力を無駄に使われるのは困るので声をかけると、驚いたように身を大きく跳ねさせた。
+					PRINTFORMW 恥ずかしさや驚きで混乱しているようだが、紅潮した%CALLNAME%の身体を見て手間が省けたと思いこのまま始めることにした…
+				ELSEIF !RAND:2
+					PRINTFORML こちらが入ってきたのを察知すると笑顔で迎え入れてくれる。
+					PRINTFORML 暫く談笑した後、話題が無くなったのを皮切りに%CALLNAME:MASTER%は%CALLNAME%を優しく押し倒す。
+					PRINTFORML 舌を絡めた濃厚な口付けを交わすと、%CALLNAME%は誘惑する様にワザと行為を拒否する様な態度を取る。
+					PRINTFORMW その姿に%CALLNAME:MASTER%は寝取り始めた頃を思い出し興奮しながら、誰が%CALLNAME%の所有者なのかを確認し始めた…
+				ELSE
+					PRINTFORML ベッドの上で寝転がっていると、既に裸体になった%CALLNAME%が横から抱きついてくる。
+					PRINTFORML 会いに来てくれただけで嬉しいのか、満面の笑顔で幸せそうに%CALLNAME:MASTER%の顔を眺めているようだ。
+					PRINTFORML そろそろ始めようと%CALLNAME%のお腹を撫でながらキスをすると、こちらの意図を読んだのか頬を赤らめる。
+					PRINTFORMW ほんのりとあたたかい下腹部に既に膣も子宮も準備を終えていると判断し、%CALLNAME:MASTER%は%CALLNAME%を押し倒した…
+				ENDIF
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+				IF RAND:6 == 0 && TALENT:非処女 == 1
+					PRINTFORML %CALLNAME%は騎乗位の体勢のまま、身につけていた上着と下着を脱ぎ捨てていく。
+					PRINTFORML その姿が何処か艶めかしく、%CALLNAME:MASTER%はつい膣内に収められた肉棒を弾ませる。
+					PRINTFORML ブラジャーのフックに手をかけていた%CALLNAME%もその振るえを察知し、クスリと笑いながら膣壁をキツくさせてくる。
+					PRINTFORMW 準備が整った%CALLNAME%は%CALLNAME:MASTER%に種付けを懇願するため、愛液を分泌させつつ腰を振り始めた…
+				ELSEIF !RAND:5
+					PRINTFORML 入ってきた%CALLNAME:MASTER%を%CALLNAME%は笑顔で出迎える。
+					PRINTFORML しかし%CALLNAME%本人はベッドの上で下腹部をマッサージしているようだ。
+					PRINTFORML そして先ほどからどんどん表情が艶めかしくなっている気がする…
+					PRINTFORMW …ある程度マッサージが終わり、%CALLNAME%は下着を脱ぎ%CALLNAME:MASTER%を誘い始めた…
+				ELSEIF !RAND:4
+					IF TALENT:狂気 || TALENT:ヤンデレ
+						PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は辺りを見渡す。
+						PRINTFORML すると%CALLNAME%は楽しそうな笑顔で、ベッドに寝転んで何かのアルバムを見ているようだ。
+						PRINTFORML 覗き込んでみると何時撮ったのだろうか、%CALLNAME:MASTER%の写真で埋め尽くされたアルバムだった。
+						PRINTFORML %CALLNAME:MASTER%が覗いているのに気がつくと、恥ずかしそうにアルバムを隠して顔を赤くする。
+						PRINTFORMW 照れる%CALLNAME%の表情は、狂気的までに乙女そのものだった…
+					ELSE
+						PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は辺りを見渡す。
+						PRINTFORML すると%CALLNAME%は真剣な顔で、ベッドに腰かけて何かの雑誌を読んでいるようだ。
+						PRINTFORML 表紙を見てみるとタイトルには『旦那を騙して托卵されるテクニック！』と書いてある。
+						PRINTFORMW 感心しながら読んでる%CALLNAME%には悪いが、とても役に立たなそうな本だ…
+					ENDIF
+				ELSEIF !RAND:3
+					PRINTFORML 待ち合わせの部屋に入ると、部屋の奥から%CALLNAME%の話し声が聞こえた。
+					PRINTFORML 窓の外を眺めながら携帯で話しているのか%CALLNAME:MASTER%には気づいていないようで、もう片方の手で一心不乱に秘所を弄っている。
+					PRINTFORML ……どうやら自慰の最中に夫から電話がかかってきたようだ。
+					PRINTFORML 流石に着信元からこの場所が特定されるのは困るので電話を取り上げると、振り向いて驚いたのかバランスを崩し%CALLNAME:MASTER%の方に倒れてきた。
+					PRINTFORMW 恥ずかしさや驚きで混乱している%CALLNAME%を抱き上げ、ベッドへと運ぶと行為を始めることにした…
+				ELSEIF !RAND:2
+					PRINTFORML こちらが入ってきたのを察知すると笑顔で向かいいれてくれる。
+					PRINTFORML 暫く談笑した後、話題が無くなったのを皮切りに%CALLNAME:MASTER%は%CALLNAME%を優しく押し倒す。
+					PRINTFORML 舌を絡めた濃厚な口付けを交わしたところで、%CALLNAME%の服から端末の着信音が響く。
+					PRINTFORMW その音を背景に舌を絡ませてくる淫靡な人妻に%CALLNAME:MASTER%は興奮しつつ、主導権は渡さぬように情事を始めた…
+				ELSE
+					PRINTFORML ベッドの上で寝転がっていると、既に裸体になった%CALLNAME%が股間に顔を寄せてくる。
+					PRINTFORML 嬉しそうに肉棒に頬擦りし、満面の笑顔で幸せそうだ。
+					PRINTFORML そろそろ始めようと頭を撫で髪を梳いてやると、恥ずかしそうに頬を赤らめる。
+					PRINTFORMW もう準備ができてるだろうと、%CALLNAME:MASTER%は%CALLNAME%を押し倒した…
+				ENDIF
+			ENDIF
+
+		ELSEIF EXP:ＮＴＬ調教経験 >= 400
+			PRINTFORML 妖艶な裸を%CALLNAME:MASTER%に擦り寄せ、%CALLNAME%は熱の籠った視線でこちらを見る。
+			PRINTFORML ベッドに寝そべり%CALLNAME%を抱き寄せお腹を撫でると、自分の感情に戸惑う様な事を言い%CALLNAME:MASTER%に判断をゆだねてくる。
+			PRINTFORMW 迷える人妻に優しくキスを交わしながら、%CALLNAME%を寝取る為の仕上げをしてやろうと覆いかぶさった…
+		ELSEIF EXP:ＮＴＬ調教経験 >= 300
+			PRINTFORML 調教が上手くいっている様で、身体を撫でまわされても口では色々と言うが抵抗はない。
+			PRINTFORML 罪悪感を快感に変える感覚を覚えたようで、ここから先は%CALLNAME%を寝取るのも捗りそうだ。
+			PRINTFORMW 胸を弄られ甘い声を出す%CALLNAME%を押し倒し、この人妻を完全に寝取る為にさらなる調教を開始した…
+		ELSEIF EXP:ＮＴＬ調教経験 >= 200
+			PRINTFORML 抱かれることに対する抵抗は薄くなってきたが、まだ快感よりも夫への罪悪感の方が勝る様だ。
+			PRINTFORML %CALLNAME:MASTER%に脱がされ、視線を感じたのか秘所を隠して%CALLNAME%は恥ずかしそうにしている。
+			PRINTFORMW だが見ていたのはそのもう少し上だよと思いながら、%CALLNAME%をそっとベッドに押し倒した…
+		ELSEIF EXP:ＮＴＬ調教経験 >= 100
+			PRINTFORML まだ夫以外の男と身体を重ねることに抵抗があるのか、%CALLNAME%は複雑な表情で俯いている。
+			PRINTFORML 不安な気持ちなのか身体に触れてみると震えてはいるようだが以前とは違う感情が混ざっているように感じた。
+			PRINTFORML %CALLNAME%の変化に興奮を覚えながらもそれを隠していつもの様に優しく語り掛けながら警戒を解いてゆき。
+			PRINTFORMW 服を脱がし終え、%CALLNAME%を裸にすると%CALLNAME:MASTER%は人妻を寝取るために調教を開始した…
+		ELSEIF  EXP:ＮＴＬ調教経験 >= 0
+			PRINTFORML 夫以外の男と身体を重ねることに抵抗があるのか、%CALLNAME%は複雑な表情で俯いている。
+			PRINTFORML 不安な気持ちなのか身体に触れてみると少々震えているようだ。
+			PRINTFORML 指輪がはまった手を胸元に寄せ反対の手で守る様に包み込む%CALLNAME%に優しく語り掛けながら警戒を解いてゆき。
+			PRINTFORMW はやる気持ちを抑えどうにか服を脱がし終え、%CALLNAME%を裸にすると%CALLNAME:MASTER%は人妻を寝取るために調教を開始した…
+		ENDIF
+
+	;反発刻印LV3
+	ELSEIF MARK:反発刻印 == 3
+		;陥落開始
+		IF MARK:陥落刻印
+			PRINTFORML ベッドに寝転がる%CALLNAME%に覆いかぶさり調教を始めようとしたのだが、%CALLNAME%は首を曲げてこちらを見ようとしない。
+			PRINTFORML 片手でこちらに向けさせると、失望の籠った視線で%CALLNAME:MASTER%を見つめた。
+			PRINTFORMW だが身体を預けることは許しているようで、ここから挽回しようと調教を開始した…
+		;それ以外
+		ELSE
+			PRINTFORML 身体を触ろうとするこちらを手で払いのける%CALLNAME%を、仕方なく無理矢理に押し倒す。
+			PRINTFORMW 屈辱に涙を堪えて睨みつける%CALLNAME%の視線を、%CALLNAME:MASTER%は無視して服を剥ぎ取っていった…
+		ENDIF
+	;上位陥落
+	ELSEIF TALENT:上位陥落
+		IF RAND:6 == 0 && TALENT:非処女 == 1
+			PRINTFORML %CALLNAME%は騎乗位の体勢のまま、身につけていた上着と下着を脱ぎ捨てていく。
+			PRINTFORML その姿が何処か艶めかしく、%CALLNAME:MASTER%はつい膣内に収められた肉棒を弾ませる。
+			PRINTFORML ブラジャーのフックに手をかけていた%CALLNAME%もその振るえを察知し、クスリと笑いながら膣壁をキツくさせてくる。
+			PRINTFORMW 準備が整った%CALLNAME%は%CALLNAME:MASTER%の要望に応えるため、愛液を分泌させつつ腰を振り始めた…
+		ELSEIF !RAND:5
+			PRINTFORML 入ってきた%CALLNAME:MASTER%を%CALLNAME%は笑顔で出迎える。
+			PRINTFORML しかし%CALLNAME%本人はベッドの上で軽くストレッチしているようだ。
+			PRINTFORML それにしても先ほどから動き方が艶めかしくなっている気がする…
+			PRINTFORMW …ある程度ストレッチが終わり、%CALLNAME%は服を脱いで素肌を曝け始めた…
+		ELSEIF !RAND:4
+			IF TALENT:狂気 || TALENT:ヤンデレ
+				PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は辺りを見渡す。
+				PRINTFORML すると%CALLNAME%は楽しそうな笑顔で、ベッドに寝転んで何かのアルバムを見ているようだ。
+				PRINTFORML 覗き込んでみると何時撮ったのだろうか、%CALLNAME:MASTER%の写真で埋め尽くされたアルバムだった。
+				PRINTFORML %CALLNAME:MASTER%が覗いているのに気がつくと、恥ずかしそうにアルバムを隠して顔を赤くする。
+				PRINTFORMW 照れる%CALLNAME%の表情は、狂気的までに乙女そのものだった…
+			ELSE
+				PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は辺りを見渡す。
+				PRINTFORML すると%CALLNAME%は楽しそうな笑顔で、ベッドに寝転んで何かの雑誌を見ているようだ。
+				PRINTFORML 表紙を見てみるとタイトルには『意中の相手を魅了させるテクニック！』と書いてある。
+				PRINTFORMW 感心しながら読んでる%CALLNAME%には悪いが、とても胡散臭そうな本だ…
+			ENDIF
+		ELSEIF !RAND:3
+			PRINTFORML 待ち合わせの部屋に入ってみると、ベッドで寝そべる%CALLNAME%は何故か指を咥えて淫らにしゃぶっていた。
+			PRINTFORML こちらには気づいていないようで、もう片手で秘所を弄りながら一心不乱に続ける。
+			PRINTFORML ……どうやらフェラの練習がてらに自慰に耽っているようだ。
+			PRINTFORML 流石に始める前にイかれては困るので声をかけると、驚いたように身を大きく跳ねさせた。
+			PRINTFORMW 恥ずかしさや驚きで混乱しているようだが、手間も省けたのでこのまま押し倒して始めることにした…
+		ELSEIF !RAND:2
+			PRINTFORML こちらが入ってきたのを察知すると笑顔で向かいいれてくれる。
+			PRINTFORML 暫く談笑した後、話題が無くなったのを皮切りに%CALLNAME:MASTER%は%CALLNAME%を優しく押し倒す。
+			PRINTFORML 舌を絡めた濃厚な口付けを交わすと、%CALLNAME%はワザと服を乱して誘惑する。
+			PRINTFORMW その淫靡さに%CALLNAME:MASTER%は興奮しつつ、主導権は渡さぬように情事を始めた…
+		ELSE
+			PRINTFORML ベッドの上で寝転がっていると、既に裸体になった%CALLNAME%が横から抱きついてくる。
+			PRINTFORML 会いに来てくれただけで嬉しいのか、満面の笑顔で幸せそうだ。
+			PRINTFORML そろそろ始めようと乳首を弄りながらキスをすると、こちらの意図を読んだのか頬を赤らめる。
+			PRINTFORMW すぐ膣内が準備を終えるだろうと、%CALLNAME:MASTER%はそのまま押し倒した…
+		ENDIF
+	;陥落開始
+	ELSEIF MARK:陥落刻印
+		IF RAND:6 == 0 && TALENT:非処女 == 1
+			PRINTFORML %CALLNAME%は騎乗位の体勢のまま、身につけていた上着と下着を脱ぎ捨てていく。
+			PRINTFORML その姿が何処か艶めかしく、%CALLNAME:MASTER%はつい膣内に収められた肉棒を弾ませる。
+			PRINTFORML ブラジャーのフックに手をかけていた%CALLNAME%もその振るえを察知し、クスリと笑いながら膣壁をキツくさせてくる。
+			PRINTFORMW 準備が整った%CALLNAME%は%CALLNAME:MASTER%の要望に応えるため、愛液を分泌させつつ腰を振り始めた…
+		ELSEIF !RAND:5
+			PRINTFORML 入ってきた%CALLNAME:MASTER%を%CALLNAME%は笑顔で出迎える。
+			PRINTFORML しかし%CALLNAME%本人はベッドの上で軽くストレッチしているようだ。
+			PRINTFORML それにしても先ほどから動き方が艶めかしくなっている気がする…
+			PRINTFORMW …ある程度ストレッチが終わり、%CALLNAME%は服を脱いで素肌を曝け始めた…
+		ELSEIF !RAND:4
+			IF TALENT:狂気 || TALENT:ヤンデレ
+				PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は辺りを見渡す。
+				PRINTFORML すると%CALLNAME%は楽しそうな笑顔で、ベッドに寝転んで何かのアルバムを見ているようだ。
+				PRINTFORML 覗き込んでみると何時撮ったのだろうか、%CALLNAME:MASTER%の写真で埋め尽くされたアルバムだった。
+				PRINTFORML %CALLNAME:MASTER%が覗いているのに気がつくと、恥ずかしそうにアルバムを隠して顔を赤くする。
+				PRINTFORMW 照れる%CALLNAME%の表情は、狂気的までに乙女そのものだった…
+			ELSE
+				PRINTFORML ドアを開けても出迎えもなく、不思議に思った%CALLNAME:MASTER%は辺りを見渡す。
+				PRINTFORML すると%CALLNAME%は楽しそうな笑顔で、ベッドに寝転んで何かの雑誌を見ているようだ。
+				PRINTFORML 表紙を見てみるとタイトルには『意中の相手を魅了させるテクニック！』と書いてある。
+				PRINTFORMW 感心しながら読んでる%CALLNAME%には悪いが、とても胡散臭そうな本だ…
+			ENDIF
+		ELSEIF !RAND:3
+			PRINTFORML 待ち合わせの部屋に入ってみると、ベッドで寝そべる%CALLNAME%は何故か指を咥えて淫らにしゃぶっていた。
+			PRINTFORML こちらには気づいていないようで、もう片手で秘所を弄りながら一心不乱に続ける。
+			PRINTFORML ……どうやらフェラの練習がてらに自慰に耽っているようだ。
+			PRINTFORML 流石に始める前にイかれては困るので声をかけると、驚いたように身を大きく跳ねさせた。
+			PRINTFORMW 恥ずかしさや驚きで混乱しているようだが、手間も省けたのでこのまま押し倒して始めることにした…
+		ELSEIF !RAND:2
+			PRINTFORML こちらが入ってきたのを察知すると笑顔で向かいいれてくれる。
+			PRINTFORML 暫く談笑した後、話題が無くなったのを皮切りに%CALLNAME:MASTER%は%CALLNAME%を優しく押し倒す。
+			PRINTFORML 舌を絡めた濃厚な口付けを交わすと、%CALLNAME%はワザと服を乱して誘惑する。
+			PRINTFORMW その淫靡さに%CALLNAME:MASTER%は興奮しつつ、主導権は渡さぬように情事を始めた…
+		ELSE
+			PRINTFORML ベッドの上で寝転がっていると、既に裸体になった%CALLNAME%が横から抱きついてくる。
+			PRINTFORML 会いに来てくれただけで嬉しいのか、満面の笑顔で幸せそうだ。
+			PRINTFORML そろそろ始めようと乳首を弄りながらキスをすると、こちらの意図を読んだのか頬を赤らめる。
+			PRINTFORMW すぐ膣内が準備を終えるだろうと、%CALLNAME:MASTER%はそのまま押し倒した…
+		ENDIF
+	;隷属開始
+	ELSEIF MARK:隷属刻印
+		PRINTFORML 妖艶な裸を%CALLNAME:MASTER%に擦り寄せ、%CALLNAME%は熱の籠った視線でこちらを見る。
+		PRINTFORML ベッドに寝そべり%CALLNAME%を抱き寄せると、心酔した表情で忠誠を誓う。
+		PRINTFORMW 軽くキスを交わし、発情しだした%CALLNAME%の相手してやろうと覆いかぶさった…
+	;性奴隷LV2
+	ELSEIF ABL:性奴隷 == 2
+		PRINTFORML 調教されることに慣れてきたようで、秘所を撫でられても抵抗感もない。
+		PRINTFORML この行為も一種の娯楽と捉えてもいるようで、ここから先調教も捗りそうだ。
+		PRINTFORMW 胸を弄られ甘い声を出す%CALLNAME%を押し倒し、眷属化に向けてさらなる調教を開始した…
+	;性奴隷LV1
+	ELSEIF ABL:性奴隷 == 1
+		PRINTFORML 脱がされることには抵抗なくなったが、未だ自身から脱ぐ勇気はないようだ。
+		PRINTFORML %CALLNAME:MASTER%に脱がされ、露わになった秘所を隠して%CALLNAME%は恥ずかしそうにしている。
+		PRINTFORMW まだハードなのは無理だろうと思いながら、%CALLNAME%をそっとベッドに押し倒した…
+	;それ以外
+	ELSE
+		PRINTFORML 未だ脱がされることに抵抗があるのか、%CALLNAME%は複雑な表情で俯いている。
+		PRINTFORML 不安な気持ちなのか身体に触れてみると少々震えているようだ。
+		PRINTFORMW 手早く脱がし終え、%CALLNAME%を裸にするとそのまま%CALLNAME:MASTER%は調教を開始した…
+	ENDIF
+ENDIF
+	;-------------------------------------------------
+	;【END】 調教終了時の口上
+	;-------------------------------------------------
+	CASE "END"
+		;反発刻印LV3
+IF TALENT:オトコ
+ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK3
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		IF TALENT:結婚済み == 1 
+			IF   TALENT:ＮＴＬ == 1
+				IF MARK:反発刻印 == 3
+					IF MARK:陥落刻印
+						PRINTFORML 部屋から出る際、%CALLNAME:MASTER%は不穏な視線を感じて後ろを振り向く。
+						PRINTFORML ベッドには服を着替え終えた%CALLNAME%がこちらを睨んでいた。
+						PRINTFORML だが表情はどこか複雑で、ただ怒りや憎しみだけではない例えるならば愛憎の感情が籠っていた。
+						PRINTFORMW まだ愛情が残っている分対処はまだマシだろうと、%CALLNAME:MASTER%は解決策を考えながら部屋を出ていった…
+					ELSE
+						PRINTFORML 調教が終わるや否や、すぐさま%CALLNAME:MASTER%から離れてこちらを睨みつける。
+						PRINTFORMW 怒りを孕んだ%CALLNAME%の強烈な視線に刺されながら、%CALLNAME:MASTER%は少し対応を誤ったことを反省しつつ退出した。
+					ENDIF
+				;陥落開始
+				ELSEIF MARK:陥落刻印
+					IF RAND:5 == 0
+						IF TALENT:狂気 || TALENT:ヤンデレ
+							PRINTFORML ベッドに寝そべる%CALLNAME%は、傍にいる%CALLNAME:MASTER%に寄り添い腕に抱きつく。
+							PRINTFORML 嬉しそうに%CALLNAME:MASTER%の名前を繰り返し呟く、%CALLNAME%の夫は知らぬ間に自分の妻を身体も心も寝取り尽くされ。
+							PRINTFORML それを見ている%CALLNAME:MASTER%は、寝取った以上%CALLNAME%はもう自分の女だと肉棒を滾らせる。
+							PRINTFORMW そしてご褒美として、%CALLNAME:MASTER%への愛に溺れた人妻に起ちあがってきたそれを味合わせてやることにした…
+						ELSE
+							PRINTFORML %CALLNAME%は甘え足りないのか寝そべっている%CALLNAME:MASTER%に寄り添い、甘い言葉で気を引いてくる。
+							PRINTFORML 察した%CALLNAME:MASTER%は%CALLNAME%をそっと抱き寄せてやると、嬉しそうに抱きついてきた。
+							PRINTFORML 特に急ぐ用もないので、ベッドで話ながら%CALLNAME%と過ごすことにした%CALLNAME:MASTER%は他愛ない会話をする。
+							PRINTFORMW %CALLNAME%も笑いながら受け答え、%CALLNAME:MASTER%達の話はしばらくすると自然と愛を語らう言葉へと変わっていった…
+						ENDIF
+					ELSEIF !RAND:4
+						IF TALENT:狂気 || TALENT:ヤンデレ
+							PRINTFORML 行為の後も繋がりながらベッドで互いの唇を重ね、舌と唾液を絡ませて二人は口を犯し合う。
+							PRINTFORML 暫くすると口を離し、%CALLNAME:MASTER%は%CALLNAME%の腰に手を回すと強く抱きしめた。
+							PRINTFORML %CALLNAME%も嬉しそうに胸板に頬ずりして、与えられる愛情を貪欲に吸っていく。
+							PRINTFORML 狂気を孕む%CALLNAME%を従えることが出来ているのは『愛』という杭を今も繋がっている様に奥深くまで打ち込んでいるからであり、それを緩ませてはならない。
+							PRINTFORML 場合によっては勝手な行動に出る可能性も伴うが、これほど寝取り甲斐のある人妻もそうはいないだろう。
+							PRINTFORML %CALLNAME:MASTER%の意識が別の方へ行っていたのを敏感に察知したのか、%CALLNAME%は甘えるように膣をキツくしてくる。
+							PRINTFORMW 健気な%CALLNAME%に応えてやるため、%CALLNAME:MASTER%は再び濃厚なキスを重ねた…
+						ELSE
+							PRINTFORML 情事を終えた%CALLNAME:MASTER%達はベッドの上でだらだらと語り合う。
+							PRINTFORML 夫よりもこちらを想ってくれている%CALLNAME%ではあるが、やはり定期的に愛さなければ不満も出てしまう。
+							PRINTFORML そうならないよう、抱きついてくる人妻を時間が許す限り愛でてやる。
+							PRINTFORMW %CALLNAME:MASTER%から寵愛を受ける%CALLNAME%は、とても幸せそうだった…
+						ENDIF
+					ELSEIF !RAND:3
+						PRINTFORML %CALLNAME:MASTER%達は行為を終えた後も繋がりながらベッドに寝そべり余韻に浸っていた。
+						PRINTFORML 時折キスしながら身体を震わすこの熱を少しでも長く保とうとする。
+						PRINTFORML しかしながらずっとこのままとはいかず、そろそろ逢瀬も終わりにしなければならない。
+						PRINTFORMW 最後に濃厚なキスをした後、名残惜しそうに離れると両者の間には二本の銀の糸が繋がれていた…
+					ELSEIF !RAND:2
+						PRINTFORML 激しい運動をして疲れ果てた二人は、残りの時間をいろんなことについての語り合いに使う。
+						PRINTFORML %CALLNAME%の都市での出来事や感想などを聞き、%CALLNAME:MASTER%は今後の行動方針を固めていく。
+						PRINTFORML 下の者からの意見というのは重要なもので、都市の今後について良い参考になる。
+						PRINTFORML そう案を考えている%CALLNAME:MASTER%の傍らには、甘えるように%CALLNAME%が寄り添う。
+						PRINTFORML 冗談交じりに最近旦那と夜の方はどうなんだと聞くと不満そうに愚痴を零した。
+						PRINTFORMW %CALLNAME:MASTER%は寝取った人妻の頭を撫でてやるとすぐに機嫌を直し笑みを零して微笑んだ…
+					ELSE
+						PRINTFORML 情事が終わると二人共手早く服を着替え直し、余った時間は寄り添って談笑する。
+						PRINTFORML 帰り際にキスをした後、『あかちゃんが欲しい』とお願いされてしまう。
+						PRINTFORMW %CALLNAME:MASTER%は微笑みながら%CALLNAME%のお腹を撫でて応えた。
+					ENDIF
+				ENDIF
+			ELSEIF  EXP:ＮＴＬ調教経験 >= 400
+				PRINTFORML 行為が終わった後も満足したりないのか、%CALLNAME:MASTER%に抱きつき続きをおねだりする。
+				PRINTFORML だが用事があると言い%CALLNAME:MASTER%が続きを渋ると%CALLNAME%は強引にしがみついてせがんできた。
+				PRINTFORML %CALLNAME:MASTER%はディープキスをしながら指で%CALLNAME%の膣の敏感な所をこね回し絶頂させ、%CALLNAME%をベッドに寝かせて部屋を出て行った。
+				PRINTFORMW しかしまだ%CALLNAME%の性欲は治まり切らない様で、扉の向こうからは寝取られ間近の欲求不満な人妻の喘ぎ声が響いてきた…
+			ELSEIF  EXP:ＮＴＬ調教経験 >= 300
+				PRINTFORML 調教を終えて%CALLNAME:MASTER%は服を着替え終えてたが、%CALLNAME%は未だ息を乱してベッドに寝転がる。
+				PRINTFORML 熱をまだ残す淫靡な肉体を曝け出したまま、%CALLNAME%はゆっくりと指を根元まで秘所差し込んでいく。
+				PRINTFORML 念入りに膣内を弄り回した後、引き抜いた指には%CALLNAME:MASTER%との行為で混ざり合った大量の液体がこびり付ついてくる。
+				PRINTFORML そして%CALLNAME%は無意識の内にその液体を自分の下腹部へと塗りつけ始めた。
+				PRINTFORMW その様子を見て%CALLNAME:MASTER%が満足気に部屋を出て行った後も、%CALLNAME%は優しく下腹部を撫で続けた…
+			ELSEIF  EXP:ＮＴＬ調教経験 >= 200
+				PRINTFORML まだ夫への罪悪感を捨てきれないのか、%CALLNAME%は足早に浴室へ向かう。
+				PRINTFORML 行為の痕跡まみれの身体をシャワーで洗い流し、仕上げに膣内も清めようとする。
+				PRINTFORML しかし、指を秘所に当てるとドロリとした濃厚な液体が溢れ出す。
+				PRINTFORMW シャワーヘッドを膣口に当て内部を清めながらもどこか寂しさを感じる事に%CALLNAME%は困惑していた…
+			ELSEIF  EXP:ＮＴＬ調教経験 >= 100
+				PRINTFORML まだ不倫をしている罪悪感に慣れないのか、%CALLNAME%は俯きながらベッドに横たわっている。
+				PRINTFORMW 後ろからお腹を撫でてやると涙目で%CALLNAME:MASTER%の方に振り向くが、困惑しながらも拒絶はしてこない様だ…
+			ELSEIF  EXP:ＮＴＬ調教経験 >= 0
+				PRINTFORML %CALLNAME%は結婚してから夫以外の男と初めて関係したのか、目を伏せながらベッドの上で身体を縮め、下着と服を回収する。
+				PRINTFORMW 夫の名前を呟きながら涙目で左手の薬指に嵌まったそれに縋るが、どうやら不倫をしてしまった事の罪悪感が相当大きいようだ…
+			ENDIF
+
+		ELSEIF MARK:反発刻印 == 3
+			IF MARK:陥落刻印
+				PRINTFORML 部屋から出る際、%CALLNAME:MASTER%は不穏な視線を感じて後ろを振り向く。
+				PRINTFORML ベッドには服を着替え終えた%CALLNAME%がこちらを睨んでいた。
+				PRINTFORML だが表情はどこか複雑で、ただ怒りや憎しみだけではない例えるならば愛憎の感情が籠っていた。
+				PRINTFORMW まだ愛情が残っている分対処はまだマシだろうと、%CALLNAME:MASTER%は解決策を考えながら部屋を出ていった…
+			ELSE
+				PRINTFORML 調教が終わるや否や、すぐさま%CALLNAME:MASTER%から離れてこちらを睨みつける。
+				PRINTFORMW 怒りを孕んだ%CALLNAME%の強烈な視線に刺されながら、%CALLNAME:MASTER%は少し対応を誤ったことを反省しつつ退出した。
+			ENDIF
+		;陥落開始
+		ELSEIF MARK:陥落刻印
+			IF RAND:5 == 0
+				IF TALENT:狂気 || TALENT:ヤンデレ
+					PRINTFORML ベッドに寝そべる%CALLNAME%は、傍にいる%CALLNAME:MASTER%に寄り添い腕に抱きつく。
+					PRINTFORML うわ言のように%CALLNAME:MASTER%の名前を繰り返し呟いて、見つめてくる瞳は完全に曇り切っていた。
+					PRINTFORML それを見ていた%CALLNAME:MASTER%だったが、愛している限り%CALLNAME%は尽くし続けてくれるとさほど気にしていなかった。
+					PRINTFORMW 今はいつものご褒美として、狂喜する狂犬に愛を貪らせてやることにした…
+				ELSE
+					PRINTFORML %CALLNAME%は甘え足りないのか寝そべっている%CALLNAME:MASTER%に寄り添い、甘い言葉で気を引いてくる。
+					PRINTFORML 察した%CALLNAME:MASTER%は%CALLNAME%をそっと抱き寄せてやると、嬉しそうに抱きついてきた。
+					PRINTFORML 特に急ぐ用もないので、%CALLNAME%と過ごすことにした%CALLNAME:MASTER%は他愛ない会話を始める。
+					PRINTFORMW %CALLNAME%も笑いながら受け答え、%CALLNAME:MASTER%達はしばらくベッドでゴロゴロしつつ談笑していた…
+				ENDIF
+			ELSEIF !RAND:4
+				IF TALENT:狂気 || TALENT:ヤンデレ
+					PRINTFORML 行為が済んだ後でもベッドで互いの唇を重ね、舌お唾液を絡ませて二人は口を犯し合う。
+					PRINTFORML 暫くすると口を離し、%CALLNAME:MASTER%は%CALLNAME%の腰に手を回すと強く抱きしめた。
+					PRINTFORML %CALLNAME%も嬉しそうに胸板に頬ずりして、与えられる愛情を貪欲に吸っていく。
+					PRINTFORML 狂気を孕む%CALLNAME%を従えることが出来ているのは『愛』という首輪あってこそであり、それを不足させてはならない。
+					PRINTFORML 場合によっては身の危険を伴うが、これほど従順な奴隷はいないだろう。
+					PRINTFORML %CALLNAME:MASTER%の意識が別の方へ行っていたのを敏感に察知したのか、%CALLNAME%は甘えるように首筋を舐めてくる。
+					PRINTFORMW 健気な%CALLNAME%に応えてやるため、%CALLNAME:MASTER%は再び濃厚なキスを重ねた…
+				ELSE
+					PRINTFORML 情事を終えた%CALLNAME:MASTER%達はベッドの上でだらだらと語り合う。
+					PRINTFORML こちらを想ってくれている%CALLNAME%ではあるが、やはり定期的に愛さなければ不満も出てしまう。
+					PRINTFORML そうならないよう、抱きついてくる%CALLNAME%を時間が許す限り愛でてやる。
+					PRINTFORMW %CALLNAME:MASTER%から寵愛を受ける%CALLNAME%は、とても幸せそうだった…
+				ENDIF
+			ELSEIF !RAND:3
+				PRINTFORML %CALLNAME:MASTER%達は行為を終えた後もベッドに寝そべり余韻に浸っていた。
+				PRINTFORML 時折キスしながら身体を震わすこの熱を少しでも長く保とうとする。
+				PRINTFORML しかしながらずっとこのままとはいかず、そろそろ逢瀬も終わりにしなければならない。
+				PRINTFORMW 最後に濃厚なキスをした後、終わることを惜しむように両者の唇からは銀の糸が繋がれていた…
+			ELSEIF !RAND:2
+				PRINTFORML 激しい運動をして疲れ果てた二人は、残りの時間をいろんなことについての語り合いに使う。
+				PRINTFORML %CALLNAME%の都市での出来事や感想などを聞き、%CALLNAME:MASTER%は今後の行動方針を固めていく。
+				PRINTFORML 下の者からの意見というのは重要なもので、都市の今後について良い参考になる。
+				PRINTFORML そう案を考えている%CALLNAME:MASTER%の傍らには、甘えるように%CALLNAME%が寄り添う。
+				PRINTFORMW その頭を撫でてやるとくすぐったくしかし笑みを零して微笑んだ…
+			ELSE
+				PRINTFORML 情事が終わると二人共手早く服を着替え直し、余った時間は寄り添って談笑する。
+				PRINTFORMW 帰り際にキスをした後、『また呼んでほしい』とお願いされ、%CALLNAME:MASTER%は微笑んで応えた。
+			ENDIF
+		;隷属開始
+		ELSEIF MARK:隷属刻印
+			PRINTFORML 行為が終わった後も満足していないのか、%CALLNAME:MASTER%に抱きつき続きをおねだりする。
+			PRINTFORML 用事があるので%CALLNAME:MASTER%は何度か%CALLNAME%にディープキスをした後、%CALLNAME%をベッドに寝かせて部屋を出て行った。
+			PRINTFORMW しかしまだ治まり切れなかったようで、扉の向こうからは%CALLNAME%の喘ぎ声が響いてきた…
+		;性奴隷LV2
+		ELSEIF ABL:性奴隷 == 2
+			PRINTFORML 調教を終えて%CALLNAME:MASTER%は服を着替え終えてたが、%CALLNAME%は未だ息を乱してベッドに寝転がる。
+			PRINTFORML 熱をまだ残す淫靡な肉体を曝け出したまま、%CALLNAME%はゆっくり秘所を弄る。
+			PRINTFORML 数度撫でた後、離した指には%CALLNAME:MASTER%との行為に感じていた証である大量の愛液が滑り付ついている。
+			PRINTFORMW その後%CALLNAME:MASTER%が部屋を出て行った後も、指から滴る膣液を眺めていた…
+		;性奴隷LV1
+		ELSEIF ABL:性奴隷 == 1
+			PRINTFORML 少し恥ずかしいのか、%CALLNAME%はこちらに背を向けて黙りこむ。
+			PRINTFORML 汗まみれの身体をタオルで拭き取り、下着を着ようとする。
+			PRINTFORML しかし、指を秘所に当てるとネチャリと愛液が滑り出す。
+			PRINTFORMW まともだったはずの身体が順応し始めている事に%CALLNAME%は困惑していた…
+		;それ以外
+		ELSE
+			PRINTFORML まだ慣れていないのか、赤面しながらベッドの上で身体を縮め、下着と服を回収する。
+			PRINTFORMW 少し涙目でこちらを見上げるが、特に強い嫌悪感は抱いていないようだ…
+		ENDIF
+	ENDIF
+
+
+
+
+
+
+	;-------------------------------------------------
+	;※ 該当無し
+	;-------------------------------------------------
+	CASEELSE
+		RETURN
+ENDSELECT
+RETURN
+
+
+;=================================================
+;   sub KOJO_ACTION_Kxxx
+;=================================================
+;   キャラ口上:行動部
+;-------------------------------------------------
+@KOJO_DEFAULT_ACTION_K1
+
+;-- CHK:実行コマンド
+SELECTCASE SELECTCOM
+
+;-------------------------------------------------------------------------------
+;◆愛撫系
+;-------------------------------------------------------------------------------
+
+	;-------------------------------------------------
+	;xxx,愛撫
+	;-------------------------------------------------
+	CASE [[TRAIN:愛撫]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF TALENT:オトコ
+ELSE
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+
+				PRINTFORML 愛撫されるのにも慣れたようで、%CALLNAME:MASTER%に身体を預けている。
+				PRINTFORMW 弱いところを愛撫する度、得られる刺激に身を震わせている…
+			;それ以外
+			ELSE
+
+				PRINTFORML やはり身体を触れたり舐められたりするのは抵抗感があるのか、%CALLNAME%は小さく身じろぎする。
+				PRINTFORMW %CALLNAME:MASTER%はなるべく敏感な箇所は弱めに刺激する…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+
+				IF RAND:2 == 0
+					PRINTFORML 耳たぶや首筋を刺激してやると、気持ち良さそうに%CALLNAME%は身を弾ませる。
+					PRINTFORML 次に片手で身体中を優しく撫でながら、%CALLNAME%の指を咥えてしゃぶる。
+					PRINTFORMW 別の快感で新鮮だったのか、いつも以上に喘ぐ声を上げていた…
+				ELSE
+					PRINTFORML 精神的高揚もあるのか、少し身体を舐めただけで大きく鳴いた。
+					PRINTFORMW %CALLNAME:MASTER%に甘えるように、こちらに身を擦り寄せながら次なる快楽を求めてきた…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 敏感なところを責めると%CALLNAME%は声を荒げて喘ぐ。
+				PRINTFORMW 準備を整える為に性感帯にさらなる刺激を与えていった…
+			;それ以外
+			ELSE
+				PRINTFORML まだ抵抗感が残っているらしく、%CALLNAME%は触れるのを避けようと動く。
+				PRINTFORMW しかし性感帯を愛撫すると抑え気味ではあるが%CALLNAME%は弱く喘いだ…
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,胸愛撫
+	;-------------------------------------------------
+	CASE [[TRAIN:胸愛撫]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF TALENT:オトコ
+ELSE
+	;初めて
+	IF C_FIRSTTIME_COM()
+		;隷属開始
+		IF MARK:隷属刻印
+			IF TALENT:爆乳 
+				PRINTFORML たわわに実った乳房を掴み、調べた性感帯を指で責めていく。
+				PRINTFORMW 快楽に溺れる%CALLNAME%を堪能しながら、%CALLNAME:MASTER%は豊満な双丘を弄んでいた…
+			ELSEIF TALENT:巨乳 
+				PRINTFORML 豊かな双房を両手で包むとその柔らかい感触が、揉みあげる%CALLNAME:MASTER%を興奮させる。
+				PRINTFORMW 触られる%CALLNAME%も弱点を責められ、胸が大きく歪む度にその身を震わせた…
+			ELSEIF TALENT:貧乳  || TALENT:絶壁 
+				PRINTFORML 少々強い感触も快感に感じるようになり、乳首を捻ると大きく鳴いた。
+				PRINTFORMW %CALLNAME%の嬌声を愉しみつつ、さらに刺激を強めていった…
+			ELSE
+				PRINTFORML そっと胸を触り、円を描くように丁寧に揉む。
+				PRINTFORMW だいぶ慣れてきたようで、甘い声を出しながら身体を捩らせた…
+			ENDIF
+		;それ以外
+		ELSE
+			IF TALENT:爆乳 
+				PRINTFORMW 先ほどから身じろぎするだけで大きく弾んでやたら主張する大いに実った双丘を鷲掴む。
+				PRINTFORMW %CALLNAME%は冷やかな視線を%CALLNAME:MASTER%に向けたが、息が荒いところを見ると多少は快感があるようだ。
+			ELSEIF TALENT:巨乳 
+				PRINTFORML 豊満な乳を両腕で躊躇せず揉む、触れられる感触に%CALLNAME%は小さく喘ぐ
+				PRINTFORMW 手の中で形を変えていく乳房に興奮しつつ、%CALLNAME%の弱点を探し始めた…
+			ELSEIF TALENT:貧乳  || TALENT:絶壁 
+				PRINTFORML お世辞にも大きいとは言えない胸に手を当てる。
+				PRINTFORML だがそれだけでも快感があったのか小さく身を震わせる。
+				PRINTFORMW %CALLNAME:MASTER%は弱いところを探しながら指で責めていった…
+			ELSE
+				PRINTFORML ちょうど良い大きさの乳房を揉むと、%CALLNAME%はびっくりしたように小さく跳ねた。
+				PRINTFORMW しかし指で責められると、驚きも快感へと変わっていった…
+			ENDIF
+		ENDIF
+	;二回目以降
+	ELSE
+		;陥落開始
+		IF MARK:陥落刻印
+			IF TALENT:爆乳 
+				IF RAND:2 == 0
+					PRINTFORML 掌でも覆いきれない魅惑的な乳房を両腕で鷲掴むと、ゆっくりとこねていく。
+					PRINTFORML 双丘を合わせて潰したり、程良く伸ばしたり%CALLNAME:MASTER%はマシュマロのような柔らかさを堪能する…
+				ELSE
+					PRINTFORML 程良い強さで胸を手で潰し、遅く優しくこねる。
+					PRINTFORMW 乳首にも指で責められ、複数の快感に%CALLNAME%は絶え間なく喘いだ…
+				ENDIF
+			ELSEIF TALENT:巨乳 
+				IF RAND:2 == 0 
+					PRINTFORML 掌で大きく実った双丘を優しく潰すと、淫靡に横へ広がっていく。
+					PRINTFORMW 小さくこねていくと乳首も刺激されたのか%CALLNAME%は気持ち良さそうに鳴いていた…
+				ELSE
+					PRINTFORML 片方の胸を手でこねり、もう片方の乳首を舐めて先を刺激する。
+					PRINTFORMW %CALLNAME%はその快感にたまらず喘ぎながら、その快楽に身を委ねていた…
+				ENDIF
+			ELSEIF TALENT:貧乳  || TALENT:絶壁 
+				IF RAND:2 == 0
+					PRINTFORML 先に乳首の周りを重点的に責めて、それから乳首の先端を優しく弄る。
+					PRINTFORMW 快感で跳ねる%CALLNAME%を後ろから抑えつつ、再度胸を刺激した…
+				ELSE
+					PRINTFORML 程良い強さで胸を手で圧迫し、遅く優しく撫でる。
+					PRINTFORMW 乳首にも指で責められ、複数の快感に%CALLNAME%は絶え間なく喘いだ…
+				ENDIF
+			ELSE
+				IF RAND:2 == 0
+					PRINTFORML もう知り尽くした%CALLNAME%の胸を手で包んで揉みあげる。
+					PRINTFORMW 開発されたこともあって%CALLNAME%は大きくのけ反りながら嬌声を発した…
+				ELSE
+					PRINTFORML 程良い強さで胸を手で潰し、遅く優しくこねる。
+					PRINTFORMW 乳首にも指で責められ、複数の快感に%CALLNAME%は絶え間なく喘いだ…
+				ENDIF
+			ENDIF
+		;隷属開始
+		ELSEIF MARK:隷属刻印
+			IF TALENT:爆乳 
+				PRINTFORML 溢れんばかりの双丘を下から持ち上げ、小さく円を描くように揉んでいく。
+				PRINTFORMW 適度に圧迫すると、性感帯に届いたのか荒い息をして喘いだ…
+			ELSEIF TALENT:巨乳 
+				PRINTFORML 揉みごたえのある乳房を揉み上げ、気持ち良さそうに%CALLNAME%は喘ぐ。
+				PRINTFORMW 掌で愛撫するように刺激していき、乳首を指で優しく摩っていった…
+			ELSEIF TALENT:貧乳  || TALENT:絶壁 
+				PRINTFORML 小さな胸に触り、手で覆うようにして揉んでいく。
+				PRINTFORMW 強い刺激が%CALLNAME%を襲い、身体をくねらせて喘いだ…
+			ELSE
+				PRINTFORML %CALLNAME:MASTER%は小さく震える胸を揉むと、%CALLNAME%は堪らず甘い声を上げた。
+				PRINTFORMW 弱い部分を責めながら乳首をコリコリさせて%CALLNAME%を快感をさらに高めさせる…
+			ENDIF
+
+			;それ以外
+		ELSE
+			IF TALENT:爆乳
+				PRINTFORMW 男の手でも溢れる豊満な乳房を持ち上げると、非常に柔らかな感触で淫靡に形を変える。
+				PRINTFORMW 大きい分快感が小さいのか%CALLNAME%はあまり気持ちよくなさそうだが、乳首を責めてやると小さく喘いだ…
+			ELSEIF TALENT:巨乳
+				PRINTFORML 手から溢れそうな双丘を持ち上げ、優しく揉んでいく。
+				PRINTFORMW 胸の柔らかさを堪能しつつ指で刺激し、快感に抗う%CALLNAME%を責めた…
+			ELSEIF TALENT:貧乳  || TALENT:絶壁 
+				PRINTFORML とても小振りな乳房に触ると、小さい分快感が強いのが大きく跳ねた。
+				PRINTFORMW 乳首も弱いらしく、なんとか快感に耐えようと必死に堪えていた…
+			ELSE
+				PRINTFORML 程良い大きさの胸を触ると、ピクンと震えて反応する。
+				PRINTFORMW 乳首も指で弄ると小さな声で喘ぎ出した…
+			ENDIF
+
+		ENDIF
+
+	ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,胸吸い
+	;-------------------------------------------------
+	CASE [[TRAIN:胸吸い]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF TALENT:オトコ
+ELSE
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				IF TALENT:巨乳  || TALENT:爆乳
+					PRINTFORMW よく実った大きな乳に吸い付くと、%CALLNAME%は歓喜の表情で喘いだ。
+					PRINTFORMW %CALLNAME%が淫らに動く度に大きく弾む双丘を両手で捕まえ母乳を啜るように力を強めた…
+				ELSEIF TALENT:貧乳  || TALENT:絶壁
+					PRINTFORML 少し乳頭を舐めてみると、先端は固くなったおりすでに発情しているようだ。
+					PRINTFORMW %CALLNAME%も吸われるのが嬉しいようで、%CALLNAME:MASTER%の口元に乳首を近づけている。
+				ELSE
+					PRINTFORML 乳首を吸おうと顔を近づけると、%CALLNAME%は少し恥ずかしそうにしながら胸を差し出した。
+					PRINTFORMW おもむろにしゃぶりついてみると淫らな声を発してその身をくねらせた…
+				ENDIF
+			;それ以外
+			ELSEIF TALENT:巨乳  || TALENT:爆乳
+				PRINTFORML おもむろに%CALLNAME%の豊満な乳房に%CALLNAME:MASTER%は吸い付く。
+				PRINTFORMW とても大きいお陰で多少引っ張っても問題なく、性感帯である乳首を刺激され%CALLNAME%も小さく震えていた…
+			ELSEIF TALENT:貧乳  || TALENT:絶壁
+				PRINTFORML 吸うには少しやり辛そうな慎ましい胸を口を近づけ、その乳首を吸ってみる。
+				PRINTFORMW 出っ張っていない分吸いにくいが、どうやら気持ちいいらしく声を荒げていた…
+			ELSE
+				PRINTFORML 吸うには丁度いい大きさの胸に%CALLNAME:MASTER%は%CALLNAME%の乳首を唇で咥える。
+				PRINTFORMW 柔らかい唇に刺激されてか、%CALLNAME%は快感に小さく震えた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF TALENT:巨乳  || TALENT:爆乳
+					PRINTFORMW プルプルと弾む乳房に吸い付き、引っ張ったり、逆に強く押し込んだりとして乳首を刺激していく。
+					PRINTFORMW すっかり吸われることに悦びを感じるようになった%CALLNAME%は%CALLNAME:MASTER%に抱きつき甘い声で強請る。
+					PRINTFORMW 抱かれる時に強く柔らかく当たる胸の感触に心地よさを感じて、今まで以上に吸いあげていった…
+				ELSEIF TALENT:貧乳  || TALENT:絶壁
+					PRINTFORML 最初は舌で乳首全体をゆっくり舐めつつ、程良くなったら思い切り吸いあげるように吸う。
+					PRINTFORML 焦らされた分突如きた強い刺激に、喘ぎ声を叫びながら%CALLNAME%は乱れる。
+					PRINTFORMW そしてまた焦らされ涙目になって訴える%CALLNAME%の姿に、%CALLNAME:MASTER%は内心喜びながら続けた。
+				ELSE
+					PRINTFORML 自ら差し出すように突き出した%CALLNAME%の胸に%CALLNAME:MASTER%はしゃぶりつく。
+					PRINTFORML 吸いついた舌で乳頭を弾くように舐めまわしつつ、唇で胸を圧迫する。
+					PRINTFORMW 淫らな声を出して後ろへのけ反る%CALLNAME%を見上げながらさらに強く責めていった…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				IF TALENT:巨乳  || TALENT:爆乳
+					PRINTFORML %CALLNAME%の腰を抱え眼の前に迫った爆乳を%CALLNAME:MASTER%は堪らず大口で吸う。
+					PRINTFORMW 喘ぐ度に動く%CALLNAME%の身体に合わせて、実る豊満な乳も艶めかしく弾んだ…
+				ELSEIF TALENT:貧乳  || TALENT:絶壁
+					PRINTFORML 片方の乳首を吸いつつ空いた方の乳頭を指で撫でて刺激を与える。
+					PRINTFORMW かなり強い快感があるのか、声も出せずに痙攣していた…
+				ELSE
+					PRINTFORML 乳首を吸うと、%CALLNAME%は強く求めるように%CALLNAME:MASTER%に抱きつく。
+					PRINTFORMW それに応えるように%CALLNAME:MASTER%は空いた方の胸を揉みながら、隆起する乳頭を強く吸った…
+				ENDIF
+			;それ以外
+			ELSE
+				IF TALENT:巨乳  || TALENT:爆乳
+					PRINTFORMW 吸っているだけでも、唇から%CALLNAME%のたわわな乳房の柔らかい感触が伝わる。
+					PRINTFORMW 少し伸ばしてみると%CALLNAME%は恥ずかしそうにしていたが、やはり気持ちいいのか抵抗はしなかった…
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁
+					PRINTFORML 性感帯が特に集中している為か刺激が強すぎて痛みにならないよう加減して刺激する。
+					PRINTFORMW 絶妙な調整で%CALLNAME%も耐えきれず艶めかしい声で叫んだ…
+				ELSE
+					PRINTFORML 乳首を吸い続けていると%CALLNAME%も慣れてきたのか、抵抗するそぶりは無くなった。
+					PRINTFORML 一度離すと反対の乳首で吸い直し、麻痺による快感の軽減を防止する。
+					PRINTFORMW その後、首が少し疲れるまで吸い続けていた…
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,クリ愛撫
+	;-------------------------------------------------
+	CASE [[TRAIN:クリ愛撫]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF TALENT:オトコ
+ELSE
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+
+				PRINTFORML 秘所に手を当てると、%CALLNAME%は特に抵抗することもなくクリを弄られる。
+				PRINTFORMW 少々緊張していたようだったが、すぐに艶めかしい声でないた…
+			;それ以外
+			ELSE
+				PRINTFORML おもむろに秘所に触れようとすると、察した%CALLNAME%はすぐさま股を閉じて拒否する。
+				PRINTFORMW %CALLNAME:MASTER%は隙間に手を入れ、クリを軽く撫でると%CALLNAME%はぴくっと跳ねた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				PRINTFORML クリを弄られて喘いでいる%CALLNAME%の反応を見つつ、%CALLNAME:MASTER%は強さを変えていく。
+				PRINTFORML 堪らず%CALLNAME%は自分から秘所を弄って多くの快感を得ようとする。
+				PRINTFORMW 時々クリを抓って跳ねる%CALLNAME%を愉しみつつ%CALLNAME:MASTER%は絶頂へと導いていく…
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML クリを優しく触り、ある程度濡れてきたところで指で軽く抓ってみる。
+				PRINTFORMW すると身体を大きく跳ねさせて%CALLNAME%は声を荒げた…
+			;それ以外
+			ELSE
+				PRINTFORML 秘所に触れるのに強張る%CALLNAME%を解す為、クリトリスを指で優しく撫でた。
+				PRINTFORMW 最初は股を閉じて抵抗していたが、徐々にその力を弱めていった…
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,クンニ
+	;-------------------------------------------------
+	CASE [[TRAIN:クンニ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF TALENT:オトコ
+ELSE
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				PRINTFORML 開いた股に顔を近づけ、%CALLNAME%の秘所を舐め上げる。
+				PRINTFORMW %CALLNAME%はどこか快感を得た表情で喜んでいた…
+			;それ以外
+			ELSE
+				PRINTFORML 股を開き秘所を舐めようとすると、案の定閉じようとするので強引に舐める。
+				PRINTFORMW ビクっと震えたあと、舌の動きに刺激されて小さな甘い声を出した…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				PRINTFORML 愛液に満ちた秘所に舌を入れると、激しい水音と共に%CALLNAME%は声を上げた。
+				PRINTFORMW 舐める度にその身を震わせ、%CALLNAME%は腕で乳首を弄って快楽に耽っている…
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 舌で膣内を出来る限り深く舐めていく、壁を舐める度に%CALLNAME%は震える。
+				PRINTFORMW どんどん高まる快感に、次第に%CALLNAME%は快楽を抑えられなくなっていく…
+			;それ以外
+			ELSE
+				PRINTFORML まだ抵抗はあるが舐める分には問題なく、秘所の中を舌で弄っていく。
+				PRINTFORMW %CALLNAME:MASTER%の顔を腕で掴み%CALLNAME%はその刺激に耐えている…
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,ペニス愛撫
+	;-------------------------------------------------
+	CASE [[TRAIN:ペニス愛撫]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,フェラする
+	;-------------------------------------------------
+	CASE [[TRAIN:フェラする]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+IF TALENT:オトコ
+ELSE
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				PRINTFORML 自身に生えた肉棒から得られる快楽を受け入れたようで、勃起するペニスを%CALLNAME:MASTER%におずおずと差し向けた。
+				PRINTFORMW 期待に震えるペニスを口に入れると、%CALLNAME%は嬉しそうに喘ぎはじめた…
+			;それ以外
+			ELSE
+	
+				PRINTFORMW 股から生えたペニスに未だ困惑しているようで、%CALLNAME:MASTER%が口に含むと、未知の快感に身体を弾ませた。
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF !RAND:2
+				PRINTFORML フェラする%CALLNAME:MASTER%を嬉しそうにまじまじと見ながら、%CALLNAME%は迫りくる射精感に身を震わせている。
+				PRINTFORMW ついでに秘所にも指を入れてやると、二重の快感で余裕も無くなり%CALLNAME%は淫らな声を上げ始めた…
+				ELSE
+				PRINTFORML %CALLNAME%は彼女の肉棒を口で奉仕する%CALLNAME:MASTER%の頭を掴むと乱暴に動かした。
+				PRINTFORMW 気持ちはわかると%CALLNAME:MASTER%は抵抗することなく、できる限り彼女のペニスを責め続ける…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML ついつい頭を掴みそうになる%CALLNAME%の手を抑えて、%CALLNAME:MASTER%はフェラを続ける。
+				PRINTFORMW ストロークする度に上半身をくねらせて喘ぐ%CALLNAME%を見ながら、%CALLNAME:MASTER%はさらに速度を速めた。 
+			;それ以外
+			ELSE
+				PRINTFORML 勃起する%CALLNAME%のペニスを頬張ると、ゆっくりとストロークする。
+				PRINTFORMW %CALLNAME%は初めは拒絶しつつも、次第に与えられる慣れない男の快楽によがり始めた…
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,指挿れ
+	;-------------------------------------------------
+	CASE [[TRAIN:指挿れ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,アナル愛撫
+	;-------------------------------------------------
+	CASE [[TRAIN:アナル愛撫]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,アナル舐め
+	;-------------------------------------------------
+	CASE [[TRAIN:アナル舐め]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,自慰
+	;-------------------------------------------------
+	CASE [[TRAIN:自慰]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,胸自慰
+	;-------------------------------------------------
+	CASE [[TRAIN:胸自慰]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+
+
+;-------------------------------------------------------------------------------
+;◆コミュ系
+;-------------------------------------------------------------------------------
+
+	;-------------------------------------------------
+	;xxx,キスする
+	;-------------------------------------------------
+	CASE [[TRAIN:キスする]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:2
+		PRINTFORML 「…チュっ………%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……はぁ…むっ…じゅる…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 口付けしようと顔を向き合わせると、%CALLNAME%は受け入れるように眼をつぶる。
+				PRINTFORMW 唇同士が触れ合うと、緊張の為か小さく震えた…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「……ッ！！……ぅんんんっ！…」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 嫌がる%CALLNAME%に無理矢理を近づけさせ唇を重ねる。
+				PRINTFORMW 抵抗しようと暴れていたが、暫くすると諦めるように大人しくなった…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:2
+		PRINTFORML 「…んっ…あむっ…んんぅっ……ぷはっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……はぁ…むっ…じゅる…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML お互いが求めあうように抱き合って唇を濃厚に重ねる、唇や舌だけでは足らず唾液まで交換し合う。
+				PRINTFORML 交わう唇からは淫靡な水音が部屋を鳴り響かせ、何度も飽きずにキスを繰り返す。
+				PRINTFORMW ようやく口を離した時には、いつの間にか押し倒されていた%CALLNAME%は放心した表情で%CALLNAME:MASTER%を見つめていた…
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:2
+		PRINTFORML 「…チュっ………%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……はぁ…むっ…じゅる…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 二人は口を重ね、さらに舌を出し合い濃厚に絡み合わせる。
+				PRINTFORMW 一通りお互いの口内を堪能し口を離すと、%CALLNAME%は艶めかしく吐息を吐いた…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…んっ……っ…」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORMW 弱々しく顔を背けていたが、こちらに向けさせると観念したように口付けを受け入れた…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,口説く
+	;-------------------------------------------------
+	CASE [[TRAIN:口説く]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			PRINTFORMW こちらは口説いてみせたのだが、どうやら良く理解できていないようだ…
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				PRINTFORML 口説かれた%CALLNAME%は嬉しそうに%CALLNAME:MASTER%に抱きつき長く濃いキスをする。
+				PRINTFORMW 暫くして口を離した%CALLNAME%は、%CALLNAME:MASTER%に愛と忠誠の言葉を紡いだ…
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORMW 少し恥ずかしそうに口説きを受け入れいている…
+			;それ以外
+			ELSE
+				PRINTFORMW こちらの口説きに、%CALLNAME%は冷たい視線を向けている…
+			ENDIF
+		ENDIF
+
+
+;-------------------------------------------------------------------------------
+;◆奉仕系
+;-------------------------------------------------------------------------------
+
+	;-------------------------------------------------
+	;xxx,手淫
+	;-------------------------------------------------
+	CASE [[TRAIN:手淫]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK11
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				PRINTFORML 指示を受けると%CALLNAME:MASTER%のペニスを掴み優しく擦る。
+				PRINTFORMW だんだんとペースを上げていき快感で震える%CALLNAME:MASTER%を愉しませている…
+			;それ以外
+			ELSE
+				PRINTFORMW すごく嫌そうな表情をしていたが、しぶしぶ肉棒を握ると擦り始めた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF !RAND:3
+					PRINTFORML 手淫を始める%CALLNAME%だったがいつもより遅いスピードで擦り、こちらを小悪魔にような表情で見上げる。
+					PRINTFORMW 耐えかねた%CALLNAME:MASTER%が肉棒を力ませると、察した%CALLNAME%が擦る速度をようやく速めた。
+					PRINTFORMW 掌で亀頭を軽く撫でたり、タマを揉んだりと、今度は%CALLNAME:MASTER%が満足するまで献身的に続けた…
+				ELSEIF !RAND:2
+					PRINTFORML 弱点を知り尽くした%CALLNAME:MASTER%のペニスを勢いよくストロークさせて射精を促す。
+					PRINTFORML %CALLNAME:MASTER%に奉仕するのが嬉しいのか一心不乱に愛撫し続ける。
+					PRINTFORMW 濡れた指で亀頭を弄りつつ、上目遣いでこちらの様子を笑顔で窺っている…
+				ELSE
+					PRINTFORML %CALLNAME%は向かい合う%CALLNAME:MASTER%と濃厚なキスをしながらも片手では、いきり勃つ肉棒を適度な速さで擦っていた。
+					PRINTFORMW 口を離すと今度は耳を甘噛みしたり首筋を舐めたり、%CALLNAME:MASTER%が気持ちよくなることだけを考えて奉仕する…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 肉棒を弄り始めたが、今度はタマも愛撫して射精を促す。
+				PRINTFORMW 程良いスピードを保ちつつ、%CALLNAME%は楽しそうに%CALLNAME:MASTER%を見上げた…
+			;それ以外
+			ELSE
+				PRINTFORML 複雑そうにこちらを見上げ、ぎこちない動きでペニスを擦る。
+				PRINTFORMW 手から感じる肉棒の熱さに、少し当てらて顔を赤らめている…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,フェラチオ
+	;-------------------------------------------------
+	CASE [[TRAIN:フェラチオ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				PRINTFORML 命令をすんなりと受け入れ、%CALLNAME:MASTER%剛直を口に頬張る。
+				PRINTFORML 動きも慣れたのか%CALLNAME:MASTER%の腰を掴んで首をピストンさせる。
+				PRINTFORMW ゾクゾクと快感を受ける%CALLNAME:MASTER%は徐々に射精へ近づいていった…
+			;それ以外
+			ELSE
+				PRINTFORML 最初は断固拒否していたが、肉棒を頬に押し付けられるのに耐えかねついに咥えた。
+				PRINTFORMW 苦しそうに咥え動きも遅かったが、歯を立てないよう精一杯努力していた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF !RAND:3
+				PRINTFORML 自らイマラチオをするように%CALLNAME%は涙目になりながら高速で首をストロークさせる。
+				PRINTFORML %CALLNAME:MASTER%が気持ち良くなるのを最優先している為か、涎を零すのも構わず振り続ける。
+				PRINTFORMW その成果あってか、高まる%CALLNAME:MASTER%の射精感はすぐに早まっていった…
+				ELSEIF !RAND:2
+				PRINTFORML 速めに首を動かしながらも空いた手でタマを揉んで%CALLNAME%は熱い肉棒を奉仕する。
+				PRINTFORMW 頬側にペニスを外から浮き出るのが分かるくらいに擦りつけ、%CALLNAME%は楽しそうに笑った…
+				ELSE
+				PRINTFORML %CALLNAME:MASTER%に抱きつきながら%CALLNAME%は淫らに首を動かす。
+				PRINTFORMW 速く精液が欲しいのか上目遣いで射精を切望している
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 頬張ったペニスを舌で刺激を加えながら首を動かしカリの部分を重点的に攻めている。
+				PRINTFORMW 唇も膣壁に見立て、肉棒が口から出る瞬間にカリ高に当たるよう調整する…
+			;それ以外
+			ELSE
+				PRINTFORMW ずっと躊躇っているのを、%CALLNAME:MASTER%が強引に口を開けてペニスをねじ込む。
+				PRINTFORMW それで腹を括ったのか、懸命に頬張った口をストロークしていった…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,パイズリ
+	;-------------------------------------------------
+	CASE [[TRAIN:パイズリ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK13
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+			IF TALENT:爆乳
+				PRINTFORML パイズリを命令された%CALLNAME%は%CALLNAME:MASTER%に見上げながら笑顔で溜息を吐く。
+				PRINTFORMW ある種関心しながら手から溢れんばかりの乳を使い、%CALLNAME:MASTER%のペニスを上下運動で刺激していく…
+			ELSE
+				IF TALENT:巨乳
+					PRINTFORML 素直に従い挟んだ双丘で腕で押さえるように固定し身体を縦に震わせる。
+					PRINTFORMW ペニスを刺激され快感に浸る%CALLNAME:MASTER%を%CALLNAME%は上目遣いで見上げた…
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁 
+						PRINTFORML なんで自分にさせるんだろうと疑問に持ちながら主人の命に従うべく胸板にペニスを当てる。
+						PRINTFORMW 思考錯誤で胸と指を使ってなんとか%CALLNAME:MASTER%に快感を与えようと健気に奉仕を始めた…
+					ELSE
+						PRINTFORML 自身の胸では難しい故に少し四苦八苦しながら肉棒を包む。
+						PRINTFORMW 抜けない様に谷間は手でガードし脇で胸を固めてから身体を上下に振り始めた…
+					ENDIF
+				ENDIF
+			ENDIF
+			;それ以外
+			ELSE
+			IF TALENT:爆乳
+				PRINTFORML 胸に挟めと肉棒を差し向け命令すると、%CALLNAME%は怪訝の眼差しで%CALLNAME:MASTER%を睨んだ。
+				PRINTFORMW しかし渋々と、大きすぎる程に実った乳房両腕で持つと、%CALLNAME:MASTER%の剛直を挟み込んだ…
+			ELSE
+				IF TALENT:巨乳
+					PRINTFORML 自身の胸を道具のように使うのに%CALLNAME%は多少の否定感があった。
+					PRINTFORMW が、観念すると豊満な乳房を持ち上げ%CALLNAME:MASTER%の肉棒を挟んで動き始めた…
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁 
+						PRINTFORML 聞いた%CALLNAME%は耳を疑い、そして%CALLNAME:MASTER%の神経を疑った。
+						PRINTFORMW しかし命令なので渋々胸板にペニスを押し当てると、ゆっくり身体を動かした…
+					ELSE
+						PRINTFORML できなくはないだろうと%CALLNAME%は困惑気味に胸を持ち上げる。
+						PRINTFORMW 完全には挟めないがするには十分のようで、%CALLNAME%は複雑な心境のまま身体を動かし始めた…
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+			IF TALENT:爆乳
+			IF !RAND:5
+				IF CSTR:衣装名_上着トップス == "胸空きタートルネック"
+					PRINTFORML 素晴らしい程に胸空きタートルネックを活かしている豊満な双乳の谷間に、%CALLNAME:MASTER%はペニスを挿入する。
+					PRINTFORML 少々窮屈なのがかえって肉棒を程よく圧迫しており、%CALLNAME%も普段より好調な動きで豊乳を動かしていく。
+					PRINTFORMW 服越しにムニュっと形をマシュマロのように変えていく胸を見て愉しみながら、%CALLNAME:MASTER%は迫る射精感に身を任せていった…
+				ELSE
+					PRINTFORML パイズリを察した%CALLNAME%は、寝そべった自分に跨る%CALLNAME:MASTER%のペニスを谷間に導いた。
+					PRINTFORML 手から溢れる胸の圧迫感を変えながら気持ち良さそうに腰を振る%CALLNAME:MASTER%を見て%CALLNAME%は嬉しそうに微笑む。
+					PRINTFORMW 打ち付ける度に顔に姿を現す亀頭を、%CALLNAME%は愛おしく舐め上げた…
+				ENDIF
+			ELSEIF !RAND:4
+			PRINTFORML %CALLNAME%は柔かな胸で%CALLNAME:MASTER%のペニスを挟み、まずは軽く上下していく。
+			PRINTFORML 今度は左右交互に上下していく動きに変え、変える度に双丘をペニスに押し付け刺激する。
+			PRINTFORMW 徐々に腰を動かしてく%CALLNAME:MASTER%を見て、気を良くした%CALLNAME%はさらに刺激を強めていった…
+			ELSEIF !RAND:3
+			PRINTFORML 溢れんばかりの双丘を軽く持ち上げ圧迫させ、ペニスを前から挿入してそのまま身体をゆっくと動かす。
+			PRINTFORML %CALLNAME:MASTER%は%CALLNAME%の肩を掴みセックスするように腰を振って縦パイズリを堪能する。
+			PRINTFORMW 手による圧迫加減でまるで本番をしているかのような快感が、%CALLNAME:MASTER%の興奮を高めていく
+			ELSEIF !RAND:2
+			PRINTFORML %CALLNAME:MASTER%は%CALLNAME%の溢れんばかりの双丘の谷間に肉棒を差し込むと、両手で抑え込んで腰を振り始めた。
+			PRINTFORMW %CALLNAME%は合わせるように爆乳で上下にストロークしながら、谷間から苦しそうに顔をだす亀頭を唇と舌で愛撫する…
+			ELSE
+			PRINTFORML %CALLNAME%は豊満な乳でペニスを挟むと、慣れた動きでパイズリを始めた。
+			PRINTFORML 谷間に隠れた肉棒を両腕で胸を圧迫しながらタプンタプンと音鳴らしてピストンする。
+			PRINTFORMW 視覚的に興奮させるその光景に、%CALLNAME:MASTER%は射精感を高めていく…
+			ENDIF
+			ELSE
+				IF TALENT:巨乳
+				IF !RAND:3
+					IF CSTR:衣装名_上着トップス == "胸空きタートルネック"
+					PRINTFORML 開かれた谷間が強調された胸空きタートルネックをそのままに、%CALLNAME:MASTER%は空いた部分からペニスを挿入する。
+					PRINTFORML 少々窮屈なのがかえって肉棒を程よく圧迫しており、%CALLNAME%も普段より好調な動きで豊乳を動かしていく。
+					PRINTFORMW 服越しにムニュっと形をマシュマロのように変えていく胸を見て愉しみながら、%CALLNAME:MASTER%は迫る射精感に身を任せていった…
+					ELSE
+					PRINTFORML %CALLNAME%は豊満な乳でペニスを挟むと、慣れた動きでパイズリを始めた。
+					PRINTFORMW 谷間に挟まれた肉棒を両腕で胸を圧迫しながら懸命にピストンを続ける…
+					ENDIF
+				ELSEIF !RAND:2
+				PRINTFORML 胸で%CALLNAME:MASTER%のペニスを挟むと、丁度いい形でフィットする。
+				PRINTFORMW %CALLNAME%が身体を上下させる度に、カリが谷間で強く刺激され、%CALLNAME:MASTER%の快感を高めていく…
+				ELSE
+				PRINTFORML パイズリを察した%CALLNAME%は、寝そべった自分に跨る%CALLNAME:MASTER%のペニスを谷間に導いた。
+				PRINTFORML ギリギリ掴める胸の圧迫感を変えながら気持ち良さそうに腰を振る%CALLNAME:MASTER%を見て%CALLNAME%は嬉しそうに微笑む。
+				PRINTFORMW 打ち付ける度に顔に姿を現す亀頭を、%CALLNAME%は愛おしく舐め上げた…
+				ENDIF
+
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁 
+					IF !RAND:2
+					PRINTFORML 苦肉の策として自身の乳首に%CALLNAME:MASTER%の亀頭を擦りつけ手淫する。
+					PRINTFORMW これでも十分気持ちいいので献身的に繰り返す%CALLNAME%の頭を撫でてやると、安心したように微笑んだ…
+					ELSE
+					PRINTFORML 胸板でなく片方の胸を中心にし、手で抱きかかえて押し当てて後は上下に動く。
+					PRINTFORML 動く度に、亀頭とカリが乳首に当たって刺激され、小さな膨らみにも触れて心地よい。
+					PRINTFORMW 気持ち良さそうにする%CALLNAME:MASTER%を見て得意気になりながら%CALLNAME%は懸命に続けた…
+					ENDIF
+					ELSE
+						IF !RAND:2
+						PRINTFORML 寝転がった%CALLNAME%に跨り、%CALLNAME%の胸を寄せてパイズリさせる。
+						PRINTFORML 手がフリーになった%CALLNAME%は、舌で亀頭を舐めつつタマを揉んで射精を促した。
+						PRINTFORMW もう片手で秘所を弄り、喘いで腰を振る%CALLNAME:MASTER%の耳を愉しませた…
+						ELSE
+						PRINTFORML 巧みにペニスを谷間に挟むと、指で谷間を補強し身体をうねらせながらピストンする。
+						PRINTFORML 亀頭が顔出した瞬間に舌で愛撫しつつ、こちらを上目遣いで見上げて誘惑する。
+						PRINTFORMW 時折艶めかしい声も出して%CALLNAME:MASTER%を射精へと献身的に奉仕していった…
+						ENDIF
+						ENDIF
+					ENDIF
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+			IF TALENT:爆乳
+			PRINTFORML 艶めかしい爆乳を左右交互に上下させる動きで肉棒を愉しませる。
+			PRINTFORMW その姿があまりにもエロい為%CALLNAME:MASTER%は高まる快感に耐えきれずつい腰を動かしてしまった…
+			ELSE
+				IF TALENT:巨乳
+				PRINTFORML 柔らかな豊満な乳房で包まれた肉棒を懸命に擦り続ける。
+				PRINTFORMW 身体を振ってストロークする度、圧迫された胸の中を刺激させながら射精へ導いていく…
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁 
+					PRINTFORML こればかりは…と思いながら%CALLNAME%は従順に従う。
+					PRINTFORML だが望んでいるのなら報いねばと胸板に肉棒を当ててそれを両手で抱えるように覆う。
+					PRINTFORMW あとは献身的に身体を動かして奉仕する、だが気持いのかと不安な眼差しで%CALLNAME:MASTER%を見上げた…
+
+					ELSE
+						PRINTFORML ある程度慣れてきたのか、準備は無理なく進み、軽やかに身体でピストンする。
+						PRINTFORMW 手と胸の感触が程良く竿を刺激し、上目遣いの視線が%CALLNAME:MASTER%の興奮をそそった…
+					ENDIF
+				ENDIF
+			ENDIF
+			;それ以外
+			ELSE
+			IF TALENT:爆乳
+			PRINTFORML 腰掛ける%CALLNAME:MASTER%の肉棒を爆乳で挟み込んで上下にストロークする。
+			PRINTFORMW 単調に上下運動するが、それだけでも迫力あるサイズの胸では非常に妖艶に見える…
+			ELSE
+				IF TALENT:巨乳
+				PRINTFORML %CALLNAME%は難なく肉棒を豊満な乳の谷間に抑え込むと、普通に身体を上下に動かす。
+				PRINTFORMW あまり献身的ではないが、柔らかい胸が%CALLNAME:MASTER%を刺激させる…
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁 
+					PRINTFORML コンプレックスなのか巨乳専用のテクニックをさせられるのが屈辱らしく。
+					PRINTFORMW 涙目に半ばヤケクソ気味に胸板とこころなしの膨らみで奉仕をし始めた…
+					ELSE
+						PRINTFORML やり辛そうに胸を使ってペニスを捕まえると、%CALLNAME%はぎこちなく身体を動かす。
+						PRINTFORMW だが十分刺激は伝わっており、なりよりその懸命な姿が%CALLNAME:MASTER%を興奮させていく…
+					ENDIF
+				ENDIF
+			ENDIF
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,素股
+	;-------------------------------------------------
+	CASE [[TRAIN:素股]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				PRINTFORML %CALLNAME:MASTER%は性器で濡れ始めている%CALLNAME%の陰部を擦り合わせる。
+				PRINTFORMW %CALLNAME:MASTER%が動く度、二つの性器の間から小さな水音が鳴り響いた…
+			;それ以外
+			ELSE
+				PRINTFORML まだ本番は抵抗があるだろうと、%CALLNAME:MASTER%は自分の性器を秘所にあてがい軽く擦り合わせる
+				PRINTFORMW %CALLNAME%は一瞬飛び引いたが、擦り合わせるだけと知ると警戒しながら受け入れた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+			IF RAND:2 == 0
+				PRINTFORML 愛液で濡れきった%CALLNAME%の秘所に%CALLNAME:MASTER%は性器同士を合わせ、素早く擦っていく。
+				PRINTFORMW 入口を強く刺激されつつ、%CALLNAME%もなんとか動いて当たる力を強めていく…
+			ELSE
+				PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に跨って、艶めいた腰つきで動いていく。
+				PRINTFORMW 擦れる%CALLNAME%の秘所からは、ヌチャヌチャと卑猥な音を立てながら膣液を零していた…
+			ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+			IF RAND:2 == 0
+				PRINTFORML %CALLNAME:MASTER%に身体を委ね、%CALLNAME%は%CALLNAME:MASTER%を抱き寄せるように腕を首に回す。
+				PRINTFORMW 焦らすように濡れる%CALLNAME%の秘所を遅めに刺激していった…
+			ELSE
+				PRINTFORML %CALLNAME:MASTER%に跨り、%CALLNAME%は愛液で滑りが良くなった秘所を%CALLNAME:MASTER%のに擦り付ける。
+				PRINTFORMW うねりながら身体を動かし、伝わってくる快感に%CALLNAME%は淫らな声を上げていた…
+			ENDIF
+			;それ以外
+			ELSE
+			IF RAND:2 == 0
+				PRINTFORML まだ警戒しているのか、いつでも抵抗できるように秘所に股に手を当てて挿入を防いでいる。
+				PRINTFORMW それとは別に性器同士を擦り合わせることで得られる快感に%CALLNAME%は感じているようだ…
+			ELSE
+				PRINTFORML 気を張っていると快感が少ないので、%CALLNAME%に自分に跨って素股するよう命令する。
+				PRINTFORMW 自分でするなら問題ないだろうと、%CALLNAME%は自らの陰部を%CALLNAME:MASTER%のに押し当てゆっくりと動いた…
+			ENDIF
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ｗ手淫
+	;-------------------------------------------------
+	CASE [[TRAIN:Ｗ手淫]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ｗフェラ
+	;-------------------------------------------------
+	CASE [[TRAIN:Ｗフェラ]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+				IF !RAND:2
+				PRINTFORML 「…じゅる…っ…んっんんぅ…」
+				ELSE
+				PRINTFORML 「あむっ……ぢゅるるるっ…んっ%UNICODE(0x2661)%」
+				ENDIF
+				;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:2 == 0
+				PRINTFORML %CALLNAME%達は左右から勃起したペニスを根本から傘までゆっくりと舐め上げる。
+				PRINTFORMW 上目遣いで%CALLNAME:MASTER%の反応を伺いながら奉仕する様は、とても征服欲を満たすものであった…
+				ELSE
+				PRINTFORML 二人は交互に%CALLNAME:MASTER%の肉棒をしゃぶり合いそしてトロトロの舌で舐める、それらを恍惚とした表情で繰り返す。
+				PRINTFORMW はやく精液が欲しいのか一心不乱に奉仕しながら、物欲しそうに潤んだ瞳で見つめていた…
+				ENDIF 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ｗパイズリ
+	;-------------------------------------------------
+	CASE [[TRAIN:Ｗパイズリ]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+			;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+			IF !RAND:2
+			PRINTFORML 「…………んっ…あ…っ…%UNICODE(0x2661)%…」
+			ELSE
+			PRINTFORML 「…ぁ…%UNICODE(0x2661)%」
+			ENDIF
+			;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+			IF RAND:2 == 0
+				PRINTFORML %CALLNAME%達は胸を押し付け合うように寄り添い、%CALLNAME:MASTER%のペニスを四つの乳房で包み込む。
+				PRINTFORMW %CALLNAME:MASTER%は二人の淫らに形を変える胸を見ながら射精感を高めていった…
+			ELSE
+				PRINTFORML 二人は%CALLNAME:MASTER%の肉棒を胸で包み込むと、互いに上下し合って奉仕していく。
+				PRINTFORMW 普段とは違うパイズリの感覚に、%CALLNAME:MASTER%もつられて腰を動かし始めた…
+			ENDIF 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,シックスナイン
+	;-------------------------------------------------
+	CASE [[TRAIN:シックスナイン]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------------------------------------
+	;◆奉仕(女主人系)
+	;-------------------------------------------------------------------------------
+
+	;-------------------------------------------------
+	;xxx,愛撫させる （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:愛撫させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,クンニさせる （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:クンニさせる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,レズシックスナイン （両方がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:レズシックスナイン]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,貝あわせ （両方がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:貝あわせ]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+;-------------------------------------------------------------------------------
+;◆道具系
+;-------------------------------------------------------------------------------
+
+	;-------------------------------------------------
+	;xxx,ローター
+	;-------------------------------------------------
+	CASE [[TRAIN:ローター]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				PRINTFORML あてがわれたローターを自ら操り、性感帯を重点的に刺激する。
+				PRINTFORMW 淫靡な水を垂らして、%CALLNAME%は我慢せず喘いでいた…
+			;それ以外
+			ELSE
+				PRINTFORML 震えるローターを警戒する%CALLNAME%の秘所に押し当てる。
+				PRINTFORMW 快感は少ないようだが、徐々に膣内は濡れ始めている…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印			
+			IF RAND:2 == 0
+				PRINTFORML チロリとローターを濡らしたあと、乳首に押し当て振動を与える。
+				PRINTFORMW 性感帯の多い乳首の周りや乳頭を刺激され、%CALLNAME%は嬌声を上げ続けた…
+			ELSE
+				PRINTFORML 滑る膣内深くにローターを侵入させ、出し入れしながら膣壁を刺激する。
+				PRINTFORML 最後は限界まで奥深く入れるとそのまま一気に引き抜いた。
+				PRINTFORMW 突如強い快感を与えられた%CALLNAME%は喘ぎながら大きく後ろへのけ反った…
+			ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+			IF RAND:2 == 0
+				PRINTFORML 秘所だけではなく、愛液でコーティングされたローターを乳首に押し付ける。
+				PRINTFORMW 潰された乳頭から絶え間なく伝わる刺激に%CALLNAME%は震えた…
+			ELSE
+				PRINTFORML ローターにも慣れた%CALLNAME%は、ゆっくりと膣内にローターを挿入れていく。
+				PRINTFORMW 膣壁に当たる振動が、喘ぐ%CALLNAME%の興奮を少しずつ高めていった…
+			ENDIF
+			;それ以外
+			ELSE
+				PRINTFORML ローターの振動に、%CALLNAME%は堪えるように甘い声を漏らす。
+				PRINTFORMW 道具で刺激されているため、抵抗は弱いようだ…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ｅマッサージャ
+	;-------------------------------------------------
+	CASE [[TRAIN:Ｅマッサージャ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,バイブ
+	;-------------------------------------------------
+	CASE [[TRAIN:バイブ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;- 挿入時
+		IF !TEQUIP:Ｖ器具経過ターン
+			;初めて
+			IF C_FIRSTTIME_COM()
+				;処女
+				IF TCVAR:履歴_EXP_処女喪失
+					;隷属開始
+					IF MARK:隷属刻印
+						PRINTFORML %CALLNAME:MASTER%に純潔を捧げたい%CALLNAME%は同然のごとく抵抗する。
+						PRINTFORML しかしそれを押し切って%CALLNAME:MASTER%はバイブを膣内に挿入させた。
+						PRINTFORMW 滴る純血を確認したあと、%CALLNAME%は涙を堪えて不貞腐れ気味に%CALLNAME:MASTER%を睨んだ…
+					;それ以外
+					ELSE
+						PRINTFORML 本物よりはマシだろうが、処女を道具に奪われるのは嫌なのか%CALLNAME%は激しく抵抗した。
+						PRINTFORMW 押さえつけてバイブを挿入すると、接合部の秘所からはタラリと純血が零れ落ちた…
+					ENDIF
+				;それ以外
+				ELSE
+					PRINTFORML いきなり出された長太いバイブに、少々怯んだ%CALLNAME%の膣内に少しずつ挿入させる。
+					PRINTFORMW 本物にはないバイブの振動に、%CALLNAME%は艶めかしい声を上げて震えた…
+				ENDIF
+			;二回目以降
+			ELSE
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML %CALLNAME:MASTER%の方が良かったらしいが、濡れる膣にバイブを挿入すると気持ち良さそうに声を上げる。
+					PRINTFORMW 既に準備出来てたのか、トロトロになった膣内を%CALLNAME:MASTER%はバイブで滑るように動かしていく…
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					PRINTFORML %CALLNAME%は自らバイブを膣内で咥えこむと、程良い速さでバイブを動かす。
+					PRINTFORMW 刺激されることで濡れていく肉壷に合わせて、だんだんとピッチを上げていった…
+				;それ以外
+				ELSE
+					PRINTFORML 濡れきれていない%CALLNAME%の秘所にバイブを挿入すると、ゆっくりとストロークさせる。
+					PRINTFORMW 膣内を蹂躙するバイブの振動に耐えきれずに%CALLNAME%は声を上げた…
+				ENDIF
+			ENDIF
+		;- 継続中
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				PRINTFORML 膣内で咥えているバイブを%CALLNAME:MASTER%は激しくストロークさせた。
+				PRINTFORMW 延々と与えられる快感は%CALLNAME%を喘ぎさせ、絶頂へ向かっていく…
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 濡れた膣に挿入されたバイブをピストンするように出し入れする。
+				PRINTFORMW 気持いいのか速度を上げるように%CALLNAME%は上目遣いでおねだりした…
+			;それ以外
+			ELSE
+				PRINTFORMW 振動するバイブに耐えるように%CALLNAME%は耐えているが限界らしく、甘声を洩らし始めた…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,アナルバイブ
+	;-------------------------------------------------
+	CASE [[TRAIN:アナルバイブ]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK10
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;- 挿入時
+		IF !TEQUIP:Ａ器具経過ターン
+			;初めて
+			IF C_FIRSTTIME_COM()
+				;隷属開始
+				IF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			;二回目以降
+			ELSE
+				;陥落開始
+				IF MARK:陥落刻印
+					;PRINTFORMW 
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			ENDIF
+		;- 継続中
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+;-------------------------------------------------------------------------------
+;◆性交系
+;-------------------------------------------------------------------------------
+
+	;-------------------------------------------------
+	;xxx,正常位
+	;-------------------------------------------------
+	CASE [[TRAIN:正常位]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;処女
+			IF TCVAR:履歴_EXP_処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML 初めてに少し抵抗感があったようだが、暴れようとはせず、%CALLNAME:MASTER%は閉じていたまたをゆっくりと開く。
+					PRINTFORMW ペニスを少しずつ挿入すると、割れ目からは赤い純血が流れ始めた…
+				;それ以外
+				ELSE
+					PRINTFORML 必死に暴れる%CALLNAME%を押し倒し、股をこじ開け膣口に肉棒を差し込む。
+					PRINTFORMW 姦通による激痛に%CALLNAME%は悶え、散らされた純潔にすすり泣いた…
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					PRINTFORML %CALLNAME%は誘惑するように股を開いて挿入しようとする%CALLNAME:MASTER%を歓迎する。
+					PRINTFORMW 一気に膣内へ突き入れると、%CALLNAME%は一声喘いで顎をのけ反らせた…
+				;それ以外
+				ELSE
+					PRINTFORML 秘所にペニスを押し当てると、%CALLNAME%はビクっと身体を跳ねさせる。
+					PRINTFORMW ある程度濡れていることを確認すると、%CALLNAME:MASTER%は%CALLNAME%を押し倒しながら挿入した…
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF RAND:4 == 0
+				PRINTFORML 愛液で満ちた%CALLNAME%の肉壷を、覆いかぶさる%CALLNAME:MASTER%は熱い肉棒で犯し続ける。
+				PRINTFORML %CALLNAME%はそっと耳元で囁きながら中出しを切望する、応えないわけにはいかぬと%CALLNAME:MASTER%は残りの精液を植えつけるべく腰の動きを速めた。
+				PRINTFORMW 極限まで高っていくボルテージに身を焦がしながら、二人は果てるまで性器を打ち付けあった…
+				ELSEIF !RAND:3
+				PRINTFORML %CALLNAME:MASTER%はペニスを速いテンポで膣内を抽挿しつつ、空いた口で%CALLNAME%の乳首に吸いつく。
+				PRINTFORMW 貪るように乳首を吸う%CALLNAME:MASTER%に快楽攻めにされ、%CALLNAME%はもっと快楽を得ようと%CALLNAME:MASTER%の腰に脚を絡めた…
+				ELSEIF !RAND:2
+				PRINTFORML 短いピッチで%CALLNAME%を泣かせている%CALLNAME:MASTER%に、%CALLNAME%は%CALLNAME:MASTER%の手を取って自身の胸まで導く。
+				PRINTFORML それに応えるように固くなった乳頭を指で摘み、適度に弄りながらグラインドする。
+				PRINTFORMW 先ほど以上に喘いで身をよじる%CALLNAME%を見て興奮しながら、%CALLNAME:MASTER%は徐々にピストンを速めていった…
+				ELSE
+				PRINTFORML 寝そべる%CALLNAME%の下半身を持ち上げ、%CALLNAME:MASTER%が上から打ち付けるようにストロークする
+				PRINTFORMW いつもとは違う膣壁の快感に%CALLNAME%はよがりながら、自身の乳首を弄り続けていた…
+				ENDIF 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				IF RAND:2 == 0
+				PRINTFORML 抽挿を繰り返すたびに肉の筒が%CALLNAME:MASTER%の肉棒を膣内が覚えたようで、お互いが気持ち良くなるよう締め具合を調整している。
+				PRINTFORMW %CALLNAME:MASTER%は打ち付けるピッチを上げていき、%CALLNAME%は淫らな声を出して乱れた…
+				ELSE
+				PRINTFORML 愛液を蓄えた%CALLNAME%の肉壷に、%CALLNAME:MASTER%はペニスを突き入れかき混ぜるように腰を動かす。
+				PRINTFORMW 息を乱しながら快楽に浸る%CALLNAME%を見下ろしながら、ピッチを短くしていった…
+				ENDIF
+			;それ以外
+			ELSE
+				IF RAND:2 == 0
+				PRINTFORML 膣内はまだ準備が終わっていないようで、%CALLNAME:MASTER%に遅くするよう頼み込んでくる。
+				PRINTFORMW 要求通りに抽挿のピッチを落として動くと、次第にではあるが膣内もトロけてきたようだ…
+				ELSE
+				PRINTFORML 未だ%CALLNAME:MASTER%との性行為には慣れていないのか、%CALLNAME%は身体を抱えるように耐えている。
+				PRINTFORMW だが、ゆっくりと長いストロークに、快感に素直な肉壷は反応して濡れ出した…
+				ENDIF
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,後背位
+	;-------------------------------------------------
+	CASE [[TRAIN:後背位]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;処女
+			IF TCVAR:履歴_EXP_処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML 後ろからということでちょっと不満そうに四つん這いになった%CALLNAME%の秘所に、%CALLNAME:MASTER%はペニスをあてがう。
+					PRINTFORML %CALLNAME%の膣内が濡れていることを確認すると、%CALLNAME:MASTER%は肉棒を徐々に奥まで入れていく。
+					PRINTFORML 痛みを堪える%CALLNAME%が苦痛が治まるまで、キスや胸愛撫で痛みをごまかす。
+					PRINTFORMW 慣れてきた%CALLNAME%から許可を得ると、%CALLNAME:MASTER%はゆっくりと腰を動かし始めた…
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					PRINTFORML 戸惑いながらも指示通りに四つん這いになる%CALLNAME%は前からの方がいいと抗議する。
+					PRINTFORMW だが、%CALLNAME%が抗議している間に待ち切れなかった%CALLNAME:MASTER%は、濡れきった膣に肉棒を差し込んでしまった…
+				;それ以外
+				ELSE
+					PRINTFORML 要求の真意が上手く掴めず、%CALLNAME%は言われた通りにベッドの上で四つん這いになる。
+					PRINTFORML 暫くして内容を察したときには既に遅く、無防備な男を知らない秘所に滾る肉棒を突き入れた。
+					PRINTFORML 純潔を奪われたことよりも己の軽率な判断を呪いつつ、ベッドの上で俯きながらシーツを握り締めて泣き始める。
+					PRINTFORMW %CALLNAME:MASTER%を腰を動かし始めると、次第に泣き声は小さな嬌声へと変わっていった…
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					PRINTFORML %CALLNAME:MASTER%からの指示もすんなり聞き、トロトロと愛液をこぼす尻を向けた。
+					PRINTFORMW すんなりペニスが入り込むと、膣を満たされた感触に%CALLNAME%は艶めかしい声を出した…
+				;それ以外
+				ELSE
+					PRINTFORML 後ろから犯されるのに不安なのか、震える%CALLNAME%の腰を掴むと%CALLNAME:MASTER%は肉棒を挿入した。
+					PRINTFORMW 膣壁を抉られる感触に耐えながら、ベッドのシーツを咥えて漏れる甘い息を堪えた…
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF RAND:4 == 0
+				PRINTFORML 後ろから%CALLNAME%をいきり勃つ肉棒で犯す%CALLNAME:MASTER%は、空いた両腕で%CALLNAME%の胸を揉み始める。
+				PRINTFORML 余りの気持ちよさに膣内が締め付けられ、余計にカリが膣壁を刺激する。
+				PRINTFORMW まるで本当に犯しているようで、%CALLNAME:MASTER%の肉欲は止まることなく、部屋には性器を打ち付ける音と嬌声が響き続けた…
+				ELSEIF !RAND:3
+				PRINTFORML 愛液に満ちた%CALLNAME%の蜜壺を%CALLNAME:MASTER%の熱い剛直が蹂躙する。
+				PRINTFORML 責め続けられて腕で上半身を支え切れなくなり、力無くベッドへ倒れ臥す。
+				PRINTFORMW 快楽に墜ちて思考がまったく回らなくなった%CALLNAME%を、%CALLNAME:MASTER%はまだ足りぬと膣内を犯し続けた…
+				ELSEIF !RAND:2
+				PRINTFORML 尻だけ上げてベッドに倒れこむ%CALLNAME%に%CALLNAME:MASTER%は覆いかぶさるようにして腰を動かす。
+				PRINTFORML あとは%CALLNAME:MASTER%から与え続けられる快感に身を委ねて嬌声を発し続ける。
+				PRINTFORMW 種付けする為に腰を振り続ける%CALLNAME:MASTER%に、%CALLNAME%は雌としての幸福感に浸っていた…
+				ELSE
+				PRINTFORML %CALLNAME:MASTER%は四つん這いになった%CALLNAME%の腰を掴み愛液が飛び散る程の速さでピストンする
+				PRINTFORMW 受ける%CALLNAME%は抑えきれぬボルテージに、上半身を大きくのけ反らして喘ぎ続ける…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 濡れきらない膣内に苦痛を示す%CALLNAME%を見て、%CALLNAME:MASTER%は一旦止めた後ペースを落として再開した。
+				PRINTFORMW %CALLNAME%はぼんやりとした思考で膣内射精のリスクを考えながらも、肉壷から与え続けられる快楽に思考も薄まっていった…
+			;それ以外
+			ELSE
+				PRINTFORML ベッドに四つん這いになりながら、繰り返し抽挿されて滑りだす膣内を蹂躙される。
+				PRINTFORMW 雌になったような錯覚を振り払うが、周りに響く淫らな水音に興奮していった…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,騎乗位
+	;-------------------------------------------------
+	CASE [[TRAIN:騎乗位]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;処女
+			IF TCVAR:履歴_EXP_処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML 純潔を捧げられる悦びに、%CALLNAME%は濡れた膣唇でペニスを取り込んでいく。
+					PRINTFORMW 男根を奥まで咥えると、割れ目から流れ出す純血を嬉しそうに眺めていた…
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					PRINTFORML 処女を自分で散らす抵抗はあったものの、%CALLNAME:MASTER%の剛直を咥え膣内に入れさせた。
+					PRINTFORMW 純血を流しながら身を震わせていたが、誤魔化すように笑顔で痛みを堪えた…
+				;それ以外
+				ELSE
+					PRINTFORML %CALLNAME:MASTER%に跨り、まだ男を知らない秘所を亀頭に押し当て何度も先を出し入れする。
+					PRINTFORML 自分から挿入することと、純潔を散らす恐怖に身を大きく震わせ%CALLNAME%は意を決して肉棒を咥えこむ。
+					PRINTFORMW 迫りくるペニスの感触と激痛が奴隷を襲い、しばらくの間、涙を流して震えていた…
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					PRINTFORML 完全にペニスを咥えこむと、膣壁を駆使して竿を蹂躙していく。
+					PRINTFORMW 大きなカリが壁に当たる度に、%CALLNAME%は髪を乱して震えた…
+				;それ以外
+				ELSE
+					PRINTFORML ぎこちない動きで騎乗位でペニスを咥え、自分のペースで腰を動かし始める。
+					PRINTFORMW 雄の温かさと感触に違和感を感じつつも、膣は喜ぶように愛液を分泌させていた…
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF RAND:4 == 0
+					IF TALENT:狂気 || TALENT:ヤンデレ
+					PRINTFORML 主導権を得られタガが外れたのか、%CALLNAME:MASTER%を押さえつけて激しいピストン繰り返していく。
+					PRINTFORML 荒い息遣いをしながら欲情仕切った笑みを浮かべ、自ら腰を動かし肉棒を子宮口に当てて中出しを誘う。
+					PRINTFORMW 流石にやられっぱなしも癪なので下から突きあげてやると、嬉しそうに喘いだ…
+					ELSE
+					PRINTFORML 狭い膣内で肉棒を絞めつけ、%CALLNAME%は長いストロークで腰を縦に振っていく。
+					PRINTFORML 雄の遺伝子を欲しがる子宮に応えるように、そのピッチも短く激しくなる。
+					PRINTFORMW ゾクゾクと身体を震わせる%CALLNAME:MASTER%を笑顔で見下ろして、射精を促していった…
+					ENDIF
+				ELSEIF !RAND:3
+				PRINTFORML トロトロの肉壷に捉えられたペニスを激しいグラインドで腰を振る。
+				PRINTFORML %CALLNAME:MASTER%を犯しているような感覚に欲情して、%CALLNAME%はさらに肉棒を膣内で刺激する。
+				PRINTFORMW 降りてくる子宮を感じながら、濃厚な種付けを求めてピストンを続けた…
+				ELSEIF !RAND:2
+				PRINTFORML 淫らに腰を振る%CALLNAME%に合わせように、%CALLNAME:MASTER%も下から肉棒を突き刺す。
+				PRINTFORML コツンと子宮口に亀頭が当たる感触に悲鳴のような声で%CALLNAME%はよがる。
+				PRINTFORMW 妊娠の危険などお構いなしに、熱い中出しを求めていった…
+				ELSE
+				PRINTFORML 激しい騎乗位に気持ち良さそうによがり、%CALLNAME%は大きく上半を後ろへのけ反らせる。
+					IF TALENT:巨乳  || TALENT:爆乳
+					PRINTFORML その動きに弾力のある豊満な双房は、いやらしく弾みその姿を淫らに変えていく。
+					PRINTFORML %CALLNAME:MASTER%は思わず手を伸ばし鷲掴むと、それに反応して%CALLNAME%は艶めかしい声でなく。
+					PRINTFORMW 下から眺める乳の迫力に興奮しつつ、%CALLNAME:MASTER%も腰を突き上げ始めた…
+					ELSE
+					PRINTFORML %CALLNAME:MASTER%は空いた手で乳首をつまむと、動きに合わせて引っ張った。
+					PRINTFORMW 乳首からの快感にも反応して喘ぐ姿に興奮しつつ、%CALLNAME:MASTER%も腰を突き上げ始めた…
+					ENDIF
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 跨った%CALLNAME%は、汗が滲む身体を大きく弾ませてピストンを繰り返す。
+				PRINTFORMW 腰を下ろす度にいやらしい音が接合部から響いた…
+			;それ以外
+			ELSE
+				PRINTFORML まだ慣れない動きで%CALLNAME:MASTER%に跨る%CALLNAME%は身体を弾ませる。
+				PRINTFORMW それでも快感を得ているのか、愛液が接合部から零れてだしていた…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,対面座位
+	;-------------------------------------------------
+	CASE [[TRAIN:対面座位]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;処女
+			IF TCVAR:履歴_EXP_処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML 視線間近での初体験に%CALLNAME%は赤面しつつも、笑顔で自分の純潔を散らそうとする%CALLNAME:MASTER%の肉棒を受けれる。
+					PRINTFORML 膣内は濡れていた為すんなりと入ったが、やはり痛いのか身を震わせて痛みに耐える。
+					PRINTFORMW %CALLNAME%が慣れるまでの間、%CALLNAME:MASTER%はキスや愛撫で痛みを薄めることにした…
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					PRINTFORML 抱き合いながらの挿入は難しいのか、緊張する%CALLNAME%を宥めつつペニスを挿入しようとする。
+					PRINTFORML 陰唇を指でクチャクチャ音を立てて開かせるとようやく男を知らない膣内へと入り込めた。
+					PRINTFORMW %CALLNAME%は%CALLNAME:MASTER%の首に抱きついて純潔を散らした痛みに堪えていた…
+				;それ以外
+				ELSE
+					PRINTFORML 正面から抱きかかえられて上手く身動きっできない%CALLNAME%に、%CALLNAME:MASTER%は挿入を試みる。
+					PRINTFORML %CALLNAME%は突き離そうとするが既に捕まっている為に抵抗できなかった。
+					PRINTFORMW その間に肉棒を%CALLNAME%の膣内に入り込み、%CALLNAME%は激痛に悶えた…
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					PRINTFORML %CALLNAME%は%CALLNAME:MASTER%の首に腕を回し、腰をうねらせて挿入を強請る。
+					PRINTFORMW 愛液に塗れた蜜壺をペニスでかき分けると、%CALLNAME%は甘い声で鳴いた…
+				;それ以外
+				ELSE
+					PRINTFORML 震える%CALLNAME%を抱き寄せ、%CALLNAME:MASTER%は性器同士をを接合させていく。
+					PRINTFORMW この体位では慣れていない為か、なんとか違和感に慣れようと弱々しく身体を動かした…
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF RAND:3 == 0
+				PRINTFORML 二人はベッドの上で濃厚なキスを繰り返し、抱き合いながら互いを求めあう身体を重ねる。
+				PRINTFORML 舌でお互いの口内を犯しながら、性器でも体液を分泌して飽きずに抽挿をし続ける。
+				PRINTFORMW 動きは徐々に激しくなり、淫らな腰つきで二人は動いていった…
+				ELSEIF !RAND:2
+				PRINTFORML お互い手足で強く抱きしめ合い、快楽に滾る身体を弾ませていく。
+				PRINTFORML 上下に動く度に膣壁に当たるカリの快感に、お互い身体を小さく痙攣させる。
+				PRINTFORMW 接合部から響く卑猥な水音に興奮しつつ、%CALLNAME:MASTER%は射精が近い肉棒で子宮口を叩き始めた…
+				ELSE
+				PRINTFORML 微笑みながら腰を振る%CALLNAME%の胸を愛撫しつつ、%CALLNAME:MASTER%はその艶めかしい動きを観察する。
+				PRINTFORMW 時折こちらからも腰を突き上げて膣内をかき乱し、唐突な快感に%CALLNAME%をよがらせた…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML %CALLNAME:MASTER%のペニスの長さに合わせて腰を振る幅を調整し、テンポよく膣壁で勃起する男根を貪る。
+				PRINTFORMW 得られる快感に身を捩りながら、軽いキスをして献身的に腰を弾ませていった…
+			;それ以外
+			ELSE
+				PRINTFORML %CALLNAME:MASTER%に抱き抱えられて%CALLNAME%はぎこちない動きで上下にストロークする。
+				PRINTFORMW この体勢だとなかなか難しいようで、度々抜けそうになるペニスに気を遣いながら身体を動かしていく…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,背面座位
+	;-------------------------------------------------
+	CASE [[TRAIN:背面座位]]
+	;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+	;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;処女
+			IF TCVAR:履歴_EXP_処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					PRINTFORML 処女を捧げることは嬉しいが後ろからは怖いらしく、心配そうにこちらを見ていたがゆっくり挿入していくと甘い声で鳴いた。
+					PRINTFORMW 痛みも処女を捧げられた悦びですぐに薄まっていき、愛液で溢れる蜜壺を肉棒で突きあげ始めた…
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					PRINTFORML 少し恥ずかしいようで身体を小さくよじらせていたが、ペニスが膣内に入り込むと快楽に流されて緊張はなくなった。
+					PRINTFORMW 代わりに痛みに震え始め、倒れそうになる%CALLNAME%の身体をしっかり支えた…
+				;それ以外
+				ELSE
+					PRINTFORML %CALLNAME%は後ろから抱きかかえるようにされて秘所の入口をペニスでつつかれる。
+					PRINTFORMW 激しく抵抗するも後ろからでは満足に離れる事は出来ず、虚しく処女を散らされた…
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					PRINTFORML 身体を支えられている%CALLNAME%は愛液で濡れた秘所に肉棒をあてがうと、竿を割れ目でクチャクチャと擦り始める。
+					PRINTFORMW 焦らされた%CALLNAME:MASTER%は自らペニスを掴み、生殖を歓迎する膣内に入り込ませた…
+				;それ以外
+				ELSE
+					PRINTFORMW 後ろからの恐怖で少々抵抗していたが、性器の接合が終わると諦めたように身体を%CALLNAME:MASTER%に委ねた。
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				IF RAND:3 == 0
+				PRINTFORML 背面座位で激しいストロークしながら、%CALLNAME%は首をこちらに向かせてキスをおねだりする。
+				PRINTFORML 興奮が高まる度にグラインドも淫らになっていき、ピッチも短くなっていく。
+				PRINTFORMW 迫る絶頂に達するべく、二人は発情した獣のようにピストンを激しくしていった…
+				ELSEIF !RAND:2
+				PRINTFORML 動くのを%CALLNAME%に任せ、%CALLNAME:MASTER%は隆起する%CALLNAME%の乳首を指でつまんだ。
+				PRINTFORML ビクンと身体を跳ねさせる%CALLNAME%をさらに刺激してやる為に乳頭を軽く引っ張った。
+				PRINTFORMW 余裕が無くなった%CALLNAME%の動きは激しく大胆なものになっていき、その刺激で%CALLNAME:MASTER%も射精感を高めていった…
+				ELSE
+				PRINTFORML 性器を打ち付け合うごとに撒き散らされる愛液に欲情しつつ、%CALLNAME:MASTER%はピストンを速めた。
+				PRINTFORMW 艶めかしい声で喘ぐ%CALLNAME%は、貪るように自らも腰を淫らに動かしていく…
+				ENDIF 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				PRINTFORML 突き上げられる度に膣壁を抉るカリに顎をのけ反らせて、自らも身体を上下にピストンし始める。
+				PRINTFORMW 二人のボルテージはだんだん上がっていき、その動く激しさも増していった…
+			;それ以外
+			ELSE
+				PRINTFORML 後ろからの突き上げにまだ慣れない%CALLNAME%は首をこちらに振り向かせて不安な表情をする。
+				PRINTFORMW しかし、膣内を犯される度に本能的に雌として悦び始め、息遣いも艶めかしいものへと変わっていった…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,正常位アナル
+	;-------------------------------------------------
+	CASE [[TRAIN:正常位アナル]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;Ａ処女
+			IF TCVAR:履歴_EXP_Ａ処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					;PRINTFORMW 
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,後背位アナル
+	;-------------------------------------------------
+	CASE [[TRAIN:後背位アナル]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;Ａ処女
+			IF TCVAR:履歴_EXP_Ａ処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					;PRINTFORMW 
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,騎乗位アナル
+	;-------------------------------------------------
+	CASE [[TRAIN:騎乗位アナル]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;Ａ処女
+			IF TCVAR:履歴_EXP_Ａ処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					;PRINTFORMW 
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,対面座位アナル
+	;-------------------------------------------------
+	CASE [[TRAIN:対面座位アナル]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;Ａ処女
+			IF TCVAR:履歴_EXP_Ａ処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					;PRINTFORMW 
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,背面座位アナル
+	;-------------------------------------------------
+	CASE [[TRAIN:背面座位アナル]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+			;Ａ処女
+			IF TCVAR:履歴_EXP_Ａ処女喪失
+				;陥落開始
+				IF MARK:陥落刻印
+					;PRINTFORMW 
+				;隷属開始
+				ELSEIF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			;それ以外
+			ELSE
+				;隷属開始
+				IF MARK:隷属刻印
+					;PRINTFORMW 
+				;それ以外
+				ELSE
+					;PRINTFORMW 
+				ENDIF
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------------------------------------
+	;◆性交(逆セックス系)
+	;-------------------------------------------------------------------------------
+	;デフォルトでは構文省略。使用する場合は他のコマンドから構文をコピーして下さい。
+
+	;-------------------------------------------------
+	;xxx,正常位させる （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:正常位させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,後背位させる （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:後背位させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,騎乗位する （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:騎乗位する]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,対面座位する （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:対面座位する]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,背面座位させる （主人がオンナのみ）
+	;-------------------------------------------------
+	CASE [[TRAIN:背面座位させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------------------------------------
+	;◆性交(逆アナルセックス系)
+	;-------------------------------------------------------------------------------
+	;デフォルトでは構文省略。使用する場合は他のコマンドから構文をコピーして下さい。
+
+	;-------------------------------------------------
+	;xxx,Ａ正常位させる
+	;-------------------------------------------------
+	CASE [[TRAIN:Ａ正常位させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ａ後背位させる
+	;-------------------------------------------------
+	CASE [[TRAIN:Ａ後背位させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ａ騎乗位する
+	;-------------------------------------------------
+	CASE [[TRAIN:Ａ騎乗位する]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ａ対面座位する
+	;-------------------------------------------------
+	CASE [[TRAIN:Ａ対面座位する]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ａ背面座位させる
+	;-------------------------------------------------
+	CASE [[TRAIN:Ａ背面座位させる]]
+
+		;初めて
+		IF C_FIRSTTIME_COM()
+		;二回目以降
+		ELSE
+		ENDIF
+
+	;-------------------------------------------------
+	;※ 該当無し
+	;-------------------------------------------------
+	CASEELSE
+		RETURN
+ENDSELECT
+RETURN
+
+;=================================================
+;   sub KOJO_LOST_VIRGIN_Kxxx
+;=================================================
+;   キャラ口上:処女喪失時
+;-------------------------------------------------
+; Input:
+;  ARG					PALAM変動値
+;-------------------------------------------------
+@KOJO_DEFAULT_LOST_VIRGIN_K1(ARG)
+
+;-- CHK
+SELECTCASE ARG
+	;-------------------------------------------------
+	;xxx,処女喪失
+	;-------------------------------------------------
+	CASE [[口上:処女喪失]]
+		;陥落かつ主人のセックスによる処女喪失
+		IF MARK:陥落刻印 && TCVAR:主人性交フラグＶ
+			;PRINTFORMW 
+		;それ以外の時に処女喪失
+		ELSE
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「………ぁ…%UNICODE(0x2661)%」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 秘所からベッドに滴る赤い血を、%CALLNAME%は確かめるように見つめた。
+				PRINTFORMW 未だ激痛に苛まれているが、%CALLNAME:MASTER%に処女を捧げた事に喜んでいるようだ…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…………」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 痛みに耐える%CALLNAME%は繋がれた性器に眼を向ける。 
+				PRINTFORMW 自らの秘所から流れ出す純血を、%CALLNAME%は曇った瞳で眺めていた…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,Ａ処女喪失
+	;-------------------------------------------------
+	CASE [[口上:Ａ処女喪失]]
+		;陥落かつ主人のセックスによるＡ処女喪失
+		IF MARK:陥落刻印 && TCVAR:主人性交フラグＡ
+			;PRINTFORMW 
+		;それ以外の時に処女喪失
+		ELSE
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,童貞喪失 (オトコ/ふたなり/男の娘用) (※Ｖ性交時のみ)
+	;-------------------------------------------------
+	CASE [[口上:童貞喪失]]
+		;陥落かつ主人のセックスによる童貞喪失
+		IF MARK:陥落刻印 && TCVAR:主人性交フラグＰ
+			;PRINTFORMW 
+		;それ以外の時に処女喪失
+		ELSE
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;※ 該当無し
+	;-------------------------------------------------
+	CASEELSE
+		RETURN
+ENDSELECT
+RETURN
+
+;=================================================
+;   sub KOJO_ORGASM_Kxxx
+;=================================================
+;   キャラ口上:絶頂時
+;-------------------------------------------------
+@KOJO_DEFAULT_ORGASM_K1
+
+;-- CHK:絶頂タイプ
+SELECTCASE TCVAR:絶頂タイプ
+	;-------------------------------------------------
+	;xxx,絶頂
+	;-------------------------------------------------
+	CASE [[口上:Ｃ絶頂]], [[口上:Ｂ絶頂]], [[口上:Ｖ絶頂]], [[口上:Ａ絶頂]]
+
+		;強絶頂
+		IF TCVAR:絶頂強度 >= 2
+			;陥落開始
+			IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「っ…ぁっ…あぁああっ…！%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「だっ…だめっ%UNICODE(0x2661)%…いくっ…っあぁっあああぁぁっ！%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+		PRINTFORML 「ひゃっ%UNICODE(0x2661)%…ぁあっあぁぁぁ……っ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁあっ…気持ちっ！%UNICODE(0x2661)%…あはっ…はぁはぁ…」
+		ELSE
+		PRINTFORML 「…っ………あっ…やぁっ…ぁああっ！%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 絶頂に達した%CALLNAME%は大きな嬌声を上げて汗した滴る身体を弾ませた。
+				PRINTFORMW %CALLNAME:MASTER%に身体を委ね、得られる快感に身を沈ませていった…
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「っ…ぁっ…あぁああっ…！」
+		ELSEIF !RAND:4
+		PRINTFORML 「だっ…だめっ…いくっ…っあぁっあああぁぁっ！」
+		ELSEIF !RAND:3
+		PRINTFORML 「ひゃっ…ぁあっあぁぁぁ……っ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁあっ…気持ちっ！…あはっ…はぁはぁ…」
+		ELSE
+		PRINTFORML 「…っ………あっ…やぁっ…ぁああっ！」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 快感が頂点に達し髪を振り乱して%CALLNAME%は絶頂に達する。
+				PRINTFORMW 淫らに喘ぎ余韻に浸る%CALLNAME%の表情はとても満足気のようだ…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ……ぁっ…」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 今まだにない強烈な絶頂に%CALLNAME%は悲鳴のような声で喘ぐ。
+				PRINTFORMW 息を乱して身体を震わせるが、余韻に浸る余裕もないようだ…
+			ENDIF
+		;絶頂
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「っ…ぁっ…あぁああっ…！%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「だっ…だめっ%UNICODE(0x2661)%…いくっ…っあぁっあああぁぁっ！%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+		PRINTFORML 「ひゃっ%UNICODE(0x2661)%…ぁあっあぁぁぁ……っ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁあっ…気持ちっ！%UNICODE(0x2661)%…あはっ…はぁはぁ…」
+		ELSE
+		PRINTFORML 「…っ………あっ…やぁっ…ぁああっ！%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:3 == 0
+				PRINTFORML 潮を吹いて愛液を撒き散らす%CALLNAME%は絶頂に耐えきれずベッドに倒れ臥す。
+				PRINTFORML 断続的に震える身体からは妖艶な雰囲気を醸し出していた。
+				PRINTFORMW ある程度余裕を取り戻した%CALLNAME%は、こちらに顔を向けると放心気味に微笑んだ…
+				ELSEIF !RAND:2
+				PRINTFORML 達した快楽に身体を制御できずに、淫らに震える身を%CALLNAME:MASTER%に委ねる。
+				PRINTFORML %CALLNAME:MASTER%は火照る身体を支え、絶頂が終わるまで%CALLNAME%を抱き続けた。
+				PRINTFORMW 興奮冷め切れぬ%CALLNAME%はこの熱を保とうと、愛する%CALLNAME:MASTER%にキスを交わした…
+				ELSE
+				PRINTFORML 顎を大きく後ろへのけ反らして%CALLNAME%は絶頂へ達する。
+				PRINTFORMW 身体に満遍なく沁み渡る幸福感に、%CALLNAME%は緩みきった表情で喘ぎ続けた…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「っ…ぁっ…あぁああっ…！」
+		ELSEIF !RAND:4
+		PRINTFORML 「だっ…だめっ…いくっ…っあぁっあああぁぁっ！」
+		ELSEIF !RAND:3
+		PRINTFORML 「ひゃっ…ぁあっあぁぁぁ……っ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁあっ…気持ちっ！…あはっ…はぁはぁ…」
+		ELSE
+		PRINTFORML 「…っ………あっ…やぁっ…ぁああっ！」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML ビクビクを身体を淫らに痙攣させて%CALLNAME%は絶頂に浸る。
+				PRINTFORMW 荒く息を乱ししばらく残った余韻を愉しんでいた…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ……ぁっ…」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 来た絶頂になんとか耐えようと、快楽に歪む口を強く噤んで声が出るのを我慢する。
+				PRINTFORMW しかし絶頂が過ぎた後の余韻には顔を緩ませて甘い吐息を漏らしていた…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,射精した (ふたなり/オトコ/男の娘のみ)
+	;-------------------------------------------------
+	CASE [[口上:Ｐ射精]]
+IF TALENT:オトコ
+ELSE
+		;陥落開始
+		IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「っ…………………ふぅ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「でちゃっ%UNICODE(0x2661)%…あっ…あぁっ…！………はぁ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+		PRINTFORML 「あっ……！……ふぁ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ひゃっ%UNICODE(0x2661)%…あぁーーー……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…うっ！…………ぁぁ……あぁ…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:2 == 0
+				PRINTFORML 精液を飲んで欲しいらしく、なんとか我慢して%CALLNAME:MASTER%におねだりする。
+				PRINTFORML しょうがないと%CALLNAME:MASTER%は口に含むと、動かす必要もなくすぐさま射精が行われた。
+				PRINTFORMW 吐き出された精液を飲み干して口の中をみせてやると、%CALLNAME%は征服感にゾクゾクと震えて再びペニスを勃起させた。
+				ELSE
+				PRINTFORML 射精を終えるとふにゃりと肉棒が萎え始めたが、男とは構造が違うらしく瞬く間に勃起を再開した。
+				PRINTFORMW %CALLNAME%は未だ絶好調の肉棒をつかんで、軽く手淫しながら愛撫をおねだりした…
+				ENDIF 
+		;隷属開始
+		ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ…ふあぁっ…！」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+			PRINTFORML %CALLNAME%は達した射精に我慢せず、濃厚な白濁液をベッドにぶちまける。
+			PRINTFORMW 後処理が面倒だが、%CALLNAME%はとても気持ち良さそうだった…
+		;それ以外
+		ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ……あっ…！」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+			PRINTFORML 慣れない男の絶頂に身体を跳ねて、なんとか耐えようとしている。
+			PRINTFORMW しかし強いエクスタシーには勝てないのか、気持ち良さそうな顔をしていた…
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;※ 該当無し
+	;-------------------------------------------------
+	CASEELSE
+		RETURN
+ENDSELECT
+RETURN
+
+;=================================================
+;   sub KOJO_ORGASM_M_Kxxx
+;=================================================
+;   キャラ口上:絶頂させた時
+;-------------------------------------------------
+@KOJO_DEFAULT_ORGASM_M_K1
+
+;-- CHK:絶頂無し
+SIF !TCVAR:被射精部位
+	RETURN
+
+;-- CHK:
+SELECTCASE TCVAR:被射精部位
+	;-------------------------------------------------
+	;xxx,主人Ａ射精 (アナルセックスで射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人Ａ射精]]
+
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人Ａ射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,主人Ｖ射精 (セックスで射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人Ｖ射精]]
+IF TALENT:ＮＴＲ度 && MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:6
+		PRINTFORML 「いやっ…%CSTR:二人称%の…子供なんかっ%UNICODE(0x2661)%……産みたくな………ぁんっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:5
+		PRINTFORML 「…やっ…そこはっ…あの人のっ%UNICODE(0x2661)%……ひゃぁっ………ぁ%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「…ダメ…なのにっ……妊娠なんてっ%UNICODE(0x2661)%……」
+		ELSEIF !RAND:3
+		PRINTFORML 「…あんっ%UNICODE(0x2661)%だめっ…ぁっ…もうそこは%CSTR:二人称%のじゃ%UNICODE(0x2661)%！…あっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぇ…やっ！…だ…ダメっ%UNICODE(0x2661)%…………ぁぁ……んっ%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…射精てる…っ………トクトクって…%UNICODE(0x2661)%………………安心する…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		IF !RAND:4
+		PRINTFORML もうすぐ射精るので%CALLNAME%を両肩を押さえて腰を激しく早く打ち付け始める。
+		PRINTFORML それで悟った%CALLNAME%は、必死に身じろぎしながら拒否の言葉を連ねる。
+		PRINTFORML が、身体の方は%CALLNAME:MASTER%の精液を欲していたようでむしろ%CALLNAME:MASTER%の腰を足で絡めて固定していた。
+		PRINTFORMW 実は欲しがっていた事に驚く%CALLNAME%だったが、そうこうしている内に%CALLNAME:MASTER%は望み通りに子宮にザーメンをぶちまけた…
+		ELSEIF !RAND:3
+		PRINTFORML %CALLNAME:MASTER%は後背位で暴発寸前をペニスを突き入れ続け、それに弱弱しく抵抗する%CALLNAME%を無視してそのまま膣内射精した。
+		PRINTFORML 勢いよく吐き出された精液は開門していた子宮口を素通りし、次々と子宮内へと溜まっていった。
+		PRINTFORML 流石に強引過ぎたかと思い%CALLNAME%の顔を伺ってみると、蕩けた表情で幸せそうに身震いしていた。
+		PRINTFORMW ふと視線が合うと、%CALLNAME%は「もっと」という意思を伝えるかのように膣内を締め付け始めた…
+		ELSEIF !RAND:2
+		PRINTFORML 上から腰を振り続けていた%CALLNAME%だったが、寝そべる%CALLNAME:MASTER%が射精間近なのを震えで感じ取る。
+		PRINTFORML 今の子宮は%CSTR:ＮＴＲキャラ名%専用なので引き抜こうと思った%CALLNAME%だが、何故か腰の動きが止まらない。
+		PRINTFORML 困惑している間に%CALLNAME:MASTER%は限界に達し、子宮目がけて射精してしまった。
+		PRINTFORML 本来なら嫌なはずなのに「嬉しい」という感情が湧いて出てきて、まだ自分はこの人のことを主人として認めているのだと再認識してしまった。
+		PRINTFORMW そうなるともう抵抗はできず射精が終わるまでの間、%CALLNAME%は流れてくる精液の感覚を「嬉々」として受け入れていた…
+		ELSE
+		PRINTFORML お互い興奮高められているせいか、互いにろくに会話もせず膣内射精の準備を始めた。
+		PRINTFORML %CALLNAME%もほぼ無意識なのか、歓迎の体勢として両腕両足を%CALLNAME:MASTER%の体に絡ませる。
+		PRINTFORML そして放たれた遺伝子達を膣内を締め付けて逃げ場をなくし、一滴残らず子宮へと収めた。
+		PRINTFORMW %CALLNAME%は全て終わったあと、遅れて自身の求愛行動に驚き赤面していた…
+		ENDIF
+ELSE
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人Ｖ射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 欲望のまま放たれる%CALLNAME:MASTER%の遺伝子を、%CALLNAME%は従順に子宮で受け止める。
+				PRINTFORML 蹂躙するがのごとく子宮の中を飛びはねドクドクと満たす感覚に%CALLNAME%もまた快感に浸る。
+				PRINTFORMW 射精が終わるまでの間、二人は痙攣しながら身体を押し付け合った…
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 欲望のまま放たれる%CALLNAME:MASTER%の遺伝子を、%CALLNAME%は発情した雌のように子宮で受け止める。
+				PRINTFORML 蹂躙するがのごとく子宮の中を飛びはねドクドクと満たす感覚に%CALLNAME%もまた快感に浸る。
+				PRINTFORMW 射精が終わるまでの間、二人は痙攣しながら身体を押し付け合った…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML %CALLNAME:MASTER%の震えに射精が間近だと悟ると、受けていた快楽を全て跳ねのけ%CALLNAME%は暴れ出した。
+				PRINTFORML しかし、先ほどまでの快楽攻めに力が上手く入らないのか、その抵抗力はさほど強くなかった。
+				PRINTFORML そして今までで一番強く肉棒を打ち付けると、子宮の中へ精液を吐きだした。
+				PRINTFORML 速く抜こうとする%CALLNAME%だったか、%CALLNAME:MASTER%に腰を掴まれているため上手く引き抜くことができない。
+				PRINTFORMW その間も注ぎこまれ続ける遺伝子に子宮が満たされたことを感知すると、%CALLNAME%は項垂れるように抵抗を止めた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 妊娠にリスクを伴うというのに、%CALLNAME%は一切の抵抗もなく膣内射精を受け止めた。
+				PRINTFORML 小さな子宮には治まり切れない白濁液は、溢れかえって膣内を汚し始める。
+				PRINTFORMW 暫くの間%CALLNAME%は子宮の熱さに震え、射精の余韻に浸る%CALLNAME:MASTER%を抱きしめた…
+			
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+			IF TALENT:ＮＴＬ == 1
+				IF RAND:3 == 0
+					PRINTFORML 激しい肉音を響かせながら、もはや秒読みとなった種付けの前に%CALLNAME:MASTER%は人妻である%CALLNAME%に中か外か質問する。
+					PRINTFORML それにまるで当然とばかりに膣内を即答する%CALLNAME%、許可も得たということで子宮口に亀頭を押し付け容赦なく種付けを行った。
+					PRINTFORML ドクドクと子宮に直接流れ込んでくる精液に、%CALLNAME%は声も出ないほどの絶頂で身体をピクピクと痙攣させる。
+					PRINTFORML 疲労で二人ともベッドに倒れ伏し、射精と絶頂により二人は心地よい脱力感に包まれる。
+					PRINTFORML 
+					PRINTFORML ふと%CALLNAME:MASTER%は「もし妊娠したら夫にどう説明するか」と尋ねてみると。
+					PRINTFORML 「…説明なんていらない%CSTR:語尾応答2%、デきた後で適当に中出しさせれば勝手に勘違い%CSTR:語尾問う2%」
+					PRINTFORMW とピストンを再開していた%CALLNAME%は、熱心に腰を振りながら夫のことをさっきまで忘れていたかのように答えた…
+				ELSEIF !RAND:2
+					PRINTFORML 夫ではなく%CALLNAME:MASTER%のペニスの形を覚えた%CALLNAME%の膣内は、吐き出された精液を貪欲に取り込んでいく。
+					PRINTFORML 夫に何度射精されても反応しなかった子宮も、水を得た魚のように動きが活発になり逞しい精子たちを歓迎する。
+					PRINTFORML 種付けされた%CALLNAME%自身も蕩けた顔で%CALLNAME:MASTER%に愛を囁き、甘えるように四肢を絡め更なる生殖行為を求める。
+					PRINTFORMW それに応えるようにピストン再開してやると%CALLNAME%は嬉しそうに喘ぎ始め、肉棒に奉仕するべく膣内をきつく締め付けた…
+				ELSE
+					PRINTFORML 射精間近となった%CALLNAME:MASTER%は、このまま種付けしようと強い打ち付けで激しいピストンを繰り返す。
+					PRINTFORML それを察知したのか人妻のはずの%CALLNAME%は媚びた声を出しながら腰を振り膣内射精を強請り始める。
+					PRINTFORML そして特濃精液が肉棒から解き放たれ、夫のスペースなど無いとばかりに子宮の中を白く埋め尽くす。
+					PRINTFORMW 種付けによる多幸感に満たされた%CALLNAME%の脳内には、既に夫の姿は微塵も存在してはいなかった…
+				ENDIF
+			ELSE
+				IF RAND:3 == 0
+					PRINTFORML 射精を始めようとする%CALLNAME:MASTER%の腰に脚を絡め、%CALLNAME%は中出しを強要させる。
+					PRINTFORML 限界まで膨れ上がった肉棒から放たれる精液で、子宮を犯される快楽に%CALLNAME%は震えた。
+					PRINTFORMW 孕ませられる雌の悦びに浸りながら、%CALLNAME%は遺伝子で満ちたお腹を愛おしそうにさすった…
+				ELSEIF !RAND:2
+					PRINTFORML %CALLNAME:MASTER%は交尾の最終目的である種付けをするべく、亀頭で子宮口をこじ開けて遺伝子を吐き出した。
+					PRINTFORML 望まれて出された遺伝子達は当人たちの思いに応えるべく、必死に卵子に向けて泳ぎだす。
+					PRINTFORMW 子を成すことを望む%CALLNAME%は、愛する人の遺伝子が無事受精することを祈った…
+				ELSE
+					PRINTFORML 大量の種付けを終え一度ペニスを引き抜くと、秘所からは入りきらなかった精液があふれ出てきた。
+					PRINTFORMW もったいなさそうに、%CALLNAME%は指で溢れる精液を指で膣内へとかき戻していった…
+				ENDIF
+			ENDIF
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF !RAND:3
+				PRINTFORML ペニスが射精を迎えようしているのが分かったのか、中出しを拒絶するように%CALLNAME%は抵抗する。
+				PRINTFORML しかし%CALLNAME:MASTER%に組み伏せられているいのでペニスを抜くことができず、そのまま射精されてしまう。
+				PRINTFORMW 本人は嫌がりながらも、意識とは無関係に雌の身体は植えつけられる精子に喜んでいた…
+				ELSEIF !RAND:2
+				PRINTFORML 子宮に送り込まれ濃厚に絡みつく白濁液を、%CALLNAME%は沈んだ眼のまま受け入れる。
+				PRINTFORML 思考はこの遺伝子達が自分の遺伝子と交わることがないことをひたすら祈り続けるのみ。
+				PRINTFORMW しかし未だに吐き出される精液の量にその願いも薄まりつつあった…
+				ELSE
+				PRINTFORML %CALLNAME%の意志などお構いなしに、%CALLNAME:MASTER%は子宮へ種付けを行う。
+				PRINTFORML 涙を堪えて耐える%CALLNAME%を見て、自分色に染め上げる征服感を満たしていく。
+				PRINTFORMW あとは快楽を受け入れさせるべく、%CALLNAME:MASTER%は腰を動かし始めた…
+				ENDIF
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,主人手射精 (手で射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人手射精]]
+
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人手射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……んっ」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふふっ……」
+		ELSE
+		PRINTFORML 「……あっ」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 手や顔にかかった精液を、%CALLNAME%は奇麗に舐めとっていく。
+				PRINTFORMW もう味にも慣れてしまったのか表情も欲情したままであった…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ……」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 射精して飛び出した白濁液を、%CALLNAME%は拒むように手でさえぎる。
+				PRINTFORMW 手にかかった精液を、嫌そうにシーツに擦り付けた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…ぁ……あはっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふふっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…っ…あんっ%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:3 == 0
+				PRINTFORML 射精寸前に%CALLNAME%は口を大きく開け、舌で思い切り吐き出された精液を受け止める。
+				PRINTFORML %CALLNAME:MASTER%の射精が終わると、クチャクチャと美味しそうに咀嚼した後コクンと飲み込んだ。
+				PRINTFORMW 舌を出して飲んだことをアピールするとちょっと恥ずかしそうに微笑んだ…
+				ELSEIF !RAND:2
+				PRINTFORML %CALLNAME%は飛び出した精液を片手で受け止め、掌には一杯の精液で出来た水たまりが完成する。
+				PRINTFORML それを%CALLNAME%は一気に飲み干し、残った分を奇麗に舐めとっていった。
+				PRINTFORMW それでも足りないのか上目遣いで手淫しながら、物欲しそうに次の射精を強請った…
+				ELSE
+				PRINTFORML 手や顔を奇麗に掃除した後、%CALLNAME%はペニスを扱いて残り汁を舐めとる。
+				PRINTFORMW 未だ勃起する%CALLNAME:MASTER%の肉棒見て、その逞しさに見惚れていた…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……んっ」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふふっ……」
+		ELSE
+		PRINTFORML 「……あっ」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 受け止めた精液を%CALLNAME%は舌で舐めるように掃除していく。
+				PRINTFORMW 最後に%CALLNAME:MASTER%の亀頭に残った分をぺロリと回収した…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ……」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORMW %CALLNAME:MASTER%は手についた精液を舐めろと%CALLNAME%に命令する。
+				PRINTFORMW 嫌悪が見て取れる表情をしていたが、指示通り不味そうに舐めとっていった…
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,主人口射精 (口で射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人口射精]]
+IF TALENT:ＮＴＲ度 && MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「……んっ……んく…………コクン…っ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「んんっ！？………んくっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+		PRINTFORML 「コクッ……ごくんっ……ふぁっ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…っ！……んっ………ごきゅっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……ごくんっ……んー……こくっ……%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		IF !RAND:4
+		PRINTFORML 口内射精されないようペニスから口を離そうとした%CALLNAME%だったが、%CALLNAME:MASTER%に頭を押さえられそのままザーメンを吐き出されてしまった。
+		PRINTFORML 最初は拒もうと口の隙間から吐き出そうとしたが、ドロドロの%CALLNAME:MASTER%の雄汁を何故か拒めず次々に飲み込んでいった。
+		PRINTFORMW 心地よさと火照りが%CALLNAME%を襲い拒否できなくなった%CALLNAME%は、結局吐き出された全てのザーメンを飲み乾した…
+		ELSEIF !RAND:3
+		PRINTFORML 待ちかねていたかのようにペニスから吐き出された精液を、%CALLNAME%は喉から音を鳴らして飲み始めた。
+		PRINTFORML 愛している%CSTR:ＮＴＲキャラ名%の時はこうはならなかったのに、今は喉の渇きを癒すようにザーメンを受け止め続ける。
+		PRINTFORMW 射精があらかた終わると、お替りを強請るように上目遣いで未だ勃起する肉棒を咥え始めた…
+		ELSEIF !RAND:2
+		PRINTFORML 射精が終わると%CALLNAME%はペニスを引き抜き、口に溜まった新鮮な精液を吐き出そうとする。
+		PRINTFORML しかし、それを吐き出すことが出来ずに、ゴクンと喉を鳴らして胃に収めてしまった。
+		PRINTFORML その後彼女の表情は少し拗ねたような…だが頬を赤らめて欲情しているのが見て分かった。
+		PRINTFORMW まだ尿道に残っているのもあるので%CALLNAME%の顔に肉棒を近づけると、一瞬戸惑ったが口に含んで掃除を始めた…
+		ELSE
+		PRINTFORML %CSTR:ＮＴＲキャラ名%の精液で汚れていた口内を、%CALLNAME:MASTER%の新しい精液で上書きしていく。
+		PRINTFORML その行為を察したのか、%CALLNAME%は%CALLNAME:MASTER%をジト目で睨み付ける。
+		PRINTFORMW だが流れ込んでくる精液は飲み込み、身体も火照って秘所から愛液を垂らしていた…
+		ENDIF
+
+ELSE
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人口射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「……んぐっ……コクン…っ…」
+		ELSEIF !RAND:4
+		PRINTFORML 「んっ…んっ………っ…ん…」
+		ELSEIF !RAND:3
+		PRINTFORML 「コクッ……ごくんっ……ふぁっ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁむっ……んっ…ごきゅっ……」
+		ELSE
+		PRINTFORML 「……ごくんっ……んー……こくっ……」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 突然の射精にも慣れた%CALLNAME%は、特に咽る事もなく吐き出された精液を飲み込む。
+				PRINTFORMW その独特の感触や喉越しにも慣れてきたたようだ…
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「……んぐっ……コクン…っ…」
+		ELSEIF !RAND:4
+		PRINTFORML 「んっ…んっ………っ…ん…」
+		ELSEIF !RAND:3
+		PRINTFORML 「コクッ……ごくんっ……ふぁっ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁむっ……んっ…ごきゅっ……」
+		ELSE
+		PRINTFORML 「……ごくんっ……んー……こくっ……」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 突然の射精に驚きながらも、%CALLNAME%はこくこくと喉を鳴らしながら吐き出された精液を飲み込む。
+				PRINTFORMW これでいいかと尋ねるように、%CALLNAME%は口を大きく空けて飲み込み終わったことを示してきた。
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「……んぐぅっ…！？……ゲホッ…ケホッ……」
+		ELSEIF !RAND:4
+		PRINTFORML 「ごふっ……んぐっ…がっ……んっ……」
+		ELSEIF !RAND:3
+		PRINTFORML 「ガハッ……ハーッ…ハー…ッ………」
+		ELSEIF !RAND:2
+		PRINTFORML 「…グッ…んっ…ケホッ……ふー…っ……」
+		ELSE
+		PRINTFORML 「…ッ……カボッ！？…カ…ハァッ！……ッー…ハアァー……ハー…」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML いきなり口の中で出された精液を吐きだし、%CALLNAME:MASTER%を睨みつける。
+				PRINTFORMW 置いてあった水で口を濯ぐと未だ残る味に眉を歪ませていた…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「…んっ……ごくっ……はぁー…っ…%UNICODE(0x2661)%」
+		ELSEIF !RAND:4
+		PRINTFORML 「んっ…んっ……はぁっ……ごくっ…ごくっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+		PRINTFORML 「コクッ……ごくんっ%UNICODE(0x2661)%……ふぁっ…んっ……んんっ…」
+		ELSEIF !RAND:2
+		PRINTFORML 「…じゅるっ……んっ…ぢゅー……ごきゅっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……ごくんっ…%UNICODE(0x2661)%…ぢゅるるるっ……んっ……%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:3 == 0
+				PRINTFORML 肉棒を%CALLNAME%の喉まで突き入れると、そのまま射精する。
+				PRINTFORML 直接喉に流し込まれる感覚に咽ないよう%CALLNAME%は必死に耐える。
+				PRINTFORMW 全て飲みきれた事を頭を撫でて褒めてやると、涙を堪えていた%CALLNAME%はすぐに笑顔になった…
+				ELSEIF !RAND:2
+				PRINTFORML 口に出され続ける%CALLNAME:MASTER%の精液を%CALLNAME%は欲情した顔で飲み干す。
+				PRINTFORML 尿道に残った分も勢いよく吸って吸いだし、全て胃の中に収める。
+				PRINTFORMW だが喉の熱さに当てられ、欲情する%CALLNAME%は再びペニスを咥え奉仕を続けた…
+				ELSE
+				PRINTFORML ペニスから吐き出されるザーメンを飲み干し、%CALLNAME:MASTER%の余韻も治まった。
+				PRINTFORMW だが、それでも%CALLNAME%はストロークを続け、次の射精を所望している…
+				ENDIF
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「……んっ……んく……コクン…っ…」
+		ELSEIF !RAND:4
+		PRINTFORML 「んっ…んっ………っ…ん…」
+		ELSEIF !RAND:3
+		PRINTFORML 「コクッ……ごくんっ……ふぁっ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ぁむっ……んっ…ごきゅっ……」
+		ELSE
+		PRINTFORML 「……ごくんっ……んー……こくっ……」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORMW 吐き出され続ける精液を何度も飲み込み、当然のように全て飲み干してしまう。
+				PRINTFORMW 問題なく飲めるようになった事に、%CALLNAME%は少し得意気に%CALLNAME:MASTER%を見つめた…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:5
+		PRINTFORML 「……んぐぅっ…！？……ゲホッ…ケホッ……」
+		ELSEIF !RAND:4
+		PRINTFORML 「ごふっ……んぐっ…がっ……んっ……」
+		ELSEIF !RAND:3
+		PRINTFORML 「ガハッ……ハーッ…ハー…ッ………」
+		ELSEIF !RAND:2
+		PRINTFORML 「…グッ…んっ…ケホッ……ふー…っ……」
+		ELSE
+		PRINTFORML 「…ッ……カボッ！？…カ…ハァッ！……ッー…ハアァー……ハー…」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 口の中を満たそうとする精液を、肉棒を咥えている状態では吐き出すわけにもいかず飲み込んでしまう。
+				PRINTFORML ふっきれ一々濯ぐにも面倒になった%CALLNAME%は一気に残りを飲み込む。
+				PRINTFORMW 涙目で%CALLNAME:MASTER%を睨む%CALLNAME%だったが、命令されて渋々ペニスを掃除している…
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,主人胸射精 (胸で射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人胸射精]]
+IF TALENT:ＮＴＲ度 && MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…ぁ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「………%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…んっ%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+		IF !RAND:4
+		PRINTFORML %CALLNAME:MASTER%の射精感は限界に達し、%CALLNAME%の胸に精液を吐き出し白く染め上げる。
+		PRINTFORML 普通不快に思うはずだが、%CALLNAME%は胸にべたつくザーメンに手を付けるとネチャネチャと弄び始めた。
+		PRINTFORMW 最後に指に付いたのを口へと運び綺麗に舐めとる、「不味い」という感想は一切起きなかった…
+		ELSEIF !RAND:3
+		PRINTFORML ぶちまけられた精液が%CALLNAME%の胸を汚し、雄汁でマーキングされていく。
+		PRINTFORML %CALLNAME:MASTER%に支配されることに満たされた感覚を覚え、%CALLNAME%は電気が走ったかのように身体を弾ませた。
+		PRINTFORMW 愛する%CSTR:ＮＴＲキャラ名%に詫びながら、ザーメンでべたつくペニスをおいしそうに頬張ってしゃぶり始めた…
+		ELSEIF !RAND:2
+		PRINTFORML 射精されたザーメンにより、胸だけでなく手や顔にも当たってベッタリとこべりつく。
+		PRINTFORML %CSTR:ＮＴＲキャラ名%との燃えるような熱さではなく暖かいという感情が沸き起こり、%CALLNAME%は不快感もなくペニスを舐め始めた。
+		PRINTFORML それを見て%CALLNAME:MASTER%はまだ%CALLNAME%の中に自分が存在していることを確信する。
+		PRINTFORMW 頭を撫でてやると、ちょっと困ったようでしかし嬉しそうな表情でこちらを見つめた…
+		ELSE
+			IF TALENT:巨乳  || TALENT:爆乳
+			PRINTFORML %CALLNAME%の豊満な乳房の谷間に埋もれている肉棒から精液が吐き出される。
+			PRINTFORML びゅくびゅくと谷間の中をザーメンで満たしていき、収めきれなくなった分が谷間から溢れてダムを造る。
+			PRINTFORML 一度ペニスを引き抜くと、ダムが決壊したことで谷間からダラダラと零れ始め、その姿はとても淫らだった。
+			PRINTFORML %CALLNAME%は両脇から乳房を押さえて谷間を圧迫させると、こねるように動かしていく。
+			PRINTFORML そして手を離すとザーメンが卑猥に糸を引いてべた付いていた。
+			PRINTFORMW 肝心の%CALLNAME%は%CSTR:ＮＴＲキャラ名%より多い精液の量に関心しているようだった…
+			ELSE
+			PRINTFORML 胸に張り付いたザーメンを、%CALLNAME:MASTER%が手で広げるようにコーティングしていく。
+			PRINTFORML %CALLNAME%はそれをまじまじと見つめ、しかし嫌がることなく最後まで受け入れていた。
+			PRINTFORMW どうやらこのような事をしても許せる程度には愛は残っているようだ…
+			ENDIF
+		ENDIF
+
+
+ELSE
+
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人胸射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……んっ」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふふっ……」
+		ELSE
+		PRINTFORML 「……あっ」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML %CALLNAME%は自ら胸を差し出して、放たれるザーメンを受け止める。
+				PRINTFORMW 精液で汚され、自身は%CALLNAME:MASTER%のモノであることを興奮しながら再確認していた…
+			;それ以外
+			ELSE
+				PRINTFORML 吐き出された%CALLNAME:MASTER%の精液が%CALLNAME%の胸や乳首を汚す。
+				PRINTFORMW 気持ち悪そうにしているが抵抗はできずされるがままに汚されていった…
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…ぁ……あはっ%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふふっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…っ…あんっ%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:3 == 0
+				PRINTFORML 勢いよく射精して吐き出されたザーメンを、%CALLNAME%は胸で全て受け止める。
+				PRINTFORML そして手で胸全体に潤滑油として淫靡にコーティングしていく。
+				PRINTFORMW コーティングが終わると、先ほど以上に滑りが良くなった胸で肉棒の奉仕を再開した…
+				ELSEIF !RAND:2
+				PRINTFORML 大量の精液で汚された胸を%CALLNAME%は嬉しそうに眺め、指で撫でて絡め付いた精液を舐めとっていく。
+				PRINTFORML %CALLNAME%が舐めている間に、%CALLNAME:MASTER%は乳首に亀頭を押し付けて残りの分を出そうとする。
+				PRINTFORMW 舐めとりが終わると、ペニスを口に含んで残りを吸いあげていった…
+				ELSE
+				IF TALENT:巨乳  || TALENT:爆乳
+				PRINTFORML %CALLNAME:MASTER%は絶頂寸前に豊満な乳房を掴み、柔らかな圧迫感に包まれて谷間の中で射精した。
+				PRINTFORML 谷間に堪った精液を胸で上下交互に動かし、谷間をザーメンでベトベトにさせていく。
+				PRINTFORMW 暫くして胸を広げると、広がった精液が糸を引いて谷間を汚していた…
+				ELSE
+					IF TALENT:貧乳  || TALENT:絶壁
+					PRINTFORML 胸板に擦りつけられていた%CALLNAME:MASTER%の肉棒から勢いよく白濁液が吐き出される。
+					PRINTFORMW 射精の余韻を長くさせようと、%CALLNAME%は乳首擦りつけて痙攣を繰り返すペニスを愛撫し続けた…
+					ELSE
+						PRINTFORML 谷間を白濁液が纏わりつき、%CALLNAME%がギュッと胸元を締めると溜まり場が作られる。
+						PRINTFORMW そこから手ですくい上げると、恍惚とした表情で口に含んでいった…
+					ENDIF
+				ENDIF
+				ENDIF  
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……んっ」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふふっ……」
+		ELSE
+		PRINTFORML 「……あっ」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML ベチャベチャと胸を汚したザーメンを、%CALLNAME%は指で取って口に含んでいく。
+				PRINTFORMW 恍惚とした表情で繰り返し、取り終わるとペニスを乳首に押し当てて奉仕を再開した…
+			;それ以外
+			ELSE
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		PRINTFORML 「…っ……」
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 飛び出した粘つく白濁液が%CALLNAME%の胸を白く染めていく。
+				PRINTFORMW %CALLNAME%は絡みついた精液を手で絡め取ると、ネチャネチャとする白濁液を眺めていた…
+			ENDIF
+		ENDIF
+ENDIF
+	;-------------------------------------------------
+	;xxx,主人秘裂射精 (秘裂で射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人秘裂射精]]
+
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人秘裂射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,主人足射精 (足で射精させた)
+	;-------------------------------------------------
+	CASE [[口上:主人足射精]]
+
+		;初めて
+		IF C_FIRSTTIME_KOJO([[口上:主人足射精]])
+			;隷属開始
+			IF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		;二回目以降
+		ELSE
+			;陥落開始
+			IF MARK:陥落刻印
+				;PRINTFORMW 
+			;隷属開始
+			ELSEIF MARK:隷属刻印
+				;PRINTFORMW 
+			;それ以外
+			ELSE
+				;PRINTFORMW 
+			ENDIF
+		ENDIF
+
+	;-------------------------------------------------
+	;※ 該当無し
+	;-------------------------------------------------
+	CASEELSE
+		RETURN
+ENDSELECT
+RETURN
+
+;=================================================
+;   sub KOJO_PALAMCHG_Kxxx
+;=================================================
+;   キャラ口上:各種PALAM変動時
+;-------------------------------------------------
+; Input:
+;  ARG					対象PALAM
+;-------------------------------------------------
+@KOJO_DEFAULT_PALAMCHG_K1(ARG)
+
+;-- CHK:対象PALAM
+SELECTCASE ARG
+	;-------------------------------------------------
+	;xxx,刻印取得(反発刻印Lv3)
+	;-------------------------------------------------
+	CASE [[口上:刻印取得_反発刻印最大]]
+		;陥落開始
+		IF MARK:陥落刻印
+			PRINTFORML %CALLNAME%は複雑な愛憎籠った顔で%CALLNAME:MASTER%を見つめる。
+			PRINTFORMW 心から愛しているが憎んでもいると矛盾した感情に翻弄されているようで、その瞳は涙を滲ませて揺らいでいた…
+		;隷属開始
+		ELSEIF MARK:隷属刻印
+			PRINTFORML 忠誠よりも怒りが勝ってしまったようで、%CALLNAME%は%CALLNAME:MASTER%を強く睨みつけた。
+			PRINTFORMW まだ明確な殺意が無い分行動次第では取り払う事が出来るだろうと、%CALLNAME:MASTER%はリカバリーを考え始めた…
+		;それ以外
+		ELSE
+			PRINTFORML 何かが%CALLNAME%の限界を超えてしまったのか、幽鬼の如き表情で%CALLNAME:MASTER%を睨んだ。
+			PRINTFORMW 憎悪を孕んだその強烈な凄みに、つい%CALLNAME:MASTER%もたじろぐ程だった…
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,素質取得(服従)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_服従]]
+		PRINTFORML プツンと何かが切れたような表情で固まった後、膝を折る%CALLNAME%は%CALLNAME:MASTER%を見上げた。
+		PRINTFORMW %CALLNAME:MASTER%をこの身を仕えるべき主として認めたようで、完全に屈服仕切った顔だった…
+
+	;-------------------------------------------------
+	;xxx,素質取得(恋慕)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_恋慕]]
+		;ＮＴＬ
+		IF   TALENT:ＮＴＬ == 1
+			PRINTFORML %CALLNAME%は顔を紅らめて%CALLNAME:MASTER%を強い愛情の籠った瞳で見つめている。
+			PRINTFORML 既に自分の全てを%CALLNAME:MASTER%に捧げ愛している物と思っていた%CALLNAME%だったが
+			PRINTFORMW 心の奥に僅かに残った夫への想いも完全に消え去り身も心も%CALLNAME:MASTER%だけのものになったようだ…
+		;結婚済み
+		ELSEIF TALENT:結婚済み == 1 
+			PRINTFORML %CALLNAME%は夫よりも%CALLNAME:MASTER%の事を好きになってしまったようで
+			PRINTFORML 頬を紅く染め%CALLNAME:MASTER%を潤んだ瞳で見つめてくる、だがすぐに愛する夫を
+			PRINTFORMW 身体だけでは無く心まで裏切ってしまう事を思ったのか%CALLNAME%は罪悪感に表情を暗く沈ませてしまう…
+		;それ以外
+		ELSE
+			PRINTFORML %CALLNAME%は顔を赤らめて%CALLNAME:MASTER%を潤んだ瞳で見つめている。
+			PRINTFORMW 快楽を貪る牝としてではなく、その様は恋に身を焦がす乙女のようだ…
+		ENDIF
+
+	;-------------------------------------------------
+	;xxx,素質取得(淫乱)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_淫乱]]
+		PRINTFORML %CALLNAME:MASTER%との度重なる行為の影響か、%CALLNAME%は恍惚の表情で欲情し続けている。
+		PRINTFORMW 過度の快楽に身を染めて、もはや通常量の快楽では満足できなくなったようだ…
+
+	;-------------------------------------------------
+	;xxx,素質取得(キス魔)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_キス魔]]
+		PRINTFORML キスという愛情表現に魅了されたのか、%CALLNAME%は先ほどから口付けを強請っている。
+		PRINTFORMW 濃厚なものを一つしてやると、顔はトロンとした表情で緩みきっていた…
+
+	;-------------------------------------------------
+	;xxx,素質取得(セックス狂)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_セックス狂]]
+		PRINTFORML 一度絶頂したのにも関わらず、%CALLNAME%は未だ絶頂の余韻が残るであろう身体を再び動かし始める。
+		PRINTFORMW 笑みを零しながら喘ぎ続けるところから、交わることの快楽に溺れきったようだ…
+
+	;-------------------------------------------------
+	;xxx,素質取得(自慰狂い)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_自慰狂い]]
+		;PRINTFORMW 
+
+	;-------------------------------------------------
+	;xxx,素質取得(尻穴狂い)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_尻穴狂い]]
+		;PRINTFORMW 
+
+	;-------------------------------------------------
+	;xxx,素質取得(心酔)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_心酔]]
+		;PRINTFORMW 
+
+	;-------------------------------------------------
+	;xxx,素質取得(愛人)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_愛人]]
+		;PRINTFORMW 
+
+	;-------------------------------------------------
+	;xxx,素質取得(情婦)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_情婦]]
+		;PRINTFORMW 
+
+	;-------------------------------------------------
+	;xxx,素質取得(調教済み)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_調教済み]]
+		;PRINTFORMW 
+
+	;-------------------------------------------------
+	;xxx,素質取得(同性愛)
+	;-------------------------------------------------
+	CASE [[口上:素質取得_同性愛]]
+		;PRINTFORMW 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	;-------------------------------------------------
+	;※ 該当無し
+	;-------------------------------------------------
+	CASEELSE
+		RETURN
+ENDSELECT
+RETURN
+
+

@@ -1,0 +1,81 @@
+﻿;-------------------------------------------------
+;調査区域選択
+;-------------------------------------------------
+@RPG_STAGESELECT
+#DIM L_INPUT
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 조사할 구역을 선택하세요。
+DRAWLINE
+PRINTFORML ――――――――――기본 조사 구역――――――――――
+PRINTLC [0] 【Lv0:도시 경계선】(습격 없음)　[1] 【Lv1:무법 구역】
+PRINTFORML
+PRINTLC [2] 【Lv2:타락한 도시】(엄중 경계)　[3] 【Lv3:위험 구역】
+PRINTFORML
+PRINTFORML [4] 【Lv4:광기의 폐도시】(불가침 경고)
+PRINTFORML [5] 【Lv5:완전 침식 구역[현대 미궁]】(독기 Lv1)
+PRINTFORML ――――――――――데일리 조사 구역――――――――――
+SIF Flag:日替わり区画難易度 != 0
+	PRINTFORML [90]【Lv{Flag:日替わり区画難易度}:어느 구획】(심도:{Flag:日替わり区画深度限界})
+PRINTFORML ――――――――――외신 활동 구역――――――――――
+PRINTFORML [50]【LvXX:모래먼지의 수도】(독기 Lv7)
+PRINTFORML [999] 그만둔다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	Flag:調査区域 = 0
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 0
+CASE 1
+	Flag:調査区域 = 1
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 0
+CASE 2
+	Flag:調査区域 = 2
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 0
+CASE 3
+	Flag:調査区域 = 3
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 0
+CASE 4
+	Flag:調査区域 = 4
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 0
+CASE 5
+	Flag:調査区域 = 5
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 3
+CASE 50
+	Flag:調査区域 = 50
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 15
+CASE 90
+	Flag:調査区域 = 90
+	Flag:調査深度 = 0
+	Flag:調査瘴気 = 0
+CASE 999
+	CALL RPG_MAIN
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+CALL RPG_MAIN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

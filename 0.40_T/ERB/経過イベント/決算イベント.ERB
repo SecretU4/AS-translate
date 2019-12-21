@@ -1,0 +1,99 @@
+﻿;-------------------------------------------------
+;決算イベント
+;-------------------------------------------------
+@TURN_EVENT_KSN(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_I
+#DIM H_H
+#DIM K_S
+
+H_H = 0
+K_S = 0
+
+Flag:都市_今期の貢献値 += FLAG:都市_貢献値持越し
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪안녕하세요「플레이어」、이번 분기의 결산을 실시겠습니다≫
+PRINTFORML ≪당신이 보유한 주민들의 합계 공헌치를 보고해드리죠≫
+DRAWLINE
+SIF FLAG:都市_貢献値持越し > 0
+	PRINTFORML ≪이월된 공헌도 {FLAG:都市_貢献値持越し}이 있습니다、이걸 이번 분기에 가산하겠습니다。≫
+PRINTFORML ≪이번 분기의 공헌도는 {Flag:都市_今期の貢献値}입니다。≫
+PRINTFORML ≪이 공헌도를 바탕으로 보너스를 지급합니다。≫
+PRINTFORML ≪당신에게 제공할 수 있는 보너스는 다음과 같습니다。≫
+DRAWLINE
+PRINTFORML [1]   【자금】(공헌도×3000)
+PRINTFORML [2]   【거주자 계급 부여】(필요:계급×500)
+PRINTFORML 
+PRINTFORML [900] 【미룬다】
+PRINTFORML 
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 1
+	K_S = 1
+	DRAWLINE
+	MONEY += (Flag:都市_今期の貢献値)*3000
+	PRINTFORML 자금 {(Flag:都市_今期の貢献値)*3000}을 획득했습니다。
+	PRINTFORML 
+	PRINTFORMW 
+CASE 2
+	K_S = 1
+	DRAWLINE
+	PRINTFORML 階級を上げる住人を選択して下さい。
+	DRAWLINE
+	ARGS:0 = 계급부여
+	CALL LIST_CHARA(ARGS:0)
+	L_INPUT = RESULT
+	L_I = RESULT
+	IF L_INPUT != 1000
+		IF TALENT:L_INPUT:NPC == 999
+			PRINTFORMW NPC는 선택할 수 없습니다
+			GOTO INPUT_LOOP
+		ELSEIF L_INPUT == 0
+			PRINTFORMW 아나타는 선택할 수 없습니다
+			GOTO INPUT_LOOP
+		ELSEIF (CFLAG:L_I:住人_階級*500) > Flag:都市_今期の貢献値
+			PRINTFORMW 공헌도가 부족합니다
+			GOTO INPUT_LOOP
+		ELSE
+			H_H = 0
+			REPEAT 8
+				TALENT:L_I:(3100+H_H) = 0
+				H_H += 1
+			REND
+			CFLAG:L_I:住人_階級 += 1
+			CFLAG:L_I:住人_貢献値 += 1
+			TALENT:L_I:(3100+(CFLAG:L_I:住人_階級)) = 1
+			PRINTFORML %CALLNAME:L_I%의 계급이 올랐습니다。
+			PRINTFORMW 공헌도 1 상승。
+		ENDIF
+	ELSEIF L_INPUT == 1000
+		GOTO INPUT_LOOP
+	ENDIF
+CASE 900
+	K_S = 0
+	FLAG:都市_貢献値持越し += Flag:都市_今期の貢献値
+	DRAWLINE
+	PRINTFORMW 이번엔 보너스를 넘기고、공헌도를 이월합니다。
+	DRAWLINE
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+IF K_S == 1
+	FLAG:都市_貢献値持越し = 0
+	Flag:都市_今期の貢献値  = 0
+ENDIF
+DRAWLINE
+PRINTFORML ≪이상으로 이번 분기의 결산을 마치겠습니다。≫
+PRINTFORMW ≪앞으로도 좋은 성과를 기대하죠。≫
+DRAWLINE
+	Flag:都市_今期の締め切り = 90
+
+
+
+
+
+

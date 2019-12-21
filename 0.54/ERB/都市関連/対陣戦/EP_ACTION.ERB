@@ -1,0 +1,186 @@
+;-------------------------------------------------
+;他プレイヤー干渉
+;-------------------------------------------------
+@EP_ACTION
+#DIM L_INPUT
+
+$INPUT_LOOP2
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪貴方の陣営が他「プレイヤー」から干渉されているようです≫
+PRINTFORML ≪このままだと貴方の管轄区画に悪影響が出るでしょう≫
+PRINTFORML ≪保有している住民で追撃することが出来ますが…如何しますか？≫
+DRAWLINE
+PRINTFORML [1] 武力防衛(スパイとの戦闘になります)
+PRINTFORML [2] 警備強化(全施設Lvの合計値×10で対抗、ブレ幅あり)
+PRINTFORML [3] 排除申請(資金{Flag:EP敵戦力*1000}必要、報酬なし)
+PRINTFORML
+PRINTFORML 
+PRINTFORML [999] - 戻る
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+Flag:EP追撃方法 = RESULT
+SELECTCASE L_INPUT
+CASE 1
+	DRAWLINE
+	PRINTFORMW ≪追撃させる配下を選択して下さい≫
+	CALL RPG_LIST_CHARA
+	L_INPUT = RESULT
+	SIF L_INPUT == 1000
+		GOTO INPUT_LOOP2
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO INPUT_LOOP2
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO INPUT_LOOP2
+	ELSEIF TALENT:L_INPUT:不在 == 1
+		PRINTFORMW 不在のため選択できません
+		GOTO INPUT_LOOP2
+	ELSE
+		Flag:調査キャラ = L_INPUT
+		DRAWLINE
+		PRINTFORMW ≪受諾しました、よい成果を期待しています≫
+		CALL RPG_BATTLE
+	ENDIF
+CASE 2
+	JUMP EP_COUNTER_CLEAR_KK
+CASE 3
+	IF MONEY >= Flag:EP敵戦力*1000
+		JUMP EP_COUNTER_CLEAR_HS
+	ELSE
+		PRINTFORMW 資金が不足しています。
+		GOTO INPUT_LOOP
+	ENDIF
+CASE 999
+	JUMP SYSTEM_MENU
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+;-------------------------------------------------
+;他プレイヤー干渉　警備強化
+;-------------------------------------------------
+@EP_COUNTER_CLEAR_KK
+#DIM S_P
+#DIM L_LOOP
+
+S_P = 0
+L_LOOP = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪了解しました、貴方が保有する施設の警備を強化し相手を捕らえます≫
+PRINTFORMW ≪さて、今回は上手くいくでしょうか≫
+DRAWLINE
+
+REPEAT 99
+		S_P += Flag:(4000+L_LOOP) 
+	L_LOOP += 1
+REND
+
+IF (S_P/2)+(RAND:(S_P+1)) >= Flag:EP敵戦力
+	JUMP EP_COUNTER_CLEAR
+ELSE
+	JUMP EP_COUNTER_MISS
+ENDIF
+
+;-------------------------------------------------
+;他プレイヤー干渉　排除申請
+;-------------------------------------------------
+@EP_COUNTER_CLEAR_HS
+#DIM S_P
+#DIM L_LOOP
+
+S_P = 0
+L_LOOP = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪了解しました、こちらで相手からの刺客を対処致しましょう≫
+PRINTFORMW ≪この選択による追撃ボーナスは発生しないので、予めご了承ください≫
+DRAWLINE
+
+
+
+CALL EP_RESET
+
+
+
+;-------------------------------------------------
+;他プレイヤー干渉　追撃成功
+;-------------------------------------------------
+@EP_COUNTER_CLEAR
+#DIM L_INPUT
+#DIM GET_POINT
+Flag:EP成否 = 1
+
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 50,250,250
+PRINTFORML ―――――――――――――――【追撃成功】―――――――――――――――
+RESETCOLOR
+DRAWLINE
+PRINTFORML ≪無事に干渉を阻止できましたね、スパイは無事鹵獲出来ました≫
+PRINTFORML ≪ルールに基づき、防衛側は鹵獲した侵入者の処遇を決めることが出来ます≫
+PRINTFORML ≪解放することも自身の陣営に引き抜くことも可能です、如何しますか？≫
+DRAWLINE
+PRINTFORML [0] - 所有する(住人入手)
+PRINTFORML [1] - 解放する(貢献値入手)
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	PRINTFORML ≪了解しました、スパイの全ての権利をあなたに移譲します≫
+	PRINTFORML ≪念のため再犯防止用の脳処理を施させて頂きます、ご了承ください≫
+	PRINTFORMW ≪ただし、他「プレイヤー」への忠誠等はそのままです、眷属化させるには苦労するでしょう≫
+	CALL CHARACTER_SCOUT1
+CASE 1
+	DRAWLINE
+	PRINTFORML ≪おや、解放するのですね、相変わらず優しい方ですね≫
+	PRINTFORMW ≪代わりに私のほうから貢献値をお渡し致します、次の決算でご活用ください≫
+	GET_POINT = Flag:EP敵戦力*20
+	Flag:都市_今期の貢献値 += GET_POINT
+	PRINTFORMW 貢献値{GET_POINT}を手に入れた。
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+CALL EP_RESET
+
+;-------------------------------------------------
+;他プレイヤー干渉　追撃失敗
+;-------------------------------------------------
+@EP_COUNTER_MISS
+#DIM L_INPUT
+
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 250,50,50
+PRINTFORML ―――――――――――――――【追撃失敗】―――――――――――――――
+RESETCOLOR
+DRAWLINE
+PRINTFORML ≪失敗してしまいましたね、相手の方が一枚上手だったのでしょう≫
+PRINTFORML ≪次は撃退できるよう、配下の育成に努めて下さい≫
+DRAWLINE
+PRINTFORMW
+
+
+CALL EP_RESET
+
+;-------------------------------------------------
+;他プレイヤー干渉　リセット
+;-------------------------------------------------
+@EP_RESET
+
+Flag:EP他プレイヤー干渉 = 0
+Flag:EP敵戦力 = 0
+Flag:EP追撃方法 = 0
+Flag:EP成否 = 0
+
+FLAG:ターン終了フラグ = 1
+
+JUMP SYSTEM_MENU
+

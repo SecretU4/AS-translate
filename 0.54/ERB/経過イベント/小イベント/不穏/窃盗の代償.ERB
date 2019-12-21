@@ -1,0 +1,161 @@
+;-------------------------------------------------
+;窃盗の代償
+;-------------------------------------------------
+@TURN_EVENT_NSM
+
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【窃盗の代償(カルマ):%CALLNAME%】
+
+PRINTFORML 小さな個人商店で買い物を楽しんでいた%CALLNAME%は店内に人の姿がないことに気がついた。
+PRINTFORML 他の買い物客はおらず、店員もレジ奥のスペースに行ったっきり戻ってこない。
+PRINTFORMW 店内には監視カメラもないのに危機感のない店員だと%CALLNAME%はあきれ返った。
+;カルマが30より大きいと窃盗ルートへ
+IF CFlag:住人_カルマ > 30
+	PRINTFORML 店員が戻ってくるのを待つうちに%CALLNAME%の中に邪念が湧き起こる。
+	PRINTFORML 今なら誰にも見つからずに商品を持っていけるのではないだろうか。
+	PRINTFORMW 悪魔の囁きに身をゆだねた%CALLNAME%は商品を鞄に隠すと、足早に店の出入り口へと向かった…
+	;窃盗の成功判定(70%の確率で成功)
+	IF RAND:100 >= 30
+		PRINTFORMW ……
+		PRINTFORML %CALLNAME%は誰にも見咎められることなく店から出ることに成功した。
+		PRINTFORML バレるかもしれないという緊張感に盗みが成功したという達成感。
+		PRINTFORMW そしてタダで手に入った商品に満足感を覚えながら%CALLNAME%は家路についた…
+		PRINTFORML 
+		IF CFLAG:住人_カルマ >= 98
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → 100
+			CFLAG:住人_カルマ = 100
+		ELSE
+			PRINTFORML %CALLNAME%のカルマが上昇した。
+			PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+3}
+			CFLAG:住人_カルマ += 3
+		ENDIF
+	;窃盗が失敗
+	ELSE
+		PRINTFORMW ……
+		PRINTFORML %CALLNAME%が店を出ようとしたところでタイミング悪く店員が戻ってきてしまった。
+		PRINTFORML 不自然に膨らんだ鞄と棚から減った商品に気がついた店員は%CALLNAME%を引き止める。
+		PRINTFORML 観念した%CALLNAME%は鞄から盗もうとした商品を取り出し店員に謝罪した。
+		PRINTFORMW 商品を受け取った店員は人目を避けるため%CALLNAME%をスタッフルームへと連れ込んだ…
+		;20%の確率で見逃してもらえる
+		IF RAND:100 >= 80
+			PRINTFORML 素直に商品を差し出したこと。逃げようとしなかったこと。反省していること。
+			PRINTFORMW %CALLNAME%の殊勝な態度を見た店員はキツイお説教をくらわせはしたが、特別に見逃してくれた…
+			PRINTFORML 
+			IF CFLAG:住人_カルマ < 100
+				PRINTFORML %CALLNAME%のカルマが上昇した。
+				PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+1}
+				CFLAG:住人_カルマ += 1
+			ENDIF
+		;見逃してもらえなかった
+		ELSE
+			PRINTFORML 「反省しているようだし、通報はしないであげてもいいけど……わかるよね？」
+			PRINTFORML %CALLNAME%の背後に回った店員は肩に回した手を襟口から差し込む。
+			PRINTFORML 拒絶しようとした%CALLNAME%だったが、通報して事を公にするぞと脅されれば強く拒むことは出来なかった。
+			PRINTFORML 「い、一度だけなら……」
+			PRINTFORMW 力なく項垂れて店員の申し出を受け入れた%CALLNAME%は、休憩用のソファに押し倒された…
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
+			PRINTFORML 
+			PRINTFORML %CALLNAME%の子宮にはすでに店員の精液がなみなみと注がれていたが、店員はセックスをやめようとはしなかった。
+			PRINTFORML 「ねえ、ボクたち相性いいと思わない？　今回だけといわずにさ、連絡先教えてよっ」
+			PRINTFORML 後背位でガンガンと%CALLNAME%に腰を打ちつけながら、店員は%CALLNAME%の連絡先を聞き出そうとする。
+			IF TALENT:巨乳 || TALENT:爆乳
+				PRINTFORML 店員の動きに合わせて前後に揺れる%CALLNAME%のたわわに実った胸を鷲掴みにし、ひしゃげるほどに力任せで胸を揉み扱く。
+			ELSEIF TALENT:貧乳 || TALENT:絶壁
+				PRINTFORML 性的興奮から勃起した%CALLNAME%の乳首を指先ですり潰すように弄びながら、腰の動きに合わせて指先の力に緩急をつける。
+			ENDIF
+			PRINTFORML それだけで短時間のうちに店員に仕込まれてしまった%CALLNAME%は絶頂を迎え、精液を少しでも多く受け入れるべく膣肉を痙攣させて
+			PRINTFORML 子宮へと精液を貪欲に飲み込んでいく。
+			PRINTFORML 「ほらっ、やっぱり身体の相性がいいよ。どうかな？　考え直してくれた？」
+			PRINTFORML 店員の問いかけに%CALLNAME%は弱弱しいものの、しっかりと首を横に振る。
+			PRINTFORML その様子を冷めた目で見つめていた店員は、急に興味がなくなった子どものように%CALLNAME%を放り出す。
+			PRINTFORMW 床に横たわる%CALLNAME%をそのままに、店員はシャワールームへと向かうと情事の汗を流し始めた…
+			PRINTFORML 
+			;60%の確率で窃盗の代償アフターのフラグが立つ
+			IF RAND:100 >= 40
+				PRINTFORML %CALLNAME%がシャワーを浴びる水音が部屋に漏れ聞こえてくると、店員は%CALLNAME%の鞄を漁りだす。
+				PRINTFORML 一度だけという約束だったが、あれだけ抱き心地のいい雌と出会うのは初めてだった。
+				PRINTFORML 手放したくない…そう思った店員は思わず行動に移していた。
+				PRINTFORML 大人しく連絡先を教えればいいものを、強情にも拒み続けた%CALLNAME%が悪いのだ。
+				PRINTFORML 身勝手な理由で自己弁護した店員は鞄から%CALLNAME%の身分証を取り出して個人情報を調べあげていく。
+				PRINTFORML %CALLNAME%を抱くだけでは終わらない、終わらせない。
+				PRINTFORML 必ずあの肉体を己だけのものにして、その子宮を自分専用の孕み袋にするのだ。
+				PRINTFORMW そう固く決意した店員はシャワールームから出てきた%CALLNAME%を何事もなかったように送り出した。
+				PRINTFORMW 無人となったスタッフルームに一人戻った店員は、自身のロッカーから作動中のカメラを取り出しほくそ笑んだ…
+				PRINTFORML 
+				IF CFLAG:住人_カルマ < 100
+					PRINTFORML %CALLNAME%のカルマが上昇した。
+					PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+1}
+					CFLAG:住人_カルマ += 1
+				ENDIF
+				;窃盗の代償アフターのフラグ
+				CFLAG:窃盗の代償アフター = 1
+			ELSE
+				PRINTFORML 店員は%CALLNAME%に二度と関わらないことを約束し、%CALLNAME%を解放した…
+				PRINTFORML 
+				IF CFLAG:住人_カルマ < 100
+					PRINTFORML %CALLNAME%のカルマが上昇した。
+					PRINTFORMW カルマ　{CFLAG:住人_カルマ} → {CFLAG:住人_カルマ+1}
+					CFLAG:住人_カルマ += 1
+				ENDIF
+				;窃盗の代償アフターのフラグを折る
+				CFLAG:窃盗の代償アフター = -1
+			ENDIF
+		
+		SIF CSTR:初えっち相手名 == ""
+			CSTR:初えっち相手名 = 個人商店の店員
+		SIF CSTR:初キス相手名 == "" 
+			CSTR:初キス相手名 = 個人商店の店員
+		SIF CSTR:初フェラ相手名 ==""
+			CSTR:初フェラ相手名 = 個人商店の店員
+		SIF CSTR:初絶頂相手名 ==""
+			CSTR:初絶頂相手名 = 個人商店の店員
+		SIF CSTR:初中出し相手名 ==""
+			CSTR:初中出し相手名 = 個人商店の店員
+		
+		TALENT:非処女 = 1
+		TCVAR:履歴_EXP_処女喪失 = 1
+		EXP:キス経験 += (RAND:2)+1
+		EXP:Ｂ経験 += (RAND:2)+1
+		EXP:Ｃ経験 += (RAND:2)+1
+		EXP:Ｖ経験 += (RAND:4)+1
+		EXP:フェラ経験 += (RAND:2)+1
+		EXP:性交経験 += (RAND:4)+1
+		EXP:絶頂経験 += (RAND:3)+1
+		EXP:精液経験 += (RAND:2)+1
+		EXP:膣射経験 += (RAND:4)+1
+		EXP:強姦経験 += (RAND:4)+1
+		EXP:苦痛快楽経験 += (RAND:3)+1
+
+		ENDIF
+	ENDIF
+;カルマが30以下の場合は思いとどまる
+ELSE
+	PRINTFORML 商品を持ち逃げされたらどうするのだろうかと思いながらも、%CALLNAME%は店員が戻ってくるまで気長に待つことにした。
+	PRINTFORMW 暫くして戻ってきた店員は待たせたことを詫び、いくつかオマケを付けてくれた…
+ENDIF
+
+
+RESETCOLOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

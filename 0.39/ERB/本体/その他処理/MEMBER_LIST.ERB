@@ -1,0 +1,230 @@
+;-------------------------------------------------
+;メンバーリスト
+;ARG:0 参照する番号FLAG側
+;ARG:1 参照する番号CFLAG側
+;-------------------------------------------------
+@MEMBER_LIST(L_FLAG_ID, L_CFLAG_ID)
+#DIM L_C_ID     ;登録番号
+#DIM L_FLAG_ID  ;参照FLAG
+#DIM L_CFLAG_ID ;参照CFLAG
+FOR L_C_ID, 0, CHARANUM
+	SIF CFLAG:L_C_ID:L_CFLAG_ID != FLAG:L_FLAG_ID
+		CONTINUE
+	PRINTFORM [%CALLNAME:L_C_ID%]
+NEXT
+
+;-------------------------------------------------
+;メンバーリスト
+;ARG:0 参照したいの変数番号
+;ARG:1 参照したいの値
+;-------------------------------------------------
+
+@MEMBER_LIST2(L_KEY_ID, L_KEY_VALUE)
+#DIM L_C_ID      ;登録番号
+#DIM L_KEY_ID    ;参照対象ID
+#DIM L_KEY_VALUE ;一致検索値
+#DIM L_CNT       ;カウント用
+L_CNT = 0
+FOR L_C_ID, 0, CHARANUM
+	SIF TALENT:L_C_ID:不在
+		CONTINUE
+	SIF CFLAG:L_C_ID:L_KEY_ID != L_KEY_VALUE
+		CONTINUE
+	PRINTFORM [%CALLNAME:L_C_ID%]
+	L_CNT ++
+NEXT
+FLAG:汎用変数 = L_CNT
+
+
+
+
+
+
+;-------------------------------------------------
+;メンバー合算
+;ARG:0 参照したいの変数番号
+;ARG:1 参照したいの値
+;ARG:2 合算する変数番号
+;-------------------------------------------------
+@MEMBER_LIST3(L_MATCH, L_KEY, L_ADD)
+#DIM L_C_ID  ;ループ用
+#DIM L_MATCH ;参照CFLAG
+#DIM L_KEY   ;一致検索値
+#DIM L_ADD   ;加算対象ID
+FLAG:汎用変数 = 0
+FOR L_C_ID, 0, CHARANUM
+	SIF CFLAG:L_C_ID:L_MATCH == L_KEY
+		FLAG:汎用変数 += CFLAG:L_C_ID:L_ADD
+NEXT
+
+
+
+
+;-------------------------------------------------
+;メンバーリスト(一致確認だけ)
+;ARG:0 参照したいの変数番号
+;ARG:1 参照したいの値
+;ARG:2 0以上にすると != 0 で検索
+;-------------------------------------------------
+@MEMBER_LIST2_1(L_CFLAG, L_KEY, L_SWITCH)
+#DIM L_CFLAG  ;参照CFLAG
+#DIM L_KEY    ;一致検索値
+#DIM L_SWITCH ;挙動変更用
+#DIM L_C_ID   ;ループ用
+FLAG:汎用変数 = 0
+SELECTCASE L_SWITCH
+CASE 0
+	FLAG:汎用変数 = MAX(FINDLASTCHARA(CFLAG:L_CFLAG, L_KEY), 0)
+	;最後尾の一致キャラを検索
+CASE 1
+	;最後尾の値が0でないキャラを検索
+	FOR L_C_ID, CHARANUM - 1, -1, -1
+		SIF CFLAG:L_C_ID:L_CFLAG == 0
+			CONTINUE
+		FLAG:汎用変数 = L_C_ID
+		BREAK
+	NEXT
+ENDSELECT
+
+
+;-------------------------------------------------
+;メンバー呼び出し
+;ARG:0 参照したいの変数番号
+;ARG:1 参照したいの値
+;-------------------------------------------------
+@MEMBER_CALL(L_CFLAG, L_KEY)
+#DIM L_CFLAG  ;参照CFLAG
+#DIM L_KEY    ;一致検索値
+#DIM L_C_ID   ;ループ用
+FLAG:汎用変数 = 0
+FLAG:支援_掛け合い = 0
+FOR L_C_ID, 0, CHARANUM
+	SIF  CFLAG:L_C_ID:L_CFLAG != L_KEY
+		CONTINUE
+	FLAG:汎用変数 ++
+	;既に設定されている場合は30％で書き換え
+	SIF !FLAG:支援_掛け合い || RAND:10 > 6
+		FLAG:支援_掛け合い = L_C_ID
+NEXT
+
+
+;-------------------------------------------------
+;メンバーリスト(随伴経験値増加)
+;ARG:0 参照したいの変数番号
+;ARG:1 参照したいの値
+;-------------------------------------------------
+@MEMBER_EXP(L_CFLAG, L_KEY)
+#DIM L_CFLAG  ;参照CFLAG
+#DIM L_KEY    ;一致検索値
+#DIM L_C_ID   ;ループ用
+FLAG:汎用変数 = 0
+FOR L_C_ID, 0, CHARANUM
+	SIF CFLAG:L_C_ID:L_CFLAG != L_KEY
+		CONTINUE
+	CFLAG:L_C_ID:住人_経験値 += FLAG:ターン経験値
+	FLAG:汎用変数 ++ 
+NEXT
+
+
+;-------------------------------------------------
+;全キャラリスト配列生成関数
+;-------------------------------------------------
+;元々はeraTW向けに実装した条件付きキャラリスト配列生成関数
+;条件切替はばっさりオミットして簡易化
+;登録番号を変えずにSORTする目的で導入
+;渡された配列に現在存在する全てのキャラの番号を順にいれていく
+;SORT項目が増えまくったのでこれでもいいかな、と
+@MEMBER_LIST_ALL(SCENE = "DEFAULT", CHARA_LIST, CHARA_CNT)
+#FUNCTION
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIMS     SCENE      ;使用場面
+#DIM  REF CHARA_LIST ;キャラ一覧
+#DIM  REF CHARA_CNT  ;キャラカウンタ
+VARSET CHARA_LIST
+VARSET CHARA_CNT
+
+;ループ中に分岐を仕込むのは一見簡潔にみえるが処理回数増えまくるのでやめとけ
+SELECTCASE SCENE
+CASE "EXPLORER"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在
+			CONTINUE
+		SIF CFLAG:LOCAL:住人_探索者 == 0
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+CASE "SUPPORT_随伴"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在
+			CONTINUE
+		SIF CFLAG:LOCAL:住人_支援_随伴 == 0
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+CASE "SUPPORT_後方"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在
+			CONTINUE
+		SIF CFLAG:LOCAL:住人_支援_後方 == 0
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+CASE "SUPPORT_回収"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在
+			CONTINUE
+		SIF CFLAG:LOCAL:住人_支援_回収 == 0
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+
+{
+CASE "RPG", 
+	"RPG_武器強化", 
+	"RPG_技能成長", 
+	"RPG_強化剤投与", 
+	"RPG_超人薬投与", 
+	"RPG_随伴配置", 
+	"RPG_後方配置", 
+	"RPG_回収配置", 
+	"RPG_探索配置"
+}
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在
+			CONTINUE
+		SIF TALENT:LOCAL:NPC == 999
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+CASE "CAFE"
+	FOR LOCAL, 0, CHARANUM
+		SIF LOCAL == MASTER
+			CONTINUE
+		SIF TALENT:LOCAL:不在
+			CONTINUE
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+CASEELSE
+	FOR LOCAL, 0, CHARANUM
+		CHARA_LIST:CHARA_CNT = LOCAL
+		CHARA_CNT ++
+	NEXT
+ENDSELECT
+

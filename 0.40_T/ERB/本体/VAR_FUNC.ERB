@@ -1,0 +1,558 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:VAR_FUNC.ERB
+;	Facility	:関数置き場(バリアント本体)。先頭に"VAR_"を付与。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ VAR_ADD_CHARA					VAR:キャラ追加
+;	・ VAR_PENIS						VAR:男性器
+;	・ VAR_WOMAN						VAR:女性
+;	・ VAR_SEX							VAR:性別
+;	・ VAR_HETEROSEX					VAR:異性愛
+;	・ VAR_BAR_BASE						VAR:バー出力(基礎)
+;	・ VAR_MONEY_ADD					VAR:資金加算
+;	・ VAR_PRINT_LIST_NAME				VAR:表示(リスト用名称)
+;	・ VAR_RESET_VIRGIN					VAR:処女化
+;	・ VAR_RESET_BUST					VAR:初期化(바스트사이즈)
+;	・ VAR_바스트사이즈					VAR:바스트사이즈
+;	・ VAR_MOOD_LV						VAR:무드LV
+;
+; *- 制御系
+;
+;	・ VAR_MAKE_LIST					VAR:リスト更新
+;	・ VAR_MAKE_PL						VAR:プレイヤーリスト作成
+;	・ VAR_MAKE_CL						VAR:キャラリスト作成
+;	・ VAR_GET_CL						VAR:キャラリスト取得
+;	・ VAR_SET_TARGET					VAR:ターゲット設定
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub VAR_ADD_CHARA
+;=================================================
+;   VAR:キャラ追加
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@VAR_ADD_CHARA(ARG)
+#DIM L_T
+
+L_T = ARG
+
+;-----------------------------
+;- 共通編集
+;-----------------------------
+
+MAXBASE:L_T:체력 = 200
+BASE:L_T:체력 = MAXBASE:L_T:체력
+MAXBASE:L_T:絶頂 = FLAG:最大値_絶頂
+MAXBASE:L_T:무드 = FLAG:最大数_무드
+
+CFLAG:L_T:使用口上 = NO:L_T
+CFLAG:L_T:危険日 = DAY % 7
+
+;初期化
+CSTR:L_T:キャラ紹介0 = 
+CSTR:L_T:キャラ紹介1 = 
+CSTR:L_T:キャラ紹介2 = 
+CSTR:L_T:キャラ紹介3 = 
+
+SIF CALLNAME:L_T == ""
+	CALLNAME:L_T = %NAME:L_T%
+
+;-----------------------------
+;- その他
+;-----------------------------
+
+CSTR:L_T:労役衣装名 = 없음
+
+
+;=================================================
+;   sub VAR_PENIS
+;=================================================
+;   VAR:男性器
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURNF				真偽値
+;-------------------------------------------------
+@VAR_PENIS(ARG=-1)
+#FUNCTION
+
+ARG  = ( (ARG < 0) ? TARGET # ARG)
+
+;- CHK:性別
+IF !VAR_SEX(ARG) || TALENT:ARG:후타나리
+	;- 有り
+	RETURNF 1
+ELSE
+	;- 無し
+	RETURNF 0
+ENDIF
+
+;=================================================
+;   sub VAR_WOMAN
+;=================================================
+;   VAR:女性
+;-------------------------------------------------
+;   女 or 오토코노코なら真
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				CSV優先(0:キャラ優先 1:CSV優先)
+; Output:
+;  RETURNF				性別区分(0:男性 1:女 or 오토코노코)
+;-------------------------------------------------
+@VAR_WOMAN(ARG=-1, ARG:1=0)
+#FUNCTION
+#DIM L_TMP
+#DIM L_OPT
+ARG  = ( (ARG < 0) ? TARGET # ARG)
+
+IF ARG:1
+	L_TMP = CSVTALENT(ARG,GETNUM(TALENT,"남자"),0)
+	L_OPT = CSVTALENT(ARG,GETNUM(TALENT,"오토코노코"),0)
+ELSE
+	L_TMP = TALENT:ARG:남자
+	L_OPT = TALENT:ARG:오토코노코
+ENDIF
+
+;- CHK:性別
+IF !L_TMP || L_OPT
+	;- 女 or 오토코노코
+	RETURNF 1
+ELSE
+	;- 男性
+	RETURNF 0
+ENDIF
+
+
+;=================================================
+;   sub VAR_SEX
+;=================================================
+;   VAR:性別
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				CSV優先(0:キャラ優先 1:CSV優先)
+; Output:
+;  RETURNF				性別区分(0:男性 1:女性)
+;-------------------------------------------------
+@VAR_SEX(ARG=-1, ARG:1=0)
+#FUNCTION
+#DIM L_TMP
+ARG  = ( (ARG < 0) ? TARGET # ARG)
+
+IF ARG:1
+	L_TMP = CSVTALENT(ARG,GETNUM(TALENT,"남자"),0)
+ELSE
+	L_TMP = TALENT:ARG:남자
+ENDIF
+
+;- CHK:性別
+IF !L_TMP
+	;- 女性
+	RETURNF 1
+ELSE
+	;- 男性
+	RETURNF 0
+ENDIF
+
+;=================================================
+;   sub VAR_HETEROSEX
+;=================================================
+;   VAR:異性愛
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+;  ARG:1				実行者
+; Output:
+;  RETURNF				性別区分(0:異性 1:同性(レズ) 2:同性(ＢＬ))
+;-------------------------------------------------
+@VAR_HETEROSEX(ARG,ARG:1)
+#FUNCTION
+#DIM L_P
+#DIM L_T
+
+;- 性別取得
+L_P = VAR_SEX(ARG)
+L_T = VAR_SEX(ARG:1)
+
+;- CHK:性別
+IF L_P == L_T
+;同性の場合
+	IF L_P
+		RETURNF 1
+	ELSE
+		RETURNF 2
+	ENDIF
+ELSE
+;異性の場合
+	RETURNF 0
+ENDIF
+
+
+
+;=================================================
+;   sub VAR_BAR_BASE
+;=================================================
+;   VAR:バー出力(基礎)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				対象項目(基礎)
+;  ARG:2				桁数区分(1:16 2:4 その他:6)
+;-------------------------------------------------
+@VAR_BAR_BASE(ARG, ARG:1, ARG:2 = 0)
+VARSET LOCAL
+LOCAL:0 = BASE:ARG:(ARG:1)
+LOCAL:1 = MAXBASE:ARG:(ARG:1)
+SIF LOCAL:0 < 0
+	LOCAL:0 = 0
+
+SELECTCASE ARG:2
+	CASE 1
+		LOCAL:2=16
+	CASE 2
+		LOCAL:2=4
+	CASEELSE
+		LOCAL:2=6
+ENDSELECT
+
+SIF LOCAL:1 <= 0
+	RETURN
+
+;- 桁算出(最大に合わせる)
+WHILE 1
+	SIF LOCAL:1 < POWER(10,LOCAL:9)
+		BREAK
+	LOCAL:9 ++
+WEND
+
+PRINTFORM %BASENAME:(ARG:1)%
+BAR LOCAL:0,LOCAL:1,LOCAL:2
+PRINTFORM (%TOSTR(LOCAL:0),LOCAL:9%/{LOCAL:1}) 
+
+
+;=================================================
+;   sub VAR_MONEY_ADD
+;=================================================
+;   VAR:資金加算
+;-------------------------------------------------
+; Input:
+;  ARG:0				加算値
+;-------------------------------------------------
+@VAR_MONEY_ADD(ARG)
+
+MONEY				+= ARG
+FLAG:累計獲得資金	 = MIN(FLAG:累計獲得資金 + ARG, 99999)
+
+
+;=================================================
+;   sub VAR_PRINT_LIST_NAME
+;=================================================
+;   VAR:表示(リスト用名称)
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;-------------------------------------------------
+@VAR_PRINT_LIST_NAME(ARG)
+CALL INFO_TARGET_DELETE(ARG)
+PRINTFORM %CALLNAME:ARG, 18, LEFT% 
+
+
+;=================================================
+;   sub VAR_RESET_VIRGIN
+;=================================================
+;   VAR:処女化
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;-------------------------------------------------
+@VAR_RESET_VIRGIN(ARG=-1)
+SIF ARG == -1
+	ARG = TARGET
+
+TALENT:ARG:비처녀 = 0
+TALENT:ARG:Ａ비처녀 = 0
+ABL:ARG:Ｖ감각 = 0
+EXP:ARG:Ｖ경험 = 0
+EXP:ARG:성교경험 = 0
+EXP:ARG:키스경험 = 0
+
+
+;=================================================
+;   sub VAR_RESET_BUST
+;=================================================
+;   VAR:初期化(바스트사이즈)
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;-------------------------------------------------
+@VAR_RESET_BUST(ARG)
+TALENT:ARG:절벽 = 0
+TALENT:ARG:빈유 = 0
+TALENT:ARG:거유 = 0
+TALENT:ARG:폭유 = 0
+
+;=================================================
+;   sub VAR_바스트사이즈
+;=================================================
+;   VAR:바스트사이즈
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+; Output:
+;  RETURNF				サイズ(절벽:-2 빈유:-1 普乳:0 거유:1 폭유:2)
+;-------------------------------------------------
+@VAR_바스트사이즈(ARG=-1)
+#FUNCTION
+SIF ARG == -1
+	RETURNF 0
+
+IF TALENT:ARG:절벽
+	RETURNF -2
+ELSEIF TALENT:ARG:빈유
+	RETURNF -1
+ELSEIF TALENT:ARG:거유
+	RETURNF 1
+ELSEIF TALENT:ARG:폭유
+	RETURNF 2
+ELSE
+	RETURNF 0
+ENDIF
+
+;=================================================
+;   sub VAR_MOOD_LV
+;=================================================
+;   VAR:무드LV
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+; Output:
+;  RETURNF				무드レベル(最大値は桁数)
+;-------------------------------------------------
+@VAR_MOOD_LV(ARG)
+#FUNCTION
+#DIM L_VAL
+#DIM L_LV
+
+L_VAL=0
+L_LV=0
+
+;- 計算:桁単位
+L_VAL = (FLAG:最大数_무드 / FLAG:最大数_무드桁数)
+
+;- 計算:レベル
+L_LV = (BASE:ARG:무드 / L_VAL)
+
+;- 調整
+L_LV = MIN(L_LV, FLAG:最大数_무드桁数)
+
+RETURNF L_LV
+
+
+;-------------------------------------------------------------------------------
+;   制御系
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub VAR_MAKE_LIST
+;=================================================
+;   VAR:リスト更新
+;-------------------------------------------------
+@VAR_MAKE_LIST
+
+GTR_CHARA_CNT = CHARANUM
+
+;- VAR:プレイヤーリスト作成
+CALL VAR_MAKE_PL
+
+;- VAR:キャラリスト作成
+CALL VAR_MAKE_CL
+
+
+;=================================================
+;   sub VAR_MAKE_PL
+;=================================================
+;   VAR:プレイヤーリスト作成
+;-------------------------------------------------
+;   調教に参加するキャラ(プレイヤー)のリストを作成する
+;-------------------------------------------------
+@VAR_MAKE_PL
+#DIM L_I
+#DIM L_CNT
+#DIM L_TGT
+
+VARSET GTR_PL, -1
+FLAG:調教対象人数 = 0
+
+L_TGT = -1
+
+L_CNT = 0
+FOR L_I, 0, CHARANUM
+	;- 除外
+	IF L_I == MASTER
+		;主人は許可
+	ELSEIF !CFLAG:L_I:調教対象フラグ
+		CONTINUE
+	ENDIF
+
+	;- 残ったキャラを保存
+	GTR_PL:L_CNT = L_I
+
+	SIF L_I != MASTER
+		FLAG:調教対象人数 ++
+
+	SIF (L_TGT < 0) && (L_I != MASTER)
+		L_TGT = L_I
+
+	L_CNT ++
+NEXT
+
+SIF TARGET != L_TGT
+	TARGET = L_TGT
+
+
+;=================================================
+;   sub VAR_MAKE_CL
+;=================================================
+;   VAR:キャラリスト作成
+;-------------------------------------------------
+;   表示対象のキャラのリストを作成する
+;-------------------------------------------------
+@VAR_MAKE_CL
+#DIM L_I
+#DIM L_CNT
+
+VARSET GTR_CL, -1
+
+;フラグ類初期化
+FLAG:陥落人数 = 0
+
+L_CNT = 0
+FOR L_I, 0, CHARANUM
+	;- 除外
+
+	;フラグ類カウント
+	SIF TALENT:L_I:상위함락
+		FLAG:陥落人数 ++
+
+	;- 残ったキャラを保存
+	GTR_CL:L_CNT = L_I
+	L_CNT ++
+NEXT
+
+;=================================================
+;   sub VAR_GET_CL
+;=================================================
+;   VAR:キャラリスト取得
+;-------------------------------------------------
+; Input:
+;  ARGS					処理(NEXT:次 PREV:前)
+;  ARG:0				対象キャラ
+; Output:
+;  RETURNF				結果(該当キャラ、または-1)
+;-------------------------------------------------
+@VAR_GET_CL(ARGS, ARG)
+#FUNCTION
+#DIM L_I
+#DIM L_TMP
+
+L_TMP = FINDELEMENT(GTR_CL, ARG)
+SIF L_TMP == -1
+	RETURNF -1
+
+SELECTCASE ARGS
+	CASE "PREV"
+		SIF !L_TMP
+			RETURNF -1
+		RETURNF GTR_CL:(L_TMP-1)
+
+	CASE "NEXT"
+		RETURNF GTR_CL:(L_TMP+1)
+	;ERROR
+	CASEELSE
+		RETURNF -1
+ENDSELECT
+
+
+;=================================================
+;   sub VAR_SET_TARGET
+;=================================================
+;   VAR:ターゲット設定
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+; Output:
+;  RETURNF				結果(0:OK 1:男女混合不可 2:体型エラー)
+;-------------------------------------------------
+@VAR_SET_TARGET(ARG)
+#FUNCTION
+#DIM L_I
+#DIM L_T
+#DIM L_P
+#DIM L_HIT
+#DIM L_SEX
+
+L_P = ARG
+L_HIT=0
+L_SEX = VAR_SEX(ARG)
+
+;体型チェック
+IF (TALENT:L_P:난쟁이체형 && !L_SEX) || TALENT:L_P:거대형 || TALENT:L_P:비인간형 
+	L_HIT = 2
+	GOTO CHKEND
+ENDIF
+
+FOR L_I,0,DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+	SIF L_T == L_P
+		CONTINUE
+	;性別が同じ
+	SIF VAR_SEX(L_T) == L_SEX
+		CONTINUE
+	L_HIT = 1
+	BREAK
+NEXT
+
+IF !L_HIT
+	;- MASTER以外なら、規定人数までは自動でTARGETに
+	IF MASTER != L_P
+		IF FLAG:調教対象人数 < FLAG:最大数_調教人数
+			CFLAG:L_P:調教対象フラグ = 1
+			FLAG:調教対象人数 ++
+		ENDIF
+	ENDIF
+ENDIF
+
+$CHKEND
+RETURNF L_HIT
+
+
+

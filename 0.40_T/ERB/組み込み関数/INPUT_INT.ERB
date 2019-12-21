@@ -1,0 +1,35 @@
+﻿;=================================================
+;   sub INPUT_INT
+;=================================================
+;   数値型インプット関数
+;-------------------------------------------------
+;   引数の値が入力されるまで入力ループを保持する
+;   入力されたら入力値を返す
+;
+;   注意：0を選択肢に含む場合は引数の並びの最後に配置しないこと
+;   （例：INPUT_INT(3, 2, 1, 0)はダメ。INPUT_INT(0, 1, 2, 3)はＯＫ）
+;-------------------------------------------------
+; Input:
+;  ARG[0..20]			対象値
+; Output:
+;  RETURN				結果(選択値)
+;-------------------------------------------------
+@INPUT_INT(ARG:0 = 0, ARG:1 = 0, ARG:2 = 0, ARG:3 = 0, ARG:4 = 0, ARG:5 = 0, ARG:6 = 0, ARG:7 = 0, ARG:8 = 0, ARG:9 = 0, ARG:10 = 0, ARG:11 = 0, ARG:12 = 0, ARG:13 = 0, ARG:14 = 0, ARG:15 = 0, ARG:16 = 0, ARG:17 = 0, ARG:18 = 0, ARG:19 = 0)
+#LOCALSIZE 2
+LOCAL:1 = 0
+FOR LOCAL, 0, 20
+	IF ARG:LOCAL < 0 || ARG:LOCAL > 9
+		LOCAL:1 = 1
+		BREAK
+	ENDIF
+NEXT
+IF LOCAL:1
+	INPUT
+ELSE
+	ONEINPUT
+ENDIF
+SIF EQUALCHECK(RESULT, ARG:0, ARG:1, ARG:2, ARG:3, ARG:4, ARG:5, ARG:6, ARG:7, ARG:8, ARG:9, ARG:10, ARG:11, ARG:12, ARG:13, ARG:14, ARG:15, ARG:16, ARG:17, ARG:18, ARG:19)
+	RETURNFORM RESULT
+CLEARLINE 1
+REUSELASTLINE
+RESTART

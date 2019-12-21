@@ -1,0 +1,188 @@
+﻿@C_PICTURE_H(ARG:0,ARG:1);逢引中
+#DIM L_I
+#DIM L_TMP
+#DIM P_S
+#DIM P_S2
+#DIM C_T
+#DIM L_Y2
+#DIM C_eye
+#DIM C_body
+#DIM C_bust
+#DIM C_suit
+#DIM C_hairC
+#DIM C_hair
+#DIM C_socks
+#DIM C_hat
+#DIM C_boots
+#DIM C_bra
+#DIM C_panties
+#DIM C_NINSIN
+#DIM C_in
+#DIM H_TNS
+#DIMS LSTR
+#DIMS LSTR_0
+#DIMS LSTR_1
+#DIMS LSTR_2
+#DIMS LSTR_3
+#DIMS LSTR_4
+#DIMS LSTR_5
+#DIMS LSTR_6
+#DIMS LSTR_7
+#DIMS LSTR_8
+#DIMS LSTR_9
+#DIMS LSTR_10
+#DIMS LSTR_11
+#DIMS LSTR_12
+#DIMS LSTR_13
+#DIMS LSTR_14
+#DIMS LSTR_15
+#DIMS LSTR_16
+#DIMS LSTR_17
+
+L_I = ARG:0
+IF Talent:L_I:NPC != 0
+	HTML_PRINT C_PICTURE_NPC_HTML_NAKED(L_I, 0, -600, 0, 800)
+	RETURN
+ENDIF
+
+
+C_eye = 0
+C_body = 0
+C_bust = 0
+C_suit = 0
+C_hairC = 0
+C_hair = 0
+C_socks = 0
+C_hat = 0
+C_boots = 0
+C_bra = 0
+C_panties = 0
+C_NINSIN = 0
+C_in = 0
+H_TNS = 0
+LSTR_0 = 
+LSTR_1 = 
+LSTR_2 = 
+LSTR_3 = 
+LSTR_4 = 
+LSTR_5 = 
+LSTR_6 = 
+LSTR_7 = 
+LSTR_8 = 
+LSTR_9 = 
+LSTR_10 = 
+LSTR_11 =
+LSTR_12 = 
+LSTR_13 = 
+LSTR_14 = 
+LSTR_15 = 
+LSTR_17 = 
+
+L_Y2 = 0
+LSTR_16 = 
+IF CFlag:L_I:住人_体格 == 1
+	LSTR_16 = 2
+	L_Y2 = 98
+ENDIF
+
+
+;IF TFLAG:サブコマンド実行中フラグ == 1
+;	L_TMP=TEQUIP:L_T:ポイント性交
+;	IF L_TMP
+;		;- 取得:コマンド名称
+;		CALLFORM COM_FUNC_GET_NAME_X{L_TMP}
+;		L_STR = %RESULTS%
+;	ENDIF
+;ENDIF
+
+
+
+
+
+
+;-------------------------------------------------
+;差分判断
+;-------------------------------------------------
+
+
+;目
+C_eye = Cflag:L_I:瞳色
+;体
+C_body = CFLAG:L_I:肌色
+;胸
+C_bust = C_PICTURE_BUST(L_I)
+
+;服
+C_suit = CFLAG:L_I:服装
+;髪色
+C_hairC = CFLAG:L_I:髪色
+;髪型
+C_hair = CFLAG:L_I:髪型
+;靴下
+C_socks = CFLAG:L_I:靴下
+;靴
+C_boots = CFLAG:L_I:靴
+;下着上
+C_bra = CFLAG:L_I:下着上
+;下着下
+C_panties = CFLAG:L_I:下着下
+
+;淫紋
+C_in = CFLAG:L_I:淫紋
+
+C_NINSIN = C_PICTURE_NINSIN(L_I)
+
+FLAG:汎用変数5 += Source:子宮精液
+H_TNS = C_PICTURE_SEMEN(L_I)
+
+
+
+
+P_S2 = 0
+P_S = -600
+;-------------------------------------------------
+;描画処理
+;-------------------------------------------------
+
+IF TALENT:L_I:妊娠 != 0 || TALENT:L_I:수정 != 0
+	LSTR_0 = <nonbutton pos='{P_S2}'><img src='NINSIN_0_{C_NINSIN}' height = '400'   ypos = '{P_S-400}'></nonbutton>
+ELSE
+	LSTR_0 = <nonbutton pos='{P_S2}'><img src='H_TNS_0_{H_TNS}' height = '400'   ypos = '{P_S-400}'></nonbutton>
+ENDIF
+
+;種族特徴2
+	LSTR_1 = <nonbutton pos='{P_S2}'><img src='C_RACE_2_{CFLAG:L_I:住人_種族}_0_{CFLAG:L_I:住人_種族特徴2}' height = '850'  width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
+;体
+	LSTR_2 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%body_{C_body}' height = '850' width = '-465'  ypos = '{P_S}'></nonbutton>
+;種族特徴3
+	LSTR_3 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%C_RACE_3_{CFLAG:L_I:住人_種族}_0_{CFLAG:L_I:住人_種族特徴3}' height = '850'  width = '-465' ypos = '{P_S}'></nonbutton>
+;目
+IF Palam:L_I:欲情 >= 30000
+	LSTR_4 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%S_eye_1' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ELSEIF Palam:L_I:欲情 >= 15000
+	LSTR_4 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%H_eye_0_{C_eye}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ELSE
+	LSTR_4 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%eye_{C_eye}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ENDIF
+;胸
+	LSTR_5 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%bust_{C_body}_{C_bust}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+;髪
+	LSTR_11 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '850' width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
+;種族特徴1
+	LSTR_12 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:L_I:住人_種族}_0_{CFLAG:L_I:住人_種族特徴1}' height = '850' width = '-465'  ypos = '{P_S+L_Y2}'></nonbutton>
+;溢れ精液
+	LSTR_15 = <nonbutton pos='{P_S2}'><img src='H_A_S_0_{H_TNS}' height = '850' width = '-465'  ypos = '{P_S}'></nonbutton>
+
+;淫紋
+IF CFLAG:L_I:淫紋 == 0 || CFLAG:L_I:淫紋 == -1
+	LSTR_17 = <nonbutton pos='{P_S2}'><img src='C_no' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ELSE
+	LSTR_17 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%in_{C_in}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ENDIF
+
+LSTR = <nobr>%LSTR_0%%LSTR_1%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%LSTR_13%%LSTR_15%%LSTR_17%
+HTML_PRINT LSTR
+
+
+
+

@@ -1,0 +1,43 @@
+;=================================================
+;   sub INPUT_YN
+;=================================================
+;   入力提示:２択
+;-------------------------------------------------
+; Input:
+;  ARGS:0				表示文字列(0)
+;  ARGS:1				表示文字列(1)
+;  ARG					改行区分(0:一列表示 1:２列表示)
+; Output:
+;  RETURN				結果(0:はい 1:いいえ)
+;-------------------------------------------------
+@INPUT_YN(ARGS:0 = "はい", ARGS:1 = "いいえ", ARG = 1)
+
+SELECTCASE ARG
+	CASE 1
+		PRINTFORML [0] %ARGS%
+		PRINTFORML [1] %ARGS:1%
+	CASE 2
+		PRINTFORM [0] %ARGS% 
+		PRINTFORML [1] %ARGS:1%
+ENDSELECT
+$INPUT_LOOP
+
+REDRAW 0
+
+ONEINPUTS
+
+SELECTCASE RESULTS
+	CASE "0"
+		REDRAW 1
+		RETURN 0
+	CASE "1"
+		REDRAW 1
+		RETURN 1
+	CASE ""
+		GOTO INPUT_LOOP
+	CASEELSE
+		CLEARLINE 1
+;		REUSELASTLINE （入力値 %RESULTS% は範囲外です）
+		GOTO INPUT_LOOP
+ENDSELECT
+

@@ -1,0 +1,73 @@
+
+;-------------------------------------------------
+;施設　品種改良施設
+;-------------------------------------------------
+@CITY_F_54
+CALL MANAGE_CHARA_SELECT("MNG_特殊_品種改良")
+
+
+;-------------------------------------------------
+;ゲノム移植2
+;-------------------------------------------------
+@CITY_F_54_GI2(L_C_ID)
+#DIM L_C_ID  ;対象の登録番号
+#DIM L_GENOM ;ループ処理用、参照しているゲノム≒FLAGやCFLAGのID
+#DIM L_INPUT ;
+CLEARLINE LINECOUNT
+CALL INFO_STATUS_HEADER(L_C_ID)
+CALL C_PICTURE_S(L_C_ID)
+DRAWLINE
+PRINTFORML 移植するゲノムを選択して下さい。（移植費用300000、所持金{MONEY}）
+DRAWLINE
+PRINTFORM 　
+FOR L_GENOM, 2500, 2520
+	SIF CFLAG:L_C_ID:(L_GENOM - 700) != 0
+		SETCOLOR COLOR("水色")
+	SIF FLAG:L_GENOM <= 0
+		SETCOLOR COLOR("灰色")
+	PRINTFORM [{L_GENOM - 2500, 2}]【%FLAGNAME:L_GENOM%: {FLAG:L_GENOM, 3}個】
+	RESETCOLOR
+	IF L_GENOM % 5 == 4
+		PRINTFORML
+		PRINTFORM 　
+	ENDIF
+NEXT
+
+
+PRINTFORML
+PRINTFORML [999] 戻る
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+	CASE 999
+		RETURN
+	CASE 0 TO 19
+		IF MONEY < 300000
+			PRINTFORMW 資金が不足しています。
+			RESTART
+		ELSEIF FLAG:(2500 + L_INPUT) <= 0
+			PRINTFORMW ゲノムがありません。
+			RESTART
+		ELSEIF CFLAG:L_C_ID:(1800 + L_INPUT) != 0
+			PRINTFORMW 既に移植済みです
+			RESTART
+		ENDIF
+		PRINTFORML %CALLNAME:L_C_ID%に%CFLAGNAME:(1800 + L_INPUT)%を移植しました。
+		PRINTFORMW 一部ステータスが2上昇し、技能ポイントに5加算されました。
+		CFLAG:L_C_ID:住人_最大体力 += 2
+		CFLAG:L_C_ID:住人_現在体力 += 2
+		CFLAG:L_C_ID:住人_最大気力 += 2
+		CFLAG:L_C_ID:住人_現在気力 += 2
+		CFLAG:L_C_ID:住人_ATK      += 2
+		CFLAG:L_C_ID:住人_DEF      += 2
+		CFLAG:L_C_ID:住人_HIT      += 2
+		CFLAG:L_C_ID:住人_SPD      += 2
+		CFLAG:L_C_ID:住人_最大BRE  += 2
+		CFLAG:L_C_ID:住人_現在BRE  += 2
+		CFLAG:L_C_ID:住人_技能ポイント += 5
+		
+		CFLAG:L_C_ID:(1800 + L_INPUT) = 1
+		FLAG:(2500 + L_INPUT) -= 1
+		MONEY -= 300000
+ENDSELECT
+RESTART

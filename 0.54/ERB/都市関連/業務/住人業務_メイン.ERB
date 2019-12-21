@@ -1,0 +1,246 @@
+
+;-------------------------------------------------
+;住人業務
+;-------------------------------------------------
+@WORK_MAIN(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_INPUT2
+#DIM L_PAGE
+#DIM L_M
+#DIM L_I
+#DIM L_NM
+#DIM N_S
+
+#DIMS CS_race
+#DIMS CS_align
+#DIMS CS_chii
+
+VARSET L_INPUT
+VARSET L_INPUT2
+VARSET L_PAGE
+VARSET L_M
+VARSET L_I
+VARSET L_NM
+VARSET N_S
+
+
+$INPUT_LOOP
+L_NM = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL INFO_CITY_BASE
+DRAWLINE
+PRINTFORML 　
+PRINTFORML 　
+DRAWLINE
+CALL PRINT_LABEL("住人業務")
+PRINTL
+DRAWLINE
+PRINTFORML TPを5消費して業務に対する業務経験を獲得させます。
+PRINTFORML 業務経験が多いほど都市貢献にプラス補正がかかります。
+DRAWLINE
+PRINTFORML [0] 干渉する
+PRINTFORML 
+PRINTFORML [999] 戻る
+INPUT
+L_INPUT = RESULT
+L_M = RESULT
+L_PAGE = 0
+
+SELECTCASE L_INPUT
+	CASE 999
+		JUMP SYSTEM_MENU
+	CASEELSE
+		SIF L_INPUT > 2 && L_INPUT != 100
+			GOTO INPUT_LOOP
+		$INPUT_LOOP2
+		CLEARLINE LINECOUNT
+		DRAWLINE
+		CALL INFO_CITY_BASE
+		DRAWLINE
+		PRINTFORML 　
+		PRINTFORML 　
+		DRAWLINE
+		PRINTFORML 任命させる住民を選択して下さい。
+		ARGS:0 = 業務
+		CALL LIST_CHARA(ARGS:0, L_PAGE)
+		L_I = RESULT
+		L_INPUT = RESULT
+		ARG:0 = RESULT
+		L_PAGE = RESULT:1
+		;あなた選択時
+		IF L_INPUT == 0
+			GOTO INPUT_LOOP
+		ELSEIF L_INPUT != 1000
+			$INPUT_LOOP3
+			DRAWLINE
+			CALL INFO_CITY_BASE
+			DRAWLINE
+			PRINTFORML ※TPが足りなくてもBPがある場合は決定時に自動で補充されます。
+			DRAWLINE
+			CS_race  = %INFO_STR_SYUZOKU(CFLAG:L_I:住人_種族)%
+			CS_align = %INFO_STR_ZOKUSEI(CFLAG:L_I:住人_属性)%
+			CS_chii  = %INFO_STR_CHII(CFLAG:L_I:住人_地位)%
+			;DRAWLINE
+			CALL C_PICTURE(ARG:0,ARG:1)
+			PRINTFORM 　　　　　
+			PRINTFORM 　NO.%TOSTR(CFLAG:ARG:個別番号) , 3, LEFT%:
+			PRINTFORML %CALLNAME:ARG,24,LEFT%
+			PRINTFORML 
+			PRINTFORM 　　　　　
+			CALL PRINT_STATUS(L_I, "所持金")
+			CALL PRINT_STATUS(L_I, "収入", , , ,1000000)
+			CALL PRINT_STATUS(L_I, "出費", , , ,1000000)
+			SIF Talent:L_I:アイドル != 0
+			CALL PRINT_LABEL("ファン数",,(!CFLAG:L_I:ファンの数 && FLAG:STATUS伏字モード ? COLOR("伏字") # -1),TOSTR(CFLAG:L_I:ファンの数))
+			PRINTL 
+			PRINTFORM 　　　　　
+			CALL PRINT_STATUS(L_I, "人気"  , , , , 10000)
+			CALL PRINT_STATUS(L_I, "モラル", , , (L_I==MASTER ? "伏字"#""), 500 , , -500)
+			CALL PRINT_STATUS(L_I, "カルマ", , , (L_I==MASTER ? "伏字"#""), 500 , , -500)
+			CALL PRINT_STATUS(L_I, "品性"  , , , (L_I==MASTER ? "伏字"#""), 500 , , -500)
+			PRINTL
+			PRINTFORM 　　　　　
+			CALL PRINT_LABEL("種族",,,CS_race)
+			CALL PRINT_LABEL("属性",,,CS_align)
+			CALL PRINT_LABEL("地位",,,CS_chii)
+			CALL PRINT_STATUS(L_I,"貢献値")
+			PRINTL
+			PRINTL
+			PRINTFORM 　　　　　
+			PRINTFORML 【業務経験:{EXP:L_I:業務経験}回】
+			PRINTL 
+			PRINTL 
+			DRAWLINE
+			PRINTFORML この住人に干渉して業務経験を積ませます。よろしいですか？
+			PRINTFORML [0] はい
+			PRINTFORML [1] いいえ
+			PRINTFORML 
+			PRINTFORML [999] メインメニューに戻る
+			INPUT
+			L_INPUT2 = RESULT
+			SELECTCASE L_INPUT2
+			;はい
+			CASE 0
+				IF FLAG:都市_現在TP < 5 && (FLAG:都市_現在BP + FLAG:都市_現在TP) > 4
+					CLEARLINE LINECOUNT
+					PRINTFORML BPを自動で補給しました。
+					WAIT
+					CALL SYSTEM_BP
+				ENDIF
+				IF FLAG:都市_現在TP < 5
+					CLEARLINE LINECOUNT
+					PRINTFORML TPが不足しています。
+					WAIT
+					GOTO INPUT_LOOP
+				ENDIF
+				FLAG:都市_現在TP -= 5		; パッチで修正
+				
+				IF (Talent:L_I:アイドル != 0 || Talent:L_I:社会人 != 0 || Talent:L_I:治安維持局員 != 0 || Talent:L_I:メイド != 0 || Talent:L_I:聖職者 != 0) ;最初に特定職か判別
+					IF Talent:L_I:学生 != 0
+						IF Talent:L_I:娼婦 != 0	;特定職+学生+娼婦
+							IF !RAND:3
+								IF Talent:L_I:アイドル != 0
+									CALL WORK_T_Ai(ARG:0)
+								ELSEIF Talent:L_I:社会人 != 0
+									CALL WORK_T_Ad(ARG:0)
+								ELSEIF Talent:L_I:治安維持局員 != 0
+									CALL WORK_T_Ti(ARG:0)
+								ELSEIF Talent:L_I:メイド != 0
+									CALL WORK_T_Me(ARG:0)
+								ELSEIF Talent:L_I:聖職者 != 0
+									CALL WORK_T_Si(ARG:0)
+								ENDIF
+							ELSEIF !RAND:2
+								CALL WORK_T_St(ARG:0)
+							ELSEIF !RAND:1
+								CALL WORK_T_Hl(ARG:0)
+							ENDIF				
+						ELSE					;特定職+学生
+							IF !RAND:2
+								IF Talent:L_I:アイドル != 0
+									CALL WORK_T_Ai(ARG:0)
+								ELSEIF Talent:L_I:社会人 != 0
+									CALL WORK_T_Ad(ARG:0)
+								ELSEIF Talent:L_I:治安維持局員 != 0
+									CALL WORK_T_Ti(ARG:0)
+								ELSEIF Talent:L_I:メイド != 0
+									CALL WORK_T_Me(ARG:0)
+								ELSEIF Talent:L_I:聖職者 != 0
+									CALL WORK_T_Si(ARG:0)
+								ENDIF
+							ELSEIF !RAND:1
+								CALL WORK_T_St(ARG:0)
+							ENDIF
+						ENDIF
+					ELSEIF Talent:L_I:娼婦 != 0	;特定職+娼婦
+						IF !RAND:2
+							IF Talent:L_I:アイドル != 0
+								CALL WORK_T_Ai(ARG:0)
+							ELSEIF Talent:L_I:社会人 != 0
+								CALL WORK_T_Ad(ARG:0)
+							ELSEIF Talent:L_I:治安維持局員 != 0
+								CALL WORK_T_Ti(ARG:0)
+							ELSEIF Talent:L_I:メイド != 0
+								CALL WORK_T_Me(ARG:0)
+							ELSEIF Talent:L_I:聖職者 != 0
+								CALL WORK_T_Si(ARG:0)
+							ENDIF
+						ELSEIF !RAND:1
+							CALL WORK_T_Hl(ARG:0)
+						ENDIF
+					ELSE						;特定職
+						IF Talent:L_I:アイドル != 0
+							CALL WORK_T_Ai(ARG:0)
+						ELSEIF Talent:L_I:社会人 != 0
+							CALL WORK_T_Ad(ARG:0)
+						ELSEIF Talent:L_I:治安維持局員 != 0
+							CALL WORK_T_Ti(ARG:0)
+						ELSEIF Talent:L_I:メイド != 0
+							CALL WORK_T_Me(ARG:0)
+						ELSEIF Talent:L_I:聖職者 != 0
+							CALL WORK_T_Si(ARG:0)
+						ENDIF
+					ENDIF
+				ELSEIF Talent:L_I:学生 != 0 
+					IF Talent:L_I:娼婦 != 0		;娼婦+学生
+						IF !RAND:2
+							CALL WORK_T_St(ARG:0)
+						ELSEIF !RAND:1
+							CALL WORK_T_Hl(ARG:0)
+						ENDIF
+					ELSE						;純学生
+						CALL WORK_T_St(ARG:0)
+					ENDIF
+				ELSEIF Talent:L_I:娼婦 != 0		;純娼婦
+					CALL WORK_T_Hl(ARG:0)
+				ELSE	
+					CALL WORK_T_Ip(ARG:0)		;一般人
+				ENDIF
+
+				CFLAG:L_I:住人_業務ポイント += 1
+				IF CFLAG:L_I:住人_業務ポイント >= (CFLAG:L_I:住人_貢献値/2)+3
+					PRINTFORML 
+					PRINTFORML %CALLNAME:L_I%は業務の中で経験を得て、さらなる貢献ができるようになった。
+					PRINTFORMW 貢献値　【{CFLAG:L_I:住人_貢献値}→{(CFLAG:L_I:住人_貢献値)+1}】
+					CFLAG:L_I:住人_業務ポイント = 0
+					CFLAG:L_I:住人_貢献値 += 1
+				ENDIF
+			;いいえ
+			CASE 1
+				GOTO INPUT_LOOP2
+			;メインメニューに戻る
+			CASE 999
+				JUMP SYSTEM_MENU
+			CASEELSE
+				GOTO INPUT_LOOP3
+			ENDSELECT
+		;1000:戻る
+		ELSE
+			GOTO INPUT_LOOP
+		ENDIF
+ENDSELECT
+
+GOTO INPUT_LOOP3
+
+

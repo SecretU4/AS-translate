@@ -1,0 +1,476 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:INFO_TRAIN.ERB
+;	Facility	:情報表示(TRAIN)。
+;				 情報を表示する関数を纏める。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ TR_INFO_PALAM_MAIN				TR情報:PALAM(メイン)
+;	・ TR_INFO_PALAM_DATA				TR情報:PALAM(データ部)
+;
+; *- 行型PALAM
+;
+;	・ TR_INFO_PALAM_LINE_MAIN			TR情報:行型PALAM(メイン)
+;	・ TR_INFO_PALAM_LINE_HEADER		TR情報:行型PALAM(ヘッダ)
+;	・ TR_INFO_PALAM_LINE_DATA			TR情報:行型PALAM(データ部)
+;	・ TR_INFO_PALAM_COM				TR情報:PALAM(コマンド)
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TR_INFO_PALAM_MAIN
+;=================================================
+;   TR情報:PALAM(メイン)
+;-------------------------------------------------
+@TR_INFO_PALAM_MAIN(ARG:0)
+#DIM L_I
+#DIM L_TMP
+#DIM L_CNT
+#DIM L_ROW
+#DIMS L_SPASE
+#DIM L_HIT
+
+L_ROW = 4	;列
+L_CNT = 0
+L_SPASE = 
+L_SPASE += "    "
+
+;-----------------------------
+;- 表示ヘッダ
+;-----------------------------
+PRINT     
+PRINTFORM 　　　　　　　　　　　　　　%LOCALS:10%＜対象:%CALLNAME%＞ 
+PRINTFORM - 絶頂
+BAR BASE:絶頂, MAXBASE:絶頂, 6
+IF TCVAR:TARGET:イきそう
+	SETCOLOR COLOR("ピンク")
+	PRINTFORM (限界!!) 
+	RESETCOLOR
+ELSE
+	PRINTFORM ({BASE:TARGET:絶頂,5}/{MAXBASE:TARGET:絶頂}) 
+ENDIF
+PRINTL
+PRINTFORM 　　　　　　　　　　　　　　
+;-----------------------------
+;- 表示データ
+;-----------------------------
+FOR L_I,0,VARSIZE("PALAM")
+	SIF !STRLENS(PALAMNAME:L_I)
+		CONTINUE
+
+	IF (L_CNT % L_ROW) == 0
+		;既に出力済みなら改行
+		IF L_CNT
+			PRINTL
+			PRINTFORM 　　　　　　　　　　　　　　
+		ENDIF
+		PRINTS L_SPASE
+	ENDIF
+
+	;- TR情報:PALAM(データ部)
+	CALL TR_INFO_PALAM_DATA(L_I)
+
+	RESETCOLOR
+	L_CNT ++
+NEXT
+SIF !LINEISEMPTY()
+	PRINTL
+
+ARG:0 = TARGET
+CALL C_PICTURE_H(ARG:0)
+;-----------------------------
+;- 装飾品
+;-----------------------------
+L_HIT=0
+SIF !LINEISEMPTY()
+	PRINTL
+PRINTFORM 　　　　　　　　　　装着具：
+L_TMP = TEQUIP:Ｖ器具
+IF L_TMP
+	SELECTCASE L_TMP
+		CASE [[TRAIN:バイブ]]
+			PRINT [バイブ] 
+			L_HIT=1
+	ENDSELECT
+ENDIF
+
+L_TMP = TEQUIP:Ａ器具
+IF L_TMP
+	SELECTCASE L_TMP
+		CASE [[TRAIN:アナルバイブ]]
+			PRINT [アナルバイブ] 
+			L_HIT=1
+	ENDSELECT
+ENDIF
+
+PRINTL 
+IF L_HIT
+ELSE
+	CLEARLINE 1
+ENDIF
+
+PRINTL
+RESETCOLOR
+
+
+;=================================================
+;   sub TR_INFO_PALAM_DATA
+;=================================================
+;   TR情報:PALAM(データ部)
+;-------------------------------------------------
+; Input:
+;  ARG:0				PALAM番号
+;-------------------------------------------------
+@TR_INFO_PALAM_DATA(ARG:0)
+#DIMS L_NAME
+#DIM L_NO
+#DIM L_VAL
+#DIM L_LV
+#DIM L_MAX
+#DIM L_桁数
+#DIM L_COLOR, 5
+#DIMS L_STR
+#DIM L_TMP
+
+;-----------------------------
+;- 初期設定
+;-----------------------------
+L_NO = ARG:0
+L_NAME = %PALAMNAME:L_NO%
+L_VAL = PALAM:L_NAME
+L_LV = GETPALAMLV(L_VAL, 9)
+
+
+;-----------------------------
+;- 表示PALAM
+;-----------------------------
+;- 暗色
+SIF !L_VAL
+	SETCOLOR COLOR("伏字")
+
+L_桁数 = 6
+
+;- カラーバー出力時
+IF 1
+	VARSET L_COLOR
+	VARSET LOCAL
+	LOCAL:15=PALAMLV:(L_LV)
+	LOCAL:16=PALAMLV:(L_LV + 1)
+
+	LOCAL:17=LOCAL:16 - LOCAL:15
+	LOCAL:18=L_VAL  - LOCAL:15
+
+	IF GROUPMATCH(L_NAME, "恐怖", "苦痛", "抑鬱", "反感", "不快")
+;		L_COLOR:0 = 0x003366
+;		L_COLOR:1 = 0x336699
+		L_COLOR:0 = 0x336699
+		L_COLOR:1 = 0x0066cc
+		L_COLOR:2 = 0x33001F
+	ELSE
+		L_COLOR:0 = 0xFF00FF
+		L_COLOR:1 = 0xFF3399
+		L_COLOR:2 = 0x33001F
+	ENDIF
+
+	PRINTFORM %L_NAME%Lv{L_LV,2} 
+	CALLF CP_CUSTOM_BAR(LOCAL:18,LOCAL:17,L_桁数,L_COLOR:0,L_COLOR:1,L_COLOR:2)
+	PRINT  
+ENDIF
+
+;-----------------------------
+;- 数値
+;-----------------------------
+L_桁数 = 5
+IF L_NAME == "潤滑" && L_VAL >= PALAMLV:6
+	L_STR = %"摩擦0",L_桁数%
+ELSE
+	L_STR = {L_VAL,L_桁数}
+ENDIF
+
+PRINTFORM %L_STR% 
+
+
+;-----------------------------
+;- 前ターンの加算
+;-----------------------------
+
+L_TMP = CUP:L_NAME
+
+IF L_TMP > 0
+	SETCOLOR COLOR("群青")
+	PRINT +
+	RESETCOLOR
+ELSE
+	PRINT  
+ENDIF
+PRINT  
+
+
+;-------------------------------------------------------------------------------
+;   行型PALAM
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TR_INFO_PALAM_LINE_MAIN
+;=================================================
+;   TR情報:行型PALAM(メイン)
+;-------------------------------------------------
+@TR_INFO_PALAM_LINE_MAIN
+#DIM L_I
+#DIM L_T
+
+;- 表示:PALAM(TRAIN) 行表示ヘッダ
+CALL TR_INFO_PALAM_LINE_HEADER
+
+;- 滞在中のキャラを表示
+FOR L_I ,0 ,DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+
+	SIF L_T < 0
+		CONTINUE
+
+	;- 表示
+	CALL TR_INFO_PALAM_LINE_DATA(L_T, L_I)
+NEXT
+PRINTL
+
+;=================================================
+;   sub TR_INFO_PALAM_LINE_HEADER
+;=================================================
+;   TR情報:行型PALAM(ヘッダ)
+;-------------------------------------------------
+@TR_INFO_PALAM_LINE_HEADER
+#DIMS L_STR
+
+PRINTFORM 　　　　　　　　
+PRINTFORM 　　　　　　　　　【調教中】　　　
+;表示調整
+CALL CP_HEARTB(0,4)
+
+;-----------------------------
+;-- ムード
+;-----------------------------
+PRINT ムード
+;- 空白微調整
+CALL CP_HEARTB(0,2)
+PRINT  
+
+;-----------------------------
+;-- その他
+;-----------------------------
+
+;- 個人BASE
+PRINT 体力   
+PRINT  
+
+;- 個人BASE(特殊)
+PRINT 絶頂 
+PRINT /回数
+PRINT    
+
+;- 個人BASE(特殊)
+PRINT 子宮射精
+PRINT   
+
+PRINTL
+
+;=================================================
+;   sub TR_INFO_PALAM_LINE_DATA
+;=================================================
+;   TR情報:行型PALAM(データ部)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				TARGET配列位置
+;-------------------------------------------------
+@TR_INFO_PALAM_LINE_DATA(ARG, ARG:1)
+#DIM L_I
+#DIM L_T
+#DIM L_TMP
+
+L_I=0
+L_T=0
+
+L_T = ARG
+
+LOCALS=
+PRINTFORM 　　　　　　　　　　　　　　
+;- SET:種別
+IF ARG == MASTER
+	LOCALS =【主人】
+ELSE
+	CALL TR_INFO_STATE(L_T)
+	LOCALS =%RESULTS%
+ENDIF
+
+PRINTFORM %LOCALS, 17, LEFT%
+RESETCOLOR
+PRINTFORM %CALLNAME:L_T, 18, LEFT%
+
+SELECTCASE L_T
+	CASE MASTER
+		PRINT <M>
+	CASE TARGET
+		PRINT <
+		SETCOLOR COLOR("水色")
+		PRINT T
+		RESETCOLOR
+		PRINT >
+	CASEELSE
+		IF !ARG:2
+			PRINTFORM [{ARG:1}]
+		ELSE
+			PRINTFORM [-]
+		ENDIF
+ENDSELECT
+PRINT  
+
+;-----------------------------
+;-- ムード
+;-----------------------------
+CALL CP_HEARTB(VAR_MOOD_LV(L_T),FLAG:最大数_ムード桁数)
+PRINT  
+
+;-----------------------------
+;- 個人BASE
+;-----------------------------
+PRINTFORM ({BASE:L_T:体力, 3}/{MAXBASE:L_T:体力, 3})
+
+
+;-----------------------------
+;- 個人BASE(特殊)
+;-----------------------------
+PRINTFORM (
+SIF TCVAR:L_T:イきそう
+	SETCOLOR COLOR("ピンク")
+PRINTFORM {BASE:L_T:絶頂, 5}
+RESETCOLOR
+PRINTFORM /{TCVAR:L_T:絶頂回数, 2}回) 
+PRINTFORM (%BARSTR(TCVAR:L_T:子宮射精回数, FLAG:最大値_子宮精液, 4)%{TCVAR:L_T:子宮射精回数, 2}回) 
+IF TALENT:L_T:オトコ == 0
+	IF TALENT:L_T:受精 != 0 
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 受精%UNICODE(0x2661)%
+		RESETCOLOR
+	ELSEIF  TALENT:L_T:妊娠 != 0
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 妊娠%UNICODE(0x2661)%
+		RESETCOLOR
+	ELSEIF CFLAG:L_T:受精現在耐久値 != 0
+		PRINTFORM ({CFLAG:L_T:受精現在耐久値}/{CFLAG:L_T:受精最大耐久値})
+	ELSE
+		SETCOLOR COLOR("ピンク")
+		PRINTFORM 受精確率{CFLAG:L_T:受精確率}％
+		RESETCOLOR
+	ENDIF
+ENDIF
+;- TR情報:PALAM(コマンド)
+CALL TR_INFO_PALAM_COM(L_T)
+
+PRINTL
+
+;=================================================
+;   sub TR_INFO_STATE
+;=================================================
+;   TR情報:状態
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+; Output:
+;  RESULTS				状態
+;-------------------------------------------------
+@TR_INFO_STATE(ARG)
+#DIM L_T
+#DIM L_TMP
+#DIMS L_STR
+L_T = ARG
+L_STR =
+RESULTS=
+
+TFLAG:サブコマンド実行中フラグ=1
+
+L_TMP=TEQUIP:L_T:ポイント性交
+IF L_TMP
+	;- 取得:コマンド名称
+	CALLFORM COM_FUNC_GET_NAME_X{L_TMP}
+	L_STR = %RESULTS%
+ENDIF
+
+
+TFLAG:サブコマンド実行中フラグ=0
+
+SIF L_STR == ""
+	RETURN
+
+IF STRLENS(L_STR) > 8
+	L_STR = 【%L_STR%】
+ELSE
+	L_STR = 【%L_STR%中】
+ENDIF
+
+SETCOLOR COLOR("ピンク")
+RESULTS = %L_STR%
+
+;=================================================
+;   sub TR_INFO_PALAM_COM
+;=================================================
+;   TR情報:PALAM(コマンド)
+;-------------------------------------------------
+; Input:
+;  ARG:0				キャラ
+;-------------------------------------------------
+@TR_INFO_PALAM_COM(ARG)
+#DIM L_T
+#DIM L_TMP
+#DIMS L_STR
+L_T = ARG
+L_STR =
+
+;-------------------
+;- 道具系
+;-------------------
+
+;- Ｖ器具
+L_TMP = TEQUIP:L_T:Ｖ器具
+IF L_TMP
+	CALLFORM COM_FUNC_GET_NAME_X{L_TMP}
+	L_STR += @"[%RESULTS%] "
+ENDIF
+
+;- Ａ器具
+L_TMP = TEQUIP:L_T:Ａ器具
+IF L_TMP
+	CALLFORM COM_FUNC_GET_NAME_X{L_TMP}
+	SELECTCASE RESULTS
+		CASE "アナルバイブ"
+			RESULTS = Ａバイブ
+	ENDSELECT
+	L_STR += @"[%RESULTS%] "
+ENDIF
+
+SIF L_STR == ""
+	RETURN
+
+SETCOLOR COLOR("ピンク")
+PRINTS L_STR
+RESETCOLOR
+

@@ -1,0 +1,268 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:DB_TALENT.ERB
+;	Facility	:データベース(TALENT)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ DB_TALENT_NAME					DB:TALENT名称
+;
+;===============================================================================
+
+;=================================================
+;   sub DB_TALENT_NAME
+;=================================================
+;   DB:TALENT名称
+;-------------------------------------------------
+; Input:
+;  ARG					対象キャラ
+;  ARGS					対象値
+;  ARG:1				CSV優先
+; Output:
+;  RETURNF				個人PALAM名称(素質)
+;-------------------------------------------------
+@DB_TALENT_NAME(ARG, ARGS, ARG:1=0)
+#FUNCTIONS
+#DIM L_VAL
+#DIMS L_STR
+#DIM L_SEX
+
+L_STR = %ARGS%
+L_SEX = VAR_SEX(ARG, ARG:1)
+
+SIF L_STR == "バストサイズ"
+	GOTO バストサイズ
+SIF STRLENS(L_STR) <= 0
+	RETURNF ""
+
+;- CSV優先
+IF ARG:1
+	L_VAL = CSVTALENT(ARG,GETNUM(TALENT,ARGS),0)
+ELSE
+	L_VAL = TALENT:ARG:ARGS
+ENDIF
+
+;CHK:対象値
+SELECTCASE L_STR
+	;-----------------------------
+	;- ■ ABL素質
+	;-----------------------------
+
+	;-----------------------------
+	;- ■ 体質素質
+	;-----------------------------
+
+	;性別
+	CASE "オトコ"
+		SELECTCASE L_VAL
+			CASE 0
+				L_STR = ♀
+			CASEELSE
+				L_STR = ♂
+		ENDSELECT
+	;非処女
+	CASE "非処女"
+		;女の場合
+		IF L_SEX
+			SELECTCASE L_VAL
+				CASE 1
+					L_STR = 
+				CASE -1
+					L_STR = 再生処女
+				CASEELSE
+					L_STR = 処女
+			ENDSELECT
+		ELSE
+			L_STR = 
+		ENDIF
+	;非童貞
+	CASE "非童貞"
+		;男の場合
+		IF !L_SEX
+			IF L_VAL == 0
+				L_STR = 童貞
+			ELSE
+				L_STR = 
+			ENDIF
+		ELSE
+			L_STR = 
+		ENDIF
+	;Ａ非処女
+	CASE "Ａ非処女"
+		;女の場合
+		IF L_SEX || FLAG:バージンモード
+			SELECTCASE L_VAL
+				CASE 1
+					L_STR = 
+				CASEELSE
+					L_STR = Ａ処女
+			ENDSELECT
+		ELSE
+			L_STR = 
+		ENDIF
+
+	;バストサイズ
+	CASE "バストサイズ"
+		$バストサイズ
+		L_STR=
+
+		;- CSV優先
+		IF ARG:1
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"絶壁"),0)
+				L_STR = 絶壁
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"貧乳"),0)
+				L_STR = 貧乳
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"巨乳"),0)
+				L_STR = 巨乳
+			SIF CSVTALENT(ARG,GETNUM(TALENT,"爆乳"),0)
+				L_STR = 爆乳
+		ELSE
+			SIF TALENT:ARG:絶壁
+				L_STR = 絶壁
+			SIF TALENT:ARG:貧乳
+				L_STR = 貧乳
+			SIF TALENT:ARG:巨乳
+				L_STR = 巨乳
+			SIF TALENT:ARG:爆乳
+				L_STR = 爆乳
+		ENDIF
+		SIF !STRLENS(L_STR)
+			L_STR = 普乳
+		;男の場合
+		SIF !L_SEX
+			L_STR = 
+	;胸
+	CASE "絶壁", "貧乳", "巨乳", "爆乳"
+		L_STR = 
+
+	;尻
+	CASE "巨尻", "爆尻"
+		IF ARG:1
+			IF CSVTALENT(ARG,GETNUM(TALENT, L_STR),0)
+				L_STR = %L_STR%
+			ELSE
+				L_STR = 
+			ENDIF
+		ELSE
+			IF TALENT:ARG:L_STR
+				L_STR = %L_STR%
+			ELSE
+				L_STR = 
+			ENDIF
+		ENDIF
+
+	;機械
+	CASE "機械"
+		SIF L_SEX
+			L_STR = 機械の乙女
+		SIF !L_VAL
+			L_STR = 
+
+	;-----------------------------
+	;- ■ 個人素質
+	;-----------------------------
+
+	;-----------------------------
+	;- ■ 対人素質
+	;-----------------------------
+
+	;隷属度
+	CASE "隷属度"
+		SELECTCASE L_VAL
+			CASE 1
+				L_STR = 服従
+			CASE 2
+				L_STR = 隷属
+			CASE 3
+				L_STR = 烙印
+			CASEELSE
+				L_STR = 
+		ENDSELECT
+	;陥落度
+	CASE "陥落度"
+		SELECTCASE L_VAL
+			CASE 1
+				L_STR = 恋慕
+			CASE 2
+				L_STR = 親愛
+			CASE 3
+				L_STR = 伴侶
+			CASEELSE
+				L_STR = 
+		ENDSELECT
+	;淫乱度
+	CASE "淫乱度"
+		SELECTCASE L_VAL
+			CASE 1, 2
+				L_STR = 淫乱
+			CASE 3
+				L_STR = 淫魔
+			CASEELSE
+				L_STR = 
+		ENDSELECT
+	;烙印、伴侶
+	CASE "烙印", "伴侶"
+		;隷属度と陥落度で表示する為、ここでは非表示
+		L_STR = 
+	;ＮＴＲ度
+	CASE "ＮＴＲ度"
+		SELECTCASE L_VAL
+			CASE 1
+				L_STR = ＮＴＲ
+			CASE 2, 3
+				L_STR = ＮＴＲ
+			CASEELSE
+				L_STR = 
+		ENDSELECT
+	CASE "学生"
+		SELECTCASE L_VAL
+			CASE 5
+				L_STR = 小学生
+			CASE 4
+				L_STR = 中学生
+			CASE 3
+				L_STR = 高校生
+			CASE 2
+				L_STR = 大学生
+			CASE 1
+				L_STR = 学生
+			CASEELSE
+				L_STR = 
+		ENDSELECT
+	CASE "小柄体型"
+		IF TALENT:ARG:小人体型 || L_VAL < 1
+			L_STR = 
+		ELSE
+			L_STR = 小柄体型
+		ENDIF
+	CASE "小人体型"
+		IF L_SEX && L_VAL
+			L_STR = 幼児体型
+		ELSEIF L_VAL
+			L_STR = 小人体型
+		ELSE
+			L_STR = 
+		ENDIF
+	;その他
+	CASEELSE
+		SIF L_VAL <= 0
+			L_STR = 
+ENDSELECT
+
+;SIF STRLENS(L_STR) > 0
+;	L_STR = [%L_STR%]
+
+RETURNF L_STR
+

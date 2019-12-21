@@ -1,0 +1,116 @@
+﻿;-------------------------------------------------
+;鬼との出会い
+;-------------------------------------------------
+@RPG_EVENT_501(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+#DIM EVE_RAND
+#DIM ID_오니
+#DIM ID_探索者
+
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 501
+
+L_I = ARG
+
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【조사 이벤트:오니와의 만남】
+PRINTFORML 
+
+PRINTFORML 갑자기 눈앞의 건물이 무너지면서 %CALLNAME:L_I%가 경악하여 뛰어오른 찰나에、너덜너덜해진「외적」이 날아왔다。
+PRINTFORML 무슨 일인지 당황하던 찰나에、크게 벌어진 구멍에서 살짝 더러워진 오니 한 명이 나타났다。
+PRINTFORML 먼저 적의가 없다는 것을 알리자、오니는 놀래켜서 미안하다고 사과했다。
+PRINTFORML 이야기에 따르면「외적」과 계속해서 싸우는 사이에 마을에서 상당히 멀어졌다는 모양이다、말하자면 미아라는 것이다。
+PRINTFORML 오니 자신은 이대로 토벌을 계속하겠다지만、몸 상태를 고려하면 오래 가지 못할지도 모른다…
+PRINTFORML 
+PRINTFORML [0] 끌어들인다		(주민으로 등록한다)
+PRINTFORML [1] 그대로 배웅한다	(주민 등록하지 않는다)
+PRINTFORML 
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	PRINTFORML %CALLNAME:L_I%는 도시에 대해 말하면서、「우리와 함께 싸우지 않을래」하고 권유했다。
+	PRINTFORML 오랫동안 고립된 산골에서 생활했었기 때문인지、오니는 도시에 대해서 듣고는 관심이 동한 것 같다。
+	PRINTFORML 운용하기에 따라선 든든한 아군이 되어 줄 것이다…
+	PRINTFORML 
+	PRINTFORMW 
+	CALL CHARACTER_SCOUT1
+	RESETCOLOR
+	ID_오니 = CHARANUM - 1
+	ID_探索者 = Flag:調査キャラ
+	EVE_RAND = RAND(1, 5)
+	
+	{
+	CALL RPG_PAIR_TALK(
+		ID_오니,     "【외계의 오니：" + @"%CALLNAME:ID_오니,     20, LEFT%" + "】", @"RPG_EVENT_501_{EVE_RAND}_ONI", 
+		ID_探索者, "【탐색자　：" + @"%CALLNAME:ID_探索者, 20, LEFT%" + "】", @"RPG_EVENT_501_{EVE_RAND}_EXPLORER"
+		)
+	}
+CASE 1
+	PRINTFORML 역시 이대로 보내기도 조금 그랬기 때문에、남은 식량이라도 건네주기로 했다。
+	PRINTFORML 오니는 웃으면서 감사를 표하고、식량을 잔뜩 챙긴 뒤에 떠났다…
+	PRINTFORML 
+	PRINTFORMW 
+	RESETCOLOR
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,153 @@
+
+;-------------------------------------------------
+;住人業務　業務　メイド
+;-------------------------------------------------
+@WORK_T_Me(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_T
+#DIM L_F
+#DIM L_K
+#DIM L_N
+
+L_T = TARGET
+TARGET = ARG:0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+
+CALL C_PICTURE(ARG:0,ARG:1)
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORM 　　　　　
+		IF !RAND:3
+			PRINTFORML 「畏まりましたご主人様、直ちに作業に移ります。」
+		ELSEIF !RAND:2
+			PRINTFORML 「ご主人様ご用件をどうぞ」
+		ELSE
+			PRINTFORML 「ご主人様のお世話はお任せくださいませ…%UNICODE(0x2661)%」
+		ENDIF
+PRINTFORML 
+PRINTFORM 　　　　　
+PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に促進され、仕事に励んだ…
+PRINTFORMW
+
+
+
+PRINTFORML 
+
+IF (Talent:非処女 == 1 && Talent:合意 == 1) && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1) && RAND:10 >= 5
+SETCOLOR 250,50,200
+DRAWLINE
+	IF !RAND:5 && TALENT:ヤンデレ
+		PRINTFORML 「あはっ…！……ご主人様…%UNICODE(0x2661)%、ご主人様ぁっ！……%UNICODE(0x2661)%、もっと気持ちよくなって下さいませっ%UNICODE(0x2661)%」
+		PRINTFORML %CALLNAME:MASTER%が保有するメイドの中で、%CALLNAME%は特に「過激派」のメイドだ。
+		PRINTFORML 己が仕えるべき相手が全てであり、邪魔する者にはとても攻撃的でやや扱い辛い。
+		PRINTFORML だが、それを考慮してもその献身は素晴らしいもので、今も女の身体を存分に使い%CALLNAME:MASTER%を愉しませている。
+		PRINTFORMW 
+		PRINTFORML 自身の快楽など二の次で、ひたすら腰を淫らに激しく振り、膣内に咥えたペニスにご奉仕を行う。
+		PRINTFORML 無理に動き続ければ痛みもあるだろうに、それしか知らないようにピストンを繰り返す。
+		PRINTFORML その献身に報いてやろうとこちらが腰を打ち付けると、ビクンと身体を跳ねらせ歓喜の声を響かせた。
+		PRINTFORML 「あぁ…素敵です%UNICODE(0x2661)%…その逞しいおちんちんで…ぁあんっ%UNICODE(0x2661)%、――――っ%UNICODE(0x2661)%」
+		PRINTFORML 怯んだ隙に今度は%CALLNAME:MASTER%が攻勢に回り、子宮に肉棒を叩きつけていく。
+		PRINTFORML それだけで興奮すさまじいのか、%CALLNAME%は断続的に絶頂を繰り返す。
+		PRINTFORML 続くように%CALLNAME:MASTER%も射精すると、両手足を絡めてその快感を余さず受け止めようとする。
+		PRINTFORML 子宮を満たされていく幸福感に浸るように、%CALLNAME%は頬を緩ませて放心していた…
+	ELSEIF !RAND:4 && TALENT:青き血族
+		PRINTFORML 青き血族と呼ばれるほどの高貴な家系と言えど、「プレイヤー」が相手ならば跪き奉仕する立場である。
+		PRINTFORML だが、貴族の女とってその立場こそが最も理想とされている、
+		PRINTFORML なぜならば「プレイヤーのメイド」とは彼らの妾にも等しいからだ。
+		PRINTFORMW 
+		PRINTFORML 「ご、ご主人様…はげしっ…%UNICODE(0x2661)%……っ…ぁんっ%UNICODE(0x2661)%」
+		PRINTFORML そんな立場の%CALLNAME%はシミ一つない柔肌を%CALLNAME:MASTER%に晒し、その肢体を容赦なく貪られていく。
+		PRINTFORML すでに膣内は肉棒に屈服仕切っており、突かれるたびにその膣壁をウネウネと蠢かせている。
+		PRINTFORML 後背位で犯されてはただ喘ぐことしかできず、ピストンの動きも徐々に激しくなり%CALLNAME%の嬌声も乱れていった…
+		PRINTFORMW 
+		PRINTFORML 「…はぁ…はぁ…っ…%UNICODE(0x2661)%……ごしゅじん…さまぁ…%UNICODE(0x2661)%」
+		PRINTFORML 一時間後、激しい行為がやっと終わったのか、膣からペニスが抜き取られる。
+		PRINTFORML それと同時に、ごぽっ…と秘所から種付けの証たる精液が溢れシーツを汚していく。
+		PRINTFORML このような大量の精液を注がれ続ければ、まず受精と妊娠は逃れられない。
+		PRINTFORML だがこうして尊き血は紡がれ続ける、%CALLNAME%も望んでその結末を受け入れるだろう。
+		PRINTFORML 新たなる青き血が産まれることを祈りながら%CALLNAME%は微笑みながらお腹を摩った…
+	ELSEIF !RAND:3 && (TALENT:巨乳 || TALENT:爆乳)
+		PRINTFORML 「…ぁむ……んっ…ふ………んんぅ……ちゅっ%UNICODE(0x2661)%」
+		PRINTFORML 書斎で作業する%CALLNAME:MASTER%だが、その下には跪いて性処理をするメイドが一人。今回の性処理担当の%CALLNAME%だ。
+		PRINTFORML 彼女は%CALLNAME:MASTER%が作業している机の下に潜り込んで、その豊満な乳房でペニスを挟み口を交えて奉仕している。
+		PRINTFORML この胸目当ても込みで雇われていると自覚がある%CALLNAME%は、パイズリも必須技能として心得ている。
+		PRINTFORML 両胸から押さえ乳圧を強めたり、左右別に上下させたりと味わう快感が単調にならないよう高度なテクを披露していく。
+		PRINTFORMW 
+		PRINTFORML 「っ！！……――%UNICODE(0x2661)%、んっ…熱い…%UNICODE(0x2661)%」
+		PRINTFORML ご奉仕を続けているとついに精液を吐き出し、%CALLNAME%の顔が白濁液で染め上げられた。
+		PRINTFORML 勢いが強くなる前にペニスを谷間の中に捕らえ、射精が終わるまで乳内で留めさせる
+		PRINTFORML 
+		PRINTFORML 「お疲れ様でしたご主人さ……？…」
+		PRINTFORML 後は掃除してお勤めが終わったかと思いきや、%CALLNAME:MASTER%の肉棒はまだ硬くそそり立ったままだった。
+		PRINTFORML 「まだ満足していない」とばかりに、%CALLNAME%はぺちぺちっと亀頭で頬を軽く叩かれる。
+		PRINTFORMW 
+		PRINTFORML 「…………%UNICODE(0x2661)%、ではご希望にお応え致します%UNICODE(0x2661)%、存分に%CSTR:一人称%のおっぱいを堪能して下さいませ%UNICODE(0x2661)%」
+		PRINTFORML 絶倫ぶりに驚きながらも、未だ身体を求められていることに、少々優越感と独占欲に浸る。
+		PRINTFORML そして%CALLNAME%は口元に付いたザーメンをペロリと舐めとり、胸元から卑猥な水音を鳴らしてパイズリを再開した…
+		PRINTFORML 
+	ELSEIF !RAND:2
+		PRINTFORML 都市ではメイド職はメジャーなもので、大手の企業などを仕切る家系はメイドを雇うのが常識とされている。
+		PRINTFORML その中でも「プレイヤー」に仕えるメイドはメイド達の憧れであり、その座に就く女性たちはトップメイドと呼ばれる。
+		PRINTFORML 「お勤めお疲れ様でございますご主人様、定期の性処理に参りました」
+		PRINTFORML %CALLNAME:MASTER%に仕える%CALLNAME%もまたトップメイド、主人の生活を支えその身体で癒すのが仕事だ。
+		PRINTFORMW 
+		PRINTFORML 「はぁっ…！…んぁっ…ご主人様…ご主人様ぁっ！……%UNICODE(0x2661)%」
+		PRINTFORML 「プレイヤー」の御眼鏡にかなった肢体を惜しみなく使い、主人に猛る肉棒で貪られる%CALLNAME%。
+		PRINTFORML だがトップメイドの特権である「プレイヤー」の子種を定期的に授かれるというのもあり、%CALLNAME%は自ら身体を差し出し嬲られ続ける。
+		PRINTFORMW 
+		PRINTFORML 「ご主人様っ、ご慈悲をっ%UNICODE(0x2661)%……子宮にご主人様の子種を下さいませっ%UNICODE(0x2661)%」
+		PRINTFORML 余程種付けがご希望なのか、%CALLNAME:MASTER%の腰に両足を絡ませて涙目で懇願する%CALLNAME%。
+		PRINTFORML そんなかわいいメイドのおねだりに応えるべく、%CALLNAME:MASTER%は亀頭で子宮口をこじ開け直接特濃精液をぶちまける。
+		PRINTFORML 「――%UNICODE(0x2661)%――――っ%UNICODE(0x2661)%……ぁあっ%UNICODE(0x2661)%%UNICODE(0x2661)%」
+		PRINTFORML 子宮内が真っ白に染まっていく感覚に喘ぎさえできない程の快楽に、%CALLNAME%はただ身体を震わせる。
+		PRINTFORML 強い雄に侍り屈服し子を授かる……これ以上の女の幸福はない。と、彼女はぼんやりとした思考で種付けを味わっていた…
+	ELSE
+		PRINTFORML 「はっ…はっ…%UNICODE(0x2661)%……ご主人様…如何でしょうか…？…あんっ%UNICODE(0x2661)%」
+		PRINTFORML ベッドの上で資料を読み耽っている%CALLNAME:MASTER%に%CALLNAME%が跨る形で、硬い肉棒を自身の膣内で愉しませている。
+		PRINTFORML もう長く続けているのか結合部は精液と愛液の混合液が泡立ち、腰を打ち付けるたびに逆流したザーメンが膣内からあふれ出る。
+		PRINTFORML いつ終わるかわからないが、%CALLNAME:MASTER%のメイドであるという自負と誇りから、絶対に満足させてみせると健気に乱れ続けていく。
+		PRINTFORMW 
+		PRINTFORML さらに数十分後、ようやく終わりが見えて来たのか、%CALLNAME:MASTER%は資料を手放すと%CALLNAME%をベッドへ倒し射精寸前のペニスで突き始めた。
+		PRINTFORML 激しい快感に襲われた%CALLNAME%はただただ喘ぎ続けるだけで、そのままトドメとばかりに濃い精液を満タンの子宮へ無理矢理注ぎ込んだ。
+		PRINTFORML 至福のように蕩けた顔で絶頂と余韻を味わい、子宮も喜びを隠せないように胎動した…
+	ENDIF
+
+DRAWLINE
+
+CALL JN_SEX_EXP
+RESETCOLOR
+
+ENDIF
+
+
+
+
+EXP:業務経験 += 1
+PRINTFORML 【業務経験　　:{EXP:業務経験-1, 5 ,LEFT}→{EXP:業務経験, 5 ,RIGHT}】
+DRAWLINE
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 5
+	L_K = (((EXP:業務経験/100)+1)*1000)+(EXP:業務経験*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 更に%CALLNAME%の活躍が「シティ」に認められ、大量の功績を獲得した！
+	PRINTFORML 【功績　　:{Flag:都市_功績 - L_K, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
+	DRAWLINE
+ENDIF
+PRINTFORMW 
+TARGET = L_T
+
+
+
+
+
+
+
+
+
+
+

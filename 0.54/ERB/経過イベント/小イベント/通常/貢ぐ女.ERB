@@ -1,0 +1,32 @@
+;-------------------------------------------------
+;貢ぐ女
+;-------------------------------------------------
+@TURN_EVENT_NORMAL_MTGONN
+#DIM I_G
+
+I_G = RAND:6
+
+DRAWLINE
+PRINTFORML 【貢ぐ女：%CALLNAME%】
+IF !RAND:4
+	PRINTFORML %CALLNAME%は商店街の福引で当てた物を%CALLNAME:MASTER%に使えないかと持ってきた…
+ELSEIF !RAND:3
+	PRINTFORML %CALLNAME%は露店で%CALLNAME:MASTER%の役に立ちそうな掘り出し物を見つけ購入した…
+ELSEIF !RAND:2
+	PRINTFORML %CALLNAME%は友人から使い道がわからないと譲られた物の中に%CALLNAME:MASTER%が集めている物を発見した…
+ELSE
+	PRINTFORML %CALLNAME%は都市の外縁部付近で珍しいものを見つけ%CALLNAME:MASTER%に届けた…
+ENDIF
+;低品質のアイテム入手
+FLAG:(2100+I_G) += 1
+PRINTFORML %FLAGNAME:(2100+I_G)%を入手した。
+	
+
+DRAWLINE
+
+
+
+
+
+
+

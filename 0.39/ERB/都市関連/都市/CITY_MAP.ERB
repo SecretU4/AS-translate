@@ -1,0 +1,91 @@
+
+;-------------------------------------------------
+; “sŽsŠÖ˜A
+;-------------------------------------------------
+
+@CITY_MAP
+
+
+PRINTFORM y“V‹C:
+IF Flag:“sŽs_“V‹C == 0
+	PRINTFORM °‚ê
+ELSEIF Flag:“sŽs_“V‹C == 1
+	PRINTFORM “Ü‚è
+ELSEIF Flag:“sŽs_“V‹C == 2
+	PRINTFORM ‰J
+ELSEIF Flag:“sŽs_“V‹C == 3
+	PRINTFORM ‘å‰J
+ELSEIF Flag:“sŽs_“V‹C == 4
+	PRINTFORM á
+ENDIF
+
+PRINTFORM z
+
+
+IF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_–h‰q != 0
+	SETCOLOR 250,50,50
+	SETBGCOLOR 90,10,10
+	PRINTFORM y–h‰qŠúŠÔŽc‚è:{Flag:“sŽs_–h‰q}“úz y‡Œvƒ_ƒ[ƒW: Œ»Ý{Flag:“sŽs_–h‰q’~Ïƒ_ƒ[ƒW}’~Ï / –Ú•W{Flag:“sŽs_–h‰q¬Œ÷ƒ_ƒ[ƒW}“ž’Bz
+ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 3
+	SETCOLOR 250,50,50
+	PRINTFORM yPŒ‚‚Ü‚Å:{Flag:“sŽs_PŒ‚}“úz
+ELSEIF Flag:“sŽs_Lv >= 5 &&  Flag:“sŽs_PŒ‚ <= 9
+	SETCOLOR 250,50,250
+	PRINTFORM yPŒ‚‚Ü‚Å:{Flag:“sŽs_PŒ‚}“úz
+ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_PŒ‚ >= 10
+	SETCOLOR 50,250,250
+	PRINTFORM yPŒ‚‚Ü‚Å:{Flag:“sŽs_PŒ‚}“úz
+ELSE
+	PRINTFORM 
+ENDIF
+
+
+IF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 75
+	SETCOLOR 250,50,50
+ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ >= 50
+	SETCOLOR 250,50,250
+ELSEIF Flag:“sŽs_Lv >= 5 && Flag:“sŽs_–h‰q‘¹‰ó—¦ < 50
+	SETCOLOR 50,250,250
+ELSE
+ENDIF
+PRINTFORML y‘¹‰ó—¦:{Flag:“sŽs_–h‰q‘¹‰ó—¦}“z
+
+RESETCOLOR
+PRINTFORM y“sŽsLv:{Flag:“sŽs_Lv, 3 ,RIGHT}({Flag:“sŽs_ŒoŒ±’l}/{Flag:“sŽs_Lv*10})z
+PRINTFORM y•\ŽÐ‰ï:{Flag:“sŽs_•\ŽÐ‰ï}z
+PRINTFORM y— ŽÐ‰ï:{Flag:“sŽs_— ŽÐ‰ï}z
+PRINTFORM y‡Œvƒtƒ@ƒ“”F{FLAG:“sŽs_‡Œvƒtƒ@ƒ“”}z
+IF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 10
+	SETCOLOR 250,50,50
+ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è < 30
+	SETCOLOR 250,50,250
+ELSEIF  Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è >= 30
+	SETCOLOR 50,250,250
+ELSE
+ENDIF
+PRINTFORML yŒˆŽZ‚Ü‚Å:{Flag:“sŽs_¡Šú‚Ì’÷‚ßØ‚è}“úz
+RESETCOLOR
+PRINTFORM yŽ‘‹à:{MONEY}z
+PRINTFORM yTP:{Flag:“sŽs_Œ»ÝTP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åTP, 3 ,RIGHT}z
+PRINTFORM yAP:{Flag:“sŽs_Œ»ÝAP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åAP, 3 ,RIGHT}z
+PRINTFORM ySP:{Flag:“sŽs_Œ»ÝSP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åSP, 3 ,RIGHT}z
+PRINTFORM yKP:{Flag:“sŽs_Œ»ÝKP, 3 ,RIGHT}/{Flag:“sŽs_Å‘åKP, 3 ,LEFT}z
+PRINTFORM yBP:{Flag:“sŽs_Œ»ÝBP, 3 ,RIGHT}z
+PRINTFORML
+PRINTFORML yŒ÷Ñ:{Flag:“sŽs_Œ÷Ñ, 10 ,RIGHT}z
+
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+

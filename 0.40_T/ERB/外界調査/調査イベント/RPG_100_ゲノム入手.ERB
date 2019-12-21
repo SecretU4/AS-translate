@@ -1,0 +1,87 @@
+﻿;-------------------------------------------------
+;ゲノム入手
+;-------------------------------------------------
+@RPG_EVENT_100(ARG:0,ARG:1)
+#DIM L_INPUT
+#DIM L_I
+#DIM L_G
+L_G = RAND:20
+ARG = Flag:調査キャラ
+Flag:調査イベント発生中 = 1
+Flag:調査イベント番号 = 100
+
+L_I = ARG
+CLEARLINE LINECOUNT
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【조사 이벤트:게놈 입수】
+PRINTFORML 
+PRINTFORML %CALLNAME:L_I%는 가까운 건물을 샅샅이 뒤지다가、특수 가공된 상자를 우연히 발견했다。
+PRINTFORML 천성적인 자물쇠 기능으로 잠금을 해제하자、안쪽엔 현대에 와선 귀중해진 게놈이 담겨 있었다。
+PRINTFORML %CALLNAME:L_I%는 이 행운에 기뻐하면서、우선 상자를 가지고 돌아가기로 했다…
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+PRINTFORML %FlagNAME:(2500+L_G)%を 입수했다
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+
+
+Flag:(2500+L_G) += 1
+
+
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,338 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:レイプイベント（仮）.ERB
+;	Facility	:労役に治安の要素追加とレイプイベント（仮）
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		2013/12/02		ネトリス				新規作成
+;	002		2013/12/15		----					調整
+;	003		2013/12/30		ネトリス				レイプでの初体験が記録されるように
+;	004		2013/12/31		----					調整
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;あくまで勝手に作った外部パッチなので、大部分の処理はこの中で行う
+;本体に書き込む場合は『TRYCALL』を使って、このERBを外してもエラーが起こらないようにする
+;
+;==========================================================
+;@治安表示
+; 治安の表示処理
+;
+;<引数>
+;
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@治安表示
+
+;- EVE:レイプ(初回調整)
+CALL EVENT_RAPE_INIT
+
+SELECTCASE FLAG:労役治安
+	CASE IS >= 91 
+;		SETCOLOR COLOR("水色")
+		PRINTFORML 치안：◎
+	CASE IS >= 71
+		PRINTFORML 치안：○
+	CASE IS >= 51
+;		SETCOLOR COLOR("黄色")
+		PRINTFORML 치안：△
+	CASEELSE
+		SETCOLOR COLOR("赤")
+		PRINTFORML 치안：×
+ENDSELECT
+RESETCOLOR
+
+
+
+;==========================================================
+;@レイプイベント
+; レイプイベント処理
+;
+;<引数>
+;
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@レイプイベント
+#DIM L_I
+#DIM L_TGT_BAK
+#DIM L_RAPE_CHK, DEFTR_CL_NUM
+#DIM L_NUM
+
+;- EVE:レイプ(初回調整)
+CALL EVENT_RAPE_INIT
+
+;コンフィグ
+SIF !FLAG:レイプイベント機能
+	RETURN
+
+;FLAG:労役治安が51以上の場合は終了
+SIF FLAG:労役治安 > 50
+	RETURN
+;TARGETを保管する
+L_TGT_BAK = TARGET
+
+
+LOCAL = 0
+L_NUM = CHARANUM
+L_RAPE_CHK = 0
+FOR L_I, 0, CHARANUM
+
+	TARGET=L_I
+
+	;キャラ失踪時のエラー防止
+	SIF L_NUM > CHARANUM && L_I == CHARANUM
+		BREAK
+
+	;男は弾く
+	SIF !VAR_SEX()
+		CONTINUE
+
+	;- 役職無し
+	SIF !CFLAG:労役役職タイプ
+		CONTINUE
+
+	L_RAPE_CHK:LOCAL = TARGET
+	LOCAL++
+NEXT
+
+;候補が無い場合は戻る
+SIF L_RAPE_CHK == 0
+	RETURN
+
+;犠牲者の番号をTARGETに入れる
+TARGET = L_RAPE_CHK:(RAND:LOCAL)
+CALL RAPE_MNG
+
+
+
+
+
+
+
+;TARGETを元に戻す
+TARGET = L_TGT_BAK
+
+
+
+
+;==========================================================
+;@RAPE_MNG
+; レイプ成否判定と結果
+;
+;<引数>
+;
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@RAPE_MNG
+#DIM L_I
+#DIM L_TMP
+#DIMS L_NAME
+L_NAME = %CALLNAME%をレイプした男
+;FLAG:労役治安によって確率を変える
+SELECTCASE FLAG:労役治安
+	CASE IS >= 41
+		L_I = 5
+	CASE IS >= 31
+		L_I = 15
+	CASE IS >= 21
+		L_I = 25
+	CASE IS >= 11
+		L_I = 35
+	CASEELSE
+		L_I = 50
+ENDSELECT
+DRAWLINE
+PRINTFORMW %CALLNAME%는 객실을 정리하다가 주위에서 시선을 느꼈다…
+PRINTFORML 
+PRINTFORML ・
+PRINTFORML ・・
+PRINTFORML ・・・
+PRINTFORML 
+;レイプされる
+IF RAND:100 < L_I
+	;治安が低くなってしまった時の対策用
+	;FLAG:労役武力がFLAG:労役人気より二倍以上大きい場合は確実に回避
+	SIF FLAG:労役武力 > FLAG:労役人気*2
+		GOTO レイプ回避
+	;レイプキャラ
+	CSTR:レイプキャラ名 = 宿泊客
+
+	PRINTFORMW %CALLNAME%는 갑자기 %CSTR:レイプキャラ名%에게 밀려 넘어졌다！
+
+	;-----------------------------
+	;- 口上
+	;-----------------------------
+
+	;- 口上:レイプイベント
+	FLAG:レイプ結果タイプ = [[レイプ結果:客室強姦]]
+	CALL KOJO_RAPE
+
+	L_TMP = 2 + (ABL:성노예 / 2)
+
+	IF !TALENT:비처녀
+		SETCOLOR COLOR("ピンク")
+		PRINTL 처녀 상실
+		RESETCOLOR
+		TALENT:비처녀 = 1
+		TCVAR:履歴_EXP_処女喪失 = 1
+	ENDIF
+
+	;- EXP
+	CALL MNG_LOG_ADD("EXP", "키스경험",		(1+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "펠라경험",	(2+L_TMP/2))
+	CALL MNG_LOG_ADD("EXP", "Ｖ경험",		(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "성교경험",		(2+L_TMP))
+
+	CALL MNG_LOG_ADD("EXP", "절정경험",	(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "정음경험",	(2+L_TMP/2))
+	CALL MNG_LOG_ADD("EXP", "정액경험",	(2+L_TMP))
+	CALL MNG_LOG_ADD("EXP", "질싸경험",	(2+L_TMP))
+	;강간경험を赤く表示してみる
+	SETCOLOR 0x990000
+	CALL MNG_LOG_ADD("EXP", "강간경험",	(2+L_TMP))
+	RESETCOLOR
+	PRINTL
+
+	;- 妊娠:可能チェック
+	IF NINSIN_ABLE(TARGET)
+		;- 妊娠:チェック
+		CALL NINSIN_CHK(TARGET, -2, 4, L_NAME)
+	ENDIF
+
+	;- 初体験記録:その他
+	TRYCALL 初体験記録_OTHER(TARGET, 1, L_NAME)
+
+	;- 口上:レイプイベント
+	FLAG:レイプ結果タイプ = [[レイプ結果:客室事後]]
+	CALL KOJO_RAPE
+
+	;レイプ発生で治安が5下がる
+	;『あのホテルのオンナ、無理やりヤッちゃったゼ！』『マジ！オレもヤルわー』みたいな感じで
+	FLAG:労役治安 -= 5
+
+;未遂
+ELSE
+	$レイプ回避
+	PRINTFORMW 기분 탓인가 보다
+
+	;- 口上:レイプイベント
+	FLAG:レイプ結果タイプ = [[レイプ結果:回避]]
+	CALL KOJO_RAPE
+ENDIF
+PRINTL
+
+TCVAR:履歴_EXP_処女喪失 = 0
+
+;=================================================
+;   sub KOJO_RAPE
+;=================================================
+;   口上:レイプイベント
+;-------------------------------------------------
+@KOJO_RAPE
+TRYCCALLFORM KOJO_RAPE_K{CFLAG:使用口上}
+;口上が無い場合は地の分が表示される
+CATCH
+	SELECTCASE FLAG:レイプ結果タイプ
+		CASE [[レイプ結果:回避]]
+
+		CASE [[レイプ結果:客室強姦]]
+
+		CASE [[レイプ結果:客室事後]]
+			SELECTCASE RAND:3
+				CASE 0
+					PRINTFORMW %CALLNAME%에게 욕망을 쏟아낸 남자는、만족하면서 그곳에서 떠났다
+					PRINTFORMW 남겨진 %CALLNAME%는 유린당한 상태로 정신을 차리지 못하고 있다…
+				CASE 1
+					PRINTFORMW %CALLNAME%에게 욕망을 쏟아낸 남자는、만족하면서 그곳에서 떠났다
+					PRINTFORMW 남겨진 %CALLNAME%는 뭔가 웅얼거리면서、필사적으로 안쪽에 쏟아진 정액을 긁어내려하고 있다…
+				CASEELSE
+					PRINTFORMW 능욕이 끝나고、혼자 남겨진 %CALLNAME%는 힘없이 일어서더니、
+					PRINTFORMW 비틀거리면서 샤워실을 향해 걸어갔다…
+			ENDSELECT
+		CASEELSE
+	ENDSELECT
+ENDCATCH
+PRINTL
+
+
+
+;;==========================================================
+;;@労役治安リセット
+;;新バージョン移行時に不具合を防ぐ為の『FLAG:労役治安』リセット処理
+;;
+;;<引数>
+;;
+;;<変数>
+;;
+;;<戻り値>
+;;
+;;==========================================================
+;@労役治安リセット
+;PRINTFORML 外部パッチ『レイプイベント（仮）.ERB』に使われている『FLAG:労役治安』の数値をリセットします。
+;PRINTFORMW 괜찮을까요？
+;CALL INPUT_YN
+;IF !RESULT
+;	FLAG:労役治安 = 1
+;	PRINTFORML 『FLAG:労役治安』をリセットしました。
+;	PRINTFORMW このままセーブを行う事でフラグ使用状態が通常状態のデータになります。
+;ELSE
+;	PRINTFORMW 処理をキャンセルしました。
+;ENDIF
+;
+;
+;
+;;以下の二つは格キャラの口上にコピペして使ってください
+;;レイプ後口上は有効になっていると地の文が出なくなるので、書き込んでいない場合は『;』で無効化してください
+;
+;;レイプ口上
+;;@KOJO_RAPE_K000
+;
+;;レイプ後口上
+;;@KOJO_RAPE_AFTER_K000
+
+
+
+;=================================================
+;   sub EVENT_RAPE_INIT
+;=================================================
+;   EVE:レイプ(初回調整)
+;-------------------------------------------------
+@EVENT_RAPE_INIT
+
+;初回は100設定
+SIF FLAG:労役治安 == 0
+	FLAG:労役治安 = 100
+
+
+;=================================================
+;   sub EVENT_RAPE_治安処理
+;=================================================
+;   EVE:レイプ(治安処理)
+;-------------------------------------------------
+@EVENT_RAPE_治安処理
+;武力が人気の75%未満で下がる
+IF FLAG:労役人気*75/100 > FLAG:労役武力
+	FLAG:労役治安 -= 3+RAND:3
+ELSE
+	FLAG:労役治安 += 3+RAND:3
+ENDIF
+;101以上1未満にならないように
+FLAG:労役治安 = LIMIT(FLAG:労役治安, 1, 100)
+
+
+
+
+

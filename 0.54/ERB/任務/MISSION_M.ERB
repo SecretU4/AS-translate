@@ -1,0 +1,490 @@
+;-------------------------------------------------
+;ミッション
+;-------------------------------------------------
+@MISSION_MAIN
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+
+DRAWLINE
+PRINTFORML ≪[ＩＤ確認]、[固有ゲノム確認]、[固有エーテル確認]、[　　　　　　　確認]、メインサーバーへのアクセスを許可します≫
+DRAWLINE
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORMW
+
+CALL MISSION_MAIN2
+;-------------------------------------------------
+;ミッション
+;-------------------------------------------------
+@MISSION_MAIN2
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+
+DRAWLINE
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪ようこそ「プレイヤー」、あなたに提示できる依頼は以下の通りです≫
+DRAWLINE
+IF Flag:依頼_スパイテロ駆除_Lv > 0
+	PRINTFORML [1] - 【スパイテロ駆除(LV:{Flag:依頼_スパイテロ駆除_Lv})】
+ELSE
+	PRINTFORML       【――――NO MISSION――――】
+ENDIF
+IF Flag:依頼_イスからの駆除依頼_Lv > 0
+	PRINTFORML [2] - 【イスからの駆除依頼(LV:{Flag:依頼_イスからの駆除依頼_Lv})】
+ELSE
+	PRINTFORML       【――――NO MISSION――――】
+ENDIF
+IF Flag:イベント誘拐中 == 1
+	PRINTFORML [500] - 【住人の救出】
+ELSE
+	PRINTFORML       【――――NO MISSION――――】
+ENDIF
+IF Flag:イベント誘拐中 == 2
+	PRINTFORML [501] - 【住人の実験施設からの救出】
+ELSE
+	PRINTFORML       【――――NO MISSION――――】
+ENDIF
+PRINTFORML
+PRINTFORML
+PRINTFORML
+PRINTFORML 
+PRINTFORML [999] - 戻る
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 1
+ CALL MISSION_SP
+CASE 2
+ CALL MISSION_IKI
+CASE 3
+CASE 4
+CASE 500
+ CALL MISSION_JN_S
+CASE 501
+ CALL MISSION_JN_S2
+CASE 100
+	CALL JN_CONFIG_DELETE
+CASE 999
+	DRAWLINE
+	PRINTFORMW ≪さようなら「プレイヤー」、これからもよい運営を期待しています≫
+	RETURN
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+
+
+;-------------------------------------------------
+;スパイテロ駆除
+;-------------------------------------------------
+@MISSION_SP
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪今日も頭のおかしいイレギュラーがいるようです、嘆かわしいですね≫
+PRINTFORML ≪テロは些細な規模ですが、イレギュラー自体は見過ごせるものではありません≫
+PRINTFORML ≪この依頼はまだ誰も受託していません、あなたが執行致しますか？≫
+DRAWLINE
+PRINTFORML
+PRINTFORML
+PRINTFORML [0] - はい(戦闘開始)
+PRINTFORML [1] - いいえ
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	DRAWLINE
+	PRINTFORMW ≪任務を遂行させる代理人を選択して下さい≫
+	CALL RPG_LIST_CHARA
+	L_INPUT = RESULT
+	SIF L_INPUT == 1000
+		GOTO INPUT_LOOP2
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO INPUT_LOOP2
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO INPUT_LOOP2
+	ELSEIF TALENT:L_INPUT:不在 == 1
+		PRINTFORMW 不在のため選択できません
+		GOTO INPUT_LOOP2
+	ELSE
+		Flag:調査キャラ = L_INPUT
+		Flag:依頼_スパイテロ駆除 = 1
+		Flag:依頼_依頼開始 = 1
+		Flag:依頼_依頼Lv = Flag:依頼_スパイテロ駆除_Lv
+		DRAWLINE
+		PRINTFORMW ≪受諾しました、よい成果を期待しています≫
+		CALL RPG_BATTLE
+	ENDIF
+CASE 1
+	CALL MISSION_MAIN2
+CASEELSE
+	GOTO INPUT_LOOP2
+ENDSELECT
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+;スパイテロ駆除クリア
+;-------------------------------------------------
+@MISSION_SP_C
+#DIM L_INPUT
+CALL CHARACTER_SCOUT1
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪お疲れ様でした「プレイヤー」、そちらがイレギュラーですね≫
+PRINTFORML ≪イレギュラーには一切の人権が凍結されています、殺処分したとしても罪になりません≫
+PRINTFORML ≪選択は捕獲したあなたの自由です、如何いたしますか？≫
+DRAWLINE
+PRINTFORMW
+DO
+	CALL INFO_STATUS_SINGLE(CHARANUM - 1)
+	DRAWLINE
+	PRINTFORML ≪お疲れ様でした「プレイヤー」、そちらがイレギュラーですね≫
+	PRINTFORML ≪イレギュラーには一切の人権が凍結されています、殺処分したとしても罪になりません≫
+	PRINTFORML ≪選択は捕獲したあなたの自由です、如何いたしますか？≫
+	PRINTFORML
+	PRINTFORML [0] - 所有する(一部行動制限された住民として所持します)
+	PRINTFORML [1] - 記憶処理(記憶を消して新しい住民として都市に放つ)
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 0
+		PRINTFORML ≪了解しました、イレギュラーの全ての権利をあなたに移譲します≫
+		PRINTFORML ≪念のため再犯防止用の脳処理を施させて頂きます、ご了承ください≫
+		PRINTFORMW ≪これで更生させるのも弄ぶのも、あなたの自由です≫
+	CASE 1
+		DRAWLINE
+		PRINTFORML ≪おや、記憶処理で留めるとは、相変わらず優しい方ですね≫
+		PRINTFORML ≪ではイレギュラーには、第二の人生を歩んでもらいましょう≫
+		PRINTFORMW ≪次の人生で、都市への貢献に期待しましょう≫
+		CALL CANCEL_SCOUT(CHARANUM - 1)
+	CASEELSE
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+
+Flag:依頼_スパイテロ駆除 = 0
+Flag:依頼_スパイテロ駆除_Lv = 0
+
+
+
+;-------------------------------------------------
+;イスからの駆除依頼
+;-------------------------------------------------
+@MISSION_IKI
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪今日もイスが作成した実験体を放置して問題になっています、嘆かわしいですね≫
+PRINTFORML ≪その駆除を彼女達から頼まれています、多少手ごわいですので気を付けましょう≫
+PRINTFORML ≪この依頼はまだ誰も受託していません、あなたが執行致しますか？≫
+DRAWLINE
+PRINTFORML
+PRINTFORML
+PRINTFORML [0] - はい(戦闘開始)
+PRINTFORML [1] - いいえ
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	DRAWLINE
+	PRINTFORMW ≪任務を遂行させる代理人を選択して下さい≫
+	CALL RPG_LIST_CHARA
+	L_INPUT = RESULT
+	SIF L_INPUT == 1000
+		GOTO INPUT_LOOP2
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO INPUT_LOOP2
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO INPUT_LOOP2
+	ELSEIF TALENT:L_INPUT:不在 == 1
+		PRINTFORMW 不在のため選択できません
+		GOTO INPUT_LOOP2
+	ELSE
+		Flag:調査キャラ = L_INPUT
+		Flag:依頼_イスからの駆除依頼 = 1
+		Flag:依頼_依頼開始 = 1
+		Flag:依頼_依頼Lv = Flag:依頼_イスからの駆除依頼_Lv
+		DRAWLINE
+		PRINTFORMW ≪受諾しました、よい成果を期待しています≫
+		CALL RPG_BATTLE
+	ENDIF
+CASE 1
+	CALL MISSION_MAIN2
+CASEELSE
+	GOTO INPUT_LOOP2
+ENDSELECT
+
+
+
+
+
+;-------------------------------------------------
+;イスからの駆除依頼クリア
+;-------------------------------------------------
+@MISSION_IKI_C
+#DIM L_INPUT
+CALL CHARACTER_SCOUT1
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪お疲れ様でした「プレイヤー」、つつがなく終わったようですね≫
+PRINTFORML ≪関係者のイスの一人から交流申請が届いておりましたよ、関心を持たれたようですね≫
+PRINTFORML ≪交流関係を結ぶかどうかは貴方の自由です、如何なさいますか？≫
+DRAWLINE
+PRINTFORMW
+DO
+	CALL INFO_STATUS_SINGLE(CHARANUM - 1)
+	DRAWLINE
+	PRINTFORML ≪お疲れ様でした「プレイヤー」、つつがなく終わったようですね≫
+	PRINTFORML ≪関係者のイスの一人から交流申請が届いておりましたよ、関心を持たれたようですね≫
+	PRINTFORML ≪交流関係を結ぶかどうかは貴方の自由です、如何なさいますか？≫
+	PRINTFORML
+	PRINTFORML [0] - 許可する(住民として登録します)
+	PRINTFORML [1] - 拒否する(登録しません)
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 0
+		PRINTFORML ≪了解しました、こちらがお相手の番号となっております≫
+		PRINTFORMW ≪多くの住民と交流を持つことが「プレイヤー」の基本です、これを足掛かりに信頼を獲得しましょう≫
+	CASE 1
+		DRAWLINE
+		PRINTFORML ≪おや、では申請は削除します≫
+		PRINTFORMW ≪返事はこちらの方で処理しておきましょう≫
+		CALL CANCEL_SCOUT(CHARANUM - 1)
+	CASEELSE
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+Flag:依頼_イスからの駆除依頼 = 0
+Flag:依頼_イスからの駆除依頼_Lv = 0
+
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+;住人救出／イレギュラー拉致
+;-------------------------------------------------
+@MISSION_JN_S(ARG:0,ARG:1,ARG:2)
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪大変嘆かわしいことです、我が都市の住人が頭のおかしいイレギュラーに拉致監禁されています≫
+PRINTFORML ≪幸いなことに相手は一人のようです、救出する場合は戦闘にもならないでしょう≫
+PRINTFORML ≪ただし慎重なタイミングが要求されます…、今から救出しますか？≫
+DRAWLINE
+PRINTFORML
+PRINTFORML　※放置したとしても、キャラロストはしません。
+PRINTFORML [0] - はい　(住人救出)
+PRINTFORML [1] - いいえ
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	DRAWLINE
+	PRINTFORML ≪申請確認……直ちに救出部隊を向かわせましょう≫
+	PRINTFORMW 
+	CLEARLINE LINECOUNT
+	PRINTFORMW ……
+	PRINTFORMW ………………
+	PRINTFORMW …………………………
+	CLEARLINE LINECOUNT
+	PRINTFORML ≪無事に救出出来ましたね、住人のケアはお任せ致します≫
+	PRINTFORML ≪……さて、大罪を犯したイレギュラーには脳を引き抜き、≫
+	PRINTFORML ≪水槽の中で終わらない苦痛を与えることにしましょう≫
+	PRINTFORMW 
+	ARG:0 = 8110
+	ARG:1 = 1
+	ARG:2 = 1
+    CALL MEMBER_LIST2_1(ARG:0,ARG:1,ARG:2)
+	CFLAG:(FLAG:汎用変数):拉致監禁 = 0
+	TALENT:(FLAG:汎用変数):不在 = 0
+	Flag:イベント誘拐中 = 0
+	PRINTFORML %CALLNAME:(FLAG:汎用変数)%が再び運用できるようになった。
+	PRINTFORML 
+	PRINTFORMW 
+CASE 1
+	CALL MISSION_MAIN2
+CASEELSE
+	GOTO INPUT_LOOP2
+ENDSELECT
+
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+;住人救出／マッドサイエンティスト拉致
+;-------------------------------------------------
+@MISSION_JN_S2(ARG:0,ARG:1,ARG:2)
+#DIM L_INPUT
+
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪大変嘆かわしいことです、我が都市の住人がマッドサイエンティストに実験動物として扱われています≫
+PRINTFORML ≪施設は巧妙に隠蔽されているためか、防衛用の設備は特に存在しないようです。救出する場合は戦闘にもならないでしょう≫
+PRINTFORML ≪ただし慎重なタイミングが要求されます…、今から救出しますか？≫
+DRAWLINE
+PRINTFORML
+PRINTFORML　※放置したとしても、キャラロストはしません。
+PRINTFORML [0] - はい　(住人救出)
+PRINTFORML [1] - いいえ
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	DRAWLINE
+	PRINTFORML ≪申請確認……直ちに救出部隊を向かわせましょう≫
+	PRINTFORMW 
+	CLEARLINE LINECOUNT
+	PRINTFORMW ……
+	PRINTFORMW ………………
+	PRINTFORMW …………………………
+	CLEARLINE LINECOUNT
+	PRINTFORML ≪無事に救出出来ましたね、住人のケアはお任せ致します≫
+	PRINTFORML ≪……惜しむらくはマッドサイエンティストを捕まえられなかったことでしょうか≫
+	PRINTFORML ≪救出部隊が到着したころには既に逃げ出していたようです……≫
+	PRINTFORMW 
+	ARG:0 = 8111
+	ARG:1 = 1
+	ARG:2 = 1
+    CALL MEMBER_LIST2_1(ARG:0,ARG:1,ARG:2)
+	CFLAG:(FLAG:汎用変数):交配実験 = 0
+	CFLAG:(FLAG:汎用変数):交配実験_妊娠 = 0
+	CFLAG:(FLAG:汎用変数):交配実験_子宮内汚染度 = 0
+	TALENT:(FLAG:汎用変数):不在 = 0
+	Flag:イベント誘拐中 = 0
+	PRINTFORML %CALLNAME:(FLAG:汎用変数)%が再び運用できるようになった。
+	PRINTFORML 
+	PRINTFORMW 
+CASE 1
+	CALL MISSION_MAIN2
+CASEELSE
+	GOTO INPUT_LOOP2
+ENDSELECT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+;ミッションクリア　分岐
+;-------------------------------------------------
+@MISSION_CLEAR_B
+
+
+
+SIF Flag:依頼_スパイテロ駆除 == 1
+	CALL MISSION_SP_C
+
+
+SIF Flag:依頼_イスからの駆除依頼 == 1
+	CALL MISSION_IKI_C
+
+
+
+JUMP MISSION_CLEAR
+
+;-------------------------------------------------
+;ミッションクリア　報酬
+;-------------------------------------------------
+@MISSION_CLEAR
+#DIM L_MONEY
+
+
+L_MONEY = (Flag:依頼_依頼Lv*500)+RAND:(Flag:依頼_依頼Lv*500)
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪以上をもって依頼の完了とさせて頂きます≫
+PRINTFORMW ≪依頼難度に応じて報酬を用意しました、お受取り下さい≫
+DRAWLINE
+PRINTFORMW 資金【￥{L_MONEY}】獲得しました。
+MONEY += L_MONEY
+DRAWLINE
+PRINTFORMW ≪さようなら「プレイヤー」、これからもよい運営を期待しています≫
+
+
+Flag:依頼_依頼Lv = 0
+Flag:依頼_依頼開始 = 0
+
+
+JUMP SYSTEM_MENU
+
+
+
+;-------------------------------------------------
+;ミッション失敗
+;-------------------------------------------------
+@MISSION_MISS
+
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML ≪代理人の力量不足でしたね、更なる育成を心掛けて下さい≫
+PRINTFORMW ≪依頼自体は他の「プレイヤー」に任せるのでご安心を≫
+DRAWLINE
+
+
+Flag:依頼_依頼Lv = 0
+Flag:依頼_依頼開始 = 0
+
+
+
+JUMP SYSTEM_MENU
+
+
+

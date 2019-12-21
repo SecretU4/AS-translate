@@ -1,0 +1,357 @@
+﻿;-------------------------------------------------
+; 都市関連 施設
+;-------------------------------------------------
+@CITY_CENTER
+#DIM L_FACI_ID ;施設ID
+#DIM L_INPUT   ;入力内容
+DRAWLINE
+FOR L_FACI_ID, 1, 8
+	CALL SHOW_FACILITY_LEVEL(L_FACI_ID)
+NEXT
+FOR L_FACI_ID, 50, 56
+	CALL SHOW_FACILITY_LEVEL(L_FACI_ID)
+NEXT
+DRAWLINE
+PRINTFORML
+PRINTFORML [999] 돌아온다
+DO
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+		JUMP SYSTEM_MENU
+	CASEELSE
+		TRYCCALLFORM CITY_F_{L_INPUT}
+			SIF FLAG:ターン終了フラグ == 1
+				RETURN
+		CATCH
+			PRINTFORMW 실장되지 않은 시설입니다。
+		ENDCATCH
+		BREAK
+	ENDSELECT
+LOOP 1
+RESTART
+
+
+;施設レベル表示関数
+@SHOW_FACILITY_LEVEL(L_FACI_ID)
+#DIM  L_FACI_ID    ;施設ID
+#DIM  L_FACI_LEVEL ;フラグ参照用
+#DIM  L_FACI_POINT ;フラグ参照用
+L_FACI_LEVEL = FLAG:(4000 + L_FACI_ID)
+L_FACI_POINT = FLAG:(4100 + L_FACI_ID)
+IF L_FACI_LEVEL <= 0
+	PRINTFORML ？？？(건설되지 않음)({L_FACI_LEVEL})
+ELSE
+	PRINTFORML [{L_FACI_ID, 2}]【%FLAGNAME:(4000 + L_FACI_ID), 20 ,LEFT%:Lv{L_FACI_LEVEL, 3 ,LEFT}({L_FACI_POINT, 2}/{L_FACI_LEVEL * 10, 2})】
+ENDIF
+
+
+
+;施設のキャラ配属関数
+@FACILITY_CHARA_SET(L_C_ID, L_FACI_ID)
+#DIM L_C_ID                      ;任命対象キャラの登録番号
+#DIM L_FACI_ID                   ;施設ID
+#DIM CONST L_CFLAG_START = 10000 ;施設用CFLAGの開始値
+#DIM CONST L_CFLAG_END   = 10100 ;施設用CFLAGの終了値（このID自体は含まれない）
+#DIM L_CHARA_ORDER               ;対象キャラがすでに配属されている施設
+L_CHARA_ORDER = FINDELEMENT(CFLAG:L_C_ID:0, 1, L_CFLAG_START, L_CFLAG_END)
+IF L_CHARA_ORDER == L_FACI_ID + L_CFLAG_START
+	PRINTFORMW 이미 %CFLAGNAME:L_CHARA_ORDER%에 임명되어 있습니다。
+	RETURN
+ELSEIF L_CHARA_ORDER > 0
+	PRINTFORMW 이미 %CFLAGNAME:L_CHARA_ORDER%에 임명되어 있습니다。
+	PRINTFORML 해임하고 다시 배속시킬까요？
+	PRINTFORML [1] - 다시 배속한다
+	PRINTFORML [0] - 그만둔다
+	DO
+		INPUT
+		SIF RESULT == 1
+			BREAK
+		SIF RESULT == 0
+			RETURN
+	LOOP 1
+	CALL FACILITY_CHARA_REMOVE(L_C_ID)
+ENDIF
+CFLAG:L_C_ID:(L_CFLAG_START + L_FACI_ID) = 1
+PRINTFORMW %CALLNAME:L_C_ID%を %CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%에 임명했습니다。
+
+
+
+;施設のキャラ解任関数
+;初期化範囲が10000～10098（10099が初期化漏れしてるように見える）だったので10099を初期化範囲に入れた
+;終端まで使い切ってないので問題は表面化しないとは思う
+@FACILITY_CHARA_REMOVE(L_C_ID)
+#DIM L_C_ID                      ;任命対象キャラの登録番号
+#DIM CONST L_CFLAG_START = 10000 ;施設用CFLAGの開始値
+#DIM CONST L_CFLAG_END   = 10100 ;施設用CFLAGの終了値（このID自体は含まれない）
+SIF TALENT:L_C_ID:부재 == 0
+	PRINTFORMW %CALLNAME:L_C_ID%を 해임했습니다。
+VARSET CFLAG:L_C_ID:0, 0, L_CFLAG_START, L_CFLAG_END
+
+
+
+
+
+;施設任命処理関数
+@CITY_FACILITY_ORDER(L_FACI_ID)
+#DIM L_FACI_ID                   ;施設ID
+#DIM L_C_ID                      ;任命対象キャラの登録番号
+#DIM L_ORDER_CNT                 ;施設の任命済みのキャラ数の取得
+#DIM L_INPUT                     ;入力内容
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "施設名")
+DRAWLINE
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "参加者")
+L_ORDER_CNT = FLAG:汎用変数
+DRAWLINE
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "説明文")
+DRAWLINE
+CALL SHOW_FACILITY_INTRODUCE(L_FACI_ID, "任命ボタン")
+;ボタンは共通で
+;2　任命
+;1　임명 해제
+;0　돌아온다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+	CASE 0
+		RETURN
+	CASE 2, 1
+		$LOOP_INPUT2
+		CLEARLINE LINECOUNT
+		DRAWLINE
+		PRINTFORML 임명할 주민을 선택하세요。
+		DRAWLINE
+		CALL LIST_CHARA("시설배속")
+		L_C_ID = RESULT
+		IF L_C_ID == 1000
+			RESTART
+		ELSEIF !INRANGE(L_C_ID, 0, CHARANUM - 1)
+			PRINTFORMW 캐릭터 범위 내에서 입력해라。
+			GOTO LOOP_INPUT2
+		ELSEIF L_C_ID == 0
+			PRINTFORMW 아나타는 선택할 수 없습니다。
+			GOTO LOOP_INPUT2
+		ELSEIF TALENT:L_C_ID:NPC == 999
+			PRINTFORMW NPC는 선택할 수 없습니다。
+			GOTO LOOP_INPUT2
+		ENDIF
+		
+		IF L_INPUT == 1
+			CALL FACILITY_CHARA_REMOVE(L_C_ID)
+			GOTO LOOP_INPUT2
+		ELSEIF L_INPUT == 2
+			IF L_ORDER_CNT >= 5
+				PRINTFORMW 배속은 다섯 명까지 할 수 있습니다。
+				GOTO LOOP_INPUT2
+			ENDIF
+			CALL FACILITY_CHARA_SET(L_C_ID, L_FACI_ID)
+			GOTO LOOP_INPUT2
+		ENDIF
+		
+	CASEELSE
+ENDSELECT
+RESTART
+
+
+
+;任命処理の施設別の表示関数
+@SHOW_FACILITY_INTRODUCE(L_FACI_ID, L_TYPE)
+#DIM        L_FACI_ID         ;施設ID
+#DIMS       L_TYPE            ;表示タイプ
+;可読性確保のための定数系
+#DIM  CONST L_学園       = 1  
+#DIM  CONST L_支援住宅   = 7  
+#DIM  CONST L_ラブホテル = 50
+#DIM  CONST L_高級カジノ = 53 
+SELECTCASE L_TYPE
+CASE "施設名"
+	SELECTCASE L_FACI_ID
+	CASE L_学園
+		PRINTFORML 【학원】
+	CASE L_支援住宅
+		PRINTFORML 【지원 주택】
+	CASE L_ラブホテル
+		PRINTFORML 【러브 호텔】
+	CASE L_高級カジノ
+		PRINTFORML 【고급 카지노】
+	ENDSELECT
+CASE "参加者"
+	SELECTCASE L_FACI_ID
+		;@MEMBER_LIST2はFLAG:汎用変数を操作します
+	CASE L_学園
+		PRINTFORM 【학생：
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "学園生徒"), 1)
+		PRINTFORML 】
+	CASE L_支援住宅
+		PRINTFORM 【점원:
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "支援ボランティア"), 1)
+		PRINTFORML 】
+	CASE L_ラブホテル
+		PRINTFORM 【점원:
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "ラブホテル店員"), 1)
+		PRINTFORML 】
+	CASE L_高級カジノ
+		PRINTFORM 【점원：
+		CALL MEMBER_LIST2(GETNUM(CFLAG, "カジノ店員"), 1)
+		PRINTFORML 】
+	ENDSELECT
+CASE "説明文"
+	SELECTCASE L_FACI_ID
+	CASE L_学園
+		PRINTFORML 주민을 재교육시킵니다。
+		PRINTFORML 임명된 주민은 모랄이 오릅니다。(정원 5명)
+	CASE L_支援住宅
+		PRINTFORML 주민을 자원 봉사에 참가시킵니다。
+		PRINTFORML 자금은 얻을 수 없지만、카르마가 감소합니다。(정원 5명)
+	CASE L_ラブホテル
+		PRINTFORML %CALLNAME:MASTER%는 이곳을 창관으로 이용할 수 있습니다。
+		PRINTFORML 주민을 임명하면、턴 종료시 창녀로 일하여 자금을 법니다。(정원 5명)
+	CASE L_高級カジノ
+		PRINTFORML 주민을 임명하면、턴 종료시 손님을 끌어서 자금을 법니다。
+		PRINTFORML 수입은 주민의 무지각 소질의 질에 따라서 결정됩니다。(정원 5명)
+		SETCOLOR 250,50,50
+		PRINTFORML 다만、모랄이 낮은 주민、또는 카르마가 높은 주민은 주의
+		RESETCOLOR
+	ENDSELECT
+	DRAWLINE
+CASE "任命ボタン"
+	SELECTCASE L_FACI_ID
+	CASE L_学園
+		PRINTFORML [2] 학생 임명
+		PRINTFORML [1] 임명 해제
+		PRINTFORML 
+		PRINTFORML [0] 돌아온다
+	CASE L_支援住宅
+		PRINTFORML [2] 점원 임명
+		PRINTFORML [1] 임명 해제
+		PRINTFORML 
+		PRINTFORML [0] 돌아온다	
+	CASE L_ラブホテル
+		PRINTFORML [2] 점원 임명
+		PRINTFORML [1] 임명 해제
+		PRINTFORML 
+		PRINTFORML [0] 돌아온다	
+	CASE L_高級カジノ
+		PRINTFORML [2] 점원 임명
+		PRINTFORML [1] 임명 해제
+		PRINTFORML 
+		PRINTFORML [0] 돌아온다	
+	ENDSELECT
+ENDSELECT
+
+
+
+
+;キャラ配属関数
+;能力表示から施設にキャラを配属する用
+@SELECT_WOKER(L_C_ID)
+#DIM         L_C_ID                     ;対象登録番号
+#DIM         L_FACI_ID                  ;対象になった施設ID
+#DIM         L_FACI_LIST = 1, 7, 50, 53 ;学園、支援住宅、ラブホテル、高級カジノ
+#DIM DYNAMIC L_CNT_WOKER, 4             ;各施設に配属済みのキャラ数
+#DIM         L_FACI_LEVEL               ;フラグ参照用、施設レベル
+#DIM CONST   L_CFLAG_START = 10000      ;施設用CFLAGの開始値
+#DIM CONST   L_CFLAG_END   = 10100      ;施設用CFLAGの終了値（このID自体は含まれない）
+#DIM         L_C_ID_REMOVE              ;解任対象登録番号
+IF L_C_ID == 0
+	PRINTFORMW ≪「플레이어」、농담은 그만하세요≫
+	RETURN
+ENDIF
+
+L_FACI_ID = FINDELEMENT(CFLAG:L_C_ID:0, 1, L_CFLAG_START, L_CFLAG_END)
+IF L_FACI_ID < 0
+	; L_FACI_IDを手抜きでつかいまわしてますごめんなさい
+	PRINTFORML %CALLNAME:L_C_ID%を 배정할 시설을 선택하세요。
+ELSE
+	PRINTFORML %CALLNAME:L_C_ID%（%CFLAGNAME:L_FACI_ID%）を 배정할 시설을 선택하세요。
+ENDIF
+CALL SHOW_ALL_WORKERS(L_FACI_LIST, L_CNT_WOKER)
+PRINTFORML [ 0] 취소
+DO
+	INPUT
+	L_FACI_ID = RESULT
+	L_FACI_LEVEL = FLAG:(4000 + L_FACI_ID)
+	IF L_FACI_ID == 0
+		RETURN
+	ELSEIF FINDELEMENT(L_FACI_LIST, L_FACI_ID) < 0
+		CONTINUE
+	ELSEIF CFLAG:L_C_ID:(L_CFLAG_START + L_FACI_ID)
+		PRINTFORMW %CALLNAME:L_C_ID%は 이미 %CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%에 임명되어 있습니다。
+		RESTART
+	ELSEIF L_FACI_LEVEL <= 0
+		PRINTFORMW 그 시설은 완성되지 않았습니다。
+		RESTART
+	ENDIF
+	BREAK
+LOOP 1
+IF L_CNT_WOKER:(FINDELEMENT(L_FACI_LIST, L_FACI_ID)) >= 5
+	PRINTFORML %CFLAGNAME:(L_CFLAG_START + L_FACI_ID)%의 인원 수가 너무 많습니다。
+	PRINTFORML 해임할 캐릭터를 선택하세요。
+	FOR LOCAL, 1, CHARANUM
+		SIF TALENT:LOCAL:부재
+			CONTINUE
+		SIF CFLAG:LOCAL:(L_CFLAG_START + L_FACI_ID) != 1
+			CONTINUE
+		PRINTFORML [{LOCAL, 3}] - %CALLNAME:LOCAL%
+	NEXT
+	PRINTFORML [999] - 시설 다시 선택
+	DO
+		INPUT
+		L_C_ID_REMOVE = RESULT
+		SIF L_C_ID_REMOVE == 999
+			RESTART
+		IF !INRANGE(L_C_ID_REMOVE, 1, CHARANUM - 1)
+		ELSEIF TALENT:L_C_ID_REMOVE:부재
+		ELSEIF CFLAG:L_C_ID_REMOVE:(L_CFLAG_START + L_FACI_ID) != 1
+		ELSE
+			BREAK
+		ENDIF
+	LOOP 1
+	CALL FACILITY_CHARA_REMOVE(L_C_ID_REMOVE)
+ENDIF
+CALL FACILITY_CHARA_SET(L_C_ID, L_FACI_ID)
+
+
+
+@SHOW_ALL_WORKERS(L_FACI_LIST, L_CNT_WOKER, OP)
+#DIM  REF  L_FACI_LIST        ;施設IDリスト
+#DIM  REF  L_CNT_WOKER        ;各施設の店員の人数、配列を直接書き換える
+#DIM       L_LIST_ID          ;参照中のリスト位置
+#DIM       L_MEMORY           ;汎用変数の書き換え防止措置
+#DIM       L_FACI_LEVEL       ;フラグ参照用、施設レベル
+#DIMS      OP                 ;実行オプション
+L_MEMORY = FLAG:汎用変数
+VARSET L_CNT_WOKER
+
+IF STRCOUNT(OP, "「ボタン無し」")
+	FOR L_LIST_ID, 0, VARSIZE("L_FACI_LIST")
+		L_FACI_LEVEL = FLAG:(4000 + L_FACI_LIST:L_LIST_ID)
+		IF L_FACI_LEVEL <= 0
+			PRINTFORML ？？？(건설되지 않음)
+		ELSE
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "施設名")
+			PRINTFORM 　　
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "参加者")
+			L_CNT_WOKER:L_LIST_ID = FLAG:汎用変数
+		ENDIF
+	NEXT
+ELSE
+	FOR L_LIST_ID, 0, VARSIZE("L_FACI_LIST")
+		L_FACI_LEVEL = FLAG:(4000 + L_FACI_LIST:L_LIST_ID)
+		IF L_FACI_LEVEL <= 0
+			PRINTFORML ？？？(건설되지 않음)
+		ELSE
+			PRINTFORM [{L_FACI_LIST:L_LIST_ID, 2}]
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "施設名")
+			PRINTFORM 　　
+			CALL SHOW_FACILITY_INTRODUCE(L_FACI_LIST:L_LIST_ID, "参加者")
+			L_CNT_WOKER:L_LIST_ID = FLAG:汎用変数
+		ENDIF
+	NEXT
+ENDIF
+
+FLAG:汎用変数 = L_MEMORY
+;広域変数はどこでバグるかわからないので念の為

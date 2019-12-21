@@ -1,0 +1,252 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:CHARACTER_SCOUT.ERB
+;	Facility	:データベース(EXPUP)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ CHARACTER_SCOUT_POS						DB:EXPUP位置
+;
+;===============================================================================
+
+;=================================================
+;   sub CHARACTER_SCOUT_POS
+;=================================================
+;   DB:EXPUP位置
+;-------------------------------------------------
+; Input:
+;  ARGS					対象値
+; Output:
+;  RETURNF				位置
+;-------------------------------------------------
+@CHARACTER_SCOUT1(ARG:0)
+#DIM S_LOOP
+#DIM S_RACE
+#DIM S_MEMBER
+#DIM L_I
+#DIMS S_NAME
+ADDCHARA 1
+
+
+
+CALL CHARACTER_SCOUT2
+ 
+
+
+;-------------------------------------------------
+; 名前　性格　素質　経験　設定
+;ランダムキャラならば追加したあと必ず使うこと
+;-------------------------------------------------
+@CHARACTER_SCOUT2(ARG:0)
+#DIM L_I
+#DIM S_MIND
+#DIM S_RACE
+L_I = CHARANUM -1
+
+;IF RAND:10 <= 7
+;性別を選びます
+;ELSE
+;		TALENT:L_I:남자 = 1
+;ENDIF
+
+ARG:0 = L_I
+
+IF TALENT:L_I:남자 == 0
+;名前を設定します
+	IF RAND:100 > 80
+		CALL RANDOM_N_LADY(ARG:0)
+	ELSE
+		CALL RANDOM_N_LADY1(ARG:0)
+	ENDIF
+ELSE
+CALL RANDOM_N_MAN(ARG:0)
+ENDIF
+
+
+IF Flag:依頼_依頼開始 == 1
+	S_RACE = RAND:((Flag:依頼_依頼Lv/5)+1)
+	SIF S_RACE >= 10
+		S_RACE = 10
+ELSEIF Flag:EP成否 == 1
+	S_RACE = RAND:((Flag:EP敵戦力/30)+1)
+	SIF S_RACE >= 10
+		S_RACE = 10
+ELSEIF Flag:調査イベント番号 > 0
+	S_RACE = RAND:11
+	SIF S_RACE >= 10
+		S_RACE = 10
+ELSE
+	IF RAND:300  >= 295
+		S_RACE = 11
+	ELSEIF RAND:100  >= 95
+		S_RACE = 8
+	ELSEIF !RAND:6 && FLAG:都市_Lv >= 50
+		S_RACE = 6
+	ELSEIF !RAND:6 && FLAG:病院 >= 20
+		S_RACE = 5
+	ELSEIF !RAND:5 && FLAG:研究施設 >= 20
+		S_RACE = 4
+	ELSEIF !RAND:4 && FLAG:품종개량施設 >= 5 && FLAG:支援住宅 >= 5
+		S_RACE = 3
+	ELSEIF !RAND:3 && FLAG:ラブホテル >= 5 && FLAG:高級カジノ >= 5 && FLAG:ゲームセンター >= 5
+		S_RACE = 2
+	ELSEIF !RAND:2 && FLAG:希少種保護施設 >= 5 && FLAG:学園 >= 5
+		S_RACE = 1
+	ELSE
+		S_RACE = 0
+	ENDIF
+ENDIF
+
+
+
+
+IF Flag:依頼_スパイテロ駆除 == 1
+	TALENT:L_I:이레귤러 = 1
+	TALENT:L_I:약점 = 1
+ELSEIF Flag:EP成否 == 1
+	TALENT:L_I:주인소유 = 1
+	TALENT:L_I:약점 = 1
+	Talent:L_I:비처녀 = 1
+	TCVAR:L_I:履歴_EXP_処女喪失 = 1
+	Talent:L_I:Ａ비처녀 = 1
+	TCVAR:L_I:履歴_EXP_Ａ処女喪失 = 1
+	EXP:L_I:Ｖ경험 = (RAND:200)+100
+	EXP:L_I:Ａ경험 = (RAND:200)+100
+	EXP:L_I:성교경험 = (RAND:300)+150
+	EXP:L_I:강간경험 = (RAND:300)+150
+	EXP:L_I:펠라경험 = (RAND:100)+50
+	EXP:L_I:파이즈리경험 = (RAND:100)+50
+	CSTR:L_I:初えっち相手名 = 他「플레이어」
+	CSTR:L_I:初キス相手名 = 他「플레이어」
+	CSTR:L_I:初精飲相手名 = 他「플레이어」
+	CSTR:L_I:初フェラ相手名 = 他「플레이어」
+	CSTR:L_I:初Ａえっち相手名 = 他「플레이어」
+	CSTR:L_I:初絶頂相手名 = 他「플레이어」
+	CSTR:L_I:初中出し相手名 = 他「플레이어」
+	CSTR:L_I:初出産相手名 = 他「플레이어」
+ENDIF
+
+
+
+
+IF Flag:調査イベント番号 == 401
+	TALENT:L_I:성노예출신 = 1
+	Talent:L_I:비처녀 = 1
+	TCVAR:L_I:履歴_EXP_処女喪失 = 1
+	Talent:L_I:Ａ비처녀 = 1
+	TCVAR:L_I:履歴_EXP_Ａ処女喪失 = 1
+	EXP:L_I:Ｖ경험 = (RAND:200)+100
+	EXP:L_I:Ａ경험 = (RAND:200)+100
+	EXP:L_I:성교경험 = (RAND:300)+150
+	EXP:L_I:강간경험 = (RAND:300)+150
+	EXP:L_I:펠라경험 = (RAND:100)+50
+	EXP:L_I:파이즈리경험 = (RAND:100)+50
+	CSTR:L_I:初えっち相手名 = 불명
+	CSTR:L_I:初キス相手名 = 불명
+	CSTR:L_I:初精飲相手名 = 불명
+	CSTR:L_I:初フェラ相手名 = 불명
+	CSTR:L_I:初Ａえっち相手名 = 불명
+	CSTR:L_I:初絶頂相手名 = 불명
+	CSTR:L_I:初中出し相手名 = 불명
+	CSTR:L_I:初出産相手名 = 불명
+ELSEIF Flag:調査イベント番号 == 400
+	TALENT:L_I:구세대인간 = 1
+ENDIF
+
+
+
+
+
+;S_RACE = 12
+
+
+CFLAG:L_I:住人_種族 = S_RACE
+;種族の設定
+
+
+
+SIF Flag:調査イベント番号 == 500
+	CFLAG:L_I:住人_種族 = 9
+SIF Flag:調査イベント番号 == 501
+	CFLAG:L_I:住人_種族 = 10
+
+SIF Flag:依頼_イスからの駆除依頼 == 1
+	CFLAG:L_I:住人_種族 = 7
+
+
+IF FLAG:継承種族 != 0
+	CFLAG:L_I:住人_種族 = (FLAG:継承種族)-1
+ENDIF
+
+S_MIND = RAND:10
+;性格の設定4
+
+CALL CHARACTER_SCOUT_MIND(ARG:0)
+;性格と口調の設定
+
+CALL Random_Chara_Set(ARG:0)
+;素質の設定
+
+
+CALL CHARACTER_SCOUT_PERSONAL2(ARG:0)
+;住人情報の設定
+
+CALL CHARACTER_SCOUT_EXTRA(ARG:0)
+;悩みの設定
+SIF CALLNAME:L_I == ""
+	CALLNAME:L_I = %NAME:L_I%
+
+MAXBASE:L_I:체력 = 200
+BASE:L_I:체력 = MAXBASE:L_I:체력
+MAXBASE:L_I:絶頂 = FLAG:最大値_絶頂
+MAXBASE:L_I:무드 = FLAG:最大数_무드
+
+CFLAG:L_I:使用口上 = NO:L_I
+CFLAG:L_I:危険日 = RAND:6
+
+FLAG:個別番号カウント += 1
+CFLAG:L_I:個別番号 = FLAG:個別番号カウント
+
+CALL CHARACTER_SCOUT_PROFILE(ARG:0)
+;初期プロフィール
+
+CALL CHARACTER_SCOUT_RPG(ARG:0)
+;RPG
+
+
+CALL CHARACTER_SCOUT_COSTUME(ARG:0)
+;種族特徴
+
+
+
+
+
+;キャラ物色中にキャンセルしても番号が進むのが気になるので
+;キャンセル用の関数
+@CANCEL_SCOUT(L_C_ID)
+#DIM L_C_ID
+FLAG:個別番号カウント --
+DELCHARA L_C_ID
+
+
+
+
+
+
+
+
+
+
+

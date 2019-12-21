@@ -1,0 +1,109 @@
+﻿
+;-------------------------------------------------
+;住人業務
+;-------------------------------------------------
+@WORK_MAIN(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_M
+#DIM L_I
+#DIM L_NM
+#DIM N_S
+
+$INPUT_LOOP
+L_NM = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+CALL INFO_CITY_BASE
+DRAWLINE
+PRINTFORML 　
+PRINTFORML 　
+DRAWLINE
+PRINTFORML 【주민 업무】
+DRAWLINE
+PRINTFORML TP를 5 소비하여 업무 경험을 획득시킵니다。
+PRINTFORML 업무 경험이 높을수록 도시 공헌에 플러스 보정이 붙습니다。
+DRAWLINE
+PRINTFORML [0] 간섭한다
+PRINTFORML 
+PRINTFORML [999] 돌아온다
+INPUT
+L_INPUT = RESULT
+L_M = RESULT
+SELECTCASE L_INPUT
+	CASE 999
+		JUMP SYSTEM_MENU
+	CASEELSE
+		SIF L_INPUT > 2 && L_INPUT != 100
+			GOTO INPUT_LOOP
+		$INPUT_LOOP2
+		CLEARLINE LINECOUNT
+		DRAWLINE
+		CALL INFO_CITY_BASE
+		DRAWLINE
+		PRINTFORML 　
+		PRINTFORML 　
+		DRAWLINE
+		PRINTFORML 임명할 주민을 선택하세요。
+		ARGS:0 = 業務
+		CALL LIST_CHARA(ARGS:0)
+		ARG:0 = RESULT
+		L_INPUT = RESULT
+		L_I = RESULT
+		IF L_INPUT == 0
+			GOTO INPUT_LOOP
+		ELSEIF L_INPUT != 1000
+			IF FLAG:都市_現在TP < 5 && (FLAG:都市_現在BP + FLAG:都市_現在TP) > 4
+				CLEARLINE LINECOUNT
+				PRINTFORML BP를 자동으로 보급했습니다。
+				WAIT
+				CALL SYSTEM_BP
+			ENDIF
+			IF FLAG:都市_現在TP < 5
+				CLEARLINE LINECOUNT
+				PRINTFORML TP가 부족합니다。
+				WAIT
+				GOTO INPUT_LOOP
+			ENDIF
+			FLAG:都市_現在TP -= 5		; パッチで修正
+			IF Talent:L_I:창녀 != 0
+				CALL WORK_T_Hl(ARG:0)
+			ELSEIF Talent:L_I:아이돌 != 0
+				CALL WORK_T_Ai(ARG:0)
+			ELSEIF Talent:L_I:사회인 != 0
+				CALL WORK_T_Ad(ARG:0)
+			ELSEIF Talent:L_I:치안유지국직원 != 0
+				CALL WORK_T_Ti(ARG:0)
+			ELSEIF Talent:L_I:메이드 != 0
+				CALL WORK_T_Me(ARG:0)
+			ELSEIF Talent:L_I:성직자 != 0
+				CALL WORK_T_Si(ARG:0)
+			ELSEIF Talent:L_I:학생 != 0
+				CALL WORK_T_St(ARG:0)
+			ELSE
+				CALL WORK_T_Ip(ARG:0)
+			ENDIF
+			
+			CFLAG:L_I:住人_業務ポイント += 1
+			IF CFLAG:L_I:住人_業務ポイント >= (CFLAG:L_I:住人_貢献値/2)+3
+				PRINTFORML 
+				PRINTFORML %CALLNAME:L_I%는 업무 중에 경험을 얻어、새로운 공헌을 할 수 있게 되었다。
+				PRINTFORMW 공헌도　【{CFLAG:L_I:住人_貢献値}→{(CFLAG:L_I:住人_貢献値)+1}】
+				CFLAG:L_I:住人_業務ポイント = 0
+				CFLAG:L_I:住人_貢献値 += 1
+			ENDIF
+		ELSE
+			GOTO INPUT_LOOP
+		ENDIF
+ENDSELECT
+
+GOTO INPUT_LOOP2
+
+
+
+
+
+
+
+
+
+

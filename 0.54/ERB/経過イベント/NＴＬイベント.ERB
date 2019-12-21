@@ -1,0 +1,689 @@
+;-------------------------------------------------
+;ＮＴＬイベント　発生判定
+;-------------------------------------------------
+@TURN_EVENT_NTL
+
+
+	
+;寝取ってない住民は戻す
+SIF TALENT:ＮＴＬ == 0 && TALENT:百合摘み == 0
+	RETURN
+
+SIF RAND:100 >= 30
+CALL TURN_EVENT_NTL_1
+
+
+
+;-------------------------------------------------
+;ＮＴＬイベント　イベント内容
+;-------------------------------------------------
+@TURN_EVENT_NTL_1
+
+SETCOLOR 250,50,200
+DRAWLINE
+PRINTFORML 【ＮＴＬイベント】
+DRAWLINE
+IF TALENT:ＮＴＬ
+	IF !RAND:9
+		PRINTFORML 【%CALLNAME:MASTER%の寝室】
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 他の配下たちと共に%CALLNAME:MASTER%のベッドに集まり%CALLNAME:MASTER%と乱交パーティーをしている、もちろん男は一人だけだが。
+		PRINTFORML %CALLNAME%もその一人として参加し、たった今何度目かの絶頂と共に膣内射精を受けて蕩けた顔をさらしている。
+		PRINTFORML 別の女性が犯され始めているところを横目にお腹の下辺りを確かめるようにさする、子宮が熱を帯びているのが感じ取れた。
+		PRINTFORML 実感を得て幸せそうにしている%CALLNAME%脳裏に、本来愛すべき夫の姿は微塵も存在していなかった…
+	ELSEIF !RAND:8
+		PRINTFORML 【%CALLNAME%の自宅】
+		PRINTFORML 夜遅く%CALLNAME%の様子を見に行こうと向かっている途中でちょうど彼女の夫がフラフラと歩いているのを見かけた%CALLNAME:MASTER%は
+		PRINTFORML 声をかけ親切に肩を貸すと酷く酔っているのか上機嫌で何度も繰り返される同じ話を聞き流しながら%CALLNAME%の自宅へと向かう。
+		PRINTFORML 
+		PRINTFORML 「はい…え、あぁ…お帰りなさい…それとこの人をどうも…あなたも家にあがってください%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML 泥酔している男の代わりにインターホンを鳴らすと扉を開け%CALLNAME%が出て来るが%CALLNAME:MASTER%と夫の姿を同時に見て
+		PRINTFORML 一瞬困惑したようだが直ぐに意図を理解したのか%CALLNAME:MASTER%を中へと迎え入れ夫を受け取ると支えながらリビングへと
+		PRINTFORML 案内し取り敢えず夫をソファーに置くと%CALLNAME:MASTER%の前まで来てあなたにも座る様に促しながら小さな包装を受け取る。
+		PRINTFORML %CALLNAME%に勧められた通りソファーに座ると少し意識が戻ってきたのか彼女の夫が自分の嫁は美人でしょうと
+		IF TALENT:妊娠 && TALENT:托卵
+		;寝取られ孕み人妻
+			PRINTFORML 自慢するように言い適当に相槌を打ちながら答えていると話は彼女が妊娠して最近ではあまり行為をしてもらえない
+			PRINTFORML などと言い始めた所で%CALLNAME%がそんな事言わないでくださいと注意しながら水の入ったコップを持って来ると
+			PRINTFORML 夫はそれを奪い取って一気に飲み干し着替えてくるから彼の相手をしててくれと言い扉の方へ向かっていく。
+		ELSE
+			PRINTFORML 自慢するように言い適当に相槌を打ちながら答えていると%CALLNAME%が変な事言わないでくださいと注意しながら
+			PRINTFORML 水の入ったコップを持って来ると夫はそれを一気に飲み干し着替えてくるから彼の相手をしててくれと言い扉の方へ向かっていく。
+		ENDIF
+		PRINTFORML 
+		PRINTFORML 「はいはい…わかりました、………もう…ごめんなさい%CSTR:二人称%に酔っ払いの相手なんかさせて%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML %CALLNAME%はまだ少しふらつく夫を心配している様に見える表情で見送りリビングから出て寝室に入って行くのを確認すると
+		PRINTFORML 謝罪してから%CALLNAME:MASTER%の前に膝をつくとズボンのチャックを下ろしてパンツから器用に肉棒を取り出し
+		PRINTFORML その先端に口づけをしてから半起ちの肉棒を優しく扱きながら%CALLNAME:MASTER%を誘う様に語り掛けてくる。
+		PRINTFORML 
+		PRINTFORML 「あの人も言ってたからぁ…%CSTR:二人称%の相手をしててっ…て%UNICODE(0x2661)%…%CSTR:語尾微笑%%UNICODE(0x2661)%…あむっ%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML それだけ言うと%CALLNAME%はもう待ちきれないとばかりに完全に勃起した%CALLNAME:MASTER%の肉棒へとしゃぶりつき
+		PRINTFORML 呆れながら%CALLNAME:MASTER%はそういう意味で言ったわけではないだろうと%CALLNAME%の頭をポンポンと優しく叩いてから
+		PRINTFORML 髪を弄り頭を撫で%CALLNAME%の媚びた上目遣いで%CALLNAME:MASTER%を見つめる熱の籠った奉仕を堪能しながらまるで
+		PRINTFORML 何かが起きるのを期待するかの様にそれ以外何もせずに待っていると別の部屋で何かが倒れた音が響いた…。
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML その音を聞いた%CALLNAME:MASTER%は奉仕を中断させるとその恰好のまま%CALLNAME%の手を引いて夫婦の寝室へと向かって行く
+		PRINTFORML 部屋の中では途中で眠ってしまったのか服を半分ほど脱いだ状態で床に倒れ込んでいる彼女の夫の姿があるが%CALLNAME:MASTER%は
+		PRINTFORML それを確認すらせずに%CALLNAME%をダブルベッドに押し倒し夫の方へ向かせると人妻の下半身を剥き出しにして見せつける様に挿入した。
+		IF TALENT:妊娠 && TALENT:托卵
+		;寝取られ孕み人妻
+			PRINTFORML 「きっ…きたあぁっ%UNICODE(0x2661)%そこにぃっ…そこに夫が居るのにぃっ%UNICODE(0x2661)%%CSTR:二人称%のオチンポはいっちゃってるうぅぅっ%UNICODE(0x2661)%」
+			PRINTFORML 「はひいぃ…%UNICODE(0x2661)%夫には使わせてない妊娠おまんこでぇっ%UNICODE(0x2661)%んっ…あかちゃんいるのにセックス楽しんじゃってますぅぅっ%UNICODE(0x2661)%」
+			PRINTFORML 
+			PRINTFORML 倒れて動かない夫の前で%CALLNAME:MASTER%に犯される%CALLNAME%はいつも以上に興奮し大きな声で喘ぎながら
+			PRINTFORML 既に子を宿したお腹を突き上げられる度に揺らし、いやらしい歓喜の表情を浮かべている。
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
+			PRINTFORML 
+			PRINTFORML 夫を前にした不貞交尾の快感にすっかり夢中になっている人妻に%CALLNAME:MASTER%は服を破って
+			PRINTFORML そのボテ腹を曝け出させると優しくお腹を撫でながら%CALLNAME%に誰の子を孕んだか言ってみろと囁いた。
+			PRINTFORML 
+			PRINTFORML 「あっ%UNICODE(0x2661)%%CSTR:二人称%ですぅっ%UNICODE(0x2661)%夫じゃなくて%UNICODE(0x2661)%%CSTR:二人称%のあかちゃん孕んでますぅぅっ%UNICODE(0x2661)%」
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+			PRINTFORML 
+			PRINTFORML そこまでやれとは言って無いだろと%CALLNAME%の頭を撫でながら叱り%CALLNAME:MASTER%は再び腰を動かし始める…
+		ELSE
+		;寝取られ托卵交尾人妻
+			PRINTFORML 「はっ…はいっちゃってるぅっ%UNICODE(0x2661)%めっ…目の前に夫が居るのにぃっ%UNICODE(0x2661)%%CSTR:二人称%と子作りしちゃってますうぅっ%UNICODE(0x2661)%」
+			PRINTFORML 「ふぁあぁっ…%UNICODE(0x2661)%%CSTR:二人称%のおちんぽぉびくびくってぇ%UNICODE(0x2661)%だ…射精されちゃうぅ…熱いのいっぱいぃっ%UNICODE(0x2661)%…しあわせぇ…%UNICODE(0x2661)%」
+			PRINTFORML 
+			PRINTFORML 倒れて動かない夫の前で%CALLNAME:MASTER%に犯される%CALLNAME%はいつも以上に興奮し大きな声で喘ぎながら
+			PRINTFORML %CALLNAME:MASTER%に膣内射精される度に絶頂に達し、本当に愛している男の子を孕まされる幸福の表情を浮かべている。
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+			PRINTFORML 
+			PRINTFORML 夫の目の前で托卵交尾に夢中になっている人妻に%CALLNAME:MASTER%は腰の動きを止めて快感をお預けし
+			PRINTFORML その腹に誰の子を宿すつもりなんだと囁き%CALLNAME%に誰の子を孕むのか結婚した男の前で告白させる。
+			PRINTFORML 
+			PRINTFORML 「あっ…%CSTR:二人称%のあかちゃん孕みますぅぅっ%UNICODE(0x2661)%%CSTR:一人称%いっぱい%CSTR:二人称%のあかちゃん産みますっ%UNICODE(0x2661)%もう一生夫の子なんて孕みませんっ%UNICODE(0x2661)%」
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
+			PRINTFORML 
+			PRINTFORML そんな事まで宣言しろなんて言ってないだろと%CALLNAME%の頭を撫でながら%CALLNAME:MASTER%は先程までよりも激しく腰を動かし始める… 
+		ENDIF
+		PRINTFORML 
+		PRINTFORML その後も夫が居る夫婦の寝室で二人は愛し合うが興奮が収まらず%CALLNAME:MASTER%は自宅に%CALLNAME%を誘うが
+		PRINTFORML 少し待つようにお願いされスマホで呼びだした車の中で数分待っていると扉を開け先程までの服に上着だけ
+		PRINTFORML 羽織った様な格好の%CALLNAME%が出てくると車に乗り移動を自動操縦に任せ二人は行為の続きを始めた…
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 翌朝、寝室の床で%CALLNAME%の夫が目を覚ますと服を脱ぐ途中で寝てしまったのか皺だらけの服を見て昨晩は
+		PRINTFORML 飲み過ぎたと反省していると時計が鳴りもう出勤の時間だと慌てて新しい服に着替え慌ただしく家を出ていった。
+	ELSEIF !RAND:7
+		PRINTFORML 【%CALLNAME%夫婦の寝室】
+		PRINTFORML 急に%CALLNAME:MASTER%の声が聴きたくなった%CALLNAME%は特に用事も無いのにスマホを取って連絡をしてきた。
+		PRINTFORML 夢中で%CALLNAME:MASTER%と話し込んでいると夫が寝室に入って来て誰と話してるのか尋ねてくる。
+		PRINTFORML %CALLNAME%が誤魔化す為に友人と話していると答えると悪戯のつもりなのか夫に後ろから抱きつかれてしまう。
+		PRINTFORML 内心では鬱陶しいと思いながらもどうにかそれを表情に出すのを我慢し作り物の笑顔で少し待っててと答える。
+		PRINTFORML だが夫は何を勘違いしたのか更に悪戯をエスカレートさせ愛撫のつもりだろうか身体を撫で回してきた。
+		PRINTFORML 
+		PRINTFORML 「ダメっ…今話してるからっ…、んんっ…ふざけないでっ…ぃゃ！」
+		PRINTFORML 
+		IF TALENT:機械
+		;機械の乙女
+			PRINTFORML 聞こえてくる%CALLNAME%の話し声から%CALLNAME:MASTER%は状況を推測し少し手伝ってやると伝える。
+			PRINTFORML その言葉に不思議がる%CALLNAME%の身体を夫の稚拙なだけの愛撫に見える悪戯よりも遥かに大きな快感が襲ってきた。
+			PRINTFORML スマホから%CALLNAME%の嬌声が響き少し強くし過ぎたかと無線を操作して快楽信号を弱めてやる。
+			PRINTFORML そのまま快楽信号と言葉だけでする夫同伴の寝取りセックスを離れた場所に居る%CALLNAME:MASTER%と楽しんでいるとまだ悪戯を続けていたのか
+			PRINTFORML %CALLNAME%のだす嬌声を自分の愛撫によって出させたものだと思い込み気を良くした夫を内心で馬鹿にしながらそれを隠す様に笑みを浮かべた…
+		ELSE
+			PRINTFORML 聞こえてくる%CALLNAME%の話し声から%CALLNAME:MASTER%は状況を推測し夫なんだから少し遊んでやれと伝えると
+			PRINTFORML %CALLNAME%はスマホで話している相手にバレない様に我慢した喘ぎ声で見事に夫への愛が籠った「演技」をこなす。
+			PRINTFORML 女とは雌の本能に正直だが本心を見せずに嘘を吐くのが上手いなと%CALLNAME:MASTER%は思いながら%CALLNAME%を褒める。
+		ENDIF
+		PRINTFORML 
+		IF TALENT:妊娠 && TALENT:托卵
+		;寝取られ孕ませ人妻
+			PRINTFORML 十数分後、身体を這い回る煩わしい感触に耐えると夫はようやく満足したのか悪戯を止め
+			PRINTFORML 外出するらしく部屋を出る前に妊娠し膨らんだ%CALLNAME%のお腹を撫で愛してるよと言葉を続ける夫を見送る。
+			PRINTFORML そして%CALLNAME%は汚いものに触れられて汚れてしまったとでも言いたいのか浴室へ行き身体を清めたあと
+			PRINTFORML 湯船に浸かりながら幸せそうな表情で%CALLNAME:MASTER%の子種で孕んだお腹を愛おしそうに撫でながら呟く…
+			PRINTFORML 
+			PRINTFORML 「んっ…%CSTR:語尾微笑%%UNICODE(0x2661)%、もうすぐ…もうすぐ本物のパパにあえるからね%CSTR:語尾微笑%%UNICODE(0x2661)%」
+			PRINTFORML 
+		ELSE
+			PRINTFORML 十数分後、身体を這い回る煩わしい感触に耐えると夫はようやく満足したのか悪戯を止め
+			PRINTFORML 外出するらしく部屋を出る前に%CALLNAME%にキスをして愛してるよと言葉を続けた夫を見送ると
+			PRINTFORML %CALLNAME%は汚いものに触れられて汚れてしまったとでも言いたいのか浴室へ行き身体を清めた。
+			PRINTFORML 
+		ENDIF
+		PRINTFORML 身体を清めたあと%CALLNAME%は寝室に戻りバスローブのまま髪を丁寧に拭きながら待っていると先ほど約束した通りに%CALLNAME:MASTER%が訪れる。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML それを嬉しそうに出迎えた%CALLNAME%は主が片方不在のダブルベッドで%CALLNAME:MASTER%を迎え入れると
+		PRINTFORML 直ぐに%CALLNAME%の雌声が響き始めその後数時間ものあいだ本当の幸せと快感に蕩けた人妻の嬌声が止む事はなかった…
+	ELSEIF !RAND:6
+		PRINTFORML 【夫婦で過ごす%CALLNAME%】
+		PRINTFORML %CALLNAME%は態々自分と過ごす為に時間を作った夫に興味も無い場所を彼方此方と連れ回されていた。
+		PRINTFORML 思い出したかのように夫が%CALLNAME%の顔を覗き込み内心うんざりして早く終わって欲しいと思っていたのが
+		PRINTFORML 表情や態度に出てしまったのかと一瞬慌てたがどうやら夫は全く気づいていない様で疲れたから少し休もうかと聴かれる。
+		PRINTFORML 散々無意味に歩かされたご褒美と言うべきかそこは運良く%CALLNAME%のお気に入りの喫茶店に近い場所だったので
+		PRINTFORML そこに行って夫の自由にできる時間が無くなるまで粘ろうかと考え近くに気に入ってる喫茶店があると伝える。
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 喫茶店につくといつもの様に美人の店長さんに出迎えられこれまた美人な若い店員に二人用のテーブルへと案内される。
+		PRINTFORML だが席に付くと後ろ居る筈の夫が遅れているのか%CALLNAME%が探すとどうやら夫はお店に来てからのあいだ店長さんを初め
+		PRINTFORML 眼に映る趣の違う美人に次から次へと目移りさせゆっくりと歩きながらジロジロと舐め回す様に見ているのを確認し
+		PRINTFORML %CALLNAME%は恥ずかしさで顔を真っ赤にしながら急いで夫の元まで行き腕を掴んで案内された席へと引っ張って行く。
+		PRINTFORML 真面目な顔で注文を聞く可愛い店員を夫は嬉しそうな顔で眺め店員がテーブルから離れると%CALLNAME%の方を向き
+		PRINTFORML 店員やお客さんも美人さんや可愛い娘ばっかりだねと言うのを聞かされ怒りを通り越して呆れ果て大きくため息を吐くと
+		PRINTFORML 何を勘違いしたのか%CALLNAME%にとっては既に財布としての価値しかない夫はそんなに妬かないで愛してるのは君だけだよと言う。
+		PRINTFORML 
+		PRINTFORML もはや夫の顔すら見るのが嫌になり顔を背けると間の悪い事にいつもの席に座っていた%CALLNAME:MASTER%と目が合ってしまい
+		PRINTFORML %CALLNAME%は訳もなく無性にばつが悪く感じ顔を伏せてしまったが数分後ようやく顔を上げるとそこには待っていたのか
+		PRINTFORML まだこちらに視線を向けていた%CALLNAME:MASTER%と再び目を合わせるが今度は相手が席を立ってお手洗いの方へと向かって行く。
+		IF TALENT:機械
+		;機械の乙女
+			PRINTFORML その直後%CALLNAME%の身体に突然快感が走り身体を震わせながら声を出さない様に耐えながら%CALLNAME:MASTER%に呼ばれていると
+			PRINTFORML 確信し%CALLNAME%はどうやって席を立とうかと考えていると夫が我慢しなくて良いから気にせずにトイレに行ってきなと言う。
+			PRINTFORML 内容はともかく今日初めて夫の口から出た嬉しい言葉にこの時ばかりは演戯を忘れ自然な笑みを浮かべ返事をすると足早に%CALLNAME:MASTER%の元へ向かう。
+		ELSE
+			PRINTFORML その直後に%CALLNAME%のスマホが着信音を発したので確認すると%CALLNAME:MASTER%からのメールで短く来いとだけ書かれており
+			PRINTFORML 一も二も無く夫にお手洗いへ行ってくると伝えると返事も聞かずに席を立ち%CALLNAME:MASTER%の待つ場所へと向かう。
+		ENDIF
+		PRINTFORML 細い通路に入りお手洗いの前まで行くと男性用の扉が開き%CALLNAME%は中へと引きずり込まれそこには期待した通り
+		PRINTFORML %CALLNAME:MASTER%が立っておりそのまま個室へ連れ込まれ鍵を掛けると口付けをされながら行為ができる様に下半身を露出させられ
+		PRINTFORML もう少しも待てないと言わんばかりに%CALLNAME:MASTER%はギンギンに勃起した肉棒で下着をずらしそのまま亀頭を膣口に宛がい躊躇なく奥まで挿入する。
+		PRINTFORML だが%CALLNAME:MASTER%は唇を離すとわざとらしく夫を放っておいてこんな事をしていいのかと聞いてくるので
+		PRINTFORML %CALLNAME%もいやらしく笑いったあとわざとらしく言い訳にもならない言葉を続けた。
+		PRINTFORML 
+		PRINTFORML 「んふっ…%UNICODE(0x2661)%…%CSTR:語尾微笑%%UNICODE(0x2661)%、やぁ…%UNICODE(0x2661)%…放してぇ%UNICODE(0x2661)%…だれか…誰かぁっ%UNICODE(0x2661)%」
+		PRINTFORML 「んむぅっ%UNICODE(0x2661)%ぢぅるるっ…ぷあぁ%UNICODE(0x2661)%…%CSTR:伴侶名前%…助けてぇ%UNICODE(0x2661)%助けっ…%UNICODE(0x2661)%…んぢぅるるるるるっ%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML 少しからかい過ぎたのか%CALLNAME%はまるで自分が今まさにレイプされてるとでも言う様に振舞うがその表情や声は
+		PRINTFORML 誰が見ても全く嫌がっているようには見えない落第点の演技だが%CALLNAME:MASTER%もそれに応えて再び口付けで
+		PRINTFORML 口を塞ごうとするが%CALLNAME%も楽しむように暴れてそれを逃れると更にわざとらしい演技で夫に助けを求めるが
+		PRINTFORML 今度こそ%CALLNAME:MASTER%は身体ごと%CALLNAME%を抱き締め口を塞ぐと犯された哀れな人妻を抱き上げ繋がったまま
+		PRINTFORML 便座に腰を下ろすと人妻も両足を%CALLNAME:MASTER%の腰に回し強い雄に中出しされレイプ種付けを望んでいるようだ。
+		PRINTFORML そのまま%CALLNAME%は%CALLNAME:MASTER%と激しく愛し合いながらこの人の女にされて良かったと幸福を噛み締めながら腰を振り
+		PRINTFORML 突然の呼び出しにここまで頑張った労いの意味も込め%CALLNAME:MASTER%はご褒美として%CALLNAME%の腰を強く抱き寄せると
+		PRINTFORML 射精寸前の肉棒を絶頂に昇り続ける人妻の子宮口に押し当てこじ開ける様にグリグリと擦り付けると更に腰を密着させ
+		PRINTFORML 痙攣し絡みついてくる膣に遂に限界に達したのか濃厚な精液を勢い良く%CALLNAME%の子袋に注ぎ込み始めるとその蕩けて混ざり合う様な
+		PRINTFORML 気持ち良い快楽を一瞬たりとも逃さない様に二人は夢中で味わい、そしてそれは%CALLNAME:MASTER%の射精が完全に終わるまで一分以上も続いた…。
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は行為を終え手早く後始末を済ませて身嗜みを整え%CALLNAME:MASTER%と離れる寂しさを堪えながら時間を確認すると
+		PRINTFORML 既に席を離れてから十分以上も経っている事に気づき慌てて%CALLNAME:MASTER%に戻ると伝えると優しく口付けをされ送り出された。
+		PRINTFORML だが席に戻るとそこには夫の姿は無く冷めて温くなったお茶を飲みながら数分待ってみるが姿は見えず近くを通りかかった店員に聞いてみると
+		PRINTFORML どうやら%CALLNAME%が席を立ったすぐ後に電話で呼び出されたのか何やら慌ただしくお店を出て行ってしまったらしく急に予定が無くなって
+		PRINTFORML 途方に暮れていると声をかけられ誘われるまま席に座り本物の夫婦の様に%CALLNAME%は%CALLNAME:MASTER%に寄り添うと睦言を交わす幸せな時間を過ごした…
+	ELSEIF !RAND:5
+		PRINTFORML 【%CALLNAME%夫婦の寝室】
+		PRINTFORML 早朝夫にせがまれ内心嫌々ながら性行為に応じる。
+		PRINTFORML ベッドに横たわり夫のペニスを受け入れ、適度に喘いで欲情を誘う。
+		PRINTFORML だが、少なくない回数をしているというのに、何故こちらが気持ちよくなってないのを悟れないのだろうか…？
+		PRINTFORML 仕草だってAVのそれと大差ないから「演技」だとすぐわかるはず。
+		PRINTFORMW だというのに此方の性感帯など知らぬとばかりにただ腰を打ち付ける様は滑稽過ぎて悲しくなる…
+		PRINTFORML 
+		PRINTFORML 数十分後、勤務に向かう夫を見送った後、生殺し状態の身体を必死に抑えつつスマホを取り出す。
+		PRINTFORML あの人なら女として扱ってくれる…、オナホ扱いの夫とは違い此方を労れるあの人なら…。
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML しばらくして再び寝室に女性の嬌声が響き渡る、だが先ほどとは違う余裕などない必死に快楽を甘受する雌の声であった…
+	ELSEIF !RAND:4
+		PRINTFORML 【%CALLNAME:MASTER%の寝室】
+		PRINTFORML 今日も激しい交尾を終え、未だギンギンに勃起している肉棒を、%CALLNAME%が綺麗にすべく根元から亀頭までをペロペロと舐め始める。
+		PRINTFORML 片手ではメールで夫へ愛が籠った(ように見える)返信文を作成している、
+		PRINTFORML 股から他の男の孕ませ汁を零しながらの様を見れば、嘘だということが一目瞭然なのだが…。
+		PRINTFORML 返信を終えるとスマホを無造作に放り出し、お掃除フェラへと奉仕を変えると、急に顔に熱が籠り蕩けた表情へと変わった。
+		PRINTFORMW 一部始終を見ていた%CALLNAME:MASTER%はちゃんと相手はしているんだなと、内心%CALLNAME%に感心していると、それを読み取った%CALLNAME%は
+		PRINTFORML 
+		PRINTFORML 「んっ…ちゅぱっ…%CSTR:語尾微笑%%UNICODE(0x2661)%、だって財布は必要%CSTR:語尾同意求む%%UNICODE(0x2661)%？」
+		PRINTFORML 
+		PRINTFORML …と返答してきた……、女性は強かだな、と%CALLNAME:MASTER%は思わずにはいられなかった…
+	ELSEIF !RAND:3
+		PRINTFORML 【%CSTR:伴侶名前%視点】
+		IF TALENT:アイドル
+		;寝取られアイドル人妻
+			PRINTFORML 「……？」
+			PRINTFORML とある日、%CSTR:伴侶名前%がメールの整理をしていると、迷惑メールの中に動画ファイルが同梱されているメールを発見した。
+			PRINTFORMW アダルトサイトの広告らしいそれにウイルスチェックをかけてみたがその類のものは発見されず、安全だろうと興味本位で開いてみることにした。
+			IF !RAND:3
+			;プロデューサーと秘密の流されSEX(プロデューサーはあなた)
+				PRINTFORML 
+				PRINTFORML 「あぁんっ%UNICODE(0x2661)%、もうっ…そろそろ本番だからダメぇ%UNICODE(0x2661)%…ちょ…ちょっとだけだからねっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML それはよくあるAVのジャンル…そっくりさん物のようだが表示されたタイトルに、
+				PRINTFORML %CALLNAME%の名前が入っておりまた画像処理・音声変換も上手く女優の仕草も本当に本人そっくりだ。
+				PRINTFORML さらに体型まで%CALLNAME%その物であり、黒子の位置が違わなければ自分でも偽物だとわからない本格的なもので、
+				PRINTFORML 気づけば完全に勃起しているが動画の%CALLNAME%は自分のよりも格段に逞しいペニスを加え込み、セリフもファンの性欲を煽るものに変わっていく。
+				PRINTFORML 
+				PRINTFORML 「あはぁぁ…%UNICODE(0x2661)%、出し過ぎぃ%UNICODE(0x2661)%…衣装に垂れたらどうするのぉ%UNICODE(0x2661)%…あっ…もうすぐ時間っ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW 最近%CALLNAME%としてないな…と言い訳しつつペニスをズボンから取り出し、動画が終わるまでこれをオカズにオナニーを続けた…
+			ELSEIF !RAND:2
+			;夫にナイショでファンと子作りSEX(ファンはあなた)
+				PRINTFORML 
+				PRINTFORML 「ほらぁっ%UNICODE(0x2661)%、もっとぉ…もっとがんばってぇ%UNICODE(0x2661)%みんなにナイショでっ%UNICODE(0x2661)%%CSTR:一人称%にファンのあかちゃん孕ませてぇっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML それはよくあるAVのジャンル…そっくりさん物のようだが表示されたタイトルに%CALLNAME%の名前が入っており
+				PRINTFORML その後に秘密のファン交流と続いている、画像処理・音声変換も上手く女優の体型はまさに%CALLNAME%その物である。
+				PRINTFORML 
+				PRINTFORML 「んあぁぁっ%UNICODE(0x2661)%…いいっ%UNICODE(0x2661)%でてるぅ%UNICODE(0x2661)%%CSTR:一人称%のおまんこにぃ%UNICODE(0x2661)%あなたの熱いのいっぱいでてるっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML だが男に跨り指を絡ませ手を繋ぎながら自分から腰を激しく動かすその姿は自らの知る%CALLNAME%とは思えないものであり、
+				PRINTFORML 夫である自分には容易に偽物だと分かるものだが気づけば完全に勃起してしまい動画の%CALLNAME%は自分のよりも
+				PRINTFORML 格段に逞しいペニスを加え込み、セリフもファンの性欲を煽るものに変わっていく。
+				PRINTFORML 
+				PRINTFORML 「…ねぇ…%UNICODE(0x2661)%もしよければ…%CSTR:一人称%…次もあなたのあかちゃんが欲しいの%UNICODE(0x2661)%やぁっ%UNICODE(0x2661)%また元気になってぇっ%UNICODE(0x2661)%そんなに出されたらあふれちゃうぅっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 最近%CALLNAME%としてないな…と言い訳しつつペニスをズボンから取り出し、動画が終わるまでこれをオカズにオナニーを続けた…
+			ELSE
+			;夫にもファンにも言えない秘密の枕営業(相手はあなた)
+				PRINTFORML 
+				PRINTFORML 「ぁ…ありがとうございますうぅ%UNICODE(0x2661)%、この前のライブぅ%UNICODE(0x2661)%あんなに大きな会場でぇっ%UNICODE(0x2661)%きもちいいっ%UNICODE(0x2661)%…はああぁっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML それはよくあるAVのジャンル…そっくりさん物のようだが表示されたタイトルに%CALLNAME%の名前が入っており
+				PRINTFORML なんとその後には秘密の枕営業などと書かれ、その%CALLNAME%そっくりの女はいやらしい顔で男に感謝しながら喘いでいる。
+				PRINTFORML 
+				PRINTFORML 「いいっ%UNICODE(0x2661)%…いいのぉっ%UNICODE(0x2661)%ぶっといおちんぽいいっ%UNICODE(0x2661)%%CSTR:一人称%のおまんこぉ%UNICODE(0x2661)%もっと可愛がってぇっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML だが向かい合う様に男の股間に跨り肉棒をくわえながら自分から腰を揺らし胸を押し付けて媚びながら喘ぐ姿は自らの知る
+				PRINTFORML %CALLNAME%とは全く別人であり、夫である自分には容易に偽物だと分かるものだが気づけば完全に勃起してしまい
+				PRINTFORML 動画の%CALLNAME%は自分のよりも格段に逞しいペニスに突き上げられ、性欲を剥き出しにして喘ぎ続けている。
+				PRINTFORML 
+				PRINTFORML 「なっ…膣内に射精してもいいからぁ…%UNICODE(0x2661)%もっと%CSTR:一人称%に良くしてぇっ%UNICODE(0x2661)%いっぱいいっぱいぃ…%UNICODE(0x2661)%よくしてくださいぃっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 最近%CALLNAME%としてないな…と言い訳しつつペニスをズボンから取り出し、動画が終わるまでこれをオカズにオナニーを続けた…
+			ENDIF
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML %CALLNAME%はその様子を扉越しで確認し、暫くは性行為を求められないだろうと愉悦を隠し切れないように笑みを零した…
+		ELSEIF TALENT:治安維持局員
+		;治安維持局員妻
+			PRINTFORML 「……？」
+			PRINTFORML とある日、%CSTR:伴侶名前%がメールの整理をしていると、迷惑メールの中に動画ファイルが同梱されているメールを発見した。
+			PRINTFORMW アダルトサイトの広告らしいそれにウイルスチェックをかけてみたがその類のものは発見されず、安全だろうと興味本位で開いてみることにした。
+			IF !RAND:3
+			;寝取られレイプ(上司はあなた)
+				PRINTFORML 
+				PRINTFORML 「ぃ…いけませんっ…やめてぇっ%UNICODE(0x2661)%、んうっ…あぁっ%UNICODE(0x2661)%…なっ膣内にぃ%UNICODE(0x2661)%…この事は誰にもっ…夫にも秘密にしますからぁっ…もぅ…またあぁぁっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML それはよくあるAVのジャンル…寝取られレイプ物のようだがなんと表示されたタイトル画面に、
+				PRINTFORML %CALLNAME%の姿が映っておりまた女優の名前も同じで仕草や口調も本人その物だ。
+				PRINTFORML もし%CALLNAME%が治安維持局員でなければ自分でも彼女を疑ってしまうくらい似ているもので、
+				PRINTFORML 気づけば完全に勃起しているが動画の%CALLNAME%は上司だという男の自分のよりも格段に逞しいペニスで犯され、段々と寝取られ行為にはまってしまっていく。
+				PRINTFORML 
+				PRINTFORML 「%CALLNAME:MASTER%のっ…おチンポでぇっ%UNICODE(0x2661)%…%CSTR:一人称%の卵子ぃ%UNICODE(0x2661)%…受精させてぇっ%UNICODE(0x2661)%…孕むぅ%UNICODE(0x2661)%…寝取られちゃうぅぅっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW ズボンから取り出したペニスを扱きながら最近%CALLNAME%としてないな…と言い訳し、動画内の%CALLNAME%が寝取られ孕まされるのをオカズにオナニーを続けた…
+			ELSEIF !RAND:2
+			;イレギュラーレイプ(イレギュラー役はあなた)
+				PRINTFORML 
+				PRINTFORML 「ダメっ%UNICODE(0x2661)%…やめてぇっ%UNICODE(0x2661)%、イクっ…イクぅっ%UNICODE(0x2661)%…また膣内にぃ%UNICODE(0x2661)%…今ならまだ見逃してあげるからぁっ…やぁ…んはあぁっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML それはよくあるAVのジャンル…凌辱レイプ監禁物のようだがなんと表示されたタイトル画面に、
+				PRINTFORML %CALLNAME%の姿が映っておりまた女優の名前も同じで仕草や口調も本人その物だ。
+				PRINTFORML もし%CALLNAME%が治安維持局員でなければ自分でも彼女を疑ってしまうくらい似ているもので、
+				PRINTFORML 気づけば完全に勃起しているが動画の%CALLNAME%は自分のよりも格段に逞しいペニスで犯され、セリフもどんどんと雄の獣欲を激しく煽るものになっていく。
+				PRINTFORML 
+				PRINTFORML 「このっ…クズチンポぉっ%UNICODE(0x2661)%…イレギュラーのクズ精子でぇっ%UNICODE(0x2661)%…孕むぅっ…ゴミ以下の劣性遺伝子受精しちゃうぅっ%UNICODE(0x2661)%…あかちゃんできちゃうぅっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW ズボンから取り出したペニスを扱きながら最近%CALLNAME%としてないな…と言い訳し、動画内の%CALLNAME%がレイプで孕まされるのをオカズにオナニーを続けた…
+			ELSE
+			;外敵レイプ(上半身だけ下半身は同時にあなたが犯してる映像を加工)
+				PRINTFORML 
+				PRINTFORML 「いやぁっ…はなしてぇっ、んぶっ…おえぇっ！…また飲まされてぇ…放しなさい殺してあげるからぁっ…やぁ…んぁっ%UNICODE(0x2661)%…身体がっ…熱くぅ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML それはよくあるAVのジャンル…異種姦凌辱物のようだがなんと表示されたタイトル画面に、
+				PRINTFORML %CALLNAME%の姿が映っておりまた女優の名前も同じで仕草や口調も本人その物で外敵の姿も資料映像通りだ。
+				PRINTFORML もし%CALLNAME%が治安維持局員でなければ自分でも彼女を疑ってしまうくらい似ているもので、精密な映像技術と展開に
+				PRINTFORML 気づけば完全に勃起しているが動画の%CALLNAME%は自分の性器とは比較にならないグロテスクな触手で犯され、すぐに嬲りものになっていく。
+				PRINTFORML 
+				PRINTFORML 「ぶっ…ぶっといのぉ…%UNICODE(0x2661)%…奥まで入ってぇっ%UNICODE(0x2661)%、ひっ…いゃあぁ！…そこはダメぇ…入っちゃダメぇぇっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 「んぶぅぅっ%UNICODE(0x2661)%…ん゛ん゛ん゛っ……ぷぁぁぁ%UNICODE(0x2661)%…いっぱいぃ…%UNICODE(0x2661)%…飲んじゃったぁ%UNICODE(0x2661)%…ああぁんっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 「チンポぉっ…オチンポぉっ%UNICODE(0x2661)%…怪物の精子っ%UNICODE(0x2661)%…孕むぅっ…人以外の遺伝子受精しちゃうぅっ%UNICODE(0x2661)%…バケモノあかちゃん産んじゃうぅぅっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW ズボンから取り出したペニスを扱きながら最近%CALLNAME%としてないな…と言い訳し、動画内の%CALLNAME%が外敵にレイプされ孕まされるのをオカズにオナニーを続けた…
+			ENDIF
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML %CALLNAME%はその様子を扉越しで確認し、暫くは性行為を求められないだろうと愉悦を隠し切れないように笑みを零した…
+		ELSEIF TALENT:主人持ち
+		;お飾り夫ではなく元主人に寝取られ報告する妻
+			PRINTFORML 「……？」
+			PRINTFORML とある日、%CSTR:伴侶名前%がメールの整理をしていると、迷惑メールの中に動画ファイルが同梱されているメールを発見した。
+			PRINTFORMW アダルトサイトの広告らしいそれにウイルスチェックをかけてみたがその類のものは発見されず、安全だろうと興味本位で開いてみることにした。
+			PRINTFORML 
+			PRINTFORML 「きてぇっ%UNICODE(0x2661)%…奥までぇっ%UNICODE(0x2661)%、イクっ…いぐうぅっ%UNICODE(0x2661)%…いっぱいぃ%UNICODE(0x2661)%…んぁ%UNICODE(0x2661)%…あかちゃんできちゃうかもぉ…あはぁぁっ%UNICODE(0x2661)%」
+			PRINTFORML 
+			PRINTFORML それはよくあるAVのジャンル…寝取られ物のようだがなんと表示されたタイトル画面に、
+			PRINTFORML %CALLNAME%の姿が映っておりまた女優の名前も同じで仕草や口調も本人その物だ。
+			PRINTFORML もし%CALLNAME%が呼んでいる夫の名前が自分の名前でなければ彼女を疑ってしまうくらい似ているもので、
+			PRINTFORML 気づけば完全に勃起しているが動画の%CALLNAME%は自分のよりも格段に逞しいペニスで寝取られ、セリフもどんどん夫を馬鹿にする内容のものになっていく。
+			IF TALENT:極上の牝
+				PRINTFORML 
+				PRINTFORML 「このチンポさいこおぉぉっ%UNICODE(0x2661)%…元気な精子ぃ%UNICODE(0x2661)%…孕みますぅっ%UNICODE(0x2661)%…受精してぇ…%UNICODE(0x2661)%…あかちゃん産みますうぅぅっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW ズボンから取り出したペニスを扱きながら最近%CALLNAME%としてないな…と言い訳し、動画内の%CALLNAME%が寝取られ孕まされるのをオカズにオナニーを続けた…
+				PRINTFORML 
+				PRINTFORML 
+				PRINTFORML 
+				PRINTFORML 
+			ELSEIF TALENT:「マザー」
+				PRINTFORML 
+				PRINTFORML 「ぁ…おちんぽぉっ%UNICODE(0x2661)%…いっぱい産んだのにぃ%UNICODE(0x2661)%…また孕んじゃうぅっ%UNICODE(0x2661)%…ママになっちゃう%UNICODE(0x2661)%…もっと…もっとおぉっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW ズボンから取り出したペニスを扱きながら最近%CALLNAME%としてないな…と言い訳し、動画内の%CALLNAME%が寝取られ孕まされるのをオカズにオナニーを続けた…
+				PRINTFORML 
+				PRINTFORML 
+				PRINTFORML 
+				PRINTFORML 
+			ELSE
+				PRINTFORML 
+				PRINTFORML 「いいのぉっ%UNICODE(0x2661)%…寝取りチンポぉっ%UNICODE(0x2661)%…あなたの精子でっ%UNICODE(0x2661)%…子宮ぅ%UNICODE(0x2661)%寝取ってぇ%UNICODE(0x2661)%…あかちゃん…受精ぇ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORMW ズボンから取り出したペニスを扱きながら最近%CALLNAME%としてないな…と言い訳し、動画内の%CALLNAME%が寝取られ孕まされるのをオカズにオナニーを続けた…
+				PRINTFORML 
+				PRINTFORML 
+				PRINTFORML 
+				PRINTFORML 
+			ENDIF
+			PRINTFORML 
+			IF TALENT:妊娠 && TALENT:極上の牝 && TALENT:聖女の子宮
+				PRINTFORML %CALLNAME%はその様子を隠しカメラから確認し、暫くは性行為を求められないだろうと安心したのか繋がったまま
+				PRINTFORML %CALLNAME:MASTER%にいやらしく微笑み大きなお腹を身体ごとを弾む様に揺らして極上の快楽で奉仕していると
+				PRINTFORML %CALLNAME:MASTER%に%CALLNAME%の元主人から連絡が来た、用件の内容はどうやら%CALLNAME%を返還してほしいらしく
+				PRINTFORML 喘ぎ声を我慢しながら静かに話を聞いていた%CALLNAME%は女なら他にいくらでも居るだろうにと呆れていると
+				PRINTFORML 今ちょうど%CALLNAME%が居るから本人に直接聞いてはどうかと%CALLNAME:MASTER%が言いモニターを操作しカメラを起動させた…
+				PRINTFORML 
+				PRINTFORML 【？視点】
+				PRINTFORML 
+				PRINTFORML 「ごぉ…ごめんなさぃっ%UNICODE(0x2661)%…この寝取りおちんぽぉ%UNICODE(0x2661)%きもち良過ぎてぇっ%UNICODE(0x2661)%もぅ…だめえぇっ%UNICODE(0x2661)%…この人からぁ…%UNICODE(0x2661)%はなれられないぃっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 通信モニターに映像が加わると完全に寝取られ極上の名器を好き放題に突き上げられ優秀な子を孕む事のできる
+				PRINTFORML 希少な胎を妊娠させ大きく膨らませた%CALLNAME%が戻れないと言う姿を見せられながら元主人は気が動転し黙ってしまう。
+				PRINTFORML 
+				PRINTFORML 「どうしたんですかぁ？あっ…んふ%UNICODE(0x2661)%もしかしてぇ…%UNICODE(0x2661)%おちんちん立たなくなっちゃたぁ？…あはぁっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 変わり果てた%CALLNAME%を見て何故あんな事に%CALLNAME%を使ったのか今更になって後悔していると
+				PRINTFORML 元主人は全身を今まで味わった事の無い激しい虚脱感に飲み込まれもう呆然と映像を眺める事しかできない。
+				PRINTFORML 
+				PRINTFORML 「んあぁっ%UNICODE(0x2661)%…ほんとうにぃ%UNICODE(0x2661)%ごめんなさいぃっ%UNICODE(0x2661)%もうぜったいにぃ…%UNICODE(0x2661)%このおちんぽからぁっ%UNICODE(0x2661)%はなれたくないのおぉぉっ%UNICODE(0x2661)%%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML 連絡を入れた数分前までは聳え立っていた元主人の肉棒は%CALLNAME%に言われた通り力を失い枯れ木の様に萎びてしまい
+				PRINTFORML %CALLNAME:MASTER%にもう通信を切ると伝えられ最後に幸せそうな表情の%CALLNAME%を後ろから大きなお腹ごと抱き抱え口付けしている様子が映っていた…
+			ELSEIF TALENT:妊娠 && TALENT:極上の牝
+				PRINTFORML %CALLNAME%はその様子を扉越しで確認し、暫くは性行為を求められないだろうと愉悦を隠し切れないように笑みを零していると
+				PRINTFORML スマホに元主人から連絡が来た、どうやら%CALLNAME:MASTER%と掛け合って%CALLNAME%が望むならと返還すると言われたらしい
+				PRINTFORML 女なら他にいくらでも居るだろうに未練がましく戻ってこいと話し続ける元主人と話すのに飽きて通話を切ると今度は
+				PRINTFORML メールを送ってきたので%CALLNAME%は内容を読まずに画像を一枚だけ添付してメールを返信し元主人を着信拒否にした…
+				PRINTFORML 
+				PRINTFORML 【？視点】
+				PRINTFORML 
+				PRINTFORML 「もっと…もっとぉっ%UNICODE(0x2661)%…この寝取りおちんぽでぇ%UNICODE(0x2661)%寝取ってぇ%UNICODE(0x2661)%寝取ってぇぇっ%UNICODE(0x2661)%…あの人にぃ%UNICODE(0x2661)%…みせてあげてぇぇぇっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML %CALLNAME%が寝取られている動画を見ながら元主人は苛立っているのか乱暴にスマホを操作していると
+				PRINTFORML 遂に想いが通じたのかメールが返信されてくるが文字は一つも無くその代わりに画像が一枚だけ添付されている
+				PRINTFORML 画像を表示させるとそこには%CALLNAME%が大きなお腹を抱え幸せそうな表情で動画の男に奉仕している様子が写っていた…
+			ELSEIF TALENT:極上の牝
+				PRINTFORML %CALLNAME%はその様子を扉越しで確認し、暫くは性行為を求められないだろうと愉悦を隠し切れないように笑みを零すと
+				PRINTFORML 急に何かを思いついたのかスマホを操作し動画ファイルだけ添付してメールを送信した…
+				PRINTFORML 
+				PRINTFORML 【？視点】
+				PRINTFORML 
+				PRINTFORML 「寝取りおちんぽぉ%UNICODE(0x2661)%…あの人のよりおっきくてぇ%UNICODE(0x2661)%おまんこぉ…%UNICODE(0x2661)%ひ…ひろがっちゃうぅっ%UNICODE(0x2661)%…あなたのおおきぃのぉっ%UNICODE(0x2661)%おくぅ…おぐまでぇぇっ%UNICODE(0x2661)%」
+				PRINTFORML 
+				PRINTFORML %CALLNAME%が寝取られている動画を見ながら元主人は苛立っているのか代わりの女をに乱暴に犯し
+				PRINTFORML 既に何度も射精しているが今抱いている女の具合に物足りなさを感じ更に苛立ちを募らせている…
+			ELSE
+				PRINTFORML %CALLNAME%はその様子を扉越しで確認し、暫くは性行為を求められないだろうと愉悦を隠し切れないように笑みを零した…
+			ENDIF
+		ELSE
+			PRINTFORML 「……？」
+			PRINTFORML とある日、%CSTR:伴侶名前%がメールの整理をしていると、いたずらメールの中に動画ファイルだけが同梱されているメールを発見した。
+			PRINTFORMW 不思議に思いウイルスチェックをかけてみたがその類のものは発見されず、安全だろうと興味本位で開いてみることにした。
+			PRINTFORML 
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+			PRINTFORML 
+			PRINTFORML それはよくあるアダルトサイトで公開されているAV…性行為の様子を撮ったもののようだが、
+			PRINTFORML メール送信の為か解像度が小さくまたモザイク・ボイスチェンジも強いため人の特定は難しそうだ。
+			PRINTFORML だが肉付きは自分好みであり、プレイの様子が演技を感じさせない本格的なもので、気づけばペニスが完全に勃起していた。
+			PRINTFORML そうこうしている内に動画の二人はより淫らに激しく動き始め、女のセリフも卑猥かつ男の肉欲を煽るものに変わっていく。
+			PRINTFORMW 最近ヌいてないな…と言い訳しつつペニスをズボンから取り出すと、動画が終わらないうちにこれをオカズにオナニーを始めた…
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML 
+			PRINTFORML %CALLNAME%はその様子を扉越しで確認し、暫くは性行為を求められないだろうと愉悦を隠し切れないように笑みを零した…
+		ENDIF
+	ELSEIF !RAND:2
+		PRINTFORML 【%CALLNAME%夫婦の寝室】
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 夫が出勤したあと欲求不満を抑えきれなかった%CALLNAME%は、%CALLNAME:MASTER%を甘い声で家に呼び込んだ。
+		PRINTFORML 夫と共に使っているダブルベッドで仰向けになる%CALLNAME:MASTER%に跨り、太いペニスを自らの膣に咥えこむ。
+		PRINTFORML %CALLNAME:MASTER%とでしか味わえない快楽に酔いしれ、貪るように喘ぎながら腰を淫らに振る。
+		PRINTFORML 絶頂ののちに睦言を交わしそして再び交わう事を幾度も繰り返し、二人の愛のあるセックスは過ぎていった。
+		PRINTFORML 
+		PRINTFORML その光景を、ベッドから転げ落ち精液と愛液に塗れた婚約指輪だけが見つめていた…
+	ELSE
+		IF TALENT:学生
+		;寝取られ学生人妻
+			PRINTFORML 【%CALLNAME%が通う学園の保健室】
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+			PRINTFORML カーテンが引かれた薄明るい一室で%CALLNAME%を簡素なベッドに押し倒し、互いの性器をジュブジュブと交じ合わせている。
+			PRINTFORML 不純異性交遊も甚だしいが%CALLNAME%は更に繋がったまま身体を起こしてキスをすると嬉しそうに笑い、
+			PRINTFORML 学生の身分で種付けを望んでいるのか両足で%CALLNAME:MASTER%の腰をホールドし、中出しを要求しているかのようだった。
+			PRINTFORML %CALLNAME:MASTER%も元からそのつもりだったようで、強く子宮口を突き込むと共に濃い精液を解き放つ。
+			PRINTFORML 本来ならば夫のモノを収めるべき膣に%CALLNAME:MASTER%の肉棒を招き入れ、快感を楽しむだけでなく
+			PRINTFORML 勝手に夫よりも強く優秀な雄の遺伝子を注ぎ込まれ、%CALLNAME%は激しい悦びと共に声を上げ絶頂した。
+			PRINTFORML 長い射精のあと痙攣する若々しい膣から肉棒を引き抜くと直ぐに閉じるが収まりきらなかった濃厚な白濁液が零れた…
+		ELSE
+			PRINTFORML 【とあるラブホテル】
+			CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+			PRINTFORML うっすらと蜜色に照らされた寝室で%CALLNAME%を豪華なベッドに押し倒し、互いの性器をジュブジュブと交じ合わせている。
+			PRINTFORML 種付けを望んでいるかのように両足で%CALLNAME:MASTER%の腰をホールドし、中出しを要求しているかのようだった。
+			PRINTFORML %CALLNAME:MASTER%も元からそのつもりだったようで、強い突きと共に濃い精液を膣内に解き放つ。
+			PRINTFORML 本来ならば夫の精子を収めるべき子宮により強い雄の遺伝子を流し込まれ、%CALLNAME%は昏い悦びと共に絶頂した。
+			PRINTFORML 十秒ほどの射精を終えてピクピク痙攣する膣からペニスを引き抜くと、ドロリと白濁液が秘所から零れた…
+		ENDIF
+	ENDIF
+ELSEIF TALENT:百合摘み
+	IF !RAND:6 && TALENT:学生
+		PRINTFORML 【%CALLNAME%が通う学園】
+		PRINTFORML 『…んー……まだかなぁ』
+		PRINTFORML 放課後、%CALLNAME%を待つ%CSTR:伴侶名前%だったが一向に来る気配がない。
+		PRINTFORML 暫く待っても来なかったので心配になった%CSTR:伴侶名前%は辺りを探すことに、まずは一階を調べることにした。
+		PRINTFORMW 
+		PRINTFORML 【保健室】
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK2000
+		PRINTFORML 『……？』
+		PRINTFORML 保健室から聞きなれない声を聴いた%CSTR:伴侶名前%は、こっそりのぞいて見ることに。
+		PRINTFORML 『……――っ！』
+		PRINTFORML カーテンの向こう側…ベッドの上で二つの影が激しく動いている……。
+		PRINTFORML これでも「その手の経験」はあるので何をしているのかは凡そ理解できる、性行為だ、しかも男女の。
+		PRINTFORML 自分は同性としかしてない為、どのようなプレイなのかは気にならなくもないが……
+		PRINTFORML 『でも…この声…』
+		PRINTFORMW それ以上に気になるのは、喘いでいる女性の声……大好きな彼女のような気がする。
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 『………っ…』
+		PRINTFORML 意を決した%CSTR:伴侶名前%は静かに近づいてカーテンに手を掛け…………―――――
+		PRINTFORML 
+		PRINTFORMW 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 【中庭】
+		PRINTFORML 『……ほぇ？』
+		PRINTFORML 目が覚めると中庭のベンチに座っていた。
+		PRINTFORML 何事だと辺りを見渡すと、丁度%CALLNAME%が自動販売機でジュースを買ってこちらに駆け寄ってきた。
+		PRINTFORML 「%CSTR:語尾微笑%…どうし%CSTR:語尾問う4%？」
+		PRINTFORML そう言って差し出してきたジュースを受け取る………さっきのは…夢？。
+		PRINTFORML 『ううん、大丈夫』
+		PRINTFORML 夢だったことに大きく安堵しつつ、席を立つ……すると妙に身体がふらつく。
+		PRINTFORML とっさに%CALLNAME%に支えてもらい何とか立ち上がる……眠り過ぎたのだろうか。
+		PRINTFORML それになんだが「お腹の下」辺りが妙に重い。
+		PRINTFORMW 
+		PRINTFORML 『えへへ、ちょっと眠りすぎちゃったみたい』
+		PRINTFORML そういうと%CALLNAME%は身体を預けさせてくれた、なんだか嬉しい気持ちが込み上げてくる。
+		PRINTFORML ほんのり暖かいお腹をさすりながら、二人で家に帰ることにした…
+		PRINTFORML 
+	ELSEIF !RAND:5
+		PRINTFORML 【%CALLNAME%夫婦の寝室】
+		PRINTFORML 『やぁんっ！…ダメなのにっ…感じちゃ…っ…ダメなのにぃいっ%UNICODE(0x2661)%』
+		PRINTFORML ―――%CSTR:一人称%が感じた悦びを、彼女にも知ってほしい―――
+		PRINTFORML そう懇願した%CALLNAME%の願いに沿って、この夜に限り伴侶たる%CSTR:伴侶名前%を%CALLNAME:MASTER%が犯している。
+		PRINTFORML 男との性行為など慣れていないはずなのに、%CSTR:伴侶名前%から発せられる声には既に嬌声が混じりつつある。
+		PRINTFORML それもそのはず、彼女の性感帯・スポット等は%CALLNAME%から教えられているからだ。
+		PRINTFORML %CALLNAME:MASTER%に弱点ばかり責められ、身体を駆け巡る圧倒的な快楽に%CSTR:伴侶名前%は雌の身体へと作り変えられていく。
+		PRINTFORML その様があまりにも愛おしいようで、%CALLNAME%は自らの秘所を弄り興奮していた…
+		PRINTFORMW 
+		PRINTFORML 『―――ぁぁあぁぁあああっ%UNICODE(0x2661)%…っ%UNICODE(0x2661)%……、…ぁつい……これ…なに……？』
+		PRINTFORML 伴侶の絶頂と共に%CALLNAME:MASTER%はペニスを抜き取ると、彼女の顔面に向けて射精しその顔を白く汚す。
+		PRINTFORML 見慣れない白濁液に絶頂で呆けながらも困惑する%CSTR:伴侶名前%に%CALLNAME%がすり寄ると、汚れた顔を綺麗に舐めとっていく。
+		PRINTFORML そして集めたザーメンを口に含みつつ、二人はそのまま熱いディープキスを交えた。
+		PRINTFORML 後ろでは%CALLNAME:MASTER%が%CALLNAME%の膣内を犯し始め、%CALLNAME%はその快感を味わいつつ精液と愛液と唾液を舌を絡めながら混ぜる。
+		PRINTFORML 「『………%UNICODE(0x2661)%』」
+		PRINTFORML 完全に快楽の虜になった二人を見て%CALLNAME:MASTER%は満足しつつ、男女のセックスは３Ｐへと移行していった…
+		PRINTFORMW 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 【翌日】
+		PRINTFORML 『おはよう！、今日もいい天気だね』
+		PRINTFORML 昨夜の記憶を消されいつも通りの態度をとる伴侶、しかしいつもより元気がある。
+		PRINTFORML 「今日は元気だね」と%CALLNAME%が尋ねてみると
+		PRINTFORML 『うん、%CALLNAME%といっぱい愛し合った夢を見たんだ、いつもよりすっごい気持ちよくて…えへへ%UNICODE(0x2661)%』
+		PRINTFORML と、彼女ははみかみながらどこか「女の顔」をしていた…
+	ELSEIF !RAND:4
+		PRINTFORML 【%CALLNAME%夫婦の寝室】
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 本来は女性二人が愛し合うはずのベッドの上で、%CALLNAME:MASTER%と%CALLNAME%が身体を求め合っている。
+		PRINTFORML もう幾度も繰り返しているのか、シーツの上には愛液がポタポタと濡れたシミが辺りに出来ており、それは徐々に増えていく。
+		PRINTFORML %CALLNAME%は後背位で犯され続けもう身体を支えきれないようで、上半をベッドに委ねただ喘ぎ続けるしかいようだ。
+		PRINTFORMW 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+		PRINTFORML その後、追い打ちとばかりに子宮目掛けて中出しすると、電流のような絶頂をなんとか抑えようと枕をぎゅっと抱きしめた。
+		PRINTFORML 射精が終わるころには子宮の充填は完了し、収めきれない分が逆流する精液が秘所から溢れシーツを汚していく。
+		PRINTFORML あの子が帰ってくる前に洗っておかないと……そう考えつつも再開されるピストンにまともな思考は消えていった…
+	ELSEIF !RAND:3
+		PRINTFORML 【とある喫茶店】
+		PRINTFORML 息抜きもかねて%CALLNAME%は夫(女性)と%CALLNAME:MASTER%がいる喫茶店で仕事をしている。
+		PRINTFORML 夫(女性)の方は仕事に熱中しているのか、ずっと資料と格闘中のようだ。
+		PRINTFORML 暇を感じた%CALLNAME%が辺りを見渡すと、定位置に%CALLNAME:MASTER%がいたので、退屈がてら声をかけた。
+		PRINTFORML すると%CALLNAME:MASTER%は夫(女性)からは見えない位置で%CALLNAME%に腰に手を回すと、ヤリ部屋へと視線を向ける。
+		PRINTFORML 意図を察した%CALLNAME%は顔を少し赤く染めて頷くと、二人は夫(女性)にバレないように部屋へと向かった…。
+		PRINTFORMW 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+		PRINTFORML 伴侶がすぐ近くにいるというのに、騎乗位で肢体を揺らし肉欲を貪る%CALLNAME%。
+		PRINTFORML 同性婚した女性とは思えぬ乱れた姿に、%CALLNAME:MASTER%も背徳感を隠せないのかその女体にむしゃぶりつく。
+		PRINTFORML 濃厚なキスを交えがら共に絶頂へと至り、あってはならぬ種付けを%CALLNAME%は喜んで受け入れた。
+		PRINTFORML 特濃ザーメンを注ぎ込まれたにも関わらず、%CALLNAME%は未だ欲情仕切っており、%CALLNAME:MASTER%の肉竿も未だ隆々としている。
+		PRINTFORML 一しきり射精を終えると、どちらから促進するまでもなく再び正しいはずの交尾を再開した…
+		PRINTFORMW 
+		PRINTFORML 『顔赤いけど、どうしたの？』
+		PRINTFORML 一時間後、心配する伴侶の下に戻る%CALLNAME%、作業は丁度終わったようで、なんとか誤魔化しつつ喫茶店を出る。
+		PRINTFORML 笑顔ですり寄ってくる彼女を応じるように、互いの指を絡め二人並んで街道を歩いていく。
+		PRINTFORML 傍から見れば愛し合っている二人の女性……、だが、%CALLNAME%の子宮には溢れんばかりの特濃子種が収められていた…
+	ELSEIF !RAND:2
+		PRINTFORML 【%CALLNAME:MASTER%の寝室】
+		PRINTFORML どうしてこうなってしまったんだろう…とたまに思うことがある。
+		PRINTFORML 夫であり妻でもある同性婚相手に隠れながら、今日も肢体を男に預けている。
+		PRINTFORML 彼女のことは今でも大好きだ…、いつまでも一緒にいたいと今でも思う。
+		PRINTFORML しかしその「大好き」はすでに愛情から友情へと墜ちていることが自覚できる程に感じられる。
+		PRINTFORML 「………%UNICODE(0x2661)%」
+		PRINTFORML なぜなら目の前の男を愛してしまったから、そして組み伏せられ抱かれる悦びを知ってしまったからだ。
+		PRINTFORMW 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 本来ならば受け入れるはずのない男の性器を自らの膣へと招き、思うままに蹂躙されていく。
+		PRINTFORML だが、一突きするごとに抗い難い快楽が身体中を駆け巡り、喘ぎが止まらない。
+		PRINTFORML せめて中出しだけは…と理性は思いつつも、口から出る言葉は種付けの懇願。
+		PRINTFORML 激しくなっていくピストンに応じるように、膣内が勝手に締まっていく。
+		PRINTFORML 理性と本能で判断に迷っている間に、子宮へと無慈悲に精液が流し込まれた。
+		PRINTFORMW 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+		PRINTFORML 口走るセリフはやはり歓迎するものだった、理性は…もう抵抗しなかった。
+		PRINTFORML もう無理なのだろう、これから何度も苦悩しようが結果は同じ。
+		PRINTFORML %CSTR:一人称%はこの人から離れられない、だって彼を愛しているのだから。
+		PRINTFORML 子宮に溜まっていく精液を感じながら、%CSTR:一人称%は更なる寵愛を求めた…
+	ELSE
+		PRINTFORML 【とあるラブホテル】
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 黄昏色に染まる一室にて、二人の男女が発情期の獣のように交わっている。
+		PRINTFORML それ自体はそこまで異常ではないが、犯されることを強請っている女性…%CALLNAME%は同性婚した人妻なのだ。
+		PRINTFORML 今日も帰るところを%CALLNAME:MASTER%に声を掛けられ、こうして痴態を男に晒している。
+		PRINTFORML 肉棒で突かれながらやっとこさスマホで「遅くなるかも」と返信メールを送り、送信されたことを確認する。
+		PRINTFORML そしてようやく甘受できると、我慢していた分蕩けた口調で嬌声を発し始めた。
+		PRINTFORMW
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 道具や貝合わせでは味わえない極上の快感を、膣内で味わい続ける。
+		PRINTFORML 綺麗だった頃のあの日に罪悪感を胸に秘めながら、%CALLNAME%は牝へと落ちていった…
+	ENDIF
+ENDIF
+
+DRAWLINE
+
+PRINTFORMW 
+
+
+
+
+;イベントによる経験加算
+CALL TURN_EVENT_NTL_EXP
+
+RESETCOLOR
+;-------------------------------------------------
+;ＮＴＬイベント　イベント内容
+;-------------------------------------------------
+@TURN_EVENT_NTL_EXP
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = %CALLNAME:MASTER%
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = %CALLNAME:MASTER%
+SIF CSTR:初精飲相手名 =="" 
+	CSTR:初精飲相手名 = %CALLNAME:MASTER%
+SIF CSTR:初フェラ相手名 ==""
+	CSTR:初フェラ相手名 = %CALLNAME:MASTER%
+SIF CSTR:初Ａえっち相手名 ==""
+	CSTR:初Ａえっち相手名 = %CALLNAME:MASTER%
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = %CALLNAME:MASTER%
+SIF CSTR:初中出し相手名 ==""
+	CSTR:初中出し相手名 = %CALLNAME:MASTER%
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
+
+CALL JN_SEX_EXP
+
+EXP:ＮＴＬ調教経験  += (RAND:3+1)+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,311 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_HELP.ERB
+;	Facility	:ヘルプ機能。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ SYSTEM_HELP_MAIN				SYSTEM:ヘルプ
+;	・ _SYSTEM_HELP_DATA			ヘルプ:データ
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub SYSTEM_HELP_MAIN
+;=================================================
+;   SYSTEM:ヘルプ
+;-------------------------------------------------
+@SYSTEM_HELP_MAIN
+#DIM L_I
+#DIM L_CNT
+#DIM L_MAX
+#DIMS L_STR
+
+L_MAX=100
+
+;-----------------------------
+;-- ヘッダ部
+;-----------------------------
+;ライン表示:新ページ
+CALL C_LINE
+
+PRINTFORML 조교전에는 각종 정보가 기재되어 있습니다。
+DRAWLINE
+
+
+;-----------------------------
+;-- データ部
+;-----------------------------
+VARSET Q
+FOR L_I, 0, L_MAX
+	Q:L_I = 1
+	L_CNT ++
+
+	SELECTCASE L_I
+		CASE 20
+			PRINTL
+		CASE 30
+			PRINTL
+		CASE 100
+			PRINTL
+	ENDSELECT
+
+	;- ヘルプ:データ
+	CALL _SYSTEM_HELP_DATA(L_I, 0)
+
+	IF STRLENS(RESULTS)
+		L_STR = %RESULTS%
+	ELSE
+		;初期化
+		Q:L_I = 0
+		L_CNT --
+		CONTINUE
+	ENDIF
+
+	PRINTFORMLC [{L_I,3}] %L_STR%
+	PRINTL
+
+NEXT
+
+SIF L_CNT
+	PRINTL
+PRINTL
+PRINTLC 　
+PRINTLC [1000] - 돌아온다
+PRINTL
+PRINTL
+
+
+;-----------------------------
+;- コマンド受付
+;-----------------------------
+$INPUT_LOOP
+INPUT
+
+SELECTCASE RESULT
+	;戻る
+	CASE 1000
+		RETURN
+
+	;データ
+	CASE 0 TO (L_MAX - 1)
+		IF !Q:RESULT
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP
+		ENDIF
+
+		;- ヘルプ:データ
+		CALL _SYSTEM_HELP_DATA(RESULT, 1)
+
+	CASEELSE
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+
+
+;=================================================
+;   sub _SYSTEM_HELP_DATA
+;=================================================
+;   ヘルプ:データ
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象
+;  ARG:1				モード(0:タイトル 1:本文)
+; Output:
+;  RESULTS				タイトル
+;-------------------------------------------------
+@_SYSTEM_HELP_DATA(ARG:0, ARG:1)
+#DIM L_MODE
+#DIM L_TMP
+L_MODE = ARG:1
+RESULTS=
+
+;- CHK:データ
+SELECTCASE ARG
+	;-------------------------------------------------------------------------------
+	;- 通常系
+	;-------------------------------------------------------------------------------
+
+	CASE 0
+		RESULTS = 클리어 조건에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 클리어 조건은 다음과 같습니다。
+		PRINTL
+		PRINTFORML ・예속 이상의 노예를 ５명 모은다
+		PRINTFORML ・호텔을 쉘터로 만든다
+		PRINTFORML 
+		PRINTFORML 위 조건을 채우면、하루 종료시 클리어 처리를 합니다。
+		PRINTFORML 또한 엔딩은 클리어 시점의 상태에 따라서 여러개가 존재합니다。
+
+	CASE 1
+		RESULTS = 호텔에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 호텔은 뒷사회의 인간들을 대상으로 영업하고 있습니다。
+		PRINTFORML 여성 부하의 제복은 미니스커트의 메이드복、남자 부하의 제복은 호텔 보이 복장입니다。
+		PRINTFORML 성가신 손님들이 있을 수도 있습니다。부하를 네토라레 당하지 않도록 하죠。
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 네토리 취미 손님		…　다른 사람의 여자를 네토리하는 것이 취미인 남성
+		PRINTFORML 아이돌 오너			…　아이돌을 네토리하는 것이 취미인 남성
+		PRINTFORML 숙박 손님			…　메이드만 보면 불끈불끈해서 강간하는 손님
+
+	CASE 2
+		RESULTS = 낙인과 반려에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 예속 각인이 LV2인 노예는 낙인을 찍고 전용 노예로 만들 수 있습니다。
+		PRINTFORML 낙인을 찍으면 소질「낙인」을 얻습니다。예속 각인이 LV3이 됩니다。
+		PRINTL
+		PRINTFORML 함락 각인 LV2인 노예는 반지를 주면 결혼할 수 있습니다。
+		PRINTFORML 결혼하면 소질「반려」를 얻습니다。함락 각인이 LV3이 됩니다。
+		PRINTL
+		PRINTFORML 양쪽 모두 사용하면 상위 함락이 되고、２회차에 인계할 수 있게 됩니다。
+
+	CASE 3
+		RESULTS = ２회차에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML ２회차 이후 주회 플레이에선、다음과 같은 항목을 계승할 수 있습니다。
+		PRINTFORML 
+		PRINTFORML ・자금
+		PRINTFORML ・아이템
+		PRINTFORML ・낙인을 찍은 반려
+		PRINTFORML ・호텔의 상태
+
+	;-------------------------------------------------------------------------------
+	;- システム系
+	;-------------------------------------------------------------------------------
+
+	CASE 20
+		RESULTS = 획득 가능한 소질에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 조교의 결과로、다음과 같은 소질을 입수할 수 있습니다。
+		PRINTFORML （주…주인 / 노…노예）
+		PRINTL
+		PRINTL ■ 개인 소질 ■---------------------------------------------------------------
+		PRINTFORML 주 　 [매혹]　　　…ABL:매료 기능 Lv6＋상위 함락 인원이 5명이 되면 획득 가능
+		PRINTFORML 주,노 [키스마]　　…EXP:키스 경험 Lv7이 되면 획득 가능
+;		PRINTFORML 주,노 [섹스광]…EXP:성교 경험 Lv8이 되면 획득 가능
+;		PRINTFORML 주,노 [자위광]　…EXP:자위 경험 Lv7이 되면 획득 가능
+;		PRINTFORML 주,노 [항문광]　…EXP:Ａ성교 경험 Lv8이 되면 획득 가능
+		PRINTL
+		PRINTL ■ 대인 소질 ■---------------------------------------------------------------
+		PRINTFORML 　 노 [예속계]　　…예속 각인 획득시、또는 아이템 사용시 동시 획득(복종/예속/낙인)
+		PRINTFORML 　 노 [연모계]　　…농락 각인 획득시、또는 아이템 사용시 동시 획득(연모/친애/반려)
+		PRINTFORML 　 노 [음란계]　　…음란 각인 획득시、또는 아이템 사용시 동시 획득(음란/음마)
+
+	CASE 21
+		RESULTS = PALAM와 EXP、획득 JUEL에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 파라미터(PALAM)는 다음과 같은 값으로 레벨이 나눠져 있습니다。최대 값은 LV9(99999)입니다。
+		PRINTFORML +--------------------------------------------------------------+
+		PRINTFORML | PALAMLV … 0/  1/  2/   3/   4/   5/    6/    7/    8/    9/ |
+		PRINTFORML | PALAM   … 0/100/500/1000/2500/5000/10000/25000/50000/99999  |
+		PRINTFORML +--------------------------------------------------------------+
+		PRINTFORML 
+		PRINTFORML 그리고、획득 구슬(GOTJUEL)은 다음과 같이 PALAM LV에 따라 결정됩니다。최대 값은 LV9(5120)입니다。
+		PRINTFORML +---------------------------------------------------+
+		PRINTFORML | PALAMLV … 0/ 1/ 2/ 3/  4/  5/  6/   7/   8/   9/ |
+		PRINTFORML | GOTJUEL … 0/20/40/80/160/320/640/1280/2560/5120  |
+		PRINTFORML +---------------------------------------------------+
+		PRINTFORML 
+		PRINTFORML 경험(EXP)은 다음과 같은 값으로 레벨이 나눠져 있습니다。최대 값은 LV9(500)입니다。
+		PRINTFORML +------------------------------------------+
+		PRINTFORML | EXPLV … 0/1/2/ 3/ 4/ 5/  6/  7/  8/  9/ |
+		PRINTFORML | EXP   … 0/1/4/10/20/50/100/200/300/500  |
+		PRINTFORML +------------------------------------------+
+		PRINTL
+		PRINTL
+		PRINTFORML 기본적으로、획득 구슬(GOTJUEL)은 LV이 오를 때마다 ２배가 됩니다。
+
+
+	;-------------------------------------------------------------------------------
+	;- 労役系
+	;-------------------------------------------------------------------------------
+
+	CASE 35
+		RESULTS = 노역 계열 기능에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 労노역 계열 기능은 [가사 기능]、[전투 기능]、[가창 기능]이 있습니다。
+		PRINTFORML 労노역 계열 기능이 높으면、노역시 수입이 높아집니다。
+		PRINTL
+		PRINTFORML [가사 기능] … 요리를 포함한 가사 전반의 기능입니다。
+		PRINTFORML [가창 기능] … 노래나 춤같은 아이돌로서의 기능입니다。
+		PRINTFORML [전투 기능] … 전투나 경계같은 경비 기능입니다。
+
+	CASE 36
+		RESULTS = 노역:직위에 대하여
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 예속된 노예에겐 노역용 직위를 임명할 수 있습니다。
+		PRINTFORML 
+		PRINTFORML 통상직：호텔에서 통상 업무 전반을 담당。
+		PRINTFORML 가희직：호텔에서 아이돌 콘서트를 담당。
+		PRINTFORML 전투직：호텔의 경비를 담당。
+		PRINTFORML 창관직：호텔의 창관을 담당。
+
+	CASEELSE
+		RETURN
+ENDSELECT
+PRINTL
+WAIT
+
+

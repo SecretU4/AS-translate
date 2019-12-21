@@ -1,0 +1,392 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SUMMONS_FUNC.ERB
+;	Facility	:召喚関連の関数置き場。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;	002		2014/03/10		なるはや				SMN_ORIGIN_CTL追加
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ SMN_INIT							SMN:初期化
+;	・ SMN_LIST_RANGE					SMN:リスト範囲
+;	・ SMN_PRINT_UNIT_TYPE_LIST			SMN:ユニットタイプリスト
+;	・ SMN_UNIT_TYPE_CTL				SMN:作品制御
+;	・ SMN_ORIGIN_CTL					SMN:出身作品制御
+;
+;===============================================================================
+
+;=================================================
+;   sub SMN_INIT
+;=================================================
+;   SMN:初期化
+;-------------------------------------------------
+@SMN_INIT
+
+;- 種族設定
+VARSET GSMN_RACE
+GSMN_RACE:00 = 인간
+GSMN_RACE:01 = OTHER
+GSMN_RACE:02 = ＴＭ
+GSMN_RACE:03 = ＴＨ
+GSMN_RACE:05 = 学園
+GSMN_RACE:08 = 都市
+GSMN_RACE:11 = 異界
+GSMN_RACE:14 = 時間
+
+GSMN_RACE:17 = ＤＤＳ
+GSMN_RACE:18 = 都市
+
+GSMN_RACE:20 = 악마
+GSMN_RACE:41 = ADD-ON
+
+
+;=================================================
+;   sub SMN_LIST_RANGE
+;=================================================
+;   SMN:リスト範囲
+;-------------------------------------------------
+; Input:
+;  ARG					No
+;-------------------------------------------------
+@SMN_LIST_RANGE(ARG)
+#DIM L_RANGE
+#DIM L_START
+
+GSMN_LIST_START	= 0
+GSMN_LIST_END	= 0
+
+L_RANGE = 100
+L_START = L_RANGE * ARG
+
+SELECTCASE ARG
+	;全部
+	CASE 50
+		GSMN_LIST_START	= 0
+		GSMN_LIST_END	= 4300
+	;악마
+	CASE 20
+		GSMN_LIST_START	= 2000
+		GSMN_LIST_END	= 4000
+	;인간
+	CASE 00
+		GSMN_LIST_START	= 0
+		GSMN_LIST_END	= 170
+	;OTHER
+	CASE 01
+		GSMN_LIST_START	= 170
+		GSMN_LIST_END	= 200
+	;ＴＭ
+	CASE 02
+		GSMN_LIST_START	= 200
+		GSMN_LIST_END	= L_START + 150
+	;ＴＨ
+	CASE 03
+		GSMN_LIST_START	= 350
+		GSMN_LIST_END	= GSMN_LIST_START + 150
+	;範囲が200
+	;都市、ADD-ON
+	CASE 18, 41
+		GSMN_LIST_START	= L_START
+		GSMN_LIST_END	= L_START + 200
+	;範囲が300
+	;学園、都市、時間
+	CASE 05, 08, 11, 14
+		GSMN_LIST_START	= L_START
+		GSMN_LIST_END	= L_START + 300
+	;その他
+	CASEELSE
+		GSMN_LIST_START	= L_START
+		GSMN_LIST_END	= L_START + L_RANGE
+ENDSELECT
+
+
+
+;=================================================
+;   sub SMN_PRINT_UNIT_TYPE_LIST
+;=================================================
+;   SMN:ユニットタイプリスト
+;-------------------------------------------------
+; Input:
+;  ARG					タイプ
+;-------------------------------------------------
+@SMN_PRINT_UNIT_TYPE_LIST(ARG)
+#DIM L_I
+#DIM L_CNT
+#DIMS L_STR
+
+DRAWLINE
+
+SIF ARG == 50
+	ARG = -1
+
+L_CNT = 0
+FOR L_I, -1, 40
+
+	;ADD-ON
+	IF L_I == 16
+		PRINTFORM [{4000+41}] %"ADD-ON",8,LEFT% 
+	ELSE
+		;男フォルダで改行
+		IF L_I == 17
+			IF !LINEISEMPTY()
+				PRINTL
+				L_CNT = 0
+			ENDIF
+		ENDIF
+
+		IF L_I > -1
+			L_STR = %GSMN_RACE:L_I%
+
+			SIF L_STR == ""
+				CONTINUE
+	;		SIF GETBIT(FLAG:作品制御フラグ, L_I)
+	;			CONTINUE
+		ENDIF
+
+		SIF L_I == ARG
+			SETCOLOR COLOR("水色")
+
+		IF L_I == -1
+			PRINTFORM [{4000+50}] %"全て",8,LEFT% 
+		ELSE
+			PRINTFORM [{4000+L_I}] %L_STR,8,LEFT% 
+		ENDIF
+	ENDIF
+
+
+	L_CNT ++
+	SIF !(L_CNT % 5)
+		PRINTL
+	RESETCOLOR
+NEXT
+
+SIF !LINEISEMPTY()
+	PRINTL
+
+DRAWLINE
+
+;;=================================================
+;;   sub SMN_UNIT_TYPE_CTL
+;;=================================================
+;;   SMN:作品制御
+;;-------------------------------------------------
+;@SMN_UNIT_TYPE_CTL
+;#DIM L_I
+;#DIM L_CNT
+;#DIM L_INPUT
+;#DIMS L_STR
+;#DIM L_LINE
+;
+;L_LINE = LINECOUNT
+;REDRAW 0
+;
+;;- SMN:初期化
+;CALL SMN_INIT
+;
+;;ライン表示:新ページ
+;CALL C_LINE
+;
+;PRINTFORML 【作品制御】
+;PRINTFORML 作品のフィルタを選択します。
+;PRINTFORML 作品をフィルタリングすると、奴隷購入画面で非表示になります。
+;PRINTL
+;PRINTL
+;
+;
+;L_CNT = 0
+;FOR L_I, 0, DEFSMN_RACE_NUM
+;
+;	IF L_I > -1
+;		L_STR = %GSMN_RACE:L_I%
+;
+;		SIF L_STR == ""
+;			CONTINUE
+;	ENDIF
+;
+;	SIF GETBIT(FLAG:作品制御フラグ, L_I)
+;		SETCOLOR COLOR("伏字")
+;
+;	PRINTFORM [{L_I,2}] %L_STR,8,LEFT% 
+;
+;	L_CNT ++
+;	SIF !(L_CNT % 5)
+;		PRINTL
+;	RESETCOLOR
+;NEXT
+;
+;SIF !LINEISEMPTY()
+;	PRINTL
+;PRINTL
+;PRINTL
+;PRINTL
+;PRINTFORMLC [{50,2}] 돌아온다
+;PRINTFORMLC [{51,2}] ベース世界のみ
+;PRINTFORMLC [{52,2}] 全フィルタ
+;PRINTFORMLC [{53,2}] 全解放
+;
+;
+;$INPUT_LOOP
+;INPUT
+;L_INPUT = RESULT
+;
+;SELECTCASE L_INPUT
+;	CASE 50
+;		REDRAW 1
+;		RETURN
+;	CASE 51
+;		FLAG:作品制御フラグ = 0
+;		REPEAT DEFSMN_RACE_NUM
+;			SIF !STRLENS(GSMN_RACE:COUNT)
+;				CONTINUE
+;			SETBIT FLAG:作品制御フラグ, COUNT
+;		REND
+;		;ベース世界
+;		CLEARBIT FLAG:作品制御フラグ, 0
+;		CLEARBIT FLAG:作品制御フラグ, 16
+;		CLEARBIT FLAG:作品制御フラグ, 20
+;	CASE 52
+;		FLAG:作品制御フラグ = 0
+;		REPEAT DEFSMN_RACE_NUM
+;			SIF !STRLENS(GSMN_RACE:COUNT)
+;				CONTINUE
+;			SETBIT FLAG:作品制御フラグ, COUNT
+;		REND
+;	CASE 53
+;		FLAG:作品制御フラグ = 0
+;	CASE 0 TO (DEFSMN_RACE_NUM - 1)
+;		SIF !STRLENS(GSMN_RACE:L_INPUT)
+;			GOTO ERROR
+;		INVERTBIT FLAG:作品制御フラグ, L_INPUT
+;	CASEELSE
+;		$ERROR
+;		;INPUTエラー対応
+;		CALL C_INPUT_ERROR
+;		GOTO INPUT_LOOP
+;ENDSELECT
+;
+;CLEARLINE LINECOUNT - L_LINE
+;
+;RESTART
+
+
+;=================================================
+;   sub SMN_ORIGIN_CTL
+;=================================================
+;   SMN:出身作品制御
+;-------------------------------------------------
+@SMN_ORIGIN_CTL
+#DIM L_I
+#DIM L_INPUT
+#DIM L_LINE
+#DIM L_PAGE
+#DIM L_PAGE_MAX
+#DIM L_PREV
+#DIM L_NEXT
+#DIM L_HIT
+#DIM L_CNT_PRINT_DATA
+
+L_LINE = LINECOUNT
+REDRAW 0
+
+$PRINT_LIST
+
+;ライン表示:新ページ
+CALL C_LINE
+
+; キャラ表示数/P
+L_CNT_PRINT_DATA = FLAG:定数_キャラ表示数 * 2
+L_PAGE_MAX = (GSMN_ORIGIN_NUM-1) / L_CNT_PRINT_DATA
+
+PRINTFORML 【出身作品制御】
+PRINTFORML 購入するキャラの出身作品を選択します。
+PRINTFORML ＜page.{L_PAGE}/{L_PAGE_MAX}＞ (計{GSMN_ORIGIN_NUM-1}作品＋その他)
+DRAWLINE
+
+
+L_PREV = 0
+L_NEXT = 0
+L_HIT = 0
+FOR L_I, (L_PAGE * L_CNT_PRINT_DATA), GSMN_ORIGIN_NUM,
+
+	L_HIT ++
+
+	;- 次ページを作成する必要があるか
+	IF L_HIT > L_CNT_PRINT_DATA
+		;次ページ有りの場合、当ページは出力完了の為終了
+		L_NEXT = 1
+		BREAK
+	ENDIF
+
+	PRINTFORM [{L_I,4}] %GSMN_ORIGIN:L_I, 44, LEFT%  
+
+
+	;改行
+	SIF (L_I % 2) == 1
+		PRINTL
+NEXT
+
+L_PREV = (L_PAGE <= 0) ? 0 # 1
+
+;- 空行
+FOR L_I, 0, FLAG:定数_キャラ表示数 - (L_HIT / 2)
+	PRINTL
+NEXT
+
+DRAWLINE
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [5007]이전 페이지\@
+PRINTLC [5000] 돌아온다
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [5009]다음 페이지\@
+PRINTFORMLC [5050]全て
+PRINTL
+
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	CASE 5000
+		REDRAW 1
+		RETURN
+	CASE 5050
+		GSMN_ORIGIN_NO = -1
+		REDRAW 1
+		RETURN
+	;이전 페이지
+	CASE 5007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO PRINT_LIST
+	;다음 페이지
+	CASE 5009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO PRINT_LIST
+	CASE 0 TO GSMN_ORIGIN_NUM
+		GSMN_ORIGIN_NO = L_INPUT
+		REDRAW 1
+		RETURN
+	CASEELSE
+		$ERROR
+		;INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+
+CLEARLINE LINECOUNT - L_LINE
+
+RESTART
+
+

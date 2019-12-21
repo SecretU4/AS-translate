@@ -1,0 +1,934 @@
+﻿
+;-------------------------------------------------
+; 喫茶店　会話
+;-------------------------------------------------
+
+@CAFE_TALK(L_I, ARG:1)
+#DIM L_I
+#DIM L_INPUT
+
+CLEARLINE LINECOUNT
+
+CALL NAYAMI_PAGE(L_I)
+CALL C_PICTURE_T(L_I)
+CALL INFO_CITY_BASE
+DRAWLINE
+
+REDRAW 0
+PRINTFORML 【――――――――이 장소에서의 액션――――――――】
+PRINTFORM [1] 대화한다(TP-1)　　
+PRINTFORM [2] 고민해결(TP-1)　　
+IF CFlag:L_I:関係段階 >= 2 && TALENT:L_I:합의 == 0
+	PRINTFORM [5] 꼬신다(TP-5)　　
+ENDIF
+PRINTFORML
+IF CFlag:L_I:関係段階 >= 2
+	PRINTFORML 【――――――사적인 액션――――――】
+	PRINTFORM [10] 경향 없음　
+	PRINTFORM [11] 충성 경향(TP-3)　
+	PRINTFORM [12] 애정 경향(TP-3)　
+	PRINTFORM [13] 음란 경향(TP-3)　
+	PRINTFORML 
+	PRINTFORML 【――――――――――관계 구축――――――――――】
+	PRINTFORM [21] 종속√(TP-5)　
+	PRINTFORM [22] 연애√(TP-5)　
+	PRINTFORM [23] 음란√(TP-5)　
+ENDIF
+PRINTFORML
+PRINTFORML 
+PRINTFORML [50] BP 섭취
+PRINTFORML 
+PRINTFORML [999] 그만둔다
+DO
+	$INPUT_LOOP
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 1
+		IF Flag:都市_現在TP <= 0
+			$LESS_TP
+			CALL C_INPUT_ERROR("TP가 부족합니다")
+			CONTINUE
+		ELSE
+			Flag:都市_現在TP -= 1
+			CALL CAFE_TALK2(L_I)
+		ENDIF
+	CASE 2
+		SIF Flag:都市_現在TP <= 0
+			GOTO LESS_TP
+		IF CFlag:L_I:住人_悩み解決判定回数 != 0 || CFlag:L_I:住人_悩み解決中 != 0
+			CALL C_INPUT_ERROR("현재 고민을 해결중입니다、결과가 나올 때까지 재선택을 할 수 없습니다。")
+			CONTINUE
+		ELSE
+			CALL NAYAMI_CHALLENGE(L_I)
+		ENDIF
+	CASE 5
+		SIF Flag:都市_現在TP < 5
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 5
+		CALL CAFE_TALK_KDK(L_I)
+	CASE 10
+		CFlag:L_I:値傾向 = 0
+	CASE 11
+		SIF Flag:都市_現在TP < 3
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 3
+		CFlag:L_I:値傾向 = 1
+	CASE 12
+		SIF Flag:都市_現在TP < 3
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 3
+		CFlag:L_I:値傾向 = 2
+	CASE 13
+		SIF Flag:都市_現在TP < 3
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 3
+		CFlag:L_I:値傾向 = 3
+	CASE 21
+		SIF Flag:都市_現在TP < 5
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 5
+		CALL CAFE_TALK_R_J(L_I)
+	CASE 22
+		SIF Flag:都市_現在TP < 5
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 5
+		CALL CAFE_TALK_R_R(L_I)
+	CASE 23
+		SIF Flag:都市_現在TP < 5
+			GOTO LESS_TP
+		Flag:都市_現在TP -= 5
+		CALL CAFE_TALK_R_I(L_I)
+	CASE 50
+		CALL SYSTEM_BP
+	CASE 999
+		RETURN
+	CASEELSE
+		$RETRY
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+RESTART
+
+
+
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------
+; 会話する
+;-------------------------------------------------
+@CAFE_TALK2(L_I)
+#DIM L_I     ;対象登録番号
+#DIM L_K_U   ;好感度上昇値
+#DIM L_K_U2  ;好感度上昇値
+#DIM L_N_K   ;悩み解明値
+#DIM L_N_K2  ;悩み解明値
+#DIM I_LOOP
+
+L_K_U2 = (CFLAG:L_I:好感度 / 100) + 1
+SIF L_K_U2 >= 100
+	L_K_U2 = 100
+
+L_K_U = (RAND:1) + 1
+L_K_U +=(L_K_U2 / 2)
+L_K_U += RAND:((L_K_U2 / 2) + 2)
+IF TALENT:L_I:즉각타락 == 1
+	L_K_U = L_K_U * 5
+ELSEIF TALENT:L_I:쉽게반함 == 1
+	L_K_U = L_K_U * 2
+ELSEIF TALENT:L_I:경계심 == 1
+	L_K_U -= L_K_U / 5
+ELSEIF TALENT:L_I:인간불신 == 1
+	L_K_U -= L_K_U / 2
+ENDIF
+
+SIF TALENT:L_I:절벽위의꽃 == 1
+	L_K_U -= L_K_U /3
+
+
+
+
+
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML %CALLNAME:MASTER%는 %CALLNAME:L_I%と 가볍게 대화를 나눴다…
+
+
+PRINTFORM 「――
+IF CFlag:L_I:関係段階 >= 2 && RAND:100 > 50
+	PRINTDATA
+		DATAFORM そう、以前の話はなんとかな%CSTR:L_I:語尾ました%
+		DATAFORM %CSTR:L_I:語尾微笑%、%CSTR:L_I:二人称%は頼もしい%CSTR:L_I:語尾です2%
+		DATAFORM %CSTR:L_I:一人称%も出来れば力に
+		DATAFORM わか%CSTR:L_I:語尾ました%、いつも通りに
+		DATAFORM そう%CSTR:L_I:語尾肯定%、これでや%CSTR:L_I:語尾促進%
+	ENDDATA
+ELSEIF CFlag:L_I:関係段階 >= 1 && RAND:100 > 50
+	PRINTDATA
+		DATAFORM %CSTR:L_I:語尾微笑%、そう%CSTR:L_I:語尾肯定%
+		DATAFORM あれはそうすれば良い%CSTR:L_I:語尾行為%
+		DATAFORM そう、あの時は%CSTR:L_I:語尾丁寧%世話にな%CSTR:L_I:語尾ました%
+		DATAFORM そう%CSTR:L_I:語尾逆説%、あのままで
+		DATAFORM %CSTR:L_I:語尾反応%、そういえばこの前の
+	ENDDATA
+ELSE
+	PRINTDATA
+		DATAFORM どう%CSTR:L_I:語尾疑問%？
+		DATAFORM 実はこんなことが
+		DATAFORM そう%CSTR:L_I:語尾同意求む%
+		DATAFORM %CSTR:L_I:語尾逆説%、これは
+		DATAFORM それはいい%CSTR:L_I:語尾褒める%っ
+	ENDDATA
+ENDIF
+IF RAND:100 > 50
+	PRINTDATA
+		DATAFORM ―――それと
+		DATAFORM ―――%CSTR:L_I:語尾逆説%
+		DATAFORM ―――そうなる%CSTR:L_I:語尾ので%
+		DATAFORM ―――これも
+		DATAFORM ―――それに%CSTR:L_I:一人称%も
+	ENDDATA
+ENDIF
+IF RAND:100 > 50
+	PRINTDATA
+		DATAFORM ――%CSTR:L_I:語尾YES%、お願い%CSTR:L_I:語尾お願い%
+		DATAFORM ――%CSTR:L_I:語尾No%、大丈夫%CSTR:L_I:語尾です%
+		DATAFORM ――%CSTR:L_I:語尾謝罪%、助か%CSTR:L_I:語尾ました%
+		DATAFORM ――大丈夫そう%CSTR:L_I:語尾肯定%
+		DATAFORM ――%CSTR:L_I:語尾相槌%、後は――
+	ENDDATA
+ENDIF
+
+PRINTFORML 」
+
+DRAWLINE
+PRINTFORML %CALLNAME:L_I%와의 사이가 조금 깊어졌다…
+PRINTFORML 호감도 {CFLAG:L_I:好感度}　→　{(CFLAG:L_I:好感度)+L_K_U}
+PRINTFORML 
+PRINTFORML 
+PRINTFORMW 
+
+
+
+L_N_K2 = (CFLAG:L_I:好感度 / 200) + 1
+SIF L_N_K2 >= 20
+	L_N_K2 = 20
+
+L_N_K = (RAND:5) + 1
+L_N_K += L_N_K2
+
+I_LOOP = 1
+FOR I_LOOP, 1, 5
+	SIF CFLAG:L_I:(4000 + I_LOOP) <= 0
+		CONTINUE
+	CFLAG:L_I:(4100 + I_LOOP) += (RAND:L_N_K) + 1
+	SIF CFLAG:L_I:(4100 + I_LOOP) >= 100
+		CFLAG:L_I:(4100 + I_LOOP)  = 100
+NEXT
+FOR I_LOOP, 11, 15
+	SIF CFLAG:L_I:(4000 + I_LOOP) <= 0
+		CONTINUE
+	CFLAG:L_I:(4100 + I_LOOP) += (RAND:L_N_K) + 2
+	SIF CFLAG:L_I:(4100 + I_LOOP) >= 100
+		CFLAG:L_I:(4100 + I_LOOP)  = 100
+NEXT
+CFLAG:L_I:好感度 += L_K_U
+
+
+;-------------------------------------------------
+; 悩み解決
+;-------------------------------------------------
+@NAYAMI_CHALLENGE(L_I)
+#DIM L_I
+#DIM I_LOOP
+#DIM L_INPUT
+CLEARLINE LINECOUNT
+CALL INFO_CITY_BASE
+PRINTFORML 
+CALL INFO_STATUS_NAYAMI_LIST(L_I, "「ボタン」")
+PRINTFORML
+PRINTFORML [999] 그만둔다
+DO
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+		RETURN
+	CASE L_INPUT
+		IF !INRANGE(L_INPUT, 1, 9) && !INRANGE(L_INPUT, 11, 19)
+		;そんな悩みはない
+			CALL C_INPUT_ERROR("입력 제대로 하라고")
+			CONTINUE
+		ENDIF
+		IF CFLAG:L_I:(4000 + L_INPUT) <= 0
+		;これまたそんな悩みはない
+			CALL C_INPUT_ERROR("그 고민은 존재하지 않습니다")
+			CONTINUE
+		ENDIF
+		IF CFLAG:L_I:(4100 + L_INPUT) < 100 
+		;内容がわからない
+			CALL C_INPUT_ERROR("아직 고민이 판명되지 않았습니다")
+			CONTINUE
+		ENDIF
+		IF L_INPUT <= 10 && CFLAG:L_I:関係段階 == 0
+			CALL C_INPUT_ERROR("해결할 수 있을 정도의 신뢰를 얻진 못했습니다")
+			CONTINUE
+		ENDIF
+		CFLAG:L_I:住人_悩み解決選択 = L_INPUT
+		CALL NAYAMI_CHALLENGE2(L_I, L_INPUT)
+		SIF RESULT
+			RETURN RESULT
+		CFLAG:L_I:住人_悩み解決選択 = 0
+		RESTART
+	CASEELSE
+		$RETRY
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+LOOP 1
+
+
+
+;-------------------------------------------------
+; 悩み解決
+;-------------------------------------------------
+;戻り値：いずれかの解決法の提示に成功したら1
+@NAYAMI_CHALLENGE2(C_ID, N_ID)
+#DIM  C_ID           ;登録番号
+#DIM  N_ID           ;悩みのID
+#DIMS PLAN_NAME,  11 ;解決方法の名前
+#DIM  SUC_PLUS,   11 ;解決方法による固定補正
+#DIM  HAVE_PLAN      ;初回限定で更新する用フラグ
+#DIM  COST_MONEY, 11 ;このキャラでかかる各プランの必要資金
+#DIM  COST_AP,    11 ;このキャラでかかる各プランの必要AP
+#DIM  L_S            ;成功率
+#DIM  L_K            ;好感度補正値
+#DIM  L_INPUT        ;入力の一時保持用
+
+IF !HAVE_PLAN
+	CALLF DIM_TABLE_NAYAMI_PLAN(PLAN_NAME, SUC_PLUS)
+	HAVE_PLAN = 1
+ENDIF
+PRINTFORML 
+PRINTFORML 해결 방법을 선택하세요
+PRINTFORML ※한번 선택하면 나중에 결과가 나올 때까지 다시 선택할 수 없습니다
+;PRINTFORML {L_P}{ARG:0}
+CALL NAYAMI_PLAN_BUTTON_LIST(C_ID, N_ID, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
+PRINTFORML 
+PRINTFORML
+PRINTFORML [0] - 그만둔다
+DO
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 0
+		RETURN
+	CASE L_INPUT
+		IF !INRANGE(L_INPUT, 1, 10)
+			GOTO RETRY
+		ENDIF
+		IF MONEY < COST_MONEY:L_INPUT
+			CALL C_INPUT_ERROR("자금이 부족합니다")
+			CONTINUE
+		ENDIF
+		IF FLAG:都市_現在AP < COST_AP:L_INPUT
+			CALL C_INPUT_ERROR("AP가 부족합니다")
+			CONTINUE
+		ENDIF
+		
+		MONEY -= COST_MONEY:L_INPUT
+		FLAG:都市_現在AP -= COST_AP:L_INPUT
+		
+		;成功確率の設定
+		L_S = 30 + SUC_PLUS:L_INPUT
+		;最案だった場合補正＋
+		IF L_INPUT == CFLAG:C_ID:(4400 + N_ID)
+			L_S += 50
+		;愚案だった場合補正―
+		ELSEIF L_INPUT == CFLAG:C_ID:(4500 + N_ID)
+			L_S -= 50
+		ENDIF
+		
+		ABL:MASTER:해결기능 += 1
+		L_S += L_S * (1 + (ABL:MASTER:해결기능 / 100))
+		L_K = (CFLAG:C_ID:好感度) / 50
+		SIF L_K  > 200
+			L_K  = 200
+		
+		CFLAG:C_ID:住人_悩み解決成功確立 = (L_K + L_S) - (CFLAG:C_ID:(4300 + N_ID) * 2)
+		SIF CFLAG:C_ID:住人_悩み解決成功確立 >= 100
+			CFLAG:C_ID:住人_悩み解決成功確立 = 100
+		CFLAG:C_ID:住人_悩み解決成功確立 -= CFLAG:C_ID:(4300 + N_ID)
+
+		CFLAG:C_ID:住人_悩み解決判定回数 = (RAND:1) + 1
+		CFLAG:C_ID:住人_悩み解決合計加算 = 0
+
+		;店に行くのは金が要る
+		IF L_INPUT == 5 && (CFLAG:C_ID:住人_所持金 >= (CFLAG:C_ID:(4300 + N_ID) * 5000) * CFLAG:C_ID:住人_難度)
+			CFLAG:C_ID:住人_悩み解決成功確立 += 20
+		ELSE
+			CFLAG:C_ID:住人_悩み解決成功確立 -= 20
+		ENDIF
+		
+		IF CFLAG:C_ID:関係段階 >= 2 && RAND:100 > 50
+			PRINTDATAL
+				DATAFORM 「もう%CSTR:C_ID:一人称%が悩んでいること、全部知られているみたい%CSTR:C_ID:語尾肯定2%……%CSTR:C_ID:語尾微笑%」
+				DATAFORM 「%CSTR:C_ID:語尾YES%、%CSTR:C_ID:二人称%がいてくれれば解決できそう%CSTR:C_ID:語尾です%」
+				DATAFORM 「%CSTR:C_ID:語尾感謝%、本当に助かってい%CSTR:C_ID:語尾ます%」
+			ENDDATA
+		ELSEIF CFLAG:C_ID:関係段階 >= 1 && RAND:100 > 50
+			PRINTDATAL
+				DATAFORM 「いつも助けてもらって悪い%CSTR:C_ID:語尾応答2%、お願い%CSTR:C_ID:語尾問う2%」
+				DATAFORM 「%CSTR:C_ID:語尾YES%、%CSTR:C_ID:二人称%の%CSTR:C_ID:語尾丁寧%力があれば解決できそう%CSTR:C_ID:語尾です%」
+				DATAFORM 「丁度、%CSTR:C_ID:二人称%の%CSTR:C_ID:語尾丁寧%力を借りようと思ってた%CSTR:C_ID:語尾ので%…%CSTR:C_ID:語尾感謝%」
+			ENDDATA
+		ELSE
+			PRINTDATAL
+				DATAFORM 「%CSTR:C_ID:語尾感謝%、最近この問題で苦労してた%CSTR:C_ID:語尾繋ぎ%%CSTR:C_ID:語尾です%…」
+				DATAFORM 「ずっと解決策が浮かばなった%CSTR:C_ID:語尾ので%……%CSTR:C_ID:語尾謝罪%、感謝%CSTR:C_ID:語尾問う2%」
+				DATAFORM 「迷惑でないなら%CSTR:C_ID:二人称%の力を%CSTR:C_ID:語尾丁寧%借り%CSTR:C_ID:語尾ます%」
+			ENDDATA
+		ENDIF
+		PRINTFORMW 해결 결과는 {(CFLAG:C_ID:住人_悩み解決判定回数) + 1}일 후에 나옵니다
+	CASEELSE
+		$RETRY
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+	CFlag:C_ID:住人_悩み前回協力 = RESULT	;前回結果表示用
+	BREAK
+LOOP 1
+FLAG:都市_現在TP -= 1
+RETURN 1
+
+
+
+;-------------------------------------------------
+;悩み解決ボタンのリスト表示関数
+;-------------------------------------------------
+;ボタンリストを表示するとともに各種コストを計算する
+@NAYAMI_PLAN_BUTTON_LIST(C_ID, N_ID, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
+#DIM  C_ID
+#DIM  N_ID
+#DIMS REF PLAN_NAME
+#DIM  REF SUC_PLUS
+#DIM  REF COST_AP
+#DIM  REF COST_MONEY
+CALLF VAR_NAYAMI_PLAN_COST(C_ID, N_ID, COST_AP, COST_MONEY)
+FOR LOCAL, 1, 11
+	CALL NAYAMI_PLAN_BUTTON(C_ID, LOCAL, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
+NEXT
+
+
+
+;-------------------------------------------------
+;個々の悩み解決ボタン関数
+;-------------------------------------------------
+@NAYAMI_PLAN_BUTTON(C_ID, P_ID, PLAN_NAME, SUC_PLUS, COST_AP, COST_MONEY)
+#DIM  C_ID
+#DIM  P_ID
+#DIMS REF PLAN_NAME
+#DIM  REF SUC_PLUS
+#DIM  REF COST_AP
+#DIM  REF COST_MONEY
+PRINTFORM [{P_ID, 2}] - %PLAN_NAME:P_ID%
+IF SUC_PLUS:P_ID < 0
+	PRINTFORM 【보정 -{ABS(SUC_PLUS:P_ID), 2}】
+ELSE
+	PRINTFORM 【보정 +{ABS(SUC_PLUS:P_ID), 2}】
+ENDIF
+IF COST_AP:P_ID == 0
+	PRINTFORM %" " * 12%
+ELSE
+	PRINTFORM (필요 AP:{COST_AP:P_ID, 3})
+ENDIF
+SIF COST_MONEY:P_ID
+	PRINTFORM (필요 자금:{COST_MONEY:P_ID})
+PRINTFORML 
+
+
+
+
+
+
+
+;-------------------------------------------------
+; 口説く
+;-------------------------------------------------
+@CAFE_TALK_KDK(L_I)
+#DIM L_I
+CFlag:L_I:口説き値 += CAFE_TALK_KDK_CALC(L_I)
+CFlag:L_I:口説き値 = LIMIT(CFlag:L_I:口説き値, 0, 100)
+
+PRINTFORML 
+DRAWLINE
+PRINTFORML 이야기 도중에、%CALLNAME:MASTER%는 %CALLNAME:L_I%を 살짝 끌어안으면서 달콤한 말을 속삭였다…
+IF CFlag:L_I:口説き値 == 100
+	PRINTFORML 
+	PRINTDATAL
+		DATAFORM 「………いい%CSTR:L_I:語尾許可%…%CSTR:L_I:二人称%になら身体を任せられ%CSTR:L_I:語尾ます%…」
+		DATAFORM 「%CSTR:L_I:語尾YES%……%CSTR:L_I:一人称%も%CSTR:L_I:二人称%ともっと深い関係になりたい%CSTR:L_I:語尾です2%…」
+		DATAFORM 「%CSTR:L_I:語尾微笑%……そんなに焦らなくても拒絶はしない%CSTR:L_I:語尾許可%……今度近いうちに…%UNICODE(0x2661)%」
+		DATAFORM 「……%CSTR:L_I:語尾YES%%UNICODE(0x2661)%………%CSTR:L_I:一人称%も……もっと…」
+		DATAFORM 「…今度、空いてる時間に呼んで%CSTR:L_I:語尾希望%…？………するなら長く愛し合いたい%CSTR:L_I:語尾です2%…%UNICODE(0x2661)%」
+		DATAFORM 「…す、するなら別の場所が……%CSTR:L_I:二人称%と%CSTR:L_I:一人称%……二人きりで…%UNICODE(0x2661)%」
+		DATAFORM 「……%UNICODE(0x2661)%、…%CSTR:L_I:二人称%が%CSTR:L_I:一人称%を本気にさせた%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%……責任取って%CSTR:L_I:語尾希望%…♪」
+		DATAFORM 「%CSTR:L_I:二人称%にここまで求愛されたら、受け入れるしかない%CSTR:L_I:語尾応答2%…%UNICODE(0x2661)%」
+		DATAFORM 「…携帯番号教える%CSTR:L_I:語尾ので%……時間があるとき呼んで%CSTR:L_I:語尾希望%…%UNICODE(0x2661)%」
+		DATAFORM 「…もう、仕方ない%CSTR:L_I:語尾応答2%……優しくするって約束できるのなら…%UNICODE(0x2661)%」
+	ENDDATA
+	PRINTFORML ……어프로치의 끝에、%CALLNAME:L_I%는 농밀한 관계가 되는 것을 받아들인 것 같다。
+	PRINTFORML %CALLNAME:L_I%에게서 전화 번호와 함께【합의】를 얻었다！
+	CFlag:L_I:携帯番号入手 = 1
+	Talent:L_I:합의 = 1
+	SIF MARK:L_I:함락각인 == 0
+		MARK:L_I:함락각인 = 1
+	Talent:L_I:비합의 = 0
+ELSE
+	PRINTFORML
+	PRINTDATAL
+		DATAFORM 「ま、まだダメ%CSTR:L_I:語尾です%っ、……もっと親密になったら…」
+		DATAFORM 「こんなに密着して……でも悪い気しない%CSTR:L_I:語尾応答2%…」
+		DATAFORM 「여자는 분위기에 약해……実際に経験すると反論の余地はない%CSTR:L_I:語尾応答2%…」
+		DATAFORM 「……♪、いずれはそういう関係になるのも悪くない%CSTR:L_I:語尾応答2%…」
+		DATAFORM 「こうして触れ合っていると…まるで恋人みたい%CSTR:L_I:語尾肯定2%…」
+		DATAFORM 「いろいろ助けてもらった%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾逆説%…これ以上の関係になるならもっと深く%CSTR:L_I:二人称%を知りたい%CSTR:L_I:語尾応答2%」
+		DATAFORM 「%CSTR:L_I:一人称%を抱きたいのなら%CSTR:L_I:二人称%をもっと教え%CSTR:L_I:語尾命令強%？…体を預けられる人かよく知りたい%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%」
+		DATAFORM 「…もしかして、%CSTR:L_I:一人称%を…抱きたいの%CSTR:L_I:語尾問う%…？」
+		DATAFORM 「…好意を持たれるのは嬉しい%CSTR:L_I:語尾逆説%、…心の準備が…」
+		DATAFORM 「っ…！、…い、いきなり言われても…困\@STRFIND("らりるれろ",SUBSTRINGU(CSTR:L_I:語尾ます,0,1)) ?  # り\@%CSTR:L_I:語尾ます%…」
+	ENDDATA
+	PRINTFORML ……성공하진 못했지만、%CALLNAME:L_I%는 조금씩 가드가 느슨해지는 것 같다…
+ENDIF
+PRINTFORMW
+
+
+
+@CAFE_TALK_KDK_CALC(L_I)
+#FUNCTION
+#DIM L_I
+#DIM KDK_POINT
+KDK_POINT = (CFLAG:L_I:好感度 / 200) + RAND(1, 4)
+SIF TALENT:L_I:창녀
+	KDK_POINT += 5
+
+KDK_POINT *= 100
+SIF TALENT:L_I:즉각타락
+	TIMES KDK_POINT, 5
+SIF TALENT:L_I:쉽게반함 == 1
+	TIMES KDK_POINT, 2
+SIF TALENT:L_I:정조무관심
+	TIMES KDK_POINT, 1.2
+
+SIF TALENT:L_I:정조관념
+	TIMES KDK_POINT, 0.8
+SIF TALENT:L_I:경계심 == 1
+	TIMES KDK_POINT, 0.2
+SIF TALENT:L_I:인간불신 == 1
+	TIMES KDK_POINT, 0.5
+SIF TALENT:L_I:절벽위의꽃 == 1
+	TIMES KDK_POINT, 0.5
+SIF TALENT:L_I:흰백합공주 == 1
+	TIMES KDK_POINT, 0.1
+
+RETURNF MAX(KDK_POINT / 100, 1)
+
+
+
+;-------------------------------------------------
+; 関係構築　従属
+;-------------------------------------------------
+@CAFE_TALK_R_J(L_I)
+#DIM L_I
+CLEARLINE LINECOUNT
+DRAWLINE
+	PRINTFORML %CALLNAME:MASTER%は 이쪽의 지시를 따르도록 주입시켰다…
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML ……
+	PRINTFORML ………
+	PRINTFORML …………
+IF CFlag:L_I:忠誠値 >= 900 && MARK:L_I:예속각인 == 3 && TALENT:L_I:심취  == 0 && TALENT:L_I:정부  == 0 && TALENT:L_I:애인  == 0
+	PRINTFORML 【성공】
+	PRINTFORML 종속화가 끝나고、%CALLNAME:L_I%는 %CALLNAME:MASTER%에게 푹 빠진 것 같다…
+	PRINTFORML %CALLNAME:L_I%は【심취】를 얻었다。
+	TALENT:L_I:심취  = 1
+ELSEIF CFlag:L_I:忠誠値 >= 600 && MARK:L_I:예속각인 == 2
+	PRINTFORML 【성공】
+	PRINTFORML 종속화가 마무리단계에 접어들면서、마치 시중이라도 드는 것처럼 행동하게 되었다…、거의 완성된 것 같다…
+	PRINTFORML %CALLNAME:L_I%의 예속 각인이 1 올랐다。
+	MARK:L_I:예속각인 += 1
+ELSEIF CFlag:L_I:忠誠値 >= 300 && MARK:L_I:예속각인 == 1
+	PRINTFORML 【성공】
+	PRINTFORML 종속화가 진행되어、어느 정도의 지시라면 어렵지 않게 받아들이게 된 것 같다…
+	PRINTFORML %CALLNAME:L_I%의 예속 각인이 1 올랐다。
+	MARK:L_I:예속각인 += 1
+ELSEIF CFlag:L_I:忠誠値 >= 100 && MARK:L_I:예속각인 == 0
+	PRINTFORML 【성공】
+	PRINTFORML 어느 정도 인상을 주었는지、%CALLNAME:L_I%는 존경이 담긴 시선으로 이쪽을 보고 있다…
+	PRINTFORML %CALLNAME:L_I%의 예속 각인이 1 올랐다。
+	MARK:L_I:예속각인 += 1
+ELSE
+	PRINTFORML 【변화 없음】
+	PRINTFORML 시간을 투자하여 대화를 나눴지만、딱히 심경의 변화는 없었던 것 같다…
+ENDIF
+
+DRAWLINE
+PRINTFORMW
+
+
+
+;-------------------------------------------------
+; 関係構築　恋愛
+;-------------------------------------------------
+@CAFE_TALK_R_R(L_I)
+#DIM L_I
+CLEARLINE LINECOUNT
+DRAWLINE
+	PRINTFORML %CALLNAME:MASTER%は 지나치지 않을 정도로 즐기기로 했다…
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML ……
+	PRINTFORML ………
+	PRINTFORML …………
+IF CFlag:L_I:愛情値 >= 900 && MARK:L_I:함락각인 == 3 && TALENT:L_I:심취  == 0 && TALENT:L_I:정부  == 0 && TALENT:L_I:애인  == 0
+	PRINTFORML 【성공】
+	PRINTFORML 조금이라도 %CALLNAME:MASTER%와 오래 있기 위해서라면、몸으로 붙잡는 것도 불사하게 된 것 같다…
+	PRINTFORML %CALLNAME:L_I%は【애인】을 획득했다。
+	TALENT:L_I:애인  = 1
+ELSEIF CFlag:L_I:愛情値 >= 600 && MARK:L_I:함락각인 == 2
+	PRINTFORML 【성공】
+	PRINTFORML 스쳐 지나갔을 사랑은、확실한 애정이 되어 %CALLNAME:L_I%を 한 사람의 여자로 만든 것 같다…
+	PRINTFORML %CALLNAME:L_I%의 함락 각인이 1 올랐다。
+	MARK:L_I:함락각인 += 1
+ELSEIF CFlag:L_I:愛情値 >= 300 && MARK:L_I:함락각인 == 1
+	PRINTFORML 【성공】
+	PRINTFORML %CALLNAME:L_I%는 내면의 연모를 자각하여、이쪽을 향한 애정을 숨김없이 드러내고 있다…
+	PRINTFORML %CALLNAME:L_I%의 함락 각인이 1 올랐다。
+	MARK:L_I:함락각인 += 1
+ELSEIF CFlag:L_I:愛情値 >= 100 && MARK:L_I:함락각인 == 0
+	PRINTFORML 【성공】
+	PRINTFORML 교류의 성과인지、%CALLNAME:L_I%는 이쪽을 향해 희미하게나마 연모를 품게 된 것 같다…
+	PRINTFORML %CALLNAME:L_I%의 함락 각인이 1 올랐다。
+	MARK:L_I:함락각인 += 1
+ELSE
+	PRINTFORML 【변화 없음】
+	PRINTFORML 시간을 투자하여 대화를 나눴지만、딱히 심경의 변화는 없었던 것 같다…
+ENDIF
+DRAWLINE
+PRINTFORMW
+
+
+
+;-------------------------------------------------
+; 関係構築　淫乱
+;-------------------------------------------------
+@CAFE_TALK_R_I(L_I)
+#DIM L_I
+CLEARLINE LINECOUNT
+DRAWLINE
+	PRINTFORML %CALLNAME:MASTER%は %CALLNAME:L_I%에게 잠든 여성성을 드러내도록 대했다…
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML ……
+	PRINTFORML ………
+	PRINTFORML …………
+IF CFlag:L_I:淫乱値 >= 900 && MARK:L_I:음란각인 == 3 && TALENT:L_I:심취  == 0  && TALENT:L_I:애인  == 0 && TALENT:L_I:정부  == 0
+	PRINTFORML 【성공】
+	PRINTFORML 
+	PRINTFORML %CALLNAME:L_I%は【정부】를 얻었다。
+	TALENT:L_I:정부  = 1
+ELSEIF CFlag:L_I:淫乱値 >= 600 && MARK:L_I:음란각인 == 2
+	PRINTFORML 【성공】
+	PRINTFORML 
+	PRINTFORML %CALLNAME:L_I%의 음란 각인이 1 올랐다。
+	MARK:L_I:음란각인 += 1
+ELSEIF CFlag:L_I:淫乱値 >= 300 && MARK:L_I:음란각인 == 1
+	PRINTFORML 【성공】
+	PRINTFORML 교육의 성과인지、%CALLNAME:L_I%의 행동이 요염해졌다…
+	PRINTFORML %CALLNAME:L_I%의 음란 각인이 1 올랐다。
+	MARK:L_I:음란각인 += 1
+ELSEIF CFlag:L_I:淫乱値 >= 100 && MARK:L_I:음란각인 == 0
+	PRINTFORML 【성공】
+	PRINTFORML 얼굴을 붉히곤 있지만、숨겨진 육욕을 제어할 수 없게 된 것 같다…
+	PRINTFORML %CALLNAME:L_I%의 음란 각인이 1 올랐다。
+	MARK:L_I:음란각인 += 1
+ELSE
+	PRINTFORML 【변화 없음】
+	PRINTFORML 시간을 투자하여 대화를 나눴지만、딱히 심경의 변화는 없었던 것 같다…
+ENDIF
+DRAWLINE
+PRINTFORMW
+
+
+
+;-------------------------------------------------
+; 悩み一覧　簡易版
+;-------------------------------------------------
+
+@NAYAMI_PAGE(ARG)
+#DIM L_I
+#DIM I_LOOP
+
+I_LOOP = 1
+L_I = ARG
+DRAWLINE
+PRINTFORML ◇----------------큰 고민----------------◇
+REPEAT 5
+	IF CFlag:L_I:(4000+I_LOOP) != 0
+		IF CFlag:L_I:(4100+I_LOOP) >= 100
+				IF CFlag:L_I:(4000+I_LOOP) <= 199
+					PRINTFORM 【금전 문제】
+				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 299
+					PRINTFORM 【연애 문제】
+				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 399
+					PRINTFORM 【가정 문제】
+				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 499
+					PRINTFORM 【생활 문제】
+				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 599
+					PRINTFORM 【범죄 문제】
+				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 699
+					PRINTFORM 【성적인 문제】
+				ENDIF
+			ELSE
+			PRINTFORM ？？？(미판명)【해석:{CFlag:L_I:(4100+I_LOOP)}/100】
+		ENDIF
+		PRINTFORM 난이도:{CFlag:L_I:(4300+I_LOOP)}　
+		PRINTFORML 달성률:({CFlag:L_I:(4200+I_LOOP)}/100)
+	ENDIF
+	I_LOOP += 1
+REND
+PRINTFORML ◇----------------작은 고민----------------◇
+I_LOOP = 1
+REPEAT 5
+	IF CFlag:L_I:(4010+I_LOOP) != 0
+		IF CFlag:L_I:(4110+I_LOOP) >= 100
+				IF CFlag:L_I:(4010+I_LOOP) <= 199
+					PRINTFORM 【금전 문제】
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 299
+					PRINTFORM 【연애 문제】
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 399
+					PRINTFORM 【가정 문제】
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 499
+					PRINTFORM 【생활 문제】
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 599
+					PRINTFORM 【범죄 문제】
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 699
+					PRINTFORM 【성적인 문제】
+				ENDIF
+			ELSE
+			PRINTFORM ？？？(미판명)【해석:{CFlag:L_I:(4110+I_LOOP)}/100】
+		ENDIF
+		PRINTFORM 난이도:{CFlag:L_I:(4310+I_LOOP)}　
+		PRINTFORML 달성률:({CFlag:L_I:(4210+I_LOOP)}/100)
+	ENDIF
+	I_LOOP += 1
+REND
+DRAWLINE
+
+
+
+;-------------------------------------------------
+;キャラ切替機能つき喫茶店会話関数
+;-------------------------------------------------
+@CAFE_TALK_GROUP(CHARA_LIST, CHARA_VIEW, CHARA_CNT, OP)
+#DIM REF CHARA_LIST
+#DIM     CHARA_VIEW
+#DIM     CHARA_CNT
+#DIMS    OP
+#DIM     C_ID
+#DIM     L_INPUT
+C_ID = CHARA_LIST:CHARA_VIEW
+CALL INFO_STATUS_NAYAMI_LIST(C_ID)
+CALL C_PICTURE_T(C_ID)
+CALL INFO_CITY_BASE
+DRAWLINE
+IF TALENT:C_ID:합의 || CFLAG:C_ID:関係段階 >= 2
+	PRINTFORM 　
+	PRINTBUTTON "[7] - 경향 변경　　　", 7
+ELSE
+	PRINTFORM %"　" * 11%
+ENDIF
+IF STRCOUNT(OP, "「캐릭터 고정」")
+	PRINTFORM %"　" * 11%
+ELSE
+	PRINTFORM 　
+	PRINTBUTTON "[8] - 이전 캐릭터　　", 8
+ENDIF
+IF TALENT:C_ID:합의 || CFLAG:C_ID:関係段階 >= 2
+	PRINTFORM 　
+	PRINTBUTTON "[9] - 관계 구축　　　", 9
+ENDIF
+PRINTFORML 
+PRINTFORM 　
+PRINTBUTTON "[4] - 대화한다(TP:1)", 4
+IF VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID) && CFLAG:C_ID:住人_悩み解決判定回数 == 0 ;!CFLAG:C_ID:住人_悩み協力状況
+	PRINTFORM 　
+	PRINTBUTTON "[5] - 고민 해결(TP:1)", 5
+ELSE
+	PRINTFORM %"　" * 11%
+ENDIF
+IF TALENT:C_ID:합의 == 0 && (CFLAG:C_ID:関係段階 >= 2 || TALENT:C_ID:창녀)
+	PRINTFORM 　
+	PRINTBUTTON "[6] - 꼬신다　(TP:5)", 6
+ENDIF
+PRINTFORML 
+PRINTFORM %"　" * 11%
+IF STRCOUNT(OP, "「캐릭터 고정」")
+	PRINTFORM %"　" * 11%
+ELSE
+	PRINTFORM 　
+	PRINTBUTTON "[2] - 다음 캐릭터　　", 2
+ENDIF
+PRINTFORM 　
+PRINTBUTTON "[3] - BP 섭취　　　　", 3
+PRINTFORML 
+PRINTFORML 
+PRINTBUTTON "[0] - 돌아온다　　　　", 0
+DO
+	ONEINPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 7
+		SIF !(TALENT:C_ID:합의 || CFLAG:C_ID:関係段階 >= 2)
+			GOTO RETRY
+		PRINTFORML 어떤 방식으로 대하도록 변경할까요？
+		PRINTFORM 　
+		PRINTBUTTON "[1] - 충성 경향(TP:3)", 1
+		PRINTFORM 　
+		PRINTBUTTON "[2] - 애정 경향(TP:3)", 2
+		PRINTFORM 　
+		PRINTBUTTON "[3] - 음란 경향(TP:3)", 3
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORM 　
+		PRINTBUTTON "[0] - 취소　　", 0
+		PRINTFORM %"　" * 11%
+		PRINTFORM 　
+		PRINTBUTTON "[9] - 경향 없음　　　", 9
+		DO
+			ONEINPUT
+			SIF INRANGE(RESULT, 1, 3) && FLAG:都市_現在TP < 3
+				GOTO LESS_TP
+			SELECTCASE RESULT
+			CASE 1
+				FLAG:都市_現在TP -= 3
+				CFLAG:C_ID:値傾向 = 1
+			CASE 2
+				FLAG:都市_現在TP -= 3
+				CFLAG:C_ID:値傾向 = 2
+			CASE 3
+				FLAG:都市_現在TP -= 3
+				CFLAG:C_ID:値傾向 = 3
+			CASE 9
+				CFLAG:C_ID:値傾向 = 0
+			CASEELSE
+			ENDSELECT
+			BREAK
+		LOOP 1
+	CASE 9
+		SIF !(TALENT:C_ID:합의 || CFLAG:C_ID:関係段階 >= 2)
+			GOTO RETRY
+		PRINTFORML 어떤 관계를 구축할까요？
+		PRINTFORM 　
+		PRINTBUTTON "[1] - 종속√(TP:5)", 1
+		PRINTFORM 　
+		PRINTBUTTON "[2] - 연애√(TP:5)", 2
+		PRINTFORM 　
+		PRINTBUTTON "[3] - 음란√(TP:5)", 3
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORM 　
+		PRINTBUTTON "[0] - 취소　", 0
+		DO
+			ONEINPUT
+			SIF INRANGE(RESULT, 1, 3) && FLAG:都市_現在TP < 5
+				GOTO LESS_TP
+			SELECTCASE RESULT
+			CASE 1
+				FLAG:都市_現在TP -= 5
+				CALL CAFE_TALK_R_J(C_ID)
+			CASE 2
+				FLAG:都市_現在TP -= 5
+				CALL CAFE_TALK_R_R(C_ID)
+			CASE 3
+				FLAG:都市_現在TP -= 5
+				CALL CAFE_TALK_R_I(C_ID)
+			CASEELSE
+			ENDSELECT
+			BREAK
+		LOOP 1
+	CASE 8
+		SIF STRCOUNT(OP, "「캐릭터 고정」")
+			GOTO RETRY
+		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT - 1) % CHARA_CNT
+	CASE 2
+		SIF STRCOUNT(OP, "「캐릭터 고정」")
+			GOTO RETRY
+		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT + 1) % CHARA_CNT
+	CASE 4
+		IF FLAG:都市_現在TP < 1
+			$LESS_TP
+			CALL C_INPUT_ERROR("TPが 부족합니다")
+			RESTART
+		ENDIF
+		FLAG:都市_現在TP --
+		CALL CAFE_TALK2(C_ID)
+	CASE 5
+		SIF FLAG:都市_現在TP < 1
+			GOTO LESS_TP
+		;SIF CFLAG:C_ID:住人_悩み協力状況
+			;GOTO RETRY
+		SIF !VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID)
+			GOTO RETRY
+		;FLAG:都市_現在TP --
+		CALL CAFE_TALK_ASSIST_NAYAMI(C_ID)
+		CALL NAYAMI_CHALLENGE(C_ID)
+	CASE 6
+		SIF FLAG:都市_現在TP < 5
+			GOTO LESS_TP
+		SIF TALENT:C_ID:합의 != 0
+			GOTO RETRY
+		SIF !(CFLAG:C_ID:関係段階 >= 2 || TALENT:C_ID:창녀)
+			GOTO RETRY
+		FLAG:都市_現在TP -= 5
+		CALL CAFE_TALK_KDK(C_ID)
+	CASE 3
+		CALL SYSTEM_BP
+	CASE 0
+		RETURN
+	CASEELSE
+		$RETRY
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+RESTART
+
+
+
+;-------------------------------------------------
+;おなやみ協力関数
+;-------------------------------------------------
+;協力してあげるよ！っていうだけでここでは何もおこらない
+@CAFE_TALK_ASSIST_NAYAMI(C_ID)
+#DIM C_ID
+CALL INFO_STATUS_NAYAMI_LIST(C_ID)
+;PRINTFORML 
+;PRINTFORML %CALLNAME:MASTER%는 %CALLNAME:C_ID%の悩み解決への協力を申し出た
+;PRINTFORMW 時間経過時に%CALLNAME:C_ID%が悩み相談にやってきます
+CALL VAR_NAYAMI_SET_ASSIST(C_ID)
+
+
+

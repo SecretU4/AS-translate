@@ -1,0 +1,205 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:COMMAND_SUB.ERB
+;	Facility	:サブコマンド。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+;	・ SUB_COM_EXE_MAIN					サブコマンド:実行(主処理)
+;	・ SUB_COM_EXE_DETAIL				サブコマンド:実行(詳細)
+;	・ SUB_COM_MSG_MAIN					サブコマンド:メッセージ(主処理)
+;
+;===============================================================================
+
+;=================================================
+;   sub SUB_COM_EXE_MAIN
+;=================================================
+;   サブコマンド:実行(主処理)
+;-------------------------------------------------
+@SUB_COM_EXE_MAIN
+#DIM L_I
+#DIM L_T
+#DIM L_TGT_BAK
+L_TGT_BAK=TARGET
+
+;- 
+FOR L_I, 0, DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+	SIF L_T < 0
+		BREAK
+	SIF TCVAR:L_T:休憩フラグ
+		CONTINUE
+
+	TARGET=L_T
+
+	;- TR:アシ設定
+	CALL TR_ASSI_SET
+
+	;- サブコマンド:実行(詳細)
+	CALL SUB_COM_EXE_DETAIL
+
+NEXT
+
+TARGET=L_TGT_BAK
+
+;=================================================
+;   sub SUB_COM_EXE_DETAIL
+;=================================================
+;   サブコマンド:実行(詳細)
+;-------------------------------------------------
+@SUB_COM_EXE_DETAIL
+#DIM L_T
+#DIM L_SCOM
+#DIM L_HIT
+L_T=TARGET
+L_HIT=0
+
+TCVAR:L_T:登録サブコマンド = 0
+
+;-----------------------------
+;- 実行
+;-----------------------------
+
+;- 性交系
+L_SCOM=TEQUIP:L_T:ポイント性交
+IF L_SCOM
+	;- コマンドソース
+	TRYCALLFORM COM_FUNC_SRC_X{L_SCOM}
+	SIF !L_HIT
+		L_HIT=L_SCOM
+ENDIF
+
+;- 奉仕系
+L_SCOM=TEQUIP:L_T:ポイント奉仕
+IF L_SCOM
+	;- コマンドソース
+	TRYCALLFORM COM_FUNC_SRC_X{L_SCOM}
+	SIF !L_HIT
+		L_HIT=L_SCOM
+ENDIF
+
+
+;- 愛撫系
+L_SCOM=TEQUIP:L_T:ポイント愛撫
+IF L_SCOM
+	;- コマンドソース
+	TRYCALLFORM COM_FUNC_SRC_X{L_SCOM}
+	SIF !L_HIT
+		L_HIT=L_SCOM
+ENDIF
+
+;- キス系
+L_SCOM=TEQUIP:L_T:ポイントキス
+IF L_SCOM
+	;- コマンドソース
+	TRYCALLFORM COM_FUNC_SRC_X{L_SCOM}
+	SIF !L_HIT
+		L_HIT=L_SCOM
+ENDIF
+
+;-------------------
+;- 道具系
+;-------------------
+
+;- Ｖ器具
+L_SCOM=TEQUIP:L_T:Ｖ器具
+IF L_SCOM
+	;- コマンドソース
+	TRYCALLFORM COM_FUNC_SRC_X{L_SCOM}
+	SIF !L_HIT
+		L_HIT=L_SCOM
+ENDIF
+;- Ａ器具
+L_SCOM=TEQUIP:L_T:Ａ器具
+IF L_SCOM
+	;- コマンドソース
+	TRYCALLFORM COM_FUNC_SRC_X{L_SCOM}
+	SIF !L_HIT
+		L_HIT=L_SCOM
+ENDIF
+
+
+;-----------------------------
+;- 後処理
+;-----------------------------
+SIF !L_HIT
+	RETURN
+
+;- TR:消費BASE(基本値)
+CALL TR_DOWNBASE_ADD_DEFAULT(L_T)
+
+TCVAR:L_T:行動済みフラグ = 1
+SIF TFLAG:メインターゲット == L_T
+	L_HIT = SELECTCOM
+
+TCVAR:L_T:登録サブコマンド = L_HIT
+
+
+;=================================================
+;   sub SUB_COM_MSG_MAIN
+;=================================================
+;   サブコマンド:メッセージ(主処理)
+;-------------------------------------------------
+@SUB_COM_MSG_MAIN
+#DIM L_I
+#DIM L_T
+#DIM L_TGT_BAK
+#DIM L_SEL_BAK
+L_TGT_BAK=TARGET
+L_SEL_BAK=SELECTCOM
+
+;- 
+FOR L_I, -1, DEFTR_PL_NUM
+	;メインターゲットが先頭
+	L_T = (L_I == -1) ? TFLAG:メインターゲット # GTR_PL:L_I
+
+	;CHK:END
+	SIF L_T < 0
+		BREAK
+
+	;CHK:サブコマンド
+	SIF !TCVAR:L_T:登録サブコマンド
+		CONTINUE
+	;CHK:出力済みフラグ
+	SIF TCVAR:L_T:出力済みフラグ
+		CONTINUE
+
+	TCVAR:L_T:出力済みフラグ=1
+
+	TARGET=L_T
+	SELECTCOM=TCVAR:L_T:登録サブコマンド
+
+	;- TR:アシ設定
+	CALL TR_ASSI_SET
+
+	;メインターゲットのみ表示
+	SIF TARGET == TFLAG:メインターゲット
+		PRINTFORML %TSTR:実行コマンド名%
+
+	;コマンドメッセージ
+	CALLFORM COM_FUNC_TRAIN_MSG_X{SELECTCOM}
+
+	;- 口上:行動部
+	CALL KOJO_ACTION
+
+	;- TR:初体験
+	CALL TR_LOST_VIRGIN(MASTER)
+	CALL TR_LOST_VIRGIN(TARGET)
+
+NEXT
+
+TARGET=L_TGT_BAK
+SELECTCOM=L_SEL_BAK
+

@@ -1,0 +1,47 @@
+;-------------------------------------------------
+; デリート
+;-------------------------------------------------
+@JN_CONFIG_DELETE
+#DIM L_I
+#DIM L_INPUT
+$DATA_LIST
+
+L_I = 0
+
+DRAWLINE
+PRINTFORML 削除したいキャラを選択して下さい
+DRAWLINE
+
+
+
+
+CALL LIST_CHARA
+
+L_INPUT = RESULT
+IF L_INPUT != 1000
+	IF TALENT:L_INPUT:NPC == 999 
+		PRINTFORMW NPCは選択できません
+		GOTO DATA_LIST
+	ELSEIF L_INPUT == 0
+		PRINTFORMW あなたは選択できません
+		GOTO DATA_LIST
+	ENDIF
+	L_I = L_INPUT
+	PRINTFORML %CALLNAME:L_I%を削除します、本当によろしいですか？
+	PRINTFORML [0] はい
+	PRINTFORML [999] 戻る
+	$INPUT_LOOP
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+	CASE 0
+	PRINTFORML 
+	PRINTFORMW %CALLNAME:L_I%を削除しました
+	DELCHARA  L_I
+	CASEELSE
+		GOTO INPUT_LOOP
+	ENDSELECT
+ENDIF
+
+

@@ -1,0 +1,36 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:_CLOTHES.ERH
+;	Facility	:ヘッダファイル(衣装)。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;-----------------------------
+;   衣装：フラグ類
+;-----------------------------
+
+#DEFINE DEFCLOTHE_TYPE_NUM		12 			;タイプ数
+#DIMS GCLOTHE_TYPE_NAME,		12			;タイプ名
+
+
+;-----------------------------
+;   衣装：データ
+;-----------------------------
+;要素数を全て同じに
+
+#DEFINE DEFCLOTHE_NUM			1200		;総数
+
+;テーブル
+#DIM  GCLOTHE_ID,				1200		;アイテムID
+#DIM  GCLOTHE_PRICE,			1200		;アイテム価格
+#DIMS GCLOTHE_NAME,				1200		;アイテム名(全角９字以内)
+#DIMS GCLOTHE_EXPLAIN,			1200		;アイテム説明（全角２５字以内）
+#DIM GCLOTHE_NONSALE,			1200		;アイテム非売品フラグ
+

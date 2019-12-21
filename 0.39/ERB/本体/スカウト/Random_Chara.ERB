@@ -1,0 +1,447 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:Random_Chara.ERB
+;	Facility	:ランダムキャラ設定
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+@Random_Chara_Set(ARG:0)
+#DIM L_I
+#DIM RCS_SST
+#DIM RCS_body
+#DIM RCS_bust
+#DIM RCS_hip
+#DIM RCS_TALENT1
+#DIM RCS_TALENT2
+#DIM RCS_RANDOM
+#DIMS first1
+#DIMS first2
+#DIMS first3
+
+
+L_I = ARG:0
+
+RCS_RANDOM = RAND:16
+
+IF RCS_RANDOM >= 14
+	RCS_body = -3
+	RCS_bust = -3
+	RCS_hip = -3
+ELSEIF RCS_RANDOM >= 12
+	RCS_body = 3
+	RCS_bust = 3
+	RCS_hip = 3
+ELSEIF RCS_RANDOM >= 9
+	RCS_bust = -3
+	RCS_hip = -3
+ELSEIF RCS_RANDOM >= 6
+	RCS_bust = 3 
+	RCS_hip = 3
+ELSE
+ENDIF
+	
+;身体のサイズを指定
+SELECTCASE  RAND:10 + RCS_body
+	CASE is <= -3
+		TALENT:L_I:小柄体型 = 1
+		TALENT:L_I:小人体型 = 1
+	CASE is <= 0
+		TALENT:L_I:小柄体型 = 1
+	CASE is >= 10
+		SIF !TALENT:L_I:小柄体型
+			TALENT:L_I:長身 = 1
+	CASEELSE
+ENDSELECT
+
+IF TALENT:L_I:オトコ == 0
+	;胸のサイズを設定
+	SELECTCASE  RAND:10 + RCS_bust
+		CASE is <=0
+			TALENT:L_I:絶壁 = 1
+		CASE 1,2,3
+			TALENT:L_I:貧乳 = 1
+		CASE 7,8,9
+			TALENT:L_I:巨乳 = 1
+		CASE is >=10
+			TALENT:L_I:爆乳 = 1
+	ENDSELECT
+	;尻のサイズを設定
+	SELECTCASE  RAND:10 + RCS_hip
+		CASE 8,9
+			TALENT:L_I:巨尻 = 1
+		CASE 10
+			TALENT:L_I:爆尻 = 1
+	ENDSELECT
+ENDIF
+
+;----------------------------------------------------------
+;----------------------------------------------------------
+;素質関連（区画）
+;----------------------------------------------------------
+;----------------------------------------------------------
+SIF TALENT:L_I:合意 == 0
+	TALENT:L_I:非合意 = 1
+
+CALL SET_RANDOM_TALENT_MENTAL(L_I)
+CALL SET_RANDOM_TALENT_SENCIBITY(L_I)
+
+;----------------------------------------------------------
+;----------------------------------------------------------
+;詳細情報
+;----------------------------------------------------------
+;----------------------------------------------------------
+CALL CHARACTER_SCOUT_PERSONAL(L_I)
+RETURN 0
+
+
+
+;----------------------------------------------------------
+;----------------------------------------------------------
+;素質関連（性格）
+;----------------------------------------------------------
+;----------------------------------------------------------
+;FUNC_FISHER_YATES_SHAFFLEによりランダム配列を生成することで抽選の重複を排除した
+;この時点ではランダムキャラはタレントがまっさらな状態なはずだが
+;念のために素質判定を入れて弾いておく
+@SET_RANDOM_TALENT_MENTAL(L_I)
+#DIM L_I
+#DIM TAL_NUM
+#DIM TAL_INDEX, 53
+CALLF FUNC_FISHER_YATES_SHAFFLE(TAL_INDEX, 53)
+
+FOR LOCAL, 0, RAND(3, 13)
+	SELECTCASE TAL_INDEX:LOCAL
+	CASE 0
+		TALENT:L_I:治療 = 1
+	CASE 1
+		SIF TALENT:L_I:目立ちたがり || TALENT:L_I:大人しい
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:目立ちたがり = 1
+		ELSE
+			TALENT:L_I:大人しい = 1
+		ENDIF
+	CASE 2
+		SIF TALENT:L_I:気丈 || TALENT:L_I:臆病
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:気丈 = 1
+		ELSE
+			TALENT:L_I:臆病 = 1
+		ENDIF
+	CASE 3
+		SIF TALENT:L_I:生意気 || TALENT:L_I:素直
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:生意気 = 1
+		ELSE
+			TALENT:L_I:素直 = 1
+		ENDIF
+	CASE 4
+		TALENT:L_I:魅力 = 1
+	CASE 5
+		SIF TALENT:L_I:男好き || TALENT:L_I:男嫌い
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:男好き = 1
+		ELSE
+			TALENT:L_I:男嫌い = 1
+		ENDIF
+	CASE 6
+		SIF TALENT:L_I:無関心 || TALENT:L_I:好奇心
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:無関心 = 1
+		ELSE
+			TALENT:L_I:好奇心 = 1
+		ENDIF
+	CASE 7
+		SIF TALENT:L_I:感情豊か || TALENT:L_I:感情乏しい
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:感情豊か = 1
+		ELSE
+			TALENT:L_I:感情乏しい = 1
+		ENDIF
+	CASE 8
+		TALENT:L_I:ツンデレ = 1
+	CASE 9
+		SIF TALENT:L_I:抑圧 || TALENT:L_I:解放
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:抑圧 = 1
+		ELSE
+			TALENT:L_I:解放 = 1
+		ENDIF
+	CASE 10
+		SIF TALENT:L_I:濡れにくい || TALENT:L_I:濡れやすい
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:濡れにくい = 1
+		ELSE
+			TALENT:L_I:濡れやすい = 1
+		ENDIF
+	CASE 11
+		SIF TALENT:L_I:プライド高い || TALENT:L_I:プライド低い
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:プライド高い = 1
+		ELSE
+			TALENT:L_I:プライド低い = 1
+		ENDIF
+	CASE 12
+		SIF TALENT:L_I:楽観的 || TALENT:L_I:悲観的
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:楽観的 = 1
+		ELSE
+			TALENT:L_I:悲観的 = 1
+		ENDIF
+	CASE 13
+		SIF TALENT:L_I:痛みに強い || TALENT:L_I:痛みに弱い
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:痛みに強い = 1
+		ELSE
+			TALENT:L_I:痛みに弱い = 1
+		ENDIF
+	CASE 14
+		SIF TALENT:L_I:恥薄い || TALENT:L_I:恥じらい
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:恥薄い = 1
+		ELSE
+			TALENT:L_I:恥じらい = 1
+		ENDIF
+	CASE 15
+		SIF TALENT:L_I:快感の否定 || TALENT:L_I:快感に素直
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:快感の否定 = 1
+		ELSE
+			TALENT:L_I:快感に素直 = 1
+		ENDIF
+	CASE 16
+		SIF TALENT:L_I:貞操観念 || TALENT:L_I:貞操無頓着
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:貞操観念 = 1
+		ELSE
+			TALENT:L_I:貞操無頓着 = 1
+		ENDIF
+	CASE 17
+		SIF TALENT:L_I:習得早い || TALENT:L_I:習得遅い
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:習得早い = 1
+		ELSE
+			TALENT:L_I:習得遅い = 1
+		ENDIF
+	CASE 18
+		SIF TALENT:L_I:倒錯的 || TALENT:L_I:保守的
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:倒錯的 = 1
+		ELSE
+			TALENT:L_I:保守的 = 1
+		ENDIF
+	CASE 19
+		SIF TALENT:L_I:サド || TALENT:L_I:マゾ
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:サド = 1
+		ELSE
+			TALENT:L_I:マゾ = 1
+		ENDIF
+	CASE 20
+		SIF TALENT:L_I:回復遅い || TALENT:L_I:回復早い
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:回復遅い = 1
+		ELSE
+			TALENT:L_I:回復早い= 1
+		ENDIF
+	CASE 21
+		;TALENT:L_I:狂気 = 1
+	CASE 22
+		TALENT:L_I:ヤンデレ = 1
+	CASE 23
+		TALENT:L_I:魅惑 = 1
+	CASE 24
+		TALENT:L_I:カリスマ = 1
+	CASE 25
+		TALENT:L_I:幼稚 = 1
+	CASE 26
+		SIF TALENT:L_I:猫舌 || TALENT:L_I:舌使い 
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:猫舌 = 1
+		ELSE
+			TALENT:L_I:舌使い = 1
+		ENDIF
+	CASE 27
+		TALENT:L_I:一線越えない = 1
+	CASE 28
+		TALENT:L_I:自慰しやすい = 1
+	CASE 29
+		TALENT:L_I:中毒しやすい = 1
+	CASE 30
+		TALENT:L_I:人気 = 1
+	CASE 31
+		SIF TALENT:L_I:献身的 || TALENT:L_I:反抗的
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:献身的 = 1
+		ELSE
+			TALENT:L_I:反抗的 = 1
+		ENDIF
+	CASE 32
+		TALENT:L_I:小悪魔 = 1
+	CASE 33
+		TALENT:L_I:鼓舞 = 1
+	CASE 34
+		TALENT:L_I:腰使い = 1
+	CASE 35
+		TALENT:L_I:自制心 = 1
+	CASE 36
+		TALENT:L_I:控え目 = 1
+	CASE 37
+		SIF TALENT:L_I:依存 || TALENT:L_I:抵抗
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:依存 = 1
+		ELSE
+			TALENT:L_I:抵抗 = 1
+		ENDIF
+	CASE 38
+		IF !RAND:2 
+			TALENT:L_I:同性愛 = 1
+			SIF RAND:10 < 6
+				TALENT:L_I:白百合姫 = 1
+		ELSE
+			TALENT:L_I:両刀= 1
+		ENDIF
+	CASE 39
+		TALENT:L_I:指使い= 1
+	CASE 40
+		SIF TALENT:L_I:惚れっぽい || TALENT:L_I:即堕ち || TALENT:L_I:警戒心 || TALENT:L_I:人間不信 
+			CONTINUE
+		IF !RAND:4 
+			TALENT:L_I:人間不信 = 1
+		ELSEIF !RAND:3 
+			TALENT:L_I:警戒心 = 1
+		ELSEIF !RAND:2 
+			TALENT:L_I:即堕ち = 1
+		ELSE
+			TALENT:L_I:惚れっぽい = 1
+		ENDIF
+	CASE 41
+		TALENT:L_I:美貌 = 1
+	CASE 42
+		TALENT:L_I:キス魔 = 1
+	CASE 43
+		TALENT:L_I:セックス狂 = 1
+	CASE 44
+		TALENT:L_I:尻穴狂い = 1
+	CASE 45
+		SIF TALENT:L_I:アホの娘 || TALENT:L_I:天才
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:アホの娘 = 1
+		ELSE
+			TALENT:L_I:天才 = 1
+		ENDIF
+	CASE 46
+		TALENT:L_I:高嶺の花 = 1
+	CASE 47
+		IF  RAND:100 <= 5
+			TALENT:L_I:「シスター」= 1
+		ENDIF
+	CASE 48
+		IF  RAND:100 <= 20
+		TALENT:L_I:記憶処理済= 1
+		ENDIF
+	CASE 49
+		SIF TALENT:L_I:妊娠しやすい || TALENT:L_I:妊娠しにくい || TALENT:L_I:聖女の子宮
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:妊娠しやすい = 1
+		ELSE
+			TALENT:L_I:妊娠しにくい = 1
+		ENDIF
+		IF  RAND:100 <= 5
+			TALENT:L_I:妊娠しやすい = 1
+			TALENT:L_I:妊娠しにくい = 0
+			TALENT:L_I:聖女の子宮 = 1
+		ENDIF
+	CASE 50
+		IF  RAND:100 <= 5
+			TALENT:L_I:極上の牝 = 1
+		ENDIF
+	CASE 51
+		IF  RAND:100 <= 20
+			TALENT:L_I:マドンナ = 1
+		ENDIF
+	CASE 52
+		TALENT:L_I:レイプ願望 = 1
+	CASEELSE
+	ENDSELECT
+NEXT
+
+
+
+
+;----------------------------------------------------------
+;----------------------------------------------------------
+;素質関連（身体）
+;----------------------------------------------------------
+;----------------------------------------------------------
+@SET_RANDOM_TALENT_SENCIBITY(L_I)
+#DIM L_I
+#DIM TAL_NUM
+#DIM TAL_INDEX, 4
+CALLF FUNC_FISHER_YATES_SHAFFLE(TAL_INDEX, 4)
+FOR LOCAL, 0, RAND(1, 3)
+	SELECTCASE TAL_INDEX:LOCAL
+	CASE 0
+		SIF TALENT:L_I:Ｖ敏感 || TALENT:L_I:Ｖ鈍感
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:Ｖ敏感 = 1
+		ELSE
+			TALENT:L_I:Ｖ鈍感 = 1
+		ENDIF
+	CASE 1
+		SIF TALENT:L_I:Ｂ敏感 || TALENT:L_I:Ｂ鈍感
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:Ｂ敏感 = 1
+		ELSE
+			TALENT:L_I:Ｂ鈍感 = 1
+		ENDIF
+	CASE 2
+		SIF TALENT:L_I:Ｃ敏感 || TALENT:L_I:Ｃ鈍感
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:Ｃ敏感 = 1
+		ELSE
+			TALENT:L_I:Ｃ鈍感 = 1
+		ENDIF
+	CASE 3
+		SIF TALENT:L_I:Ａ敏感 || TALENT:L_I:Ａ鈍感
+			CONTINUE
+		IF !RAND:2
+			TALENT:L_I:Ａ敏感 = 1
+		ELSE
+			TALENT:L_I:Ａ鈍感 = 1
+		ENDIF
+	CASEELSE
+	ENDSELECT
+NEXT

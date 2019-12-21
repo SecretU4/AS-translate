@@ -1,0 +1,311 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_HELP.ERB
+;	Facility	:ヘルプ機能。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ SYSTEM_HELP_MAIN				SYSTEM:ヘルプ
+;	・ _SYSTEM_HELP_DATA			ヘルプ:データ
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub SYSTEM_HELP_MAIN
+;=================================================
+;   SYSTEM:ヘルプ
+;-------------------------------------------------
+@SYSTEM_HELP_MAIN
+#DIM L_I
+#DIM L_CNT
+#DIM L_MAX
+#DIMS L_STR
+
+L_MAX=100
+
+;-----------------------------
+;-- ヘッダ部
+;-----------------------------
+;ライン表示:新ページ
+CALL C_LINE
+
+PRINTFORML 調教典には各種情報が記載されています。
+DRAWLINE
+
+
+;-----------------------------
+;-- データ部
+;-----------------------------
+VARSET Q
+FOR L_I, 0, L_MAX
+	Q:L_I = 1
+	L_CNT ++
+
+	SELECTCASE L_I
+		CASE 20
+			PRINTL
+		CASE 30
+			PRINTL
+		CASE 100
+			PRINTL
+	ENDSELECT
+
+	;- ヘルプ:データ
+	CALL _SYSTEM_HELP_DATA(L_I, 0)
+
+	IF STRLENS(RESULTS)
+		L_STR = %RESULTS%
+	ELSE
+		;初期化
+		Q:L_I = 0
+		L_CNT --
+		CONTINUE
+	ENDIF
+
+	PRINTFORMLC [{L_I,3}] %L_STR%
+	PRINTL
+
+NEXT
+
+SIF L_CNT
+	PRINTL
+PRINTL
+PRINTLC 　
+PRINTLC [1000] - 戻る
+PRINTL
+PRINTL
+
+
+;-----------------------------
+;- コマンド受付
+;-----------------------------
+$INPUT_LOOP
+INPUT
+
+SELECTCASE RESULT
+	;戻る
+	CASE 1000
+		RETURN
+
+	;データ
+	CASE 0 TO (L_MAX - 1)
+		IF !Q:RESULT
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP
+		ENDIF
+
+		;- ヘルプ:データ
+		CALL _SYSTEM_HELP_DATA(RESULT, 1)
+
+	CASEELSE
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+
+
+;=================================================
+;   sub _SYSTEM_HELP_DATA
+;=================================================
+;   ヘルプ:データ
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象
+;  ARG:1				モード(0:タイトル 1:本文)
+; Output:
+;  RESULTS				タイトル
+;-------------------------------------------------
+@_SYSTEM_HELP_DATA(ARG:0, ARG:1)
+#DIM L_MODE
+#DIM L_TMP
+L_MODE = ARG:1
+RESULTS=
+
+;- CHK:データ
+SELECTCASE ARG
+	;-------------------------------------------------------------------------------
+	;- 通常系
+	;-------------------------------------------------------------------------------
+
+	CASE 0
+		RESULTS =クリア条件について
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML クリア条件は下記となります。
+		PRINTL
+		PRINTFORML ・隷属以上の奴隷を５人集める
+		PRINTFORML ・ホテルをシェルターにする
+		PRINTFORML 
+		PRINTFORML 上記を満たすと、一日終了時にクリア処理が行われます。
+		PRINTFORML またエンディングはクリア時の状態によって複数存在します。
+
+	CASE 1
+		RESULTS =ホテルについて
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML ホテルは裏社会の人間向けに営業しています。
+		PRINTFORML 女配下の制服はミニスカートのメイド服、男配下の制服はボーイ服です。
+		PRINTFORML 厄介な客には彼らが居ます。配下を寝取られない様にしましょう。
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 寝取り趣味の客　　…　他人の女を寝取るのが趣味の男
+		PRINTFORML アイドルオーナー　…　アイドルを寝取るのが趣味の男
+		PRINTFORML 宿泊客　　　　　　…　メイドさんにムラムラしてレイプする客
+
+	CASE 2
+		RESULTS =烙印と伴侶について
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 隷属刻印LV2の奴隷は烙印を押す事で専用奴隷にする事が出来ます。
+		PRINTFORML 烙印を押すと素質「烙印」を得ます。隷属刻印がLV3になります。
+		PRINTL
+		PRINTFORML 陥落刻印LV2の奴隷はエンゲージリングを贈る事で結婚する事が出来ます。
+		PRINTFORML 結婚すると素質「伴侶」を得ます。陥落刻印がLV3になります。
+		PRINTL
+		PRINTFORML 両方使うと上位陥落となり、２週目に引き継ぎが可能になります。
+
+	CASE 3
+		RESULTS =２週目について
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML ２週目以降の周回プレイでは、下記を引き継ぎ可能です。
+		PRINTFORML 
+		PRINTFORML ・資金
+		PRINTFORML ・アイテム
+		PRINTFORML ・烙印を押した伴侶
+		PRINTFORML ・ホテルの状態
+
+	;-------------------------------------------------------------------------------
+	;- システム系
+	;-------------------------------------------------------------------------------
+
+	CASE 20
+		RESULTS =取得可能な素質について
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 調教の結果、以下の素質を入手可能です。
+		PRINTFORML （主…主人 / 奴…奴隷）
+		PRINTL
+		PRINTL ■ 個人素質 ■---------------------------------------------------------------
+		PRINTFORML 主 　 [魅惑]　　　…ABL:魅了技能Lv6＋上位陥落人数5人で取得可能
+		PRINTFORML 主,奴 [キス魔]　　…EXP:キス経験Lv7で取得可能
+;		PRINTFORML 主,奴 [セックス狂]…EXP:性交経験Lv8で取得可能
+;		PRINTFORML 主,奴 [自慰狂い]　…EXP:自慰経験Lv7で取得可能
+;		PRINTFORML 主,奴 [尻穴狂い]　…EXP:Ａ性交経験Lv8で取得可能
+		PRINTL
+		PRINTL ■ 対人素質 ■---------------------------------------------------------------
+		PRINTFORML 　 奴 [隷属系]　　…隷属刻印取得時、またはアイテム使用時に同時取得(服従/隷属/烙印)
+		PRINTFORML 　 奴 [恋慕系]　　…篭絡刻印取得時、またはアイテム使用時に同時取得(恋慕/親愛/伴侶)
+		PRINTFORML 　 奴 [淫乱系]　　…淫乱刻印取得時、またはアイテム使用時に同時取得(淫乱/淫魔)
+
+	CASE 21
+		RESULTS =PALAMとEXP、取得JUELについて
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML パラメータ(PALAM)は下記の値でレベル分けされています。最大値はLV9(99999)です。
+		PRINTFORML +--------------------------------------------------------------+
+		PRINTFORML | PALAMLV … 0/  1/  2/   3/   4/   5/    6/    7/    8/    9/ |
+		PRINTFORML | PALAM   … 0/100/500/1000/2500/5000/10000/25000/50000/99999  |
+		PRINTFORML +--------------------------------------------------------------+
+		PRINTFORML 
+		PRINTFORML また、取得珠(GOTJUEL)は下記の様にPALAMLVで決定されています。最大値はLV9(5120)です。
+		PRINTFORML +---------------------------------------------------+
+		PRINTFORML | PALAMLV … 0/ 1/ 2/ 3/  4/  5/  6/   7/   8/   9/ |
+		PRINTFORML | GOTJUEL … 0/20/40/80/160/320/640/1280/2560/5120  |
+		PRINTFORML +---------------------------------------------------+
+		PRINTFORML 
+		PRINTFORML 経験(EXP)は下記の値でレベル分けされています。最大値はLV9(500)です。
+		PRINTFORML +------------------------------------------+
+		PRINTFORML | EXPLV … 0/1/2/ 3/ 4/ 5/  6/  7/  8/  9/ |
+		PRINTFORML | EXP   … 0/1/4/10/20/50/100/200/300/500  |
+		PRINTFORML +------------------------------------------+
+		PRINTL
+		PRINTL
+		PRINTFORML 基本的には、取得珠(GOTJUEL)はLVが上がる毎に２倍になっていきます。
+
+
+	;-------------------------------------------------------------------------------
+	;- 労役系
+	;-------------------------------------------------------------------------------
+
+	CASE 35
+		RESULTS =労役系技能について
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 労役系技能には[家事技能]、[戦闘技能]、[歌唱技能]が存在します。
+		PRINTFORML 労役系技能が高いと、労役時の収入が高額になります。
+		PRINTL
+		PRINTFORML [家事技能] … 料理を含む家事全般の技能です。
+		PRINTFORML [歌唱技能] … 歌唱やダンスなどアイドルとしての技能です。
+		PRINTFORML [戦闘技能] … 戦闘や警戒など警備の技能です。
+
+	CASE 36
+		RESULTS =労役:役職について
+		SIF !L_MODE
+			RETURN
+
+		DRAWLINE
+		PRINTFORML 【%RESULTS%】
+		PRINTL
+		PRINTFORML 隷属した奴隷には労役用の役職を任命出来ます。
+		PRINTFORML 
+		PRINTFORML 通常職：ホテルでの通常業務全般を担当。
+		PRINTFORML 歌姫職：ホテルでのアイドルコンサートを担当。
+		PRINTFORML 戦闘職：ホテルの警備を担当。
+		PRINTFORML 娼館職：ホテルの娼館を担当。
+
+	CASEELSE
+		RETURN
+ENDSELECT
+PRINTL
+WAIT
+
+

@@ -1,0 +1,61 @@
+;-------------------------------------------------
+;イレギュラー襲撃イベント
+;-------------------------------------------------
+@TURN_EVENT_I_R
+#DIM L_MONEY
+#DIM L_MONEY2
+
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【イレギュラー襲撃イベント(モラル):%CALLNAME%】
+
+PRINTFORML 帰宅途中突然%CALLNAME%は複数の女に裏路地に連れ込まれ、服をはぎ取られ、怪しい薬を打たれてしまった。
+PRINTFORML 薬によって%CALLNAME%の雌の本能が膨れ上がり、襲われているにもかかわらず欲情し、秘所から蜜が垂れてしまう。
+PRINTFORML その様子を見た女たちは%CALLNAME%の乳房や秘所をしなやかな指で愛撫し、肉壷と菊門を張り型で犯している。
+PRINTFORML 犯されている%CALLNAME%は体中を駆け巡る熱に喘ぎ、腰をくねらせ、達した快感に体を震わせ気を失ってしまった。
+PRINTFORML 気が付いた時には女たちのすがたはなく、%CALLNAME%は先ほどの痴態を恥じながら再び帰路についた。
+PRINTFORMW 
+
+
+TALENT:非処女 = 1
+TALENT:Ａ非処女 = 1
+TCVAR:履歴_EXP_処女喪失 = 1
+TCVAR:履歴_EXP_Ａ処女喪失 = 1
+EXP:Ａ経験 += (RAND:4+1)
+EXP:Ｂ経験 += (RAND:4)
+EXP:Ｃ経験 += (RAND:4)
+EXP:Ｖ経験 += (RAND:4+1)
+EXP:絶頂経験 += (RAND:2)+1
+EXP:レズ経験 += (RAND:2)+1
+EXP:強姦経験 += (RAND:2+1)+1
+EXP:苦痛快楽経験 += (RAND:3)
+
+
+RESETCOLOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

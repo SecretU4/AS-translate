@@ -1,0 +1,1135 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_MANAGEMENT.ERB
+;	Facility	:経営（労役）。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ SYSTEM_MANAGEMENT				SYSTEM:経営
+;	・ MNG_RELEASE						経営:해방
+;	・ MNG_SHIFT_WORK					経営:シフト設定
+;	・ MNG_INCOME_CALC					経営:収入計算
+;	・ MNG_ACCOUNTS						経営:会計処理
+;	・ MNG_LOG_ADD						経営:加算ログ
+;	・ MNG_MSG_MAIN						経営:メッセージ
+;	・ MNG_CLOTHES_NAME					経営:衣装名
+;	・ MNG_LIST_MAKE					経営:キャラリスト作成
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub SYSTEM_MANAGEMENT
+;=================================================
+;   SYSTEM:経営
+;-------------------------------------------------
+@SYSTEM_MANAGEMENT
+
+;- 経営:キャラリスト作成
+CALL MNG_LIST_MAKE
+
+;-----------------------------
+;-- データ部作成
+;-----------------------------
+$DATA_TOP
+
+;- 経営:収入計算
+CALL MNG_INCOME_CALC
+
+;-----------------------------
+;-- データ部表示
+;-----------------------------
+;ライン表示:新ページ
+CALL C_LINE
+
+PRINTFORML 【노역】호텔을 경영합니다。
+DRAWLINE
+
+PRINTFORM {DAY}일째 
+PRINTFORM (%GET_DAY(DAY)%) 
+PRINTFORM [ %GVAR_MONEY_NAME%:{MONEY} 
+PRINTFORM / 노예의 숫자:{CHARANUM-1}명 
+PRINTFORM / 함락 인원 수:{FLAG:陥落人数}명
+PRINTFORM ]
+PRINTFORM 　[누계 획득 %GVAR_MONEY_NAME%:{FLAG:累計獲得資金}]
+PRINTL
+PRINTL
+
+PRINTFORML 점포 이름： … 호텔 아나타
+PRINTFORML 업무 내용： … 숙박・레스토랑・콘서트
+PRINTL
+
+PRINTFORML 인기：{FLAG:労役人気,4}/{FLAG:労役最大値}  … 기본 수입에 영향。
+PRINTFORML 가희：{FLAG:労役歌姫,4}/{FLAG:労役最大値}  … 콘서트 수입에 영향。고수익이지만 인기가 필요。
+;-------------------------------------------------
+;PRINTFORML 武力：{FLAG:労役武力,4}/{FLAG:労役最大値}  … 警備に影響。基礎収入に影響小。
+;-------------------------------------------------
+PRINTFORM 무력：
+;武力が人気の75%未満の時に文字の色を変えて知らせる
+SIF FLAG:労役人気*75/100 > FLAG:労役武力
+	SETCOLOR COLOR("赤")
+PRINTFORM {FLAG:労役武力,4}
+RESETCOLOR
+PRINTFORML /{FLAG:労役最大値}  … 警備に影響。基礎収入に影響小。
+;-------------------------------------------------
+
+PRINTL
+PRINTFORML 収益：{FLAG:労役収益,4}/{FLAG:労役最大値}
+CALL 治安表示
+PRINTL
+
+;------------------------------------------------- 設備
+VARSET LOCAL
+LOCAL:0 = FLAG:労役設備上昇基礎 * 10
+LOCAL:1 = FLAG:労役設備上昇人気 * 10
+LOCAL:2 = FLAG:労役設備上昇歌姫 * 10 * 2
+LOCAL:3 = FLAG:労役設備上昇戦闘 * 10 * 2
+LOCAL:4 = FLAG:労役設備上昇娼館 * 10 * 2
+LOCAL:5 = FLAG:労役設備上昇開発 * 10 * 2
+
+PRINTFORML ┌─|설비|──────────────────────────────┐
+PRINTFORML ｜　기본：+{LOCAL:0,3}\%　인기：+{LOCAL:1,3}\%　가희：+{LOCAL:2,3}\%　전투：+{LOCAL:3,3}\%　개발：+{LOCAL:5,3}\%　 ｜
+PRINTFORML └──────────────────────────────────┘
+
+;PRINTFORML ┌─|設備|─────────────────┐
+;PRINTFORML ｜　기본：+{LOCAL:00,3}\%　인기：+{LOCAL:00,3}\%　歌姫：+{LOCAL:00,3}\%　 ｜
+;PRINTFORML ｜　戦闘：+{LOCAL:00,3}\%　娼館：+{LOCAL:00,3}\%　開発：+{LOCAL:00,3}\%　 ｜
+;PRINTFORML └─────────────────────┘
+;-------------------------------------------------
+
+;-----------------------------
+;- メニューコマンド表示
+;-----------------------------
+
+DRAWLINE
+PRINTL [1] - 설비 강화
+PRINTL [2] - 시프트 설정
+PRINTL [3] - 노역 아이템
+PRINTL
+PRINTL [9] - 해방
+PRINTL
+PRINTL [0] - 돌아온다
+PRINTL
+
+
+;-----------------------------
+;- コマンド受付
+;-----------------------------
+$INPUT_LOOP
+INPUT
+
+SELECTCASE RESULT
+	;戻る
+	CASE 0
+		RETURN
+
+	;設備強化
+	CASE 1
+;-------------------------------------------------
+		;- 経営:設備
+		CALL MNG_FACILITY_MAIN
+;-------------------------------------------------
+;		CALL C_INPUT_ERROR("この機能は調整中です")
+;		GOTO INPUT_LOOP
+;-------------------------------------------------
+
+	;シフト設定
+	CASE 2
+		;- 経営:シフト設定
+		CALL MNG_SHIFT_WORK
+
+	;労役アイテム
+	CASE 3
+		;経営:アイテム
+		CALL MNG_ITEM_MAIN
+
+	;解放
+	CASE 9
+		;- 経営:해방
+		CALL MNG_RELEASE
+		RESTART
+
+	CASEELSE
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+GOTO DATA_TOP
+
+;=================================================
+;   sub MNG_RELEASE
+;=================================================
+;   経営:해방
+;-------------------------------------------------
+@MNG_RELEASE
+#DIM L_INPUT
+#DIMS L_ERR_MSG
+#DIM L_T
+#DIM L_BAK
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+L_BAK = TARGET
+L_ERR_MSG=
+
+;-----------------------------
+;- データリスト
+;-----------------------------
+RESULT:1=0
+$DATA_LIST
+
+;- LIST:キャラリスト
+CALL LIST_CHARA(@"해방할 캐릭터를 선택하세요　", RESULT:1, L_ERR_MSG)
+L_INPUT = RESULT
+L_ERR_MSG=
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		RETURN 0
+	;- キャラ
+	CASEELSE
+
+		IF L_INPUT == MASTER
+			L_ERR_MSG = 주인은 해방할 수 없습니다
+			GOTO DATA_LIST
+		ENDIF
+
+		;ライン表示:新ページ
+		CALL C_LINE
+		PRINTFORML %CALLNAME:L_INPUT%を 해방합니까？
+		CALL INPUT_YN
+		IF !RESULT
+			CALL C_LINE
+			PRINTFORMW %CALLNAME:L_INPUT%を 해방했습니다。
+			PRINTFORMW ………
+			PRINTFORMW ……
+			PRINTFORMW …
+
+			TARGET = L_INPUT
+
+			;在庫
+			SIF !GSMN_STOCK:(NO:TARGET)
+				GSMN_STOCK:(NO:TARGET) =1
+
+			;解放口上
+			FLAG:日常コマンド = [[日常EVE:해방]]
+			TRYCALLFORM KOJO_DAILY
+
+			DELCHARA L_INPUT
+
+			TARGET = L_BAK
+
+			;- VAR:リスト更新
+			CALL VAR_MAKE_LIST
+
+		ELSE
+			GOTO DATA_LIST
+		ENDIF
+ENDSELECT
+RESTART
+
+;=================================================
+;   sub MNG_SHIFT_WORK
+;=================================================
+;   経営:シフト設定
+;-------------------------------------------------
+@MNG_SHIFT_WORK
+#DIM L_INPUT
+#DIM L_I
+#DIM L_TMP
+#DIM L_T
+#DIM L_CNT
+#DIM L_PAGE
+#DIM L_CNT_DATA
+#DIM L_CNT_PRINT_DATA
+#DIM L_SELECT
+#DIMS L_STR
+#DIM L_NEXT
+#DIM L_PREV
+#DIM L_START
+#DIM L_END
+#DIM DYNAMIC L_DATA ,DEFTR_CL_NUM
+#DIM L_通常職
+#DIM L_歌姫職
+#DIM L_戦闘職
+#DIM L_娼館職
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+
+L_TMP=0
+L_PAGE=0
+
+; キャラ総数
+L_CNT_DATA = CHARANUM
+
+; キャラ表示数/P
+L_CNT_PRINT_DATA = FLAG:定数_キャラ表示数
+
+;奇数の場合は切り上げ
+SIF L_CNT_PRINT_DATA % 2
+	L_CNT_PRINT_DATA += 1
+
+
+$MAKE_LIST
+VARSET L_DATA, -1
+L_CNT=0
+
+L_通常職 = 0
+L_歌姫職 = 0
+L_戦闘職 = 0
+L_娼館職 = 0
+
+REPEAT L_CNT_DATA
+	L_T = COUNT
+	;- 隷属前の相手は非表示
+	SIF !MARK:L_T:예속각인 && (L_T != MASTER)
+		CONTINUE
+	SELECTCASE CFLAG:L_T:労役役職タイプ
+		CASE [[労役役職:通常職]]
+			L_通常職 ++
+		CASE [[労役役職:歌姫職]]
+			L_歌姫職 ++
+		CASE [[労役役職:戦闘職]]
+			L_戦闘職 ++
+		CASE [[労役役職:娼館職]]
+			L_娼館職 ++
+	ENDSELECT
+
+	L_DATA:L_CNT = L_T
+	L_CNT ++
+REND
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+$PRINT_LIST
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORML 종업원의 직위를 선택하세요。　＜page.{L_PAGE}＞
+PRINTFORML 표시된 금액은、해당 캐릭터의 노역 기본 수입입니다。
+PRINTL
+PRINTL
+PRINTFORML 통상직({L_通常職, 3}명)     … 일반 업무를 담당。인기가 오름。
+PRINTFORML 가희직({L_歌姫職, 3}명)     … 아이돌 업무를 담당。가희가 오름。(배율 ２배)
+PRINTFORML 전투직({L_戦闘職, 3}명)     … 경비 업무를 담당。무력이 오름。
+PRINTFORML 창관직({L_娼館職, 3}명)     … 창관 업무를 담당。인기가 오름。(배율 ２배)
+PRINTL
+DRAWLINE
+
+
+L_START	= (L_PAGE) * L_CNT_PRINT_DATA
+L_END	= (L_PAGE + 1) * L_CNT_PRINT_DATA
+
+L_TMP=0
+FOR L_I, L_START, L_END
+
+	L_T = L_DATA:L_I
+
+	IF L_T > -1
+		;表示
+		PRINTFORM [%TOSTR(L_T),3%] %CALLNAME:L_T, 16, LEFT% 
+		PRINTFORM %DB_TALENT_NAME(L_T, "남자")% 
+		PRINTFORM 【%INFO_WORK_NAME(L_T)%】 
+		PRINTFORM (\\{CFLAG:L_T:労役収入,4}) 
+;		PRINTFORM %L_STR% 
+		IF 1
+			PRINT [
+			SIF !ABL:L_T:가창기능
+				SETCOLOR COLOR("伏字")
+			PRINT 가희
+			RESETCOLOR
+			SIF !ABL:L_T:전투기능
+				SETCOLOR COLOR("伏字")
+			PRINT 戦
+			RESETCOLOR
+;			SIF !ABL:L_T:공작기능
+;				SETCOLOR COLOR("伏字")
+;			PRINT 開
+;			SIF !VAR_SEX(L_T)
+;				SETCOLOR COLOR("伏字")
+;			PRINT 娼
+;			RESETCOLOR
+			PRINT ] 
+		ELSE
+			PRINT 　　　
+		ENDIF
+		PRINT 　
+	ENDIF
+
+	L_TMP ++
+
+	SIF (L_TMP % 2) == 0
+		PRINTL
+
+NEXT
+SIF !LINEISEMPTY()
+	PRINTL
+PRINTL
+
+L_PREV = (!L_PAGE) ? 0 # 1
+L_NEXT = (L_CNT > ( (L_PAGE+1) * L_CNT_PRINT_DATA) ) ? 1 # 0
+
+PRINTFORMLC \@(!L_PREV) ? %" " * 16% # [1007]이전 페이지\@
+PRINTLC [1000] 돌아온다
+PRINTFORMLC \@(!L_NEXT) ? %" " * 16% # [1009]다음 페이지\@
+PRINTL 
+PRINTL 
+
+$INPUT_LOOP_1
+INPUT
+L_INPUT = RESULT
+
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		RETURN 0
+	;- キャラ
+	CASE 0 TO L_CNT_DATA -1
+		;- 主人
+		IF L_INPUT == MASTER
+;			;INPUTエラー対応
+;			CALL C_INPUT_ERROR("主人は対象に設定出来ません")
+;			GOTO INPUT_LOOP_1
+
+		;- 隷属前
+		ELSEIF !MARK:L_INPUT:예속각인
+			;INPUTエラー対応
+			CALL C_INPUT_ERROR
+			GOTO INPUT_LOOP_1
+		ENDIF
+
+		DRAWLINE
+		PRINTFORML %CALLNAME:L_INPUT%를 어떤 직위에 임명할까요？(노역 기본 수입：{CFLAG:L_INPUT:労役収入})
+		PRINTL
+		PRINTFORML [0] 해제
+		PRINTFORML [1] 통상직
+		PRINTFORML [2] 가희직 … \@ (!ABL:L_INPUT:가창기능) ? NG # OK\@
+		PRINTFORML [3] 전투직 … \@ (!ABL:L_INPUT:전투기능) ? NG # OK\@
+		PRINTFORML [4] 창관직 … \@ (!VAR_SEX(L_INPUT)) ? NG # OK\@
+		PRINTL
+		PRINTFORML [100] 돌아온다
+		PRINTL
+
+		$INPUT_LOOP_2
+		INPUT
+		L_SELECT = RESULT
+
+		;- 表示:ページ別
+		SELECTCASE L_SELECT
+			;- 終了
+			CASE 100
+				;- 無し
+				GOTO PRINT_LIST
+			CASE [[労役役職:無し]]
+				DRAWLINE
+				PRINTFORMW 직위를 해제했습니다
+				CFLAG:L_INPUT:労役役職タイプ = [[労役役職:無し]]
+			;- 通常職
+			CASE [[労役役職:通常職]]
+				DRAWLINE
+				PRINTFORMW 통상직에 임명했습니다
+				CFLAG:L_INPUT:労役役職タイプ = [[労役役職:通常職]]
+			;- 歌姫職
+			CASE [[労役役職:歌姫職]]
+				IF !ABL:L_INPUT:가창기능
+					;INPUTエラー対応
+					CALL C_INPUT_ERROR("ABL:가창기능이 0이면、가희직에 임명할 수 없습니다")
+					GOTO INPUT_LOOP_2
+				ENDIF
+				DRAWLINE
+				PRINTFORMW 가희직에 임명했습니다
+				CFLAG:L_INPUT:労役役職タイプ = [[労役役職:歌姫職]]
+			;- 戦闘職
+			CASE [[労役役職:戦闘職]]
+				IF !ABL:L_INPUT:전투기능
+					;INPUTエラー対応
+					CALL C_INPUT_ERROR("ABL:전투기능이 0이면、전투직에 임명할 수 없습니다")
+					GOTO INPUT_LOOP_2
+				ENDIF
+				DRAWLINE
+				PRINTFORMW 전투직에 임명했습니다
+				CFLAG:L_INPUT:労役役職タイプ = [[労役役職:戦闘職]]
+			;- 娼館職
+			CASE [[労役役職:娼館職]]
+				IF !VAR_SEX(L_INPUT)
+					;INPUTエラー対応
+					CALL C_INPUT_ERROR("여성 이외엔、창관직에 임명할 수 없습니다")
+					GOTO INPUT_LOOP_2
+				ENDIF
+				DRAWLINE
+				PRINTFORMW 직위를 창관직으로 변경했습니다
+				CFLAG:L_INPUT:労役役職タイプ = [[労役役職:娼館職]]
+			;- その他
+			CASEELSE
+				;INPUTエラー対応
+				CALL C_INPUT_ERROR
+				GOTO INPUT_LOOP_2
+		ENDSELECT
+
+		GOTO MAKE_LIST
+	;이전 페이지
+	CASE 1007
+		SIF !L_PREV
+			GOTO ERROR
+		L_PAGE -= 1
+		GOTO PRINT_LIST
+	;다음 페이지
+	CASE 1009
+		SIF !L_NEXT
+			GOTO ERROR
+		L_PAGE += 1
+		GOTO PRINT_LIST
+	;- その他
+	CASEELSE
+		$ERROR
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+RESTART
+
+;=================================================
+;   sub MNG_INCOME_CALC
+;=================================================
+;   経営:収入計算
+;-------------------------------------------------
+@MNG_INCOME_CALC
+#DIM L_I
+#DIM L_TGT_BAK
+#DIM L_VAL
+#DIM L_ADD
+#DIM L_TMP
+#DIM L_FC_人気
+#DIM L_FC_歌姫
+#DIM L_FC_警備
+#DIM L_FC_娼館
+#DIM L_FC_開発
+#DIM L_FC_開発EXP
+#DIMS L_KEY
+
+
+;-----------------------------
+;- 前処理 (設備倍率計算)
+;-----------------------------
+
+;- 初期化
+FLAG:労役設備上昇基礎 = 0
+FLAG:労役設備上昇人気 = 0
+FLAG:労役設備上昇歌姫 = 0
+FLAG:労役設備上昇戦闘 = 0
+FLAG:労役設備上昇娼館 = 0
+FLAG:労役設備上昇開発 = 0
+
+;- 奴隷個室
+L_KEY = 労役設備ビット奴隷個室
+FLAG:労役設備上昇基礎	+= ( MNG_FC_LV_GET(L_KEY, 0) + MNG_FC_LV_GET(L_KEY, 3) + MNG_FC_LV_GET(L_KEY, 6) )
+
+FLAG:労役設備上昇基礎	+= MNG_FC_LV_GET("労役設備ビット食堂")
+;倉庫は無し
+FLAG:労役設備上昇戦闘	+= MNG_FC_LV_GET("労役設備ビット訓練場")
+FLAG:労役設備上昇基礎	+= MNG_FC_LV_GET("労役設備ビット図書室")
+FLAG:労役設備上昇開発	+= MNG_FC_LV_GET("労役設備ビット工房")
+FLAG:労役設備上昇基礎	+= MNG_FC_LV_GET("労役設備ビット客室")
+FLAG:労役設備上昇人気	+= MNG_FC_LV_GET("労役設備ビットレストラン")
+FLAG:労役設備上昇歌姫	+= MNG_FC_LV_GET("労役設備ビットコンサートホール")
+FLAG:労役設備上昇基礎	+= MNG_FC_LV_GET("労役設備ビット温泉")
+FLAG:労役設備上昇人気	+= MNG_FC_LV_GET("労役設備ビット売店")
+FLAG:労役設備上昇基礎	+= MNG_FC_LV_GET("労役設備ビットロビー")
+FLAG:労役設備上昇基礎	+= MNG_FC_LV_GET("労役設備ビットフロント")
+FLAG:労役設備上昇人気	+= MNG_FC_LV_GET("労役設備ビット娯楽室")
+
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+L_TGT_BAK = TARGET
+FLAG:労役人気 = 0
+FLAG:労役歌姫 = 0
+FLAG:労役武力 = 0
+FLAG:労役人数 = 0
+
+FOR L_I, 0, CHARANUM
+
+	TARGET=L_I
+
+	L_VAL=0
+
+	;-----------------------------
+	;- 計算(能力)
+	;-----------------------------
+
+	;가사기능+가창기능+전투기능
+	L_VAL += (ABL:가사기능 + ABL:가창기능 + ABL:전투기능) * 10
+
+	;매료기능+성노예
+	L_VAL += (ABL:매료기능 + ABL:성노예) * 5
+
+	;농락
+	L_VAL += (ABL:농락) * 3
+
+	;部位
+	L_VAL += (ABL:Ｃ감각 + ABL:Ｖ감각 + ABL:Ａ감각 + ABL:Ｂ감각)
+
+	;中毒
+	L_VAL += (ABL:성교중독 + ABL:자위중독 + ABL:정액중독 + ABL:키스중독)
+
+	;-----------------------------
+	;- 計算(素質)
+	;-----------------------------
+
+	;魅惑 + 상위함락
+	L_VAL += (TALENT:매혹 + TALENT:상위함락) * 30
+
+	;陥落
+	L_VAL += (MARK:함락각인) * 15
+
+	;함락도+예속도
+	L_VAL += (TALENT:함락도 + TALENT:예속도) * 10
+
+	;-----------------------------
+	;- 計算(その他)
+	;-----------------------------
+
+	;労役アイテム
+	SIF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_特集記事)
+		L_VAL += 30
+
+	;労役アイテム
+	SIF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_首輪)
+		L_VAL /= 2
+
+	;L_VAL /= 3
+	L_VAL /= 5
+
+	;設備(基礎)
+	L_VAL = C_TIMES(L_VAL, 100 + (FLAG:労役設備上昇基礎 * 20) )
+
+	;基礎収入
+	CFLAG:労役収入 = MIN(L_VAL, FLAG:労役最大値)
+
+	;-----------------------------
+	;- 集計処理
+	;-----------------------------
+
+	;- 役職無し
+	SIF !CFLAG:労役役職タイプ
+		CONTINUE
+
+;------------------------------------------------- DEL
+;	SELECTCASE CFLAG:労役役職タイプ
+;		CASE [[労役役職:通常職]]
+;			FLAG:労役人気 += L_VAL
+;		CASE [[労役役職:歌姫職]]
+;			FLAG:労役歌姫 += L_VAL * 2
+;		CASE [[労役役職:戦闘職]]
+;			FLAG:労役武力 += L_VAL
+;		CASE [[労役役職:娼館職]]
+;			FLAG:労役人気 += L_VAL * 2
+;	ENDSELECT
+;------------------------------------------------- DEL
+;------------------------------------------------- ADD
+	SELECTCASE CFLAG:労役役職タイプ
+		CASE [[労役役職:通常職]]
+			FLAG:労役人気 += C_TIMES(L_VAL, 100 + (FLAG:労役設備上昇人気 * 20) )
+		CASE [[労役役職:歌姫職]]
+			FLAG:労役歌姫 += C_TIMES(L_VAL, 100 + (FLAG:労役設備上昇歌姫 * 20) ) * 2
+		CASE [[労役役職:戦闘職]]
+			FLAG:労役武力 += C_TIMES(L_VAL, 100 + (FLAG:労役設備上昇戦闘 * 20) )
+		CASE [[労役役職:娼館職]]
+			FLAG:労役人気 += C_TIMES(L_VAL, 100 + (FLAG:労役設備上昇娼館 * 20) ) * 2
+	ENDSELECT
+;------------------------------------------------- ADD
+
+	FLAG:労役人数 ++
+
+NEXT
+
+
+TARGET = L_TGT_BAK
+
+FLAG:労役収益 = 0
+
+FLAG:労役収益 += FLAG:労役人気
+FLAG:労役収益 += MIN(FLAG:労役人気, FLAG:労役歌姫)
+FLAG:労役収益 += FLAG:労役武力 / 2
+FLAG:労役収益 = MIN(FLAG:労役収益, FLAG:労役最大値)
+
+
+;=================================================
+;   sub MNG_LOG_ADD
+;=================================================
+;   経営:加算ログ
+;-------------------------------------------------
+; Input:
+;  ARGS:0				対象ステータス(JUEL/EXP)
+;  ARGS:1				対象値
+;  ARG:0				加算値
+;  ARG:1				キャラ
+;-------------------------------------------------
+@MNG_LOG_ADD(ARGS:0, ARGS:1, ARG:0, ARG:1=-1)
+#DIM L_PRINT
+
+L_PRINT=1
+
+SIF ARG:1 == -1
+	ARG:1=TARGET
+
+SIF ARG:1 == MASTER
+	L_PRINT=0
+
+SELECTCASE ARGS:0
+	CASE "JUEL"
+		JUEL:(ARG:1):(ARGS:1) += ARG
+		JUEL:(ARG:1):(ARGS:1) = MIN(FLAG:最大数_JUEL, JUEL:(ARG:1):(ARGS:1))
+		SIF L_PRINT
+			PRINTFORML %ARGS:1%의 구슬 +{ARG}
+	CASE "EXP"
+		EXP:(ARG:1):(ARGS:1) += ARG
+		EXP:(ARG:1):(ARGS:1) = MIN(FLAG:最大数_EXP, EXP:(ARG:1):(ARGS:1))
+		SIF L_PRINT
+			PRINTFORML %ARGS:1% +{ARG}
+	CASEELSE
+		RETURN
+ENDSELECT
+
+
+;=================================================
+;   sub MNG_ACCOUNTS
+;=================================================
+;   経営:会計処理
+;-------------------------------------------------
+@MNG_ACCOUNTS
+#DIM L_VAL
+#DIM L_MAX
+L_MAX = 999999
+
+L_VAL = FLAG:労役収益
+IF L_VAL
+	MONEY += L_VAL
+	FLAG:累計獲得資金 += L_VAL
+
+	MONEY = MIN(L_MAX, MONEY)
+	FLAG:累計獲得資金 = MIN(L_MAX, FLAG:累計獲得資金)
+ENDIF
+
+CALL C_LINE
+PRINTFORML 【경영 수익】
+PRINTFORML %GVAR_MONEY_NAME%{L_VAL}을 수익으로 회수했습니다。
+PRINTW
+
+
+;=================================================
+;   sub MNG_MSG_MAIN
+;=================================================
+;   経営:メッセージ
+;-------------------------------------------------
+@MNG_MSG_MAIN
+#DIM L_I
+#DIM L_TGT_BAK
+#DIM L_TMP
+#DIM L_VAL
+#DIM L_HIT
+#DIM L_NTR_CHK
+#DIM L_NTR_ITEM
+#DIM L_NTR_NOT
+#DIM L_WOMAN
+#DIM L_NTR_MODE
+#DIM L_NUM
+#DIMS L_STR
+
+L_TGT_BAK = TARGET
+
+L_HIT=0
+
+;- NTR:労役(発生チェック)
+L_NTR_CHK = NTR_MNG_CHK()
+
+;視姦カット機能
+;L_NTR_MODE = FLAG:ＮＴＲモード
+;L_NTR_MODE = 1
+L_NTR_MODE = 0
+
+FLAG:労役中フラグ = 1
+
+L_NUM = CHARANUM
+FOR L_I, 0, CHARANUM
+
+	TARGET=L_I
+
+	;キャラ失踪時のエラー防止
+	SIF L_NUM > CHARANUM && L_I == CHARANUM
+		BREAK
+
+	;- 役職無し
+	SIF !CFLAG:労役役職タイプ
+		CONTINUE
+
+	;- 経営:アイテム更新
+	CALL MNG_ITEM_RENEW(TARGET)
+
+	;- 結果を設定
+	SELECTCASE CFLAG:労役役職タイプ
+		CASE [[労役役職:通常職]]
+			SELECTCASE RAND:2
+				CASE 1
+					CFLAG:労役結果タイプ = [[労役結果:客室整備]]
+				CASEELSE
+					CFLAG:労役結果タイプ = [[労役結果:ウェイトレス]]
+			ENDSELECT
+		CASE [[労役役職:歌姫職]]
+			SELECTCASE RAND:3
+				CASE 2
+					CFLAG:労役結果タイプ = [[労役結果:コンサート]]
+				CASE 1
+					CFLAG:労役結果タイプ = [[労役結果:歌唱練習]]
+				CASEELSE
+					CFLAG:労役結果タイプ = [[労役結果:ウェイトレス]]
+			ENDSELECT
+
+		CASE [[労役役職:戦闘職]]
+			SELECTCASE RAND:3
+				CASE 2
+					CFLAG:労役結果タイプ = [[労役結果:館内警備]]
+				CASE 1
+					CFLAG:労役結果タイプ = [[労役結果:戦闘訓練]]
+				CASEELSE
+					CFLAG:労役結果タイプ = [[労役結果:ウェイトレス]]
+			ENDSELECT
+
+		CASE [[労役役職:娼館職]]
+			SELECTCASE RAND:3
+				CASE 1
+					CFLAG:労役結果タイプ = [[労役結果:ウェイトレス]]
+				CASEELSE
+					CFLAG:労役結果タイプ = [[労役結果:娼館客室]]
+			ENDSELECT
+
+			;男の場合はウェイトレスに変更
+			SIF !VAR_SEX()
+				CFLAG:労役結果タイプ = [[労役結果:ウェイトレス]]
+
+		;上記以外
+		CASEELSE
+			;除外
+			CONTINUE
+	ENDSELECT
+
+	;- 結果
+	DRAWLINE
+	IF !L_HIT
+		L_HIT=1
+		SETCOLOR COLOR("ピンク")
+		PRINTFORML 【노역 풍경】
+		RESETCOLOR
+		PRINTFORML 오늘 호텔의 하루를 돌아봅니다。
+		PRINTFORML ………
+		PRINTFORML ……
+		PRINTFORML …
+		FORCEWAIT
+		PRINTL
+	ENDIF
+	L_STR = %CSTR:労役衣装名%
+	L_WOMAN = VAR_SEX()
+	SELECTCASE CFLAG:労役結果タイプ
+		CASE [[労役結果:ウェイトレス]]
+			L_STR = \@ ( VAR_SEX() ) ? ウェイトレス # ウェイター \@
+			PRINTFORML 【%L_STR%】(%CALLNAME%)
+			IF TARGET == MASTER
+				PRINTFORML ホテルのレストランで%L_STR%をした…
+			ELSE
+				PRINTFORML ホテルのレストランで%L_STR%をしている%CALLNAME%を見つけた…
+			ENDIF
+			PRINTFORML %CALLNAME%는 ハンディターミナルで注文を取っている…
+			IF L_WOMAN && L_NTR_MODE
+				PRINTFORML %CALLNAME%는 가슴이나 허벅지를 훔쳐보는 손님들의 음란한 시선에 노출되어 있다…
+			ENDIF
+			WAIT
+
+		CASE [[労役結果:客室整備]]
+			PRINTFORML 【客室整備】(%CALLNAME%)
+			IF TARGET == MASTER
+				PRINTFORML 空室になった客室の整備をした…
+			ELSE
+				PRINTFORML 空室をマスターキーで開くと、客室整備をしている%CALLNAME%を見つけた…
+			ENDIF
+			IF L_WOMAN && L_NTR_MODE
+				PRINTFORML 部屋の外では%CALLNAME%の姿を見入る客が何名か居る…
+				PRINTFORML %CALLNAME%는 가슴이나 허벅지를 훔쳐보는 손님들의 음란한 시선에 노출되어 있다…
+			ENDIF
+			WAIT
+
+		CASE [[労役結果:歌唱練習]]
+			PRINTFORML 【歌唱練習】(%CALLNAME%)
+			IF TARGET == MASTER
+				PRINTFORML %CALLNAME%는 コンサートホールで公開リハーサルを行った…
+			ELSE
+				PRINTFORML コンサートホールに行くと、歌唱練習をしている%CALLNAME%を見つけた…
+				PRINTFORML %CALLNAME%는 公開リハーサルを行っている様だ…
+			ENDIF
+			IF L_WOMAN && L_NTR_MODE
+				PRINTFORML %CALLNAME%는 가슴이나 허벅지를 훔쳐보는 손님들의 음란한 시선에 노출되어 있다…
+			ENDIF
+			WAIT
+
+		CASE [[労役結果:コンサート]]
+			PRINTFORML 【コンサート】(%CALLNAME%)
+			IF TARGET == MASTER
+				PRINTFORML %CALLNAME%는 コンサートホールでライブを行った…
+			ELSE
+				PRINTFORML コンサートホールで、ライブを行っている%CALLNAME%を見つけた…
+			ENDIF
+			IF L_WOMAN && L_NTR_MODE
+				PRINTFORML %CALLNAME%는 가슴이나 허벅지를 훔쳐보는 손님들의 음란한 시선에 노출되어 있다…
+			ENDIF
+			WAIT
+
+		CASE [[労役結果:戦闘訓練]]
+			PRINTFORML 【戦闘訓練】(%CALLNAME%)
+			IF TARGET == MASTER
+				PRINTFORML %CALLNAME%는 館の訓練場で窓越しに観客を交えながら訓練をした…
+			ELSE
+				PRINTFORML 館の訓練場に行くと、戦闘訓練をしている%CALLNAME%を見つけた…
+				PRINTFORML %CALLNAME%는 窓越しに観客を交えながら訓練をしている様だ…
+			ENDIF
+			IF L_WOMAN && L_NTR_MODE
+				PRINTFORML %CALLNAME%는 가슴이나 허벅지를 훔쳐보는 손님들의 음란한 시선에 노출되어 있다…
+			ENDIF
+			WAIT
+
+		CASE [[労役結果:館内警備]]
+			PRINTFORML 【館内警備】(%CALLNAME%)
+			IF TARGET == MASTER
+				PRINTFORML %CALLNAME%는 館内を見回りした…
+			ELSE
+				PRINTFORML 館内を見回りしている%CALLNAME%を見つけた…
+			ENDIF
+			PRINTFORML %CALLNAME%는 カメラと巡回で異常をチェックしている…
+			IF L_WOMAN && L_NTR_MODE
+				PRINTFORML %CALLNAME%는 가슴이나 허벅지를 훔쳐보는 손님들의 음란한 시선에 노출되어 있다…
+			ENDIF
+			WAIT
+
+		CASE [[労役結果:娼館客室]]
+			;- 経営:娼館(メッセージ)
+			CALL MNG_BROTHEL_MSG
+
+		CASEELSE
+			CONTINUE
+	ENDSELECT
+	PRINTL
+
+	;- 口上出力:労役イベント
+	CALL KOJO_WORK
+
+	;-----------------------------
+	;- 取得 (基本経験値は+13)
+	;-----------------------------
+
+	;- ウェイトレスは通常職へ
+	SIF CFLAG:労役結果タイプ == [[労役結果:ウェイトレス]]
+		GOTO WORK_NOMAL
+	SELECTCASE CFLAG:労役役職タイプ
+		CASE [[労役役職:通常職]]
+			$WORK_NOMAL
+			L_TMP = (ABL:성노예 + ABL:가사기능) / 2
+			L_VAL = MIN(9, 2+L_TMP)
+
+			;- EXP
+			CALL MNG_LOG_ADD("JUEL", "生活", TR_GOTJUEL(PALAMLV:(L_VAL)))
+			CALL MNG_LOG_ADD("EXP", "유혹경험", (3+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "가사경험", (7+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "피사경험", (3+L_TMP))
+
+		CASE [[労役役職:歌姫職]]
+			L_TMP = (ABL:성노예 + ABL:가창기능) / 2
+			L_VAL = MIN(9, 2+L_TMP)
+
+			;- EXP
+			CALL MNG_LOG_ADD("JUEL", "生活", TR_GOTJUEL(PALAMLV:(L_VAL)))
+			CALL MNG_LOG_ADD("EXP", "유혹경험", (3+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "피사경험", (3+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "가창경험", (7+L_TMP))
+
+		CASE [[労役役職:戦闘職]]
+			L_TMP = (ABL:성노예 + ABL:전투기능) / 2
+			L_VAL = MIN(9, 2+L_TMP)
+
+			;- EXP
+			CALL MNG_LOG_ADD("JUEL", "生活", TR_GOTJUEL(PALAMLV:(L_VAL)))
+			CALL MNG_LOG_ADD("EXP", "유혹경험", (3+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "촬영경험", (3+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "전투경험", (7+L_TMP))
+
+		CASE [[労役役職:娼館職]]
+			L_TMP = (ABL:성노예 + ABL:매료기능) / 2
+			L_VAL = MIN(9, 2+L_TMP)
+
+			IF !TALENT:비처녀
+				SETCOLOR COLOR("ピンク")
+				PRINTL 처녀 상실
+				RESETCOLOR
+				TALENT:비처녀 = 1
+			ENDIF
+
+			;- EXP
+			CALL MNG_LOG_ADD("JUEL", "誘惑", TR_GOTJUEL(PALAMLV:(L_VAL)))
+			CALL MNG_LOG_ADD("JUEL", "欲情", TR_GOTJUEL(PALAMLV:(L_VAL)))
+			CALL MNG_LOG_ADD("EXP", "키스경험",		(1+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "펠라경험",	(2+L_TMP/2))
+			CALL MNG_LOG_ADD("EXP", "Ｖ경험",		(2+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "성교경험",		(2+L_TMP))
+
+			CALL MNG_LOG_ADD("EXP", "절정경험",	(2+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "정음경험",	(2+L_TMP/2))
+			CALL MNG_LOG_ADD("EXP", "정액경험",	(2+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "질싸경험",	(2+L_TMP))
+
+			CALL MNG_LOG_ADD("EXP", "유혹경험", (3+L_TMP))
+			CALL MNG_LOG_ADD("EXP", "촬영경험", (3+L_TMP))
+			SETCOLOR COLOR("ピンク")
+			CALL MNG_LOG_ADD("EXP", "매춘경험", (3+L_TMP))
+			RESETCOLOR
+
+			;- 経営:娼館(調教)
+			CALL MNG_BROTHEL_TR
+
+		CASEELSE
+	ENDSELECT
+
+	PRINTL
+	WAIT
+
+	L_NTR_NOT = 0
+
+	;特定の役職は後処理
+	SELECTCASE CFLAG:労役結果タイプ
+		CASE [[労役結果:娼館客室]]
+			;- TR:MARKUP(淫乱)
+			CALL TR_MARKUP_LECHERY(TARGET)
+			;朝まで調教なのでNTR無し
+			L_NTR_NOT = 1
+		CASEELSE
+	ENDSELECT
+
+
+	TCVAR:行動フラグ_ソース変動 = 1
+
+	;-----------------------------
+	;- 性交
+	;-----------------------------
+	L_NTR_ITEM = 0
+
+	SIF MNG_ITEM_CHK(TARGET, DEFMNG_ITEM_特集記事)
+		L_NTR_ITEM = 1
+
+	;ＮＴＲモードOFFなら発生無し
+	IF !FLAG:ＮＴＲモード
+
+	;NTR拒否なら発生無し
+	ELSEIF L_NTR_NOT
+
+	;NTRヒットの場合はNTR
+	ELSEIF L_NTR_CHK || L_NTR_ITEM
+		;- NTR:労役
+		CALL NTR_MNG
+		;失踪時は番号調整
+		SIF RESULT
+			L_I --
+	ELSE
+	ENDIF
+
+NEXT
+
+TARGET = L_TGT_BAK
+
+IF L_HIT
+
+	;MASTERもチェック対象
+	TCVAR:MASTER:行動フラグ_ソース変動 = 1
+
+	DRAWLINE
+	;- ABLUP:自動(主処理)
+	CALL ABLUP_AUTO_MAIN
+
+
+	CVARSET TCVAR
+
+ENDIF
+
+FLAG:労役中フラグ = 0
+
+
+;=================================================
+;   sub MNG_CLOTHES_NAME
+;=================================================
+;   経営:衣装名
+;-------------------------------------------------
+; Input:
+;  ARG					制服タイプ
+;-------------------------------------------------
+@MNG_CLOTHES_NAME(ARG)
+#FUNCTIONS
+
+SELECTCASE ARG
+	CASE [[労役制服タイプ:메이드복]]
+		RETURNF "메이드복"
+	CASE [[労役制服タイプ:ボーイ服]]
+		RETURNF "보이복장"
+	CASEELSE
+		RETURNF "없음"
+ENDSELECT
+
+
+;=================================================
+;   sub MNG_LIST_MAKE
+;=================================================
+;   経営:キャラリスト作成
+;-------------------------------------------------
+@MNG_LIST_MAKE
+#DIM L_I
+#DIM L_T
+#DIM L_CNT
+
+VARSET GMNG_CL, -1
+
+L_CNT = 0
+FOR L_I, 0, CHARANUM
+
+	L_T = L_I
+
+	;- 隷属前の相手は非表示
+	SIF !MARK:L_T:예속각인 && (L_T != MASTER)
+		CONTINUE
+
+	GMNG_CL:L_CNT = L_I
+
+	L_CNT ++
+NEXT
+
+GMNG_CL_NUM = L_CNT
+

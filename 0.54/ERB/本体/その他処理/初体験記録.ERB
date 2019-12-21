@@ -1,0 +1,387 @@
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:初体験記録.ERB
+;	Facility	:それぞれの初体験相手を記録して、ステータスで表示できるようにする
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		2013/12/19		ネトリス				新規作成
+;	002		20XX/XX/XX		----					調整
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;あくまで勝手に作った外部パッチなので、効率が悪くてもエラー防止のために大部分の処理はこの中で行う
+;本体に書き込む場合は『TRYCALL』を使って、このERBを外してもエラーが起こらないようにする
+;
+;==========================================================
+;@初体験記録_調教
+; 調教時の初体験記録
+;
+;<引数>
+;ARG   = 対象者
+;ARG:1 = 初体験の区別用（1.初えっち　2.初Ａえっち　3.初キス　4.初フェラ　5.初中出し　6.初絶頂　7.初精飲　8.初出産
+;ARGS  = 相手名
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@初体験記録_調教, ARG, ARG:1, ARGS=""
+#LOCALSSIZE 1
+
+LOCALS=
+;初体験の相手名を記録
+SELECTCASE ARG:1
+	;初えっち
+	CASE 1
+		LOCALS=初えっち相手名
+	;初Ａえっち
+	CASE 2
+		LOCALS=初Ａえっち相手名
+	;初キス
+	CASE 3
+		LOCALS=初キス相手名
+	;初フェラ
+	CASE 4
+		LOCALS=初フェラ相手名
+	;初中出し
+	CASE 5
+		LOCALS=初中出し相手名
+	;初絶頂
+	CASE 6
+		LOCALS=初絶頂相手名
+	;初精飲
+	CASE 7
+		LOCALS=初精飲相手名
+	;初出産相手名
+	CASE 8
+		SIF CSTR:ARG:初出産相手名 == ""
+			CSTR:ARG:初出産相手名 = %CSTR:ARG:妊娠相手名%
+		RETURN
+	;その他
+	CASEELSE
+		RETURN
+ENDSELECT
+SIF CSTR:ARG:LOCALS != ""
+	RETURN
+
+;名前有りの場合はそれをセット
+IF STRLENS(ARGS)
+	CSTR:ARG:LOCALS = %ARGS%
+;主人
+ELSEIF ARG == MASTER
+	;奴隷をセット
+	CSTR:ARG:LOCALS = %NAME:(TFLAG:メインターゲット)%
+;それ以外はPLAYER
+ELSE
+	CSTR:ARG:LOCALS = %NAME:PLAYER%
+ENDIF
+
+
+;;==========================================================
+;;@初体験記録_ＮＴＲ
+;; 調教時の初体験記録
+;;
+;;<引数>
+;;ARG = 対象者
+;;ARG:1
+;;ARG:2 = 初体験の区別用（1.初えっち　2.初Ａえっち　3.初キス　4.初フェラ　5.初中出し　6.初絶頂　7.初精飲
+;;<変数>
+;;
+;;<戻り値>
+;;
+;;==========================================================
+;@初体験記録_ＮＴＲ, ARGS
+;#LOCALSSIZE 1
+;
+;LOCALS=初えっち相手名
+;SIF EXP:TARGET:Ｖ経験 && (CSTR:TARGET:LOCALS == "未経験" || CSTR:TARGET:LOCALS == "")
+;	CSTR:TARGET:LOCALS = %ARGS%
+;SIF EXP:TARGET:キス経験 && (CSTR:TARGET:初キス相手名 == "未経験" || CSTR:TARGET:初キス相手名 == "")
+;	CSTR:TARGET:初キス相手名 = %ARGS%
+;SIF EXP:TARGET:フェラ経験 && (CSTR:TARGET:初フェラ相手名 == "未経験" || CSTR:TARGET:初フェラ相手名 == "")
+;	CSTR:TARGET:初フェラ相手名 = %ARGS%
+;SIF EXP:TARGET:膣射経験 && (CSTR:TARGET:初中出し相手名 == "未経験" || CSTR:TARGET:初中出し相手名 == "")
+;	CSTR:TARGET:初中出し相手名 =%ARGS%
+;SIF EXP:TARGET:絶頂経験 && (CSTR:TARGET:初絶頂相手名 == "未経験" || CSTR:TARGET:初絶頂相手名 == "")
+;	CSTR:TARGET:初絶頂相手名 = %ARGS%
+;SIF EXP:TARGET:精飲経験 && (CSTR:TARGET:初精飲相手名 == "未経験" || CSTR:TARGET:初精飲相手名 == "")
+;	CSTR:TARGET:初精飲相手名 = %ARGS%
+
+
+;==========================================================
+;@初体験記録
+; 調教時の初体験記録
+;
+;<引数>
+;ARG = 対象者
+;<変数>
+;
+;<戻り値>
+;
+;==========================================================
+@初体験記録(ARG)
+#DIM L_LEN
+;FOR COUNT, 60, 68
+;	LOCALS = %CSTR:ARG:COUNT%
+;	IF STRLENS(LOCALS) >= 1
+;		CONTINUE
+;	CSTR:ARG:COUNT = 未経験
+;NEXT
+
+L_LEN = 20
+
+CALL C_HEADLINE("初体験")
+PRINTFORM 初キス　　：%CSTR:ARG:初キス相手名, L_LEN, LEFT%
+PRINTFORM 初フェラ　：%CSTR:ARG:初フェラ相手名, L_LEN, LEFT%
+PRINTFORM 初精飲　　：%CSTR:ARG:初精飲相手名, L_LEN, LEFT%
+PRINTL
+PRINTFORM 初エッチ　：%CSTR:ARG:初えっち相手名, L_LEN, LEFT%
+PRINTFORM 初Ａエッチ：%CSTR:ARG:初Ａえっち相手名, L_LEN, LEFT%
+PRINTFORM 初中出し　：%CSTR:ARG:初中出し相手名, L_LEN, LEFT%
+PRINTL
+PRINTFORM 初絶頂　　：%CSTR:ARG:初絶頂相手名, L_LEN, LEFT%
+PRINTFORM 初出産　　：%CSTR:ARG:初出産相手名, L_LEN, LEFT%
+PRINTL
+PRINTL
+;SIF FLAG:デバッグモード
+;	PRINTL [999] - 初体験記録リセット－デバッグモード機能
+;PRINTL [0]もどる
+;
+;INPUT
+;SELECTCASE RESULT
+;	CASE 999
+;		CALL 初体験記録リセット
+;	CASEELSE
+;		
+;ENDSELECT
+
+
+;;==========================================================
+;;@初体験記録リセット
+;;新バージョン移行時に不具合を防ぐ為のリセット処理
+;;
+;;<引数>
+;;
+;;<変数>
+;;
+;;<戻り値>
+;;
+;;==========================================================
+;@初体験記録リセット
+;PRINTFORML 外部パッチ『初体験記録.ERB』に使われている『CSTR』の数値を全員分リセットします。
+;PRINTFORMW よろしいですか？
+;CALL INPUT_YN
+;IF !RESULT
+;	REPEAT CHARANUM
+;		CVARSET CSTR, 60
+;		CVARSET CSTR, 61
+;		CVARSET CSTR, 62
+;		CVARSET CSTR, 63
+;		CVARSET CSTR, 64
+;		CVARSET CSTR, 65
+;		CVARSET CSTR, 66
+;		CVARSET CSTR, 67
+;	REND
+;	
+;	PRINTFORML リセットしました。
+;	PRINTFORMW このままセーブを行う事で通常状態のデータになります。
+;ELSE
+;	PRINTFORMW 処理をキャンセルしました。
+;ENDIF
+
+;;==========================================================
+;;@初体験記録表示
+;; このERBを消したら表示されないように
+;; かなり意味がないけど、なるべく本体に処理を残さないようにしてみる
+;;
+;;<引数>
+;;
+;;<変数>
+;;
+;;<戻り値>
+;;
+;;==========================================================
+;@初体験記録表示
+;PRINTBUTTON "初体験記録 +",200
+;PRINTL 
+
+
+;=================================================
+;   sub 初体験記録_TRAIN
+;=================================================
+;   初体験記録:調教
+;-------------------------------------------------
+; Input:
+;  ARG					対象者
+;-------------------------------------------------
+@初体験記録_TRAIN(ARG)
+
+;性交系
+;-------------------------------------------------
+;SIF TCVAR:ARG:履歴_EXP_処女喪失
+;	CALL 初体験記録_調教, ARG, 1
+;SIF TCVAR:ARG:履歴_EXP_Ａ処女喪失
+;	CALL 初体験記録_調教, ARG, 2
+;SIF TCVAR:ARG:履歴_EXP_童貞喪失
+;	CALL 初体験記録_調教, ARG, 1
+;-------------------------------------------------
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "性交経験")
+	CALL 初体験記録_調教, ARG, 1
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "Ａ性交経験")
+	CALL 初体験記録_調教, ARG, 2
+;-------------------------------------------------
+
+;その他
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "キス経験")
+	CALL 初体験記録_調教, ARG, 3
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "フェラ経験")
+	CALL 初体験記録_調教, ARG, 4
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "膣射経験")
+	CALL 初体験記録_調教, ARG, 5
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "絶頂経験")
+	CALL 初体験記録_調教, ARG, 6
+SIF GTR_EXPUP:ARG:GETNUM(EXP, "精飲経験")
+	CALL 初体験記録_調教, ARG, 7
+
+
+
+;=================================================
+;   sub 初体験記録_OTHER
+;=================================================
+;   初体験記録:その他
+;-------------------------------------------------
+; Input:
+;  ARG					対象者
+;  ARG:1				区分(1:標準(Ｖ) 2:標準(Ａ) 3:標準(Ｐ) 4:標準(Ｃ) )
+;  ARGS					対象者名
+;-------------------------------------------------
+@初体験記録_OTHER(ARG, ARG:1=0, ARGS="")
+
+SELECTCASE ARG:1
+	;標準(Ｖ)
+	CASE 1
+		CALL 初体験記録_調教, ARG, 1, ARGS		;初えっち
+		CALL 初体験記録_調教, ARG, 3, ARGS		;初キス経験
+		CALL 初体験記録_調教, ARG, 4, ARGS		;初フェラ経験
+		CALL 初体験記録_調教, ARG, 5, ARGS		;初膣射経験
+		CALL 初体験記録_調教, ARG, 6, ARGS		;初絶頂経験
+		CALL 初体験記録_調教, ARG, 7, ARGS		;初精飲経験
+
+	;標準(Ａ)
+	CASE 2
+		CALL 初体験記録_調教, ARG, 2, ARGS		;初Ａえっち
+		CALL 初体験記録_調教, ARG, 3, ARGS		;初キス経験
+		CALL 初体験記録_調教, ARG, 4, ARGS		;初フェラ経験
+		CALL 初体験記録_調教, ARG, 6, ARGS		;初絶頂経験
+		CALL 初体験記録_調教, ARG, 7, ARGS		;初精飲経験
+
+	;標準(Ｐ)…オトコ役側
+	CASE 3
+		CALL 初体験記録_調教, ARG, 1, ARGS		;初えっち
+		CALL 初体験記録_調教, ARG, 3, ARGS		;初キス経験
+		CALL 初体験記録_調教, ARG, 6, ARGS		;初絶頂経験
+
+	;標準(Ｃ)…本番無しの愛撫
+	CASE 4
+		CALL 初体験記録_調教, ARG, 3, ARGS		;初キス経験
+		CALL 初体験記録_調教, ARG, 6, ARGS		;初絶頂経験
+
+	;その他
+	CASEELSE
+		RETURN
+ENDSELECT
+
+
+;;=================================================
+;;   sub 初体験記録_項目
+;;=================================================
+;;   初体験記録:項目
+;;-------------------------------------------------
+;; Input:
+;;  ARG					対象者
+;;  ARGS:0				項目名
+;;  ARGS:1				キー
+;;-------------------------------------------------
+;;  メモ：
+;;  使用保留。使い方は下記
+;;
+;;  CALL 初体験記録_ITEM(ARG, "初キス", "初キス相手名")
+;;-------------------------------------------------
+;
+;@初体験記録_ITEM(ARG, ARGS:0, ARGS:1)
+;#DIM L_LEN
+;#DIMS L_STR
+;#DIM L_BAK
+;L_BAK=GETCOLOR()
+;L_LEN = 20
+;L_STR=%初体験記録_NAME(CSTR:ARG:(ARGS:1))%
+;
+;SIF L_STR == "----"
+;	SETCOLOR COLOR("伏字")
+;
+;PRINTFORM %ARGS:0, 10, LEFT%：%L_STR, L_LEN, LEFT%
+;
+;SETCOLOR L_BAK
+
+;=================================================
+;   sub 初体験記録_NAME
+;=================================================
+;   初体験記録:相手名
+;-------------------------------------------------
+; Input:
+;  ARGS					名称
+; Output:
+;  RETURNF				相手名
+;-------------------------------------------------
+@初体験記録_NAME(ARGS)
+#FUNCTIONS
+
+;SIF !STRLENS(ARGS)
+;	ARGS = 未経験
+	ARGS = ----
+
+RETURNF ARGS
+
+
+
+
+;==========================================================
+;@初体験記録_SAVESTR確認
+; ARGSの文字列がSAVESTRにあるか調べる
+; あればSAVESTRの番号を返す
+; なければ空いているSAVEDATAに記録、番号を返す
+; 空きがなければ0を返す（0=名も知らぬ男）
+;
+;<引数>
+;ARGS  = 相手名
+;<変数>
+;
+;<戻り値>
+; ARGSの文字列が登録されているSAVESTRの番号
+; 登録されていなく、登録できる空きがなければ0
+;==========================================================
+@初体験記録_SAVESTR確認(ARGS)
+#FUNCTION
+#LOCALSSIZE 2
+;一応番号が不足した時用のものを事前に用意
+SAVESTR:0 = 名も知らぬ男
+FOR LOCAL, 0, VARSIZE("SAVESTR")
+	LOCAL:1 += 1 
+	;同じ物があれば番号を返す
+	SIF SAVESTR:(LOCAL:1) == ARGS
+		RETURNF LOCAL:1
+	;空の場合はブレイク
+	SIF STRLENS(SAVESTR:(LOCAL:1)) == 0
+		BREAK
+NEXT
+;空きがなければ0を返す
+SIF LOCAL:1 == VARSIZE("SAVESTR")
+	RETURNF 0
+;同じ物がなく、番号があいていればARGSをSAVESTR:(LOCAL:1)に保存した上で番号を返す
+SAVESTR:(LOCAL:1) = %ARGS%
+RETURNF LOCAL:1
+

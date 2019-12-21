@@ -1,0 +1,344 @@
+
+;-------------------------------------------------
+;住人業務　業務　アイドル
+;-------------------------------------------------
+@WORK_T_Ai(ARG:0,ARG:1,ARGS:0)
+#DIM L_INPUT
+#DIM L_T
+#DIM L_F
+#DIM L_K
+#DIM L_N
+
+L_T = TARGET
+TARGET = ARG:0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+		IF !RAND:3
+			PRINTFORML 「%CSTR:語尾YES%、やれるだけやってみ%CSTR:語尾ます%」
+		ELSEIF !RAND:2
+			PRINTFORML 「……上手くできたみたい%CSTR:語尾肯定2%」
+		ELSE
+			PRINTFORML 「まだ工夫がいるみたい%CSTR:語尾肯定2%」
+		ENDIF
+PRINTFORML 
+PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に促進され、アイドル活動に励んだ…
+
+PRINTFORML 
+
+IF (Talent:非処女 == 1 && Talent:合意 == 1) && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1) && RAND:10 >= 5
+SETCOLOR 250,50,200
+DRAWLINE
+	IF !RAND:9
+		PRINTFORML 「…っ……ん」
+		PRINTFORML 軽い睡眠から目を覚ます、どうやら絶頂してから眠っていたようだ。
+		PRINTFORML 視線を横に向けるとチームメイトの一人が彼に犯されていた、後ろから激しく腰を打ち付けられ蕩けた嬌声を絶えず発している。
+		PRINTFORML …何故この状況になったのか思い起こすと、スポンサーである彼の元へチームメイト五人で会いに行ったのを思い出す。
+		PRINTFORML いつも支援してくれる「お礼」を込めてのことだが、最初はよく全員同意したなと驚いたものだ。
+		PRINTFORML 後で知ったが他の四人は彼の援助と推薦があってアイドルになれたのだという、ついでに既に肉体関係だとも。
+		PRINTFORML お手付きの速さにやや呆れもするが、面倒や認知をしてくれる為まだマシだろうと思うことにした。
+		PRINTFORML 
+		PRINTFORML そうこう考えているうちに犯されている子は息切れしつつ絶頂し、彼もようやく射精したようだ、膣内射精されてあの子も満足そうに倒れこむ。
+		PRINTFORML すると他のチームメイトが媚びた声で彼にすり寄る、こちらも行動しないと永遠に待たされてしまいそうだ。
+		PRINTFORML そう思った%CALLNAME%は、股から精液を垂らしつつ皆の元へ歩み寄っていった…
+	ELSEIF !RAND:8
+		PRINTFORML かなり大きい会場でのライブという事で普段よりも緊張してリハーサルでは普段しないようなミスをして落ち込んでいた%CALLNAME%だが
+		PRINTFORML %CALLNAME:MASTER%が控室に入ってくるとそれを忘れてしまったかのように嬉しそうな顔になり他に誰も居ないのを良いことに抱きついてきた。
+		PRINTFORML だが報告で%CALLNAME%がリハーサルで上手くいかなかった事を聞いていた%CALLNAME:MASTER%にその事を聞かれると気まずそうに顔を伏せてしまう
+		PRINTFORML そんな%CALLNAME%を%CALLNAME:MASTER%は抱き締めると本番では上手くいくと言い勇気付けるが%CALLNAME%はまだ失敗のイメージに悩んでいると
+		PRINTFORML %CALLNAME:MASTER%は%CALLNAME%を抱き締めたまま押し倒して下着をずらし強引に肉棒を挿入して%CALLNAME%を犯し始めた。
+		PRINTFORML 
+		PRINTFORML 「ゃ…%CSTR:語尾拒絶%%UNICODE(0x2661)%…もう数時間後には本番%CSTR:語尾問う3%…こんなぁっ%UNICODE(0x2661)%…%CSTR:語尾拒絶%%UNICODE(0x2661)%」
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML 最初は僅かに抵抗した%CALLNAME%だが直ぐに雌の本能に負け快楽に流され腰の動きを合わせて奥まで突かせようとしてくるが
+		PRINTFORML %CALLNAME:MASTER%の腰がビクビクと震え射精が近い事を感じとると足を腰に回し慌てたように言葉を続けた。
+		PRINTFORML 
+		PRINTFORML 「いっ…衣装っ%UNICODE(0x2661)%…本番用でぇっ%UNICODE(0x2661)%…ナカっ膣内にぃっ…全部膣内に出し%CSTR:語尾命令強%%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML 腰を密着させ%CALLNAME%の膣内にベットリとした濃厚な精液を注ぎ込んだ%CALLNAME:MASTER%はまだ硬さを失ってない肉棒で
+		PRINTFORML 子宮の入り口をグリグリと焦らす様に刺激しながら本番が上手くできたら今度は此処に注ぎ込んでやると言い優しく口付けをした。
+		PRINTFORML 「…っ%UNICODE(0x2661)%…%CSTR:語尾感謝%%UNICODE(0x2661)%…それと、約束%CSTR:語尾拒否%…%CSTR:語尾微笑%%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML ライブ本番いつも以上に大勢のファン達を見事に歌とダンスで魅了し、自分を包み込む歓声に最高の笑みで応え輝いている%CALLNAME%。
+		PRINTFORML 会場施設の一室でモニター越しにそれを見守る%CALLNAME:MASTER%はその姿を見ながら時間を確認しそろそろライブも終盤、
+		PRINTFORML 最後の歌が始まる直前モニターに映る%CALLNAME%が一瞬身体を震わせた様に見えたが観客に違和感を感じさせない様に歌い始めた。
+		IF TALENT:機械
+		;機械の乙女
+			PRINTFORML 「～～♪～～っ%UNICODE(0x2661)%～っ%UNICODE(0x2661)%～～～♪♪～～っ%UNICODE(0x2661)%%UNICODE(0x2661)%%UNICODE(0x2661)%」
+			PRINTFORML %CALLNAME:MASTER%が操作する端末に快楽信号を送られ少し音を外したりダンスの振り付けをミスしそうになりながらも
+			PRINTFORML どうにか最後の歌を歌い終えライブを成功させた%CALLNAME%は会場に集まったファン達に最後の挨拶をして無事終了する。
+		ELSE
+			PRINTFORML 「～～♪～～っ！～！？～～～♪♪～～っ？！%UNICODE(0x2661)%」
+			PRINTFORML 本番直前までセックスしていて処理できなかった精液が数時間も続いたライブとダンスで魅せパンから零れそうになりながらも
+			PRINTFORML どうにか最後の歌を歌い終えライブを成功させた%CALLNAME%は会場に集まったファン達に最後の挨拶をして無事終了する。
+		ENDIF
+		PRINTFORML だが%CALLNAME:MASTER%には普段ライブで見せる高揚とは違う意味で紅潮した%CALLNAME%の表情やスカート越しに
+		PRINTFORML 股間を抑える様子にちょっとやり過ぎたかと思いながら約束を果たす為にライブを終えた%CALLNAME%の元に向かう。
+		PRINTFORML 
+		PRINTFORML %CALLNAME%はファン達に笑顔で手を振りながらも小走りで舞台の袖へと移動すると出迎えたスタッフへの挨拶も手短に済ませ
+		PRINTFORML 急いで控室に戻り衣装を全て脱ぎ捨てると股から白濁とした液体を垂らしながら備え付けのシャワールームに飛び込む。
+		PRINTFORML 「あぁ%UNICODE(0x2661)%…こんなにっ…たくさん%UNICODE(0x2661)%…ぁ…あぶなかったぁ…%UNICODE(0x2661)%」
+		PRINTFORML 全開にした暖かいシャワーを頭から浴びながら秘所に指を差し込むとどろりとした精子が溢れ出るのを見て快感を
+		PRINTFORML 感じながらもなんとか誰にもバレずに済んだ事に%CALLNAME%は艶の混じった安堵の声を漏らす…。
+		PRINTFORML 
+		PRINTFORML ライブが終わって安心したのか急に疲労が%CALLNAME%の身体を包みこむ感覚に襲われ意識を虚ろにしたまま
+		PRINTFORML しばらくシャワーを浴び続けていると突然シャワールームの扉が開かれ%CALLNAME:MASTER%が入ってくる。
+		PRINTFORML %CALLNAME:MASTER%は%CALLNAME%を労う言葉をかけながらその魅力的な肢体を撫でる様に優しく揉み解す、
+		PRINTFORML 気持ち良さそうにマッサージに身体を預けながら%CALLNAME%は甘える様に%CALLNAME:MASTER%にキスをせがんできた。
+		PRINTFORML %CALLNAME:MASTER%はふざけてアイドルの癖にファン達に申し訳ないと思わないのかと言って%CALLNAME%をからかう
+		PRINTFORML 
+		PRINTFORML 「きっと…大丈夫%CSTR:語尾応答%%UNICODE(0x2661)%…%CSTR:一人称%のファンはやさしいからぁ%UNICODE(0x2661)%」
+		IF TALENT:ＮＴＬ
+		;寝取り済み
+			PRINTFORML 「アイドル止めろなんてっ…あの人…%CSTR:伴侶名前%みたいな事言わない%CSTR:語尾褒める%%UNICODE(0x2661)%」
+		ELSE
+			PRINTFORML 「%CSTR:一人称%がエッチで卑しいアイドルでもぉ%UNICODE(0x2661)%…ゆるしてくれ%CSTR:語尾ます%%UNICODE(0x2661)%」
+		ENDIF
+		PRINTFORML ファンが聞いたら卒倒するか激怒してネットワークで炎上しかねない発言に%CALLNAME:MASTER%は突然
+		PRINTFORML 関係をバラさない様に注意し%CALLNAME%の膣奥まで肉棒を挿入して子宮口を何度も何度も繰り返し突き上げる。
+		PRINTFORML 
+		PRINTFORML 「%CSTR:語尾YES%っ%UNICODE(0x2661)%…ひみつぅ%UNICODE(0x2661)%…ヒミツに%CSTR:語尾問う2%%UNICODE(0x2661)%…秘密のカンケイさせて%CSTR:語尾希望%っ…%UNICODE(0x2661)%%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML キツく締め付けながら肉棒に吸い付いてくる様な%CALLNAME%の雌穴を屈服させた%CALLNAME:MASTER%は仕上げとばかりに
+		PRINTFORML 最奥に亀頭を擦りつけ子宮の中まで肉棒を押し込もうとしながら容赦なく射精しアイドルの子宮を自分の遺伝子で満たした…
+		PRINTFORML 
+	ELSEIF !RAND:7
+		PRINTFORML 砂浜を撫でる穏やかな波とその中を歩く%CALLNAME%、レジャー施設内に造られた海岸添いの砂浜を模したプールを貸し切り
+		PRINTFORML 今まさにグラビアの撮影を行っている最中の%CALLNAME%は布面積の小さい大胆なビキニの水着を着て
+		PRINTFORML 扇情的な姿勢やポーズで被写体となり時にはかなりきわどい角度から局部を強調するものまで撮られている。
+		IF TALENT:巨乳 || TALENT:爆乳
+			PRINTFORML そしてカメラマンから更に過激な注文をされ%CALLNAME%はファンの視線を釘付けにして離さない魅力的な胸から
+			PRINTFORML 水着を取り去ると手や指、ときには飲み物などの小道具を使い乳首と乳輪が見るギリギリまで肌を晒していき
+			PRINTFORML 撮影の最後には下の水着を上へと引っ張り性器の形が浮き出ているファン垂涎の一枚を撮られ無事終了した。
+		ELSEIF TALENT:貧乳 || TALENT:絶壁
+			PRINTFORML 更にカメラマンから注文を受けた%CALLNAME%は波打ち際に寝そべり波で身体を濡らすとなんとその
+			PRINTFORML スレンダーな肢体を覆う小さな白いビキニが透けて乳首や乳輪の色がうっすらと浮かび上がってしまう
+			PRINTFORML 流石にこれには%CALLNAME%も顔を紅く染めるがなんとか最後まで撮影をこなし何枚もの濡れ透けビキニ姿を撮られて終了した。
+		ELSE
+			PRINTFORML カメラマンの注文に応え%CALLNAME%は僅かに恥じらいながらも魅力的な身体を惜しげも無く使って楽しそうに撮影を続け
+			IF TALENT:巨尻 || TALENT:爆尻
+				PRINTFORML 大きな岩陰に隠れる様な場面で岩に片手をつき大きなお尻を強調しながら水着の紐を解く様ないやらしい仕草を撮影し終了する。
+			ELSE
+				PRINTFORML バランスの良い均整の取れた見事なプロポーションの性的な写真を何枚も撮られて無事終了する。
+			ENDIF
+		ENDIF
+		PRINTFORML 
+		PRINTFORML 
+		PRINTFORML 撮影が終了し%CALLNAME%は撤収を始めたスタッフを眺めながら待っていると遅れてやってきた%CALLNAME:MASTER%に
+		PRINTFORML 今日の仕事は終わりだからスタッフが帰ったら二人だけで残り時間いっぱいまで貸し切りを楽しもうと言われ満面の笑みを浮かべる。
+		PRINTFORML %CALLNAME:MASTER%は%CALLNAME%に連れられるまま二人で一通りの場所を回り遊び終えると次は岩陰の方へと引っ張っられ
+		PRINTFORML 撮影中に見つけたと言う岩と南国風の観葉植物に隠れて周りから見えない場所で%CALLNAME:MASTER%の水着を膝下まで下ろし
+		PRINTFORML 肉棒を優しく扱きながらいやらしく微笑むと亀頭にキスをしそのまま肉棒を舐めしゃぶり嬉しそうに上目遣いで見つめてくる。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+		PRINTFORML 「…ぷあぁっ%UNICODE(0x2661)%…んっ…%CSTR:語尾拒絶%%UNICODE(0x2661)%…こっちよりぃ…%UNICODE(0x2661)%…こっち%UNICODE(0x2661)%…%CSTR:語尾微笑%%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に仕込まれたフェラチオで肉棒をそそり立たせると誘う様な視線で%CALLNAME:MASTER%を見つめて語り掛けながら
+		PRINTFORML 水着を脱ぎ岩に背を預け片足を持ち上げクチュリといやらしい音を立て二本の指で秘所を開くとそこから愛液が溢れてきた。
+		PRINTFORML 
+		PRINTFORML 「はいってきたぁっ%UNICODE(0x2661)%…いちばん奥までぇっ%UNICODE(0x2661)%…%CSTR:二人称%のおちんちんっ%UNICODE(0x2661)%…すきぃ%UNICODE(0x2661)%…だいすきぃっ%UNICODE(0x2661)%」
+		PRINTFORML 
+		PRINTFORML 多くのファンを持つアイドルが%CALLNAME:MASTER%にだけ見せる淫靡な姿に興奮し%CALLNAME%の膣を最奥までいきり立った肉棒で一突きにする。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML 勢いに任せるまま%CALLNAME%の最奥まで犯して喘がせると%CALLNAME:MASTER%は我慢できずにこのまま膣内に出すぞと言い放つ。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
+		PRINTFORML 
+		PRINTFORML %CALLNAME%もそれを聞いて喘ぎ声交じりに答え頷くとを抱き付き足を絡ませて%CALLNAME:MASTER%の種付けを受け入れ
+		PRINTFORML 二人は繋がり抱き合ったまましばらくのあいだ余韻に浸っていたがまだ収まらない性欲にレジャー施設を出て喫茶店へと車を走らせた…
+	ELSEIF !RAND:6 && TALENT:妊娠
+		PRINTFORML %CALLNAME%の体調が優れないためファンクラブ会員限定の生配信ミニライブを急遽トークイベントに変更したが
+		PRINTFORML 幸いなことにファンからは大きな不満の声も出ず混乱も無く%CALLNAME:MASTER%は安心して無事にイベントを開始できた。
+		PRINTFORML 「%CSTR:一人称%の体調の所為で予定を変更して本当に%CSTR:語尾謝罪%…突然%CSTR:語尾逆説%今日はトークイベントを楽しんで%CSTR:語尾希望2%」
+		IF TALENT:結婚済み || TALENT:交際中
+			IF TALENT:ＮＴＬ && TALENT:托卵
+				PRINTFORML 少し申し訳なさそうな顔でカメラに向かって頭を下げファン達に謝罪する%CALLNAME%のお腹は%CALLNAME:MASTER%の子を宿してはっきりと膨らんでいる
+			ELSE
+				PRINTFORML 申し訳なさそうな表情でカメラに向かって頭を下げファン達に謝罪する%CALLNAME%のお腹は何者かの子を宿し膨らんでしまっている
+			ENDIF
+		ELSE
+		;あなた
+			PRINTFORML 少し居心地の悪そうな顔でカメラに向かって頭を下げファン達に謝罪する%CALLNAME%のお腹は%CALLNAME:MASTER%の子を宿してはっきりと膨らんでいる
+		ENDIF
+		IF TALENT:礼儀正しい
+			PRINTFORML 「ライブの代わりになるかは分かりませんが今回は特別に少しだけならエッチな質問にも答えちゃいますっ！」
+			PRINTFORML %CALLNAME%は恥かしさに耐えながら%CALLNAME:MASTER%に言われた通りに挨拶しその後宣言した通りにファン達から性的な内容を含む
+			PRINTFORML 質問を何度も受けるがその礼儀正しい性格からか頬を真っ赤に染めながらもかなり正直に答えてしまっている。
+		ELSEIF TALENT:クール
+			PRINTFORML 「ライブの代わりになるか分からないんだけど今回だけ特別に少しならスケベな質問にも答えちゃうよ♪」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に言われた通りに挨拶しその後宣言した通りにファン達から性的な内容を含む質問を
+			PRINTFORML 何度も受けるが恥かしさを感じさせない様子で愛想良く反応しながら楽しそうに答えている。
+		ELSEIF TALENT:ツンツン
+			PRINTFORML 「ライブの代わりになるか分からないけれど今回特別にこの%CALLNAME%がちょっとだけエッチな質問にも答えてあげるんだからねっ！」
+			PRINTFORML %CALLNAME%は恥かしさで怒る様に喋りながら挨拶しその後宣言した通りにファン達から性的な内容を含む質問を
+			PRINTFORML 何度もしつこくされ続けると顔を真っ赤に染めながら激しく質問の内容に反応しファンを楽しませている。
+		ELSEIF TALENT:マイペース
+			PRINTFORML 「ライブの代わりになるか分からないけど今回特別に少しならエッチな質問にも答えちゃうよ～♪」
+			PRINTFORML %CALLNAME%は恥かしがりながらも%CALLNAME:MASTER%に言われた通りに挨拶しその後宣言した通りにファン達から性的な内容を含む
+			PRINTFORML 質問を何度も受けるがそのマイペースな性格からか頬を紅く染めながらもいつもの調子で正直に答えている。
+		ELSEIF TALENT:高圧的
+			PRINTFORML 「それと代わりになるかは分からないけれど今回は特別に%CALLNAME%が少しだけいやらしい質問にも答えてあげる事にしたの…♪」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に言われた通りに挨拶しその後宣言した通りにファン達から性的な内容を含む質問を
+			PRINTFORML 何度も受けるが普段と違う独特の色気を漂わせ膨らんだお腹を撫でながら愛想良く答えている。
+		ELSEIF TALENT:荒々しい
+			PRINTFORML 「それとな…ライブの代わりになるか分かんないけど今回少しだけならお前たちのいやらしい質問にも答えてやる事にしたんだぞっ！…うぅ…」
+			PRINTFORML %CALLNAME%は恥かしさに怒ったり弱ったりしながらも%CALLNAME:MASTER%に言われた通りに挨拶しファン達から性的な内容を含む
+			PRINTFORML 質問を何度も受け普段の様子からは考えられない程か頬を真っ赤に染め狼狽えながらも答えてしまっている。
+		ELSEIF TALENT:弱気
+			PRINTFORML 「ぁ…あとライブの代わりになるかは分からないですけど今回は特別にちょ…ちょっとだけならエッチな質問にも答えちゃいますぅっ…！」
+			PRINTFORML %CALLNAME%は恥かしさで涙目になりながら%CALLNAME:MASTER%に言われた通り挨拶してファン達から性的な内容の
+			PRINTFORML 質問ばかりに何度も受け予想どうり弱気な性格からか頬を真っ赤に染め正直に答えてしまっている。
+		ELSEIF TALENT:気品高い
+			PRINTFORML 「ライブの代わりになるかは分からないですけれども今回%CSTR:一人称%特別に少しだけいやらしい質問にも答える事にしましたの…♪」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に言われた通りに挨拶しその後宣言した通りにファン達から性的な内容をいくつか含む質問を
+			PRINTFORML 何度も受けながらも気品漂う独特の色気を漂わせ膨らんだお腹を撫でながら愛想良く答えている。
+		ELSEIF TALENT:男気
+			PRINTFORML 「それと…ライブの代わりになるか分かんねえけど今回特別にお前らのスケベな質問にも少しだけ答えてやるぞ！…そっそんなはしゃぐなっ！」
+			PRINTFORML %CALLNAME%は恥かしさに怒りながらも%CALLNAME:MASTER%に言われた通りに挨拶しファン達から性的な内容を含む
+			PRINTFORML 質問を何度も受け普段の様子からは考えられない程か頬を真っ赤に染め狼狽えながらも答えてしまっている。
+		ELSEIF TALENT:色っぽい
+			PRINTFORML 「あとぉ…ライブの代わりになるか分からないけど今回特別にちょっとだけエッチな質問にも答えてあげちゃうわ♪」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に言われた通りに挨拶するとファン達から性的な内容の質問を何度もされるが
+			PRINTFORML 楽しそうな様子で愛想良く反応しながら答え時には質問された内容以上の事まで話している。
+		ELSEIF TALENT:フレンドリー
+			PRINTFORML 「あとライブの代わりになるか分からないけど今回は特別にちょっとだけエッチな質問にも答えてあげちゃうわよぉ♪」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に言われた通りに挨拶するとファン達から性的な内容の質問を何度もされるが
+			PRINTFORML 恥ずかしがりながらも親しい同性の友人と話す時の様に楽しそうに愛想良く答えている。
+		ELSEIF TALENT:古風
+			PRINTFORML 「流行うたの代わりとなるかは分からぬがこのひと時は%CALLNAME%が特別に少しばかり御主等のいやらしい質問に答える事としたのじゃ…♪」
+			PRINTFORML %CALLNAME%は%CALLNAME:MASTER%に言われた通りに挨拶し宣言した通りにファン達から性的な内容を含む質問を
+			PRINTFORML 何度も受ける恥かしさに耐えながらできる限り愛想良く反応し楽しそうに答えている。
+		ELSEIF TALENT:子供っぽい
+			PRINTFORML 「あっ！…あとぉライブの代わりになるか分からないけどぉ…今回特別にエッチ？…な質問に%CALLNAME%が答えちゃうのっ♪…えへへっ♪」
+			PRINTFORML %CALLNAME%はよく意味も理解できないまま%CALLNAME:MASTER%に言われた通りに挨拶するとファン達から性的な内容の質問を次々とされるが
+			PRINTFORML やはり意味がよく分からない様子で変な答え方をして笑いを誘ったりパンツの色を聞かれて恥かしがったりしながら楽しそうに答えている。
+		ELSEIF TALENT:おしゃま
+			PRINTFORML 「あの…それとライブの代わりになるか分からないですが…今回はですね…特別に少しだけエッチな質問にも答えますっ！…恥ずかしいですぅ…♪」
+			PRINTFORML  %CALLNAME%は恥かしさで顔を真っ赤にしながら%CALLNAME:MASTER%に言われた通り挨拶しファン達から性的な内容の
+			PRINTFORML 質問ばかりに何度もされると更に頬を真っ赤に染めて混乱しながら答えてしまっている。
+		ELSE
+			PRINTFORML この部分は本来表示されません
+		ENDIF
+		PRINTFORML 
+		PRINTFORML 様々な質問や答えが飛び交ったトークイベントも終わりの時間が近づき%CALLNAME%が今後少しの間は体調によってライブやダンスの
+		PRINTFORML イベントを控えるとファン達に伝え改めて頭を下げその後にこの子を産んだらまた今まで通り活動を再開すると宣言し
+		PRINTFORML 制度によって住民に広く認知される女性達は定期的にその中から無作為に選ばれ子を産んでシティに貢献しなければならないと
+		PRINTFORML 教えられているファン達は%CALLNAME%に、妊娠おめでとう元気なあかちゃん産んでねなどのお祝いのメッセージを送りながらイベントは終了した…
+		PRINTFORML 
+	ELSEIF !RAND:5 && (TALENT:巨乳 || TALENT:爆乳)
+		PRINTFORML 現在人気のコスチュームを見せてもらうがやたら色気のある衣装だ、特に下乳は大きな穴が開いている、所謂「パイズリ穴」というやつだ。
+		PRINTFORML 特に%CALLNAME%ほどの豊満な乳房だと胸部がキツキツであり、肉付きを誇張するかのように穴から下乳がはみ出ている。
+		PRINTFORML こちらの視線に気づいたのか、ニヤリと笑みを浮かべた%CALLNAME%がこちらをベッドに腰かけさせると、
+		PRINTFORML 徐にペニスを取り出し一度口に含み、十分に濡らした後それをきつそうなパイズリ穴へと挿入した。
+		PRINTFORML 
+		PRINTFORML マシュマロのように柔らかい乳房に犯されながら、甘い声と上目遣いのコンボによる視覚的興奮は強烈であり、物凄い勢いで精液が充填されていくのを感じる。
+		PRINTFORML 調教で教えた技巧も合わさって動くたびに肉音すら出る圧巻のパイズリの前に、%CALLNAME:MASTER%はあっけなく乳内射精してしまった。
+		PRINTFORML しばらく射精の余韻に浸っていたが、小悪魔な笑みを浮かべたままの%CALLNAME%は再びパイズリを再開する。
+		PRINTFORML 精液で更に滑りが良くなったことによる快感と、ネチュネチュと谷間から聞こえる卑猥な水音で射精したはずのペニスはすぐさま硬さを取り戻す。
+		PRINTFORML それに気分をよくした%CALLNAME%は、いつも喘がされてる仕返しと言わんばかりにパイズリ天獄を続けていった…
+		PRINTFORML 
+	ELSEIF !RAND:4
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 新曲のCDが沢山売れたということで、%CALLNAME%へのご褒美として%CALLNAME:MASTER%は彼女を自室に向かい入れ可愛がることに。
+		PRINTFORML 騎乗位を許してやると、待っていたと言わんばかりに欲情仕切った面持ちで、股から愛液を垂らしながら腰を上下に振り始める。
+		PRINTFORML %CALLNAME:MASTER%の種子を欲しがるように子宮も下りきっており、打ち付けるたびに淫靡な水音が鳴り響く。
+		PRINTFORML 
+		PRINTFORML イっては再び淫舞を繰り返す%CALLNAME%の種付け要求に%CALLNAME:MASTER%も遂に根負けし、充填されていた精液を容赦なく射精した。
+		PRINTFORML アイドルを独占し種付けするという背徳感に興奮を抑えきれない%CALLNAME:MASTER%は、%CALLNAME%をベッドに寝かせ正常位で犯し始める。
+		PRINTFORML その欲望を読み取った%CALLNAME%は歓喜を持って受け入れ、両手両足で%CALLNAME:MASTER%をホールドし更なる施しを強請った…
+	ELSEIF !RAND:3
+		PRINTFORML 持て囃されるのは好きだし歌も踊りの好き、でもプライベートも欲しいと思う%CALLNAME%だが、人気があればあるほどそれは難しい。
+		PRINTFORML でもそんな彼女でも安心して素顔を晒すことが出来る場所もある、大好きな彼がよくいる喫茶店だ。
+		PRINTFORML 彼や店長が言うには「情報漏洩禁止」の申請をしておくと大丈夫なのだそうだが今でも半信半疑、しかし確かに漏れたことがないので一応信頼している。
+		PRINTFORML 
+		PRINTFORML 今日も彼と楽しいお茶会を楽しみ、気分上々といった状態なのでいつもの「奥の部屋」へ行こうと彼を誘う。
+		PRINTFORML 何故喫茶店に「ヤリ部屋」が複数もあるのか疑問だが、おちおちラブホテルも使えない身分としてはありがたいことだ。
+		PRINTFORML 黄昏色の光で照らされた部屋に入るやいなや、お互いに衣服を脱ぎ去り彼の逞しいペニスを自身の膣内に向かい入れた。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 膣内はすでに彼のペニスの形を覚えたのか、軽いストロークでも電気が走ったかのような快感が身体を巡る。
+		PRINTFORML 女性の身体を知り尽くしたかのような巧みなピストンで、こちらはただただ快楽を甘受することしかできない。
+		PRINTFORML アイドルらしい演技などする余裕もない、強い雄に犯される雌に成り下がったかのように身体も心も媚び諂う。
+		PRINTFORML 
+		PRINTFORML 情交の末、こちらが数度絶頂した後ようやく彼もイったのか、熱いモノが子宮に流れ込んでいく感覚を感じ取る。
+		PRINTFORML 今日は排卵日だっただろうかと、思考定まらない状態で満更でもない…寧ろ望む未来図をぼんやりと思い描く。
+		PRINTFORML 女として最大の幸福に満たされながら、さらに味わおうと昏い欲望に着き動かれていった…
+	ELSEIF !RAND:2
+		PRINTFORML 早く来てしまったため準備を終えてもライブまで二時間もある状況で、退屈そうにしていた%CALLNAME%のところに視察に来ていた%CALLNAME:MASTER%がやってくる。
+		PRINTFORML 思わぬサプライズに満面の笑みで向かい入れると、人目がないことをいいことに、%CALLNAME%は甘ったるい声を出して彼に甘え始めた。
+		PRINTFORML 最初はべったりするだけだったが次第に表情に熱が籠り始め、最後には簡易ベッドでエッチのおねだりにまで発展する
+		PRINTFORML かわいいアイドルのリクエストなら仕方ないと、%CALLNAME:MASTER%はガチガチに勃起したペニスを取り出し、愛液で濡れ切った秘所に挿入した。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML その後、時間ギリギリまで愛し合い、最後に何度目かわからない射精を子宮に向かってぶちまける。
+		PRINTFORML もう入り切れないと、逆流するザーメンを亀頭で無理やり押し込み、さらにピストンで子宮へと送っていく。
+		PRINTFORML トクトクと胎に溜まっていく感覚に%CALLNAME%は酔いしれ、火照りが収まるまで彼とアフターキスを好きなだけ楽しんだ。
+		PRINTFORML 熱い情交を済ませ、シャワーを浴びて支度を整えた%CALLNAME%は時間ピッタリにライブへ向かう。
+		PRINTFORML 
+		PRINTFORML 大勢のファンたちの前で歌とダンスで魅了し、歓声には笑みで応える%CALLNAME%。
+		PRINTFORML 多くの熱意と劣情を集めるだが、既に彼女の子宮は一人の男の精液で満たされていた…
+	ELSE
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
+		PRINTFORML 
+		PRINTFORML ライブを終えた%CALLNAME%は様子を見に来ていた%CALLNAME:MASTER%に駆け寄り、おねだりして車で家に送って貰うことに。
+		PRINTFORML その道中、%CALLNAME%は自動運転で暇を持て余していた%CALLNAME:MASTER%のペニスをズボンから取り出し、火照った顔を隠し切れぬままフェラを始める。
+		PRINTFORML 時たま大きな肉棒に頬擦りしたり上目遣いでフェラしたりと、アイドル活動で磨き上げた魅せのセンスを使い%CALLNAME:MASTER%の情欲を誘っていく。
+		PRINTFORML %CALLNAME:MASTER%もこれには堪らず射精を抑えきれずに口の中に濃い精液を吐き出す、
+		PRINTFORML 射精が一通り済ますと%CALLNAME%が口を開けて溜まった白濁液を見せた後ごっくんと綺麗に飲み干した。
+		PRINTFORML 
+		CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK30
+		PRINTFORML 
+		PRINTFORML 家に着いた後も離れようとしない%CALLNAME%に観念した%CALLNAME:MASTER%は、彼女に導かれるように寝室へ向かい服を脱ぐことすら忘れ情交に耽った。
+		PRINTFORML 喘ぎ声さえ美しい%CALLNAME%の歌声は深夜になっても止むことはなかった…
+	ENDIF
+DRAWLINE
+
+CALL JN_SEX_EXP
+RESETCOLOR
+
+ENDIF
+
+
+
+
+
+
+
+PRINTFORMW
+
+EXP:業務経験 += 1
+L_F = 1+(EXP:業務経験/10)+(RAND:(EXP:業務経験))+RAND:50
+L_N = 5+RAND:20
+CFlag:ファンの数 += L_F
+CFlag:住人_人気 += L_N
+PRINTFORML 【業務経験　　:{EXP:業務経験-1, 9 ,LEFT}→{EXP:業務経験, 9 ,RIGHT}】
+PRINTFORML 【ファンの数　:{CFlag:ファンの数-L_F, 9 ,LEFT}→{CFlag:ファンの数, 9 ,RIGHT}】
+PRINTFORML 【人気　　　　:{CFlag:住人_人気-L_F, 9 ,LEFT}→{CFlag:住人_人気, 9 ,RIGHT}】
+DRAWLINE
+IF Flag:都市_功績獲得機会 != 0
+	CFLAG:住人_業務ポイント += 5
+	L_K = (((EXP:業務経験/100)+1)*1000)+(EXP:業務経験*3)
+	Flag:都市_功績 += L_K
+	Flag:都市_功績獲得機会 = 0
+	PRINTFORML 更に%CALLNAME%の活躍が「シティ」に認められ、大量の功績を獲得した！
+	PRINTFORML 【功績　　:{Flag:都市_功績-1, 10 ,LEFT}→{Flag:都市_功績, 10 ,RIGHT}】
+	DRAWLINE
+ENDIF
+PRINTFORMW 
+
+TARGET = L_T
+
+
+
+
+
+
+
+
+
+
+
