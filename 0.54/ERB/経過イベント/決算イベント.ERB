@@ -14,19 +14,19 @@ Flag:都市_今期の貢献値 += FLAG:都市_貢献値持越し
 $INPUT_LOOP
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML ≪こんにちわ「プレイヤー」、今期の決算を行いますよ≫
-PRINTFORML ≪貴方が保有する住民たちの合計貢献値を報告致します≫
+PRINTFORML ≪안녕하세요「플레이어」、이번 분기의 결산을 실시겠습니다≫
+PRINTFORML ≪당신이 보유한 주민들의 합계 공헌치를 보고해드리죠≫
 DRAWLINE
 SIF FLAG:都市_貢献値持越し > 0
-	PRINTFORML ≪持ち越している貢献値{FLAG:都市_貢献値持越し}があります、これを今期に加算します。≫
-PRINTFORML ≪今期の貢献値は{Flag:都市_今期の貢献値}です。≫
-PRINTFORML ≪この貢献値を元にボーナスを支給致します。≫
-PRINTFORML ≪あなたに提示できるボーナスは以下の通りです。≫
+	PRINTFORML ≪이월된 공헌도 {FLAG:都市_貢献値持越し}이 있습니다、이걸 이번 분기에 가산하겠습니다。≫
+PRINTFORML ≪이번 분기의 공헌도는 {Flag:都市_今期の貢献値}입니다。≫
+PRINTFORML ≪이 공헌도를 바탕으로 보너스를 지급합니다。≫
+PRINTFORML ≪당신에게 제공할 수 있는 보너스는 다음과 같습니다。≫
 DRAWLINE
-PRINTFORML [1]   【資金】(貢献値×3000)
-PRINTFORML [2]   【住人階級付与】(必要:階級×500)
+PRINTFORML [1]   【자금】(공헌도×3000)
+PRINTFORML [2]   【거주자 계급 부여】(필요:계급×500)
 PRINTFORML 
-PRINTFORML [900] 【持ち越す】
+PRINTFORML [900] 【미룬다】
 PRINTFORML 
 INPUT
 L_INPUT = RESULT
@@ -35,7 +35,7 @@ CASE 1
 	K_S = 1
 	DRAWLINE
 	MONEY += (Flag:都市_今期の貢献値)*3000
-	PRINTFORML 資金{(Flag:都市_今期の貢献値)*3000}を獲得しました。
+	PRINTFORML 자금{(Flag:都市_今期の貢献値)*3000}を獲得しました。
 	PRINTFORML 
 	PRINTFORMW 
 CASE 2
@@ -50,16 +50,16 @@ CASE 2
 	IF L_INPUT == 1000
 		GOTO INPUT_LOOP
 	ELSEIF TALENT:L_INPUT:NPC == 999
-		PRINTFORMW NPCは選択できません
+		PRINTFORMW NPC는 선택할 수 없습니다
 		GOTO INPUT_LOOP
 	ELSEIF L_INPUT == 0
-		PRINTFORMW あなたは選択できません
+		PRINTFORMW 아나타는 선택할 수 없습니다
 		GOTO INPUT_LOOP
 	ELSEIF (CFLAG:L_I:住人_階級 * 500) > Flag:都市_今期の貢献値
-		PRINTFORMW 貢献値が足りません
+		PRINTFORMW 공헌도가 부족합니다
 		GOTO INPUT_LOOP
 	ELSEIF CFLAG:L_I:住人_階級 == 7
-		PRINTFORMW これ以上の階級は存在しません
+		PRINTFORMW 더 이상의 계급은 존재하지 않습니다
 		GOTO INPUT_LOOP
 	ENDIF
 	
@@ -69,13 +69,13 @@ CASE 2
 	CFLAG:L_I:住人_階級 += 1
 	CFLAG:L_I:住人_貢献値 += 1
 	TALENT:L_I:(3100 + (CFLAG:L_I:住人_階級)) = 1
-	PRINTFORML %CALLNAME:L_I%の階級が上がりました。
-	PRINTFORMW 貢献値1上昇。
+	PRINTFORML %CALLNAME:L_I%의 계급이 올랐습니다。
+	PRINTFORMW 공헌도 1 상승。
 CASE 900
 	K_S = 0
 	FLAG:都市_貢献値持越し += Flag:都市_今期の貢献値
 	DRAWLINE
-	PRINTFORMW 今回はボーナスを見送り、貢献値を持越しします。
+	PRINTFORMW 이번엔 보너스를 넘기고、공헌도를 이월합니다。
 	DRAWLINE
 CASEELSE
 	GOTO INPUT_LOOP
@@ -86,8 +86,8 @@ IF K_S == 1
 	Flag:都市_今期の貢献値  = 0
 ENDIF
 DRAWLINE
-PRINTFORML ≪以上で今期の決算を終了します。≫
-PRINTFORMW ≪今後もよい成果を期待していますよ。≫
+PRINTFORML ≪이상으로 이번 분기의 결산을 마치겠습니다。≫
+PRINTFORMW ≪앞으로도 좋은 성과를 기대하죠。≫
 DRAWLINE
 	Flag:都市_今期の締め切り = 90
 
