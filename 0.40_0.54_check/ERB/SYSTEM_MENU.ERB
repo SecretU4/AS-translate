@@ -35,6 +35,7 @@
 @SYSTEM_MENU(ARG:0)
 #DIM L_INPUT
 #DIM NOW_GROUP ;REF用
+#DIM L_color
 FLAG:継承種族 = 0
 Flag:汎用変数6 = 999
 ;- VAR:ターン終了処理
@@ -45,6 +46,7 @@ IF GTR_CHARA_CNT != CHARANUM
 	;- VAR:リスト更新
 	CALL VAR_MAKE_LIST
 ENDIF
+
 
 ;-------------------------------------------------
 
@@ -86,6 +88,7 @@ SIF FLAG:調教対象人数
 ;-----------------------------
 
 DRAWLINE
+L_color = GETCOLOR()
 
 SIF !FLAG:調教対象人数
 	SETCOLOR COLOR("伏字")
@@ -98,6 +101,8 @@ PRINTLC [102] - 시간을 진행한다
 IF FLAG:都市_防衛 != 0
 	PRINTLC [300] - 防衛戦
 ENDIF
+SIF !FLAG:都市_現在BP && Flag:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
 PRINTLC [50] - BP 섭취(TP 회복)
 PRINTL
 
@@ -117,14 +122,15 @@ ELSEIF Flag:依頼_スパイテロ駆除_Lv > 0 || Flag:依頼_イスからの�
 ELSE
 	SETCOLOR COLOR("伏字")
 	PRINTLC [107] - 의뢰
-	RESETCOLOR
+	SETCOLOR L_color
 ENDIF
 PRINTLC [108] - 지원 지시
+PRINTLC [121] - アーカイブ
 PRINTL 
 IF FLAG:都市_功績獲得機会 != 0
 	SETCOLOR 50,250,250
 	PRINTLC [109] - 주민 업무-!-
-	RESETCOLOR
+	SETCOLOR L_color
 ELSE
 	PRINTLC [109] - 주민 업무
 ENDIF
@@ -133,11 +139,12 @@ PRINTLC [111] - 능력 상승
 IF Flag:EP他プレイヤー干渉 != 0
 	SETCOLOR 250,50,50
 	PRINTLC [112] - 【경고】
-	RESETCOLOR
+	SETCOLOR L_color
 ENDIF
 PRINTL 
+PRINTLC [113] - 遺物研究
+PRINTL 
 
-;PRINTLC [113] - 
 ;PRINTLC [114] - 아이템 구입
 ;PRINTLC [115] - 의상 구입
 PRINTL 
@@ -181,7 +188,6 @@ SELECTCASE L_INPUT
 			CALL C_INPUT_ERROR("조교 대상이 존재하지 않아 실행할 수 없습니다。조교 대상을 선택하세요。")
 			GOTO INPUT_LOOP
 		ENDIF
-		;TRAIN
 		CALL SYSTEM_TRAIN
 		FLAG:ターン終了フラグ = 1
 
@@ -254,12 +260,9 @@ SELECTCASE L_INPUT
 		CALL CHANGE_TARGET_PREV
 	CASE 154
 		CALL CHANGE_TARGET_NEXT
-
-
-	;区画管理
+		;遺物研究
 	CASE 113
-		;SYSTEM:AREA_MENU
-		;CALL SYSTEM_AREA_MENU
+		CALL AF_LABO
 	;アイテム購入
 	CASE 114
 		;アイテム:主処理
@@ -273,6 +276,9 @@ SELECTCASE L_INPUT
 		CLEARLINE LINECOUNT
 		DRAWLINE
 		TRYCALLFORM CITY_STORY_{FLAG:都市_ストーリー}
+	;アーカイブ
+	CASE 121
+	CALL ARCHIVE_TOP
 	;口調修正
 	CASE 150
 		;口調修正

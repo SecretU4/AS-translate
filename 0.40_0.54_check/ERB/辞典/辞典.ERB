@@ -45,6 +45,7 @@ PRINTFORML [15] アーティファクト
 PRINTFORM [6] 種族　　　　　　　
 PRINTFORML [16] キャラリスト表示項目
 PRINTFORML [7] 決算
+PRINTFORML [17] アーカイブ
 PRINTFORML [8] 襲撃
 PRINTFORML
 PRINTFORML [999] 그만둔다
@@ -54,12 +55,24 @@ CLEARLINE LINECOUNT
 
 SELECTCASE L_INPUT
 CASE 0
-	PRINTFORML 大まかに説明すると。
-	PRINTFORML 1 住民登録を登録し攻略。
-	PRINTFORML 2 ターン経過で住民たちが都市を発展させる(合意を得ていると＋補正)。
-	PRINTFORML 3 ある程度貯めると施設が解放される。
-	PRINTFORML 4 効率を上げるために新たな住人を攻略する。
+PRINTFORML 前提として「外界調査」は後回しにし大まかに説明すると。
+PRINTFORML ・住人攻略編
+PRINTFORML 1 喫茶店で住人を探し登録し、一先ず会話しながら好感度を上げていく。
+PRINTFORML 2 ある程度会話を重ねていくと住民が抱えている悩みが開示される。
+PRINTFORML 3 悩みを解決して親密になる(小さな悩み→大きな悩みの順で解決、なお合意が得られればそれ以上悩みを解決する必要なし)
+PRINTFORML 4 口説いて合意を得る、その後好感度を上げつつ「傾向変更」で好きな傾向を選ぶ。
+PRINTFORML 5 傾向が進行したら「関係構築」で該当する√を選び陥落させていく(一段落の目安は陥落素質『心酔』『愛人』『情婦』何れかの取得)。
+PRINTFORML 6 陥落素質を取得できたらひとまず攻略完了、さらに育てるか新しい住人を探す。
+PRINTFORML 
+PRINTFORML ・都市発展編
+	PRINTFORML 1 ターン経過で住民たちが都市を発展させる(合意を得ていると＋補正)。
+	PRINTFORML 2 ある程度貯めると施設が解放される。
+	PRINTFORML 3 効率を上げるために新たな住人を攻略したり、役職に就かせたりする。
 	PRINTFORML となります。
+	PRINTFORMW 
+	PRINTFORML 外界調査は現在フレーバー要素が強いので、用事がなければ向かう必要はありません。
+	PRINTFORML ただし一部種族・素質は外界調査でのイベントでしか入手できないものがあるので注意してください。
+	PRINTFORML 
 	PRINTFORMW 
 CASE 1
 	PRINTFORML 住民は『喫茶店』で出会うことで住民登録されます。
@@ -113,6 +126,7 @@ CASE 4
 	PRINTFORMW 
 CASE 5
 	PRINTFORML 妊娠の条件は以下の通りです。
+	PRINTFORML ・コンフィグの妊娠スイッチがON
 	PRINTFORML ・危険日である
 	PRINTFORML ・受精耐久値が0である(危険日に中出しすることで耐久値は減少する)
 	PRINTFORML 　減少値はあなたの男体レベル・精子レベルに応じる。
@@ -125,7 +139,9 @@ CASE 6
 	PRINTFORM [0] 인간　　　　　　　
 	PRINTFORML [11] 정령
 	PRINTFORML [1] 엘프
+	PRINTFORML [12] 吸血鬼
 	PRINTFORML [2] 야마
+	PRINTFORML [13] ニア
 	PRINTFORML [3] 아인
 	PRINTFORML [4] 오토마타
 	PRINTFORML [5] 천사
@@ -213,6 +229,19 @@ CASE 6
 		PRINTFORML 今は都市にある植物を拠り所に、一部の個体が細々と生活している。
 		PRINTFORML 攻撃面は貧弱だが速度・命中・幸運がとても高い
 		PRINTFORML 【출현 장소】 초 낮은 확률로 찻집에 출몰
+	CASE 12
+		PRINTFORML 人間が死後に魔術で蘇り、その過程で変質・派生した種族。
+		PRINTFORML 竜人に匹敵しうる怪力を持つ反面、新陳代謝に他者の血を必要としている。
+		PRINTFORML また陽の光を嫌い、殆どの個体が夜での活動を好む。
+		PRINTFORML その生態から人の上に立つ管理職を担う者が多い。
+		PRINTFORML 【出現場所】 都市レベルを25以上、「夜の喫茶店」で低確率でに出没
+	CASE 13
+		PRINTFORML 「外敵」解明の為に優秀な雌に「外敵」の遺伝子を混ぜた受精卵を着床させて産ませた人工種族。
+		PRINTFORML 一般には海人の亜種として知られており、実際に都市で活動させその生態を観察している。
+		PRINTFORML そしてある程度調べ終えた個体はひっそりと処分され、廃棄場には処分待ちの個体が眠っている。
+		PRINTFORML 戦闘面では平均上の性能に加え体力・気力が高く、特に瘴気への高い耐性が特徴。
+		PRINTFORML 元々自然界にいない種族の為、海人以上に妊娠しにくい。
+		PRINTFORML 【出現場所】 廃棄場&研究施設レベル150、確率で廃棄場で獲得。
 	CASE 999
 		GOTO INPUT_LOOP
 	ENDSELECT
@@ -232,7 +261,7 @@ CASE 10
 	PRINTFORML 【TP】주민과 대화하는 등등에 사용되는 포인트
 	PRINTFORML 【AP】주민의 고민 해결에 사용하는 포인트、고민을 해결하면 최대 값이 늘어난다
 	PRINTFORML 【SP】서포트를 사용할 때 필요한 포인트
-	PRINTFORML 【KP】
+	PRINTFORML 【LP】人工遺物生成・アーティファクトの強化に使うポイント、遺物研究で増やせる。
 	PRINTFORML 【BP】TP를 회복할 수 있는 포인트、주민이 임신하면 증가
 	PRINTFORMW 
 CASE 11
@@ -269,13 +298,25 @@ CASE 14
 	PRINTFORML 【해독】	일부 이벤트 발생 확률에 필요
 	PRINTFORMW 
 CASE 15
+	PRINTFORML ・基本性能
 	PRINTFORML 전투에 승리하면 드물게 입수할 수 있는 무기。(深度が高いほど入手しやすい)
 	PRINTFORML 5개까지 장비할 수 있으며、종합 수치의 일부를 부대 스테이터스에 반영할 수 있다。
 	PRINTFORML 探索キャラには各ステータスに「アーティファクト各合計÷10」が加算。
 	PRINTFORML 部隊には部隊各総合値に「部隊各合計値×アーティファクト各合計値％」が加算される。
 	PRINTFORML 
+	PRINTFORML ・異能
+	PRINTFORML アーティファクトに持つ異能によって戦闘中に様々な恩恵が得られる。
+	PRINTFORML 同じ異能がある場合、発生率又は効果が上昇する。
+	PRINTFORML 
+	PRINTFORML 【無能】効果なし
+	PRINTFORML 【吸血】確定発動、与えたダメージの一部を吸収し体力を回復させる。
+	PRINTFORML 【核熱】確定発動、与ダメージに応じた防御無視の追加攻撃。
+	PRINTFORML 【侵食】確定発動、敵の現在体力に応じた毒ダメージ、防衛時には無効化される。
+	PRINTFORML 【時間】確率発動、再行動。
+	PRINTFORML 【空間】確率発動、相手からのダメージを10分の1にする。
+	PRINTFORML 
 	PRINTFORML ようは高い数値を装備するほど強くなる。
-	PRINTFORMW 現在、異能の効果は発揮されません。
+	PRINTFORMW 異能は一色にするか確定発動を並べるかでよい。
 CASE 16
 	PRINTFORML 独自に実装したものを中心に説明します。
 	PRINTFORML 【ID】각 주민의 고유 번호。　　　【기밀】각 주민의 기밀 개체 레벨。
@@ -286,7 +327,14 @@ CASE 16
 	PRINTFORML 【출신】100の位が「구세대인간」などの来歴を、下2桁が種族を示す。
 	PRINTFORML 【난이도】この数値が大きいと、悩みの解決の難易度が上がる。
 	PRINTFORML 【지위】数値が大きいほど身分が高い、2で上流階級、3で貴族。
-	PRINTFORML 【직업】10の位が職業の種類、1の位が年齢層を示す。11と表示された場合は職業が設定されていない。
+	PRINTFORML 【직업】100の位が職業の種類、10の位は娼婦としての活動の有無、1の位が年齢層を示す。101なら職業が設定されていない。
+	WAIT
+CASE 17
+	PRINTFORML 外界調査中、特定の条件でアーカイブを入手できます。
+	PRINTFORML 入手したアーカイブはメインメニューの「アーカイブ」で閲覧できます。
+	PRINTFORML 
+	PRINTFORML 【入手条件】区域Lv3以上かつ深度50以上で戦闘に勝利した際、低確率で入手
+	PRINTFORML 
 	WAIT
 CASE 20
 	PRINTFORML 【모랄】

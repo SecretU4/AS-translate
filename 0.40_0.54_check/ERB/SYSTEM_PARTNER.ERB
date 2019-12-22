@@ -10,7 +10,7 @@ CALL MEMBER_LIST2_1(1, 1 ,1)
 L_I = FLAG:汎用変数
 FLAG:汎用変数2 = FLAG:汎用変数
 FLAG:汎用変数 = 100
-IF FLAG:都市_パートナーセックス == 0 && TALENT:L_I:妊娠 == 0 && TALENT:L_I:수정 == 0 && TALENT:L_I:비처녀 && (TALENT:L_I:심취 || TALENT:L_I:애인 || TALENT:L_I:정부) && FLAG:妊娠機能 == 1
+IF FLAG:都市_パートナーセックス == 0 && TALENT:L_I:妊娠 == 0 && TALENT:L_I:수정 == 0 && TALENT:L_I:비처녀 && (TALENT:L_I:심취 || TALENT:L_I:애인 || TALENT:L_I:정부) && FLAG:妊娠機能 == 1 && FLAG:種付けイベント == 1
 P_S = RAND:5
 LSTR =  <nonbutton pos='0'><img src='P_SEX_{P_S}' height = '900'  ypos = '0'></nonbutton><nobr>
 HTML_PRINT LSTR
@@ -19,16 +19,30 @@ ELSEIF TALENT:L_I:부재 == 0
 	CALL C_PICTURE(L_I, 0, -100)
 ENDIF
 FLAG:汎用変数 = 0
-PRINTFORML 　　 　　【HP　:{CFlag:L_I:住人_현재체력, 3 ,RIGHT}/{CFlag:L_I:住人_최대체력, 3 ,RIGHT}】【SP　:{CFlag:L_I:住人_現在気力, 3 ,RIGHT}/{CFlag:L_I:住人_最大気力, 3 ,RIGHT}】
-PRINTFORML 　　 　　【호감도:{CFlag:L_I:好感度, 6 ,RIGHT}】【충성도:{CFLAG:L_I:忠誠値, 4 ,RIGHT}】【애정도:{CFLAG:L_I:愛情値, 4 ,RIGHT}】【음란도:{CFLAG:L_I:淫乱値, 4 ,RIGHT}】
-PRINTFORML 　　 　　【인기　:{CFLAG:L_I:住人_人気, 6 ,RIGHT}】【모랄:{CFLAG:L_I:住人_モラル, 4 ,RIGHT}】【카르마:{CFLAG:L_I:住人_カルマ, 4 ,RIGHT}】【품성　:{CFLAG:L_I:住人_品性, 4 ,RIGHT}】
+; 実際には必要ないのに、見た目を揃えるためだけに綺麗さだけで幅を増やしてみる
+PRINTFORM 　　 　　
+CALL PRINT_RANGE_STATUS(L_I, "HP", "体力", 3, 4, "伏字", "％")
+CALL PRINT_RANGE_STATUS(L_I, "SP", "気力", 3, 4, "伏字", "％")
+PRINTL
+PRINT 　　 
+CALL PRINT_STATUS(L_I, "호감도", 6, 6)
+CALL PRINT_STATUS(L_I, "충성도", 6, 6)
+CALL PRINT_STATUS(L_I, "애정도", 6, 6)
+CALL PRINT_STATUS(L_I, "음란도", 6, 6)
+PRINTL
+PRINT 　　 　　
+CALL PRINT_STATUS(L_I, "인기",   6, 6, , 10000)
+CALL PRINT_STATUS(L_I, "모랄", 6, 6, (L_I==MASTER ? "伏字"#""), 500, , -500)
+CALL PRINT_STATUS(L_I, "카르마", 6, 6, (L_I==MASTER ? "伏字"#""), 500, , -500)
+CALL PRINT_STATUS(L_I, "품성",   6, 6, (L_I==MASTER ? "伏字"#""), 500, , -500)
+PRINTL
 PRINTFORML 　　 　　
 
 
 PRINTFORM 　　　　　
 SIF TALENT:L_I:부재 == 0
 	PRINTFORM %CALLNAME:L_I%
-IF FLAG:都市_パートナーセックス == 0 && TALENT:L_I:妊娠 == 0 && TALENT:L_I:수정 == 0 &&  TALENT:L_I:비처녀 && (TALENT:L_I:심취 || TALENT:L_I:애인 || TALENT:L_I:정부) && FLAG:妊娠機能 == 1
+IF FLAG:都市_パートナーセックス == 0 && TALENT:L_I:妊娠 == 0 && TALENT:L_I:수정 == 0 &&  TALENT:L_I:비처녀 && (TALENT:L_I:심취 || TALENT:L_I:애인 || TALENT:L_I:정부) && FLAG:妊娠機能 == 1  && FLAG:種付けイベント == 1
 	CALL PARTNER_SEX
 ELSEIF TALENT:L_I:합의 != 1
 	PRINTFORML 
