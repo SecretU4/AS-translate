@@ -47,31 +47,30 @@ CASE 2
 	CALL LIST_CHARA(ARGS:0)
 	L_INPUT = RESULT
 	L_I = RESULT
-	IF L_INPUT != 1000
-		IF TALENT:L_INPUT:NPC == 999
+	IF L_INPUT == 1000
+	GOTO INPUT_LOOP
+	ELSEIF TALENT:L_INPUT:NPC == 999
 			PRINTFORMW NPC는 선택할 수 없습니다
 			GOTO INPUT_LOOP
 		ELSEIF L_INPUT == 0
 			PRINTFORMW 아나타는 선택할 수 없습니다
 			GOTO INPUT_LOOP
-		ELSEIF (CFLAG:L_I:住人_階級*500) > Flag:都市_今期の貢献値
+		ELSEIF (CFLAG:L_I:住人_階級 * 500) > Flag:都市_今期の貢献値
 			PRINTFORMW 공헌도가 부족합니다
 			GOTO INPUT_LOOP
-		ELSE
-			H_H = 0
-			REPEAT 8
-				TALENT:L_I:(3100+H_H) = 0
-				H_H += 1
-			REND
+			ELSEIF CFLAG:L_I:住人_階級 == 7
+			PRINTFORMW 더 이상의 계급은 존재하지 않습니다
+			GOTO INPUT_LOOP
+		ENDIF
+		
+		;階級を一時的に消去
+		VARSET TALENT:L_I:0, 0, 3101, 3108
+		
 			CFLAG:L_I:住人_階級 += 1
 			CFLAG:L_I:住人_貢献値 += 1
-			TALENT:L_I:(3100+(CFLAG:L_I:住人_階級)) = 1
+			TALENT:L_I:(3100 + (CFLAG:L_I:住人_階級)) = 1
 			PRINTFORML %CALLNAME:L_I%의 계급이 올랐습니다。
 			PRINTFORMW 공헌도 1 상승。
-		ENDIF
-	ELSEIF L_INPUT == 1000
-		GOTO INPUT_LOOP
-	ENDIF
 CASE 900
 	K_S = 0
 	FLAG:都市_貢献値持越し += Flag:都市_今期の貢献値
