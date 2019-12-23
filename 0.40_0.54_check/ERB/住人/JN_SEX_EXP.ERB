@@ -30,14 +30,14 @@ SEX_P = ((RAND:2)+1)
 EXP:Ａ성교경험 += SEX_P
 PRINTFORM 【Ａ성교 경험　:{EXP:Ａ성교경험-SEX_P, 5 ,LEFT}→{EXP:Ａ성교경험, 5 ,RIGHT}】
 PRINTFORML
-SEX_P = ((RAND:5)+1)
+SEX_P = ((RAND:3)+1)
 EXP:수음경험 += SEX_P
 PRINTFORM 【수음 경험　　:{EXP:수음경험-SEX_P, 5 ,LEFT}→{EXP:수음경험, 5 ,RIGHT}】
-SEX_P = ((RAND:5)+1)
+SEX_P = ((RAND:3)+1)
 EXP:펠라경험 += SEX_P
 PRINTFORM 【펠라 경험　:{EXP:펠라경험-SEX_P, 5 ,LEFT}→{EXP:펠라경험, 5 ,RIGHT}】
 IF TALENT:거유 == 1 || TALENT:폭유 == 1
-	SEX_P = ((RAND:5)+1)
+	SEX_P = ((RAND:3)+1)
 	EXP:파이즈리경험 += SEX_P
 	PRINTFORM 【파이즈리 경험:{EXP:파이즈리경험-SEX_P, 5 ,LEFT}→{EXP:파이즈리경험, 5 ,RIGHT}】
 ENDIF

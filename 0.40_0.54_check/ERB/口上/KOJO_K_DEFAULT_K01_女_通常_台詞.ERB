@@ -1,5 +1,4 @@
-﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
-;
+﻿;
 ;	Module		:KOJO_K_DEFAULT_K01_女_通常_セリフ.ERB
 ;	Facility	:キャラクター口上(No.0000:???)
 ;
@@ -21,10 +20,28 @@
 @KOJO_DEFAULT_ENCOUNTER_K1_TALK1
 IF TALENT:합의 == 1
 	IF TALENT:결혼완료 == 1 
-		PRINTFORML 「……やっぱり%CSTR:一人称%…こうゆう事は…%CSTR:二人称%の事は良い人だと思うけど…」
-		PRINTFORML 「それでも%CSTR:一人称%には夫が…此処まで来て今更こんな事…%CSTR:語尾謝罪%…っ…%CSTR:語尾拒絶%？！」
+		IF !RAND:4
+			PRINTFORML 「……やっぱり%CSTR:一人称%…こうゆう事は…%CSTR:二人称%の事は良い人だと思うけど…」
+			PRINTFORML 「それでも%CSTR:一人称%には夫が…此処まで来て今更こんな事…%CSTR:語尾謝罪%…っ…%CSTR:語尾拒絶%？！」
+		ELSEIF !RAND:3
+			PRINTFORML 「ここまで来といて悪いん%CSTR:語尾逆説%……やっぱり流石に……」
+			PRINTFORMW 「あっ、ちょっと待っ……、本気なの……%CSTR:語尾問う%？そこまで%CSTR:一人称%を……あっ」
+		ELSEIF !RAND:2
+			PRINTFORML 「（これから%CSTR:一人称%、あの人を裏切って…%CALLNAME:MASTER%に…）」
+			PRINTFORMW 「その、やっぱり今はまだ……、あ……っ！」
 	ELSE
-		PRINTFORML 「いい部屋……あとは任せるつもり%CSTR:語尾逆説%…優しくして%CSTR:語尾希望%？%UNICODE(0x2661)%」
+				PRINTFORMW 「いけない事だってわかってるのに……%CSTR:一人称%はあの人を…これから…」
+		ENDIF
+	ELSE
+		IF !RAND:4
+			PRINTFORML 「いい部屋……あとは任せるつもり%CSTR:語尾逆説%…優しくして%CSTR:語尾希望%？%UNICODE(0x2661)%」
+		ELSEIF !RAND:3
+			PRINTFORML 「あの……シャワー浴びてきた%CSTR:語尾ので%、その…準備終わ%CSTR:語尾ました%……良い%CSTR:語尾許可%%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+			PRINTFORML 「ここまで来ちゃったけれど……信じて良い%CSTR:語尾応答3%？」
+		ELSE
+			PRINTFORML 「……照明、もう少し暗くしてくれない%CSTR:語尾問う%？……%CSTR:語尾感謝%。それじゃあ……%CSTR:語尾同意求む%」
+		ENDIF
 	ENDIF
 ELSE
 	PRINTFORML 「……%CSTR:語尾何？%？」
@@ -73,9 +90,22 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:7
 				PRINTFORML 「おあずけなんて意地悪しないで%CSTR:語尾希望%、%CSTR:二人称%が欲しくって我慢できない…んっ…%CSTR:語尾です%%UNICODE(0x2661)%」
 			ELSEIF !RAND:6
-				PRINTFORML 「妊娠してしまったの%CSTR:語尾逆説%…、%CSTR:語尾微笑%…嘘%CSTR:語尾です%…%UNICODE(0x2661)%」
+				IF TALENT:妊娠 >= 10 && CFLAG:妊娠フラグ == 1
+					PRINTFORML 「妊娠しちゃう…、なんて言ってたら、本当にしてしまった%CSTR:語尾否定%%UNICODE(0x2661)%……%CSTR:語尾微笑%…責任取って%CSTR:語尾希望%…？%UNICODE(0x2661)%」
+				ELSEIF TALENT:妊娠 >= 10
+					PRINTFORML 「こんなお腹だけど……今の%CSTR:一人称%は全部%CSTR:二人称%のモノ%CSTR:語尾です%……だから好きなだけ……シて%CSTR:語尾希望%？%UNICODE(0x2661)%」
+				ELSE
+					PRINTFORML 「妊娠してしまったの%CSTR:語尾逆説%…、%CSTR:語尾微笑%…嘘%CSTR:語尾です%…%UNICODE(0x2661)%」
+				ENDIF
 			ELSEIF !RAND:5
-				PRINTFORML 「とっても子宮が熱い%CSTR:語尾です2%……このまましたら%CSTR:二人称%の子を孕んじゃう…%UNICODE(0x2661)%」
+			PRINTFORM 「とっても子宮が熱い%CSTR:語尾です2%……
+				IF TALENT:妊娠 >= 10 && CFLAG:妊娠フラグ == 1
+					PRINTFORML ああ…間違いなく%CSTR:一人称%、%CSTR:二人称%に孕まされた%CSTR:語尾応答3%……%CSTR:語尾微笑%%UNICODE(0x2661)%」
+				ELSEIF TALENT:妊娠 >= 10
+					PRINTFORML 今は母親じゃなくて、ただの発情した雌%CSTR:語尾です%……たっぷり愛して%CSTR:語尾希望%%UNICODE(0x2661)%」
+				ELSE
+					PRINTFORML このまましたら%CSTR:二人称%の子を孕んじゃう…%UNICODE(0x2661)%」
+				ENDIF
 			ELSEIF !RAND:4
 				PRINTFORML 「時間まで…%CSTR:一人称%を可愛がって%CSTR:語尾希望%…%UNICODE(0x2661)%」
 			ELSEIF !RAND:3
@@ -93,7 +123,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:9
 				PRINTFORML 「%CSTR:二人称%、ご指名%CSTR:語尾感謝%%UNICODE(0x2661)%……他人の女でするのってどう%CSTR:語尾問う%…%UNICODE(0x2661)%」
 			ELSEIF !RAND:8
-				PRINTFORML 「もう準備出来て%CSTR:語尾ます%…%UNICODE(0x2661)%、たくさん種付けし%CSTR:語尾命令%%UNICODE(0x2661)%」
+				PRINTFORML 「もう準備出来て%CSTR:語尾ます%…%UNICODE(0x2661)%、たくさん\@ TALENT:妊娠 >= 10 ?膣中出し#種付け\@し%CSTR:語尾命令%%UNICODE(0x2661)%」
 			ELSEIF !RAND:7
 				PRINTFORML 「もう夫のじゃ満足できない身体にされて……悪いオチンポ…%CSTR:語尾微笑%%UNICODE(0x2661)%」
 			ELSEIF !RAND:6
@@ -123,9 +153,9 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:7
 				PRINTFORML 「%CSTR:語尾拒絶%…お腹が…疼いてぇ…%UNICODE(0x2661)%…」
 			ELSEIF !RAND:6
-				PRINTFORML 「は、孕ませるなんてぇ…そんなぁ……%UNICODE(0x2661)%」
+				PRINTFORML 「\@ TALENT:妊娠 >= 10 ?ぼ、ボテ腹セックスだ#は、孕ませる\@なんてぇ…そんなぁ……%UNICODE(0x2661)%」
 			ELSEIF !RAND:5
-				PRINTFORML 「%CSTR:二人称%…避妊はしなくて良いから…夫には言はないで%CSTR:語尾希望%%UNICODE(0x2661)%」
+				PRINTFORML 「%CSTR:二人称%…\@ TALENT:妊娠 >= 10 ?いくらでも膣中出しして#避妊はしなくて\@良いから…夫には言わないで%CSTR:語尾希望%%UNICODE(0x2661)%」
 			ELSEIF !RAND:4
 				PRINTFORML 「…っ……%CSTR:語尾謝罪%…%CSTR:一人称%は今から%CSTR:二人称%に抱かれます……%UNICODE(0x2661)%」
 			ELSEIF !RAND:3
@@ -154,7 +184,7 @@ IF TALENT:결혼완료 == 1
 		ELSEIF !RAND:2
 			PRINTFORML 「最近たまに、夫の事を他人の様に思えて%CSTR:語尾ます%…変%CSTR:語尾同意求む%……」
 		ELSE
-			PRINTFORML 「…夫にもされたこと無い様なことぉ…慣れてきて%CSTR:語尾送る%っ…おかしくなるっ！」
+			PRINTFORML 「…夫にもされたこと無い様なことぉ…慣れてきて%CSTR:語尾送る%っ…おかしくなる……っ！」
 		ENDIF
 	ELSEIF  EXP:ＮＴＬ조교경험 >= 200
 		IF !RAND:4
@@ -170,7 +200,7 @@ IF TALENT:결혼완료 == 1
 		IF !RAND:4
 			PRINTFORML 「…%CSTR:語尾反応%…%CSTR:語尾YES%…する%CSTR:語尾繋ぎ%%CSTR:語尾問う%…？」
 		ELSEIF !RAND:3
-			PRINTFORML 「できるなら避妊して%CSTR:語尾希望%…ほんとうにお願い%CSTR:語尾お願い%」
+			PRINTFORML 「できるなら\@ TALENT:妊娠 >= 10 ?お腹の子に優しく#避妊\@して%CSTR:語尾希望%…ほんとうにお願い%CSTR:語尾お願い%」
 		ELSEIF !RAND:2
 			PRINTFORML 「何故か…%CSTR:二人称%を拒めない%CSTR:語尾繋ぎ%%CSTR:語尾です%……」
 		ELSE
@@ -178,9 +208,9 @@ IF TALENT:결혼완료 == 1
 		ENDIF
 	ELSE
 		IF !RAND:4
-			PRINTFORML 「孕ませるなんて、そんなっ…そんなぁ……」
+			PRINTFORML 「\@ TALENT:妊娠 >= 10 ?この身籠った体すら犯そう#孕ませる\@なんて……、そんなっ…そんなぁ……」
 		ELSEIF !RAND:3
-			PRINTFORML 「……%CSTR:一人称%には夫が……んんっ…」
+			PRINTFORML 「……%CSTR:一人称%には\@ TALENT:妊娠 >= 10 ?お腹の子#夫\@が……んんっ…」
 		ELSEIF !RAND:2
 			PRINTFORML 「夫と電話中だからもう少し待って%CSTR:語尾命令強%…%CSTR:語尾拒絶%っ！」
 		ELSE
@@ -245,9 +275,9 @@ ELSEIF TALENT:애인 == 1
 	ELSEIF !RAND:7
 		PRINTFORML 「あまり待たせないで%CSTR:語尾希望%、身体が%CSTR:二人称%を欲しがって仕方ないん%CSTR:語尾です%」
 	ELSEIF !RAND:6
-		PRINTFORML 「いっそ子作りとか…、冗談%CSTR:語尾です%…%UNICODE(0x2661)%」
+		PRINTFORML 「いっそ\@ TALENT:妊娠 >= 10 ?生まれるまでずっと繋がってる#子作り\@とか…、冗談%CSTR:語尾です%…%UNICODE(0x2661)%」
 	ELSEIF !RAND:5
-		PRINTFORML 「何だか子宮が熱いん%CSTR:語尾です%……このまましたら妊娠するかも…」
+		PRINTFORML 「何だか子宮が熱いん%CSTR:語尾です%……このまましたら\@ TALENT:妊娠 >= 10 ?この子の事を忘れて乱れちゃう#妊娠する\@かも…」
 	ELSEIF !RAND:4
 		PRINTFORML 「時間がなくなるまで…愛し合ってい%CSTR:語尾同意求む2%？」
 	ELSEIF !RAND:3
@@ -366,7 +396,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:2
 				PRINTFORML 「%CSTR:一人称%を使いたい時は、いつでも呼んで%CSTR:語尾希望%…%UNICODE(0x2661)%」
 			ELSE
-				PRINTFORML 「%CSTR:二人称%の%CSTR:語尾丁寧%役に立てて……%CSTR:一人称%幸せ%CSTR:語尾です2%%UNICODE(0x2661)%」
+				PRINTFORML 「%CSTR:二人称%の%CSTR:語尾丁寧%役に立てて……%CSTR:一人称%幸せ\@ TALENT:古風 ?な# \@%CSTR:語尾です2%%UNICODE(0x2661)%」
 			ENDIF
 		ELSEIF TALENT:애인 == 1
 			IF !RAND:10
@@ -392,11 +422,11 @@ IF TALENT:결혼완료 == 1
 			ENDIF
 		ELSEIF TALENT:정부 == 1
 			IF !RAND:10
-				PRINTFORML 「んはぁっ…もっと…もっとぉ……滅茶苦茶にして%CSTR:語尾希望%…%UNICODE(0x2661)%…孕んじゃうまで種付けし%CSTR:語尾命令%%UNICODE(0x2661)%」
+				PRINTFORML 「んはぁっ…もっと…もっとぉ……滅茶苦茶にして%CSTR:語尾希望%…%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?まだまだこのお腹に膣中出し#孕んじゃうまで種付け\@し%CSTR:語尾命令%%UNICODE(0x2661)%」
 			ELSEIF !RAND:9
 				PRINTFORML 「気持ちいい…っ%UNICODE(0x2661)%…だいすきぃ%UNICODE(0x2661)%…ちゅっ…んっ%CSTR:二人称%%UNICODE(0x2661)%…」
 			ELSEIF !RAND:8
-				PRINTFORML 「%CSTR:二人称%に激しく求められる度に、子宮が疼いて孕みたくなるん%CSTR:語尾です%…%UNICODE(0x2661)%」
+				PRINTFORML 「%CSTR:二人称%に激しく求められる度に、子宮が疼いて孕みたくなるん%CSTR:語尾です%…\@ TALENT:妊娠 >= 10 ?もう孕んでるのに#…\@%UNICODE(0x2661)%」
 			ELSEIF !RAND:7
 				PRINTFORML 「こんなに凄い快楽に身体が慣れたらぁ%UNICODE(0x2661)%……%CSTR:二人称%以外の男じゃ幸せになれない%CSTR:語尾応答2%…%UNICODE(0x2661)%」
 			ELSEIF !RAND:6
@@ -430,7 +460,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:3
 				PRINTFORML 「お疲れ様%CSTR:語尾応答%%UNICODE(0x2661)%……明日も人妻を寝取って%CSTR:語尾希望%%UNICODE(0x2661)%」
 			ELSEIF !RAND:2
-				PRINTFORML 「こんどいっぱい膣内に射精されたらぁ…%UNICODE(0x2661)%…夫じゃなくて%CSTR:二人称%の子供孕んじゃうぅぅ…%UNICODE(0x2661)%」
+				PRINTFORML 「こんどいっぱい膣内に射精されたらぁ…%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?この子が#夫じゃなくて\@%CSTR:二人称%の\@ TALENT:妊娠 >= 10 ?精液の味を覚えちゃいそう#子供孕んじゃうぅぅ\@…%UNICODE(0x2661)%」
 			ELSE
 				PRINTFORML 「次は夫に魅せつけながら…？%CSTR:語尾拒絶%！…それだけは許し%CSTR:語尾命令強%ほかの事は何でも%CSTR:語尾お願い%…だからっ！」
 			ENDIF
@@ -467,7 +497,7 @@ IF TALENT:결혼완료 == 1
 		ENDIF
 	ELSEIF  EXP:ＮＴＬ조교경험 >= 100
 		IF !RAND:4
-			PRINTFORML 「こんどいっぱい膣内に射精されたらぁ……夫じゃなくて%CSTR:二人称%の子供できちゃうぅぅ…%UNICODE(0x2661)%」
+			PRINTFORML 「こんどいっぱい膣内に射精されたらぁ……\@ TALENT:妊娠 >= 10 ?この子が#夫じゃなくて\@%CSTR:二人称%の\@ TALENT:妊娠 >= 10 ?精液の味を覚えちゃいそう#子供孕んじゃうぅぅ\@…%UNICODE(0x2661)%」
 		ELSEIF !RAND:3
 			PRINTFORML 「%CSTR:一人称%は夫のっ…！…%CSTR:二人称%の女にはな――んっ…！」
 		ELSEIF !RAND:2
@@ -1296,11 +1326,11 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:10
 				PRINTFORM …夫？…%CSTR:一人称%が愛しているのは%CSTR:二人称%ですっ%UNICODE(0x2661)%…んはぁあああっ%UNICODE(0x2661)%
 			ELSEIF !RAND:9
-				PRINTFORM 夫の소추じゃなくてぇ…%UNICODE(0x2661)%…%CSTR:二人称%のぶっとくて逞しい本物のオチンポで%CSTR:一人称%に托卵して%CSTR:語尾希望%っ%UNICODE(0x2661)%
+				PRINTFORM 夫の소추じゃなくてぇ…%UNICODE(0x2661)%…%CSTR:二人称%のぶっとくて逞しい本物のオチンポで\@ TALENT:妊娠 >= 10 ?孕んだ# \@%CSTR:一人称%に\@ TALENT:妊娠 >= 10 ?膣中出しアクメさせ#托卵し\@て%CSTR:語尾希望%っ%UNICODE(0x2661)%
 			ELSEIF !RAND:8
-				PRINTFORM …%CSTR:一人称%はぁ…もう%CSTR:二人称%の女なりましたぁ%UNICODE(0x2661)%…子作りぃ…しちゃってますぅぅっ%UNICODE(0x2661)%
+				PRINTFORM …%CSTR:一人称%はぁ…もう%CSTR:二人称%の女なりましたぁ%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?本気のボテ腹セックス#子作りぃ\@…しちゃってますぅぅっ%UNICODE(0x2661)%
 			ELSEIF !RAND:7
-				PRINTFORM ぉ…夫よりも立派なおちんちんとぉ%UNICODE(0x2661)%…セックスしちゃってますぅうぅぅっ%UNICODE(0x2661)%
+				PRINTFORM ぉ…夫よりも立派なおちんちんとぉ%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?にんっしんっ#子作り\@セックスしちゃってますぅうぅぅっ%UNICODE(0x2661)%
 			ELSEIF !RAND:6
 				PRINTFORM あの人と全然違うっ%UNICODE(0x2661)%…なんでこんなに深く響くのぉぉっ%UNICODE(0x2661)%
 			ELSEIF !RAND:5
@@ -1310,7 +1340,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:3
 				PRINTFORM …%CSTR:二人称%のオチンポに雌の悦びを教えられてぇ%UNICODE(0x2661)%…%CSTR:二人称%とセックスすることしか考えられない%CSTR:語尾です%%UNICODE(0x2661)%
 			ELSEIF !RAND:2
-				PRINTFORM そんな立派なおちんちんでっ…子宮のいりぐちズリズリされたらぁ%UNICODE(0x2661)%…あかちゃん孕みたくなっちゃうぅっ%UNICODE(0x2661)%
+				PRINTFORM そんな立派なおちんちんでっ…子宮のいりぐちズリズリされたらぁ%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?何度でも# \@あかちゃん孕みたくなっちゃうぅっ%UNICODE(0x2661)%
 			ELSE
 				PRINTFORM …不倫っ%UNICODE(0x2661)%…あの人を裏切って%CSTR:二人称%とぉっ%UNICODE(0x2661)%……%CSTR:語尾微笑%%UNICODE(0x2661)%
 			ENDIF
@@ -1320,7 +1350,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:10
 				PRINTFORM 夫の事はいいからぁ…んはぁっ%UNICODE(0x2661)%……人妻と寝取りせっくすぅっ%UNICODE(0x2661)%…%CSTR:語尾微笑%%UNICODE(0x2661)%
 			ELSEIF !RAND:9
-				PRINTFORM もっといっぱいぃっ%UNICODE(0x2661)%…たくさん種付けして%CSTR:語尾希望%%UNICODE(0x2661)%
+				PRINTFORM もっといっぱいぃっ%UNICODE(0x2661)%…たくさん\@ TALENT:妊娠 >= 10 ?妊婦におまんこ#種付け\@して%CSTR:語尾希望%%UNICODE(0x2661)%
 			ELSEIF !RAND:8
 				PRINTFORM …いいっ…おまんこぉっ%UNICODE(0x2661)%…もっともっとおちんちんで寝取ってぇっ%UNICODE(0x2661)%
 			ELSEIF !RAND:7
@@ -1328,7 +1358,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:6
 				PRINTFORM 夫に嘘ついてぇ%UNICODE(0x2661)%…%CSTR:語尾微笑%…%CSTR:一人称%と交尾たのしんで%CSTR:語尾です%%UNICODE(0x2661)%
 			ELSEIF !RAND:5
-				PRINTFORM 子宮に熱いのはいってますぅっ%UNICODE(0x2661)%…%CSTR:二人称%のあかちゃん孕んじゃい%CSTR:語尾です%…%UNICODE(0x2661)%
+				PRINTFORM 子宮に熱いのはいってますぅっ%UNICODE(0x2661)%…%CSTR:二人称%のあかちゃん孕\@ TALENT:妊娠 >= 10 ?みたがりのおまんこ喜んでるのぉ#んじゃいますぅ\@…%UNICODE(0x2661)%
 			ELSEIF !RAND:4
 				PRINTFORM …もっとぉ%UNICODE(0x2661)%…%CSTR:一人称%を可愛がって%CSTR:語尾希望%…%UNICODE(0x2661)%」
 			ELSEIF !RAND:3
@@ -1342,11 +1372,11 @@ IF TALENT:결혼완료 == 1
 			IF !RAND:11
 				PRINTFORM もっと気持ちよくぅっ%UNICODE(0x2661)%…いちばん奥っ…%CSTR:語尾肯定%%UNICODE(0x2661)%
 			ELSEIF !RAND:10
-				PRINTFORM いい%CSTR:語尾応答%、%CSTR:二人称%のぉ…あかちゃんほしぃっ%UNICODE(0x2661)%…欲しい%CSTR:語尾繋ぎ%%CSTR:語尾です%%UNICODE(0x2661)%
+				PRINTFORM いい%CSTR:語尾応答%、%CSTR:二人称%のぉ…\@ TALENT:妊娠 >= 10 ?おちんちん#あかちゃん\@ほしぃっ%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?妊婦でもおちんちん# \@欲しい%CSTR:語尾繋ぎ%%CSTR:語尾です%%UNICODE(0x2661)%
 			ELSEIF !RAND:9
 				PRINTFORM %CSTR:二人称%%UNICODE(0x2661)%…ぁん…%CSTR:語尾微笑%%UNICODE(0x2661)%
 			ELSEIF !RAND:8
-				PRINTFORM …種つけぇっ%UNICODE(0x2661)%…種つけ交尾ぃ%UNICODE(0x2661)%
+				PRINTFORM …\@ TALENT:妊娠 >= 10 ?すごいい#種付けぇ\@っ%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?母親失格ずぼずぼイい#種つけ交尾\@ぃ%UNICODE(0x2661)%
 			ELSEIF !RAND:7
 				PRINTFORM 夫のおちんちんじゃダメぇっ%UNICODE(0x2661)%……このオチンポぉ…%UNICODE(0x2661)%
 			ELSEIF !RAND:6
@@ -1368,7 +1398,7 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:11
 				PRINTFORM …%CSTR:語尾微笑%…気持ちいぃ…今日もいっぱいぃ%UNICODE(0x2661)%
 			ELSEIF !RAND:10
-				PRINTFORM %CSTR:一人称%っ…%CSTR:二人称%とのセックスだいすき%CSTR:語尾です2%%UNICODE(0x2661)%
+				PRINTFORM %CSTR:一人称%っ…%CSTR:二人称%とのセックスだいすき\@ TALENT:古風 ?な# \@%CSTR:語尾です2%%UNICODE(0x2661)%
 			ELSEIF !RAND:9
 				PRINTFORM %CSTR:語尾拒絶%%UNICODE(0x2661)%…恥ずかしいからぁっ…気持ちよくなってる顔みつめないでぇっ%UNICODE(0x2661)%
 			ELSEIF !RAND:8
@@ -1376,9 +1406,9 @@ IF TALENT:결혼완료 == 1
 			ELSEIF !RAND:7
 				PRINTFORM いいっもっとぉっ…おなかしびれてぇっ%UNICODE(0x2661)%
 			ELSEIF !RAND:6
-				PRINTFORM こ…こんなにいっぱいぃ…孕んじゃうぅ…%UNICODE(0x2661)%
+				PRINTFORM こ…こんなにいっぱいぃ…\@ TALENT:妊娠 >= 10 ?あかちゃん溺れちゃ#孕んじゃ\@うぅ…%UNICODE(0x2661)%
 			ELSEIF !RAND:5
-				PRINTFORM いちばん奥まできてぇっ…%UNICODE(0x2661)%…できちゃってもいいからぁ%UNICODE(0x2661)%
+				PRINTFORM いちばん奥まできてぇっ…%UNICODE(0x2661)%…\@ TALENT:妊娠 >= 10 ?赤ちゃん部屋ぐりぐりしても#できちゃっても\@いいからぁ%UNICODE(0x2661)%
 			ELSEIF !RAND:4
 				PRINTFORM …%CSTR:一人称%を抱いてぇっ…%UNICODE(0x2661)%
 			ELSEIF !RAND:3
@@ -1397,7 +1427,7 @@ IF TALENT:결혼완료 == 1
 		ELSEIF !RAND:4
 			PRINTFORM …%CSTR:語尾反応%…%CSTR:語尾YES%…なかにぃ…%UNICODE(0x2661)%
 		ELSEIF !RAND:3
-			PRINTFORM 本当にぃ…夫のじゃないあかちゃんできちゃうっ%UNICODE(0x2661)%…
+			PRINTFORM 本当にぃ…\@ TALENT:妊娠 >= 10 ?妊娠おまんこでダメになっ#夫のじゃないあかちゃんでき\@ちゃうっ%UNICODE(0x2661)%…
 		ELSEIF !RAND:2
 			PRINTFORM いけないのっ……%CSTR:一人称%…結婚してぇっ…%UNICODE(0x2661)%
 		ELSE
@@ -1427,7 +1457,7 @@ IF TALENT:결혼완료 == 1
 		ELSEIF !RAND:3
 			PRINTFORM %CSTR:一人称%…奥さん失格っ…あぁ%CSTR:語尾拒絶%っ…%UNICODE(0x2661)%
 		ELSEIF !RAND:2
-			PRINTFORM …激しくしないで…かたちっ…かわっちゃうぅ…
+			PRINTFORM …激しくしないで…\@ TALENT:妊娠 >= 10 ?お腹の子が……あひいぃっ#かたちっ…かわっちゃうぅ\@…%UNICODE(0x2661)%…
 		ELSE
 			PRINTFORM ……あの人のよりもっ……気持ちいいですっ%UNICODE(0x2661)%…！…
 		ENDIF
@@ -1439,7 +1469,7 @@ IF TALENT:결혼완료 == 1
 		ELSEIF !RAND:4
 			PRINTFORM …ひろがっちゃっ…%CSTR:語尾拒絶%っ…かきまわさないでぇっ…
 		ELSEIF !RAND:3
-			PRINTFORM 避妊……避妊…して%CSTR:語尾希望%…お願い%CSTR:語尾お願い%っ…
+			PRINTFORM \@ TALENT:妊娠 >= 10 ?妊娠してるから……優しく、優しく#避妊……避妊…\@して%CSTR:語尾希望%…お願い%CSTR:語尾お願い%っ…
 		ELSEIF !RAND:2
 			PRINTFORM …%CSTR:二人称%の方が…おおきい%CSTR:語尾です%……
 		ELSE
@@ -1647,10 +1677,97 @@ T_COUNT = RAND:2+1
 
 PRINTFORM 「
 
-
-
+;妊娠している
+IF TALENT:妊娠 >= 10
 IF TALENT:ＮＴＬ == 1 && TALENT:탁란 == 0
 	IF !RAND:5
+				PRINTFORM この子を産んだら……っ、また%CSTR:二人称%の赤ちゃんを%CSTR:語尾希望%っ%UNICODE(0x2661)%…あああっ！%UNICODE(0x2661)%…
+		ELSEIF !RAND:4
+			PRINTFORM ふあぁ……っ%UNICODE(0x2661)%子宮の中も、外も……っ、%CSTR:二人称%ので満たされて、%CSTR:一人称%……！%UNICODE(0x2661)%
+		ELSEIF !RAND:3
+			PRINTFORM んっあっああっ%UNICODE(0x2661)%、\@ TALENT:交際中 ?あの人#夫\@じゃなくて%CSTR:二人称%にっ、全部捧げるから……っ、注いでぇっ%UNICODE(0x2661)%！
+		ELSEIF !RAND:2
+			PRINTFORM ぁぁあぁっ%UNICODE(0x2661)%………%CSTR:語尾微笑%…まったくもう…\@ TALENT:交際中 ?人の#人妻\@妊婦にどれだけ膣中出しすれば気が済むの%CSTR:語尾疑問%%UNICODE(0x2661)%…
+		ELSE
+			PRINTFORM ふっ、く、苦しいけど、ああっ%UNICODE(0x2661)%…こんな幸せ、\@ TALENT:交際中 ?あの人#夫\@のじゃ味わえないぃっ……うああぁっ%UNICODE(0x2661)%！
+		ENDIF
+	ELSEIF TALENT:ＮＴＬ == 1
+		IF !RAND:5
+			PRINTFORM 次こそは、っんぅっ、%CSTR:二人称%の赤ちゃんがいい%CSTR:語尾褒める%っ%UNICODE(0x2661)%…精液でマーキングして%CSTR:語尾希望%……っ！%UNICODE(0x2661)%
+		ELSEIF !RAND:4
+			PRINTFORM お腹の子のことはいいから、んあっ%UNICODE(0x2661)%、今はただ%CSTR:二人称%専用の雌にご褒美を%CSTR:語尾希望%っ%UNICODE(0x2661)%…！
+		ELSEIF !RAND:3
+			PRINTFORM ダメな\@ TALENT:交際中 ?あの人#夫\@の子を孕んだ%CSTR:一人称%に…%CSTR:二人称%のいっぱい注いでオシオキして%CSTR:語尾希望%っ……ふあ、あああっ%UNICODE(0x2661)%…！
+		ELSEIF !RAND:2
+			PRINTFORM んぁっ、ぁぁあぁっ%UNICODE(0x2661)%！……はぁ、はぁ……どう%CSTR:語尾誰%？…あの人の子を孕んじゃったアソコの具合は……%UNICODE(0x2661)%…
+		ELSE
+			PRINTFORM 出してっ……出してぇっ%UNICODE(0x2661)%　%CSTR:二人称%の熱いの以外、今はどうでもいいのぉっ%UNICODE(0x2661)%…ふあああっ%UNICODE(0x2661)%……！
+		ENDIF
+	ELSEIF TALENT:心酔 == 1
+		IF !RAND:5
+			PRINTFORM %CSTR:二人称%のなら、いくらでも受け止めてあげ%CSTR:語尾送る%…%UNICODE(0x2661)%…
+		ELSEIF !RAND:4
+			PRINTFORM ボテ腹でも…%UNICODE(0x2661)%…っ…命令なら…仕方ない%CSTR:語尾応答2%…%UNICODE(0x2661)%…
+		ELSEIF !RAND:3
+			PRINTFORM 降ろさず産ませて%CSTR:語尾希望%っ%UNICODE(0x2661)%…いい子産むからっ%UNICODE(0x2661)%…
+		ELSEIF !RAND:2
+			PRINTFORM いつでも、%CSTR:一人称%が欲しいなら使って良い%CSTR:語尾褒める%%UNICODE(0x2661)%　だから……このままっ%UNICODE(0x2661)%…
+		ELSE
+			PRINTFORM いっぱい注いで%CSTR:語尾希望%っ%UNICODE(0x2661)%…子宮が溢れるくらいにっ…%UNICODE(0x2661)%…
+		ENDIF
+	ELSEIF TALENT:愛人 == 1
+		IF !RAND:5
+			PRINTFORM %CALLNAME:MASTER%、%CALLNAME:MASTER%……っ%UNICODE(0x2661)%！……あひっ、あ%UNICODE(0x2661)%、んあああぁっ%UNICODE(0x2661)%……
+		ELSEIF !RAND:4
+			PRINTFORM っ…あぁぁあああぁっ%UNICODE(0x2661)%…っ……%CSTR:語尾微笑%…愛して%CSTR:語尾愛%……%UNICODE(0x2661)%…ちゅっ%UNICODE(0x2661)%…
+		ELSEIF !RAND:3
+			PRINTFORM 今だけっ…愛し合う夫婦に%CSTR:語尾同意求む2%っ%UNICODE(0x2661)%…%CSTR:二人称%の妻にいっぱい注ぎ込んで%CSTR:語尾希望%っ%UNICODE(0x2661)%…
+		ELSEIF !RAND:2
+			PRINTFORM このまま膣内にっ%UNICODE(0x2661)%…あああああぁっ！%UNICODE(0x2661)%…
+		ELSE
+			PRINTFORM 今にも射精そう%CSTR:語尾逆説%っ%UNICODE(0x2661)%…もちろん膣内%CSTR:語尾同意求む%…っ%UNICODE(0x2661)%？…んぁああぁっ！%UNICODE(0x2661)%…
+		ENDIF
+	ELSEIF TALENT:情婦 == 1
+		IF !RAND:5
+			PRINTFORM %CSTR:語尾微笑%%UNICODE(0x2661)%…%CSTR:一人称%のナカにそんなに出したい%CSTR:語尾繋ぎ%%CSTR:語尾肯定%%UNICODE(0x2661)%……っ…ぁあああっ%UNICODE(0x2661)%…
+		ELSEIF !RAND:4
+			PRINTFORM もう孕んでるっていうのに…んぅっ%UNICODE(0x2661)%…お互い好き%CSTR:語尾同意求む%%UNICODE(0x2661)%…%CSTR:語尾微笑%%UNICODE(0x2661)%…遠慮なんて%CSTR:語尾遠慮%%UNICODE(0x2661)%…
+		ELSEIF !RAND:3
+			PRINTFORM そんなに腰振って…%UNICODE(0x2661)%…妊婦に種付けしたいの%CSTR:語尾問う%？%UNICODE(0x2661)%…いい%CSTR:語尾許可%…好きなだけっ%UNICODE(0x2661)%…
+		ELSEIF !RAND:2
+			PRINTFORM このままだと、子宮の赤ちゃんまで%CSTR:二人称%に溺れ%CSTR:語尾行為3%っ%UNICODE(0x2661)%　でも欲しくてっ…っはぁあっ%UNICODE(0x2661)%…
+		ELSE
+			PRINTFORM ああっ、%CSTR:語尾拒絶%っ%UNICODE(0x2661)%　母親になる、のにっ%UNICODE(0x2661)%、%CSTR:二人称%の精液の事しか考えられなくっ……%UNICODE(0x2661)%！　ふあぁあっ%UNICODE(0x2661)%…
+		ENDIF
+	ELSEIF TALENT:合意 == 1
+		IF !RAND:5
+			PRINTFORM だっ…大事に…し%CSTR:語尾命令%……ああ、でも腰が勝手に……っ、ぁんっ…%UNICODE(0x2661)%
+		ELSEIF !RAND:4
+			PRINTFORM んんんぅっ%UNICODE(0x2661)%……！！……はぁ、はぁあ……%UNICODE(0x2661)%　お腹が…苦しいくらい、タプタプ…%UNICODE(0x2661)%
+		ELSEIF !RAND:3
+			PRINTFORM ぅ…そんなに打ち付けたら、…んくっ%UNICODE(0x2661)%…あっ、……はっ%UNICODE(0x2661)%、くぅぅっ……！だめぇっ%UNICODE(0x2661)%…！
+		ELSEIF !RAND:2
+			PRINTFORM ふぁあああっ……%UNICODE(0x2661)%！……っに、妊婦に、こんなに射精するなんてぇ…%UNICODE(0x2661)%…
+		ELSE
+			PRINTFORM あっ%UNICODE(0x2661)%…やぁっ%UNICODE(0x2661)%！……激しいのはダメなの、に、気持ち良くなっちゃうぅ……%UNICODE(0x2661)%！…
+		ENDIF
+	ELSE
+		IF !RAND:5
+			PRINTFORM やっやめっ！？…もう中に子供が……%CSTR:語尾拒絶%っ！！…
+		ELSEIF !RAND:4
+			PRINTFORM ぁ……ぁぁああぁ……中が、苦しっ……
+		ELSEIF !RAND:3
+			PRINTFORM くうううぅっ……！……っは、はぁ、%CSTR:二人称%、どれだけ妊婦に出せば気が済むの%CSTR:語尾問う%……
+		ELSEIF !RAND:2
+			PRINTFORM %CSTR:語尾拒絶%っ！…妊娠…っ…してるのに……っ、あぁっ…
+		ELSE
+			PRINTFORM こんなに…流し込まれ…たらっ…
+		ENDIF
+	ENDIF
+;通常（妊娠してない）
+ELSE
+	IF TALENT:ＮＴＬ == 1 && TALENT:托卵 == 0
+		IF !RAND:5
 		PRINTFORM 産むなら%CSTR:二人称%の赤ちゃんがいい%CSTR:語尾褒める%っ%UNICODE(0x2661)%…夫の子供なんて産みたく%CSTR:語尾無%っ！%UNICODE(0x2661)%…
 	ELSEIF !RAND:4
 		PRINTFORM 子宮の中…%CSTR:二人称%ので一杯%CSTR:語尾です%…%UNICODE(0x2661)%…夫の分…？…最初から%CSTR:語尾無%%UNICODE(0x2661)%…
@@ -1697,9 +1814,9 @@ ELSEIF TALENT:정부 == 1
 	ELSE
 		PRINTFORM %CSTR:二人称%の子供妊娠させ%CSTR:語尾希望2%っ%UNICODE(0x2661)%…ひゃぁんっ%UNICODE(0x2661)%…
 	ENDIF
-ELSEIF TALENT:합의 == 1
-	IF !RAND:5
-		PRINTFORM せっ…責任は…とっ%CSTR:語尾命令%……ぁんっ…%UNICODE(0x2661)%
+	ELSEIF TALENT:합의 == 1
+		IF !RAND:5
+			PRINTFORM せっ…責任は…とって……っ！……ぁんっ…%UNICODE(0x2661)%
 	ELSEIF !RAND:4
 		PRINTFORM お腹が…タプタプ…%UNICODE(0x2661)%
 	ELSEIF !RAND:3
@@ -1722,7 +1839,7 @@ ELSE
 		PRINTFORM こんなに…流し込まれ…たらっ…
 	ENDIF
 ENDIF
-
+ENDIF
 
 $INPUT_LOOP
 

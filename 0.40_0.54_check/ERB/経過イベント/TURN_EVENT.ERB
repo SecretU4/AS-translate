@@ -11,19 +11,25 @@ L_TGT_BAK = TARGET
 L_P2 = 0
 L_I = 0
 
-FLAG:都市_合計ファン数 = 0
+FLAG:都市_合計ファン数 = SUMCARRAY(CFLAG:ファンの数)
+
+SIF FLAG:遺研_研究対象 != 0
+	CALLFORM AL_Branch_{FLAG:遺研_研究対象}
 
 FOR L_I, 1, CHARANUM
 	TARGET = L_I
 	ARG =  L_I
 
-	IF TARGET != MASTER  && TALENT:L_I:NPC != 999 && TALENT:L_I:부재 == 0
+	IF TARGET != MASTER  && TALENT:L_I:NPC != 999 && TALENT:L_I:부재 == 0 && TALENT:L_I:ボランティア == 0
 		;陥落ボーナスイベント
 		SIF CFLAG:華燭の典 == 0 && (Talent:심취 == 1 || Talent:애인 == 1 || Talent:정부 == 1)
 			CALL TURN_EVENT_FALL_BONUS
 		CALL TURN_EVENT_NAYAMI_K
 		IF CFLAG:레귤러 != 0
 			CALL TURN_EVENT_NJ
+			;ＡＩ博士の改造イベント
+			SIF (RAND:10000 <= 1 && CFlag:住人_カルマ <= 0) || (Talent:AI専属被験者 == 1 && RAND:2000 <= 1)
+				CALL TURN_EVENT_AIHKS
 			;交流イベント
 			SIF CFLAG:住人交流設定 != 0 && RAND:100 < CFLAG:住人イベント傾向_交流
 				CALL TURN_EVENT_COM
@@ -32,6 +38,9 @@ FOR L_I, 1, CHARANUM
 			CALL TURN_EVENT_F
 			CALL TURN_EVENT_HNYU
 			CALL TURN_EVENT_NTL
+			CALL TURN_EVENT_UWK
+			SIF RAND:100 >= 50 && Talent:非処女 != 0 && (Talent:心酔 == 1 || Talent:愛人 == 1 || Talent:情婦 == 1)
+				CALL TURN_EVENT_KNRK
 		ENDIF
 		CALL TURN_EVENT_TL
 		CALL TURN_EVENT_NAYAMI_K_END
@@ -45,20 +54,27 @@ FOR L_I, 1, CHARANUM
 		CALL TURN_EVENT_PERSONAL_END
 		CALL TURN_EVENT_CITY_EXP
 	ELSEIF TALENT:L_I:부재 == 1
-		IF CFlag:拉致監禁 > 0 && FLAG:ＮＴＲモード == 1
+		;拉致監禁
+		SIF CFlag:拉致監禁 > 0 && FLAG:ＮＴＲモード == 1
 			CALL TURN_EVENT_RPG_RK
-		ENDIF
+		;交配実験
+		SIF CFlag:交配実験 > 0 && FLAG:ＮＴＲモード == 1
+			CALL TURN_EVENT_RPG_KJ
+	ENDIF
+	IF TALENT:L_I:ボランティア == 1
+		CALL TURN_EVENT_VOLUNTEER_1
+	ENDIF
+	IF TALENT:L_I:ボランティア != 0 && FLAG:遺研_研究対象 != 0 && FLAG:遺研_リーダー != 0 && MONEY >= FLAG:遺研_費用 && (CFLAG:住人_肉体ダメージ < 100 || FLAG:遺研_精神ダメージ < 100)
+		CALL TURN_EVENT_VOLUNTEER
 	ENDIF
 NEXT
+CALL TURN_EVENT_CITY_GROWTH
 TARGET = L_TGT_BAK
 
 IF RAND:100 >= 95 && Flag:都市_Lv >= 10 && FLAG:都市_防衛 == 0 && Flag:都市_襲撃 > 1 && Flag:EP他プレイヤー干渉 == 0
 	Flag:EP他プレイヤー干渉 = 1
 	Flag:EP敵戦力 = (RAND:((Flag:都市_Lv)+1))/10
-	SIF Flag:EP敵戦力  <= 0
-		Flag:EP敵戦力 = 1
-	SIF Flag:EP敵戦力  >= 10
-		Flag:EP敵戦力 = 10
+	Flag:EP敵戦力 = LIMIT(Flag:EP敵戦力, 1, 10)
 ENDIF
 
 IF Flag:EP他プレイヤー干渉 == 3 && FLAG:都市_防衛 == 0 && Flag:都市_襲撃 > 1
@@ -117,6 +133,9 @@ SIF Flag:都市_現在SP >= Flag:都市_最大SP
 SIF Flag:都市_現在TP >= Flag:都市_最大TP
 	Flag:都市_現在TP = Flag:都市_最大TP
 
+Flag:都市_最大LP = 50+(Flag:都市_Lv*2)
+
+
 SIF Flag:都市_Lv >= 5 && FLAG:都市_防衛 == 0 &&  Flag:都市_襲撃 > 0
 	FLAG:都市_襲撃 -= 1
 
@@ -160,9 +179,9 @@ SIF !RAND:10
 	Flag:都市_功績獲得機会 = 1
 
 
-
+FLAG:遺研_独自判定 = 0
 FLAG:都市_パートナーセックス = 0
-FLAG:都市_ストーリー = RAND:11
+FLAG:都市_ストーリー = RAND:13
 
 Flag:日替わり区画難易度 = ((RAND:(Flag:都市_Lv))/20)+1
 Flag:日替わり区画深度限界 = ((RAND:(Flag:都市_Lv))/10)+20
@@ -173,6 +192,11 @@ SIF Flag:日替わり区画深度限界 >= 50
 SIF Flag:調査区域 == 90
 	Flag:調査深度 = 0
 
+
+IF FLAG:遺研_研究対象 != 0 && FLAG:遺研_リーダー != 0
+	FLAG:遺研_固定乱数 = RAND:101
+	FLAG:(16000+FLAG:遺研_研究対象) += 1
+ENDIF
 
 ;CALL TURN_EVENT_CAFE_CHARA_MAIN
 
@@ -467,118 +491,140 @@ SIF CFlag:住人_현재체력 >= CFlag:住人_최대체력
 ;貢献
 ;-------------------------------------------------
 @TURN_EVENT_CITY_EXP
-#DIM L_T
-#DIM L_LOOP
-#DIM L_B
-#DIM L_FH
-#DIM L_FH2
-#DIM L_FC
-#DIM L_S
+#DIM DYNAMIC RATE_EVIL_UP        ;裏社会に貢献する確率、善悪属性準拠
 
-L_S = 0
-L_FC = 0
-L_FH = 0
-L_FH2 = 0
-L_B = 0
-L_LOOP = 0
+#DIM DYNAMIC CHARA_WORK          ;このターンのキャラの功績
+#DIM DYNAMIC WORK_BONUS          ;業種別、経験その他によるボーナス、基礎値はCHARA_WORK
+#DIM DYNAMIC FALLEN_BONUS        ;陥落による補正
 
+#DIM DYNAMIC CITY_EXP            ;都市に入る経験値、基礎値はWORK_BONUS
+#DIM DYNAMIC FACI_UP_VALUE       ;各施設に入る経験の数値
+#DIM DYNAMIC GROWTH_ILLEGAL_SIDE ;裏社会の変動値、マイナス成長を含む
+#DIM DYNAMIC GROWTH_LAWFUL_SIDE  ;表社会の変動値
 
-IF CFlag:住人_属性 == 2
-	L_T = 80
-ELSEIF CFlag:住人_属性 == 1
-	L_T = 20
-ELSE
-	L_T = 50
-ENDIF
+SELECTCASE CFlag:住人_属性
+CASE 2
+	RATE_EVIL_UP = 80
+CASE 1
+	RATE_EVIL_UP = 20
+CASEELSE
+	RATE_EVIL_UP = 50
+ENDSELECT
 
-L_FC = FLAG:都市_合計ファン数
+;功績基礎値は業務経験依存、刻印つけるとがんばる
+CHARA_WORK = RAND:(3 + GETEXPLV(EXP:業務経験, 9)) + MAX(MARK:隷属刻印, MARK:陥落刻印, MARK:淫乱刻印) * 2
+;アイドルによる全住人への追加補正、補正値0～20、ファン数8000以上で最大補正
+CHARA_WORK += CBRT(LIMIT(FLAG:都市_合計ファン数, 1, 8000)) - 1
 
-SIF L_FC >= 50000000
-	L_FC = 50000000
+;業種別、経験その他によるボーナス、基礎値は功績
+WORK_BONUS = MAX(CHARA_WORK, 1)
 IF Talent:아이돌 != 0
-	L_FH = 4000
+	WORK_BONUS += RAND:6 + GETEXPLV(EXP:誘惑経験, 9) + CBRT(LIMIT(CFLAG:住人_人気, 1, 1000))
 ELSEIF Talent:사회인 != 0
-	L_FH = 5000
-ELSEIF Talent:학생
-	L_FH = 5000
-ELSEIF Talent:창녀 != 0
-	L_FH = 7000
+	WORK_BONUS += RAND(2, 6) + RAND(2, 6) + RAND(2, 6)
 ELSEIF Talent:성직자 != 0
-	L_FH = 500
 	SIF RAND:10 > 4 && CFlag:住人_カルマ >= 1
 		CFlag:住人_カルマ -= 1
+	WORK_BONUS += RAND:3 + GETEXPLV(EXP:奉仕快楽経験, 9)
+	SIF CFLAG:住人_モラル > 0
+		WORK_BONUS += SQRT(LIMIT(ABS(CFLAG:住人_モラル), 1, 100))
 ELSEIF Talent:메이드 != 0
-	L_FH = 500
 	IF Flag:都市_現在AP <= Flag:都市_最大AP
-		Flag:都市_現在AP += (EXP:업무경험/40)+1
+		Flag:都市_現在AP += CHARA_WORK + 1
 	ENDIF
+	WORK_BONUS += RAND:6 + GETEXPLV(EXP:奉仕快楽経験, 9) + GETEXPLV(EXP:主人調教経験, 9)
+ELSEIF Talent:창녀 != 0
+	WORK_BONUS += RAND:3 + GETEXPLV(EXP:売春経験, 9)
+	SIF CFLAG:住人_モラル < 0
+		WORK_BONUS += SQRT(LIMIT(ABS(CFLAG:住人_モラル), 1, 100))
+ELSEIF Talent:학생 != 0
+	WORK_BONUS += RAND(1, 10) + RAND(1, 10)
 ELSE
-	L_FH = 2000
+	WORK_BONUS += RAND(1, 3) + CBRT(LIMIT(FLAG:都市_合計ファン数, 1, 1000)) - 1
 ENDIF
 
-
-$FC_LOOP
-IF L_FH >= L_FC
-	L_FH2 += 1
-	L_FH = L_FH*8
-	GOTO FC_LOOP
+;陥落関連ボーナス
+IF TALENT:合意 == 1 || TALENT:調教済み
+	FALLEN_BONUS = 1 + CFlag:住人_貢献値 / 2
+ELSEIF TALENT:弱み   != 0
+	FALLEN_BONUS = 1 + CFlag:住人_貢献値 / 5
+ELSEIF TALENT:犯され != 0
+	FALLEN_BONUS = 1 + CFlag:住人_貢献値 / 10
+ELSE
+	FALLEN_BONUS = 1 + CFlag:住人_貢献値 / 4
+ENDIF
+;三種類の陥落ごとに別々のボーナス
+IF TALENT:愛人 == 1
+	FALLEN_BONUS += RAND:(3 + CBRT(LIMIT(CFLAG:好感度 / 100, 1, 1000)))
+ELSEIF TALENT:情婦 == 1
+	FALLEN_BONUS += RAND:(3 + GETEXPLV(EXP:売春経験, 9))
+ELSEIF TALENT:心酔 == 1
+	FALLEN_BONUS += RAND:(3 + GETEXPLV(EXP:奉仕快楽経験, 9))
 ENDIF
 
+IF RAND:100 < RAND:10 + (CFlag:住人_地位 + CFlag:住人_貢献値) * 10
+	CITY_EXP            = WORK_BONUS
+	FACI_UP_VALUE       = (RAND:(CFlag:住人_貢献値) + FALLEN_BONUS) * (WORK_BONUS) + CHARA_WORK
+	GROWTH_ILLEGAL_SIDE = RAND:(CFlag:住人_貢献値) + FALLEN_BONUS + RAND:(CFlag:住人_貢献値 * 2)
+	GROWTH_LAWFUL_SIDE  = RAND:(CFlag:住人_貢献値) + FALLEN_BONUS
 
-SIF TALENT:정부 == 1
-	L_S = (EXP:매춘경험+50)/50
-
-
-
-SIF CFlag:住人_貢献値 <= 0
-	CFlag:住人_貢献値 = 1
-
-
-SIF TALENT:합의 == 1
-	L_B = (CFlag:住人_貢献値/2)+1
-
-
-IF (((CFlag:住人_地位)*10)+((CFlag:住人_貢献値)*10)+RAND:10) >= RAND:100
-	IF L_T >= RAND:100
+	IF RAND:100 < RATE_EVIL_UP
 		;施設(悪)
-		Flag:(4150+RAND:6) += (((RAND:(CFlag:住人_貢献値)+1)+L_B)*(L_FH2+1))+L_S
-		Flag:都市_裏社会 += (RAND:(CFlag:住人_貢献値)+1)+L_B+RAND:(CFlag:住人_貢献値*2)
-		Flag:都市_表社会 -= (RAND:(CFlag:住人_貢献値)+1)+L_B
+		Flag:(4150 + RAND:6) += FACI_UP_VALUE
+		Flag:都市_裏社会 += GROWTH_ILLEGAL_SIDE
+		Flag:都市_表社会 -= GROWTH_LAWFUL_SIDE
 	ELSE
 		;施設(善)
-		Flag:(4101+RAND:7) += (((RAND:(CFlag:住人_貢献値)+1)+L_B)*(L_FH2+1))+L_S
-		Flag:都市_裏社会 -= (RAND:(CFlag:住人_貢献値)+1)+L_B+RAND:(CFlag:住人_貢献値*2)
-		Flag:都市_表社会 += (RAND:(CFlag:住人_貢献値)+1)+L_B
+		Flag:(4101 + RAND:7) += FACI_UP_VALUE
+		Flag:都市_裏社会 -= GROWTH_ILLEGAL_SIDE
+		Flag:都市_表社会 += GROWTH_LAWFUL_SIDE
 	ENDIF
-
-Flag:都市_経験値 += (RAND:(CFlag:住人_貢献値))+1+L_B
-Flag:都市_今期の貢献値 += RAND:((CFlag:住人_貢献値)+1+L_B)
-
-ENDIF
-REPEAT 99
-	IF (Flag:(4100+L_LOOP) >= (Flag:(4000+L_LOOP))*10 && Flag:(4000+L_LOOP) != 0) || (Flag:(4100+L_LOOP) >= 10 && Flag:(4000+L_LOOP) == 0)
-		Flag:(4000+L_LOOP) += 1
-		Flag:(4100+L_LOOP) = 0
+	
+	Flag:都市_経験値       += CITY_EXP
+	Flag:都市_今期の貢献値 += CITY_EXP
 	ENDIF
-	L_LOOP += 1
-REND
-
-
-FLAG:都市_合計ファン数 += CFLAG:ファンの数
-
-IF Flag:都市_経験値 >= (Flag:都市_Lv)*10
-	Flag:都市_Lv += 1
-	Flag:都市_経験値 = 0
-ENDIF
 
 SIF Flag:都市_裏社会 <= 0
 	Flag:都市_裏社会 = 0
 SIF Flag:都市_表社会  <= 0
 	Flag:都市_表社会  = 0
 
-Flag:都市_功績 += RAND:(((EXP:업무경험+1)/100)+3)
+IF TALENT:万年乳期  == 1 && RAND:10 >= 3
+	FLAG:都市_現在BP += (RAND:4)+1
+	PRINTFORML 万年乳期の%CALLNAME%は常に母乳が出るようになっている。
+	PRINTFORML %CALLNAME:MASTER%は本日分を採取し、BPへと変換した。
+	ENDIF
 
-MONEY += (Flag:都市_Lv+1)*70+(RAND:(Flag:都市_Lv+1)*70)
+Flag:都市_功績 += CHARA_WORK
+MONEY += (Flag:都市_Lv + 1 + RAND:(Flag:都市_Lv + 1)) * 70
+
+
+
+
+
+;-------------------------------------------------
+;都市の成長処理
+;キャラ処理のたびに成長を行うのを止め、経験値取得後にまとめて成長を行うように変更
+;-------------------------------------------------
+@TURN_EVENT_CITY_GROWTH
+#DIM FACI_ID
+;施設の成長処理
+FOR FACI_ID, 1, 100
+	;施設名未定義ならスルー
+	SIF !STRLENS(FLAGNAME:(4000 + FACI_ID))
+		CONTINUE
+	;成長できなくなるまで続ける
+	WHILE Flag:(4100 + FACI_ID) >= MAX(Flag:(4000 + FACI_ID), 1) * 10
+		Flag:(4100 + FACI_ID) -= MAX(Flag:(4000 + FACI_ID), 1) * 10
+		Flag:(4000 + FACI_ID) ++
+	WEND
+NEXT
+;都市自体の成長処理
+WHILE Flag:都市_経験値 >= Flag:都市_Lv * 10
+	Flag:都市_経験値 -= Flag:都市_Lv * 10
+	Flag:都市_Lv ++
+WEND
+
 
 
 

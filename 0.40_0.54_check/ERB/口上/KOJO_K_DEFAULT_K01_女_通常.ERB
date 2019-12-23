@@ -688,15 +688,38 @@ ELSE
 			;그 외 
 			ELSE
 
+				IF EXP:Ｃ経験 >= 10 || EXP:Ｂ経験 >= 10
+					PRINTFORML 抵抗感こそ無いものの、%CALLNAME:MASTER%にこうやって触られるのは初めて故か
+					PRINTFORML %CALLNAME%の体は少し強張っているようにも見える
+					PRINTFORMW その緊張をほぐす為に、%CALLNAME:MASTER%はゆっくりと愛撫を開始した……
+				ELSE
 				PRINTFORML やはり身体を触れたり舐められたりするのは抵抗感があるのか、%CALLNAME%는 小さく身じろぎする。
 				PRINTFORMW %CALLNAME:MASTER%는 なるべく敏感な箇所は弱めに刺激する…
 			ENDIF
+		ENDIF
 		;二回目以降
 		ELSE
 			;陥落開始
 			IF MARK:함락각인
-
-				IF RAND:2 == 0
+				IF !RAND:5
+						PRINTFORML %CALLNAME:MASTER%が%CALLNAME%の陰核や%OPPAI_DESCRIPTION(TARGET)%を弄り倒してやると、
+					IF ABL:Ｃ感覚 >= 4 || ABL:Ｂ感覚 >= 4
+						PRINTFORMW 開発された性感帯からの刺激に%CALLNAME%は嬌声を上げて激しく身悶えた……
+					ELSE
+						PRINTFORMW %CALLNAME%は艶やかな楽器のように喘ぎ声で%CALLNAME:MASTER%を喜ばせた……
+					ENDIF
+				ELSEIF !RAND:4
+					PRINTFORML 乳首や陰核をこねくり回しつつ、しっとりと汗ばんだ肢体に口づけの雨を降らす
+					PRINTFORML 思わず甘い吐息を漏らす%CALLNAME%の唇を塞いで舌を差し入れると、
+					IF EXP:主人調教経験 >= 30 ||  EXP:キス経験 >= 10 || TALENT:娼婦
+						PRINTFORMW 昂った%CALLNAME%もこちらに舌を絡めてきた……
+					ELSE
+						PRINTFORMW %CALLNAME:MASTER%は攻勢に翻弄される%CALLNAME%の口内をたっぷりと味わった……
+					ENDIF
+				ELSEIF !RAND:3
+					PRINTFORML %CALLNAME:MASTER%は優しく抱き締める様に%CALLNAME%の肢体を撫で回していく
+					PRINTFORMW 主要な性感帯に触れるたび、%CALLNAME%は気持ち良さそうに声を上げている……
+				ELSEIF !RAND:2
 					PRINTFORML 耳たぶや首筋を刺激してやると、気持ち良さそうに%CALLNAME%는 身を弾ませる。
 					PRINTFORML 次に片手で身体中を優しく撫でながら、%CALLNAME%의 指を咥えてしゃぶる。
 					PRINTFORMW 別の快感で新鮮だったのか、いつも以上に喘ぐ声を上げていた…
@@ -1313,6 +1336,11 @@ ENDIF
 			IF MARK:예속각인
 				PRINTFORML 指示を受けると%CALLNAME:MASTER%のペニスを掴み優しく擦る。
 				PRINTFORMW だんだんとペースを上げていき快感で震える%CALLNAME:MASTER%를 愉しませている…
+			;陥落開始
+			ELSEIF MARK:陥落刻印 || TALENT:娼婦
+				PRINTFORML %CALLNAME%はおずおずとペニスに触れては離れを繰り返していたが、
+				PRINTFORML ぷにぷにとした亀頭の触感や振り子のように揺れる陰茎が楽しくなってきたのか
+				PRINTFORMW そう長く掛からない内にその手でペニスをしごき始めていった……
 			;그 외 
 			ELSE
 				PRINTFORMW すごく嫌そうな表情をしていたが、しぶしぶ肉棒を握ると擦り始めた…
@@ -1358,6 +1386,17 @@ ENDIF
 				PRINTFORML 命令をすんなりと受け入れ、%CALLNAME:MASTER%剛直を口に頬張る。
 				PRINTFORML 動きも慣れたのか%CALLNAME:MASTER%の腰を掴んで首をピストンさせる。
 				PRINTFORMW ゾクゾクと快感を受ける%CALLNAME:MASTER%는 徐々に射精へ近づいていった…
+			;陥落開始
+			ELSEIF MARK:陥落刻印 || TALENT:娼婦
+				IF EXP:フェラ経験 >= 1
+					PRINTFORML 最初は%CALLNAME:MASTER%の肉棒の逞しさに気圧されていた%CALLNAME%だったが、
+					PRINTFORML 意を決して先端を咥え、少しづつその口腔に%CALLNAME:MASTER%の剛直を収めていった
+					PRINTFORMW 苦戦しつつも淫らな音を立てて上下していく唇の感触に、肉棒は硬度を増していった……
+				ELSE
+					PRINTFORML 初めは肉棒のグロテスクさに頬張ることを躊躇っていた%CALLNAME%だが、
+					PRINTFORML チロチロと先端を舐め始め、ゆっくりとその口腔に%CALLNAME:MASTER%の剛直を収めていった
+					PRINTFORMW ぎこちないながらも一生懸命な奉仕によって、肉棒はテラテラと滑り輝いていく……
+				ENDIF
 			;그 외 
 			ELSE
 				PRINTFORML 最初は断固拒否していたが、肉棒を頬に押し付けられるのに耐えかねついに咥えた。
@@ -1567,6 +1606,17 @@ ENDIF
 			IF MARK:예속각인
 				PRINTFORML %CALLNAME:MASTER%는 性器で濡れ始めている%CALLNAME%의 陰部を擦り合わせる。
 				PRINTFORMW %CALLNAME:MASTER%가 動く度、二つの性器の間から小さな水音が鳴り響いた…
+			;陥落開始
+			ELSEIF MARK:陥落刻印 || TALENT:娼婦
+				IF EXP:性交経験 >= 3 || EXP:Ａ性交経験 >= 3
+					PRINTFORML 素股を命じられた%CALLNAME%は、どこかのぼせたような表情で性器同士を擦り付け始めた
+					PRINTFORML 少しずつ滑りが増していく陰部にこのまま挿入ってしまうのではと思いつつ、
+					PRINTFORMW 密着する二人の股の間には水音と淫卑な感触が広がっていった……
+				ELSE
+					PRINTFORML 素股を命じられた%CALLNAME%は、恐る恐る%CALLNAME:MASTER%の上に腰を下ろしていく
+					PRINTFORML ぎこちなく腰を振る%CALLNAME%の初々しさに、%CALLNAME:MASTER%のペニスから涎が零れていく
+					PRINTFORMW 段々と大きくなる粘膜の擦れ合う音で、%CALLNAME%の羞恥はジリジリと炙られていった……
+				ENDIF
 			;그 외 
 			ELSE
 				PRINTFORML まだ本番は抵抗があるだろうと、%CALLNAME:MASTER%는 自分の性器を秘所にあてがい軽く擦り合わせる
@@ -3038,6 +3088,21 @@ SELECTCASE TCVAR:被射精部位
 	CASE [[口上:主人Ｖ射精]]
 IF TALENT:ＮＴＲ도 && MARK:함락각인
 ;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF TALENT:妊娠 >= 10
+			IF !RAND:6
+			PRINTFORML 「いやっ…もう%CSTR:二人称%の…精液なんてっ%UNICODE(0x2661)%……注がなっ………ぁんっ%UNICODE(0x2661)%」
+			ELSEIF !RAND:5
+			PRINTFORML 「…やっ…そこはっ…あの人のっ%UNICODE(0x2661)%……ひゃぁっ………ぁ%UNICODE(0x2661)%」
+			ELSEIF !RAND:4
+			PRINTFORML 「…ダメ…なのにっ……妊娠してる、のにぃっ%UNICODE(0x2661)%……！」
+			ELSEIF !RAND:3
+			PRINTFORML 「…あんっ%UNICODE(0x2661)%だめっ…ぁっ…もうそこにはぁ……%UNICODE(0x2661)%！…あっ%UNICODE(0x2661)%」
+			ELSEIF !RAND:2
+			PRINTFORML 「…ぇ…やっ！…だ…ダメっ%UNICODE(0x2661)%…………ぁぁ……んっ%UNICODE(0x2661)%」
+			ELSE
+			PRINTFORML 「…射精てる…っ………トクトクって…%UNICODE(0x2661)%………………安心する…%UNICODE(0x2661)%」
+			ENDIF
+		ELSE
 		IF !RAND:6
 		PRINTFORML 「いやっ…%CSTR:二人称%の…子供なんかっ%UNICODE(0x2661)%……産みたくな………ぁんっ%UNICODE(0x2661)%」
 		ELSEIF !RAND:5
@@ -3051,6 +3116,7 @@ IF TALENT:ＮＴＲ도 && MARK:함락각인
 		ELSE
 		PRINTFORML 「…射精てる…っ………トクトクって…%UNICODE(0x2661)%………………安心する…%UNICODE(0x2661)%」
 		ENDIF
+ENDIF
 ;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
 		IF !RAND:4
 		PRINTFORML もうすぐ射精るので%CALLNAME%を両肩を押さえて腰を激しく早く打ち付け始める。
@@ -3111,48 +3177,224 @@ ELSE
 ;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
 	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
 ;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
-				PRINTFORML 妊娠にリスクを伴うというのに、%CALLNAME%는 一切の抵抗もなく膣内射精を受け止めた。
-				PRINTFORML 小さな子宮には治まり切れない白濁液は、溢れかえって膣内を汚し始める。
-				PRINTFORMW 暫くの間%CALLNAME%는 子宮の熱さに震え、射精の余韻に浸る%CALLNAME:MASTER%를 抱きしめた…
-			
+				IF TALENT:妊娠 >= 10
+					IF RAND:3 == 0
+						PRINTFORML 妊娠した身であっても%CALLNAME%は当然のように膣内射精を了承する
+						PRINTFORML %CALLNAME:MASTER%の命ならばと重たくなったお腹を揺らし、
+						PRINTFORML 一番奥まで咥え込んだ状態でその迸りを余すことなく受け止めた
+						PRINTFORMW 射精の熱に震える恭順者の表情は、自分の役目を全うする恍惚に染まっている……
+					ELSEIF !RAND:2
+						PRINTFORML 膨れ上がったペニスが膣内で欲望を爆発させ、逆流した精液が結合部から噴き出す
+						PRINTFORML %CALLNAME%はその快感に身を焦がしながら、汗ばんだ肉体全てを%CALLNAME:MASTER%に捧げている
+						PRINTFORMW 子を孕んでも変わらない献身に、%CALLNAME:MASTER%はそっと%CALLNAME%を撫でてやった……
+					ELSE
+						PRINTFORML %CALLNAME:MASTER%は妊婦である%CALLNAME%の蜜壺を怒張した肉棒で掻き回している
+						PRINTFORML 孕んでもなお自分を使ってくれることに感謝を述べ、自ら膣中出しをねだる%CALLNAME%に
+						PRINTFORMW %CALLNAME:MASTER%はとびきりの白濁液を注いでやった……
+					ENDIF
+				ELSEIF TALENT:妊娠 || TALENT:受精 || TALENT:托卵
+					IF RAND:3 == 0
+						PRINTFORML 湿った快音を鳴らして突き込まれる肉棒から%CALLNAME%を服従させる白濁液が吐き出される
+						PRINTFORML 既に着床した卵子を宿していても、その種付け行為に意味があると信じる%CALLNAME%には関係のない話だ
+						PRINTFORMW %CALLNAME:MASTER%の為の蜜穴が役目を果たすと、%CALLNAME%は震えながら熱い吐息を漏らした……
+					ELSEIF !RAND:2
+						PRINTFORML 激しいピストンに応えるように一生懸命腰を振る%CALLNAME%に、
+						PRINTFORML %CALLNAME:MASTER%は肉棒を奥まで突き込まれてご褒美の精液を注ぎ込んだ
+						PRINTFORML ペニスへの献身が\@ CFLAG:妊娠フラグ == 1 ?妊娠という形で実を結んだ#残念ながら成就しない\@ことをまだ知らない%CALLNAME%は、
+						PRINTFORMW 下腹部に広がっていく熱さにただ恍惚としている……
+					ELSE
+						PRINTFORML 限界を迎えたペニスから放たれた精液が膣内を逆流し、結合部から溢れ出していく
+						PRINTFORML もう受精しているとは気付かない%CALLNAME%はその白濁液を掬い、
+						PRINTFORMW 次の射精を誘う様に繋がったままのペニスと膣口に塗り付けている……
+					ENDIF
+				ELSE
+					IF RAND:3 == 0
+					PRINTFORML 妊娠にリスクを伴うというのに、%CALLNAME%는 一切の抵抗もなく膣内射精を受け止めた。
+					PRINTFORML 小さな子宮には治まり切れない白濁液は、溢れかえって膣内を汚し始める。
+					PRINTFORMW 暫くの間%CALLNAME%는 子宮の熱さに震え、射精の余韻に浸る%CALLNAME:MASTER%를 抱きしめた…
+					ELSEIF !RAND:2
+						PRINTFORML 限界まで怒張した肉棒を%CALLNAME%の秘所に突き立て、%CALLNAME:MASTER%は射精を開始する
+						PRINTFORML その種付け行為を従順に受け止める%CALLNAME%の表情は陶酔感に満ちており、
+						PRINTFORMW %CALLNAME:MASTER%の所有物である証が最奥に注がれると、幸せそうな喘ぎ声が零れ出た……
+					ELSE
+						PRINTFORML 命令ならば幾らでも種付けを許す淫らな雌穴に%CALLNAME:MASTER%は精液をぶちまけた
+						PRINTFORMW 子宮に注がれる子種の熱さに身悶えながら、%CALLNAME%は膣内を締めて最後まで主に奉仕している……
+					ENDIF
+				ENDIF
 			;陥落開始
 			ELSEIF MARK:함락각인
 ;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
 	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
 ;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				;妊娠した上で自覚している
+				IF TALENT:妊娠 >= 10
+					;寝取り妊婦
+					IF TALENT:ＮＴＬ == 1
+						IF RAND:4 == 0
+							;あなたの子を妊娠
+							IF CFLAG:妊娠フラグ == 1
+								PRINTFORML 射精の予兆を感じ取ってなお、二人は淫らな水音を響かせながら貪欲に快楽を貪り続ける
+								PRINTFORML ”\@ TALENT:交際中 ?恋人#伴侶\@への裏切りの果てに胎内に%CALLNAME:MASTER%の子を宿している”
+								PRINTFORML それは膣中出しを躊躇う理由を奪い、性交を昂らせる要素でしかなくなっていた
+								PRINTL 
+								PRINTFORML %CALLNAME%は情欲に染まり切った瞳で%CALLNAME:MASTER%へ淫らな言葉と共に精液をねだり、
+								PRINTFORMW %CALLNAME:MASTER%は当然のように亀頭を子宮口に押し付け、願い通りに\@ TALENT:交際中 ?浮気#人妻\@妊婦へ白濁液を注ぎ込んだ……
+							;あなた以外の子
+							ELSE
+								PRINTFORML 妊娠した身の上でも獣のように腰を打ち付け合い、%CALLNAME:MASTER%たちは肉欲に溺れている
+								PRINTFORML やがて膨らみ切った肉棒が子宮を穿ちながら欲望をぶちまけると、%CALLNAME%はおとがいをそらして総身を震わせた
+								PRINTFORML 快楽に融けた意識には%CALLNAME:MASTER%以外の子種で宿した子の事など消え去っているのだろう
+								PRINTL 
+								PRINTFORML 胎内の子が精液で溺れてしまう恐れなど微塵も見せずに更なる膣中出しを求める%CALLNAME%に、
+								PRINTFORMW %CALLNAME:MASTER%は再び\@ TALENT:交際中 ?淫らな#人妻\@妊婦の膣内の感触を味わい始めた……
+							ENDIF
+						ELSEIF !RAND:3
+							IF CFLAG:妊娠フラグ == 1
+								PRINTFORML 淫らに吸い付いてくる\@ TALENT:交際中 ?他人の恋人#人妻\@の雌穴に、%CALLNAME:MASTER%は派手な肉音を立てて肉棒を挿し込む
+								PRINTFORML %CALLNAME:MASTER%が専有する孕み腹は、打ち付けに合わせて汗で滑り光る表面を揺らしている
+								PRINTFORMW やがて互いの性の膨張と収縮が限界に達した瞬間、驚くほどの勢いで蜜壺が白く染め上げられていった……
+							ELSE
+								PRINTFORML 射精を察した%CALLNAME%は\@ TALENT:交際中 ?恋人がいる#人妻だ\@というのに%CALLNAME:MASTER%の膣中出しを求めて嬌声を上げる
+								PRINTFORML %CALLNAME%を孕ませた相手にこの痴態を見せたやりたいと思いつつ、%CALLNAME:MASTER%は気兼ねなく精液を放った
+								PRINTFORML 宿した子とは別の遺伝子がどくどくと溢れ出る結合部は、
+								PRINTFORMW 嬉しそうに%CALLNAME:MASTER%の肉棒にしゃぶりついている……
+							ENDIF
+						ELSEIF !RAND:2
+							IF CFLAG:妊娠フラグ == 1
+								PRINTFORML %CALLNAME:MASTER%の子種で身重になった\@ TALENT:交際中 ?他人の恋人#人妻\@の秘所は、
+								PRINTFORML 動くたびに%CALLNAME:MASTER%のペニスの形に歪み、涎を零し続けている
+								PRINTFORML その事実に昂る%CALLNAME:MASTER%は、本来の主の精子が入る隙など一ミリもない程に
+								PRINTFORMW その膨らんだ孕み腹の中へ熱い猛りをぶちまけた……
+							ELSE
+								PRINTFORML 他人の子を宿して大きくなった腹部を\@ TEQUIP:ポイント性交 == [[TRAIN:騎乗位]] ?見上げ#見下ろし\@ながら、
+								PRINTFORML %CALLNAME:MASTER%は不貞妊婦の雌穴に容赦無い種付けを見舞う
+								PRINTFORML 発情し一人の雌に堕とされた%CALLNAME%は、その息苦しさすら快感に変えて%CALLNAME:MASTER%の子種を搾り取っていく
+								PRINTFORML 荒い呼吸を整える彼女の瞳は、無駄撃ちとなって収め切れずに零れ出る白濁液を
+								PRINTFORMW 熱を帯びた視線で心底残念そうに見つめている……
+							ENDIF
+						ELSE
+							PRINTFORML 限界を迎えたペニスから放たれた精液が膣内を逆流し、結合部から溢れ出していく
+							PRINTFORML %CALLNAME%は母親となったはずの下腹部を膣中出しの快楽に支配され、唯の雌に堕ちていた
+							PRINTFORMW 精液が零れ伝う度に恍惚感で震えるお腹が、その堕落を雄弁に語っている……
+						ENDIF
+					;通常妊婦
+					ELSE
+						IF RAND:4 == 0
+							;あなたの子を妊娠
+							IF CFLAG:妊娠フラグ == 1
+								PRINTFORML %CALLNAME%が%CALLNAME:MASTER%の種を孕んだお腹を揺らしながら、激しいピストンに己の雌を曝け出している
+								PRINTFORML その光景に興奮した%CALLNAME:MASTER%は、たまらず熱い迸りを%CALLNAME%の最奥で放つ
+								PRINTFORML 大きくなったお腹を更に膨らませようと満ち溢れる子種達に
+								PRINTFORMW %CALLNAME%は甘美な眩暈を覚え、総身を震わせている……
+							;あなた以外の子
+							ELSE
+								PRINTFORML 別人の子種を宿している子宮を塗り潰す様に、%CALLNAME:MASTER%はこれでもかと%CALLNAME%に白濁液を注ぎ込む
+								PRINTFORML 何処か荒々しいその打ち付けに%CALLNAME%は愛おしさを覚え、女の芯が更に熱くなるのを感じた
+								PRINTFORMW とうに孕んでいるというのに、%CALLNAME%の子宮はこれが本当の主人だと言わんばかりに肉棒に吸い付いている……
+							ENDIF
+						ELSEIF !RAND:3
+							IF CFLAG:妊娠フラグ == 1
+								PRINTFORML %CALLNAME:MASTER%に孕まされた蜜壺は、%CALLNAME:MASTER%の子種を注がれる幸せに反応して淫猥に収縮を繰り返す
+								PRINTFORML その健気さと淫蕩さに限界まで膨張したペニスは、
+								PRINTFORML 最後の一滴まで%CALLNAME%の膣内へとご褒美を注ぎ込んだ
+								PRINTFORMW 自分の雌を完全征服された感覚に酔いしれる%CALLNAME%は、秘所から随喜の涙を溢し続けている……
+							ELSE
+								PRINTFORML 激しい腰の打ち付け合いの末にぐちゃぐちゃになった膣内へ、熱い白濁液が撒き散らされる
+								PRINTFORML 人の子を大事にしなければならないはずの妊婦のお腹は、
+								PRINTFORMW どろりと白濁液を零す度に快感に震えている……
+							ENDIF
+						ELSEIF !RAND:2
+							PRINTFORML 膣内で暴れまわる肉棒に射精が近いことを感じ取った%CALLNAME%は、無意識に腰を押し付けてくる
+							PRINTFORML すでに孕んでいる身体ならばと、交尾の果ての快楽を求めているようだ
+							PRINTFORMW 望み通りに白濁液を子宮へ勢い良く叩きつけてやると、%CALLNAME%は一際大きい嬌声をあげた……
+						ELSE
+							PRINTFORML 妊婦の秘所を抉り倒して射精する快感で、%CALLNAME:MASTER%の肉棒は勢い良く精液を吐き出していった
+							PRINTFORML 射精を終えて引き抜かれた結合部からは白濁の塊が溢れ、名残惜しそうに垂れている
+							PRINTFORMW 孕んで大きくなったお腹と並ぶその眺めに、%CALLNAME:MASTER%は再び股間が熱くなるのを感じた……
+						ENDIF
+					ENDIF
+					
+				;未授精、または未だ気付いてない
+				ELSE
 			IF TALENT:ＮＴＬ == 1
+									;受精（自覚はしてない）
+						IF TALENT:妊娠 || TALENT:受精 || TALENT:托卵
+							IF RAND:3 == 0
+								PRINTFORML \@ TALENT:交際中 ?恋人#伴侶\@以外の雄に種付けを許す淫らな雌穴に%CALLNAME:MASTER%は精液をぶちまけた
+								PRINTFORML %CALLNAME%が%CALLNAME:MASTER%の精子に孕まされる想像に甘い吐息を漏らす中、
+								PRINTFORMW %CALLNAME%の子宮だけはそれが\@ CFLAG:妊娠フラグ == 1 ?真実#妄想\@だと知っていた……
+							ELSEIF !RAND:2
+								PRINTFORML 限界まで怒張した肉棒を\@ TALENT:交際中 ?他人の恋人#人妻\@の秘所に突き立て、%CALLNAME:MASTER%は射精を開始する
+								PRINTFORML 熱い白濁が注がれ快感にぼやける%CALLNAME%の意識には、\@ TALENT:交際中 ?恋人#夫\@の姿は存在しなかった
+								PRINTFORMW 既にお腹に子供がいると知っていたとしても、その光景は変わらないだろう……
+							ELSE
+								PRINTFORML 加速するピストンに合わせて喘ぎ声が激しくなる%CALLNAME%に、
+								PRINTFORML 悪戯な笑みを浮かべた%CALLNAME:MASTER%は\@ TALENT:交際中 ?恋人#夫\@への謝罪を命じる
+								PRINTFORML 快楽に蕩けた顔で%CALLNAME%が偽りの謝罪を口にすると、彼女の最奥へたっぷりと背徳感の塊が注がれていった
+								PRINTFORMW その背徳感は人知れず受精した子宮によって増幅されている事に、二人はまだ気付いていない……
+							ENDIF
+						;通常
+						ELSE
 				IF RAND:3 == 0
 					PRINTFORML 激しい肉音を響かせながら、もはや秒読みとなった種付けの前に%CALLNAME:MASTER%는 人妻である%CALLNAME%に中か外か質問する。
 					PRINTFORML それにまるで当然とばかりに膣内を即答する%CALLNAME%、許可も得たということで子宮口に亀頭を押し付け容赦なく種付けを行った。
 					PRINTFORML ドクドクと子宮に直接流れ込んでくる精液に、%CALLNAME%는 声も出ないほどの絶頂で身体をピクピクと痙攣させる。
 					PRINTFORML 疲労で二人ともベッドに倒れ伏し、射精と絶頂により二人は心地よい脱力感に包まれる。
 					PRINTFORML 
-					PRINTFORML ふと%CALLNAME:MASTER%는 「もし妊娠したら夫にどう説明するか」と尋ねてみると。
+					PRINTFORML ふと%CALLNAME:MASTER%는 「もし妊娠したら\@ TALENT:交際中 ?恋人#夫\@にどう説明するか」と尋ねてみると。
 					PRINTFORML 「…説明なんていらない%CSTR:語尾応答2%、デきた後で適当に中出しさせれば勝手に勘違い%CSTR:語尾問う2%」
-					PRINTFORMW とピストンを再開していた%CALLNAME%는、熱心に腰を振りながら夫のことをさっきまで忘れていたかのように答えた…
+					PRINTFORMW とピストンを再開していた%CALLNAME%는、熱心に腰を振りながら\@ TALENT:交際中 ?恋人#夫\@のことをさっきまで忘れていたかのように答えた…
 				ELSEIF !RAND:2
-					PRINTFORML 夫ではなく%CALLNAME:MASTER%のペニスの形を覚えた%CALLNAME%의 膣内は、吐き出された精液を貪欲に取り込んでいく。
-					PRINTFORML 夫に何度射精されても反応しなかった子宮も、水を得た魚のように動きが活発になり逞しい精子たちを歓迎する。
+					PRINTFORML \@ TALENT:交際中 ?恋人#夫\@ではなく%CALLNAME:MASTER%のペニスの形を覚えた%CALLNAME%의 膣内は、吐き出された精液を貪欲に取り込んでいく。
+					PRINTFORML \@ TALENT:交際中 ?恋人#夫\@に何度射精されても反応しなかった子宮も、水を得た魚のように動きが活発になり逞しい精子たちを歓迎する。
 					PRINTFORML 種付けされた%CALLNAME%自身も蕩けた顔で%CALLNAME:MASTER%に愛を囁き、甘えるように四肢を絡め更なる生殖行為を求める。
 					PRINTFORMW それに応えるようにピストン再開してやると%CALLNAME%는 嬉しそうに喘ぎ始め、肉棒に奉仕するべく膣内をきつく締め付けた…
 				ELSE
 					PRINTFORML 射精間近となった%CALLNAME:MASTER%는 、このまま種付けしようと強い打ち付けで激しいピストンを繰り返す。
-					PRINTFORML それを察知したのか人妻のはずの%CALLNAME%는 媚びた声を出しながら腰を振り膣内射精を強請り始める。
+					PRINTFORML それを察知したのか\@ TALENT:交際中 ?恋人がいる#人妻の\@はずの%CALLNAME%는 媚びた声を出しながら腰を振り膣内射精を強請り始める。
 					PRINTFORML そして特濃精液が肉棒から解き放たれ、夫のスペースなど無いとばかりに子宮の中を白く埋め尽くす。
-					PRINTFORMW 種付けによる多幸感に満たされた%CALLNAME%의 脳内には、既に夫の姿は微塵も存在してはいなかった…
+					PRINTFORMW 種付けによる多幸感に満たされた%CALLNAME%의 脳内には、既に\@ TALENT:交際中 ?恋人#夫\@の姿は微塵も存在してはいなかった…
 				ENDIF
+						ENDIF
+					ELSE
+						;受精（自覚はしてない）
+						IF TALENT:妊娠 || TALENT:受精 || TALENT:托卵
+							IF RAND:3 == 0
+								PRINTFORML 射精まで秒読みとなった%CALLNAME:MASTER%のペニスに%CALLNAME%の膣内がより強く絡みついてくる
+								PRINTFORML 本人にその意識は無くとも、肉体は\@ CFLAG:妊娠フラグ == 1 ?自分を孕ませてくれた雄#本当に孕むべき相手\@が誰なのかを理解しているのだろう
+								PRINTFORMW 遺伝子を注ぎ込まれた瞬間、%CALLNAME%は言いようの無い快感と\@ CFLAG:妊娠フラグ == 1 ?幸福感#切なさ\@を感じていた……
+							ELSEIF !RAND:2
+								PRINTFORML 激しく抜き差しされる肉棒が心地良い肉音を立てて%CALLNAME%の蜜壺に全て埋没すると、
+								PRINTFORML 子宮口を押し潰す先端から勢いよく熱い精液が迸った
+								PRINTFORMW もう受精している卵子には届かなくとも、その猛々しさは%CALLNAME%の女芯を否応なく燃え上がらせた……
+							ELSE
+								PRINTFORML たっぷりと交尾の証を吐き出した雄の象徴が引き抜かれると、秘所から名残惜しそうに白濁液が零れ落ちた
+								PRINTFORML ひくひくと雄を誘う秘肉の奥には既に生命が宿っているが、
+								PRINTFORMW それをまだ知らない%CALLNAME%は再度の種付けを求めて腰をくねらせている……
+							ENDIF
+						;通常
 			ELSE
 				IF RAND:3 == 0
-					PRINTFORML 射精を始めようとする%CALLNAME:MASTER%の腰に脚を絡め、%CALLNAME%는 中出しを強要させる。
+					PRINTFORML 射精を始めようとする%CALLNAME:MASTER%に\@ TEQUIP:ポイント性交 == [[TRAIN:後背位]] ?腰を押し付け#脚を絡め\@、%CALLNAME%は中出しを強要させる。
 					PRINTFORML 限界まで膨れ上がった肉棒から放たれる精液で、子宮を犯される快楽に%CALLNAME%는 震えた。
 					PRINTFORMW 孕ませられる雌の悦びに浸りながら、%CALLNAME%는 遺伝子で満ちたお腹を愛おしそうにさすった…
 				ELSEIF !RAND:2
 					PRINTFORML %CALLNAME:MASTER%는 交尾の最終目的である種付けをするべく、亀頭で子宮口をこじ開けて遺伝子を吐き出した。
 					PRINTFORML 望まれて出された遺伝子達は当人たちの思いに応えるべく、必死に卵子に向けて泳ぎだす。
+								IF MARK:陥落刻印 >= 3
 					PRINTFORMW 子を成すことを望む%CALLNAME%는、愛する人の遺伝子が無事受精することを祈った…
+								ELSE
+									PRINTFORML この人の子ならばと、%CALLNAME%は想い人の遺伝子が無事受精することを祈った…
+								ENDIF
 				ELSE
 					PRINTFORML 大量の種付けを終え一度ペニスを引き抜くと、秘所からは入りきらなかった精液があふれ出てきた。
-					PRINTFORMW もったいなさそうに、%CALLNAME%는 指で溢れる精液を指で膣内へとかき戻していった…
+					IF CFlag:妊娠願望 >= 30 || CFlag:雌の本能 >= 30 || CFlag:無自覚な雌 >= 60
+						PRINTFORMW もったいなさそうに、%CALLNAME%는 指で溢れる精液を指で膣内へとかき戻していった…
+								ELSE
+									PRINTFORMW ゆっくりと流れ落ちるそれを、%CALLNAME%は熱く潤んだ瞳で見つめている……
+								ENDIF
+							ENDIF
+						ENDIF
 				ENDIF
 			ENDIF
 			;그 외 
@@ -3160,6 +3402,22 @@ ELSE
 ;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
 	CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK1000
 ;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				;妊娠した上で自覚している
+				IF TALENT:妊娠 >= 10
+					IF !RAND:3
+					PRINTFORML 射精の態勢に入った%CALLNAME:MASTER%の動きに、%CALLNAME%はなけなしの抵抗を試みる
+					PRINTFORMW しかしがっしりと腰を掴まれた妊婦に逃げる術は無く、大量の白濁液が注ぎ込まれていった……
+					ELSEIF !RAND:2
+					PRINTFORML 子宮に送り込まれ濃厚に絡みつく白濁液を、%CALLNAME%は沈んだ眼のまま受け入れる。
+					PRINTFORML 身籠った肉体に性欲をぶちまけられる無力感に交じって、
+					PRINTFORMW お腹が精液で更に圧迫されていく苦しさに何故か昂ぶりを感じている%CALLNAME%がいた…
+					ELSE
+					PRINTFORML 妊娠している%CALLNAME%の意志などお構いなしに、%CALLNAME:MASTER%は子宮めがけて精液を叩きつける
+					PRINTFORML 涙を湛えて孕んだ腹部を震わせる%CALLNAME%を見て、自分色に染め上げる征服感を満たしていく。
+					PRINTFORMW あとは快楽を受け入れさせるべく、%CALLNAME:MASTER%は腰を動かし始めた…
+					ENDIF
+				;未授精、または未だ気付いてない
+				ELSE
 				IF !RAND:3
 				PRINTFORML ペニスが射精を迎えようしているのが分かったのか、中出しを拒絶するように%CALLNAME%는 抵抗する。
 				PRINTFORML しかし%CALLNAME:MASTER%に組み伏せられているいのでペニスを抜くことができず、そのまま射精されてしまう。
@@ -3173,6 +3431,8 @@ ELSE
 				PRINTFORML 涙を堪えて耐える%CALLNAME%を見て、自分色に染め上げる征服感を満たしていく。
 				PRINTFORMW あとは快楽を受け入れさせるべく、%CALLNAME:MASTER%는 腰を動かし始めた…
 				ENDIF
+			ENDIF
+
 			ENDIF
 		ENDIF
 ENDIF
@@ -3196,6 +3456,21 @@ ENDIF
 ;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
 				PRINTFORML 手や顔にかかった精液を、%CALLNAME%는 奇麗に舐めとっていく。
 				PRINTFORMW もう味にも慣れてしまったのか表情も欲情したままであった…
+
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…ぁ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ひゃんっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…わっ…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 飛び出た精液を思わず手で遮ってしまった%CALLNAME%だが、
+				PRINTFORMW 間に合わなかった分が顔や体に降りかかり、その肢体を汚されてしまった……
+
 			;그 외 
 			ELSE
 ;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
@@ -3471,6 +3746,21 @@ ELSE
 ;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
 				PRINTFORML %CALLNAME%는 自ら胸を差し出して、放たれるザーメンを受け止める。
 				PRINTFORMW 精液で汚され、自身は%CALLNAME:MASTER%のモノであることを興奮しながら再確認していた…
+
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…ぁ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ひゃんっ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…んんっ…%UNICODE(0x2661)%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 噴出する白濁液が%CALLNAME%の\@ VAR_バストサイズ(TARGET) >= 1 ?豊満な# \@胸をベトベトに汚していく
+				PRINTFORMW 垂れ掛かる精液の熱さに、%CALLNAME%は自分の胸が%CALLNAME:MASTER%を悦ばせたことを実感した……
+
 			;그 외 
 			ELSE
 				PRINTFORML 吐き出された%CALLNAME:MASTER%の精液が%CALLNAME%의 胸や乳首を汚す。
@@ -3544,22 +3834,114 @@ ENDIF
 		IF C_FIRSTTIME_KOJO([[口上:主人秘裂射精]])
 			;隷属開始
 			IF MARK:예속각인
-				;PRINTFORMW 
-			;그 외 
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…はっ……んっ、あぁっ……%UNICODE(0x2661)%！」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふっ…！…くううっ%UNICODE(0x2661)%……はぁ、ぁ、……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…んんんっ！……ひゃっ%UNICODE(0x2661)%…ああ……気持ち、よかった%CSTR:語尾問う%……？…%CSTR:語尾微笑%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 少しズレればすぐ膣中出しになりそうな位置での射精を受け止め、
+				PRINTFORMW %CALLNAME%は最後までクチュクチュと水音を奏でる性器を従順に擦り付けている……
+
+			;陥落開始
+			ELSEIF MARK:陥落刻印
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……んっ%UNICODE(0x2661)%、くぁ、……はあぁっ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふっ、ふっ……んあっ、ああっ%UNICODE(0x2661)%……っ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……あっ、くぅ……ひぁっ……%UNICODE(0x2661)%……っ！……」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML %CALLNAME%の太ももに挟み込まれた%CALLNAME:MASTER%のペニスがびゅるびゅるとザーメンを吐き出す
+				PRINTFORML 肉棒越しに駆け抜けていくザーメンの熱さに、%CALLNAME%は自分が射精しているような錯覚を覚える
+				PRINTFORMW 腰を振り終えた%CALLNAME%は、%CALLNAME:MASTER%に声を掛けられるまでしばらく放心していた……
+
+			;그 외
 			ELSE
-				;PRINTFORMW 
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……ふっ、くうぅ、ぁっ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ひぃっ、……んっ、いやあっ……っ……%UNICODE(0x2661)%」
+			ELSE
+		PRINTFORML 「……いゃ……ぬるぬるするっ……！……」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 自分の股下で白濁液を放出される%CALLNAME%は、
+				PRINTFORMW 間違っても膣内に入らないようペニスを太ももで必死に固定している……
 			ENDIF
 		;二回目以降
 		ELSE
 			;陥落開始
 			IF MARK:함락각인
-				;PRINTFORMW 
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……んっ%UNICODE(0x2661)%、くうぅっ、……はぁっ、はぁ……%UNICODE(0x2661)%」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふあ、……っああんっ%UNICODE(0x2661)%……っ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……あっ、あっ、く……ひあぁっ%UNICODE(0x2661)%、んん～～～っ！」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:3 == 0
+				PRINTFORML 肉棒を挟み込んだ%CALLNAME%の股の間から、勢い良く精液が飛び出ていく
+				PRINTFORML 直接膣穴に咥え込む誘惑に耐えきった%CALLNAME%の吐息は荒く、
+				PRINTFORMW 互いの体液でグチャグチャになった股間は驚くほど熱くなっていた…
+				ELSEIF !RAND:2
+				PRINTFORML 角度を調整して秘裂に精液を噴き出し続ける%CALLNAME:MASTER%のペニスが、
+				PRINTFORML 敏感になっている%CALLNAME%の陰唇と陰核を容赦なく刺激する
+				PRINTFORMW 熱い白濁液のシャワーにあてられるたび、%CALLNAME%は肢体をビクビクと仰け反らせていた……
+				ELSE
+				PRINTFORML 本番さながらの奉仕に限界を迎えたペニスが精液を虚空に放っていく
+				PRINTFORML %CALLNAME%は何度も擦り合わされた性器が発する疼きに耐えられず、
+				PRINTFORMW 欲望を吐き出す肉棒の先端を膣口でくちゅくちゅと撫でまわしている……
+				ENDIF
+
 			;隷属開始
 			ELSEIF MARK:예속각인
-				;PRINTFORMW 
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「…はっ……んっ、あぁっ……%UNICODE(0x2661)%！」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ふっ…！…くううっ%UNICODE(0x2661)%……はぁ、ぁ、……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「…んんんっ！……ひゃっ%UNICODE(0x2661)%…ああ……気持ち、よかった%CSTR:語尾問う%……？…%CSTR:語尾微笑%」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				IF RAND:3 == 0
+				PRINTFORML 射精の間も腰を振り続け、最後までヌルヌルと秘所から溢れる愛液を塗り付けていく%CALLNAME%
+				PRINTFORML やがてペニスが射精を終えた事を確認すると、ゆっくりと腰を浮かせていった
+				PRINTFORML %CALLNAME%は自分の役目を全うした証とばかりに、
+				PRINTFORMW 白濁と愛液でぬちょぬちょと糸を引く股間を%CALLNAME:MASTER%に見せつけている……
+				ELSEIF !RAND:2
+				PRINTFORML 射精の兆候を感じ取った%CALLNAME%は腰振りの速度を上げ、肉棒を擦り上げていく
+				PRINTFORML グニグニと形を変える秘肉の感触に限界を迎えた%CALLNAME:MASTER%は、
+				PRINTFORMW 奉仕の喜びに涎を垂らす%CALLNAME%の下の口へ精液を叩きつけた……
+				ELSE
+				PRINTFORML 鈴口からザーメンが放出されるタイミングに合わせて、
+				PRINTFORML %CALLNAME%は跳ね上がるペニスを濡れそぼった秘裂でぐっ、と搾り上げた
+				PRINTFORML 己の主の射精感を高めるために一生懸命快感に耐えた%CALLNAME%は、
+				PRINTFORMW %CALLNAME:MASTER%の満足げな顔を見て股下が更に疼くのを感じていた……
+				ENDIF
+
 			;그 외 
 			ELSE
-				;PRINTFORMW 
+;――――――――――――――――――――汎用台詞開始――――――――――――――――――――
+		IF !RAND:3
+		PRINTFORML 「……ふっ、くうぅ、ぁっ……」
+		ELSEIF !RAND:2
+		PRINTFORML 「…ひぃっ、……んっ、いやあっ……っ……%UNICODE(0x2661)%」
+		ELSE
+		PRINTFORML 「……いゃ……ぬるぬるするっ……！……」
+		ENDIF
+;――――――――――――――――――――汎用台詞終了――――――――――――――――――――
+				PRINTFORML 散々秘裂をなぞられた%CALLNAME:MASTER%のペニスに%CALLNAME%の股下が汚されていく
+				PRINTFORML ねっとりと張り付く精液の感覚に、%CALLNAME%は涙目になっている……
 			ENDIF
 		ENDIF
 
