@@ -254,6 +254,8 @@ CASE 999	;何もしない
 	PRINTFORML ……
 	PRINTFORML 오늘은 이미 늦었다。
 	PRINTFORMW %CALLNAME:MASTER%는 %CALLNAME%를 평상복으로 갈아입히고 집 근처까지 보내주었다…
+	;１回限りのイベントなので次回以降は発生しないフラグON
+	CFLAG:華燭の典 = 1
 	RETURN
 CASEELSE
 	GOTO INPUT_LOOP
@@ -277,7 +279,48 @@ PRINTFORML ……
 PRINTFORML 
 CALL KOJO_DEFAULT_ENCOUNTER_K1_TALK12
 PRINTFORML 
-IF TALENT:애인
+;対象が処女の場合
+IF !TALENT:非処女
+	IF TALENT:愛人
+		PRINTFORML 『結婚式を経て初夜に処女を捧げて子を孕む』
+		PRINTFORML 今回は結婚式を模した儀式だが、かつて夢見た光景が現実のものとなっていることに%CALLNAME%は胸を高鳴らせていた。
+		IF (TALENT:ＮＴＬ || TALENT:百合摘み)
+			PRINTFORML しかも相手が偽りの愛を誓わされた伴侶ではなく、真の番である%CALLNAME:MASTER%に処女を捧げるのだからなおさらである。
+		ELSE
+			PRINTFORML しかも相手は最愛の%CALLNAME:MASTER%であり、もはやこれ以上の幸せはないだろう。
+		ENDIF
+		PRINTFORMW 優しくベッドへと導かれた%CALLNAME%は%CALLNAME:MASTER%の種を何度もその身に受け入れ、しっかりと子どもを宿した…
+	ELSEIF TALENT:心酔
+		PRINTFORML 今まで一度も使われることのなかった処女膣を使うということで、%CALLNAME%はかつてないほどに緊張していた。
+		PRINTFORML %CALLNAME:MASTER%に気に入ってもらえるだろうか？
+		PRINTFORML うまく務めを果たせるだろうか？
+		PRINTFORML 不安渦巻く%CALLNAME%の心中を察した%CALLNAME:MASTER%は普段よりも優しく声をかけると、緊張をほぐすように軽いスキンシップから開始した。
+		PRINTFORMW だが一度交合してしまえば事前に%CALLNAME:MASTER%に仕込まれていたこともあり、%CALLNAME%はしっかりと務めを果たして受精した…
+	ELSEIF TALENT:情婦
+		PRINTFORML いよいよ目前に迫った%CALLNAME:MASTER%との初交尾に%CALLNAME%の肉体は期待に打ち震えていた。
+		PRINTFORML 今夜まで一度も使われることのなかった膣、そこから得られる快楽はいかほどのものであろうか。
+		PRINTFORML 何度も処女を破って欲しいと願い出ていたのに、%CALLNAME:MASTER%はいやらしい笑みを浮かべるばかりで取り合ってくれなかった。
+		PRINTFORML だがそれも今日まで。
+		PRINTFORML %CALLNAME:MASTER%の熱い肉棒と子種を胎内に受け入れた%CALLNAME%は、この世のものとは思えない快感と幸福感に包まれた。
+		PRINTFORMW 性の悦びを知った%CALLNAME%は体力の続く限り%CALLNAME:MASTER%との種付け交尾に励み受精しました…
+	ENDIF
+
+	TALENT:非処女 = 1
+	TCVAR:履歴_EXP_処女喪失 = 1
+
+	SIF CSTR:初えっち相手名 == ""
+		CSTR:初えっち相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初キス相手名 == "" 
+		CSTR:初キス相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初フェラ相手名 ==""
+		CSTR:初フェラ相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初絶頂相手名 ==""
+		CSTR:初絶頂相手名 = %CALLNAME:MASTER%
+	SIF CSTR:初中出し相手名 ==""
+		CSTR:初中出し相手名 = %CALLNAME:MASTER%
+;対象が非処女の場合
+ELSE
+	IF TALENT:애인
 	IF !RAND:3
 		PRINTFORMW 사랑하는 %CALLNAME:MASTER%의 아이를 갖고 싶다는 %CALLNAME%의 소원이 정자와 난자에 통했는지、%CALLNAME%는 수정되었습니다…
 	ELSEIF !RAND:2
@@ -300,6 +343,7 @@ ELSEIF TALENT:정부
 		PRINTFORMW %CALLNAME%는 쾌락에 탐닉한 나머지、원래 목적도 잊고 온몸이 정액 범벅이 되었지만、무사히 수정 완료되었습니다…
 	ELSE
 		PRINTFORMW 넘치는 %CALLNAME:MASTER%의 정액을 자기도 모르게 질 안쪽에 도로 밀어넣던 %CALLNAME%의 생식 본능이 승리하면서、%CALLNAME%는 수정되었습니다…
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -309,8 +353,18 @@ SIF TALENT:교제중 == 1 || TALENT:결혼완료 == 1　|| TALENT:백합결혼 =
 	TALENT:탁란 = 1
 CFLAG:妊娠フラグ = 1
 
-;--------------------受精現在耐久値を減らしていく処理(演出)を追加する--------------------
-
+;男体経験値は妊娠2回分、精子経験値は膣内射精20回分を加算
+;余剰の経験値は持ち越さず0にリセット
+CFLAG:MASTER:男体経験値 += 2
+IF CFLAG:MASTER:男体経験値 >= CFlag:MASTER:男体レベル*2
+	CFLAG:MASTER:男体経験値 = 0
+	CFlag:MASTER:男体レベル += 1
+ENDIF
+CFLAG:MASTER:精子経験値 += 20
+IF CFLAG:MASTER:精子経験値 >= ((CFlag:MASTER:精子レベル)*5)+CFlag:MASTER:精子レベル
+	CFLAG:MASTER:精子経験値 = 0
+	CFlag:MASTER:精子レベル += 1
+ENDIF
 CALL JN_SEX_EXP
 
 

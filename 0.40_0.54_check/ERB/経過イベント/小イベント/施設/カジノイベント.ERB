@@ -45,10 +45,9 @@ RESETCOLOR
 
 IF RAND:100 >= 60 && (CFLAG:住人_モラル < 0 || CFLAG:住人_カルマ >= 40)
 	CALL TURN_EVENT_F_53_C
-;10&の確率でフェロモンが高い場合発生
-ELSEIF RAND:100 >= 90 && CFLAG:フェロモン >= 15
+ELSEIF RAND:100 >= 90 && CFLAG:フェロモン >= 40		;10%の確率でフェロモンが40以上の場合
 	CALL TURN_EVENT_F_53_B
-	L_MONEY += 500
+	L_MONEY += 1000
 ENDIF
 
 
@@ -211,14 +210,6 @@ EXP:절정경험 += (RAND:3)+1
 
 CFLAG:住人_モラル -= 1
 CFLAG:住人_カルマ += 1
-
-
-
-
-
-
-
-
 
 
 

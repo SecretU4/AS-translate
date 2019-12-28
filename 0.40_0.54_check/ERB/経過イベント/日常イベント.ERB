@@ -133,6 +133,148 @@ IF TALENT:학생 && RAND:10 > 5
 			PRINTFORML 하지만、공부 쪽으로 마음이 바뀌면서、잠시 후엔 가지고 있던 노트를 펼치고 자습하기 시작했다。
 		PRINTFORMW 쉬는 시간이 끝날 때까지、%CALLNAME%는 도서실에서 시간을 보냈다…
 	ENDIF
+;アイドル
+ELSEIF TALENT:アイドル && RAND:10 > 5
+	PRINTFORML 【アイドルイベント:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML 直前の仕事が押してしまった%CALLNAME%は移動中の車内で食事をとっていた。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML アイドルは体力勝負な面もあるので移動中でもしっかりとした食事を心がけている。
+		PRINTFORML マネージャーとこの後に控えている仕事の内容を確認しながらなので味わう余裕はないが、
+		PRINTFORML お腹に詰め込めるだけ詰め込んでおく。
+		IF CFlag:住人_悩み食生絡み == 1
+			PRINTFORMW 最近は不規則な生活が続いているストレスからか、以前よりも食べる量が増えた気がする…
+		ELSE
+			PRINTFORMW 食べ過ぎにならないよう注意しながら%CALLNAME%は仕事の打ち合わせを続けた…
+		ENDIF
+	ELSEIF !RAND:9
+		PRINTFORML %CALLNAME%はライブで使用する衣装の試着を行っていた。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML あまり露出の多い衣装は遠慮したいところだが、仕事である以上は割り切らねばならない。
+		PRINTFORML 煌びやかな衣装に袖を通し、用意された姿見の前でクルリと回転する。
+		PRINTFORML そうして軽くダンスを踊りながらつっぱる感じやズレが生じないか確かめていく。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML 少しばかりお腹回りがキツイのは自己管理の甘さが招いた結果なので言い出せない。
+		PRINTFORMW 着用した衣装に問題が無いことを確認し終えた%CALLNAME%は次の衣装へと手を伸ばした…
+	ELSEIF !RAND:8
+		PRINTFORML %CALLNAME%はライブに備えて歌やダンスの練習をしている。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 他人よりも物覚えが悪いことを自覚している%CALLNAME%はより多くの時間を割いていた。
+		PRINTFORML 華やかなアイドル活動も裏では地道な努力が欠かせないのだ。
+		PRINTFORMW 健康的な汗を額に浮かべながら時間いっぱいまで%CALLNAME%は練習を続けた…
+	ELSEIF !RAND:7
+		PRINTFORML 今日はオフということで%CALLNAME%はショッピングを楽しんでいた。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 正体がバレぬようにと簡単な変装をしているので話しかけられることはない。
+		PRINTFORML 時間に追われることなくショッピングを満喫できる機会はめったにない貴重な時間だ。
+		IF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORMW ついつい要らない物にまで手が伸びそうになるのを堪えながら、%CALLNAME%はショッピングを満喫した…
+		ELSE
+			PRINTFORMW 目当ての店だけでなく新しくできた店もいくつか開拓した%CALLNAME%はショッピングを満喫した…
+		ENDIF
+	ELSEIF !RAND:6
+		PRINTFORML %CALLNAME%が事務所を訪れると入り口付近には大勢の報道関係者が詰めかけていた。
+		PRINTFORML なんでも事務所に所属するアイドルのプライベートがすっぱ抜かれたのだそうだ。
+		IF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 腕を組んでデートしている姿を撮られたということで、%CALLNAME%は自分も気をつけようと自戒する。
+		ELSEIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML ラブホテルから二人で出てくる姿を撮られたということで、%CALLNAME%は自分も気をつけようと自戒する。
+		ENDIF
+		PRINTFORMW いらぬ火の粉が降りかかってこないように事務所から離れた%CALLNAME%はそのまま現場へと向かった…
+	ELSEIF !RAND:5
+		PRINTFORML %CALLNAME%が事務所の休憩室でお茶を楽しんでいると、有名なアイドルグループが集団で入ってきた。
+		IF !RAND:3
+			PRINTFORML 「アイツらでかい顔してるけどさ、枕営業して仕事取ってるらしいよ」
+			PRINTFORML 「清純派アイドルが股開いて仕事取ってるとか…ファンが泣いちゃうじゃん」
+		ELSEIF !RAND:2
+			PRINTFORML 「あれ、一人減ってる？」
+			PRINTFORML 「なんでもハメ撮り写真が流出して辞めさせられたらしいよ」
+		ELSE
+			PRINTFORML 「ああいう誰にでもヤらせる奴が同じ事務所だと、私たちのイメージも悪くなるよね」
+			PRINTFORML 「本当にね。いい迷惑だからさっさとやめて欲しいわ」
+		ENDIF
+		PRINTFORML 彼女らは性的なゴシップが後を絶たないことから同じ事務所の女性からは嫌われている。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML %CALLNAME%も性的な悩みを抱えているだけに、できれば仲良くなりたいとは思わない相手だった。
+		PRINTFORMW 休憩室の空気が悪化し始めたのを敏感に感じ取った%CALLNAME%は早々に退室した…
+	ELSEIF !RAND:4
+		PRINTFORML 事務所からの帰り道、%CALLNAME%は誰かに尾行されている気がした。
+		PRINTFORML マネージャーに連絡を取りつつ、念のため人通りの多い道を選んで自宅から遠ざかる。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML アイドルとして人気になるほどこの手のトラブルは増えると聞かされていたので%CALLNAME%は冷静に行動する。
+		PRINTFORMW やがて迎えに来たマネージャーの車に乗り込むと、%CALLNAME%は遠回りしながら自宅へと送ってもらった…
+	ELSEIF !RAND:3
+		PRINTFORML 仕事を終えて事務所へと戻ってきた%CALLNAME%は事務所の休憩室でお茶を楽しむことにした。
+		IF !RAND:3
+			PRINTFORML 「最近になって家族から反対されるようになったんだよね…勉強しろってうるさくて」
+			PRINTFORML 「うちも成績下がったら辞めさせるって怒られたばっかりだよ」
+		ELSEIF !RAND:2
+			PRINTFORML 「うちの弟妹がサイン貰って来てってうるさくてさ…」
+			PRINTFORML 「ああ、うん、同じ事務所だからって気軽に頼めるもんじゃないもんね…」
+		ELSE
+			PRINTFORML 「本当はアイドルなんてなる気が無かったんだけど、家族が勝手に写真とか送っててさ…」
+			PRINTFORML 「あー、あるあるだね。あれ急にオーディションとかの通知が届くからビックリするよね」
+		ENDIF
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML どこの家庭もそうなのか、同調したくなる家族に対する不満が耳に届く。
+		PRINTFORMW 他人の会話を肴にお茶を楽しんだ%CALLNAME%は気を引き締めると次の現場へと向かった…
+	ELSEIF !RAND:2 && TALENT:学生
+		PRINTFORML 学業に励む傍らアイドル活動を行っている%CALLNAME%は空き時間を見つけては勉強にも励まねばならなかった。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML 特に今はテストが近いのでテスト勉強をしなければならず、普段よりも時間を多く割いている。
+		PRINTFORML 自ら選んだ道とはいえ、学生とアイドルの両立はなかなかに大変だ。
+		PRINTFORMW 机に向かいながらウトウトしていた%CALLNAME%は頬を叩いて気合を入れなおすと、再びペンを手にした…
+	ELSE
+		IF !RAND:3
+			PRINTFORML 「いらっしゃいませ、空いてる席へご案内いたしますね」
+		ELSEIF !RAND:2
+			PRINTFORML 「かしこまりましたー、少々お待ちください」
+		ELSE
+			PRINTFORML 「おまたせしましたー、ごゆっくりどうぞ♪」
+		ENDIF
+		PRINTFORML 現場の近くに行きつけのカフェがあったため、%CALLNAME%は休憩時間に抜け出してカフェを訪れていた。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML ロケ弁やケータリングで出される料理よりも、このカフェで出される料理の方が美味しいのだ。
+		PRINTFORML 軽食にデザート、食後のお茶といつものペースで堪能した%CALLNAME%は現場へと戻る。
+		PRINTFORMW 息抜きが功を奏したのか、その後の仕事ではミスもなく順調に進んだ…
+ENDIF
+;娼婦
+;ELSEIF TALENT:娼婦 && RAND:10 > 5
+;	PRINTFORML 【娼婦イベント:%CALLNAME%】
+;	DRAWLINE
+;	IF !RAND:10
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:9
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:8
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:7
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:6
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:5
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:4
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:3
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSEIF !RAND:2
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ELSE
+;		PRINTFORML 
+;		PRINTFORMW 
+;	ENDIF
+;治安維持局員
 ELSEIF TALENT:치안유지국직원 == 1 && RAND:10 > 5
 	PRINTFORML 【치안 유지국직원 이벤트:%CALLNAME%】
 	DRAWLINE
@@ -234,6 +376,7 @@ ELSEIF TALENT:치안유지국직원 == 1 && RAND:10 > 5
 			PRINTFORML 그 대응에 쫓기면서、%CALLNAME%는 집 주변의 범죄자는 적발해주지 않으려나 하면서 한숨을 쉬었다。
 		PRINTFORMW 결국 하루를 꼬박 잡아먹는 대형 사건이 되면서、일상 업무는 다음날 이후로 미뤄지게 되었다…
 	ENDIF
+;社会人
 ELSEIF TALENT:사회인 == 1 && RAND:10 > 5
 	PRINTFORML 【사회인 이벤트:%CALLNAME%】
 	DRAWLINE
@@ -330,6 +473,257 @@ ELSEIF TALENT:사회인 == 1 && RAND:10 > 5
 			PRINTFORML 最初は無視していたが最近色恋沙汰には縁があるため、どうにも気になってしまう。
 		PRINTFORMW 何だか自分が場違いな感じがした%CALLNAME%는、その場を後にした…
 	ENDIF
+;聖職者
+ELSEIF TALENT:聖職者 && RAND:10 > 5
+	PRINTFORML 【聖職者イベント:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML %CALLNAME%が礼拝堂の掃除をしていると、集会を前に集まった信徒たちが何やら噂話をしていた。
+		PRINTFORML 「例の裏通り、また不審者が出たって…」
+		PRINTFORML 「被害者はすべて女性なんでしょ？　怖いわねぇ…」
+		PRINTFORML どうやらこの近所の裏通りで頻発している女性暴行事件について話しているようだった。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML %CALLNAME%の家も近所にあるため、はやく解決してほしいと密かに祈りを捧げる。
+		PRINTFORMW その後も信徒の噂話に耳を傾けながら、%CALLNAME%は熱心に掃除を続けた…
+	ELSEIF !RAND:9
+		PRINTFORML %CALLNAME%が礼拝堂にやってくると、教会のお偉いさん方が顔を突き合わせて何か相談していた。
+		IF !RAND:3
+			PRINTFORML 「例の雨漏りの件、どうなったのかね」
+			PRINTFORML 「とりあえず穴は塞ぎました…天候が荒れる前に格安で修理を受けてくれる業者が見つかればいいのですが」
+		ELSEIF !RAND:2
+			PRINTFORML 「正面扉の立て付けが悪くなっているが、どうにかならんかね」
+			PRINTFORML 「今期の予算でこれ以上の改修工事は…するなら信徒たちから寄付金を募るしかないでしょうね」
+		ELSE
+			PRINTFORML 「座席の木が所々捲れ上がって危険だ、どうにかならんのか」
+			PRINTFORML 「新しい椅子を手配しているところですが、予算内に収まるモノがなかなか…」
+		ENDIF
+		PRINTFORML どうやら古くなった礼拝堂の改修費用が足りずに困っているようだ。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML %CALLNAME%も協力したいところだが無い袖は振れない。
+		PRINTFORMW %CALLNAME%は邪魔にならないようそそくさとその場を離れると、日課の清掃を開始した…
+	ELSEIF !RAND:8
+		PRINTFORML %CALLNAME%が物置の掃除を行っていると、顔を真っ青にした司祭が駆け込んできた。
+		PRINTFORML どうしたのか尋ねると司祭は顔を寄せて理由を語った。
+		IF !RAND:3
+			PRINTFORML 「この教会で保管していたはずの聖遺物がオークションにかけられていたんだ」
+		ELSEIF !RAND:2
+			PRINTFORML 「捕まったイレギュラーのアジトから紛失した彫像以外にも色々と出てきたらしいんだ」
+		ELSE
+			PRINTFORML 「旧世紀の書物や絵画が大量に売りに出されていたんだが、その中に見知ったものがあったんだ」
+		ENDIF
+		PRINTFORML 古くから存在する宗教施設には歴史的、美術的な価値のあるモノが多い。
+		PRINTFORML その一部が外部で発見されたため、倉庫内の貴重品を目録と照会しに来たのだという。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML 倉庫の掃除を担当するうちの一人である%CALLNAME%はいらぬ疑いをかけられないよう、協力を申し出た。
+		PRINTFORMW 二人で密かに行った照会作業は遅くまで続いた…
+	ELSEIF !RAND:7
+		PRINTFORML 聖職者は質素倹約を旨とし、過剰な贅沢や華美を求めてはいけない。
+		PRINTFORML %CALLNAME%はその教えをしっかりと守るために、喫茶店のメニューと睨めっこをしていた。
+		IF !RAND:3
+			PRINTFORML 「この喫茶店ってなんでも美味しいからつい食べ過ぎちゃうよね」
+			PRINTFORML 「だからって何人前食べる気よ、多くない？」
+		ELSEIF !RAND:2
+			PRINTFORML 「ここのケーキ美味しいよね～、ショーケースで販売してくれたらいいのに」
+			PRINTFORML 「一部の素材が天然物で日持ちしないからここでしか味わえないらしいよ」
+		ELSE
+			PRINTFORML 「うーん…オススメにすべきか日替わりにすべきか…それが問題だ」
+			PRINTFORML 「いつまで悩んでるつもり？　早く決めてよね」
+		ENDIF
+		PRINTFORML 他の利用客の会話や注文されたモノを確認しながら%CALLNAME%は候補を絞り込んでいく。
+		IF CFlag:住人_悩み食生絡み == 1
+			PRINTFORMW しかし誘惑に負けてしまった%CALLNAME%はデザートに一品追加してしまった…
+		ELSE
+			PRINTFORMW 誘惑に打ち勝った%CALLNAME%は食べたいものを一品だけ注文した…
+		ENDIF
+	ELSEIF !RAND:6
+		PRINTFORML 聖職者という仕事柄、%CALLNAME%は信徒に悩みを相談されることがあった。
+		PRINTFORML 今日もまた一人の信徒が相談を持ち込み、%CALLNAME%はその対応にあたることとなった。
+		PRINTFORML 信徒の相談内容は夜の営みに関するもので、伴侶が異常な性癖を持っていることへの不満が中心だった。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 他人の性事情を詳らかに聞かされた%CALLNAME%は赤面しながらもつい聞き入ってしまった。
+		PRINTFORMW %CALLNAME%は相互理解の重要性を示唆した説法をそれとなく聞かせ、よき営みが行われるよう祈った…
+	ELSEIF !RAND:5
+		PRINTFORML %CALLNAME%は街頭に立ち布教活動に勤しんでいた。
+		PRINTFORML 一目でそれと分かりやすいように祭服に身を包んでいるためか、行き交う人々の中で若干浮いてしまっている。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 人目を気にする性質の%CALLNAME%には辛い仕事だが、救いを求める人がいつ現れるとも知れない。
+		PRINTFORMW 人々の注目を集めながら教えの一部を説いた%CALLNAME%は、希望者数名を伴って礼拝堂へと帰った…
+	ELSEIF !RAND:4
+		PRINTFORML 礼拝堂で祈りを捧げていた%CALLNAME%の耳に、呻き声のようなものが届いた。
+		PRINTFORML 不思議に思って出所を探してみると、地下へと続く階段から聞こえているようだった。
+		PRINTFORML もし誰かが苦しんでいたら大変だと地下へと駆け下りた%CALLNAME%は、うっすらと開いている扉に気づいた。
+		PRINTFORML 中を覗いてみると、そこでは司祭が信徒を相手に性行為を行っている真っ最中だった。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 思わぬ現場を目撃してしまった%CALLNAME%は股間に手が伸びそうになっているのに気づき、慌てて頭を振る。
+		PRINTFORMW 誰かに見られたら大変だと、そっと扉を閉めた%CALLNAME%は地上階へと駆け戻った…
+	ELSEIF !RAND:3
+		PRINTFORML %CALLNAME%は神前結婚式を挙げたいという富裕層のカップルの対応を任されていた。
+		PRINTFORML 今では結婚式も珍しくなってしまったが、富裕層の間では家の財力を示す儀式として重宝されている。
+		PRINTFORML その例に漏れず、カップルは両家の財力を誇示すべく様々な催しや引き出物をプランに練り込んでいく。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML それでいて時折イチャついては%CALLNAME%を置き去りにするカップルに、こうはならないぞと%CALLNAME%は自戒する。
+		PRINTFORMW 最終的な金額に目玉が飛び出そうになった%CALLNAME%だったが、カップルは何食わぬ顔で支払いを済ませていった…
+	ELSEIF !RAND:2
+		PRINTFORML 聖職者は教典の内容だけでなくその解釈や、季節ごとに催される様々な式典の作法など覚えなくてはいけないことが多い。
+		PRINTFORML そのため定期的に勉強会が開かれ、その中で実施される試験に合格しなければ序列が変化しないようになっている。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML %CALLNAME%も上の序列を目指して勉強に励んでいたが、やはり覚えることが多すぎて苦戦していた。
+		PRINTFORMW %CALLNAME%は試験の結果に一喜一憂しながら勉強を続けた…
+	ELSE
+		PRINTFORML %CALLNAME%は懺悔室で信徒から罪の告解を受けた。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML 「素行の悪い娘についカッとなって暴力を振るってしまったのです…」
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML 「他人に優しくできず、ついキツイ態度をとってしまうのです…」
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML 「好きな人ができてから、何事も手につかないのです…」
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 「友人の妻があまりにも私の好みだったので、つい寝取ってしまったのです…」
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML 「先日友人が亡くなった際に、借金を踏み倒せてラッキーと不謹慎なことを考えてしまったのです…」
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 「性病を患っているにもかかわらず、欲望に負けてパートナーと生で性交を行ってしまったのです…」
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML 「女性の生乳見たさに、家の脱衣所にカメラを仕掛けてしまったのです…」
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML 「ダイエットをしようと決心したのに、つい食べ過ぎてしまうのです…」
+		PRINTFORML 「悪いことが続いて、ついイライラしてしまうのです…」
+		PRINTFORMW 大小様々な罪に赦しを与えるうちに、自身も気を付けようと%CALLNAME%は背筋を伸ばした。
+	ENDIF
+;メイド
+ELSEIF TALENT:メイド && RAND:10 > 5
+	PRINTFORML 【メイドイベント:%CALLNAME%】
+	DRAWLINE
+	IF !RAND:10
+		PRINTFORML 部屋の掃除をして回っていた%CALLNAME%は、ご主人様の部屋の前にたむろしているメイドたちを見つけた。
+		PRINTFORML 何事かと声をかけようと近付いたところで、部屋の内部から喘ぎ声が漏れ聞こえてきた。
+		IF !RAND:3
+			PRINTFORML 「かれこれ三時間くらい経つけど、まだ続くのかな…」
+			PRINTFORML 「うわぁ…さすがはご主人様…絶倫…」
+		ELSEIF !RAND:2
+			PRINTFORML 「ね、ね、今中にいるのって誰？」
+			PRINTFORML 「たぶん、側仕えのメイドの誰かだと思う…この部屋の掃除は午前中に終わってるはずだし…」
+		ELSE
+			PRINTFORML 「たまに叩く音や悲鳴が聞こえるけど…平気かな？」
+			PRINTFORML 「あー、うん…連れ込まれてる娘がマゾだからね…愛のある行為だと思うから大丈夫」
+		ENDIF
+		PRINTFORML どうやらご主人様とメイドの情事を扉越しに盗み聞きしているようだった。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 思わず仕事を放り出して出歯亀に混ざりそうになった%CALLNAME%だが、遠くから歩いてくるメイド長の姿に気がついた。
+		PRINTFORMW 駆けつけたメイド長がサボっていたメイドたちを仕事に戻していくのを眺めながら、%CALLNAME%も気を取り直して仕事に戻った…
+	ELSEIF !RAND:9
+		PRINTFORML 仕事を終えて更衣室で着替えていた%CALLNAME%は、なかなか帰り支度をしようとしない同僚たちに気がついた。
+		IF !RAND:3
+			PRINTFORML 「いつお手付きになるんだ、とか…既成事実を作ってしまえ、とか…娘をなんだと思ってるんだか」
+			PRINTFORML 「そこまで露骨な家族だと嫌だね…ウチは何も言われないから、まだマシかも」
+		ELSEIF !RAND:2
+			PRINTFORML 「最近弟が夜中に部屋に忍び込んできてナニかやってるんだよね…」
+			PRINTFORML 「うわ、それ危ないじゃん…襲われる前に家を出たら？」
+		ELSE
+			PRINTFORML 「母は後を継いでもらいたいらしいけど、私はご主人さまに仕えている方が楽しくていいんだよね…」
+			PRINTFORML 「それで最近は遅くまで粘ってるのね…いいわ、私も付き合う」
+		ENDIF
+		PRINTFORML どうやら家に帰りたくない事情があるらしい。
+		SIF CFlag:住人_悩み家庭絡み == 1
+			PRINTFORML %CALLNAME%も家庭の悩みを抱えているため遅くまで残っていたい気持ちは理解できるが、翌日の仕事に影響が出る恐れがある。
+		PRINTFORMW 聞き耳を立てていることを気付かれないよう手早く着替えを済ませた%CALLNAME%は、挨拶をして更衣室を後にした…
+	ELSEIF !RAND:8
+		IF !RAND:3
+			PRINTFORML 「あちらの男性が社長…向こうで談笑しているのが次期社長の息子…」
+			PRINTFORML 「社長の隣にいる子は娘さ…え？　あの方は奥様なんですか？」
+		ELSEIF !RAND:2
+			PRINTFORML 「親子で顔が似すぎて見分けが…」
+			PRINTFORML 「おでこの中心にホクロがあるのが父親です。確認するときは相手に気づかれないよう、それとなく行うように」
+		ELSE
+			PRINTFORML 「あちらのご令嬢の前では絶対に年齢の話をしてはいけません」
+			PRINTFORML 「ずいぶん若く見えますけど…え！？　三桁行ってるんですか！？」
+		ENDIF
+		PRINTFORML メイドたるものパーティーに参加している人々のデータは頭に叩き込んでおかなければならない。
+		PRINTFORML %CALLNAME%たち一部のメイドは給仕の合間にメイド長から参加者の情報を叩きこまれていた。
+		SIF CFlag:住人_悩み勉学絡み == 1
+			PRINTFORML だが物覚えの悪い%CALLNAME%はなかなか覚えることができず、都度メイド長に確認してしまう。
+		PRINTFORMW トップメイドになる頃には自然と覚えるというメイド長の言葉に、%CALLNAME%はその道のりの険しさを思い知らされた…
+	ELSEIF !RAND:7
+		PRINTFORML 「本日は病欠での欠勤が多いため、ご主人様の周辺に固めて他の業務は後日に回します」
+		PRINTFORML 朝礼に集まった人数がやけに少ないと感じていた%CALLNAME%の疑問は、メイド長の一言で解決した。
+		SIF CFlag:住人_悩み病絡み == 1
+			PRINTFORML 振り直しとなった配属表を受け取る同僚を横目で見ながら、%CALLNAME%も体調には気を付けることにした。
+		PRINTFORMW 人手不足で多忙を極めるかと思われた一日だったが、メイド長の采配により逆にゆったりと過ごす一日となった…
+	ELSEIF !RAND:6
+		IF !RAND:3
+			PRINTFORML 「ねえ彼女たち、俺たちとちょっと遊ばない？」
+		ELSEIF !RAND:2
+			PRINTFORML 「お姉さんたち美人だね、よく言われるでしょ」
+		ELSE
+			PRINTFORML 「スウィーツの美味しい喫茶店知ってるんだけど、ちょっと寄っていこうよ」
+		ENDIF
+		PRINTFORML 買い出しのために街へ出ていた%CALLNAME%と同僚は、その途上で何度もナンパされることとなった。
+		PRINTFORML と言うのも着替える時間を惜しんでメイド服のまま出てきてしまったがために、目敏い男たちから声をかけられたのである。
+		PRINTFORML メイドといえば富裕層に仕える職業であり、出自が高貴な者も多数存在する上級市民だ。
+		PRINTFORML そのことを知っている男たちが言わば逆玉を狙って声をかけてきているのが丸わかりだったので、%CALLNAME%たちは歯牙にもかけなかった。
+		SIF CFlag:住人_悩み恋愛絡み == 1
+			PRINTFORML それに何より%CALLNAME%には気になる人もいたので、下心見え見えの男たちに心を動かされるはずもない。
+		PRINTFORMW あまりの煩わしさに手早く買い物を済ませた%CALLNAME%たちは寄り道せずに帰宅の途についた…
+	ELSEIF !RAND:5
+		PRINTFORML トップメイドたるもの外見の瑕疵は許されない。
+		PRINTFORML 仕事に関するものはすべて支給されるが、外見を美しく整えるためには日頃の努力も必要となってくる。
+		PRINTFORML %CALLNAME%は外見を磨くために必要なモノを通販サイトで眺めながら次々にカートへ追加していく。
+		SIF CFlag:住人_悩み金銭絡み == 1
+			PRINTFORML だがカート内の金額が予想以上に膨れ上がっていたため、%CALLNAME%はいくつかの商品を削除することにした。
+		PRINTFORMW これが経費で落ちればいいのにと叶わぬ願いを呟きながら%CALLNAME%は買い物を続けた…
+	ELSEIF !RAND:4
+		PRINTFORML シャワー室で肌を磨き上げていた%CALLNAME%は、水音に混じって同僚たちの会話に耳を澄ませていた。
+		IF !RAND:3
+			PRINTFORML 「うぅ…まだ出てくる……この後立ち仕事が待ってるのに…どうしよう」
+			PRINTFORML 「ご主人様、いっぱい愛してくれるのは嬉しいんだけどね…全部中に出しちゃうから」
+		ELSEIF !RAND:2
+			PRINTFORML 「さっきから念入りにお尻洗ってるけど…もしかして？」
+			PRINTFORML 「うん、その…今日はお尻の姦通式だから身綺麗にしておけって…」
+		ELSE
+			PRINTFORML 「ご主人様って大きいおっぱいの方が好きなのかな？」
+			PRINTFORML 「あー、視線がね…でも膨らみかけのおっぱいを擦ってニヤニヤしてたのも見たから、どうかなあ…」
+		ENDIF
+		PRINTFORML お互い裸になっているためか、聞こえてくるのはご主人様の性行為に関する話題が中心だった。
+		SIF CFlag:住人_悩み性的絡み == 1
+			PRINTFORML 思わず手を止めて聞き入ってしまっていた%CALLNAME%は、煩悩をはらうかのように頭からシャワーを浴びた。
+		PRINTFORMW その後も有用な話題がたびたび出たため、%CALLNAME%がシャワー室を出たのは随分と時間が経過してからだった…
+	ELSEIF !RAND:3
+		PRINTFORML 屋敷内の掃除を終えてメイドの詰め所に戻ってきた%CALLNAME%は、噂話に興じる同僚の会話に耳を傾けた。
+		IF !RAND:3
+			PRINTFORML 「最近、空き巣被害が増えてきたみたいだね…」
+			PRINTFORML 「終業前の戸締り確認はきちんとしよう」
+		ELSEIF !RAND:2
+			PRINTFORML 「近所で深夜に窓ガラスがすべて割られてた事件があったらしいよ」
+			PRINTFORML 「お屋敷には防犯カメラがあるけど…」
+		ELSE
+			PRINTFORML 「ねえねえ聞いた？　メイド長の下着が盗まれたらしいよ」
+			PRINTFORML 「本当に？　あの色気のないデカパン欲しがる下着ドロなんていたんだ…」
+		ENDIF
+		PRINTFORML どうやら彼女たちは最近の犯罪事件について話しているようだ。
+		SIF CFlag:住人_悩み犯罪絡み == 1
+			PRINTFORML %CALLNAME%にも関係のある話が出るかもしれないと、つい耳をそばだててしまう。
+		PRINTFORMW %CALLNAME%はメイド長に休憩時間の長さを注意されるまで聞き耳を立て続けた…
+	ELSEIF !RAND:2
+		PRINTFORML 都市の権力者を集めたパーティーがお屋敷で開かれ、%CALLNAME%は接客と料理の運搬に追われていた。
+		PRINTFORML 目まぐるしい忙しさの中だからこそ優雅に、瀟洒に。
+		SIF CFlag:住人_悩み対人絡み == 1
+			PRINTFORML あまり接客が得意ではないことを自覚している%CALLNAME%は裏方の仕事を率先して引き受けていく。
+		PRINTFORMW パーティーは恙なく進行し、%CALLNAME%は雇い主に恥をかかせることなくきっちりと仕事をやり終えた…
+	ELSE
+		IF !RAND:3
+			PRINTFORML 「いらっしゃいませ、空いてる席へご案内いたしますね」
+		ELSEIF !RAND:2
+			PRINTFORML 「かしこまりましたー、少々お待ちください」
+		ELSE
+			PRINTFORML 「おまたせしましたー、ごゆっくりどうぞ♪」
+		ENDIF
+		PRINTFORML たまには外で食事をとろうと%CALLNAME%は行きつけの喫茶店にやってきた。
+		SIF CFlag:住人_悩み食生絡み == 1
+			PRINTFORML お屋敷の賄い料理に不満はないが、食べたいものを食べたいときに食べられない点だけが悩みの種である。
+		PRINTFORML お気に入りのメニューで腹ごしらえをした%CALLNAME%は食後の紅茶を楽しみながら何とはなしに店内を見回す。
+		PRINTFORML 店員の接客態度についつい目が行ってしまうのは職業病だろうか。
+		PRINTFORMW 気になって休憩という気分ではなくなってしまった%CALLNAME%は、早々にお屋敷へと帰ることにした…
+		ENDIF
 ELSE
 	PRINTFORML 【휴일 이벤트:%CALLNAME%】
 	IF !RAND:10
