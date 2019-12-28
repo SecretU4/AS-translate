@@ -44,13 +44,26 @@ ELSE
 	HTML_PRINT C_PICTURE_NPC_HTML(C_T, L_X, L_Y, 0, 850)
 ENDIF
 
-PRINTFORML 　　　　　【이름:%CALLNAME:C_T%】
-PRINTFORML 　　　　　【호감도:{CFlag:C_T:好感度}】
-PRINTFORML 　　　　　【충성도:{CFLAG:C_T:忠誠値}】【애정도:{CFLAG:C_T:愛情値}】【음란도:{CFLAG:C_T:淫乱値}】
-PRINTFORML 　　　　　【경향:%LS_type%】【육체 관계:%LS_kudoki%】
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("이름",,,CALLNAME:C_T)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_STATUS(C_T, "호감도")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_STATUS(C_T, "충성도")
+CALL PRINT_STATUS(C_T, "애정도")
+CALL PRINT_STATUS(C_T, "음란도")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("경향",,,LS_type)
+CALL PRINT_LABEL("육체관계",,,LS_kudoki)
+PRINTL
 PRINTFORML 　　　　　
 IF CFlag:C_T:住人_悩み解決判定回数 != 0
-	PRINTFORML 　　　　　【현재 고민 해결중:결과까지 앞으로 {(CFlag:C_T:住人_悩み解決判定回数)+1}일】
+	PRINTFORM 　　　　　
+	CALL PRINT_LABEL("현재 고민 해결중",,,@"결과까지 앞으로 {(CFlag:C_T:住人_悩み解決判定回数)+1}일",,COLOR(@"悩み_解決{CFlag:C_T:住人_悩み解決判定回数}"))
+	PRINTL
 ELSE
 	;前回結果表示用
 	IF CFlag:C_T:住人_悩み解決中 == 0 && CFlag:C_T:住人_悩み前回協力 > 0
@@ -87,7 +100,9 @@ ELSE
 				LOCALS:2 = 해결끝
 		ENDSELECT
 		IF LOCALS:2 != "해결끝"
-			PRINTFORML 　　　　　【이전 해결 방법:%LOCALS:1%(%LOCALS:2%)】
+		PRINTFORM 　　　　　
+		CALL PRINT_LABEL("이전 해결 방법",,,@"%LOCALS:1%(%LOCALS:2%)")
+		PRINTL
 		ELSE
 			PRINTFORML 　　　　　
 		ENDIF
@@ -139,14 +154,28 @@ CS_body  = %INFO_STR_STYLE(CFLAG:L_T:体型)%
 ;-------------------------------------------------
 ;描画処理
 ;-------------------------------------------------
-PRINTFORM 　　　　　【종족:%CS_race%】
-PRINTFORM 【속성:%CS_align%】
-PRINTFORM 【지위:%CS_chii%】
-PRINTFORML 【공헌도:{CFLAG:L_T:住人_貢献値}】
-PRINTFORML 　　　　　【%CS_size%】
-PRINTFORML 　　　　　【머리 색:%CS_hairC%】【머리 모양:%CS_hair%】【눈:%CS_eye%】【눈동자 색:%CS_eyeC%】
-PRINTFORML 　　　　　【체형:%CS_body%】
-PRINTFORML 　　　　　【매력 포인트:%CSTR:L_T:チャームポイント%】【버릇:%CSTR:L_T:癖%】
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("종족",,,CS_race)
+CALL PRINT_LABEL("속성",,,CS_align)
+CALL PRINT_LABEL("지위",,,CS_chii)
+CALL PRINT_LABEL(L_T,"공헌도")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL(CS_size)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("머리 색",,,CS_hairC)
+CALL PRINT_LABEL("머리 모양",,,CS_hair)
+CALL PRINT_LABEL("눈",,,  CS_eye)
+CALL PRINT_LABEL("눈동자 색",,,CS_eyeC)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("체형",,,CS_body)
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_LABEL("매력 포인트",,,CSTR:L_T:チャームポイント)
+CALL PRINT_LABEL("버릇",,,CSTR:L_T:癖)
+PRINTL
 PRINTFORM 　　　　　
 PRINTFORM 【유전자:
 CALL INFO_TARGET_GENOM(L_T)
@@ -168,7 +197,7 @@ ENDIF
 ;-------------------------------------------------
 ;-------------------------------------------------
 ;-------------------------------------------------
-@C_PICTURE_S_S(L_T)
+@C_PICTURE_S_S(ARG)
 #DIM L_T
 #DIM L_X
 #DIM L_Y
@@ -183,13 +212,27 @@ ENDIF
 #DIM L_SIEK
 #DIMS CS_ninsin
 
+L_T = ARG
 L_X = 0
 L_Y = 0
-C_ninsin = C_PICTURE_NINSIN(L_T)
+C_ninsin = C_PICTURE_NINSIN(ARG)
 L_SIEK = CFLAG:L_T:子宮精液貯蔵量/5000
 SIF L_SIEK >= 4
 	L_SIEK = 4
-IF TALENT:L_T:妊娠 == 0 && TALENT:L_T:수정 == 0
+
+IF CFLAG:L_T:妊娠フラグ == 1 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【자궁:%CALLNAME:MASTER%와의 아이】【경과 Week:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 70 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:支援住宅の青年との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 71 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【子宮:少年との子供】【経過週数:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 2 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【자궁:%CSTR:L_T:3500%와의 아이】【경과 Week:{TALENT:L_T:妊娠}】
+ELSEIF CFLAG:L_T:妊娠フラグ == 3 && TALENT:L_T:妊娠 != 0
+	CS_ninsin =【자궁:애인과의 아이】【경과 Week:{TALENT:L_T:妊娠}】
+ELSEIF  TALENT:L_T:受精 != 0 
+	CS_ninsin =【子宮:受精中】【胎芽中:{TALENT:L_T:受精}】
+ELSEIF TALENT:L_T:妊娠 == 0 && TALENT:L_T:수정 == 0 && L_SIEK >= 1
 	IF    L_SIEK >= 4 
 		CS_ninsin =【자궁:이미 정액 탱크라고 부를 정도로 %CALLNAME:MASTER%의 정자가 난자를 찾아 꿈틀거리고 있다】
 	ELSEIF   L_SIEK >= 3
@@ -199,12 +242,6 @@ IF TALENT:L_T:妊娠 == 0 && TALENT:L_T:수정 == 0
 	ELSEIF   L_SIEK >= 1
 		CS_ninsin =【자궁:%CALLNAME:MASTER%의 정액으로 하얗게 물들여져 있다】
 	ENDIF
-ELSEIF CFLAG:L_T:妊娠フラグ == 1 && TALENT:L_T:妊娠 != 0
-	CS_ninsin =【자궁:%CALLNAME:MASTER%와의 아이】【경과 Week:{TALENT:L_T:妊娠}】
-ELSEIF CFLAG:L_T:妊娠フラグ == 2 && TALENT:L_T:妊娠 != 0
-	CS_ninsin =【자궁:%CSTR:L_T:3500%와의 아이】【경과 Week:{TALENT:L_T:妊娠}】
-ELSEIF CFLAG:L_T:妊娠フラグ == 3 && TALENT:L_T:妊娠 != 0
-	CS_ninsin =【자궁:애인과의 아이】【경과 Week:{TALENT:L_T:妊娠}】
 ELSE
 	CS_ninsin =【자궁:】
 ENDIF
@@ -234,9 +271,16 @@ PRINTFORML 　　　　　　　　
 PRINTFORML 　　　　　　　　
 PRINTFORML 　　　　　　　　
 PRINTFORML 　　　　　　　　
-PRINTFORML 　　　　　　【모체 레벨:{CFlag:L_T:母体レベル}】
-PRINTFORML 　　　　　　【난자 레벨:{CFlag:L_T:卵子レベル}】
-PRINTFORML 　　　　　　【수정 내구도:{CFlag:L_T:受精現在耐久値}/{CFlag:L_T:受精最大耐久値}】【수정 확률:{CFlag:L_T:受精確率}】
+PRINTFORM 　　　　　　
+CALL PRINT_STATUS(L_T, "모체 레벨")
+PRINTL
+PRINTFORM 　　　　　　
+CALL PRINT_STATUS(L_T, "난자 레벨")
+PRINTL
+PRINTFORM 　　　　　
+CALL PRINT_RANGE_STATUS(L_T, "수정 내구도", "受精/耐久値")	; 検索キー(第3引数)は/でPRE/POST分割して検索する。
+CALL PRINT_STATUS(L_T, "수정 확률")
+PRINTL
 
 
 

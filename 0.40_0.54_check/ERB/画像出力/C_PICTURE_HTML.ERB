@@ -21,6 +21,8 @@
 #DIM L_Y2;小柄体格の位置調整用
 #DIM L_W
 #DIM L_H
+#DIM L_N
+#DIM L_N2
 #DIMS BG_STR
 #DIMS OL_STR
 #DIMS LSTR
@@ -39,7 +41,11 @@
 #DIMS LSTR_12
 #DIMS LSTR_14
 #DIMS LSTR_15
-#DIM C_bust
+#DIMS LSTR_N2
+#DIMS LSTR_UK
+#DIM DYNAMIC C_bust
+#DIM DYNAMIC ARG_ID
+
 
 SIF Flag:汎用変数6 != 999 && Flag:探索中 != 1
 	BG_STR = 
@@ -52,6 +58,16 @@ ELSE
 	LSTR_0 = 
 	L_Y2 = 0
 ENDIF
+
+IF Talent:L_T:妊娠 >= 6
+	L_N = (TALENT:L_T:妊娠/6)-1
+	SIF L_N >= 2
+		L_N = 2
+ELSE
+	L_N = 0
+	L_N2 = 0
+ENDIF
+
 ;種族特徴2
 LSTR_1 = C_RACE_2_{CFLAG:L_T:住人_種族}_0_{CFLAG:L_T:住人_種族特徴2}
 LSTR_1 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_1)%
@@ -67,63 +83,89 @@ LSTR_4 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_4)%
 ;胸
 LSTR_5 = %LSTR_0%bust_{CFLAG:L_T:肌色}_{C_bust}
 LSTR_5 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_5)%
+
+;妊娠
+IF  Talent:L_T:妊娠 >= 6
+	LSTR_N2 = %LSTR_0%C_MB_{CFLAG:L_T:肌色}_{L_N}
+ELSE
+	LSTR_N2 = C_no
+ENDIF
+
+LSTR_N2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_N2)%
+ 
 ;下着上
-IF CFLAG:L_T:下着上 == -1
+IF CFLAG:L_T:下着上 == -1 || Talent:L_T:妊娠 >= 6
 	LSTR_6 = C_no
 ELSE
 	LSTR_6 = %LSTR_0%bra_{C_bust}_{CFLAG:L_T:下着上}
 ENDIF
 LSTR_6 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_6)%
 ;下着下
-IF CFLAG:L_T:下着下 == -1
+IF CFLAG:L_T:下着下 == -1 || Talent:L_T:妊娠 >= 6
 	LSTR_7 = C_no
 ELSE
 	LSTR_7 = %LSTR_0%panties_{CFLAG:L_T:下着下}
 ENDIF
 LSTR_7 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_7)%
 ;ソックス
-IF CFLAG:L_T:靴下 == -1
+IF CFLAG:L_T:靴下 == -1 || Talent:L_T:妊娠 >= 6
 	LSTR_8 = C_no
 ELSE
 	LSTR_8 = %LSTR_0%socks_{CFLAG:L_T:靴下}
 ENDIF
 LSTR_8 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_8)%
 ;靴
-IF CFLAG:L_T:靴 == -1
+IF CFLAG:L_T:靴 == -1 || Talent:L_T:妊娠 >= 6
 	LSTR_9 = C_no
 ELSE
 	LSTR_9 = %LSTR_0%boots_{CFLAG:L_T:靴}
 ENDIF
 LSTR_9 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_9)%
+
 ;帽子
-IF CFLAG:L_T:帽子 == 0 || CFLAG:L_T:帽子 == -1
+IF CFLAG:L_T:帽子 == 0 || CFLAG:L_T:帽子 == -1 || Talent:L_T:妊娠 != 0
 	LSTR_14 = C_no
 ELSE
 	LSTR_14 = hat_{CFLAG:L_T:帽子}
 ENDIF
 LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_14)%
-;服
-IF CFLAG:L_T:服装 == -1
+
+;マタニティドレス
+IF   Talent:L_T:妊娠 >= 6 && CFLAG:L_T:服装 != -1 
+	LSTR_10 = %LSTR_0%C_M_Dress_{C_bust}_{L_N}
+ELSEIF CFLAG:L_T:服装 == -1 
 	LSTR_10 = C_no
 ELSE
 	LSTR_10 = %LSTR_0%suit_{C_bust}_{CFLAG:L_T:服装}
 ENDIF
 LSTR_10 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_10)%
-;髪
+
+;前髪
 LSTR_11 = hair_{CFLAG:L_T:髪色}_{CFLAG:L_T:髪型}
 LSTR_11 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_11)%
+
+;後髪
+LSTR_UK = hair_U_{CFLAG:L_T:髪色}_{CFLAG:L_T:後髪型}
+LSTR_UK = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_UK)%
+
 ;種族特徴1
 LSTR_12 = C_RACE_1_{CFLAG:L_T:住人_種族}_0_{CFLAG:L_T:住人_種族特徴1}
 LSTR_12 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_12)%
+
 ;淫紋
-IF CFLAG:L_T:淫紋 == 0 || CFLAG:L_T:淫紋 == -1
+IF CFLAG:L_T:淫紋 == 0 || CFLAG:L_T:淫紋 == -1 || Talent:L_T:妊娠 >= 6
 	LSTR_15 = C_no
 ELSE
 	LSTR_15 = %LSTR_0%in_{CFLAG:L_T:淫紋}
 ENDIF
-LSTR_15 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_15)%
+IF CFlag:L_T:住人_体格 == 1
+	LSTR_15 = %C_PICTURE_IMG(L_X, L_Y+L_Y2-110, L_W, L_H, LSTR_15)%
+ELSE
+	LSTR_15 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_15)%
+ENDIF
 
-LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_15%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%OL_STR%
+LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_N2%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_15%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%OL_STR%
+
 
 
 RETURNF LSTR
@@ -151,6 +193,8 @@ RETURNF LSTR
 #DIM L_Y2
 #DIM L_W
 #DIM L_H
+#DIM L_N
+#DIM L_N2
 #DIMS BG_STR
 #DIMS LSTR
 #DIMS LSTR_0
@@ -163,6 +207,8 @@ RETURNF LSTR
 #DIMS LSTR_12
 #DIMS LSTR_13
 #DIMS LSTR_14
+#DIMS LSTR_N2
+#DIMS LSTR_UK
 #DIM C_bust
 
 C_bust = C_PICTURE_BUST(L_T)
@@ -173,6 +219,15 @@ IF CFlag:L_T:住人_体格 == 1
 ELSE
 	LSTR_13 = 
 	L_Y2 = 0
+ENDIF
+
+IF Talent:L_T:妊娠 >= 6
+	L_N = (TALENT:L_T:妊娠/6)-1
+	SIF L_N >= 2
+		L_N = 2
+ELSE
+	L_N = 0
+	L_N2 = 0
 ENDIF
 
 ;種族特徴2
@@ -190,22 +245,40 @@ LSTR_4 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_4)%
 ;胸
 LSTR_5 = %LSTR_13%bust_{CFLAG:L_T:肌色}_{C_bust}
 LSTR_5 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_5)%
-;髪
+
+IF  Talent:L_T:妊娠 >= 6
+	LSTR_N2 = %LSTR_13%C_MB_{CFLAG:L_T:肌色}_{L_N}
+ELSE
+	LSTR_N2 = C_no
+ENDIF
+
+	LSTR_N2 = %C_PICTURE_IMG(L_X, L_Y, L_W, L_H, LSTR_N2)%
+
+;前髪
 LSTR_11 = hair_{CFLAG:L_T:髪色}_{CFLAG:L_T:髪型}
 LSTR_11 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_11)%
+;後髪
+LSTR_UK = hair_U_{CFLAG:L_T:髪色}_{CFLAG:L_T:後髪型}
+LSTR_UK = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_UK)%
+
 ;種族特徴1
 LSTR_12 = C_RACE_1_{CFLAG:L_T:住人_種族}_0_{CFLAG:L_T:住人_種族特徴1}
 LSTR_12 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_12)%
 ;淫紋
-IF CFLAG:L_T:淫紋 == 0 || CFLAG:L_T:淫紋 == -1
+IF CFLAG:L_T:淫紋 == 0 || CFLAG:L_T:淫紋 == -1 || Talent:L_T:妊娠 >= 6
 	LSTR_14 = C_no
 ELSE
 	LSTR_14 = %LSTR_13%in_{CFLAG:L_T:淫紋}
 ENDIF
-LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_14)%
+IF CFlag:L_T:住人_体格 == 1
+	LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2-110, L_W, L_H, LSTR_14)%
+ELSE
+	LSTR_14 = %C_PICTURE_IMG(L_X, L_Y+L_Y2, L_W, L_H, LSTR_14)%
+ENDIF
 
 
-LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_11%%LSTR_12%%LSTR_14%
+
+LSTR = <nobr>%BG_STR%%LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_N2%%LSTR_11%%LSTR_12%%LSTR_14%
 
 RETURNF LSTR
 
@@ -320,7 +393,7 @@ RETURNF L_S
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; 胸の Talent ([절벽],[빈유],なし,[거유],[폭유],) に対応する
+;; 胸の Talent ([絶壁],[貧乳],なし,[巨乳],[爆乳],) に対応する
 ;; 胸画像番号を返します。
 ;;
 ;; 引数
@@ -332,13 +405,13 @@ RETURNF L_S
 #FUNCTION
 #DIM C_bust    ; 胸画像番号
 
-IF Talent:ARG:폭유 == 1
+IF Talent:ARG:爆乳 == 1
 	C_bust = 4
-ELSEIF Talent:ARG:거유 == 1
+ELSEIF Talent:ARG:巨乳 == 1
 	C_bust = 3
-ELSEIF Talent:ARG:절벽 == 1
+ELSEIF Talent:ARG:絶壁 == 1
 	C_bust = 2
-ELSEIF Talent:ARG:빈유 == 1
+ELSEIF Talent:ARG:貧乳 == 1
 	C_bust = 1
 ELSE
 	C_bust = 0
@@ -359,15 +432,16 @@ RETURNF C_bust
 @C_PICTURE_NINSIN(ARG)
 #FUNCTION
 #DIM C_ninsin    ; 妊娠画像番号
+#DIM L_T
 
 SIF TALENT:ARG:妊娠 != 0
 	C_ninsin = (TALENT:ARG:妊娠/4)+2
-SIF TALENT:ARG:수정 != 0
+SIF TALENT:ARG:受精 != 0
 	C_ninsin = 1
 SIF C_ninsin >= 8
 	C_ninsin = 8
 	
-SIF TALENT:ARG:妊娠 == 0 && TALENT:ARG:수정 == 0
+SIF TALENT:ARG:妊娠 == 0 && TALENT:ARG:受精 == 0
 	C_ninsin = 0
 
 RETURNF C_ninsin
