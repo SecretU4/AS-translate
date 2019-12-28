@@ -125,17 +125,17 @@ RETURN 1
 ;-------------------------------------------------
 ;IF !CFLAG:エキストラモード確認
 ;	CFLAG:エキストラモード確認 = 1
-;	PRINTFORML %CALLNAME%を処女モードに移行しますか？
+;	PRINTFORML %타겟을% 처녀모드로 이행하겠습니까？
 ;	PRINTL [0] 네
 ;	PRINTL [1] 아니오
 ;	$INPUT_LOOP_EX
 ;	INPUT
 ;	IF RESULT == 0
-;		PRINTFORMW ―処女モードに素質、能力を変更します―
+;		PRINTFORMW 처녀모드로 소질、능력을 변경합니다
 ;		;- VAR:処女化
 ;		CALL VAR_RESET_VIRGIN
 ;	ELSEIF RESULT == 1
-;		PRINTFORMW ―通常モードで調教を開始します―
+;		PRINTFORMW 통상 모드로 조교를 시작합니다
 ;	ELSE
 ;		CLEARLINE 1
 ;		GOTO INPUT_LOOP_EX
