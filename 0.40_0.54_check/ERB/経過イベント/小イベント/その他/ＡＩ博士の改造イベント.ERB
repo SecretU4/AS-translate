@@ -1,0 +1,1278 @@
+﻿;-------------------------------------------------
+;ＡＩ博士の改造イベント
+;
+;超低確率(0.02%)で発生、さらに確率で各種強化、失敗すると弱化
+;-------------------------------------------------
+@TURN_EVENT_AIHKS
+#DIM L_INPUT
+#DIM L_INPUT2
+#DIM L_INPUT3
+#DIM P_S
+#DIMS LSTR
+P_S = 0
+
+
+DRAWLINE
+PRINTFORML 【ＡＩ博士の改造イベント：%CALLNAME%】
+PRINTFORML 
+PRINTFORML 　　　　　|%CALLNAME%は見知らぬ部屋で目を覚ました。
+PRINTFORML 　　　　　|周囲には用途不明の機械が並んでいて研究室のように見える…
+PRINTFORML 　　　　　|「ハーイ、オ目覚メミタイナノ？」
+PRINTFORML 　　　　　|見知らぬ部屋に連れ込まれて警戒する%CALLNAME%の前に現れたのは一人の少女だった。
+PRINTFORML 　　　　　|背中に自身の身体よりも大きな機械を背負い、背が低いために白衣を引きずりながら現れた少女はペコリとお辞儀をする。
+PRINTFORML 　　　　　|「私ハＡＩ博士ナノ。悩ミ多キ住民ノタメニ、日夜頑張ッテルノ」
+PRINTFORML 　　　　　|そう言って無邪気な笑みを浮かべたＡＩ博士は背負っている機械を起動させた。
+PRINTFORML 　　　　　|「ダカラ貴女ノオ悩ミ、聞カセテ欲シーノ？」
+PRINTFORML 　　　　　|左右から迫りくるロボットアームやドリル、ナイフといった凶器に身の危険を感じる…
+
+P_S -= 800
+LSTR = <img src='NPC_5' height = '850'  ypos = '{P_S}'>
+HTML_PRINT LSTR
+PRINTFORMW
+
+$INPUT_LOOP1
+PRINTFORML [1] - 【無自覚の素質を強化したい】
+PRINTFORML [2] - 【戦闘能力を強化したい】
+PRINTFORML [3] - 【妊娠しやすくなりたい】
+PRINTFORML [4] - 【感度を良くしたい】
+PRINTFORML [5] - 【胸のサイズを変えたい】
+PRINTFORML [999] - 【悩みはない】
+PRINTFORML 
+
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 1	;無自覚の素質を強化したい
+	PRINTFORML 「オォー、モットＨク、雄ヲ誘惑スル雌ニナリタイノ？」
+	PRINTFORML 「ソレナラ得意ダカラ任セテナノ。成功ノ確率ハ一ツダケ上ゲルト８０％、全部上ゲルト４０％ナノ」
+	PRINTFORML 「チナミニ上ガル箇所ハランダムナノ。アト失敗スルト下ガッチャウノ、許シテ欲シイノ」
+	PRINTFORML 
+	
+	$INPUT_LOOP2
+	PRINTFORML 
+	PRINTFORML [1] - 【無自覚の素質を一つ上げる】（８０％の確率で成功）
+	PRINTFORML [2] - 【無自覚の素質をすべて上げる】（４０％の確率で成功）
+	PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+	PRINTFORML 
+	
+	INPUT
+	L_INPUT2 = RESULT
+	
+	SELECTCASE L_INPUT2
+	CASE 1	;無自覚の素質を一つ上げる
+		CALL TURN_EVENT_AIHKS_A1
+	CASE 2	;無自覚の素質をすべて上げる
+		CALL TURN_EVENT_AIHKS_A2
+	CASE 10	;もう少し考えたい
+		GOTO INPUT_LOOP1
+	CASEELSE
+		GOTO INPUT_LOOP2
+	ENDSELECT
+CASE 2	;戦闘能力を強化したい
+	PRINTFORML 「ホッホゥ、天下無双ヲオ望ミナノ？」
+	PRINTFORML 「ソレナラ容易ダカラ任セテナノ。成功確率ハナナナント８０％ナノ！」
+	PRINTFORML 「失敗スルト弱クナッチャウノ、許シテ欲シイノ」
+	PRINTFORML 
+	
+	$INPUT_LOOP3
+	PRINTFORML 
+	PRINTFORML [1] - 【戦闘能力を強化する】（８０％の確率で成功）
+	PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+	PRINTFORML 
+	
+	INPUT
+	L_INPUT2 = RESULT
+	
+	SELECTCASE L_INPUT2
+	CASE 1	;戦闘能力を強化する
+		CALL TURN_EVENT_AIHKS_B1
+	CASE 10	;もう少し考えたい
+		GOTO INPUT_LOOP1
+	CASEELSE
+		GOTO INPUT_LOOP3
+	ENDSELECT
+CASE 3	;妊娠しやすくなりたい
+	;受精もしくは妊娠している場合
+	IF TALENT:受精 || TALENT:妊娠
+		PRINTFORML 「アッ…エット…今ハ危険ダカラ手術ハ駄目ダッテシティママガ言ッテルノ」
+		PRINTFORML 「他ノヲ選ンデ欲シイナ、ナノ」
+		GOTO INPUT_LOOP1
+	;受精もしくは妊娠していない場合
+	ELSE
+		PRINTFORML 「ピャー、ソレッテ雄ニ子宮ヲ使ワレ続ケルクソ雑魚卵子ニシタイッテコトナノ？」
+		PRINTFORML 「デ、出来ナクハナイケド…大人ノ考エル事ハ難シイノ…成功ノ確率ハ６０％ナノ」
+		PRINTFORML 「失敗スルト妊娠シ難クナッチャウノ、許シテ欲シイノ」
+		PRINTFORML 
+		
+		$INPUT_LOOP4
+		PRINTFORML 
+		PRINTFORML [1] - 【妊娠しやすくする】（６０％の確率で成功）
+		PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+		PRINTFORML 
+		
+		INPUT
+		L_INPUT2 = RESULT
+		
+		SELECTCASE L_INPUT2
+		CASE 1	;妊娠しやすくする
+			CALL TURN_EVENT_AIHKS_C1
+		CASE 10	;もう少し考えたい
+			GOTO INPUT_LOOP1
+		CASEELSE
+			GOTO INPUT_LOOP4
+		ENDSELECT
+	ENDIF
+CASE 4	;感度を良くしたい
+	PRINTFORML 「ヒョエー、自分カラ弱点ヲ増ヤシテイクスタイルナノ？」
+	PRINTFORML 「ソウイウノ嫌イジャナイノ。成功確率ハ一ヶ所ダケナラ７０％、全部ナラ３０％ナノ」
+	PRINTFORML 「成功ナラ一段階上ガルノ。失敗シテモ感度ハ変ワラナイカラ安心シテ欲シイノ」
+	
+	$INPUT_LOOP5
+	PRINTFORML %CALLNAME%の感度
+	PRINTFORM Ｖ感度：
+	IF TALENT:Ｖ敏感
+		PRINTFORM 敏感
+	ELSEIF TALENT:Ｖ鈍感
+		PRINTFORM 鈍感
+	ELSE
+		PRINTFORM 普通
+	ENDIF
+	
+	PRINTFORM 　／　Ａ感度：
+	IF TALENT:Ａ敏感
+		PRINTFORM 敏感
+	ELSEIF TALENT:Ａ鈍感
+		PRINTFORM 鈍感
+	ELSE
+		PRINTFORM 普通
+	ENDIF
+	
+	PRINTFORM 　／　Ｂ感度：
+	IF TALENT:Ｂ敏感
+		PRINTFORM 敏感
+	ELSEIF TALENT:Ｂ鈍感
+		PRINTFORM 鈍感
+	ELSE
+		PRINTFORM 普通
+	ENDIF
+	
+	PRINTFORM 　／　Ｃ感度：
+	IF TALENT:Ｃ敏感
+		PRINTFORML 敏感
+	ELSEIF TALENT:Ｃ鈍感
+		PRINTFORML 鈍感
+	ELSE
+		PRINTFORML 普通
+	ENDIF
+	PRINTFORML 
+	PRINTFORML [1] - 【Ｖ感度をよくする】（７０％の確率で成功）
+	PRINTFORML [2] - 【Ａ感度をよくする】（７０％の確率で成功）
+	PRINTFORML [3] - 【Ｂ感度をよくする】（７０％の確率で成功）
+	PRINTFORML [4] - 【Ｃ感度をよくする】（７０％の確率で成功）
+	PRINTFORML [5] - 【感度をすべてよくする】（３０％の確率で成功）
+	PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+	PRINTFORML 
+	
+	INPUT
+	L_INPUT2 = RESULT
+	
+	SELECTCASE L_INPUT2
+	CASE 1	;Ｖ感度をよくする
+		IF TALENT:Ｖ敏感
+			PRINTFORMW すでに%CALLNAME%のＶ感度は敏感でこれ以上は上がりそうにない。
+			GOTO INPUT_LOOP5
+		ELSE
+			CALL TURN_EVENT_AIHKS_D1
+		ENDIF
+	CASE 2	;Ａ感度をよくする
+		IF TALENT:Ａ敏感
+			PRINTFORMW すでに%CALLNAME%のＡ感度は敏感でこれ以上は上がりそうにない。
+			GOTO INPUT_LOOP5
+		ELSE
+			CALL TURN_EVENT_AIHKS_D2
+		ENDIF
+	CASE 3	;Ｂ感度をよくする
+		IF TALENT:Ｂ敏感
+			PRINTFORMW すでに%CALLNAME%のＢ感度は敏感でこれ以上は上がりそうにない。
+			GOTO INPUT_LOOP5
+		ELSE
+			CALL TURN_EVENT_AIHKS_D3
+		ENDIF
+	CASE 4	;Ｃ感度をよくする
+		IF TALENT:Ｃ敏感
+			PRINTFORMW すでに%CALLNAME%のＣ感度は敏感でこれ以上は上がりそうにない。
+			GOTO INPUT_LOOP5
+		ELSE
+			CALL TURN_EVENT_AIHKS_D4
+		ENDIF
+	CASE 5	;すべての感度をよくする
+		CALL TURN_EVENT_AIHKS_D5
+	CASE 10	;もう少し考えたい
+		GOTO INPUT_LOOP1
+	CASEELSE
+		GOTO INPUT_LOOP5
+	ENDSELECT
+CASE 5	;胸のサイズを変えたい
+	PRINTFORML 「オッパイノサイズヲ変エタイノ？　……私モモウ少シ…アッ、イヤ、何デモナイノ！」
+	PRINTFORML 「マズハ大キクスルノカ、小サクスルノカ、選ンデ欲シイノ」
+	PRINTFORML 「成功率ハ１００％ダカラ、安心シテ選ンデ欲シイノ！」
+	
+	$INPUT_LOOP6
+	PRINTFORML 
+	PRINTFORML [1] - 【大きくしたい】
+	PRINTFORML [2] - 【小さくしたい】
+	PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+	PRINTFORML 
+	
+	INPUT
+	L_INPUT2 = RESULT
+	
+	SELECTCASE L_INPUT2
+	CASE 1	;大きくしたい
+		;カップサイズが最大の場合はダメ
+		IF CFLAG:カップサイズ == 27
+			PRINTFORML 「サ、流石ニソレ以上ハ私デモ無理ナノ……破裂シチャウノ」
+			GOTO INPUT_LOOP6
+		ELSE
+			IF TALENT:爆乳
+				PRINTFORML 「エェ……バインバインナノニ…マダ大キサヲ求メルッテ……ドン引キナノ」（ボソボソ）
+				PRINTFORML 「ン、ンンッ！…デキナクハナイケド、ソンナニ下品ナオッパイガオ好ミナノ？」
+			ELSEIF TALENT:巨乳
+				PRINTFORML 「今デモ大キイノニ、モット大キクナノ？　コノ欲シガリサン、ナノッ！」
+				PRINTFORML 「マァ…デキナクハナイノ、本当ニモット大キクシタイノ？」
+			ELSEIF TALENT:貧乳
+				PRINTFORML 「貧乳ハステータスナノ。昔ノ言葉デ残ッテルノ」
+				PRINTFORML 「……本当ニソノ慎マシヤカナオ胸トオサラバシタイノ？」
+			ELSEIF TALENT:絶壁
+				PRINTFORML 「ワカル……ワカルノ……無イヨリカハ微カデモ有ル方ガイイノ……」
+				PRINTFORML 「持タザル者ノ苦シミハヨク理解シテルノ……今スグ大キクスルノ？」
+			ELSE
+				PRINTFORML 「大キスギズ小サスギズ、美シイ調律ガ保タレテルト思ウノ」
+				PRINTFORML 「ソレデモオッパイヲ大キクシタイノ？」
+			ENDIF
+			PRINTFORML 「因ミニ、詰メ物スルンジャナクテ育乳ナノ。偽乳ジャナクテ天然モノナノ」
+			
+			$INPUT_LOOP7
+			PRINTFORML 
+			PRINTFORML [1] - 【大きくする】(注意：胸のサイズに関する体質素質も変化する恐れがあります)
+			PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+			PRINTFORML 
+			
+			INPUT
+			L_INPUT3 = RESULT
+			
+			SELECTCASE L_INPUT3
+			CASE 1	;大きくする
+				CALL TURN_EVENT_AIHKS_E1
+			CASE 10	;もう少し考えたい
+				GOTO INPUT_LOOP6
+			CASEELSE
+				GOTO INPUT_LOOP7
+			ENDSELECT
+		ENDIF
+	CASE 2	;小さくしたい
+		;カップサイズが最小(計測不能)の場合はダメ
+		IF CFLAG:カップサイズ == 0
+			PRINTFORML 「サ、流石ニソレ以上ハ私デモ無理ナノ……抉レチャウノ」
+			GOTO INPUT_LOOP6
+		ELSE
+			IF TALENT:爆乳
+				PRINTFORML 「アァ～…大キスギテ逆ニ不便ッテヤツナノ？」
+				PRINTFORML 「贅沢ナ悩ミダト思ウノ……ウウン、大丈夫ナノ、チャント小サクシテアゲルノ」
+			ELSEIF TALENT:巨乳
+				PRINTFORML 「ウンウン、私カラ見テモチョット大キスギル感ジガスルノ」
+				PRINTFORML 「何事モバランスガ大事ト存ジマス、ナノッ！」
+			ELSEIF TALENT:貧乳
+				PRINTFORML 「エッ…エット……ソンナニ大キク無イト思ウノ……」
+				PRINTFORML 「ソレデモ貴女ハチッパイヲ更ニ小サクシタイナノ？」
+			ELSEIF TALENT:絶壁
+				PRINTFORML 「ウェッ？！コ、コレ以上小サクスルノ？！」
+				PRINTFORML 「モウソレ断崖絶壁ナノ……マァ、貴女ガ望ムナラ処置シテアゲルケド…ナノ」
+			ELSE
+				PRINTFORML 「確カニ手ノヒラニ収マルサイズモ可愛クテ嫌イジャナイノ」
+				PRINTFORML 「…今ヨリモ慎マシヤカナ胸ガ御所望ナノ？」
+			ENDIF
+			PRINTFORML 「因ミニ、脂肪ヲ吸引スルンジャナクテ薬デ胸全体ヲ減退サセルカラ垂レタリシナイノ！」
+			
+			$INPUT_LOOP8
+			PRINTFORML 
+			PRINTFORML [1] - 【小さくする】(注意：胸のサイズに関する体質素質も変化する恐れがあります)
+			PRINTFORML [10] - 【もう少し考えたい】（一つ前の選択肢に戻る）
+			PRINTFORML 
+			
+			INPUT
+			L_INPUT3 = RESULT
+			
+			SELECTCASE L_INPUT3
+			CASE 1	;小さくする
+				CALL TURN_EVENT_AIHKS_E2
+			CASE 10	;もう少し考えたい
+				GOTO INPUT_LOOP6
+			CASEELSE
+				GOTO INPUT_LOOP8
+			ENDSELECT
+		ENDIF
+	CASE 10	;もう少し考えたい
+		GOTO INPUT_LOOP1
+	CASEELSE
+		GOTO INPUT_LOOP5
+	ENDSELECT
+CASE 999	;悩みはない
+	PRINTFORML 悩みはない、そう告げるとＡＩ博士は背負った機械を止めた。
+	PRINTFORML 「ソウナノ……デモ貴女ミタイナ幸セナ住民ガ、モット増エルト嬉シイノ」
+	PRINTFORML 大人しく引き下がったＡＩ博士にホッと胸を撫で下ろしていると、ガスが顔に噴きつけられる。
+	PRINTFORML 不意を突かれた%CALLNAME%はガスを吸ってしまい意識が朦朧としだす。
+	PRINTFORMW 意識が落ちる直前、最後に見たのは笑みを浮かべて手を振っているＡＩ博士の姿だった…
+CASEELSE
+	GOTO INPUT_LOOP1
+ENDSELECT
+
+PRINTFORML 
+PRINTFORML …
+PRINTFORML ……
+PRINTFORMW 自宅のベッドで目を覚ました%CALLNAME%は何かあったような気がしたが、すぐに忘れて眠りについた…
+
+
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　無自覚の素質を強化したい
+;無自覚の素質をランダムで１つだけ強化します
+;５％の確率で大成功、８０％の確率で成功、１５％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_A1
+#DIM L_SIKU
+
+L_SIKU = RAND:100
+
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「動カナイデ、ジットシテテ下サイナノー」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+;大成功
+IF L_SIKU >= 95
+	IF !RAND:6	;フェロモン強化
+		PRINTFORML 「私ニカカレバコンナモノナノ。フェロモンガ超強化サレタノ」
+		;70以上の場合は上限が99なので99に
+		IF CFLAG:フェロモン >= 70
+			PRINTFORMW 【フェロモン：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%のフェロモンは上限に達しました）
+			CFLAG:フェロモン = 99
+		;それ以外は+30(ハート3段階)増加する
+		ELSE
+			PRINTFORMW 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン+30}】
+			CFLAG:フェロモン += 30
+		ENDIF
+	ELSEIF !RAND:5	;雌の本能強化
+		PRINTFORML 「私ニカカレバコンナモノナノ。雌ノ本能ガ超強化サレタノ」
+		;70以上の場合は上限が99なので99に
+		IF CFLAG:雌の本能 >= 70
+			PRINTFORMW 【雌の本能：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雌の本能は上限に達しました）
+			CFLAG:雌の本能 = 99
+		;それ以外は+30(ハート3段階)増加する
+		ELSE
+			PRINTFORMW 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能+30}】
+			CFLAG:雌の本能 += 30
+		ENDIF
+	ELSEIF !RAND:4	;性への興味強化
+		PRINTFORML 「私ニカカレバコンナモノナノ。性ヘノ興味ガ超強化サレタノ」
+		;70以上の場合は上限が99なので99に
+		IF CFLAG:性への興味 >= 70
+			PRINTFORMW 【性への興味：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性への興味は上限に達しました）
+			CFLAG:性への興味 = 99
+		;それ以外は+30(ハート3段階)増加する
+		ELSE
+			PRINTFORMW 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味+30}】
+			CFLAG:性への興味 += 30
+		ENDIF
+	ELSEIF !RAND:3	;雄への関心強化
+		PRINTFORML 「私ニカカレバコンナモノナノ。雄ヘノ関心ガ超強化サレタノ」
+		;70以上の場合は上限が99なので99に
+		IF CFLAG:雄への関心 >= 70
+			PRINTFORMW 【雄への関心：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雄への関心は上限に達しました）
+			CFLAG:雄への関心 = 99
+		;それ以外は+30(ハート3段階)増加する
+		ELSE
+			PRINTFORMW 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心+30}】
+			CFLAG:雄への関心 += 30
+		ENDIF
+	ELSEIF !RAND:2	;性交願望強化
+		PRINTFORML 「私ニカカレバコンナモノナノ。性交願望ガ超強化サレタノ」
+		;70以上の場合は上限が99なので99に
+		IF CFLAG:性交願望 >= 70
+			PRINTFORMW 【性交願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性交願望は上限に達しました）
+			CFLAG:性交願望 = 99
+		;それ以外は+30(ハート3段階)増加する
+		ELSE
+			PRINTFORMW 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望+30}】
+			CFLAG:性交願望 += 30
+		ENDIF
+	ELSE			;妊娠願望強化
+		PRINTFORML 「私ニカカレバコンナモノナノ。妊娠願望ガ超強化サレタノ」
+		;70以上の場合は上限が99なので99に
+		IF CFLAG:妊娠願望 >= 70
+			PRINTFORMW 【妊娠願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の妊娠願望は上限に達しました）
+			CFLAG:妊娠願望 = 99
+		;それ以外は+30(ハート3段階)増加する
+		ELSE
+			PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+30}】
+			CFLAG:妊娠願望 += 30
+		ENDIF
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、喜ンデクレルトイイナナノ♪」
+;成功
+ELSEIF L_SIKU >= 15
+	IF !RAND:6	;フェロモン強化
+		PRINTFORML 「マズマズノ結果ナノ。フェロモンガ強化サレタノ」
+		;80以上の場合は上限が99なので99に
+		IF CFLAG:フェロモン >= 80
+			PRINTFORMW 【フェロモン：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%のフェロモンは上限に達しました）
+			CFLAG:フェロモン = 99
+		;それ以外は+20(ハート2段階)増加する
+		ELSE
+			PRINTFORMW 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン+20}】
+			CFLAG:フェロモン += 20
+		ENDIF
+	ELSEIF !RAND:5	;雌の本能強化
+		PRINTFORML 「マズマズノ結果ナノ。雌ノ本能ガ強化サレタノ」
+		;80以上の場合は上限が99なので99に
+		IF CFLAG:雌の本能 >= 80
+			PRINTFORMW 【雌の本能：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雌の本能は上限に達しました）
+			CFLAG:雌の本能 = 99
+		;それ以外は+20(ハート2段階)増加する
+		ELSE
+			PRINTFORMW 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能+20}】
+			CFLAG:雌の本能 += 20
+		ENDIF
+	ELSEIF !RAND:4	;性への興味強化
+		PRINTFORML 「マズマズノ結果ナノ。性ヘノ興味ガ強化サレタノ」
+		;80以上の場合は上限が99なので99に
+		IF CFLAG:性への興味 >= 80
+			PRINTFORMW 【性への興味：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性への興味は上限に達しました）
+			CFLAG:性への興味 = 99
+		;それ以外は+20(ハート2段階)増加する
+		ELSE
+			PRINTFORMW 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味+20}】
+			CFLAG:性への興味 += 20
+		ENDIF
+	ELSEIF !RAND:3	;雄への関心強化
+		PRINTFORML 「マズマズノ結果ナノ。雄ヘノ関心ガ強化サレタノ」
+		;80以上の場合は上限が99なので99に
+		IF CFLAG:雄への関心 >= 80
+			PRINTFORMW 【雄への関心：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雄への関心は上限に達しました）
+			CFLAG:雄への関心 = 99
+		;それ以外は+20(ハート2段階)増加する
+		ELSE
+			PRINTFORMW 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心+20}】
+			CFLAG:雄への関心 += 20
+		ENDIF
+	ELSEIF !RAND:2	;性交願望強化
+		PRINTFORML 「マズマズノ結果ナノ。性交願望ガ強化サレタノ」
+		;80以上の場合は上限が99なので99に
+		IF CFLAG:性交願望 >= 80
+			PRINTFORMW 【性交願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性交願望は上限に達しました）
+			CFLAG:性交願望 = 99
+		;それ以外は+20(ハート2段階)増加する
+		ELSE
+			PRINTFORMW 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望+20}】
+			CFLAG:性交願望 += 20
+		ENDIF
+	ELSE			;妊娠願望強化
+		PRINTFORML 「マズマズノ結果ナノ。妊娠願望ガ強化サレタノ」
+		;80以上の場合は上限が99なので99に
+		IF CFLAG:妊娠願望 >= 80
+			PRINTFORMW 【妊娠願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の妊娠願望は上限に達しました）
+			CFLAG:妊娠願望 = 99
+		;それ以外は+20(ハート2段階)増加する
+		ELSE
+			PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+20}】
+			CFLAG:妊娠願望 += 20
+		ENDIF
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+;失敗
+ELSE
+	IF !RAND:6	;フェロモン
+		PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー。フェロモンガ低下シチャッタノ」
+		;10以下の場合は1に
+		IF CFLAG:フェロモン <= 10
+			PRINTFORMW 【フェロモン　{CFLAG:フェロモン} → 1】
+			CFLAG:フェロモン = 1
+		;それ以外は-10(ハート1段階)低下する
+		ELSE
+			PRINTFORMW 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン-10}】
+			CFLAG:フェロモン -= 10
+		ENDIF
+	ELSEIF !RAND:5	;雌の本能
+		PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー。雌ノ本能ガ低下シチャッタノ」
+		;10以下の場合は1に
+		IF CFLAG:雌の本能 <= 10
+			PRINTFORMW 【雌の本能　{CFLAG:雌の本能} → 1】
+			CFLAG:雌の本能 = 1
+		;それ以外は-10(ハート1段階)低下する
+		ELSE
+			PRINTFORMW 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能-10}】
+			CFLAG:雌の本能 -= 10
+		ENDIF
+	ELSEIF !RAND:4	;性への興味
+		PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー。性ヘノ興味ガ低下シチャッタノ」
+		;10以下の場合は1に
+		IF CFLAG:性への興味 <= 10
+			PRINTFORMW 【性への興味　{CFLAG:性への興味} → 1】
+			CFLAG:性への興味 = 1
+		;それ以外は-10(ハート1段階)低下する
+		ELSE
+			PRINTFORMW 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味-10}】
+			CFLAG:性への興味 -= 10
+		ENDIF
+	ELSEIF !RAND:3	;雄への関心
+		PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー。雄ヘノ関心ガ低下シチャッタノ」
+		;10以下の場合は1に
+		IF CFLAG:雄への関心 <= 10
+			PRINTFORMW 【雄への関心　{CFLAG:雄への関心} → 1】
+			CFLAG:雄への関心 = 1
+		;それ以外は-10(ハート1段階)低下する
+		ELSE
+			PRINTFORMW 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心-10}】
+			CFLAG:雄への関心 -= 10
+		ENDIF
+	ELSEIF !RAND:2	;性交願望
+		PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー。性交願望ガ低下シチャッタノ」
+		;10以下の場合は1に
+		IF CFLAG:性交願望 <= 10
+			PRINTFORMW 【性交願望　{CFLAG:性交願望} → 1】
+			CFLAG:性交願望 = 1
+		;それ以外は-10(ハート1段階)低下する
+		ELSE
+			PRINTFORMW 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望-10}】
+			CFLAG:性交願望 -= 10
+		ENDIF
+	ELSE			;妊娠願望
+		PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー。妊娠願望ガ低下シチャッタノ」
+		;10以下の場合は1に
+		IF CFLAG:妊娠願望 <= 10
+			PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → 1】
+			CFLAG:妊娠願望 = 1
+		;それ以外は-10(ハート1段階)低下する
+		ELSE
+			PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望-10}】
+			CFLAG:妊娠願望 -= 10
+		ENDIF
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、怒ラナイトイイノ…」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　無自覚の素質を強化したい
+;無自覚の素質をすべて強化します
+;１０％の確率で大成功、４０％の確率で成功、５０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_A2
+#DIM L_SIKU
+
+L_SIKU = RAND:100
+
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「難シイ手術ニナルノ、気ヲシッカリ強クモッテ欲シイノ」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+;大成功
+IF L_SIKU >= 90
+	PRINTFORML 「……ヤッパリ私ハ天才ナノ。自分ノ腕前ニ惚レ惚レシチャウノ」
+	;フェロモン強化
+	;85以上の場合は上限が99なので99に
+	IF CFLAG:フェロモン >= 85
+		PRINTFORML 【フェロモン：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%のフェロモンは上限に達しました）
+		CFLAG:フェロモン = 99
+	;それ以外は+15増加する
+	ELSE
+		PRINTFORML 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン+15}】
+		CFLAG:フェロモン += 15
+	ENDIF
+	;雌の本能強化
+	;85以上の場合は上限が99なので99に
+	IF CFLAG:雌の本能 >= 85
+		PRINTFORML 【雌の本能：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雌の本能は上限に達しました）
+		CFLAG:雌の本能 = 99
+	;それ以外は+15増加する
+	ELSE
+		PRINTFORML 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能+15}】
+		CFLAG:雌の本能 += 15
+	ENDIF
+	;性への興味強化
+	;85以上の場合は上限が99なので99に
+	IF CFLAG:性への興味 >= 85
+		PRINTFORML 【性への興味：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性への興味は上限に達しました）
+		CFLAG:性への興味 = 99
+	;それ以外は+15増加する
+	ELSE
+		PRINTFORML 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味+15}】
+		CFLAG:性への興味 += 15
+	ENDIF
+	;雄への関心強化
+	;85以上の場合は上限が99なので99に
+	IF CFLAG:雄への関心 >= 85
+		PRINTFORML 【雄への関心：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雄への関心は上限に達しました）
+		CFLAG:雄への関心 = 99
+	;それ以外は+15増加する
+	ELSE
+		PRINTFORML 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心+15}】
+		CFLAG:雄への関心 += 15
+	ENDIF
+	;性交願望強化
+	;85以上の場合は上限が99なので99に
+	IF CFLAG:性交願望 >= 85
+		PRINTFORML 【性交願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性交願望は上限に達しました）
+		CFLAG:性交願望 = 99
+	;それ以外は+15増加する
+	ELSE
+		PRINTFORML 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望+15}】
+		CFLAG:性交願望 += 15
+	ENDIF
+	;妊娠願望強化
+	;85以上の場合は上限が99なので99に
+	IF CFLAG:妊娠願望 >= 85
+		PRINTFORMW 【妊娠願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の妊娠願望は上限に達しました）
+		CFLAG:妊娠願望 = 99
+	;それ以外は+15増加する
+	ELSE
+		PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+15}】
+		CFLAG:妊娠願望 += 15
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、喜ンデクレルトイイナナノ♪」
+;成功
+ELSEIF L_SIKU >= 50
+	PRINTFORML 「マアマアノ仕上ガリナノ」
+	;フェロモン強化
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:フェロモン >= 90
+		PRINTFORML 【フェロモン：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%のフェロモンは上限に達しました）
+		CFLAG:フェロモン = 99
+	;それ以外は+10増加する
+	ELSE
+		PRINTFORML 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン+10}】
+		CFLAG:フェロモン += 10
+	ENDIF
+	;雌の本能強化
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雌の本能 >= 90
+		PRINTFORML 【雌の本能：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雌の本能は上限に達しました）
+		CFLAG:雌の本能 = 99
+	;それ以外は+10増加する
+	ELSE
+		PRINTFORML 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能+10}】
+		CFLAG:雌の本能 += 10
+	ENDIF
+	;性への興味強化
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性への興味 >= 90
+		PRINTFORML 【性への興味：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性への興味は上限に達しました）
+		CFLAG:性への興味 = 99
+	;それ以外は+10増加する
+	ELSE
+		PRINTFORML 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味+10}】
+		CFLAG:性への興味 += 10
+	ENDIF
+	;雄への関心強化
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:雄への関心 >= 90
+		PRINTFORML 【雄への関心：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の雄への関心は上限に達しました）
+		CFLAG:雄への関心 = 99
+	;それ以外は+10増加する
+	ELSE
+		PRINTFORML 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心+10}】
+		CFLAG:雄への関心 += 10
+	ENDIF
+	;性交願望強化
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:性交願望 >= 90
+		PRINTFORML 【性交願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の性交願望は上限に達しました）
+		CFLAG:性交願望 = 99
+	;それ以外は+10増加する
+	ELSE
+		PRINTFORML 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望+10}】
+		CFLAG:性交願望 += 10
+	ENDIF
+	;妊娠願望強化
+	;90以上の場合は上限が99なので99に
+	IF CFLAG:妊娠願望 >= 90
+		PRINTFORMW 【妊娠願望：%UNICODE(0x2661)%×10(MAX)】（%CALLNAME%の妊娠願望は上限に達しました）
+		CFLAG:妊娠願望 = 99
+	;それ以外は+10増加する
+	ELSE
+		PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望+10}】
+		CFLAG:妊娠願望 += 10
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+;失敗
+ELSE
+	PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー」
+	;フェロモン
+	;10以下の場合は1に
+	IF CFLAG:フェロモン <= 10
+		PRINTFORML 【フェロモン　{CFLAG:フェロモン} → 1】
+		CFLAG:フェロモン = 1
+	;それ以外は-10(ハート1段階)低下する
+	ELSE
+		PRINTFORML 【フェロモン　{CFLAG:フェロモン} → {CFLAG:フェロモン-10}】
+		CFLAG:フェロモン -= 10
+	ENDIF
+	;雌の本能
+	;10以下の場合は1に
+	IF CFLAG:雌の本能 <= 10
+		PRINTFORML 【雌の本能　{CFLAG:雌の本能} → 1】
+		CFLAG:雌の本能 = 1
+	;それ以外は-10(ハート1段階)低下する
+	ELSE
+		PRINTFORML 【雌の本能　{CFLAG:雌の本能} → {CFLAG:雌の本能-10}】
+		CFLAG:雌の本能 -= 10
+	ENDIF
+	;性への興味
+	;10以下の場合は1に
+	IF CFLAG:性への興味 <= 10
+		PRINTFORML 【性への興味　{CFLAG:性への興味} → 1】
+		CFLAG:性への興味 = 1
+	;それ以外は-10(ハート1段階)低下する
+	ELSE
+		PRINTFORML 【性への興味　{CFLAG:性への興味} → {CFLAG:性への興味-10}】
+		CFLAG:性への興味 -= 10
+	ENDIF
+	;雄への関心
+	;10以下の場合は1に
+	IF CFLAG:雄への関心 <= 10
+		PRINTFORML 【雄への関心　{CFLAG:雄への関心} → 1】
+		CFLAG:雄への関心 = 1
+	;それ以外は-10(ハート1段階)低下する
+	ELSE
+		PRINTFORML 【雄への関心　{CFLAG:雄への関心} → {CFLAG:雄への関心-10}】
+		CFLAG:雄への関心 -= 10
+	ENDIF
+	;性交願望
+	;10以下の場合は1に
+	IF CFLAG:性交願望 <= 10
+		PRINTFORML 【性交願望　{CFLAG:性交願望} → 1】
+		CFLAG:性交願望 = 1
+	;それ以外は-10(ハート1段階)低下する
+	ELSE
+		PRINTFORML 【性交願望　{CFLAG:性交願望} → {CFLAG:性交願望-10}】
+		CFLAG:性交願望 -= 10
+	ENDIF
+	;妊娠願望
+	;10以下の場合は1に
+	IF CFLAG:妊娠願望 <= 10
+		PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → 1】
+		CFLAG:妊娠願望 = 1
+	;それ以外は-10(ハート1段階)低下する
+	ELSE
+		PRINTFORMW 【妊娠願望　{CFLAG:妊娠願望} → {CFLAG:妊娠願望-10}】
+		CFLAG:妊娠願望 -= 10
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、怒ラナイトイイノ…」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　戦闘能力を強化したい
+;ＲＰＧステータスの強化
+;８０％の確率で成功（＋１０～２０）、２０％の確率で失敗（－１０～０）
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_B1
+#DIM L_HP
+#DIM L_SP
+#DIM L_ATK
+#DIM L_DEF
+#DIM L_SPD
+#DIM L_HIT
+
+PRINTFORML ＡＩ博士の背後から延びるアームは奇妙な色の液体が入ったビーカーを取り出した。
+PRINTFORMW 「サアサア、コノ薬ヲ飲ムノ。怪シクナンテナイカラ安心シテ飲ムノ」
+PRINTFORMW …
+PRINTFORMW ……
+;成功
+IF RAND:100 >= 20
+	PRINTFORML %CALLNAME%の全身から力が湧いてくる…
+	PRINTFORML 「ドウヤラ成功シタミタイナノ」
+	PRINTFORML 
+	
+	L_HP    = (RAND:11)+10
+	L_SP    = (RAND:11)+10
+	L_ATK   = (RAND:11)+10
+	L_DEF   = (RAND:11)+10
+	L_SPD   = (RAND:11)+10
+	L_HIT   = (RAND:11)+10
+	
+	PRINTFORML HP　{CFLAG:住人_最大体力}　→　{CFLAG:住人_最大体力+L_HP}
+	PRINTFORML SP　{CFLAG:住人_最大気力}　→　{CFLAG:住人_最大気力+L_SP}
+	PRINTFORML ATK　{CFLAG:住人_ATK}　→　{CFLAG:住人_ATK+L_ATK}
+	PRINTFORML DEF　{CFLAG:住人_DEF}　→　{CFLAG:住人_DEF+L_DEF}
+	PRINTFORML SPD　{CFLAG:住人_SPD}　→　{CFLAG:住人_SPD+L_SPD}
+	PRINTFORML HIT　{CFLAG:住人_HIT}　→　{CFLAG:住人_HIT+L_HIT}
+	PRINTFORMW 
+	
+	CFLAG:住人_最大体力 += L_HP
+	CFLAG:住人_現在体力 += L_HP
+	CFLAG:住人_最大気力 += L_SP
+	CFLAG:住人_現在気力 += L_SP
+	CFLAG:住人_ATK      += L_ATK
+	CFLAG:住人_DEF      += L_DEF
+	CFLAG:住人_SPD      += L_SPD
+	CFLAG:住人_HIT      += L_HIT
+	
+	PRINTFORML 
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+;失敗
+ELSE
+	PRINTFORML %CALLNAME%の全身から力が抜けていく…
+	PRINTFORML 「……少シ調合ヲ間違ッチャッタミタイナノ」
+	PRINTFORML 
+	
+	L_HP    = (RAND:11)
+	L_SP    = (RAND:11)
+	L_ATK   = (RAND:11)
+	L_DEF   = (RAND:11)
+	L_SPD   = (RAND:11)
+	L_HIT   = (RAND:11)
+	
+	PRINTFORML HP　{CFLAG:住人_最大体力}　→　{CFLAG:住人_最大体力-L_HP}
+	PRINTFORML SP　{CFLAG:住人_最大気力}　→　{CFLAG:住人_最大気力-L_SP}
+	PRINTFORML ATK　{CFLAG:住人_ATK}　→　{CFLAG:住人_ATK-L_ATK}
+	PRINTFORML DEF　{CFLAG:住人_DEF}　→　{CFLAG:住人_DEF-L_DEF}
+	PRINTFORML SPD　{CFLAG:住人_SPD}　→　{CFLAG:住人_SPD-L_SPD}
+	PRINTFORML HIT　{CFLAG:住人_HIT}　→　{CFLAG:住人_HIT-L_HIT}
+	PRINTFORMW 
+	
+	CFLAG:住人_最大体力 -= L_HP
+	CFLAG:住人_現在体力 -= L_HP
+	CFLAG:住人_最大気力 -= L_SP
+	CFLAG:住人_現在気力 -= L_SP
+	CFLAG:住人_ATK      -= L_ATK
+	CFLAG:住人_DEF      -= L_DEF
+	CFLAG:住人_SPD      -= L_SPD
+	CFLAG:住人_HIT      -= L_HIT
+	
+	PRINTFORML 
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、怒ラナイトイイノ…」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　妊娠しやすくする
+;受精最大耐久値を下げる
+;１０％の確率で大成功（聖女の子宮を付与）、６０％の確率で成功、３０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_C1
+#DIM L_SIKU
+
+L_SIKU = RAND:100
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「動カナイデ、ジットシテテ下サイナノー」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+;大成功
+IF L_SIKU >= 90
+	PRINTFORML 「……チョットヤリスギチャッタノ、マア本人ガ望ンダコトダシイイカナノ」
+	PRINTFORML 
+	;聖女の子宮を所持している
+	IF TALENT:聖女の子宮
+		;受精最大耐久値が100以下の場合は1にする
+		IF CFLAG:受精最大耐久値 <= 100
+			PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　1
+			CFLAG:受精最大耐久値 = 1
+			CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+		;そうでない場合は-100する
+		ELSE
+			PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　{CFLAG:受精最大耐久値-100}
+			CFLAG:受精最大耐久値 -= 100
+			CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+		ENDIF
+		;母体レベルが80以下の場合は+5する
+		IF CFlag:母体レベル <= 80
+			PRINTFORML 母体レベル　{CFLAG:母体レベル}　→　{CFLAG:母体レベル+5}
+			CFlag:母体レベル += 5
+		ENDIF
+		;卵子レベルが80以下の場合は+5する
+		IF CFlag:卵子レベル <= 80
+			PRINTFORML 卵子レベル　{CFLAG:卵子レベル}　→　{CFLAG:卵子レベル+5}
+			CFlag:卵子レベル += 5
+		ENDIF
+		;聖女の子宮持ちはスカウト時に100になりますが念のため
+		CFLAG:受精確率 = 100
+	;聖女の子宮を所持していない
+	ELSE
+		;受精最大耐久値が100以下の場合は1にする
+		IF CFLAG:受精最大耐久値 <= 100
+			PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　1
+			CFLAG:受精最大耐久値 = 1
+			CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+		;そうでない場合は-100する
+		ELSE
+			PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　{CFLAG:受精最大耐久値-100}
+			CFLAG:受精最大耐久値 -= 100
+			CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+		ENDIF
+		;母体レベルが80以下の場合は+5する
+		IF CFlag:母体レベル <= 80
+			PRINTFORML 母体レベル　{CFLAG:母体レベル}　→　{CFLAG:母体レベル+5}
+			CFlag:母体レベル += 5
+		ENDIF
+		;卵子レベルが80以下の場合は+5する
+		IF CFlag:卵子レベル <= 80
+			PRINTFORML 卵子レベル　{CFLAG:卵子レベル}　→　{CFLAG:卵子レベル+5}
+			CFlag:卵子レベル += 5
+		ENDIF
+		;聖女の子宮を付与する
+		TALENT:聖女の子宮 = 1
+		CFLAG:受精確率 = 100
+	ENDIF
+	PRINTFORML 
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、喜ンデクレルトイイナナノ♪」
+;成功
+ELSEIF L_SIKU >= 30
+	PRINTFORML 「処置ハ成功シタノ、妊娠シ易クナッタナノ」
+	PRINTFORML 
+	;受精最大耐久値が50以下の場合は1にする
+	IF CFLAG:受精最大耐久値 <= 50
+		PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　1
+		CFLAG:受精最大耐久値 = 1
+		CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+	;そうでない場合は-50する
+	ELSE
+		PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　{CFLAG:受精最大耐久値-50}
+		CFLAG:受精最大耐久値 -= 50
+		CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+	ENDIF
+	;母体レベルが50以下の場合は+2する
+	IF CFlag:母体レベル <= 50
+		PRINTFORML 母体レベル　{CFLAG:母体レベル}　→　{CFLAG:母体レベル+2}
+		CFlag:母体レベル += 2
+	ENDIF
+	;卵子レベルが50以下の場合は+2する
+	IF CFlag:卵子レベル <= 50
+		PRINTFORML 卵子レベル　{CFLAG:卵子レベル}　→　{CFLAG:卵子レベル+2}
+		CFlag:卵子レベル += 2
+	ENDIF
+	;受精確率が70以下の場合は+10する
+	IF CFLAG:受精確率 <= 70
+		PRINTFORML 受精確率　{CFLAG:受精確率}　→　{CFLAG:受精確率+10}
+		CFLAG:受精確率 += 10
+	ENDIF
+	PRINTFORML 
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+;失敗
+ELSE
+	PRINTFORML 「……科学ノ進歩ニ犠牲ハツキモノナノー、妊娠シ難クナッチャッタケド頑張ッテナノ」
+	PRINTFORML 
+	;受精最大耐久値が1000以上の場合はそのまま
+	IF CFLAG:受精最大耐久値 >= 1000
+		;失敗すると受精最大耐久値が999に減らされてしまうため変動させない
+	;受精最大耐久値が950以上の場合は999にする
+	ELSEIF CFLAG:受精最大耐久値 >= 950
+		PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　999
+		CFLAG:受精最大耐久値 = 999
+		CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+	;そうでない場合は+50する
+	ELSE
+		PRINTFORML 受精最大耐久値　{CFLAG:受精最大耐久値}　→　{CFLAG:受精最大耐久値+50}
+		CFLAG:受精最大耐久値 += 50
+		CFLAG:受精現在耐久値 = CFLAG:受精最大耐久値
+	ENDIF
+	;聖女の子宮を持っていない場合
+	IF TALENT:聖女の子宮 == 0
+		;受精確率が30以上の場合は-5する
+		IF CFLAG:受精確率 >= 30
+			PRINTFORML 受精確率　{CFLAG:受精確率}　→　{CFLAG:受精確率-5}
+			CFLAG:受精確率 -= 5
+		ENDIF
+	ENDIF
+	PRINTFORML 
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、怒ラナイトイイノ…」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　Ｖ感度を上げる
+;Ｖ感度を上げる
+;７０％の確率で成功、３０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_D1
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「動カナイデ、ジットシテテ下サイナノー」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+IF RAND:100 >= 30
+	PRINTFORML 「マズマズノ結果ナノ」
+	;Ｖ鈍感の場合はＶ鈍感を削除
+	IF TALENT:Ｖ鈍感
+		PRINTFORML %CALLNAME%のＶ感度が普通になりました。
+		TALENT:Ｖ鈍感 = 0
+	;そうでない場合はＶ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＶ感度が敏感になりました。
+		TALENT:Ｖ敏感 = 1
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+ELSE
+	PRINTFORML 「ン！？　間違ッタノ…科学ノ進歩ニ犠牲ハツキモノナノー」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　Ａ感度を上げる
+;Ａ感度を上げる
+;７０％の確率で成功、３０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_D2
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「動カナイデ、ジットシテテ下サイナノー」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+IF RAND:100 >= 30
+	PRINTFORML 「マズマズノ結果ナノ」
+	;Ａ鈍感の場合はＡ鈍感を削除
+	IF TALENT:Ａ鈍感
+		PRINTFORML %CALLNAME%のＡ感度が普通になりました。
+		TALENT:Ａ鈍感 = 0
+	;そうでない場合はＡ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＡ感度が敏感になりました。
+		TALENT:Ａ敏感 = 1
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+ELSE
+	PRINTFORML 「ン！？　間違ッタノ…科学ノ進歩ニ犠牲ハツキモノナノー」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　Ｂ感度を上げる
+;Ｂ感度を上げる
+;７０％の確率で成功、３０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_D3
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「動カナイデ、ジットシテテ下サイナノー」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+IF RAND:100 >= 30
+	PRINTFORML 「マズマズノ結果ナノ」
+	;Ｂ鈍感の場合はＢ鈍感を削除
+	IF TALENT:Ｂ鈍感
+		PRINTFORML %CALLNAME%のＢ感度が普通になりました。
+		TALENT:Ｂ鈍感 = 0
+	;そうでない場合はＢ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＢ感度が敏感になりました。
+		TALENT:Ｂ敏感 = 1
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+ELSE
+	PRINTFORML 「ン！？　間違ッタノ…科学ノ進歩ニ犠牲ハツキモノナノー」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　Ｃ感度を上げる
+;Ｃ感度を上げる
+;７０％の確率で成功、３０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_D4
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「動カナイデ、ジットシテテ下サイナノー」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+IF RAND:100 >= 30
+	PRINTFORML 「マズマズノ結果ナノ」
+	;Ｃ鈍感の場合はＣ鈍感を削除
+	IF TALENT:Ｃ鈍感
+		PRINTFORML %CALLNAME%のＣ感度が普通になりました。
+		TALENT:Ｃ鈍感 = 0
+	;そうでない場合はＣ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＣ感度が敏感になりました。
+		TALENT:Ｃ敏感 = 1
+	ENDIF
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+ELSE
+	PRINTFORML 「ン！？　間違ッタノ…科学ノ進歩ニ犠牲ハツキモノナノー」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　感度をすべてよくする
+;感度をすべて上げる
+;４０％の確率で成功、６０％の確率で失敗
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_D5
+
+PRINTFORML ＡＩ博士の背後から延びるアームが%CALLNAME%を手術台に押さえつけた。
+PRINTFORMW 「難シイ手術ニナルノ、気ヲシッカリ強クモッテ欲シイノ」
+PRINTFORMW ブスッ、ギュイィィィィン、バリバリバリ…
+PRINTFORMW …
+PRINTFORMW ……
+;成功
+IF RAND:100 >= 60
+	PRINTFORML 「……ヤッパリ私ハ天才ナノ。自分ノ腕前ニ惚レ惚レシチャウノ」
+
+	;Ｖ鈍感の場合はＶ鈍感を削除
+	IF TALENT:Ｖ鈍感
+		PRINTFORML %CALLNAME%のＶ感度が普通になりました。
+		TALENT:Ｖ鈍感 = 0
+	;Ｖ敏感の場合は変化なし
+	ELSEIF TALENT:Ｖ敏感
+	;そうでない場合はＶ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＶ感度が敏感になりました。
+		TALENT:Ｖ敏感 = 1
+	ENDIF
+	;Ａ鈍感の場合はＡ鈍感を削除
+	IF TALENT:Ａ鈍感
+		PRINTFORML %CALLNAME%のＡ感度が普通になりました。
+		TALENT:Ａ鈍感 = 0
+	;Ａ敏感の場合は変化なし
+	ELSEIF TALENT:Ａ敏感
+	;そうでない場合はＡ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＡ感度が敏感になりました。
+		TALENT:Ａ敏感 = 1
+	ENDIF
+	;Ｂ鈍感の場合はＢ鈍感を削除
+	IF TALENT:Ｂ鈍感
+		PRINTFORML %CALLNAME%のＢ感度が普通になりました。
+		TALENT:Ｂ鈍感 = 0
+	;Ｂ敏感の場合は変化なし
+	ELSEIF TALENT:Ｂ敏感
+	;そうでない場合はＢ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＢ感度が敏感になりました。
+		TALENT:Ｂ敏感 = 1
+	ENDIF
+	;Ｃ鈍感の場合はＣ鈍感を削除
+	IF TALENT:Ｃ鈍感
+		PRINTFORML %CALLNAME%のＣ感度が普通になりました。
+		TALENT:Ｃ鈍感 = 0
+	;Ｃ敏感の場合は変化なし
+	ELSEIF TALENT:Ｃ敏感
+	;そうでない場合はＣ敏感を追加
+	ELSE
+		PRINTFORML %CALLNAME%のＣ感度が敏感になりました。
+		TALENT:Ｃ敏感 = 1
+	ENDIF
+	
+	PRINTFORML 「後ハ自宅ニ送リ届ケテット…シティママ、褒メテクレルトイイナナノ♪」
+ELSE
+	PRINTFORML 「ン！？　間違ッタノ…科学ノ進歩ニ犠牲ハツキモノナノー」
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　胸を大きくする
+;カップサイズを一段階上げて、バストサイズを+2～3cmします
+;カップサイズ　0:測定不能,1:AA,2:A,3:B,4:C,5:D,6:E,7:F,8:G,…,27:Z
+;体質素質が変化する基準
+;絶壁：測定不能,AA　貧乳：A,B　普乳：C,D　巨乳：E,F　爆乳：G,H～,Z
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_E1
+
+PRINTFORML ＡＩ博士は%CALLNAME%を全裸にすると手術台に横たわらせた。
+PRINTFORML 「成長促進剤ヲオ注射スルノ、急激ナ成長ノ影響デ胸ガ張ッタヨウニ感ジルケド気ニシナイデナノ」
+PRINTFORML 注射器を携えたアームの一本が赤色の液体を%CALLNAME%の胸に注入していく。
+PRINTFORML 毛細血管まで成長促進剤が行き渡ったのか、%CALLNAME%の胸にはくっきりと赤い血管が浮き出していた。
+PRINTFORMW なんだか胸全体が熱を持ち始めた気がする…
+
+CFLAG:バストサイズ += 2+(CFLAG:カップサイズ%2)
+CFLAG:カップサイズ += 1
+
+;絶壁を持つ住民のカップサイズがAまたはBになった場合、絶壁を消して貧乳にする
+IF TALENT:絶壁 && (CFLAG:カップサイズ == 2 || CFLAG:カップサイズ == 3)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は微かな膨らみを主張する程度には成長したようです…
+	PRINTFORMW 体質素質が変化しました　［絶壁］→［貧乳］
+	TALENT:絶壁 = 0
+	TALENT:貧乳 = 1
+;貧乳を持つ住民のカップサイズがCまたはDになった場合、貧乳を消す
+ELSEIF TALENT:貧乳 && (CFLAG:カップサイズ == 4 || CFLAG:カップサイズ == 5)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は女性特有の膨らみをしっかりと主張するようになりました…
+	PRINTFORMW 体質素質が変化しました　［貧乳］→［普乳］
+	TALENT:貧乳 = 0
+;住民のカップサイズがEまたはFになった場合、巨乳にする
+ELSEIF (CFLAG:カップサイズ == 6 || CFLAG:カップサイズ == 7)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は豊かな膨らみをいやらしく主張するほどの成長を遂げました…
+	PRINTFORMW 体質素質が変化しました　［普乳］→［巨乳］
+	TALENT:巨乳 = 1
+;巨乳を持つ住民のカップサイズがGまたはHになった場合、巨乳を消して爆乳にする
+ELSEIF TALENT:巨乳 && (CFLAG:カップサイズ == 8 || CFLAG:カップサイズ == 9)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は山のような膨らみで下品に主張するほどの成長を遂げました…
+	PRINTFORMW 体質素質が変化しました　［巨乳］→［爆乳］
+	TALENT:巨乳 = 0
+	TALENT:爆乳 = 1
+ENDIF
+
+
+;-------------------------------------------------
+;ＡＩ博士の改造イベント　胸を小さくする
+;カップサイズを一段階下げて、バストサイズを-2～3cmします
+;カップサイズ　0:測定不能,1:AA,2:A,3:B,4:C,5:D,6:E,7:F,8:G,…,27:Z
+;体質素質が変化する基準
+;絶壁：測定不能,AA　貧乳：A,B　普乳：C,D　巨乳：E,F　爆乳：G,H～,Z
+;-------------------------------------------------
+@TURN_EVENT_AIHKS_E2
+
+PRINTFORML ＡＩ博士は%CALLNAME%を全裸にすると手術台に横たわらせた。
+PRINTFORML 「成長後退剤ヲオ注射スルノ、胸ノ脂肪ニ加エテ皮膚モ減退スルカラ垂レル心配ハナイノ」
+PRINTFORML 注射器を携えたアームの一本が青色の液体を%CALLNAME%の胸に注入していく。
+PRINTFORML 毛細血管まで成長後退剤が行き渡ったのか、%CALLNAME%の胸にはくっきりと青い血管が浮き出していた。
+PRINTFORMW なんだか胸全体が熱を持ち始めた気がする…
+
+CFLAG:バストサイズ -= 2+(CFLAG:カップサイズ%2)
+CFLAG:カップサイズ -= 1
+
+;爆乳を持つ住民のカップサイズがFまたはEになった場合、爆乳を消して巨乳にする
+IF TALENT:爆乳 && (CFLAG:カップサイズ == 7 || CFLAG:カップサイズ == 6)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の下品な胸は慎みを思い出したのか、いやらしく主張する程度には小さくなったようです…
+	PRINTFORMW 体質素質が変化しました　［爆乳］→［巨乳］
+	TALENT:爆乳 = 0
+	TALENT:巨乳 = 1
+;巨乳を持つ住民のカップサイズがDまたはCになった場合、巨乳を消す
+ELSEIF TALENT:巨乳 && (CFLAG:カップサイズ == 5 || CFLAG:カップサイズ == 4)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は女性特有の膨らみをしっかりと主張する程度に小さくなったようです…
+	PRINTFORMW 体質素質が変化しました　［巨乳］→［普乳］
+	TALENT:巨乳 = 0
+;住民のカップサイズがBまたはAになった場合、貧乳にする
+ELSEIF (CFLAG:カップサイズ == 3 || CFLAG:カップサイズ == 2)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は慎ましく微かな膨らみを主張する程度に小さくなったようです…
+	PRINTFORMW 体質素質が変化しました　［普乳］→［貧乳］
+	TALENT:貧乳 = 1
+;貧乳を持つ住民のカップサイズがAAまたは測定不能になった場合、貧乳を消して絶壁にする
+ELSEIF TALENT:貧乳 && (CFLAG:カップサイズ == 1 || CFLAG:カップサイズ == 0)
+	PRINTFORML 
+	PRINTFORML %CALLNAME%の胸は膨らみなど存在しない断崖絶壁と化しました…
+	PRINTFORMW 体質素質が変化しました　［貧乳］→［絶壁］
+	TALENT:貧乳 = 0
+	TALENT:絶壁 = 1
+ENDIF
+
+
+
+
+

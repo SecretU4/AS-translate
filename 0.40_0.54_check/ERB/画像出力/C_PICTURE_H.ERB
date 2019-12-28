@@ -11,6 +11,7 @@
 #DIM C_suit
 #DIM C_hairC
 #DIM C_hair
+#DIM C_U_hair
 #DIM C_socks
 #DIM C_hat
 #DIM C_boots
@@ -18,6 +19,7 @@
 #DIM C_panties
 #DIM C_NINSIN
 #DIM C_in
+#DIM L_N
 #DIM H_TNS
 #DIMS LSTR
 #DIMS LSTR_0
@@ -38,6 +40,8 @@
 #DIMS LSTR_15
 #DIMS LSTR_16
 #DIMS LSTR_17
+#DIMS LSTR_N2
+#DIMS LSTR_UK
 
 L_I = ARG:0
 IF Talent:L_I:NPC != 0
@@ -52,6 +56,7 @@ C_bust = 0
 C_suit = 0
 C_hairC = 0
 C_hair = 0
+C_U_hair = 0
 C_socks = 0
 C_hat = 0
 C_boots = 0
@@ -95,6 +100,14 @@ ENDIF
 ;	ENDIF
 ;ENDIF
 
+IF Talent:L_I:妊娠 >= 6
+	L_N = (TALENT:L_I:妊娠/6)-1
+	SIF L_N >= 2
+		L_N = 2
+ELSE
+	L_N = 0
+ENDIF
+
 
 
 
@@ -118,6 +131,8 @@ C_suit = CFLAG:L_I:服装
 C_hairC = CFLAG:L_I:髪色
 ;髪型
 C_hair = CFLAG:L_I:髪型
+;後髪型
+C_U_hair = CFLAG:L_I:後髪型
 ;靴下
 C_socks = CFLAG:L_I:靴下
 ;靴
@@ -166,21 +181,30 @@ ELSE
 ENDIF
 ;胸
 	LSTR_5 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%bust_{C_body}_{C_bust}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
-;髪
+;妊娠
+IF  Talent:L_I:妊娠 >= 6
+	LSTR_N2 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%C_MB_{CFLAG:L_I:肌色}_{L_N}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ELSE
+	LSTR_N2 = <nonbutton pos='{P_S2}'><img src='C_no' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
+ENDIF
+
+;前髪
 	LSTR_11 = <nonbutton pos='{P_S2}'><img src='hair_{C_hairC}_{C_hair}' height = '850' width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
+;後髪
+	LSTR_UK = <nonbutton pos='{P_S2}'><img src='hair_U_{C_hairC}_{C_U_hair}' height = '850' width = '-465' ypos = '{P_S+L_Y2}'></nonbutton>
 ;種族特徴1
 	LSTR_12 = <nonbutton pos='{P_S2}'><img src='C_RACE_1_{CFLAG:L_I:住人_種族}_0_{CFLAG:L_I:住人_種族特徴1}' height = '850' width = '-465'  ypos = '{P_S+L_Y2}'></nonbutton>
 ;溢れ精液
 	LSTR_15 = <nonbutton pos='{P_S2}'><img src='H_A_S_0_{H_TNS}' height = '850' width = '-465'  ypos = '{P_S}'></nonbutton>
 
 ;淫紋
-IF CFLAG:L_I:淫紋 == 0 || CFLAG:L_I:淫紋 == -1
+IF CFLAG:L_I:淫紋 == 0 || CFLAG:L_I:淫紋 == -1 || Talent:L_I:妊娠 >= 6
 	LSTR_17 = <nonbutton pos='{P_S2}'><img src='C_no' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ELSE
 	LSTR_17 = <nonbutton pos='{P_S2}'><img src='%LSTR_16%in_{C_in}' height = '850' width = '-465' ypos = '{P_S}'></nonbutton>
 ENDIF
 
-LSTR = <nobr>%LSTR_0%%LSTR_1%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%LSTR_13%%LSTR_15%%LSTR_17%
+LSTR = <nobr>%LSTR_0%%LSTR_1%%LSTR_UK%%LSTR_2%%LSTR_3%%LSTR_4%%LSTR_5%%LSTR_N2%%LSTR_6%%LSTR_7%%LSTR_8%%LSTR_9%%LSTR_10%%LSTR_11%%LSTR_12%%LSTR_14%%LSTR_13%%LSTR_15%%LSTR_17%
 HTML_PRINT LSTR
 
 

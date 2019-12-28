@@ -8,12 +8,17 @@
 ;;   ARG:2   ダイスの修正値を表す整数
 ;; 戻値
 ;;   ダイスの文字列 (nDm+p)
+;;   すべての引数が0以下の時は空白文字列を返す
 ;;
 @INFO_STR_DICE(ARG:0,ARG:1,ARG:2)
 #FUNCTIONS
 #DIMS L_S
 
+IF ARG:0 <= 0 && ARG:1 <= 0 && ARG:2 <= 0
+	L_S '= " " * 8
+ELSE
 L_S = {ARG:0, 2 ,RIGHT}D{ARG:1, 2 ,RIGHT}+{ARG:2, 2 ,LEFT}
+ENDIF
 
 RETURNF L_S
 
@@ -184,6 +189,8 @@ CASE 11
 	L_S = 정령
 CASE 12
 	L_S = 흡혈귀
+CASE 13
+	L_S = ニア
 CASEELSE
 	L_S = {ARG}
 ENDSELECT
@@ -445,6 +452,97 @@ CASE 23
 	L_S = 귀 밑 머리
 CASE 24
 	L_S = 네츄럴 롱
+	CASE 25
+	L_S = エアインテーク
+CASE 26
+	L_S = おさげ
+CASE 27
+	L_S = スーパーロング
+CASE 28
+	L_S = スポーティヘア
+CASE 29
+	L_S = ひとつ結び
+CASEELSE
+	L_S = {ARG}
+ENDSELECT
+
+RETURNF L_S
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; 髪型の値に対応する文字列を返します。
+;;
+;; 引数
+;;   ARG     髪型の値を表す整数。
+;; 戻値
+;;   髪型の文字列。
+;;
+@INFO_STR_U_HAIR(ARG)
+#FUNCTIONS
+#DIMS L_S
+
+SELECTCASE ARG
+CASE  0
+	L_S = 짧은 머리(後ろ髪)
+CASE  1
+	L_S = 중간 머리(後ろ髪)
+CASE  2
+	L_S = 긴 머리(後ろ髪)
+CASE  3
+	L_S = 트윈 테일(後ろ髪)
+CASE  4
+	L_S = 포니 테일(後ろ髪)
+CASE  5
+	L_S = 웨이브 헤어(後ろ髪)
+CASE  6
+	L_S = 사이드 테일(後ろ髪)
+CASE  7
+	L_S = 언밸런스(後ろ髪)
+CASE  8
+	L_S = 内はね(後ろ髪)
+CASE  9
+	L_S = 外はね(後ろ髪)
+CASE 10
+	L_S = 세미 웨이브(後ろ髪)
+CASE 11
+	L_S = 롱 웨이브(後ろ髪)
+CASE 12
+	L_S = 한쪽 눈 가림(後ろ髪)
+CASE 13
+	L_S = 가린 눈(後ろ髪)
+CASE 14
+	L_S = 공주님 컷(後ろ髪)
+CASE 15
+	L_S = 롱 사이드 테일(後ろ髪)
+CASE 16
+	L_S = 투 사이드 업(後ろ髪)
+CASE 17
+	L_S = 3갈래 묶음(後ろ髪)
+CASE 18
+	L_S = 드릴 헤어(後ろ髪)
+CASE 19
+	L_S = 베리 숏 헤어(後ろ髪)
+CASE 20
+	L_S = 보브 헤어(後ろ髪)
+CASE 21
+	L_S = 하프 업(後ろ髪)
+CASE 22
+	L_S = 一本三つ編み(後ろ髪)
+CASE 23
+	L_S = 귀 밑 머리(後ろ髪)
+CASE 24
+	L_S = 네츄럴 롱(後ろ髪)
+	CASE 25
+	L_S = エアインテーク(後ろ髪)
+CASE 26
+	L_S = おさげ(後ろ髪)
+CASE 27
+	L_S = スーパーロング(後ろ髪)
+CASE 28
+	L_S = スポーティヘア(後ろ髪)
+CASE 29
+	L_S = ひとつ結び(後ろ髪)
 CASEELSE
 	L_S = {ARG}
 ENDSELECT
@@ -553,3 +651,4 @@ CASEELSE
 ENDSELECT
 
 RETURNF L_S
+

@@ -8,8 +8,8 @@
 CLEARLINE LINECOUNT
 SETCOLOR 250,0,0
 DRAWLINE
-PRINTFORML 要求された権限を確認、申請を受諾しました。
-PRINTFORML プログラムを起動します。
+PRINTFORML 요구된 권한을 확인、신청을 수락했습니다。
+PRINTFORML 프로그램을 기동합니다。
 DRAWLINE
 RESETCOLOR
 PRINTFORML 
@@ -26,27 +26,27 @@ SETCOLOR 0,0,0
 SETBGCOLOR 255,255,255
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML ようこそ
-PRINTFORML 閲覧したい項目を選択して下さい。
+PRINTFORML 환영합니다
+PRINTFORML 열람하고 싶은 내용을 선택해주세요。
 DRAWLINE
 PRINTFORML 
-PRINTFORM [0] 管理のススメ　　　
-PRINTFORM [10] 各ポイントについて　　　
-PRINTFORML [20] カルマ＆モラル　　
-PRINTFORM [1] 住民攻略　　　　　
-PRINTFORML [11] 序盤のお勧め攻略
-PRINTFORM [2] 陥落　　　　　　　
-PRINTFORML [12] 住人業務
-PRINTFORML [3] 戦闘関連
-PRINTFORM [4] 探索　　　　　　　
-PRINTFORML [14] 技能
-PRINTFORM [5] 妊娠条件　　　　　
-PRINTFORML [15] アーティファクト
-PRINTFORM [6] 種族　　　　　　　
-PRINTFORML [16] キャラリスト表示項目
-PRINTFORML [7] 決算
-PRINTFORML [17] アーカイブ
-PRINTFORML [8] 襲撃
+PRINTFORM [0] 관리의 진행　　　 
+PRINTFORM [10] 각 포인트에 대하여　　　
+PRINTFORML [20] 카르마＆모럴　　
+PRINTFORM [1] 주민 공략　　　　 
+PRINTFORML [11] 초반 진행 공략
+PRINTFORM [2] 함락　　　　　　　
+PRINTFORML [12] 주민 업무
+PRINTFORML [3] 전투 관련
+PRINTFORM [4] 탐색　　　　　　　
+PRINTFORML [14] 기능
+PRINTFORM [5] 임신 조건　　　　 
+PRINTFORML [15] 아티팩트
+PRINTFORM [6] 종족　　　　　　　
+PRINTFORML [16] 캐릭터 리스트 표시 항목
+PRINTFORM [7] 결산　　　　　　　
+PRINTFORML [17] 아카이브
+PRINTFORML [8] 습격
 PRINTFORML
 PRINTFORML [999] 그만둔다
 INPUT
@@ -55,93 +55,93 @@ CLEARLINE LINECOUNT
 
 SELECTCASE L_INPUT
 CASE 0
-PRINTFORML 前提として「外界調査」は後回しにし大まかに説明すると。
-PRINTFORML ・住人攻略編
-PRINTFORML 1 喫茶店で住人を探し登録し、一先ず会話しながら好感度を上げていく。
-PRINTFORML 2 ある程度会話を重ねていくと住民が抱えている悩みが開示される。
-PRINTFORML 3 悩みを解決して親密になる(小さな悩み→大きな悩みの順で解決、なお合意が得られればそれ以上悩みを解決する必要なし)
-PRINTFORML 4 口説いて合意を得る、その後好感度を上げつつ「傾向変更」で好きな傾向を選ぶ。
-PRINTFORML 5 傾向が進行したら「関係構築」で該当する√を選び陥落させていく(一段落の目安は陥落素質『心酔』『愛人』『情婦』何れかの取得)。
-PRINTFORML 6 陥落素質を取得できたらひとまず攻略完了、さらに育てるか新しい住人を探す。
+PRINTFORML 「외계조사」를 제외하여 대략적으로 설명하자면。
+PRINTFORML ・주민 공략편
+PRINTFORML 1 찻집에서 거주자를 찾아 등록하고、대화를 진행하며 호감도를 높여간다。
+PRINTFORML 2 어느 정도 대화를 진행하였다면 거주자들이 갖고 있는 고민거리가 공개된다。
+PRINTFORML 3 고민을 해결한다(작은 고민→큰 고민 순으로 해결、더욱이 합의가 이루어졌다면 그 이상 고민을 해결할 필요가 없다)
+PRINTFORML 4 설득하여 합의를 얻는다、그 후 호감도를 올려가며 「경향변경」으로 원하는 경향을 선택한다。
+PRINTFORML 5 경향이 진행된다면 「관계구축」에서 해당하는 √를 선택하여 함락시킨다(조건은『심취』『애인』『정부』이하의 소질중 하나를 습득)。
+PRINTFORML 6 함락 소질을 습득하는데 성공했다면 일단 공략 완료、더욱 더 육성하거나 새로운 거주자를 찾는다。
 PRINTFORML 
-PRINTFORML ・都市発展編
-	PRINTFORML 1 ターン経過で住民たちが都市を発展させる(合意を得ていると＋補正)。
-	PRINTFORML 2 ある程度貯めると施設が解放される。
-	PRINTFORML 3 効率を上げるために新たな住人を攻略したり、役職に就かせたりする。
-	PRINTFORML となります。
+PRINTFORML ・도시 발전편
+	PRINTFORML 1 턴 경과와 함께 거주자들이 도시를 발전시켜 간다(합의를 얻은 상태라면 ＋ 보정)。
+	PRINTFORML 2 어느 정도 발전이 진행되면 새로운 시설이 해금된다。
+	PRINTFORML 3 효율을 높이기 위하여 새로운 거주자를 공략하거나、직책을 위임하는 방법이 있다。
+	PRINTFORML 이상입니다。
 	PRINTFORMW 
-	PRINTFORML 外界調査は現在フレーバー要素が強いので、用事がなければ向かう必要はありません。
-	PRINTFORML ただし一部種族・素質は外界調査でのイベントでしか入手できないものがあるので注意してください。
+	PRINTFORML 외계조사는 현재 맛보기 요소가 강하므로、볼일이 없다면 진행할 필요는 없습니다。
+	PRINTFORML 다만 일부 종족・소질은 외계조사에서의 이벤트에서만 입수할 수 있는 것이 있으므로 주의하시기 바랍니다。
 	PRINTFORML 
 	PRINTFORMW 
 CASE 1
-	PRINTFORML 住民は『喫茶店』で出会うことで住民登録されます。
-	PRINTFORML 登録された住民と会話することで好感度と悩みの解析度を上げましょう。
+	PRINTFORML 거주자는 『찻집』에서 만나는 것으로 등록이 가능합니다。
+	PRINTFORML 등록된 거주민과 대화함으로써 호감도와 고민의 해석도를 높입시다。
 	PRINTFORMW 
-	PRINTFORML 解析が100％になると大まかな情報が開示されます、開示された情報をもとに適切な解決方法を選択しましょう。
-	PRINTFORML 結果が出るまで数日要します、解決度が100％になるまで試してみましょう。
-	PRINTFORML どのような傾向の悩みを抱えているかは日常生活の情報の際に匂わせる程度ではありますが出てくる場合があります。
+	PRINTFORML 해석이 100％에 달하면 대략적인 정보가 공개됩니다、공개된 정보를 참고하여 적절한 해결 방법을 선택합시다。
+	PRINTFORML 결과가 나올 때까지는 며칠의 시간을 필요로 합니다、해결도 100％가 될 때까지 반복합시다。
+	PRINTFORML 어떤 경향의 고민을 안고 있는지는 일상생활의 정보 사이에서 힌트가 나오거나 혹은 그냥 나오는 경우가 있습니다。
 	PRINTFORMW 
 CASE 2
-	PRINTFORML 悩みを幾つか解決するとを確かな信頼獲得し、そこから口説くことで『합의』を得ることが出来ます。
-	PRINTFORML ただし性行為をしても陥落を取得することは出来ません。
-	PRINTFORML 『喫茶店』での会話にて新たに『プライベートでのアクション』の項目が増えているので、好きな陥落√を選択しましょう。
+	PRINTFORML 몆 가지의 고민을 해결하여 확실한 신뢰를 획득하고、그 이후 설득함으로써 『합의』를 얻을 수 있습니다。
+	PRINTFORML 단、성행위를 해도 함락을 취득할 수는 없습니다。
+	PRINTFORML 『찻집』에서의 대화에서 새롭게 『사적인 행동』의 항목이 추가되므로 선호하는 함락을 선택합시다。
 	PRINTFORMW 
-	PRINTFORML ターン終了時に√に応じた함락도が上昇します、ある程度好感度と함락도が上がったら『関係構築』で陥落を取得しましょう。
-	PRINTFORML 最大まで貯めていると素質を獲得します、ただし獲得出来る素質は一つまでです。
-	PRINTFORML ・심취　従属√の素質
-	PRINTFORML ・애인　恋愛√の素質
-	PRINTFORML ・정부　淫乱√の素質
+	PRINTFORML 턴 종료시에 √에 따른 함락도가 상승합니다、어느 정도 호감도와 함락도가 올라가면 『관계 구축』으로 함락을 취득합시다。
+	PRINTFORML 최대까지 모은 상태였다면 소질을 취득합니다、다만 획득할 수 있는 함락 소질은 캐릭터당 하나 뿐입니다
+	PRINTFORML ・심취　종속√의 소질
+	PRINTFORML ・애인　연애√의 소질
+	PRINTFORML ・정부　음란√의 소질
 	PRINTFORMW 
 CASE 3
-	PRINTFORML 【ステータス】
-	PRINTFORML HP　　　체력　　0になると戦闘不能になる。
-	PRINTFORML SP　　　気力　　0になると行動不能、3割を切ると被ダメージ増加。
-	PRINTFORML GUTS　　根気　　行動に際する消費SPを抑える。
-	PRINTFORML BRAVE　 勇気　　高いと戦闘で有利な行動が出来る。
-	PRINTFORML SAN　　 正気度　恐怖系に対する耐性。
-	PRINTFORML ATK　　 攻撃力　ダメージにプラス補正が入る。
-	PRINTFORML DEF　　 防御力　被ダメージを軽減する。
-	PRINTFORML HIT　　 器用さ　命中に補正が入る、確率でダメージを緩和する。
-	PRINTFORML SPD　　 素早さ　回避に補正が入り高いほど先制をとれる、確率でFASTATACKが発動。
-	PRINTFORML LUK　　 幸運　　アイテム入手にプラス補正。アクシデントに全般的に対応。
-	PRINTFORML BRE　　 バリア　瘴気を無効化する障壁。
+	PRINTFORML 【스테이터스】
+	PRINTFORML HP　　　체력　　수치가 0이 되면 전투 불능이 된다。
+	PRINTFORML SP　　　기력　　수치가 0이 되면 행동 불능、3할 이하가 되면 받는 데미지가 증가한다。
+	PRINTFORML GUTS　　끈기　　행동의 소비 SP를 억제한다。
+	PRINTFORML BRAVE　 용기　　높으면 전투에서 유리한 액션을 취할 수 있다。
+	PRINTFORML SAN　　 정신도　공포계에 대한 내성이 생긴다。
+	PRINTFORML ATK　　 공격력　데미지에 플러스 보정이 적용된다。
+	PRINTFORML DEF　　 방어력　받는 데미지를 경감한다。
+	PRINTFORML HIT　　 재주　  명중률에 보정이 적용된다、일정한 확률로 데미지를 경감한다。
+	PRINTFORML SPD　　 민첩　  회피에 보정이 적용되고 선제를 취할 수 있게 된다、일정한 확률로 FASTATACK이 발동한다。
+	PRINTFORML LUK　　 행운　　아이템 입수에 플러스 보정。그 외 엑시던트에 전반적으로 대응한다。
+	PRINTFORML BRE　　 배리어　장기를 무효화하는 장벽이다。
 	PRINTFORMW
-	PRINTFORML 【武装】
-	PRINTFORML ダメージは武装の『攻撃回数』『最大ダメージ』『ダメージボーナス』で決まる。
-	PRINTFORML ・例　2D6+2
-	PRINTFORML 攻撃回数2回、一回の攻撃1～6のランダムダメージ、その合計に2のダメージボーナスを加算する。
+	PRINTFORML 【무장】
+	PRINTFORML 데미지는 무장의 『공격 횟수』『최대 데미지』『데미지 보너스』로 결정된다。
+	PRINTFORML ・예　2D6+2
+	PRINTFORML 공격 횟수 2회、한 번의 공격으로1～6의 랜덤 타격、그 합계에 2의 타격 보너스를 가산한다。
 	PRINTFORMW 
 CASE 4
-	PRINTFORML 【外界調査】
-	PRINTFORML 『調査区域』と『調査キャラ』を選択して外界を調査しましょう。
-	PRINTFORML 『調査区域』はレベルが高いほど危険です、最初は襲撃の無いレベル0で調査しましょう。
-	PRINTFORML 行動する度にSPを消費します、0になると調査できなくなります。
-	PRINTFORML 高レベルになると瘴気が湧きHPが減ります、バリア持ち出ないと攻略は難しいでしょう。
+	PRINTFORML 【외계 조사】
+	PRINTFORML 『조사 구역』과 『조사 캐릭터』를 선택하고 외계를 조사합니다。
+	PRINTFORML 『조사 구역』은 레벨이 높을수록 위험합니다、처음에는 습격이 없는 레벨 0부터 시작합시다。
+	PRINTFORML 행동할 때마다 SP를 소비합니다、수치가 0이 되면 조사를 진행할 수 없게 됩니다。
+	PRINTFORML 고레벨이 되면 장기가 생겨 HP가 감소합니다、베리어를 소지하지 않으면 공략은 어려울 것입니다。
 	PRINTFORMW 
-	PRINTFORML 【アイテム】
-	PRINTFORML 調査をするとアイテムを入手できることがあります。
-	PRINTFORML レベルと深度が高いほど高品質なものが手に入ります。
-	PRINTFORML これらの素材は『次世代改良』にて使用します。
+	PRINTFORML 【아이템】
+	PRINTFORML 조사를 하면 간혹 아이템을 얻을 때가 있습니다。
+	PRINTFORML 레벨과 심도가 높을수록 고품질의 아이템을 얻을 수 있습니다。
+	PRINTFORML 이들 소재는 『차세대 개량』에서 사용됩니다。
 	PRINTFORMW 
 CASE 5
-	PRINTFORML 妊娠の条件は以下の通りです。
-	PRINTFORML ・コンフィグの妊娠スイッチがON
-	PRINTFORML ・危険日である
-	PRINTFORML ・受精耐久値が0である(危険日に中出しすることで耐久値は減少する)
-	PRINTFORML 　減少値はあなたの男体レベル・精子レベルに応じる。
-	PRINTFORML ・受精耐久値が0のときに中出しされると受精確率で受精判定を行う
-	PRINTFORML 以上を満たすと住民は妊娠します。
-	PRINTFORMW 妊娠から出産まで約30日要します。
+	PRINTFORML 임신의 조건을 아래와 같습니다。
+	PRINTFORML ・CONFIG 임신 스위치가 ON
+	PRINTFORML ・위험일이다。
+	PRINTFORML ・수정 내구치가 0이다(위험일에 질내사정 함으로써 내구치는 감소한다)
+	PRINTFORML 　감소치는 당신의 남체 레벨・정자 레벨에 대응한다。
+	PRINTFORML ・수정 내구치가 0가 되었을 때 질내사정 당하면 대응되는 확률로 수정이 판정된다。
+	PRINTFORML 이상을 만족하면 거주자는 임신합니다。
+	PRINTFORMW 임신부터 출산까지는 약 30일이 소요됩니다。
 CASE 6
 	$INPUT_LOOP_SZ
 	CLEARLINE LINECOUNT
 	PRINTFORM [0] 인간　　　　　　　
 	PRINTFORML [11] 정령
-	PRINTFORML [1] 엘프
-	PRINTFORML [12] 吸血鬼
-	PRINTFORML [2] 야마
-	PRINTFORML [13] ニア
+	PRINTFORM [1] 엘프　　　　　　　
+	PRINTFORML [12] 흡혈귀
+	PRINTFORM [2] 야마　　　　　　　
+	PRINTFORML [13] 니어
 	PRINTFORML [3] 아인
 	PRINTFORML [4] 오토마타
 	PRINTFORML [5] 천사
@@ -157,183 +157,183 @@ CASE 6
 	CLEARLINE LINECOUNT
 	SELECTCASE L_INPUT
 	CASE 0
-		PRINTFORML 高度文明を築いた霊長の長(自称)、個々の力は大したことはないが技術進歩については他の追随を許さない。
-		PRINTFORML 現代社会も人間が仕切っており、総数も合わせてもっとも繁栄している種族。
-		PRINTFORML 科学の進歩により老化の克服はされている。
+		PRINTFORML 고도의 문명을 이룬 영장류의 대표(자칭)、개개의 힘은 대단한 것이 아니지만 기술력에 대해서 만큼은 타의 추종을 불허한다。
+		PRINTFORML 현대사회도 인간이 중심이 되어 지휘하고 있으며 총 개체수를 합쳐서 가장 번영한 종족。
+		PRINTFORML 과학의 진보로 노화는 이미 극복한 상태다。
 		PRINTFORML 【출현 조건】없음
 		PRINTFORML 【출현 장소】찻집에 출몰
 	CASE 1
-		PRINTFORML 不老長寿の種族、かつては自然と共に生きていたようだが文明成長と伴い、自然派も今や少数となっている。
-		PRINTFORML 男女ともにとても繁殖能力が弱く、純血同士の妊娠確率はかなり低い。
+		PRINTFORML 불로장수의 종족、과거에는 자연과 함깨 살아갔던 모양이지만、문명의 성장과 함깨 자연파는 소수가 되었다。
+		PRINTFORML 남녀 모두 번식능력이 매우 약하고、순혈끼리의 임신확률은 매우 낮다。
 		PRINTFORML 【출현 조건】『시설』희소종 보호 시설 ＆『시설』학원을 레벨 5 이상으로 올린다
 		PRINTFORML 【출현 장소】 조건을 만족하면 찻집에 출몰
 		PRINTFORML 
 	CASE 2
-		PRINTFORML 赤い刻印が特徴の種族、快楽主義かつ好奇心旺盛で人間が生み出す娯楽に興味津々、それ故か人間とは仲が良い。
-		PRINTFORML 古来より夜の眷属と言われるため、よく悪い種族と誤解されがち。
+		PRINTFORML 붉은색 각인이 특징적인 종족、기본적으로 쾌락주의이며 호기심이 많아 인간이 만들어내는 오락에 관심이 많기에、인간과는 사이가 좋은 모양이다。
+		PRINTFORML 예로부터 밤의 권속이라는 이명을 보유하고 있었기에、흔히 악한 종족으로 오해받고 있다。
 		PRINTFORML 【출현 조건】『시설』러브호텔 ＆『시설』고급 카지노 ＆『시설』게임 센터를 레벨 5 이상으로 올린다
 		PRINTFORML 【출현 장소】 조건을 만족하면 찻집에 출몰
 		PRINTFORML 
 	CASE 3
-		PRINTFORML 動物の耳と尻尾を持つ種族、性質は種類によって様々で強い者は凄まじい力を誇る。
-		PRINTFORML だが大多数は人間と変わらない性能。
+		PRINTFORML 동물의 귀와 꼬리를 가진 종족、성질은 종류에 따라 다양하고 강한 개체는 엄청난 힘을 자랑한다。
+		PRINTFORML 하지만 대다수는 인간과 그다지 다를 바 없는 신체 능력을 가지고 있다。
 		PRINTFORML 【출현 조건】『시설』품종 개량 시설 ＆『시설』지원 주택을 5 이상으로 올린다
 		PRINTFORML 【출현 장소】 조건을 만족하면 찻집에 출몰
 		PRINTFORML 
 	CASE 4
-		PRINTFORML 古代文明の遺産の一つ、ナノマシン・シリコン・古代部品で構成された기계人間、見た目は人間と殆ど大差ない。
-		PRINTFORML 今の文明レベルでも再現は不可能で、稼働前の個体が遺跡の奥に眠っていることがある。
-		PRINTFORML いかなる業か女性個体は、確率はかなり低いが妊娠が可能となっている。
+		PRINTFORML 고대 문명의 유산 중 하나다、나노머신・실리콘・고대부품으로 구성된 기계인간이며、외형은 인간와 크게 다를 바 없다。
+		PRINTFORML 지금의 문명 레벨로는 재현이 불가능하며、아직 가동되지 않은 몇 개체들이 유적 깊은 곳에 잠들어 있는 모양이다 。
+		PRINTFORML 무슨 이유에선지 여성 개체는 확률이 매우 낮기는 하지만、임신이 가능하다고 한다。
 		PRINTFORML 【출현 조건】『시설』연구 시설을 레벨 20 이상으로 올린다
 		PRINTFORML 【출현 장소】 조건을 만족하면 찻집에 출몰
 	CASE 5
-		PRINTFORML 過去に一度絶滅した種族、白ないし黒の翼と美しい容姿を持つと言われている。
-		PRINTFORML 現在は残された遺伝子を用いて再現したものがごく僅かではあるが存在している。
+		PRINTFORML 과거에 이미 한번 멸종된 종족、검은색 날개와 아름다운 외모를 가지고 있다고 알려져 있다。
+		PRINTFORML 현재는 남아 있는 유전자를 이용해 재현한 것만이 극소수 존재하고 있다.。
 		PRINTFORML 【출현 조건】『시설』병원을 레벨 20 이상으로 올린다
 		PRINTFORML 【출현 장소】 조건을 만족하면 찻집에 출몰
 		PRINTFORML 
 	CASE 6
-		PRINTFORML 絶滅危惧種、難のある性格を持つ者が多い、しかし総じて能力の高い種族。
-		PRINTFORML 生存圏が狭まった現在でも、自身が住みかとして認めなければ居つかない。
+		PRINTFORML 멸종위기종、어려운 성격을 가진 자가 많다、그러나 대체로 능력이 뛰어난 종족。
+		PRINTFORML 생존권이 좁아진 현재에도、자신의 거처로 인정한 장소에서만 거주한다고 한다。
 		PRINTFORML 【출현 조건】도시 레벨을 50 이상으로 올린다
 		PRINTFORML 【출현 장소】 조건을 만족하면 찻집에 출몰
 		PRINTFORML 
 	CASE 7
-		PRINTFORML 時間の秘密を解き明かした偉大なる種族、精神を交換することで実質不老の存在。その中でも人類派の派閥になった変わり者。
-		PRINTFORML 肉体疲労を気にせず書物ばかり見ていたためか近視になり、全員メガネを着用している。
-		PRINTFORML かなり極端な性能をしている、수반 부대라면 든든한 아군이 될 것이다。
+		PRINTFORML 시간의 비밀을 밝혀낸 위대한 종족、정신을 교환함으로써 실질적인 불로의 존재이다。그들 중에서도 인류파의 파벌이 된 괴짜。
+		PRINTFORML 육체피로를 신경쓰지 않고 오로지 책만 보고 있어서인지、근시가 되어 모두 안경을 착용하고 있다。
+		PRINTFORML 상당히 극단적인 성능을 가지고 있다、수반 부대라면 든든한 아군이 될 것이다。
 		PRINTFORML 【출현 조건】이스의 구제 의뢰를 클리어한다
 		PRINTFORML 
 	CASE 8
-		PRINTFORML 人間よりも遥か以前に種族として完成していた存在、しかし外敵の出現により海から追放された。
-		PRINTFORML とにかく妊娠しない体質な為、大昔から一部の人間たちと密かに交流していた。
-		PRINTFORML ステータスは용인ほどではないが、良好な水準をしている。
+		PRINTFORML 인간보다 훨씬 이전에 이미 종족으로서 완성되어 있던 존재、그러나 외적의 출현으로 바다에서 추방되었다。
+		PRINTFORML 어쨋든 임신하지 않는 체질이기 때문에、오래전부터 일부의 인간들과 은밀히 교류하고 있었다。
+		PRINTFORML 스테이터스는 용인 만큼은 아니지만 양호한 수준이다。
 		PRINTFORML 【출현 장소】 매우 드물게 찻집에 출몰
 		PRINTFORML 
 	CASE 9
-		PRINTFORML 背中から鳥の羽が生えた種族、基本は「外敵」があまり寄り付かない森の奥地に集団で住んでいる。
-		PRINTFORML 果物が大好物で繁殖力も人間よりも高いが、奔放な性格が多いためか長生きしないようだ。
-		PRINTFORML 素早い動きが可能で敵を翻弄する、反面耐久力が低い。
+		PRINTFORML 등에 새의 깃털이 돋아난 존재、기본적으로는 「외적」이 잘 다가가지 않는 숲의 오지에 무리를 지어 살아가고 있다。
+		PRINTFORML 과일을 매우 좋아하고 번식력도 사람보다 높지만、자유 분방한 성격이 많아서 그런지 오래 살지는 못하는 것 같다。
+		PRINTFORML 빠른 움직임으로 적을 농락하지만、내구력이 낮다。
 		PRINTFORML 【출현 조건】구역 Lv1 이상　&　심도 30 이상
 		PRINTFORML 【출현 장소】 조사 이벤트「상처입은 조인」에서 동료가 된다
 	CASE 10
-		PRINTFORML 二本の角が生えた褐色肌の種族(まれに違う者もいる)、種族総出で絶賛「外敵」と交戦中。
-		PRINTFORML 多くが変わった性格をしており、何より戦いを好む性格をしている。
-		PRINTFORML 火力・耐久力がずば抜けているが、大ざっぱな体質が災いしてか命中・回避がかなり低い。
-		PRINTFORML 運用する場合は命中を補強する必要あり、補強完了するまで随伴にも向いていない。
+		PRINTFORML 두 뿔이 난 갈색 피부의 종족(드물게 다른 자도 있음)、종족 총출동에서 활약하였으며 적극적으로 「외적」과 교전중。
+		PRINTFORML 많은 개체가 특이한 성격을 가지고 있으며、무엇보다 싸움을 좋아하는 호전적인 성격을 가지고 있다。
+		PRINTFORML 화력・내구력이 월등히 뛰어나지만、전투를 하면 홍분하는 체질이기에 명중・회피가 상당히 낮다。
+		PRINTFORML 운용할 경우에는 명중을 보강할 필요가 있기에、보강 완료 전까지는 전투 운용애 부적합하다。
 		PRINTFORML 【출현 조건】구역 Lv3 이상　&　심도 50 이상
 		PRINTFORML 【출현 장소】조사 이벤트「오니와의 만남」에서 이기면 동료가 된다
 	CASE 11
-		PRINTFORML 絶滅寸前とも言われている幻の種族、鮮やかな蝶の羽根を持つ。
-		PRINTFORML 엘프以上に自然と同化していた為、「外敵」の出現により生きる糧を失ってしまった。
-		PRINTFORML 今は都市にある植物を拠り所に、一部の個体が細々と生活している。
-		PRINTFORML 攻撃面は貧弱だが速度・命中・幸運がとても高い
+		PRINTFORML 멸종 직전이라 알려진 환상의 종족、선명한 나비의 날개를 가지고 있다。
+		PRINTFORML 엘프 이상으로 자연과 동화되어 있었기에、「외적」의 출현으로 삶의 양식을 대부분 잃고 말았다。
+		PRINTFORML 지금은 도시내에 있는 식물들을 근거지로 하여、일부 개체가 근근히 생존 중이다。
+		PRINTFORML 공격력은 빈약하지만 속도・명중・행운이 매우 높다。
 		PRINTFORML 【출현 장소】 초 낮은 확률로 찻집에 출몰
 	CASE 12
-		PRINTFORML 人間が死後に魔術で蘇り、その過程で変質・派生した種族。
-		PRINTFORML 竜人に匹敵しうる怪力を持つ反面、新陳代謝に他者の血を必要としている。
-		PRINTFORML また陽の光を嫌い、殆どの個体が夜での活動を好む。
-		PRINTFORML その生態から人の上に立つ管理職を担う者が多い。
-		PRINTFORML 【出現場所】 都市レベルを25以上、「夜の喫茶店」で低確率でに出没
+		PRINTFORML 인간이 사후에 마술로 살아나고、그 과정에서 변질・파생된 종족。
+		PRINTFORML 용인에 필적할 만한 괴력을 지닌 반면、신진대사에 다른 사람의 피를 필요로 한다。
+		PRINTFORML 또한 햇빛을 기피하며、대부분의 개체들이 야간 활동을 선호한다。
+		PRINTFORML 그 생태로 인해 사람 위에 서는 관리직을 담당하는 자가 많다。
+		PRINTFORML 【출현 장소】 도시 수준을 25이상、「밤의 찻집」에서 드물게 출몰
 	CASE 13
-		PRINTFORML 「外敵」解明の為に優秀な雌に「外敵」の遺伝子を混ぜた受精卵を着床させて産ませた人工種族。
-		PRINTFORML 一般には海人の亜種として知られており、実際に都市で活動させその生態を観察している。
-		PRINTFORML そしてある程度調べ終えた個体はひっそりと処分され、廃棄場には処分待ちの個体が眠っている。
-		PRINTFORML 戦闘面では平均上の性能に加え体力・気力が高く、特に瘴気への高い耐性が特徴。
-		PRINTFORML 元々自然界にいない種族の為、海人以上に妊娠しにくい。
-		PRINTFORML 【出現場所】 廃棄場&研究施設レベル150、確率で廃棄場で獲得。
+		PRINTFORML 「외적」해명을 위해 우수한 암컷에게「외적」의 유전자를 이식한 수정란을 착상시켜 낳게 한 인공 종족。
+		PRINTFORML 일반적으로는 해인의 아종으로 알려져 있으며、실제로 도시에서 활동시키며 그 생태를 관찰하고 있다。
+		PRINTFORML 그리고 어느 정도 조사를 마친 개체는 조용히 처분되며、폐기장에는 처분을 기다리는 개체가 잠들어 있다。
+		PRINTFORML 전투면에서는 평균적인 성능에 더하여 체력・기력이 높고、특히 장기에 대하여 높은 내성을 가지고 있는 것이 특징이다。
+		PRINTFORML 원래는 자연계에 존재하지 않는 종족이라、해인 이상으로 임신하기 어렵다。
+		PRINTFORML 【출현 장소】 폐기장&연구 시설 수준150、일정한 확률로 폐기장에서 획득。
 	CASE 999
 		GOTO INPUT_LOOP
 	ENDSELECT
 	PRINTFORMW
 	GOTO INPUT_LOOP_SZ
 CASE 7
-	PRINTFORML 90日経過すると、その期間に住人が貢献したポイントを発表します。
-	PRINTFORML 量に応じてボーナスを受け取ることが出来ます。
-	PRINTFORML 使わず今期のポイントを次に持ち越すことも可能、ただし一度使うと全てリセットされます。
+	PRINTFORML 90일 경과하면、그 기간동안 주민이 기여한 포인트를 발표하겠습니다。
+	PRINTFORML 그 양에 따라 보너스를 받을 수 있습니다。
+	PRINTFORML 이번 분기의 포인트를 다음으로 미루는 것도 가능、단 한번 사용하면 모두 리셋됩니다。
 	PRINTFORMW 
 CASE 8
-	PRINTFORML 襲撃当日になると大型の外敵が都市に襲撃してきます。
-	PRINTFORML 一定ターンまで指定された累計ダメージを与えると撃退に成功します。
-	PRINTFORML 失敗した場合は都市にダメージを受け、都市Lvなどが低下します。
+	PRINTFORML 습격 당일이 되면 대형 외적이 도시를 습격해 옵니다。
+	PRINTFORML 일정 턴까지 지정된 누계 데미지를 부여하면 격퇴에 성공합니다。
+	PRINTFORML 실패할 경우에는 도시에 데미지가 부여되고、도시 Lv등이 저하됩니다。
 	PRINTFORMW 
 CASE 10
-	PRINTFORML 【TP】주민과 대화하는 등등에 사용되는 포인트
-	PRINTFORML 【AP】주민의 고민 해결에 사용하는 포인트、고민을 해결하면 최대 값이 늘어난다
+	PRINTFORML 【TP】주민과 대화하는 등의 액션에 사용되는 포인트
+	PRINTFORML 【AP】주민의 고민 해결에 사용되는 포인트、고민을 해결하면 최대 값이 늘어난다
 	PRINTFORML 【SP】서포트를 사용할 때 필요한 포인트
-	PRINTFORML 【LP】人工遺物生成・アーティファクトの強化に使うポイント、遺物研究で増やせる。
+	PRINTFORML 【LP】인공유물 생성・아티팩트 강화에 사용하는 포인트、유물 연구로 늘릴 수 있다。
 	PRINTFORML 【BP】TP를 회복할 수 있는 포인트、주민이 임신하면 증가
 	PRINTFORMW 
 CASE 11
-	PRINTFORML 序盤はどうしても住民攻略に時間がかかりがちです、
-	PRINTFORML 早く攻略したい場合は「쉽게반함」または「즉각타락」持ちの住民を攻略しましょう。
-	PRINTFORML 通常の住民と比較して、「쉽게반함」が2倍、「즉각타락」が5倍のスピードで攻略できます。
-	PRINTFORML 支援指示と併用すればかなり時間短縮できるでしょう。
+	PRINTFORML 초반에는 아무래도 주민 공략에 시간이 많이 걸리기 마련입니다、
+	PRINTFORML 빠른 공략을 원한다면 「쉽게반함」또는 「즉각타락」을 가진 주민을 공략합니다。
+	PRINTFORML 통상 주민과 비교하여、「쉽게반함」이 2배、「즉각타락」은 5배의 속도로 공략이 가능합니다。
+	PRINTFORML 지원 지시와 병행하면 상당한 시간을 단축하는 것이 가능합니다。
 	PRINTFORML 
 	PRINTFORMW 
 CASE 12
-	PRINTFORML 業務をしている住人に干渉しより効率的に働いてもらいます。
+	PRINTFORML 업무를 하는 거주자에게 간섭하여 보다 효율적으로 일하도록 유도합시다。
 	PRINTFORML 【-!-】표시가 있을 「시티」에 평가를 받으면서、공적 포인트를 대량으로 얻을 수 있습니다。
 	PRINTFORML 
-	PRINTFORML 一定以上業務をすると、貢献値が上昇します。貢献値が高いほど必要な業務量が高くなります。
+	PRINTFORML 일정 이상의 업무를 행하면、공헌치가 상승합니다。공헌치가 높을수록 필요한 업무량이 높아집니다。
 	PRINTFORML 
 	PRINTFORMW
-	PRINTFORML 以下役職ごとの性質。
+	PRINTFORML 이하 직책 별 성질。
 	PRINTFORML 
 	PRINTFORML 【사회인】			공헌도 상승에 필요한 업무 포인트를 넉넉하게 입수한다。
 	PRINTFORML 【아이돌】			팬의 숫자에 따라 모든 주민의 공헌에 플러스 보정。받는 쪽은 직위에 따라서 보정 정도가 다르다。
-	PRINTFORML 【학생】			턴 종료시 확률적으로 업무 포인트가 오른다。【아이돌】【창녀】와 같이 있는 경우도 있다。
+	PRINTFORML 【학생】			턴 종료시 일정한 확률로 업무 포인트가 오른다。【아이돌】【창녀】와 같이 있는 경우도 있다。
 	PRINTFORML 【창녀】			매춘 경험에 따라 공헌도에 최종 플러스 보정。올리긴 쉽지만 상한이 있다。
 	PRINTFORML 【치안유지국직원】		전투 경험치가 들어온다、턴 종료시에도 소량의 전투 경험치가 들어오기도 한다。
-	PRINTFORML 【메이드】　	　　턴 종료시、업무 경험에 따라서 AP를 소량 회복한다。
-	PRINTFORML 【성직자】　	　　턴 종료시 확률적으로 카르마가 감소한다。
-	PRINTFORML 【직위 없음】		아이돌의 팬 보정을 많이 받는다。
+	PRINTFORML 【메이드】			턴 종료시、업무 경험에 따라서 AP를 소량 회복한다。
+	PRINTFORML 【성직자】			턴 종료시 일정한 확률로 카르마가 감소한다。
+	PRINTFORML 【직위 없음】		        아이돌의 팬 보정을 많이 받는다。
 	PRINTFORMW 
 CASE 14
-	PRINTFORML 以下実装され効果のある技能
-	PRINTFORML 【目星】	1층의 탐색 회수에 ＋보정　　　　　
-	PRINTFORML 【엿듣기】	次の戦闘発生確率を視覚できる　　　　　　【의료】전투 종료시 체력을 회복
-	PRINTFORML 【자물쇠】	一部イベント発生確率に必要
-	PRINTFORML 【은신】	エンカウントした時に戦闘を回避できる　　【해체】戦闘勝利時アイテム獲得
+	PRINTFORML 이하 구현된 기능
+	PRINTFORML 【표적】	1층의 탐색 회수에 ＋보정　　　　　
+	PRINTFORML 【엿듣기】	다음 전투 발생 확률을 시각화 할 수 있다　　　　　　【의료】전투 종료시 체력을 회복
+	PRINTFORML 【자물쇠】	일부 이벤트 발생 확률에 필요
+	PRINTFORML 【은신】	인카운트시 전투를 회피할 수 있다　　               【해체】전투 승리시 아이템 획득
 	PRINTFORML 【해독】	일부 이벤트 발생 확률에 필요
 	PRINTFORMW 
 CASE 15
-	PRINTFORML ・基本性能
-	PRINTFORML 전투에 승리하면 드물게 입수할 수 있는 무기。(深度が高いほど入手しやすい)
-	PRINTFORML 5개까지 장비할 수 있으며、종합 수치의 일부를 부대 스테이터스에 반영할 수 있다。
-	PRINTFORML 探索キャラには各ステータスに「アーティファクト各合計÷10」が加算。
-	PRINTFORML 部隊には部隊各総合値に「部隊各合計値×アーティファクト各合計値％」が加算される。
+	PRINTFORML ・기본 성능
+	PRINTFORML 전투에서 승리하여 드물게 입수할 수 있는 무기。(심도가 높을수록 입수하기 쉽다)
+	PRINTFORML 최대 5개까지 장비할 수 있으며、종합 수치의 일부를 부대 스테이터스에 반영할 수 있다。
+	PRINTFORML 탐색 캐릭터에는 각 스테이터스에「아티팩트 각 합계÷10」이 가산。
+	PRINTFORML 부대에는 부대 각 종합치에「부대 각 합계치×아티팩트 각 합계치％」가 가산된다。
 	PRINTFORML 
-	PRINTFORML ・異能
-	PRINTFORML アーティファクトに持つ異能によって戦闘中に様々な恩恵が得られる。
-	PRINTFORML 同じ異能がある場合、発生率又は効果が上昇する。
+	PRINTFORML ・이능
+	PRINTFORML 아티팩트가 가진 이능에 의해 전투 중、다양한 혜택을 얻을 수 있다。
+	PRINTFORML 이능이 중복된 경우、발생률 또는 효과가 상승한다。
 	PRINTFORML 
-	PRINTFORML 【無能】効果なし
-	PRINTFORML 【吸血】確定発動、与えたダメージの一部を吸収し体力を回復させる。
-	PRINTFORML 【核熱】確定発動、与ダメージに応じた防御無視の追加攻撃。
-	PRINTFORML 【侵食】確定発動、敵の現在体力に応じた毒ダメージ、防衛時には無効化される。
-	PRINTFORML 【時間】確率発動、再行動。
-	PRINTFORML 【空間】確率発動、相手からのダメージを10分の1にする。
+	PRINTFORML 【무능】효과가 없다
+	PRINTFORML 【흡혈】확정 발동、입힌 데미지의 일부를 흡수하여 체력을 회복시킨다。
+	PRINTFORML 【핵열】확정 발동、부여 데미지에 따른 방어 무시 추가 공격。
+	PRINTFORML 【침식】확정 발동、적의 현재 체력에 따른 독 데미지、방위시에는 무효화된다。
+	PRINTFORML 【시간】확률 발동、재행동。
+	PRINTFORML 【공간】확률 발동、상대의 타격을 10분의 1로 한다。
 	PRINTFORML 
-	PRINTFORML ようは高い数値を装備するほど強くなる。
-	PRINTFORMW 異能は一色にするか確定発動を並べるかでよい。
+	PRINTFORML 요지는 높은 수치를 장비할수록 강해진다는 것이다。
+	PRINTFORMW 이능은 증복으로 맞추거나 확정 발동을 나열하는 것이 좋다。
 CASE 16
-	PRINTFORML 独自に実装したものを中心に説明します。
-	PRINTFORML 【ID】각 주민의 고유 번호。　　　【기밀】각 주민의 기밀 개체 레벨。
-	PRINTFORML 【부대】소속 부대를 나타낸다。　　　【시설】배속된 시설을 나타낸다。
-	PRINTFORML 【관리】住人が「플레이어」にどれだけ管理されているか、레귤러指定や특별보호などで上昇する。
-	PRINTFORML 【친교】10の位が陥落素質の種類、1の位が取得済みの刻印の合計を表す（반발각인은 포함되지 않는다）。
-	PRINTFORML 【공략】관계 구축이 가능한 상태인 것을 나타낸다。下1桁は関係の方向性、桁数が取得可能な刻印レベルを表し、4桁なら陥落が可能。
-	PRINTFORML 【출신】100の位が「구세대인간」などの来歴を、下2桁が種族を示す。
-	PRINTFORML 【난이도】この数値が大きいと、悩みの解決の難易度が上がる。
-	PRINTFORML 【지위】数値が大きいほど身分が高い、2で上流階級、3で貴族。
-	PRINTFORML 【직업】100の位が職業の種類、10の位は娼婦としての活動の有無、1の位が年齢層を示す。101なら職業が設定されていない。
+	PRINTFORML 독자적으로 실장한 것 위주로 설명하겠습니다。
+	PRINTFORML 【ID】    각 주민의 고유 번호。　　　 【기밀】각 주민의 기밀 개체 레벨。
+	PRINTFORML 【부대】  소속 부대를 나타낸다。　　　【시설】배속된 시설을 나타낸다。
+	PRINTFORML 【관리】  거주자가「플레이어」에게 얼마나 관리되고 있는지、레귤러의 지정이나 특별보호 등으로 상승한다。
+	PRINTFORML 【친교】  10단위가 함락 소질의 종류、1의 자리가 취득된 각인의 합계를 나타낸다（반발각인은 포함되지 않는다）。
+	PRINTFORML 【공략】  관계 구축이 가능한 상태인 것을 나타낸다。아래 1자릿수는 관계의 방향、자릿수가 취득 가능한 개인의 수준을 나타내며 、4자릿수면 함락이 가능。
+	PRINTFORML 【출신】  100의 단위가「구세대인간」등의 내력을、아래 2자릿수가 종족을 나타낸다。
+	PRINTFORML 【난이도】이 수치가 크면、고민 해결의 난이도가 상승한다。
+	PRINTFORML 【지위】  수치가 큰 만큼 신분이 높고、2에서 상류 계급、3으로 귀족이 된다。
+	PRINTFORML 【직업】  100단위가 직업의 종류、10단위는 창녀로서의 활동 유무、1의 자리는 연령층을 나타낸다。101이라면 직업이 설정되지 않는다。
 	WAIT
 CASE 17
-	PRINTFORML 外界調査中、特定の条件でアーカイブを入手できます。
-	PRINTFORML 入手したアーカイブはメインメニューの「アーカイブ」で閲覧できます。
+	PRINTFORML 외계조사 중、특정 조건으로 아카이브를 입수할 수 있습니다。
+	PRINTFORML 입수한 아카이브는 메인 메뉴의 「아카이브」에서 열람할 수 있습니다。
 	PRINTFORML 
-	PRINTFORML 【入手条件】区域Lv3以上かつ深度50以上で戦闘に勝利した際、低確率で入手
+	PRINTFORML 【입수 조건】구역 Lv3이상、심도 50이상에서 전투에 승리했을 때、낮은 확률로 입수
 	PRINTFORML 
 	WAIT
 CASE 20
