@@ -103,9 +103,11 @@ CASE "EXTRA"
 		ENDIF
 		RETURNF TEMP_INT * 100 + CFLAG:C_ID:住人_種族
 	CASE EXTRA_職業
-		IF TALENT:C_ID:치안유지국직원 == 1
+		IF TALENT:C_ID:メイド == 1
+			TEMP_INT = 7
+		ELSEIF TALENT:C_ID:성직자 == 1
 			TEMP_INT = 6
-		ELSEIF TALENT:C_ID:창녀 == 1
+		ELSEIF TALENT:C_ID:치안유지국직원 == 1
 			TEMP_INT = 5
 		ELSEIF TALENT:C_ID:사회인 == 1
 			TEMP_INT = 4
@@ -116,7 +118,8 @@ CASE "EXTRA"
 		ELSE
 			TEMP_INT = 1
 		ENDIF
-		RETURNF TEMP_INT * 10 + (TALENT:C_ID:학생 + 1)
+		
+		RETURNF TEMP_INT * 100 + TALENT:C_ID:학생 * 10 + (TALENT:C_ID:학생 + 1)
 	CASE EXTRA_管理指数
 		TEMP_INT = CFLAG:C_ID:関係段階 + CFLAG:C_ID:레귤러 * 3 + CFLAG:C_ID:특별보호 * 2
 		SIF CFLAG:C_ID:マンションID

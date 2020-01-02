@@ -553,7 +553,6 @@ LABEL_SIZE = VARSIZE(TEMP_LIST)
 #DIMS SCENE
 #DIMS REF LIST_PACK ;戻り値用、リスト配列
 #DIM  REF PACK_SIZE ;
-#DIMS     TEMP_PACK ;LISTNAMEの一次取得用
 {
 #DIMS CONST C_PACK_ALL = "基礎情報", 
 	"교류 ST", 
@@ -575,86 +574,24 @@ LABEL_SIZE = VARSIZE(TEMP_LIST)
 	"탐색 ABL", 
 	"무장", 
 }
-{
-#DIMS CONST C_PACK_DEFAULT = "基礎情報", 
-	"관리 정보", 
-	"사회 정보", 
-	"신체 ST", 
-	"페로몬 ST", 
-	"성감각 ST", 
-	"성기능 ST", 
-	"성벽 ABL", 
-	"성행동 경험", 
-	"성교 경험", 
-	"조교 경험", 
-	"특수 쾌락 경험", 
-	"일상 경험", 
-	"전투 BASE", 
-	"전투 ST", 
-	"탐색 ABL", 
-	"무장", 
-}
-
-{
-#DIMS CONST C_PACK_RPG = "基礎情報", 
-	"관리 정보", 
-	"신체 ST", 
-	"탐색 ABL", 
-	"무장", 
-	"전투 BASE", 
-	"전투 ST"
-}
-
-{
-#DIMS CONST C_PACK_MNG = "基礎情報", 
-	"관리 정보", 
-	"사회 정보", 
-	"신체 ST", 
-	"페로몬 ST", 
-	"탐색 ABL", 
-	"전투 ST", 
-	"무장"
-}
-
-
-VARSET TEMP_PACK
 VARSET LIST_PACK
 SELECTCASE SCENE
 CASE "ALL"
-	TEMP_PACK '= "C_PACK_ALL"
-CASE "CAFE", "DEFAULT"
-	TEMP_PACK '= "C_PACK_DEFAULT"
-{
-CASE "EXPLORER", "RPG", 
-	"RPG_武器強化", 
-	"RPG_技能成長", 
-	"RPG_強化剤投与", 
-	"RPG_超人薬投与", 
-	"RPG_随伴配置", 
-	"RPG_後方配置", 
-	"RPG_回収配置", 
-	"RPG_探索配置"
-}
-	TEMP_PACK '= "C_PACK_RPG"
-{
-CASE 
-	"MNG_登録_登録抹消", 
-	"MNG_입주_一号室", "MNG_입주_二号室", "MNG_입주_三号室", "MNG_입주_四号室", "MNG_입주_五号室", 
-	"MNG_입주_六号室", "MNG_입주_七号室", "MNG_입주_八号室", "MNG_입주_九号室", "MNG_입주_十号室", 
-	
-	"MNG_登録_레귤러", "MNG_登録_특별보호", "MNG_登録_名前変更", 
-	"MNG_転職_성직자", "MNG_転職_메이드", "MNG_転職_아이돌", "MNG_転職_사회인", "MNG_転職_局員", "MNG_転職_창녀", 
-	"MNG_配属_学園生徒", "MNG_配属_支援ボラ", "MNG_配属_ラブホ店員", "MNG_配属_カジノ店員", 
-	"MNG_特殊_外見変更", "MNG_特殊_治療設備", "MNG_特殊_품종개량", "MNG_特殊_신체강화", "MNG_特殊_차세대창조", 
-	"MNG_登録_교우제어", "MNG_登録_衣装変更"
-}
-	TEMP_PACK '= "C_PACK_MNG"
-
+	ARRAYCOPY "C_PACK_ALL", "LIST_PACK"
+	PACK_SIZE = VARSIZE("C_PACK_ALL")
+	RETURNF
 CASEELSE
-	TEMP_PACK '= "C_PACK_DEFAULT"
+	SELECTCASE SCENE_TYPE(SCENE)
+	CASE "RPG"
+		CALLF RPG_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+	CASE "MNG"
+		CALLF MNG_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+	CASE "AL"
+		CALLF AL_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+	CASEELSE
+		CALLF DEFAULT_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+	ENDSELECT
 ENDSELECT
-ARRAYCOPY TEMP_PACK, "LIST_PACK"
-PACK_SIZE = VARSIZE(TEMP_PACK)
 
 
 
