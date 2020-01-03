@@ -10,6 +10,7 @@
 #DIM L_DG2
 #DIM L_G
 #DIM I_G
+#DIM CONST SKILL_LABEL_SPAN = 8
 
 L_G = RAND:20
 L_DG1 = RAND:6
@@ -33,23 +34,59 @@ ENDIF
 
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORML 【―――――――――발견!!―――――――――】
+CALL PRINT_LABEL("―――――――――발견!!―――――――――")
+PRINTL
 DRAWLINE
 IF FLAG:フロア_特殊調査 == 3
 	PRINTFORML 뭔가 신경 쓰이는 곳을 찾아 조사하다 보니、고풍스럽고 견고한 자물쇠가 채워진 상자를 발견했다。
 	PRINTFORML 간단한 구조지만、역으로 열쇠를 쓰는 것 외엔 온전히 열 방법이 없어보인다。
-	PRINTFORML 【자물쇠】기능이 있다면 열 수 있을지도 모른다。
+		SETCOLOR 0xFFA500
+		PRINTFORM 【자물쇠】
+		RESETCOLOR
+	PRINTFORML 기능이 있다면 열 수 있을지도 모른다。
 	PRINTFORML 없으면 열쇠를 파괴할 수도 있지만、내용물에 피해가 갈지도 모른다…
+	PRINTL 
+	PRINTFORML ◇探索者： %CALLNAME:L_I%
+	PRINTFORML 
+	PRINTFORM 　　技能：
+	CALL PRINT_STATUS(L_I, "鍵開け", SKILL_LABEL_SPAN, 3)
+	PRINTL 
+	PRINTL 
+	
 ELSEIF FLAG:フロア_特殊調査 == 2
 	PRINTFORML 어떤 시설에 침입하여 방을 조사하던 도중에 기계락이 걸린 문을 발견했다。
-	PRINTFORML 아직 기능하고 있지만 열기 위해선【컴퓨터】기능이 뛰어나지 않은 이상은 어려울 것이다。
+	PRINTFORM 아직 기능하고 있지만 열기 위해선
+		SETCOLOR 0xFFA500
+		PRINTFORM【컴퓨터】
+		RESETCOLOR
+	PRINTFORML 기능이 뛰어나지 않은 이상은 어려울 것이다。
 	PRINTFORML 성가시면 힘으로 열어버릴 수도 있지만、그 반동으로 안쪽이 엉망진창이 될 가능성이 있다…
 	PRINTFORML 
+	PRINTL 
+	PRINTFORML ◇探索者： %CALLNAME:L_I%
+	PRINTFORML 
+	PRINTFORM 　　技能：
+	CALL PRINT_STATUS(L_I, "コンピュータ", SKILL_LABEL_SPAN, 3)
+	PRINTL 
+	PRINTL 
+	
 ELSEIF FLAG:フロア_特殊調査 == 1
 	PRINTFORML 구획을 조사하던 도중에 망가진 대형 수송기를 발견했다、언뜻 봐도 파손된지 얼마 안된 것 같다。
 	PRINTFORML 그러나 안쪽을 조사하려고 했지만 파괴에 의해 긴급 잠금이 걸렸는지、쉽게 열리지 않았다。
-	PRINTFORML 이것을 조사하려면【기계수리】의 기능이 필요할 것이다、특기 분야라면 우선하고 싶은 선택이다。
+	PRINTFORM 이것을 조사하려면
+		SETCOLOR 0xFFA500
+		PRINTFORM【기계수리】
+		RESETCOLOR
+	PRINTFORML 의 기능이 필요할 것이다、특기 분야라면 우선하고 싶은 선택이다。
 	PRINTFORML 혹은 억지로 열어볼 수도 있다、하지만 그 경우엔 확률적으로 건질 물건이 줄어들지도 모른다…
+	PRINTL 
+	PRINTFORML ◇探索者： %CALLNAME:L_I%
+	PRINTFORML 
+	PRINTFORM 　　技能：
+	CALL PRINT_STATUS(L_I, "機械修理", SKILL_LABEL_SPAN, 3)
+	PRINTL 
+	PRINTL 
+	
 ENDIF
 DRAWLINE
 
@@ -74,33 +111,36 @@ CASE 0
 			L_S = 1
 	ENDIF
 	IF L_S == 1
-		SETCOLOR 50,250,250
-		PRINTFORML 【―――――――――성공―――――――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("―――――――――성공―――――――――",,COLOR("RPG_MESSAGE_SUCCESS"))
+		PRINTL
 		PRINTFORML %CALLNAME:L_I%의 능숙한 기능에 의해、문제를 해결할 수 있었다。
 		PRINTFORML 계속해서 조사한 결과、사용할 수 있는 것을 몇개쯤 발견했다。
 		PRINTFORML 싱글벙글 그것들을 회수하고、회수부대에게 이송을 부탁했다…
 		PRINTFORML
 		L_AG = RAND:4
 		IF L_AG == 3
-			PRINTFORML 【아이템 입수】%FlagNAME:(2100+I_G)%을 3개 입수했다
+			CALL PRINT_LABEL("아이템 입수")
+			PRINTFORML %FlagNAME:(2100+I_G)%을 3개 입수했다
 			FLAG:(2100+I_G) += 3
 		ELSEIF L_AG == 2
-			PRINTFORML 【게놈 입수】%FlagNAME:(2500+L_G)%을 3개 입수했다
+			CALL PRINT_LABEL("게놈 입수")
+			PRINTFORML %FlagNAME:(2500+L_G)%을 3개 입수했다
 			Flag:(2500+L_G) += 2
 		ELSEIF L_AG == 1
-			PRINTFORML 【강화제 입수】%FlagNAME:(2800+L_DG1)%을 1개 입수했다
-			PRINTFORML 【강화제 입수】%FlagNAME:(2800+L_DG2)%을 1개 입수했다
+			CALL PRINT_LABEL("강화제 입수")
+			PRINTFORML %FlagNAME:(2800+L_DG1)%을 1개 입수했다
+			CALL PRINT_LABEL("강화제 입수")
+			PRINTFORML %FlagNAME:(2800+L_DG2)%을 1개 입수했다
 			Flag:(2800+L_DG1) += 1
 			Flag:(2800+L_DG2) += 1
 		ELSE
-			PRINTFORML 【초인약 입수】%FlagNAME:(2800+L_DG1)%을 1개 입수했다
+			CALL PRINT_LABEL("초인약 입수")
+			PRINTFORML %FlagNAME:(2800+L_DG1)%을 1개 입수했다
 			Flag:(2810+L_DG1) += 1
 		ENDIF
 	ELSE
-		SETCOLOR 250,50,50
-		PRINTFORML 【―――――――――실패―――――――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("―――――――――실패―――――――――")
+		PRINTL
 		PRINTFORML 여러가지 시행착오를 거친 결과 실패한 것 같다…
 		PRINTFORML 이제 이것을 해결할 순 없을 것이다。
 		PRINTFORML 조금 낙담하면서 %CALLNAME:L_I%는 구획 조사를 재개했다…
@@ -109,28 +149,29 @@ CASE 1
 	SIF 30 >=  RAND:100
 			L_S = 1
 	IF L_S == 1
-		SETCOLOR 50,250,250
-		PRINTFORML 【―――――――――성공―――――――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("―――――――――성공―――――――――")
+		PRINTL
 		PRINTFORML 어떻게든 대상에 충격이 전해지지 않도록 공격한 결과、운 좋게 성공한 것 같다。
 		PRINTFORML 다만 자재에 충격이 전해진 덕분에 몇개는 못쓰게 된 것 같다。
 		PRINTFORML 어쩔 수 없지 라고 타협하면서 그것들을 회수하고、회수부대에게 이송을 부탁했다…
 		PRINTFORML
 		L_AG = RAND:3
 		IF L_AG == 2
-			PRINTFORML 【아이템 입수】%FlagNAME:(2100+I_G)%을 1개 입수했다
+			CALL PRINT_LABEL("아이템 입수")
+			PRINTFORML %FlagNAME:(2100+I_G)%을 1개 입수했다
 			FLAG:(2100+I_G) += 1
 		ELSEIF L_AG == 1
-			PRINTFORML 【게놈 입수】%FlagNAME:(2500+L_G)%을 1개 입수했다
+			CALL PRINT_LABEL("게놈 입수")
+			PRINTFORML %FlagNAME:(2500+L_G)%을 1개 입수했다
 			Flag:(2500+L_G) += 1
 		ELSE
-			PRINTFORML 【강화제 입수】%FlagNAME:(2800+L_DG2)%을 1개 입수했다
+			CALL PRINT_LABEL("강화제 입수")
+			PRINTFORML %FlagNAME:(2800+L_DG2)%을 1개 입수했다
 			Flag:(2800+L_DG2) += 1
 		ENDIF
 	ELSE
-		SETCOLOR 250,50,50
-		PRINTFORML 【―――――――――실패―――――――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("―――――――――실패―――――――――")
+		PRINTL
 		PRINTFORML 힘조절을 잘못하여 화려하게 박살내고 말았다…。
 		PRINTFORML 이걸로는 조사도 뭣도 안되겠지。
 		PRINTFORML 살짝 낙담하면서 %CALLNAME:L_I%는 구획 조사를 재개했다…

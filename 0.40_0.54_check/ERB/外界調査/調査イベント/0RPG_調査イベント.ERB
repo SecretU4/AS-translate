@@ -13,6 +13,9 @@ L_I = ARG
 
 IF RAND:100 > 97
 	IF !RAND:5 && Flag:調査イベント発生中 == 0 && Flag:調査区域 >= 1 && Flag:調査深度 >= 30 
+		;性奴隷救出
+		CALL RPG_EVENT_401
+	ELSEIF !RAND:5 && Flag:調査イベント発生中 == 0 && Flag:調査区域 >= 1 && Flag:調査深度 >= 30 
 		;傷ついた조인
 		CALL RPG_EVENT_500
 	ELSEIF !RAND:4 && Flag:調査イベント発生中 == 0 && Flag:調査区域 >= 3 && Flag:調査深度 >= 50 
@@ -22,8 +25,13 @@ IF RAND:100 > 97
 		;冷凍カプセル
 		CALL RPG_EVENT_400
 	ELSEIF !RAND:2 && Flag:調査イベント発生中 == 0 && CFLAG:L_I:특별보호 == 0 && Flag:イベント誘拐中 == 0 && CFlag:L_I:住人_カルマ >= 40 
+		IF !RAND:2
 		;拉致
 		CALL RPG_EVENT_800
+	ELSE
+			;交配実験
+			CALL RPG_EVENT_801
+		ENDIF
 	ELSE
 	ENDIF
 ENDIF

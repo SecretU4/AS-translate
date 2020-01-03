@@ -12,17 +12,20 @@ CLEARLINE LINECOUNT
 DRAWLINE
 REPEAT 900
 	IF L_LOOP == 0
-		PRINTFORML 【――――――――――――――――――소　재――――――――――――――――――】
+		CALL PRINT_LABEL("――――――――――――――――――소　재――――――――――――――――――")
+		PRINTL 
 		L_LOOP2  = 0
 	ENDIF
 	IF L_LOOP == 400
 		PRINTFORML
-		PRINTFORML 【――――――――――――――――――유전자――――――――――――――――――】
+		CALL PRINT_LABEL("――――――――――――――――――유전자――――――――――――――――――")
+		PRINTL
 		L_LOOP2  = 0
 	ENDIF
 	IF L_LOOP == 700
 		PRINTFORML
-		PRINTFORML 【――――――――――――――――――강화제――――――――――――――――――】
+		CALL PRINT_LABEL("――――――――――――――――――강화제――――――――――――――――――")
+		PRINTL 
 		L_LOOP2  = 0
 	ENDIF
 	IF FlagNAME:(2100+L_LOOP) != ""
@@ -30,9 +33,10 @@ REPEAT 900
 			PRINTFORML
 			L_LOOP2  =0
 		ENDIF
-		PRINTFORM 【%FlagNAME:(2100+L_LOOP), 8 ,LEFT%:{Flag:(2100+L_LOOP), 3 ,RIGHT}】
+		CALL PRINT_LABEL(FlagNAME:(2100+L_LOOP), -12 , (!Flag:(2100+L_LOOP) ? COLOR("伏字") # COLOR("ITEM_EXIST")),TOSTR(Flag:(2100+L_LOOP)), 3)
+		PRINTFORM %" "*MAX(0, 21-RESULT)%
+		L_LOOP2 += 1
 	ENDIF
-	L_LOOP2 += 1
 	L_LOOP += 1
 REND
 PRINTFORML

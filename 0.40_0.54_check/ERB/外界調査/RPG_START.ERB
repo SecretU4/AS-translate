@@ -133,15 +133,18 @@ IF Flag:フロア_探索回数 <= 0 ||  Flag:フロア_種類 == 90	; 回数0で
 	PRINTPLAIN [0]  - 조사 불가　　
 	RESETCOLOR
 ELSE
-	PRINTFORM [0]  - 조사(SP 소비)
+	PRINTBUTTON @"[0]  - 조사(SP 소비)", 0
 ENDIF
-PRINTFORM 　　[1]  - 휴식(SP 소비)
+PRINT
+PRINTBUTTON @"[1]  - 휴식(SP 소비)", 1
 IF  Flag:フロア_種類 == 90	; 回数0では選択できないように
 	SETCOLOR 60,60,60
 	PRINTPLAIN 　　[2]  - 전투 불가
 	RESETCOLOR
 ELSE
-	PRINTFORML 　　[2]  - 전투
+	PRINT 　　
+	PRINTBUTTON @"[2]  - 전투", 2
+	PRINTL 
 ENDIF
 IF Flag:フロア_特殊調査 > 0 && Flag:フロア_種類 != 90
 	SETCOLOR 50,250,250
@@ -152,9 +155,8 @@ ELSE
 ENDIF
 PRINTFORML [3]  - 다음으로(SP 소비)
 IF CFlag:L_I:住人_現在気力 <= CFlag:L_I:住人_最大気力-((CFlag:L_I:住人_最大気力*7)/10)
-	SETCOLOR 220,220,0
-	PRINTFORML 【주의　피로한 상태입니다！】
-	RESETCOLOR
+	CALL PRINT_LABEL("주의　피로한 상태입니다！",,COLOR("RPG_MESSAGE_WARNING"))
+	PRINTFORML 
 ELSE 
 	PRINTFORML 
 ENDIF
@@ -165,6 +167,10 @@ SETCOLOR 0,0,0
 TINPUT 400, 100, 2
 RESETCOLOR
 L_INPUT = RESULT
+
+
+
+
 SELECTCASE L_INPUT
 CASE 0
 	IF Flag:フロア_探索回数 <= 0
@@ -203,7 +209,9 @@ CASE 3
 		PRINTFORMW %CALLNAME:L_I%의 ＳＰ가 부족합니다。
 	ENDIF
 CASE 10
-	IF CFlag:L_I:住人_現在気力 >= Flag:フロア_消耗
+	IF Flag:フロア_特殊調査 <= 0
+
+	ELSEIF CFlag:L_I:住人_現在気力 >= Flag:フロア_消耗
 		CALL RPG_DISCOVERY(ARG)
 	ELSE 
 		PRINTFORMW %CALLNAME:L_I%의 ＳＰ가 부족합니다。

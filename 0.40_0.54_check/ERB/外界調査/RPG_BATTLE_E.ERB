@@ -88,7 +88,7 @@ ELSEIF Flag:調査区域 == 90 && (Flag:調査深度 >= Flag:日替わり区画�
 		E_T = 1+Flag:日替わり区画難易度
 		E_W = 1
 		E_W2 = 1
-		Flag:敵_弱点 = 3
+		Flag:敵_弱点 = 4
 		Flag:敵_耐性 = 1
 		Flag:敵_レア = 1
 	ELSE
@@ -98,7 +98,7 @@ ELSEIF Flag:調査区域 == 90 && (Flag:調査深度 >= Flag:日替わり区画�
 		E_T = 1+Flag:日替わり区画難易度
 		E_W = 2
 		E_W2 = 2
-		Flag:敵_弱点 = 0
+		Flag:敵_弱点 = 1
 		Flag:敵_耐性 = 4
 		Flag:敵_レア = 1
 	ENDIF
@@ -285,7 +285,7 @@ ELSEIF  Flag:調査深度 > 15
 		E_T = 2
 		E_W = 0
 		E_W2 = 1
-		Flag:敵_弱点 = 2
+		Flag:敵_弱点 = 4
 		Flag:敵_耐性 = 0
 	ELSEIF !RAND:2
 		SAVESTR:敵_名前 = 미＝고
@@ -293,7 +293,7 @@ ELSEIF  Flag:調査深度 > 15
 		E_T = 2
 		E_W = 3
 		E_W2 = 0
-		Flag:敵_弱点 = 3
+		Flag:敵_弱点 = 2
 		Flag:敵_耐性 = 4
 	ELSE
 		SAVESTR:敵_名前 = 인스머스

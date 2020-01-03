@@ -31,24 +31,12 @@ CASE 0
 	PRINTFORML 생성할 강화제를 선택하세요。
 	DRAWLINE
 	;5個 10個 全素材投入の選択肢を追加
-	PRINTFORM [0] 강화제(HP) (소지 수:{Flag:(2800) , 3 , RIGHT})　(영목×5 소비)(소지 수:{Flag:(2100) , 3 , RIGHT}) 
-	PRINTFORM [10] x5 
-	PRINTFORML [20] x10
-	PRINTFORM [1] 강화제(SP) (소지 수:{Flag:(2801) , 3 , RIGHT})　(영석×5 소비)(소지 수:{Flag:(2101) , 3 , RIGHT}) 
-	PRINTFORM [11] x5 
-	PRINTFORML [21] x10
-	PRINTFORM [2] 강화제(ATK)(소지 수:{Flag:(2802) , 3 , RIGHT})　(영수×5 소비)(소지 수:{Flag:(2102) , 3 , RIGHT}) 
-	PRINTFORM [12] x5 
-	PRINTFORML [22] x10
-	PRINTFORM [3] 강화제(DEF)(소지 수:{Flag:(2803) , 3 , RIGHT})　(기계×5 소비)(소지 수:{Flag:(2103) , 3 , RIGHT}) 
-	PRINTFORM [13] x5 
-	PRINTFORML [23] x10
-	PRINTFORM [4] 강화제(HIT)(소지 수:{Flag:(2804) , 3 , RIGHT})　(혈액×5 소비)(소지 수:{Flag:(2104) , 3 , RIGHT}) 
-	PRINTFORM [14] x5 
-	PRINTFORML [24] x10
-	PRINTFORM [5] 강화제(SPD)(소지 수:{Flag:(2805) , 3 , RIGHT})　(심장×5 소비)(소지 수:{Flag:(2105) , 3 , RIGHT}) 
-	PRINTFORM [15] x5 
-	PRINTFORML [25] x10
+	CALL RPG_CRAFT_PRINTITEM(0, "강화제", "HP", 2800, "영목", 2100)
+	CALL RPG_CRAFT_PRINTITEM(1, "강화제", "SP", 2801, "영석", 2101)
+	CALL RPG_CRAFT_PRINTITEM(2, "강화제", "ATK", 2802, "영수", 2102)
+	CALL RPG_CRAFT_PRINTITEM(3, "강화제", "DEF", 2803, "기계", 2103)
+	CALL RPG_CRAFT_PRINTITEM(4, "강화제", "HIT", 2804, "혈액", 2104)
+	CALL RPG_CRAFT_PRINTITEM(5, "강화제", "SPD", 2805, "심장", 2105)
 	PRINTFORML [100] 모든 소재 사용
 	PRINTFORML 
 	PRINTFORML [999] 그만둔다
@@ -73,7 +61,10 @@ CASE 0
 					L_CV = Flag:(2100+L_CL) / 5
 					Flag:(2800+L_CL) += L_CV
 					Flag:(2100+L_CL) -= 5 * L_CV
+					SIF !L_CV && FLAG:STATUS伏字モード
+						SETCOLOR COLOR("伏字")
 					PRINTFORML %FLAGNAME:(2100+L_CL)%을 {5 * L_CV , 3 , RIGHT}개 소비하여 %FLAGNAME:(2800+L_CL)%을 {L_CV , 3 , RIGHT}개 만들었습니다。
+					RESETCOLOR
 					L_CL += 1
 				REND
 				PRINTW
@@ -126,24 +117,12 @@ CASE 1
 	PRINTFORML 생성할 초인약을 선택하세요。
 	DRAWLINE
 	;5個 10個 全素材投入の選択肢を追加
-	PRINTFORM [0] 초인약(HP) (소지 수:{Flag:(2810) , 3 , RIGHT})　(신목×5 소비)(소지 수:{Flag:(2110) , 3 , RIGHT}) 
-	PRINTFORM [10] x5 
-	PRINTFORML [20] x10
-	PRINTFORM [1] 초인약(SP) (소지 수:{Flag:(2811) , 3 , RIGHT})　(마석×5 소비)(소지 수:{Flag:(2111) , 3 , RIGHT}) 
-	PRINTFORM [11] x5 
-	PRINTFORML [21] x10
-	PRINTFORM [2] 초인약(ATK)(소지 수:{Flag:(2812) , 3 , RIGHT})　(성수×5 소비)(소지 수:{Flag:(2112) , 3 , RIGHT}) 
-	PRINTFORM [12] x5 
-	PRINTFORML [22] x10
-	PRINTFORM [3] 초인약(DEF)(소지 수:{Flag:(2813) , 3 , RIGHT})　(보구×5 소비)(소지 수:{Flag:(2113) , 3 , RIGHT}) 
-	PRINTFORM [13] x5 
-	PRINTFORML [23] x10
-	PRINTFORM [4] 초인약(HIT)(소지 수:{Flag:(2814) , 3 , RIGHT})　(공물×5 소비)(소지 수:{Flag:(2114) , 3 , RIGHT}) 
-	PRINTFORM [14] x5 
-	PRINTFORML [24] x10
-	PRINTFORM [5] 초인약(SPD)(소지 수:{Flag:(2815) , 3 , RIGHT})　(혼백×5 소비)(소지 수:{Flag:(2115) , 3 , RIGHT}) 
-	PRINTFORM [15] x5 
-	PRINTFORML [25] x10
+	CALL RPG_CRAFT_PRINTITEM(0, "초인약", "HP", 2810, "신목", 2110)
+	CALL RPG_CRAFT_PRINTITEM(1, "초인약", "SP", 2811, "마석", 2111)
+	CALL RPG_CRAFT_PRINTITEM(2, "초인약", "ATK", 2812, "성수", 2112)
+	CALL RPG_CRAFT_PRINTITEM(3, "초인약", "DEF", 2813, "보구", 2113)
+	CALL RPG_CRAFT_PRINTITEM(4, "초인약", "HIT", 2814, "공물", 2114)
+	CALL RPG_CRAFT_PRINTITEM(5, "초인약", "SPD", 2815, "혼백", 2115)
 	PRINTFORML [100] 모든 소재 사용
 	PRINTFORML 
 	PRINTFORML [999] 그만둔다
@@ -168,7 +147,10 @@ CASE 1
 					L_CV = Flag:(2110+L_CL) / 5
 					Flag:(2810+L_CL) += L_CV
 					Flag:(2110+L_CL) -= 5 * L_CV
+					SIF !L_CV && FLAG:STATUS伏字モード
+						SETCOLOR COLOR("伏字")
 					PRINTFORML %FLAGNAME:(2110+L_CL)%을 {5 * L_CV , 3 , RIGHT}개 소비하여 %FLAGNAME:(2810+L_CL)%을 {L_CV , 3 , RIGHT}개 만들었습니다。
+					RESETCOLOR
 					L_CL += 1
 				REND
 				PRINTW
@@ -221,7 +203,35 @@ ENDSELECT
 
 GOTO INPUT_LOOP
 
+@RPG_CRAFT_PRINTITEM(MENU_NUM, TYPE, SUBTYPE, CRAFT_FLAG_NUM, SRC_ITEM_NAME, SRC_FLAG_NUM)
+#DIM MENU_NUM
+#DIMS TYPE
+#DIMS SUBTYPE
+#DIM CRAFT_FLAG_NUM
+#DIMS SRC_ITEM_NAME
+#DIM SRC_FLAG_NUM
 
+SIF Flag:SRC_FLAG_NUM < 5 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{MENU_NUM}] %TYPE, 6 ,LEFT%(%SUBTYPE, 3 ,LEFT%) 
+RESETCOLOR
+SIF !Flag:CRAFT_FLAG_NUM && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM (소지 수:{Flag:CRAFT_FLAG_NUM , 3 , RIGHT})
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 5 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM 　(%SRC_ITEM_NAME%×5 소비)(소지 수:{Flag:SRC_FLAG_NUM , 3 , RIGHT}) 
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 25 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{10+MENU_NUM}] x5 
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 50 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{20+MENU_NUM}] x10
+RESETCOLOR
+PRINTL
 
 
 

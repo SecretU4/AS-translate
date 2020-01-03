@@ -7,7 +7,8 @@ Flag:探索中 = 0
 CLEARLINE LINECOUNT
 DRAWLINE
 DRAWLINE
-PRINTFORML 【공략 부대의 철수 준비를 확인、각 부대에 연락합니다】
+CALL PRINT_LABEL("공략 부대의 철수 준비를 확인、각 부대에 연락합니다")
+PRINTFORML 
 DRAWLINE
 DRAWLINE
 
@@ -17,7 +18,8 @@ CALL RPG_END_TALK_MAIN
 CALL RPG_END_ITEM
 DRAWLINE
 DRAWLINE
-PRINTFORML 【모든 부대 철수 완료、도시로 귀환합니다】
+CALL PRINT_LABEL("모든 부대 철수 완료、도시로 귀환합니다")
+PRINTFORML 
 DRAWLINE
 DRAWLINE
 PRINTFORMW
@@ -33,7 +35,8 @@ PRINTFORMW
 ARG:0 = 6800
 ARG:1 = 1
 CALL MEMBER_EXP(ARG:0,ARG:1)
-PRINTFORML 【수반 부대:이번 탐색으로、수반 부대도 경험을 쌓은 것 같다…(경험치 {FLAG:ターン経験値}取得)】
+CALL PRINT_LABEL("수반 부대",,,@"이번 탐색으로、수반 부대도 경험을 쌓은 것 같다…(경험치 {FLAG:ターン経験値}取得)")
+PRINTL
 DRAWLINE
 
 

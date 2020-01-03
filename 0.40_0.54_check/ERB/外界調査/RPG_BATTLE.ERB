@@ -55,9 +55,8 @@ PRINTFORML
 PRINTFORMW
 IF CFlag:L_I:住人_SPD >= RAND:100
 ;ファーストアタック
-	SETCOLOR 0,240,240
-	PRINTFORML 【――――FASTATACK!!――――】
-	RESETCOLOR
+	CALL PRINT_LABEL("――――FASTATACK!!――――",,COLOR("RPG_MESSAGE_GOOD"))
+	PRINTL
 	PRINTFORML %CALLNAME:L_I%는 적이 움직이기 전에 공격했다！
 	CALL RPG_BATTLE_ATTACK_P(ARG)
 ENDIF
@@ -70,35 +69,43 @@ SIF Flag:都市_防衛 != 0
 	FLAG:都市_防衛ターン -= 1
 CLEARLINE LINECOUNT
 DRAWLINE
-PRINTFORM 【%CALLNAME:L_I%】
+CALL PRINT_LABEL(CALLNAME:L_I)
 IF CFlag:L_I:住人_現在気力 <= CFlag:L_I:住人_最大気力-((CFlag:L_I:住人_最大気力*7)/10)
-	SETCOLOR 220,220,0
-	PRINTFORML 【피로】
-	RESETCOLOR
+	CALL PRINT_LABEL("피로",,COLOR("RPG_MESSAGE_WARNING"))
+	PRINTL
 ELSE 
 	PRINTFORML 
 ENDIF
-PRINTFORML 【HP:{CFlag:L_I:住人_현재체력}/{CFlag:L_I:住人_최대체력}】【SP:{CFlag:L_I:住人_現在気力}/{CFlag:L_I:住人_最大気力}】
-PRINTFORML 【GUTS:{CFlag:L_I:住人_GUTS}】【BRAVE:{CFlag:L_I:住人_BRAVE}】
-PRINTFORML 【SAN:{CFlag:L_I:住人_SAN}】
-PRINTFORML 【BRE:{CFlag:L_I:住人_現在BRE}/{CFlag:L_I:住人_最大BRE}】
-SIF Flag:戦闘_攻勢 > 0
-	PRINTFORML 【공세(앞으로 {Flag:戦闘_攻勢}턴)】
-DRAWLINE
-PRINTFORML 【%SAVESTR:敵_名前%】
-PRINTFORM 【상태:
-IF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*9)/10)
-	PRINTFORM 빈사
-ELSEIF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*6)/10)
-	PRINTFORM 위중
-ELSEIF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*4)/10)
-	PRINTFORM 중상
-ELSEIF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*2)/10)
-	PRINTFORM 경상
-ELSE 
-	PRINTFORM 무상
+CALL PRINT_RANGE_STATUS(L_I, "HP", "体力", , , , "％")
+CALL PRINT_RANGE_STATUS(L_I, "SP", "気力", , , , "％")
+PRINTL
+CALL PRINT_STATUS(L_I, "GUTS" )
+CALL PRINT_STATUS(L_I, "BRAVE")
+PRINTL
+CALL PRINT_STATUS(L_I, "SAN")
+PRINTL
+CALL PRINT_RANGE_STATUS(L_I, "BRE", , , , , "％")
+PRINTL
+IF Flag:戦闘_攻勢 > 0
+	CALL PRINT_LABEL(@"공세(앞으로 {Flag:戦闘_攻勢}턴)")
+	PRINTL
 ENDIF
-PRINTFORML 】
+DRAWLINE
+CALL PRINT_LABEL(@"SAVESTR:敵_名前)
+PRINTL
+ 【상태:
+IF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*9)/10)
+	CALL PRINT_LABEL("상태",,,"빈사",,COLOR("敵_瀕死"))
+ELSEIF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*6)/10)
+	CALL PRINT_LABEL("상태",,,"위중",,COLOR("敵위중"))
+ELSEIF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*4)/10)
+	CALL PRINT_LABEL("상태",,,"중상",,COLOR("敵_重傷"))
+ELSEIF Flag:敵_現在체력 <= Flag:敵_最大체력-((Flag:敵_最大체력*2)/10)
+	CALL PRINT_LABEL("상태",,,"경상",,COLOR("敵_軽傷"))
+ELSE 
+	CALL PRINT_LABEL("상태",,,"무상",,COLOR("敵_無傷"))
+ENDIF
+PRINTFORML
 
 DRAWLINE
 SIF Flag:自動戦闘 == 1
@@ -106,6 +113,7 @@ SIF Flag:自動戦闘 == 1
 PRINTFORM [1]  - 턴 경과(SP-1)　
 PRINTFORM [2]  - 자동 전투
 PRINTFORML 
+PRINTFORML
 PRINTFORM [10] - 공세 지시(SP-10)(주는 데미지 2배　5턴)
 PRINTFORML 
 PRINTFORML 
@@ -136,9 +144,8 @@ CASE 1
 	DRAWLINE
 	IF CFlag:L_I:住人_BRAVE >= RAND:100
 	;ブレイブアタック
-		SETCOLOR 0,240,240
-		PRINTFORML 【――――BRAVE ATACK!!――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("――――BRAVE ATACK!!――――",,COLOR("RPG_MESSAGE_GOOD"))
+		PRINTL
 		PRINTFORML %CALLNAME:L_I%는 다시 공격을 내질렀다！
 		CALL RPG_BATTLE_ATTACK_P(ARG)
 	ENDIF
@@ -151,9 +158,11 @@ CASE 10
 	IF CFlag:L_I:住人_現在気力 >= 10
 		Flag:戦闘_攻勢 = 5
 		CFlag:L_I:住人_現在気力 -= 10
-		PRINTFORMW 【――――공세 지시 발령!!――――】
+		CALL PRINT_LABEL("――――공세 지시 발령!!――――")
+		PRINTW
 	ELSE
-		PRINTFORMW 【――――SP가 부족합니다――――】
+		CALL PRINT_LABEL("――――SP가 부족합니다――――")
+		PRINTW
 	ENDIF
 		GOTO INPUT_LOOP
 CASE 0
@@ -164,9 +173,8 @@ CASE 0
 	ELSEIF RAND:(CFlag:L_I:住人_SPD) >= RAND:(Flag:敵_SPD)
 		CALL RPG_START(ARG)
 	ELSE
-		SETCOLOR 250,40,40
-		PRINTFORML 【――――도주에 실패했다！――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("――――도주에 실패했다！――――",,COLOR("RPG_MESSAGE_ALART"))
+		PRINTL
 		CALL RPG_BATTLE_ATTACK_E(ARG)
 		GOTO INPUT_LOOP
 	ENDIF
@@ -183,9 +191,11 @@ ENDSELECT
 #DIM L_INPUT
 #DIM L_I
 #DIM L_D
+#DIM L_D2
 #DIM L_W
 #DIM L_DL
 #DIM E_A
+#DIM ART_GENOME
 
 L_INPUT = 0
 L_W = 0
@@ -193,6 +203,8 @@ L_DL = 0
 L_D = 0
 E_A = 0
 L_I = ARG
+;外界調査であり、かつFLAG:敵_レアが非0の敵を倒したときにゲノム適性付きアーティファクトが生成される確率
+ART_GENOME = 10
 
 $EXTRA_LOOP
 
@@ -204,7 +216,9 @@ ELSE
 	L_W = 10
 ENDIF
 DRAWLINE
-PRINTFORML 【%CALLNAME:L_I%의 턴】【%CSTR:L_I:(4000+L_W)%:{CFlag:L_I:(6551+L_W)}D{CFlag:L_I:(6552+L_W)}+{CFlag:L_I:(6553+L_W)}】
+CALL PRINT_LABEL(@"%CALLNAME:L_I%의 턴")
+CALL PRINT_LABEL(CSTR:L_I:(4000+L_W),,,@"{CFlag:L_I:(6551+L_W)}D{CFlag:L_I:(6552+L_W)}+{CFlag:L_I:(6553+L_W)}")
+PRINTL
 PRINTFORMW %CALLNAME:L_I%는 %CSTR:L_I:(4000+L_W)%에게 공격。
 	;ヒット数
 	L_DL = CFlag:L_I:(6551+L_W)
@@ -220,9 +234,8 @@ PRINTFORMW %CALLNAME:L_I%는 %CSTR:L_I:(4000+L_W)%에게 공격。
 	
 	IF CFlag:L_I:(6558+L_W) >= 10
 	;必殺
-		SETCOLOR 0,240,240
-		PRINTFORML 【――――SPECIAL ATACK!!――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("――――SPECIAL ATACK!!――――",,COLOR("RPG_MESSAGE_GOOD"))
+		PRINTL
 		PRINTFORML %CALLNAME:L_I%는 혼신이 일격을 내질렀다！！。
 		L_D += L_D/2
 	ENDIF
@@ -235,14 +248,10 @@ PRINTFORMW %CALLNAME:L_I%는 %CSTR:L_I:(4000+L_W)%에게 공격。
 	PRINTFORML
 	IF 100+(CFlag:L_I:住人_HIT)+(FLAG:遺物_HIT合計値)-Flag:敵_SPD >= RAND:100
 	;命中
-		SETCOLOR 0,140,240
-		PRINTFORM 【CLEAN HIT!!】
-		RESETCOLOR
+		CALL PRINT_LABEL("CLEAN HIT!!",,COLOR("RPG_CLEANHIT"))
 	ELSE 
 	;カス当たり
-		SETCOLOR 240,40,240
-		PRINTFORM 【HIT!!】
-		RESETCOLOR
+		CALL PRINT_LABEL("HIT!!",,COLOR("RPG_HIT"))
 		L_D = L_D/((RAND:5)+1)
 	ENDIF
 	L_D -= (Flag:敵_DEF/3)+RAND:((Flag:敵_DEF/3)+1)+RAND:((Flag:敵_DEF/3)+1)
@@ -252,12 +261,48 @@ PRINTFORMW %CALLNAME:L_I%는 %CSTR:L_I:(4000+L_W)%에게 공격。
 	SIF FLAG:都市_防衛 != 0
 		FLAG:都市_防衛ダメージ += L_D
 	PRINTFORMW %SAVESTR:敵_名前%에게 {L_D} 데미지를 입혔다。
-	
+;【吸血】
+IF Flag:遺物_吸血合計値 >= 1
+	L_D2 = L_D/(21-(Flag:遺物_吸血合計値*4))
+	CFlag:L_I:住人_現在体力 += L_D2
+	SIF CFlag:L_I:住人_現在体力 >= CFlag:L_I:住人_最大体力 
+		CFlag:L_I:住人_現在体力 = CFlag:L_I:住人_最大体力 
+	PRINTFORML
+	CALL PRINT_LABEL("ARTIFACT EFFECT!!",,COLOR("RPG_CLEANHIT"))
+	PRINTFORML 【吸血Lv{Flag:遺物_吸血合計値}】敵の生き血を啜り、{L_D2}回復した。
+ENDIF
+;【核熱】
+IF Flag:遺物_核熱合計値 >= 1
+	L_D2 = L_D+10
+	L_D2 = L_D2/(6-(Flag:遺物_核熱合計値))
+	Flag:敵_現在体力 -= L_D2
+	SIF FLAG:都市_防衛 != 0
+		FLAG:都市_防衛ダメージ += L_D2
+	PRINTFORML
+	CALL PRINT_LABEL("ARTIFACT EFFECT!!",,COLOR("RPG_CLEANHIT"))
+	PRINTFORML 【核熱Lv{Flag:遺物_核熱合計値}】%SAVESTR:敵_名前%に{L_D2}ダメージを与えた。
+ENDIF
+;【侵食】
+IF Flag:遺物_侵食合計値 >= 1 && Flag:都市_防衛 == 0
+	L_D2 = ((Flag:敵_現在体力*100)*((RAND:(Flag:遺物_侵食合計値))+1)*2)/10000
+	Flag:敵_現在体力 -= L_D2
+	PRINTFORML
+	CALL PRINT_LABEL("ARTIFACT EFFECT!!",,COLOR("RPG_CLEANHIT"))
+	PRINTFORML 【侵食Lv{Flag:遺物_侵食合計値}】%SAVESTR:敵_名前%に{L_D2}ダメージを与えた。
+ENDIF
+;【ゲノム適性】
+IF FLAG:遺物_ゲノム適性合計値 >= 1
+	PRINTFORML
+	CALL PRINT_LABEL("ARTIFACT EFFECT!!",,COLOR("RPG_CLEANHIT"))
+	PRINTFORML 【適性Lv{Flag:遺物_ゲノム適性合計値}】アーティファクトは持ち主の適性を認めた。
+ENDIF
+
+PRINTFORMW
+
 IF FLAG:支援_随伴合計ATK != 0 && RAND:((FLAG:支援_随伴合計SPD/3)+1) >= (RAND:100)+1
 	;随伴攻撃
-		SETCOLOR 240,140,240
-		PRINTFORML 【――――SUPPORT ATACK!!――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("――――SUPPORT ATACK!!――――",,COLOR("RPG_MESSAGE_SUPPORT"))
+		PRINTL
 		PRINTFORML 수반 대원들의 원호 공격。
 		L_D = 0
 		L_D += FLAG:支援_随伴合計ATK/5
@@ -297,30 +342,40 @@ IF Flag:敵_現在체력 <= 0
 	ENDIF
 
 	IF CFLAG:L_I:住人_技能_의료 >= RAND:100
-		SETCOLOR 0,240,240
-		PRINTFORMW 【――――%CALLNAME:L_I%는 다친 몸을 치료했다――――】
-		RESETCOLOR
+		CALL PRINT_LABEL(@"――――%CALLNAME:L_I%는 다친 몸을 치료했다――――",,COLOR("RPG_MESSAGE_GOOD"))
+		PRINTW
 		CFlag:L_I:住人_현재체력 += CFlag:L_I:住人_최대체력/7
 		SIF CFlag:L_I:住人_현재체력 >= CFlag:L_I:住人_최대체력 
 			CFlag:L_I:住人_현재체력 = CFlag:L_I:住人_최대체력
 	ENDIF
 	IF CFLAG:L_I:住人_技能_해체 >= RAND:100
-		SETCOLOR 0,240,240
-		PRINTFORML 【――――%CALLNAME:L_I%는 쓰러뜨린 적을 해체했다――――】
+		CALL PRINT_LABEL(@"――――%CALLNAME:L_I%는 쓰러뜨린 적을 해체했다――――",,COLOR("RPG_MESSAGE_GOOD"))
+		PRINTL
 		IF Flag:敵_取得経験値 > 50
 			Flag:I骸 += 1
-			PRINTFORMW 【――――I시체를 손에 넣었다――――】
+			CALL PRINT_LABEL("――――I시체를 손에 넣었다――――",33,COLOR("RPG_MESSAGE_GOOD"))
+		PRINTW
 		ELSEIF Flag:敵_取得経験値 > 25
 			Flag:I供物 += 1
-			PRINTFORMW 【――――I공물을 손에 넣었다――――】
+			CALL PRINT_LABEL("――――I공물을 손에 넣었다――――",33,COLOR("RPG_MESSAGE_GOOD"))
+			PRINTW
 		ELSE
 			Flag:I血液 += 1
-			PRINTFORMW 【――――I혈액을 손에 넣었다――――】
+			CALL PRINT_LABEL("――――I혈액을 손에 넣었다――――",33,COLOR("RPG_MESSAGE_GOOD"))
+			PRINTW
 		ENDIF
-		RESETCOLOR
 	ENDIF
-	SIF RAND:((Flag:調査深度)+1) >=  20+RAND:100
+	IF RAND:((Flag:調査深度)+1) >=  20+RAND:100
+		;日替わり区画でない、かつレア敵撃破なら5%の確率でゲノム適性付きアーティファクト生成処理
+		;判定に失敗なら通常のアーティファクト生成
+		IF FLAG:調査区域 != 90 && FLAG:敵_レア != 0 && RAND:100 < ART_GENOME
+			CALL RPG_ARTIFACT_GENOME_GET(ARG)
+		ELSE
 		CALL RPG_ARTIFACT_GET(ARG)
+		ENDIF
+	ENDIF
+	SIF Flag:調査区域 >= 3 && Flag:調査深度 >= 50
+		CALL ARCHIVE_G
 	IF Flag:調査区域 == 90 && (Flag:調査深度 >= Flag:日替わり区画深度限界)
 		RESETBGCOLOR
 		PRINTFORML ≪구획 답파를 축하드립니다、「외적」이 근거지로 삼은 플로어에 아티팩트 반응이 감지되었습니다≫
@@ -339,13 +394,28 @@ ENDIF
 
 IF CFlag:L_I:(6558+L_W) >= 20 && (CFlag:L_I:(6558+L_W)-E_A) > RAND:100
 ;連続攻撃
-	SETCOLOR 0,240,240
-	PRINTFORML 【――――EXTRA ATACK!!――――】
-	RESETCOLOR
+	CALL PRINT_LABEL("――――EXTRA ATACK!!――――",,COLOR("RPG_MESSAGE_GOOD"))
+	PRINTL
 	PRINTFORML %CALLNAME:L_I%는 연달아서 공격을 날렸다！。
 	E_A += 20
 	GOTO EXTRA_LOOP
 ENDIF
+
+
+;【時間】
+IF (Flag:遺物_時間合計値 >= 1) && ((Flag:遺物_時間合計値+4)*3 >= RAND:100) 
+	CALL PRINT_LABEL("ARTIFACT EFFECT!!",,COLOR("RPG_CLEANHIT"))
+	PRINTFORMW 【時間Lv{Flag:遺物_時間合計値}】周囲の時間を停滞させ、更に追い打ちを仕掛けた！
+	GOTO EXTRA_LOOP
+ENDIF
+
+
+
+
+
+
+
+
 
 
 ;-------------------------------------------------
@@ -374,7 +444,9 @@ ELSE
 ;サブ武装
 	L_W = 30
 ENDIF
-PRINTFORML 【%SAVESTR:敵_名前%의 턴】【{Flag:(9031+L_W)}D{Flag:(9032+L_W)}+{Flag:(9033+L_W)}】
+CALL PRINT_LABEL(@"%SAVESTR:敵_名前%의 턴")
+CALL PRINT_LABEL(@"{Flag:(9031+L_W)}D{Flag:(9032+L_W)}+{Flag:(9033+L_W)}")
+PRINTL
 PRINTFORMW %SAVESTR:敵_名前%는 %CALLNAME:L_I%에게 공격。
 IF 100+Flag:敵_HIT-CFlag:L_I:住人_SPD-FLAG:遺物_SPD合計値 >= RAND:100
 ;命中
@@ -389,21 +461,26 @@ IF 100+Flag:敵_HIT-CFlag:L_I:住人_SPD-FLAG:遺物_SPD合計値 >= RAND:100
 	
 	IF RAND:((CFlag:L_I:住人_HIT)*5+1+FLAG:遺物_HIT合計値)-RAND:((Flag:敵_HIT)*5+1) >= RAND:100
 	;パリィ
-		SETCOLOR 0,240,240
-		PRINTFORML 【――――PARRY!!――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("――――PARRY!!――――",,COLOR("RPG_MESSAGE_GOOD"))
+		PRINTL
 		PRINTFORML %CALLNAME:L_I%는 %SAVESTR:敵_名前%의 공격을 흘리면서 위력을 떨어뜨렸다。
 		L_D -= L_D/2
 	ENDIF
 	IF FLAG:支援_随伴合計DEF != 0 && FLAG:支援_随伴合計HIT != 0 && RAND:((FLAG:支援_随伴合計SPD/3)+1) >= (RAND:100)+1 && L_D > 0
 	;援護防御
-		SETCOLOR 240,140,240
-		PRINTFORML 【――――SUPPORT GUARD!!――――】
-		RESETCOLOR
+		CALL PRINT_LABEL("――――SUPPORT GUARD!!――――",,COLOR("RPG_MESSAGE_SUPPORT"))
+		PRINTL
 		PRINTFORML 수반 대원은 %CALLNAME:L_I%를 감싸면서、위력을 경감시켰다。
 		L_D /= 2 + FLAG:支援_随伴合計DEF / 300 + FLAG:支援_随伴合計HIT / 300
 	ENDIF
 	
+	;【空間】
+	IF (Flag:遺物_空間合計値 >= 1) && ((Flag:遺物_空間合計値)*10 >= RAND:100) && L_D >= 10
+		CALL PRINT_LABEL("ARTIFACT EFFECT!!",,COLOR("RPG_CLEANHIT"))
+		L_D = L_D/10
+		PRINTFORMW 【空間Lv{Flag:遺物_空間合計値}】周囲の空間を歪ませ、攻撃を遮る防壁を展開した。
+	ENDIF
+
 	SIF CFlag:L_I:住人_現在気力 <= CFlag:L_I:住人_最大気力-((CFlag:L_I:住人_最大気力*7)/10)
 		L_D += L_D/2
 	L_D -= (CFlag:L_I:住人_DEF/3)+RAND:(CFlag:L_I:住人_DEF/3)+RAND:(CFlag:L_I:住人_DEF/3)+RAND:((FLAG:遺物_DEF合計値/2)+1)

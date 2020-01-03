@@ -47,6 +47,7 @@ CASE 400
 	Flag:遺物_連続消去 = !Flag:遺物_連続消去
 CASE 500
 	CALL RPG_ARTIFACT_SORT
+	PRINTFORMW アーティファクトを五項目の合計値順にソートしました
 CASE 600
 		CLEARLINE LINECOUNT
 		PRINTFORML 현재 장비중이 아닌 AF를 모두 소거할까요？
@@ -85,6 +86,7 @@ CASEELSE
 	DRAWLINE
 	PRINTFORML 
 	PRINTFORM [100] 장비　
+	PRINTFORM [101] 強化(LP必要)　
 	PRINTFORM [150] 소거　
 	PRINTFORML [999] 돌아온다
 	INPUT
@@ -130,6 +132,47 @@ CASEELSE
 			ENDSELECT
 			BREAK
 		LOOP 1
+	CASE 101
+		CLEARLINE LINECOUNT
+		PRINTFORML LPを消費して強化してよろしいですか？
+		PRINTFORML 
+		PRINTFORM [100]  1回分強化する(LP10必要)　
+		PRINTFORM [101]  5回分強化する(LP50必要)　
+		PRINTFORML [999] いいえ
+		INPUT
+		L_INPUT = RESULT
+		SELECTCASE L_INPUT
+		CASE 100
+			IF Flag:都市_現在LP <= 9
+				PRINTFORML 
+				PRINTFORMW LPが足りません
+				RESTART
+			ENDIF
+			Flag:(15400 + ART_ID) += 1
+			Flag:(15500 + ART_ID) += 1
+			Flag:(15600 + ART_ID) += 1
+			Flag:(15700 + ART_ID) += 1
+			Flag:(15800 + ART_ID) += 1
+			PRINTFORML 
+			PRINTFORMW 強化しました。
+			Flag:都市_現在LP -= 10
+		CASE 101
+			IF Flag:都市_現在LP <= 49
+				PRINTFORML 
+				PRINTFORMW LPが足りません
+				RESTART
+			ENDIF
+			Flag:(15400 + ART_ID) += 5
+			Flag:(15500 + ART_ID) += 5
+			Flag:(15600 + ART_ID) += 5
+			Flag:(15700 + ART_ID) += 5
+			Flag:(15800 + ART_ID) += 5
+			PRINTFORML 
+			PRINTFORMW 強化しました。
+			Flag:都市_現在LP -= 50
+		CASE 999
+			RESTART
+		ENDSELECT
 	CASE 150
 		IF Flag:(15300 + ART_ID) != 0
 			PRINTFORML 
@@ -174,6 +217,7 @@ Flag:(15500 + ART_ID) = 0
 Flag:(15600 + ART_ID) = 0
 Flag:(15700 + ART_ID) = 0
 Flag:(15800 + ART_ID) = 0
+Flag:(18000 + ART_ID) = 0
 SaveStr:(5000 + ART_ID)  = 
 SaveStr:(5100 + ART_ID)  = 
 SaveStr:(5200 + ART_ID)  = 
@@ -196,6 +240,7 @@ FOR LOCAL,1,91
 		Flag:(15600 + LOCAL) = 0
 		Flag:(15700 + LOCAL) = 0
 		Flag:(15800 + LOCAL) = 0
+		Flag:(18000 + LOCAL) = 0
 		SaveStr:(5000 + LOCAL)  = 
 		SaveStr:(5100 + LOCAL)  = 
 		SaveStr:(5200 + LOCAL)  = 
@@ -222,10 +267,14 @@ PRINTFORML %SaveStr:(5400 + ART_ID)%
 #DIMS CONST ART_FROM = "前文明", "古代"  , "異世界", "生体"  , "불명"  , "外宇宙"
 #DIMS CONST ART_ABL  = "無能"  , "吸血"  , "核熱"  , "侵食"  , "時間"  , "空間"
 IF !INRANGE(ART_ID, 1, 90)
+	SETCOLOR COLOR("伏字")
 	PRINTFORML [--]＝범위 외＝
+	RESETCOLOR
 	RETURN
 ELSEIF Flag:(15000 + ART_ID) == 0
+	SETCOLOR COLOR("伏字")
 	PRINTFORML [{ART_ID, 2}]＝미등록＝
+	RESETCOLOR
 	RETURN
 ENDIF
 
@@ -239,6 +288,11 @@ PRINTFORM HIT{(Flag:(15600 + ART_ID)), 4,RIGHT}:
 PRINTFORM SPD{(Flag:(15700 + ART_ID)), 4,RIGHT}:
 PRINTFORM LUK{(Flag:(15800 + ART_ID)), 4,RIGHT}
 PRINTFORM ]
+IF FLAG:(18000 + ART_ID) >= 0 && CFLAGNAME:(FLAG:(18000 + ART_ID)) != ""
+	PRINTFORM [%REPLACE(CFLAGNAME:(FLAG:(18000 + ART_ID)) , "ゲノム" , "")%]
+ELSE
+	PRINTFORM [--]
+ENDIF
 SIF Flag:(15300 + ART_ID) == 1
 	PRINTFORM 장비중
 PRINTFORML 
@@ -478,10 +532,10 @@ ELSE
 		Flag:(15000+L_A) = 99
 
 	;製品
-	Flag:(15100+L_A) = RAND:5
+	Flag:(15100+L_A) = RAND:6
 
 	;能力
-	Flag:(15200+L_A) = RAND:4
+	Flag:(15200+L_A) = RAND:6
 
 	;装備初期化
 	Flag:(15300+L_A) = 0
@@ -1042,12 +1096,32 @@ PRINTFORML
 DRAWLINE
 PRINTFORMW
 
+RETURN L_A
 
 
+;-------------------------------------------------
+;ゲノムアーティファクト加算
+;@RPG_ARTIFACT_GETを実行、その後でゲノム適性を付与している
+;-------------------------------------------------
+@RPG_ARTIFACT_GENOME_GET(ARG)
+#DIM DYNAMIC GART_GENOME
+#DIM DYNAMIC GART_VAR
+#DIM GART_CNT
+
+CALL RPG_ARTIFACT_GET(ARG)
 
 
+;定義済みのゲノムの個数をカウント
+;CFLAGにある移植されたゲノムを記録する部分のCFLAGNAMEが非0ならそのゲノムが定義されていると見なす
+FOR GART_CNT , 1800 , 1900
+	SIF CFLAGNAME:GART_CNT != ""
+		GART_VAR++
+NEXT
 
+;@RPG_ARTIFACT_GETで何個目のアーティファクトに新規追加を行ったかをRESULTへ返すよう改変している
+FLAG:(18000 + RESULT) = 1800 + RAND:GART_VAR
 
+RETURN RESULT
 
 
 
@@ -1057,11 +1131,23 @@ PRINTFORMW
 @RPG_ARTIFACT_PLUS(ARG)
 #DIM ART_EQUIP ;装備슬롯ID
 #DIM ART_ID    ;実際のアーティファクトID
+#DIM GENOME_BOOST
+
 FLAG:遺物_ATK合計値 = 0
 FLAG:遺物_DEF合計値 = 0
 FLAG:遺物_HIT合計値 = 0
 FLAG:遺物_SPD合計値 = 0
 FLAG:遺物_LUK合計値 = 0
+Flag:遺物_吸血合計値 = 0
+Flag:遺物_核熱合計値 = 0
+Flag:遺物_侵食合計値 = 0
+Flag:遺物_時間合計値 = 0
+Flag:遺物_空間合計値 = 0
+Flag:遺物_ゲノム適性合計値 = 0
+
+;ゲノム適性によるアーティファクトの能力上昇幅。20ならアーティファクトの全能力を120%に引き上げる
+GENOME_BOOST = 20
+
 FOR ART_EQUIP, 1, 6
 	ART_ID = Flag:(15900 + ART_EQUIP)
 	SIF !INRANGE(ART_ID, 1, 90)
@@ -1071,6 +1157,28 @@ FOR ART_EQUIP, 1, 6
 	FLAG:遺物_HIT合計値 += Flag:(15600 + ART_ID)
 	FLAG:遺物_SPD合計値 += Flag:(15700 + ART_ID)
 	FLAG:遺物_LUK合計値 += Flag:(15800 + ART_ID)
+	
+	IF Flag:(15200 + ART_ID) == 5
+		Flag:遺物_空間合計値 += 1
+	ELSEIF Flag:(15200 + ART_ID) == 4
+		Flag:遺物_時間合計値 += 1
+	ELSEIF Flag:(15200 + ART_ID) == 3
+		Flag:遺物_侵食合計値 += 1
+	ELSEIF Flag:(15200 + ART_ID) == 2
+		Flag:遺物_核熱合計値 += 1
+	ELSEIF Flag:(15200 + ART_ID) == 1
+		Flag:遺物_吸血合計値 += 1
+	ENDIF
+
+	;アーティファクトのゲノム適性を調査キャラが所有しているなら能力増加
+	IF FLAG:(18000 + ART_ID) > 0 && STRFIND(@"%CFLAGNAME:(FLAG:(18000 + ART_ID))%" , "ゲノム") >= 0 && CFLAG:ARG:(FLAG:(18000 + ART_ID))
+		FLAG:遺物_ATK合計値 += Flag:(15400 + ART_ID) * GENOME_BOOST / 100
+		FLAG:遺物_DEF合計値 += Flag:(15500 + ART_ID) * GENOME_BOOST / 100
+		FLAG:遺物_HIT合計値 += Flag:(15600 + ART_ID) * GENOME_BOOST / 100
+		FLAG:遺物_SPD合計値 += Flag:(15700 + ART_ID) * GENOME_BOOST / 100
+		FLAG:遺物_LUK合計値 += Flag:(15800 + ART_ID) * GENOME_BOOST / 100
+		FLAG:遺物_ゲノム適性合計値++
+	ENDIF
 NEXT
 
 FLAG:支援_随伴合計ATK += ((FLAG:支援_随伴合計ATK)*(FLAG:遺物_ATK合計値))/100
@@ -1091,8 +1199,6 @@ FLAG:遺物_DEF合計値 = FLAG:遺物_DEF合計値/5
 FLAG:遺物_HIT合計値 = FLAG:遺物_HIT合計値/5
 FLAG:遺物_SPD合計値 = FLAG:遺物_SPD合計値/5
 FLAG:遺物_LUK合計値 = FLAG:遺物_LUK合計値/5
-
-
 
 
 
