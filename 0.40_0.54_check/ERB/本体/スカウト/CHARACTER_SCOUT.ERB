@@ -88,7 +88,9 @@ ELSEIF Flag:調査イベント番号 > 0
 	SIF S_RACE >= 10
 		S_RACE = 10
 ELSE
-	IF RAND:300  >= 295
+	IF RAND:100  >= 85 && FLAG:都市_Lv >= 25 && FLAG:時間帯 == 1
+		S_RACE = 12
+	ELSEIF RAND:300  >= 295
 		S_RACE = 11
 	ELSEIF RAND:100  >= 95
 		S_RACE = 8
@@ -98,6 +100,8 @@ ELSE
 		S_RACE = 5
 	ELSEIF !RAND:5 && FLAG:研究施設 >= 20
 		S_RACE = 4
+		SIF Flag:喫茶店スカウト != 0
+			TALENT:L_I:機械 = 1
 	ELSEIF !RAND:4 && FLAG:품종개량施設 >= 5 && FLAG:支援住宅 >= 5
 		S_RACE = 3
 	ELSEIF !RAND:3 && FLAG:ラブホテル >= 5 && FLAG:高級カジノ >= 5 && FLAG:ゲームセンター >= 5
@@ -111,8 +115,11 @@ ENDIF
 
 
 
-
-IF Flag:依頼_スパイテロ駆除 == 1
+IF FLAG:遺研_研究中 != 0
+	TALENT:L_I:イレギュラー = 1
+	TALENT:L_I:弱み = 1
+	TALENT:L_I:ボランティア = 1
+ELSEIF Flag:依頼_スパイテロ駆除 == 1
 	TALENT:L_I:이레귤러 = 1
 	TALENT:L_I:약점 = 1
 ELSEIF Flag:EP成否 == 1
@@ -147,10 +154,11 @@ IF Flag:調査イベント番号 == 401
 	TCVAR:L_I:履歴_EXP_処女喪失 = 1
 	Talent:L_I:Ａ비처녀 = 1
 	TCVAR:L_I:履歴_EXP_Ａ処女喪失 = 1
-	EXP:L_I:Ｖ경험 = (RAND:200)+100
-	EXP:L_I:Ａ경험 = (RAND:200)+100
-	EXP:L_I:성교경험 = (RAND:300)+150
-	EXP:L_I:강간경험 = (RAND:300)+150
+	EXP:L_I:Ｖ경험 = (RAND:200)+50
+	EXP:L_I:Ａ경험 = (RAND:200)+50
+	EXP:L_I:성교경험 = (RAND:300)+50
+	EXP:L_I:강간경험 = (RAND:300)+50
+	EXP:L_I:出産経験 = (RAND:3)+1
 	EXP:L_I:펠라경험 = (RAND:100)+50
 	EXP:L_I:파이즈리경험 = (RAND:100)+50
 	CSTR:L_I:初えっち相手名 = 불명
@@ -181,14 +189,22 @@ SIF Flag:調査イベント番号 == 500
 	CFLAG:L_I:住人_種族 = 9
 SIF Flag:調査イベント番号 == 501
 	CFLAG:L_I:住人_種族 = 10
-
 SIF Flag:依頼_イスからの駆除依頼 == 1
 	CFLAG:L_I:住人_種族 = 7
-
+SIF Flag:掘り出しもの品質 == 10
+	CFLAG:L_I:住人_種族 = 13
 
 IF FLAG:継承種族 != 0
 	CFLAG:L_I:住人_種族 = (FLAG:継承種族)-1
 ENDIF
+
+IF (Flag:カフェ絞り込み_種族 != 0) && (Flag:喫茶店スカウト != 0)
+	TALENT:L_I:機械 = 0
+	CFLAG:L_I:住人_種族 = (Flag:カフェ絞り込み_種族)-1
+	SIF Flag:カフェ絞り込み_種族 == 5
+		TALENT:L_I:機械 = 1
+ENDIF
+
 
 S_MIND = RAND:10
 ;性格の設定4

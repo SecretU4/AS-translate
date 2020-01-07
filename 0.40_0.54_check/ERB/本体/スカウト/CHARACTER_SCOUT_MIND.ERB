@@ -97,46 +97,83 @@ SELECTCASE TALENTNAME:(L_TAL_START + S_MIND)
 CASE "예의바름"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = 貴方
+	CSTR:L_C_ID:二人称2 = 貴方
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = 兄さま
 CASE "쿨"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = キミ
+	CSTR:L_C_ID:二人称2 = キミ
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = 兄さん
 CASE "츤츤"
 	CSTR:L_C_ID:一人称 = アタシ
 	CSTR:L_C_ID:二人称 = アンタ
+	CSTR:L_C_ID:二人称2 = アンタ
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = お兄ちゃん
 CASE "마이페이스"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = 君
+	CSTR:L_C_ID:二人称2 = 君
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = お兄さん
 CASE "고압적"
 	CSTR:L_C_ID:一人称 = アタシ
 	CSTR:L_C_ID:二人称 = 貴方
+	CSTR:L_C_ID:二人称2 = 貴方
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = お兄様
 CASE "난폭함"
 	CSTR:L_C_ID:一人称 = 俺
 	CSTR:L_C_ID:二人称 = お前
+	CSTR:L_C_ID:二人称2 = お前
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = アニキ
 CASE "나약함"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = 貴方
+	CSTR:L_C_ID:二人称2 = 貴方
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = お兄ちゃん
 CASE "품위있음"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = 貴方
+	CSTR:L_C_ID:二人称2 = 貴方
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = お兄様
 CASE "남성스러움"
 	CSTR:L_C_ID:一人称 = 俺
 	CSTR:L_C_ID:二人称 = お前
+	CSTR:L_C_ID:二人称2 = お前
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = 兄貴
 CASE "섹시함"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = 貴方
+	CSTR:L_C_ID:二人称2 = 貴方
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = お兄さん
 CASE "프렌들리"
 	CSTR:L_C_ID:一人称 = 私
 	CSTR:L_C_ID:二人称 = アンタ
+	CSTR:L_C_ID:二人称2 = アンタ
 CASE "아이같음"
 	CSTR:L_C_ID:一人称 = %CALLNAME:L_C_ID%
 	CSTR:L_C_ID:二人称 = おにーさん
+	CSTR:L_C_ID:二人称2 = きみ
 CASE "깜찍함"
 	CSTR:L_C_ID:一人称 = %CALLNAME:L_C_ID%
 	CSTR:L_C_ID:二人称 = お兄さん
+	CSTR:L_C_ID:二人称2 = あなた
 CASE "고풍스러움"
 	CSTR:L_C_ID:一人称 = 妾
 	CSTR:L_C_ID:二人称 = お主
+	CSTR:L_C_ID:二人称2 = お主
+	SIF TALENT:L_C_ID:「シスター」 != 0
+		CSTR:L_C_ID:二人称 = 兄上
 ENDSELECT
+
 
 
 ;=============================
@@ -168,6 +205,8 @@ FOR L_C_ID, 0, CHARANUM
 	CALL CHARACTER_SCOUT_MIND_REPEAT(L_C_ID)
 NEXT
 
+
+
 PRINTFORMW 수정 완료했습니다。
 
 
@@ -189,6 +228,7 @@ ENDIF
 
 
 
+
 ;-------------------------------------------------
 ;身体特徴系のフレーバーデータ設定
 ;-------------------------------------------------
@@ -198,7 +238,8 @@ IF TALENT:L_C_ID:NPC == 0
 	IF TALENT:L_C_ID:EPC == 0
 		CFLAG:L_C_ID:肌色 = RAND:6
 		CFLAG:L_C_ID:髪色 = RAND:11
-		CFLAG:L_C_ID:髪型 = RAND:25
+		CFLAG:L_C_ID:髪型 = RAND:30
+		CFLAG:L_C_ID:後髪型 = RAND:30
 		CFLAG:L_C_ID:目 = RAND:8
 		CFLAG:L_C_ID:瞳色 = RAND:6
 		CFLAG:L_C_ID:体型 = RAND:3
@@ -207,8 +248,23 @@ IF TALENT:L_C_ID:NPC == 0
 		ENDIF
 	ENDIF
 ENDIF
+
+
+
 CALL CHARACTER_SCOUT_CHARM_POINT(L_C_ID)
 CALL CHARACTER_SCOUT_KUSE(L_C_ID)
+IF RAND:100 >= 50
+	CFlag:L_C_ID:住人_体格 = 1
+	TALENT:L_C_ID:長身 = 0
+	IF RAND:100 >= 70
+		TALENT:L_C_ID:小人体型 = 1
+	ELSE
+		TALENT:L_C_ID:小柄体型 = 1
+	ENDIF
+ELSE
+	TALENT:L_C_ID:小人体型 = 0
+	TALENT:L_C_ID:小柄体型 = 0
+ENDIF
 CALL CHARACTER_SCOUT_BODYSIZE(L_C_ID)
 
 
@@ -589,6 +645,9 @@ CASE "오니"
 CASE "흡혈귀"
 	L_OVUM_DEFFENSE = 500
 	CFLAG:L_C_ID:受精確率 = 5
+CASE "ニア"
+	L_OVUM_DEFFENSE = 9999
+	CFLAG:L_C_ID:受精確率 = 1
 CASEELSE
 ;CASE "인간", "용인", "이스", "정령" デス
 	L_OVUM_DEFFENSE = 0
@@ -621,6 +680,75 @@ FOR L_NAYAMI_SLOT, 1, RAND(3, 5)
 	CALL MAKE_SMALL_NAYAMI(L_C_ID, L_NAYAMI_SLOT)
 NEXT
 
+
+;-------------------------------------------------
+;学生の特殊素質処理
+;-------------------------------------------------
+@CHARACTER_SCOUT_STUDENT(L_C_ID)
+#DIM L_C_ID
+#DIM DYNAMIC L_SEIKAKU
+SIF Talent:L_C_ID:学生 == 0
+	RETURN
+
+Talent:L_C_ID:学生 += RAND:5
+SELECTCASE TALENT:L_C_ID:学生
+	CASE 5
+		;小学生は幼い口調になりやすく、幼児体型になりやすい
+		LOCAL = RAND:3
+		SIF LOCAL
+			L_SEIKAKU = 11 + LOCAL
+		IF RAND:2
+			TALENT:L_C_ID:小柄体型 = 1
+			TALENT:L_C_ID:小人体型 = 1
+			TALENT:L_C_ID:長身 = 0
+		ELSEIF RAND:3
+			TALENT:L_C_ID:小柄体型 = 1
+			TALENT:L_C_ID:長身 = 0
+		ENDIF
+		CFlag:L_C_ID:住人_体格 = 1
+	CASE 4
+		;中学生は幼い口調にややなりやすく小柄体型になりやすい
+		LOCAL = RAND:6
+		IF LOCAL == 0
+			L_SEIKAKU = 13
+		ELSEIF LOCAL < 3
+			L_SEIKAKU = 12
+		ENDIF
+		IF RAND:2
+			TALENT:L_C_ID:小柄体型 = 1
+			TALENT:L_C_ID:長身 = 0
+		ELSEIF RAND:3
+			TALENT:L_C_ID:小柄体型 = 1
+			TALENT:L_C_ID:小人体型 = 1
+			TALENT:L_C_ID:長身 = 0
+		ENDIF
+	CASE 3
+		;高校生は成人よりは幼い口調になりやすい
+		LOCAL = RAND:12
+		IF LOCAL == 0
+			L_SEIKAKU = 13
+		ELSEIF LOCAL < 3
+			L_SEIKAKU = 12
+		ENDIF
+ENDSELECT
+;体型を再設定
+CALL CHARACTER_SCOUT_BODYSIZE(L_C_ID)
+;口調を再設定
+IF L_SEIKAKU > 0
+	VARSET TALENT:L_C_ID:0, 0, 1400, 1450
+	TALENT:L_C_ID:(1400+L_SEIKAKU) = 1
+	CALL CHARACTER_SCOUT_MIND_REPEAT(L_C_ID, L_SEIKAKU)
+ENDIF
+;学生アイドルとか援助待ち女学生とかいいよね
+IF !RAND:5
+	Talent:L_C_ID:アイドル = 1
+ELSEIF Flag:時間帯 == 0
+	SIF !RAND:8
+		Talent:L_C_ID:娼婦 = 1
+ELSEIF Flag:時間帯 == 1
+	SIF !RAND:2
+		Talent:L_C_ID:娼婦 = 1
+ENDIF
 
 
 ;-------------------------------------------------
@@ -680,6 +808,10 @@ CASE "정령"
 CASE "흡혈귀"
 	CFLAG:L_C_ID:住人_種族特徴1 = 0
 	CFLAG:L_C_ID:住人_種族特徴2 = RAND:4
+CASE "ニア"
+	L_RANDOM = RAND:5
+	CFLAG:L_C_ID:住人_種族特徴1 = L_RANDOM
+	CFLAG:L_C_ID:住人_種族特徴2 = L_RANDOM
 CASEELSE
 ENDSELECT
 
@@ -705,6 +837,10 @@ IF TALENT:L_C_ID:남자 == 0
 		CFLAG:L_C_ID:服装 = RAND:12
 		CFLAG:L_C_ID:靴 = RAND:5
 	ENDIF
+ENDIF
+
+IF FLAG:遺研_研究中 != 0
+	CFLAG:L_C_ID:服装 = 23
 ENDIF
 
 L_RANDOM = RAND:2
