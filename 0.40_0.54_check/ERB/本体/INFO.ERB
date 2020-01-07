@@ -8,6 +8,12 @@
 ;	Modification Data:
 ;
 ;	Edit	Date			Author					Reason
+;	005		2019/04/14		M						表示系改善 ＆ リファクタリング：
+;														関連して危険日と悩み有無の順序入れ替え
+;														値 0 の物は伏字モード連動
+;														定型ラベル型ステータス表示はPRINT_STATUS.ERBに集約
+;														表示項目桁の指示明確化
+;														交流情報が正常に表示に反映されていなかったのを修正
 ;	004		2018/11/14		morph					共通処理を関数化して別の箇所でも使えるように
 ;														INFO_TARGET_MARK
 ;														INFO_TARGET_RELATION
@@ -95,9 +101,9 @@ FOR L_I, 0, DEFTR_PL_NUM
 		BREAK
 
 	IF L_T == MASTER
-		PRINT 【주인】
+		CALL PRINT_LABEL("주인")
 	ELSE
-		PRINT 　　　　　
+		PRINT 　　　　
 	ENDIF
 
 	;- 表示:ターゲット(詳細)
@@ -147,8 +153,8 @@ CALL INFO_TARGET_MARK(L_I)
 CALL INFO_TARGET_RELATION(L_I)
 CALL INFO_TARGET_GENDER(L_I)
 CALL INFO_TARGET_FALLEN(L_I)
-CALL INFO_TARGET_PREGNANCY(L_I, ARG:1)
 CALL INFO_TARGET_NAYAMI(L_I)
+CALL INFO_TARGET_PREGNANCY(L_I, ARG:1)
 
 
 
@@ -410,16 +416,17 @@ ENDIF
 @INFO_TARGET_NAYAMI(L_I)
 #DIM L_I
 #DIM NAYAMI
+#DIM CONST NAYAMI_SPAN = 10
 IF CFlag:L_I:住人_悩み解決判定回数 != 0 || CFlag:L_I:住人_悩み解決中 != 0
-	PRINTFORM , 해결까지 {(CFlag:L_I:住人_悩み解決判定回数)+1}일 
+	PRINTFORM ,%@"해결까지 {(CFlag:L_I:住人_悩み解決判定回数)+1}일",NAYAMI_SPAN,LEFT%
 ELSE
 	NAYAMI = SEARCH_ALL_NAYAMI(L_I)
 	IF INRANGE(NAYAMI, 201, 205)
-		PRINT , 상담 필요！
+		PRINTFORM ,%"상담 필요！",NAYAMI_SPAN,LEFT%
 	ELSEIF INRANGE(NAYAMI, 211, 215)
-		PRINT , 상담 상태
+		PRINTFORM ,%"상담 상태",NAYAMI_SPAN,LEFT%
 	ELSEIF NAYAMI
-		PRINT , 고민중…
+		PRINTFORM ,%"고민중…",NAYAMI_SPAN,LEFT%
 	ENDIF
 ENDIF
 
@@ -473,11 +480,7 @@ IF SHORT
 	ENDIF
 	RETURN
 ENDIF
-IF CFLAG:C_ID:레귤러 == 1
-	PRINTFORM [레귤러:ON ]
-ELSE
-	PRINTFORM [레귤러:OFF]
-ENDIF
+CALL PRINT_LABEL("레귤러",,,(CFLAG:C_ID:레귤러 ? "ON" # "OFF"), -3, ( !CFLAG:C_ID:레귤러 && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,1) ; 左詰めは負
 
 
 
@@ -495,11 +498,7 @@ IF SHORT
 	ENDIF
 	RETURN
 ENDIF
-IF CFLAG:C_ID:특별보호 == 1
-	PRINTFORM [특별 보호:ON ]
-ELSE
-	PRINTFORM [특별 보호:OFF]
-ENDIF
+CALL PRINT_LABEL("특별보호",,,(CFLAG:C_ID:特別保護 ? "ON" # "OFF"), -3, ( !CFLAG:C_ID:特別保護 && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,1) ; 左詰めは負
 
 
 
@@ -513,13 +512,17 @@ ENDIF
 #DIMS CONST STR_EVE_LIMIT = "NG", "친구", "베프", "연인", "없음"
 #DIMS CONST NPC_LV        = "－", "지인", "친구", "베프", "연인", "결혼"
 #DIMS CONST NPC_TYPE        = "교", "연", "범", "성"
+#DIM        CFLAGNUM_住人イベント傾向_交流
+#DIM        CFLAGNUM_対象1関係
+CFLAGNUM_住人イベント傾向_交流 = GETNUM(CFLAG,"住人イベント傾向_交流")
+CFLAGNUM_対象1関係             = GETNUM(CFLAG,"対象1関係")
 PRINTFORM 상한：%STR_EVE_LIMIT:(LIMIT(CFlag:C_ID:住人交流設定, 0, 4))%
 FOR L_NPC, 0, 4
 	PRINTFORM  %NPC_TYPE:L_NPC%
-	PRINTFORM ：%STR_EVE_RATE:(LIMIT(CFlag:C_ID:住人イベント傾向_交流 / 30, 0, 3))%/
-	SELECTCASE CFLAG:C_ID:(3020+L_NPC)
+	PRINTFORM ：%STR_EVE_RATE:(LIMIT(CFlag:C_ID:(CFLAGNUM_住人イベント傾向_交流+L_NPC) / 30, 0, 3))%/
+	SELECTCASE CFLAG:C_ID:(CFLAGNUM_対象1関係+L_NPC)
 	CASE 0 TO 5
-		PRINTFORM %NPC_LV:(CFLAG:C_ID:(3020+L_NPC))%
+		PRINTFORM %NPC_LV:(CFLAG:C_ID:(CFLAGNUM_対象1関係+L_NPC))%
 	CASE -5
 		PRINTFORM 애인
 	ENDSELECT
@@ -557,13 +560,11 @@ PRINTFORM %UNICODE(0x02460 - 1 + CFLAG:C_ID:マンションID)%
 #DIM        TEMP_RANK
 #DIMS CONST RANKNAME    = "NONE-", "SevenR", "SixO", "FiveY", "FourG", "ThreeB", "TwoI", "OneV"
 TEMP_RANK = INFO_STATUS_GET_BY_LABEL(C_ID, "階級")
-SETCOLOR RANK_TO_COLOR(TEMP_RANK)
-PRINTFORMD [
-PRINTFORM ■
-PRINTFORMD %RANKNAME:TEMP_RANK, 6%]
-RESETCOLOR
-
-
+CALL PRINT_LABEL( , , , "■", , RANK_TO_COLOR(TEMP_RANK), , RANKNAME:TEMP_RANK, 6, , 1)
+;comment:
+;  ラベルが必要なら第一引数に入れると下のようになる
+;CALL PRINT_LABEL("階級" , , , "■", , RANK_TO_COLOR(TEMP_RANK), , RANKNAME:TEMP_RANK, 6, , 1)
+;> [階級:■NONE-] 
 
 ;-----------------------------
 ;-- 遺伝子情報
@@ -589,8 +590,25 @@ PRINTFORM %L_STR%
 ;-----------------------------
 @INFO_TARGET_BREEDING(C_ID)
 #DIM          C_ID
-PRINTFORM [출산 횟수:{CFLAG:C_ID:住人_回収済み数, 3 ,RIGHT}][계승 횟수:{CFLAG:C_ID:住人_継承, 3 ,RIGHT}]
+CALL PRINT_LABEL("출산 횟수",,(CFlag:C_ID:住人_回収済み数 <= 0 && FLAG:STATUS伏字モード ? COLOR("伏字") # -1),TOSTR(CFLAG:C_ID:住人_回収済み数), 3,,,,,, 1)
+CALL PRINT_LABEL("계승 횟수",,(CFlag:C_ID:住人_継承 <= 0 && FLAG:STATUS伏字モード ? COLOR("伏字") # -1), TOSTR(CFLAG:C_ID:住人_継承), 3,,,,,, 1)
 
+;-----------------------------
+;-- 人妻関連情報
+;-----------------------------
+@INFO_TARGET_MARRIED(C_ID)
+#DIM          C_ID
+IF CFLAG:C_ID:住人_体格 == 1
+	PRINTFORM 幼
+ELSEIF TALENT:C_ID:未亡人
+	PRINTFORM 亡
+ELSEIF TALENT:C_ID:百合結婚 
+	PRINTFORM 百
+ELSEIF TALENT:C_ID:結婚済み
+	PRINTFORM 妻
+ELSE
+	PRINTFORM 　
+ENDIF
 
 
 ;-----------------------------
@@ -598,9 +616,10 @@ PRINTFORM [출산 횟수:{CFLAG:C_ID:住人_回収済み数, 3 ,RIGHT}][계승 �
 ;-----------------------------
 @INFO_TARGET_SOCIALITY(C_ID)
 #DIM          C_ID
-PRINTFORM [인기:{MIN(CFLAG:C_ID:住人_人気, 999999), 6 ,RIGHT}][모랄:{CFLAG:C_ID:住人_モラル, 4 ,RIGHT}][카르마:{CFLAG:C_ID:住人_カルマ, 4 ,RIGHT}][품성:{CFLAG:C_ID:住人_品性, 4 ,RIGHT}]
-
-
+CALL PRINT_STATUS(C_ID, "인기",   6, 6, , 10000, ,     , , 1)
+CALL PRINT_STATUS(C_ID, "모랄", 6, 4, (C_ID==MASTER ? "伏字"#""),  500, , -500, , 1)
+CALL PRINT_STATUS(C_ID, "카르마", 6, 4, (C_ID==MASTER ? "伏字"#""),  500, , -500, , 1)
+CALL PRINT_STATUS(C_ID, "품성",   6, 4, (C_ID==MASTER ? "伏字"#""),  500, , -500, , 1)
 
 ;-----------------------------
 ;-- 所属部隊情報
@@ -611,7 +630,7 @@ PRINTFORM [인기:{MIN(CFLAG:C_ID:住人_人気, 999999), 6 ,RIGHT}][모랄:{CFL
 #DIM  DYNAMIC SUP_ID
 #DIMS CONST   SUP_NAME = "－", "随", "後", "回", "探"
 SUP_ID = INFO_STATUS_GET_BY_LABEL(C_ID, "部隊")
-PRINTFORM [%SUP_NAME:SUP_ID%]
+CALL PRINT_LABEL(SUP_NAME:SUP_ID,,(SUP_NAME:SUP_ID==SUP_NAME && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
 
 
 
@@ -634,7 +653,7 @@ IF SHORT
 	ELSE
 		FAC_NAME '= "－－"
 	ENDIF
-	PRINTFORM [%FAC_NAME%]
+	CALL PRINT_LABEL(FAC_NAME,,(FAC_NAME=="－－" && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
 	RETURN
 ENDIF
 IF CFLAG:C_ID:学園生徒 == 1
@@ -648,7 +667,7 @@ ELSEIF  CFLAG:C_ID:カジノ店員 == 1
 ELSE
 	FAC_NAME '= "－－"
 ENDIF
-PRINTFORM [배속:%FAC_NAME, 10%]
+CALL PRINT_LABEL("배속",,(FAC_NAME=="－－" && Flag:STATUS伏字モード ? COLOR("伏字") # -1), FAC_NAME, 10,,,,,,1)
 
 
 
@@ -696,7 +715,7 @@ IF SHORT
 	ENDIF
 
 
-	PRINTFORM [%JOB_NAME, 6%]
+	CALL PRINT_LABEL(JOB_NAME,6,(JOB_NAME=="　　　" && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
 	RETURN
 ENDIF
 
@@ -734,7 +753,39 @@ ELSEIF TALENT:C_ID:창녀 != 0
 ELSEIF TALENT:C_ID:치안유지국직원 != 0
 	JOB_NAME '= "치안 유지국 직원"
 ENDIF
-PRINTFORM [%JOB_NAME, 24%]
+CALL PRINT_LABEL(JOB_NAME,24,(JOB_NAME=="" && Flag:STATUS伏字モード ? COLOR("伏字") # -1),,,,,,,,1)
+
+
+
+
+;-----------------------------
+;-- 名前被り情報
+;-----------------------------
+@INFO_TARGET_SAME_NAME(C_ID)
+#DIM C_ID
+#DIM DYNAMIC SAME_CNT
+SAME_CNT = CNT_SAME_NAME(C_ID, CALLNAME:C_ID)
+IF SAME_CNT <= 0
+	PRINTFORM ───
+ELSE
+	PRINTFORM 同名{MIN(99, SAME_CNT), 2}
+ENDIF
+
+
+
+;-----------------------------
+;-- 中毒情報
+;-----------------------------
+@INFO_TARGET_ADDICT(C_ID)
+#DIM C_ID
+IF TALENT:C_ID:快楽中毒 == 1
+	SETCOLOR COLOR("紫")
+	PRINTFORM 快
+	RESETCOLOR
+ELSE
+	PRINTFORM 　
+ENDIF
+
 
 
 
@@ -870,6 +921,10 @@ NEXT
 ;都市の予算情報
 ;-------------------------------------------------
 @INFO_CITY_BASE
-PRINTFORML 【ＴＰ:{Flag:都市_現在TP}/{Flag:都市_最大TP}】【BP:{FLAG:都市_現在BP}】【AP:{FLAG:都市_現在AP}】【소지금:{MONEY}】
+CALL PRINT_RANGE_STATUS(-1, "ＴＰ", "TP", , , "伏字")
+CALL PRINT_STATUS(-1, "BP")
+CALL PRINT_STATUS(-1, "AP")
+CALL PRINT_LABEL("소지금",,,@"{MONEY}")
+PRINTL
 
 

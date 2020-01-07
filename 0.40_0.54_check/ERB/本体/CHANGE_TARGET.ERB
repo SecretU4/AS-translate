@@ -9,6 +9,7 @@
 ;
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		----					新規作成
+;   002     2019/04/17      M                       ラベル表示リファクタリング
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
@@ -88,13 +89,9 @@ WHILE 1
 	ELSE
 		PRINTFORM [%TOSTR(L_I),3%] 
 		IF L_I == MASTER
-			SETCOLOR COLOR("水色")
-			PRINTFORM 【MASTER】
-			RESETCOLOR
+			CALL PRINT_LABEL("MASTER",,COLOR("水色"))
 		ELSEIF CFLAG:L_I:調教対象フラグ
-			SETCOLOR COLOR("ピンク")
-			PRINTFORM 【TARGET】
-			RESETCOLOR
+			CALL PRINT_LABEL("TARGET",,COLOR("ピンク"))
 		ELSE
 			PRINTFORM 　　　　　
 		ENDIF

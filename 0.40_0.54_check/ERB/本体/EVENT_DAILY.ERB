@@ -9,6 +9,7 @@
 ;
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		----					新規作成
+;   002     2019/04/17      M                       ラベル表示リファクタリング
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
@@ -67,7 +68,8 @@ FOR L_I,0,CHARANUM
 	IF !L_HIT
 		L_HIT=1
 		DRAWLINE
-		PRINTFORML 【制服支給】
+		CALL PRINT_LABEL("制服支給")
+		PRINTL
 		PRINTL
 	ENDIF
 
@@ -230,7 +232,8 @@ L_PLAYER	= %CALLNAME:MASTER%
 ;- 夜伽
 ;-------------------
 CALL C_LINE
-PRINTFORML 【夜伽】
+CALL PRINT_LABEL("夜伽")
+PRINTL
 PRINTFORML %L_STR%を夜伽に呼んだ…
 PRINTFORML %L_NAME%は裸になって%L_PLAYER%に忠誠を誓うと、%L_PLAYER%とベッドの中で過ごした…
 FORCEWAIT
@@ -283,7 +286,8 @@ TARGET = L_BAK
 
 PRINTL
 PRINTL
-PRINTFORML 【朝】
+CALL PRINT_LABEL("朝")
+PRINTL
 
 ;- EVE:日常(朝イベント)
 CALL EVENT_DAILY_MORNING
@@ -1235,15 +1239,15 @@ L_PLAYER	= %CALLNAME:MASTER%
 
 SELECTCASE ARGS
 	CASE "Ｖ"
-		PRINTFORM 【夜伽Ｖ】
+		CALL PRINT_LABEL("夜伽Ｖ")
 	CASE "Ａ"
-		PRINTFORM 【夜伽Ａ】
+		CALL PRINT_LABEL("夜伽Ａ")
 	CASE "Ｃ"
-		PRINTFORM 【夜伽Ｃ】
+		CALL PRINT_LABEL("夜伽Ｃ")
 	CASE "逆Ｖ"
-		PRINTFORM 【夜伽逆Ｖ】
+		CALL PRINT_LABEL("夜伽逆Ｖ")
 	CASE "逆Ａ"
-		PRINTFORM 【夜伽逆Ａ】
+		CALL PRINT_LABEL("夜伽逆Ａ")
 	;その他
 	CASEELSE
 ENDSELECT

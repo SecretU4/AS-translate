@@ -11,6 +11,7 @@
 ;	001		20XX/XX/XX		----					新規作成
 ;	002		2017/02/28		morph					ソートアルゴリズムの追加（CHARA_SORT_CTRL/CHARA_SORT_APPLY/CHARA_SORT_LABEL_TYPE/CHARA_SORT_FIND_LABEL）
 ;	003		2018/11/11		morph					キャラソート画面における全キャラ一括ソート処理を追加（AUTO_SORT_MAIN/CALC_SORT_STANDARD(CHARA)/CALC_SORT_JOB(CHARA)/CALC_SORT_MOTHER(CHARA)）
+;   004     2019/04/17      M                       ラベル表示リファクタリング
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
 ;===============================================================================
@@ -99,13 +100,9 @@ WHILE 1
 	ELSE
 		PRINTFORM [%TOSTR(L_I),3%] 
 		IF L_I == MASTER
-			SETCOLOR COLOR("水色")
-			PRINTFORM 【MASTER】
-			RESETCOLOR
+			CALL PRINT_LABEL("MASTER",,COLOR("水色"))
 		ELSEIF L_I == L_SELECT
-			SETCOLOR COLOR("緑")
-			PRINTFORM 【SELECT】
-			RESETCOLOR
+			CALL PRINT_LABEL("SELECT",,COLOR("緑"))
 		ELSE
 			PRINTFORM 　　　　　
 		ENDIF
@@ -314,21 +311,7 @@ RETURNF L_RESULT
 @CALC_SORT_RACE(CHARA)
 #FUNCTION
 #DIM CHARA
-#DIM L_出自
-IF TALENT:CHARA:인권파괴 == 1
-	L_出自 = 5
-ELSEIF TALENT:CHARA:주인소유 == 1
-	L_出自 = 4
-ELSEIF TALENT:CHARA:성노예출신 == 1
-	L_出自 = 3
-ELSEIF TALENT:CHARA:구세대인간 == 1
-	L_出自 = 2
-ELSEIF TALENT:CHARA:푸른혈족 == 1
-	L_出自 = 1
-ELSE
-	L_出自 = 0
-ENDIF
-RETURNF L_出自 * 100 + CFLAG:CHARA:住人_種族
+RETURNF INFO_STATUS_GET_BY_LABEL(CHARA, "出自")
 
 
 ;-------------------------------------------------

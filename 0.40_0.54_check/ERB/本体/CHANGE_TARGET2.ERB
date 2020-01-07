@@ -162,7 +162,7 @@ FLAG:調教対象人数 = 0
 ;;
 @CHANGE_TARGET_IS(ARG)
 #FUNCTION
-RETURNF (Talent:ARG:합의 != 0 || Talent:ARG:약점 != 0 || Talent:ARG:조교완료 != 0) && TALENT:ARG:부재 == 0
+RETURNF (Talent:ARG:합의 != 0 || Talent:ARG:약점 != 0 || Talent:ARG:조교완료 != 0) && TALENT:ARG:부재 == 0 &&  TALENT:ARG:ボランティア <= 0
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -225,9 +225,7 @@ FOR L_i, ARG:0, ARG:0 + ARG:1
 	IF GTR_CL:L_i > 0
 		PRINTFORM [%TOSTR(GTR_CL:L_i),3%]
 		IF CFLAG:(GTR_CL:L_i):調教対象フラグ 
-			SETCOLOR COLOR("ピンク")
-			PRINTFORM 【TARGET】
-			RESETCOLOR
+			CALL PRINT_LABEL("TARGET",,COLOR("ピンク"))
 		ELSE
 			PRINTFORM 　      　
 		ENDIF
