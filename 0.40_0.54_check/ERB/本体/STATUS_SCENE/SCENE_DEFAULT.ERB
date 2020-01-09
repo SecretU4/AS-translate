@@ -1,0 +1,279 @@
+﻿@DEFAULT_INFO_TARGET_DETAIL(L_I, L_COLOR = 0, CSTR_ID = 0)
+#DIM L_I
+#DIM L_COLOR
+#DIM CSTR_ID
+SETCOLOR 0xc1c1c1
+RESETCOLOR
+;PRINTFORM \[No.%TOSTR(NO:L_I),3%\] 
+IF CSTR_ID > 0
+	PRINTFORM %CSTR:L_I:CSTR_ID%
+ENDIF
+CALL VAR_PRINT_LIST_NAME(L_I)
+
+;VAR:バー出力(基礎)
+;行内で最初にカラー変更が起きると半角スペースが入る仕様？で後ろがズレないためのSETCOLOR
+SETCOLOR 0xc1c1c1
+CALL VAR_BAR_BASE(L_I, 0, 2)
+RESETCOLOR
+CALL INFO_TARGET_MARK(L_I)
+;-----------------------------
+;-- 労役情報
+;-----------------------------
+;未実装みたいなので一時的にコメントアウト
+;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
+CALL INFO_TARGET_RELATION(L_I)
+CALL INFO_TARGET_GENDER(L_I)
+CALL INFO_TARGET_FALLEN(L_I)
+CALL INFO_TARGET_NAYAMI(L_I)
+CALL INFO_TARGET_PREGNANCY(L_I, L_COLOR)
+
+
+;-------------------------------------------------
+;ラベル使用一行情報表示関数
+;-------------------------------------------------
+;キャラの情報を一行で表示しつつボタンとして扱う
+;キャララベル（ボタンとしての番号）と登録番号を別々に指定する必要がある
+@DEFAULT_INFO_CHARA_DETAIL_LABEL(C_LABEL, C_ID, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIM      C_LABEL    ;ボタンとして表示させる数値
+#DIM      C_ID       ;キャラの登録番号
+#DIMS     SORT_TYPE  ;現在のソート順
+#DIMS REF LABEL_LIST ;この行で使用するラベル一覧配列
+#DIM      LABEL_SIZE ;ラベル一覧配列の要素数
+;C_LABELが負数はありえないので表示内容のアナウンスに流用してます
+IF C_LABEL < 0
+	PRINTFORM %" " * 26%
+	CALL INFO_LABEL_LIST(SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+	PRINTFORML 
+ELSE
+	PRINTFORM [{C_LABEL, 3}]
+	CALL VAR_PRINT_LIST_NAME(C_ID)
+	CALL INFO_LABEL_ARRAY(C_ID, LABEL_LIST, LABEL_SIZE)
+	PRINTFORML 
+ENDIF
+
+
+
+;-------------------------------------------------
+;情報ページ定義関数
+;-------------------------------------------------
+@DEFAULT_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+#FUNCTION
+#DIMS SCENE
+#DIMS REF LIST_PACK ;戻り値用、リスト配列
+#DIM  REF PACK_SIZE ;
+{
+#DIMS CONST C_PACK = "基礎情報", 
+	"管理情報", 
+	"社会情報", 
+	"신체 ST", 
+	"페로몬 ST", 
+	"성감각 ST", 
+	"성기능 ABL", 
+	"성벽 ABL", 
+	"성행동 경험", 
+	"성교 경험", 
+	"조교 경험", 
+	"특수 쾌락 경험", 
+	"일상 경험", 
+	"전투 BASE", 
+	"전투 ST", 
+	"탐색 ABL", 
+	"무장", 
+}
+ARRAYCOPY "C_PACK", "LIST_PACK"
+PACK_SIZE = VARSIZE("C_PACK")
+RETURNF
+
+
+;-------------------------------------------------
+;ラベル使用部分キャラリスト関数
+;-------------------------------------------------
+;LIST_CHARA_STATUS_GROUPの基礎情報表示用
+@DEFAULT_LIST_CHARA_STATUS_GROUP(SCENE, CHARA_LIST, SHOW_START, SHOW_END, INPUT_MIN, INPUT_MAX, SORT_TYPE, LIST_NAME)
+#DIMS     SCENE         ;使用するシーン
+#DIM  REF CHARA_LIST    ;キャラリスト配列
+#DIM      SHOW_START    ;表示開始のキャララベルID
+#DIM      SHOW_END      ;表示終了のキャララベルID
+#DIM      INPUT_MIN     ;表示中キャララベルIDの最小値
+#DIM      INPUT_MAX     ;表示中キャララベルIDの最大値
+#DIMS     LABEL_LIST, 30;表示内容の取得用
+#DIM      LABEL_SIZE    ;表示内容の数
+#DIMS     SORT_TYPE     ;現在のソート順
+#DIMS     LIST_NAME     ;現在の表示内容
+#DIMS     PREV_LIST     ;前回表示した内容
+#DIM      C_LABEL       ;キャララベルID
+#DIM      DETAIL_OP     ;基礎情報の表示内容の切り替え用
+IF LIST_NAME == "基礎情報"
+	FOR C_LABEL, SHOW_START, SHOW_END
+		IF INRANGE(C_LABEL, INPUT_MIN, INPUT_MAX)
+			PRINTFORM [{C_LABEL, 3}] 
+			CALL DEFAULT_INFO_TARGET_DETAIL(CHARA_LIST:C_LABEL)
+		ENDIF
+		PRINTL
+	NEXT
+	RETURN
+ENDIF
+
+;ラベルリスト取得
+IF LIST_NAME == PREV_LIST
+ELSE
+	CALLF DIM_TABLE_LABEL_LIST(LIST_NAME, LABEL_LIST, LABEL_SIZE)
+	PREV_LIST '= LIST_NAME
+ENDIF
+
+;デバッグ確認用
+;CALL VAR_SHOW_STR_ARRAY(LABEL_LIST, LABEL_SIZE)
+CALL DEFAULT_INFO_CHARA_DETAIL_LABEL(-1, 0, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+DRAWLINE
+FOR C_LABEL, SHOW_START, SHOW_END
+	IF INRANGE(C_LABEL, INPUT_MIN, INPUT_MAX)
+		CALL DEFAULT_INFO_CHARA_DETAIL_LABEL(C_LABEL, CHARA_LIST:C_LABEL, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+	ELSE
+		PRINTL
+	ENDIF
+NEXT
+
+
+
+;-------------------------------------------------
+;シーン切替可能入力関数
+;-------------------------------------------------
+@DEFAULT_LIST_CHARA_INPUT(SCENE, OP, CHARA_LIST, CHARA_CNT, NOW_GROUP, LAST_GROUP, LIST_PACK, PACK_PAGE, PACK_SIZE, INPUT_MIN, INPUT_MAX, SORT_TYPE, GET_LIST)
+#DIMS     SCENE      ;使用場面
+#DIMS     OP         ;オプション文字列
+#DIM  REF CHARA_LIST ;キャラリスト一覧配列
+#DIM      CHARA_CNT  ;リスト中のキャラ数
+#DIM  REF NOW_GROUP  ;現在表示中のキャラグループ
+#DIM      LAST_GROUP ;キャラグループの最後尾
+#DIMS REF LIST_PACK  ;パックリスト配列
+#DIM  REF PACK_PAGE  ;表示データのページ数
+#DIM      PACK_SIZE  ;パックリスト配列のサイズ
+#DIM      INPUT_MIN  ;表示中キャララベルIDの最小値
+#DIM      INPUT_MAX  ;表示中キャララベルIDの最大値
+#DIMS REF SORT_TYPE  ;現在のソート順
+#DIM  REF GET_LIST   ;キャラリスト更新処理用フラグ
+#DIMS     INPUT_STR  ;入力内容の一時保持
+#DIM      INPUT_INT  ;入力内容の一時保持
+#DIM      L_INPUT    ;入力内容の一時保持
+
+#DIM DYNAMIC L_SUP_CNT, 4         ;各部隊に配属済みのキャラ数
+VARSET INPUT_STR
+VARSET INPUT_INT
+
+;ボタン長さ：
+;[----] - 
+;%LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%
+;
+;情報移動はボタン部9、ラベル部20で29
+;キャラ移動はボタン部9、ラベル部14で23
+PRINTFORM %" " * 29%
+PRINTFORM 　　
+SIF CHARA_CNT > 0 && NOW_GROUP > 1
+	PRINTBUTTON "[8888] - 　이전 캐릭터　", "8888"
+PRINTFORML 
+PRINTFORM 　
+PRINTBUTTON @"[4444] - %LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%", "4444"
+PRINTFORM 　
+PRINTFORM %" " * 23%
+PRINTFORM 　
+PRINTBUTTON @"[6666] - %LIST_PACK:((PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE), 20%", "6666"
+PRINTFORML 
+PRINTFORM 　
+PRINTBUTTON "[1111] - 　　　　정렬 반영", "1111"
+PRINTFORM 　
+IF CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP
+	PRINTBUTTON "[2222] - 　다음 캐릭터　", "2222"
+ELSE
+	PRINTFORM %" " * 23%
+ENDIF
+PRINTFORM 　
+PRINTBUTTON "[3333] - 　　　　표시 인원 수 변경", "3333"
+PRINTFORML 
+DRAWLINE
+PRINTFORM 　
+PRINTBUTTON "[9999] - 　　　　돌아온다　　　　", "9999"
+PRINTFORML 
+PRINTFORML 
+DO
+	INPUTS
+	INPUT_STR '= RESULTS
+	SIF !STRLENS(INPUT_STR)
+		GOTO DEFAULT_RETRY
+	IF ISNUMERIC(INPUT_STR)
+		INPUT_INT = TOINT(INPUT_STR)
+		SELECTCASE INPUT_INT
+		;先にシステム系を処理、キャラ数が多いので4ケタに拡張
+		CASE 1111
+			CALL LIST_CHARA_MEMORY_SORT(CHARA_LIST, CHARA_CNT)
+			RETURN 0
+		CASE 8888
+			SIF !(CHARA_CNT > 0 && NOW_GROUP > 1)
+				GOTO DEFAULT_RETRY
+			NOW_GROUP --
+			RETURN -1
+		CASE 2222
+			SIF !(CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP)
+				GOTO DEFAULT_RETRY
+			NOW_GROUP ++
+			RETURN -1
+		CASE 3333
+			PRINTFORML 페이지 최대 표시 인원 숫자를 선택or입력하세요（1～999명）
+			PRINTFORM [5] 5명 
+			PRINTFORM [10] 10명 
+			PRINTFORM [15] 15명 
+			PRINTFORML [20] 20명 
+			PRINTFORML [0] 변경하지 않는다
+			INPUT
+			L_INPUT = RESULT
+			IF INRANGE(L_INPUT, 1, 999)
+				FLAG:定数_カフェ表示数 = L_INPUT
+				PRINTFORMW 표시 인원을 {L_INPUT}명으로 변경했습니다
+				NOW_GROUP = 1
+			ENDIF
+			RETURN -1
+		CASE 4444
+			PACK_PAGE = (PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE
+			RETURN -1
+		CASE 6666
+			PACK_PAGE = (PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE
+			RETURN -1
+		CASE 9999
+			NOW_GROUP = 1
+			RETURN
+		CASEELSE
+		;キャラが選択された時
+			SIF !INRANGE(INPUT_INT, INPUT_MIN, INPUT_MAX)
+				GOTO DEFAULT_RETRY
+			;ここだけDO-LOOPぬけます
+			BREAK
+			$DEFAULT_RETRY
+			CALL C_INPUT_ERROR("無効な入力です")
+			CONTINUE
+		ENDSELECT
+	ELSE
+		;STRで受け取った時、SORT処理なので処理が可能な場合は全てRESTART
+		;妙な文字列を受け取った場合にはCONTINUE
+		;DO-LOOPを脱出できるのはINTかつ、リスト上のキャラを選択した場合のみ
+		CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
+		IF RESULT
+			RETURN -1
+		ELSE
+			GOTO DEFAULT_RETRY
+		ENDIF
+	ENDIF
+LOOP 1
+IF STRCOUNT(OP, "「정보 표시」")
+	CALL INFO_STATUS_GROUP(CHARA_LIST, INPUT_INT, CHARA_CNT, OP)
+	SIF RESULT < 0
+		RETURN -1
+	NOW_GROUP = 1
+	SIF STRCOUNT(OP, "「최종 확인」")
+		RETURN RESULT
+ELSE
+	NOW_GROUP = 1
+	RETURN CHARA_LIST:INPUT_INT
+ENDIF
+
+

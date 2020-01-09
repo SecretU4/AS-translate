@@ -1,0 +1,488 @@
+﻿;=================================================
+;RPG用キャラセレクト関数
+;-------------------------------------------------
+@RPG_CHARA_SELECT(MODE_NOW = "RPG_武器強化")
+#DIMS         MODE_NOW
+#DIM          MODE_ID
+#DIM          L_INPUT
+#DIM          NOW_GROUP = 1 ;ページ記憶用
+#DIMS DYNAMIC OP_RELOAD     ;初回以外のページ更新とリスト更新を抑制する
+{
+#DIMS CONST   MODE_NAME = 
+	"RPG_武器強化", 
+	"RPG_技能成長", 
+	"RPG_強化剤投与", 
+	"RPG_超人薬投与", 
+	"RPG_随伴配置", 
+	"RPG_後方配置", 
+	"RPG_回収配置", 
+	"RPG_探索配置"
+}
+{
+#DIMS CONST   MEMO_STR = 
+	"무기 강화 대상자를 선택하세요。", 
+	"기능 성장 대상자를 선택하세요。", 
+	"강화제 투여 대상자를 선택하세요。", 
+	"초인약 투여 대상자를 선택하세요。", 
+	"수반 부대에 배치할 인물을 선택하세요。", 
+	"후방 부대에 배치할 인물을 선택하세요。", 
+	"회수 부대에 배치할 인물을 선택하세요。", 
+	"탐색 부대에 배치할 인물을 선택하세요。"
+}
+
+MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
+SELECTCASE MODE_ID
+CASE -1
+	MODE_NOW '= "RPG_武器強化"
+	RESTART
+ENDSELECT
+CLEARLINE LINECOUNT
+
+CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP_RELOAD, MODE_NOW, MEMO_STR:MODE_ID)
+
+L_INPUT = RESULT
+OP_RELOAD '= "「ページ更新無し」「リスト更新無し」"
+SELECTCASE L_INPUT
+CASE 0
+	NOW_GROUP = 1
+	RETURN
+CASE 1 TO CHARANUM - 1
+	SELECTCASE MODE_NOW
+	CASE "RPG_武器強化"
+		CALL RPG_WEAPON_MENU(L_INPUT)
+	CASE "RPG_技能成長"
+		CALL RPG_SKILLSET(L_INPUT)
+	CASE "RPG_強化剤投与", "RPG_超人薬投与"
+		CALL RPG_DOPING(L_INPUT, MODE_NOW)
+	CASE "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置"
+		CALL RPG_SUPPORT_MENU(L_INPUT, MODE_NOW)
+	ENDSELECT
+CASE 1000 TO 1007
+	MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+CASEELSE
+ENDSELECT
+RESTART
+
+
+
+;-------------------------------------------------
+;RPG用CALLNAME表示関数
+;-------------------------------------------------
+@RPG_LIST_NAME(C_ID)
+#DIM C_ID
+SIF C_ID < 0
+	RETURN
+CALL INFO_TARGET_DELETE(C_ID)
+PRINTFORM %SHORTEN_NAME(C_ID), 10, LEFT%
+PRINT 　
+CALL INFO_TARGET_RELATION(C_ID)
+CALL INFO_TARGET_SUPPORT(C_ID)
+PRINT 　
+
+
+
+;-------------------------------------------------
+;RPG用ターゲット詳細情報表示関数
+;-------------------------------------------------
+@RPG_INFO_TARGET_DETAIL(L_I, L_CATE)
+#DIM L_I     ;対象キャラ
+#DIM L_CATE  ;表示カテゴリー小区分フラグ
+#DIM L_TMP   
+#DIM L_SEX   
+#DIMS L_STR  
+#DIMS CONST OP_NAME = "NONE", "強化剤", "超人薬", "技能"
+
+L_SEX = VAR_SEX(L_I)
+CALL INFO_TARGET_DELETE(L_I)
+PRINTFORM %SHORTEN_NAME(L_I), 10, LEFT%
+PRINT 　
+CALL INFO_TARGET_RELATION(L_I)
+CALL INFO_TARGET_SUPPORT(L_I)
+PRINT 　
+
+;VAR:バー出力(基礎)
+;CALL VAR_BAR_BASE(L_I, 0, 2)
+
+;強化剤用フラグがある時残り強化回数を表示
+SELECTCASE OP_NAME:L_CATE
+CASE "強化剤"
+	PRINTFORM [잔여 {LIMIT(100-CFLAG:L_I:住人_強化回数, 0, 999), 3 ,RIGHT}]
+CASE "超人薬"
+	PRINTFORM [잔여 {LIMIT(100-CFLAG:L_I:住人_超人回数, 0, 999), 3 ,RIGHT}]
+CASE "技能"
+	PRINTFORM [잔여 {LIMIT(CFLAG:L_I:住人_技能ポイント, 0, 999), 3 ,RIGHT}]
+CASEELSE
+	PRINTFORM [승리 {LIMIT(CFLAG:L_I:住人_勝利回数, 0, 999), 3 ,RIGHT}]
+ENDSELECT
+
+;基礎能力出力
+CALL PRINT_RANGE_STATUS(L_I, "HP", "体力", , 3, , "％", , , 1)
+CALL PRINT_RANGE_STATUS(L_I, "SP", "気力", , 3, , "％", , , 1)
+CALL PRINT_RANGE_STATUS(L_I, "BRE", , , 3, "伏字", "％", , , 1)
+
+CALL INFO_TARGET_WEAPON(L_I, "MAIN")
+CALL INFO_TARGET_WEAPON(L_I, "SUB")
+
+;-----------------------------
+;-- 刻印情報
+;-----------------------------
+;現状は調査パートに影響無さそうで長いのでコメントアウト
+
+;-----------------------------
+;-- 労役情報
+;-----------------------------
+;未実装みたいなので一時的にコメントアウト
+;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
+
+CALL INFO_TARGET_GENDER(L_I)
+
+;
+;@RPG_INFO_BASE(L_I, TYPE)
+;	Discontinued by M.
+
+
+;-------------------------------------------------
+;RPG用ラベル使用一行情報表示関数
+;-------------------------------------------------
+@RPG_INFO_CHARA_DETAIL_LABEL(C_LABEL, C_ID, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIM      C_LABEL    ;ボタンとして表示させる数値
+#DIM      C_ID       ;キャラの登録番号
+#DIMS     SORT_TYPE  ;現在のソート順
+#DIMS REF LABEL_LIST ;この行で使用するラベル一覧配列
+#DIM      LABEL_SIZE ;ラベル一覧配列の要素数
+;C_LABELが負数はありえないので表示内容のアナウンスに流用してます
+IF C_LABEL < 0
+	PRINTFORM %" " * 31%
+	CALL INFO_LABEL_LIST(SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+	PRINTFORML 
+ELSE
+	CALL INFO_LABEL_ARRAY(C_ID, LABEL_LIST, LABEL_SIZE)
+	PRINTFORML 
+ENDIF
+
+
+
+;-------------------------------------------------
+;RPG用情報ページ定義関数
+;-------------------------------------------------
+@RPG_DIM_TABLE_LIST_PACK(SCENE, LIST_PACK, PACK_SIZE)
+#FUNCTION
+#DIMS SCENE
+#DIMS REF LIST_PACK ;戻り値用、リスト配列
+#DIM  REF PACK_SIZE ;
+{
+#DIMS CONST C_PACK = "基礎情報", 
+	"管理情報", 
+	"身体ST", 
+	"探索ABL", 
+	"武装", 
+	"戦闘BASE", 
+	"戦闘ST"
+}
+ARRAYCOPY "C_PACK", "LIST_PACK"
+PACK_SIZE = VARSIZE("C_PACK")
+RETURNF
+
+
+
+;-------------------------------------------------
+;RPG用ラベル使用部分キャラリスト関数
+;-------------------------------------------------
+@RPG_LIST_CHARA_STATUS_GROUP(SCENE, CHARA_LIST, SHOW_START, SHOW_END, INPUT_MIN, INPUT_MAX, SORT_TYPE, LIST_NAME)
+#DIMS     SCENE         ;使用するシーン
+#DIM  REF CHARA_LIST    ;キャラリスト配列
+#DIM      SHOW_START    ;表示開始のキャララベルID
+#DIM      SHOW_END      ;表示終了のキャララベルID
+#DIM      INPUT_MIN     ;表示中キャララベルIDの最小値
+#DIM      INPUT_MAX     ;表示中キャララベルIDの最大値
+#DIMS     LABEL_LIST, 30;表示内容の取得用
+#DIM      LABEL_SIZE    ;表示内容の数
+#DIMS     SORT_TYPE     ;現在のソート順
+#DIMS     LIST_NAME     ;現在の表示内容
+#DIMS     PREV_LIST     ;前回表示した内容
+#DIM      C_LABEL       ;キャララベルID
+#DIM      DETAIL_OP     ;基礎情報の表示内容の切り替え用
+
+IF LIST_NAME == "基礎情報"
+	SELECTCASE SCENE
+	CASE "RPG_強化剤投与"
+		DETAIL_OP = 1
+	CASE "RPG_超人薬投与"
+		DETAIL_OP = 2
+	CASE "RPG_技能成長"
+		DETAIL_OP = 3
+	CASEELSE
+		DETAIL_OP = 0
+	ENDSELECT
+	FOR C_LABEL, SHOW_START, SHOW_END
+		IF INRANGE(C_LABEL, INPUT_MIN, INPUT_MAX)
+			PRINTFORM [{C_LABEL, 3}]
+			CALL RPG_INFO_TARGET_DETAIL(CHARA_LIST:C_LABEL, DETAIL_OP)
+		ENDIF
+		PRINTL
+	NEXT
+	RETURN
+ENDIF
+
+;ラベルリスト取得
+IF LIST_NAME == PREV_LIST
+ELSE
+	CALLF DIM_TABLE_LABEL_LIST(LIST_NAME, LABEL_LIST, LABEL_SIZE)
+	PREV_LIST '= LIST_NAME
+ENDIF
+
+;デバッグ確認用
+;CALL VAR_SHOW_STR_ARRAY(LABEL_LIST, LABEL_SIZE)
+CALL RPG_INFO_CHARA_DETAIL_LABEL(-1, 0, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+DRAWLINE
+FOR C_LABEL, SHOW_START, SHOW_END
+	IF INRANGE(C_LABEL, INPUT_MIN, INPUT_MAX)
+		PRINTFORM [{C_LABEL, 3}]
+		CALL RPG_LIST_NAME(CHARA_LIST:C_LABEL)
+		CALL RPG_INFO_CHARA_DETAIL_LABEL(C_LABEL, CHARA_LIST:C_LABEL, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+	ELSE
+		PRINTL
+	ENDIF
+NEXT
+
+;TRYCCALLFORM %SCENE%_LIST_NAME(-1)
+;	FOR C_LABEL, SHOW_START, SHOW_END
+;		IF INRANGE(C_LABEL, INPUT_MIN, INPUT_MAX)
+;			PRINTFORM [{C_LABEL, 3}]
+;			CALLFORM %SCENE%_LIST_NAME(CHARA_LIST:C_LABEL)
+;			CALL RPG_INFO_CHARA_DETAIL_LABEL(C_LABEL, CHARA_LIST:C_LABEL, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+;		ELSE
+;			PRINTL
+;		ENDIF
+;	NEXT
+;CATCH
+;	FOR C_LABEL, SHOW_START, SHOW_END
+;		IF INRANGE(C_LABEL, INPUT_MIN, INPUT_MAX)
+;			PRINTFORM [{C_LABEL, 3}]
+;			CALL RPG_LIST_NAME(CHARA_LIST:C_LABEL)
+;			CALL RPG_INFO_CHARA_DETAIL_LABEL(C_LABEL, CHARA_LIST:C_LABEL, SORT_TYPE, LABEL_LIST, LABEL_SIZE)
+;		ELSE
+;			PRINTL
+;		ENDIF
+;	NEXT
+;ENDCATCH
+;
+
+
+
+
+;-------------------------------------------------
+;RPG用シーン切替可能入力関数
+;-------------------------------------------------
+@RPG_LIST_CHARA_INPUT(SCENE, OP, CHARA_LIST, CHARA_CNT, NOW_GROUP, LAST_GROUP, LIST_PACK, PACK_PAGE, PACK_SIZE, INPUT_MIN, INPUT_MAX, SORT_TYPE, GET_LIST)
+#DIMS     SCENE      ;使用場面
+#DIMS     OP         ;オプション文字列
+#DIM  REF CHARA_LIST ;キャラリスト一覧配列
+#DIM      CHARA_CNT  ;リスト中のキャラ数
+#DIM  REF NOW_GROUP  ;現在表示中のキャラグループ
+#DIM      LAST_GROUP ;キャラグループの最後尾
+#DIMS REF LIST_PACK  ;パックリスト配列
+#DIM  REF PACK_PAGE  ;表示データのページ数
+#DIM      PACK_SIZE  ;パックリスト配列のサイズ
+#DIM      INPUT_MIN  ;表示中キャララベルIDの最小値
+#DIM      INPUT_MAX  ;表示中キャララベルIDの最大値
+#DIMS REF SORT_TYPE  ;現在のソート順
+#DIM  REF GET_LIST   ;キャラリスト更新処理用フラグ
+#DIMS     INPUT_STR  ;入力内容の一時保持
+#DIM      INPUT_INT  ;入力内容の一時保持
+#DIM      L_INPUT    ;入力内容の一時保持
+
+#DIM DYNAMIC L_SUP_CNT, 4         ;各部隊に配属済みのキャラ数
+VARSET INPUT_STR
+VARSET INPUT_INT
+
+;ボタン長さ：
+;[----] - 
+;%LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%
+;
+;情報移動はボタン部9、ラベル部20で29
+;キャラ移動はボタン部9、ラベル部14で23
+PRINTFORM %" " * 29%
+PRINTFORM 　　
+SIF CHARA_CNT > 0 && NOW_GROUP > 1
+	PRINTBUTTON "[8888] - 　이전 캐릭터　", "8888"
+PRINTFORML 
+PRINTFORM 　
+PRINTBUTTON @"[4444] - %LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%", "4444"
+PRINTFORM 　
+PRINTFORM %" " * 23%
+PRINTFORM 　
+PRINTBUTTON @"[6666] - %LIST_PACK:((PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE), 20%", "6666"
+PRINTFORML 
+PRINTFORM 　
+IF GROUPMATCH(SCENE, "RPG_武器強化", "RPG_技能成長", "RPG_強化剤投与", "RPG_超人薬投与", "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置")
+	PRINTBUTTON "[1111] - 　　　　모든 캐릭터 해임", "1111"
+ELSE
+	PRINTFORM %" " * 29%
+ENDIF
+PRINTFORM 　
+IF CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP
+	PRINTBUTTON "[2222] - 　다음 캐릭터　", "2222"
+ELSE
+	PRINTFORM %" " * 23%
+ENDIF
+PRINTFORM 　
+PRINTBUTTON "[3333] - 　　　　표시 인원 수 변경", "3333"
+PRINTFORML 
+IF GROUPMATCH(SCENE, "RPG_武器強化", "RPG_技能成長", "RPG_強化剤投与", "RPG_超人薬投与", "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置")
+	DRAWLINE
+	PRINTFORM 　
+	SIF SCENE == "RPG_武器強化"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1000] - 　　　　　　무기 강화", "1000"
+	PRINTFORM 　
+	RESETCOLOR
+	SIF SCENE == "RPG_技能成長"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1001] - 　　기능 성장　", "1001"
+	PRINTFORM 　
+	RESETCOLOR
+	SIF SCENE == "RPG_強化剤投与"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1002] - 　　　　　강화제 투여", "1002"
+	PRINTFORM 　
+	RESETCOLOR
+	SIF SCENE == "RPG_超人薬投与"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1003] - 　　초인약 투여", "1003"
+	PRINTFORML 
+	RESETCOLOR
+	
+	SIF SCENE == "RPG_随伴配置"
+		SETCOLOR COLOR("黄色")
+	PRINTFORM 　
+	PRINTBUTTON "[1004] - 　　　　　　수반 배치", "1004"
+	PRINTFORM 　
+	RESETCOLOR
+	SIF SCENE == "RPG_後方配置"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1005] - 　　후방 배치　", "1005"
+	PRINTFORM 　
+	RESETCOLOR
+	SIF SCENE == "RPG_回収配置"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1006] - 　　　　　　회수 배치", "1006"
+	PRINTFORM 　
+	RESETCOLOR
+	SIF SCENE == "RPG_探索配置"
+		SETCOLOR COLOR("黄色")
+	PRINTBUTTON "[1007] - 　　　탐색 배치", "1007"
+	PRINTFORML 
+	RESETCOLOR
+ELSE
+ENDIF
+DRAWLINE
+
+CALL SHOW_ALL_SUPPORT(L_SUP_CNT, "「ボタン無し」")
+DRAWLINE
+PRINTFORM 　
+PRINTBUTTON "[9999] - 　　　　돌아온다　　　　", "9999"
+PRINTFORML 
+PRINTFORML 
+DO
+	INPUTS
+	INPUT_STR '= RESULTS
+	SIF !STRLENS(INPUT_STR)
+		GOTO RPG_RETRY
+	IF ISNUMERIC(INPUT_STR)
+		INPUT_INT = TOINT(INPUT_STR)
+		SELECTCASE INPUT_INT
+		;先にシステム系を処理、キャラ数が多いので4ケタに拡張
+		CASE 1111
+			IF GROUPMATCH(SCENE, "RPG_武器強化", "RPG_技能成長", "RPG_強化剤投与", "RPG_超人薬投与", "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置")
+				PRINTFORML 정말 모든 캐릭터를 부대에서 제외하시겠습니까？
+				PRINTFORML 
+				PRINTFORML [1] 제외한다
+				PRINTFORML [0] 그만둔다
+				INPUT
+				IF RESULT == 1
+					CALL SUPPORT_CHARA_ALL_REMOVE
+				ELSE
+					PRINTFORMW 해임을 취소합니다
+				ENDIF
+				RETURN -1
+			ELSE
+				GOTO RPG_RETRY
+			ENDIF
+		CASE 1000 TO 1007
+			SIF !GROUPMATCH(SCENE, "RPG_武器強化", "RPG_技能成長", "RPG_強化剤投与", "RPG_超人薬投与", "RPG_随伴配置", "RPG_後方配置", "RPG_回収配置", "RPG_探索配置")
+				GOTO RPG_RETRY
+			RETURN INPUT_INT
+		CASE 8888
+			SIF !(CHARA_CNT > 0 && NOW_GROUP > 1)
+				GOTO RPG_RETRY
+			NOW_GROUP --
+			RETURN -1
+		CASE 2222
+			SIF !(CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP)
+				GOTO RPG_RETRY
+			NOW_GROUP ++
+			RETURN -1
+		CASE 3333
+			PRINTFORML 페이지 최대 표시 인원 숫자를 선택or입력하세요（1～999人）
+			PRINTFORM [5] 5명 
+			PRINTFORM [10] 10명 
+			PRINTFORM [15] 15명 
+			PRINTFORML [20] 20명 
+			PRINTFORML [0] 변경하지 않는다
+			INPUT
+			L_INPUT = RESULT
+			IF INRANGE(L_INPUT, 1, 999)
+				FLAG:定数_カフェ表示数 = L_INPUT
+				PRINTFORMW 표시 인원을 {L_INPUT}명으로 변경했습니다
+				GET_LIST = 1
+				NOW_GROUP = 1
+			ENDIF
+			RETURN -1
+		CASE 4444
+			PACK_PAGE = (PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE
+			RETURN -1
+		CASE 6666
+			PACK_PAGE = (PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE
+			RETURN -1
+		CASE 9999
+			NOW_GROUP = 1
+			RETURN
+		CASEELSE
+		;キャラが選択された時
+			SIF !INRANGE(INPUT_INT, INPUT_MIN, INPUT_MAX)
+				GOTO RPG_RETRY
+			;ここだけDO-LOOPぬけます
+			BREAK
+			$RPG_RETRY
+			CALL C_INPUT_ERROR("無効な入力です")
+			CONTINUE
+		ENDSELECT
+	ELSE
+		;STRで受け取った時、SORT処理なので処理が可能な場合は全てRESTART
+		;妙な文字列を受け取った場合にはCONTINUE
+		;DO-LOOPを脱出できるのはINTかつ、リスト上のキャラを選択した場合のみ
+		CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
+		IF RESULT
+			RETURN -1
+		ELSE
+			GOTO RPG_RETRY
+		ENDIF
+	ENDIF
+LOOP 1
+IF STRCOUNT(OP, "「부대 배치」")
+	CALL SELECT_SUPPORT(CHARA_LIST:INPUT_INT)
+	RETURN -1
+ELSEIF STRCOUNT(OP, "「정보 표시」")
+	CALL INFO_STATUS_GROUP(CHARA_LIST, INPUT_INT, CHARA_CNT, OP)
+	SIF RESULT < 0
+		RETURN -1
+	SIF STRCOUNT(OP, "「최종 확인」")
+		RETURN RESULT
+ELSE
+	RETURN CHARA_LIST:INPUT_INT
+ENDIF
+
+
