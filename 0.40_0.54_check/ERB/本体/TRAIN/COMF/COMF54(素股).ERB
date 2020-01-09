@@ -1,7 +1,7 @@
 ﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 ;
 ;	Module		:COMFxxx.ERB
-;	Facility	:TRAINコマンド(18:アナル愛撫)。
+;	Facility	:TRAINコマンド(54:素股)。
 ;
 ;	Licence		:ライセンスフリー。
 ;
@@ -12,6 +12,7 @@
 ;
 ;		Module Name						Explanation
 ;
+;	・ COM_FUNC_JUMP_Xxxx				取得:ジャンプ先
 ;	・ COM_FUNC_GET_NAME_Xxxx			取得:コマンド名称
 ;	・ COM_FUNC_ABLE_Xxxx				CHK:コマンド実行条件
 ;	・ COM_FUNC_EXE_Xxxx				コマンド実行
@@ -29,8 +30,8 @@
 ; Output:
 ;  RESULTS				コマンド名称
 ;-------------------------------------------------
-@COM_FUNC_GET_NAME_X18
-RESULTS = 애널 애무
+@COM_FUNC_GET_NAME_X54
+RESULTS = 스마타
 
 ;=================================================
 ;   sub COM_FUNC_ABLE_Xxxx
@@ -40,7 +41,20 @@ RESULTS = 애널 애무
 ; Output:
 ;  RESULT				真偽値
 ;-------------------------------------------------
-@COM_FUNC_ABLE_X18
+@COM_FUNC_ABLE_X54
+
+;Ｖ器具使用中は不可
+SIF TEQUIP:Ｖ器具
+	RETURN 0
+
+;- PLAYERにペニスが無いと不可
+SIF !VAR_PENIS(PLAYER)
+	RETURN 0
+
+;潤滑が高くないとダメ
+SIF PALAM:潤滑 < PALAMLV:3
+	RETURN 0
+
 RETURN 1
 
 ;=================================================
@@ -48,12 +62,9 @@ RETURN 1
 ;=================================================
 ;   コマンド実行
 ;-------------------------------------------------
-@COM_FUNC_EXE_X18
+@COM_FUNC_EXE_X54
 #DIM L_P
 #DIM L_T
-#DIM L_TMP
-#DIM L_I
-VARSET LOCAL
 
 L_P = PLAYER
 L_T = TARGET
@@ -62,7 +73,10 @@ L_T = TARGET
 ;COM別FLAGの設定
 ;-----------------------------
 
-TEQUIP:L_T:ポイント愛撫 = [[TRAIN:アナル愛撫]]
+;- POSE:リセット
+CALL POSE_RESET("Ｐ")
+
+TEQUIP:L_T:ポイント奉仕 = [[TRAIN:素股]]
 
 ;-----------------------------
 ;ソース追加処理
@@ -78,7 +92,7 @@ TEQUIP:L_T:ポイント愛撫 = [[TRAIN:アナル愛撫]]
 ;=================================================
 ;   コマンドソース
 ;-------------------------------------------------
-@COM_FUNC_SRC_X18
+@COM_FUNC_SRC_X54
 #DIM L_P
 #DIM L_T
 #DIM L_TMP
@@ -92,31 +106,38 @@ L_T = TARGET
 ;COM別FLAGの設定
 ;-----------------------------
 
+;- POSE:SET
+CALL POSE_SET(L_T, [[占有部位:指]])
+
 ;-----------------------------
 ;ソース追加処理
 ;-----------------------------
 
-LOCAL:0 = 120
-LOCAL:1 = 100
+LOCAL:0 = 100
+LOCAL:1 = 40
+LOCAL:2 = 120
+LOCAL:3 = 60
 
 ;-- 補正追加
 
-;- 範囲:100%～250%
-LOCAL:10 = ABL:L_P:기교
+;- 範囲:100%～200%
+LOCAL:10 = ABL:L_T:기교
 SELECTCASE LOCAL:10
 	CASE 0 to 8
-		L_TMP = 100 + (15 * LOCAL:10)
+		L_TMP = 100 + (10 * LOCAL:10)
 	CASEELSE
-		L_TMP = 250
+		L_TMP = 200
 ENDSELECT
 LOCAL:0 = LOCAL:0 * L_TMP / 100
 LOCAL:1 = LOCAL:1 * L_TMP / 100
-
+LOCAL:2 = LOCAL:2 * L_TMP / 100
+LOCAL:3 = LOCAL:3 * L_TMP / 100
 
 ;- ソース
-SOURCE:L_T:快Ａ += LOCAL:0
+SOURCE:L_P:快Ｃ += LOCAL:0
 SOURCE:L_T:性行為 += LOCAL:1
-
+SOURCE:L_T:性奉仕 += LOCAL:2
+SOURCE:L_T:快Ｃ += LOCAL:3
 
 ;-----------------------------
 ;経験の処理
@@ -126,8 +147,9 @@ SOURCE:L_T:性行為 += LOCAL:1
 CALL TR_EXP_ADD_HETEROSEX(L_T,L_P)
 
 ;- 各種経験
-GTR_EXPUP:L_P:DB_EXPUP_POS("수음경험") += 1
-
+GTR_EXPUP:L_T:DB_EXPUP_POS("수음경험") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("유혹경험") += 1
+GTR_EXPUP:L_T:DB_EXPUP_POS("봉사쾌락경험") += 1
 
 ;-----------------------------
 ;その他の処理
@@ -140,23 +162,40 @@ GTR_EXPUP:L_P:DB_EXPUP_POS("수음경험") += 1
 ;=================================================
 ;   コマンドメッセージ
 ;-------------------------------------------------
-@COM_FUNC_TRAIN_MSG_X18
+@COM_FUNC_TRAIN_MSG_X54
 
-PRINTFORM %CALLNAME:PLAYER%는 %CALLNAME%의 애널을 
-IF ABL:Ａ감각 <= 1
-	PRINT 손가락 안쪽으로 어루만지면서 
-ELSEIF ABL:Ａ감각 <= 3
-	PRINT 풀어주면서 
+PRINTFORM %CALLNAME%는 %CALLNAME:PLAYER%의 자지를 가랑이에 끼우고、
+IF MARK:함락각인
+	;欲情のPALAMLV5以上
+	IF PALAM:欲情 >= PALAMLV:5
+		PRINTFORM 입에서 침을 질질 흘리면서 
+	ELSE
+		PRINTFORM 푹 빠진 시선으로 %CALLNAME:PLAYER%를 응시하면서 
+	ENDIF
 ELSE
-	PRINT 손가락을 쑤셔넣어 
+	;欲情のPALAMLV5以上
+	IF PALAM:欲情 >= PALAMLV:5
+		PRINTFORM 입에서 침을 질질 흘리면서 
+	;수치심옅음
+	ELSEIF TALENT:수치심옅음
+		PRINTFORM 대담하게 허리를 움직이면서 
+	;감정부족
+	ELSEIF TALENT:감정부족
+		PRINTFORM 희미하게 붉어진 얼굴로 
+	ELSE
+		PRINT 부끄러워하면서 
+	ENDIF
 ENDIF
-PRINTFORML 애무했다…
-IF ABL:Ａ감각 <= 1
-	PRINTFORML %CALLNAME%는 아직 감촉을 받아들이기 힘든 것 같다…
-ELSEIF ABL:Ａ감각 <= 3
-	PRINTFORML %CALLNAME%는 이물감에 등을 바르르 떨고 있다…
+
+;작은체형
+IF TALENT:작은체형
+	PRINT 미성숙한 균열을 
 ELSE
-	PRINTFORML %CALLNAME%는 황홀한 표정으로 손가락에 몸을 맡기고 있다…
+	PRINT 음순을 
+ENDIF
+PRINTL 자지에 문지르고 있다…
+IF MARK:예속각인
+	PRINTFORML %CALLNAME%는 음란한 시선으로 도발하면서 %CALLNAME:PLAYER%를 유혹하고 있다…
 ENDIF
 
 WAIT
@@ -170,6 +209,6 @@ WAIT
 ; Output:
 ;  RESULT				コマンド種別
 ;-------------------------------------------------
-@COM_FUNC_GET_TYPE_X18
-RETURN [[COM種別:愛撫系]]
+@COM_FUNC_GET_TYPE_X54
+RETURN [[COM種別:奉仕系]]
 
