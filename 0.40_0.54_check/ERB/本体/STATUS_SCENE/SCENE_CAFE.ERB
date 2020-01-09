@@ -1,0 +1,181 @@
+﻿;=================================================
+;   sub CAFE_INFO_TARGET_DETAIL
+;=================================================
+;   表示:ターゲット(詳細)
+;-------------------------------------------------
+@CAFE_INFO_TARGET_DETAIL(C_ID, SHORT = 0)
+#DIM C_ID   ;対象キャラ
+#DIM SHORT  ;短縮フラグ(0:オフ 1:オン)
+;PRINTFORM \[No.%TOSTR(NO:L_I),3%\] 
+CALL VAR_PRINT_LIST_NAME(C_ID)
+
+;好感度表示
+;行内で最初にカラー変更が起きると半角スペースが入る仕様？で後ろがズレないためのSETCOLOR
+SETCOLOR 0xc1c1c1
+PRINTFORM 호감도:{CFlag:C_ID:好感度, 6 ,RIGHT} 
+RESETCOLOR
+CALL INFO_TARGET_MARK(C_ID)
+;-----------------------------
+;-- 労役情報
+;-----------------------------
+;未実装みたいなので一時的にコメントアウト
+;PRINTFORM [%INFO_WORK_NAME(L_I)%] 
+CALL INFO_TARGET_RELATION(C_ID)
+CALL INFO_TARGET_GENDER(C_ID)
+CALL INFO_TARGET_FALLEN(C_ID)
+CALL INFO_TARGET_NAYAMI(C_ID)
+CALL INFO_TARGET_PREGNANCY(C_ID, SHORT)
+
+
+
+@CAFE_LIST_CHARA_STATUS_HEADER(SCENE, LIST_NAME, CHARA_CNT, NOW_GROUP, LAST_GROUP)
+#DIMS SCENE      ;現在の場面
+#DIMS LIST_NAME  ;表示項目の分類＝PACK_NAME
+#DIM  CHARA_CNT  ;キャラリスト配列のキャラ数
+#DIM  NOW_GROUP  ;閲覧中のキャラグループ
+#DIM  LAST_GROUP ;キャラグループの最大値
+IF Flag:時間帯 == 0
+	PRINTFORM 【시간대:낮(선속성 주민 발생중)】
+ELSE
+	PRINTFORM 【시간대:밤(악속성 주민 발생중)】
+ENDIF
+CALL PRINT_RANGE_STATUS(-1, "TP", , , , "伏字")
+CALL PRINT_RANGE_STATUS(-1, "AP", , , , "伏字")
+PRINTL
+
+
+
+@CAFE_LIST_CHARA_INPUT(SCENE, OP, CHARA_LIST, CHARA_CNT, NOW_GROUP, LAST_GROUP, LIST_PACK, PACK_PAGE, PACK_SIZE, INPUT_MIN, INPUT_MAX, SORT_TYPE, GET_LIST)
+#DIMS     SCENE      ;使用場面
+#DIMS     OP         ;オプション文字列
+#DIM  REF CHARA_LIST ;キャラリスト一覧配列
+#DIM      CHARA_CNT  ;リスト中のキャラ数
+#DIM  REF NOW_GROUP  ;現在表示中のキャラグループ
+#DIM      LAST_GROUP ;キャラグループの最後尾
+#DIMS REF LIST_PACK  ;パックリスト配列
+#DIM  REF PACK_PAGE  ;表示データのページ数
+#DIM      PACK_SIZE  ;パックリスト配列のサイズ
+#DIM      INPUT_MIN  ;表示中キャララベルIDの最小値
+#DIM      INPUT_MAX  ;表示中キャララベルIDの最大値
+#DIMS REF SORT_TYPE  ;現在のソート順
+#DIM  REF GET_LIST   ;キャラリスト更新処理用フラグ
+#DIMS     INPUT_STR  ;入力内容の一時保持
+#DIM      INPUT_INT  ;入力内容の一時保持
+#DIM      L_INPUT    ;入力内容の一時保持
+
+#DIM DYNAMIC L_SUP_CNT, 4         ;各部隊に配属済みのキャラ数
+
+;ボタン長さ：
+;[----] - 
+;%LIST_PACK:((PACK_PAGE - 1 + 11) % 11), 20%
+;
+;情報移動はボタン部9、ラベル部20で29
+;キャラ移動はボタン部9、ラベル部14で23
+PRINTFORM %" " * 29%
+PRINTFORM 　　
+SIF CHARA_CNT > 0 && NOW_GROUP > 1
+	PRINTBUTTON "[8888] - 　이전 캐릭터　", "8888"
+PRINTFORML 
+PRINTFORM 　
+PRINTBUTTON @"[4444] - %LIST_PACK:((PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE), 20%", "4444"
+PRINTFORM 　
+PRINTFORM %" " * 23%
+PRINTFORM 　
+PRINTBUTTON @"[6666] - %LIST_PACK:((PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE), 20%", "6666"
+PRINTFORML 
+IF CHARANUM < 200
+	PRINTFORM 　
+	PRINTBUTTON "[1111] - 　　새 주민을 확정한다", "1111"
+	PRINTFORM 　
+ELSE
+	PRINTFORM %" " * 29%
+	PRINTFORM 　　
+ENDIF
+IF CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP
+	PRINTBUTTON "[2222] - 　다음 캐릭터　", "2222"
+ELSE
+	PRINTFORM %" " * 23%
+ENDIF
+PRINTFORM 　
+PRINTBUTTON "[3333] - 　　　　표시 인원 수 변경", "3333"
+PRINTFORML 
+DRAWLINE
+PRINTFORM 　
+PRINTBUTTON "[9999] - 　　　　돌아온다　　　　", "9999"
+PRINTFORML 
+PRINTFORML 
+DO
+	INPUTS
+	INPUT_STR '= RESULTS
+	SIF !STRLENS(INPUT_STR)
+		GOTO CAFE_RETRY
+	IF ISNUMERIC(INPUT_STR)
+		INPUT_INT = TOINT(INPUT_STR)
+		SELECTCASE INPUT_INT
+		;先にシステム系を処理、キャラ数が多いので4ケタに拡張
+		CASE 8888
+			SIF !(CHARA_CNT > 0 && NOW_GROUP > 1)
+				GOTO CAFE_RETRY
+			NOW_GROUP --
+			RETURN -1
+		CASE 2222
+			SIF !(CHARA_CNT > 0 && NOW_GROUP < LAST_GROUP)
+				GOTO CAFE_RETRY
+			NOW_GROUP ++
+			RETURN -1
+		CASE 1111
+			SIF CHARANUM >= 200
+				GOTO CAFE_RETRY
+			CALL CITY_SCOUT
+			SIF RESULT
+				GET_LIST = 1
+			RETURN -1
+		CASE 3333
+			PRINTFORML 페이지 최대 표시 인원 숫자를 선택or입력하세요（1～999명）
+			PRINTFORM [5] 5명 
+			PRINTFORM [10] 10명 
+			PRINTFORM [15] 15명 
+			PRINTFORML [20] 20명 
+			PRINTFORML [0] 변경하지 않는다
+			INPUT
+			L_INPUT = RESULT
+			IF INRANGE(L_INPUT, 1, 999)
+				FLAG:定数_カフェ表示数 = L_INPUT
+				PRINTFORMW 표시 인원을 {L_INPUT}명으로 변경했습니다
+				GET_LIST = 1
+				NOW_GROUP = 1
+			ENDIF
+			RETURN -1
+		CASE 4444
+			PACK_PAGE = (PACK_PAGE - 1 + PACK_SIZE) % PACK_SIZE
+			RETURN -1
+		CASE 6666
+			PACK_PAGE = (PACK_PAGE + 1 + PACK_SIZE) % PACK_SIZE
+			RETURN -1
+		CASE 9999
+			NOW_GROUP = 1
+			RETURN
+		CASEELSE
+		;キャラが選択された時
+			SIF !INRANGE(INPUT_INT, INPUT_MIN, INPUT_MAX)
+				GOTO CAFE_RETRY
+			;ここだけDO-LOOPぬけます
+			BREAK
+			$CAFE_RETRY
+			CALL C_INPUT_ERROR("無効な入力です")
+			CONTINUE
+		ENDSELECT
+	ELSE
+		;STRで受け取った時、SORT処理なので処理が可能な場合は全てRESTART
+		;妙な文字列を受け取った場合にはCONTINUE
+		;DO-LOOPを脱出できるのはINTかつ、リスト上のキャラを選択した場合のみ
+		CALL CHARA_SORT_CTRL(CHARA_LIST, CHARA_CNT, INPUT_STR, SORT_TYPE)
+		IF RESULT
+			RETURN -1
+		ELSE
+			GOTO CAFE_RETRY
+		ENDIF
+	ENDIF
+LOOP 1
+CALL CAFE_TALK_GROUP(CHARA_LIST, INPUT_INT, CHARA_CNT, OP)
+RETURN -1

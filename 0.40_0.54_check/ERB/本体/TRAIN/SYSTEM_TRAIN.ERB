@@ -1,0 +1,1271 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_TRAIN.ERB
+;	Facility	:TRAIN関連処理。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- XXXX
+;
+;	・ SYSTEM_TRAIN						SYSTEM:TRAIN
+;	・ TRAIN_INIT						TR:初期化
+;	・ TRAIN_SEC_START					TR:前処理
+;	・ TRAIN_SEC_MAIN					TR:主処理
+;	・ TRAIN_SEC_END					TR:後処理
+;	・ TRAIN_SHOW_COM					TR:コマンドリスト表示
+;
+; *- 処理系(詳細)
+;
+;	・ TRAIN_COM_EXE					TR:コマンド実行
+;	・ TR_CALC_MOOD						TR:무드
+;	・ TR_LOST_VIRGIN					TR:初体験
+;	・ TR_SAME_COMMAND					TR:同一コマンド
+;	・ TR_MSG_START						TR:開始メッセージ
+;	・ TR_MSG_END						TR:終了メッセージ
+;	・ TR_LOG							TR:履歴
+;	・ TR_AUTO_COM						TR:自動コマンド
+;	・ TR_START_SET						TR:開始状態セット
+;
+;===============================================================================
+
+
+;-------------------------------------------------------------------------------
+;   XXXX
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub SYSTEM_TRAIN
+;=================================================
+;   SYSTEM:TRAIN
+;-------------------------------------------------
+@SYSTEM_TRAIN
+#DIM L_COM
+
+
+;- TR:初期化
+CALL TRAIN_INIT
+
+;- TR:開始状態セット
+CALL TR_START_SET
+
+;- TR:開始メッセージ
+CALL TR_MSG_START
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+
+WHILE 1
+	;- TR:前処理
+	CALL TRAIN_SEC_START
+
+	;- TR:主処理
+	CALL TRAIN_SEC_MAIN
+
+	;- TR:後処理
+	CALL TRAIN_SEC_END
+
+	SIF SELECTCOM == [[TRAIN:行動終了]]
+		BREAK
+WEND
+
+;-----------------------------
+;- 処理終了
+;-----------------------------
+
+;- TR:終了メッセージ
+CALL TR_MSG_END
+
+;- TR:反映処理
+CALL TR_REFLECT_MAIN
+
+DRAWLINE
+
+;- ABLUP:自動(主処理)
+CALL ABLUP_AUTO_MAIN
+
+;- TR:MARKUP(メイン)
+CALL TR_MARKUP_MAIN
+
+;- TR:パラメータ変動(終了時)
+CALL TR_PALAMCHG_AFTER
+
+;- TR:初期化
+CALL TRAIN_INIT
+
+
+
+
+;=================================================
+;   sub TRAIN_INIT
+;=================================================
+;   TR:初期化
+;-------------------------------------------------
+@TRAIN_INIT
+
+VARSET TFLAG
+VARSET TSTR
+VARSET PREVCOM
+
+FLAG:調教開始フラグ = 0
+
+;- 全キャラ
+REPEAT CHARANUM
+
+	;- 全要素を初期化
+	VARSET GOTJUEL:COUNT:0, 0
+	VARSET TEQUIP:COUNT:0, 0
+	VARSET EX:COUNT:0, 0
+
+	VARSET PALAM:COUNT:0, 0
+	VARSET SOURCE:COUNT:0, 0
+	VARSET CUP:COUNT:0, 0
+	VARSET CDOWN:COUNT:0, 0
+	VARSET DOWNBASE:COUNT:0, 0
+
+	VARSET TCVAR:COUNT:0, 0
+
+	;- その他
+	BASE:COUNT:絶頂 = 0
+	BASE:COUNT:무드 = 0
+	CFLAG:COUNT:調教疲労フラグ = 0
+REND
+
+
+;=================================================
+;   sub TRAIN_SEC_START
+;=================================================
+;   TR:前処理
+;-------------------------------------------------
+@TRAIN_SEC_START
+
+;毎ターン初期化
+FLAG:調教コマンド派生 = 0
+
+
+;=================================================
+;   sub TRAIN_SEC_MAIN
+;=================================================
+;   TR:主処理
+;-------------------------------------------------
+; Output:
+;  RETURN				処理結果(0:続行 1:終了)
+;-------------------------------------------------
+@TRAIN_SEC_MAIN
+#DIM L_TMP
+#DIM L_PREVCOM
+#DIM L_INPUT
+#DIM L_C
+#DIM L_C2
+
+;- TR:アシ設定
+CALL TR_ASSI_SET
+
+;-----------------------------
+;- 表示:ヘッダー部
+;-----------------------------
+
+;- 表示:ページヘッダ
+CALL C_LINE
+
+;- 表示:日付
+CALL INFO_DATE
+
+PRINT 　　
+;-------------------------------------------------
+;PRINTFORM (経過ターン:{TFLAG:行動経過ターン数}T/{FLAG:最大数_行動限界ターン}T) 
+;-------------------------------------------------
+PRINTFORM (경과 턴:
+;SETCOLOR COLOR("水色")
+PRINTFORM {TFLAG:行動経過ターン数,2}T
+RESETCOLOR
+PRINTFORM /{FLAG:最大数_行動限界ターン}T) 
+;-------------------------------------------------
+
+PRINTL
+
+;-----------------------------
+;- 表示:パラメータ部
+;-----------------------------
+
+;- TR情報:行型PALAM(メイン)
+CALL TR_INFO_PALAM_LINE_MAIN
+
+;- TR情報:PALAM(メイン)
+CALL TR_INFO_PALAM_MAIN
+
+;-----------------------------
+;- CHK:自動コマンド
+;-----------------------------
+
+;- TR:自動コマンド
+CALL TR_AUTO_COM
+SIF RESULT
+	GOTO COM_EXE
+
+DRAWLINE
+
+;-----------------------------
+;- 表示:オプションパネル
+;-----------------------------
+
+IF 1
+;	ALIGNMENT RIGHT
+	PRINT 　　
+	IF 0
+;		PRINT 　　　　　　　　　
+	ELSE
+		PRINT [ 
+		PRINTBUTTON "상태 해제[960] ", 960
+		PRINT ]　
+	ENDIF
+
+	IF 1
+		PRINT [ COM 표시: 
+		SIF FLAG:フィルタ愛撫
+			SETCOLOR COLOR("伏字")
+		PRINTBUTTON "애무계[950] ", 950
+		RESETCOLOR
+
+		SIF FLAG:フィルタ奉仕
+			SETCOLOR COLOR("伏字")
+		PRINTBUTTON "봉사계[951] ", 951
+		RESETCOLOR
+
+		SIF FLAG:フィルタ道具
+			SETCOLOR COLOR("伏字")
+		PRINTBUTTON "도구계[952] ", 952
+		RESETCOLOR
+
+		SIF FLAG:フィルタＶ性交
+			SETCOLOR COLOR("伏字")
+		PRINTBUTTON "Ｖ성교계[953] ", 953
+		RESETCOLOR
+
+		SIF FLAG:フィルタＡ性交
+			SETCOLOR COLOR("伏字")
+		PRINTBUTTON "Ａ성교계[954] ", 954
+		RESETCOLOR
+
+		PRINT ] 
+	ENDIF
+	PRINTL
+	ALIGNMENT LEFT
+ENDIF
+PRINTL
+
+;-----------------------------
+;- 表示:コマンド部
+;-----------------------------
+
+;- TR:コマンドリスト表示
+CALL TRAIN_SHOW_COM
+
+IF PREVCOM
+	PRINTFORML ＜이전 실행 커맨드：%TSTR:実行コマンド名%＞
+ELSE
+	PRINTL 
+ENDIF
+
+;-----------------------------
+;- コマンド受付
+;-----------------------------
+$INPUT_LOOP
+
+VARSET SELECTCOM
+
+SIF FLAG:アニメフレーム間隔 <= 0
+	FLAG:アニメフレーム間隔 = 50
+;INPUT
+L_C2 = 50
+FLAG:画像_調教アニメS = 0
+FLAG:画像_調教アニメF = 2
+FLAG:画像_調教アニメ1 = 0
+FLAG:画像_調教アニメ2 = 0
+$INPUT_LOOP2
+;アニメ
+CALL H_ANIM_1
+SETCOLOR 0,0,0
+TINPUT L_C2, 1000, 1
+RESETCOLOR
+IF L_C == 1
+	L_C2 = FLAG:アニメフレーム間隔
+ELSE
+	L_C2 = FLAG:アニメフレーム間隔
+	L_C = 0
+ENDIF
+L_C += 1
+CLEARLINE 3
+;- 退避
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	;行動終了
+	CASE [[TRAIN:行動終了]]
+		SELECTCOM = L_INPUT
+		RETURN
+
+	;キャラ変更
+	CASE 0 TO 9
+		L_TMP = GTR_PL:L_INPUT
+
+		;- CHK:ID
+		SIF L_TMP < 0
+			GOTO ERROR
+
+		;- TARGETチェンジ
+		TARGET = L_TMP
+
+		IF TARGET == TFLAG:メインターゲット
+			PREVCOM = L_PREVCOM
+		ELSEIF PREVCOM
+			L_PREVCOM = PREVCOM
+			PREVCOM = 0
+		ENDIF
+
+	;調教メニュー
+	CASE DEFTR_MACRO_1, DEFTR_MACRO_2
+
+		IF !BASE:TARGET:체력
+			CALL C_INPUT_ERROR(@"%CALLNAME%의 체력이 0이기 대문에 조교할 수 없습니다")
+			PRINTFORML
+			GOTO INPUT_LOOP
+		ENDIF
+
+		SELECTCASE L_INPUT
+			CASE DEFTR_MACRO_1
+				CALL COM_MACRO_EXE(0)
+			CASE DEFTR_MACRO_2
+				CALL COM_MACRO_EXE(1)
+		ENDSELECT
+
+	;コマンド実行
+	CASE 10 TO (920 -1)
+
+		IF !BASE:TARGET:체력
+			CALL C_INPUT_ERROR(@"%CALLNAME%의 체력이 0이기 대문에 조교할 수 없습니다")
+			PRINTFORML
+			GOTO INPUT_LOOP
+		ENDIF
+
+		L_TMP = GTR_COMABLE:L_INPUT
+		SIF L_TMP == -1
+			GOTO ERROR
+
+		SELECTCOM = L_TMP
+
+		$COM_EXE
+
+		;- TR:コマンド実行
+		CALL TRAIN_COM_EXE
+
+		;- 実行結果1以外の場合は、そのコマンドを中止と判断
+		SIF RESULT == 0
+			RESTART
+
+		RETURN
+
+	;능력 표시
+	CASE 920
+		CALL INFO_STATUS_MAIN(MASTER)
+	;능력 표시
+	CASE 921
+		CALL INFO_STATUS_MAIN(TARGET)
+	;능력 표시(一覧)
+	CASE 922
+		CALL INFO_STATUS_LIST
+
+	;コマンドフィルタ
+	CASE 924
+		;- コマンドフィルタ画面:主処理
+		CALL COMMAND_FILTER_MAIN
+	;コンフィグ
+	CASE 925
+		;表示:コンフィグ(LIST)
+		CALL CONFIG_LIST
+	;履歴
+	CASE 926
+
+		DRAWLINE
+		PRINTFORML ＜이력：이전 패러미터 변동＞
+
+		;- TR:履歴
+		CALL TR_LOG
+
+	;조교 메뉴１
+	CASE 927
+		;- コマンドマクロ:設定
+		CALL COM_MACRO_SET(0)
+
+	;조교 메뉴２
+	CASE 928
+		;- コマンドマクロ:設定
+		CALL COM_MACRO_SET(1)
+
+	;表示系フラグ
+	CASE 950 TO 954
+
+		SELECTCASE RESULT
+			CASE 950
+				FLAG:フィルタ愛撫 = !FLAG:フィルタ愛撫
+			CASE 951
+				FLAG:フィルタ奉仕 = !FLAG:フィルタ奉仕
+			CASE 952
+				FLAG:フィルタ道具 = !FLAG:フィルタ道具
+			CASE 953
+				FLAG:フィルタＶ性交 = !FLAG:フィルタＶ性交
+			CASE 954
+				FLAG:フィルタＡ性交 = !FLAG:フィルタＡ性交
+		ENDSELECT
+
+	;状態解除
+	CASE 960
+		;- TR:部位ポイントリセット
+		CALL TR_POINT_RESET(TARGET)
+
+	CASE 1000
+		CALL H_ANIM_1
+		CLEARLINE 1
+		GOTO INPUT_LOOP2
+	;上記以外
+	CASEELSE
+		$ERROR
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub TRAIN_SEC_END
+;=================================================
+;   TRAIN:後処理
+;-------------------------------------------------
+@TRAIN_SEC_END
+#DIM L_I
+#DIM L_T
+#DIM L_HIT
+#DIM L_EXIT
+
+SIF SELECTCOM == [[TRAIN:行動終了]]
+	RETURN
+
+;-----------------------------
+;- 退場チェック
+;-----------------------------
+L_HIT=0
+L_EXIT=0
+
+;- 休憩者発生
+FOR L_I,0,DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+	SIF L_T < 0
+		BREAK
+
+	IF TCVAR:L_T:休憩フラグ
+		CONTINUE
+	ENDIF
+
+	;체력0
+	IF !BASE:L_T:체력
+
+		;- TR:部位ポイントリセット
+		CALL TR_POINT_RESET(L_T)
+
+		L_HIT ++
+		TCVAR:L_T:休憩フラグ=1
+		IF L_T == MASTER
+			L_EXIT=1
+			CALL CP_PRINTFORMW_COLORED("【휴식】", COLOR("水色"), @"%CALLNAME:L_T%가 지쳤기 때문에 조교를 마치기로 했다…")
+		ELSE
+			CALL CP_PRINTFORMW_COLORED("【휴식】", COLOR("水色"), @"%CALLNAME:L_T%가 지쳤기 때문에 휴식을 주기로 했다…")
+		ENDIF
+	ENDIF
+NEXT
+
+;- 時間切れ
+IF !L_HIT && (TFLAG:行動経過ターン数 >= FLAG:最大数_行動限界ターン)
+	L_EXIT=1
+	CALL CP_PRINTFORMW_COLORED("【시간】", COLOR("水色"), @"시간이 다 되었기 때문에 조교를 끝내기로 했다…")
+ENDIF
+
+
+SIF L_EXIT
+	SELECTCOM = [[TRAIN:行動終了]]
+
+
+;=================================================
+;   sub TRAIN_SHOW_COM
+;=================================================
+;   TR:コマンドリスト表示
+;-------------------------------------------------
+@TRAIN_SHOW_COM
+#DIM L_I
+#DIM L_TMP
+#DIM L_HIT
+#DIM L_COM
+#DIM L_FILTER_VAL
+#DIM L_CNT_PRINT
+#DIM L_MAX_PRINT
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+VARSET GTR_COMABLE, -1
+
+L_HIT = 0
+L_COM = 0
+L_CNT_PRINT	= 0
+L_MAX_PRINT	= PRINTCPERLINE()
+
+;-----------------------------
+;- 表示開始
+;-----------------------------
+
+;-- 実行可能コマンドを画面表示
+FOR L_I, 10, (1000 + 1)
+	;- 派生は除外(500～599)
+	SIF (500 <= L_I) && (L_I < 600)
+		CONTINUE
+
+	;- 改行処理
+	SELECTCASE L_I
+		;- 必須で改行する項目
+		CASE 900
+			L_HIT = 2
+		;- 前行に出力有りなら改行する項目
+		CASE 920, 800, 80, 300
+			SIF !LINEISEMPTY()
+				L_HIT = 1
+	ENDSELECT
+
+	;- 改行
+	IF L_HIT
+		;空行を挟みたい場合
+		SIF !LINEISEMPTY() && (L_HIT >= 2)
+			PRINTL
+		PRINTL
+		L_HIT = 0
+		L_CNT_PRINT=0
+	ENDIF
+
+	;- CHK:固定表示
+	SELECTCASE L_I
+		;- 조교 메뉴１
+		CASE DEFTR_MACRO_1
+			SIF TARGET == MASTER
+				CONTINUE
+			SIF !(FLAG:マクロ登録数１ && !FLAG:マクロ使用フラグ１)
+				CONTINUE
+			PRINTFORMC 조교 메뉴１[{DEFTR_MACRO_1}]
+		;- 조교 메뉴２
+		CASE DEFTR_MACRO_2
+			SIF TARGET == MASTER
+				CONTINUE
+			SIF !(FLAG:マクロ登録数２ && !FLAG:マクロ使用フラグ２)
+				CONTINUE
+			PRINTFORMC 조교 메뉴２[{DEFTR_MACRO_2}]
+		;- オプション
+		CASE 920
+			PRINTC 능력 표시(MASTER)[920]
+		CASE 921
+			PRINTC 능력 표시(TARGET)[921]
+		CASE 922
+			PRINTC 능력 표시(일람)[922]
+		CASE 924
+			PRINTC 커맨드 필터[924]
+		CASE 925
+			PRINTC Config[925]
+		CASE 926
+			PRINTC 이력[926]
+		CASE 927
+			PRINTC 조교 메뉴１[927]
+		CASE 928
+			PRINTC 조교 메뉴２[928]
+		;- その他
+		CASEELSE
+			SIF TARGET == MASTER
+				CONTINUE
+			;- 派生になるかチェック
+			TRYCCALLFORM COM_FUNC_JUMP_X{L_I}
+				L_COM = ( (RESULT >= 0) ? RESULT # L_I )
+			CATCH
+				L_COM = L_I
+			ENDCATCH
+
+			;- コマンドに変更が無い場合、条件チェック
+			IF L_COM == L_I
+				SELECTCOM=L_COM
+
+				;- TR:コマンド実行条件チェック
+				CALL TR_COM_ABLE_MAIN
+				SIF !RESULT
+					CONTINUE
+			ENDIF
+
+
+			;- CHK:フィルタ
+			TRYCCALLFORM COM_FUNC_GET_TYPE_X{L_COM}
+				L_FILTER_VAL = RESULT
+
+				IF FLAG:フィルタ愛撫 && (L_FILTER_VAL == [[COM種別:愛撫系]])
+					CONTINUE
+				ELSEIF FLAG:フィルタ奉仕 && (L_FILTER_VAL == [[COM種別:奉仕系]])
+					CONTINUE
+				ELSEIF FLAG:フィルタ道具 && (L_FILTER_VAL == [[COM種別:道具系]])
+					CONTINUE
+				ELSEIF FLAG:フィルタＶ性交 && (L_FILTER_VAL == [[COM種別:Ｖ性交系]])
+					CONTINUE
+				ELSEIF FLAG:フィルタＡ性交 && (L_FILTER_VAL == [[COM種別:Ａ性交系]])
+					CONTINUE
+				ELSEIF FLAG:フィルタＶ性交 && (L_FILTER_VAL == [[COM種別:逆Ｖ性交系]])
+					CONTINUE
+				ELSEIF FLAG:フィルタＡ性交 && (L_FILTER_VAL == [[COM種別:逆Ａ性交系]])
+					CONTINUE
+				ENDIF
+			CATCH
+			ENDCATCH
+
+			L_TMP = L_I
+
+			;-- hit時
+			GTR_COMABLE:L_TMP = L_COM
+
+			;- 取得:コマンド名称
+			CALLFORM COM_FUNC_GET_NAME_X{L_COM}
+			PRINTFORMC %RESULTS%[{L_TMP,3}]
+			RESETCOLOR
+	ENDSELECT
+
+	L_CNT_PRINT ++
+	IF (L_CNT_PRINT % L_MAX_PRINT) == 0
+		PRINTL
+	ENDIF
+NEXT
+SIF !LINEISEMPTY()
+	PRINTL
+;PRINTL
+PRINTC 행동종료 [990]
+PRINTL
+
+
+;-------------------------------------------------------------------------------
+;   処理系(詳細)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub TRAIN_COM_EXE
+;=================================================
+;   TR:コマンド実行
+;-------------------------------------------------
+; Output:
+;  RETURN				処理結果(1:コマンド実行 0:コマンド中止)
+;-------------------------------------------------
+@TRAIN_COM_EXE
+#DIM L_TMP
+#DIM L_I
+
+L_TMP=0
+
+;-----------------------------
+;- 実行確認
+;-----------------------------
+
+;- コマンド実行確認
+TRYCCALLFORM COM_FUNC_INPUT_X{SELECTCOM}
+	;- CHK:実行中止か
+	IF !RESULT
+		RETURN 0
+	ENDIF
+CATCH
+ENDCATCH
+
+;-------------------------------------------------
+;--- 実行される為、各種後続処理を実行
+;-------------------------------------------------
+
+;-----------------------------
+;- 初期化処理
+;-----------------------------
+
+;- 全キャラ
+REPEAT CHARANUM
+	;- ポイント更新
+	TEQUIP:COUNT:ポイント性交前回 = TEQUIP:COUNT:ポイント性交
+	TEQUIP:COUNT:ポイント奉仕前回 = TEQUIP:COUNT:ポイント奉仕
+	TEQUIP:COUNT:ポイント愛撫前回 = TEQUIP:COUNT:ポイント愛撫
+
+	;- ポイントクリア
+;	TEQUIP:COUNT:ポイント性交 = 0
+	TEQUIP:COUNT:ポイント奉仕 = 0
+	TEQUIP:COUNT:ポイント愛撫 = 0
+
+	SIF !CFLAG:COUNT:調教対象フラグ && MASTER != COUNT
+		CONTINUE
+
+	;- 初期化
+	VARSET SOURCE:COUNT:0, 0
+	VARSET DOWNBASE:COUNT:0, 0
+	VARSET CUP:COUNT:0, 0
+	VARSET CDOWN:COUNT:0, 0
+
+REND
+
+;- その他
+VARSET GTR_EXPUP:0:0
+
+TFLAG:メインターゲット = TARGET
+
+;PLAYERとTARGETは自動で行動済み
+TCVAR:PLAYER:行動済みフラグ = 1
+TCVAR:TARGET:行動済みフラグ = 1
+
+;-----------------------------
+;- コマンド情報取得
+;-----------------------------
+
+;- 取得:コマンド名称
+CALLFORM COM_FUNC_GET_NAME_X{SELECTCOM}
+TSTR:実行コマンド名 = %RESULTS%
+
+;-----------------------------
+;- 実行
+;-----------------------------
+
+;- コマンド実行
+CALLFORM COM_FUNC_EXE_X{SELECTCOM}
+
+;-------------------------------------------------
+;前回とコマンドが同じで、ターゲットも同じ
+SIF (PREVCOM == SELECTCOM) && (TARGET == TFLAG:メインターゲット)
+	TFLAG:同一コマンド実行フラグ = 1
+;-------------------------------------------------
+
+;-----------------------------
+;- カウンター
+;-----------------------------
+
+
+;-----------------------------
+;- ソース計算
+;-----------------------------
+
+;- サブコマンド:実行(主処理)
+CALL SUB_COM_EXE_MAIN
+
+;- SOURCE反映:主処理
+CALL SOURCE_CHECK_MAIN
+
+;- TR:무드
+CALL TR_CALC_MOOD
+
+
+;-------------------------------------------------
+;--- ソース計算終了後、各口上・情景・計算結果を表示
+;-------------------------------------------------
+
+;-----------------------------
+;- 情景:コマンド
+;-----------------------------
+
+;- 表示:ページヘッダ
+CALL C_LINE
+;PRINTL
+
+;- サブコマンド:メッセージ(主処理)
+CALL SUB_COM_MSG_MAIN
+
+SIF RESULT
+	PRINTL
+
+;-----------------------------
+;- 情景:終了処理
+;-----------------------------
+
+;- LOG出力:絶頂(主処理)
+CALLFORM LOG_ORGASM_MAIN
+
+;- LOG出力:絶頂(情景 - 主処理)
+CALLFORM LOG_ORGASM_SIGHT_MAIN
+
+;- TR:パラメータ変動(刻印)
+CALLFORM TR_PALAMCHG_MARK_MAIN
+
+PRINTFORML …
+PRINTFORML ……
+PRINTFORML ………
+DRAWLINE
+WAIT
+
+;- TR:履歴
+CALL TR_LOG
+
+
+;-----------------------------
+;- コマンド実行付随処理
+;-----------------------------
+
+;- 全キャラ
+REPEAT CHARANUM
+	IF COUNT == MASTER
+	ELSEIF !CFLAG:COUNT:調教対象フラグ
+		CONTINUE
+	ENDIF
+
+	;主人以外
+	IF COUNT != MASTER
+		;行動済み
+		IF TCVAR:COUNT:行動済みフラグ
+			TCVAR:COUNT:調教回数 ++
+			EXP:COUNT:주인조교경험 ++
+			IF TALENT:COUNT:교제중 == 1 || TALENT:COUNT:결혼완료 == 1 || TALENT:COUNT:백합결혼 == 1
+				EXP:COUNT:ＮＴＬ조교경험 ++
+				SIF RAND:100 > 50
+					EXP:COUNT:ＮＴＬ조교경험 ++
+			ENDIF
+		ENDIF
+	ENDIF
+
+	;全員
+	SIF TEQUIP:COUNT:Ｖ器具
+		TEQUIP:COUNT:Ｖ器具経過ターン ++
+	SIF TEQUIP:COUNT:Ａ器具
+		TEQUIP:COUNT:Ａ器具経過ターン ++
+
+REND
+
+
+;-----------------------------
+;- コマンド実行終了時初期化処理
+;-----------------------------
+;- 全キャラ
+REPEAT CHARANUM
+	IF COUNT == MASTER
+	ELSEIF !CFLAG:COUNT:調教対象フラグ
+		CONTINUE
+	ENDIF
+
+	;- POSE:初期化
+	CALL POSE_CLEAR(COUNT)
+
+	;- TCVAR初期化
+	FOR L_I, 0, 50
+		TCVAR:COUNT:L_I=0
+	NEXT
+
+REND
+
+;- TFLAG初期化
+REPEAT 50
+	TFLAG:COUNT=0
+REND
+
+PREVCOM = SELECTCOM
+
+
+;-----------------------------
+;- コマンド実行終了時処理
+;-----------------------------
+TFLAG:行動経過ターン数 ++
+
+RETURN 1
+
+
+;=================================================
+;   sub TR_CALC_MOOD
+;=================================================
+;   TR:무드
+;-------------------------------------------------
+@TR_CALC_MOOD
+#DIM L_I
+#DIM L_P
+#DIM L_TMP
+VARSET LOCAL
+
+L_I=0
+L_TMP=0
+
+;-----------------------------
+;- 計算:무드
+;-----------------------------
+
+;- 
+FOR L_I, 0, DEFTR_PL_NUM
+	L_P = GTR_PL:L_I
+
+	SIF L_P < 0
+		BREAK
+	SIF L_P == MASTER
+		CONTINUE
+
+	;-- 計算
+	LOCAL = 0
+
+	;-----------------------------
+	;--- プラス補正
+	;-----------------------------
+
+	;-- 個人PALAM
+
+	;各種快感
+	LOCAL += TCVAR:L_P:絶頂加算値
+	;欲情
+	LOCAL += CUP:L_P:欲情
+
+	;-- 対人PALAM
+	LOCAL += CUP:L_P:好意
+	LOCAL += CUP:L_P:屈服
+
+	;- 各種能力で増加
+	L_TMP = 0
+	L_TMP += ABL:L_P:성노예
+	L_TMP += ABL:L_P:친밀
+	L_TMP += ABL:L_P:순종
+	L_TMP += ABL:L_P:봉사정신
+	L_TMP = 100 + (10 * L_TMP)
+
+	LOCAL = LOCAL * L_TMP / 100
+
+	;-----------------------------
+	;--- マイナス補正
+	;-----------------------------
+
+	;-- 個人PALAM
+	LOCAL -= CUP:L_P:苦痛
+	LOCAL -= CUP:L_P:抑鬱
+
+	;-- 対人PALAM
+	LOCAL -= CUP:L_P:恐怖
+	LOCAL -= CUP:L_P:反感
+	LOCAL -= CUP:L_P:不快
+
+	;-----------------------------
+	;--- 計上
+	;-----------------------------
+
+	;0以下は加算しない
+	SIF LOCAL < 0
+		CONTINUE
+
+	DOWNBASE:L_P:무드 = LOCAL
+
+	;-- 丸め補正(1/100)
+	DOWNBASE:L_P:무드 /= 100
+
+	BASE:L_P:무드 += DOWNBASE:L_P:무드
+	BASE:L_P:무드 = MAX(BASE:L_P:무드,0)
+	BASE:L_P:무드 = MIN(BASE:L_P:무드,MAXBASE:L_P:무드)
+
+NEXT
+
+
+;=================================================
+;   sub TR_LOST_VIRGIN
+;=================================================
+;   TR:初体験
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象者
+; Output:
+;  RETURN				結果
+;-------------------------------------------------
+@TR_LOST_VIRGIN(ARG)
+#DIM L_HIT
+#DIM L_BAK
+
+L_BAK = TARGET
+TARGET = ARG
+
+L_HIT=0
+
+IF TCVAR:ARG:履歴_EXP_処女喪失
+	PRINTFORM %CALLNAME:ARG%
+	SETCOLOR COLOR("ピンク")
+	PRINTW 처녀 상실
+	RESETCOLOR
+	IF ARG != MASTER
+		;- 口上出力:処女喪失時
+		CALLFORM KOJO_LOST_VIRGIN([[口上:処女喪失]])
+	ENDIF
+	L_HIT=1
+ENDIF
+
+IF TCVAR:ARG:履歴_EXP_Ａ処女喪失
+	PRINTFORM %CALLNAME:ARG%
+	SETCOLOR COLOR("ピンク")
+	PRINTW Ａ처녀 상실
+	RESETCOLOR
+	IF ARG != MASTER
+		;- 口上出力:処女喪失時
+		CALLFORM KOJO_LOST_VIRGIN([[口上:Ａ処女喪失]])
+	ENDIF
+	L_HIT=1
+ENDIF
+
+IF TCVAR:ARG:履歴_EXP_童貞喪失
+	PRINTFORM %CALLNAME:ARG%
+	SETCOLOR COLOR("群青")
+	PRINTW 동정 상실
+	RESETCOLOR
+	IF ARG != MASTER
+		;- 口上出力:処女喪失時
+		CALLFORM KOJO_LOST_VIRGIN([[口上:童貞喪失]])
+	ENDIF
+	L_HIT=1
+ENDIF
+
+;- 初体験記録_TRAIN
+CALL 初体験記録_TRAIN(ARG)
+
+;初期化
+TCVAR:ARG:履歴_EXP_処女喪失 = 0
+TCVAR:ARG:履歴_EXP_Ａ処女喪失 = 0
+TCVAR:ARG:履歴_EXP_童貞喪失 = 0
+
+TARGET = L_BAK
+
+RETURNFORM L_HIT
+
+;=================================================
+;   sub TR_SAME_COMMAND 
+;=================================================
+;   TR:同一コマンド
+;-------------------------------------------------
+; Input:
+;  ARG:0				モード(0:W 1:L)
+;-------------------------------------------------
+@TR_SAME_COMMAND(ARG=1)
+
+IF TFLAG:同一コマンド実行フラグ
+	SETCOLOR COLOR("水色")
+	PRINTL ＜동일 커맨드 실행＞
+	RESETCOLOR
+	SIF !ARG
+		WAIT
+ENDIF
+
+
+;=================================================
+;   sub TR_MSG_START
+;=================================================
+;   TR:開始メッセージ
+;-------------------------------------------------
+@TR_MSG_START
+#DIM L_I
+#DIM L_T
+#DIM L_BAK_TGT
+#DIMS L_PARTY
+L_PARTY = %TR_PARTY_NAME()%
+
+
+FLAG:汎用変数 = 0
+FLAG:汎用変数2 = 0
+FLAG:汎用変数3 = 0
+FLAG:汎用変数4 = 0
+FLAG:汎用変数5 = 0
+
+DRAWLINE
+PRINTFORML %CALLNAME:MASTER%는 %L_PARTY%를 불러내、한순간의 밀회를 시작했다……
+PRINTL 
+
+
+
+;- 口上
+L_BAK_TGT = TARGET
+FOR L_I, 0, DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+	TARGET = L_T
+
+	;- TR:アシ設定
+	CALL TR_ASSI_SET
+
+	;- 口上:エキストラモード
+	CALL KOJO_EXTRA
+
+
+	;- 口上:遭遇時
+	CALL KOJO_ENCOUNTER("START")
+
+	CFLAG:主人初調教 = 1
+
+NEXT
+TARGET = L_BAK_TGT
+
+IF FLAG:支援_自動排卵薬サポート == 1 && Flag:都市_現在SP >= 1 && MONEY >= 2000
+	TALENT:排卵薬 = 1
+	Flag:都市_現在SP -= 1
+	MONEY -= 2000
+ENDIF
+
+PRINTFORMW %CALLNAME:MASTER%는 %L_PARTY%를 넘어뜨리면서、조교를 시작했다……
+PRINTFORMW ………
+PRINTFORMW ……
+PRINTFORMW …
+
+
+
+;=================================================
+;   sub TR_MSG_END
+;=================================================
+;   TR:終了メッセージ
+;-------------------------------------------------
+@TR_MSG_END
+#DIM L_I
+#DIM L_T
+#DIM L_BAK_TGT
+#DIMS L_PARTY
+L_PARTY = %TR_PARTY_NAME()%
+
+;表示:ページヘッダ
+CALL C_LINE
+
+PRINTFORMW %CALLNAME:MASTER%는 %L_PARTY%의 조교를 끝냈다……
+PRINTL
+
+;- 口上
+L_BAK_TGT = TARGET
+FOR L_I, 0, DEFTR_PL_NUM
+	L_T = GTR_PL:L_I
+	SIF L_T < 0
+		BREAK
+	SIF L_T == MASTER
+		CONTINUE
+	TARGET = L_T
+
+	;- TR:アシ設定
+	CALL TR_ASSI_SET
+
+	;- NTR:計算
+	CALL NTR_CALC(L_T, -50)
+
+	IF 1
+		;반발각인LV3
+		IF MARK:반발각인 == 3
+			PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%에게 불만스런 시선을 보내고 있다…
+		;성노예LV0
+		ELSEIF !ABL:성노예
+			PRINTFORMW %CALLNAME%는 %CALLNAME:MASTER%를 쳐다보고 있다…
+		ELSE
+			PRINTFORMW %CALLNAME%는 뺨을 붉히고 있다…
+		ENDIF
+	ENDIF
+	;- 口上:遭遇時
+	CALL KOJO_ENCOUNTER("END")
+NEXT
+TARGET = L_BAK_TGT
+
+PRINTFORMW %L_PARTY%와 잡담을 나누면서 쉬었다……
+PRINTFORML ………
+PRINTFORML ……
+PRINTFORMW …
+PRINTL
+
+;=================================================
+;   sub TR_LOG
+;=================================================
+;   TR:履歴
+;-------------------------------------------------
+@TR_LOG
+
+PRINTL
+
+;- TR:同一コマンド
+CALL TR_SAME_COMMAND
+
+;- SRC表示:SOURCE(主処理)
+CALL SRC_SHOW_SRC_MAIN
+
+;- SRC表示:BASE-EXP(主処理)
+CALL SRC_SHOW_BASE_EXP_MAIN
+
+;- SRC表示:CUP(主処理)
+CALL SRC_SHOW_CUP_MAIN
+WAIT
+
+
+;=================================================
+;   sub TR_AUTO_COM
+;=================================================
+;   TR:自動コマンド
+;-------------------------------------------------
+; Output:
+;  RESULT				真偽値
+;-------------------------------------------------
+@TR_AUTO_COM
+
+SIF !BASE:TARGET:체력
+	VARSET NEXTCOM
+
+SIF !NEXTCOM:0
+	RETURN 0
+
+SELECTCOM = NEXTCOM:0
+ARRAYREMOVE NEXTCOM, 0, 1
+
+RETURN 1
+
+;=================================================
+;   sub TR_START_SET
+;=================================================
+;   TR:開始状態セット
+;-------------------------------------------------
+@TR_START_SET
+#DIM L_I
+#DIM L_P
+#DIM L_MOOD
+#DIM L_VAL
+
+FOR L_I, 0, DEFTR_PL_NUM
+	L_P = GTR_PL:L_I
+
+	SIF L_P < 0
+		BREAK
+	SIF L_P == MASTER
+		CONTINUE
+
+	L_MOOD = 0
+	IF TALENT:L_P:상위함락
+		L_MOOD = 5
+	ELSEIF MARK:L_P:함락각인
+		L_MOOD = 4
+	ELSEIF MARK:L_P:예속각인
+		L_MOOD = 2
+	ENDIF
+	BASE:L_P:무드 = (FLAG:最大数_무드 / FLAG:最大数_무드桁数) * L_MOOD
+
+;	IF MARK:L_P:함락각인
+;		L_VAL = 10000
+;	ELSEIF MARK:L_P:예속각인
+;		L_VAL = 5000
+;	ELSE
+;		L_VAL = 0
+;	ENDIF
+;	PALAM:L_P:潤滑 = L_VAL
+
+NEXT
+
+;調教を開始した時の対象キャラを一番目のキャラに固定する（通常は前回選んだキャラ）
+IF FLAG:調教開始時の対象キャラ固定
+	TARGET = GTR_PL:1
+ENDIF
+
+FLAG:調教開始フラグ = 1
+
+
+

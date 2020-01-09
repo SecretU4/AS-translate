@@ -1,0 +1,520 @@
+﻿
+;-------------------------------------------------
+;遺物研究
+;-------------------------------------------------
+@AF_LABO
+#DIM L_INPUT
+
+SIF Flag:都市_最大LP <= 50
+	Flag:都市_最大LP = 50
+
+
+FLAG:遺研_研究中 = 1
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML %AL_WORDS()%
+DRAWLINE
+CALL AL_STATUS
+
+PRINTFORM [0] -  研究対象設定　　
+SIF FLAG:遺研_研究対象 > 0
+	PRINTFORML [1] -  研究対象詳細
+SIF FLAG:遺研_研究対象 > 0
+	PRINTFORM [2] -  リーダー任命　　
+SIF FLAG:遺研_研究対象 > 0
+	PRINTFORML [3] -  サポータ―任命
+PRINTFORM [10] - 蘇生手術　　　　
+PRINTFORM [20] - 人工遺物生成
+PRINTFORML
+PRINTFORML [4] -  能力表示
+PRINTFORML
+PRINTFORM [50] - ボランティア募集　　
+PRINTFORML [51] - ボランティア終了
+PRINTFORML
+PRINTFORM [999] - 戻る　　　　
+PRINTFORML [998] - 解説
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 0
+	; CALL AF_LABO_0
+	CALL AL_ARTIFACT_LIST
+CASE 1
+	CLEARLINE LINECOUNT
+	CALLFORM AL_Profile_{FLAG:遺研_研究対象}
+CASE 2
+	CALL AF_LABO_2
+CASE 3
+	CALL AF_LABO_3
+CASE 4
+	CALL AF_LABO_4
+CASE 10
+	CALL AF_LABO_10
+CASE 20
+	CALL AF_LABO_Craft
+CASE 50
+	CALL CITY_SCOUT
+CASE 51
+	CALL AF_LABO_DELETE
+CASE 998
+	CLEARLINE LINECOUNT
+	PRINTFORML ボランティアに遺物を調査させることで研究し、有用なデータを獲得する施設。
+	PRINTFORML 
+	PRINTFORML 研究に成功した場合LPが上昇する、上昇したLPはアーティファクトを強化することができる。
+	PRINTFORML 遺物研究する為の方法は以下の通り。
+	PRINTFORML 1.ボランティア募集でキャラを加入させる
+	PRINTFORML 2.研究対象を選ぶ
+	PRINTFORML 3.ボランティアの中でリーダーを任命させる(サポーターは任意、一部＋補正が入る)
+	PRINTFORML 4.ターン経過中に成功失敗のイベントが発生、成功した場合LPを獲得する。
+	PRINTFORML 
+	PRINTFORML 注意！　研究した場合リーダーorサポーターは肉体・精神ダメージを受ける。
+	PRINTFORML 　　　　肉体or精神ダメージが100越えるとそのボランティアは死亡する。
+	PRINTFORMW 
+CASE 999
+	FLAG:遺研_研究中 = 0
+	RETURN
+CASE -111
+	PRINTFORMW てすと稼働中
+	CALL AL_CHARA_SELECT
+CASEELSE
+	GOTO INPUT_LOOP
+ENDSELECT
+
+RESTART
+
+
+
+;-------------------------------------------------
+;遺物研究 リーダー任命
+;-------------------------------------------------
+@AF_LABO_2
+#DIM L_CHECK
+#DIM L_CHECK2
+#DIM L_INPUT
+
+L_CHECK = 0
+L_CHECK2 = 0
+FOR L_CHECK, CHARANUM - 1, -1, -1
+	SIF FLAG:遺研_リーダー == CFLAG:L_CHECK:個別番号
+		L_CHECK2 = 1
+	SIF TALENT:L_CHECK:ボランティア == 3 && (FLAG:遺研_リーダー != CFLAG:L_CHECK:個別番号)
+		TALENT:L_CHECK:ボランティア = 1
+NEXT
+SIF L_CHECK2 == 0
+	FLAG:遺研_リーダー = 0
+	
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML リーダーに担当するボランティアを選択してください。(定員1名)
+DRAWLINE
+CALL MEMBER_LIST_B
+PRINTFORML
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	IF FLAG:遺研_リーダー != 0 && FLAG:遺研_リーダー != CFLAG:L_INPUT:個別番号
+		PRINTFORMW 既にリーダーが任命されています。
+	ELSEIF TALENT:L_INPUT:ボランティア <= 2
+		SIF TALENT:L_INPUT:ボランティア == 2
+			FLAG:遺研_サポーター総数 -= 1
+		TALENT:L_INPUT:ボランティア = 3
+		FLAG:遺研_リーダー = CFLAG:L_INPUT:個別番号
+		PRINTFORMW %CALLNAME:L_INPUT%をリーダーに任命しました。
+	ELSEIF TALENT:L_INPUT:ボランティア == 3  && FLAG:遺研_リーダー == CFLAG:L_INPUT:個別番号
+		TALENT:L_INPUT:ボランティア = 1
+		FLAG:遺研_リーダー = 0
+		PRINTFORMW %CALLNAME:L_INPUT%を除名しました。
+	ENDIF
+	GOTO INPUT_LOOP
+ENDSELECT
+
+;-------------------------------------------------
+;遺物研究 サポータ―任命
+;-------------------------------------------------
+@AF_LABO_3
+#DIM L_INPUT
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML サポーターに担当するボランティアを選択してください。(定員3名)
+DRAWLINE
+CALL MEMBER_LIST_B
+PRINTFORML
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	IF TALENT:L_INPUT:ボランティア == 2
+		TALENT:L_INPUT:ボランティア = 1
+		FLAG:遺研_サポーター総数 -= 1
+		SIF FLAG:遺研_サポーター総数 <= 0
+			FLAG:遺研_サポーター総数 = 0
+		PRINTFORMW %CALLNAME:L_INPUT%を除名しました。
+	ELSEIF FLAG:遺研_サポーター総数 >= 3
+		PRINTFORMW サポーターは3人までです。
+	ELSEIF TALENT:L_INPUT:ボランティア == 1
+		TALENT:L_INPUT:ボランティア = 2
+		FLAG:遺研_サポーター総数 += 1
+		PRINTFORMW %CALLNAME:L_INPUT%を任命しました。
+	ENDIF
+	GOTO INPUT_LOOP
+ENDSELECT
+
+;-------------------------------------------------
+;遺物研究 能力表示
+;-------------------------------------------------
+@AF_LABO_4(ARG)
+#DIM L_INPUT
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 能力表示したいボランティアを選択してください。
+DRAWLINE
+CALL MEMBER_LIST_B
+PRINTFORML
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+ARG = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	CALL INFO_STATUS_MAIN(ARG)
+	GOTO INPUT_LOOP
+ENDSELECT
+
+
+
+;-------------------------------------------------
+;遺物研究 蘇生手術
+;-------------------------------------------------
+@AF_LABO_10
+#DIM CHECK
+#DIM L_INPUT
+
+CHECK = 0
+
+	
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 蘇生したいボランティアを選択してください。
+DRAWLINE
+CALL MEMBER_LIST_B
+PRINTFORML
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+CHECK = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	IF CFLAG:CHECK:住人_肉体ダメージ >= 100 || CFLAG:CHECK:住人_精神ダメージ >= 100
+		CLEARLINE LINECOUNT
+		PRINTFORML %CALLNAME:CHECK%を蘇生するには　資金{CFLAG:CHECK:住人_遺研_総数*1000}　かかります。
+		PRINTFORML よろしいですか？(現資金{money})
+		PRINTFORML 
+		PRINTFORML [0] - はい
+		PRINTFORML [1] - いいえ
+		INPUT
+		L_INPUT = RESULT
+		SELECTCASE L_INPUT
+		CASE 0
+		IF CFLAG:CHECK:住人_遺研_総数*1000 > MONEY
+			PRINTFORMW 資金が不足しています。
+			GOTO INPUT_LOOP
+		ELSE
+			MONEY -= CFLAG:CHECK:住人_遺研_総数*1000
+			CFLAG:CHECK:住人_肉体ダメージ = 50
+			CFLAG:CHECK:住人_精神ダメージ = 50
+			PRINTFORMW %CALLNAME:CHECK%を蘇生しました。
+			GOTO INPUT_LOOP
+		ENDIF
+		CASEELSE
+			GOTO INPUT_LOOP
+		ENDSELECT
+	ELSEIF CFLAG:CHECK:住人_肉体ダメージ < 100 && CFLAG:CHECK:住人_精神ダメージ < 100
+		PRINTFORMW %CALLNAME:CHECK%は死んでいません。
+		GOTO INPUT_LOOP
+	ENDIF
+	GOTO INPUT_LOOP
+ENDSELECT
+
+;-------------------------------------------------
+;遺物研究 ボランティア終了
+;-------------------------------------------------
+@AF_LABO_DELETE
+#DIM L_INPUT
+$INPUT_LOOP
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 削除するボランティアを選択してください。
+DRAWLINE
+CALL MEMBER_LIST_B
+PRINTFORML
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	SIF TALENT:L_INPUT:ボランティア >= 2
+		FLAG:遺研_サポーター総数 -= 1
+	CALL CANCEL_SCOUT(L_INPUT)
+	GOTO INPUT_LOOP
+ENDSELECT
+
+;-------------------------------------------------
+;遺物研究 遺物選択
+;-------------------------------------------------
+@AF_LABO_0
+#DIM L_N
+#DIM L_INPUT
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+
+L_N = 0
+
+DRAWLINE
+PRINTFORML 研究する遺物を選択してください。
+DRAWLINE
+$AL_LOOP
+TRYCCALLFORM AL_Check_{L_N}
+CATCH
+ENDCATCH
+IF RESULT == 1
+	PRINTFORML [{L_N}] %SaveStr:500%
+ELSE
+
+ENDIF
+L_N += 1
+RESULT = 0
+SIF L_N < 100
+	GOTO AL_LOOP
+DRAWLINE
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	CALLFORM AL_Set_{L_INPUT}
+	PRINTFORMW 研究対象を設定しました。
+	RETURN
+ENDSELECT
+RESTART
+
+
+
+;-------------------------------------------------
+;遺物研究 セリフ
+;-------------------------------------------------
+
+@AL_WORDS
+#FUNCTIONS
+#DIMS DYNAMIC WORDS
+STRDATA WORDS
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　ｱｰﾃｨﾌｧｸﾄ･ﾗﾎﾞﾗﾄﾘｰ･ｺｰﾎﾟﾚｰｼｮﾝ
+		DATAFORM 『住人の明日を豊かにする研究機関、ＡＬＣヘようこそ！』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『ＡＬＣは都市を盛り上げるため尽力致します！』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『ボランティアの皆さま今日もお疲れ様です！、共に頑張りましょう』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『新しいボランティアの方々は教習所へ移動してください』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『今日は「プレイヤー」が視察に来られます、粗相の無いようよろしくお願いいたします』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『都市に繁栄を人々に希望を！』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『「外敵」に負けぬ強い社会を！ＡＬＣは邁進していきます』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『不思議なモノ・見慣れぬモノが御座いましたら是非我々にご相談下さい！』
+	ENDLIST
+	DATALIST
+		DATAFORM 【研究機関ＡＬＣ】　　　　
+		DATAFORM 『未知を力に変えてより良い未来を、それを成すのが我々ＡＬＣです』
+	ENDLIST
+	[SKIPSTART]
+	;増設用
+	DATALIST
+		DATAFORM 
+		DATAFORM 
+	ENDLIST
+	[SKIPEND]
+ENDDATA
+RETURNF WORDS
+
+
+;-------------------------------------------------
+;遺物ステータス
+;-------------------------------------------------
+@AL_STATUS
+#DIM DYNAMIC AL_LEEDER
+#DIM DYNAMIC AL_SUPPORT, 4
+CALL AL_RELOAD_VOLUNTEER_LIST(AL_LEEDER, AL_SUPPORT)
+IF FLAG:遺研_研究対象 > 0
+	PRINTFORML 【研究対象:%SaveStr:500%】
+ELSE
+	PRINTFORML 【研究対象:None】
+ENDIF
+
+FLAG:遺研_合計経験値 = 0
+FLAG:遺研_合計属性 = 0
+
+PRINTFORM %" " * 34%
+IF INRANGE(AL_LEEDER, 1, CHARANUM - 1)
+	PRINTFORM 【主任:%CALLNAME:AL_LEEDER, 14%】
+	FLAG:遺研_合計経験値 += CFLAG:AL_LEEDER:住人_遺研_総数
+	IF CFLAG:AL_LEEDER:住人_属性 == 2
+		FLAG:遺研_合計属性 -= 1
+	ELSEIF CFLAG:AL_LEEDER:住人_属性 == 1
+		FLAG:遺研_合計属性 += 1
+	ENDIF
+ELSE
+	PRINTFORM 【主任:%"None", 14%】
+ENDIF
+FOR LOCAL, 0, 3
+	IF INRANGE(AL_SUPPORT:LOCAL, 1, CHARANUM - 1)
+		PRINTFORM 【助手:%CALLNAME:(AL_SUPPORT:LOCAL), 14%】
+		FLAG:遺研_合計経験値 += (CFLAG:(AL_SUPPORT:LOCAL):住人_遺研_総数+1)/3
+		IF CFLAG:(AL_SUPPORT:LOCAL):住人_属性 == 2
+			FLAG:遺研_合計属性 -= 1
+		ELSEIF CFLAG:(AL_SUPPORT:LOCAL):住人_属性 == 1
+			FLAG:遺研_合計属性 += 1
+		ENDIF
+	ELSE
+		PRINTFORM 【助手:%"None", 14%】
+	ENDIF
+NEXT
+PRINTFORML 
+IF FLAG:遺研_研究対象 > 0
+	PRINTFORML 研究回数　　:{FLAG:(16000+FLAG:遺研_研究対象), 10}回
+	PRINTFORML 研究費用　　:{FLAG:遺研_費用, 10}
+	PRINTFORML 危険性　　　:%AL_STATUS_BAR(FLAG:遺研_危険性)%
+	PRINTFORML 研究利益　　:%AL_STATUS_BAR(FLAG:遺研_研究利益)%
+	PRINTFORML 肉体ダメージ:%AL_STATUS_BAR(FLAG:遺研_肉体ダメージ)%
+	PRINTFORML 精神ダメージ:%AL_STATUS_BAR(FLAG:遺研_精神ダメージ)%
+ELSE
+	PRINTFORML %"\n" * 6%
+ENDIF
+
+
+CALL AL_PICTURE_VOLUNTEER_LEEDER(AL_LEEDER)
+CALL AL_PICTURE_VOLUNTEER_SUPPORT(AL_SUPPORT)
+PRINTFORM %" " * 34%
+IF INRANGE(AL_LEEDER, 1, CHARANUM - 1)
+	SIF CFLAG:AL_LEEDER:住人_遺研_総数 >= 999
+		CFLAG:AL_LEEDER:住人_遺研_総数 = 999
+	PRINTFORM 【EXP:{CFLAG:AL_LEEDER:住人_遺研_総数, 3}|B:{CFLAG:AL_LEEDER:住人_肉体ダメージ, 3}|M:{CFLAG:AL_LEEDER:住人_精神ダメージ, 3}】
+ELSE
+		PRINTFORM 【EXP:%"", 3%|B:%"", 3%|M:%"", 3%】
+ENDIF
+FOR LOCAL, 0, 3
+	IF INRANGE(AL_SUPPORT:LOCAL, 1, CHARANUM - 1)
+	SIF CFLAG:(AL_SUPPORT:LOCAL):住人_遺研_総数 >= 999
+		CFLAG:(AL_SUPPORT:LOCAL):住人_遺研_総数 = 999
+		PRINTFORM 【EXP:{CFLAG:(AL_SUPPORT:LOCAL):住人_遺研_総数, 3}|B:{CFLAG:(AL_SUPPORT:LOCAL):住人_肉体ダメージ, 3}|M:{CFLAG:(AL_SUPPORT:LOCAL):住人_精神ダメージ, 3}】
+	ELSE
+		PRINTFORM 【EXP:%"", 3%|B:%"", 3%|M:%"", 3%】
+	ENDIF
+NEXT
+PRINTFORML
+PRINTFORM 　　　　　　　　　　　　　　　　　【『被験班』　　キャリア:Lv{FLAG:遺研_合計経験値/30}
+
+IF FLAG:遺研_合計属性 >= 2
+	PRINTFORM 　　属性:善
+ELSEIF FLAG:遺研_合計属性 <= -2
+	PRINTFORM 　　属性:悪
+ELSE
+	PRINTFORM 　　属性:中立
+ENDIF
+
+PRINTFORML 　　】
+
+@AL_RELOAD_VOLUNTEER_LIST(AL_LEEDER, AL_SUPPORT)
+#DIM REF     AL_LEEDER
+#DIM REF     AL_SUPPORT
+#DIM         C_ID
+#DIM DYNAMIC SUP_CNT
+FOR C_ID, 1, CHARANUM
+	SELECTCASE TALENT:C_ID:ボランティア
+	CASE 3
+		AL_LEEDER = C_ID
+	CASE 2
+		AL_SUPPORT:SUP_CNT = C_ID
+		SUP_CNT ++
+	CASEELSE
+		CONTINUE
+	ENDSELECT
+NEXT
+
+
+
+@AL_PICTURE_VOLUNTEER_LEEDER(C_ID)
+#DIM C_ID
+IF C_ID == 0
+	PRINTFORML
+ELSEIF TALENT:C_ID:NPC == 0
+	HTML_PRINT C_PICTURE_HTML(C_ID, 2000, -506, -450, 850)
+ELSE
+	HTML_PRINT C_PICTURE_NPC_HTML(C_ID, 2000, -506, -450, 850)
+ENDIF
+
+
+
+@AL_PICTURE_VOLUNTEER_SUPPORT(C_LIST)
+#DIM REF C_LIST
+#DIM     LIST_ID
+FOR LIST_ID, 0, 3
+	IF C_LIST:LIST_ID == 0
+		PRINTFORML
+	ELSEIF TALENT:(C_LIST:LIST_ID):NPC == 0
+		HTML_PRINT C_PICTURE_HTML(C_LIST:LIST_ID, 3200 + LIST_ID * 1176, -604 - LIST_ID * 98, 0, 850)
+	ELSE
+		HTML_PRINT C_PICTURE_NPC_HTML(C_LIST:LIST_ID, 3200 + LIST_ID * 1176, -604 - LIST_ID * 98, 0, 850)
+	ENDIF
+NEXT
+
+
+
+
+
+
+
+
+

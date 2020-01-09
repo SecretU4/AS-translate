@@ -1,0 +1,208 @@
+@MANAGE_CHARA_SELECT(MODE_NOW = "MNG_레귤러指定")
+#DIMS         MODE_NOW
+#DIM          MODE_ID
+#DIM          L_INPUT
+#DIM          NOW_GROUP = 1 ;ページ記憶用
+#DIM  DYNAMIC ROOM_ID       ;
+#DIMS DYNAMIC OP_RELOAD     ;初回以外のページ更新とリスト更新を抑制する
+{
+#DIMS CONST   MODE_NAME = "MNG_登録_登録抹消", 
+	
+	"MNG_입주_一号室", 
+	"MNG_입주_二号室", 
+	"MNG_입주_三号室", 
+	"MNG_입주_四号室", 
+	"MNG_입주_五号室", 
+	"MNG_입주_六号室", 
+	"MNG_입주_七号室", 
+	"MNG_입주_八号室", 
+	"MNG_입주_九号室", 
+	"MNG_입주_十号室", 
+	
+	"MNG_登録_레귤러", 
+	"MNG_登録_특별보호", 
+	"MNG_登録_名前変更", 
+	
+	"MNG_転職_성직자", 
+	"MNG_転職_메이드", 
+	"MNG_転職_아이돌", 
+	"MNG_転職_사회인", 
+	"MNG_転職_局員", 
+	"MNG_転職_창녀", 
+	
+	"MNG_配属_学園生徒", 
+	"MNG_配属_支援ボラ", 
+	"MNG_配属_ラブホ店員", 
+	"MNG_配属_カジノ店員", 
+	
+	"MNG_特殊_外見変更", 
+	"MNG_特殊_治療設備", 
+	"MNG_特殊_품종개량", 
+	"MNG_特殊_신체강화", 
+	"MNG_特殊_차세대창조", 
+	
+	"MNG_登録_교우제어", 
+	"MNG_登録_衣装変更", 
+	"MNG_登録_範囲消去", 
+	"MNG_登録_抹消中止"
+}
+
+{
+#DIMS CONST   MEMO_STR = "등록 말소 후보자를 선택하세요。", 
+	
+	"1호실에 입주할 인물을 선택하세요。", 
+	"2호실에 입주할 인물을 선택하세요。", 
+	"3호실에 입주할 인물을 선택하세요。", 
+	"4호실에 입주할 인물을 선택하세요。", 
+	"5호실에 입주할 인물을 선택하세요。", 
+	"6호실에 입주할 인물을 선택하세요。", 
+	"7호실에 입주할 인물을 선택하세요。", 
+	"8호실에 입주할 인물을 선택하세요。", 
+	"9호실에 입주할 인물을 선택하세요。", 
+	"10호실에 입주할 인물을 선택하세요。", 
+	
+	"관찰 상황을 바꿀 인물을 선택하세요。", 
+	"보호 지정을 바꿀 대상을 선택하세요。", 
+	"이름을 바꿀 대상을 선택하세요。", 
+	
+	"전직 대상자를 선택하세요", 
+	"전직 대상자를 선택하세요", 
+	"전직 대상자를 선택하세요", 
+	"전직 대상자를 선택하세요", 
+	"전직 대상자를 선택하세요", 
+	"전직 대상자를 선택하세요", 
+	
+	"학원 입학 대상자를 선택하세요", 
+	"지원 주택 자원봉사 후보자를 선택하세요", 
+	"러브호텔 점원 후보자를 선택하세요", 
+	"고급 카지노 점원 후보자를 선택하세요", 
+	
+	"외관 변경 대상자를 선택하세요", 
+	"치료 대상자를 선택하세요", 
+	"품종 개량 대상자를 선택하세요", 
+	"신체 강화 대상자를 선택하세요", 
+	"차세대 창조의 모체를 선택하세요", 
+	
+	"이벤트 설정 대상자를 선택하세요", 
+	"의상 변경 대상자를 선택하세요", 
+	
+	"등록 말소 범위의 시작값을 지정하세요", 
+	""
+}
+#DIM CONST INPUT_MODE_外見変更   = 1024
+#DIM CONST INPUT_MODE_治療設備   = 1025
+#DIM CONST INPUT_MODE_품종개량   = 1026
+#DIM CONST INPUT_MODE_신체강화   = 1027
+#DIM CONST INPUT_MODE_차세대창조 = 1028
+#DIM CONST INPUT_MODE_抹消中止   = 1032
+
+
+MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
+SELECTCASE MODE_ID
+CASE -1
+	MODE_NOW '= "MNG_登録_레귤러"
+	MODE_ID = FINDELEMENT(MODE_NAME, MODE_NOW)
+ENDSELECT
+CLEARLINE LINECOUNT
+CALL LIST_CHARA_STATUS_MAIN(0, NOW_GROUP, OP_RELOAD, MODE_NOW, MEMO_STR:MODE_ID)
+
+
+
+L_INPUT = RESULT
+OP_RELOAD '= "「ページ更新無し」「リスト更新無し」"
+SELECTCASE L_INPUT
+CASE 0
+	NOW_GROUP = 1
+	CALL MNG_DELETE_CHARA
+	RETURN
+CASE 1 TO CHARANUM - 1
+	SELECTCASE MODE_NOW
+	CASE "RPG_武器強化"
+		CALL RPG_WEAPON_MENU(L_INPUT)
+	CASE "MNG_登録_레귤러"
+		CALL MNG_CHARA_REGULAR(L_INPUT)
+	CASE "MNG_登録_특별보호"
+		CALL MNG_CHARA_PROTECT(L_INPUT)
+	CASE "MNG_登録_名前変更"
+		CALL MNG_RENAME(L_INPUT)
+	CASE "MNG_登録_登録抹消"
+		IF TALENT:L_INPUT:NPC
+			CFLAG:L_INPUT:登録抹消 = 0
+		ELSEIF CFLAG:L_INPUT:레귤러 || CFLAG:L_INPUT:특별보호 || CFLAG:L_INPUT:マンションID
+			CFLAG:L_INPUT:登録抹消 = 0
+		ELSE
+			CFLAG:L_INPUT:登録抹消 = !CFLAG:L_INPUT:登録抹消
+		ENDIF
+	CASE "MNG_登録_範囲消去"
+	CASE "MNG_登録_抹消中止"
+	CASE "MNG_登録_교우제어"
+		CALL MNG_CONFIG_EVENT(L_INPUT)
+	CASE "MNG_登録_衣装変更"
+		CALL MNG_CHANGE_CLOTHES(L_INPUT)
+	CASE "MNG_特殊_外見変更"
+		CALL MNG_CUSTOM_LOOKS(L_INPUT)
+	CASE "MNG_特殊_治療設備"
+		CALL MNG_CURE_SICK(L_INPUT)
+	CASE "MNG_特殊_품종개량"
+		CALL CITY_F_54_GI2(L_INPUT)
+	CASE "MNG_特殊_신체강화"
+		CALL LABORATORY_BOOST_ST(L_INPUT)
+	CASE "MNG_特殊_차세대창조"
+		IF CFLAG:L_INPUT:住人_回収済み数  <= CFLAG:L_INPUT:住人_継承
+			PRINTFORMW 조건을 만족하지 못했습니다
+		ELSE
+			CALL LABORATORY_BREEDING_BABY_DESIGNING(L_INPUT)
+			OP_RELOAD '= "「ページ更新無し」"
+		ENDIF
+	CASE "MNG_転職_성직자", "MNG_転職_메이드", "MNG_転職_아이돌", "MNG_転職_사회인", "MNG_転職_局員", "MNG_転職_창녀"
+		CALL MNG_JOB(L_INPUT, MODE_NOW)
+	CASE "MNG_配属_学園生徒", "MNG_配属_支援ボラ", "MNG_配属_ラブホ店員", "MNG_配属_カジノ店員"
+		CALL MNG_FACILITY(L_INPUT, MODE_NOW)
+	CASEELSE
+		IF STRCOUNT(MODE_NOW, "MNG_입주")
+			;マンション입주処理
+			ROOM_ID = MODE_ID
+			CALL MNG_MOVING_ROOM(L_INPUT, ROOM_ID)
+		ELSE
+
+		ENDIF
+	ENDSELECT
+CASE INPUT_MODE_外見変更
+	IF FLAG:エステ >= 1
+		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+	ENDIF
+CASE INPUT_MODE_治療設備
+	IF FLAG:病院 >= 1
+		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+	ENDIF
+CASE INPUT_MODE_품종개량
+	IF FLAG:품종개량施設 >= 1
+		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+	ENDIF
+CASE INPUT_MODE_신체강화, INPUT_MODE_차세대창조
+	IF FLAG:研究施設 >= 1
+		MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+	ENDIF
+CASE INPUT_MODE_抹消中止
+	CVARSET CFLAG, GETNUM(CFLAG, "登録抹消"), 0
+	MODE_NOW '= MODE_NAME:0
+CASE 1000 TO 1031
+	MODE_NOW '= MODE_NAME:(L_INPUT % 1000)
+CASEELSE
+ENDSELECT
+RESTART
+
+
+@MNG_DELETE_CHARA
+SIF FINDCHARA(CFLAG:登録抹消, 1) == -1
+	RETURN
+
+PRINTFORMW 주민 등록 말소를 실시합니다
+FOR LOCAL, CHARANUM - 1, 0, -1
+	SIF !CFLAG:LOCAL:登録抹消
+		CONTINUE
+	PRINTFORML 　[%CALLNAME:LOCAL%]は 당신의 관리에서 벗어났습니다
+	DELCHARA LOCAL
+NEXT
+WAIT
+

@@ -1,0 +1,260 @@
+﻿;-------------------------------------------------
+;クラフト
+;-------------------------------------------------
+@RPG_CRAFT
+#DIM L_INPUT
+#DIM L_LOOP
+#DIM L_LOOP2
+#DIM I_S
+#DIM L_CL
+#DIM L_CV
+
+$INPUT_LOOP
+I_S = 0
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML 제조할 물건을 선택하세요。
+DRAWLINE
+PRINTFORML [0] 강화제 생성
+PRINTFORML [1] 초인약 생성
+PRINTFORML 
+PRINTFORML 
+PRINTFORML [999] 그만둔다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 0
+	$INPUT_LOOP2
+	CLEARLINE LINECOUNT
+	DRAWLINE
+	PRINTFORML 생성할 강화제를 선택하세요。
+	DRAWLINE
+	;5個 10個 全素材投入の選択肢を追加
+	CALL RPG_CRAFT_PRINTITEM(0, "강화제", "HP", 2800, "영목", 2100)
+	CALL RPG_CRAFT_PRINTITEM(1, "강화제", "SP", 2801, "영석", 2101)
+	CALL RPG_CRAFT_PRINTITEM(2, "강화제", "ATK", 2802, "영수", 2102)
+	CALL RPG_CRAFT_PRINTITEM(3, "강화제", "DEF", 2803, "기계", 2103)
+	CALL RPG_CRAFT_PRINTITEM(4, "강화제", "HIT", 2804, "혈액", 2104)
+	CALL RPG_CRAFT_PRINTITEM(5, "강화제", "SPD", 2805, "심장", 2105)
+	PRINTFORML [100] 모든 소재 사용
+	PRINTFORML 
+	PRINTFORML [999] 그만둔다
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+		GOTO INPUT_LOOP
+	CASE 100
+		PRINTFORML 소지한 모든 소재로 만들 수 있을 만큼의 강화제를 만듭니다
+		PRINTFORML 괜찮을까요？
+		PRINTFORML [0] 네
+		PRINTFORML [1] 아니오
+		INPUT
+		L_INPUT = RESULT
+			SELECTCASE L_INPUT
+			CASE 0
+			;ループ用初期化処理
+				L_CL = 0
+				;元素材の個数を5で割った整数分강화제を入手し、素材を消費
+				REPEAT 6
+					L_CV = Flag:(2100+L_CL) / 5
+					Flag:(2800+L_CL) += L_CV
+					Flag:(2100+L_CL) -= 5 * L_CV
+					SIF !L_CV && FLAG:STATUS伏字モード
+						SETCOLOR COLOR("伏字")
+					PRINTFORML %FLAGNAME:(2100+L_CL)%을 {5 * L_CV , 3 , RIGHT}개 소비하여 %FLAGNAME:(2800+L_CL)%을 {L_CV , 3 , RIGHT}개 만들었습니다。
+					RESETCOLOR
+					L_CL += 1
+				REND
+				PRINTW
+				GOTO INPUT_LOOP2
+			CASEELSE
+				GOTO INPUT_LOOP2
+			ENDSELECT
+	CASEELSE
+		;作成個数チェック
+		IF L_INPUT >= 20 && L_INPUT < 26
+			;10個生成用処理
+			IF Flag:(2080+L_INPUT) >= 50
+				Flag:(2080+L_INPUT) -= 50
+				Flag:(2780+L_INPUT) += 10
+				PRINTFORMW %FlagNAME:(2780+L_INPUT)%을 10개 만들었습니다。
+				GOTO INPUT_LOOP2
+			ELSE 
+				PRINTFORMW 소재가 부족합니다。
+			ENDIF
+		ELSEIF L_INPUT >= 10 && L_INPUT < 16
+			;5個生成用処理
+			IF Flag:(2090+L_INPUT) >= 25
+				Flag:(2090+L_INPUT) -= 25
+				Flag:(2790+L_INPUT) += 5
+				PRINTFORMW %FlagNAME:(2790+L_INPUT)%을 5개 만들었습니다。
+				GOTO INPUT_LOOP2
+			ELSE 
+				PRINTFORMW 소재가 부족합니다。
+			ENDIF
+		ELSEIF L_INPUT >= 0 && L_INPUT < 6
+			;1個生成用処理
+			IF Flag:(2100+L_INPUT) >= 5
+				Flag:(2100+L_INPUT) -= 5
+				Flag:(2800+L_INPUT) += 1
+				PRINTFORMW %FlagNAME:(2800+L_INPUT)%을 만들었습니다。
+				GOTO INPUT_LOOP2
+			ELSE 
+				PRINTFORMW 소재가 부족합니다。
+			ENDIF
+		ELSE
+		GOTO INPUT_LOOP2
+		ENDIF
+	ENDSELECT
+	;ループ階層を一つ手前にしました
+	GOTO INPUT_LOOP2
+CASE 1
+	$INPUT_LOOP3
+	CLEARLINE LINECOUNT
+	DRAWLINE
+	PRINTFORML 생성할 초인약을 선택하세요。
+	DRAWLINE
+	;5個 10個 全素材投入の選択肢を追加
+	CALL RPG_CRAFT_PRINTITEM(0, "초인약", "HP", 2810, "신목", 2110)
+	CALL RPG_CRAFT_PRINTITEM(1, "초인약", "SP", 2811, "마석", 2111)
+	CALL RPG_CRAFT_PRINTITEM(2, "초인약", "ATK", 2812, "성수", 2112)
+	CALL RPG_CRAFT_PRINTITEM(3, "초인약", "DEF", 2813, "보구", 2113)
+	CALL RPG_CRAFT_PRINTITEM(4, "초인약", "HIT", 2814, "공물", 2114)
+	CALL RPG_CRAFT_PRINTITEM(5, "초인약", "SPD", 2815, "혼백", 2115)
+	PRINTFORML [100] 모든 소재 사용
+	PRINTFORML 
+	PRINTFORML [999] 그만둔다
+	INPUT
+	L_INPUT = RESULT
+	SELECTCASE L_INPUT
+	CASE 999
+		GOTO INPUT_LOOP
+	CASE 100
+		PRINTFORML 소지한 모든 소재로 만들 수 있을 만큼의 초인약을 생성합니다
+		PRINTFORML 괜찮을까요？
+		PRINTFORML [0] 네
+		PRINTFORML [1] 아니오
+		INPUT
+		L_INPUT = RESULT
+			SELECTCASE L_INPUT
+			CASE 0
+			;ループ用初期化処理
+				L_CL = 0
+				;元素材の個数を5で割った整数分초인약を入手し、素材を消費
+				REPEAT 6
+					L_CV = Flag:(2110+L_CL) / 5
+					Flag:(2810+L_CL) += L_CV
+					Flag:(2110+L_CL) -= 5 * L_CV
+					SIF !L_CV && FLAG:STATUS伏字モード
+						SETCOLOR COLOR("伏字")
+					PRINTFORML %FLAGNAME:(2110+L_CL)%을 {5 * L_CV , 3 , RIGHT}개 소비하여 %FLAGNAME:(2810+L_CL)%을 {L_CV , 3 , RIGHT}개 만들었습니다。
+					RESETCOLOR
+					L_CL += 1
+				REND
+				PRINTW
+				GOTO INPUT_LOOP3
+			CASEELSE
+				GOTO INPUT_LOOP3
+			ENDSELECT
+	CASEELSE
+		;作成個数チェック
+		IF L_INPUT >= 20 && L_INPUT < 26
+			;10個生成用処理
+			IF Flag:(2090+L_INPUT) >= 50
+				Flag:(2090+L_INPUT) -= 50
+				Flag:(2790+L_INPUT) += 10
+				PRINTFORMW %FlagNAME:(2790+L_INPUT)%을 10개 만들었습니다。
+				GOTO INPUT_LOOP3
+			ELSE 
+				PRINTFORMW 소재가 부족합니다。
+			ENDIF
+		ELSEIF L_INPUT >= 10 && L_INPUT < 16
+			;5個生成用処理
+			IF Flag:(2100+L_INPUT) >= 25
+				Flag:(2100+L_INPUT) -= 25
+				Flag:(2800+L_INPUT) += 5
+				PRINTFORMW %FlagNAME:(2800+L_INPUT)%을 5개 만들었습니다。
+				GOTO INPUT_LOOP3
+			ELSE 
+				PRINTFORMW 소재가 부족합니다。
+			ENDIF
+		ELSEIF L_INPUT >= 0 && L_INPUT < 6
+			;1個生成用処理
+			IF Flag:(2110+L_INPUT) >= 5
+				Flag:(2110+L_INPUT) -= 5
+				Flag:(2810+L_INPUT) += 1
+				PRINTFORMW %FlagNAME:(2810+L_INPUT)%을 만들었습니다。
+				GOTO INPUT_LOOP3
+			ELSE 
+				PRINTFORMW 소재가 부족합니다。
+			ENDIF
+		ELSE
+		GOTO INPUT_LOOP3
+		ENDIF
+	ENDSELECT
+	;ループ階層を一つ手前にしました
+	GOTO INPUT_LOOP3
+CASE 999
+	JUMP RPG_MAIN
+CASEELSE
+ENDSELECT
+
+GOTO INPUT_LOOP
+
+@RPG_CRAFT_PRINTITEM(MENU_NUM, TYPE, SUBTYPE, CRAFT_FLAG_NUM, SRC_ITEM_NAME, SRC_FLAG_NUM)
+#DIM MENU_NUM
+#DIMS TYPE
+#DIMS SUBTYPE
+#DIM CRAFT_FLAG_NUM
+#DIMS SRC_ITEM_NAME
+#DIM SRC_FLAG_NUM
+
+SIF Flag:SRC_FLAG_NUM < 5 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{MENU_NUM}] %TYPE, 6 ,LEFT%(%SUBTYPE, 3 ,LEFT%) 
+RESETCOLOR
+SIF !Flag:CRAFT_FLAG_NUM && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM (소지 수:{Flag:CRAFT_FLAG_NUM , 3 , RIGHT})
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 5 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM 　(%SRC_ITEM_NAME%×5 소비)(소지 수:{Flag:SRC_FLAG_NUM , 3 , RIGHT}) 
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 25 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{10+MENU_NUM}] x5 
+RESETCOLOR
+SIF Flag:SRC_FLAG_NUM < 50 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORM [{20+MENU_NUM}] x10
+RESETCOLOR
+PRINTL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

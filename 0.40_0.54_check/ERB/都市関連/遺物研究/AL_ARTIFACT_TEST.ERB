@@ -1,0 +1,223 @@
+﻿;-------------------------------------------------
+; 遺物をテストする関数
+; ステータスやプロフィール、成功／失敗時のテキストを確認する
+;-------------------------------------------------
+@遺物研究テスト
+FLAG:遺研_研究中 = 1
+FLAG:遺研_サポーター総数 = 3
+CALL 遺物研究テスト_スカウト
+JUMP 遺物研究テスト_メインループ
+
+
+; サンプルボランティアを生成する
+@遺物研究テスト_スカウト
+Flag:喫茶店スカウト = 1
+
+CLEARLINE LINECOUNT
+CALL CHARACTER_SCOUT1
+TARGET = CHARANUM - 1
+CALL CAFE_SCOUT_OPTION2(TARGET)
+CALL 遺物研究テスト_ボランティアのプロフィールを表示する
+
+PRINTL * 遺物をテストするボランティアを選択してください
+PRINTL
+PRINT [1] 決定　　　
+PRINT [2] 別の住人　
+PRINT [3] 絞り込み　
+
+$INPUT_LOOP
+INPUT
+SELECTCASE RESULT
+    CASE 1
+        RETURN
+    CASE 2
+        CALL CANCEL_SCOUT(TARGET)
+    CASE 3
+        CALL CANCEL_SCOUT(TARGET)
+        CALL CAFE_SCOUT_OPTION
+    CASEELSE
+        CALL C_INPUT_ERROR("無効な入力です")
+        GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
+
+; ボランティアのプロフィール
+@遺物研究テスト_ボランティアのプロフィールを表示する
+DRAWLINE
+PRINTFORML 名前:%CALLNAME%
+DRAWLINE
+CALL C_PICTURE_S(TARGET)
+PRINTFORML ■------------------------------------ 　素質　 ------------------------------------■
+CALL INFO_STATUS_TALENT(TARGET)
+CALL CHARACTER_SCOUT_PROFILE(TARGET)
+DRAWLINE
+
+;-------------------------------------------------
+; 遺物をリストから選択してテストする
+;-------------------------------------------------
+@遺物研究テスト_メインループ
+#DIM CONST 全情報を開示する = 1
+
+CLEARLINE LINECOUNT
+CALL AL_ARTIFACT_LIST(全情報を開示する)
+
+SIF FLAG:遺研_研究対象 > 0
+    CALL 遺物研究テスト_対象遺物をテストする
+
+RESTART
+
+;-------------------------------------------------
+; 対象遺物をテストする
+;-------------------------------------------------
+@遺物研究テスト_対象遺物をテストする(遺物ID)
+#DIM 遺物ID
+
+遺物ID = FLAG:遺研_研究対象
+
+; ステータス
+DRAWLINE
+CALLFORM AL_Status_{遺物ID}
+DRAWLINE
+
+; LPや費用効率などの詳細情報
+CALL 遺物研究テスト_解析表を表示する
+
+; プロフィールをLV1～3まで表示するため、一時的に研究回数を100回にする
+FLAG:(16000 + FLAG:遺研_研究対象) = 100
+CALLFORM AL_Profile_{遺物ID}
+FLAG:(16000 + FLAG:遺研_研究対象) = 0
+
+; 成功／失敗のテキスト
+WHILE 1
+    PRINTLC [0] 戻る  [1] 成功  [2] 失敗  [3] 判定
+    INPUT
+    SIF RESULT == 0
+        BREAK
+    SIF RESULT < 0 || RESULT > 3
+        CONTINUE
+
+    PRINTL
+    PRINTFORMDL {FLAG:(16000+FLAG:遺研_研究対象)+1}回目...
+    SELECTCASE RESULT
+        CASE 1
+            CALL 遺物研究テスト_成功(遺物ID)
+        CASE 2
+            CALL 遺物研究テスト_失敗(遺物ID)
+        CASE 3
+            CALL 遺物研究テスト_ランダム(遺物ID)
+    ENDSELECT
+    FLAG:(16000+FLAG:遺研_研究対象) ++
+    PRINTL
+WEND
+
+; 研究回数をリセット
+FLAG:(16000 + FLAG:遺研_研究対象) = 0
+
+;-------------------------------------------------
+; 各遺物の解析表
+;-------------------------------------------------
+@遺物研究テスト_解析表を表示する
+#DIMS 項目
+#DIMS 数値
+#DIMS 説明
+
+SETCOLOR 50,250,250
+
+項目 = 成功率
+数値 = {AL_成功率()}\%
+説明 = 100\%(基本) +15\%(サポーター3人) -{FLAG:遺研_失敗率}\%(失敗率) -{FLAG:遺研_危険性 * 2}\%(危険性) %遺物研究テスト_独自判定()%
+CALL 遺物研究テスト_解析表の項目(項目, 数値, 説明)
+
+項目 = 獲得LP
+数値 = 1 ～ {AL_最大LP()}
+説明 = {FLAG:遺研_研究利益}(研究利益) + {(FLAG:遺研_危険性 / 2)}(危険性÷2)
+CALL 遺物研究テスト_解析表の項目(項目, 数値, 説明)
+
+項目 = LP期待値
+数値 = %AL_小数表記に変換(AL_LP期待値())%
+説明 = 1回の研究で得られるLPの期待値
+CALL 遺物研究テスト_解析表の項目(項目, 数値, 説明)
+
+項目 = 費用効率
+数値 = {AL_費用効率()}\%
+説明 = 1LPにかかる費用を50000とした場合の効率
+CALL 遺物研究テスト_解析表の項目(項目, 数値, 説明)
+
+項目 = 肉体ダメージ
+数値 = {AL_肉体ダメージ()}
+説明 = {FLAG:遺研_肉体ダメージ}(肉体ダメージ) + {FLAG:遺研_危険性}(危険性)
+CALL 遺物研究テスト_解析表の項目(項目, 数値, 説明)
+
+項目 = 精神ダメージ
+数値 = {AL_精神ダメージ()}
+説明 = {FLAG:遺研_精神ダメージ}(精神ダメージ) + {FLAG:遺研_危険性}(危険性)
+CALL 遺物研究テスト_解析表の項目(項目, 数値, 説明)
+
+RESETCOLOR
+
+
+@遺物研究テスト_解析表の項目(項目, 数値, 説明)
+#DIMS 項目
+#DIMS 数値
+#DIMS 説明
+PRINTFORML %項目, 20, LEFT% | %数値, 10, LEFT% | %説明%
+
+;-------------------------------------------------
+; 研究の成功／失敗テキストを表示する
+;-------------------------------------------------
+@遺物研究テスト_成功(遺物ID)
+#DIM 遺物ID
+
+SETCOLOR 150,250,150
+DRAWLINE
+PRINTFORML 【遺物研究:成功】
+DRAWLINE
+CALLFORM AL_Clear_{遺物ID}
+RESETCOLOR
+
+
+@遺物研究テスト_失敗(遺物ID)
+#DIM 遺物ID
+
+SETCOLOR 250,150,150
+DRAWLINE
+PRINTFORML 【遺物研究:失敗】
+DRAWLINE
+CALLFORM AL_Out_{遺物ID}
+RESETCOLOR
+
+
+@遺物研究テスト_ランダム(遺物ID)
+#DIM 遺物ID
+
+IF RAND:100 < AL_成功率()
+    CALL 遺物研究テスト_成功(遺物ID)
+ELSE
+    CALL 遺物研究テスト_失敗(遺物ID)
+ENDIF
+
+;-------------------------------------------------
+; 独自判定の文字列を返す
+; 解析表で成功率の説明に使う
+;-------------------------------------------------
+@遺物研究テスト_独自判定
+#FUNCTIONS
+#DIM 独自判定
+#DIMS 表記
+
+独自判定 = FLAG:遺研_独自判定
+
+SELECTCASE 独自判定
+    CASE 0
+        RETURNF
+    CASE 10
+        表記 = +100\%
+    CASE -10
+        表記 = -100\%
+    CASE IS > 0
+        表記 = +{独自判定 * 5}\%
+    CASE IS < 0
+        表記 = {独自判定 * 5}\%
+ENDSELECT
+RETURNF 表記 + "(独自判定)"

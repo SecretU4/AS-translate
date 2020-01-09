@@ -1,0 +1,2016 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:INFO_STATUS.ERB
+;	Facility	:정보 표시(STATUS)。
+;				 情報を表示する関数を纏める。
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;	002		2014/09/28		なるはや				両親表示を追加
+;	003		2017/02/28		morph					関数追加（INFO_STATUS_GROUP/INFO_STATUS_GET_BY_LABEL）
+;	004		2018/11/13		いんどまん				@INFO_STATUS_GET_BY_LABELに随伴/後方/회수부대で必要とされる能力値合計を表示するためのIF分岐追加
+;	005		2018/11/14		morph					随伴/後方/회수부대の能力値算出に使用する例外処理を@C_GET_CVAR_VALUEに移動、@INFO_STATUS_GET_BY_LABELの記述を差し戻し
+;	006		2019/04/15		M						表示改修＆リファクタリングMOD: 表示桁幅指定、定型ラベル表示はPRINT_STATUS.ERBへ集約、0の値は伏字モードなど
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- 表示系
+;
+;	・ INFO_STATUS_LIST					表示:STATUS画面(LIST)
+;
+;	# STATUS系(画面)
+;	・ INFO_STATUS_MAIN					表示:STATUS画面
+;	・ INFO_STATUS_GROUP				表示:配列利用정보 표시関数
+;	・ INFO_STATUS_BASES_PALAM			表示:STATUS画面(기본PALAM)
+;	・ INFO_STATUS_BASES_LOG			表示:STATUS画面(기본이력)
+;	・ INFO_STATUS_TRAIN_DATA			表示:STATUS画面(조교이력)
+;
+;	# STATUS系 - 詳細
+;	・ INFO_STATUS_HEADER				表示:STATUS(ヘッダ)
+;	・ INFO_STATUS_MARK					表示:STATUS(刻印)
+;	・ INFO_STATUS_TALENT				表示:STATUS(素質)
+;	・ INFO_STATUS_ABL					表示:STATUS(能力)
+;	・ INFO_STATUS_EXP					表示:STATUS(経験)
+;	・ INFO_STATUS_JUEL					表示:STATUS(珠)
+;	・ INFO_STATUS_GOTJUEL				表示:STATUS(取得珠)
+;	・ INFO_STATUS_INTRODUCTION			表示:STATUS(紹介)
+;	・ INFO_STATUS_OTHER				表示:STATUS(その他)
+;	・ INFO_INTRODUCTION				表示:STATUS(紹介)
+;
+;	# その他
+;	・ INFO_SIMPLE_STATUS_EXP			簡易表示:STATUS(経験)
+;	・ INFO_STATUS_GET_BY_LABEL			式中関数:ラベル使用キャラステータス参照関数
+
+
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   STATUS系(画面)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub INFO_STATUS_LIST
+;=================================================
+;   表示:STATUS画面(LIST)
+;-------------------------------------------------
+@INFO_STATUS_LIST
+#DIM L_INPUT
+#DIMS L_ERR_MSG
+
+;-----------------------------
+;- 初期処理
+;-----------------------------
+L_INPUT=0
+L_ERR_MSG=
+
+;-----------------------------
+;- データリスト
+;-----------------------------
+RESULT:1=0
+$DATA_LIST
+
+;- LIST:キャラリスト
+CALL LIST_CHARA(@"스테이터스를 표시하고 싶은 캐릭터를 선택하세요　", RESULT:1, L_ERR_MSG)
+L_INPUT = RESULT
+
+;- 表示:ページ別
+SELECTCASE L_INPUT
+	;- 終了
+	CASE 1000
+		RETURN 0
+	;- キャラ
+	CASEELSE
+		;表示:STATUS画面
+		CALL INFO_STATUS_MAIN(L_INPUT)
+		GOTO DATA_LIST
+ENDSELECT
+RESTART
+
+
+;=================================================
+;   sub INFO_STATUS_MAIN
+;=================================================
+;   表示:STATUS画面
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_MAIN(ARG)
+#DIM L_TMP
+#DIM L_PAGE_NOW
+#DIM L_PAGE_下限
+#DIM L_PAGE_上限
+#DIM L_PAGE_前
+#DIM L_PAGE_次
+
+#DIM L_CHARA_前
+#DIM L_CHARA_次
+
+L_TMP=0
+L_PAGE_下限=0
+L_PAGE_上限=0
+
+L_CHARA_前=0
+L_CHARA_次=0
+
+;-----------------------------
+;- 定数設定
+;-----------------------------
+L_PAGE_下限 = 0
+L_PAGE_上限 = 7
+
+
+;-----------------------------
+;- 処理開始
+;-----------------------------
+$PRINT_LOOP_1
+
+L_CHARA_前 = VAR_GET_CL("PREV",ARG)
+L_CHARA_次 = VAR_GET_CL("NEXT",ARG)
+
+L_PAGE_前 = (L_PAGE_NOW > L_PAGE_下限) ? 1 # 0
+L_PAGE_次 = (L_PAGE_NOW < L_PAGE_上限) ? 1 # 0
+
+;- 表示:STATUS(ヘッダ)
+		REDRAW 0
+		CLEARLINE LINECOUNT
+CALL INFO_STATUS_HEADER(ARG)
+PRINTL
+
+;- 表示:ページ別
+SELECTCASE L_PAGE_NOW
+	CASE 0
+		;- 表示:STATUS画面(기본PALAM)
+		DRAWLINE
+		CALL INFO_STATUS_BASES_PALAM(ARG)
+	CASE 1
+		;- 表示:STATUS画面(상세정보)
+		DRAWLINE
+		CALL INFO_PERSONAL(ARG)
+	CASE 2
+		;- 表示:STATUS画面(RPG정보)
+		DRAWLINE
+		CALL INFO_RPG(ARG)
+	CASE 3
+		;- 表示:STATUS画面(隠し性情報)
+		DRAWLINE
+		CALL INFO_SEX(ARG)
+	CASE 4
+		;- 表示:STATUS画面(조교이력)
+		DRAWLINE
+		CALL INFO_STATUS_TRAIN_DATA(ARG)
+	CASE 5
+		;- 表示:STATUS画面(素質＆初体験)
+		DRAWLINE
+		CALL INFO_STATUS_OTHER(ARG)
+	CASE 6
+		;- 表示:STATUS画面(기본이력)
+		DRAWLINE
+		CALL INFO_STATUS_BASES_LOG(ARG)
+	CASE 7
+		;- 表示:STATUS画面(紹介)
+		DRAWLINE
+		CALL INFO_INTRODUCTION(ARG)
+ENDSELECT
+
+;- 表示:選択部
+PRINTFORMLC [1007]이전 페이지
+PRINTLC [1000] 돌아온다
+PRINTFORMLC [1009]다음 페이지
+IF L_PAGE_NOW == 2
+	;PRINTFORMLC [3000] 衣装変更
+ENDIF
+PRINTL 
+IF FLAG:遺研_研究中 ==  0
+	PRINTFORMLC \@(L_CHARA_前 > -1) ? [1001]이전 캐릭터 # %" " * 16%\@
+	PRINTFORMLC   %" " * 18%
+	PRINTFORMLC \@(L_CHARA_次 > -1) ? [1003]다음 캐릭터 # %" " * 16%\@
+ENDIF
+
+$INPUT_LOOP_1
+INPUT
+SELECTCASE RESULT
+	CASE 1000
+		RETURN
+	;衣装変更
+	CASE 3000
+		;- 衣装:変更画面
+		CALL CLOTHES_CHG_MAIN(ARG)
+
+	;이전 페이지
+	CASE 1007
+		IF L_PAGE_NOW == 0
+			L_PAGE_NOW += 7
+		ELSEIF L_PAGE_前
+			L_PAGE_NOW -= 1
+		ENDIF
+	;다음 페이지
+	CASE 1009
+		IF L_PAGE_NOW ==7
+			L_PAGE_NOW -= 7
+		ELSEIF L_PAGE_次
+			L_PAGE_NOW += 1
+		ENDIF
+	;이전 캐릭터
+	CASE 1001
+		SIF L_CHARA_前 > -1
+			ARG = L_CHARA_前
+	;다음 캐릭터
+	CASE 1003
+		SIF L_CHARA_次 > -1
+			ARG = L_CHARA_次
+	CASEELSE
+		;- INPUTエラー対応
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP_1
+ENDSELECT
+
+GOTO PRINT_LOOP_1
+
+
+
+;-------------------------------------------------
+;配列利用정보 표시関数
+;-------------------------------------------------
+;@INFO_STATUS_MAINからパクった
+;配列を渡さないと機能しないので注意
+;ページやキャラリストの端と端がつながってます
+;渡された配列に含まれる登録番号のキャラの情報を閲覧することが出来る
+;戻り値：OPに「최종 확인」が含まれる場合、1で決定を行うとRESULTに表示キャラの登録番号が記録される
+;
+;OPに含まれる文字列によって機能を切り替える
+;「최종 확인」　　このオプションを指定して
+;　　　　　　　　1で決定を行うとRESULTに表示キャラの登録番号が記録される
+;「캐릭터 고정」　このオプションを指定するとキャラの切替ができない
+@INFO_STATUS_GROUP(CHARA_LIST, CHARA_VIEW, CHARA_CNT, OP)
+#DIM REF   CHARA_LIST      ;表示に使用するキャラリスト、必須
+#DIM       CHARA_VIEW      ;現在閲覧中のキャラのリスト上の位置
+#DIM       CHARA_CNT       ;キャラリストのサイズ
+#DIMS      OP              ;実行オプション
+#DIM       L_PAGE_NOW  = 0 ;閲覧中のページ数
+#DIM CONST PAGE_SIZE   = 8 ;ページのサイズ
+{
+#DIMS CONST TYPE_STATUS, 8 = 
+	"기본PALAM", 
+	"상세정보", 
+	"RPG정보", 
+	"생식정보", 
+	"조교이력", 
+	"특수소질＆첫체험", 
+	"기본이력", 
+	"인물소개"
+}
+
+;- 表示:STATUS(ヘッダ)
+REDRAW 0
+CLEARLINE LINECOUNT
+CALL INFO_STATUS_HEADER(CHARA_LIST:CHARA_VIEW)
+
+SELECTCASE TYPE_STATUS:L_PAGE_NOW
+CASE "기본PALAM", 
+	;- 表示:STATUS画面(기본PALAM)
+	DRAWLINE
+	CALL INFO_STATUS_BASES_PALAM(CHARA_LIST:CHARA_VIEW)
+CASE "상세정보", 
+	;- 表示:STATUS画面(상세정보)
+	DRAWLINE
+	CALL INFO_PERSONAL(CHARA_LIST:CHARA_VIEW)
+CASE "RPG정보", 
+	;- 表示:STATUS画面(RPG정보)
+	DRAWLINE
+	CALL INFO_RPG(CHARA_LIST:CHARA_VIEW)
+CASE "생식정보", 
+	;- 表示:STATUS画面(隠し性情報)
+	DRAWLINE
+	CALL INFO_SEX(CHARA_LIST:CHARA_VIEW)
+CASE "조교이력", 
+	;- 表示:STATUS画面(조교이력)
+	DRAWLINE
+	CALL INFO_STATUS_TRAIN_DATA(CHARA_LIST:CHARA_VIEW)
+CASE "특수소질＆첫체험", 
+	;- 表示:STATUS画面(初体験)
+	DRAWLINE
+	CALL INFO_STATUS_OTHER(CHARA_LIST:CHARA_VIEW)
+CASE "기본이력", 
+	;- 表示:STATUS画面(기본이력)
+	DRAWLINE
+	CALL INFO_STATUS_BASES_LOG(CHARA_LIST:CHARA_VIEW)
+CASE "인물소개"
+	;- 表示:STATUS画面(紹介)
+	DRAWLINE
+	CALL INFO_INTRODUCTION(CHARA_LIST:CHARA_VIEW)
+ENDSELECT
+
+IF STRCOUNT(OP, "「최종 확인」") || STRCOUNT(OP, "「캐릭터 고정」")
+	PRINTFORM %"　" * 8%
+ELSE
+	PRINTBUTTON "[7] - 　시설 배속", 7
+ENDIF
+PRINTFORM %"　" * 1%
+IF STRCOUNT(OP, "「캐릭터 고정」")
+ELSE
+	PRINTBUTTON "[8] - 이전 캐릭터", 8
+ENDIF
+PRINTFORM %"　" * 1%
+IF STRCOUNT(OP, "「최종 확인」") || STRCOUNT(OP, "「캐릭터 고정」")
+	PRINTFORM %"　" * 8%
+ELSE
+	PRINTBUTTON "[9] - 　부대 배속", 9
+ENDIF
+PRINTFORML 
+
+PRINTBUTTON @"[4] - %TYPE_STATUS:((L_PAGE_NOW + PAGE_SIZE - 1) % PAGE_SIZE), 14*2,LEFT%", 4
+PRINTBUTTON @"[6] - %TYPE_STATUS:((L_PAGE_NOW + PAGE_SIZE + 1) % PAGE_SIZE), 14, LEFT%", 6
+PRINTFORML 
+PRINTFORM %"　" * 8%
+PRINTFORM %"　" * 1%
+IF STRCOUNT(OP, "「캐릭터 고정」")
+ELSE
+	PRINTBUTTON "[2] - 다음 캐릭터", 2
+ENDIF
+PRINTFORM %"　" * 1%
+PRINTFORML 
+
+IF STRCOUNT(OP, "「최종 확인」")
+	PRINTBUTTON "[1] - 　　　결정", 1
+	PRINTFORM 　　　　　　　　　　
+	PRINTBUTTON "[0] - 취소", 0
+	PRINTFORML 
+ELSE
+	PRINTBUTTON "[0] - 돌아온다", 0
+ENDIF
+
+DO
+	ONEINPUT
+	SELECTCASE RESULT
+	CASE 1
+		SIF !STRCOUNT(OP, "「최종 확인」")
+			GOTO RETRY
+		RETURN CHARA_LIST:CHARA_VIEW
+	CASE 0
+		RETURN -1
+	[SKIPSTART]
+	;衣装変更
+	CASE 3000
+		;- 衣装:変更画面
+		CALL CLOTHES_CHG_MAIN(ARG)
+	[SKIPEND]
+	;이전 페이지
+	CASE 4
+		L_PAGE_NOW = (L_PAGE_NOW + PAGE_SIZE - 1) % PAGE_SIZE
+	;다음 페이지
+	CASE 6
+		L_PAGE_NOW = (L_PAGE_NOW + PAGE_SIZE + 1) % PAGE_SIZE
+	;시설배속
+	CASE 7
+		SIF STRCOUNT(OP, "「최종 확인」") || STRCOUNT(OP, "「캐릭터 고정」")
+			GOTO RETRY
+		CALL SELECT_WOKER(CHARA_LIST:CHARA_VIEW)
+	;이전 캐릭터
+	CASE 8
+		SIF STRCOUNT(OP, "「캐릭터 고정」")
+			GOTO RETRY
+		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT - 1) % CHARA_CNT
+	;部隊配属
+	CASE 9
+		SIF STRCOUNT(OP, "「최종 확인」") || STRCOUNT(OP, "「캐릭터 고정」")
+			GOTO RETRY
+		CALL SELECT_SUPPORT(CHARA_LIST:CHARA_VIEW)
+	;다음 캐릭터
+	CASE 2
+		SIF STRCOUNT(OP, "「캐릭터 고정」")
+			GOTO RETRY
+		CHARA_VIEW = (CHARA_VIEW + CHARA_CNT + 1) % CHARA_CNT
+	CASEELSE
+		$RETRY
+		;- INPUTエラー対応
+		CALL C_INPUT_ERROR("無効な入力です")
+		CONTINUE
+	ENDSELECT
+	BREAK
+LOOP 1
+RESTART
+
+
+
+;@INFO_STATUS_GROUPの呼び出し用関数
+;キャラ番号を渡すことで単体の能力表示関数として動作する
+@INFO_STATUS_SINGLE(L_C_ID, OP)
+#DIM  L_C_ID
+#DIMS OP
+CALL INFO_STATUS_GROUP(L_C_ID, 0, 1, OP + "「캐릭터 고정」")
+
+
+
+;=================================================
+;   sub INFO_STATUS_BASES_PALAM
+;=================================================
+;   表示:STATUS画面(기본PALAM)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_BASES_PALAM(ARG)
+
+;-- 刻印
+
+;- ライン表示:見出し
+CALL C_HEADLINE("각인(MARK)")
+;- 表示:STATUS(刻印)
+CALL INFO_STATUS_MARK(ARG)
+PRINTL
+
+
+;-- 素質
+
+;- ライン表示:見出し
+CALL C_HEADLINE("소질(TALENT)")
+;- 表示:STATUS(素質)
+CALL INFO_STATUS_TALENT(ARG)
+PRINTL
+
+
+;-- 能力
+;- ライン表示:見出し
+CALL C_HEADLINE("능력(ABL)")
+;- 表示:STATUS(能力)
+CALL INFO_STATUS_ABL(ARG)
+PRINTL
+
+
+;=================================================
+;   sub INFO_STATUS_BASES_LOG
+;=================================================
+;   表示:STATUS画面(기본이력)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_BASES_LOG(ARG)
+
+;-- 経験
+
+;- ライン表示:見出し
+CALL C_HEADLINE("経験(EXP)")
+;- 表示:STATUS(経験)
+CALL INFO_STATUS_EXP(ARG)
+PRINTL
+
+
+;-- 珠
+
+;- ライン表示:見出し
+CALL C_HEADLINE("珠(JUEL)")
+;- 表示:STATUS(珠)
+CALL INFO_STATUS_JUEL(ARG)
+PRINTL
+
+;=================================================
+;   sub INFO_STATUS_TRAIN_DATA
+;=================================================
+;   表示:STATUS画面(조교이력)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_TRAIN_DATA(ARG)
+#DIM L_I
+
+L_I = ARG
+SETCOLOR 250,100,200
+PRINTFORML ――――――――――――――――――――――――%CALLNAME:L_I%의 조교 이력――――――――――――――――――――――――
+
+
+IF  MASTER != L_I
+	IF TALENT:L_I:총애 == 1
+		CALL PRINT_LABEL("총애　　　　　　")
+		IF CFLAG:L_I:体型 == 2
+			PRINTFORML 		%CALLNAME:MASTER%는 그 색기 넘치는 풍만한 몸에 푹 빠져서 총애하고 있다。
+		ELSEIF CFLAG:L_I:体型 == 0
+			PRINTFORML 		%CALLNAME:MASTER%는 그 아름답고 가녀린 몸에 푹 빠져서 총애하고 있다。
+		ELSE
+			PRINTFORML 		%CALLNAME:MASTER%는 그 용모에 홀딱 반하여 총애하고 있다。
+		ENDIF
+	ELSEIF Exp:L_I:주인조교경험 >= 500
+		CALL PRINT_LABEL("마음에 듦　　　")
+		IF CFLAG:L_I:体型 == 2
+			PRINTFORML 		%CALLNAME:MASTER%에게 그 색기 넘치는 풍만한 몸으로 시선을 끌어、몇번이나 안겼다。
+		ELSEIF CFLAG:L_I:体型 == 0
+			PRINTFORML 		%CALLNAME:MASTER%에게 그 아름답고 가녀린 몸으로 시선을 끌어、몇번이나 안겼다。
+		ELSE
+			PRINTFORML 		%CALLNAME:MASTER%에게 그 외모로 시선을 끌어、몇번이나 안겼다。
+		ENDIF
+	ENDIF
+	IF TALENT:L_I:심취 == 1
+		CALL PRINT_LABEL("심취　　　　　　")
+		PRINTFORML		%CALLNAME:L_I%는 %CALLNAME:MASTER%를 진심으로 숭배하고 있다。
+	ELSEIF TALENT:L_I:애인 == 1
+		CALL PRINT_LABEL("애인　　　　　　")
+		PRINTFORML 		%CALLNAME:L_I%는 %CALLNAME:MASTER%에게 깊은 애정을 품고 있다。
+	ELSEIF TALENT:L_I:정부 == 1
+		CALL PRINT_LABEL("정부　　　　　　")
+		PRINTFORML 【정부】		%CALLNAME:L_I%는 %CALLNAME:MASTER%와의 육체 관계에 푹 빠져있다。
+	ENDIF
+
+	IF TALENT:L_I:합의 == 1
+		CALL PRINT_LABEL("합의　　　　　　")
+		PRINTFORML 		%CALLNAME:MASTER%와의 성행위에 합의했다。
+	ENDIF
+	IF TALENT:L_I:조교완료 == 1
+		CALL PRINT_LABEL("조교완료　　　　")
+		PRINTFORML 		성적인 조교 끝에 몸이 언제나 쾌락을 요구하고 있다。
+	ENDIF
+	IF Exp:L_I:파이즈리경험 >= 900
+		CALL PRINT_LABEL("파이즈리 LvMAX 　")
+		PRINTFORML 		가슴으로 손쉽게 사정시킬 정도의 기교를 가지고 있다。
+	ELSEIF Exp:L_I:파이즈리경험 >= 700
+		CALL PRINT_LABEL("파이즈리 Lv4　 　")
+		PRINTFORML 		성행위와 동일한 수준의 쾌락을 줄 수 있게 되었다。
+	ELSEIF Exp:L_I:파이즈리경험 >= 500
+		CALL PRINT_LABEL("파이즈리 Lv3　 　")
+		PRINTFORML 		어떤 자지라도 사정시킬 수 있다。
+	ELSEIF Exp:L_I:파이즈리경험 >= 300
+		CALL PRINT_LABEL("파이즈리 Lv2　 　")
+		PRINTFORML 		교묘하게 가슴을 사용하여 사정으로 이끌 수 있다。
+	ELSEIF Exp:L_I:파이즈리경험 >= 100
+		CALL PRINT_LABEL("파이즈리 Lv1　 　")
+		PRINTFORML 		가슴으로 사정시킬 수 있게 되었다。
+	ENDIF
+
+	IF Exp:L_I:펠라경험 >= 900
+		CALL PRINT_LABEL("펠라 LvMAX　 　")
+		PRINTFORML 		그녀의 펠라에 사정을 참을 순 없다。
+	ELSEIF Exp:L_I:펠라경험 >= 700
+		CALL PRINT_LABEL("펠라 Lv4　　 　")
+		PRINTFORML 		이미 보지처럼 쾌락을 주는 입이다。
+	ELSEIF Exp:L_I:펠라경험 >= 500
+		CALL PRINT_LABEL("펠라 Lv3　　 　")
+		PRINTFORML 		사정을 재촉하는 행동이나 테크닉을 익혔다。
+	ELSEIF Exp:L_I:펠라경험 >= 300
+		CALL PRINT_LABEL("펠라 Lv2　　 　")
+		PRINTFORML 		여유가 생기면 혀도 쓸 수 있게 되었다。
+	ELSEIF Exp:L_I:펠라경험 >= 100
+		CALL PRINT_LABEL("펠라 Lv1　　 　")
+		PRINTFORML 		사정하면서 정액을 입에 머금는 것에 익숙해졌다。
+	ENDIF
+
+	IF Exp:L_I:성교경험 >= 900
+		CALL PRINT_LABEL("섹스 LvMAX 　")
+		PRINTFORML 		음란한 허리 놀림으로 사정을 재촉하면서、정액이 마를 때까지 놓지 않을 정도로 교미에 완전히 빠짐。
+	ELSEIF Exp:L_I:성교경험 >= 700
+		CALL PRINT_LABEL("섹스 Lv4 　")
+		PRINTFORML 		성별이 다르기만 해도 호의를 품을 정도로、섹스 삼매경。
+	ELSEIF Exp:L_I:성교경험 >= 500
+		CALL PRINT_LABEL("섹스 Lv3 　")
+		PRINTFORML 		질 안쪽에 자지가 없으면 침착해지지 않고、질 안쪽은 언제나 흠뻑 젖어있다。
+	ELSEIF Exp:L_I:성교경험 >= 300
+		CALL PRINT_LABEL("섹스 Lv2 　")
+		PRINTFORML 		교미에 완전히 순응하면서 자지의 기능을 파악、질 안쪽에서 그 상황을 짐작할 수 있다。
+	ELSEIF Exp:L_I:성교경험 >= 100
+		CALL PRINT_LABEL("섹스 Lv1 　")
+		PRINTFORML 		수컷과의 교미에 익숙해져、질 안쪽에 자지가 비집고 들어오는 이물감에 적응했다。
+	ENDIF
+
+	IF TALENT:L_I:얀데레 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("사랑에 굶주린 광기")
+		PRINTFORML 		%CALLNAME:MASTER%에게 사랑받기 위해서라면 어떤 짓이라도…
+	ENDIF
+	IF TALENT:L_I:츤데레 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("데레끼　　　　　")
+		PRINTFORML 			츤츤거리던 시절은 어디로 갔는지、시선을 향하면 부끄러워하는 모습을 보인다。
+	ENDIF
+	IF TALENT:L_I:마돈나 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("사랑받는 마돈나　 　")
+		PRINTFORML 		愛と性を知りより魅力的になった、이젠 닿지 않을거라 생각하면서도 포로가 되는 남자들이 급격히 증가 중。
+	ENDIF
+	IF TALENT:L_I:절벽위의꽃 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		PRINTFORML 【 연모의 꽃 】
+		PRINTFORML			사랑에 빠진 그 모습에 모두가 수근거리고 있다…、누가 그녀의 마음을 얻었는지를。
+	ENDIF
+	IF TALENT:L_I:인간불신 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		PRINTFORML 【해방된 마음】
+		PRINTFORML			타인을 거절하던 자물쇠가 부서지고、고독했던 그녀는 간신히 사람을 사랑하게 되었다。
+	ENDIF
+	IF TALENT:L_I:극상의암컷 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		PRINTFORML 【지고의 애인】
+		PRINTFORML			남자라면 누구라도 범하고 싶은 그 몸은、%CALLNAME:MASTER%의 색으로 물들었다。
+	ENDIF
+	IF TALENT:L_I:聖女の血族 == 1 && Exp:L_I:主人調教経験 >= 100 && ( TALENT:L_I:心酔 == 1 || TALENT:L_I:愛人 == 1 || TALENT:L_I:情婦 == 1)
+		CALL PRINT_LABEL("聖痕を刻む聖女　")
+		PRINTFORML 		聖なる聖女は一人の遺伝子のみを育むことを誓った。
+	ELSEIF TALENT:L_I:성녀의자궁 == 1 && Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("성흔이 새겨진 자궁")
+		PRINTFORML		성스러운 자궁은 단 한사람의 유전자만을 받아들일 것을 맹세했다。
+	ENDIF
+	IF TALENT:L_I:아이돌 == 1 &&  Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("아이돌의 시크릿")
+		PRINTFORML 		팬들은 모른다…그 미소는 오직 단 한사람만을 향하고 있다는 것을。
+	ENDIF
+	IF TALENT:L_I:메이드 == 1 &&  Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("주종을 넘어서")
+		PRINTFORML  	%CALLNAME:MASTER%와 가장 가까운 여자로서、누구보다 사랑받고 싶어한다…
+	ENDIF
+	IF TALENT:L_I:학생  &&  Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("교실 최초의 어른")
+		PRINTFORML 		교실의 남자 아이들이 가장 두근두근하는 상대、그리고 남들보다 한발 앞서서 어른이 된 젊은 암컷。
+	ENDIF
+	IF TALENT:L_I:남성혐오 == 1 &&  Exp:L_I:주인조교경험 >= 100 && ( TALENT:L_I:심취 == 1 || TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("…남자는 싫어　　")
+		PRINTFORML 		…그렇지만 그 남자에겐 몸을 허락하게 되고、어째서인지 관계를 끊을 수가 없다……。
+	ENDIF
+	IF TALENT:L_I:흰백합공주 == 1 && (TALENT:L_I:심취 == 1|| TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("백탁의 백합 공주")
+		PRINTFORML 		하얀 백합이라도 꽃가루 받이라는 규칙에서 벗어날 순 없다、지금은 씨앗을 원하는 한송이의 암꽃。
+	ELSEIF TALENT:L_I:동성애 == 1 && Exp:L_I:주인조교경험 >= 100 && (TALENT:L_I:심취 == 1|| TALENT:L_I:애인 == 1 || TALENT:L_I:정부 == 1)
+		CALL PRINT_LABEL("레즈 타락하다　")
+		PRINTFORML 		수컷의 존재에 굴복하여 이성간의 성행위、아이를 임신하고 낳는다는 암컷 본연의 존재 방식을 인정했다。
+	ENDIF
+	IF TALENT:L_I:ＮＴＲ도 == 1
+		CALL PRINT_LABEL("ＮＴＲ　　　　　")
+		PRINTFORML 		%CALLNAME:L_I%는 %CALLNAME:MASTER%가 아닌、누군가에게 네토라레 당했다…。
+	ENDIF
+	IF TALENT:L_I:ＮＴＬ == 1
+		CALL PRINT_LABEL("ＮＴＬ　　　　　")
+		PRINTFORML 		사랑하는 사람이 있었던 %CALLNAME:L_I%의 몸과 마음은 이미 %CALLNAME:MASTER%의 것이다。
+	ENDIF
+	IF TALENT:L_I:백합뜯기 == 1
+		CALL PRINT_LABEL("백합뜯기　　　　")
+		PRINTFORML 		사랑하는 여성이 있었던 %CALLNAME:L_I%의 몸과 마음은 이미 %CALLNAME:MASTER%의 것이다。
+	ENDIF
+	IF CFLAG:L_I:あなたの子の出産数
+		CALL PRINT_LABEL("임신 완료　　　")
+		PRINTFORML 		%CALLNAME:MASTER%의 정자로 수정하여 임신、그리고 %CALLNAME:MASTER%의 피를 이은 아이를 낳았다。
+	ENDIF
+	IF TALENT:L_I:탁란완료 == 1
+		CALL PRINT_LABEL("탁란 완료　　　　")
+		PRITNFORML 		남편과 기르고 있는 아이는 남편의 핏줄이 아닌、%CALLNAME:MASTER%의 피를 이어받은 귀여운 아이이다。
+	ELSEIF TALENT:L_I:탁란 == 1
+		CALL PRINT_LABEL("탁란　　　　　　")
+		PRINTFORML 		인연을 맺은 상대가 아닌、%CALLNAME:MASTER%와의 아이를 임신하고 있다。
+	ENDIF
+	IF TALENT:L_I:被托卵済み == 1
+		CALL PRINT_LABEL("被托卵済み　　　")
+		PRINTFORML 		愛しているはずの%CALLNAME:MASTER%ではない子を自ら望んで産んだ…
+	ELSEIF TALENT:L_I:被托卵 == 1
+		CALL PRINT_LABEL("被托卵　　　　　")
+		PRINTFORML 		愛しているはずの%CALLNAME:MASTER%ではない種で孕んでいる…
+	ENDIF
+	IF TALENT:L_I:浮気 == 3
+		CALL PRINT_LABEL("浮気　　　　　　")
+		PRINTFORML 		夫だけでなく「夫の上司」と密かに肉体関係を持っている。
+	ELSEIF TALENT:L_I:浮気 == 2
+		CALL PRINT_LABEL("浮気　　　　　　")
+		PRINTFORML 		夫だけでなく「幼馴染」と密かに肉体関係を持っている。
+	ELSEIF TALENT:L_I:浮気 == 1
+		CALL PRINT_LABEL("浮気　　　　　　")
+		PRINTFORML 		夫だけでなく「元カレ」と密かに肉体関係を持っている。
+	ENDIF
+	IF CFLAG:交配実験_子宮内汚染度 >= 97
+		CALL PRINT_LABEL("まつろわぬ聖域　")
+		PRINTFORML 		実験によって汚染され切った子宮は人を産む聖域ではなくなった…。
+	ENDIF
+	IF CFLAG:交配実験_出産回数 >= 45
+		CALL PRINT_LABEL("人ならざる愛し子")
+		PRINTFORML 		交配実験の末、%CALLNAME:L_I%は人ではない子を数多く産み落とした…。
+	ENDIF
+
+
+
+
+	IF CFLAG:L_I:子宮精液貯蔵量合計 > 0
+		CALL PRINT_LABEL(@"%CALLNAME:MASTER%와의 아이 만들기")
+		SIF CFLAG:L_I:子宮精液貯蔵量 > 0
+			;<!>謎の一行のせいで、残留がなくても表示されるようになってた...
+		PRINTFORM 
+		PRINTFORM %CALLNAME:MASTER%의 교배로 {CFLAG:L_I:子宮精液貯蔵量/500}ml의 정액이 자궁에 남아있으며、
+		ENDIF
+		PRINTFORML 지금까지 {CFLAG:L_I:子宮精液貯蔵量合計/500}ml의 정액을 자궁에 모았다。
+	ENDIF
+ENDIF
+
+PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+RESETCOLOR
+;-------------------------------------------------------------------------------
+;   STATUS系(詳細)
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub INFO_STATUS_HEADER
+;=================================================
+;   表示:STATUS(ヘッダ)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_HEADER(ARG)
+;表示:ページヘッダ
+CALL C_LINE
+PRINTFORM NO.%TOSTR(CFLAG:ARG:個別番号) , 3, LEFT%:
+PRINTFORM %CALLNAME:ARG,24,LEFT%
+;체력
+CALL VAR_BAR_BASE(ARG, 0, 1)
+SIF ARG != MASTER
+	CALL MNG_INFO_BASIC_DATA(ARG)
+;- 情報:危険日
+CALL INFO_危険日(ARG)
+PRINTL
+
+;=================================================
+;   sub INFO_STATUS_MARK
+;=================================================
+;   表示:STATUS(刻印)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_MARK(ARG)
+#DIM L_CNT
+
+L_CNT=0
+
+VARSET LOCAL
+FOR LOCAL,0,VARSIZE("MARK")
+
+	LOCALS = %MARKNAME:LOCAL%
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+	LOCAL:1 = MARK:ARG:LOCAL
+
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
+	PRINTFORM %LOCALS , 10%
+	PRINTFORM :LV{LOCAL:1, 2 ,LEFT} 
+	BAR LOCAL:1, 3, 3
+	PRINT  
+	RESETCOLOR
+
+	L_CNT += 1
+	IF L_CNT > 3
+		PRINTL
+		L_CNT = 0
+	ENDIF
+NEXT
+
+SIF !LINEISEMPTY()
+	PRINTL
+
+
+;=================================================
+;   sub INFO_STATUS_TALENT
+;=================================================
+;   表示:STATUS(素質)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				CSV優先
+;-------------------------------------------------
+@INFO_STATUS_TALENT(ARG, ARG:1=0)
+#DIM L_CNT
+#DIM L_COLOR
+#DIM L_I
+#DIMS L_STR
+#DIM DYNAMIC L_LABELCOLOR
+#DIM CONST L_LAYOUT_OFFSET = 14
+
+L_CNT=0
+L_COLOR = GETCOLOR()
+
+
+FOR L_I,0,VARSIZE("TALENT")
+	L_LABELCOLOR = -1
+
+	SELECTCASE L_I
+		CASE 0
+			CALL PRINT_LABEL("ABL 소질")
+			PRINTFORM %"：",L_LAYOUT_OFFSET-RESULT%
+		CASE 50
+			PRINTL
+			CALL PRINT_LABEL("체질 소질")
+			PRINTFORM %"：",L_LAYOUT_OFFSET-RESULT%
+			L_CNT = 0
+		CASE 100
+			PRINTL
+			CALL PRINT_LABEL("개인 소질")
+			PRINTFORM %"：",L_LAYOUT_OFFSET-RESULT%
+			L_CNT = 0
+		CASE 200
+			PRINTL
+			CALL PRINT_LABEL("대인 소질")
+			PRINTFORM %"：",L_LAYOUT_OFFSET-RESULT%
+			L_CNT = 0
+		CASE 3000
+			PRINTL
+			CALL PRINT_LABEL("기밀 소질")
+			PRINTFORM %"：",L_LAYOUT_OFFSET-RESULT%
+			L_CNT = 0
+	ENDSELECT
+
+	;- DB:TALENT名称
+	L_STR = %DB_TALENT_NAME(ARG, TALENTNAME:L_I, ARG:1)%
+
+	;-特殊変換
+	SELECTCASE TALENTNAME:L_I
+		CASE "시조"
+			IF CFLAG:(ARG):차세대창조子孫数
+				L_STR = 시조:創造数{MIN(CFLAG:(ARG):차세대창조子孫数, 999), 3, RIGHT}
+			ELSE
+				L_STR = 
+			ENDIF
+		CASE "髪色","髪型","目","瞳色","唇","体型","乳首","陰毛","ペニスサイズ","母親"
+		L_STR = 
+	ENDSELECT
+
+
+	;-特殊変換
+	SELECTCASE TALENTNAME:L_I
+		CASE "남자"
+			IF VAR_SEX(ARG, ARG:1)
+				L_STR = 여자
+			ELSE
+				L_STR = 남자
+			ENDIF
+	ENDSELECT
+
+	SIF STRLENS(L_STR) <= 0
+		CONTINUE
+
+	IF L_CNT > 95;75
+		PRINTL
+		PRINTFORM %" ",L_LAYOUT_OFFSET%
+		L_CNT = 0
+	ENDIF
+
+	L_CNT += STRLENS(L_STR)
+
+	;-着色
+	SELECTCASE L_STR
+		CASE "処女", "오토코노코"
+			L_LABELCOLOR = 0xFF66CC
+		CASE "童貞"
+			L_LABELCOLOR = COLOR("群青")
+		CASE "비전투원","비인간형","저항","중고품","인간불신"
+			L_LABELCOLOR = COLOR("群青")
+		CASE "배란약", "妊娠", "수정" ,"심취" ,"애인" ,"정부" ,"쉽게반함" ,"즉각타락"
+			L_LABELCOLOR = COLOR("ピンク")
+		CASE "ＮＴＲ", "악마", "반마", "조마", "약점", "ＮＴＬ","탁란","탁란완료","被托卵済み","浮気"
+			L_LABELCOLOR = COLOR("紫")
+		CASE "비합의", "범해짐","부재","기억처리약","강간욕망","イレギュラー","ボランティア","強化住人"
+			L_LABELCOLOR = COLOR_FROMRGB(250,0,0)
+		CASE "푸른혈족"
+			L_LABELCOLOR = COLOR_FROMRGB(50,50,250)
+		CASE "합의"
+			L_LABELCOLOR = COLOR_FROMRGB(250,250,100)
+		CASE "성녀의자궁", "극상의암컷" ,"마돈나","万年乳期","聖女の血族"
+			L_LABELCOLOR = COLOR_FROMRGB(250,250,200)
+		CASE "학생", "대학생", "고등학생", "중학생", "초등학생"
+			IF (TALENT:(ARG:0):아이돌 || TALENT:(ARG:0):창녀)
+				L_LABELCOLOR = COLOR_FROMRGB(250,100,50)
+			ELSE
+				L_LABELCOLOR = COLOR_FROMRGB(50,250,50)
+			ENDIF
+		CASE "아이돌", "사회인", "창녀", "치안유지국직원", "메이드", "성직자","AI専属被験者"
+			L_LABELCOLOR = COLOR_FROMRGB(50,250,50)
+		CASE "기밀Lv1개체", "기밀Lv2개체", "기밀Lv3개체"
+			L_LABELCOLOR = COLOR_FROMRGB(50,250,50)
+		CASE "기밀Lv4개체", "기밀Lv5개체", "기밀Lv6개체"
+			L_LABELCOLOR = COLOR_FROMRGB(250,250,50)
+		CASE "기밀Lv7개체", "기밀Lv8개체", "기밀Lv9개체"
+			L_LABELCOLOR = COLOR_FROMRGB(250,50,50)
+	ENDSELECT
+
+	CALL PRINT_LABEL(L_STR,,L_LABELCOLOR,,,,,,,,1)
+
+	;- 外枠分を加算
+	L_CNT += 2
+
+NEXT
+
+SIF !LINEISEMPTY()
+	PRINTL
+
+
+;=================================================
+;   sub INFO_STATUS_ABL
+;=================================================
+;   表示:STATUS(能力)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				空データ除外
+;-------------------------------------------------
+@INFO_STATUS_ABL(ARG, ARG:1=0)
+#DIM L_CNT
+#DIM L_COLOR
+
+L_CNT=0
+L_COLOR = GETCOLOR()
+
+VARSET LOCAL
+FOR LOCAL,0,VARSIZE("ABL")
+
+	LOCALS = %ABLNAME:LOCAL%
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+	LOCAL:1 = ABL:ARG:LOCAL
+
+	SIF ARG:1 && !LOCAL:1
+		CONTINUE
+
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
+	PRINTFORM %LOCALS , 10%
+	PRINTFORM :LV{LOCAL:1, 2, LEFT} 
+	BAR (LOCAL:1/3), 3, 3
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+	SETCOLOR L_COLOR
+	PRINT
+
+	L_CNT += 1
+	IF L_CNT > 3
+		PRINTL
+		L_CNT = 0
+	ENDIF
+NEXT
+
+SIF !LINEISEMPTY()
+	PRINTL
+
+;=================================================
+;   sub INFO_STATUS_EXP
+;=================================================
+;   表示:STATUS(経験)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				空データ除外
+;-------------------------------------------------
+@INFO_STATUS_EXP(ARG, ARG:1=0)
+#DIM L_CNT
+#DIM L_COLOR
+#DIM CONST EXP_STATUS_SPAN = 29
+
+L_CNT=0
+L_COLOR = GETCOLOR()
+VARSET LOCAL
+
+FOR LOCAL,0,VARSIZE("EXP")
+
+	;ヘッダー
+	SELECTCASE LOCAL
+		CASE 0
+			PRINTFORM %"■======= 통상 경험 =======■"%, EXP_STATUS_SPAN , LEFT% 
+			L_CNT = 1
+		CASE 50
+			SIF !LINEISEMPTY()
+				PRINTL
+			PRINTFORM %"■=== 비정상 경험 ===■"%, EXP_STATUS_SPAN , LEFT% 
+			L_CNT = 1
+		CASE 80
+			SIF !LINEISEMPTY()
+				PRINTL
+			PRINTFORM %"■====== 기타 경험 ======■"%, EXP_STATUS_SPAN , LEFT% 
+			L_CNT = 1
+	ENDSELECT
+
+	LOCALS = %EXPNAME:LOCAL%
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+	LOCAL:1 = EXP:ARG:LOCAL
+
+	SIF ARG:1 && !LOCAL:1
+		CONTINUE
+
+	;CHK:数量(必須表示のみ素通り)
+	SELECTCASE LOCAL
+		CASE 0,50,60
+		CASEELSE
+;			SIF LOCAL:1 <= 0
+;				CONTINUE
+	ENDSELECT
+
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
+	PRINTFORM %@"%LOCALS , 16%:LV{GETEXPLV(LOCAL:1,9), 2, LEFT}(%TOSTR(LOCAL:1) , 4%回)", EXP_STATUS_SPAN , LEFT%
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+	SETCOLOR L_COLOR
+	PRINT  
+
+	L_CNT += 1
+	IF L_CNT > 2
+		PRINTL
+		L_CNT = 0
+	ENDIF
+
+NEXT
+
+SIF !LINEISEMPTY()
+	PRINTL
+
+;=================================================
+;   sub INFO_STATUS_JUEL
+;=================================================
+;   表示:STATUS(珠)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_JUEL(ARG)
+#DIM L_HIT
+#DIM L_CNT
+#DIM L_COLOR
+
+L_HIT=0
+L_CNT=0
+VARSET LOCAL
+L_COLOR = GETCOLOR()
+
+FOR LOCAL,0,VARSIZE("ABL")
+
+	LOCALS = %PALAMNAME:LOCAL%
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+	LOCAL:1 = JUEL:ARG:LOCAL
+
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
+	LOCALS += "의 구슬"
+	PRINTFORM %LOCALS , 14%:
+	PRINTFORM {LOCAL:1 , 5}
+	SIF LOCAL:1 <= 0 && FLAG:STATUS伏字モード
+		SETCOLOR L_COLOR
+	PRINT  
+	L_HIT = 1
+
+	L_CNT += 1
+	IF L_CNT > 3
+		PRINTL
+		L_CNT = 0
+		L_HIT = 0
+	ENDIF
+NEXT
+
+SIF L_HIT
+	PRINTL
+
+;=================================================
+;   sub INFO_STATUS_GOTJUEL
+;=================================================
+;   表示:STATUS(取得珠)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_GOTJUEL(ARG)
+#DIM L_HIT
+#DIM L_CNT
+#DIM L_COLOR
+
+L_HIT=0
+L_CNT=0
+VARSET LOCAL
+L_COLOR = GETCOLOR()
+
+FOR LOCAL,0,VARSIZE("ABL")
+
+	LOCALS = %PALAMNAME:LOCAL%
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+	LOCAL:1 = GOTJUEL:ARG:LOCAL
+	LOCAL:2 = JUEL:ARG:LOCAL
+
+	SIF LOCAL:1 <= 0
+		CONTINUE
+	LOCALS += "의 구슬"
+	PRINTFORM %LOCALS , 10%:
+	PRINTFORM {LOCAL:2 , 5}(+{LOCAL:1 , 5})
+	PRINT  
+	L_HIT = 1
+
+	L_CNT += 1
+	IF L_CNT > 3
+		PRINTL
+		L_CNT = 0
+		L_HIT = 0
+	ENDIF
+NEXT
+SIF L_HIT
+	PRINTL
+PRINTL
+
+;=================================================
+;   sub INFO_STATUS_INTRODUCTION
+;=================================================
+;   表示:STATUS(紹介)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				CSV優先
+;-------------------------------------------------
+@INFO_STATUS_INTRODUCTION(ARG, ARG:1=0)
+#DIM L_TMP
+
+IF ARG:1
+	L_TMP = ARG
+ELSE
+	L_TMP = NO:ARG
+ENDIF
+
+REPEAT 4
+	PRINTSL CSVCSTR(L_TMP, GETNUM(CSTR, "キャラ紹介" + TOSTR(COUNT)), 0)
+REND
+
+;=================================================
+;   sub INFO_STATUS_OTHER
+;=================================================
+;   表示:STATUS(その他)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_STATUS_OTHER(ARG)
+#DIM L_CNT
+#DIM L_TMP
+#DIMS L_STR
+#DIM L_I
+
+L_I = ARG
+
+;- 主人の場合
+IF ARG == MASTER
+	PRINTFORML 함락 인원 수:{FLAG:陥落人数}명
+	PRINTFORML 
+	PRINTFORML 
+ELSE
+	;-----------------------------
+	;- NTR
+	;-----------------------------
+	L_CNT=0
+	L_TMP=CFLAG:ARG:ＮＴＲ再陥落回数
+	IF L_TMP
+		PRINTFORML ＮＴＲ재함락 횟수：{L_TMP,2}회
+		L_CNT ++
+	ENDIF
+	L_TMP=CFLAG:ARG:ＮＴＲ好感度
+	IF L_TMP
+		PRINTFORML ＮＴＲ호감도 (%CSTR:ARG:ＮＴＲキャラ名%)：{L_TMP,3}/999
+		L_CNT ++
+	ENDIF
+	WHILE 1
+		SIF L_CNT >= 2
+			BREAK
+		PRINTL
+		L_CNT ++
+	WEND
+
+ENDIF
+TRYCALL 初体験記録(ARG)
+
+
+PRINTFORML ――――――――――――――――――――――――%CALLNAME:L_I%의 특수 소질――――――――――――――――――――――――
+SIF TALENT:L_I:생환자 == 1
+	PRINTFORML 기밀 Lv1:【생환자】			「외적」의 위협에 노출되었다가 도시 외곽에서 살아서 돌아온 사람。
+SIF TALENT:L_I:실험체 == 1
+	PRINTFORML 기밀 Lv2:【실험체】			뭔지 모를 실험을 받고 있던 사람、관찰이 필요한 대상이기도 하다。
+SIF TALENT:L_I:푸른혈족 == 1
+	PRINTFORML 기밀 Lv1:【푸른 혈족】		영주・왕족같은 고귀한 혈통을 가지고 태어난 자、현대에선 매우 드물다。
+SIF TALENT:L_I:마레비토 == 1
+	PRINTFORML 기밀 Lv1:【마레비토】			이곳이 아닌 다른 세계에서 온 운이 없는 사람들。
+SIF TALENT:L_I:구세대인간 == 1
+	PRINTFORML 기밀 Lv2:【구세대 인간】		「외적」에게 멸망당하기 전에 살아 있던 사람、옛 문명에 대해 매우 박식하다。
+SIF TALENT:L_I:성노예출신 == 1
+	PRINTFORML 기밀 Lv1:【성노예 출신】		예전엔 성노예였던 사람、최소한 이쪽에선 소중히 대하자。
+SIF TALENT:L_I:인권파괴 == 1
+	PRINTFORML 기밀 Lv2:【인권파괴】			인권이 현저히 손상된 사람、당신의 보호가 없으면 가축 이하의 대우를 받는다。
+SIF TALENT:L_I:돌연변이 == 1
+	PRINTFORML 기밀 Lv3:【돌연변이】			유용한 변이를 이룬 개체、딱히 인외의 존재라는 것은 아니다。
+SIF TALENT:L_I:격세유전 == 1
+	PRINTFORML 기밀 Lv3:【격세 유전】		과거 세대의 특이성이 발현된 사람、용모도 살짝 비슷하다。
+SIF TALENT:L_I:기억처리약 == 1
+	PRINTFORML 기밀 Lv2:【기억처리약】		아무것도 떠올릴 수 없다
+SIF TALENT:L_I:명가 == 1
+	PRINTFORML 기밀 Lv0:【명가】			몇대를 이어서「플레이어」를 모시는 일족、주민들의 동경의 대상이기도 하다。
+SIF TALENT:L_I:극상의암컷 == 1
+	PRINTFORML 기밀 Lv1:【극상의 암컷】		남성에게는 성적인、동성에게는 질투어린 시선을 받기에 충분한 외모를 가지고 있다。
+SIF TALENT:L_I:마돈나 == 1
+	PRINTFORML 기밀 Lv1:【마돈나】			남자의 고백을 받은 것은 헤아릴 수 없고、몸과 마음을 노려지고 있다。
+SIF TALENT:L_I:흰백합공주 == 1
+	PRINTFORML 기밀 Lv1:【흰 백합 공주】		동성을 사랑하고 자애하며、이성에겐 거의 관심이 없다。
+SIF TALENT:L_I:AI専属被験者 == 1
+	PRINTFORML 機密Lv2 :【AI専属被験者】		ＡＩ博士ノ「オ得意様」ナノ！、優先シテ実験シテアゲルノ！。
+SIF TALENT:L_I:万年乳期 == 1
+	PRINTFORML 機密Lv2 :【万年乳期】		妊娠の有無に関係なく母乳が出る特異体質、よく採れ甘くそして濃厚。
+SIF TALENT:L_I:強化住人 == 1
+	PRINTFORML 機密Lv6 :【強化住人】		ﾅﾆｶｼﾀﾅﾉｰ!!!
+SIF TALENT:L_I:성녀의자궁 == 1
+	PRINTFORML 기밀 Lv4:【성녀의 자궁】		어떤 정자도 받아들이며、우수한 아이를 기르는 자궁을 가지고 있다。
+SIF TALENT:L_I:聖女の血族 == 1
+	PRINTFORML 重要機密:【聖女の血族】		最初期の都市を支えた偉大な大聖女、その血を色濃く継いだ者。教会で信仰対象にされる程の尊き血。
+SIF TALENT:L_I:「시스터」 == 1
+	PRINTFORML 기밀 Lv5:【「시스터」】		당신의 여동생이라는 설정을 덧씌워진 개체。
+SIF TALENT:L_I:「예거」 == 1
+	PRINTFORML 기밀 Lv5:【「예거」】		수많은「외적」을 멸한 사람에게「시티」가 수여하는 칭호。
+SIF TALENT:L_I:「마더」 == 1
+	PRINTFORML 기밀 Lv5:【「마더」】		많은 아이를 낳아서 도시에 공헌한 사람에게「시티」가 수여하는 칭호。
+SIF TALENT:L_I:「ミューチュアル」 == 1
+	PRINTFORML 重要機密:【「ミューチュアル」】	「外敵」の宿主でかつ共生している、何故共生出来ているのか解明は未だ出来ていない。
+SIF CFLAG:L_I:住人_種族 == 13
+	PRINTFORML 重要機密:【ニア】		「外敵」解明の一環として人工的に生み出された「外敵」の血を引く種族。
+PRINTFORML ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+;=================================================
+;   sub INFO_INTRODUCTION
+;=================================================
+;   表示:STATUS画面(상세정보)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_PERSONAL(ARG)
+#DIM L_I
+#DIM L_TMP
+#DIMS L_KEY
+#DIM I_LOOP
+
+I_LOOP = 1
+L_TMP = NO:ARG
+L_I = ARG:0
+
+
+DRAWLINE
+PRINTFORML ■------------------------------------ 상세 정보 ------------------------------------■
+
+PRINTFORML ◇----------------주민 정보----------------◇
+CALL PRINT_STATUS(L_I, "소지금")
+CALL PRINT_STATUS(L_I, "수입"  , , , ,1000000)
+CALL PRINT_STATUS(L_I, "지출"  , , , ,1000000)
+SIF Talent:L_I:아이돌 != 0
+	CALL PRINT_STATUS(L_I, "팬 수",,(!CFLAG:L_I:ファンの数 && FLAG:STATUS伏字モード ? COLOR("伏字") # -1),TOSTR(CFLAG:L_I:ファンの数))
+PRINTL
+CALL PRINT_STATUS(L_I, "인기"  , , , , 10000)
+CALL PRINT_STATUS(L_I, "모랄", , , (L_I==MASTER ? "伏字"#""), 500 , , -500)
+CALL PRINT_STATUS(L_I, "카르마", , , (L_I==MASTER ? "伏字"#""), 500 , , -500)
+CALL PRINT_STATUS(L_I, "품성"  , , , (L_I==MASTER ? "伏字"#""), 500 , , -500)
+PRINTL
+ CALL PRINT_STATUS(L_I, "육체 데미지")
+ CALL PRINT_STATUS(L_I, "정신 데미지")
+PRINTL
+
+IF TALENT:L_I:남자 == 1 || TALENT:L_I:후타나리
+PRINTFORM 【자지 사이즈:
+	IF CFLAG:L_I:ペニスサイズ == 3
+			PRINTFORM 거근
+	ELSEIF CFLAG:L_I:ペニスサイズ == 2
+			PRINTFORM 소추 포경
+	ELSEIF CFLAG:L_I:ペニスサイズ == 1
+			PRINTFORM 포경
+	ELSE
+			PRINTFORM 표준
+	ENDIF
+PRINTFORML 】
+ENDIF
+
+PRINTFORML ◇----------------정신 정보----------------◇
+CALL PRINT_STATUS(L_I, "충성도")
+CALL PRINT_STATUS(L_I, "애정도")
+CALL PRINT_STATUS(L_I, "음란도")
+PRINTL
+
+
+PRINTFORML ■------------------------------------ 고민 일람 ------------------------------------■
+PRINTFORML ◇----------------큰 고민----------------◇
+REPEAT 5
+	IF CFlag:L_I:(4000+I_LOOP) != 0
+		IF CFlag:L_I:(4100+I_LOOP) >= 100
+			IF CFlag:L_I:(4000+I_LOOP) <= 199
+				SETCOLOR COLOR("悩み_金銭")
+				CALL PRINT_LABEL("금전 문제")
+			ELSEIF CFlag:L_I:(4000+I_LOOP) <= 299
+				SETCOLOR COLOR("悩み_恋愛")
+				CALL PRINT_LABEL("연애 문제")
+			ELSEIF CFlag:L_I:(4000+I_LOOP) <= 399
+				SETCOLOR COLOR("悩み_家庭")
+				CALL PRINT_LABEL("가정 문제")
+			ELSEIF CFlag:L_I:(4000+I_LOOP) <= 499
+				SETCOLOR COLOR("悩み_生活")
+				CALL PRINT_LABEL("생활 문제")
+			ELSEIF CFlag:L_I:(4000+I_LOOP) <= 599
+				SETCOLOR COLOR("悩み_犯罪")
+				CALL PRINT_LABEL("범죄 문제")
+			ELSEIF CFlag:L_I:(4000+I_LOOP) <= 699
+				SETCOLOR COLOR("悩み_性的")
+				CALL PRINT_LABEL("성적인 문제")
+			ENDIF
+		ELSE
+			SIF FLAG:STATUS伏字モード
+				SETCOLOR COLOR("伏字")
+			PRINTFORM ？？？(미판명)
+			CALL PRINT_LABEL("해석",,,TOSTR(CFlag:L_I:(4100+I_LOOP)),3,,"/","100")
+		ENDIF
+		PRINTFORM 난이도:{CFlag:L_I:(4300+I_LOOP),2}　
+		PRINTFORML 달성률:({CFlag:L_I:(4200+I_LOOP),3}/100)
+		RESETCOLOR
+	ENDIF
+	I_LOOP += 1
+REND
+PRINTFORML ◇----------------작은 고민----------------◇
+I_LOOP = 1
+REPEAT 5
+	IF CFlag:L_I:(4010+I_LOOP) != 0
+		IF CFlag:L_I:(4110+I_LOOP) >= 100
+				IF CFlag:L_I:(4010+I_LOOP) <= 199
+				SETCOLOR COLOR("悩み_金銭")
+				CALL PRINT_LABEL("금전 문제")
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 299
+				SETCOLOR COLOR("悩み_恋愛")
+				CALL PRINT_LABEL("연애 문제")
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 399
+				SETCOLOR COLOR("悩み_家庭")
+				CALL PRINT_LABEL("가정 문제")
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 499
+				SETCOLOR COLOR("悩み_生活")
+				CALL PRINT_LABEL("생활 문제")
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 599
+				SETCOLOR COLOR("悩み_犯罪")
+				CALL PRINT_LABEL("범죄 문제")
+				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 699
+				SETCOLOR COLOR("悩み_性的")
+				CALL PRINT_LABEL("성적인 문제")
+				ENDIF
+			ELSE
+			SIF FLAG:STATUS伏字モード
+				SETCOLOR COLOR("伏字")
+			PRINTFORM ？？？(미판명)
+			CALL PRINT_LABEL("해석",,,TOSTR(CFlag:L_I:(4100+I_LOOP)),3,,"/","100")
+		ENDIF
+		PRINTFORM 난이도:{CFlag:L_I:(4310+I_LOOP),2}　
+		PRINTFORML 달성률:({CFlag:L_I:(4210+I_LOOP),3}/100)
+		RESETCOLOR
+	ENDIF
+	I_LOOP += 1
+REND
+PRINTFORML ■------------------------------------ 신체 정보 ------------------------------------■
+SIF TALENT:L_I:남자 == 0 || MASTER != L_I
+	CALL C_PICTURE_S(ARG:0)
+
+SIF !LINEISEMPTY()
+	PRINTL
+
+
+;=================================================
+;   表示:STATUS画面(隠し性情報)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_SEX(ARG)
+#DIM L_I
+#DIM P_S
+#DIMS LSTR
+L_I = ARG
+P_S = 0
+IF MASTER == L_I
+PRINTFORML 
+CALL PRINT_STATUS(L_I, "남체 레벨")
+SIF !CFlag:L_I:男体経験値 && !CFlag:L_I:男体レベル && Flag:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORML ({CFlag:L_I:男体経験値}/{CFlag:L_I:男体レベル*2})
+RESETCOLOR
+CALL PRINT_STATUS(L_I, "정자 레벨")
+SIF !CFlag:L_I:精子経験値 && !CFlag:L_I:精子レベル && Flag:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+PRINTFORML ({CFlag:L_I:精子経験値}/{((CFlag:L_I:精子レベル)*5)+CFlag:L_I:精子レベル})
+RESETCOLOR
+PRINTFORML 
+ELSEIF TALENT:L_I:남자 == 0 || MASTER != L_I
+	CALL C_PICTURE_S_S(ARG)
+	PRINTFORML ■----------------%CALLNAME:L_I%が 보유한 무자각 소질----------------■
+	IF TALENT:L_I:남자 == 0
+		IF CFlag:L_I:無自覚な雌 >= 80
+			IF !RAND:5
+				PRINTFORML 「……%UNICODE(0x2661)%」
+			ELSEIF !RAND:4
+				PRINTFORML 「%CSTR:L_I:二人称%の子供は、とても優秀な子になりそう%CSTR:L_I:語尾同意求む%」
+			ELSEIF !RAND:3
+				PRINTFORML 「子供とか興味あ%CSTR:L_I:語尾対応%、%CSTR:L_I:二人称%は？」
+			ELSEIF !RAND:2
+				PRINTFORML (%CSTR:L_I:一人称%…いつの間にか身体摺り寄せて……)
+			ELSE
+				PRINTFORML 「隣でも大丈夫%CSTR:L_I:語尾問う%？、この方が聞きやすくていい%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%」
+			ENDIF
+		ELSEIF CFlag:L_I:無自覚な雌 >= 60
+			IF !RAND:5
+				PRINTFORML 「今日も話たくさん聞いてもらっていい%CSTR:L_I:語尾問う%？」
+			ELSEIF !RAND:4
+				PRINTFORML 「%CSTR:L_I:二人称%は女性に興味あ%CSTR:L_I:語尾聞く%？」
+			ELSEIF !RAND:3
+				PRINTFORML 「……♪」
+			ELSEIF !RAND:2
+				PRINTFORML 「%CSTR:L_I:語尾何？%%UNICODE(0x2661)%」
+			ELSE
+				PRINTFORML 「身体熱い…%CSTR:L_I:語尾逆説%…心地いい%CSTR:L_I:語尾応答2%…」
+			ENDIF
+		ELSEIF CFlag:L_I:無自覚な雌 >= 40
+			IF !RAND:5
+				PRINTFORML 「%CSTR:L_I:二人称%の話はいつも面白い%CSTR:L_I:語尾応答2%」
+			ELSEIF !RAND:4
+				PRINTFORML 「…っん」
+			ELSEIF !RAND:3
+				PRINTFORML 「…いつも%CSTR:L_I:語尾感謝%」
+			ELSEIF !RAND:2
+				PRINTFORML 「身体が火照って…」
+			ELSE
+				PRINTFORML 「%CSTR:L_I:二人称%になら触られても平気%CSTR:L_I:語尾許可%」
+			ENDIF
+		ELSEIF CFlag:L_I:無自覚な雌 >= 20
+			IF !RAND:5
+				PRINTFORML 「%CSTR:L_I:二人称%に話を聞いてもらって助かって%CSTR:L_I:語尾ます%」
+			ELSEIF !RAND:4
+				PRINTFORML 「もっと話を聞いてもらっていい%CSTR:L_I:語尾問う%？」
+			ELSEIF !RAND:3
+				PRINTFORML 「%CSTR:L_I:二人称%ってよく見るといい感じだと思う%CSTR:L_I:語尾繋ぎ%%CSTR:L_I:語尾です%」
+			ELSEIF !RAND:2
+				PRINTFORML 「少し近づいていい%CSTR:L_I:語尾問う%？」
+			ELSE
+				PRINTFORML 「少し熱い%CSTR:L_I:語尾応答2%、なんで%CSTR:L_I:語尾疑問%…？」
+			ENDIF
+		ELSE 
+			IF !RAND:5
+				PRINTFORML 「%CSTR:L_I:一人称%の顔に何かついてるの%CSTR:L_I:語尾問う%？」
+			ELSEIF !RAND:4
+				PRINTFORML 「……？」
+			ELSEIF !RAND:3
+				PRINTFORML 「………どうか%CSTR:L_I:語尾問う4%？」
+			ELSEIF !RAND:2
+				PRINTFORML 「特に問題はない%CSTR:L_I:語尾許可%」
+			ELSE
+				PRINTFORML 「…？、%CSTR:L_I:語尾何？%」
+			ENDIF
+		ENDIF
+
+
+
+
+
+
+
+		IF CFlag:L_I:フェロモン >= 1
+		PRINTFORM ・【　페로몬　】남성
+			IF CFlag:L_I:フェロモン >= 90
+				PRINTFORML 에 대한 영향력이 심각하여、당신의 보호 없이는 일상 생활도 아지 못할 정도의 굉장한 페로몬 덩어리입니다
+				CALL CP_HEARTB_PINK, 10
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 80
+				PRINTFORML 들의 이성을 압도하여、덮쳐서 임신시키려고 할 정도의 페로몬을 두르고 있습니다
+				CALL CP_HEARTB_PINK(9)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 70
+				PRINTFORML 들이 그녀의 색기와 체취에 발기를 억누르지 못할 정도의 페로몬을 풍기고 있습니다
+				CALL CP_HEARTB_PINK(8)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 60
+				PRINTFORML 들이 한번 보기만 해도 임신시키고 싶어할 정도의 페로몬을 두르고 있습니다
+				CALL CP_HEARTB_PINK(7)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 50
+				PRINTFORML 들이 어떻게든 섹스하고 싶어할 정도로 매료시키는 페로몬을 내뿜습니다
+				CALL CP_HEARTB_PINK(6)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 40
+				PRINTFORML 들에게서 성적인 시선으로 보이는 것을 피할 수 없을 정도의 페로몬을 두르고 있습니다
+				CALL CP_HEARTB_PINK(5)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 30
+				PRINTFORML 에게서 사랑받을 정도의 페로몬을 풍기고 있습니다
+				CALL CP_HEARTB_PINK(4)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 20
+				PRINTFORML 에게 매력적인 여성이라 생각될 페로몬을 풍기고 있습니다
+				CALL CP_HEARTB_PINK(3)
+				PRINTL
+			ELSEIF CFlag:L_I:フェロモン >= 10
+				PRINTFORML 을 약간 성적으로 흥분시키는 페로몬을 뿌리고 다닙니다
+				CALL CP_HEARTB_PINK(2)
+				PRINTL
+			ELSE
+				PRINTFORML 에게 관심을 받을 정도의 페로몬을 품고 있습니다
+				CALL CP_HEARTB_PINK()
+				PRINTL
+			ENDIF
+		ENDIF
+
+		PRINTFORM ・【　암컷 본능　】
+		IF CFlag:L_I:雌の本能 >= 90
+			PRINTFORML 항상 임신하고 있지 않으면 정서가 불안정해질 정도로 기이한 생식 본능입니다
+				CALL CP_HEARTB_PINK(10)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 80
+			PRINTFORML 우수한 수컷이 보이면 무의식적으로 유혹하여 번식하려고 할 정도로 욕구를 품고 있습니다
+				CALL CP_HEARTB_PINK(9)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 70
+			PRINTFORML 오히려 피임하면 불쾌해질 정도로 생식 본능을 품고 있습니다
+				CALL CP_HEARTB_PINK(8)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 60
+			PRINTFORML 우수한 수컷이 보이면 아이를 임신하고 싶어질 정도로 생식 본능을 품고 있습니다
+				CALL CP_HEARTB_PINK(7)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 50
+			PRINTFORML 생식 본능이라고 부르기엔 조금 이상할 정도의 욕구입니다
+				CALL CP_HEARTB_PINK(6)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 40
+			PRINTFORML 수컷이 가까이 있으면 자궁이 욱신거릴 정도로 생식 본능을 품고 있습니다
+				CALL CP_HEARTB_PINK(5)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 30
+			PRINTFORML 생식 활동에 대해 상상히 적극적인 의사를 품고 있습니다
+				CALL CP_HEARTB_PINK(4)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 20
+			PRINTFORML 암컷 중에는 다소 강한 생식 본능을 가지고 있습니다
+				CALL CP_HEARTB_PINK(3)
+				PRINTL
+		ELSEIF CFlag:L_I:雌の本能 >= 10
+			PRINTFORML 암컷으로서 양호한 생식 본능을 가지고 있습니다
+				CALL CP_HEARTB_PINK(2)
+				PRINTL
+		ELSE
+			PRINTFORML 암컷으로서 일반적인 생식 본능을 가지고 있습니다
+				CALL CP_HEARTB_PINK()
+				PRINTL
+		ENDIF
+
+		PRINTFORM ・【성에 대한 흥미】
+		IF CFlag:L_I:性への興味 >= 90
+			PRINTFORML 야한 것에 빠지는 것은 사람으로서 자연스로운 것이라고 주장하고 있습니다
+				CALL CP_HEARTB_PINK(10)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 80
+			PRINTFORML 성적인 것에 대해선 완벽히 파악하여、실전으로 체험하고 싶다고 생각할 정도입니다
+				CALL CP_HEARTB_PINK(9)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 70
+			PRINTFORML 꽤나 성에 대한 흥미가 강하여、항상 야한 망상을 하고 있을 정도입니다
+				CALL CP_HEARTB_PINK(8)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 60
+			PRINTFORML 성에 대한 흥미가 강하여、밤마다 상상하면서 흥분하고 있습니다
+				CALL CP_HEARTB_PINK(7)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 50
+			PRINTFORML 조금이라도 성적인 묘사가 있으면、자기도 모르게 확대 망상하고 맙니다
+				CALL CP_HEARTB_PINK(6)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 40
+			PRINTFORML 성에 대한 궁금증의 일환으로서 몇몇 성인 용품을 가지고 있습니다
+				CALL CP_HEARTB_PINK(5)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 30
+			PRINTFORML 성적인 장르에 전혀 저항감이 없습니다
+				CALL CP_HEARTB_PINK(4)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 20
+			PRINTFORML 보는 눈이 없으면 성적인 것에 대한 정보를 모읍니다
+				CALL CP_HEARTB_PINK(3)
+				PRINTL
+		ELSEIF CFlag:L_I:性への興味 >= 10
+			PRINTFORML 나름 성에 대한 흥미는 있어、관련된 것을 다소 알아보고 있습니다
+				CALL CP_HEARTB_PINK(2)
+				PRINTL
+		ELSE
+			PRINTFORML 성에 대한 관심은 일반적입니다
+				CALL CP_HEARTB_PINK()
+				PRINTL
+		ENDIF
+
+		PRINTFORM ・【수컷에 대한 관심】
+		IF CFlag:L_I:雄への関心 >= 90
+			PRINTFORML 원하는 상대를 따르면서、넋을 잃고 아양을 떠는 암컷 중에 암컷입니다
+			CALL CP_HEARTB_PINK(10)
+			PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 80
+			PRINTFORML 자기 타입인 남자에겐 다가가서 암컷 어필을 할 정도로 관심이 있습니다
+				CALL CP_HEARTB_PINK(9)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 70
+			PRINTFORML 이성에겐 달달하고、동성에겐 차가운 태도를 보일 정도로 관심이 있습니다
+				CALL CP_HEARTB_PINK(8)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 60
+			PRINTFORML 자지를 보면 성적으로 흥분할 만큼 관심이 있습니다
+				CALL CP_HEARTB_PINK(7)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 50
+			PRINTFORML 남자의 알몸을 보고 싶다고 생각할 정도로 관심이 있습니다
+				CALL CP_HEARTB_PINK(6)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 40
+			PRINTFORML 자기 타입인 남자의 자지가 어떻게 생겼는지 궁금할 정도로 관심이 있습니다
+				CALL CP_HEARTB_PINK(5)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 30
+			PRINTFORML 이성에 대한 편견을 전혀 가지고 있지 않습니다
+				CALL CP_HEARTB_PINK(4)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 20
+			PRINTFORML 자연스럽게 자기 타입의 남자를 찾을 정도로는 관심이 있습니다
+				CALL CP_HEARTB_PINK(3)
+				PRINTL
+		ELSEIF CFlag:L_I:雄への関心 >= 10
+			PRINTFORML 저항 없이 남자와 대화할 정도로는 관심을 가지고 있습니다
+				CALL CP_HEARTB_PINK(2)
+				PRINTL
+		ELSE
+			PRINTFORML 남자에 대한 관심은 딱히 없습니다
+				CALL CP_HEARTB_PINK()
+				PRINTL
+		ENDIF
+
+		PRINTFORM ・【　성교 욕망　】
+		IF CFlag:L_I:性交願望 >= 90
+			PRINTFORML 서큐버스로 오인할 정도로 섹스 욕구를 품고 있습니다
+			CALL CP_HEARTB_PINK(10)
+			PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 80
+			PRINTFORML 가능하다면 계속 교미만 하고 싶을 정도로 섹스 욕구를 품고 있습니다
+				CALL CP_HEARTB_PINK(9)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 70
+			PRINTFORML 몇번이고 절정해도 마르지 않을 섹스 욕구를 가지고 있습니다
+				CALL CP_HEARTB_PINK(8)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 60
+			PRINTFORML 짐승같은 섹스를 원하고 있습니다
+				CALL CP_HEARTB_PINK(7)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 50
+			PRINTFORML 보지를 휘저어줄 성행위를 원하고 있습니다
+				CALL CP_HEARTB_PINK(6)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 40
+			PRINTFORML 격렬한 섹스를 하고 싶을 정도로 성행위에 목말라 있습니다
+				CALL CP_HEARTB_PINK(5)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 30
+			PRINTFORML 여성이 가지기엔 강한 섹스 욕구를 품고 있습니다
+				CALL CP_HEARTB_PINK(4)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 20
+			PRINTFORML 서로 만족할 수 있는 섹스를 원합니다
+				CALL CP_HEARTB_PINK(3)
+				PRINTL
+		ELSEIF CFlag:L_I:性交願望 >= 10
+			PRINTFORML 기분 좋게 해준다면 응할 정도로는 섹스 욕구가 있습니다
+				CALL CP_HEARTB_PINK(2)
+				PRINTL
+		ELSE
+			PRINTFORML 성행위는 좋아하지 않습니다
+				CALL CP_HEARTB_PINK()
+				PRINTL
+		ENDIF
+
+		PRINTFORM ・【　임신 욕망　】
+		IF CFlag:L_I:妊娠願望 >= 90
+			PRINTFORML 자궁과 뇌가 직접 연결된게 아닐까 생각할 정도로 임신 욕구를 품고 있습니다
+			CALL CP_HEARTB_PINK(10)
+			PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 80
+			PRINTFORML 좋아하는 사람과의 교미라면 바로 배란이 시작될 정도로 임신하고 싶어합니다
+				CALL CP_HEARTB_PINK(9)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 70
+			PRINTFORML 좋아하는 사람과의 아이라면 몇명이든 낳아도 좋다고 생각하고 있습니다
+				CALL CP_HEARTB_PINK(8)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 60
+			PRINTFORML 자궁이 임신하고 싶다고 계속 욱신거릴 정도로 임신하고 싶어합니다
+				CALL CP_HEARTB_PINK(7)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 50
+			PRINTFORML 아이를 많이 갖길 원하여 임신에 적극적인 자세입니다
+				CALL CP_HEARTB_PINK(6)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 40
+			PRINTFORML 성행위를 한 이상 임신해도 괜찮다고 생각하는 정도로는 임신하고 싶어합니다
+				CALL CP_HEARTB_PINK(5)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 30
+			PRINTFORML 질내 사정에 의한 임신에 대한 불안감은 없습니다
+				CALL CP_HEARTB_PINK(4)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 20
+			PRINTFORML 좋아하는 사람의 아이 정도는 낳고 싶다고 생각하고 있습니다
+				CALL CP_HEARTB_PINK(3)
+				PRINTL
+		ELSEIF CFlag:L_I:妊娠願望 >= 10
+			PRINTFORML 단계를 밟아 간다면 임신을 허락해줄 것 같습니다
+				CALL CP_HEARTB_PINK(2)
+				PRINTL
+		ELSE
+			PRINTFORML 임신은 하기 싫다고 생각하고 있습니다
+				CALL CP_HEARTB_PINK()
+				PRINTL
+		ENDIF
+	ENDIF
+ENDIF
+DRAWLINE
+
+
+
+PRINTFORML
+PRINTFORML
+
+;=================================================
+;   表示:STATUS画面(RPG정보)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_RPG(L_I)
+#DIM L_I
+PRINTFORML ■------------------------------------ 전투 상세 ------------------------------------■
+PRINTFORML ◇----------------신체 정보----------------◇
+CALL PRINT_RANGE_STATUS(L_I, "HP", "体力", , 3, "伏字", "％")
+CALL PRINT_RANGE_STATUS(L_I, "SP", "気力", , 3, "伏字", "％")
+PRINTL
+CALL PRINT_STATUS(L_I, "GUTS" , , 3)
+CALL PRINT_STATUS(L_I, "BRAVE", , 3)
+CALL PRINT_STATUS(L_I, "SAN"  , , 3)
+PRINTL
+CALL PRINT_STATUS(L_I, "経験値")
+PRINTL
+CALL PRINT_STATUS(L_I, "ATK"  , , 3)
+CALL PRINT_STATUS(L_I, "DEF"  , , 3)
+PRINTL
+CALL PRINT_STATUS(L_I, "HIT"  , , 3)
+CALL PRINT_STATUS(L_I, "SPD"  , , 3)
+CALL PRINT_STATUS(L_I, "LUK"  , , 3)
+PRINTL
+CALL PRINT_RANGE_STATUS(L_I, "BRE", , , 3, "伏字", "％")
+PRINTL
+CALL INFO_RPG_SKILL(L_I)
+CALL INFO_RPG_WEAPON(L_I)
+PRINTFORML 
+
+
+@INFO_RPG_SKILL(L_I)
+#DIM L_I
+#DIM CONST SKILL_LABEL_SPAN = 8
+PRINTFORML ◇----------------기능 정보----------------◇
+CALL PRINT_STATUS(L_I, "目星"    , SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "アイデア", SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "聞き耳"  , SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "医療"    , SKILL_LABEL_SPAN, 3)
+PRINTL
+CALL PRINT_STATUS(L_I, "機械修理", SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "コンピュータ", SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "鍵開け", SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "隠れる", SKILL_LABEL_SPAN, 3)
+PRINTL
+CALL PRINT_STATUS(L_I, "解体", SKILL_LABEL_SPAN, 3)
+CALL PRINT_STATUS(L_I, "解読", SKILL_LABEL_SPAN, 3)
+PRINTL
+@INFO_RPG_WEAPON(L_I)
+#DIM L_I
+#DIM CONST _INFO_RPG_WEPON_SPAN = 23
+PRINTFORML ◇----------------무장 정보----------------◇
+PRINTFORML □-----메인 병기-----□□----- 서브 병기 -----□
+SIF L_I == MASTER && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
+CALL PRINT_LABEL(CSTR:L_I:4000, -19)
+PRINTFORM %" " * MAX(0, _INFO_RPG_WEPON_SPAN-RESULT)%
+CALL PRINT_LABEL(CSTR:L_I:4010, -19)
+PRINTL
+CALL PRINT_LABEL("タイプ",,,INFO_STR_HEISOU(CFlag:L_I:住人_M兵装), -4)
+PRINTFORM %" " * MAX(0, _INFO_RPG_WEPON_SPAN-RESULT)%
+CALL PRINT_LABEL("タイプ",,,INFO_STR_HEISOU(CFlag:L_I:住人_S兵装), -4)
+PRINTL
+CALL PRINT_LABEL("練度",,,@"\@ CFlag:L_I:住人_M兵装練度?{CFlag:L_I:住人_M兵装練度}#\@", -3 )
+PRINTFORM %" " * MAX(0, _INFO_RPG_WEPON_SPAN-RESULT)%
+CALL PRINT_LABEL("練度",,,@"\@ CFlag:L_I:住人_S兵装練度?{CFlag:L_I:住人_S兵装練度}#\@", -3 )
+PRINTL
+CALL PRINT_LABEL("ダメージ",,,INFO_STR_MAIN_WEAPON_DAMAGE(L_I))
+PRINTFORM %" " * MAX(0, _INFO_RPG_WEPON_SPAN-RESULT)%
+CALL PRINT_LABEL("ダメージ",,,INFO_STR_SUB_WEAPON_DAMAGE(L_I))
+PRINTL
+RESETCOLOR
+
+
+
+
+;=================================================
+;   sub INFO_INTRODUCTION
+;=================================================
+;   表示:STATUS画面(紹介)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_INTRODUCTION(ARG)
+#DIM L_I
+#DIM L_LOOP
+
+L_I = ARG
+L_LOOP = 0
+DRAWLINE
+PRINTFORML ■------------------------------------초기 프로필 ------------------------------------■
+DRAWLINE
+REPEAT 20
+	SIF L_LOOP >= 2
+		SETCOLOR 50,250,150
+	SIF L_LOOP >= 5
+		SETCOLOR 250,250,50
+	SIF L_LOOP >= 9
+		SETCOLOR 250,50,50
+	SIF L_LOOP >= 13
+		SETCOLOR 250,0,0
+	SIF CSTR:L_I:(70+L_LOOP) != ""
+		PRINTFORML %CSTR:L_I:(70+L_LOOP)%
+	L_LOOP += 1
+REND
+IF L_I == MASTER
+	SETCOLOR 250,50,50
+	PRINTFORML 【기밀 Lv8:소속】あなたは都市を発展・繁栄させる「플레이어」の一人です。
+	PRINTFORML 【기밀 Lv9:운영】上記の任についている間、都市の住人を権限が許す限り利用できます。
+	SETCOLOR 250,0,0
+	PRINTFORML 【중요 기밀:권한】あなたに許可されている権限は――――――――――－－－－□○種です。
+	PRINTFORML 【중요 기밀:일족】４０４　Ｅｒｒｏｒ
+	PRINTFORML 【중요 기밀:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【중요 기밀:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【중요 기밀:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【중요 기밀:인권】あなたには第一級人権が付与されています、　　　　　　　　　　人権に守られています。
+	PRINTFORML 【중요 기밀:　　】４０３　Ｅｒｒｏｒ
+	PRINTFORML 【  　기밀:　　】あなたには一切の許可がされていません。
+	PRINTFORML 【  　기밀:　　】あなたは　　　　　への　　に必ず　　なければなりません。
+ENDIF
+RESETCOLOR
+DRAWLINE
+
+
+
+
+
+;=================================================
+;   sub INFO_SIMPLE_STATUS_EXP
+;=================================================
+;   簡易表示:STATUS(経験)
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@INFO_SIMPLE_STATUS_EXP(ARG)
+#DIM L_HIT
+#DIM L_CNT
+
+L_HIT=0
+L_CNT=0
+VARSET LOCAL
+
+FOR LOCAL,0,VARSIZE("EXP")
+
+	LOCALS = %EXPNAME:LOCAL%
+	SIF STRLENS(LOCALS) <= 0
+		CONTINUE
+	LOCAL:1 = EXP:ARG:LOCAL
+	SIF !LOCAL:1
+		CONTINUE
+
+	PRINTFORM %LOCALS , 16%
+	PRINTFORM :LV{GETEXPLV(LOCAL:1,9), 2, LEFT}
+	PRINTFORM (%TOSTR(LOCAL:1) , 4%회)
+	PRINT  
+	L_HIT = 1
+
+	L_CNT += 1
+	IF L_CNT > 2
+		PRINTL
+		L_CNT = 0
+		L_HIT = 0
+	ENDIF
+
+NEXT
+
+SIF L_HIT
+	PRINTL
+
+
+
+;-------------------------------------------------
+;ラベル使用キャラステータス参照関数
+;-------------------------------------------------
+;ラベル名から指定キャラのステータス値を参照する
+;ラベル名が不正な場合は0
+@INFO_STATUS_GET_BY_LABEL(C_ID, LABEL_NAME)
+#FUNCTION
+#LOCALSIZE 1
+#LOCALSSIZE 1
+#DIM  C_ID           ;
+#DIMS LABEL_NAME     ;
+#DIMS LABEL_VAR_NAME ;
+#DIM  LABEL_VAR_ID   ;
+IF CHARA_SORT_FIND_LABEL(LABEL_NAME, LABEL_VAR_NAME, LABEL_VAR_ID)
+	RETURNF C_GET_CVAR_VALUE(C_ID, LABEL_VAR_NAME, LABEL_VAR_ID)
+ELSE
+	DEBUGPRINTFORML INFO_STATUS_GET_BY_LABEL, 不正なLABEL_NAME %LABEL_NAME%
+	RETURNF 0
+ENDIF
+
+
+;-------------------------------------------------
+;個人の悩み一覧関数
+;-------------------------------------------------
+;仕様書いてないからよくわかんねーけど
+;とりあえず大小各1～9までが悩みスロットと解釈したよ？
+@INFO_STATUS_NAYAMI_LIST(C_ID, OP)
+#DIM  C_ID   ;登録番号
+#DIMS OP     ;実行オプション
+#DIM  I_LOOP ;ループ用
+DRAWLINE
+PRINTFORML ◇----------------큰 고민----------------◇
+IF STRCOUNT(OP, "「ボタン」")
+	FOR I_LOOP, 1, 9
+		SIF CFLAG:C_ID:(4000 + I_LOOP) <= 0
+			CONTINUE
+		IF CFLAG:C_ID:(4200 + I_LOOP) >= 100
+			PRINTFORM 해결　
+		ELSE
+			PRINTFORM [{I_LOOP, 2}]
+		ENDIF
+		CALL INFO_STATUS_NAYAMI(C_ID, I_LOOP)
+	NEXT
+ELSE
+	FOR I_LOOP, 1, 9
+		SIF CFLAG:C_ID:(4000 + I_LOOP) <= 0
+			CONTINUE
+		CALL INFO_STATUS_NAYAMI(C_ID, I_LOOP)
+	NEXT
+ENDIF
+PRINTFORML ◇----------------작은 고민----------------◇
+IF STRCOUNT(OP, "「ボタン」")
+	FOR I_LOOP, 11, 19
+		SIF CFLAG:C_ID:(4000 + I_LOOP) <= 0
+			CONTINUE
+		IF CFLAG:C_ID:(4200 + I_LOOP) >= 100
+			PRINTFORM 해결　
+		ELSE
+			PRINTFORM [{I_LOOP, 2}]
+		ENDIF
+		CALL INFO_STATUS_NAYAMI(C_ID, I_LOOP)
+	NEXT
+ELSE
+	FOR I_LOOP, 11, 19
+		SIF CFLAG:C_ID:(4000 + I_LOOP) <= 0
+			CONTINUE
+		CALL INFO_STATUS_NAYAMI(C_ID, I_LOOP)
+	NEXT
+ENDIF
+
+;-------------------------------------------------
+;悩み정보 표시関数
+;-------------------------------------------------
+@INFO_STATUS_NAYAMI(C_ID, NAYAMI_ID)
+#DIM C_ID
+#DIM NAYAMI_ID
+IF CFLAG:C_ID:(4100 + NAYAMI_ID) >= 100
+	SELECTCASE CFLAG:C_ID:(4000 + NAYAMI_ID)
+	CASE IS <= 199
+		SETCOLOR COLOR("悩み_金銭")
+		CALL PRINT_LABEL("금전 문제")
+	CASE IS <= 299
+		SETCOLOR COLOR("悩み_恋愛")
+		CALL PRINT_LABEL("연애 문제")
+	CASE IS <= 399
+		SETCOLOR COLOR("悩み_家庭")
+		CALL PRINT_LABEL("가정 문제")
+	CASE IS <= 499
+		SETCOLOR COLOR("悩み_生活")
+		CALL PRINT_LABEL("생활 문제")
+	CASE IS <= 599
+		SETCOLOR COLOR("悩み_犯罪")
+		CALL PRINT_LABEL("범죄 문제")
+	CASE IS <= 699
+		SETCOLOR COLOR("悩み_性的")
+		CALL PRINT_LABEL("성적인 문제")
+	ENDSELECT
+		ELSE
+			SIF FLAG:STATUS伏字モード
+				SETCOLOR COLOR("伏字")
+			PRINTFORM ？？？(미판명)
+			CALL PRINT_LABEL("해석",,,TOSTR(CFLAG:C_ID:(4100 + NAYAMI_ID)),3,,"/","100")
+ENDIF
+PRINTFORM 　난이도：{CFLAG:C_ID:(4300 + NAYAMI_ID),2}　
+PRINTFORM 달성률：({CFLAG:C_ID:(4200 + NAYAMI_ID),3}/100)
+RESETCOLOR
+SIF NAYAMI_ID == CFLAG:C_ID:住人_悩み解決選択
+	PRINTFORM 　현재 해결중
+PRINTFORML 

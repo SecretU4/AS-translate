@@ -1,0 +1,374 @@
+﻿
+;-------------------------------------------------
+;敵設定
+;-------------------------------------------------
+@RPG_BATTLE_E(ARG)
+#DIM E_T
+#DIM E_W
+#DIM E_W2
+#DIM E_AB
+#DIM E_EB
+#DIM R_EB
+R_EB = 0
+E_EB = 0
+E_AB = 0
+
+
+IF Flag:依頼_イスからの駆除依頼 == 1
+	SAVESTR:敵_名前 = 폭주한 실험체
+	E_T = ((Flag:依頼_イスからの駆除依頼_Lv)/2)+1
+	E_EB = 10
+	E_W = RAND:5
+	E_W2 = RAND:5
+	Flag:敵_弱点 = RAND:5
+	Flag:敵_耐性 = RAND:5
+ELSEIF Flag:EP追撃方法 == 1
+	SAVESTR:敵_名前 = 타 세력의 에이전트
+	E_T = ((Flag:EP敵戦力)/2)+1
+	E_W = RAND:5
+	E_W2 = RAND:5
+	Flag:敵_弱点 = RAND:5
+	Flag:敵_耐性 = RAND:5
+ELSEIF Flag:依頼_スパイテロ駆除 == 1
+	SAVESTR:敵_名前 = 이레귤러
+	E_T = ((Flag:依頼_スパイテロ駆除_Lv)/2)+1
+	E_W = RAND:5
+	E_W2 = RAND:5
+	Flag:敵_弱点 = RAND:5
+	Flag:敵_耐性 = RAND:5
+ELSEIF Flag:都市_防衛 != 0
+	IF !RAND:4
+		SAVESTR:敵_名前 = 『다곤:Lv{(FLAG:都市_Lv/3)+5}』
+		E_T = (FLAG:都市_Lv/3)+5
+		R_EB = FLAG:都市_Lv
+		E_W = 1
+		E_W2 = 1
+		Flag:敵_弱点 = 4
+		Flag:敵_耐性 = 1
+	ELSEIF !RAND:3
+		SAVESTR:敵_名前 = 『림・샤이코스:Lv{(FLAG:都市_Lv/3)+5}』
+		E_T = (FLAG:都市_Lv/3)+5
+		R_EB = FLAG:都市_Lv
+		E_W = 4
+		E_W2 = 4
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = 2
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 『가타노조아:Lv{(FLAG:都市_Lv/3)+5}』
+		E_T = (FLAG:都市_Lv/3)+5
+		R_EB = FLAG:都市_Lv
+		E_W = 3
+		E_W2 = 3
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 3
+	ELSE
+		SAVESTR:敵_名前 = 『란＝테고스:Lv{(FLAG:都市_Lv/3)+5}』
+		E_T = (FLAG:都市_Lv/3)+5
+		R_EB = FLAG:都市_Lv
+		E_W = 2
+		E_W2 = 2
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 4
+	ENDIF
+ELSEIF Flag:調査区域 == 90 && (Flag:調査深度 >= Flag:日替わり区画深度限界)
+	IF !RAND:3
+		SAVESTR:敵_名前 = 로이거
+		E_EB = Flag:日替わり区画難易度*25
+		R_EB = Flag:日替わり区画難易度*15
+		E_T = 1+Flag:日替わり区画難易度
+		E_W = 0
+		E_W2 = 0
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 2
+		Flag:敵_レア = 1
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 하이드라
+		E_EB = Flag:日替わり区画難易度*25
+		R_EB = Flag:日替わり区画難易度*15
+		E_T = 1+Flag:日替わり区画難易度
+		E_W = 1
+		E_W2 = 1
+		Flag:敵_弱点 = 4
+		Flag:敵_耐性 = 1
+		Flag:敵_レア = 1
+	ELSE
+		SAVESTR:敵_名前 = 크아이가
+		E_EB = Flag:日替わり区画難易度*25
+		R_EB = Flag:日替わり区画難易度*15
+		E_T = 1+Flag:日替わり区画難易度
+		E_W = 2
+		E_W2 = 2
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 4
+		Flag:敵_レア = 1
+	ENDIF
+ELSEIF  Flag:調査区域 == 90
+	IF !RAND:3
+		SAVESTR:敵_名前 = 이형화한 인간
+		E_EB = 3
+		E_T = 2
+		E_W = 0
+		E_W2 = 1
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 0
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 타락한「외적」
+		E_EB = 5
+		E_T = 2
+		E_W = 3
+		E_W2 = 0
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = 4
+	ELSE
+		SAVESTR:敵_名前 = 광신자
+		E_EB = 3
+		E_T = 2
+		E_W = 0
+		E_W2 = RAND:5
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = -1
+	ENDIF
+ELSEIF RAND:100 >= 95 
+	IF !RAND:3
+		SAVESTR:敵_名前 = 불숨
+		E_EB = 500
+		R_EB = 40
+		E_T = 12
+		E_W = 0
+		E_W2 = 0
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 2
+		Flag:敵_レア = 1
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 로드 비야키
+		E_EB = 500
+		R_EB = 40
+		E_T = 12
+		E_W = 1
+		E_W2 = 1
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = 1
+		Flag:敵_レア = 1
+	ELSE
+		SAVESTR:敵_名前 = ニョグダ
+		E_EB = 500
+		R_EB = 40
+		E_T = 12
+		E_W = 2
+		E_W2 = 2
+		Flag:敵_弱点 = 0
+		Flag:敵_耐性 = 4
+		Flag:敵_レア = 1
+	ENDIF
+ELSEIF Flag:調査区域 == 50
+	IF RAND:100 >= (50+((FLAG:支援_後方合計HIT+FLAG:支援_後方合計SPD)/4))-(Flag:調査深度/40)
+		SAVESTR:敵_名前 = 티끌을 밟는 것[쿠아킬・우터스]
+		E_EB = 4000
+		R_EB = 2000
+		E_T = 40
+		E_W = 4
+		E_W2 = 0
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 4
+		Flag:敵_レア = 100
+	ELSE
+		SAVESTR:敵_名前 = 불사 노인
+		E_EB = 30
+		E_T = 25
+		E_W = 1
+		E_W2 = 2
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 1
+	ENDIF
+ELSEIF Flag:調査区域 == 5
+	IF RAND:100 >= (50+((FLAG:支援_後方合計HIT+FLAG:支援_後方合計SPD)/4))-(Flag:調査深度/20)
+		SAVESTR:敵_名前 = 미궁의 주인[아이호트]
+		E_EB = 4000
+		R_EB = 80
+		E_T = 12
+		E_W = 1
+		E_W2 = 2
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 3
+		Flag:敵_レア = 1
+	ELSE
+		SAVESTR:敵_名前 = 아이호트의 자식
+		E_EB = 15
+		E_T = 12
+		E_W = 1
+		E_W2 = 2
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 3
+	ENDIF
+ELSEIF Flag:調査区域 >= 4 && Flag:調査深度 > 100
+	IF !RAND:3
+		SAVESTR:敵_名前 = 이타카
+		E_EB = 40
+		E_T = 7
+		E_W = 1
+		E_W2 = 0
+		Flag:敵_弱点 = 4
+		Flag:敵_耐性 = 3
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 이스
+		E_EB = 40
+		E_T = 7
+		E_W = 3
+		E_W2 = 4
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 4
+	ELSE
+		SAVESTR:敵_名前 = 쇼고스 로드
+		E_EB = 35
+		E_T = 7
+		E_W = 0
+		E_W2 = 1
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 0
+	ENDIF
+ELSEIF Flag:調査区域 >= 3 && Flag:調査深度 > 60
+	IF !RAND:3
+		SAVESTR:敵_名前 = 落とし子
+		E_EB = 30
+		E_T = 4
+		E_W = 4
+		E_W2 = 2
+		Flag:敵_弱点 = 0
+		Flag:敵_耐性 = 4
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 깊은 것
+		E_EB = 23
+		E_T = 4
+		E_W = 2
+		E_W2 = 0
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 0
+	ELSE
+		SAVESTR:敵_名前 = 비야키
+		E_EB = 21
+		E_T = 4
+		E_W = 0
+		E_W2 = 1
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = 2
+	ENDIF
+ELSEIF Flag:調査区域 >= 2 && Flag:調査深度 > 30
+	IF !RAND:3
+		SAVESTR:敵_名前 = 문 비스트
+		E_EB = 18
+		E_T = 3
+		E_W = 0
+		E_W2 = 1
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = 2
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 별의 정령
+		E_EB = 16
+		E_T = 3
+		E_W = 0
+		E_W2 = 4
+		Flag:敵_弱点 = 1
+		Flag:敵_耐性 = 4
+	ELSE
+		SAVESTR:敵_名前 = 올드원
+		E_EB = 14
+		E_T = 3
+		E_W = 0
+		E_W2 = RAND:5
+		Flag:敵_弱点 = 0
+		Flag:敵_耐性 = 1
+	ENDIF
+ELSEIF  Flag:調査深度 > 15
+	IF !RAND:3
+		SAVESTR:敵_名前 = 쇼고스
+		E_EB = 10
+		E_T = 2
+		E_W = 0
+		E_W2 = 1
+		Flag:敵_弱点 = 4
+		Flag:敵_耐性 = 0
+	ELSEIF !RAND:2
+		SAVESTR:敵_名前 = 미＝고
+		E_EB = 7
+		E_T = 2
+		E_W = 3
+		E_W2 = 0
+		Flag:敵_弱点 = 2
+		Flag:敵_耐性 = 4
+	ELSE
+		SAVESTR:敵_名前 = 인스머스
+		E_EB = 4
+		E_T = 2
+		E_W = 0
+		E_W2 = RAND:5
+		Flag:敵_弱点 = 3
+		Flag:敵_耐性 = -1
+	ENDIF
+ELSE
+	SAVESTR:敵_名前 = 숨어있는 자
+	E_T = 1
+	E_W = RAND:5
+	E_W2 = RAND:5
+	Flag:敵_弱点 = -1
+	Flag:敵_耐性 = -1
+ENDIF
+
+E_AB = Flag:調査区域
+
+SIF Flag:調査区域 == 50
+	E_AB = Flag:日替わり区画難易度*3
+	
+SIF Flag:EP追撃方法 == 1
+	E_AB = 1
+
+Flag:敵_最大체력 = (E_AB*10)+(Flag:調査深度/5)+(RAND:(5+E_T)*E_T)+6+R_EB
+Flag:敵_現在체력 = Flag:敵_最大체력
+Flag:敵_ATK = (RAND:(E_T*4)+(E_AB*2))+(RAND:(4+E_T)*E_T)+2+R_EB
+Flag:敵_DEF = (RAND:(E_T*2)+(E_AB))+(RAND:(2+E_T)*E_T)+2+R_EB
+Flag:敵_HIT = (RAND:(E_T*3)+(E_AB*2))+(RAND:(4+E_T)*E_T)+2+R_EB
+Flag:敵_SPD = (RAND:(E_T*3)+(E_AB))+(RAND:(3+E_T)*E_T)+2+R_EB
+Flag:敵_最大BRE = 0
+Flag:敵_現在BRE = 0
+
+Flag:敵_M兵装 = E_W
+Flag:敵_M兵装ダイス = (RAND:(E_T))+1
+Flag:敵_M兵装ダメージ = (RAND:(E_T))+(E_T*3)
+Flag:敵_M兵装ボーナス = (RAND:(E_T*2))+1
+
+Flag:敵_S兵装 = E_W2
+Flag:敵_S兵装ダイス = (RAND:(E_T))+1
+Flag:敵_S兵装ダメージ = (RAND:(E_T))+(E_T*2)
+Flag:敵_S兵装ボーナス = (RAND:(E_T))+1
+
+IF Flag:都市_防衛 != 0
+	Flag:敵_最大체력 = Flag:敵_最大체력*5000
+	Flag:敵_現在체력 = Flag:敵_最大체력
+	Flag:敵_SPD = 10
+	Flag:敵_DEF = 5
+ENDIF
+IF Flag:調査区域 == 90 && (Flag:調査深度 >= Flag:日替わり区画深度限界)
+	Flag:敵_最大체력 += Flag:敵_最大체력/2
+	Flag:敵_現在체력 = Flag:敵_最大체력
+ENDIF
+SIF Flag:敵_レア != 0
+	Flag:敵_SPD = 10
+
+Flag:敵_取得経験値 = 1+(E_T*E_AB)+E_EB 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

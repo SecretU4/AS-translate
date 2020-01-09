@@ -1,0 +1,74 @@
+﻿;-------------------------------------------------
+;アイテム確認
+;-------------------------------------------------
+@RPG_ITEM
+#DIM L_INPUT
+#DIM L_LOOP
+#DIM L_LOOP2
+
+L_LOOP2 = 0
+L_LOOP = 0
+CLEARLINE LINECOUNT
+DRAWLINE
+REPEAT 900
+	IF L_LOOP == 0
+		CALL PRINT_LABEL("――――――――――――――――――소　재――――――――――――――――――")
+		PRINTL 
+		L_LOOP2  = 0
+	ENDIF
+	IF L_LOOP == 400
+		PRINTFORML
+		CALL PRINT_LABEL("――――――――――――――――――유전자――――――――――――――――――")
+		PRINTL
+		L_LOOP2  = 0
+	ENDIF
+	IF L_LOOP == 700
+		PRINTFORML
+		CALL PRINT_LABEL("――――――――――――――――――강화제――――――――――――――――――")
+		PRINTL 
+		L_LOOP2  = 0
+	ENDIF
+	IF FlagNAME:(2100+L_LOOP) != ""
+		IF L_LOOP2 >= 6
+			PRINTFORML
+			L_LOOP2  =0
+		ENDIF
+		CALL PRINT_LABEL(FlagNAME:(2100+L_LOOP), -12 , (!Flag:(2100+L_LOOP) ? COLOR("伏字") # COLOR("ITEM_EXIST")),TOSTR(Flag:(2100+L_LOOP)), 3)
+		PRINTFORM %" "*MAX(0, 21-RESULT)%
+		L_LOOP2 += 1
+	ENDIF
+	L_LOOP += 1
+REND
+PRINTFORML
+DRAWLINE
+PRINTFORML 
+PRINTFORML [999] 돌아온다
+INPUT
+L_INPUT = RESULT
+SELECTCASE L_INPUT
+CASE 999
+	CALL RPG_MAIN
+CASEELSE
+ENDSELECT
+
+CALL RPG_MAIN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

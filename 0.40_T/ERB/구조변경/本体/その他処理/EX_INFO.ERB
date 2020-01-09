@@ -1,0 +1,68 @@
+[SKIPSTART]
+
+3101,계급SevenR,;特殊階級、「플레이어」と「シティ」に認められた者のみ授かる。
+3102,계급SixO,;　階級の上昇と共に貢献値も上がる
+3103,계급FiveY,;
+3104,계급FourG,;
+3105,계급ThreeB,;
+3106,계급ToI,;
+3107,계급OneV,;
+
+H_H = 0
+REPEAT 8
+	TALENT:L_I:(3100+H_H) = 0
+	H_H += 1
+REND
+CFLAG:L_I:住人_階級 += 1
+CFLAG:L_I:住人_貢献値 += 1
+TALENT:L_I:(3100+(CFLAG:L_I:住人_階級)) = 1
+PRINTFORML %CALLNAME:L_I%의 계급이 올랐습니다。
+PRINTFORMW 공헌도 1 상승。
+
+CASE "시설배속"
+	;なし/学園/ボラ/ラブ/賭場
+CASE "레귤러"
+	;観
+CASE "특별보호"
+	;特
+CASE "계급부여"
+	CALL EX_INFO_CHARA_RANK(C_ID)
+CASE "業務"
+	;
+		L_STR = 
+		IF TALENT:(ARG:0):학생 != 0
+			SELECTCASE TALENT:(ARG:0):학생
+				CASE 5
+					L_STR = 초등학생
+				CASE 4
+					L_STR = 중학생
+				CASE 3
+					L_STR = 고등학생
+					SIF L_SEX
+						L_STR = 여고생
+				CASE 2
+					L_STR = 대학생
+					SIF L_SEX
+						L_STR = 여대생
+				CASEELSE
+					L_STR = 학생
+			ENDSELECT
+		ENDIF
+		IF TALENT:(ARG:0):아이돌 != 0
+			L_STR = %L_STR%아이돌
+		ELSEIF TALENT:(ARG:0):사회인 != 0
+			L_STR = 사회인
+		ELSEIF TALENT:(ARG:0):창녀 != 0
+			IF L_STR == ""
+				L_STR = 창녀
+			ELSE
+				L_STR = サポ待ち%L_STR%
+			ENDIF
+		ELSEIF TALENT:(ARG:0):치안유지국직원 != 0
+			L_STR = 치안유지국직원
+		ENDIF
+		SIF L_STR != ""
+			PRINTFORM [%L_STR%]
+ENDSELECT
+
+[SKIPEND]
