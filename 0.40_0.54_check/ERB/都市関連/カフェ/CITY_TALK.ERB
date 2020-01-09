@@ -6,6 +6,7 @@
 @CAFE_TALK(L_I, ARG:1)
 #DIM L_I
 #DIM L_INPUT
+#DIM L_color
 
 CLEARLINE LINECOUNT
 
@@ -15,28 +16,47 @@ CALL INFO_CITY_BASE
 DRAWLINE
 
 REDRAW 0
-PRINTFORML 【――――――――이 장소에서의 액션――――――――】
+CALL PRINT_LABEL("――――――――이 장소에서의 액션――――――――")
+PRINTL
+L_color = GETCOLOR()
+SIF Flag:都市_現在TP < 1 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
 PRINTFORM [1] 대화한다(TP-1)　　
 PRINTFORM [2] 고민해결(TP-1)　　
+SETCOLOR L_color
 IF CFlag:L_I:関係段階 >= 2 && TALENT:L_I:합의 == 0
+	SIF Flag:都市_現在TP < 5 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM [5] 꼬신다(TP-5)　　
+	SETCOLOR L_color
 ENDIF
 PRINTFORML
 IF CFlag:L_I:関係段階 >= 2
-	PRINTFORML 【――――――사적인 액션――――――】
+	CALL PRINT_LABEL("――――――사적인 액션――――――")
+	PRINTL
 	PRINTFORM [10] 경향 없음　
+	SIF Flag:都市_現在TP < 3 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM [11] 충성 경향(TP-3)　
 	PRINTFORM [12] 애정 경향(TP-3)　
 	PRINTFORM [13] 음란 경향(TP-3)　
+	SETCOLOR L_color
 	PRINTFORML 
-	PRINTFORML 【――――――――――관계 구축――――――――――】
+	CALL PRINT_LABEL("――――――――――관계 구축――――――――――")
+	PRINTL
+	SIF Flag:都市_現在TP < 5 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTFORM [21] 종속√(TP-5)　
 	PRINTFORM [22] 연애√(TP-5)　
 	PRINTFORM [23] 음란√(TP-5)　
+	SETCOLOR L_color
 ENDIF
 PRINTFORML
 PRINTFORML 
+SIF !FLAG:都市_現在BP && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
 PRINTFORML [50] BP 섭취
+SETCOLOR L_color
 PRINTFORML 
 PRINTFORML [999] 그만둔다
 DO
@@ -559,27 +579,33 @@ DRAWLINE
 	PRINTFORML ………
 	PRINTFORML …………
 IF CFlag:L_I:忠誠値 >= 900 && MARK:L_I:예속각인 == 3 && TALENT:L_I:심취  == 0 && TALENT:L_I:정부  == 0 && TALENT:L_I:애인  == 0
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 종속화가 끝나고、%CALLNAME:L_I%는 %CALLNAME:MASTER%에게 푹 빠진 것 같다…
 	PRINTFORML %CALLNAME:L_I%は【심취】를 얻었다。
 	TALENT:L_I:심취  = 1
+	TALENT:L_I:浮気 = 0
 ELSEIF CFlag:L_I:忠誠値 >= 600 && MARK:L_I:예속각인 == 2
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 종속화가 마무리단계에 접어들면서、마치 시중이라도 드는 것처럼 행동하게 되었다…、거의 완성된 것 같다…
 	PRINTFORML %CALLNAME:L_I%의 예속 각인이 1 올랐다。
 	MARK:L_I:예속각인 += 1
 ELSEIF CFlag:L_I:忠誠値 >= 300 && MARK:L_I:예속각인 == 1
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 종속화가 진행되어、어느 정도의 지시라면 어렵지 않게 받아들이게 된 것 같다…
 	PRINTFORML %CALLNAME:L_I%의 예속 각인이 1 올랐다。
 	MARK:L_I:예속각인 += 1
 ELSEIF CFlag:L_I:忠誠値 >= 100 && MARK:L_I:예속각인 == 0
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 어느 정도 인상을 주었는지、%CALLNAME:L_I%는 존경이 담긴 시선으로 이쪽을 보고 있다…
 	PRINTFORML %CALLNAME:L_I%의 예속 각인이 1 올랐다。
 	MARK:L_I:예속각인 += 1
 ELSE
-	PRINTFORML 【변화 없음】
+	CALL PRINT_LABEL("변화 없음")
+	PRINTL
 	PRINTFORML 시간을 투자하여 대화를 나눴지만、딱히 심경의 변화는 없었던 것 같다…
 ENDIF
 
@@ -602,27 +628,33 @@ DRAWLINE
 	PRINTFORML ………
 	PRINTFORML …………
 IF CFlag:L_I:愛情値 >= 900 && MARK:L_I:함락각인 == 3 && TALENT:L_I:심취  == 0 && TALENT:L_I:정부  == 0 && TALENT:L_I:애인  == 0
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 조금이라도 %CALLNAME:MASTER%와 오래 있기 위해서라면、몸으로 붙잡는 것도 불사하게 된 것 같다…
 	PRINTFORML %CALLNAME:L_I%は【애인】을 획득했다。
 	TALENT:L_I:애인  = 1
+	TALENT:L_I:浮気 = 0
 ELSEIF CFlag:L_I:愛情値 >= 600 && MARK:L_I:함락각인 == 2
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 스쳐 지나갔을 사랑은、확실한 애정이 되어 %CALLNAME:L_I%を 한 사람의 여자로 만든 것 같다…
 	PRINTFORML %CALLNAME:L_I%의 함락 각인이 1 올랐다。
 	MARK:L_I:함락각인 += 1
 ELSEIF CFlag:L_I:愛情値 >= 300 && MARK:L_I:함락각인 == 1
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML %CALLNAME:L_I%는 내면의 연모를 자각하여、이쪽을 향한 애정을 숨김없이 드러내고 있다…
 	PRINTFORML %CALLNAME:L_I%의 함락 각인이 1 올랐다。
 	MARK:L_I:함락각인 += 1
 ELSEIF CFlag:L_I:愛情値 >= 100 && MARK:L_I:함락각인 == 0
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 교류의 성과인지、%CALLNAME:L_I%는 이쪽을 향해 희미하게나마 연모를 품게 된 것 같다…
 	PRINTFORML %CALLNAME:L_I%의 함락 각인이 1 올랐다。
 	MARK:L_I:함락각인 += 1
 ELSE
-	PRINTFORML 【변화 없음】
+	CALL PRINT_LABEL("변화 없음")
+	PRINTL
 	PRINTFORML 시간을 투자하여 대화를 나눴지만、딱히 심경의 변화는 없었던 것 같다…
 ENDIF
 DRAWLINE
@@ -644,27 +676,33 @@ DRAWLINE
 	PRINTFORML ………
 	PRINTFORML …………
 IF CFlag:L_I:淫乱値 >= 900 && MARK:L_I:음란각인 == 3 && TALENT:L_I:심취  == 0  && TALENT:L_I:애인  == 0 && TALENT:L_I:정부  == 0
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 
 	PRINTFORML %CALLNAME:L_I%は【정부】를 얻었다。
 	TALENT:L_I:정부  = 1
+	TALENT:L_I:浮気 = 0
 ELSEIF CFlag:L_I:淫乱値 >= 600 && MARK:L_I:음란각인 == 2
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 
 	PRINTFORML %CALLNAME:L_I%의 음란 각인이 1 올랐다。
 	MARK:L_I:음란각인 += 1
 ELSEIF CFlag:L_I:淫乱値 >= 300 && MARK:L_I:음란각인 == 1
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 교육의 성과인지、%CALLNAME:L_I%의 행동이 요염해졌다…
 	PRINTFORML %CALLNAME:L_I%의 음란 각인이 1 올랐다。
 	MARK:L_I:음란각인 += 1
 ELSEIF CFlag:L_I:淫乱値 >= 100 && MARK:L_I:음란각인 == 0
-	PRINTFORML 【성공】
+	CALL PRINT_LABEL("성공")
+	PRINTL
 	PRINTFORML 얼굴을 붉히곤 있지만、숨겨진 육욕을 제어할 수 없게 된 것 같다…
 	PRINTFORML %CALLNAME:L_I%의 음란 각인이 1 올랐다。
 	MARK:L_I:음란각인 += 1
 ELSE
-	PRINTFORML 【변화 없음】
+	CALL PRINT_LABEL("변화 없음")
+	PRINTL
 	PRINTFORML 시간을 투자하여 대화를 나눴지만、딱히 심경의 변화는 없었던 것 같다…
 ENDIF
 DRAWLINE
@@ -679,32 +717,44 @@ PRINTFORMW
 @NAYAMI_PAGE(ARG)
 #DIM L_I
 #DIM I_LOOP
+#DIM L_color
 
 I_LOOP = 1
+L_color = GETCOLOR()
 L_I = ARG
 DRAWLINE
 PRINTFORML ◇----------------큰 고민----------------◇
 REPEAT 5
 	IF CFlag:L_I:(4000+I_LOOP) != 0
 		IF CFlag:L_I:(4100+I_LOOP) >= 100
-				IF CFlag:L_I:(4000+I_LOOP) <= 199
-					PRINTFORM 【금전 문제】
-				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 299
-					PRINTFORM 【연애 문제】
-				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 399
-					PRINTFORM 【가정 문제】
-				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 499
-					PRINTFORM 【생활 문제】
-				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 599
-					PRINTFORM 【범죄 문제】
-				ELSEIF CFlag:L_I:(4000+I_LOOP) <= 699
-					PRINTFORM 【성적인 문제】
-				ENDIF
-			ELSE
-			PRINTFORM ？？？(미판명)【해석:{CFlag:L_I:(4100+I_LOOP)}/100】
+                IF CFlag:L_I:(4000+I_LOOP) <= 199
+                    SETCOLOR COLOR("悩み_金銭")
+                    CALL PRINT_LABEL("금전 문제")
+                ELSEIF CFlag:L_I:(4000+I_LOOP) <= 299
+                    SETCOLOR COLOR("悩み_恋愛")
+                    CALL PRINT_LABEL("연애 문제")
+                ELSEIF CFlag:L_I:(4000+I_LOOP) <= 399
+                    SETCOLOR COLOR("悩み_家庭")
+                    CALL PRINT_LABEL("가정 문제")
+                ELSEIF CFlag:L_I:(4000+I_LOOP) <= 499
+                    SETCOLOR COLOR("悩み_生活")
+                    CALL PRINT_LABEL("생활 문제")
+                ELSEIF CFlag:L_I:(4000+I_LOOP) <= 599
+                    SETCOLOR COLOR("悩み_犯罪")
+                    CALL PRINT_LABEL("범죄 문제")
+                ELSEIF CFlag:L_I:(4000+I_LOOP) <= 699
+                    SETCOLOR COLOR("悩み_性的")
+                    CALL PRINT_LABEL("성적인 문제")
+                ENDIF
+            ELSE
+                SIF FLAG:STATUS伏字モード
+                    SETCOLOR COLOR("伏字")
+                PRINTFORM ？？？(미판명)
+                CALL PRINT_LABEL("해석",,,TOSTR(CFlag:L_I:(4100+I_LOOP)),3,,"/","100")
 		ENDIF
-		PRINTFORM 난이도:{CFlag:L_I:(4300+I_LOOP)}　
-		PRINTFORML 달성률:({CFlag:L_I:(4200+I_LOOP)}/100)
+		PRINTFORM 난이도:{CFlag:L_I:(4300+I_LOOP),2}　
+		PRINTFORML 달성률:({CFlag:L_I:(4200+I_LOOP),3}/100)
+		SETCOLOR L_color
 	ENDIF
 	I_LOOP += 1
 REND
@@ -714,23 +764,32 @@ REPEAT 5
 	IF CFlag:L_I:(4010+I_LOOP) != 0
 		IF CFlag:L_I:(4110+I_LOOP) >= 100
 				IF CFlag:L_I:(4010+I_LOOP) <= 199
-					PRINTFORM 【금전 문제】
+				SETCOLOR COLOR("悩み_金銭")
+				CALL PRINT_LABEL("금전 문제")
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 299
-					PRINTFORM 【연애 문제】
+				SETCOLOR COLOR("悩み_恋愛")
+				CALL PRINT_LABEL("연애 문제")
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 399
-					PRINTFORM 【가정 문제】
+				SETCOLOR COLOR("悩み_家庭")
+				CALL PRINT_LABEL("가정 문제")
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 499
-					PRINTFORM 【생활 문제】
+				SETCOLOR COLOR("悩み_生活")
+				CALL PRINT_LABEL("생활 문제")
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 599
-					PRINTFORM 【범죄 문제】
+				SETCOLOR COLOR("悩み_犯罪")
+				CALL PRINT_LABEL("범죄 문제")
 				ELSEIF CFlag:L_I:(4010+I_LOOP) <= 699
-					PRINTFORM 【성적인 문제】
+				SETCOLOR COLOR("悩み_性的")
+				CALL PRINT_LABEL("성적인 문제")
 				ENDIF
 			ELSE
-			PRINTFORM ？？？(미판명)【해석:{CFlag:L_I:(4110+I_LOOP)}/100】
+			SIF FLAG:STATUS伏字モード
+				SETCOLOR COLOR("伏字")
+			PRINTFORM ？？？(미판명)【해석:{CFlag:L_I:(4110+I_LOOP),3}/100】
 		ENDIF
-		PRINTFORM 난이도:{CFlag:L_I:(4310+I_LOOP)}　
-		PRINTFORML 달성률:({CFlag:L_I:(4210+I_LOOP)}/100)
+		PRINTFORM 난이도:{CFlag:L_I:(4310+I_LOOP),2}　
+		PRINTFORML 달성률:({CFlag:L_I:(4210+I_LOOP),3}/100)
+		SETCOLOR L_color
 	ENDIF
 	I_LOOP += 1
 REND
@@ -748,10 +807,12 @@ DRAWLINE
 #DIMS    OP
 #DIM     C_ID
 #DIM     L_INPUT
+#DIM     L_color
 C_ID = CHARA_LIST:CHARA_VIEW
 CALL INFO_STATUS_NAYAMI_LIST(C_ID)
 CALL C_PICTURE_T(C_ID)
 CALL INFO_CITY_BASE
+L_color = GETCOLOR()
 DRAWLINE
 IF TALENT:C_ID:합의 || CFLAG:C_ID:関係段階 >= 2
 	PRINTFORM 　
@@ -771,19 +832,30 @@ IF TALENT:C_ID:합의 || CFLAG:C_ID:関係段階 >= 2
 ENDIF
 PRINTFORML 
 PRINTFORM 　
+SIF FLAG:都市_現在TP < 1 && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
 PRINTBUTTON "[4] - 대화한다(TP:1)", 4
+SETCOLOR L_color
 IF VAR_NAYAMI_ASSIST_ABLE_LIST(C_ID) && CFLAG:C_ID:住人_悩み解決判定回数 == 0 ;!CFLAG:C_ID:住人_悩み協力状況
 	PRINTFORM 　
+	SIF FLAG:都市_現在TP < 1 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTBUTTON "[5] - 고민 해결(TP:1)", 5
+	SETCOLOR L_color
 ELSE
 	PRINTFORM %"　" * 11%
 ENDIF
 IF TALENT:C_ID:합의 == 0 && (CFLAG:C_ID:関係段階 >= 2 || TALENT:C_ID:창녀)
 	PRINTFORM 　
+	SIF FLAG:都市_現在TP < 5 && FLAG:STATUS伏字モード
+		SETCOLOR COLOR("伏字")
 	PRINTBUTTON "[6] - 꼬신다　(TP:5)", 6
+	SETCOLOR L_color
 ENDIF
 PRINTFORML 
-PRINTFORM %"　" * 11%
+PRINTFORM 　
+PRINTBUTTON "[1] - 能力表示　　　", 1
+
 IF STRCOUNT(OP, "「캐릭터 고정」")
 	PRINTFORM %"　" * 11%
 ELSE
@@ -791,7 +863,10 @@ ELSE
 	PRINTBUTTON "[2] - 다음 캐릭터　　", 2
 ENDIF
 PRINTFORM 　
+SIF !FLAG:都市_現在BP && FLAG:STATUS伏字モード
+	SETCOLOR COLOR("伏字")
 PRINTBUTTON "[3] - BP 섭취　　　　", 3
+SETCOLOR L_color
 PRINTFORML 
 PRINTFORML 
 PRINTBUTTON "[0] - 돌아온다　　　　", 0
@@ -804,11 +879,14 @@ DO
 			GOTO RETRY
 		PRINTFORML 어떤 방식으로 대하도록 변경할까요？
 		PRINTFORM 　
+		SIF FLAG:都市_現在TP < 3 && FLAG:STATUS伏字モード
+			SETCOLOR COLOR("伏字")
 		PRINTBUTTON "[1] - 충성 경향(TP:3)", 1
 		PRINTFORM 　
 		PRINTBUTTON "[2] - 애정 경향(TP:3)", 2
 		PRINTFORM 　
 		PRINTBUTTON "[3] - 음란 경향(TP:3)", 3
+		SETCOLOR L_color
 		PRINTFORML 
 		PRINTFORML 
 		PRINTFORM 　
@@ -841,11 +919,14 @@ DO
 			GOTO RETRY
 		PRINTFORML 어떤 관계를 구축할까요？
 		PRINTFORM 　
+		SIF FLAG:都市_現在TP < 5 && FLAG:STATUS伏字モード
+			SETCOLOR COLOR("伏字")
 		PRINTBUTTON "[1] - 종속√(TP:5)", 1
 		PRINTFORM 　
 		PRINTBUTTON "[2] - 연애√(TP:5)", 2
 		PRINTFORM 　
 		PRINTBUTTON "[3] - 음란√(TP:5)", 3
+		SETCOLOR L_color
 		PRINTFORML 
 		PRINTFORML 
 		PRINTFORM 　
@@ -903,6 +984,8 @@ DO
 			GOTO RETRY
 		FLAG:都市_現在TP -= 5
 		CALL CAFE_TALK_KDK(C_ID)
+	CASE 1
+		CALL INFO_STATUS_MAIN(C_ID)
 	CASE 3
 		CALL SYSTEM_BP
 	CASE 0

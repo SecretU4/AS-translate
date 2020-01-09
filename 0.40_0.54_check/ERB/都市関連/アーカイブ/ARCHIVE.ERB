@@ -1,0 +1,242 @@
+﻿
+
+;-------------------------------------------------
+;アーカイブ
+;-------------------------------------------------
+@ARCHIVE_TOP
+#DIM L_N
+#DIM A_N
+#DIM L_INPUT
+$INPUT_LOOP2
+CLEARLINE LINECOUNT
+
+L_N = 0
+
+FLAG:17001 = 1
+
+DRAWLINE
+PRINTFORML  【アーカイブ】
+PRINTFORML  ここでは外界調査で回収したアーカイブを閲覧できます。
+DRAWLINE
+$AL_LOOP
+IF FLAG:(17000+L_N) != 0
+	PRINTFORML [{L_N}] %FLAGNAME:(17000+L_N)%
+ELSE
+
+ENDIF
+L_N += 1
+RESULT = 0
+SIF L_N < 500
+	GOTO AL_LOOP
+DRAWLINE
+PRINTFORML [999] - 戻る
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+CASE 999
+	RETURN
+CASEELSE
+	SIF FLAG:(17000+L_INPUT) == 0
+		GOTO INPUT_LOOP2
+	A_N = L_INPUT 
+	CALL ARCHIVE_C(A_N)
+	GOTO INPUT_LOOP2
+ENDSELECT
+RESTART
+
+
+;-------------------------------------------------
+;アーカイブ　回収
+;-------------------------------------------------
+@ARCHIVE_G
+#DIM A_G
+#DIM L_N
+
+A_G = 0
+
+SIF RAND:100 <= 95
+	RETURN
+
+
+L_N  = (RAND:9)+1
+
+SIF FLAG:(17000+L_N) == 0
+	A_G = 1
+
+
+FLAG:(17000+L_N) = 1
+SIF A_G == 1
+PRINTFORMW アーカイブ%FLAGNAME:(17000+L_N)%を入手しました
+
+
+
+;-------------------------------------------------
+;アーカイブ　閲覧
+;-------------------------------------------------
+@ARCHIVE_C(A_N)
+#DIM A_N
+
+
+CLEARLINE LINECOUNT
+DRAWLINE
+PRINTFORML %FLAGNAME:(17000+A_N)%
+DRAWLINE
+IF  A_N == 10
+	PRINTFORML ナノ！ナノ、ナノ、ナノ！ナノー！…ナノ！
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML ナッナッナノナノ、ナッナッナノナノ、ナノナノ！
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 　　　　　　飽キタナノ
+	PRINTFORML 
+ELSEIF A_N == 9
+	PRINTFORML 「周回しているとき、奥にいる敵は斬るか魔法で攻撃しなさい！」
+	PRINTFORML って言ってたけど本当かなぁ…、でも先輩は毎日周回してるからそうなんだろうね。
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML でも「周回」ってなんのことだろう。
+	PRINTFORML 
+ELSEIF A_N == 8
+	PRINTFORML 見出しは以下の通り
+	PRINTFORML 
+	PRINTFORML ・未曾有の台風による被害
+	PRINTFORML 
+	PRINTFORML ・交通事故多発中
+	PRINTFORML 
+	PRINTFORML ・謎の精神病が流行
+	PRINTFORML 
+	PRINTFORML ・[検閲]大陸にて謎の生物現る！
+ELSEIF A_N == 7
+	PRINTFORML 　　　霧が濃いから一応書いておく
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 　上がスーパー
+	PRINTFORML 右が住宅地
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 上が図書館？で右がスーパー？
+	PRINTFORML 　　　記憶違いか？
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 　　　　　　　　　やっぱり変だ
+ELSEIF A_N == 6
+	PRINTFORML 都市の異常に気付いて外に出たものの、外はもっと異常だった。
+	PRINTFORML バケモノいるのは知っていたが、まさかこんなにいるなんて…
+	PRINTFORML それに街中だというのに終わりのない迷路みたいになってる。
+	PRINTFORML 一緒に脱走した仲間とははぐれるしで、八方塞がりだ……。
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML エージェントが銃を持って近くをうろついている、
+	PRINTFORML 都市からは私はイレギュラーとして認識されてしまったようだ。
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORMW 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 　　　腹　　　　　　喰われ　　　　
+	PRINTFORML 　　　　こんなことなら　　　　　　　　　　都市にいれば
+ELSEIF A_N == 5
+	PRINTFORML 海沿いにある倉庫に出てきたあのバケモノはなんだったんだ？。
+	PRINTFORML 気色悪い触手にヌメヌメした身体、気持ち悪いったらありゃしねぇ。
+	PRINTFORML 驚いて棒でぶっ叩いたら海に落ちてったが…死んではなさそうだ
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 最近、変なものを見たとかの噂もあるし、今日はよく眠れそうにない
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+ELSEIF A_N == 4
+	PRINTFORML 　　　インスマス　　　銃で撃つ
+	PRINTFORML ミ＝ゴ　　　鈍器で殴る
+	PRINTFORML 　ショゴス　　　　　　　魔法で攻撃
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+ELSEIF A_N == 3
+	PRINTFORML [検閲]に指示された物を隠しておいた。
+	PRINTFORML 出来れば早く回収した方がいい。
+	PRINTFORML 時間が経つと行けるところが変わっちまうし、
+	PRINTFORML 最悪都市の奴らに見つけられるかもしれないからな。
+ELSEIF A_N == 2
+	PRINTFORML 被験体の[検閲]を摘出して試験用培養液で満たしたカプセルに格納。
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 格納から１ヵ月経過、正常に生体信号を確認。
+	PRINTFORML 
+	PRINTFORML 格納から２ヶ月経過、正常に生体信号を確認。
+	PRINTFORML 
+	PRINTFORML 格納から３ヶ月経過、生体信号を確認したがやや乱れが見られた。
+	PRINTFORML 
+	PRINTFORML 格納から４ヶ月経過、途切れ途切れではあるが生体信号を確認。
+	PRINTFORML 
+	PRINTFORML 格納から５ヶ月経過、機能停止。
+	PRINTFORML 
+	PRINTFORML 以上から[検閲]の交換の場合に一時保存に有用。
+	PRINTFORML 
+ELSEIF A_N == 1
+	PRINTFORML 歩いても歩いても同じ場所ばかり歩いてる気がする…
+	PRINTFORML 
+	PRINTFORML 　　　沢山探したけど誰もいない、あるのは死体ばかりだ…
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 　　　　　　　　　　　　　もう疲れた
+	PRINTFORML 
+	PRINTFORML 
+	PRINTFORML 誰でもいい
+	PRINTFORML 　　　　　　　　　　一人は心がもたない
+	PRINTFORML 
+	PRINTFORML 
+ENDIF
+
+
+DRAWLINE
+DRAWLINE
+
+PRINTFORMW
+CLEARLINE LINECOUNT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

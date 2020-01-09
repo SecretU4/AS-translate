@@ -8,6 +8,7 @@
 #DIM L_INPUT
 #DIM DYNAMIC ADD_CNT
 #DIM DYNAMIC NOT_CLEAR
+Flag:喫茶店スカウト = 1
 IF NOT_CLEAR
 	NOT_CLEAR = 0
 ELSE
@@ -19,7 +20,7 @@ PRINTFORM [1] 결정　　　
 PRINTFORM [2] 다른 주민　
 PRINTFORM [3] 조건 설정　
 PRINTFORML
-SIF CHARANUM < 200
+SIF CHARANUM < 200 && FLAG:遺研_研究中 == 0
 	PRINTFORML [4] 10명 가입　
 PRINTFORML 
 PRINTFORML [0] 그만둔다
@@ -41,7 +42,7 @@ DO
 		CALL CANCEL_SCOUT(CHARANUM - 1)
 		CALL CAFE_SCOUT_OPTION
 	CASE 4
-		SIF CHARANUM >= 200
+		SIF CHARANUM >= 200 || FLAG:遺研_研究中 != 0
 			GOTO RETRY
 		FOR LOCAL, 0, 9
 			IF CHARANUM >= 200
@@ -55,6 +56,7 @@ DO
 		NEXT
 		NOT_CLEAR = 1
 	CASE 0
+		Flag:喫茶店スカウト = 0
 		CALL CANCEL_SCOUT(CHARANUM - 1)
 		RETURN ADD_CNT
 	CASEELSE
@@ -79,6 +81,7 @@ L_I = CHARANUM -1
 CALL CAFE_SCOUT_OPTION2(L_I)
 IF SCENE == "SOLO"
 	DRAWLINE
+	SIF FLAG:遺研_研究中 == 0
 	CALL CITY_CAFE_NPC_TALK("SCOUT")
 	DRAWLINE
 	PRINTFORML 현재 주민의 수 {CHARANUM - 2, 3}명
@@ -104,6 +107,9 @@ SIF FLAG:カフェ絞り込み_身分 == 0
 	FLAG:カフェ絞り込み_身分 =  94
 SIF FLAG:カフェ絞り込み_胸 == 0
 	FLAG:カフェ絞り込み_胸 = 60
+
+SIF Flag:カフェ絞り込み_性格 >= 30
+	Flag:カフェ絞り込み_性格 = 0
 
 SIF GETBIT(FLAG:カフェ絞り込み_処女, 0)
 	CLEARBIT FLAG:カフェ絞り込み_処女, 1
@@ -140,6 +146,8 @@ CASE 63
 	PRINTFORML 거유
 CASE 64
 	PRINTFORML 폭유
+CASE 65
+	PRINTFORML 普乳
 ENDSELECT
 
 
@@ -183,20 +191,42 @@ CASE 80
 	PRINTL 커다람
 CASE 81
 	PRINTL 터질듯함
+CASE 82
+	PRINTL 普尻
 ENDSELECT
 
 PRINTFORM [7] 성격:
 SELECTCASE FLAG:カフェ絞り込み_性格
 CASE 0
 	PRINTL 자유
-CASE 30
-	PRINTL 제대로 자랐음(예의 바름・품격 있음・섹시함・고풍스러움)
-CASE 60
-	PRINTL 온화함(쿨・마이 페이스・나약함・프렌들리)
-CASE 90
-	PRINTL 천성이 난폭함(츤츤・거침・남성적・고압적)
-CASE 120
-	PRINTL 유치함(어린애 같음・깜찍)
+CASE 1
+	PRINTL 礼儀正しい
+CASE 2
+	PRINTL クール
+CASE 3
+	PRINTL ツンツン
+CASE 4
+	PRINTL マイペース
+CASE 5
+	PRINTL 高圧的
+CASE 6
+	PRINTL 荒々しい
+CASE 7
+	PRINTL 弱気
+CASE 8
+	PRINTL 気品高い
+CASE 9
+	PRINTL 男気
+CASE 10
+	PRINTL 色っぽい
+CASE 11
+	PRINTL フレンドリー
+CASE 12
+	PRINTL 古風
+CASE 13
+	PRINTL 子供っぽい
+CASE 14
+	PRINTL おしゃま
 ENDSELECT
 
 PRINTFORM [8] 귀와 머리카락 일치:
@@ -207,6 +237,66 @@ CASE 1
 	PRINTL 일치시킨다
 ENDSELECT
 
+PRINTFORM [11] 体格:
+SELECTCASE FLAG:カフェ絞り込み_体格
+CASE 0
+	PRINTL 自由
+CASE 1
+	PRINTL 大人体格
+CASE 2
+	PRINTL 子供体格
+ENDSELECT
+IF FLAG:都市_Lv >= 30
+	PRINTFORM [10] 合意:
+	SELECTCASE FLAG:カフェ絞り込み_合意
+	CASE 0
+		PRINTL 非合意
+	CASE 1
+		PRINTL 合意
+	ENDSELECT
+ELSE
+	SETCOLOR 100,100,100
+	PRINTFORML [ ] 合意:　都市Lv30必要
+	RESETCOLOR
+ENDIF
+IF FLAG:都市_Lv >= 50
+	PRINTFORM [9] 血族:
+	SELECTCASE FLAG:カフェ絞り込み_血族
+	CASE 0
+		PRINTL 自由
+	CASE 1
+		PRINTL 青き血族
+	ENDSELECT
+ELSE
+	SETCOLOR 100,100,100
+	PRINTFORML [ ] 血族:　都市Lv50必要
+	RESETCOLOR
+ENDIF
+IF FLAG:都市_Lv >= 80
+	PRINTFORM [12] 種族:
+	SELECTCASE FLAG:カフェ絞り込み_種族
+	CASE 0
+		PRINTL 自由
+	CASE 1
+		PRINTL 人間
+	CASE 2
+		PRINTL エルフ
+	CASE 3
+		PRINTL 夜魔
+	CASE 4
+		PRINTL 亜人
+	CASE 5
+		PRINTL オートマタ
+	CASE 6
+		PRINTL 天使
+	CASE 7
+		PRINTL 竜人
+	ENDSELECT
+ELSE
+	SETCOLOR 100,100,100
+	PRINTFORML [ ] 合意:　都市Lv80必要
+	RESETCOLOR
+ENDIF
 PRINTFORML
 PRINTFORML [999] 돌아온다
 DO
@@ -219,9 +309,9 @@ DO
 		SIF Flag:カフェ絞り込み_身分 >= 100
 			Flag:カフェ絞り込み_身分 = 94
 	CASE 2
-		SIF Flag:カフェ絞り込み_胸 <= 65
+		SIF Flag:カフェ絞り込み_胸 <= 66
 			Flag:カフェ絞り込み_胸 += 1
-		SIF Flag:カフェ絞り込み_胸 >= 65
+		SIF Flag:カフェ絞り込み_胸 >= 66
 			Flag:カフェ絞り込み_胸 = 60
 	CASE 3
 		IF GETBIT(FLAG:カフェ絞り込み_処女, 0)
@@ -254,19 +344,12 @@ DO
 		Flag:カフェ絞り込み_尻++
 		SIF Flag:カフェ絞り込み_尻 == 1
 			Flag:カフェ絞り込み_尻 = 80
-		SIF Flag:カフェ絞り込み_尻 == 82
+		SIF Flag:カフェ絞り込み_尻 == 83
 			Flag:カフェ絞り込み_尻 = 0
 	CASE 7
+	;性格
 		Flag:カフェ絞り込み_性格 += 1
-		SIF Flag:カフェ絞り込み_性格 == 1
-			Flag:カフェ絞り込み_性格 = 30
-		SIF Flag:カフェ絞り込み_性格 == 31
-			Flag:カフェ絞り込み_性格 = 60
-		SIF Flag:カフェ絞り込み_性格 == 61
-			Flag:カフェ絞り込み_性格 = 90
-		SIF Flag:カフェ絞り込み_性格 == 91
-			Flag:カフェ絞り込み_性格 = 120
-		SIF Flag:カフェ絞り込み_性格 == 121
+		SIF Flag:カフェ絞り込み_性格 >= 15
 			Flag:カフェ絞り込み_性格 = 0
 	CASE 8
 		IF (Flag:カフェ絞り込み_耳髪一致 == 0)
@@ -274,6 +357,28 @@ DO
 		ELSEIF (Flag:カフェ絞り込み_耳髪一致 == 1)
 			Flag:カフェ絞り込み_耳髪一致 = 0
 		ENDIF
+	CASE 9
+		IF (Flag:カフェ絞り込み_血族 == 0)
+			Flag:カフェ絞り込み_血族 = 1
+		ELSEIF (Flag:カフェ絞り込み_血族 == 1)
+			Flag:カフェ絞り込み_血族 = 0
+		ENDIF
+	CASE 10
+		IF (Flag:カフェ絞り込み_合意 == 0)
+			Flag:カフェ絞り込み_合意 = 1
+		ELSEIF (Flag:カフェ絞り込み_合意 == 1)
+			Flag:カフェ絞り込み_合意 = 0
+		ENDIF
+	CASE 11
+	;体格
+		Flag:カフェ絞り込み_体格 += 1
+		SIF Flag:カフェ絞り込み_体格 >= 3
+			Flag:カフェ絞り込み_体格 = 0
+	CASE 12
+	;種族
+		Flag:カフェ絞り込み_種族 += 1
+		SIF Flag:カフェ絞り込み_種族 >= 8
+			Flag:カフェ絞り込み_種族 = 0
 	CASE 999
 		RETURN
 	CASEELSE
@@ -321,79 +426,22 @@ ELSE
 		Talent:L_I:치안유지국직원 = 1
 	ENDSELECT
 ENDIF
-IF Talent:L_I:학생
-	Talent:L_I:학생 += RAND:5
-	SELECTCASE TALENT:L_I:학생
-		CASE 5
-			;초등학생は幼い口調になりやすく、幼児体型になりやすい
-			LOCAL = RAND:3
-			SIF LOCAL
-				L_SEIKAKU = 11 + LOCAL
-			IF RAND:2
-				TALENT:L_I:작은체형 = 1
-				TALENT:L_I:난쟁이체형 = 1
-				TALENT:L_I:장신 = 0
-			ELSEIF RAND:3
-				TALENT:L_I:작은체형 = 1
-				TALENT:L_I:장신 = 0
-			ENDIF
-			CFlag:L_I:住人_体格 = 1
-		CASE 4
-			;중학생は幼い口調にややなりやすく작은체형になりやすい
-			LOCAL = RAND:6
-			IF LOCAL == 0
-				L_SEIKAKU = 13
-			ELSEIF LOCAL < 3
-				L_SEIKAKU = 12
-			ENDIF
-			IF RAND:2
-				TALENT:L_I:작은체형 = 1
-				TALENT:L_I:장신 = 0
-			ELSEIF RAND:3
-				TALENT:L_I:작은체형 = 1
-				TALENT:L_I:난쟁이체형 = 1
-				TALENT:L_I:장신 = 0
-			ENDIF
-		CASE 3
-			;고등학생は成人よりは幼い口調になりやすい
-			LOCAL = RAND:12
-			IF LOCAL == 0
-				L_SEIKAKU = 13
-			ELSEIF LOCAL < 3
-				L_SEIKAKU = 12
-			ENDIF
-	ENDSELECT
-	;体型を再設定
-	CALL CHARACTER_SCOUT_BODYSIZE(L_I)
-	;口調を再設定
-	IF L_SEIKAKU >= 0
-		VARSET TALENT:L_I:0, 0, 1400, 1450
-		TALENT:L_I:(1400+L_SEIKAKU) = 1
-		CALL CHARACTER_SCOUT_MIND_REPEAT(L_I, L_SEIKAKU)
-	ENDIF
-	;학생아이돌とか援助待ち女학생とかいいよね
-	IF !RAND:5
-		Talent:L_I:아이돌 = 1
-	ELSEIF Flag:時間帯 == 0
-		SIF !RAND:8
-			Talent:L_I:창녀 = 1
-	ELSEIF Flag:時間帯 == 1
-		SIF !RAND:2
-			Talent:L_I:창녀 = 1
-	ENDIF
-ENDIF
+SIF Talent:L_I:학생
+	CALL CHARACTER_SCOUT_STUDENT(L_I)
 
 IF Flag:カフェ絞り込み_胸 >= 61
 	Talent:L_I:절벽 = 0
 	Talent:L_I:빈유 = 0
 	Talent:L_I:거유 = 0
 	Talent:L_I:폭유 = 0
+	SIF Flag:カフェ絞り込み_胸 != 65
 	Talent:L_I:(Flag:カフェ絞り込み_胸) = 1
 	CFLAG:L_I:바스트사이즈 = CHARACTER_BUST_RETURN(L_I)
 ENDIF
 IF Flag:カフェ絞り込み_尻
 	Talent:L_I:큰엉덩이 = 0
 	Talent:L_I:터질듯한엉덩이 = 0
+	SIF Flag:カフェ絞り込み_尻 != 82
 	Talent:L_I:(Flag:カフェ絞り込み_尻) = 1
 	CFLAG:L_I:ヒップサイズ = CHARACTER_HIP_RETURN(L_I)
 ENDIF
@@ -488,6 +536,19 @@ ENDIF
 IF TALENT:L_I:결혼완료 && !RAND:20
 	TALENT:L_I:미망인 = 1
 	TALENT:L_I:결혼완료 = 0
+ELSEIF TALENT:L_I:結婚済み && TALENT:L_I:Ａ非処女 == 1 && !RAND:7
+	TALENT:L_I:浮気 = (RAND:3)+1
+	EXP:L_I:浮気経験 += (RAND:200)+50
+	EXP:L_I:性交経験 += (RAND:100)+20
+	EXP:L_I:Ａ性交経験 += (RAND:100)+20
+	EXP:L_I:絶頂経験 += (RAND:100)+20
+	EXP:L_I:キス経験 += (RAND:300)+50
+	EXP:L_I:精飲経験 +=(RAND:100)+20
+	EXP:L_I:精液経験 += (RAND:100)+20
+	EXP:L_I:フェラ経験 += (RAND:200)+50
+	EXP:L_I:絶頂経験 += (RAND:100)+20
+	SIF Talent:L_I:巨乳 == 1 || Talent:L_I:爆乳 == 1
+		EXP:L_I:パイズリ経験 += (RAND:200)+70
 ENDIF
 
 
@@ -637,6 +698,14 @@ IF EXP:L_I:출산경험 >= 1
 		ENDIF
 	ENDIF
 ENDIF
+IF TALENT:L_I:浮気 == 3
+	L_NAME = "夫の上司"
+ELSEIF TALENT:L_I:浮気 == 2
+	L_NAME = "幼馴染"
+ELSEIF TALENT:L_I:浮気 == 1
+	L_NAME = "元カレ"
+ENDIF
+
 SIF CSTR:L_I:初えっち相手名 == "" && Talent:L_I:비처녀 == 1
 	CSTR:L_I:初えっち相手名 = %L_NAME%
 SIF CSTR:L_I:初キス相手名 == "" && EXP:L_I:키스경험 >= 1
@@ -655,67 +724,20 @@ SIF CSTR:L_I:初出産相手名 =="" && EXP:L_I:출산경험 >= 1
 	CSTR:L_I:初出産相手名 = %L_NAME2%
 
 L_M = 0
+
+SIF !INRANGE(Flag:カフェ絞り込み_性格 - 1, 0, 13)
+	Flag:カフェ絞り込み_性格 = 0
+
 IF Flag:カフェ絞り込み_性格 != 0
 	VARSET TALENT:L_I:0, 0, 1400, 1450
-	L_SEIKAKU = 0
-	SELECTCASE FLAG:カフェ絞り込み_性格
-	CASE 30
-		SELECTCASE RAND:4
-		CASE 0
-			TALENT:L_I:예의바름 = 1
-			L_SEIKAKU = 0
-		CASE 1
-			TALENT:L_I:품위있음  = 1
-			L_SEIKAKU = 7
-		CASE 2
-			TALENT:L_I:섹시함 = 1
-			L_SEIKAKU = 9
-		CASE 3
-			TALENT:L_I:고풍스러움 = 1
-			L_SEIKAKU = 11
-		ENDSELECT
-	CASE 60
-		SELECTCASE RAND:4
-		CASE 0
-			TALENT:L_I:프렌들리 = 1
-			L_SEIKAKU = 10
-		CASE 1
-			TALENT:L_I:나약함  = 1
-			L_SEIKAKU = 6
-		CASE 2
-			TALENT:L_I:마이페이스  = 1
-			L_SEIKAKU = 3
-		CASE 3
-			TALENT:L_I:쿨 = 1
-			L_SEIKAKU = 1
-		ENDSELECT
-	CASE 90
-		SELECTCASE RAND:4
-		CASE 0
-			TALENT:L_I:고압적 = 1
-			L_SEIKAKU = 4
-		CASE 1
-			TALENT:L_I:츤츤 = 1
-			L_SEIKAKU = 2
-		CASE 2
-			TALENT:L_I:남성스러움  = 1
-			L_SEIKAKU = 6
-		CASE 3
-			TALENT:L_I:난폭함 = 1
-			L_SEIKAKU = 5
-		ENDSELECT
-	CASE 120
-		SELECTCASE RAND:2
-		CASE 0
-			TALENT:L_I:아이같음 = 1
-			L_SEIKAKU = 12
-		CASE 1
-			TALENT:L_I:깜찍함 = 1
-			L_SEIKAKU = 13
-		ENDSELECT
-	ENDSELECT
+	TALENT:L_I:(1400+(Flag:カフェ絞り込み_性格-1)) = 1
+	L_SEIKAKU = Flag:カフェ絞り込み_性格-1
 	CALL CHARACTER_SCOUT_MIND_REPEAT(L_I, L_SEIKAKU)
 ENDIF
+
+;小さい体型の靴3は定義されてません...
+SIF (TALENT:L_I:小人体型 || TALENT:L_I:小柄体型) && CFlag:L_I:住人_体格 == 0
+	CFlag:L_I:住人_体格 = 1
 
 CALL CHARACTER_SCOUT_COSTUME(L_I)
 
@@ -734,6 +756,25 @@ IF FLAG:カフェ絞り込み_耳髪一致 == 1 && CFLAG:L_I:住人_種族 == 3;
 ENDIF
 
 
+IF FLAG:カフェ絞り込み_血族 == 1
+	TALENT:L_I:青き血族 = 1
+	CFLAG:L_I:住人_地位 = 3
+ENDIF
+
+IF FLAG:カフェ絞り込み_合意 == 1
+	TALENT:L_I:合意 = 1
+	TALENT:L_I:非合意 = 0
+	CFLAG:L_I:関係段階 = 2
+	CFLAG:L_I:好感度 += 1000
+ENDIF
+
+IF FLAG:カフェ絞り込み_体格 == 1
+	CFlag:L_I:住人_体格 = 0
+	CALL CHARACTER_SCOUT_COSTUME(L_I)
+ELSEIF FLAG:カフェ絞り込み_体格 == 2
+	CFlag:L_I:住人_体格 = 1
+	CALL CHARACTER_SCOUT_COSTUME(L_I)
+ENDIF
 
 
 RETURN

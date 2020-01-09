@@ -54,22 +54,27 @@ RESTART
 #DIM I_G
 ;ここの汎用フラグ使ってないっぽい
 
-IF RAND:(Flag:廃棄場+(1)) >= RAND:20
-	IF RAND:(Flag:廃棄場+(1)) >= RAND:20
-		;高品質
-		Flag:掘り出しもの品質 = 3
-		Flag:汎用変数 = RAND:10
-	ELSE
-		;中品質
-		Flag:掘り出しもの品質 = 2
-		Flag:汎用変数 = RAND:10
-	ENDIF
+IF Flag:廃棄場 >= 150  &&  Flag:研究施設 >= 150  && 15 <= RAND:20
+	;ニア
+	Flag:掘り出しもの品質 = 10
+	Flag:汎用変数 = RAND:10
 ELSE
-	;低品質
-		Flag:掘り出しもの品質 = 1
-		Flag:汎用変数 = RAND:10
+	IF RAND:(Flag:廃棄場+(1)) >= RAND:20
+		IF RAND:(Flag:廃棄場+(1)) >= RAND:20
+			;高品質
+			Flag:掘り出しもの品質 = 3
+			Flag:汎用変数 = RAND:10
+		ELSE
+			;中品質
+			Flag:掘り出しもの品質 = 2
+			Flag:汎用変数 = RAND:10
+		ENDIF
+	ELSE
+		;低品質
+			Flag:掘り出しもの品質 = 1
+			Flag:汎用変数 = RAND:10
+	ENDIF
 ENDIF
-
 CALL CHARACTER_SCOUT1
 
 

@@ -84,7 +84,8 @@ I_G = 0
 DRAWLINE
 DRAWLINE
 DRAWLINE
-PRINTFORML 【　　　　　　　　　　　　　　　　　　　　　　防衛　成功　　　　　　　　　　　　　　　　　　　　】
+CALL PRINT_LABEL("　　　　　　　　　　　　　　　　　　　　　　防衛　成功　　　　　　　　　　　　　　　　　　　　")
+PRINTFORML 
 DRAWLINE
 DRAWLINE
 DRAWLINE
@@ -103,14 +104,16 @@ REPEAT 5
 		;中品質
 		I_G = (RAND:6)+10
 	ENDIF
-	PRINTFORML  【――――%FLAGNAME:(2100+I_G)%を入手した――――】
+	PRINTS " "
+	CALL PRINT_LABEL(@"――――%FLAGNAME:(2100+I_G)%を入手した――――")
 	FLAG:(2100+I_G) += 1
 REND
 
 
 ;ゲノム
 I_G = (RAND:20)
-PRINTFORML  【――――%FLAGNAME:(2500+I_G)%を入手した――――】
+PRINTS " "
+CALL PRINT_LABEL(@"――――%FLAGNAME:(2500+I_G)%を入手した――――")
 FLAG:(2500+I_G) += 1
 
 
@@ -128,7 +131,8 @@ CALL CITY_RID_END
 DRAWLINE
 DRAWLINE
 DRAWLINE
-PRINTFORML 【　　　　　　　　　　　　　　　　　　　　　　防衛　失敗　　　　　　　　　　　　　　　　　　　　】
+CALL PRINT_LABEL("　　　　　　　　　　　　　　　　　　　　　　防衛　失敗　　　　　　　　　　　　　　　　　　　　")
+PRINTFORML 
 DRAWLINE
 DRAWLINE
 DRAWLINE

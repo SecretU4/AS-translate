@@ -14,16 +14,25 @@ TARGET = ARG:0
 
 CLEARLINE LINECOUNT
 DRAWLINE
-		IF !RAND:4
+
+CALL C_PICTURE(ARG:0,ARG:1)
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORML 
+PRINTFORM 　　　　　
+		IF !RAND:3
 			PRINTFORML 「%CSTR:語尾YES%、やれるだけやってみ%CSTR:語尾ます%」
-		ELSEIF !RAND:3
+		ELSEIF !RAND:2
 			PRINTFORML 「……上手くできたみたい%CSTR:語尾肯定2%」
 		ELSE
 			PRINTFORML 「まだ工夫がいるみたい%CSTR:語尾肯定2%」
 		ENDIF
 PRINTFORML 
+PRINTFORM
 PRINTFORML %CALLNAME%는 %CALLNAME:MASTER%에게 떠밀려、업무에 힘썼다…
 PRINTFORML 
+
 
 
 IF (Talent:비처녀 == 1 && Talent:합의 == 1) && (Talent:심취 == 1 || Talent:애인 == 1 || Talent:정부 == 1) && RAND:10 >= 5
