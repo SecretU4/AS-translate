@@ -9,6 +9,7 @@
 ;
 ;	Edit	Date			Author					Reason
 ;	001		20XX/XX/XX		----					新規作成
+;   002     2019/04/14      M                       表示リファクタリング：表示桁幅固定
 ;
 ;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
 
@@ -69,7 +70,6 @@ SELECTCASE L_INPUT
 		GOTO CHARA_LIST
 ENDSELECT
 RESTART
-
 
 ;-------------------------------------------------------------------------------
 ;   ABLUP:リスト画面
@@ -143,7 +143,11 @@ B:200 = 1
 PRINTFORMLC \@(L_CHARA_前 > -1) ? [1001]이전 캐릭터 # %" " * 16%\@
 PRINTLC [1000] 돌아온다
 PRINTFORMLC \@(L_CHARA_次 > -1) ? [1003]다음 캐릭터 # %" " * 16%\@
-
+PRINTL 
+PRINTL 
+PRINTFORM %" " * 52%
+PRINTBUTTON @"[1010]全員の体力を上げる", 1010
+PRINTL 
 
 $INPUT_LOOP_1
 INPUT
@@ -160,6 +164,9 @@ SELECTCASE L_INPUT
 	CASE 1003
 		SIF L_CHARA_次 > -1
 			ARG = L_CHARA_次
+	;全員の体力を上げる
+	CASE 1010
+		CALL MAXBASEUP_ALL
 	CASEELSE
 		;- CHK:NG
 		IF B:L_INPUT == 0
@@ -241,7 +248,84 @@ ENDSELECT
 
 GOTO PRINT_LOOP_1
 
+;=================================================
+;   sub MAXBASEUP_ALL
+;=================================================
+;人数多くなると全員の体力を上げるのが面倒なので、一括して上げる関数
+;-------------------------------------------------
+@MAXBASEUP_ALL
+#DIM L_I
+#DIM L_TMP
+#DIM L_MONEY
+#DIM L_TOTALMONEY
 
+VARSET L_I
+VARSET L_TOTALMONEY
+
+L_TMP = 50
+L_MONEY = 300
+
+;必要資金の計算。今後最大値上限が増えた場合、改修の必要あり
+;（最大値の指定はVER 0.52時点でERB\本体\VAR_PROCESS_1日終了.ERBにある）
+FOR L_I, 0, CHARANUM
+	;既に最大なら無視
+	IF MAXBASE:L_I:体力 == FLAG:最大値_体力
+		CONTINUE
+	;ボランティアも無視
+	ELSEIF TALENT:L_I:ボランティア
+		CONTINUE
+	;体力200の場合、600円費用増加
+	ELSEIF MAXBASE:L_I:体力 + (L_TMP * 2) == FLAG:最大値_体力
+		L_TOTALMONEY += (L_MONEY * 2)
+	;体力250の場合、300円費用増加
+	ELSEIF MAXBASE:L_I:体力 + L_TMP == FLAG:最大値_体力
+		L_TOTALMONEY += L_MONEY
+	ENDIF
+NEXT
+
+DRAWLINE
+DRAWLINE
+PRINTFORML 体力が最大ではない住人全ての体力を{FLAG:最大値_体力}まで上昇させますか？（ボランティアは除く）
+PRINTFORM （上昇には%GVAR_MONEY_NAME%を
+SETCOLOR 0xffff00
+PRINTFORM {L_TOTALMONEY}
+RESETCOLOR
+PRINTFORML 消費します。現在%GVAR_MONEY_NAME%:{MONEY}）
+PRINTL
+
+CALL INPUT_YN
+SELECTCASE RESULT
+	;はい
+	CASE 0
+		IF MONEY < L_TOTALMONEY
+			PRINTFORMW %GVAR_MONEY_NAME%が足りません
+			RETURN
+		ELSEIF L_TOTALMONEY == 0
+			PRINTFORMW 既に全員最大値です。
+			RETURN
+		ENDIF
+		FOR LOCAL, 0, CHARANUM
+			;既に最大なら無視
+			IF MAXBASE:LOCAL:体力 == FLAG:最大値_体力
+				CONTINUE
+			;ボランティアも無視
+			ELSEIF TALENT:LOCAL:ボランティア
+				CONTINUE
+			;雑に全員最大値。
+			ELSE
+				MAXBASE:LOCAL:体力 = FLAG:最大値_体力
+			ENDIF
+		NEXT
+		;総費用分お金の減少
+		MONEY -= L_TOTALMONEY
+		PRINTFORMW {L_TOTALMONEY}の%GVAR_MONEY_NAME%を消費し、全員の体力を{FLAG:最大値_体力}まで上昇させました。
+
+	;いいえ
+	CASE 1
+		;スルー
+ENDSELECT
+
+RETURN
 ;=================================================
 ;   sub _ABLUP_LIST_PRINT_SIGNAL
 ;=================================================
@@ -328,7 +412,7 @@ FOR L_I,0,VARSIZE("ABL")
 ;		SETCOLOR COLOR("伏字")
 
 	;-- 表示
-	PRINTFORM  [{L_TMP, 3}] %LOCALS,10,LEFT% :LV{ABL:ARG:L_I} 
+	PRINTFORM  [{L_TMP, 3}] %LOCALS,10,LEFT% :LV{ABL:ARG:L_I, 2, LEFT} 
 	BAR LOCAL:1, L_MAX, 3 
 
 	;-  表示:ABLUP(LIST-結果)
@@ -376,7 +460,7 @@ FOR L_I,0,VARSIZE("MARK")
 	L_TMP = L_I + VARSIZE("ABL")
 
 	;-- 表示
-	PRINTFORM  [{L_TMP, 3}] %LOCALS,10,LEFT% :LV{MARK:ARG:L_I} 
+	PRINTFORM  [{L_TMP, 3}] %LOCALS,10,LEFT% :LV{MARK:ARG:L_I, 2, LEFT} 
 	BAR LOCAL:1, L_MAX, 3 
 
 	;-  表示:ABLUP(LIST-結果)

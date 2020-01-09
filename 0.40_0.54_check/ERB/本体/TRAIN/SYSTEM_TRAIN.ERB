@@ -1080,6 +1080,8 @@ DRAWLINE
 PRINTFORML %CALLNAME:MASTER%는 %L_PARTY%를 불러내、한순간의 밀회를 시작했다……
 PRINTL 
 
+
+
 ;- 口上
 L_BAK_TGT = TARGET
 FOR L_I, 0, DEFTR_PL_NUM
@@ -1104,6 +1106,12 @@ FOR L_I, 0, DEFTR_PL_NUM
 
 NEXT
 TARGET = L_BAK_TGT
+
+IF FLAG:支援_自動排卵薬サポート == 1 && Flag:都市_現在SP >= 1 && MONEY >= 2000
+	TALENT:排卵薬 = 1
+	Flag:都市_現在SP -= 1
+	MONEY -= 2000
+ENDIF
 
 PRINTFORMW %CALLNAME:MASTER%는 %L_PARTY%를 넘어뜨리면서、조교를 시작했다……
 PRINTFORMW ………
