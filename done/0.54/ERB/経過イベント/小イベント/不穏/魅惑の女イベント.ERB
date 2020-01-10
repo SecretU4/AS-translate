@@ -1,0 +1,114 @@
+﻿;-------------------------------------------------
+;魅惑の女イベント
+;-------------------------------------------------
+@TURN_EVENT_FON_MWK
+
+
+DRAWLINE
+SETCOLOR 150,250,150
+PRINTFORML 【매혹의 여자 이벤트(불온):%CALLNAME%】
+PRINTFORML 
+PRINTFORML %CALLNAME%가 카페에서 시간을 보내고 있자 요염한 분위기의 여성이 합석을 제의했다。
+PRINTFORML 지금은 혼자이고 싶은 기분이었던 %CALLNAME%는 다른 빈자리도 있다는 이유로 거절했으나、
+PRINTFORML 여자와 말을 주고 받는 와중에 점점 마음이 바뀌게 되었다。
+PRINTFORML 이윽고 어째서 그녀를 거절하려 했었는가도 의아해질 정도로 %CALLNAME%는 흔쾌히 자리를 내주고、둘이서 차를 즐기기로 하였다。
+PRINTFORML 여성과 대화하는 와중에 %CALLNAME%는 자신에 대한 모든 것을 알아주기를 원하며、
+PRINTFORML 마지막에는 개인적인 부분까지도 적극적으로 이야기하게 되었다。
+PRINTFORMW 정신없이 자신의 개인정보를 쏟아내는 %CALLNAME%에게 여성은 장소를 옮길 제안을 했다…
+PRINTFORML 
+PRINTFORML %CALLNAME%는 러브호텔에서 여성들의 일방적인 애무를 받고 있다。
+PRINTFORML 카페에서의 사적인 대화로 자신의 성감대나 약점까지 모두 털어낸 %CALLNAME%의 육체를
+PRINTFORML 여성은 간단히 절정으로 이끌어 갔다。
+PRINTFORML 그러다%CALLNAME%의 사고가 쾌락과、절정에 의해 하얗게 변한 그 순간、여성은 %CALLNAME%의 귓가에 속삭였다。
+PRINTFORML 남성을 헐뜯고、여성을 부추겨、생식본능에 따르는 것이 악이라 말하는 시티의 방침에 반하는 말을。
+PRINTFORML 평소의 %CALLNAME%라면 흘려들을 말도、몽롱한 의식속에서는 마치 머리 속에 각인되는 것처럼
+PRINTFORML 느껴져 %CALLNAME%의 의식속에 깊숙이 뿌리내렸다。
+PRINTFORML 시간을 들여 %CALLNAME%의 육체를 가지고 놀고 언어의 독을 흘려보내던 여성은、탈진하여 기절한 %CALLNAME%를 방치하고서는
+PRINTFORMW 러브호텔을 떠나갔다…
+PRINTFORML 
+PRINTFORML 귀가한 %CALLNAME%는 오늘 하루의 기억이 뚜렷하지 않은 것에 의아함을 느끼면서도、극도의 피로감으로 인해 깊이 생각하지는 못하고、금새 잠에 빠졌다。
+PRINTFORML 이 날을 기준으로 %CALLNAME%는 이성에 대한 성적 매력을 느끼지 못하게 되었고、동성을 연애대상으로 보게 되어버렸다…
+PRINTFORML 
+
+;男嫌いではない場合
+IF	TALENT:男嫌い == 0
+	TALENT:男好き = 0
+	TALENT:両刀 = 0
+	TALENT:男嫌い = 1
+	;同性愛を持っている場合
+	IF TALENT:同性愛 == 1
+		;30%の確率で白百合姫に変化
+		IF RAND:100 <= 30
+			TALENT:同性愛 = 0
+			TALENT:白百合姫 = 1
+		ENDIF
+	;同性愛ではなく白百合姫の場合
+	ELSEIF TALENT:白百合姫 == 1
+		;なにもしない
+	;同性愛でも白百合姫でもない場合
+	ELSE
+		TALENT:同性愛 = 1
+	ENDIF
+;男嫌いの場合
+ELSE
+	;同性愛を持っている場合
+	IF TALENT:同性愛 == 1
+		;60%の確率で白百合姫に変化
+		IF RAND:100 <= 60
+			TALENT:同性愛 = 0
+			TALENT:白百合姫 = 1
+		ENDIF
+	;同性愛ではなく白百合姫の場合
+	ELSEIF TALENT:白百合姫 == 1
+		;なにもしない
+	;同性愛でも白百合姫でもない場合
+	ELSE
+		TALENT:同性愛 = 1
+	ENDIF
+ENDIF
+
+SIF CSTR:初えっち相手名 == ""
+	CSTR:初えっち相手名 = 魅惑の女
+SIF CSTR:初キス相手名 == "" 
+	CSTR:初キス相手名 = 魅惑の女
+SIF CSTR:初絶頂相手名 ==""
+	CSTR:初絶頂相手名 = 魅惑の女
+
+EXP:キス経験 += (RAND:4)
+EXP:Ｖ経験 += (RAND:5)
+EXP:Ａ経験 += (RAND:5)
+EXP:Ｂ経験 += (RAND:5)
+EXP:Ｃ経験 += (RAND:5)
+EXP:絶頂経験 += (RAND:4)+1
+
+
+
+
+RESETCOLOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,178 @@
+﻿;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+;
+;	Module		:SYSTEM_FUNC.ERB
+;	Facility	:システム用関数置き場。
+;
+;				 尚、記載する関数は全て先頭に"C_"を付ける。
+;				 (C=Common、共通)
+;
+;	Licence		:ライセンスフリー。
+;
+;	Modification Data:
+;
+;	Edit	Date			Author					Reason
+;	001		20XX/XX/XX		----					新規作成
+;
+;_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/#
+
+;===============================================================================
+;  ◇記載関数一覧(記載順)
+;
+;		Module Name						Explanation
+;
+; *- xxxx
+;
+;	・ C_ADD_CHARA						共通:キャラ追加
+;	・ C_CUSTOM_CHARA					共通:キャラカスタム
+;
+;===============================================================================
+
+;-------------------------------------------------------------------------------
+;   xxxx
+;-------------------------------------------------------------------------------
+
+;=================================================
+;   sub C_ADD_CHARA
+;=================================================
+;   共通:キャラ追加
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;  ARG:1				戦闘レベル
+;  ARG:2				重複許可
+; Output:
+;  RESULT				結果(0:登録を実行 1:既に登録済み 2:データが存在しない 3:キャラ数上限)
+;-------------------------------------------------
+@C_ADD_CHARA(ARG, ARG:1 = 0, ARG:2 = 0)
+#DIM L_T
+#DIM L_NUM
+#DIM L_MAX
+#DIM L_TMP
+L_MAX = 300
+
+;重複許可無しの場合
+IF !ARG:2
+	;キャラNo190～200は重複可能
+	IF GROUPMATCH(ARG, 190, 200) || GROUPMATCH(ARG, 167)  
+	;[同Noでの登録者が存在]
+	ELSEIF CHARANUM && FINDCHARA(NO, ARG) > -1
+		RETURN 1
+	ENDIF
+ENDIF
+
+L_NUM = CHARANUM
+L_TMP = L_MAX - 5
+IF L_NUM == L_TMP
+	PRINTFORML ※소지한 캐릭터가 {L_TMP}명이 되었습니다
+	PRINTFORML 　{L_MAX}명을 넘으면、가입 처리가 취소되니 주의해 주세요
+	WAIT
+ENDIF
+IF L_NUM == (L_MAX-1)
+	PRINTFORML 캐릭터 수가 상한 ({L_MAX}体)에 이르렀습니다
+	PRINTFORML 캐릭터 가입 처리를 취소합니다
+	WAIT
+	RETURN 3
+ENDIF
+
+;--- キャラ追加
+IF EXISTCSV(ARG, 0)
+	ADDCHARA ARG
+		IF ARG == 167
+		CALL Random_Chara_Set(ARG)
+		ELSE
+		ENDIF
+ELSE
+	RETURN 2
+ENDIF
+L_T = CHARANUM -1
+
+;-----------------------------
+;- 本体モジュール
+;-----------------------------
+
+;- 追加:キャラ
+CALL VAR_ADD_CHARA(L_T)
+
+
+;-----------------------------
+;- その他
+;-----------------------------
+
+;デフォルトでは1を設定し、呼び出し側で調整
+CFLAG:L_T:イベント加入 = 1
+
+;カスタム可能チェック
+SIF CFLAG:L_T:カスタムフラグ
+	CALL C_CUSTOM_CHARA(L_T)
+
+RETURN 0
+
+
+;=================================================
+;   sub C_CUSTOM_CHARA
+;=================================================
+;   共通:キャラカスタム
+;-------------------------------------------------
+; Input:
+;  ARG:0				対象キャラ
+;-------------------------------------------------
+@C_CUSTOM_CHARA(ARG)
+#DIM L_INPUT
+
+;-----------------------------
+;- 名前変更
+;-----------------------------
+CUSTOMDRAWLINE =
+PRINTFORML 【캐릭터 커스텀】
+PRINTFORML %CALLNAME:ARG%는 일부 데이터를 커스터마이즈 가능합니다。패러미터를 선택하세요。
+PRINTL
+PRINTFORML [  0] 이름(NAME)　　　：%NAME:ARG%
+PRINTFORML [  1] 호칭(CALLNAME)：%CALLNAME:ARG%
+PRINTL
+PRINTL
+PRINTL
+PRINTFORML [100] 완료
+
+$INPUT_LOOP
+INPUT
+L_INPUT = RESULT
+
+SELECTCASE L_INPUT
+	;完了
+	CASE 100
+		RETURN
+	;名前変更
+	CASE 0
+		DRAWLINE
+		PRINTFORML 【이름(NAME)변경】
+		PRINTFORML 현재 이름은 "%NAME:ARG%"입니다。새 이름을 입력해 주세요。
+		PRINTFORML 입력을 취소하고 싶다면、아무것도 입력하지 말아주세요。
+		INPUTS
+		SELECTCASE RESULTS
+			CASE ""
+				RESTART
+			CASEELSE
+			
+				NAME:ARG = %RESULTS%
+		ENDSELECT
+	;呼び名変更
+	CASE 1
+		DRAWLINE
+		PRINTFORML 【호칭(CALLNAME)변경】
+		PRINTFORML 현재 호칭은 "%CALLNAME:ARG%"입니다。새 호칭을 입력해 주세요。
+		PRINTFORML 입력을 취소하고 싶다면、아무것도 입력하지 말아주세요。
+		INPUTS
+		SELECTCASE RESULTS
+			CASE ""
+				RESTART
+			CASEELSE
+				CALLNAME:ARG = %RESULTS%
+		ENDSELECT
+	;ERROR
+	CASEELSE
+		$ERROR
+		CALL C_INPUT_ERROR
+		GOTO INPUT_LOOP
+ENDSELECT
+RESTART
+
